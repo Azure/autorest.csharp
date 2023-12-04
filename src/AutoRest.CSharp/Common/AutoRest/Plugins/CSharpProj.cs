@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private string _coreCsProjContent = @"
   <ItemGroup>
     <PackageReference Include=""Azure.Core"" />
+    <PackageReference Include=""System.ClientModel"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"

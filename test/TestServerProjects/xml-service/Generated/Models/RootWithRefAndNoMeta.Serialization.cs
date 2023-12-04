@@ -5,15 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class RootWithRefAndNoMeta : IXmlSerializable
+    public partial class RootWithRefAndNoMeta : IXmlSerializable, IPersistableModel<RootWithRefAndNoMeta>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "RootWithRefAndNoMeta");
             if (Optional.IsDefined(RefToModel))
@@ -29,7 +33,9 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element, ModelReaderWriterOptions options = null)
         {
             ComplexTypeNoMeta refToModel = default;
             string something = default;
@@ -41,7 +47,48 @@ namespace xml_service.Models
             {
                 something = (string)somethingElement;
             }
-            return new RootWithRefAndNoMeta(refToModel, something);
+            return new RootWithRefAndNoMeta(refToModel, something, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<RootWithRefAndNoMeta>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RootWithRefAndNoMeta>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RootWithRefAndNoMeta)} does not support '{options.Format}' format.");
+            }
+        }
+
+        RootWithRefAndNoMeta IPersistableModel<RootWithRefAndNoMeta>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RootWithRefAndNoMeta>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeRootWithRefAndNoMeta(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RootWithRefAndNoMeta)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RootWithRefAndNoMeta>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

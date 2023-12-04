@@ -6,15 +6,26 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class Datetimerfc1123Wrapper : IUtf8JsonSerializable
+    public partial class Datetimerfc1123Wrapper : IUtf8JsonSerializable, IJsonModel<Datetimerfc1123Wrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Datetimerfc1123Wrapper>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Datetimerfc1123Wrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Field))
             {
@@ -26,17 +37,48 @@ namespace body_complex.Models
                 writer.WritePropertyName("now"u8);
                 writer.WriteStringValue(Now.Value, "R");
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Datetimerfc1123Wrapper DeserializeDatetimerfc1123Wrapper(JsonElement element)
+        Datetimerfc1123Wrapper IJsonModel<Datetimerfc1123Wrapper>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDatetimerfc1123Wrapper(document.RootElement, options);
+        }
+
+        internal static Datetimerfc1123Wrapper DeserializeDatetimerfc1123Wrapper(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<DateTimeOffset> field = default;
             Optional<DateTimeOffset> now = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"u8))
@@ -57,8 +99,44 @@ namespace body_complex.Models
                     now = property.Value.GetDateTimeOffset("R");
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Datetimerfc1123Wrapper(Optional.ToNullable(field), Optional.ToNullable(now));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Datetimerfc1123Wrapper(Optional.ToNullable(field), Optional.ToNullable(now), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Datetimerfc1123Wrapper>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Datetimerfc1123Wrapper IPersistableModel<Datetimerfc1123Wrapper>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDatetimerfc1123Wrapper(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Datetimerfc1123Wrapper)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Datetimerfc1123Wrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -109,9 +110,13 @@ namespace AutoRest.TestServer.Tests
         public void ObjectTypePropertiesSerializedAsValues()
         {
             DateTime date = DateTime.UtcNow;
-            var inputModel = new RenamedThirdModel(new ETag("Id"), date);
+            var inputModel = new RenamedThirdModel()
+            {
+                CustomizedETagProperty = new ETag("Id"),
+                CustomizedCreatedAtProperty = date
+            };
 
-            JsonAsserts.AssertSerialization(
+            JsonAsserts.AssertWireSerialization(
                 @"{""ETag"":""Id"",""CreatedAt"":" + JsonSerializer.Serialize(date) + "}",
                 inputModel);
         }
@@ -130,7 +135,7 @@ namespace AutoRest.TestServer.Tests
         public void ObjectTypePropertiesSerializedAsNull()
         {
             var inputModel = new RenamedThirdModel();
-            JsonAsserts.AssertSerialization(
+            JsonAsserts.AssertWireSerialization(
                 @"{""ETag"":"""",""CreatedAt"":" + JsonSerializer.Serialize(new DateTime()) + "}",
                 inputModel);
         }
@@ -195,12 +200,12 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new[] { typeof(JsonElement) },
+                new[] { typeof(JsonElement), typeof(ModelReaderWriterOptions) },
                 null));
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new[] { typeof(XElement) },
+                new[] { typeof(XElement), typeof(ModelReaderWriterOptions) },
                 null));
         }
 
@@ -230,7 +235,7 @@ namespace AutoRest.TestServer.Tests
             var inputModel = new ModelWithUriProperty();
             inputModel.Uri = new Uri("http://localhost");
 
-            JsonAsserts.AssertSerialization(
+            JsonAsserts.AssertWireSerialization(
                 @"{""Uri"":""http://localhost/""}",
                 inputModel);
         }

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> A cat. </summary>
@@ -19,8 +22,9 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="meow"> A cat can meow. </param>
-        internal Cat(PetKind kind, string id, string meow) : base(kind, id)
+        internal Cat(PetKind kind, string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string meow) : base(kind, id, serializedAdditionalRawData)
         {
             Meow = meow;
             Kind = kind;

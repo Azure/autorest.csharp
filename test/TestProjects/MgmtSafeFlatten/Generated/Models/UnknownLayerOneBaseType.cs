@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The UnknownLayerOneBaseType. </summary>
@@ -12,7 +15,8 @@ namespace MgmtSafeFlatten.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownLayerOneBaseType"/>. </summary>
         /// <param name="name"></param>
-        internal UnknownLayerOneBaseType(LayerOneTypeName name) : base(name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownLayerOneBaseType(LayerOneTypeName name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(name, serializedAdditionalRawData)
         {
             Name = name;
         }

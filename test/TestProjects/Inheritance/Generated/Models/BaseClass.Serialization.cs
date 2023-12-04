@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,10 +15,18 @@ using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
 {
-    public partial class BaseClass : IUtf8JsonSerializable
+    public partial class BaseClass : IUtf8JsonSerializable, IJsonModel<BaseClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClass>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<BaseClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<BaseClass>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(BaseClass)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(BaseClassProperty))
             {
@@ -78,11 +88,40 @@ namespace Inheritance.Models
                 writer.WritePropertyName("DfeUri"u8);
                 JsonSerializer.Serialize(writer, DfeUri);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static BaseClass DeserializeBaseClass(JsonElement element)
+        BaseClass IJsonModel<BaseClass>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<BaseClass>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(BaseClass)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeBaseClass(document.RootElement, options);
+        }
+
+        internal static BaseClass DeserializeBaseClass(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -99,6 +138,8 @@ namespace Inheritance.Models
             Optional<DataFactoryElement<DateTimeOffset>> dfeDateTime = default;
             Optional<DataFactoryElement<TimeSpan>> dfeDuration = default;
             Optional<DataFactoryElement<Uri>> dfeUri = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("BaseClassProperty"u8))
@@ -205,8 +246,44 @@ namespace Inheritance.Models
                     dfeUri = JsonSerializer.Deserialize<DataFactoryElement<Uri>>(property.Value.GetRawText());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new BaseClass(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new BaseClass(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<BaseClass>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BaseClass>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(BaseClass)} does not support '{options.Format}' format.");
+            }
+        }
+
+        BaseClass IPersistableModel<BaseClass>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BaseClass>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeBaseClass(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(BaseClass)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<BaseClass>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

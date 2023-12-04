@@ -16,7 +16,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string aniType = null, string name = null)
         {
-            return new Pet(aniType, name);
+            return new Pet(aniType, serializedAdditionalRawData: null, name);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Animal"/>. </summary>
@@ -24,7 +24,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.Animal"/> instance for mocking. </returns>
         public static Animal Animal(string aniType = null)
         {
-            return new Animal(aniType);
+            return new Animal(aniType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetAction"/>. </summary>
@@ -32,7 +32,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetAction"/> instance for mocking. </returns>
         public static PetAction PetAction(string actionResponse = null)
         {
-            return new PetAction(actionResponse);
+            return new PetAction(actionResponse, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetActionError"/>. </summary>
@@ -42,7 +42,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
         public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
         {
-            return new PetActionError(actionResponse, errorType, errorMessage);
+            return new PetActionError(actionResponse, serializedAdditionalRawData: null, errorType, errorMessage);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetSadError"/>. </summary>
@@ -52,7 +52,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetSadError"/> instance for mocking. </returns>
         public static PetSadError PetSadError(string actionResponse = null, string errorMessage = null, string reason = null)
         {
-            return new PetSadError(actionResponse, "PetSadError", errorMessage, reason);
+            return new PetSadError(actionResponse, serializedAdditionalRawData: null, "PetSadError", errorMessage, reason);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetHungryOrThirstyError"/>. </summary>
@@ -63,7 +63,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetHungryOrThirstyError"/> instance for mocking. </returns>
         public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
         {
-            return new PetHungryOrThirstyError(actionResponse, "PetHungryOrThirstyError", errorMessage, reason, hungryOrThirsty);
+            return new PetHungryOrThirstyError(actionResponse, serializedAdditionalRawData: null, "PetHungryOrThirstyError", errorMessage, reason, hungryOrThirsty);
         }
     }
 }

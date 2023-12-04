@@ -5,15 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    public partial class SoaRecord : IUtf8JsonSerializable
+    public partial class SoaRecord : IUtf8JsonSerializable, IJsonModel<SoaRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SoaRecord>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<SoaRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SoaRecord)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Host))
             {
@@ -50,11 +62,40 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("minimumTTL"u8);
                 writer.WriteNumberValue(MinimumTtl.Value);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static SoaRecord DeserializeSoaRecord(JsonElement element)
+        SoaRecord IJsonModel<SoaRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SoaRecord)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSoaRecord(document.RootElement, options);
+        }
+
+        internal static SoaRecord DeserializeSoaRecord(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -66,6 +107,8 @@ namespace MgmtExpandResourceTypes.Models
             Optional<long> retryTime = default;
             Optional<long> expireTime = default;
             Optional<long> minimumTTL = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("host"u8))
@@ -123,8 +166,44 @@ namespace MgmtExpandResourceTypes.Models
                     minimumTTL = property.Value.GetInt64();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SoaRecord(host.Value, email.Value, Optional.ToNullable(serialNumber), Optional.ToNullable(refreshTime), Optional.ToNullable(retryTime), Optional.ToNullable(expireTime), Optional.ToNullable(minimumTTL));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SoaRecord(host.Value, email.Value, Optional.ToNullable(serialNumber), Optional.ToNullable(refreshTime), Optional.ToNullable(retryTime), Optional.ToNullable(expireTime), Optional.ToNullable(minimumTTL), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<SoaRecord>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SoaRecord)} does not support '{options.Format}' format.");
+            }
+        }
+
+        SoaRecord IPersistableModel<SoaRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SoaRecord>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSoaRecord(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SoaRecord)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SoaRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

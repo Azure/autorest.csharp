@@ -58,7 +58,7 @@ namespace Payload.Pageable
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPageablesRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPageablesNextPageRequest(nextLink, maxpagesize, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, User.DeserializeUser, ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
         }
 
         /// <summary> List users. </summary>
@@ -70,7 +70,7 @@ namespace Payload.Pageable
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPageablesRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPageablesNextPageRequest(nextLink, maxpagesize, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, User.DeserializeUser, ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
         }
 
         /// <summary>

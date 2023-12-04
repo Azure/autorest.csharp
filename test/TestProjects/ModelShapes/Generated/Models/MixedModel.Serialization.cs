@@ -6,16 +6,26 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace ModelShapes.Models
 {
-    public partial class MixedModel : IUtf8JsonSerializable
+    public partial class MixedModel : IUtf8JsonSerializable, IJsonModel<MixedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MixedModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<MixedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<MixedModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(MixedModel)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("RequiredString"u8);
             writer.WriteStringValue(RequiredString);
@@ -169,11 +179,41 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("RequiredReadonlyInt"u8);
+                writer.WriteNumberValue(RequiredReadonlyInt);
+            }
+            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
+            {
+                writer.WritePropertyName("NonRequiredReadonlyInt"u8);
+                writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
+            }
             if (Optional.IsDefined(Vector))
             {
                 writer.WritePropertyName("vector"u8);
                 writer.WriteStartArray();
                 foreach (var item in Vector.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(VectorReadOnly))
+            {
+                writer.WritePropertyName("vectorReadOnly"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorReadOnly.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("vectorReadOnlyRequired"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorReadOnlyRequired.Span)
                 {
                     writer.WriteNumberValue(item);
                 }
@@ -203,6 +243,40 @@ namespace ModelShapes.Models
                     writer.WriteNull("vectorNullable");
                 }
             }
+            if (options.Format != "W" && Optional.IsDefined(VectorReadOnlyNullable))
+            {
+                if (VectorReadOnlyNullable != null)
+                {
+                    writer.WritePropertyName("vectorReadOnlyNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorReadOnlyNullable.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorReadOnlyNullable");
+                }
+            }
+            if (options.Format != "W")
+            {
+                if (VectorReadOnlyRequiredNullable != null)
+                {
+                    writer.WritePropertyName("vectorReadOnlyRequiredNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorReadOnlyRequiredNullable.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorReadOnlyRequiredNullable");
+                }
+            }
             if (VectorRequiredNullable != null)
             {
                 writer.WritePropertyName("vectorRequiredNullable"u8);
@@ -217,11 +291,40 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("vectorRequiredNullable");
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static MixedModel DeserializeMixedModel(JsonElement element)
+        MixedModel IJsonModel<MixedModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<MixedModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(MixedModel)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeMixedModel(document.RootElement, options);
+        }
+
+        internal static MixedModel DeserializeMixedModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -252,6 +355,8 @@ namespace ModelShapes.Models
             Optional<ReadOnlyMemory<float>?> vectorReadOnlyNullable = default;
             ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable = default;
             ReadOnlyMemory<float>? vectorRequiredNullable = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"u8))
@@ -566,8 +671,44 @@ namespace ModelShapes.Models
                     vectorRequiredNullable = new ReadOnlyMemory<float>?(array);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, Optional.ToNullable(vectorNullable), Optional.ToNullable(vectorReadOnlyNullable), vectorReadOnlyRequiredNullable, vectorRequiredNullable);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, Optional.ToNullable(vectorNullable), Optional.ToNullable(vectorReadOnlyNullable), vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<MixedModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MixedModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MixedModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        MixedModel IPersistableModel<MixedModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<MixedModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeMixedModel(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MixedModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<MixedModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The UnknownPet. </summary>
@@ -13,7 +16,8 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="UnknownPet"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
-        internal UnknownPet(PetKind kind, string id) : base(kind, id)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownPet(PetKind kind, string id, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, id, serializedAdditionalRawData)
         {
             Kind = kind;
         }

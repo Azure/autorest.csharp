@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -26,11 +27,17 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="KeywordTokenizer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the tokenizer. </param>
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="bufferSize"> The read buffer size in bytes. Default is 256. </param>
-        internal KeywordTokenizer(string odataType, string name, int? bufferSize) : base(odataType, name)
+        internal KeywordTokenizer(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int? bufferSize) : base(odataType, name, serializedAdditionalRawData)
         {
             BufferSize = bufferSize;
             OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordTokenizer";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="KeywordTokenizer"/> for deserialization. </summary>
+        internal KeywordTokenizer()
+        {
         }
 
         /// <summary> The read buffer size in bytes. Default is 256. </summary>

@@ -1,6 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Collections.Generic;
+using System.ClientModel;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
@@ -24,8 +27,10 @@ namespace CustomNamespace
         [CodeGenMember("PropertyToField")]
         private readonly string _field;
 
-        internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
+        internal static CustomizedModel DeserializeCustomizedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             int? propertyRenamedAndTypeChanged = default;
             CustomFruitEnum fruit = default;
             CustomDaysOfWeek daysOfWeek = default;
@@ -57,7 +62,7 @@ namespace CustomNamespace
                     continue;
                 }
             }
-            return new CustomizedModel(propertyRenamedAndTypeChanged, field, fruit, daysOfWeek);
+            return new CustomizedModel(propertyRenamedAndTypeChanged, field, fruit, daysOfWeek, new Dictionary<string, BinaryData>());
         }
     }
 }

@@ -5,25 +5,65 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Analyzer : IUtf8JsonSerializable
+    public partial class Analyzer : IUtf8JsonSerializable, IJsonModel<Analyzer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Analyzer>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Analyzer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Analyzer)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Analyzer DeserializeAnalyzer(JsonElement element)
+        Analyzer IJsonModel<Analyzer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Analyzer)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnalyzer(document.RootElement, options);
+        }
+
+        internal static Analyzer DeserializeAnalyzer(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -40,5 +80,36 @@ namespace CognitiveSearch.Models
             }
             return UnknownAnalyzer.DeserializeUnknownAnalyzer(element);
         }
+
+        BinaryData IPersistableModel<Analyzer>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Analyzer)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Analyzer IPersistableModel<Analyzer>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Analyzer>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeAnalyzer(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Analyzer)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Analyzer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

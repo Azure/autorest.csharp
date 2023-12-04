@@ -33,15 +33,21 @@ namespace CognitiveSearch.Models
         /// <param name="context"> Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document. </param>
         /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="textExtractionAlgorithm"> A value indicating which algorithm to use for extracting text. Default is printed. </param>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="shouldDetectOrientation"> A value indicating to turn orientation detection on or not. Default is false. </param>
-        internal OcrSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, TextExtractionAlgorithm? textExtractionAlgorithm, OcrSkillLanguage? defaultLanguageCode, bool? shouldDetectOrientation) : base(odataType, name, description, context, inputs, outputs)
+        internal OcrSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, IDictionary<string, BinaryData> serializedAdditionalRawData, TextExtractionAlgorithm? textExtractionAlgorithm, OcrSkillLanguage? defaultLanguageCode, bool? shouldDetectOrientation) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             TextExtractionAlgorithm = textExtractionAlgorithm;
             DefaultLanguageCode = defaultLanguageCode;
             ShouldDetectOrientation = shouldDetectOrientation;
             OdataType = odataType ?? "#Microsoft.Skills.Vision.OcrSkill";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OcrSkill"/> for deserialization. </summary>
+        internal OcrSkill()
+        {
         }
 
         /// <summary> A value indicating which algorithm to use for extracting text. Default is printed. </summary>

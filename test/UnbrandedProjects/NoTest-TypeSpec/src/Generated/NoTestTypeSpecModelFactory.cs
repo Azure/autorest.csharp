@@ -31,7 +31,7 @@ namespace NoTestTypeSpec.Models
             optionalNullableList ??= new List<int>();
             requiredNullableList ??= new List<int>();
 
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, optionalLiteralString, optionalLiteralInt, optionalLiteralFloat, optionalLiteralBool, requiredBadDescription, optionalNullableList?.ToList(), requiredNullableList?.ToList());
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, optionalLiteralString, optionalLiteralInt, optionalLiteralFloat, optionalLiteralBool, requiredBadDescription, optionalNullableList?.ToList(), requiredNullableList?.ToList(), serializedAdditionalRawData: null);
         }
     }
 }

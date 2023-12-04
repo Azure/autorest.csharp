@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -16,6 +17,7 @@ using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
+    [DebuggerDisplay("Name: {Declaration.Name}, Type: {Declaration.Type}")]
     internal class ObjectTypeProperty
     {
         public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty)
@@ -444,11 +446,6 @@ Examples:
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }
             return updatedDescription ?? $"";
-        }
-
-        public override string ToString()
-        {
-            return $"ObjectTypeProperty {{Name: {Declaration.Name}, Type: {Declaration.Type}}}";
         }
     }
 }

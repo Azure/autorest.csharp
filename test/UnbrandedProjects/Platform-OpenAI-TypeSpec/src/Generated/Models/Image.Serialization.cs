@@ -3,22 +3,79 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class Image
+    public partial class Image : IUtf8JsonWriteable, IJsonModel<Image>
     {
-        internal static Image DeserializeImage(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Image>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Image>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Image>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Image)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (OptionalProperty.IsDefined(Url))
+            {
+                writer.WritePropertyName("url"u8);
+                writer.WriteStringValue(Url.AbsoluteUri);
+            }
+            if (OptionalProperty.IsDefined(B64Json))
+            {
+                writer.WritePropertyName("b64_json"u8);
+                writer.WriteBase64StringValue(B64Json.ToArray(), "D");
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        Image IJsonModel<Image>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Image>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Image)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeImage(document.RootElement, options);
+        }
+
+        internal static Image DeserializeImage(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             OptionalProperty<Uri> url = default;
             OptionalProperty<BinaryData> b64Json = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("url"u8))
@@ -39,9 +96,45 @@ namespace OpenAI.Models
                     b64Json = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Image(url.Value, b64Json.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Image(url.Value, b64Json.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Image>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Image>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Image)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Image IPersistableModel<Image>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Image>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeImage(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Image)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Image>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
@@ -49,6 +142,14 @@ namespace OpenAI.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeImage(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            var content = new Utf8JsonRequestBody();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

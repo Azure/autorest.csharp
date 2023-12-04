@@ -6,14 +6,188 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.IO;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class BlobProperties
+    public partial class BlobProperties : IXmlSerializable, IPersistableModel<BlobProperties>
     {
-        internal static BlobProperties DeserializeBlobProperties(XElement element)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        {
+            writer.WriteStartElement(nameHint ?? "BlobProperties");
+            writer.WriteStartElement("Last-Modified");
+            writer.WriteValue(LastModified, "R");
+            writer.WriteEndElement();
+            writer.WriteStartElement("Etag");
+            writer.WriteValue(Etag);
+            writer.WriteEndElement();
+            if (Optional.IsDefined(ContentLength))
+            {
+                writer.WriteStartElement("Content-Length");
+                writer.WriteValue(ContentLength.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(ContentType))
+            {
+                writer.WriteStartElement("Content-Type");
+                writer.WriteValue(ContentType);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(ContentEncoding))
+            {
+                writer.WriteStartElement("Content-Encoding");
+                writer.WriteValue(ContentEncoding);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(ContentLanguage))
+            {
+                writer.WriteStartElement("Content-Language");
+                writer.WriteValue(ContentLanguage);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(ContentMD5))
+            {
+                writer.WriteStartElement("Content-MD5");
+                writer.WriteValue(ContentMD5);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(ContentDisposition))
+            {
+                writer.WriteStartElement("Content-Disposition");
+                writer.WriteValue(ContentDisposition);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(CacheControl))
+            {
+                writer.WriteStartElement("Cache-Control");
+                writer.WriteValue(CacheControl);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(BlobSequenceNumber))
+            {
+                writer.WriteStartElement("x-ms-blob-sequence-number");
+                writer.WriteValue(BlobSequenceNumber.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(BlobType))
+            {
+                writer.WriteStartElement("BlobType");
+                writer.WriteValue(BlobType.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(LeaseStatus))
+            {
+                writer.WriteStartElement("LeaseStatus");
+                writer.WriteValue(LeaseStatus.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(LeaseState))
+            {
+                writer.WriteStartElement("LeaseState");
+                writer.WriteValue(LeaseState.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(LeaseDuration))
+            {
+                writer.WriteStartElement("LeaseDuration");
+                writer.WriteValue(LeaseDuration.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(CopyId))
+            {
+                writer.WriteStartElement("CopyId");
+                writer.WriteValue(CopyId);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(CopyStatus))
+            {
+                writer.WriteStartElement("CopyStatus");
+                writer.WriteValue(CopyStatus.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(CopySource))
+            {
+                writer.WriteStartElement("CopySource");
+                writer.WriteValue(CopySource);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(CopyProgress))
+            {
+                writer.WriteStartElement("CopyProgress");
+                writer.WriteValue(CopyProgress);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(CopyCompletionTime))
+            {
+                writer.WriteStartElement("CopyCompletionTime");
+                writer.WriteValue(CopyCompletionTime.Value, "R");
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(CopyStatusDescription))
+            {
+                writer.WriteStartElement("CopyStatusDescription");
+                writer.WriteValue(CopyStatusDescription);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(ServerEncrypted))
+            {
+                writer.WriteStartElement("ServerEncrypted");
+                writer.WriteValue(ServerEncrypted.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(IncrementalCopy))
+            {
+                writer.WriteStartElement("IncrementalCopy");
+                writer.WriteValue(IncrementalCopy.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(DestinationSnapshot))
+            {
+                writer.WriteStartElement("DestinationSnapshot");
+                writer.WriteValue(DestinationSnapshot);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(DeletedTime))
+            {
+                writer.WriteStartElement("DeletedTime");
+                writer.WriteValue(DeletedTime.Value, "R");
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(RemainingRetentionDays))
+            {
+                writer.WriteStartElement("RemainingRetentionDays");
+                writer.WriteValue(RemainingRetentionDays.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(AccessTier))
+            {
+                writer.WriteStartElement("AccessTier");
+                writer.WriteValue(AccessTier.Value.ToString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(AccessTierInferred))
+            {
+                writer.WriteStartElement("AccessTierInferred");
+                writer.WriteValue(AccessTierInferred.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(ArchiveStatus))
+            {
+                writer.WriteStartElement("ArchiveStatus");
+                writer.WriteValue(ArchiveStatus.Value.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static BlobProperties DeserializeBlobProperties(XElement element, ModelReaderWriterOptions options = null)
         {
             DateTimeOffset lastModified = default;
             string etag = default;
@@ -155,7 +329,48 @@ namespace xml_service.Models
             {
                 archiveStatus = new ArchiveStatus(archiveStatusElement.Value);
             }
-            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus);
+            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<BlobProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BlobProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(BlobProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        BlobProperties IPersistableModel<BlobProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<BlobProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeBlobProperties(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(BlobProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<BlobProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

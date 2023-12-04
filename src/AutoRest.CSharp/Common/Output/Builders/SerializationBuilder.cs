@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -192,7 +193,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, SerializableObjectType objectType)
         {
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
             List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
@@ -252,7 +253,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             return new XmlObjectSerialization(
                 objectSchema.Serialization?.Xml?.Name ?? objectSchema.Language.Default.Name,
-                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
+                objectType, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
                 contentSerialization
                 );
         }
@@ -270,7 +271,7 @@ namespace AutoRest.CSharp.Output.Builders
 
                 var serializedName = schemaProperty.SerializedName;
                 var isRequired = schemaProperty.IsRequired;
-                var isReadOnly = schemaProperty.IsReadOnly;
+                var shouldExcludeInWireSerialization = schemaProperty.IsReadOnly;
                 var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
 
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
@@ -288,8 +289,7 @@ namespace AutoRest.CSharp.Output.Builders
                     property.ValueType,
                     serialization,
                     isRequired,
-                    isReadOnly,
-                    false,
+                    shouldExcludeInWireSerialization,
                     customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                     customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
                     enumerableExpression: enumerableExpression);
@@ -302,7 +302,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
+        public JsonObjectSerialization BuildJsonObjectSerialization(SchemaObjectType objectType)
         {
             var propertyBag = new SerializationPropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
@@ -318,8 +318,8 @@ namespace AutoRest.CSharp.Output.Builders
 
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
-            var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
-            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
+            var additionalProperties = CreateAdditionalProperties(objectType);
+            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
         private class SerializationPropertyBag
@@ -356,33 +356,35 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType)
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectType objectType)
         {
-            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
-
+            bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
             foreach (var obj in objectType.EnumerateHierarchy())
             {
-                additionalPropertiesProperty = obj.AdditionalPropertiesProperty;
+                additionalPropertiesProperty = obj.AdditionalPropertiesProperty ?? (obj as SerializableObjectType)?.RawDataField;
                 if (additionalPropertiesProperty != null)
                 {
+                    // if this is a real "AdditionalProperties", we should NOT exclude it in wire
+                    shouldExcludeInWireSerialization = additionalPropertiesProperty != obj.AdditionalPropertiesProperty;
                     break;
                 }
             }
 
-            if (inheritedDictionarySchema == null || additionalPropertiesProperty == null)
+            if (additionalPropertiesProperty == null)
             {
                 return null;
             }
 
             var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
             Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, dictionaryValueType, false);
+            var valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
 
             return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,
                     valueSerialization,
-                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments));
+                    new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                    shouldExcludeInWireSerialization);
         }
     }
 }

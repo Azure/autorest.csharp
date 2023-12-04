@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtSafeFlatten.Models
@@ -26,11 +27,17 @@ namespace MgmtSafeFlatten.Models
 
         /// <summary> Initializes a new instance of <see cref="LayerOneBarType"/>. </summary>
         /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the type. </param>
-        internal LayerOneBarType(LayerOneTypeName name, string parameters) : base(name)
+        internal LayerOneBarType(LayerOneTypeName name, IDictionary<string, BinaryData> serializedAdditionalRawData, string parameters) : base(name, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Name = name;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LayerOneBarType"/> for deserialization. </summary>
+        internal LayerOneBarType()
+        {
         }
 
         /// <summary> Defines the parameters for the type. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -29,10 +30,16 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="meow"> Meow. </param>
-        internal Cat(string kind, string name, string meow) : base(kind, name)
+        internal Cat(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string meow) : base(kind, name, serializedAdditionalRawData)
         {
             Meow = meow;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Cat"/> for deserialization. </summary>
+        internal Cat()
+        {
         }
 
         /// <summary> Meow. </summary>

@@ -5,11 +5,46 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace NameConflicts.Models
 {
     /// <summary> The Class. </summary>
     public partial class Class
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="Class"/>. </summary>
         public Class()
         {
@@ -124,7 +159,8 @@ namespace NameConflicts.Models
         /// <param name="toStringValue"></param>
         /// <param name="equalsValue"></param>
         /// <param name="getHashCodeValue"></param>
-        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classValue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system, string toStringValue, string equalsValue, string getHashCodeValue)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Class(string @abstract, string @add, string @alias, string @as, string @ascending, string @async, string @await, string @base, string @bool, string @break, string @by, string @byte, string @catch, string @char, string @checked, string @const, string @continue, string classValue, string @decimal, string @default, string @delegate, string @descending, string @do, string @double, string @dynamic, string @else, string @enum, string @event, string @explicit, string @extern, string @false, string @finally, string @fixed, string @float, string @for, string @foreach, string @from, string @get, string @global, string @goto, string group, string @if, string @implicit, string @in, string @int, string @interface, string @internal, string @into, string @is, string @join, string @let, string @lock, string @long, string @nameof, string @namespace, string @new, string nullProperty, string @object, string @on, string @operator, string orderby, string @out, string @override, string @params, string @partial, string @private, string @protected, string @public, string @readonly, string @ref, string @remove, string @return, string @sbyte, string @sealed, string select, string @set, string @short, string @sizeof, string @stackalloc, string @static, string @string, string @struct, string @switch, string @this, string @throw, string @true, string @try, string @typeof, string @uint, string @ulong, string @unchecked, string @unmanaged, string @unsafe, string @ushort, string @using, string value, string @var, string @virtual, string @void, string @volatile, string @when, string @where, string @while, string @yield, SystemEnum? system, string toStringValue, string equalsValue, string getHashCodeValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Abstract = @abstract;
             Add = @add;
@@ -234,6 +270,7 @@ namespace NameConflicts.Models
             ToStringValue = toStringValue;
             EqualsValue = equalsValue;
             GetHashCodeValue = getHashCodeValue;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the abstract. </summary>

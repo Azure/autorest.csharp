@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,10 +15,88 @@ using Azure.Core;
 
 namespace _Azure.Lro.RpcLegacy.Models
 {
-    public partial class JobResult
+    public partial class JobResult : IUtf8JsonSerializable, IJsonModel<JobResult>
     {
-        internal static JobResult DeserializeJobResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JobResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<JobResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<JobResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(JobResult)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("jobId"u8);
+                writer.WriteStringValue(JobId);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("comment"u8);
+                writer.WriteStringValue(Comment);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.ToString());
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Errors))
+            {
+                writer.WritePropertyName("errors"u8);
+                writer.WriteStartArray();
+                foreach (var item in Errors)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Results))
+            {
+                writer.WritePropertyName("results"u8);
+                writer.WriteStartArray();
+                foreach (var item in Results)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        JobResult IJsonModel<JobResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<JobResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(JobResult)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeJobResult(document.RootElement, options);
+        }
+
+        internal static JobResult DeserializeJobResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -25,6 +106,8 @@ namespace _Azure.Lro.RpcLegacy.Models
             JobStatus status = default;
             Optional<IReadOnlyList<ErrorResponse>> errors = default;
             Optional<IReadOnlyList<string>> results = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jobId"u8))
@@ -70,9 +153,45 @@ namespace _Azure.Lro.RpcLegacy.Models
                     results = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new JobResult(jobId, comment, status, Optional.ToList(errors), Optional.ToList(results));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new JobResult(jobId, comment, status, Optional.ToList(errors), Optional.ToList(results), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<JobResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<JobResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(JobResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        JobResult IPersistableModel<JobResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<JobResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeJobResult(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(JobResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<JobResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -80,6 +199,14 @@ namespace _Azure.Lro.RpcLegacy.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeJobResult(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

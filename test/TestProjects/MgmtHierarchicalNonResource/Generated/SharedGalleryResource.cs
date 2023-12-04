@@ -186,7 +186,7 @@ namespace MgmtHierarchicalNonResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => SharedGalleryImage.DeserializeSharedGalleryImage(e), _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace MgmtHierarchicalNonResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImagesRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImagesRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, sharedTo);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, SharedGalleryImage.DeserializeSharedGalleryImage, _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => SharedGalleryImage.DeserializeSharedGalleryImage(e), _sharedGalleryImagesClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImages", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace MgmtHierarchicalNonResource
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion(e), _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace MgmtHierarchicalNonResource
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sharedGalleryImageVersionsRestClient.CreateListRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sharedGalleryImageVersionsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.Parent.Name, Id.Name, galleryImageName, sharedTo);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion, _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => SharedGalleryImageVersion.DeserializeSharedGalleryImageVersion(e), _sharedGalleryImageVersionsClientDiagnostics, Pipeline, "SharedGalleryResource.GetSharedGalleryImageVersions", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

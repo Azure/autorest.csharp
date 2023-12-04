@@ -2,15 +2,68 @@
 
 #nullable disable
 
-using System.Net.ClientModel.Core;
+using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class DeleteModelResponse
+    public partial class DeleteModelResponse : IUtf8JsonWriteable, IJsonModel<DeleteModelResponse>
     {
-        internal static DeleteModelResponse DeserializeDeleteModelResponse(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeleteModelResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<DeleteModelResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DeleteModelResponse>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(DeleteModelResponse)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("id"u8);
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("object"u8);
+            writer.WriteStringValue(Object);
+            writer.WritePropertyName("deleted"u8);
+            writer.WriteBooleanValue(Deleted);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        DeleteModelResponse IJsonModel<DeleteModelResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeleteModelResponse>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(DeleteModelResponse)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeleteModelResponse(document.RootElement, options);
+        }
+
+        internal static DeleteModelResponse DeserializeDeleteModelResponse(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -18,6 +71,8 @@ namespace OpenAI.Models
             string id = default;
             string @object = default;
             bool deleted = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -35,9 +90,45 @@ namespace OpenAI.Models
                     deleted = property.Value.GetBoolean();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DeleteModelResponse(id, @object, deleted);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DeleteModelResponse(id, @object, deleted, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<DeleteModelResponse>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeleteModelResponse>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DeleteModelResponse)} does not support '{options.Format}' format.");
+            }
+        }
+
+        DeleteModelResponse IPersistableModel<DeleteModelResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeleteModelResponse>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDeleteModelResponse(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DeleteModelResponse)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DeleteModelResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
@@ -45,6 +136,14 @@ namespace OpenAI.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDeleteModelResponse(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            var content = new Utf8JsonRequestBody();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

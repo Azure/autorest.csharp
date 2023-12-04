@@ -5,6 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -12,9 +17,9 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IXmlSerializable
+    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsageViaAttribute>, IXmlSerializable, IPersistableModel<ModelWithCustomUsageViaAttribute>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithCustomUsageViaAttribute");
             if (Optional.IsDefined(ModelProperty))
@@ -26,34 +31,75 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
-        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(XElement element, ModelReaderWriterOptions options = null)
         {
             string modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {
                 modelProperty = (string)modelPropertyElement;
             }
-            return new ModelWithCustomUsageViaAttribute(modelProperty);
+            return new ModelWithCustomUsageViaAttribute(modelProperty, serializedAdditionalRawData: null);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomUsageViaAttribute>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<ModelWithCustomUsageViaAttribute>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomUsageViaAttribute>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsageViaAttribute)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(ModelProperty);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(JsonElement element)
+        ModelWithCustomUsageViaAttribute IJsonModel<ModelWithCustomUsageViaAttribute>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomUsageViaAttribute>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsageViaAttribute)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithCustomUsageViaAttribute(document.RootElement, options);
+        }
+
+        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> modelProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"u8))
@@ -61,8 +107,61 @@ namespace TypeSchemaMapping.Models
                     modelProperty = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ModelWithCustomUsageViaAttribute(modelProperty.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ModelWithCustomUsageViaAttribute(modelProperty.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<ModelWithCustomUsageViaAttribute>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomUsageViaAttribute>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsageViaAttribute)} does not support '{options.Format}' format.");
+            }
+        }
+
+        ModelWithCustomUsageViaAttribute IPersistableModel<ModelWithCustomUsageViaAttribute>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomUsageViaAttribute>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeModelWithCustomUsageViaAttribute(document.RootElement, options);
+                    }
+                case "X":
+                    return DeserializeModelWithCustomUsageViaAttribute(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsageViaAttribute)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ModelWithCustomUsageViaAttribute>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

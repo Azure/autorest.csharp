@@ -70,7 +70,7 @@ namespace MgmtMockAndSample.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TenantActivityLogsRestClient.CreateListRequest(filter, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TenantActivityLogsRestClient.CreateListNextPageRequest(nextLink, filter, select);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "MockableMgmtMockAndSampleTenantResource.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => EventData.DeserializeEventData(e), TenantActivityLogsClientDiagnostics, Pipeline, "MockableMgmtMockAndSampleTenantResource.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace MgmtMockAndSample.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TenantActivityLogsRestClient.CreateListRequest(filter, select);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => TenantActivityLogsRestClient.CreateListNextPageRequest(nextLink, filter, select);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, EventData.DeserializeEventData, TenantActivityLogsClientDiagnostics, Pipeline, "MockableMgmtMockAndSampleTenantResource.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => EventData.DeserializeEventData(e), TenantActivityLogsClientDiagnostics, Pipeline, "MockableMgmtMockAndSampleTenantResource.GetTenantActivityLogs", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

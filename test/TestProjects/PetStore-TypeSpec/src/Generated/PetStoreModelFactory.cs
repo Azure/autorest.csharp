@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-
 namespace PetStore.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +16,7 @@ namespace PetStore.Models
         /// <returns> A new <see cref="Models.Fish"/> instance for mocking. </returns>
         public static Fish Fish(string kind = null, int size = default)
         {
-            return new UnknownFish(kind, size);
+            return new UnknownFish(kind, size, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Shark"/>. </summary>
@@ -27,7 +25,7 @@ namespace PetStore.Models
         /// <returns> A new <see cref="Models.Shark"/> instance for mocking. </returns>
         public static Shark Shark(int size = default, string bite = null)
         {
-            return new Shark("shark", size, bite);
+            return new Shark("shark", size, serializedAdditionalRawData: null, bite);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Tuna"/>. </summary>
@@ -36,7 +34,7 @@ namespace PetStore.Models
         /// <returns> A new <see cref="Models.Tuna"/> instance for mocking. </returns>
         public static Tuna Tuna(int size = default, int fat = default)
         {
-            return new Tuna("tuna", size, fat);
+            return new Tuna("tuna", size, serializedAdditionalRawData: null, fat);
         }
     }
 }

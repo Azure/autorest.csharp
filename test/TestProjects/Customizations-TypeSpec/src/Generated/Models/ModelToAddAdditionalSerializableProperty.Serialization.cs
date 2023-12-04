@@ -5,16 +5,28 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable
+    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable, IJsonModel<ModelToAddAdditionalSerializableProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToAddAdditionalSerializableProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<ModelToAddAdditionalSerializableProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelToAddAdditionalSerializableProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(ModelToAddAdditionalSerializableProperty)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             WriteRequiredIntValue(writer);
@@ -35,11 +47,40 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("additionalNullableSerializableProperty");
                 }
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element)
+        ModelToAddAdditionalSerializableProperty IJsonModel<ModelToAddAdditionalSerializableProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelToAddAdditionalSerializableProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(ModelToAddAdditionalSerializableProperty)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
+        }
+
+        internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +88,8 @@ namespace CustomizationsInTsp.Models
             int requiredInt = default;
             Optional<int> additionalSerializableProperty = default;
             Optional<int?> additionalNullableSerializableProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
@@ -73,9 +116,45 @@ namespace CustomizationsInTsp.Models
                     additionalNullableSerializableProperty = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<ModelToAddAdditionalSerializableProperty>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelToAddAdditionalSerializableProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelToAddAdditionalSerializableProperty)} does not support '{options.Format}' format.");
+            }
+        }
+
+        ModelToAddAdditionalSerializableProperty IPersistableModel<ModelToAddAdditionalSerializableProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelToAddAdditionalSerializableProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelToAddAdditionalSerializableProperty)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ModelToAddAdditionalSerializableProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

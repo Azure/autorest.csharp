@@ -5,16 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace lro.Models
 {
-    public partial class SubProduct : IUtf8JsonSerializable
+    public partial class SubProduct : IUtf8JsonSerializable, IJsonModel<SubProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubProduct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<SubProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SubProduct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SubProduct)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(ProvisioningState))
@@ -22,12 +39,46 @@ namespace lro.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
+            {
+                writer.WritePropertyName("provisioningStateValues"u8);
+                writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
+            }
             writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static SubProduct DeserializeSubProduct(JsonElement element)
+        SubProduct IJsonModel<SubProduct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SubProduct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SubProduct)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubProduct(document.RootElement, options);
+        }
+
+        internal static SubProduct DeserializeSubProduct(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -35,6 +86,8 @@ namespace lro.Models
             Optional<string> id = default;
             Optional<string> provisioningState = default;
             Optional<SubProductPropertiesProvisioningStateValues> provisioningStateValues = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -68,8 +121,44 @@ namespace lro.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SubProduct(id.Value, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SubProduct(id.Value, serializedAdditionalRawData, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
         }
+
+        BinaryData IPersistableModel<SubProduct>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SubProduct>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SubProduct)} does not support '{options.Format}' format.");
+            }
+        }
+
+        SubProduct IPersistableModel<SubProduct>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SubProduct>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSubProduct(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SubProduct)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SubProduct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -5,15 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class KeywordTokenizerV2 : IUtf8JsonSerializable
+    public partial class KeywordTokenizerV2 : IUtf8JsonSerializable, IJsonModel<KeywordTokenizerV2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeywordTokenizerV2>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<KeywordTokenizerV2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<KeywordTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(KeywordTokenizerV2)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxTokenLength))
             {
@@ -24,11 +36,40 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element)
+        KeywordTokenizerV2 IJsonModel<KeywordTokenizerV2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<KeywordTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(KeywordTokenizerV2)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeywordTokenizerV2(document.RootElement, options);
+        }
+
+        internal static KeywordTokenizerV2 DeserializeKeywordTokenizerV2(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -36,6 +77,8 @@ namespace CognitiveSearch.Models
             Optional<int> maxTokenLength = default;
             string odataType = default;
             string name = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxTokenLength"u8))
@@ -57,8 +100,44 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new KeywordTokenizerV2(odataType, name, Optional.ToNullable(maxTokenLength));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new KeywordTokenizerV2(odataType, name, serializedAdditionalRawData, Optional.ToNullable(maxTokenLength));
         }
+
+        BinaryData IPersistableModel<KeywordTokenizerV2>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<KeywordTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(KeywordTokenizerV2)} does not support '{options.Format}' format.");
+            }
+        }
+
+        KeywordTokenizerV2 IPersistableModel<KeywordTokenizerV2>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<KeywordTokenizerV2>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeKeywordTokenizerV2(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(KeywordTokenizerV2)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<KeywordTokenizerV2>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

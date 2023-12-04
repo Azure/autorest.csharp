@@ -30,7 +30,7 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.DedicatedHostGroupData"/>. </summary>
@@ -46,7 +46,7 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.DedicatedHostData"/>. </summary>
@@ -62,7 +62,22 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.DedicatedHostPatch"/>. </summary>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="platformFaultDomain"> Fault domain of the dedicated host within a dedicated host group. </param>
+        /// <param name="autoReplaceOnFailure"> Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided. </param>
+        /// <param name="hostId"> A unique id generated and assigned to the dedicated host by the platform. &lt;br&gt;&lt;br&gt; Does not change throughout the lifetime of the host. </param>
+        /// <param name="provisioningOn"> The date when the host was first provisioned. </param>
+        /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
+        /// <returns> A new <see cref="Models.DedicatedHostPatch"/> instance for mocking. </returns>
+        public static DedicatedHostPatch DedicatedHostPatch(IDictionary<string, string> tags = null, int? platformFaultDomain = null, bool? autoReplaceOnFailure = null, string hostId = null, DateTimeOffset? provisioningOn = null, string provisioningState = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new DedicatedHostPatch(tags, serializedAdditionalRawData: null, platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.VirtualMachineExtensionImageData"/>. </summary>
@@ -78,7 +93,7 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar);
+            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.EnvironmentContainerResourceData"/>. </summary>
@@ -94,7 +109,7 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties);
+            return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.WorkspaceData"/>. </summary>
@@ -125,7 +140,7 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new WorkspaceData(id, name, resourceType, systemData, tags, location, workspaceId, description, friendlyName, keyVault, applicationInsights, containerRegistry, storageAccount, discoveryUri, provisioningState, hbiWorkspace, serviceProvisionedResourceGroup, privateLinkCount, imageBuildCompute, allowPublicAccessWhenBehindVnet, primaryUserAssignedIdentity, tenantId);
+            return new WorkspaceData(id, name, resourceType, systemData, tags, location, workspaceId, description, friendlyName, keyVault, applicationInsights, containerRegistry, storageAccount, discoveryUri, provisioningState, hbiWorkspace, serviceProvisionedResourceGroup, privateLinkCount, imageBuildCompute, allowPublicAccessWhenBehindVnet, primaryUserAssignedIdentity, tenantId, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.VirtualMachineScaleSetData"/>. </summary>
@@ -142,7 +157,7 @@ namespace MgmtParamOrdering.Models
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, zones?.ToList());
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, zones?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetInstanceView"/>. </summary>
@@ -150,7 +165,7 @@ namespace MgmtParamOrdering.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetInstanceView"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(string virtualMachine = null)
         {
-            return new VirtualMachineScaleSetInstanceView(virtualMachine);
+            return new VirtualMachineScaleSetInstanceView(virtualMachine, serializedAdditionalRawData: null);
         }
     }
 }

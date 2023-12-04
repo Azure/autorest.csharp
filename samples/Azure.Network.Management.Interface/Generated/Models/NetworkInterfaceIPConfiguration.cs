@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -25,6 +26,7 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceIPConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="virtualNetworkTaps"> The reference to Virtual Network Taps. </param>
@@ -40,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="applicationSecurityGroups"> Application security groups in which the IP configuration is included. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface IP configuration. </param>
         /// <param name="privateLinkConnectionProperties"> PrivateLinkConnection properties for the network interface. </param>
-        internal NetworkInterfaceIPConfiguration(string id, string name, string etag, IList<VirtualNetworkTap> virtualNetworkTaps, IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools, IList<BackendAddressPool> loadBalancerBackendAddressPools, IList<InboundNatRule> loadBalancerInboundNatRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, bool? primary, PublicIPAddress publicIPAddress, IList<ApplicationSecurityGroup> applicationSecurityGroups, ProvisioningState? provisioningState, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties) : base(id)
+        internal NetworkInterfaceIPConfiguration(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, IList<VirtualNetworkTap> virtualNetworkTaps, IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools, IList<BackendAddressPool> loadBalancerBackendAddressPools, IList<InboundNatRule> loadBalancerInboundNatRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, bool? primary, PublicIPAddress publicIPAddress, IList<ApplicationSecurityGroup> applicationSecurityGroups, ProvisioningState? provisioningState, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

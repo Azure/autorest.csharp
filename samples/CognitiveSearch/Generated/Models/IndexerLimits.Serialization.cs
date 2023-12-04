@@ -6,15 +6,76 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexerLimits
+    public partial class IndexerLimits : IUtf8JsonSerializable, IJsonModel<IndexerLimits>
     {
-        internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerLimits>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<IndexerLimits>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerLimits>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IndexerLimits)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(MaxRunTime))
+            {
+                writer.WritePropertyName("maxRunTime"u8);
+                writer.WriteStringValue(MaxRunTime.Value, "P");
+            }
+            if (options.Format != "W" && Optional.IsDefined(MaxDocumentExtractionSize))
+            {
+                writer.WritePropertyName("maxDocumentExtractionSize"u8);
+                writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(MaxDocumentContentCharactersToExtract))
+            {
+                writer.WritePropertyName("maxDocumentContentCharactersToExtract"u8);
+                writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        IndexerLimits IJsonModel<IndexerLimits>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerLimits>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IndexerLimits)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexerLimits(document.RootElement, options);
+        }
+
+        internal static IndexerLimits DeserializeIndexerLimits(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -22,6 +83,8 @@ namespace CognitiveSearch.Models
             Optional<TimeSpan> maxRunTime = default;
             Optional<long> maxDocumentExtractionSize = default;
             Optional<long> maxDocumentContentCharactersToExtract = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxRunTime"u8))
@@ -51,8 +114,44 @@ namespace CognitiveSearch.Models
                     maxDocumentContentCharactersToExtract = property.Value.GetInt64();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new IndexerLimits(Optional.ToNullable(maxRunTime), Optional.ToNullable(maxDocumentExtractionSize), Optional.ToNullable(maxDocumentContentCharactersToExtract));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new IndexerLimits(Optional.ToNullable(maxRunTime), Optional.ToNullable(maxDocumentExtractionSize), Optional.ToNullable(maxDocumentContentCharactersToExtract), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<IndexerLimits>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerLimits>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IndexerLimits)} does not support '{options.Format}' format.");
+            }
+        }
+
+        IndexerLimits IPersistableModel<IndexerLimits>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerLimits>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeIndexerLimits(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IndexerLimits)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<IndexerLimits>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

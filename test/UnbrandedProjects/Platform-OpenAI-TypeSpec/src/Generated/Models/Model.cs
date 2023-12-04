@@ -3,13 +3,46 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel.Internal;
+using System.ClientModel.Internal;
+using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
     /// <summary> Describes an OpenAI model offering that can be used with the API. </summary>
     public partial class Model
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
         /// <param name="id"> The model identifier, which can be referenced in the API endpoints. </param>
         /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>
@@ -23,6 +56,7 @@ namespace OpenAI.Models
             Id = id;
             Created = created;
             OwnedBy = ownedBy;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
@@ -30,12 +64,19 @@ namespace OpenAI.Models
         /// <param name="object"> The object type, which is always "model". </param>
         /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>
         /// <param name="ownedBy"> The organization that owns the model. </param>
-        internal Model(string id, ModelObject @object, DateTimeOffset created, string ownedBy)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model(string id, ModelObject @object, DateTimeOffset created, string ownedBy, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Object = @object;
             Created = created;
             OwnedBy = ownedBy;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Model"/> for deserialization. </summary>
+        internal Model()
+        {
         }
 
         /// <summary> The model identifier, which can be referenced in the API endpoints. </summary>

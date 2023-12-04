@@ -118,9 +118,19 @@ namespace AutoRest.CSharp.Output.Models.Types
                 switch (parentPropertyType)
                 {
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
+                        // when a property is flattened, it should only have one property. But the serialization ctor might takes two parameters because it may have the raw data field as an extra parameter
+                        var parameters = serializableObjectType.SerializationConstructor.Signature.Parameters;
+                        var arguments = new List<ValueExpression>();
                         // get the type of the first parameter of its ctor
-                        var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = New.Instance(parentPropertyType, result.GetConversion(from, to));
+                        var to = parameters[0].Type;
+                        arguments.Add(result.GetConversion(from, to));
+                        // check if we need extra parameters for the raw data field
+                        if (parameters.Count > 1)
+                        {
+                            // this parameter should be the raw data field, otherwise this property should not have been flattened in the first place
+                            arguments.Add(new PositionalParameterReference(parameters[1].Name, Null));
+                        }
+                        result = New.Instance(parentPropertyType, arguments.ToArray());
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
@@ -174,6 +184,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     // if the property is not found, in order not to introduce compilation errors, we need to add a `default` into the argument list
                     methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Default));
+                    continue;
+                }
+
+                if (ctorParameter.IsRawData)
+                {
+                    // we do not want to include the raw data as a parameter of the model factory entry method, therefore here we skip the parameter, and use empty dictionary as argument
+                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Null));
                     continue;
                 }
 
@@ -252,7 +269,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool RequiresModelFactory(SerializableObjectType model)
         {
-            if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer)
+            if (model.Declaration.Accessibility != "public")
             {
                 return false;
             }
@@ -262,7 +279,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties.Where(p => p != (obj as SerializableObjectType)?.RawDataField));
             // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
             if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
             {

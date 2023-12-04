@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
@@ -24,7 +25,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <summary> Initializes a new instance of <see cref="UnknownAbstractModel"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"></param>
-        internal UnknownAbstractModel(string kind, string name) : base(kind, name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownAbstractModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownAbstractModel"/> for deserialization. </summary>
+        internal UnknownAbstractModel()
         {
         }
     }

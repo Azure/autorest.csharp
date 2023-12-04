@@ -15,6 +15,38 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used only as input. </summary>
     public partial class InputModel
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -65,6 +97,7 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableModelList = new ChangeTrackingList<CollectionItem>();
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
@@ -91,7 +124,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableModelList"> Optional model nullable collection. </param>
         /// <param name="nonRequiredNullableStringList"> Optional string nullable collection. </param>
         /// <param name="nonRequiredNullableIntList"> Optional int nullable collection. </param>
-        internal InputModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IList<int> requiredIntList, IList<string> requiredStringList, IList<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement, IList<CollectionItem> requiredNullableModelList, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, IList<CollectionItem> nonRequiredModelList, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, IList<CollectionItem> nonRequiredNullableModelList, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IList<int> requiredIntList, IList<string> requiredStringList, IList<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement, IList<CollectionItem> requiredNullableModelList, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, IList<CollectionItem> nonRequiredModelList, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, IList<CollectionItem> nonRequiredNullableModelList, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -116,6 +150,12 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableModelList = nonRequiredNullableModelList;
             NonRequiredNullableStringList = nonRequiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InputModel"/> for deserialization. </summary>
+        internal InputModel()
+        {
         }
 
         /// <summary> Required string. </summary>

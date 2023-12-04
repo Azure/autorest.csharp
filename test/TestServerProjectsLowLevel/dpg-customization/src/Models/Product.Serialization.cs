@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System.ClientModel;
 using System.Text.Json;
 using Azure;
 
@@ -10,8 +11,10 @@ namespace dpg_customization_LowLevel.Models
 {
     public partial class Product
     {
-        internal static Product DeserializeProduct(JsonElement element)
+        internal static Product DeserializeProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             ProductReceived received = default;
             foreach (var property in element.EnumerateObject())
             {

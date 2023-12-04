@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -13,10 +15,18 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripModel : IUtf8JsonSerializable
+    public partial class RoundTripModel : IUtf8JsonSerializable, IJsonModel<RoundTripModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<RoundTripModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(RoundTripModel)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
@@ -73,6 +83,16 @@ namespace ModelsTypeSpec.Models
                 {
                     writer.WriteNull("nonRequiredNullableString");
                 }
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("requiredReadonlyInt"u8);
+                writer.WriteNumberValue(RequiredReadonlyInt);
+            }
+            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
+            {
+                writer.WritePropertyName("nonRequiredReadonlyInt"u8);
+                writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
@@ -237,11 +257,40 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableStringList");
                 }
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
+        RoundTripModel IJsonModel<RoundTripModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(RoundTripModel)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripModel(document.RootElement, options);
+        }
+
+        internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -276,6 +325,8 @@ namespace ModelsTypeSpec.Models
             IList<string> requiredNullableStringList = default;
             Optional<IList<int>> nonRequiredNullableIntList = default;
             Optional<IList<string>> nonRequiredNullableStringList = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -550,13 +601,49 @@ namespace ModelsTypeSpec.Models
                     nonRequiredNullableStringList = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new RoundTripModel(requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown.Value, requiredInt8Array, Optional.ToList(optionalInt8Array), requiredNullableIntList, requiredNullableStringList, Optional.ToList(nonRequiredNullableIntList), Optional.ToList(nonRequiredNullableStringList));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RoundTripModel(serializedAdditionalRawData, requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown.Value, requiredInt8Array, Optional.ToList(optionalInt8Array), requiredNullableIntList, requiredNullableStringList, Optional.ToList(nonRequiredNullableIntList), Optional.ToList(nonRequiredNullableStringList));
         }
+
+        BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RoundTripModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        RoundTripModel IPersistableModel<RoundTripModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRoundTripModel(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RoundTripModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RoundTripModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static RoundTripModel FromResponse(Response response)
+        internal static new RoundTripModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripModel(document.RootElement);

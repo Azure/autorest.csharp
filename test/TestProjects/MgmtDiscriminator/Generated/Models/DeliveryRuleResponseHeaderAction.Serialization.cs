@@ -5,25 +5,71 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleResponseHeaderAction : IUtf8JsonSerializable
+    public partial class DeliveryRuleResponseHeaderAction : IUtf8JsonSerializable, IJsonModel<DeliveryRuleResponseHeaderAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleResponseHeaderAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<DeliveryRuleResponseHeaderAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleResponseHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(DeliveryRuleResponseHeaderAction)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
             writer.WriteObjectValue(Parameters);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
+            if (options.Format != "W" && Optional.IsDefined(Foo))
+            {
+                writer.WritePropertyName("foo"u8);
+                writer.WriteStringValue(Foo);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static DeliveryRuleResponseHeaderAction DeserializeDeliveryRuleResponseHeaderAction(JsonElement element)
+        DeliveryRuleResponseHeaderAction IJsonModel<DeliveryRuleResponseHeaderAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleResponseHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(DeliveryRuleResponseHeaderAction)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeliveryRuleResponseHeaderAction(document.RootElement, options);
+        }
+
+        internal static DeliveryRuleResponseHeaderAction DeserializeDeliveryRuleResponseHeaderAction(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -31,6 +77,8 @@ namespace MgmtDiscriminator.Models
             HeaderActionParameters parameters = default;
             DeliveryRuleActionType name = default;
             Optional<string> foo = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("parameters"u8))
@@ -48,8 +96,44 @@ namespace MgmtDiscriminator.Models
                     foo = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DeliveryRuleResponseHeaderAction(name, foo.Value, parameters);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DeliveryRuleResponseHeaderAction(name, foo.Value, serializedAdditionalRawData, parameters);
         }
+
+        BinaryData IPersistableModel<DeliveryRuleResponseHeaderAction>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleResponseHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DeliveryRuleResponseHeaderAction)} does not support '{options.Format}' format.");
+            }
+        }
+
+        DeliveryRuleResponseHeaderAction IPersistableModel<DeliveryRuleResponseHeaderAction>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeliveryRuleResponseHeaderAction>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDeliveryRuleResponseHeaderAction(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DeliveryRuleResponseHeaderAction)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DeliveryRuleResponseHeaderAction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

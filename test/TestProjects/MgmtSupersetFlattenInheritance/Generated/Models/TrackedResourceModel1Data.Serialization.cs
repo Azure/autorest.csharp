@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +15,18 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSupersetFlattenInheritance
 {
-    public partial class TrackedResourceModel1Data : IUtf8JsonSerializable
+    public partial class TrackedResourceModel1Data : IUtf8JsonSerializable, IJsonModel<TrackedResourceModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrackedResourceModel1Data>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<TrackedResourceModel1Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<TrackedResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(TrackedResourceModel1Data)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
             {
@@ -35,11 +46,60 @@ namespace MgmtSupersetFlattenInheritance
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static TrackedResourceModel1Data DeserializeTrackedResourceModel1Data(JsonElement element)
+        TrackedResourceModel1Data IJsonModel<TrackedResourceModel1Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<TrackedResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(TrackedResourceModel1Data)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTrackedResourceModel1Data(document.RootElement, options);
+        }
+
+        internal static TrackedResourceModel1Data DeserializeTrackedResourceModel1Data(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -51,6 +111,8 @@ namespace MgmtSupersetFlattenInheritance
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -101,8 +163,44 @@ namespace MgmtSupersetFlattenInheritance
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new TrackedResourceModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new TrackedResourceModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<TrackedResourceModel1Data>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TrackedResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(TrackedResourceModel1Data)} does not support '{options.Format}' format.");
+            }
+        }
+
+        TrackedResourceModel1Data IPersistableModel<TrackedResourceModel1Data>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TrackedResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeTrackedResourceModel1Data(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(TrackedResourceModel1Data)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<TrackedResourceModel1Data>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

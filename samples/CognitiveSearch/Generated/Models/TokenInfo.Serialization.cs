@@ -5,14 +5,82 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class TokenInfo
+    public partial class TokenInfo : IUtf8JsonSerializable, IJsonModel<TokenInfo>
     {
-        internal static TokenInfo DeserializeTokenInfo(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TokenInfo>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<TokenInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<TokenInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(TokenInfo)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("token"u8);
+                writer.WriteStringValue(Token);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("startOffset"u8);
+                writer.WriteNumberValue(StartOffset);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("endOffset"u8);
+                writer.WriteNumberValue(EndOffset);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("position"u8);
+                writer.WriteNumberValue(Position);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        TokenInfo IJsonModel<TokenInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TokenInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(TokenInfo)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTokenInfo(document.RootElement, options);
+        }
+
+        internal static TokenInfo DeserializeTokenInfo(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -21,6 +89,8 @@ namespace CognitiveSearch.Models
             int startOffset = default;
             int endOffset = default;
             int position = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("token"u8))
@@ -43,8 +113,44 @@ namespace CognitiveSearch.Models
                     position = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new TokenInfo(token, startOffset, endOffset, position);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new TokenInfo(token, startOffset, endOffset, position, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<TokenInfo>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TokenInfo>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(TokenInfo)} does not support '{options.Format}' format.");
+            }
+        }
+
+        TokenInfo IPersistableModel<TokenInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TokenInfo>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeTokenInfo(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(TokenInfo)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<TokenInfo>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

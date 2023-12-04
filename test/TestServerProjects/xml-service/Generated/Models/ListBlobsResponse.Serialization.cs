@@ -5,13 +5,52 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.IO;
+using System.Xml;
 using System.Xml.Linq;
+using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ListBlobsResponse
+    public partial class ListBlobsResponse : IXmlSerializable, IPersistableModel<ListBlobsResponse>
     {
-        internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        {
+            writer.WriteStartElement(nameHint ?? "EnumerationResults");
+            if (Optional.IsDefined(ServiceEndpoint))
+            {
+                writer.WriteStartAttribute("ServiceEndpoint");
+                writer.WriteValue(ServiceEndpoint);
+                writer.WriteEndAttribute();
+            }
+            writer.WriteStartAttribute("ContainerName");
+            writer.WriteValue(ContainerName);
+            writer.WriteEndAttribute();
+            writer.WriteStartElement("Prefix");
+            writer.WriteValue(Prefix);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Marker");
+            writer.WriteValue(Marker);
+            writer.WriteEndElement();
+            writer.WriteStartElement("MaxResults");
+            writer.WriteValue(MaxResults);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Delimiter");
+            writer.WriteValue(Delimiter);
+            writer.WriteEndElement();
+            writer.WriteObjectValue(Blobs, "Blobs");
+            writer.WriteStartElement("NextMarker");
+            writer.WriteValue(NextMarker);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element, ModelReaderWriterOptions options = null)
         {
             string serviceEndpoint = default;
             string containerName = default;
@@ -53,7 +92,48 @@ namespace xml_service.Models
             {
                 nextMarker = (string)nextMarkerElement;
             }
-            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker);
+            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<ListBlobsResponse>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ListBlobsResponse>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ListBlobsResponse)} does not support '{options.Format}' format.");
+            }
+        }
+
+        ListBlobsResponse IPersistableModel<ListBlobsResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ListBlobsResponse>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeListBlobsResponse(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ListBlobsResponse)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ListBlobsResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

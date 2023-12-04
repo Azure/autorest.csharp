@@ -777,7 +777,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentOperationsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id.Parent, Id.Name, top);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => DeploymentOperation.DeserializeDeploymentOperation(e), _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -800,7 +800,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentOperationsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id.Parent, Id.Name, top);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DeploymentOperation.DeserializeDeploymentOperation, _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => DeploymentOperation.DeserializeDeploymentOperation(e), _deploymentOperationsClientDiagnostics, Pipeline, "DeploymentExtendedResource.GetAtScopeDeploymentOperations", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

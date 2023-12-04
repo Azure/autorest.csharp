@@ -5,16 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class Permissions : IUtf8JsonSerializable
+    public partial class Permissions : IUtf8JsonSerializable, IJsonModel<Permissions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Permissions>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Permissions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Permissions>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Permissions)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Keys))
             {
@@ -56,11 +67,40 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Permissions DeserializePermissions(JsonElement element)
+        Permissions IJsonModel<Permissions>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Permissions>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Permissions)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePermissions(document.RootElement, options);
+        }
+
+        internal static Permissions DeserializePermissions(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -69,6 +109,8 @@ namespace MgmtMockAndSample.Models
             Optional<IList<SecretPermission>> secrets = default;
             Optional<IList<CertificatePermission>> certificates = default;
             Optional<IList<StoragePermission>> storage = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keys"u8))
@@ -127,8 +169,44 @@ namespace MgmtMockAndSample.Models
                     storage = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Permissions(Optional.ToList(keys), Optional.ToList(secrets), Optional.ToList(certificates), Optional.ToList(storage));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Permissions(Optional.ToList(keys), Optional.ToList(secrets), Optional.ToList(certificates), Optional.ToList(storage), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Permissions>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Permissions>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Permissions)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Permissions IPersistableModel<Permissions>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Permissions>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePermissions(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Permissions)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Permissions>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

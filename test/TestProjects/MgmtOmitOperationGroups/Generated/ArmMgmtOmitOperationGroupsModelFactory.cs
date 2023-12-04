@@ -22,7 +22,7 @@ namespace MgmtOmitOperationGroups.Models
         /// <returns> A new <see cref="Models.ModelZ"/> instance for mocking. </returns>
         public static ModelZ ModelZ(string h = null, string i = null)
         {
-            return new ModelZ(h, i);
+            return new ModelZ(h, i, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelQ"/>. </summary>
@@ -34,7 +34,7 @@ namespace MgmtOmitOperationGroups.Models
         /// <returns> A new <see cref="Models.ModelQ"/> instance for mocking. </returns>
         public static ModelQ ModelQ(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string m = null)
         {
-            return new ModelQ(id, name, resourceType, systemData, m);
+            return new ModelQ(id, name, resourceType, systemData, m, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtOmitOperationGroups.Model2Data"/>. </summary>
@@ -49,7 +49,7 @@ namespace MgmtOmitOperationGroups.Models
         /// <returns> A new <see cref="MgmtOmitOperationGroups.Model2Data"/> instance for mocking. </returns>
         public static Model2Data Model2Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string b = null, ModelX modelx = null, string f = null, string g = null)
         {
-            return new Model2Data(id, name, resourceType, systemData, b, modelx, f, g);
+            return new Model2Data(id, name, resourceType, systemData, b, modelx, f, g, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Model4"/>. </summary>
@@ -59,7 +59,7 @@ namespace MgmtOmitOperationGroups.Models
         /// <returns> A new <see cref="Models.Model4"/> instance for mocking. </returns>
         public static Model4 Model4(string id = null, string j = null, ModelZ modelz = null)
         {
-            return new Model4(id, j, modelz);
+            return new Model4(id, j, modelz, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Model5"/>. </summary>
@@ -71,7 +71,7 @@ namespace MgmtOmitOperationGroups.Models
         {
             modelqs ??= new List<ModelQ>();
 
-            return new Model5(id, k, modelqs?.ToList());
+            return new Model5(id, k, modelqs?.ToList(), serializedAdditionalRawData: null);
         }
     }
 }

@@ -5,16 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPTrue : IUtf8JsonSerializable
+    public partial class PetAPTrue : IUtf8JsonSerializable, IJsonModel<PetAPTrue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPTrue>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<PetAPTrue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPTrue>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PetAPTrue)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
@@ -22,6 +33,11 @@ namespace additionalProperties.Models
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteBooleanValue(Status.Value);
             }
             foreach (var item in AdditionalProperties)
             {
@@ -31,8 +47,22 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        internal static PetAPTrue DeserializePetAPTrue(JsonElement element)
+        PetAPTrue IJsonModel<PetAPTrue>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPTrue>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PetAPTrue)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetAPTrue(document.RootElement, options);
+        }
+
+        internal static PetAPTrue DeserializePetAPTrue(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -68,5 +98,36 @@ namespace additionalProperties.Models
             additionalProperties = additionalPropertiesDictionary;
             return new PetAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties);
         }
+
+        BinaryData IPersistableModel<PetAPTrue>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPTrue>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PetAPTrue)} does not support '{options.Format}' format.");
+            }
+        }
+
+        PetAPTrue IPersistableModel<PetAPTrue>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPTrue>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePetAPTrue(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PetAPTrue)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PetAPTrue>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

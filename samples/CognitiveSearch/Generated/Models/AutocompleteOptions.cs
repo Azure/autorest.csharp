@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,6 +14,38 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class AutocompleteOptions
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="AutocompleteOptions"/>. </summary>
         public AutocompleteOptions()
         {
@@ -28,7 +61,8 @@ namespace CognitiveSearch.Models
         /// <param name="minimumCoverage"> A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. </param>
         /// <param name="searchFields"> The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
-        internal AutocompleteOptions(AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> searchFields, int? top)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutocompleteOptions(AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> searchFields, int? top, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AutocompleteMode = autocompleteMode;
             Filter = filter;
@@ -38,6 +72,7 @@ namespace CognitiveSearch.Models
             MinimumCoverage = minimumCoverage;
             SearchFields = searchFields;
             Top = top;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </summary>

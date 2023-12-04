@@ -6,15 +6,18 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class AccessPolicy : IXmlSerializable
+    public partial class AccessPolicy : IXmlSerializable, IPersistableModel<AccessPolicy>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "AccessPolicy");
             writer.WriteStartElement("Start");
@@ -29,7 +32,9 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static AccessPolicy DeserializeAccessPolicy(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static AccessPolicy DeserializeAccessPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
             DateTimeOffset start = default;
             DateTimeOffset expiry = default;
@@ -46,7 +51,48 @@ namespace xml_service.Models
             {
                 permission = (string)permissionElement;
             }
-            return new AccessPolicy(start, expiry, permission);
+            return new AccessPolicy(start, expiry, permission, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<AccessPolicy>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AccessPolicy>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
+            }
+        }
+
+        AccessPolicy IPersistableModel<AccessPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AccessPolicy>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<AccessPolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

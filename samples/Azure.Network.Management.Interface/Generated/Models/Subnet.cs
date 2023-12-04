@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -29,6 +30,7 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="Subnet"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="addressPrefix"> The address prefix for the subnet. </param>
@@ -48,7 +50,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the subnet resource. </param>
         /// <param name="privateEndpointNetworkPolicies"> Enable or Disable apply network policies on private end point in the subnet. </param>
         /// <param name="privateLinkServiceNetworkPolicies"> Enable or Disable apply network policies on private link service in the subnet. </param>
-        internal Subnet(string id, string name, string etag, string addressPrefix, IList<string> addressPrefixes, NetworkSecurityGroup networkSecurityGroup, RouteTable routeTable, SubResource natGateway, IList<ServiceEndpointPropertiesFormat> serviceEndpoints, IList<ServiceEndpointPolicy> serviceEndpointPolicies, IReadOnlyList<PrivateEndpoint> privateEndpoints, IReadOnlyList<IPConfiguration> ipConfigurations, IReadOnlyList<IPConfigurationProfile> ipConfigurationProfiles, IReadOnlyList<ResourceNavigationLink> resourceNavigationLinks, IReadOnlyList<ServiceAssociationLink> serviceAssociationLinks, IList<Delegation> delegations, string purpose, ProvisioningState? provisioningState, string privateEndpointNetworkPolicies, string privateLinkServiceNetworkPolicies) : base(id)
+        internal Subnet(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string addressPrefix, IList<string> addressPrefixes, NetworkSecurityGroup networkSecurityGroup, RouteTable routeTable, SubResource natGateway, IList<ServiceEndpointPropertiesFormat> serviceEndpoints, IList<ServiceEndpointPolicy> serviceEndpointPolicies, IReadOnlyList<PrivateEndpoint> privateEndpoints, IReadOnlyList<IPConfiguration> ipConfigurations, IReadOnlyList<IPConfigurationProfile> ipConfigurationProfiles, IReadOnlyList<ResourceNavigationLink> resourceNavigationLinks, IReadOnlyList<ServiceAssociationLink> serviceAssociationLinks, IList<Delegation> delegations, string purpose, ProvisioningState? provisioningState, string privateEndpointNetworkPolicies, string privateLinkServiceNetworkPolicies) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

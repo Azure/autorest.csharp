@@ -26,7 +26,7 @@ namespace MgmtSupersetInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetInheritance.SupersetModel1Data"/> instance for mocking. </returns>
         public static SupersetModel1Data SupersetModel1Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null)
         {
-            return new SupersetModel1Data(id, name, resourceType, systemData, @new);
+            return new SupersetModel1Data(id, name, resourceType, systemData, @new, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel4Data"/>. </summary>
@@ -42,7 +42,7 @@ namespace MgmtSupersetInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SupersetModel4Data(id, name, resourceType, systemData, tags, location, @new);
+            return new SupersetModel4Data(id, name, resourceType, systemData, tags, location, @new, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel6Data"/>. </summary>
@@ -54,7 +54,7 @@ namespace MgmtSupersetInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetInheritance.SupersetModel6Data"/> instance for mocking. </returns>
         public static SupersetModel6Data SupersetModel6Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null)
         {
-            return new SupersetModel6Data(id, name, resourceType, systemData, @new);
+            return new SupersetModel6Data(id, name, resourceType, systemData, @new, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel7Data"/>. </summary>
@@ -66,7 +66,7 @@ namespace MgmtSupersetInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetInheritance.SupersetModel7Data"/> instance for mocking. </returns>
         public static SupersetModel7Data SupersetModel7Data(string id = null, string name = null, string resourceType = null, string @new = null, SupersetModel7SystemData systemData = null)
         {
-            return new SupersetModel7Data(id, name, resourceType, @new, systemData);
+            return new SupersetModel7Data(id, name, resourceType, @new, systemData, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SupersetModel7SystemData"/>. </summary>
@@ -76,7 +76,7 @@ namespace MgmtSupersetInheritance.Models
         /// <returns> A new <see cref="Models.SupersetModel7SystemData"/> instance for mocking. </returns>
         public static SupersetModel7SystemData SupersetModel7SystemData(string createdBy = null, DateTimeOffset? createdOn = null, string lastModifiedBy = null)
         {
-            return new SupersetModel7SystemData(createdBy, createdOn, lastModifiedBy);
+            return new SupersetModel7SystemData(createdBy, createdOn, lastModifiedBy, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SupersetModel5"/>. </summary>
@@ -93,7 +93,7 @@ namespace MgmtSupersetInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SupersetModel5(id, name, resourceType, systemData, tags, location, foo, @new);
+            return new SupersetModel5(id, name, resourceType, systemData, tags, location, foo, @new, serializedAdditionalRawData: null);
         }
     }
 }

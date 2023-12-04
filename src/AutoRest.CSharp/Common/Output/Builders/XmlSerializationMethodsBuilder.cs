@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -21,50 +20,69 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class XmlSerializationMethodsBuilder
     {
-        public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
+        public static IEnumerable<Method> BuildXmlSerializationMethods(XmlObjectSerialization serialization)
         {
-            var xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, ValidationType.None, null);
-            var nameHint = new Parameter("nameHint", null, typeof(string), null, ValidationType.None, null);
-            return new Method
+            // a private helper method with the options to do the full xml serialization
+            var xmlWriter = new XmlWriterExpression(KnownParameters.Serializations.XmlWriter);
+            var nameHint = (ValueExpression)KnownParameters.Serializations.NameHint;
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
+            yield return new Method
             (
-                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{xmlWriter, nameHint}, ExplicitInterface: typeof(IXmlSerializable)),
-                SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement()
+                new MethodSignature(serialization.WriteXmlMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
+                WriteObject(serialization, xmlWriter, nameHint, options).ToArray()
+            );
+
+            yield return new Method
+            (
+                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
+                This.Invoke(serialization.WriteXmlMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
             );
         }
 
-        public static IEnumerable<MethodBodyStatement> SerializeExpression(XmlWriterExpression xmlWriter, XmlObjectSerialization objectSerialization, ValueExpression nameHint)
+        private static IEnumerable<MethodBodyStatement> WriteObject(XmlObjectSerialization objectSerialization, XmlWriterExpression xmlWriter, ValueExpression nameHint, ModelReaderWriterOptionsExpression options)
         {
             yield return xmlWriter.WriteStartElement(NullCoalescing(nameHint, Literal(objectSerialization.Name)));
 
             foreach (XmlObjectAttributeSerialization serialization in objectSerialization.Attributes)
             {
-                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, new[]
-                {
-                    xmlWriter.WriteStartAttribute(serialization.SerializedName),
-                    SerializeValueExpression(xmlWriter, serialization.ValueSerialization, serialization.Value),
-                    xmlWriter.WriteEndAttribute()
-                }));
+                yield return Serializations.WrapInCheckNotWire(
+                    serialization,
+                    options.Format,
+                    InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, new[]
+                    {
+                        xmlWriter.WriteStartAttribute(serialization.SerializedName),
+                        SerializeValueExpression(xmlWriter, serialization.ValueSerialization, serialization.Value),
+                        xmlWriter.WriteEndAttribute()
+                    })));
             }
 
             foreach (XmlObjectElementSerialization serialization in objectSerialization.Elements)
             {
-                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ValueSerialization, serialization.Value)));
+                yield return Serializations.WrapInCheckNotWire(
+                    serialization,
+                    options.Format,
+                    InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ValueSerialization, serialization.Value))));
             }
 
             foreach (XmlObjectArraySerialization serialization in objectSerialization.EmbeddedArrays)
             {
-                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ArraySerialization, serialization.Value)));
+                yield return Serializations.WrapInCheckNotWire(
+                    serialization,
+                    options.Format,
+                    InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ArraySerialization, serialization.Value))));
             }
 
             if (objectSerialization.ContentSerialization is { } contentSerialization)
             {
-                yield return SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, contentSerialization.Value);
+                yield return Serializations.WrapInCheckNotWire(
+                    contentSerialization,
+                    options.Format,
+                    SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, contentSerialization.Value));
             }
 
             yield return xmlWriter.WriteEndElement();
@@ -72,7 +90,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement WrapInNullCheck(PropertySerialization serialization, MethodBodyStatement statement)
         {
-            if (serialization.SerializedType is {IsNullable: true} serializedType)
+            if (serialization.SerializedType is { IsNullable: true } serializedType)
             {
                 if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
                 {
@@ -169,12 +187,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
-            var methodName = $"Deserialize{declaration.Name}";
-            var element = new Parameter("element", null, typeof(XElement), null, ValidationType.None, null);
             return new Method
             (
-                new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
-                BuildDeserializeBody(new XElementExpression(element), serialization).ToArray()
+                new MethodSignature($"Deserialize{declaration.Name}", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { KnownParameters.Serializations.XElement, KnownParameters.Serializations.OptionalOptions }),
+                BuildDeserializeBody(new XElementExpression(KnownParameters.Serializations.XElement), serialization).ToArray()
             );
         }
 
@@ -215,11 +231,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var objectType = (ObjectType)objectSerialization.Type.Implementation;
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.SerializationConstructorParameterName, v => (ValueExpression)v.Value);
-            var parameters = objectType.SerializationConstructor.Signature.Parameters
-                .Select(p => parameterValues[p.Name])
-                .ToArray();
 
-            yield return Return(New.Instance(objectSerialization.Type, parameters));
+            var arguments = new List<ValueExpression>();
+            foreach (var parameter in objectType.SerializationConstructor.Signature.Parameters)
+            {
+                if (parameterValues.TryGetValue(parameter.Name, out var argument))
+                    arguments.Add(argument);
+                else
+                {
+                    // this must be the raw data property
+                    arguments.Add(new PositionalParameterReference(parameter.Name, Null));
+                }
+            }
+
+            yield return Return(New.Instance(objectSerialization.Type, arguments.ToArray()));
         }
 
         public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, StreamExpression stream)
@@ -317,7 +342,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     frameworkType == typeof(string)
                 )
                 {
-                    return new CastExpression(value, type);
+                    return value.CastTo(type);
                 }
 
                 if (frameworkType == typeof(ResourceIdentifier))
@@ -333,19 +358,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(ResourceType))
                 {
-                    return new CastExpression(value, typeof(string));
+                    return value.CastTo(typeof(string));
                 }
 
                 if (frameworkType == typeof(Guid))
                 {
                     return value is XElementExpression xElement
                         ? New.Instance(typeof(Guid), xElement.Value)
-                        : new CastExpression(value, typeof(Guid));
+                        : value.CastTo(typeof(Guid));
                 }
 
                 if (frameworkType == typeof(Uri))
                 {
-                    return New.Instance(typeof(Uri), new CastExpression(value, typeof(string)));
+                    return New.Instance(typeof(Uri), value.CastTo(typeof(string)));
                 }
 
                 if (value is XElementExpression element)
@@ -405,7 +430,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
-            if (element.ContentSerialization is {} contentSerialization)
+            if (element.ContentSerialization is { } contentSerialization)
             {
                 propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.Value.Type, contentSerialization.SerializationConstructorParameterName));
             }

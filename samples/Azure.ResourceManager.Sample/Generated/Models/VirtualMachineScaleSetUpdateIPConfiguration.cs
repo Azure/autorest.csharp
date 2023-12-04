@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -31,6 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The IP configuration name.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.name
@@ -67,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The load balancer inbound nat pools.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.loadBalancerInboundNatPools
         /// </param>
-        internal VirtualMachineScaleSetUpdateIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetUpdatePublicIPAddressConfiguration publicIPAddressConfiguration, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id)
+        internal VirtualMachineScaleSetUpdateIPConfiguration(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetUpdatePublicIPAddressConfiguration publicIPAddressConfiguration, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Subnet = subnet;

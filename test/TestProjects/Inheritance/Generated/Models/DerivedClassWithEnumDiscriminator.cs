@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Inheritance.Models
 {
     /// <summary> The DerivedClassWithEnumDiscriminator. </summary>
@@ -18,7 +21,8 @@ namespace Inheritance.Models
 
         /// <summary> Initializes a new instance of <see cref="DerivedClassWithEnumDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"></param>
-        internal DerivedClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty) : base(discriminatorProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(discriminatorProperty, serializedAdditionalRawData)
         {
             DiscriminatorProperty = discriminatorProperty;
         }

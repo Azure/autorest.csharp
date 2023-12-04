@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownSimilarity. </summary>
@@ -12,7 +15,8 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownSimilarity"/>. </summary>
         /// <param name="odataType"></param>
-        internal UnknownSimilarity(string odataType) : base(odataType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownSimilarity(string odataType, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "Unknown";
         }

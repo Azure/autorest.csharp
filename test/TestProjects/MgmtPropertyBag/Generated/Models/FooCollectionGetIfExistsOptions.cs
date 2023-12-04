@@ -24,6 +24,11 @@ namespace MgmtPropertyBag.Models
             FooName = fooName;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FooCollectionGetIfExistsOptions"/> for deserialization. </summary>
+        internal FooCollectionGetIfExistsOptions()
+        {
+        }
+
         /// <summary> The foo name. </summary>
         public string FooName { get; }
         /// <summary> The filter to apply on the operation. </summary>

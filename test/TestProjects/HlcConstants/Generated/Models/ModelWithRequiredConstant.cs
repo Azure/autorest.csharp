@@ -5,11 +5,46 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace HlcConstants.Models
 {
     /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
     public partial class ModelWithRequiredConstant
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         public ModelWithRequiredConstant()
         {
@@ -24,12 +59,14 @@ namespace HlcConstants.Models
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>
         /// <param name="requiredFloatConstant"> A constant based on float. </param>
-        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredStringConstant = requiredStringConstant;
             RequiredIntConstant = requiredIntConstant;
             RequiredBooleanConstant = requiredBooleanConstant;
             RequiredFloatConstant = requiredFloatConstant;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>

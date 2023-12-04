@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,6 +14,38 @@ namespace CognitiveSearch.Models
     /// <summary> Parameters for fuzzy matching, and other autocomplete query behaviors. </summary>
     public partial class AutocompleteRequest
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/>. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
@@ -37,7 +70,8 @@ namespace CognitiveSearch.Models
         /// <param name="searchFields"> The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
-        internal AutocompleteRequest(string searchText, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string searchFields, string suggesterName, int? top)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutocompleteRequest(string searchText, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string searchFields, string suggesterName, int? top, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SearchText = searchText;
             AutocompleteMode = autocompleteMode;
@@ -49,6 +83,12 @@ namespace CognitiveSearch.Models
             SearchFields = searchFields;
             SuggesterName = suggesterName;
             Top = top;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/> for deserialization. </summary>
+        internal AutocompleteRequest()
+        {
         }
 
         /// <summary> The search text on which to base autocomplete results. </summary>

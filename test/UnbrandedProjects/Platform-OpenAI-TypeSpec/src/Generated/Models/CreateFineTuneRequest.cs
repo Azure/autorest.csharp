@@ -3,14 +3,46 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Internal;
 using System.Collections.Generic;
-using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
 {
     /// <summary> The CreateFineTuneRequest. </summary>
     public partial class CreateFineTuneRequest
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
@@ -31,6 +63,7 @@ namespace OpenAI.Models
 
             TrainingFile = trainingFile;
             ClassificationBetas = new OptionalList<double>();
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>
@@ -129,7 +162,8 @@ namespace OpenAI.Models
         /// For example, a `suffix` of "custom-model-name" would produce a model name like
         /// `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
         /// </param>
-        internal CreateFineTuneRequest(string trainingFile, string validationFile, CreateFineTuneRequestModel? model, long? nEpochs, long? batchSize, double? learningRateMultiplier, double? promptLossRate, bool? computeClassificationMetrics, long? classificationNClasses, string classificationPositiveClass, IList<double> classificationBetas, string suffix)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateFineTuneRequest(string trainingFile, string validationFile, CreateFineTuneRequestModel? model, long? nEpochs, long? batchSize, double? learningRateMultiplier, double? promptLossRate, bool? computeClassificationMetrics, long? classificationNClasses, string classificationPositiveClass, IList<double> classificationBetas, string suffix, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TrainingFile = trainingFile;
             ValidationFile = validationFile;
@@ -143,6 +177,12 @@ namespace OpenAI.Models
             ClassificationPositiveClass = classificationPositiveClass;
             ClassificationBetas = classificationBetas;
             Suffix = suffix;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/> for deserialization. </summary>
+        internal CreateFineTuneRequest()
+        {
         }
 
         /// <summary>

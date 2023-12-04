@@ -5,14 +5,72 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class SentenceSentiment
+    public partial class SentenceSentiment : IUtf8JsonSerializable, IJsonModel<SentenceSentiment>
     {
-        internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SentenceSentiment>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<SentenceSentiment>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SentenceSentiment>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SentenceSentiment)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            writer.WritePropertyName("sentiment"u8);
+            writer.WriteStringValue(Sentiment.ToSerialString());
+            writer.WritePropertyName("confidenceScores"u8);
+            writer.WriteObjectValue(ConfidenceScores);
+            writer.WritePropertyName("offset"u8);
+            writer.WriteNumberValue(Offset);
+            writer.WritePropertyName("length"u8);
+            writer.WriteNumberValue(Length);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        SentenceSentiment IJsonModel<SentenceSentiment>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SentenceSentiment>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SentenceSentiment)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSentenceSentiment(document.RootElement, options);
+        }
+
+        internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -22,6 +80,8 @@ namespace CognitiveServices.TextAnalytics.Models
             SentimentConfidenceScorePerLabel confidenceScores = default;
             int offset = default;
             int length = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"u8))
@@ -49,8 +109,44 @@ namespace CognitiveServices.TextAnalytics.Models
                     length = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SentenceSentiment(text, sentiment, confidenceScores, offset, length);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SentenceSentiment(text, sentiment, confidenceScores, offset, length, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<SentenceSentiment>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SentenceSentiment>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SentenceSentiment)} does not support '{options.Format}' format.");
+            }
+        }
+
+        SentenceSentiment IPersistableModel<SentenceSentiment>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SentenceSentiment>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSentenceSentiment(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SentenceSentiment)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SentenceSentiment>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

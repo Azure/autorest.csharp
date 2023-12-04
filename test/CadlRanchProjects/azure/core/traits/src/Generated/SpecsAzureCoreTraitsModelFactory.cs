@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-
 namespace _Specs_.Azure.Core.Traits.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,21 +16,15 @@ namespace _Specs_.Azure.Core.Traits.Models
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(int id = default, string name = null)
         {
-            return new User(id, name);
+            return new User(id, name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserActionResponse"/>. </summary>
         /// <param name="userActionResult"> User action result. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="userActionResult"/> is null. </exception>
         /// <returns> A new <see cref="Models.UserActionResponse"/> instance for mocking. </returns>
         public static UserActionResponse UserActionResponse(string userActionResult = null)
         {
-            if (userActionResult == null)
-            {
-                throw new ArgumentNullException(nameof(userActionResult));
-            }
-
-            return new UserActionResponse(userActionResult);
+            return new UserActionResponse(userActionResult, serializedAdditionalRawData: null);
         }
     }
 }

@@ -6,12 +6,45 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The GeoReplication. </summary>
     public partial class GeoReplication
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="GeoReplication"/>. </summary>
         /// <param name="status"> The status of the secondary location. </param>
         /// <param name="lastSyncTime"> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </param>
@@ -19,6 +52,22 @@ namespace Azure.Storage.Tables.Models
         {
             Status = status;
             LastSyncTime = lastSyncTime;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="GeoReplication"/>. </summary>
+        /// <param name="status"> The status of the secondary location. </param>
+        /// <param name="lastSyncTime"> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GeoReplication(GeoReplicationStatusType status, DateTimeOffset lastSyncTime, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Status = status;
+            LastSyncTime = lastSyncTime;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="GeoReplication"/> for deserialization. </summary>
+        internal GeoReplication()
+        {
         }
 
         /// <summary> The status of the secondary location. </summary>

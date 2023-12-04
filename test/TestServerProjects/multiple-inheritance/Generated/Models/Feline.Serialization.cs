@@ -5,15 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace multiple_inheritance.Models
 {
-    public partial class Feline : IUtf8JsonSerializable
+    public partial class Feline : IUtf8JsonSerializable, IJsonModel<Feline>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Feline>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Feline>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Feline>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Feline)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Meows))
             {
@@ -25,17 +37,48 @@ namespace multiple_inheritance.Models
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Feline DeserializeFeline(JsonElement element)
+        Feline IJsonModel<Feline>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Feline>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Feline)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFeline(document.RootElement, options);
+        }
+
+        internal static Feline DeserializeFeline(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<bool> meows = default;
             Optional<bool> hisses = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("meows"u8))
@@ -56,8 +99,44 @@ namespace multiple_inheritance.Models
                     hisses = property.Value.GetBoolean();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Feline(Optional.ToNullable(meows), Optional.ToNullable(hisses));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Feline(Optional.ToNullable(meows), Optional.ToNullable(hisses), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Feline>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Feline>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Feline)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Feline IPersistableModel<Feline>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Feline>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeFeline(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Feline)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Feline>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

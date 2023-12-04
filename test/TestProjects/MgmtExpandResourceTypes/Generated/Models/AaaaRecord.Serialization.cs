@@ -5,31 +5,74 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    public partial class AaaaRecord : IUtf8JsonSerializable
+    public partial class AaaaRecord : IUtf8JsonSerializable, IJsonModel<AaaaRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AaaaRecord>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<AaaaRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<AaaaRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(AaaaRecord)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Ipv6Address))
             {
                 writer.WritePropertyName("ipv6Address"u8);
                 writer.WriteStringValue(Ipv6Address);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static AaaaRecord DeserializeAaaaRecord(JsonElement element)
+        AaaaRecord IJsonModel<AaaaRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<AaaaRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(AaaaRecord)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAaaaRecord(document.RootElement, options);
+        }
+
+        internal static AaaaRecord DeserializeAaaaRecord(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> ipv6Address = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipv6Address"u8))
@@ -37,8 +80,44 @@ namespace MgmtExpandResourceTypes.Models
                     ipv6Address = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new AaaaRecord(ipv6Address.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new AaaaRecord(ipv6Address.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<AaaaRecord>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AaaaRecord>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(AaaaRecord)} does not support '{options.Format}' format.");
+            }
+        }
+
+        AaaaRecord IPersistableModel<AaaaRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AaaaRecord>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeAaaaRecord(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(AaaaRecord)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<AaaaRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

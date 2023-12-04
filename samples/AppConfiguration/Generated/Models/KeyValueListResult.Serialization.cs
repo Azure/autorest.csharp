@@ -5,22 +5,85 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    internal partial class KeyValueListResult
+    internal partial class KeyValueListResult : IUtf8JsonSerializable, IJsonModel<KeyValueListResult>
     {
-        internal static KeyValueListResult DeserializeKeyValueListResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyValueListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<KeyValueListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<KeyValueListResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(KeyValueListResult)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Items))
+            {
+                writer.WritePropertyName("items"u8);
+                writer.WriteStartArray();
+                foreach (var item in Items)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("@nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        KeyValueListResult IJsonModel<KeyValueListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<KeyValueListResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(KeyValueListResult)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyValueListResult(document.RootElement, options);
+        }
+
+        internal static KeyValueListResult DeserializeKeyValueListResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IReadOnlyList<KeyValue>> items = default;
             Optional<string> nextLink = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"u8))
@@ -42,8 +105,44 @@ namespace AppConfiguration.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new KeyValueListResult(Optional.ToList(items), nextLink.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new KeyValueListResult(Optional.ToList(items), nextLink.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<KeyValueListResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<KeyValueListResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(KeyValueListResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        KeyValueListResult IPersistableModel<KeyValueListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<KeyValueListResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeKeyValueListResult(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(KeyValueListResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<KeyValueListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

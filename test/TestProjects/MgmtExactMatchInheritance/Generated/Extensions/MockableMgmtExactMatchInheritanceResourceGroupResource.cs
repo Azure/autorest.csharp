@@ -244,7 +244,7 @@ namespace MgmtExactMatchInheritance.Mocking
         public virtual AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ExactMatchModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => ExactMatchModel3.DeserializeExactMatchModel3(e), ExactMatchModel3sClientDiagnostics, Pipeline, "MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace MgmtExactMatchInheritance.Mocking
         public virtual Pageable<ExactMatchModel3> GetExactMatchModel3s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ExactMatchModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => ExactMatchModel3.DeserializeExactMatchModel3(e), ExactMatchModel3sClientDiagnostics, Pipeline, "MockableMgmtExactMatchInheritanceResourceGroupResource.GetExactMatchModel3s", "value", null, cancellationToken);
         }
 
         /// <summary>

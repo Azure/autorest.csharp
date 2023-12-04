@@ -3,13 +3,46 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel.Internal;
+using System.ClientModel.Internal;
+using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
     /// <summary> The CreateTranslationRequest. </summary>
     public partial class CreateTranslationRequest
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
@@ -23,6 +56,7 @@ namespace OpenAI.Models
 
             File = file;
             Model = model;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/>. </summary>
@@ -45,13 +79,20 @@ namespace OpenAI.Models
         /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
         /// automatically increase the temperature until certain thresholds are hit.
         /// </param>
-        internal CreateTranslationRequest(BinaryData file, CreateTranslationRequestModel model, string prompt, CreateTranslationRequestResponseFormat? responseFormat, double? temperature)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateTranslationRequest(BinaryData file, CreateTranslationRequestModel model, string prompt, CreateTranslationRequestResponseFormat? responseFormat, double? temperature, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             File = file;
             Model = model;
             Prompt = prompt;
             ResponseFormat = responseFormat;
             Temperature = temperature;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/> for deserialization. </summary>
+        internal CreateTranslationRequest()
+        {
         }
 
         /// <summary>

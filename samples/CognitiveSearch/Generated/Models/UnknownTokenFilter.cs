@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownTokenFilter. </summary>
@@ -13,9 +16,15 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="UnknownTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal UnknownTokenFilter(string odataType, string name) : base(odataType, name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "Unknown";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownTokenFilter"/> for deserialization. </summary>
+        internal UnknownTokenFilter()
+        {
         }
     }
 }

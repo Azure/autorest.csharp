@@ -15,6 +15,38 @@ namespace ModelsTypeSpec.Models
     /// <summary> Output model with readonly properties. </summary>
     public partial class RoundTripReadOnlyModel
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/>. </summary>
         /// <param name="optionalReadOnlyIntRecord"> Optional int record. </param>
         /// <param name="optionalReadOnlyStringRecord"> Optional string record. </param>
@@ -40,6 +72,7 @@ namespace ModelsTypeSpec.Models
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
             RequiredCollectionWithNullableIntElement = requiredCollectionWithNullableIntElement.ToList();
             OptionalCollectionWithNullableBooleanElement = new ChangeTrackingList<bool?>();
+            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/>. </summary>
@@ -67,7 +100,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalModelRecord"> Optional model record. </param>
         /// <param name="requiredCollectionWithNullableIntElement"> Required collection of which the element is a nullable int. </param>
         /// <param name="optionalCollectionWithNullableBooleanElement"> Optional collection of which the element is a nullable boolean. </param>
-        internal RoundTripReadOnlyModel(string requiredReadonlyString, int requiredReadonlyInt, string optionalReadonlyString, int? optionalReadonlyInt, DerivedModel requiredReadonlyModel, DerivedModel optionalReadonlyModel, FixedStringEnum requiredReadonlyFixedStringEnum, ExtensibleEnum requiredReadonlyExtensibleEnum, FixedStringEnum optionalReadonlyFixedStringEnum, ExtensibleEnum optionalReadonlyExtensibleEnum, IReadOnlyList<string> requiredReadonlyStringList, IReadOnlyList<int> requiredReadonlyIntList, IReadOnlyList<CollectionItem> requiredReadOnlyModelList, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord, IReadOnlyList<string> optionalReadonlyStringList, IReadOnlyList<int> optionalReadonlyIntList, IReadOnlyList<CollectionItem> optionalReadOnlyModelList, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord, IReadOnlyList<int?> requiredCollectionWithNullableIntElement, IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripReadOnlyModel(string requiredReadonlyString, int requiredReadonlyInt, string optionalReadonlyString, int? optionalReadonlyInt, DerivedModel requiredReadonlyModel, DerivedModel optionalReadonlyModel, FixedStringEnum requiredReadonlyFixedStringEnum, ExtensibleEnum requiredReadonlyExtensibleEnum, FixedStringEnum optionalReadonlyFixedStringEnum, ExtensibleEnum optionalReadonlyExtensibleEnum, IReadOnlyList<string> requiredReadonlyStringList, IReadOnlyList<int> requiredReadonlyIntList, IReadOnlyList<CollectionItem> requiredReadOnlyModelList, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord, IReadOnlyList<string> optionalReadonlyStringList, IReadOnlyList<int> optionalReadonlyIntList, IReadOnlyList<CollectionItem> optionalReadOnlyModelList, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord, IReadOnlyList<int?> requiredCollectionWithNullableIntElement, IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredReadonlyString = requiredReadonlyString;
             RequiredReadonlyInt = requiredReadonlyInt;
@@ -93,6 +127,12 @@ namespace ModelsTypeSpec.Models
             OptionalModelRecord = optionalModelRecord;
             RequiredCollectionWithNullableIntElement = requiredCollectionWithNullableIntElement;
             OptionalCollectionWithNullableBooleanElement = optionalCollectionWithNullableBooleanElement;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/> for deserialization. </summary>
+        internal RoundTripReadOnlyModel()
+        {
         }
 
         /// <summary> Required string, illustrating a readonly reference type property. </summary>

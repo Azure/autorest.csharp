@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -28,11 +29,17 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="SnowballTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="language"> The language to use. </param>
-        internal SnowballTokenFilter(string odataType, string name, SnowballTokenFilterLanguage language) : base(odataType, name)
+        internal SnowballTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, SnowballTokenFilterLanguage language) : base(odataType, name, serializedAdditionalRawData)
         {
             Language = language;
             OdataType = odataType ?? "#Microsoft.Azure.Search.SnowballTokenFilter";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="SnowballTokenFilter"/> for deserialization. </summary>
+        internal SnowballTokenFilter()
+        {
         }
 
         /// <summary> The language to use. </summary>

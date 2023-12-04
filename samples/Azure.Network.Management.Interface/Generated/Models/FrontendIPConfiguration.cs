@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -25,6 +26,7 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="FrontendIPConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Type of the resource. </param>
@@ -40,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="publicIPAddress"> The reference to the Public IP resource. </param>
         /// <param name="publicIPPrefix"> The reference to the Public IP Prefix resource. </param>
         /// <param name="provisioningState"> The provisioning state of the frontend IP configuration resource. </param>
-        internal FrontendIPConfiguration(string id, string name, string etag, string type, IList<string> zones, IReadOnlyList<SubResource> inboundNatRules, IReadOnlyList<SubResource> inboundNatPools, IReadOnlyList<SubResource> outboundRules, IReadOnlyList<SubResource> loadBalancingRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, PublicIPAddress publicIPAddress, SubResource publicIPPrefix, ProvisioningState? provisioningState) : base(id)
+        internal FrontendIPConfiguration(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string type, IList<string> zones, IReadOnlyList<SubResource> inboundNatRules, IReadOnlyList<SubResource> inboundNatPools, IReadOnlyList<SubResource> outboundRules, IReadOnlyList<SubResource> loadBalancingRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, PublicIPAddress publicIPAddress, SubResource publicIPPrefix, ProvisioningState? provisioningState) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

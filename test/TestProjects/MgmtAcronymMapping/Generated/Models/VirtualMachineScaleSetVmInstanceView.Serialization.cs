@@ -5,16 +5,127 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetVmInstanceView
+    public partial class VirtualMachineScaleSetVmInstanceView : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetVmInstanceView>
     {
-        internal static VirtualMachineScaleSetVmInstanceView DeserializeVirtualMachineScaleSetVmInstanceView(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetVmInstanceView>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<VirtualMachineScaleSetVmInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmInstanceView>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetVmInstanceView)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PlatformUpdateDomain))
+            {
+                writer.WritePropertyName("platformUpdateDomain"u8);
+                writer.WriteNumberValue(PlatformUpdateDomain.Value);
+            }
+            if (Optional.IsDefined(PlatformFaultDomain))
+            {
+                writer.WritePropertyName("platformFaultDomain"u8);
+                writer.WriteNumberValue(PlatformFaultDomain.Value);
+            }
+            if (Optional.IsDefined(RdpThumbPrint))
+            {
+                writer.WritePropertyName("rdpThumbPrint"u8);
+                writer.WriteStringValue(RdpThumbPrint);
+            }
+            if (Optional.IsDefined(VmAgent))
+            {
+                writer.WritePropertyName("vmAgent"u8);
+                writer.WriteObjectValue(VmAgent);
+            }
+            if (Optional.IsDefined(MaintenanceRedeployStatus))
+            {
+                writer.WritePropertyName("maintenanceRedeployStatus"u8);
+                writer.WriteObjectValue(MaintenanceRedeployStatus);
+            }
+            if (Optional.IsCollectionDefined(Disks))
+            {
+                writer.WritePropertyName("disks"u8);
+                writer.WriteStartArray();
+                foreach (var item in Disks)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(VmHealth))
+            {
+                writer.WritePropertyName("vmHealth"u8);
+                writer.WriteObjectValue(VmHealth);
+            }
+            if (Optional.IsDefined(BootDiagnostics))
+            {
+                writer.WritePropertyName("bootDiagnostics"u8);
+                writer.WriteObjectValue(BootDiagnostics);
+            }
+            if (Optional.IsCollectionDefined(Statuses))
+            {
+                writer.WritePropertyName("statuses"u8);
+                writer.WriteStartArray();
+                foreach (var item in Statuses)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(AssignedHost))
+            {
+                writer.WritePropertyName("assignedHost"u8);
+                writer.WriteStringValue(AssignedHost);
+            }
+            if (Optional.IsDefined(PlacementGroupId))
+            {
+                writer.WritePropertyName("placementGroupId"u8);
+                writer.WriteStringValue(PlacementGroupId);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        VirtualMachineScaleSetVmInstanceView IJsonModel<VirtualMachineScaleSetVmInstanceView>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmInstanceView>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetVmInstanceView)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetVmInstanceView(document.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetVmInstanceView DeserializeVirtualMachineScaleSetVmInstanceView(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -30,6 +141,8 @@ namespace MgmtAcronymMapping.Models
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
             Optional<string> assignedHost = default;
             Optional<ResourceIdentifier> placementGroupId = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("platformUpdateDomain"u8))
@@ -133,8 +246,44 @@ namespace MgmtAcronymMapping.Models
                     placementGroupId = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<VirtualMachineScaleSetVmInstanceView>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmInstanceView>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetVmInstanceView)} does not support '{options.Format}' format.");
+            }
+        }
+
+        VirtualMachineScaleSetVmInstanceView IPersistableModel<VirtualMachineScaleSetVmInstanceView>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetVmInstanceView>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeVirtualMachineScaleSetVmInstanceView(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetVmInstanceView)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VirtualMachineScaleSetVmInstanceView>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

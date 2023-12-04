@@ -113,7 +113,7 @@ namespace MgmtOmitOperationGroups.Mocking
         public virtual AsyncPageable<Model5> GetModel5sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "MockableMgmtOmitOperationGroupsResourceGroupResource.GetModel5s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => Model5.DeserializeModel5(e), Model5sClientDiagnostics, Pipeline, "MockableMgmtOmitOperationGroupsResourceGroupResource.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace MgmtOmitOperationGroups.Mocking
         public virtual Pageable<Model5> GetModel5s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "MockableMgmtOmitOperationGroupsResourceGroupResource.GetModel5s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => Model5.DeserializeModel5(e), Model5sClientDiagnostics, Pipeline, "MockableMgmtOmitOperationGroupsResourceGroupResource.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>

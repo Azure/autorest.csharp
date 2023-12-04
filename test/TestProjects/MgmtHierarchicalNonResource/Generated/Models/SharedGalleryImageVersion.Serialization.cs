@@ -6,15 +6,92 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class SharedGalleryImageVersion
+    public partial class SharedGalleryImageVersion : IUtf8JsonSerializable, IJsonModel<SharedGalleryImageVersion>
     {
-        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryImageVersion>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<SharedGalleryImageVersion>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SharedGalleryImageVersion)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location);
+            }
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PublishedOn))
+            {
+                writer.WritePropertyName("publishedDate"u8);
+                writer.WriteStringValue(PublishedOn.Value, "O");
+            }
+            if (Optional.IsDefined(EndOfLifeOn))
+            {
+                writer.WritePropertyName("endOfLifeDate"u8);
+                writer.WriteStringValue(EndOfLifeOn.Value, "O");
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("identifier"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(UniqueId))
+            {
+                writer.WritePropertyName("uniqueId"u8);
+                writer.WriteStringValue(UniqueId);
+            }
+            writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        SharedGalleryImageVersion IJsonModel<SharedGalleryImageVersion>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SharedGalleryImageVersion)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSharedGalleryImageVersion(document.RootElement, options);
+        }
+
+        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -24,6 +101,8 @@ namespace MgmtHierarchicalNonResource.Models
             Optional<DateTimeOffset> publishedDate = default;
             Optional<DateTimeOffset> endOfLifeDate = default;
             Optional<string> uniqueId = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -83,8 +162,44 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SharedGalleryImageVersion(name.Value, location.Value, uniqueId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(endOfLifeDate));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SharedGalleryImageVersion(name.Value, location.Value, serializedAdditionalRawData, uniqueId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(endOfLifeDate));
         }
+
+        BinaryData IPersistableModel<SharedGalleryImageVersion>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SharedGalleryImageVersion)} does not support '{options.Format}' format.");
+            }
+        }
+
+        SharedGalleryImageVersion IPersistableModel<SharedGalleryImageVersion>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SharedGalleryImageVersion>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSharedGalleryImageVersion(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SharedGalleryImageVersion)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SharedGalleryImageVersion>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

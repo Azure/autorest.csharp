@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -21,13 +22,14 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="ServiceEndpointPolicyDefinition"/>. </summary>
         /// <param name="id"> Resource ID. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="description"> A description for this rule. Restricted to 140 chars. </param>
         /// <param name="service"> Service endpoint name. </param>
         /// <param name="serviceResources"> A list of service resources. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy definition resource. </param>
-        internal ServiceEndpointPolicyDefinition(string id, string name, string etag, string description, string service, IList<string> serviceResources, ProvisioningState? provisioningState) : base(id)
+        internal ServiceEndpointPolicyDefinition(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string description, string service, IList<string> serviceResources, ProvisioningState? provisioningState) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

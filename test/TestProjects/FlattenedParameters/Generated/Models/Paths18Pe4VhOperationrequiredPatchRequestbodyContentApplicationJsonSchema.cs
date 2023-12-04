@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace FlattenedParameters.Models
@@ -13,6 +14,38 @@ namespace FlattenedParameters.Models
     /// <summary> The Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
@@ -26,10 +59,17 @@ namespace FlattenedParameters.Models
         /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <param name="nonRequired"></param>
-        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Required = required;
             NonRequired = nonRequired;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/> for deserialization. </summary>
+        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema()
+        {
         }
 
         /// <summary> Gets the required. </summary>

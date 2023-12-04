@@ -5,11 +5,46 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The StringWrapper. </summary>
     public partial class StringWrapper
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="StringWrapper"/>. </summary>
         public StringWrapper()
         {
@@ -19,11 +54,13 @@ namespace body_complex.Models
         /// <param name="field"></param>
         /// <param name="empty"></param>
         /// <param name="nullProperty"></param>
-        internal StringWrapper(string field, string empty, string nullProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StringWrapper(string field, string empty, string nullProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field = field;
             Empty = empty;
             NullProperty = nullProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

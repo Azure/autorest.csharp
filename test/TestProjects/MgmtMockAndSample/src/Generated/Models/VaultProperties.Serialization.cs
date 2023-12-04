@@ -6,16 +6,26 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultProperties : IUtf8JsonSerializable
+    public partial class VaultProperties : IUtf8JsonSerializable, IJsonModel<VaultProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<VaultProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(VaultProperties)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Duration))
             {
@@ -45,6 +55,11 @@ namespace MgmtMockAndSample.Models
             {
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
+            }
+            if (options.Format != "W" && Optional.IsDefined(HsmPoolResourceId))
+            {
+                writer.WritePropertyName("hsmPoolResourceId"u8);
+                writer.WriteStringValue(HsmPoolResourceId);
             }
             if (Optional.IsCollectionDefined(Deployments))
             {
@@ -101,6 +116,16 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
+            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpointConnections))
+            {
+                writer.WritePropertyName("privateEndpointConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpointConnections)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
@@ -121,11 +146,40 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
                 writer.WriteObjectValue(ExtremelyDeepStringProperty);
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static VaultProperties DeserializeVaultProperties(JsonElement element)
+        VaultProperties IJsonModel<VaultProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(VaultProperties)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultProperties(document.RootElement, options);
+        }
+
+        internal static VaultProperties DeserializeVaultProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -152,6 +206,8 @@ namespace MgmtMockAndSample.Models
             Optional<SinglePropertyModel> readWriteSingleStringProperty = default;
             Optional<ReadOnlySinglePropertyModel> readOnlySingleStringProperty = default;
             Optional<ExtremelyDeepSinglePropertyModel> extremelyDeepStringProperty = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("duration"u8))
@@ -351,8 +407,44 @@ namespace MgmtMockAndSample.Models
                     extremelyDeepStringProperty = ExtremelyDeepSinglePropertyModel.DeserializeExtremelyDeepSinglePropertyModel(property.Value);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new VaultProperties(Optional.ToNullable(duration), Optional.ToNullable(createOn), tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToList(deployments), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new VaultProperties(Optional.ToNullable(duration), Optional.ToNullable(createOn), tenantId, sku, Optional.ToList(accessPolicies), vaultUri.Value, hsmPoolResourceId.Value, Optional.ToList(deployments), Optional.ToNullable(enabledForDiskEncryption), Optional.ToNullable(enabledForTemplateDeployment), Optional.ToNullable(enableSoftDelete), Optional.ToNullable(softDeleteRetentionInDays), Optional.ToNullable(enableRbacAuthorization), Optional.ToNullable(createMode), Optional.ToNullable(enablePurgeProtection), networkAcls.Value, Optional.ToNullable(provisioningState), Optional.ToList(privateEndpointConnections), publicNetworkAccess.Value, readWriteSingleStringProperty.Value, readOnlySingleStringProperty.Value, extremelyDeepStringProperty.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<VaultProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VaultProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        VaultProperties IPersistableModel<VaultProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeVaultProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VaultProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VaultProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -15,12 +15,11 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             CSharpType? serializedType,
             JsonSerialization valueSerialization,
             bool isRequired,
-            bool shouldSkipSerialization,
-            bool shouldSkipDeserialization,
+            bool shouldExcludeInWireSerialization,
             string? customSerializationMethodName = null,
             string? customDeserializationMethodName = null,
             TypedValueExpression? enumerableExpression = null)
-            : base(parameterName, value, serializedName, serializedType, isRequired, shouldSkipSerialization, shouldSkipDeserialization, enumerableExpression)
+            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression)
         {
             ValueSerialization = valueSerialization;
             CustomSerializationMethodName = customSerializationMethodName;

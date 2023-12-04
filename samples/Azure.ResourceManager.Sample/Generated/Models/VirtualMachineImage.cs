@@ -39,6 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The name of the resource.
         /// Serialized Name: VirtualMachineImageResource.name
@@ -72,7 +73,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies disallowed configuration for the VirtualMachine created from the image
         /// Serialized Name: VirtualMachineImage.properties.disallowed
         /// </param>
-        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
+        internal VirtualMachineImage(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, serializedAdditionalRawData, name, location, tags)
         {
             Plan = plan;
             OSDiskImage = osDiskImage;
@@ -80,6 +81,11 @@ namespace Azure.ResourceManager.Sample.Models
             AutomaticOSUpgradeProperties = automaticOSUpgradeProperties;
             HyperVGeneration = hyperVGeneration;
             Disallowed = disallowed;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImage"/> for deserialization. </summary>
+        internal VirtualMachineImage()
+        {
         }
 
         /// <summary>

@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -14,10 +16,18 @@ using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
-    public partial class WorkspaceData : IUtf8JsonSerializable
+    public partial class WorkspaceData : IUtf8JsonSerializable, IJsonModel<WorkspaceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WorkspaceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<WorkspaceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(WorkspaceData)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -32,8 +42,33 @@ namespace MgmtParamOrdering
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(WorkspaceId))
+            {
+                writer.WritePropertyName("workspaceId"u8);
+                writer.WriteStringValue(WorkspaceId);
+            }
             if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description"u8);
@@ -76,10 +111,25 @@ namespace MgmtParamOrdering
                 writer.WritePropertyName("discoveryUrl"u8);
                 writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
             if (Optional.IsDefined(HbiWorkspace))
             {
                 writer.WritePropertyName("hbiWorkspace"u8);
                 writer.WriteBooleanValue(HbiWorkspace.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(ServiceProvisionedResourceGroup))
+            {
+                writer.WritePropertyName("serviceProvisionedResourceGroup"u8);
+                writer.WriteStringValue(ServiceProvisionedResourceGroup);
+            }
+            if (options.Format != "W" && Optional.IsDefined(PrivateLinkCount))
+            {
+                writer.WritePropertyName("privateLinkCount"u8);
+                writer.WriteNumberValue(PrivateLinkCount.Value);
             }
             if (Optional.IsDefined(ImageBuildCompute))
             {
@@ -96,12 +146,46 @@ namespace MgmtParamOrdering
                 writer.WritePropertyName("primaryUserAssignedIdentity"u8);
                 writer.WriteStringValue(PrimaryUserAssignedIdentity);
             }
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
+            {
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
+            }
             writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static WorkspaceData DeserializeWorkspaceData(JsonElement element)
+        WorkspaceData IJsonModel<WorkspaceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(WorkspaceData)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeWorkspaceData(document.RootElement, options);
+        }
+
+        internal static WorkspaceData DeserializeWorkspaceData(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -128,6 +212,8 @@ namespace MgmtParamOrdering
             Optional<bool> allowPublicAccessWhenBehindVnet = default;
             Optional<string> primaryUserAssignedIdentity = default;
             Optional<Guid> tenantId = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -294,8 +380,44 @@ namespace MgmtParamOrdering
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new WorkspaceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, workspaceId.Value, description.Value, friendlyName.Value, keyVault.Value, applicationInsights.Value, containerRegistry.Value, storageAccount.Value, discoveryUrl.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(hbiWorkspace), serviceProvisionedResourceGroup.Value, Optional.ToNullable(privateLinkCount), imageBuildCompute.Value, Optional.ToNullable(allowPublicAccessWhenBehindVnet), primaryUserAssignedIdentity.Value, Optional.ToNullable(tenantId));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new WorkspaceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, workspaceId.Value, description.Value, friendlyName.Value, keyVault.Value, applicationInsights.Value, containerRegistry.Value, storageAccount.Value, discoveryUrl.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(hbiWorkspace), serviceProvisionedResourceGroup.Value, Optional.ToNullable(privateLinkCount), imageBuildCompute.Value, Optional.ToNullable(allowPublicAccessWhenBehindVnet), primaryUserAssignedIdentity.Value, Optional.ToNullable(tenantId), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<WorkspaceData>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(WorkspaceData)} does not support '{options.Format}' format.");
+            }
+        }
+
+        WorkspaceData IPersistableModel<WorkspaceData>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceData>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeWorkspaceData(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(WorkspaceData)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<WorkspaceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

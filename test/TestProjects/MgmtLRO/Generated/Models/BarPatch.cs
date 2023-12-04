@@ -20,8 +20,9 @@ namespace MgmtLRO.Models
 
         /// <summary> Initializes a new instance of <see cref="BarPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="buzz"> Update Domain count. </param>
-        internal BarPatch(IDictionary<string, string> tags, Guid? buzz) : base(tags)
+        internal BarPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, Guid? buzz) : base(tags, serializedAdditionalRawData)
         {
             Buzz = buzz;
         }

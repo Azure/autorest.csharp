@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -23,7 +26,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
         /// Serialized Name: VirtualMachineReimageParameters.tempDisk
         /// </param>
-        internal VirtualMachineScaleSetVmReimageContent(bool? tempDisk) : base(tempDisk)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmReimageContent(bool? tempDisk, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(tempDisk, serializedAdditionalRawData)
         {
         }
     }

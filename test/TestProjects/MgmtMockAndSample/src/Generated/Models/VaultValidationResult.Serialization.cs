@@ -5,22 +5,85 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultValidationResult
+    public partial class VaultValidationResult : IUtf8JsonSerializable, IJsonModel<VaultValidationResult>
     {
-        internal static VaultValidationResult DeserializeVaultValidationResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultValidationResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<VaultValidationResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultValidationResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(VaultValidationResult)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Issues))
+            {
+                writer.WritePropertyName("issues"u8);
+                writer.WriteStartArray();
+                foreach (var item in Issues)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Result))
+            {
+                writer.WritePropertyName("result"u8);
+                writer.WriteStringValue(Result);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        VaultValidationResult IJsonModel<VaultValidationResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultValidationResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(VaultValidationResult)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultValidationResult(document.RootElement, options);
+        }
+
+        internal static VaultValidationResult DeserializeVaultValidationResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IReadOnlyList<VaultIssue>> issues = default;
             Optional<string> result = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("issues"u8))
@@ -42,8 +105,44 @@ namespace MgmtMockAndSample.Models
                     result = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new VaultValidationResult(Optional.ToList(issues), result.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new VaultValidationResult(Optional.ToList(issues), result.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<VaultValidationResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultValidationResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VaultValidationResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        VaultValidationResult IPersistableModel<VaultValidationResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<VaultValidationResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeVaultValidationResult(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VaultValidationResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<VaultValidationResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

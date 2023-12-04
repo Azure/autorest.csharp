@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -85,6 +85,7 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string RequestContentCreateName { get; }
 
         public abstract Type IUtf8JsonSerializableType { get; }
+        public abstract Type IXmlSerializableType { get; }
         public string IUtf8JsonSerializableWriteName => nameof(IUtf8JsonWriteable.Write);
 
         public abstract Type Utf8JsonWriterExtensionsType { get; }

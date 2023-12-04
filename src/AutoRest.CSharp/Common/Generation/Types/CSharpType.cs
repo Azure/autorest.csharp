@@ -122,8 +122,10 @@ namespace AutoRest.CSharp.Generation.Types
 
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
             return obj is CSharpType csType && Equals(csType, ignoreNullable: false);
         }
 

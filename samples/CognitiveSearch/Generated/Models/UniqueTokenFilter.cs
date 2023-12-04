@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -26,11 +27,17 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="UniqueTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="onlyOnSamePosition"> A value indicating whether to remove duplicates only at the same position. Default is false. </param>
-        internal UniqueTokenFilter(string odataType, string name, bool? onlyOnSamePosition) : base(odataType, name)
+        internal UniqueTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, bool? onlyOnSamePosition) : base(odataType, name, serializedAdditionalRawData)
         {
             OnlyOnSamePosition = onlyOnSamePosition;
             OdataType = odataType ?? "#Microsoft.Azure.Search.UniqueTokenFilter";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UniqueTokenFilter"/> for deserialization. </summary>
+        internal UniqueTokenFilter()
+        {
         }
 
         /// <summary> A value indicating whether to remove duplicates only at the same position. Default is false. </summary>

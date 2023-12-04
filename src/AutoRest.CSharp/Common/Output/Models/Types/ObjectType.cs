@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        public bool IsUnknownDerivedType { get; protected init; }
+        public bool IsPropertyBag { get; protected init; }
         public bool IsStruct => ExistingType?.IsValueType ?? false;
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
@@ -101,7 +103,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     childrenList.Add($"{implementation.Type:C}");
                 }
-                return childrenList.Any() ?
+                return childrenList.Count > 0 ?
                     (FormattableString)$"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}." :
                     $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}.";
             }

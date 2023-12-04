@@ -17,61 +17,37 @@ namespace _Type.Property.Nullable.Models
         /// <summary> Initializes a new instance of <see cref="Models.StringProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         /// <returns> A new <see cref="Models.StringProperty"/> instance for mocking. </returns>
         public static StringProperty StringProperty(string requiredProperty = null, string nullableProperty = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
-
-            return new StringProperty(requiredProperty, nullableProperty);
+            return new StringProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BytesProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         /// <returns> A new <see cref="Models.BytesProperty"/> instance for mocking. </returns>
         public static BytesProperty BytesProperty(string requiredProperty = null, BinaryData nullableProperty = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
-
-            return new BytesProperty(requiredProperty, nullableProperty);
+            return new BytesProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DatetimeProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         /// <returns> A new <see cref="Models.DatetimeProperty"/> instance for mocking. </returns>
         public static DatetimeProperty DatetimeProperty(string requiredProperty = null, DateTimeOffset? nullableProperty = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
-
-            return new DatetimeProperty(requiredProperty, nullableProperty);
+            return new DatetimeProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DurationProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         /// <returns> A new <see cref="Models.DurationProperty"/> instance for mocking. </returns>
         public static DurationProperty DurationProperty(string requiredProperty = null, TimeSpan? nullableProperty = null)
         {
-            if (requiredProperty == null)
-            {
-                throw new ArgumentNullException(nameof(requiredProperty));
-            }
-
-            return new DurationProperty(requiredProperty, nullableProperty);
+            return new DurationProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsByteProperty"/>. </summary>
@@ -82,7 +58,7 @@ namespace _Type.Property.Nullable.Models
         {
             nullableProperty ??= new List<BinaryData>();
 
-            return new CollectionsByteProperty(requiredProperty, nullableProperty?.ToList());
+            return new CollectionsByteProperty(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsModelProperty"/>. </summary>
@@ -93,21 +69,15 @@ namespace _Type.Property.Nullable.Models
         {
             nullableProperty ??= new List<InnerModel>();
 
-            return new CollectionsModelProperty(requiredProperty, nullableProperty?.ToList());
+            return new CollectionsModelProperty(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InnerModel"/>. </summary>
         /// <param name="property"> Inner model property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         /// <returns> A new <see cref="Models.InnerModel"/> instance for mocking. </returns>
         public static InnerModel InnerModel(string property = null)
         {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-
-            return new InnerModel(property);
+            return new InnerModel(property, serializedAdditionalRawData: null);
         }
     }
 }

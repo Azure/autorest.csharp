@@ -5,16 +5,87 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexerExecutionInfo
+    public partial class IndexerExecutionInfo : IUtf8JsonSerializable, IJsonModel<IndexerExecutionInfo>
     {
-        internal static IndexerExecutionInfo DeserializeIndexerExecutionInfo(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerExecutionInfo>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<IndexerExecutionInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerExecutionInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IndexerExecutionInfo)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.ToSerialString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(LastResult))
+            {
+                writer.WritePropertyName("lastResult"u8);
+                writer.WriteObjectValue(LastResult);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("executionHistory"u8);
+                writer.WriteStartArray();
+                foreach (var item in ExecutionHistory)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("limits"u8);
+                writer.WriteObjectValue(Limits);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        IndexerExecutionInfo IJsonModel<IndexerExecutionInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerExecutionInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IndexerExecutionInfo)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexerExecutionInfo(document.RootElement, options);
+        }
+
+        internal static IndexerExecutionInfo DeserializeIndexerExecutionInfo(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -23,6 +94,8 @@ namespace CognitiveSearch.Models
             Optional<IndexerExecutionResult> lastResult = default;
             IReadOnlyList<IndexerExecutionResult> executionHistory = default;
             IndexerLimits limits = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"u8))
@@ -54,8 +127,44 @@ namespace CognitiveSearch.Models
                     limits = IndexerLimits.DeserializeIndexerLimits(property.Value);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new IndexerExecutionInfo(status, lastResult.Value, executionHistory, limits);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new IndexerExecutionInfo(status, lastResult.Value, executionHistory, limits, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<IndexerExecutionInfo>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerExecutionInfo>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IndexerExecutionInfo)} does not support '{options.Format}' format.");
+            }
+        }
+
+        IndexerExecutionInfo IPersistableModel<IndexerExecutionInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IndexerExecutionInfo>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeIndexerExecutionInfo(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IndexerExecutionInfo)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<IndexerExecutionInfo>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

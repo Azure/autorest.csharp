@@ -6,15 +6,111 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class DeploymentOperationProperties
+    public partial class DeploymentOperationProperties : IUtf8JsonSerializable, IJsonModel<DeploymentOperationProperties>
     {
-        internal static DeploymentOperationProperties DeserializeDeploymentOperationProperties(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentOperationProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<DeploymentOperationProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<DeploymentOperationProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(DeploymentOperationProperties)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningOperation))
+            {
+                writer.WritePropertyName("provisioningOperation"u8);
+                writer.WriteStringValue(ProvisioningOperation.Value.ToSerialString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Timestamp))
+            {
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
+            }
+            if (options.Format != "W" && Optional.IsDefined(Duration))
+            {
+                writer.WritePropertyName("duration"u8);
+                writer.WriteStringValue(Duration.Value, "P");
+            }
+            if (options.Format != "W" && Optional.IsDefined(AnotherDuration))
+            {
+                writer.WritePropertyName("anotherDuration"u8);
+                writer.WriteStringValue(AnotherDuration.Value, "c");
+            }
+            if (options.Format != "W" && Optional.IsDefined(ServiceRequestId))
+            {
+                writer.WritePropertyName("serviceRequestId"u8);
+                writer.WriteStringValue(ServiceRequestId);
+            }
+            if (options.Format != "W" && Optional.IsDefined(StatusCode))
+            {
+                writer.WritePropertyName("statusCode"u8);
+                writer.WriteStringValue(StatusCode);
+            }
+            if (options.Format != "W" && Optional.IsDefined(StatusMessage))
+            {
+                writer.WritePropertyName("statusMessage"u8);
+                writer.WriteObjectValue(StatusMessage);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Request))
+            {
+                writer.WritePropertyName("request"u8);
+                writer.WriteObjectValue(Request);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Response))
+            {
+                writer.WritePropertyName("response"u8);
+                writer.WriteObjectValue(Response);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        DeploymentOperationProperties IJsonModel<DeploymentOperationProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeploymentOperationProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(DeploymentOperationProperties)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeploymentOperationProperties(document.RootElement, options);
+        }
+
+        internal static DeploymentOperationProperties DeserializeDeploymentOperationProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -29,6 +125,8 @@ namespace MgmtScopeResource.Models
             Optional<StatusMessage> statusMessage = default;
             Optional<HttpMessage> request = default;
             Optional<HttpMessage> response = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("provisioningOperation"u8))
@@ -109,8 +207,44 @@ namespace MgmtScopeResource.Models
                     response = HttpMessage.DeserializeHttpMessage(property.Value);
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new DeploymentOperationProperties(Optional.ToNullable(provisioningOperation), provisioningState.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), Optional.ToNullable(anotherDuration), serviceRequestId.Value, statusCode.Value, statusMessage.Value, request.Value, response.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new DeploymentOperationProperties(Optional.ToNullable(provisioningOperation), provisioningState.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), Optional.ToNullable(anotherDuration), serviceRequestId.Value, statusCode.Value, statusMessage.Value, request.Value, response.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<DeploymentOperationProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeploymentOperationProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DeploymentOperationProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        DeploymentOperationProperties IPersistableModel<DeploymentOperationProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<DeploymentOperationProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDeploymentOperationProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DeploymentOperationProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<DeploymentOperationProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -5,15 +5,58 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
-    public partial struct OutputAdditionalPropertiesModelStruct
+    public partial struct OutputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModel<OutputAdditionalPropertiesModelStruct>, IJsonModel<object>
     {
-        internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<OutputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(OutputAdditionalPropertiesModelStruct)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("id"u8);
+            writer.WriteNumberValue(Id);
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        OutputAdditionalPropertiesModelStruct IJsonModel<OutputAdditionalPropertiesModelStruct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(OutputAdditionalPropertiesModelStruct)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputAdditionalPropertiesModelStruct(document.RootElement, options);
+        }
+
+        void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, options);
+
+        object IJsonModel<object>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Create(ref reader, options);
+
+        internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             int id = default;
             IReadOnlyDictionary<string, string> additionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
@@ -29,5 +72,42 @@ namespace AdditionalPropertiesEx.Models
             additionalProperties = additionalPropertiesDictionary;
             return new OutputAdditionalPropertiesModelStruct(id, additionalProperties);
         }
+
+        BinaryData IPersistableModel<OutputAdditionalPropertiesModelStruct>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(OutputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
+            }
+        }
+
+        OutputAdditionalPropertiesModelStruct IPersistableModel<OutputAdditionalPropertiesModelStruct>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeOutputAdditionalPropertiesModelStruct(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(OutputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<OutputAdditionalPropertiesModelStruct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).Write(options);
+
+        object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).Create(data, options);
+
+        string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options);
     }
 }

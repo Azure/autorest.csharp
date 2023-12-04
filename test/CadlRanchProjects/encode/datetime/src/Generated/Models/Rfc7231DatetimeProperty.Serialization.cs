@@ -6,29 +6,71 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace Encode.Datetime.Models
 {
-    public partial class Rfc7231DatetimeProperty : IUtf8JsonSerializable
+    public partial class Rfc7231DatetimeProperty : IUtf8JsonSerializable, IJsonModel<Rfc7231DatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Rfc7231DatetimeProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<Rfc7231DatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value, "R");
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Rfc7231DatetimeProperty DeserializeRfc7231DatetimeProperty(JsonElement element)
+        Rfc7231DatetimeProperty IJsonModel<Rfc7231DatetimeProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRfc7231DatetimeProperty(document.RootElement, options);
+        }
+
+        internal static Rfc7231DatetimeProperty DeserializeRfc7231DatetimeProperty(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             DateTimeOffset value = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -36,9 +78,45 @@ namespace Encode.Datetime.Models
                     value = property.Value.GetDateTimeOffset("R");
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new Rfc7231DatetimeProperty(value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new Rfc7231DatetimeProperty(value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<Rfc7231DatetimeProperty>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Rfc7231DatetimeProperty IPersistableModel<Rfc7231DatetimeProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRfc7231DatetimeProperty(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Rfc7231DatetimeProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

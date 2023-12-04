@@ -6,15 +6,18 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ModelWithUrlProperty : IXmlSerializable
+    public partial class ModelWithUrlProperty : IXmlSerializable, IPersistableModel<ModelWithUrlProperty>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithUrlProperty");
             if (Optional.IsDefined(Url))
@@ -26,14 +29,57 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static ModelWithUrlProperty DeserializeModelWithUrlProperty(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static ModelWithUrlProperty DeserializeModelWithUrlProperty(XElement element, ModelReaderWriterOptions options = null)
         {
             Uri url = default;
             if (element.Element("Url") is XElement urlElement)
             {
                 url = new Uri((string)urlElement);
             }
-            return new ModelWithUrlProperty(url);
+            return new ModelWithUrlProperty(url, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<ModelWithUrlProperty>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithUrlProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelWithUrlProperty)} does not support '{options.Format}' format.");
+            }
+        }
+
+        ModelWithUrlProperty IPersistableModel<ModelWithUrlProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithUrlProperty>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeModelWithUrlProperty(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelWithUrlProperty)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ModelWithUrlProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

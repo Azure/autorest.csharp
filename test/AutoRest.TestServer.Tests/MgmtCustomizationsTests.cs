@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests
                 Meow = "MEOW"
             };
 
-            var root = JsonAsserts.AssertSerializes(pet);
+            var root = JsonAsserts.AssertWireSerializes(pet);
             var sizeProperty = root.GetProperty("size");
 
             // asserts we serialize the int size into a string
@@ -31,9 +31,9 @@ namespace AutoRest.TestServer.Tests
         public void Cat_SizeDeserializeIntoInt()
         {
             var json = @"{""kind"": ""Cat"", ""size"": ""10"", ""meow"": ""MEOW""}";
-            var root = JsonAsserts.Parse(json);
+            using var document = JsonDocument.Parse(json);
 
-            var pet = Pet.DeserializePet(root);
+            var pet = Pet.DeserializePet(document.RootElement);
             var cat = pet as Cat;
 
             Assert.IsTrue(cat != null);
@@ -52,7 +52,7 @@ namespace AutoRest.TestServer.Tests
             // this should serialize into:
             // { "kind": "Dog", "properties": { "dog": { "bark": "DOG BARKS" } } }
 
-            var root = JsonAsserts.AssertSerializes(pet);
+            var root = JsonAsserts.AssertWireSerializes(pet);
             var properties = root.GetProperty("properties");
             Assert.AreEqual(JsonValueKind.Object, properties.ValueKind);
             var dogProperty = properties.GetProperty("dog");
@@ -66,10 +66,9 @@ namespace AutoRest.TestServer.Tests
         public void Dog_DeserializeFromProperties()
         {
             var json = @"{""kind"": ""Dog"", ""properties"": { ""dog"": { ""bark"": ""dog barks"" }}}";
+            using var document = JsonDocument.Parse(json);
 
-            var root = JsonAsserts.Parse(json);
-
-            var pet = Pet.DeserializePet(root);
+            var pet = Pet.DeserializePet(document.RootElement);
             var dog = pet as Dog;
 
             Assert.IsTrue(dog != null);

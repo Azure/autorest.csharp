@@ -146,7 +146,7 @@ namespace dpg_customization_LowLevel
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
-                Product.DeserializeProduct,
+                e => Product.DeserializeProduct(e),
                 ClientDiagnostics,
                 Pipeline,
                 "DPGClient.GetPagesValues",
@@ -169,7 +169,7 @@ namespace dpg_customization_LowLevel
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
-                Product.DeserializeProduct,
+                e => Product.DeserializeProduct(e),
                 ClientDiagnostics,
                 Pipeline,
                 "DPGClient.GetPagesValues",

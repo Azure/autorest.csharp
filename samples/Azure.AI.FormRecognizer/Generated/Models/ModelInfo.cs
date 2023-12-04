@@ -6,12 +6,45 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Basic custom model information. </summary>
     public partial class ModelInfo
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="status"> Status of the model. </param>
@@ -23,6 +56,26 @@ namespace Azure.AI.FormRecognizer.Models
             Status = status;
             CreatedDateTime = createdDateTime;
             LastUpdatedDateTime = lastUpdatedDateTime;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="status"> Status of the model. </param>
+        /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
+        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelInfo(Guid modelId, ModelStatus status, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            ModelId = modelId;
+            Status = status;
+            CreatedDateTime = createdDateTime;
+            LastUpdatedDateTime = lastUpdatedDateTime;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ModelInfo"/> for deserialization. </summary>
+        internal ModelInfo()
+        {
         }
 
         /// <summary> Model identifier. </summary>

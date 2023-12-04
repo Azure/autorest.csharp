@@ -29,7 +29,7 @@ namespace MgmtExtensionCommonRestOperation.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType);
+            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExtensionCommonRestOperation.TypeTwoData"/>. </summary>
@@ -45,7 +45,7 @@ namespace MgmtExtensionCommonRestOperation.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType);
+            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, serializedAdditionalRawData: null);
         }
     }
 }

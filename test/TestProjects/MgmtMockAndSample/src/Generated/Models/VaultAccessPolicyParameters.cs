@@ -15,6 +15,38 @@ namespace MgmtMockAndSample.Models
     /// <summary> Parameters for updating the access policy in a vault. </summary>
     public partial class VaultAccessPolicyParameters : ResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyParameters"/>. </summary>
         /// <param name="properties"> Properties of the access policy. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
@@ -32,10 +64,17 @@ namespace MgmtMockAndSample.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> The resource type of the access policy. </param>
         /// <param name="properties"> Properties of the access policy. </param>
-        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyParameters"/> for deserialization. </summary>
+        internal VaultAccessPolicyParameters()
+        {
         }
 
         /// <summary> The resource type of the access policy. </summary>

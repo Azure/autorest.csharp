@@ -196,7 +196,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<CustomModel1> GetCustomModel1sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, CustomModel1.DeserializeCustomModel1, CustomModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => CustomModel1.DeserializeCustomModel1(e), CustomModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<CustomModel1> GetCustomModel1s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, CustomModel1.DeserializeCustomModel1, CustomModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => CustomModel1.DeserializeCustomModel1(e), CustomModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel1s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<CustomModel2> GetCustomModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, CustomModel2.DeserializeCustomModel2, CustomModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => CustomModel2.DeserializeCustomModel2(e), CustomModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<CustomModel2> GetCustomModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, CustomModel2.DeserializeCustomModel2, CustomModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => CustomModel2.DeserializeCustomModel2(e), CustomModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetCustomModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -556,7 +556,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, SubResourceModel1.DeserializeSubResourceModel1, SubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => SubResourceModel1.DeserializeSubResourceModel1(e), SubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -576,7 +576,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<SubResourceModel1> GetSubResourceModel1s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, SubResourceModel1.DeserializeSubResourceModel1, SubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => SubResourceModel1.DeserializeSubResourceModel1(e), SubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel1s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -736,7 +736,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, SubResourceModel2.DeserializeSubResourceModel2, SubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => SubResourceModel2.DeserializeSubResourceModel2(e), SubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -756,7 +756,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<SubResourceModel2> GetSubResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, SubResourceModel2.DeserializeSubResourceModel2, SubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => SubResourceModel2.DeserializeSubResourceModel2(e), SubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetSubResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -916,7 +916,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, WritableSubResourceModel1.DeserializeWritableSubResourceModel1, WritableSubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => WritableSubResourceModel1.DeserializeWritableSubResourceModel1(e), WritableSubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -936,7 +936,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, WritableSubResourceModel1.DeserializeWritableSubResourceModel1, WritableSubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => WritableSubResourceModel1.DeserializeWritableSubResourceModel1(e), WritableSubResourceModel1sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel1s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1096,7 +1096,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, WritableSubResourceModel2.DeserializeWritableSubResourceModel2, WritableSubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => WritableSubResourceModel2.DeserializeWritableSubResourceModel2(e), WritableSubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1116,7 +1116,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, WritableSubResourceModel2.DeserializeWritableSubResourceModel2, WritableSubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => WritableSubResourceModel2.DeserializeWritableSubResourceModel2(e), WritableSubResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetWritableSubResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1276,7 +1276,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<ResourceModel2> GetResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, ResourceModel2.DeserializeResourceModel2, ResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => ResourceModel2.DeserializeResourceModel2(e), ResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1296,7 +1296,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<ResourceModel2> GetResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, ResourceModel2.DeserializeResourceModel2, ResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => ResourceModel2.DeserializeResourceModel2(e), ResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1456,7 +1456,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TrackedResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, TrackedResourceModel2.DeserializeTrackedResourceModel2, TrackedResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => TrackedResourceModel2.DeserializeTrackedResourceModel2(e), TrackedResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -1476,7 +1476,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         public virtual Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TrackedResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, TrackedResourceModel2.DeserializeTrackedResourceModel2, TrackedResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => TrackedResourceModel2.DeserializeTrackedResourceModel2(e), TrackedResourceModel2sClientDiagnostics, Pipeline, "MockableMgmtSupersetFlattenInheritanceResourceGroupResource.GetTrackedResourceModel2s", "value", null, cancellationToken);
         }
 
         /// <summary>

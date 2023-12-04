@@ -14,6 +14,38 @@ namespace MgmtMockAndSample.Models
     /// <summary> Properties of the vault. </summary>
     public partial class VaultProperties
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VaultProperties"/>. </summary>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
@@ -52,7 +84,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="readWriteSingleStringProperty"> This is a single property of string. </param>
         /// <param name="readOnlySingleStringProperty"> This is a single property of read-only string. </param>
         /// <param name="extremelyDeepStringProperty"> This is a single property of string. </param>
-        internal VaultProperties(TimeSpan? duration, DateTimeOffset? createOn, Guid tenantId, MgmtMockAndSampleSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, IList<string> deployments, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultProperties(TimeSpan? duration, DateTimeOffset? createOn, Guid tenantId, MgmtMockAndSampleSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, IList<string> deployments, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections, string publicNetworkAccess, SinglePropertyModel readWriteSingleStringProperty, ReadOnlySinglePropertyModel readOnlySingleStringProperty, ExtremelyDeepSinglePropertyModel extremelyDeepStringProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Duration = duration;
             CreateOn = createOn;
@@ -76,6 +109,12 @@ namespace MgmtMockAndSample.Models
             ReadWriteSingleStringProperty = readWriteSingleStringProperty;
             ReadOnlySingleStringProperty = readOnlySingleStringProperty;
             ExtremelyDeepStringProperty = extremelyDeepStringProperty;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VaultProperties"/> for deserialization. </summary>
+        internal VaultProperties()
+        {
         }
 
         /// <summary> Time elapsed for task. </summary>

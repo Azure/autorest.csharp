@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,10 +15,130 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class OutputModel
+    public partial class OutputModel : IUtf8JsonSerializable, IJsonModel<OutputModel>
     {
-        internal static OutputModel DeserializeOutputModel(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<OutputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(OutputModel)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("requiredString"u8);
+            writer.WriteStringValue(RequiredString);
+            writer.WritePropertyName("requiredInt"u8);
+            writer.WriteNumberValue(RequiredInt);
+            writer.WritePropertyName("requiredModel"u8);
+            writer.WriteObjectValue(RequiredModel);
+            writer.WritePropertyName("requiredList"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredList)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredModelRecord"u8);
+            writer.WriteStartObject();
+            foreach (var item in RequiredModelRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
+            if (Optional.IsCollectionDefined(OptionalList))
+            {
+                writer.WritePropertyName("optionalList"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalList)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(OptionalNullableList))
+            {
+                if (OptionalNullableList != null)
+                {
+                    writer.WritePropertyName("optionalNullableList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalNullableList)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("optionalNullableList");
+                }
+            }
+            if (Optional.IsCollectionDefined(OptionalRecord))
+            {
+                writer.WritePropertyName("optionalRecord"u8);
+                writer.WriteStartObject();
+                foreach (var item in OptionalRecord)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (Optional.IsCollectionDefined(OptionalNullableRecord))
+            {
+                if (OptionalNullableRecord != null)
+                {
+                    writer.WritePropertyName("optionalNullableRecord"u8);
+                    writer.WriteStartObject();
+                    foreach (var item in OptionalNullableRecord)
+                    {
+                        writer.WritePropertyName(item.Key);
+                        writer.WriteObjectValue(item.Value);
+                    }
+                    writer.WriteEndObject();
+                }
+                else
+                {
+                    writer.WriteNull("optionalNullableRecord");
+                }
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        OutputModel IJsonModel<OutputModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(OutputModel)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputModel(document.RootElement, options);
+        }
+
+        internal static OutputModel DeserializeOutputModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -29,6 +152,8 @@ namespace ModelsTypeSpec.Models
             Optional<IReadOnlyList<CollectionItem>> optionalNullableList = default;
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalRecord = default;
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalNullableRecord = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -122,9 +247,45 @@ namespace ModelsTypeSpec.Models
                     optionalNullableRecord = dictionary;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, Optional.ToList(optionalList), Optional.ToList(optionalNullableList), Optional.ToDictionary(optionalRecord), Optional.ToDictionary(optionalNullableRecord));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, Optional.ToList(optionalList), Optional.ToList(optionalNullableList), Optional.ToDictionary(optionalRecord), Optional.ToDictionary(optionalNullableRecord), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<OutputModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(OutputModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        OutputModel IPersistableModel<OutputModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OutputModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeOutputModel(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(OutputModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<OutputModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -132,6 +293,14 @@ namespace ModelsTypeSpec.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeOutputModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

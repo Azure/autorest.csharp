@@ -28,11 +28,17 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="ElisionTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="articles"> The set of articles to remove. </param>
-        internal ElisionTokenFilter(string odataType, string name, IList<string> articles) : base(odataType, name)
+        internal ElisionTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> articles) : base(odataType, name, serializedAdditionalRawData)
         {
             Articles = articles;
             OdataType = odataType ?? "#Microsoft.Azure.Search.ElisionTokenFilter";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ElisionTokenFilter"/> for deserialization. </summary>
+        internal ElisionTokenFilter()
+        {
         }
 
         /// <summary> The set of articles to remove. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +15,18 @@ using NamespaceForEnums;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class SecondModel : IUtf8JsonSerializable
+    internal partial class SecondModel : IUtf8JsonSerializable, IJsonModel<SecondModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecondModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<SecondModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SecondModel)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(IntProperty))
             {
@@ -38,11 +49,40 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static SecondModel DeserializeSecondModel(JsonElement element)
+        SecondModel IJsonModel<SecondModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SecondModel)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSecondModel(document.RootElement, options);
+        }
+
+        internal static SecondModel DeserializeSecondModel(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,6 +90,8 @@ namespace TypeSchemaMapping.Models
             Optional<int> stringProperty = default;
             Optional<IReadOnlyDictionary<string, string>> dictionaryProperty = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("StringProperty"u8))
@@ -84,8 +126,44 @@ namespace TypeSchemaMapping.Models
                     daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SecondModel(stringProperty, Optional.ToDictionary(dictionaryProperty), Optional.ToNullable(daysOfWeek));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SecondModel(stringProperty, Optional.ToDictionary(dictionaryProperty), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<SecondModel>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        SecondModel IPersistableModel<SecondModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSecondModel(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SecondModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

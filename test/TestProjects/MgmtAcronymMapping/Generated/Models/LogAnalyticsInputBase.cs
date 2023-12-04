@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
@@ -16,6 +17,38 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class LogAnalyticsInputBase
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
@@ -64,7 +97,8 @@ namespace MgmtAcronymMapping.Models
         /// Group query result by Resource Name.
         /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
         /// </param>
-        internal LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BlobContainerSasUri = blobContainerSasUri;
             FromTime = fromTime;
@@ -72,6 +106,12 @@ namespace MgmtAcronymMapping.Models
             GroupByThrottlePolicy = groupByThrottlePolicy;
             GroupByOperationName = groupByOperationName;
             GroupByResourceName = groupByResourceName;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/> for deserialization. </summary>
+        internal LogAnalyticsInputBase()
+        {
         }
 
         /// <summary>

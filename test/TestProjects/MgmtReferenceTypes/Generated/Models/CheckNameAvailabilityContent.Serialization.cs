@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -13,10 +15,18 @@ using Azure.Core;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(CheckNameAvailabilityContentConverter))]
-    public partial class CheckNameAvailabilityContent : IUtf8JsonSerializable
+    public partial class CheckNameAvailabilityContent : IUtf8JsonSerializable, IJsonModel<CheckNameAvailabilityContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CheckNameAvailabilityContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<CheckNameAvailabilityContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityContent>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityContent)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -31,8 +41,22 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static CheckNameAvailabilityContent DeserializeCheckNameAvailabilityContent(JsonElement element)
+        CheckNameAvailabilityContent IJsonModel<CheckNameAvailabilityContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityContent>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityContent)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCheckNameAvailabilityContent(document.RootElement, options);
+        }
+
+        internal static CheckNameAvailabilityContent DeserializeCheckNameAvailabilityContent(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -58,6 +82,37 @@ namespace Azure.ResourceManager.Fake.Models
             }
             return new CheckNameAvailabilityContent(name.Value, type);
         }
+
+        BinaryData IPersistableModel<CheckNameAvailabilityContent>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityContent>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityContent)} does not support '{options.Format}' format.");
+            }
+        }
+
+        CheckNameAvailabilityContent IPersistableModel<CheckNameAvailabilityContent>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityContent>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeCheckNameAvailabilityContent(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityContent)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<CheckNameAvailabilityContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class CheckNameAvailabilityContentConverter : JsonConverter<CheckNameAvailabilityContent>
         {

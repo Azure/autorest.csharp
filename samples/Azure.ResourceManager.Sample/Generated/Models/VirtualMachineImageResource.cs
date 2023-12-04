@@ -41,6 +41,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The name of the resource.
         /// Serialized Name: VirtualMachineImageResource.name
@@ -53,11 +54,16 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md).
         /// Serialized Name: VirtualMachineImageResource.tags
         /// </param>
-        internal VirtualMachineImageResource(string id, string name, AzureLocation location, IDictionary<string, string> tags) : base(id)
+        internal VirtualMachineImageResource(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, AzureLocation location, IDictionary<string, string> tags) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Location = location;
             Tags = tags;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImageResource"/> for deserialization. </summary>
+        internal VirtualMachineImageResource()
+        {
         }
 
         /// <summary>

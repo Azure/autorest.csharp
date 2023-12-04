@@ -305,6 +305,7 @@ extends:
 
   <ItemGroup>
     <PackageReference Include=""Azure.Core"" />
+    <PackageReference Include=""System.ClientModel"" />
     <PackageReference Include=""System.Text.Json"" />
   </ItemGroup>
 
@@ -322,7 +323,7 @@ extends:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""System.Net.ClientModel"" Version=""1.0.0-beta.1"" />
+    <PackageReference Include=""System.ClientModel"" Version=""1.0.0-alpha.20231116.3"" />
     <PackageReference Include=""System.Text.Json"" Version=""4.7.2"" />
   </ItemGroup>
 

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel4. </summary>
@@ -19,8 +22,9 @@ namespace MgmtExactMatchInheritance.Models
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="exactMatchModel9Type"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="new"></param>
-        internal ExactMatchModel4(int? id, string name, string exactMatchModel9Type, string @new) : base(id, name, exactMatchModel9Type)
+        internal ExactMatchModel4(int? id, string name, string exactMatchModel9Type, IDictionary<string, BinaryData> serializedAdditionalRawData, string @new) : base(id, name, exactMatchModel9Type, serializedAdditionalRawData)
         {
             New = @new;
         }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
@@ -13,6 +14,38 @@ namespace MgmtMockAndSample.Models
     /// <summary> Guest configuration assignment properties. </summary>
     public partial class GuestConfigurationAssignmentProperties
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentProperties"/>. </summary>
         public GuestConfigurationAssignmentProperties()
         {
@@ -28,7 +61,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="assignmentHash"> Combined hash of the configuration package and parameters. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="resourceType"> Type of the resource - VMSS / VM. </param>
-        internal GuestConfigurationAssignmentProperties(string targetResourceId, ComplianceStatus? complianceStatus, DateTimeOffset? lastComplianceStatusChecked, string latestReportId, string parameterHash, string context, string assignmentHash, ProvisioningState? provisioningState, ResourceType? resourceType)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationAssignmentProperties(string targetResourceId, ComplianceStatus? complianceStatus, DateTimeOffset? lastComplianceStatusChecked, string latestReportId, string parameterHash, string context, string assignmentHash, ProvisioningState? provisioningState, ResourceType? resourceType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TargetResourceId = targetResourceId;
             ComplianceStatus = complianceStatus;
@@ -39,6 +73,7 @@ namespace MgmtMockAndSample.Models
             AssignmentHash = assignmentHash;
             ProvisioningState = provisioningState;
             ResourceType = resourceType;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> VM resource Id. </summary>

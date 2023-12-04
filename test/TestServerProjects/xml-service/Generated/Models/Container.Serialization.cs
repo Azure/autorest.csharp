@@ -5,14 +5,41 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 using System.Xml.Linq;
+using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Container
+    public partial class Container : IXmlSerializable, IPersistableModel<Container>
     {
-        internal static Container DeserializeContainer(XElement element)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        {
+            writer.WriteStartElement(nameHint ?? "Container");
+            writer.WriteStartElement("Name");
+            writer.WriteValue(Name);
+            writer.WriteEndElement();
+            writer.WriteObjectValue(Properties, "Properties");
+            if (Optional.IsCollectionDefined(Metadata))
+            {
+                foreach (var pair in Metadata)
+                {
+                    writer.WriteStartElement("String");
+                    writer.WriteValue(pair.Value);
+                    writer.WriteEndElement();
+                }
+            }
+            writer.WriteEndElement();
+        }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static Container DeserializeContainer(XElement element, ModelReaderWriterOptions options = null)
         {
             string name = default;
             ContainerProperties properties = default;
@@ -34,7 +61,48 @@ namespace xml_service.Models
                 }
                 metadata = dictionary;
             }
-            return new Container(name, properties, metadata);
+            return new Container(name, properties, metadata, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<Container>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Container>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Container)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Container IPersistableModel<Container>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Container>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeContainer(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Container)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Container>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

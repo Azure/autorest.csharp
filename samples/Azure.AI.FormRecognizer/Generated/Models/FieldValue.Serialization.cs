@@ -6,16 +6,149 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class FieldValue
+    public partial class FieldValue : IUtf8JsonSerializable, IJsonModel<FieldValue>
     {
-        internal static FieldValue DeserializeFieldValue(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FieldValue>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<FieldValue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<FieldValue>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(FieldValue)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("type"u8);
+            writer.WriteStringValue(Type.ToSerialString());
+            if (Optional.IsDefined(ValueString))
+            {
+                writer.WritePropertyName("valueString"u8);
+                writer.WriteStringValue(ValueString);
+            }
+            if (Optional.IsDefined(ValueDate))
+            {
+                writer.WritePropertyName("valueDate"u8);
+                writer.WriteStringValue(ValueDate.Value, "D");
+            }
+            if (Optional.IsDefined(ValueTime))
+            {
+                writer.WritePropertyName("valueTime"u8);
+                writer.WriteStringValue(ValueTime.Value, "T");
+            }
+            if (Optional.IsDefined(ValuePhoneNumber))
+            {
+                writer.WritePropertyName("valuePhoneNumber"u8);
+                writer.WriteStringValue(ValuePhoneNumber);
+            }
+            if (Optional.IsDefined(ValueNumber))
+            {
+                writer.WritePropertyName("valueNumber"u8);
+                writer.WriteNumberValue(ValueNumber.Value);
+            }
+            if (Optional.IsDefined(ValueInteger))
+            {
+                writer.WritePropertyName("valueInteger"u8);
+                writer.WriteNumberValue(ValueInteger.Value);
+            }
+            if (Optional.IsCollectionDefined(ValueArray))
+            {
+                writer.WritePropertyName("valueArray"u8);
+                writer.WriteStartArray();
+                foreach (var item in ValueArray)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ValueObject))
+            {
+                writer.WritePropertyName("valueObject"u8);
+                writer.WriteStartObject();
+                foreach (var item in ValueObject)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (Optional.IsDefined(Text))
+            {
+                writer.WritePropertyName("text"u8);
+                writer.WriteStringValue(Text);
+            }
+            if (Optional.IsCollectionDefined(BoundingBox))
+            {
+                writer.WritePropertyName("boundingBox"u8);
+                writer.WriteStartArray();
+                foreach (var item in BoundingBox)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Confidence))
+            {
+                writer.WritePropertyName("confidence"u8);
+                writer.WriteNumberValue(Confidence.Value);
+            }
+            if (Optional.IsCollectionDefined(Elements))
+            {
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in Elements)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Page))
+            {
+                writer.WritePropertyName("page"u8);
+                writer.WriteNumberValue(Page.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        FieldValue IJsonModel<FieldValue>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FieldValue>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(FieldValue)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeFieldValue(document.RootElement, options);
+        }
+
+        internal static FieldValue DeserializeFieldValue(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -34,6 +167,8 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<float> confidence = default;
             Optional<IReadOnlyList<string>> elements = default;
             Optional<int> page = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -166,8 +301,44 @@ namespace Azure.AI.FormRecognizer.Models
                     page = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), Optional.ToList(valueArray), Optional.ToDictionary(valueObject), text.Value, Optional.ToList(boundingBox), Optional.ToNullable(confidence), Optional.ToList(elements), Optional.ToNullable(page));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), Optional.ToList(valueArray), Optional.ToDictionary(valueObject), text.Value, Optional.ToList(boundingBox), Optional.ToNullable(confidence), Optional.ToList(elements), Optional.ToNullable(page), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<FieldValue>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FieldValue>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(FieldValue)} does not support '{options.Format}' format.");
+            }
+        }
+
+        FieldValue IPersistableModel<FieldValue>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<FieldValue>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeFieldValue(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(FieldValue)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<FieldValue>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

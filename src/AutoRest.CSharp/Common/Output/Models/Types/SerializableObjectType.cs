@@ -1,6 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -20,29 +23,56 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
 
-        private bool? _includeSerializer;
-        public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
-
-        private bool? _includeDeserializer;
-        public bool IncludeDeserializer => _includeDeserializer ??= EnsureIncludeDeserializer();
-
+        private bool _jsonSerializationInitialized = false;
         private JsonObjectSerialization? _jsonSerialization;
-        public JsonObjectSerialization? JsonSerialization => HasJsonSerialization ? _jsonSerialization ??= EnsureJsonSerialization() : null;
+        public JsonObjectSerialization? JsonSerialization => EnsureJsonSerialization();
 
+        private bool _xmlSerializationInitialized = false;
         private XmlObjectSerialization? _xmlSerialization;
-        public XmlObjectSerialization? XmlSerialization => HasXmlSerialization ? _xmlSerialization ??= EnsureXmlSerialization() : null;
+        public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
 
-        private bool? _hasJsonSerialization;
-        private bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();
+        private JsonObjectSerialization? EnsureJsonSerialization()
+        {
+            if (_jsonSerializationInitialized)
+                return _jsonSerialization;
 
-        private bool? _hasXmlSerialization;
-        private bool HasXmlSerialization => _hasXmlSerialization ??= EnsureHasXmlSerialization();
+            _jsonSerializationInitialized = true;
+            _jsonSerialization = BuildJsonSerialization();
+            return _jsonSerialization;
+        }
 
-        protected abstract bool EnsureHasJsonSerialization();
-        protected abstract bool EnsureHasXmlSerialization();
-        protected abstract bool EnsureIncludeSerializer();
-        protected abstract bool EnsureIncludeDeserializer();
-        protected abstract JsonObjectSerialization? EnsureJsonSerialization();
-        protected abstract XmlObjectSerialization? EnsureXmlSerialization();
+        private XmlObjectSerialization? EnsureXmlSerialization()
+        {
+            if (_xmlSerializationInitialized)
+                return _xmlSerialization;
+
+            _xmlSerializationInitialized = true;
+            _xmlSerialization = BuildXmlSerialization();
+            return _xmlSerialization;
+        }
+
+        protected abstract JsonObjectSerialization? BuildJsonSerialization();
+        protected abstract XmlObjectSerialization? BuildXmlSerialization();
+
+        // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method
+        public virtual ObjectTypeProperty? RawDataField => null;
+
+        private bool? _shouldHaveRawData;
+        protected bool ShouldHaveRawData => _shouldHaveRawData ??= EnsureShouldHaveRawData();
+
+        private bool EnsureShouldHaveRawData()
+        {
+            if (IsPropertyBag)
+                return false;
+
+            if (Inherits != null && Inherits is not { IsFrameworkType: false, Implementation: SystemObjectType })
+                return false;
+
+            return true;
+        }
+
+        protected const string PrivateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
+        protected const string PrivateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
+        protected static readonly CSharpType _privateAdditionalPropertiesPropertyType = typeof(IDictionary<string, BinaryData>);
     }
 }

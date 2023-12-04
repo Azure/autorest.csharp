@@ -5,22 +5,85 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace paging.Models
 {
-    internal partial class OdataProductResult
+    internal partial class OdataProductResult : IUtf8JsonSerializable, IJsonModel<OdataProductResult>
     {
-        internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OdataProductResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<OdataProductResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<OdataProductResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(OdataProductResult)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Values))
+            {
+                writer.WritePropertyName("values"u8);
+                writer.WriteStartArray();
+                foreach (var item in Values)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(OdataNextLink))
+            {
+                writer.WritePropertyName("odata.nextLink"u8);
+                writer.WriteStringValue(OdataNextLink);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        OdataProductResult IJsonModel<OdataProductResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OdataProductResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(OdataProductResult)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeOdataProductResult(document.RootElement, options);
+        }
+
+        internal static OdataProductResult DeserializeOdataProductResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IReadOnlyList<Product>> values = default;
             Optional<string> odataNextLink = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("values"u8))
@@ -42,8 +105,44 @@ namespace paging.Models
                     odataNextLink = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new OdataProductResult(Optional.ToList(values), odataNextLink.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new OdataProductResult(Optional.ToList(values), odataNextLink.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<OdataProductResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OdataProductResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(OdataProductResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        OdataProductResult IPersistableModel<OdataProductResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<OdataProductResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeOdataProductResult(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(OdataProductResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<OdataProductResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

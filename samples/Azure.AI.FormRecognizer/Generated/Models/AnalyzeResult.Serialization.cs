@@ -5,16 +5,101 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class AnalyzeResult
+    public partial class AnalyzeResult : IUtf8JsonSerializable, IJsonModel<AnalyzeResult>
     {
-        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnalyzeResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<AnalyzeResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(AnalyzeResult)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("version"u8);
+            writer.WriteStringValue(Version);
+            writer.WritePropertyName("readResults"u8);
+            writer.WriteStartArray();
+            foreach (var item in ReadResults)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(PageResults))
+            {
+                writer.WritePropertyName("pageResults"u8);
+                writer.WriteStartArray();
+                foreach (var item in PageResults)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DocumentResults))
+            {
+                writer.WritePropertyName("documentResults"u8);
+                writer.WriteStartArray();
+                foreach (var item in DocumentResults)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(Errors))
+            {
+                writer.WritePropertyName("errors"u8);
+                writer.WriteStartArray();
+                foreach (var item in Errors)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        AnalyzeResult IJsonModel<AnalyzeResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(AnalyzeResult)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnalyzeResult(document.RootElement, options);
+        }
+
+        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -24,6 +109,8 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<IReadOnlyList<PageResult>> pageResults = default;
             Optional<IReadOnlyList<DocumentResult>> documentResults = default;
             Optional<IReadOnlyList<ErrorInformation>> errors = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("version"u8))
@@ -83,8 +170,44 @@ namespace Azure.AI.FormRecognizer.Models
                     errors = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new AnalyzeResult(version, readResults, Optional.ToList(pageResults), Optional.ToList(documentResults), Optional.ToList(errors));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new AnalyzeResult(version, readResults, Optional.ToList(pageResults), Optional.ToList(documentResults), Optional.ToList(errors), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<AnalyzeResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(AnalyzeResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        AnalyzeResult IPersistableModel<AnalyzeResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<AnalyzeResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeAnalyzeResult(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(AnalyzeResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<AnalyzeResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

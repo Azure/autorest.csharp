@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     /// <summary> Unknown version of Dog. </summary>
@@ -19,7 +22,13 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="UnknownDog"/>. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="weight"> Weight of the dog. </param>
-        internal UnknownDog(DogKind kind, int weight) : base(kind, weight)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDog(DogKind kind, int weight, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, weight, serializedAdditionalRawData)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownDog"/> for deserialization. </summary>
+        internal UnknownDog()
         {
         }
     }

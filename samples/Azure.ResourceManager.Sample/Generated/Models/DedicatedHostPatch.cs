@@ -29,6 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="platformFaultDomain">
         /// Fault domain of the dedicated host within a dedicated host group.
         /// Serialized Name: DedicatedHostUpdate.properties.platformFaultDomain
@@ -61,7 +62,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The dedicated host instance view.
         /// Serialized Name: DedicatedHostUpdate.properties.instanceView
         /// </param>
-        internal DedicatedHostPatch(IDictionary<string, string> tags, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(tags)
+        internal DedicatedHostPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(tags, serializedAdditionalRawData)
         {
             PlatformFaultDomain = platformFaultDomain;
             AutoReplaceOnFailure = autoReplaceOnFailure;

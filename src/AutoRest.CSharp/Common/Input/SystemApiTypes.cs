@@ -2,10 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Core.Pipeline;
-using System.Net.ClientModel.Internal;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
+using System.ClientModel.Primitives.Pipeline;
 using AutoRest.CSharp.Common.Output.Expressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.System;
@@ -14,7 +14,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure.Core.Pipeline; //needed because BearerTokenAuthenticationPolicy doesn't exist in System.ServiceModel.Rest yet
-using RequestBody = System.Net.ClientModel.Core.RequestBody;
+using RequestBody = System.ClientModel.Primitives.RequestBody;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -79,6 +79,8 @@ namespace AutoRest.CSharp.Common.Input
         public override string RequestContentCreateName => nameof(RequestBody.CreateFromStream);
 
         public override Type IUtf8JsonSerializableType => typeof(IUtf8JsonWriteable);
+
+        public override Type IXmlSerializableType => throw new NotSupportedException("Xml serialization is not supported in non-branded libraries yet");
 
         public override Type Utf8JsonWriterExtensionsType => typeof(ModelSerializationExtensions);
 

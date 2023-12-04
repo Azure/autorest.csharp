@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,6 +14,38 @@ namespace CognitiveSearch.Models
     /// <summary> Represents an item- or document-level indexing error. </summary>
     public partial class ItemError
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="ItemError"/>. </summary>
         /// <param name="errorMessage"> The message describing the error that occurred while processing the item. </param>
         /// <param name="statusCode"> The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </param>
@@ -32,7 +65,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available. </param>
         /// <param name="details"> Additional, verbose details about the error to assist in debugging the indexer. This may not be always available. </param>
         /// <param name="documentationLink"> A link to a troubleshooting guide for these classes of errors. This may not be always available. </param>
-        internal ItemError(string key, string errorMessage, int statusCode, string name, string details, string documentationLink)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ItemError(string key, string errorMessage, int statusCode, string name, string details, string documentationLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Key = key;
             ErrorMessage = errorMessage;
@@ -40,6 +74,12 @@ namespace CognitiveSearch.Models
             Name = name;
             Details = details;
             DocumentationLink = documentationLink;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ItemError"/> for deserialization. </summary>
+        internal ItemError()
+        {
         }
 
         /// <summary> The key of the item for which indexing failed. </summary>

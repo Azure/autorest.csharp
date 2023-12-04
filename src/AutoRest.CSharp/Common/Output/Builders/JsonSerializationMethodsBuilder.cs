@@ -2,12 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -22,53 +28,278 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        public static Method BuildUtf8JsonSerializableWrite(JsonObjectSerialization jsonObjectSerialization)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
         {
-            var utf8JsonWriter = new Parameter("writer", null, typeof(Utf8JsonWriter), null, ValidationType.None, null);
-            return new Method
+            var jsonModelInterface = json.IJsonModelInterface;
+            var typeOfT = jsonModelInterface.Arguments[0];
+
+            // void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            yield return new
             (
-                new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriter }, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
-                WriteObject(new Utf8JsonWriterExpression(utf8JsonWriter), jsonObjectSerialization)
+                new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter }, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
+                This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, ModelReaderWriterOptionsExpression.Wire)
             );
+
+            // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
+            yield return new
+            (
+                new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
+                WriteObject(json, writer, options)
+            );
+
+            // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+            var reader = (ValueExpression)KnownParameters.Serializations.Utf8JsonReader;
+            yield return new
+            (
+                new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
+                new MethodBodyStatement[]
+                {
+                    Serializations.ValidateJsonFormat(options, json.IPersistableModelTInterface),
+                    EmptyLine,
+                    // using var document = JsonDocument.ParseValue(ref reader);
+                    UsingDeclare("document", JsonDocumentExpression.ParseValue(reader), out var docVariable),
+                    // return DeserializeXXX(doc.RootElement, options);
+                    Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
+                }
+            );
+
+            // if the model is a struct, it needs to implement IJsonModel<object> as well which leads to another 2 methods
+            if (json.IJsonModelObjectInterface is { } jsonModelObjectInterface)
+            {
+                // void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+                yield return new
+                (
+                    new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelObjectInterface),
+                    This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), writer, options)
+                );
+
+                // object IJsonModel<object>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+                yield return new
+                (
+                    new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelObjectInterface),
+                    This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Create), reader, options)
+                );
+            }
         }
 
-        public static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, JsonObjectSerialization serialization)
+        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml)
+        {
+            var iModelTInterface = json?.IPersistableModelTInterface ?? xml?.IPersistableModelTInterface;
+            var iModelObjectInterface = json?.IPersistableModelObjectInterface ?? xml?.IPersistableModelObjectInterface;
+            // if we have json serialization, we must have this interface.
+            // if we have xml serialization, we must have this interface.
+            // therefore this type should never be null - because we cannot get here when json and xml both are null
+            Debug.Assert(iModelTInterface != null);
+
+            var typeOfT = iModelTInterface.Arguments[0];
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
+            // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
+            yield return new
+            (
+                new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
+                BuildModelWriteMethodBody(json, xml, options, iModelTInterface).ToArray()
+            );
+
+            // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
+            var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
+            yield return new
+            (
+                new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
+                BuildModelCreateMethodBody(model, json != null, xml != null, data, options, iModelTInterface).ToArray()
+            );
+
+            // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
+            yield return new
+            (
+                new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
+                xml != null ? Serializations.XmlFormat : Serializations.JsonFormat
+            );
+
+            // if the model is a struct, it needs to implement IPersistableModel<object> as well which leads to another 2 methods
+            if (iModelObjectInterface is not null)
+            {
+                // BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options)
+                yield return new
+                (
+                    new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelObjectInterface),
+                    // => (IPersistableModel<T>this).Write(options);
+                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.Write), options)
+                );
+
+                // object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options)
+                yield return new
+                (
+                    new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelObjectInterface),
+                    // => (IPersistableModel<T>this).Read(options);
+                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.Create), data, options)
+                );
+
+                // ModelReaderWriterFormat IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options)
+                yield return new
+                (
+                    new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelObjectInterface),
+                    // => (IPersistableModel<T>this).GetFormatFromOptions(options);
+                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options)
+                );
+            }
+
+            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json, XmlObjectSerialization? xml, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            {
+                // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
+                yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
+
+                yield return EmptyLine;
+
+                var switchStatement = new SwitchStatement(format);
+
+                if (json != null)
+                {
+                    var jsonCase = new SwitchCase(Serializations.JsonFormat,
+                        Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options }))
+                        );
+                    switchStatement.Add(jsonCase);
+                }
+
+                if (xml != null)
+                {
+                    /*  using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        ((IXmlSerializable)this).Write(writer, null);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    */
+                    var xmlCase = new SwitchCase(Serializations.XmlFormat,
+                        new MethodBodyStatement[]
+                        {
+                            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
+                            UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
+                            new InvokeInstanceMethodStatement(null, xml.WriteXmlMethodName, new[] { xmlWriter, Null, options }, false),
+                            xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
+                            new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
+                                // return BinaryData.FromStream(stream);
+                                Return(BinaryDataExpression.FromStream(stream, false)),
+                                // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                                Return(New.Instance(typeof(BinaryData),
+                                    InvokeStaticMethodExpression.Extension(
+                                        typeof(MemoryExtensions),
+                                        nameof(MemoryExtensions.AsMemory),
+                                        stream.Invoke(nameof(MemoryStream.GetBuffer)),
+                                        new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
+                                        ))))
+                        }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
+                    switchStatement.Add(xmlCase);
+                }
+
+                // default case
+                /*
+                 * throw new FormatException($"The model {nameof(T)} does not support '{options.Format}' format.");
+                 */
+                var typeOfT = iModelTInterface.Arguments[0];
+                var defaultCase = SwitchCase.Default(
+                    Serializations.ThrowValidationFailException(options.Format, typeOfT)
+                );
+                switchStatement.Add(defaultCase);
+
+                yield return switchStatement;
+            }
+
+            static IEnumerable<MethodBodyStatement> BuildModelCreateMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            {
+                // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
+                yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
+
+                yield return EmptyLine;
+
+                var switchStatement = new SwitchStatement(format);
+
+                if (hasJson)
+                {
+                    /* using var document = JsonDocument.ParseValue(ref reader);
+                     * return DeserializeXXX(doc.RootElement, options);
+                     */
+                    var jsonCase = new SwitchCase(Serializations.JsonFormat,
+                        new MethodBodyStatement[]
+                        {
+                            UsingDeclare("document", JsonDocumentExpression.Parse(data), out var docVariable),
+                            Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
+                        }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
+                    switchStatement.Add(jsonCase);
+                }
+
+                if (hasXml)
+                {
+                    // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
+                    var xmlCase = new SwitchCase(Serializations.XmlFormat,
+                        Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), options)));
+                    switchStatement.Add(xmlCase);
+                }
+
+                // default case
+                /*
+                 * throw new InvalidOperationException($"The model {nameof(T)} does not support '{options.Format}' format.");
+                 */
+                var typeOfT = iModelTInterface.Arguments[0];
+                var defaultCase = SwitchCase.Default(
+                    Serializations.ThrowValidationFailException(options.Format, typeOfT)
+                );
+                switchStatement.Add(defaultCase);
+
+                yield return switchStatement;
+            }
+        }
+
+        public static MethodBodyStatement[] WriteObject(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options)
             => new[]
             {
+                Serializations.ValidateJsonFormat(options, serialization.IPersistableModelTInterface),
+                EmptyLine,
                 utf8JsonWriter.WriteStartObject(),
-                WriteProperties(utf8JsonWriter, serialization.Properties).ToArray(),
-                SerializeAdditionalProperties(utf8JsonWriter, serialization.AdditionalProperties),
+                WriteProperties(utf8JsonWriter, serialization.Properties, options).ToArray(),
+                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
                 utf8JsonWriter.WriteEndObject()
             };
 
-        public static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
+        public static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties, ModelReaderWriterOptionsExpression options)
         {
             foreach (JsonPropertySerialization property in properties)
             {
-                if (property.ShouldSkipSerialization)
-                {
-                    continue;
-                }
-
                 if (property.ValueSerialization == null)
                 {
                     // Flattened property
-                    yield return utf8JsonWriter.WritePropertyName(property.SerializedName);
-                    yield return utf8JsonWriter.WriteStartObject();
-                    yield return WriteProperties(utf8JsonWriter, property.PropertySerializations!).ToArray();
-                    yield return utf8JsonWriter.WriteEndObject();
+                    yield return Serializations.WrapInCheckNotWire(
+                        property,
+                        options.Format,
+                        new[]
+                        {
+                            utf8JsonWriter.WritePropertyName(property.SerializedName),
+                            utf8JsonWriter.WriteStartObject(),
+                            WriteProperties(utf8JsonWriter, property.PropertySerializations!, options).ToArray(),
+                            utf8JsonWriter.WriteEndObject(),
+                        });
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
@@ -76,22 +307,28 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
-                    yield return InvokeOptional.WrapInIsDefined(
+                    yield return Serializations.WrapInCheckNotWire(
                         property,
-                        new IfElseStatement(checkPropertyIsInitialized,
-                            WriteProperty(utf8JsonWriter, property),
-                            utf8JsonWriter.WriteNull(property.SerializedName)
-                        )
+                        options.Format,
+                        InvokeOptional.WrapInIsDefined(
+                            property,
+                            new IfElseStatement(checkPropertyIsInitialized,
+                                WritePropertySerialization(utf8JsonWriter, property),
+                                utf8JsonWriter.WriteNull(property.SerializedName)
+                            ))
                     );
                 }
                 else
                 {
-                    yield return InvokeOptional.WrapInIsDefined(property, WriteProperty(utf8JsonWriter, property));
+                    yield return Serializations.WrapInCheckNotWire(
+                        property,
+                        options.Format,
+                        InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(utf8JsonWriter, property)));
                 }
             }
         }
 
-        private static MethodBodyStatement WriteProperty(Utf8JsonWriterExpression utf8JsonWriter, JsonPropertySerialization serialization)
+        private static MethodBodyStatement WritePropertySerialization(Utf8JsonWriterExpression utf8JsonWriter, JsonPropertySerialization serialization)
         {
             return new[]
             {
@@ -102,7 +339,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, JsonAdditionalPropertiesSerialization? additionalProperties)
+        private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, JsonAdditionalPropertiesSerialization? additionalProperties)
         {
             if (additionalProperties is null)
             {
@@ -110,11 +347,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], additionalProperties.Value);
-            return new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
+            MethodBodyStatement statement = new ForeachStatement("item", additionalPropertiesExpression, out KeyValuePairExpression item)
             {
                 utf8JsonWriter.WritePropertyName(item.Key),
                 SerializeExpression(utf8JsonWriter, additionalProperties.ValueSerialization, item.Value)
             };
+
+            // if it should be excluded in wire serialization, it is a raw data field and we need to check if it is null
+            // otherwise it is the public AdditionalProperties property, we always instantiate it therefore we do not need to check null.
+            statement = additionalProperties.ShouldExcludeInWireSerialization ?
+                new IfStatement(NotEqual(additionalPropertiesExpression, Null))
+                {
+                    statement
+                } : statement;
+
+            return Serializations.WrapInCheckNotWire(
+                additionalProperties,
+                options.Format,
+                statement);
         }
 
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
@@ -221,7 +471,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return utf8JsonWriter.WriteObjectValue(value);
             }
 
-            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(RequestMethod) || valueType == typeof(AzureLocation))
+            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation) || valueType == typeof(ExtendedLocationType))
             {
                 return utf8JsonWriter.WriteStringValue(value);
             }
@@ -259,7 +509,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : utf8JsonWriter.WriteStringValue(value);
             }
 
-            if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress))
+            if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress) || valueType == typeof(RequestMethod) || valueType == typeof(ExtendedLocationType))
             {
                 return utf8JsonWriter.WriteStringValue(value.InvokeToString());
             }
@@ -293,7 +543,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value);
             }
 
-            throw new NotSupportedException($"Framework type {valueType} serialization not supported");
+            throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
 
         private static MethodBodyStatement CheckCollectionItemForNull(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value)
@@ -304,19 +554,22 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static Method? BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization, INamedTypeSymbol? existingType)
         {
             var methodName = $"Deserialize{declaration.Name}";
-            var element = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
-            var signature = new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { element });
+            var signature = new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { KnownParameters.Serializations.JsonElement, KnownParameters.Serializations.OptionalOptions });
             if (SourceInputHelper.TryGetExistingMethod(existingType, signature, out _))
             {
                 return null;
             }
 
-            return new Method(signature, BuildDeserializeBody(element, serialization).ToArray());
+            return new Method(signature, BuildDeserializeBody(serialization, new JsonElementExpression(KnownParameters.Serializations.JsonElement), new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options)).ToArray());
         }
 
-        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(Parameter element, JsonObjectSerialization serialization)
+        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(JsonObjectSerialization serialization, JsonElementExpression jsonElement, ModelReaderWriterOptionsExpression options)
         {
-            var jsonElement = new JsonElementExpression(element);
+            // fallback to Default options if it is null
+            yield return AssignIfNull(options, ModelReaderWriterOptionsExpression.Wire);
+
+            yield return EmptyLine;
+
             if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
             {
                 yield return new IfStatement(jsonElement.ValueKindEqualsNull())
@@ -328,7 +581,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var discriminator = serialization.Discriminator;
             if (discriminator is not null && discriminator.HasDescendants)
             {
-                yield return new IfStatement(jsonElement.TryGetProperty(element.Name, discriminator.SerializedName, out var discriminatorElement))
+                yield return new IfStatement(jsonElement.TryGetProperty(discriminator.SerializedName, out var discriminatorElement))
                 {
                     new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray())
                 };
@@ -340,7 +593,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
             else
             {
-                yield return WriteObjectInitialization(jsonElement, serialization).ToArray();
+                yield return WriteObjectInitialization(serialization, jsonElement, options).ToArray();
             }
         }
 
@@ -352,7 +605,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteObjectInitialization(JsonElementExpression element, JsonObjectSerialization serialization)
+        private static IEnumerable<MethodBodyStatement> WriteObjectInitialization(JsonObjectSerialization serialization, JsonElementExpression element, ModelReaderWriterOptionsExpression options)
         {
             // this is the first level of object hierarchy
             // collect all properties and initialize the dictionary
@@ -366,7 +619,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.Value.Type, additionalProperties.SerializationConstructorParameterName));
             }
 
-            bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
+            bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType?.Type);
 
             foreach (var variable in propertyVariables)
             {
@@ -380,7 +633,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    yield return Declare(variable.Value, Snippets.Default);
+                    yield return Declare(variable.Value, Default);
                 }
             }
 
@@ -392,9 +645,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
                 yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
-                    DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties.ValueSerialization, new JsonPropertyExpression(property), new DictionaryExpression(objAdditionalProperties.Type.Arguments[0], objAdditionalProperties.Type.Arguments[1], dictionary), propertyVariables, shouldTreatEmptyStringAsNull)
+                    DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties, new JsonPropertyExpression(property), new DictionaryExpression(objAdditionalProperties.Type.Arguments[0], objAdditionalProperties.Type.Arguments[1], dictionary), options, propertyVariables, shouldTreatEmptyStringAsNull).ToArray()
                 };
-                yield return new AssignValueStatement(propertyVariables[objAdditionalProperties], dictionary);
+                yield return Assign(propertyVariables[objAdditionalProperties], dictionary);
             }
             else
             {
@@ -412,24 +665,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(New.Instance(serialization.Type, parameters));
         }
 
-        private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonSerialization? additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
+        private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonAdditionalPropertiesSerialization additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, ModelReaderWriterOptionsExpression options, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            if (additionalPropertiesSerialization is null)
-            {
-                return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
-            }
+            yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
+            // in the case here, this line returns an empty statement, we only want the value here
+            DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
+            var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
 
-            return new[]
-            {
-                DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
-                DeserializeValue(additionalPropertiesSerialization, jsonProperty.Value, out var value),
-                dictionary.Add(jsonProperty.Name, value)
-            };
+            yield return Serializations.WrapInCheckNotWire(
+                additionalPropertiesSerialization,
+                options.Format,
+                additionalPropertiesStatement);
         }
 
         private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
             => propertySerializations
-                .Where(p => !p.ShouldSkipDeserialization)
                 .Select(p => new IfStatement(jsonProperty.NameEquals(p.SerializedName))
                 {
                     DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull)
@@ -544,7 +794,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return EmptyStatement;
         }
 
-        private static ValueExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)
+        private static BoolExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)
         {
             var jsonElement = jsonProperty.Value;
             if (!shouldTreatEmptyStringAsNull)
@@ -569,7 +819,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// Collects a list of properties being read from all level of object hierarchy
         private static void CollectPropertiesForDeserialization(IDictionary<JsonPropertySerialization, VariableReference> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
         {
-            foreach (JsonPropertySerialization jsonProperty in jsonProperties.Where(p => !p.ShouldSkipDeserialization))
+            foreach (JsonPropertySerialization jsonProperty in jsonProperties)
             {
                 if (jsonProperty.SerializedType is { } type)
                 {
@@ -756,13 +1006,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type, serializerOptions);
 
-                case Resource { ResourceData: SerializableObjectType { IncludeDeserializer: true } resourceDataType } resource:
+                case Resource { ResourceData: SerializableObjectType resourceDataType } resource:
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);
 
-                case SerializableObjectType { IncludeDeserializer: true } type:
+                case SerializableObjectType type:
                     return SerializableObjectTypeExpression.Deserialize(type, element);
 
                 case EnumType clientEnum:
@@ -814,7 +1064,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 frameworkType == typeof(ResourceType) ||
                 frameworkType == typeof(ContentType) ||
                 frameworkType == typeof(RequestMethod) ||
-                frameworkType == typeof(AzureLocation))
+                frameworkType == typeof(AzureLocation) ||
+                frameworkType == typeof(ExtendedLocationType))
             {
                 return New.Instance(frameworkType, element.GetString());
             }
@@ -888,14 +1139,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetTimeSpan(format.ToFormatSpecifier());
             }
 
-            throw new NotSupportedException($"Framework type {frameworkType} is not supported");
+            throw new NotSupportedException($"Framework type {frameworkType} is not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
 
         private static MethodBodyStatement InvokeListAdd(ValueExpression list, ValueExpression value)
             => new InvokeInstanceMethodStatement(list, nameof(List<object>.Add), value);
 
         private static MethodBodyStatement InvokeArrayElementAssignment(ValueExpression array, ValueExpression index, ValueExpression value)
-            => new AssignValueStatement(new ArrayElementExpression(array, index), value);
+            => Assign(new ArrayElementExpression(array, index), value);
 
         private static ValueExpression InvokeJsonSerializerDeserializeMethod(JsonElementExpression element, CSharpType serializationType, ValueExpression? options = null)
         {

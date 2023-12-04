@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,6 +14,38 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class SuggestOptions
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="SuggestOptions"/>. </summary>
         public SuggestOptions()
         {
@@ -31,7 +64,8 @@ namespace CognitiveSearch.Models
         /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
         /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        internal SuggestOptions(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, IList<string> searchFields, IList<string> select, int? top)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuggestOptions(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, IList<string> searchFields, IList<string> select, int? top, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Filter = filter;
             UseFuzzyMatching = useFuzzyMatching;
@@ -42,6 +76,7 @@ namespace CognitiveSearch.Models
             SearchFields = searchFields;
             Select = select;
             Top = top;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An OData expression that filters the documents considered for suggestions. </summary>

@@ -4,15 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Common.Decorator
 {
     internal static class DefaultDerivedSchema
     {
-        public const string DefaultDerivedExtension = "x-ms-autorest-defaultDerivedSchema";
+        private const string DefaultDerivedExtension = "x-ms-autorest-defaultDerivedSchema";
 
         public static void AddDefaultDerivedSchemas(CodeModel codeModel)
         {
@@ -51,14 +49,6 @@ namespace AutoRest.CSharp.Common.Decorator
             if (actualBaseSchema is null)
                 throw new InvalidOperationException($"Found a child poly {schema.Language.Default.Name} that we weren't able to determine its base poly from {string.Join(',', schema.Parents?.Immediate.Select(p => p.Name) ?? Array.Empty<string>())}");
 
-            //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-            var hasXCsharpUsageOutput = !actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase);
-            if (!actualBaseSchema.Usage.Contains(SchemaContext.Output) &&
-                !actualBaseSchema.Usage.Contains(SchemaContext.Exception) &&
-                (!hasXCsharpUsageOutput.HasValue ||
-                hasXCsharpUsageOutput.Value))
-                return;
-
             ObjectSchema? defaultDerivedSchema = null;
 
             //if I have children and parents then I am my own defaultDerivedType
@@ -96,6 +86,7 @@ namespace AutoRest.CSharp.Common.Decorator
                         },
                         DiscriminatorValue = "Unknown",
                         SerializationFormats = { KnownMediaType.Json },
+                        IsUnknownDiscriminatorModel = true
                     };
 
                     if (actualBaseSchema.Parents is not null)

@@ -20,6 +20,38 @@ namespace Azure.ResourceManager.Storage
     /// </summary>
     public partial class StorageAccountData : TrackedResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="StorageAccountData"/>. </summary>
         /// <param name="location"> The location. </param>
         public StorageAccountData(AzureLocation location) : base(location)
@@ -71,7 +103,8 @@ namespace Azure.ResourceManager.Storage
         /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
         /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'. </param>
         /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </param>
-        internal StorageAccountData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, StorageSku sku, StorageKind? kind, ManagedServiceIdentity identity, ExtendedLocation extendedLocation, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverOn, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? createdOn, CustomDomain customDomain, SasPolicy sasPolicy, KeyPolicy keyPolicy, KeyCreationTime keyCreationTime, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<StoragePrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, StorageSku sku, StorageKind? kind, ManagedServiceIdentity identity, ExtendedLocation extendedLocation, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverOn, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? createdOn, CustomDomain customDomain, SasPolicy sasPolicy, KeyPolicy keyPolicy, KeyCreationTime keyCreationTime, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<StoragePrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Kind = kind;
@@ -110,6 +143,12 @@ namespace Azure.ResourceManager.Storage
             DefaultToOAuthAuthentication = defaultToOAuthAuthentication;
             PublicNetworkAccess = publicNetworkAccess;
             ImmutableStorageWithVersioning = immutableStorageWithVersioning;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="StorageAccountData"/> for deserialization. </summary>
+        internal StorageAccountData()
+        {
         }
 
         /// <summary> Gets the SKU. </summary>

@@ -78,7 +78,7 @@ namespace Azure.Network.Management.Interface
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, LoadBalancer.DeserializeLoadBalancer, _clientDiagnostics, _pipeline, "NetworkInterfaceLoadBalancersClient.List", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => LoadBalancer.DeserializeLoadBalancer(e), _clientDiagnostics, _pipeline, "NetworkInterfaceLoadBalancersClient.List", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> List all load balancers in a network interface. </summary>
@@ -93,7 +93,7 @@ namespace Azure.Network.Management.Interface
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, LoadBalancer.DeserializeLoadBalancer, _clientDiagnostics, _pipeline, "NetworkInterfaceLoadBalancersClient.List", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => LoadBalancer.DeserializeLoadBalancer(e), _clientDiagnostics, _pipeline, "NetworkInterfaceLoadBalancersClient.List", "value", "nextLink", cancellationToken);
         }
     }
 }

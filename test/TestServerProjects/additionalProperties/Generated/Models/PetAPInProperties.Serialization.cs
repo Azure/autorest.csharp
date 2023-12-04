@@ -5,16 +5,27 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPInProperties : IUtf8JsonSerializable
+    public partial class PetAPInProperties : IUtf8JsonSerializable, IJsonModel<PetAPInProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPInProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<PetAPInProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPInProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PetAPInProperties)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
@@ -22,6 +33,11 @@ namespace additionalProperties.Models
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteBooleanValue(Status.Value);
             }
             if (Optional.IsCollectionDefined(AdditionalProperties))
             {
@@ -34,11 +50,40 @@ namespace additionalProperties.Models
                 }
                 writer.WriteEndObject();
             }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element)
+        PetAPInProperties IJsonModel<PetAPInProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPInProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PetAPInProperties)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePetAPInProperties(document.RootElement, options);
+        }
+
+        internal static PetAPInProperties DeserializePetAPInProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +92,8 @@ namespace additionalProperties.Models
             Optional<string> name = default;
             Optional<bool> status = default;
             Optional<IDictionary<string, float>> additionalProperties = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -82,8 +129,44 @@ namespace additionalProperties.Models
                     additionalProperties = dictionary;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new PetAPInProperties(id, name.Value, Optional.ToNullable(status), Optional.ToDictionary(additionalProperties));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new PetAPInProperties(id, name.Value, Optional.ToNullable(status), Optional.ToDictionary(additionalProperties), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<PetAPInProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPInProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PetAPInProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        PetAPInProperties IPersistableModel<PetAPInProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PetAPInProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePetAPInProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PetAPInProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PetAPInProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

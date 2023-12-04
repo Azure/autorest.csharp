@@ -6,16 +6,27 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    public partial class PollutedDog : IUtf8JsonSerializable
+    public partial class PollutedDog : IUtf8JsonSerializable, IJsonModel<PollutedDog>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedDog>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<PollutedDog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PollutedDog>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PollutedDog)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("woof"u8);
             writer.WriteStringValue(Woof);
@@ -32,11 +43,40 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static PollutedDog DeserializePollutedDog(JsonElement element)
+        PollutedDog IJsonModel<PollutedDog>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PollutedDog>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PollutedDog)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePollutedDog(document.RootElement, options);
+        }
+
+        internal static PollutedDog DeserializePollutedDog(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -45,6 +85,8 @@ namespace ConfidentLevelsInTsp.Models
             BinaryData color = default;
             string kind = default;
             string name = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("woof"u8))
@@ -67,9 +109,45 @@ namespace ConfidentLevelsInTsp.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new PollutedDog(kind, name, woof, color);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new PollutedDog(kind, name, serializedAdditionalRawData, woof, color);
         }
+
+        BinaryData IPersistableModel<PollutedDog>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PollutedDog>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PollutedDog)} does not support '{options.Format}' format.");
+            }
+        }
+
+        PollutedDog IPersistableModel<PollutedDog>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PollutedDog>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePollutedDog(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PollutedDog)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PollutedDog>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

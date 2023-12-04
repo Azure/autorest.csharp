@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -32,13 +33,19 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="PatternReplaceTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="pattern"> A regular expression pattern. </param>
         /// <param name="replacement"> The replacement text. </param>
-        internal PatternReplaceTokenFilter(string odataType, string name, string pattern, string replacement) : base(odataType, name)
+        internal PatternReplaceTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string pattern, string replacement) : base(odataType, name, serializedAdditionalRawData)
         {
             Pattern = pattern;
             Replacement = replacement;
             OdataType = odataType ?? "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PatternReplaceTokenFilter"/> for deserialization. </summary>
+        internal PatternReplaceTokenFilter()
+        {
         }
 
         /// <summary> A regular expression pattern. </summary>

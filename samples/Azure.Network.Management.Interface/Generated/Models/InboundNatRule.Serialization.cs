@@ -5,20 +5,42 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class InboundNatRule : IUtf8JsonSerializable
+    public partial class InboundNatRule : IUtf8JsonSerializable, IJsonModel<InboundNatRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InboundNatRule>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<InboundNatRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<InboundNatRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(InboundNatRule)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Etag))
+            {
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Id))
             {
@@ -31,6 +53,11 @@ namespace Azure.Network.Management.Interface.Models
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
                 writer.WriteObjectValue(FrontendIPConfiguration);
+            }
+            if (options.Format != "W" && Optional.IsDefined(BackendIPConfiguration))
+            {
+                writer.WritePropertyName("backendIPConfiguration"u8);
+                writer.WriteObjectValue(BackendIPConfiguration);
             }
             if (Optional.IsDefined(Protocol))
             {
@@ -62,12 +89,46 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("enableTcpReset"u8);
                 writer.WriteBooleanValue(EnableTcpReset.Value);
             }
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
+            {
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
+            }
             writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static InboundNatRule DeserializeInboundNatRule(JsonElement element)
+        InboundNatRule IJsonModel<InboundNatRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<InboundNatRule>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(InboundNatRule)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeInboundNatRule(document.RootElement, options);
+        }
+
+        internal static InboundNatRule DeserializeInboundNatRule(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -85,6 +146,8 @@ namespace Azure.Network.Management.Interface.Models
             Optional<bool> enableFloatingIP = default;
             Optional<bool> enableTcpReset = default;
             Optional<ProvisioningState> provisioningState = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -200,8 +263,44 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new InboundNatRule(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, backendIPConfiguration.Value, Optional.ToNullable(protocol), Optional.ToNullable(frontendPort), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(provisioningState));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new InboundNatRule(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, backendIPConfiguration.Value, Optional.ToNullable(protocol), Optional.ToNullable(frontendPort), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(provisioningState));
         }
+
+        BinaryData IPersistableModel<InboundNatRule>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InboundNatRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(InboundNatRule)} does not support '{options.Format}' format.");
+            }
+        }
+
+        InboundNatRule IPersistableModel<InboundNatRule>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<InboundNatRule>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeInboundNatRule(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(InboundNatRule)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<InboundNatRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

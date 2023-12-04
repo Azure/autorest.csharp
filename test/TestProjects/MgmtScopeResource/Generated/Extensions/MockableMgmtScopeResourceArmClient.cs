@@ -257,7 +257,7 @@ namespace MgmtScopeResource.Mocking
 
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => MarketplacesRestClient.CreateListRequest(scope, filter, top, skiptoken);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => MarketplacesRestClient.CreateListNextPageRequest(nextLink, scope, filter, top, skiptoken);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Marketplace.DeserializeMarketplace, MarketplacesClientDiagnostics, Pipeline, "MockableMgmtScopeResourceArmClient.GetMarketplaces", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => Marketplace.DeserializeMarketplace(e), MarketplacesClientDiagnostics, Pipeline, "MockableMgmtScopeResourceArmClient.GetMarketplaces", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace MgmtScopeResource.Mocking
 
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => MarketplacesRestClient.CreateListRequest(scope, filter, top, skiptoken);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => MarketplacesRestClient.CreateListNextPageRequest(nextLink, scope, filter, top, skiptoken);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Marketplace.DeserializeMarketplace, MarketplacesClientDiagnostics, Pipeline, "MockableMgmtScopeResourceArmClient.GetMarketplaces", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => Marketplace.DeserializeMarketplace(e), MarketplacesClientDiagnostics, Pipeline, "MockableMgmtScopeResourceArmClient.GetMarketplaces", "value", "nextLink", cancellationToken);
         }
         /// <summary>
         /// Gets an object representing a <see cref="FakePolicyAssignmentResource"/> along with the instance operations that can be performed on it but with no data.

@@ -5,21 +5,80 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtListMethods.Models
 {
-    public partial class NonResourceChild
+    public partial class NonResourceChild : IUtf8JsonSerializable, IJsonModel<NonResourceChild>
     {
-        internal static NonResourceChild DeserializeNonResourceChild(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonResourceChild>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<NonResourceChild>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<NonResourceChild>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(NonResourceChild)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(NumberOfCores))
+            {
+                writer.WritePropertyName("numberOfCores"u8);
+                writer.WriteNumberValue(NumberOfCores.Value);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        NonResourceChild IJsonModel<NonResourceChild>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NonResourceChild>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(NonResourceChild)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeNonResourceChild(document.RootElement, options);
+        }
+
+        internal static NonResourceChild DeserializeNonResourceChild(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> name = default;
             Optional<int> numberOfCores = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -36,8 +95,44 @@ namespace MgmtListMethods.Models
                     numberOfCores = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new NonResourceChild(name.Value, Optional.ToNullable(numberOfCores));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new NonResourceChild(name.Value, Optional.ToNullable(numberOfCores), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<NonResourceChild>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NonResourceChild>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(NonResourceChild)} does not support '{options.Format}' format.");
+            }
+        }
+
+        NonResourceChild IPersistableModel<NonResourceChild>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<NonResourceChild>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeNonResourceChild(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(NonResourceChild)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<NonResourceChild>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

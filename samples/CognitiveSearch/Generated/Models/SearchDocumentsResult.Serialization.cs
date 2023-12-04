@@ -5,16 +5,113 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SearchDocumentsResult
+    public partial class SearchDocumentsResult : IUtf8JsonSerializable, IJsonModel<SearchDocumentsResult>
     {
-        internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SearchDocumentsResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<SearchDocumentsResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchDocumentsResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SearchDocumentsResult)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsDefined(Count))
+            {
+                writer.WritePropertyName("@odata.count"u8);
+                writer.WriteNumberValue(Count.Value);
+            }
+            if (options.Format != "W" && Optional.IsDefined(Coverage))
+            {
+                writer.WritePropertyName("@search.coverage"u8);
+                writer.WriteNumberValue(Coverage.Value);
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Facets))
+            {
+                writer.WritePropertyName("@search.facets"u8);
+                writer.WriteStartObject();
+                foreach (var item in Facets)
+                {
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteStartArray();
+                    foreach (var item0 in item.Value)
+                    {
+                        writer.WriteObjectValue(item0);
+                    }
+                    writer.WriteEndArray();
+                }
+                writer.WriteEndObject();
+            }
+            if (options.Format != "W" && Optional.IsDefined(NextPageParameters))
+            {
+                writer.WritePropertyName("@search.nextPageParameters"u8);
+                writer.WriteObjectValue(NextPageParameters);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Results)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (options.Format != "W" && Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("@odata.nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        SearchDocumentsResult IJsonModel<SearchDocumentsResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchDocumentsResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(SearchDocumentsResult)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeSearchDocumentsResult(document.RootElement, options);
+        }
+
+        internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -25,6 +122,8 @@ namespace CognitiveSearch.Models
             Optional<SearchRequest> searchNextPageParameters = default;
             IReadOnlyList<SearchResult> value = default;
             Optional<string> odataNextLink = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.count"u8))
@@ -95,8 +194,44 @@ namespace CognitiveSearch.Models
                     odataNextLink = property.Value.GetString();
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), Optional.ToDictionary(searchFacets), searchNextPageParameters.Value, value, odataNextLink.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), Optional.ToDictionary(searchFacets), searchNextPageParameters.Value, value, odataNextLink.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<SearchDocumentsResult>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchDocumentsResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SearchDocumentsResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        SearchDocumentsResult IPersistableModel<SearchDocumentsResult>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<SearchDocumentsResult>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSearchDocumentsResult(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SearchDocumentsResult)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<SearchDocumentsResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

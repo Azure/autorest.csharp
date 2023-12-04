@@ -3,13 +3,46 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel.Internal;
+using System.ClientModel.Internal;
+using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
     /// <summary> The CreateImageVariationRequest. </summary>
     public partial class CreateImageVariationRequest
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="CreateImageVariationRequest"/>. </summary>
         /// <param name="image">
         /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
@@ -21,6 +54,7 @@ namespace OpenAI.Models
             ClientUtilities.AssertNotNull(image, nameof(image));
 
             Image = image;
+            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateImageVariationRequest"/>. </summary>
@@ -32,13 +66,20 @@ namespace OpenAI.Models
         /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
-        internal CreateImageVariationRequest(BinaryData image, long? n, CreateImageVariationRequestSize? size, CreateImageVariationRequestResponseFormat? responseFormat, string user)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CreateImageVariationRequest(BinaryData image, long? n, CreateImageVariationRequestSize? size, CreateImageVariationRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Image = image;
             N = n;
             Size = size;
             ResponseFormat = responseFormat;
             User = user;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="CreateImageVariationRequest"/> for deserialization. </summary>
+        internal CreateImageVariationRequest()
+        {
         }
 
         /// <summary>

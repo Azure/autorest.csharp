@@ -38,7 +38,7 @@ namespace MgmtPartialResource.Models
         {
             zones ??= new List<string>();
 
-            return new PublicIPAddressData(id, name, resourceType, systemData, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipAddress, idleTimeoutInMinutes, resourceGuid, servicePublicIPAddress, migrationPhase, linkedPublicIPAddress, deleteOption);
+            return new PublicIPAddressData(id, name, resourceType, systemData, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipAddress, idleTimeoutInMinutes, resourceGuid, servicePublicIPAddress, migrationPhase, linkedPublicIPAddress, deleteOption, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPartialResource.ConfigurationProfileAssignmentData"/>. </summary>
@@ -54,7 +54,7 @@ namespace MgmtPartialResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ConfigurationProfileAssignmentData(id, name, resourceType, systemData, tags, location, properties);
+            return new ConfigurationProfileAssignmentData(id, name, resourceType, systemData, tags, location, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ConfigurationProfileAssignmentProperties"/>. </summary>
@@ -64,7 +64,7 @@ namespace MgmtPartialResource.Models
         /// <returns> A new <see cref="Models.ConfigurationProfileAssignmentProperties"/> instance for mocking. </returns>
         public static ConfigurationProfileAssignmentProperties ConfigurationProfileAssignmentProperties(string configurationProfile = null, string targetId = null, string status = null)
         {
-            return new ConfigurationProfileAssignmentProperties(configurationProfile, targetId, status);
+            return new ConfigurationProfileAssignmentProperties(configurationProfile, targetId, status, serializedAdditionalRawData: null);
         }
     }
 }

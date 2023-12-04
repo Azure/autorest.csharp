@@ -29,7 +29,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeData(id, name, resourceType, systemData, tags, location, bar);
+            return new FakeData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithNonResChWithLocData"/>. </summary>
@@ -45,7 +45,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeParentWithAncestorWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new FakeParentWithAncestorWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NonResourceChild"/>. </summary>
@@ -54,7 +54,7 @@ namespace MgmtListMethods.Models
         /// <returns> A new <see cref="Models.NonResourceChild"/> instance for mocking. </returns>
         public static NonResourceChild NonResourceChild(string name = null, int? numberOfCores = null)
         {
-            return new NonResourceChild(name, numberOfCores);
+            return new NonResourceChild(name, numberOfCores, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithNonResChData"/>. </summary>
@@ -70,7 +70,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeParentWithAncestorWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
+            return new FakeParentWithAncestorWithNonResChData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithLocData"/>. </summary>
@@ -86,7 +86,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeParentWithAncestorWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new FakeParentWithAncestorWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorData"/>. </summary>
@@ -102,7 +102,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeParentWithAncestorData(id, name, resourceType, systemData, tags, location, bar);
+            return new FakeParentWithAncestorData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithNonResChData"/>. </summary>
@@ -118,7 +118,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
+            return new FakeParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentData"/>. </summary>
@@ -134,7 +134,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeParentData(id, name, resourceType, systemData, tags, location, bar);
+            return new FakeParentData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithNonResChWithLocData"/>. </summary>
@@ -150,7 +150,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ResGrpParentWithAncestorWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new ResGrpParentWithAncestorWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithNonResChData"/>. </summary>
@@ -166,7 +166,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ResGrpParentWithAncestorWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
+            return new ResGrpParentWithAncestorWithNonResChData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithLocData"/>. </summary>
@@ -182,7 +182,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ResGrpParentWithAncestorWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new ResGrpParentWithAncestorWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorData"/>. </summary>
@@ -198,7 +198,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ResGrpParentWithAncestorData(id, name, resourceType, systemData, tags, location, bar);
+            return new ResGrpParentWithAncestorData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithNonResChData"/>. </summary>
@@ -214,7 +214,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ResGrpParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
+            return new ResGrpParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentData"/>. </summary>
@@ -230,7 +230,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ResGrpParentData(id, name, resourceType, systemData, tags, location, bar);
+            return new ResGrpParentData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithNonResChWithLocData"/>. </summary>
@@ -246,7 +246,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SubParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new SubParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithNonResChData"/>. </summary>
@@ -262,7 +262,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SubParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
+            return new SubParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithLocData"/>. </summary>
@@ -278,7 +278,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SubParentWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new SubParentWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentData"/>. </summary>
@@ -294,7 +294,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SubParentData(id, name, resourceType, systemData, tags, location, bar);
+            return new SubParentData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithNonResChWithLocData"/>. </summary>
@@ -310,7 +310,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtGrpParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new MgmtGrpParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithNonResChData"/>. </summary>
@@ -326,7 +326,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtGrpParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
+            return new MgmtGrpParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithLocData"/>. </summary>
@@ -342,7 +342,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtGrpParentWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new MgmtGrpParentWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGroupParentData"/>. </summary>
@@ -358,7 +358,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtGroupParentData(id, name, resourceType, systemData, tags, location, bar);
+            return new MgmtGroupParentData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantTestData"/>. </summary>
@@ -374,7 +374,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TenantTestData(id, name, resourceType, systemData, tags, location, bar);
+            return new TenantTestData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithNonResChWithLocData"/>. </summary>
@@ -390,7 +390,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TenantParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new TenantParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithNonResChData"/>. </summary>
@@ -406,7 +406,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TenantParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
+            return new TenantParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithLocData"/>. </summary>
@@ -422,7 +422,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TenantParentWithLocData(id, name, resourceType, systemData, tags, location, bar);
+            return new TenantParentWithLocData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentData"/>. </summary>
@@ -438,7 +438,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TenantParentData(id, name, resourceType, systemData, tags, location, bar);
+            return new TenantParentData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpdateWorkspaceQuotas"/>. </summary>
@@ -450,7 +450,7 @@ namespace MgmtListMethods.Models
         /// <returns> A new <see cref="Models.UpdateWorkspaceQuotas"/> instance for mocking. </returns>
         public static UpdateWorkspaceQuotas UpdateWorkspaceQuotas(string id = null, string updateWorkspaceQuotasType = null, long? limit = null, QuotaUnit? unit = null, Status? status = null)
         {
-            return new UpdateWorkspaceQuotas(id, updateWorkspaceQuotasType, limit, unit, status);
+            return new UpdateWorkspaceQuotas(id, updateWorkspaceQuotasType, limit, unit, status, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeConfigurationData"/>. </summary>
@@ -466,7 +466,7 @@ namespace MgmtListMethods.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeConfigurationData(id, name, resourceType, systemData, tags, location, configValue);
+            return new FakeConfigurationData(id, name, resourceType, systemData, tags, location, configValue, serializedAdditionalRawData: null);
         }
     }
 }

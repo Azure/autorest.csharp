@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
     /// </summary>
     internal sealed record FormattableStringExpression : ValueExpression
     {
-        public FormattableStringExpression(string format, IReadOnlyList<ValueExpression> args)
+        public FormattableStringExpression(string format, params ValueExpression[] args)
         {
 #if DEBUG
             Validate(format, args);
@@ -23,10 +23,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             Format = format;
             Args = args;
         }
+
         public string Format { get; init; }
         public IReadOnlyList<ValueExpression> Args { get; init; }
 
-        public void Deconstruct(out string format,  out IReadOnlyList<ValueExpression> args)
+        public void Deconstruct(out string format, out IReadOnlyList<ValueExpression> args)
         {
             format = Format;
             args = Args;

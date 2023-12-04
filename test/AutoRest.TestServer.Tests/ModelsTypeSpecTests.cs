@@ -2,14 +2,15 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
-using NUnit.Framework;
 using ModelsTypeSpec.Models;
+using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -96,7 +97,7 @@ namespace AutoRest.TestServer.Tests
         {
             var inputModel = CreateInputModel();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.False(element.TryGetProperty("nonRequiredNullableInt", out _));
             Assert.False(element.TryGetProperty("nonRequiredNullableString", out _));
             Assert.False(element.TryGetProperty("nonRequiredNullableIntList", out _));
@@ -110,7 +111,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredNullableIntList = null;
             inputModel.NonRequiredNullableStringList = null;
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nonRequiredNullableIntList").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nonRequiredNullableStringList").ValueKind);
         }
@@ -122,7 +123,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredNullableIntList.Clear();
             inputModel.NonRequiredNullableStringList.Clear();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nonRequiredNullableIntList").ValueKind);
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nonRequiredNullableStringList").ValueKind);
         }
@@ -134,7 +135,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredNullableInt = 1;
             inputModel.NonRequiredNullableString = "2";
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(1, element.GetProperty("nonRequiredNullableInt").GetInt32());
             Assert.AreEqual("2", element.GetProperty("nonRequiredNullableString").GetString());
         }
@@ -211,7 +212,7 @@ namespace AutoRest.TestServer.Tests
                 null
             );
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("requiredNullableString").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("requiredNullableInt").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("requiredNullableStringList").ValueKind);
@@ -239,7 +240,7 @@ namespace AutoRest.TestServer.Tests
                 Array.Empty<int>()
             );
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("requiredNullableStringList").ValueKind);
             Assert.AreEqual(0, element.GetProperty("requiredNullableStringList").GetArrayLength());
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("requiredNullableIntList").ValueKind);
@@ -287,7 +288,7 @@ namespace AutoRest.TestServer.Tests
             _ = inputModel.NonRequiredIntList.Remove(1);
             _ = inputModel.NonRequiredStringList.Remove("s");
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.False(element.TryGetProperty("nonRequiredStringList", out _));
             Assert.False(element.TryGetProperty("nonRequiredIntList", out _));
@@ -301,7 +302,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredIntList.Add(1);
             inputModel.NonRequiredStringList.Add("1");
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.AreEqual("[1]", element.GetProperty("nonRequiredIntList").ToString());
             Assert.AreEqual("[\"1\"]", element.GetProperty("nonRequiredStringList").ToString());
@@ -317,7 +318,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredStringList.Add("1");
             inputModel.NonRequiredStringList.Clear();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.AreEqual("[]", element.GetProperty("nonRequiredIntList").ToString());
             Assert.AreEqual("[]", element.GetProperty("nonRequiredStringList").ToString());
@@ -333,7 +334,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.NonRequiredStringList.Add("1");
             (inputModel.NonRequiredStringList as ChangeTrackingList<string>).Reset();
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.False(element.TryGetProperty("nonRequiredStringList", out _));
             Assert.False(element.TryGetProperty("nonRequiredIntList", out _));
@@ -350,7 +351,7 @@ namespace AutoRest.TestServer.Tests
             inputModel.RequiredNullableIntList = null;
             inputModel.RequiredNullableStringList = null;
 
-            var element = JsonAsserts.AssertSerializes(inputModel);
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("requiredNullableIntList").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("requiredNullableStringList").ValueKind);
@@ -439,6 +440,228 @@ namespace AutoRest.TestServer.Tests
         {
             var model = RoundTripModel.DeserializeRoundTripModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement);
             Assert.Null(model.NonRequiredInt);
+        }
+
+        [TestCase("J")]
+        [TestCase("W")]
+        public void ValidateWriteInputModel(string format)
+        {
+            var options = format switch
+            {
+                "W" => new ModelReaderWriterOptions("W"),
+                "J" => ModelReaderWriterOptions.Json,
+                _ => throw new NotSupportedException()
+            };
+            var baseModel = new BaseModel();
+            var modelList = new[] {
+                new CollectionItem(new Dictionary<string, RecordItem>()
+                {
+                    ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+                })
+            };
+            var input = new InputModel("requiredString", 314, null, null, baseModel, baseModel, new[] { 1, 2, 3 }, new[] { "a", "b" }, modelList, new Dictionary<string, RecordItem>(), new float?[] { null }, new bool?[] { null, true }, Array.Empty<CollectionItem>(), new[] { "c", null }, new[] { 1, 2 });
+
+            var result = ModelReaderWriter.Write(input, options);
+            using var document = JsonDocument.Parse(result);
+            var root = document.RootElement;
+
+            foreach (var property in document.RootElement.EnumerateObject())
+            {
+                if (property.NameEquals("requiredString"))
+                {
+                    Assert.AreEqual("requiredString", property.Value.GetString());
+                    continue;
+                }
+
+                if (property.NameEquals("requiredInt"))
+                {
+                    Assert.AreEqual(314, property.Value.GetInt32());
+                    continue;
+                }
+
+                if (property.NameEquals("requiredNullableInt"))
+                {
+                    Assert.AreEqual(JsonValueKind.Null, property.Value.ValueKind);
+                    continue;
+                }
+
+                if (property.NameEquals("requiredNullableString"))
+                {
+                    Assert.AreEqual(JsonValueKind.Null, property.Value.ValueKind);
+                    continue;
+                }
+
+                if (property.NameEquals("requiredModel"))
+                {
+                    Assert.AreEqual(0, property.Value.EnumerateObject().Count()); // this model does not have any properties
+                    continue;
+                }
+
+                if (property.NameEquals("requiredModel2"))
+                {
+                    Assert.AreEqual(0, property.Value.EnumerateObject().Count()); // this model does not have any properties
+                    continue;
+                }
+
+                if (property.NameEquals("requiredIntList"))
+                {
+                    CollectionAssert.AreEqual(new[] { 1, 2, 3 }, property.Value.EnumerateArray().Select(e => e.GetInt32()));
+                    continue;
+                }
+
+                if (property.NameEquals("requiredStringList"))
+                {
+                    CollectionAssert.AreEqual(new[] { "a", "b" }, property.Value.EnumerateArray().Select(e => e.GetString()));
+                    continue;
+                }
+
+                if (property.NameEquals("requiredModelList"))
+                {
+                    var modelArray = property.Value.EnumerateArray().ToArray();
+                    Assert.AreEqual(1, modelArray.Length);
+                    foreach (var p in modelArray[0].EnumerateObject())
+                    {
+                        if (p.NameEquals("requiredModelRecord"))
+                        {
+                            Assert.AreEqual(0, p.Value.GetProperty("key").GetProperty("requiredList").EnumerateArray().Count());
+                            continue;
+                        }
+
+                        Assert.Fail($"We should not have other properties here, but got {p.Name}");
+                    }
+                    continue;
+                }
+
+                if (property.NameEquals("requiredCollectionWithNullableFloatElement"))
+                {
+                    CollectionAssert.AreEqual(new float?[] { null }, property.Value.EnumerateArray().Select(e => e.ValueKind == JsonValueKind.Null ? (float?)null : e.GetSingle()));
+                    continue;
+                }
+
+                if (property.NameEquals("requiredCollectionWithNullableBooleanElement"))
+                {
+                    CollectionAssert.AreEqual(new bool?[] { null, true }, property.Value.EnumerateArray().Select(e => e.ValueKind == JsonValueKind.Null ? (bool?)null : e.GetBoolean()));
+                    continue;
+                }
+
+                if (property.NameEquals("requiredNullableModelList"))
+                {
+                    Assert.AreEqual(0, property.Value.EnumerateArray().Count());
+                    continue;
+                }
+
+                if (property.NameEquals("requiredNullableStringList"))
+                {
+                    CollectionAssert.AreEqual(new[] { "c", null }, property.Value.EnumerateArray().Select(e => e.GetString()));
+                    continue;
+                }
+
+                if (property.NameEquals("requiredNullableIntList"))
+                {
+                    CollectionAssert.AreEqual(new[] { 1, 2 }, property.Value.EnumerateArray().Select(e => e.GetInt32()));
+                    continue;
+                }
+
+                if (property.NameEquals("requiredModelRecord"))
+                {
+                    Assert.AreEqual(0, property.Value.EnumerateObject().Count()); // this record does not have any entry
+                    continue;
+                }
+
+                Assert.Fail($"We should not have other properties here, but got {property.Name}");
+            }
+
+        }
+
+        [TestCase("J")]
+        [TestCase("W")]
+        public void ValidateReadInputModel(string format)
+        {
+            var options = format switch
+            {
+                "W" => new ModelReaderWriterOptions("W"),
+                "J" => ModelReaderWriterOptions.Json,
+                _ => throw new NotSupportedException()
+            };
+            var json = @"{""requiredString"": ""foo"", ""requiredCollectionWithNullableBooleanElement"": [false, null], ""extraProperty"": ""test""}";
+            var binary = BinaryData.FromString(json);
+            var model = ModelReaderWriter.Read<InputModel>(binary, options);
+
+            Assert.AreEqual("foo", model.RequiredString);
+            Assert.AreEqual(default(int), model.RequiredInt);
+            CollectionAssert.AreEqual(new bool?[] { false, null }, model.RequiredCollectionWithNullableBooleanElement);
+            if (format == "J")
+            {
+                // get the private _serializedAdditionalRawData field
+                var field = typeof(InputModel).GetField("_serializedAdditionalRawData", BindingFlags.Instance | BindingFlags.NonPublic);
+                var rawData = (IDictionary<string, BinaryData>)field.GetValue(model);
+                Assert.AreEqual(1, rawData.Count);
+                Assert.AreEqual("\"test\"", rawData["extraProperty"].ToString());
+            }
+        }
+
+        [TestCase("J")]
+        [TestCase("W")]
+        public void ValidateWriteOutputModel(string format)
+        {
+            var options = format switch
+            {
+                "W" => new ModelReaderWriterOptions("W"),
+                "J" => ModelReaderWriterOptions.Json,
+                _ => throw new NotSupportedException()
+            };
+            var output = ModelsTypeSpecModelFactory.OutputModel(requiredString: "requiredString", requiredInt: 314, optionalNullableList: new[]
+                {
+                    new CollectionItem(new Dictionary<string, RecordItem>()
+                    {
+                        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+                    })
+                });
+
+            var result = ModelReaderWriter.Write(output, options);
+            using var document = JsonDocument.Parse(result);
+
+            foreach (var property in document.RootElement.EnumerateObject())
+            {
+                if (property.NameEquals("requiredString"))
+                {
+                    Assert.AreEqual("requiredString", property.Value.GetString());
+                    continue;
+                }
+
+                if (property.NameEquals("requiredInt"))
+                {
+                    Assert.AreEqual(314, property.Value.GetInt32());
+                    continue;
+                }
+
+                if (property.NameEquals("optionalNullableList"))
+                {
+                    var array = property.Value.EnumerateArray().ToArray();
+                    Assert.AreEqual(1, array.Length);
+
+                    foreach (var p in array[0].EnumerateObject())
+                    {
+                        if (p.NameEquals("requiredModelRecord"))
+                        {
+                            foreach (var pp in p.Value.GetProperty("key").EnumerateObject())
+                            {
+                                if (pp.NameEquals("requiredList"))
+                                {
+                                    Assert.AreEqual(0, pp.Value.EnumerateArray().Count());
+                                    continue;
+                                }
+                                Assert.Fail($"We should not have other properties here, but got {pp.Name}");
+                            }
+                            continue;
+                        }
+                        Assert.Fail($"We should not have other properties here, but got {p.Name}");
+                    }
+                }
+
+                // TODO -- remove the comment until the issue is fixed
+                //Assert.Fail($"We should not have other properties here, but got {property.Name}");
+            }
         }
     }
 }

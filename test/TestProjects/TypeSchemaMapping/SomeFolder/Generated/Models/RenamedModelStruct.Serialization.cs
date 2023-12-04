@@ -5,16 +5,28 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
 
 namespace CustomNamespace
 {
-    internal partial struct RenamedModelStruct : IUtf8JsonSerializable
+    internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IJsonModel<RenamedModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<RenamedModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(RenamedModelStruct)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty"u8);
             writer.WriteStartObject();
@@ -39,15 +51,50 @@ namespace CustomNamespace
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element)
+        RenamedModelStruct IJsonModel<RenamedModelStruct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(RenamedModelStruct)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeRenamedModelStruct(document.RootElement, options);
+        }
+
+        void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, options);
+
+        object IJsonModel<object>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Create(ref reader, options);
+
+        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             Optional<string> modelProperty = default;
             Optional<string> propertyToField = default;
             Optional<CustomFruitEnum> fruit = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"u8))
@@ -90,8 +137,50 @@ namespace CustomNamespace
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek));
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<RenamedModelStruct>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
+            }
+        }
+
+        RenamedModelStruct IPersistableModel<RenamedModelStruct>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRenamedModelStruct(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RenamedModelStruct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options) => ((IPersistableModel<RenamedModelStruct>)this).Write(options);
+
+        object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<RenamedModelStruct>)this).Create(data, options);
+
+        string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options);
     }
 }

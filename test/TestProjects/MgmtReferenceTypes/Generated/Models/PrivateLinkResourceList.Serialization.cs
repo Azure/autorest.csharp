@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,16 +16,48 @@ using Azure.Core;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateLinkResourceListConverter))]
-    public partial class PrivateLinkResourceList : IUtf8JsonSerializable
+    public partial class PrivateLinkResourceList : IUtf8JsonSerializable, IJsonModel<PrivateLinkResourceList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkResourceList>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<PrivateLinkResourceList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
+            if (options.Format != "W" && Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
-        internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element)
+        PrivateLinkResourceList IJsonModel<PrivateLinkResourceList>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializePrivateLinkResourceList(document.RootElement, options);
+        }
+
+        internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -48,6 +82,37 @@ namespace Azure.ResourceManager.Fake.Models
             }
             return new PrivateLinkResourceList(Optional.ToList(value));
         }
+
+        BinaryData IPersistableModel<PrivateLinkResourceList>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{options.Format}' format.");
+            }
+        }
+
+        PrivateLinkResourceList IPersistableModel<PrivateLinkResourceList>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePrivateLinkResourceList(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<PrivateLinkResourceList>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class PrivateLinkResourceListConverter : JsonConverter<PrivateLinkResourceList>
         {
