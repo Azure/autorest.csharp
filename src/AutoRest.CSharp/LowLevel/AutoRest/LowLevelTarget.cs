@@ -8,7 +8,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.Generation;
 using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -40,26 +39,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{client.Type.Name}.cs", dpgClientWriter.ToString());
 
                 var sampleProvider = library.GetSampleForClient(client);
-                if (Configuration.IsBranded)
+                // write samples
+                if (sampleProvider != null)
                 {
-                    // write samples
-                    if (sampleProvider != null)
-                    {
-                        var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
-                        var clientSampleWriter = new ExpressionTypeProviderWriter(sampleProvider);
-                        clientSampleWriter.Write();
-                        project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
-                        project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
-                    }
-                }
-                else
-                {
-                    if (Configuration.GenerateTestProject && sampleProvider is not null)
-                    {
-                        var smokeTestWriter = new SmokeTestWriter(client, sampleProvider);
-                        smokeTestWriter.Write();
-                        project.AddGeneratedTestFile($"../../tests/Generated/{client.Type.Name}Tests.cs", smokeTestWriter.ToString());
-                    }
+                    var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                    var clientSampleWriter = new ExpressionTypeProviderWriter(sampleProvider);
+                    clientSampleWriter.Write();
+                    project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                    project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
                 }
             }
 
@@ -82,16 +69,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
-            if (Configuration.GenerateTests)
+            if (Configuration.GenerateTestProject)
             {
-                // write test base and test env
-                var testBaseWriter = new ExpressionTypeProviderWriter(library.DpgTestBase);
-                testBaseWriter.Write();
-                project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestBase.Type.Name}.cs", testBaseWriter.ToString());
+                if (Configuration.IsBranded)
+                {
+                    // write test base and test env
+                    var testBaseWriter = new ExpressionTypeProviderWriter(library.DpgTestBase);
+                    testBaseWriter.Write();
+                    project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestBase.Type.Name}.cs", testBaseWriter.ToString());
 
-                var testEnvWriter = new ExpressionTypeProviderWriter(library.DpgTestEnvironment);
-                testEnvWriter.Write();
-                project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestEnvironment.Type.Name}.cs", testEnvWriter.ToString());
+                    var testEnvWriter = new ExpressionTypeProviderWriter(library.DpgTestEnvironment);
+                    testEnvWriter.Write();
+                    project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestEnvironment.Type.Name}.cs", testEnvWriter.ToString());
+                }
 
                 // write the client test files
                 foreach (var client in library.RestClients)

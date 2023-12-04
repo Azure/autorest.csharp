@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,7 +25,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction_ShortVersion()
+        public async Task FirstTestTypeSpec_TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -35,7 +36,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction_AllParameters()
+        public async Task FirstTestTypeSpec_TopAction_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -46,7 +58,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction2_ShortVersion()
+        public async Task FirstTestTypeSpec_TopAction_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -57,7 +80,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction2_AllParameters()
+        public async Task FirstTestTypeSpec_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -68,7 +91,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PatchAction_ShortVersion()
+        public async Task FirstTestTypeSpec_PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -93,7 +116,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PatchAction_AllParameters()
+        public async Task FirstTestTypeSpec_PatchAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -126,7 +149,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnonymousBody_ShortVersion()
+        public async Task FirstTestTypeSpec_AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -151,7 +174,19 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnonymousBody_AllParameters()
+        public async Task FirstTestTypeSpec_AnonymousBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -184,7 +219,26 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_ShortVersion()
+        public async Task FirstTestTypeSpec_AnonymousBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            };
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_FriendlyModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -199,19 +253,19 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_AllParameters()
+        public async Task FirstTestTypeSpec_FriendlyModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -226,30 +280,19 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_FriendlyModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AddTimeHeader_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.AddTimeHeaderAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AddTimeHeader_AllParameters()
+        public async Task FirstTestTypeSpec_AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -260,7 +303,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_ShortVersion()
+        public async Task FirstTestTypeSpec_AddTimeHeader_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.AddTimeHeaderAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -276,7 +330,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -288,7 +342,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_AllParameters()
+        public async Task FirstTestTypeSpec_StringFormat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -304,7 +358,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_StringFormat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -316,7 +370,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProjectedNameModel_ShortVersion()
+        public async Task FirstTestTypeSpec_ProjectedNameModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -331,19 +385,19 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProjectedNameModel_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_ProjectedNameModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProjectedNameModel_AllParameters()
+        public async Task FirstTestTypeSpec_ProjectedNameModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -358,30 +412,19 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProjectedNameModel_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_ProjectedNameModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            ProjectedModel projectedModel = new ProjectedModel("<name>");
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnsAnonymousModel_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.ReturnsAnonymousModelAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnsAnonymousModel_AllParameters()
+        public async Task FirstTestTypeSpec_ReturnsAnonymousModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -392,7 +435,40 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HeadAsBoolean_ShortVersion()
+        public async Task FirstTestTypeSpec_ReturnsAnonymousModel_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<object> response = await client.ReturnsAnonymousModelAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_ReturnsAnonymousModel_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.ReturnsAnonymousModelAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_ReturnsAnonymousModel_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<object> response = await client.ReturnsAnonymousModelAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_HeadAsBoolean_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -403,7 +479,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HeadAsBoolean_AllParameters()
+        public async Task FirstTestTypeSpec_HeadAsBoolean_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -414,7 +490,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringBody_ShortVersion()
+        public async Task FirstTestTypeSpec_StringBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -426,7 +502,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringBody_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_StringBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -437,7 +513,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringBody_AllParameters()
+        public async Task FirstTestTypeSpec_StringBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -449,7 +525,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringBody_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_StringBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -460,7 +536,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task BoolBody_ShortVersion()
+        public async Task FirstTestTypeSpec_BoolBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -472,7 +548,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task BoolBody_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_BoolBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -483,7 +559,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task BoolBody_AllParameters()
+        public async Task FirstTestTypeSpec_BoolBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -495,7 +571,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task BoolBody_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_BoolBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -506,7 +582,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DateTimeBody_ShortVersion()
+        public async Task FirstTestTypeSpec_DateTimeBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -518,7 +594,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DateTimeBody_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_DateTimeBody_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -529,7 +605,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DateTimeBody_AllParameters()
+        public async Task FirstTestTypeSpec_DateTimeBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -541,7 +617,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DateTimeBody_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_DateTimeBody_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -552,7 +628,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnString_ShortVersion()
+        public async Task FirstTestTypeSpec_ReturnString_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -563,7 +639,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnString_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_ReturnString_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -574,7 +650,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnString_AllParameters()
+        public async Task FirstTestTypeSpec_ReturnString_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -585,7 +661,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnString_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_ReturnString_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -596,7 +672,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnUnknown_ShortVersion()
+        public async Task FirstTestTypeSpec_ReturnUnknown_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -607,7 +683,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnUnknown_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_ReturnUnknown_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -618,7 +694,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnUnknown_AllParameters()
+        public async Task FirstTestTypeSpec_ReturnUnknown_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -629,7 +705,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ReturnUnknown_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_ReturnUnknown_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -640,7 +716,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SayHi_ShortVersion()
+        public async Task Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -651,7 +727,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SayHi_AllParameters()
+        public async Task Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -662,7 +738,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloAgain_ShortVersion()
+        public async Task Demo2_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -711,7 +787,25 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloAgain_AllParameters()
+        public async Task Demo2_HelloAgain_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -794,7 +888,48 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoContentType_ShortVersion()
+        public async Task Demo2_HelloAgain_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection = { FloatFixedEnum.One },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection = { IntFixedEnum.One },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+},
+            };
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -843,7 +978,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoContentType_AllParameters()
+        public async Task Demo2_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -926,7 +1061,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloDemo2_ShortVersion()
+        public async Task Demo2_HelloDemo2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -937,7 +1072,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloDemo2_AllParameters()
+        public async Task Demo2_HelloDemo2_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloDemo2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -948,7 +1094,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateLiteral_ShortVersion()
+        public async Task Demo2_HelloDemo2_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -973,7 +1130,19 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateLiteral_AllParameters()
+        public async Task Demo2_CreateLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -1006,7 +1175,26 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloLiteral_ShortVersion()
+        public async Task Demo2_CreateLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList = { 1234 },
+            };
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -1017,7 +1205,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloLiteral_AllParameters()
+        public async Task Demo2_HelloLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -1028,7 +1227,18 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetUnknownValue_ShortVersion()
+        public async Task Demo2_HelloLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task EnumTest_GetUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -1039,13 +1249,101 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetUnknownValue_AllParameters()
+        public async Task EnumTest_GetUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             Response response = await client.GetUnknownValueAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Entity_DoSomething_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.DoSomethingAsync("<p2>", null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Entity_DoSomething_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.DoSomethingAsync("<p2>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Entity_DoSomething_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.DoSomethingAsync("<p2>", null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Entity_DoSomething_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.DoSomethingAsync("<p2>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Glossary_DoSomething_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Glossary_DoSomething_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Glossary_DoSomething_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Glossary_DoSomething_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
         }
     }
 }

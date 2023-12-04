@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.LowLevel.Output
+namespace AutoRest.CSharp.Output.Models.Types
 {
     // TODO -- eventually we should be able to move this class to a more common place, or just combine everything in this class into TypeProvider
     internal abstract class ExpressionTypeProvider : TypeProvider

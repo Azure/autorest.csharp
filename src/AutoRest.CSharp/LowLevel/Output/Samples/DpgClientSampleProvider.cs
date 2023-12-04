@@ -32,7 +32,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
         protected override IEnumerable<string> BuildUsings()
         {
-            yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
+            if (Configuration.IsBranded)
+                yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
         }
 
         private readonly IEnumerable<DpgOperationSample> _samples;

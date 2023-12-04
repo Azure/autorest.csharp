@@ -4,6 +4,7 @@
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.TestFramework;
 
 namespace AutoRest.CSharp.LowLevel.Output.Tests

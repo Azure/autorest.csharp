@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Output;
 using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.LowLevel.Output.Tests;
 
@@ -71,15 +72,17 @@ namespace AutoRest.CSharp.Output.Models.Types
         private DpgTestEnvironmentProvider? _dpgTestEnvironment;
         public DpgTestEnvironmentProvider DpgTestEnvironment => _dpgTestEnvironment ??= new DpgTestEnvironmentProvider(Configuration.Namespace, _sourceInputModel);
 
-        private Dictionary<LowLevelClient, DpgClientRecordedTestProvider>? _dpgClientTestProviders;
-        private Dictionary<LowLevelClient, DpgClientRecordedTestProvider> DpgClientTestProviders => _dpgClientTestProviders ??= EnsureDpgClientTestProviders();
+        private Dictionary<LowLevelClient, DpgClientTestProvider>? _dpgClientTestProviders;
+        private Dictionary<LowLevelClient, DpgClientTestProvider> DpgClientTestProviders => _dpgClientTestProviders ??= EnsureDpgClientTestProviders();
 
-        private Dictionary<LowLevelClient, DpgClientRecordedTestProvider> EnsureDpgClientTestProviders()
+        private Dictionary<LowLevelClient, DpgClientTestProvider> EnsureDpgClientTestProviders()
         {
-            var result = new Dictionary<LowLevelClient, DpgClientRecordedTestProvider>();
+            var result = new Dictionary<LowLevelClient, DpgClientTestProvider>();
             foreach (var client in RestClients)
             {
-                var testCaseProvider = new DpgClientRecordedTestProvider(Configuration.Namespace, client, DpgTestBase, _sourceInputModel);
+                DpgClientTestProvider testCaseProvider = Configuration.IsBranded ?
+                    new DpgClientRecordedTestProvider(Configuration.Namespace, client, DpgTestBase, _sourceInputModel) :
+                    new SmokeTestProvider(Configuration.Namespace, client, _sourceInputModel);
                 if (!testCaseProvider.IsEmpty)
                 {
                     result.Add(client, testCaseProvider);
@@ -89,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        public DpgClientRecordedTestProvider? GetTestForClient(LowLevelClient client) => DpgClientTestProviders.TryGetValue(client, out var test) ? test : null;
+        public DpgClientTestProvider? GetTestForClient(LowLevelClient client) => DpgClientTestProviders.TryGetValue(client, out var test) ? test : null;
 
         private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
         private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
@@ -97,6 +100,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<LowLevelClient, DpgClientSampleProvider> EnsureDpgSampleProviders()
         {
             var result = new Dictionary<LowLevelClient, DpgClientSampleProvider>();
+
+            // we currently only write samples for branded libraries
+            if (!Configuration.IsBranded)
+                return result;
+
             foreach (var client in RestClients)
             {
                 var sampleProvider = new DpgClientSampleProvider(Configuration.Namespace, client, _sourceInputModel);

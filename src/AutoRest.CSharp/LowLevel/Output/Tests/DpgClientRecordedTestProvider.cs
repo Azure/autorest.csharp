@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -33,7 +34,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override IEnumerable<string> BuildUsings()
         {
-            yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
+            if (Configuration.IsBranded)
+                yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
         }
 
         protected override IEnumerable<Method> BuildConstructors()
@@ -61,9 +63,13 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override string GetMethodName(DpgOperationSample sample, bool isAsync)
         {
-            var builder = new StringBuilder(sample.OperationMethodSignature.Name);
+            var builder = new StringBuilder();
 
-            builder.Append('_').Append(sample.ExampleKey);
+            if (sample.ResourceName is not null)
+                builder.Append(sample.ResourceName).Append('_');
+
+            builder.Append(sample.InputOperationName)
+                .Append('_').Append(sample.ExampleKey);
 
             if (sample.IsConvenienceSample)
             {
@@ -79,7 +85,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Please remove the Ignore attribute to let the test method run") };
 
-        public override MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        protected override MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             // change the first method in methodToCall to the factory method of that client
             var firstMethod = methodsToCall[0];

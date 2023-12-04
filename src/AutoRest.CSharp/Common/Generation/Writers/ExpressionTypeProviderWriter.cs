@@ -2,10 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.LowLevel.Output;
+using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.LowLevel.Generation
+namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ExpressionTypeProviderWriter
     {

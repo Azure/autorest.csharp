@@ -13,6 +13,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -68,8 +69,7 @@ namespace AutoRest.CSharp.LowLevel.Output
             });
         }
 
-        // TODO -- change this back to protected by introduce a smoketest provider
-        public virtual MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        protected virtual MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             var first = methodsToCall[0];
             ValueExpression valueExpression = first switch

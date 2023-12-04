@@ -25,10 +25,10 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
 {

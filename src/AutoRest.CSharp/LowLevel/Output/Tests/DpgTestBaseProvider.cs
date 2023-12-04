@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.TestFramework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
