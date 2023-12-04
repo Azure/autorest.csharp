@@ -15,6 +15,8 @@ export enum InputTypeKind {
     DateTimeRFC3339 = "DateTimeRFC3339",
     DateTimeRFC7231 = "DateTimeRFC7231",
     DateTimeUnix = "DateTimeUnix",
+    Decimal = "Decimal",
+    Decimal128 = "Decimal128",
     DurationISO8601 = "DurationISO8601",
     DurationConstant = "DurationConstant",
     DurationSeconds = "DurationSeconds",

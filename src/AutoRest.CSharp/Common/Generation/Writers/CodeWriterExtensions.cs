@@ -6,10 +6,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -118,10 +116,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
             }
 
-            if (field.DefaultValue != null &&
+            if (field.InitializationValue != null &&
                 (modifiers.HasFlag(FieldModifiers.Const) || modifiers.HasFlag(FieldModifiers.Static)))
             {
-                return writer.AppendRaw(" = ").Append(field.DefaultValue).Line($";");
+                writer.AppendRaw(" = ")
+                    .WriteValueExpression(field.InitializationValue);
+                return writer.Line($";");
             }
 
             return field.WriteAsProperty ? writer.Line() : writer.Line($";");
@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteMethodDeclarationNoScope(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            if (methodBase.Attributes is {} attributes)
+            if (methodBase.Attributes is { } attributes)
             {
                 foreach (var attribute in attributes)
                 {
@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.RemoveTrailingComma();
             writer.Append($")");
 
-            if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints})
+            if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints })
             {
                 writer.Line();
                 foreach (var (argument, constraint) in constraints)
@@ -650,14 +650,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteMethod(this CodeWriter writer, Method method)
         {
-            if (method.Body is {} body)
+            if (method.Body is { } body)
             {
                 using (writer.WriteMethodDeclaration(method.Signature))
                 {
                     writer.WriteMethodBodyStatement(body);
                 }
             }
-            else if (method.BodyExpression is {} expression)
+            else if (method.BodyExpression is { } expression)
             {
                 using (writer.WriteMethodDeclarationNoScope(method.Signature))
                 {
@@ -668,6 +668,88 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
+        }
+
+        public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
+        {
+            if (property.Description is not null)
+            {
+                writer.Line().WriteXmlDocumentationSummary(property.Description);
+            }
+
+            if (property.Exceptions is not null)
+            {
+                foreach (var (exceptionType, description) in property.Exceptions)
+                {
+                    writer.WriteXmlDocumentationException(exceptionType, description);
+                }
+            }
+
+            var modifiers = property.Modifiers;
+            writer.AppendRawIf("public ", modifiers.HasFlag(MethodSignatureModifiers.Public))
+                .AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
+                .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
+                .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private))
+                .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
+                .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
+
+            writer.Append($"{property.PropertyType} {property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
+
+            switch (property.PropertyBody)
+            {
+                case ExpressionPropertyBody(var expression):
+                    writer.AppendRaw(" => ")
+                        .WriteValueExpression(expression);
+                    break;
+                case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
+                    writer.AppendRaw("{ get; ");
+                    if (hasSetter)
+                    {
+                        WritePropertyAccessorModifiers(writer, setterModifiers);
+                        writer.AppendRaw(" set; ");
+                    }
+                    writer.AppendRaw("}");
+                    if (initialization is not null)
+                    {
+                        writer.AppendRaw(" = ")
+                            .WriteValueExpression(initialization);
+                    }
+                    break;
+                case MethodPropertyBody(var getter, var setter, var setterModifiers):
+                    writer.LineRaw("{");
+                    // write getter
+                    WriteMethodPropertyAccessor(writer, "get", getter);
+                    // write setter
+                    if (setter is not null)
+                    {
+                        WriteMethodPropertyAccessor(writer, "set", setter, setterModifiers);
+                    }
+                    writer.AppendRaw("}");
+                    break;
+                default:
+                    throw new InvalidOperationException($"Unhandled property body type {property.PropertyBody}");
+            }
+
+            writer.Line();
+
+            static void WriteMethodPropertyAccessor(CodeWriter writer, string name, MethodBodyStatement body, MethodSignatureModifiers modifiers = MethodSignatureModifiers.None)
+            {
+                WritePropertyAccessorModifiers(writer, modifiers);
+                writer.LineRaw(name)
+                    .LineRaw("{");
+                using (writer.AmbientScope())
+                {
+                    writer.WriteMethodBodyStatement(body);
+                }
+                writer.LineRaw("}");
+            }
+
+            static void WritePropertyAccessorModifiers(CodeWriter writer, MethodSignatureModifiers modifiers)
+            {
+                writer.AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
+                    .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
+                    .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private));
+            }
         }
 
         public static void WriteOverloadMethod(this CodeWriter writer, OverloadMethodSignature overloadMethod)

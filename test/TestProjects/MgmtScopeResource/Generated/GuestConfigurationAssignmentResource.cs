@@ -39,6 +39,9 @@ namespace MgmtScopeResource
         private readonly GuestConfigurationAssignmentsRestOperations _guestConfigurationAssignmentRestClient;
         private readonly GuestConfigurationAssignmentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.GuestConfiguration/guestConfigurationAssignments";
+
         /// <summary> Initializes a new instance of the <see cref="GuestConfigurationAssignmentResource"/> class for mocking. </summary>
         protected GuestConfigurationAssignmentResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtScopeResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.GuestConfiguration/guestConfigurationAssignments";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

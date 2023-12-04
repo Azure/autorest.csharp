@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -19,6 +20,35 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         public ImagePatch()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
+        /// <param name="tags">
+        /// Resource tags
+        /// Serialized Name: UpdateResource.tags
+        /// </param>
+        /// <param name="sourceVirtualMachine">
+        /// The source virtual machine from which Image is created.
+        /// Serialized Name: ImageUpdate.properties.sourceVirtualMachine
+        /// </param>
+        /// <param name="storageProfile">
+        /// Specifies the storage settings for the virtual machine disks.
+        /// Serialized Name: ImageUpdate.properties.storageProfile
+        /// </param>
+        /// <param name="provisioningState">
+        /// The provisioning state.
+        /// Serialized Name: ImageUpdate.properties.provisioningState
+        /// </param>
+        /// <param name="hyperVGeneration">
+        /// Gets the HyperVGenerationType of the VirtualMachine created from the image
+        /// Serialized Name: ImageUpdate.properties.hyperVGeneration
+        /// </param>
+        internal ImagePatch(IDictionary<string, string> tags, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration) : base(tags)
+        {
+            SourceVirtualMachine = sourceVirtualMachine;
+            StorageProfile = storageProfile;
+            ProvisioningState = provisioningState;
+            HyperVGeneration = hyperVGeneration;
         }
 
         /// <summary>

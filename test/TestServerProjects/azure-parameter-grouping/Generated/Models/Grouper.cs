@@ -15,6 +15,15 @@ namespace azure_parameter_grouping.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
+        /// <param name="groupedConstant"> A grouped parameter that is a constant. </param>
+        /// <param name="groupedParameter"> Optional parameter part of a parameter grouping. </param>
+        internal Grouper(EncryptionAlgorithmType? groupedConstant, string groupedParameter)
+        {
+            GroupedConstant = groupedConstant;
+            GroupedParameter = groupedParameter;
+        }
+
         /// <summary> A grouped parameter that is a constant. </summary>
         public EncryptionAlgorithmType? GroupedConstant { get; set; }
         /// <summary> Optional parameter part of a parameter grouping. </summary>
