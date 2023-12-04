@@ -373,7 +373,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (arguments is not null)
             {
-                for (int i = 0; i < arguments.Length; i++)
+                for (int i = 0; i < arguments.Count; i++)
                 {
                     var argument = arguments[i];
                     if (argument is { IsFrameworkType: true, FrameworkType.IsGenericParameter: true })

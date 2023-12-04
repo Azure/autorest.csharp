@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (HasDefaultPublicCtor(property.Declaration.Type))
                 {
-                    if (innerProperty.Declaration.Type.Arguments.Length > 0)
+                    if (innerProperty.Declaration.Type.Arguments.Count > 0)
                         return (true, true, false);
                     else
                         return (true, false, false);

@@ -55,12 +55,12 @@ namespace AutoRest.CSharp.Utilities
                 return IsSameType((INamedTypeSymbol)symbol.TypeArguments.Single(), type.WithNullable(false));
             }
 
-            if (symbol.ContainingNamespace.ToString() != type.Namespace || symbol.Name != type.Name || symbol.TypeArguments.Length != type.Arguments.Length)
+            if (symbol.ContainingNamespace.ToString() != type.Namespace || symbol.Name != type.Name || symbol.TypeArguments.Length != type.Arguments.Count)
             {
                 return false;
             }
 
-            for (int i = 0; i < type.Arguments.Length; ++i)
+            for (int i = 0; i < type.Arguments.Count; ++i)
             {
                 if (!IsSameType((INamedTypeSymbol)symbol.TypeArguments[i], type.Arguments[i]))
                 {

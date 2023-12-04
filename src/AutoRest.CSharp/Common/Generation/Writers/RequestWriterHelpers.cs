@@ -432,7 +432,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.Scope())
                     {
                         writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
-                        WriteConstantOrParameter(writer, new Reference(paramVariable.ActualName, value.Type.Arguments.Length > 0 ? value.Type.Arguments[0] : value.Type), enumAsString: true);
+                        WriteConstantOrParameter(writer, new Reference(paramVariable.ActualName, value.Type.IsGenericType ? value.Type.Arguments[0] : value.Type), enumAsString: true);
                         WriteSerializationFormat(writer, queryParameter.SerializationFormat);
                         writer.Line($", {queryParameter.Escape:L});");
                     }

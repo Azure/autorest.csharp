@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -41,13 +40,19 @@ namespace AutoRest.CSharp.Generation.Types
         }
 
         public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments)
+        { }
+
+        public CSharpType(Type type, IReadOnlyList<CSharpType> arguments) : this(type, false, arguments)
+        { }
+
+        public CSharpType(Type type, bool isNullable, params CSharpType[] arguments) : this(type, isNullable, arguments as IReadOnlyList<CSharpType>)
         {
         }
 
-        public CSharpType(Type type, bool isNullable, params CSharpType[] arguments)
+        public CSharpType(Type type, bool isNullable, IReadOnlyList<CSharpType> arguments)
         {
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
-            Debug.Assert(type.IsGenericTypeDefinition || arguments.Length == 0, "arguments can be added only to the generic type definition.");
+            Debug.Assert(type.IsGenericTypeDefinition || arguments.Count == 0, "arguments can be added only to the generic type definition.");
 
             _type = type;
 
@@ -58,21 +63,6 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = type.IsValueType;
             IsEnum = type.IsEnum;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
-        }
-
-        /// <summary>
-        /// Constructs a CSharpType that represents a union type.
-        /// </summary>
-        /// <param name="type">The type to convert.</param>
-        /// <param name="unionItemTypes">The list of union item types.</param>
-        /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
-        public CSharpType(Type type, CSharpType[] unionItemTypes, bool isNullable) : this(
-            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
-            isNullable,
-            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
-        {
-            IsUnion = true;
-            UnionItemTypes = unionItemTypes;
         }
 
         public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
@@ -102,9 +92,9 @@ namespace AutoRest.CSharp.Generation.Types
         public bool IsLiteral { get; init; }
         public Constant? Literal { get; init; }
         public bool IsUnion { get; }
-        public IReadOnlyList<CSharpType> UnionItemTypes { get; } = Array.Empty<CSharpType>();
+        public IReadOnlyList<CSharpType> UnionItemTypes { get; init; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }
-        public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
+        public IReadOnlyList<CSharpType> Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
         public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
@@ -122,8 +112,10 @@ namespace AutoRest.CSharp.Generation.Types
 
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
             return obj is CSharpType csType && Equals(csType, ignoreNullable: false);
         }
 
@@ -132,14 +124,14 @@ namespace AutoRest.CSharp.Generation.Types
         public bool Equals(Type type) =>
             IsFrameworkType && (type.IsGenericType ? type.GetGenericTypeDefinition() == FrameworkType && ArgumentsEquals(type.GetGenericArguments()) : type == FrameworkType);
 
-        private bool ArgumentsEquals(Type[] genericArguments)
+        private bool ArgumentsEquals(IReadOnlyList<Type> genericArguments)
         {
-            if (Arguments.Length != genericArguments.Length)
+            if (Arguments.Count != genericArguments.Count)
             {
                 return false;
             }
 
-            for (int i = 0; i < Arguments.Length; i++)
+            for (int i = 0; i < Arguments.Count; i++)
             {
                 if (!Arguments[i].Equals(genericArguments[i]))
                 {
@@ -157,7 +149,7 @@ namespace AutoRest.CSharp.Generation.Types
                 ? throw new NotSupportedException($"{nameof(TypeProvider)} doesn't support generics.")
                 : new(_type, IsNullable);
 
-        public bool IsGenericType => Arguments.Length > 0;
+        public bool IsGenericType => Arguments.Count > 0;
 
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
@@ -243,6 +235,20 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             return type;
+        }
+
+        /// <summary>
+        /// Constructs a CSharpType that represents a union type.
+        /// </summary>
+        /// <param name="unionItemTypes">The list of union item types.</param>
+        /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
+        /// <returns></returns>
+        public static CSharpType FromUnion(IReadOnlyList<CSharpType> unionItemTypes, bool isNullable)
+        {
+            return new CSharpType(typeof(BinaryData), isNullable)
+            {
+                UnionItemTypes = unionItemTypes
+            };
         }
 
         internal static CSharpType FromSystemType(BuildContext context, Type type, IEnumerable<ObjectTypeProperty>? backingProperties = null)

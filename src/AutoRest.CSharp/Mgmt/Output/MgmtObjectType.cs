@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             if (objectTypeProperty.ValueType.IsFrameworkType && objectTypeProperty.ValueType.FrameworkType.IsGenericType)
             {
-                for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
+                for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Count; i++)
                 {
                     var argType = objectTypeProperty.ValueType.Arguments[i];
                     if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
@@ -321,7 +321,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal string GetFullSerializedName(ObjectTypeProperty otProperty, int argumentIndex)
         {
-            if (otProperty.ValueType.Arguments == null || otProperty.ValueType.Arguments.Length <= argumentIndex)
+            if (otProperty.ValueType.Arguments == null || otProperty.ValueType.Arguments.Count <= argumentIndex)
                 throw new ArgumentException("argumentIndex out of range");
             var argType = otProperty.ValueType.Arguments[argumentIndex];
             return $"{this.GetFullSerializedName(otProperty)}.Arguments[{argumentIndex}-{argType.Namespace}.{argType.Name}]";
