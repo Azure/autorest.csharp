@@ -40,6 +40,9 @@ namespace MgmtPartialResource
         private readonly ConfigurationProfileAssignmentsRestOperations _configurationProfileAssignmentRestClient;
         private readonly ConfigurationProfileAssignmentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Automanage/configurationProfileAssignments";
+
         /// <summary> Initializes a new instance of the <see cref="ConfigurationProfileAssignmentResource"/> class for mocking. </summary>
         protected ConfigurationProfileAssignmentResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtPartialResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Automanage/configurationProfileAssignments";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
