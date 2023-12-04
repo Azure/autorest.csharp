@@ -10,7 +10,6 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "generate-tests": true,
   "models-to-treat-empty-string-as-null": [
     "EventData",
     "ManagedHsmProperties"

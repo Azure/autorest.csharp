@@ -24,7 +24,7 @@ namespace AnomalyDetector.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateEntireSeries_ShortVersion()
+        public async Task Univariate_DetectUnivariateEntireSeries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -45,7 +45,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateEntireSeries_ShortVersion_Convenience()
+        public async Task Univariate_DetectUnivariateEntireSeries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -60,7 +60,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateEntireSeries_AllParameters()
+        public async Task Univariate_DetectUnivariateEntireSeries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -89,7 +89,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateEntireSeries_AllParameters_Convenience()
+        public async Task Univariate_DetectUnivariateEntireSeries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -116,7 +116,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateLastPoint_ShortVersion()
+        public async Task Univariate_DetectUnivariateLastPoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -137,7 +137,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateLastPoint_ShortVersion_Convenience()
+        public async Task Univariate_DetectUnivariateLastPoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -152,7 +152,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateLastPoint_AllParameters()
+        public async Task Univariate_DetectUnivariateLastPoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -181,7 +181,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateLastPoint_AllParameters_Convenience()
+        public async Task Univariate_DetectUnivariateLastPoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -208,7 +208,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateChangePoint_ShortVersion()
+        public async Task Univariate_DetectUnivariateChangePoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -230,7 +230,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateChangePoint_ShortVersion_Convenience()
+        public async Task Univariate_DetectUnivariateChangePoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -245,7 +245,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateChangePoint_AllParameters()
+        public async Task Univariate_DetectUnivariateChangePoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -272,7 +272,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectUnivariateChangePoint_AllParameters_Convenience()
+        public async Task Univariate_DetectUnivariateChangePoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -296,7 +296,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateBatchDetectionResult_ShortVersion()
+        public async Task Multivariate_GetMultivariateBatchDetectionResult_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -307,7 +307,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateBatchDetectionResult_ShortVersion_Convenience()
+        public async Task Multivariate_GetMultivariateBatchDetectionResult_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -318,7 +318,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateBatchDetectionResult_AllParameters()
+        public async Task Multivariate_GetMultivariateBatchDetectionResult_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -329,7 +329,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateBatchDetectionResult_AllParameters_Convenience()
+        public async Task Multivariate_GetMultivariateBatchDetectionResult_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -340,7 +340,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TrainMultivariateModel_ShortVersion()
+        public async Task Multivariate_TrainMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -357,7 +357,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TrainMultivariateModel_ShortVersion_Convenience()
+        public async Task Multivariate_TrainMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -369,7 +369,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TrainMultivariateModel_AllParameters()
+        public async Task Multivariate_TrainMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -429,7 +429,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TrainMultivariateModel_AllParameters_Convenience()
+        public async Task Multivariate_TrainMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -471,7 +471,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteMultivariateModel_ShortVersion()
+        public async Task Multivariate_DeleteMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -482,7 +482,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteMultivariateModel_AllParameters()
+        public async Task Multivariate_DeleteMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -493,7 +493,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModel_ShortVersion()
+        public async Task Multivariate_GetMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -504,7 +504,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModel_ShortVersion_Convenience()
+        public async Task Multivariate_GetMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -515,7 +515,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModel_AllParameters()
+        public async Task Multivariate_GetMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -526,7 +526,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModel_AllParameters_Convenience()
+        public async Task Multivariate_GetMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -537,7 +537,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateBatchAnomaly_ShortVersion()
+        public async Task Multivariate_DetectMultivariateBatchAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -555,7 +555,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateBatchAnomaly_ShortVersion_Convenience()
+        public async Task Multivariate_DetectMultivariateBatchAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -567,7 +567,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateBatchAnomaly_AllParameters()
+        public async Task Multivariate_DetectMultivariateBatchAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -585,7 +585,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateBatchAnomaly_AllParameters_Convenience()
+        public async Task Multivariate_DetectMultivariateBatchAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -597,7 +597,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateLastAnomaly_ShortVersion()
+        public async Task Multivariate_DetectMultivariateLastAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -627,7 +627,7 @@ values = new object[]
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateLastAnomaly_ShortVersion_Convenience()
+        public async Task Multivariate_DetectMultivariateLastAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -642,7 +642,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateLastAnomaly_AllParameters()
+        public async Task Multivariate_DetectMultivariateLastAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -672,7 +672,7 @@ values = new object[]
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DetectMultivariateLastAnomaly_AllParameters_Convenience()
+        public async Task Multivariate_DetectMultivariateLastAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -687,7 +687,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModels_ShortVersion()
+        public async Task Multivariate_GetMultivariateModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -700,7 +700,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModels_ShortVersion_Convenience()
+        public async Task Multivariate_GetMultivariateModels_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -713,7 +713,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModels_AllParameters()
+        public async Task Multivariate_GetMultivariateModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -726,7 +726,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMultivariateModels_AllParameters_Convenience()
+        public async Task Multivariate_GetMultivariateModels_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

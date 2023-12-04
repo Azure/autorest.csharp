@@ -22,7 +22,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Two_ShortVersion()
+        public async Task Beta_Two_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -32,7 +32,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Two_AllParameters()
+        public async Task Beta_Two_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -42,7 +42,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Three_ShortVersion()
+        public async Task SubBeta_Three_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -52,7 +52,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Three_AllParameters()
+        public async Task SubBeta_Three_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();

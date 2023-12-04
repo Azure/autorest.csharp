@@ -9,5 +9,6 @@
   "use-overloads-between-protocol-and-convenience": true,
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
+  "generate-tests": true,
   "branded": false
 }

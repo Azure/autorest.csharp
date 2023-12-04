@@ -24,7 +24,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadModel_ShortVersion()
+        public async Task SpreadTypeSpec_SpreadModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -39,7 +39,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadModel_ShortVersion_Convenience()
+        public async Task SpreadTypeSpec_SpreadModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -50,7 +50,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadModel_AllParameters()
+        public async Task SpreadTypeSpec_SpreadModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -65,7 +65,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadModel_AllParameters_Convenience()
+        public async Task SpreadTypeSpec_SpreadModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -76,7 +76,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAlias_ShortVersion()
+        public async Task SpreadTypeSpec_SpreadAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -91,7 +91,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAlias_ShortVersion_Convenience()
+        public async Task SpreadTypeSpec_SpreadAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -101,7 +101,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAlias_AllParameters()
+        public async Task SpreadTypeSpec_SpreadAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -116,7 +116,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAlias_AllParameters_Convenience()
+        public async Task SpreadTypeSpec_SpreadAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -126,7 +126,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadMultiTargetAlias_ShortVersion()
+        public async Task SpreadTypeSpec_SpreadMultiTargetAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -141,7 +141,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadMultiTargetAlias_ShortVersion_Convenience()
+        public async Task SpreadTypeSpec_SpreadMultiTargetAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -151,7 +151,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadMultiTargetAlias_AllParameters()
+        public async Task SpreadTypeSpec_SpreadMultiTargetAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -166,7 +166,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadMultiTargetAlias_AllParameters_Convenience()
+        public async Task SpreadTypeSpec_SpreadMultiTargetAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -176,7 +176,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithModel_ShortVersion()
+        public async Task SpreadTypeSpec_SpreadAliasWithModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -191,7 +191,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithModel_ShortVersion_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -202,7 +202,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithModel_AllParameters()
+        public async Task SpreadTypeSpec_SpreadAliasWithModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -217,7 +217,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithModel_AllParameters_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -228,7 +228,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithSpreadAlias_ShortVersion()
+        public async Task SpreadTypeSpec_SpreadAliasWithSpreadAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -243,7 +243,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithSpreadAlias_ShortVersion_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithSpreadAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -253,7 +253,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithSpreadAlias_AllParameters()
+        public async Task SpreadTypeSpec_SpreadAliasWithSpreadAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -268,7 +268,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithSpreadAlias_AllParameters_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithSpreadAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -278,7 +278,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithOptionalProps_ShortVersion()
+        public async Task SpreadTypeSpec_SpreadAliasWithOptionalProps_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -296,7 +296,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithOptionalProps_ShortVersion_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithOptionalProps_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -306,7 +306,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithOptionalProps_AllParameters()
+        public async Task SpreadTypeSpec_SpreadAliasWithOptionalProps_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -330,7 +330,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithOptionalProps_AllParameters_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithOptionalProps_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -340,7 +340,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithCollections_ShortVersion()
+        public async Task SpreadTypeSpec_SpreadAliasWithCollections_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -357,7 +357,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithCollections_ShortVersion_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithCollections_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -367,7 +367,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithCollections_AllParameters()
+        public async Task SpreadTypeSpec_SpreadAliasWithCollections_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
@@ -388,7 +388,7 @@ namespace SpreadTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SpreadAliasWithCollections_AllParameters_Convenience()
+        public async Task SpreadTypeSpec_SpreadAliasWithCollections_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);

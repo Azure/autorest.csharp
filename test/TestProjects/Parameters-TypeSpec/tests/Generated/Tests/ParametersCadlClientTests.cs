@@ -22,7 +22,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_ShortVersion()
+        public async Task ParameterOrders_Operation_ShortVersion()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
@@ -31,7 +31,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_ShortVersion_Convenience()
+        public async Task ParameterOrders_Operation_ShortVersion_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
@@ -40,7 +40,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_AllParameters()
+        public async Task ParameterOrders_Operation_AllParameters()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
@@ -49,7 +49,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation_AllParameters_Convenience()
+        public async Task ParameterOrders_Operation_AllParameters_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
@@ -58,7 +58,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation2_ShortVersion()
+        public async Task ParameterOrders_Operation2_ShortVersion()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
@@ -67,7 +67,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation2_ShortVersion_Convenience()
+        public async Task ParameterOrders_Operation2_ShortVersion_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
@@ -76,7 +76,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation2_AllParameters()
+        public async Task ParameterOrders_Operation2_AllParameters()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
@@ -85,7 +85,7 @@ namespace ParametersCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Operation2_AllParameters_Convenience()
+        public async Task ParameterOrders_Operation2_AllParameters_Convenience()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 

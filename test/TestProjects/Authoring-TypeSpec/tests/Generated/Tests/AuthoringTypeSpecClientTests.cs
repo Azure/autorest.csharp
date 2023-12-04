@@ -24,7 +24,223 @@ namespace AuthoringTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateOrUpdate_ShortVersion()
+        public async Task Project_GetProject_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetProjectAsync("<projectName>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Project_GetProject_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetProjectAsync("<projectName>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Deployment_GetDeployment_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Deployment_GetDeployment_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task DeploymentJob_GetDeploymentStatus_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task DeploymentJob_GetDeploymentStatus_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task DeploymentJob_GetDeploymentStatus_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task DeploymentJob_GetDeploymentStatus_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task SwapDeploymentsJob_GetSwapDeploymentsStatus_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task SwapDeploymentsJob_GetSwapDeploymentsStatus_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task SwapDeploymentsJob_GetSwapDeploymentsStatus_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task SwapDeploymentsJob_GetSwapDeploymentsStatus_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Project_GetProjects_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetProjectsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Project_GetProjects_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetProjectsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Deployment_GetDeployments_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Deployment_GetDeployments_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Global_GetSupportedLanguages_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetSupportedLanguagesAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Global_GetSupportedLanguages_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Global_GetTrainingConfigVersions_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Global_GetTrainingConfigVersions_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
+
+            await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Project_CreateOrUpdate_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
@@ -35,12 +251,13 @@ namespace AuthoringTypeSpec.Tests
                 storageInputContainerName = "<storageInputContainerName>",
                 language = "<language>",
             });
-            Response response = await client.CreateOrUpdateAsync("<projectName>", content);
+            Operation<BinaryData> operation = await client.CreateOrUpdateAsync(WaitUntil.Completed, "<projectName>", content);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateOrUpdate_AllParameters()
+        public async Task Project_CreateOrUpdate_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
@@ -57,92 +274,77 @@ namespace AuthoringTypeSpec.Tests
                 description = "<description>",
                 language = "<language>",
             });
-            Response response = await client.CreateOrUpdateAsync("<projectName>", content);
+            Operation<BinaryData> operation = await client.CreateOrUpdateAsync(WaitUntil.Completed, "<projectName>", content);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProject_ShortVersion()
+        public async Task Project_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>");
+            Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProject_AllParameters()
+        public async Task Project_Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>");
+            Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Delete_ShortVersion()
+        public async Task Projects_Export_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteAsync("<projectName>");
+            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Delete_AllParameters()
+        public async Task Projects_Export_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteAsync("<projectName>");
+            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Export_ShortVersion()
+        public async Task Projects_Importx_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
+            Operation<BinaryData> operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Export_AllParameters()
+        public async Task Projects_Importx_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
+            Operation<BinaryData> operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Importx_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.ImportxAsync("<projectName>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Importx_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.ImportxAsync("<projectName>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Train_ShortVersion()
+        public async Task Projects_Train_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
@@ -151,12 +353,13 @@ namespace AuthoringTypeSpec.Tests
             {
                 modelLabel = "<modelLabel>",
             });
-            Response response = await client.TrainAsync("<projectName>", content);
+            Operation<BinaryData> operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", content);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Train_AllParameters()
+        public async Task Projects_Train_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
@@ -165,74 +368,57 @@ namespace AuthoringTypeSpec.Tests
             {
                 modelLabel = "<modelLabel>",
             });
-            Response response = await client.TrainAsync("<projectName>", content);
+            Operation<BinaryData> operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", content);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployment_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployment_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeployProject_ShortVersion()
+        public async Task Deployment_DeployProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
-            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
+            Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeployProject_AllParameters()
+        public async Task Deployment_DeployProject_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
-            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
+            Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteDeployment_ShortVersion()
+        public async Task Deployment_DeleteDeployment_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
+            Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task DeleteDeployment_AllParameters()
+        public async Task Deployment_DeleteDeployment_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
+            Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SwapDeployments_ShortVersion()
+        public async Task Deployments_SwapDeployments_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
@@ -242,12 +428,13 @@ namespace AuthoringTypeSpec.Tests
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
             });
-            Response response = await client.SwapDeploymentsAsync("<projectName>", content);
+            Operation<BinaryData> operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SwapDeployments_AllParameters()
+        public async Task Deployments_SwapDeployments_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
@@ -257,183 +444,8 @@ namespace AuthoringTypeSpec.Tests
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
             });
-            Response response = await client.SwapDeploymentsAsync("<projectName>", content);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeploymentStatus_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeploymentStatusValue_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeploymentStatus_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeploymentStatusValue_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSwapDeploymentsStatus_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSwapDeploymentsStatusValue_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSwapDeploymentsStatus_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSwapDeploymentsStatusValue_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProjects_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetProjectsAsync())
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProjects_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetProjectsAsync())
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployments_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployments_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSupportedLanguages_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetSupportedLanguagesAsync())
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSupportedLanguages_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTrainingConfigVersions_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync())
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTrainingConfigVersions_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
-
-            await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
-            {
-            }
+            Operation<BinaryData> operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
+            BinaryData responseData = operation.Value;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProject_ShortVersion()
+        public async Task Project_GetProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);
@@ -32,7 +32,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProject_AllParameters()
+        public async Task Project_GetProject_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);
@@ -42,7 +42,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployment_ShortVersion()
+        public async Task Deployment_GetDeployment_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);
@@ -52,7 +52,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployment_AllParameters()
+        public async Task Deployment_GetDeployment_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);
@@ -62,7 +62,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProjects_ShortVersion()
+        public async Task Project_GetProjects_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);
@@ -74,7 +74,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetProjects_AllParameters()
+        public async Task Project_GetProjects_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);
@@ -86,7 +86,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployments_ShortVersion()
+        public async Task Deployment_GetDeployments_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);
@@ -98,7 +98,7 @@ namespace RenameGetList.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetDeployments_AllParameters()
+        public async Task Deployment_GetDeployments_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RenameGetListClient client = CreateRenameGetListClient(endpoint);

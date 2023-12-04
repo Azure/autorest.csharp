@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,7 +25,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction_ShortVersion()
+        public async Task NewProjectTypeSpec_TopAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -35,7 +36,18 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction_AllParameters()
+        public async Task NewProjectTypeSpec_TopAction_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task NewProjectTypeSpec_TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -46,7 +58,18 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction2_ShortVersion()
+        public async Task NewProjectTypeSpec_TopAction_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task NewProjectTypeSpec_TopAction2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -57,7 +80,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task TopAction2_AllParameters()
+        public async Task NewProjectTypeSpec_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,7 +91,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PatchAction_ShortVersion()
+        public async Task NewProjectTypeSpec_PatchAction_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -89,7 +112,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PatchAction_AllParameters()
+        public async Task NewProjectTypeSpec_PatchAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -114,7 +137,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnonymousBody_ShortVersion()
+        public async Task NewProjectTypeSpec_AnonymousBody_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -135,7 +158,19 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnonymousBody_AllParameters()
+        public async Task NewProjectTypeSpec_AnonymousBody_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task NewProjectTypeSpec_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -160,7 +195,25 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_ShortVersion()
+        public async Task NewProjectTypeSpec_AnonymousBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            };
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task NewProjectTypeSpec_FriendlyModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -175,19 +228,19 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_ShortVersion_Convenience()
+        public async Task NewProjectTypeSpec_FriendlyModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_AllParameters()
+        public async Task NewProjectTypeSpec_FriendlyModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -202,30 +255,19 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task FriendlyModel_AllParameters_Convenience()
+        public async Task NewProjectTypeSpec_FriendlyModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
 
-            Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Friend friend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(friend);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AddTimeHeader_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
-
-            Response response = await client.AddTimeHeaderAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AddTimeHeader_AllParameters()
+        public async Task NewProjectTypeSpec_AddTimeHeader_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -236,7 +278,18 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_ShortVersion()
+        public async Task NewProjectTypeSpec_AddTimeHeader_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Response response = await client.AddTimeHeaderAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task NewProjectTypeSpec_StringFormat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -252,7 +305,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_ShortVersion_Convenience()
+        public async Task NewProjectTypeSpec_StringFormat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -264,7 +317,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_AllParameters()
+        public async Task NewProjectTypeSpec_StringFormat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -280,7 +333,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task StringFormat_AllParameters_Convenience()
+        public async Task NewProjectTypeSpec_StringFormat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -292,7 +345,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SayHi_ShortVersion()
+        public async Task Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -303,7 +356,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SayHi_AllParameters()
+        public async Task Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -314,7 +367,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloAgain_ShortVersion()
+        public async Task Demo2_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -353,7 +406,25 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloAgain_AllParameters()
+        public async Task Demo2_HelloAgain_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            });
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -422,7 +493,47 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoContentType_ShortVersion()
+        public async Task Demo2_HelloAgain_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
+            {
+                ["key"] = StringExtensibleEnum.One
+            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object())
+            })
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection = { FloatFixedEnum.One },
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection = { IntFixedEnum.One },
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new object())
+},
+            };
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -461,7 +572,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoContentType_AllParameters()
+        public async Task Demo2_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -530,7 +641,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloDemo2_ShortVersion()
+        public async Task Demo2_HelloDemo2_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -541,7 +652,18 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloDemo2_AllParameters()
+        public async Task Demo2_HelloDemo2_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloDemo2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -552,7 +674,18 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateLiteral_ShortVersion()
+        public async Task Demo2_HelloDemo2_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -573,7 +706,19 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task CreateLiteral_AllParameters()
+        public async Task Demo2_CreateLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -598,7 +743,25 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloLiteral_ShortVersion()
+        public async Task Demo2_CreateLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+            };
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -609,7 +772,18 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task HelloLiteral_AllParameters()
+        public async Task Demo2_HelloLiteral_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Demo2_HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -620,7 +794,18 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetUnknownValue_ShortVersion()
+        public async Task Demo2_HelloLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NewProjectTypeSpecClient client = CreateNewProjectTypeSpecClient(endpoint, credential);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task EnumTest_GetUnknownValue_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -631,7 +816,7 @@ namespace Azure.NewProject.TypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetUnknownValue_AllParameters()
+        public async Task EnumTest_GetUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

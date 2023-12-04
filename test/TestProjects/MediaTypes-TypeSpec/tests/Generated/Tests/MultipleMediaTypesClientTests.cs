@@ -24,7 +24,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneBinaryBodyTwoContentTypes_ShortVersion()
+        public async Task MultipleMediaTypes_OneBinaryBodyTwoContentTypes_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -35,7 +35,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneBinaryBodyTwoContentTypes_ShortVersion_Convenience()
+        public async Task MultipleMediaTypes_OneBinaryBodyTwoContentTypes_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -45,7 +45,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneBinaryBodyTwoContentTypes_AllParameters()
+        public async Task MultipleMediaTypes_OneBinaryBodyTwoContentTypes_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -56,7 +56,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneBinaryBodyTwoContentTypes_AllParameters_Convenience()
+        public async Task MultipleMediaTypes_OneBinaryBodyTwoContentTypes_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -66,7 +66,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneStringBodyThreeContentTypes_ShortVersion()
+        public async Task MultipleMediaTypes_OneStringBodyThreeContentTypes_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -77,7 +77,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneStringBodyThreeContentTypes_ShortVersion_Convenience()
+        public async Task MultipleMediaTypes_OneStringBodyThreeContentTypes_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -87,7 +87,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneStringBodyThreeContentTypes_AllParameters()
+        public async Task MultipleMediaTypes_OneStringBodyThreeContentTypes_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -98,7 +98,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneStringBodyThreeContentTypes_AllParameters_Convenience()
+        public async Task MultipleMediaTypes_OneStringBodyThreeContentTypes_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -108,7 +108,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneModelBodyOneContentType_ShortVersion()
+        public async Task MultipleMediaTypes_OneModelBodyOneContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -122,7 +122,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneModelBodyOneContentType_ShortVersion_Convenience()
+        public async Task MultipleMediaTypes_OneModelBodyOneContentType_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -133,7 +133,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneModelBodyOneContentType_AllParameters()
+        public async Task MultipleMediaTypes_OneModelBodyOneContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
@@ -147,7 +147,7 @@ namespace MultipleMediaTypes.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task OneModelBodyOneContentType_AllParameters_Convenience()
+        public async Task MultipleMediaTypes_OneModelBodyOneContentType_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);

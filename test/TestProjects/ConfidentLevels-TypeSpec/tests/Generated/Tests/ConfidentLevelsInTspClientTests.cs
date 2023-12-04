@@ -24,7 +24,7 @@ namespace ConfidentLevelsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionInRequestProperty_ShortVersion()
+        public async Task ConfidentLevelsInTsp_UnionInRequestProperty_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -38,7 +38,18 @@ namespace ConfidentLevelsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionInRequestProperty_AllParameters()
+        public async Task ConfidentLevelsInTsp_UnionInRequestProperty_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionInRequestPropertyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnionInRequestProperty_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -52,7 +63,18 @@ namespace ConfidentLevelsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionInResponseProperty_ShortVersion()
+        public async Task ConfidentLevelsInTsp_UnionInRequestProperty_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            ModelWithUnionProperty body = new ModelWithUnionProperty(BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionInRequestPropertyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnionInResponseProperty_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -67,7 +89,18 @@ namespace ConfidentLevelsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionInResponseProperty_AllParameters()
+        public async Task ConfidentLevelsInTsp_UnionInResponseProperty_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            UsualModel body = new UsualModel("<name>", 1234);
+            Response<AnotherModelWithUnionProperty> response = await client.UnionInResponsePropertyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnionInResponseProperty_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -83,7 +116,21 @@ namespace ConfidentLevelsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionWithSelfReference_ShortVersion()
+        public async Task ConfidentLevelsInTsp_UnionInResponseProperty_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            UsualModel body = new UsualModel("<name>", 1234)
+            {
+                Size = 123.45,
+            };
+            Response<AnotherModelWithUnionProperty> response = await client.UnionInResponsePropertyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnionWithSelfReference_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -102,7 +149,21 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionWithSelfReference_AllParameters()
+        public async Task ConfidentLevelsInTsp_UnionWithSelfReference_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+default
+            }, BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionWithSelfReferenceAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnionWithSelfReference_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -121,7 +182,21 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionWithInderict_ShortVersion()
+        public async Task ConfidentLevelsInTsp_UnionWithSelfReference_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithSelfReference input = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+            {
+default
+            }, BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UnionWithSelfReferenceAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnionWithInderict_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -135,7 +210,18 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnionWithInderict_AllParameters()
+        public async Task ConfidentLevelsInTsp_UnionWithInderict_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>");
+            Response response = await client.UnionWithInderictAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnionWithInderict_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -166,7 +252,27 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task LiteralOfInteger_ShortVersion()
+        public async Task ConfidentLevelsInTsp_UnionWithInderict_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            NonConfidentModelWithIndirectSelfReference input = new NonConfidentModelWithIndirectSelfReference("<name>")
+            {
+                Reference = {new IndirectSelfReferenceModel("<something>", BinaryData.FromObjectAsJson("<unionProperty>"))
+{
+Reference = new NonConfidentModelWithSelfReference("<name>", new NonConfidentModelWithSelfReference[]
+{
+default
+}, BinaryData.FromObjectAsJson("<unionProperty>")),
+}},
+            };
+            Response response = await client.UnionWithInderictAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_LiteralOfInteger_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -181,7 +287,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task LiteralOfInteger_AllParameters()
+        public async Task ConfidentLevelsInTsp_LiteralOfInteger_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfIntegerAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_LiteralOfInteger_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -196,7 +313,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task LiteralOfFloat_ShortVersion()
+        public async Task ConfidentLevelsInTsp_LiteralOfInteger_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            ModelWithIntegerLiteralTypeProperty input = new ModelWithIntegerLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfIntegerAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_LiteralOfFloat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -211,7 +339,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task LiteralOfFloat_AllParameters()
+        public async Task ConfidentLevelsInTsp_LiteralOfFloat_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfFloatAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_LiteralOfFloat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -226,7 +365,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConfidentOperationWithDiscriminator_ShortVersion()
+        public async Task ConfidentLevelsInTsp_LiteralOfFloat_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            ModelWithFloatLiteralTypeProperty input = new ModelWithFloatLiteralTypeProperty("<name>");
+            Response response = await client.LiteralOfFloatAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -242,7 +392,7 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConfidentOperationWithDiscriminator_ShortVersion_Convenience()
+        public async Task ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -253,7 +403,7 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConfidentOperationWithDiscriminator_AllParameters()
+        public async Task ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -269,7 +419,7 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConfidentOperationWithDiscriminator_AllParameters_Convenience()
+        public async Task ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -280,7 +430,7 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PollutedBaseMethod_ShortVersion()
+        public async Task ConfidentLevelsInTsp_PollutedBaseMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -297,7 +447,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PollutedBaseMethod_AllParameters()
+        public async Task ConfidentLevelsInTsp_PollutedBaseMethod_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedPet> response = await client.PollutedBaseMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_PollutedBaseMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -314,7 +475,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PollutedDerivedMethod_ShortVersion()
+        public async Task ConfidentLevelsInTsp_PollutedBaseMethod_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            PollutedPet input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedPet> response = await client.PollutedBaseMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_PollutedDerivedMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -331,7 +503,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task PollutedDerivedMethod_AllParameters()
+        public async Task ConfidentLevelsInTsp_PollutedDerivedMethod_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedDog> response = await client.PollutedDerivedMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_PollutedDerivedMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -348,7 +531,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnpollutedDerivedMethod_ShortVersion()
+        public async Task ConfidentLevelsInTsp_PollutedDerivedMethod_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            PollutedDog input = new PollutedDog("<name>", "<woof>", BinaryData.FromObjectAsJson("<color>"));
+            Response<PollutedDog> response = await client.PollutedDerivedMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnpollutedDerivedMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -364,7 +558,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UnpollutedDerivedMethod_AllParameters()
+        public async Task ConfidentLevelsInTsp_UnpollutedDerivedMethod_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+            Response<UnpollutedCat> response = await client.UnpollutedDerivedMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UnpollutedDerivedMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -380,7 +585,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UseDerivedModel_ShortVersion()
+        public async Task ConfidentLevelsInTsp_UnpollutedDerivedMethod_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            UnpollutedCat input = new UnpollutedCat("<name>", "<meow>");
+            Response<UnpollutedCat> response = await client.UnpollutedDerivedMethodAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UseDerivedModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -394,7 +610,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UseDerivedModel_AllParameters()
+        public async Task ConfidentLevelsInTsp_UseDerivedModel_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            DerivedModel input = new DerivedModel("<name>");
+            Response response = await client.UseDerivedModelAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UseDerivedModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -410,7 +637,21 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UseDerivedModelWithUnion_ShortVersion()
+        public async Task ConfidentLevelsInTsp_UseDerivedModel_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            DerivedModel input = new DerivedModel("<name>")
+            {
+                Age = 1234,
+            };
+            Response response = await client.UseDerivedModelAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UseDerivedModelWithUnion_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -425,7 +666,18 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UseDerivedModelWithUnion_AllParameters()
+        public async Task ConfidentLevelsInTsp_UseDerivedModelWithUnion_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UseDerivedModelWithUnionAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UseDerivedModelWithUnion_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
@@ -437,6 +689,17 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ConfidentLevelsInTsp_UseDerivedModelWithUnion_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ConfidentLevelsInTspClient client = CreateConfidentLevelsInTspClient(endpoint);
+
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            Response response = await client.UseDerivedModelWithUnionAsync(input);
         }
     }
 }

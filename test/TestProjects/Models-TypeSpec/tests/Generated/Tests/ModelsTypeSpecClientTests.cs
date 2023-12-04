@@ -25,7 +25,7 @@ namespace ModelsTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetOutputDiscriminatorModel_ShortVersion()
+        public async Task ModelsTypeSpec_GetOutputDiscriminatorModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -35,7 +35,7 @@ namespace ModelsTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetOutputDiscriminatorModel_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_GetOutputDiscriminatorModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -45,7 +45,7 @@ namespace ModelsTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetOutputDiscriminatorModel_AllParameters()
+        public async Task ModelsTypeSpec_GetOutputDiscriminatorModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -55,7 +55,7 @@ namespace ModelsTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetOutputDiscriminatorModel_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_GetOutputDiscriminatorModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -65,7 +65,7 @@ namespace ModelsTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTrip_ShortVersion()
+        public async Task ModelsTypeSpec_InputToRoundTrip_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -128,7 +128,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTrip_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_InputToRoundTrip_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -154,7 +154,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTrip_AllParameters()
+        public async Task ModelsTypeSpec_InputToRoundTrip_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -243,7 +243,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTrip_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_InputToRoundTrip_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -279,7 +279,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripPrimitive_ShortVersion()
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -342,7 +342,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripPrimitive_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -368,7 +368,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripPrimitive_AllParameters()
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -457,7 +457,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripPrimitive_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_InputToRoundTripPrimitive_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -493,7 +493,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripOptional_ShortVersion()
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -504,7 +504,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripOptional_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -515,7 +515,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripOptional_AllParameters()
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -586,7 +586,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputToRoundTripOptional_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_InputToRoundTripOptional_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -635,7 +635,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutput_ShortVersion()
+        public async Task ModelsTypeSpec_RoundTripToOutput_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -704,7 +704,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutput_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_RoundTripToOutput_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -733,7 +733,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutput_AllParameters()
+        public async Task ModelsTypeSpec_RoundTripToOutput_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -825,7 +825,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutput_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_RoundTripToOutput_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -869,7 +869,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputRecursive_ShortVersion()
+        public async Task ModelsTypeSpec_InputRecursive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -883,7 +883,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputRecursive_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_InputRecursive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -894,7 +894,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputRecursive_AllParameters()
+        public async Task ModelsTypeSpec_InputRecursive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -908,7 +908,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task InputRecursive_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_InputRecursive_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -922,7 +922,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripRecursive_ShortVersion()
+        public async Task ModelsTypeSpec_RoundTripRecursive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -936,7 +936,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripRecursive_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_RoundTripRecursive_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -947,7 +947,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripRecursive_AllParameters()
+        public async Task ModelsTypeSpec_RoundTripRecursive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -961,7 +961,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripRecursive_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_RoundTripRecursive_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -975,7 +975,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SelfReference_ShortVersion()
+        public async Task ModelsTypeSpec_SelfReference_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -985,7 +985,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SelfReference_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_SelfReference_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -995,7 +995,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SelfReference_AllParameters()
+        public async Task ModelsTypeSpec_SelfReference_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1005,7 +1005,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task SelfReference_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_SelfReference_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1015,7 +1015,87 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutputWithNoUseBase_ShortVersion()
+        public async Task ModelsTypeSpec_FixedFloatEnum_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response response = await client.FixedFloatEnumAsync(1.1F);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_FixedFloatEnum_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response<OutputModel> response = await client.FixedFloatEnumAsync(FixedFloatEnum.One);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_FixedFloatEnum_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response response = await client.FixedFloatEnumAsync(1.1F);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_FixedFloatEnum_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response<OutputModel> response = await client.FixedFloatEnumAsync(FixedFloatEnum.One);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_ExtenisbleIntEnum_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response response = await client.ExtenisbleIntEnumAsync(1);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_ExtenisbleIntEnum_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response<OutputModel> response = await client.ExtenisbleIntEnumAsync(ExtensibleIntEnum.One);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_ExtenisbleIntEnum_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response response = await client.ExtenisbleIntEnumAsync(1);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_ExtenisbleIntEnum_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response<OutputModel> response = await client.ExtenisbleIntEnumAsync(ExtensibleIntEnum.One);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_RoundTripToOutputWithNoUseBase_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1045,7 +1125,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutputWithNoUseBase_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_RoundTripToOutputWithNoUseBase_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1065,7 +1145,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutputWithNoUseBase_AllParameters()
+        public async Task ModelsTypeSpec_RoundTripToOutputWithNoUseBase_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1095,7 +1175,7 @@ null
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTripToOutputWithNoUseBase_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_RoundTripToOutputWithNoUseBase_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1115,7 +1195,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnalyzeConversation_ShortVersion()
+        public async Task ModelsTypeSpec_AnalyzeConversation_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1125,7 +1205,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnalyzeConversation_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_AnalyzeConversation_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1135,7 +1215,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnalyzeConversation_AllParameters()
+        public async Task ModelsTypeSpec_AnalyzeConversation_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1145,7 +1225,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task AnalyzeConversation_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_AnalyzeConversation_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1155,7 +1235,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSingleBase_ShortVersion()
+        public async Task ModelsTypeSpec_GetSingleBase_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1165,7 +1245,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSingleBase_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_GetSingleBase_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1175,7 +1255,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSingleBase_AllParameters()
+        public async Task ModelsTypeSpec_GetSingleBase_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1185,7 +1265,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetSingleBase_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_GetSingleBase_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1195,7 +1275,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GenericType_ShortVersion()
+        public async Task ModelsTypeSpec_GenericType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1215,7 +1295,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GenericType_ShortVersion_Convenience()
+        public async Task ModelsTypeSpec_GenericType_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1226,7 +1306,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GenericType_AllParameters()
+        public async Task ModelsTypeSpec_GenericType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
@@ -1246,7 +1326,7 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GenericType_AllParameters_Convenience()
+        public async Task ModelsTypeSpec_GenericType_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);

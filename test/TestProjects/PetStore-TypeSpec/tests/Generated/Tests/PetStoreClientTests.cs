@@ -24,7 +24,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Delete_ShortVersion()
+        public async Task Pets_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -34,7 +34,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Delete_AllParameters()
+        public async Task Pets_Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -44,7 +44,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Read_ShortVersion()
+        public async Task Pets_Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -54,7 +54,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Read_ShortVersion_Convenience()
+        public async Task Pets_Read_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -64,7 +64,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Read_AllParameters()
+        public async Task Pets_Read_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -74,7 +74,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Read_AllParameters_Convenience()
+        public async Task Pets_Read_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -84,7 +84,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_ShortVersion()
+        public async Task Pets_Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -99,7 +99,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_ShortVersion_Convenience()
+        public async Task Pets_Create_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -110,7 +110,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_AllParameters()
+        public async Task Pets_Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -126,7 +126,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_AllParameters_Convenience()
+        public async Task Pets_Create_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -140,7 +140,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPetByKind_ShortVersion()
+        public async Task Pets_GetPetByKind_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -150,7 +150,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPetByKind_ShortVersion_Convenience()
+        public async Task Pets_GetPetByKind_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -160,7 +160,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPetByKind_AllParameters()
+        public async Task Pets_GetPetByKind_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -170,7 +170,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPetByKind_AllParameters_Convenience()
+        public async Task Pets_GetPetByKind_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -180,7 +180,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFirstPet_ShortVersion()
+        public async Task Pets_GetFirstPet_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -190,7 +190,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFirstPet_ShortVersion_Convenience()
+        public async Task Pets_GetFirstPet_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -200,7 +200,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFirstPet_AllParameters()
+        public async Task Pets_GetFirstPet_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -210,7 +210,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFirstPet_AllParameters_Convenience()
+        public async Task Pets_GetFirstPet_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -220,7 +220,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFish_ShortVersion()
+        public async Task Pets_GetFish_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -230,7 +230,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFish_ShortVersion_Convenience()
+        public async Task Pets_GetFish_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -240,7 +240,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFish_AllParameters()
+        public async Task Pets_GetFish_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
@@ -250,7 +250,7 @@ namespace PetStore.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetFish_AllParameters_Convenience()
+        public async Task Pets_GetFish_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);

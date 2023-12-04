@@ -22,7 +22,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Zero_ShortVersion()
+        public async Task ClientAndOperationGroup_Zero_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = CreateClientAndOperationGroupClient(endpoint);
@@ -32,7 +32,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Zero_AllParameters()
+        public async Task ClientAndOperationGroup_Zero_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = CreateClientAndOperationGroupClient(endpoint);
@@ -42,7 +42,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task One_ShortVersion()
+        public async Task Alpha_One_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = CreateClientAndOperationGroupClient(endpoint);
@@ -52,7 +52,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task One_AllParameters()
+        public async Task Alpha_One_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = CreateClientAndOperationGroupClient(endpoint);

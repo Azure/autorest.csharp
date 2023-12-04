@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -25,7 +26,7 @@ namespace CustomizationsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTrip_ShortVersion()
+        public async Task CustomizationsInTsp_RoundTrip_ShortVersion()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
 
@@ -35,7 +36,7 @@ namespace CustomizationsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTrip_ShortVersion_Convenience()
+        public async Task CustomizationsInTsp_RoundTrip_ShortVersion_Convenience()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
 
@@ -45,7 +46,7 @@ namespace CustomizationsInTsp.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTrip_AllParameters()
+        public async Task CustomizationsInTsp_RoundTrip_AllParameters()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
 
@@ -97,6 +98,22 @@ new
 key = "<badListOfDictionaryName>",
 }
             },
+                    vector = new object[]
+            {
+123.45F
+            },
+                    vectorOptional = new object[]
+            {
+123.45F
+            },
+                    vectorNullable = new object[]
+            {
+123.45F
+            },
+                    vectorOptionalNullable = new object[]
+            {
+123.45F
+            },
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -112,7 +129,7 @@ key = "<badListOfDictionaryName>",
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task RoundTrip_AllParameters_Convenience()
+        public async Task CustomizationsInTsp_RoundTrip_AllParameters_Convenience()
         {
             CustomizationsInTspClient client = CreateCustomizationsInTspClient();
 
@@ -136,7 +153,11 @@ new Dictionary<string, string>
 {
 ["key"] = "<badListOfDictionaryName>"
 }
-            }),
+            }, new float[] { 123.45F }, new float[] { 123.45F })
+                {
+                    VectorOptional = new float[] { 123.45F },
+                    VectorOptionalNullable = new float[] { 123.45F },
+                },
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,

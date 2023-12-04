@@ -23,7 +23,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UpdateConvenience_ShortVersion()
+        public async Task ConvenienceInCadl_UpdateConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -32,7 +32,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UpdateConvenience_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_UpdateConvenience_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -41,7 +41,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UpdateConvenience_AllParameters()
+        public async Task ConvenienceInCadl_UpdateConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -50,7 +50,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task UpdateConvenience_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_UpdateConvenience_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -59,7 +59,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalBeforeRequired_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -72,7 +72,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalBeforeRequired_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -82,7 +82,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalBeforeRequired_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -95,7 +95,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalBeforeRequired_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -105,7 +105,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoConvenience_ShortVersion()
+        public async Task ConvenienceInCadl_NoConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -114,7 +114,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoConvenience_AllParameters()
+        public async Task ConvenienceInCadl_NoConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -123,7 +123,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoConvenienceRequiredBody_ShortVersion()
+        public async Task ConvenienceInCadl_NoConvenienceRequiredBody_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -136,7 +136,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoConvenienceRequiredBody_AllParameters()
+        public async Task ConvenienceInCadl_NoConvenienceRequiredBody_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -149,7 +149,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoConvenienceOptionalBody_ShortVersion()
+        public async Task ConvenienceInCadl_NoConvenienceOptionalBody_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -159,7 +159,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task NoConvenienceOptionalBody_AllParameters()
+        public async Task ConvenienceInCadl_NoConvenienceOptionalBody_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -172,7 +172,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Protocol_ShortVersion()
+        public async Task ConvenienceInCadl_Protocol_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -181,7 +181,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolValue_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_Protocol_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -190,7 +190,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Protocol_AllParameters()
+        public async Task ConvenienceInCadl_Protocol_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -199,7 +199,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolValue_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_Protocol_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -208,7 +208,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithOptional_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -217,7 +217,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithOptionalValue_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -226,7 +226,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithOptional_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -235,7 +235,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithOptionalValue_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -244,7 +244,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithRequired_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -253,7 +253,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithRequired_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -262,7 +262,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithRequired_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -271,7 +271,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceWithRequired_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -280,7 +280,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceShouldNotGenerate_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceShouldNotGenerate_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -289,7 +289,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceShouldNotGenerate_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceShouldNotGenerate_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -298,7 +298,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolShouldNotGenerateConvenience_ShortVersion()
+        public async Task ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -307,7 +307,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolShouldNotGenerateConvenience_AllParameters()
+        public async Task ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -316,7 +316,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalQuery_ShortVersion()
+        public async Task ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -325,7 +325,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalQueryValue_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -334,7 +334,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalQuery_AllParameters()
+        public async Task ConvenienceInCadl_ProtocolOptionalQuery_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -343,7 +343,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalQueryValue_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ProtocolOptionalQuery_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -352,7 +352,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredQuery_ShortVersion()
+        public async Task ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -361,7 +361,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredQueryValue_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -370,7 +370,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredQuery_AllParameters()
+        public async Task ConvenienceInCadl_ProtocolRequiredQuery_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -379,7 +379,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredQueryValue_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ProtocolRequiredQuery_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -388,7 +388,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalModel_ShortVersion()
+        public async Task ConvenienceInCadl_ProtocolOptionalModel_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -398,7 +398,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalModel_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ProtocolOptionalModel_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -407,7 +407,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalModel_AllParameters()
+        public async Task ConvenienceInCadl_ProtocolOptionalModel_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -420,7 +420,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalModel_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ProtocolOptionalModel_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -430,7 +430,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredModel_ShortVersion()
+        public async Task ConvenienceInCadl_ProtocolRequiredModel_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -443,7 +443,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredModel_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ProtocolRequiredModel_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -453,7 +453,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredModel_AllParameters()
+        public async Task ConvenienceInCadl_ProtocolRequiredModel_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -466,7 +466,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolRequiredModel_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ProtocolRequiredModel_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -476,7 +476,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithOptional_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -485,7 +485,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithOptionalValue_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -494,7 +494,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithOptional_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -503,7 +503,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithOptionalValue_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -512,7 +512,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithOptional_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -521,7 +521,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithOptionalValue_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -530,7 +530,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithOptional_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -539,7 +539,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithOptionalValue_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -548,7 +548,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithRequired_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -557,7 +557,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -566,7 +566,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithRequired_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -575,7 +575,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalQueryWithRequired_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -584,7 +584,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithRequired_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -593,7 +593,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -602,7 +602,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithRequired_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -611,7 +611,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredQueryWithRequired_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -620,7 +620,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithOptional_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -630,7 +630,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithOptional_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -639,7 +639,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithOptional_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -652,7 +652,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithOptional_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -662,7 +662,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredModelWithOptional_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -675,7 +675,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredModelWithOptional_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -685,7 +685,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredModelWithOptional_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -698,7 +698,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceRequiredModelWithOptional_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -708,7 +708,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithRequired_ShortVersion()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -718,7 +718,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithRequired_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -727,7 +727,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithRequired_AllParameters()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -740,7 +740,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ConvenienceOptionalModelWithRequired_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -750,7 +750,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalBeforeRequired_ShortVersion()
+        public async Task ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -763,7 +763,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalBeforeRequired_ShortVersion_Convenience()
+        public async Task ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -773,7 +773,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalBeforeRequired_AllParameters()
+        public async Task ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
@@ -786,7 +786,7 @@ namespace ConvenienceInCadl.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task ProtocolOptionalBeforeRequired_AllParameters_Convenience()
+        public async Task ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 

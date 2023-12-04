@@ -23,7 +23,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Delete_ShortVersion()
+        public async Task Pet_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
@@ -33,7 +33,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Delete_AllParameters()
+        public async Task Pet_Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
@@ -43,7 +43,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Read_ShortVersion()
+        public async Task Pets_Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
@@ -53,7 +53,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Read_AllParameters()
+        public async Task Pets_Read_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
@@ -63,7 +63,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_ShortVersion()
+        public async Task Pets_Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
@@ -77,7 +77,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Create_AllParameters()
+        public async Task Pets_Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
@@ -92,7 +92,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPets_ShortVersion()
+        public async Task Toy_GetPets_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
@@ -104,7 +104,7 @@ namespace MixApiVersion.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPets_AllParameters()
+        public async Task Toy_GetPets_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);

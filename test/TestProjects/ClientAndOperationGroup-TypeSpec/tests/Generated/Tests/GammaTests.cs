@@ -22,7 +22,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Four_ShortVersion()
+        public async Task Gamma_Four_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();
@@ -32,7 +32,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Four_AllParameters()
+        public async Task Gamma_Four_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();
@@ -42,7 +42,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Five_ShortVersion()
+        public async Task Gamma_Five_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();
@@ -52,7 +52,7 @@ namespace ClientAndOperationGroup.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Five_AllParameters()
+        public async Task Gamma_Five_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();

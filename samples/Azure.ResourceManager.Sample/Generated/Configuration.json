@@ -9,7 +9,6 @@
   "azure-arm": true,
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "generate-tests": true,
   "KeepOrphanedModels": [
     "AvailabilitySetSkuType"
   ],

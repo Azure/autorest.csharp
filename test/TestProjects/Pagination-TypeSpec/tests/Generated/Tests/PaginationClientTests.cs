@@ -6,7 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
@@ -23,7 +25,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPaginationLedgerEntries_ShortVersion()
+        public async Task LedgerEntry_GetPaginationLedgerEntries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -41,7 +43,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPaginationLedgerEntries_ShortVersion_Convenience()
+        public async Task LedgerEntry_GetPaginationLedgerEntries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -55,7 +57,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPaginationLedgerEntries_AllParameters()
+        public async Task LedgerEntry_GetPaginationLedgerEntries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -73,7 +75,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetPaginationLedgerEntries_AllParameters_Convenience()
+        public async Task LedgerEntry_GetPaginationLedgerEntries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -87,7 +89,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMetricDimensionValues_ShortVersion()
+        public async Task DimensionValueListItem_GetMetricDimensionValues_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -100,7 +102,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMetricDimensionValues_ShortVersion_Convenience()
+        public async Task DimensionValueListItem_GetMetricDimensionValues_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -113,7 +115,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMetricDimensionValues_AllParameters()
+        public async Task DimensionValueListItem_GetMetricDimensionValues_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -126,7 +128,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetMetricDimensionValues_AllParameters_Convenience()
+        public async Task DimensionValueListItem_GetMetricDimensionValues_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -139,7 +141,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetLedgerEntries_ShortVersion()
+        public async Task LedgerEntry_GetLedgerEntries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -152,7 +154,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetLedgerEntries_ShortVersion_Convenience()
+        public async Task LedgerEntry_GetLedgerEntries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -165,7 +167,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetLedgerEntries_AllParameters()
+        public async Task LedgerEntry_GetLedgerEntries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -178,7 +180,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetLedgerEntries_AllParameters_Convenience()
+        public async Task LedgerEntry_GetLedgerEntries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -191,7 +193,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklists_ShortVersion()
+        public async Task TextBlocklist_GetTextBlocklists_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -204,7 +206,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklists_ShortVersion_Convenience()
+        public async Task TextBlocklist_GetTextBlocklists_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -217,7 +219,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklists_AllParameters()
+        public async Task TextBlocklist_GetTextBlocklists_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -230,7 +232,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklists_AllParameters_Convenience()
+        public async Task TextBlocklist_GetTextBlocklists_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -243,7 +245,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklistItems_ShortVersion()
+        public async Task TextBlockItem_GetTextBlocklistItems_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -256,7 +258,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklistItems_ShortVersion_Convenience()
+        public async Task TextBlockItem_GetTextBlocklistItems_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -269,7 +271,7 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklistItems_AllParameters()
+        public async Task TextBlockItem_GetTextBlocklistItems_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -282,13 +284,65 @@ namespace Pagination.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task GetTextBlocklistItems_AllParameters_Convenience()
+        public async Task TextBlockItem_GetTextBlocklistItems_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = CreatePaginationClient(endpoint, credential);
 
             await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Pools_GetPools_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = CreatePaginationClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetPoolsAsync(null, null, null, null))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Pools_GetPools_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = CreatePaginationClient(endpoint, credential);
+
+            await foreach (BatchPool item in client.GetPoolsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Pools_GetPools_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = CreatePaginationClient(endpoint, credential);
+
+            await foreach (BinaryData item in client.GetPoolsAsync("<$filter>", new string[] { "<$select>" }, new string[] { "<$expand>" }, null))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task Pools_GetPools_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationClient client = CreatePaginationClient(endpoint, credential);
+
+            await foreach (BatchPool item in client.GetPoolsAsync(filter: "<$filter>", select: new string[] { "<$select>" }, expand: new string[] { "<$expand>" }))
             {
             }
         }
