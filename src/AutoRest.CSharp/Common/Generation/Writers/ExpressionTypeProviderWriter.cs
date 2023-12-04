@@ -11,10 +11,10 @@ namespace AutoRest.CSharp.Generation.Writers
         private readonly ExpressionTypeProvider _provider;
         private readonly CodeWriter _writer;
 
-        public ExpressionTypeProviderWriter(ExpressionTypeProvider provider)
+        public ExpressionTypeProviderWriter(CodeWriter writer, ExpressionTypeProvider provider)
         {
             _provider = provider;
-            _writer = new CodeWriter();
+            _writer = writer;
         }
 
         public virtual void Write()

@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (sampleProvider != null)
                 {
                     var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
-                    var clientSampleWriter = new ExpressionTypeProviderWriter(sampleProvider);
+                    var clientSampleWriter = new ExpressionTypeProviderWriter(new CodeWriter(), sampleProvider);
                     clientSampleWriter.Write();
                     project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
                     project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
@@ -74,11 +74,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (Configuration.IsBranded)
                 {
                     // write test base and test env
-                    var testBaseWriter = new ExpressionTypeProviderWriter(library.DpgTestBase);
+                    var testBaseWriter = new ExpressionTypeProviderWriter(new CodeWriter(), library.DpgTestBase);
                     testBaseWriter.Write();
                     project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestBase.Type.Name}.cs", testBaseWriter.ToString());
 
-                    var testEnvWriter = new ExpressionTypeProviderWriter(library.DpgTestEnvironment);
+                    var testEnvWriter = new ExpressionTypeProviderWriter(new CodeWriter(), library.DpgTestEnvironment);
                     testEnvWriter.Write();
                     project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestEnvironment.Type.Name}.cs", testEnvWriter.ToString());
                 }
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     if (clientTestProvider != null)
                     {
                         var clientTestFilename = $"../../tests/Generated/Tests/{clientTestProvider.Type.Name}.cs";
-                        var clientTestWriter = new ExpressionTypeProviderWriter(clientTestProvider);
+                        var clientTestWriter = new ExpressionTypeProviderWriter(new CodeWriter(), clientTestProvider);
                         clientTestWriter.Write();
                         project.AddGeneratedTestFile(clientTestFilename, clientTestWriter.ToString());
                     }
