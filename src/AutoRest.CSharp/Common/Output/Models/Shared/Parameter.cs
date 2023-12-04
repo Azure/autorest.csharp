@@ -297,7 +297,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             public int GetHashCode([DisallowNull] Parameter obj)
             {
-                return HashCode.Combine(obj.Type, obj.Name);
+                // remove type as part of the hash code generation as the type might have changes between versions
+                return HashCode.Combine(obj.Name);
             }
         }
     }
