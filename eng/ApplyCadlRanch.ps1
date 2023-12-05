@@ -4,9 +4,9 @@ if (-not $CadlRanchPath) {
     $CadlRanchPath = "$PSScriptRoot\..\..\cadl-ranch" # if cadl-ranch path is not provided, then expect it to be in the same folder as this repo and folder name is cadl-ranch
 }
 
-# Push-Location $CadlRanchPath
-# pnpm build
-# Pop-Location
+Push-Location $CadlRanchPath
+pnpm build
+Pop-Location
 
 $specPathSource = "$CadlRanchPath\packages\cadl-ranch-specs\http"
 $mockAPIPathSource = "$CadlRanchPath\packages\cadl-ranch-specs\dist\http"
