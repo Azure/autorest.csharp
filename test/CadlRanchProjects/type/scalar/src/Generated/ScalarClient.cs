@@ -65,5 +65,45 @@ namespace _Type.Scalar
         {
             return Volatile.Read(ref _cachedUnknown) ?? Interlocked.CompareExchange(ref _cachedUnknown, new Unknown(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnknown;
         }
+
+        /// <summary> Initializes a new instance of DecimalType. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual DecimalType GetDecimalTypeClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new DecimalType(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of Decimal128Type. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Decimal128Type GetDecimal128TypeClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Decimal128Type(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of DecimalVerify. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual DecimalVerify GetDecimalVerifyClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new DecimalVerify(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of Decimal128Verify. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Decimal128Verify GetDecimal128VerifyClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Decimal128Verify(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
     }
 }

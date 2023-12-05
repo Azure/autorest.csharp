@@ -41,6 +41,9 @@ namespace MgmtOperations
         private readonly UnpatchableResourcesRestOperations _unpatchableResourceRestClient;
         private readonly UnpatchableResourceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/unpatchableResources";
+
         /// <summary> Initializes a new instance of the <see cref="UnpatchableResource"/> class for mocking. </summary>
         protected UnpatchableResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtOperations
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/unpatchableResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

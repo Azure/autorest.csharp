@@ -41,6 +41,9 @@ namespace MgmtParamOrdering
         private readonly VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetRestClient;
         private readonly VirtualMachineScaleSetData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets";
+
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtParamOrdering
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

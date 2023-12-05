@@ -38,6 +38,9 @@ namespace MgmtListMethods
         private readonly TenantParentsRestOperations _tenantParentRestClient;
         private readonly TenantParentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Tenant/tenantTests/tenantParents";
+
         /// <summary> Initializes a new instance of the <see cref="TenantParentResource"/> class for mocking. </summary>
         protected TenantParentResource()
         {
@@ -64,9 +67,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Tenant/tenantTests/tenantParents";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
