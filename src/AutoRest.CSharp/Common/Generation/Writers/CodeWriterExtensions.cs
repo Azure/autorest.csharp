@@ -754,7 +754,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteOverloadMethod(this CodeWriter writer, OverloadMethodSignature overloadMethod)
         {
-            writer.WriteXmlDocumentationSummary(overloadMethod.Description);
+            writer.WriteRawXmlDocumentation(overloadMethod.Description);
             if (overloadMethod.IsHiddenFromUser)
             {
                 writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");

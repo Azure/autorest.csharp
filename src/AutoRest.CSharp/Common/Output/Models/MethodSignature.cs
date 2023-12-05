@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
 
                 var result = x.Name == x.Name
-                    && x.ReturnType!.Equals(y.ReturnType)
+                    &&  x.ReturnType == y.ReturnType
                     && x.Parameters.SequenceEqual(y.Parameters, Parameter.TypeAndNameEqualityComparer);
                 return result;
             }

@@ -182,7 +182,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var method in methods)
             {
                 var description = method.GetDocumentationCommentXml();
-                //var returnType = MgmtContext.TypeFactory.GetCsharpType(method.ReturnType);
                 if (!MgmtContext.TypeFactory.TryCreateType(method.ReturnType, out var returnType))
                 {
                     // TODO: handle missing method return type from MgmtOutputLibrary
