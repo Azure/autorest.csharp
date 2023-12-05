@@ -93,7 +93,6 @@ namespace NamedTypeSymbolExtensionsTests
                 publicDiscriminatorProperty: false,
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
-                generateTests: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,
