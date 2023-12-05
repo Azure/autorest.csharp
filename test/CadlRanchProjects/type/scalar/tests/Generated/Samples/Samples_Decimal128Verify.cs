@@ -23,7 +23,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_PrepareVerify_ShortVersion()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = client.PrepareVerify(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_PrepareVerify_ShortVersion_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = await client.PrepareVerifyAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_PrepareVerify_ShortVersion_Convenience()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response<IReadOnlyList<decimal>> response = client.PrepareVerify();
         }
@@ -56,7 +56,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_PrepareVerify_ShortVersion_Convenience_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response<IReadOnlyList<decimal>> response = await client.PrepareVerifyAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_PrepareVerify_AllParameters()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = client.PrepareVerify(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_PrepareVerify_AllParameters_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = await client.PrepareVerifyAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_PrepareVerify_AllParameters_Convenience()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response<IReadOnlyList<decimal>> response = client.PrepareVerify();
         }
@@ -98,7 +98,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_PrepareVerify_AllParameters_Convenience_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response<IReadOnlyList<decimal>> response = await client.PrepareVerifyAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_Verify_ShortVersion()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Verify(content);
@@ -119,7 +119,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_Verify_ShortVersion_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.VerifyAsync(content);
@@ -131,7 +131,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_Verify_ShortVersion_Convenience()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = client.Verify((decimal)default);
         }
@@ -140,7 +140,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_Verify_ShortVersion_Convenience_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = await client.VerifyAsync((decimal)default);
         }
@@ -149,7 +149,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_Verify_AllParameters()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Verify(content);
@@ -161,7 +161,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_Verify_AllParameters_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.VerifyAsync(content);
@@ -173,7 +173,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128Verify_Verify_AllParameters_Convenience()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = client.Verify((decimal)default);
         }
@@ -182,7 +182,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128Verify_Verify_AllParameters_Convenience_Async()
         {
-            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient(apiVersion: "1.0.0");
+            Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
             Response response = await client.VerifyAsync((decimal)default);
         }

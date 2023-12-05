@@ -6,19 +6,18 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using _Type.Property.ValueTypes.Models;
 
-namespace _Type.Scalar
+namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
-    /// <summary> Decimal128 type verification. </summary>
-    public partial class Decimal128Verify
+    /// <summary> The Decimal128 sub-client. </summary>
+    public partial class Decimal128
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,58 +28,44 @@ namespace _Type.Scalar
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Decimal128Verify for mocking. </summary>
-        protected Decimal128Verify()
+        /// <summary> Initializes a new instance of Decimal128 for mocking. </summary>
+        protected Decimal128()
         {
         }
 
-        /// <summary> Initializes a new instance of Decimal128Verify. </summary>
+        /// <summary> Initializes a new instance of Decimal128. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        internal Decimal128Verify(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
+        internal Decimal128(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='PrepareVerifyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<IReadOnlyList<decimal>>> PrepareVerifyAsync(CancellationToken cancellationToken = default)
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='GetDecimal128Async(CancellationToken)']/*" />
+        public virtual async Task<Response<Decimal128Property>> GetDecimal128Async(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PrepareVerifyAsync(context).ConfigureAwait(false);
-            IReadOnlyList<decimal> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            List<decimal> array = new List<decimal>();
-            foreach (var item in document.RootElement.EnumerateArray())
-            {
-                array.Add(item.GetDecimal());
-            }
-            value = array;
-            return Response.FromValue(value, response);
+            Response response = await GetDecimal128Async(context).ConfigureAwait(false);
+            return Response.FromValue(Decimal128Property.FromResponse(response), response);
         }
 
+        /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='PrepareVerify(CancellationToken)']/*" />
-        public virtual Response<IReadOnlyList<decimal>> PrepareVerify(CancellationToken cancellationToken = default)
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='GetDecimal128(CancellationToken)']/*" />
+        public virtual Response<Decimal128Property> GetDecimal128(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PrepareVerify(context);
-            IReadOnlyList<decimal> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
-            List<decimal> array = new List<decimal>();
-            foreach (var item in document.RootElement.EnumerateArray())
-            {
-                array.Add(item.GetDecimal());
-            }
-            value = array;
-            return Response.FromValue(value, response);
+            Response response = GetDecimal128(context);
+            return Response.FromValue(Decimal128Property.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -89,7 +74,7 @@ namespace _Type.Scalar
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PrepareVerifyAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetDecimal128Async(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -97,14 +82,14 @@ namespace _Type.Scalar
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='PrepareVerifyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> PrepareVerifyAsync(RequestContext context)
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='GetDecimal128Async(RequestContext)']/*" />
+        public virtual async Task<Response> GetDecimal128Async(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Decimal128Verify.PrepareVerify");
+            using var scope = ClientDiagnostics.CreateScope("Decimal128.GetDecimal128");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePrepareVerifyRequest(context);
+                using HttpMessage message = CreateGetDecimal128Request(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -115,7 +100,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Get call
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -124,7 +109,7 @@ namespace _Type.Scalar
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PrepareVerify(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetDecimal128(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -132,14 +117,14 @@ namespace _Type.Scalar
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='PrepareVerify(RequestContext)']/*" />
-        public virtual Response PrepareVerify(RequestContext context)
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='GetDecimal128(RequestContext)']/*" />
+        public virtual Response GetDecimal128(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Decimal128Verify.PrepareVerify");
+            using var scope = ClientDiagnostics.CreateScope("Decimal128.GetDecimal128");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePrepareVerifyRequest(context);
+                using HttpMessage message = CreateGetDecimal128Request(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -149,30 +134,38 @@ namespace _Type.Scalar
             }
         }
 
-        /// <param name="body"> The <see cref="decimal"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='VerifyAsync(decimal,CancellationToken)']/*" />
-        public virtual async Task<Response> VerifyAsync(decimal body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='PutAsync(Decimal128Property,CancellationToken)']/*" />
+        public virtual async Task<Response> PutAsync(Decimal128Property body, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(body, nameof(body));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
-            Response response = await VerifyAsync(content, context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The <see cref="decimal"/> to use. </param>
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='Verify(decimal,CancellationToken)']/*" />
-        public virtual Response Verify(decimal body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='Put(Decimal128Property,CancellationToken)']/*" />
+        public virtual Response Put(Decimal128Property body, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(body, nameof(body));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
-            Response response = Verify(content, context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Put(content, context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -181,7 +174,7 @@ namespace _Type.Scalar
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="VerifyAsync(decimal,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(Decimal128Property,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -191,16 +184,16 @@ namespace _Type.Scalar
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='VerifyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> VerifyAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Decimal128Verify.Verify");
+            using var scope = ClientDiagnostics.CreateScope("Decimal128.Put");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateVerifyRequest(content, context);
+                using HttpMessage message = CreatePutRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -211,7 +204,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method]
+        /// [Protocol Method] Put operation
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -220,7 +213,7 @@ namespace _Type.Scalar
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Verify(decimal,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(Decimal128Property,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -230,16 +223,16 @@ namespace _Type.Scalar
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Decimal128Verify.xml" path="doc/members/member[@name='Verify(RequestContent,RequestContext)']/*" />
-        public virtual Response Verify(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
+        public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Decimal128Verify.Verify");
+            using var scope = ClientDiagnostics.CreateScope("Decimal128.Put");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateVerifyRequest(content, context);
+                using HttpMessage message = CreatePutRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -249,27 +242,27 @@ namespace _Type.Scalar
             }
         }
 
-        internal HttpMessage CreatePrepareVerifyRequest(RequestContext context)
+        internal HttpMessage CreateGetDecimal128Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/scalar/decimal128/prepare_verify", false);
+            uri.AppendPath("/type/property/value-types/decimal128", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateVerifyRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreatePutRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
-            request.Method = RequestMethod.Post;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/scalar/decimal128/verify", false);
+            uri.AppendPath("/type/property/value-types/decimal128", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

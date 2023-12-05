@@ -49,6 +49,8 @@ namespace _Type.Property.ValueTypes
         private Bytes _cachedBytes;
         private Int _cachedInt;
         private Float _cachedFloat;
+        private Decimal _cachedDecimal;
+        private Decimal128 _cachedDecimal128;
         private Datetime _cachedDatetime;
         private Duration _cachedDuration;
         private Enum _cachedEnum;
@@ -99,6 +101,18 @@ namespace _Type.Property.ValueTypes
         public virtual Float GetFloatClient()
         {
             return Volatile.Read(ref _cachedFloat) ?? Interlocked.CompareExchange(ref _cachedFloat, new Float(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedFloat;
+        }
+
+        /// <summary> Initializes a new instance of Decimal. </summary>
+        public virtual Decimal GetDecimalClient()
+        {
+            return Volatile.Read(ref _cachedDecimal) ?? Interlocked.CompareExchange(ref _cachedDecimal, new Decimal(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimal;
+        }
+
+        /// <summary> Initializes a new instance of Decimal128. </summary>
+        public virtual Decimal128 GetDecimal128Client()
+        {
+            return Volatile.Read(ref _cachedDecimal128) ?? Interlocked.CompareExchange(ref _cachedDecimal128, new Decimal128(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimal128;
         }
 
         /// <summary> Initializes a new instance of Datetime. </summary>

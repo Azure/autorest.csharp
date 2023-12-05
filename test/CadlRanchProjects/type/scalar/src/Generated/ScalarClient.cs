@@ -47,6 +47,10 @@ namespace _Type.Scalar
         private String _cachedString;
         private Boolean _cachedBoolean;
         private Unknown _cachedUnknown;
+        private DecimalType _cachedDecimalType;
+        private Decimal128Type _cachedDecimal128Type;
+        private DecimalVerify _cachedDecimalVerify;
+        private Decimal128Verify _cachedDecimal128Verify;
 
         /// <summary> Initializes a new instance of String. </summary>
         public virtual String GetStringClient()
@@ -67,43 +71,27 @@ namespace _Type.Scalar
         }
 
         /// <summary> Initializes a new instance of DecimalType. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DecimalType GetDecimalTypeClient(string apiVersion = "1.0.0")
+        public virtual DecimalType GetDecimalTypeClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new DecimalType(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimalType) ?? Interlocked.CompareExchange(ref _cachedDecimalType, new DecimalType(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimalType;
         }
 
         /// <summary> Initializes a new instance of Decimal128Type. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Decimal128Type GetDecimal128TypeClient(string apiVersion = "1.0.0")
+        public virtual Decimal128Type GetDecimal128TypeClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Decimal128Type(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimal128Type) ?? Interlocked.CompareExchange(ref _cachedDecimal128Type, new Decimal128Type(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimal128Type;
         }
 
         /// <summary> Initializes a new instance of DecimalVerify. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DecimalVerify GetDecimalVerifyClient(string apiVersion = "1.0.0")
+        public virtual DecimalVerify GetDecimalVerifyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new DecimalVerify(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimalVerify) ?? Interlocked.CompareExchange(ref _cachedDecimalVerify, new DecimalVerify(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimalVerify;
         }
 
         /// <summary> Initializes a new instance of Decimal128Verify. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Decimal128Verify GetDecimal128VerifyClient(string apiVersion = "1.0.0")
+        public virtual Decimal128Verify GetDecimal128VerifyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Decimal128Verify(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimal128Verify) ?? Interlocked.CompareExchange(ref _cachedDecimal128Verify, new Decimal128Verify(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimal128Verify;
         }
     }
 }
