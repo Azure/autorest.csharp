@@ -88,6 +88,8 @@ You could run this command on local dev machine or ask github workflow run it ag
 
 ### Testing Details
 
+**autorest.testserver**
+
 [autorest.testserver](http://github.com/Azure/autorest.testserver/) provides a platform for automated testing of the code generators. 
 
 It packages a bunch of test swagger files, along with a “mock” nodejs server. 
@@ -95,6 +97,12 @@ It packages a bunch of test swagger files, along with a “mock” nodejs server
 The swagger files are compiled, and then run, which pings the mock server (to verify behavior). This tests both the Modeler 4 and language specific codegen. 
 
 This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/README.md).
+
+**cadl-ranch**
+
+[cadl-ranch](https://github.com/Azure/cadl-ranch) is similar to autorest.testserver, which provides a platform for automated testing too. The difference is the testing target of cadl-ranch is typespec generated SDK.
+
+To test local change in cadl-ranch, run `.\eng\ApplyCadlRanch.ps1 {cadl-ranch path}` or just run `.\eng\ApplyCadlRanch.ps1` if cadl-ranch folder is at the same folder of autorest.csharp.
 
 ## PR Merge Process
 
