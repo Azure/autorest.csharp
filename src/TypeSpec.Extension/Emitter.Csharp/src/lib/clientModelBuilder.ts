@@ -97,33 +97,35 @@ export function createModelForService(
         }
         defaultApiVersion = versions[versions.length - 1].value;
     }
-    const apiVersionParam : InputParameter | undefined = defaultApiVersion ? {
-        Name: "apiVersion",
-        NameInRequest: "api-version",
-        Description: "",
-        Type: {
-            Name: "String",
-            Kind: InputTypeKind.String,
-            IsNullable: false
-        } as InputPrimitiveType,
-        Location: RequestLocation.Query,
-        IsRequired: true,
-        IsApiVersion: true,
-        IsContentType: false,
-        IsEndpoint: false,
-        IsResourceParameter: false,
-        SkipUrlEncoding: false,
-        Explode: false,
-        Kind: InputOperationParameterKind.Client,
-        DefaultValue: {
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Value: defaultApiVersion
-        } as InputConstant
-    } : undefined;
+    const apiVersionParam: InputParameter | undefined = defaultApiVersion
+        ? {
+              Name: "apiVersion",
+              NameInRequest: "api-version",
+              Description: "",
+              Type: {
+                  Name: "String",
+                  Kind: InputTypeKind.String,
+                  IsNullable: false
+              } as InputPrimitiveType,
+              Location: RequestLocation.Query,
+              IsRequired: true,
+              IsApiVersion: true,
+              IsContentType: false,
+              IsEndpoint: false,
+              IsResourceParameter: false,
+              SkipUrlEncoding: false,
+              Explode: false,
+              Kind: InputOperationParameterKind.Client,
+              DefaultValue: {
+                  Type: {
+                      Name: "String",
+                      Kind: InputTypeKind.String,
+                      IsNullable: false
+                  } as InputPrimitiveType,
+                  Value: defaultApiVersion
+              } as InputConstant
+          }
+        : undefined;
 
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
@@ -194,9 +196,9 @@ export function createModelForService(
                         target: NoTarget
                     });
                     break;
-                }
-                else {
-                    const apiVersionInOperation = op.Parameters[apiVersionIndex];
+                } else {
+                    const apiVersionInOperation =
+                        op.Parameters[apiVersionIndex];
                     if (!apiVersionInOperation.DefaultValue?.Value) {
                         apiVersionInOperation.DefaultValue =
                             apiVersionParam.DefaultValue;
@@ -214,11 +216,12 @@ export function createModelForService(
                         ) &&
                         apiVersionInOperation.Kind ===
                             InputOperationParameterKind.Client &&
-                        apiVersionInOperation.Location === apiVersionParam.Location
+                        apiVersionInOperation.Location ===
+                            apiVersionParam.Location
                     ) {
                         op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
-                }                
+                }
             }
         }
     }
