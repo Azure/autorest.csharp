@@ -13,12 +13,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
+    /// <summary>
+    /// This type holds three portions of codes:
+    ///     - current
+    ///     - custom
+    ///     - baseline contract
+    ///     current union custom compare with baseline contract outputs the changeset, we can apply different rules with it.
+    /// </summary>
     internal class SignatureType
     {
         private readonly string _defaultNamespace;
         private readonly string _defaultName;
         private readonly SignatureType? _customization;
-        private readonly SignatureType? _previousContract;
+        private readonly SignatureType? _baselineContract;
         private readonly MethodChangeset? _methodChangeset;
 
         // Missing means the method with the same name is missing from the current contract
@@ -33,8 +40,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (sourceInputModel is not null)
             {
                 _customization = new SignatureType(PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, defaultNamespace, defaultName);
-                _previousContract = new SignatureType(PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
-                _methodChangeset ??= CompareMethods(Methods.Union(_customization?.Methods ?? Array.Empty<MethodSignature>(), MethodSignature.ParameterAndReturnTypeEqualityComparer), _previousContract?.Methods);
+                _baselineContract = new SignatureType(PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
+                _methodChangeset ??= CompareMethods(Methods.Union(_customization?.Methods ?? Array.Empty<MethodSignature>(), MethodSignature.ParameterAndReturnTypeEqualityComparer), _baselineContract?.Methods);
             }
         }
 

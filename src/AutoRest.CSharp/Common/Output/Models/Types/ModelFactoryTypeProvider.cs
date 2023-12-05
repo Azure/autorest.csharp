@@ -33,6 +33,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         // TODO: remove this intermediate state once we generate it before output types
         private IReadOnlyList<Method>? _methods;
+
+        // This method should only be called from OutputMethods as intermediate state.
         private IReadOnlyList<Method> ShouldNotBeUsedForOutput([CallerMemberName] string caller = "")
         {
             Debug.Assert(caller == nameof(OutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
