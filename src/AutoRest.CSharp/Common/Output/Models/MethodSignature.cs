@@ -24,7 +24,13 @@ namespace AutoRest.CSharp.Output.Models
         public MethodSignature WithAsync(bool isAsync) => isAsync ? MakeAsync() : MakeSync();
 
         public MethodSignature DisableOptionalParameters()
-            => this with { Parameters = Parameters.Select(p => p.ToRequired()).ToList() };
+        {
+            if (Parameters.All(p => p.DefaultValue is null))
+            {
+                return this;
+            }
+            return this with { Parameters = Parameters.Select(p => p.ToRequired()).ToList() };
+        }
 
         private MethodSignature MakeAsync()
         {
@@ -121,7 +127,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
 
                 var result = x.Name == x.Name
-                    && x.ReturnType.EqualsByName(y.ReturnType)
+                    && x.ReturnType!.Equals(y.ReturnType)
                     && x.Parameters.SequenceEqual(y.Parameters, Parameter.TypeAndNameEqualityComparer);
                 return result;
             }

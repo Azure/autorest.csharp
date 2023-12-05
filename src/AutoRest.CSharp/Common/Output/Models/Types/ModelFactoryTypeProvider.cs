@@ -22,7 +22,6 @@ using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Microsoft.CodeAnalysis;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -34,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         // TODO: remove this intermediate state once we generate it before output types
         private IReadOnlyList<Method>? _methods;
-        private IReadOnlyList<Method> ShouldNotBeUsedForOutPut([CallerMemberName] string caller = "")
+        private IReadOnlyList<Method> ShouldNotBeUsedForOutput([CallerMemberName] string caller = "")
         {
             Debug.Assert(caller == nameof(OutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
             return _methods ??= Models!.Select(CreateMethod).ToList();
@@ -42,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IReadOnlyList<Method>? _outputMethods;
         public IReadOnlyList<Method> OutputMethods
-            => _outputMethods ??= ShouldNotBeUsedForOutPut().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
+            => _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
@@ -101,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
         private SignatureType? _signatureType;
-        public override SignatureType SignatureType => _signatureType ??= new SignatureType(ShouldNotBeUsedForOutPut().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
+        public override SignatureType SignatureType => _signatureType ??= new SignatureType(ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {

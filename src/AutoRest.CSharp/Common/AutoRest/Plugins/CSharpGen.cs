@@ -26,11 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration();
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-
-            var baselineContract = await LoadBaselineContract();
-            var sourceInputModel = baselineContract is not null
-                ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: baselineContract)
-                : new SourceInputModel(await project.GetCompilationAsync());
+            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), previousContract: await LoadBaselineContract());
 
             if (Configuration.Generation1ConvenienceClient)
             {

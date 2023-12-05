@@ -19,10 +19,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly string _defaultName;
         private readonly SignatureType? _customization;
         private readonly SignatureType? _previousContract;
+        private readonly MethodChangeset? _methodChangeset;
 
         // Missing means the method with the same name is missing from the current contract
         // Updated means the method with the same name is updated in the current contract, and the list contains the previous method and current methods including overload ones
-        private readonly (IReadOnlyList<MethodSignature> Missing, IReadOnlyList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? _methodChangeset;
+        private record MethodChangeset(IReadOnlyList<MethodSignature> Missing, IReadOnlyList<(List<MethodSignature> Current, MethodSignature Previous)> Updated) { }
 
         public SignatureType(IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
         {
@@ -115,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return true;
         }
 
-        private static (IReadOnlyList<MethodSignature> Missing, IReadOnlyList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature>? previousMethods)
+        private static MethodChangeset? CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature>? previousMethods)
         {
             if (previousMethods is null)
             {
@@ -150,7 +151,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
             }
-            return (missing, updated);
+            return new(missing, updated);
         }
 
         public IReadOnlyList<MethodSignature> Methods { get; }
