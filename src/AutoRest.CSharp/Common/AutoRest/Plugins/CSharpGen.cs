@@ -60,6 +60,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             string fullPath;
             string projectFilePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, $"{Configuration.Namespace}.csproj"));
+            if (!File.Exists(projectFilePath))
+                return null;
+
             var baselineVersion = ProjectRootElement.Open(projectFilePath).Properties.SingleOrDefault(p => p.Name == "ApiCompatVersion")?.Value;
 
             if (baselineVersion is not null)
