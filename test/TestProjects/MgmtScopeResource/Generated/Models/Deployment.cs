@@ -25,6 +25,17 @@ namespace MgmtScopeResource.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
+        /// <summary> Initializes a new instance of <see cref="Deployment"/>. </summary>
+        /// <param name="location"> The location to store the deployment data. </param>
+        /// <param name="properties"> The deployment properties. </param>
+        /// <param name="tags"> Deployment tags. </param>
+        internal Deployment(string location, DeploymentProperties properties, IDictionary<string, string> tags)
+        {
+            Location = location;
+            Properties = properties;
+            Tags = tags;
+        }
+
         /// <summary> The location to store the deployment data. </summary>
         public string Location { get; set; }
         /// <summary> The deployment properties. </summary>

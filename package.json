@@ -7,7 +7,7 @@
     "@azure-tools/typespec-autorest": "0.36.1",
     "@azure-tools/typespec-azure-core": "0.36.0",
     "@azure-tools/typespec-azure-resource-manager": "0.36.1",
-    "@azure-tools/typespec-client-generator-core": "0.36.0",
+    "@azure-tools/typespec-client-generator-core": "0.36.1",
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@microsoft.azure/autorest.testserver": "3.3.48",
     "@typespec/compiler": "0.50.0",

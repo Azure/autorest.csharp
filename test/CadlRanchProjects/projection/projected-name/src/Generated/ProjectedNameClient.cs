@@ -181,11 +181,18 @@ namespace Projection.ProjectedName
         }
 
         private Property _cachedProperty;
+        private Model _cachedModel;
 
         /// <summary> Initializes a new instance of Property. </summary>
         public virtual Property GetPropertyClient()
         {
             return Volatile.Read(ref _cachedProperty) ?? Interlocked.CompareExchange(ref _cachedProperty, new Property(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedProperty;
+        }
+
+        /// <summary> Initializes a new instance of Model. </summary>
+        public virtual Model GetModelClient()
+        {
+            return Volatile.Read(ref _cachedModel) ?? Interlocked.CompareExchange(ref _cachedModel, new Model(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedModel;
         }
 
         internal HttpMessage CreateClientNameRequest(RequestContext context)

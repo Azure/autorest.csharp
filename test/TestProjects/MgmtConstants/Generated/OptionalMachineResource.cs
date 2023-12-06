@@ -41,6 +41,9 @@ namespace MgmtConstants
         private readonly OptionalsRestOperations _optionalMachineOptionalsRestClient;
         private readonly OptionalMachineData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Constant/optionalMachines";
+
         /// <summary> Initializes a new instance of the <see cref="OptionalMachineResource"/> class for mocking. </summary>
         protected OptionalMachineResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtConstants
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Constant/optionalMachines";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
