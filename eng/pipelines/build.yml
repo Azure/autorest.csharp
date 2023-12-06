@@ -82,7 +82,7 @@ stages:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
-          - script: |
+          - script: >-
               dotnet test AutoRest.CSharp.sln
               --filter Name!~Example_
               --logger "trx;LogFileName=debug.trx" --logger:"console;verbosity=normal"
@@ -92,7 +92,7 @@ stages:
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
               DOTNET_MULTILEVEL_LOOKUP: 0
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - script: |
+          - script: >-
               dotnet test AutoRest.CSharp.sln
               -c Release
               --filter Name!~Example_
