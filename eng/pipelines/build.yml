@@ -118,9 +118,7 @@ stages:
             displayName: "Publish .NET Test Results"
             inputs:
               testResultsFiles: "**/*.trx"
-              testRunTitle: "$(OSName) $(TestTargetFramework)"
               testResultsFormat: "VSTest"
-              mergeTestResults: true
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - pwsh: >
                 ./eng/PublishRelease.ps1
