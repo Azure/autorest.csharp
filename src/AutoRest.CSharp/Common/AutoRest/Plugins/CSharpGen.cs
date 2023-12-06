@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
+using Microsoft.Build.Construction;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using NuGet.Configuration;
@@ -58,14 +59,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private async Task<CSharpCompilation?> LoadBaselineContract()
         {
             string fullPath;
-            var baselineContractPath = Configuration.BaselineContractFolder;
-            var baselineVersion = Configuration.BaselineContractVersion;
-            if (baselineContractPath is not null)
-            {
-                fullPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, baselineContractPath));
-                return await GeneratedCodeWorkspace.CreateExistingCodeProject(fullPath).GetCompilationAsync();
-            }
-            else if (baselineVersion is not null)
+            string projectFilePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, $"{Configuration.Namespace}.csproj"));
+            var baselineVersion = ProjectRootElement.Open(projectFilePath).Properties.SingleOrDefault(p => p.Name == "ApiCompatVersion")?.Value;
+
+            if (baselineVersion is not null)
             {
                 var nugetPackagePath = SettingsUtility.GetGlobalPackagesFolder(new NullSettings());
                 fullPath = Path.Combine(nugetPackagePath, Configuration.Namespace.ToLowerInvariant(), baselineVersion, "lib", "netstandard2.0", $"{Configuration.Namespace}.dll");
@@ -74,6 +71,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(xmlDocumentationPath, fullPath).GetCompilationAsync();
                 }
+            }
+
+            // fallback for testing purpose
+            var baselinePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "BaselineContract", Configuration.Namespace));
+            fullPath = Path.Combine(baselinePath, $"{Configuration.Namespace}.dll");
+            if (File.Exists(fullPath))
+            {
+                return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(Path.Combine(baselinePath, $"{Configuration.Namespace}.xml"), fullPath).GetCompilationAsync();
             }
 
             return null;

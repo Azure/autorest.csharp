@@ -1,0 +1,2155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MgmtCustomizations</name>
+    </assembly>
+    <members>
+        <member name="T:MgmtCustomizations.Models.Cat">
+            <summary> A cat. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.Models.Cat.Meow">
+            <summary> A cat can meow. We changed the readonly flag of this property using customization code </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.Cat.#ctor">
+            <summary> Initializes a new instance of Cat. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.Cat.#ctor(MgmtCustomizations.Models.PetKind,System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
+            <summary> Initializes a new instance of Cat. </summary>
+            <param name="kind"> The kind of the pet. </param>
+            <param name="name"> The name of the pet. </param>
+            <param name="size">
+            The size of the pet. This property here is mocking the following scenario:
+            Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+            </param>
+            <param name="dateOfBirth"> Pet date of birth. </param>
+            <param name="meow"> A cat can meow. </param>
+        </member>
+        <member name="T:MgmtCustomizations.Models.Dog">
+            <summary> A dog. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.Models.Dog.Bark">
+            <summary> A dog can bark. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.Dog.#ctor">
+            <summary> Initializes a new instance of Dog. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.Dog.#ctor(MgmtCustomizations.Models.PetKind,System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
+            <summary> Initializes a new instance of Dog. </summary>
+            <param name="kind"> The kind of the pet. </param>
+            <param name="name"> The name of the pet. </param>
+            <param name="size">
+            The size of the pet. This property here is mocking the following scenario:
+            Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+            </param>
+            <param name="dateOfBirth"> Pet date of birth. </param>
+            <param name="bark"> A dog can bark. </param>
+        </member>
+        <member name="T:MgmtCustomizations.Models.Pet">
+            <summary>
+            A pet
+            Please note <see cref="T:MgmtCustomizations.Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+            The available derived classes include <see cref="T:MgmtCustomizations.Models.Cat"/> and <see cref="T:MgmtCustomizations.Models.Dog"/>.
+            </summary>
+        </member>
+        <member name="P:MgmtCustomizations.Models.Pet.Size">
+            <summary> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.Models.Pet.DateOfBirth">
+            <summary> Pet date of birth. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.Pet.#ctor">
+            <summary> Initializes a new instance of Pet. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.Pet.#ctor(MgmtCustomizations.Models.PetKind,System.String,System.Int32,System.Nullable{System.DateTimeOffset})">
+            <summary> Initializes a new instance of Pet. </summary>
+            <param name="kind"> The kind of the pet. </param>
+            <param name="name"> The name of the pet. </param>
+            <param name="size">
+            The size of the pet. This property here is mocking the following scenario:
+            Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+            </param>
+            <param name="dateOfBirth"> Pet date of birth. </param>
+        </member>
+        <member name="P:MgmtCustomizations.Models.Pet.Kind">
+            <summary> The kind of the pet. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.Models.Pet.Name">
+            <summary> The name of the pet. </summary>
+        </member>
+        <member name="T:MgmtCustomizations.Models.PetStoreProperties">
+            <summary> The properties. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.Models.PetStoreProperties.Order">
+            verifies this could work
+        </member>
+        <member name="M:MgmtCustomizations.Models.PetStoreProperties.#ctor">
+            <summary> Initializes a new instance of PetStoreProperties. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.PetStoreProperties.#ctor(System.Nullable{System.Int32},MgmtCustomizations.Models.Pet)">
+            <summary> Initializes a new instance of PetStoreProperties. </summary>
+            <param name="order"> The order. </param>
+            <param name="pet">
+            A pet
+            Please note <see cref="T:MgmtCustomizations.Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+            The available derived classes include <see cref="T:MgmtCustomizations.Models.Cat"/> and <see cref="T:MgmtCustomizations.Models.Dog"/>.
+            </param>
+        </member>
+        <member name="P:MgmtCustomizations.Models.PetStoreProperties.Pet">
+            <summary>
+            A pet
+            Please note <see cref="T:MgmtCustomizations.Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+            The available derived classes include <see cref="T:MgmtCustomizations.Models.Cat"/> and <see cref="T:MgmtCustomizations.Models.Dog"/>.
+            </summary>
+        </member>
+        <member name="T:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory">
+            <summary> Model factory for models. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.PetStoreData(Azure.Core.ResourceIdentifier,System.String,Azure.Core.ResourceType,Azure.ResourceManager.Models.SystemData,MgmtCustomizations.Models.PetStoreProperties)">
+            <summary> Initializes a new instance of PetStoreData. </summary>
+            <param name="id"> The id. </param>
+            <param name="name"> The name. </param>
+            <param name="resourceType"> The resourceType. </param>
+            <param name="systemData"> The systemData. </param>
+            <param name="properties"> The properties. </param>
+            <returns> A new <see cref="T:MgmtCustomizations.PetStoreData"/> instance for mocking. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Pet(System.String,System.Int32,System.Nullable{System.DateTimeOffset})">
+            <summary> Initializes a new instance of Pet. </summary>
+            <param name="name"> The name of the pet. </param>
+            <param name="size">
+            The size of the pet. This property here is mocking the following scenario:
+            Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+            </param>
+            <param name="dateOfBirth"> Pet date of birth. </param>
+            <returns> A new <see cref="T:MgmtCustomizations.Models.Pet"/> instance for mocking. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Cat(System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
+            <summary> Initializes a new instance of Cat. </summary>
+            <param name="name"> The name of the pet. </param>
+            <param name="size">
+            The size of the pet. This property here is mocking the following scenario:
+            Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+            </param>
+            <param name="dateOfBirth"> Pet date of birth. </param>
+            <param name="meow"> A cat can meow. </param>
+            <returns> A new <see cref="T:MgmtCustomizations.Models.Cat"/> instance for mocking. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Dog(System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
+            <summary> Initializes a new instance of Dog. </summary>
+            <param name="name"> The name of the pet. </param>
+            <param name="size">
+            The size of the pet. This property here is mocking the following scenario:
+            Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+            </param>
+            <param name="dateOfBirth"> Pet date of birth. </param>
+            <param name="bark"> A dog can bark. </param>
+            <returns> A new <see cref="T:MgmtCustomizations.Models.Dog"/> instance for mocking. </returns>
+        </member>
+        <member name="T:MgmtCustomizations.Models.PetKind">
+            <summary> The kind of the pet. </summary>
+        </member>
+        <member name="F:MgmtCustomizations.Models.PetKind.Cat">
+            <summary> Cat. </summary>
+        </member>
+        <member name="F:MgmtCustomizations.Models.PetKind.Dog">
+            <summary> Dog. </summary>
+        </member>
+        <member name="T:MgmtCustomizations.Models.PetStoreListResult">
+            <summary> The list result of the rules. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.PetStoreListResult.#ctor">
+            <summary> Initializes a new instance of PetStoreListResult. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.PetStoreListResult.#ctor(System.Collections.Generic.IReadOnlyList{MgmtCustomizations.PetStoreData})">
+            <summary> Initializes a new instance of PetStoreListResult. </summary>
+            <param name="value"> The values. </param>
+        </member>
+        <member name="P:MgmtCustomizations.Models.PetStoreListResult.Value">
+            <summary> The values. </summary>
+        </member>
+        <member name="T:MgmtCustomizations.Models.UnknownPet">
+            <summary> The UnknownPet. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.Models.UnknownPet.#ctor(MgmtCustomizations.Models.PetKind,System.String,System.Int32,System.Nullable{System.DateTimeOffset})">
+            <summary> Initializes a new instance of UnknownPet. </summary>
+            <param name="kind"> The kind of the pet. </param>
+            <param name="name"> The name of the pet. </param>
+            <param name="size">
+            The size of the pet. This property here is mocking the following scenario:
+            Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
+            </param>
+            <param name="dateOfBirth"> Pet date of birth. </param>
+        </member>
+        <member name="T:MgmtCustomizations.MgmtCustomizationsExtensions">
+            <summary> A class to add extension methods to MgmtCustomizations. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsExtensions.GetPetStoreResource(Azure.ResourceManager.ArmClient,Azure.Core.ResourceIdentifier)">
+            <summary>
+            Gets an object representing a <see cref="T:MgmtCustomizations.PetStoreResource" /> along with the instance operations that can be performed on it but with no data.
+            You can use <see cref="M:MgmtCustomizations.PetStoreResource.CreateResourceIdentifier(System.String,System.String,System.String)" /> to create a <see cref="T:MgmtCustomizations.PetStoreResource" /> <see cref="T:Azure.Core.ResourceIdentifier" /> from its components.
+            </summary>
+            <param name="client"> The <see cref="T:Azure.ResourceManager.ArmClient" /> instance the method will execute against. </param>
+            <param name="id"> The resource ID of the resource to get. </param>
+            <returns> Returns a <see cref="T:MgmtCustomizations.PetStoreResource" /> object. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsExtensions.GetPetStores(Azure.ResourceManager.Resources.ResourceGroupResource)">
+            <summary> Gets a collection of PetStoreResources in the ResourceGroupResource. </summary>
+            <param name="resourceGroupResource"> The <see cref="T:Azure.ResourceManager.Resources.ResourceGroupResource" /> instance the method will execute against. </param>
+            <returns> An object representing collection of PetStoreResources and their operations over a PetStoreResource. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsExtensions.GetPetStoreAsync(Azure.ResourceManager.Resources.ResourceGroupResource,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="resourceGroupResource"> The <see cref="T:Azure.ResourceManager.Resources.ResourceGroupResource" /> instance the method will execute against. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsExtensions.GetPetStore(Azure.ResourceManager.Resources.ResourceGroupResource,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="resourceGroupResource"> The <see cref="T:Azure.ResourceManager.Resources.ResourceGroupResource" /> instance the method will execute against. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="T:MgmtCustomizations.ResourceGroupResourceExtensionClient">
+            <summary> A class to add extension methods to ResourceGroupResource. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.ResourceGroupResourceExtensionClient.#ctor">
+            <summary> Initializes a new instance of the <see cref="T:MgmtCustomizations.ResourceGroupResourceExtensionClient"/> class for mocking. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.ResourceGroupResourceExtensionClient.#ctor(Azure.ResourceManager.ArmClient,Azure.Core.ResourceIdentifier)">
+            <summary> Initializes a new instance of the <see cref="T:MgmtCustomizations.ResourceGroupResourceExtensionClient"/> class. </summary>
+            <param name="client"> The client parameters to use in these operations. </param>
+            <param name="id"> The identifier of the resource that is the target of operations. </param>
+        </member>
+        <member name="M:MgmtCustomizations.ResourceGroupResourceExtensionClient.GetPetStores">
+            <summary> Gets a collection of PetStoreResources in the ResourceGroupResource. </summary>
+            <returns> An object representing collection of PetStoreResources and their operations over a PetStoreResource. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.#ctor">
+            <summary> Initializes a new instance of MgmtCustomizationsArmOperation for mocking. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.MgmtCustomizationsArmOperation.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:MgmtCustomizations.MgmtCustomizationsArmOperation.HasCompleted">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.GetRawResponse">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.UpdateStatus(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.UpdateStatusAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.WaitForCompletionResponse(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.WaitForCompletionResponse(System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.WaitForCompletionResponseAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation.WaitForCompletionResponseAsync(System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.#ctor">
+            <summary> Initializes a new instance of MgmtCustomizationsArmOperation for mocking. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.MgmtCustomizationsArmOperation`1.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:MgmtCustomizations.MgmtCustomizationsArmOperation`1.Value">
+            <inheritdoc />
+        </member>
+        <member name="P:MgmtCustomizations.MgmtCustomizationsArmOperation`1.HasValue">
+            <inheritdoc />
+        </member>
+        <member name="P:MgmtCustomizations.MgmtCustomizationsArmOperation`1.HasCompleted">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.GetRawResponse">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.UpdateStatus(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.UpdateStatusAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.WaitForCompletion(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.WaitForCompletion(System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.WaitForCompletionAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:MgmtCustomizations.MgmtCustomizationsArmOperation`1.WaitForCompletionAsync(System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:MgmtCustomizations.PetStoreData">
+            <summary>
+            A class representing the PetStore data model.
+            A pet store
+            </summary>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreData.#ctor">
+            <summary> Initializes a new instance of PetStoreData. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreData.#ctor(Azure.Core.ResourceIdentifier,System.String,Azure.Core.ResourceType,Azure.ResourceManager.Models.SystemData,MgmtCustomizations.Models.PetStoreProperties)">
+            <summary> Initializes a new instance of PetStoreData. </summary>
+            <param name="id"> The id. </param>
+            <param name="name"> The name. </param>
+            <param name="resourceType"> The resourceType. </param>
+            <param name="systemData"> The systemData. </param>
+            <param name="properties"> The properties. </param>
+        </member>
+        <member name="P:MgmtCustomizations.PetStoreData.Properties">
+            <summary> The properties. </summary>
+        </member>
+        <member name="T:MgmtCustomizations.PetStoreCollection">
+            <summary>
+            A class representing a collection of <see cref="T:MgmtCustomizations.PetStoreResource" /> and their operations.
+            Each <see cref="T:MgmtCustomizations.PetStoreResource" /> in the collection will belong to the same instance of <see cref="T:Azure.ResourceManager.Resources.ResourceGroupResource" />.
+            To get a <see cref="T:MgmtCustomizations.PetStoreCollection" /> instance call the GetPetStores method from an instance of <see cref="T:Azure.ResourceManager.Resources.ResourceGroupResource" />.
+            </summary>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.#ctor">
+            <summary> Initializes a new instance of the <see cref="T:MgmtCustomizations.PetStoreCollection"/> class for mocking. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.#ctor(Azure.ResourceManager.ArmClient,Azure.Core.ResourceIdentifier)">
+            <summary> Initializes a new instance of the <see cref="T:MgmtCustomizations.PetStoreCollection"/> class. </summary>
+            <param name="client"> The client parameters to use in these operations. </param>
+            <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.CreateOrUpdateAsync(Azure.WaitUntil,System.String,MgmtCustomizations.PetStoreData,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Create</description>
+            </item>
+            </list>
+            </summary>
+            <param name="waitUntil"> <see cref="F:Azure.WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="data"> Endpoint properties. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.CreateOrUpdate(Azure.WaitUntil,System.String,MgmtCustomizations.PetStoreData,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Create</description>
+            </item>
+            </list>
+            </summary>
+            <param name="waitUntil"> <see cref="F:Azure.WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="data"> Endpoint properties. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.GetAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.Get(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.GetAllAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_List</description>
+            </item>
+            </list>
+            </summary>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <returns> An async collection of <see cref="T:MgmtCustomizations.PetStoreResource" /> that may take multiple service requests to iterate over. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.GetAll(System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_List</description>
+            </item>
+            </list>
+            </summary>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <returns> A collection of <see cref="T:MgmtCustomizations.PetStoreResource" /> that may take multiple service requests to iterate over. </returns>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.ExistsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Checks to see if the resource exists in azure.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.Exists(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Checks to see if the resource exists in azure.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.GetIfExistsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Tries to get details for this resource from the service.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreCollection.GetIfExists(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Tries to get details for this resource from the service.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        </member>
+        <member name="T:MgmtCustomizations.PetStoreResource">
+            <summary>
+            A Class representing a PetStore along with the instance operations that can be performed on it.
+            If you have a <see cref="T:Azure.Core.ResourceIdentifier" /> you can construct a <see cref="T:MgmtCustomizations.PetStoreResource" />
+            from an instance of <see cref="T:Azure.ResourceManager.ArmClient" /> using the GetPetStoreResource method.
+            Otherwise you can get one from its parent resource <see cref="T:Azure.ResourceManager.Resources.ResourceGroupResource" /> using the GetPetStore method.
+            </summary>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.CreateResourceIdentifier(System.String,System.String,System.String)">
+            <summary> Generate the resource identifier of a <see cref="T:MgmtCustomizations.PetStoreResource"/> instance. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.#ctor">
+            <summary> Initializes a new instance of the <see cref="T:MgmtCustomizations.PetStoreResource"/> class for mocking. </summary>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.#ctor(Azure.ResourceManager.ArmClient,MgmtCustomizations.PetStoreData)">
+            <summary> Initializes a new instance of the <see cref = "T:MgmtCustomizations.PetStoreResource"/> class. </summary>
+            <param name="client"> The client parameters to use in these operations. </param>
+            <param name="data"> The resource that is the target of operations. </param>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.#ctor(Azure.ResourceManager.ArmClient,Azure.Core.ResourceIdentifier)">
+            <summary> Initializes a new instance of the <see cref="T:MgmtCustomizations.PetStoreResource"/> class. </summary>
+            <param name="client"> The client parameters to use in these operations. </param>
+            <param name="id"> The identifier of the resource that is the target of operations. </param>
+        </member>
+        <member name="F:MgmtCustomizations.PetStoreResource.ResourceType">
+            <summary> Gets the resource type for the operations. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.PetStoreResource.HasData">
+            <summary> Gets whether or not the current instance has data. </summary>
+        </member>
+        <member name="P:MgmtCustomizations.PetStoreResource.Data">
+            <summary> Gets the data representing this Feature. </summary>
+            <exception cref="T:System.InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.GetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.Get(System.Threading.CancellationToken)">
+            <summary>
+            Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Get</description>
+            </item>
+            </list>
+            </summary>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.DeleteAsync(Azure.WaitUntil,System.Threading.CancellationToken)">
+            <summary>
+            Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Delete</description>
+            </item>
+            </list>
+            </summary>
+            <param name="waitUntil"> <see cref="F:Azure.WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.Delete(Azure.WaitUntil,System.Threading.CancellationToken)">
+            <summary>
+            Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Delete</description>
+            </item>
+            </list>
+            </summary>
+            <param name="waitUntil"> <see cref="F:Azure.WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.UpdateAsync(Azure.WaitUntil,MgmtCustomizations.PetStoreData,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Create</description>
+            </item>
+            </list>
+            </summary>
+            <param name="waitUntil"> <see cref="F:Azure.WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+            <param name="data"> Endpoint properties. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoreResource.Update(Azure.WaitUntil,MgmtCustomizations.PetStoreData,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+            <list type="bullet">
+            <item>
+            <term>Request Path</term>
+            <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pets/petStore/{name}</description>
+            </item>
+            <item>
+            <term>Operation Id</term>
+            <description>PetStores_Create</description>
+            </item>
+            </list>
+            </summary>
+            <param name="waitUntil"> <see cref="F:Azure.WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+            <param name="data"> Endpoint properties. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.#ctor(Azure.Core.Pipeline.HttpPipeline,System.String,System.Uri,System.String)">
+            <summary> Initializes a new instance of PetStoresRestOperations. </summary>
+            <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+            <param name="applicationId"> The application id to use for user agent. </param>
+            <param name="endpoint"> server parameter. </param>
+            <param name="apiVersion"> Api Version. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.ListAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary> Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.List(System.String,System.String,System.Threading.CancellationToken)">
+            <summary> Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.GetAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary> Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.Get(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary> Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.CreateAsync(System.String,System.String,System.String,MgmtCustomizations.PetStoreData,System.Threading.CancellationToken)">
+            <summary> Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="data"> Endpoint properties. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.Create(System.String,System.String,System.String,MgmtCustomizations.PetStoreData,System.Threading.CancellationToken)">
+            <summary> Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="data"> Endpoint properties. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.DeleteAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary> Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="M:MgmtCustomizations.PetStoresRestOperations.Delete(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary> Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. </summary>
+            <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+            <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
+            <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+            <param name="cancellationToken"> The cancellation token to use. </param>
+            <exception cref="T:System.ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
+            <exception cref="T:System.ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        </member>
+        <member name="T:Azure.Core.MultipartContent">
+            <summary>
+             Provides a container for content encoded using multipart/form-data MIME type.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.MultipartContent.#ctor(System.String,System.String)">
+            <summary>
+             Initializes a new instance of the <see cref="T:Azure.Core.MultipartContent"/> class.
+            </summary>
+            <param name="subtype">The multipart sub type.</param>
+            <param name="boundary">The boundary string for the multipart form data content.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartContent.ApplyToRequest(Azure.Core.Request)">
+            <summary>
+             Add content type header to the request.
+            </summary>
+            <param name="request">The request.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartContent.Add(Azure.Core.RequestContent)">
+            <summary>
+             Add HTTP content to a collection of RequestContent objects that
+             get serialized to multipart/form-data MIME type.
+            </summary>
+            <param name="content">The Request content to add to the collection.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartContent.Add(Azure.Core.RequestContent,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+             Add HTTP content to a collection of RequestContent objects that
+             get serialized to multipart/form-data MIME type.
+            </summary>
+            <param name="content">The Request content to add to the collection.</param>
+            <param name="headers">The headers to add to the collection.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartContent.Dispose">
+            <summary>
+             Frees resources held by the <see cref="T:Azure.Core.MultipartContent"/> object.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.MultipartContent.WriteTo(System.IO.Stream,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+             <param name="stream"></param>
+             <param name="cancellationToken"></param>
+            
+        </member>
+        <member name="M:Azure.Core.MultipartContent.WriteToAsync(System.IO.Stream,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+             <param name="stream"></param>
+             <param name="cancellation"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Azure.Core.MultipartContent.TryComputeLength(System.Int64@)">
+            <summary>
+            Attempts to compute the length of the underlying content, if available.
+            </summary>
+            <param name="length">The length of the underlying data.</param>
+        </member>
+        <member name="T:Azure.Core.MultipartFormDataContent">
+            <summary>
+             Provides a container for content encoded using multipart/form-data MIME type.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.MultipartFormDataContent.#ctor">
+            <summary>
+             Initializes a new instance of the <see cref="T:Azure.Core.MultipartFormDataContent"/> class.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.MultipartFormDataContent.#ctor(System.String)">
+            <summary>
+             Initializes a new instance of the <see cref="T:Azure.Core.MultipartFormDataContent"/> class.
+            </summary>
+            <param name="boundary">The boundary string for the multipart form data content.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartFormDataContent.Add(Azure.Core.RequestContent)">
+            <summary>
+             Add HTTP content to a collection of RequestContent objects that
+             get serialized to multipart/form-data MIME type.
+            </summary>
+            <param name="content">The Request content to add to the collection.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartFormDataContent.Add(Azure.Core.RequestContent,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+             Add HTTP content to a collection of RequestContent objects that
+             get serialized to multipart/form-data MIME type.
+            </summary>
+            <param name="content">The Request content to add to the collection.</param>
+            <param name="headers">The headers to add to the collection.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartFormDataContent.Add(Azure.Core.RequestContent,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+             Add HTTP content to a collection of RequestContent objects that
+             get serialized to multipart/form-data MIME type.
+            </summary>
+            <param name="content">The Request content to add to the collection.</param>
+            <param name="name">The name for the request content to add.</param>
+            <param name="headers">The headers to add to the collection.</param>
+        </member>
+        <member name="M:Azure.Core.MultipartFormDataContent.Add(Azure.Core.RequestContent,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+             Add HTTP content to a collection of RequestContent objects that
+             get serialized to multipart/form-data MIME type.
+            </summary>
+            <param name="content">The Request content to add to the collection.</param>
+            <param name="name">The name for the request content to add.</param>
+            <param name="fileName">The file name for the request content to add to the collection.</param>
+            <param name="headers">The headers to add to the collection.</param>
+        </member>
+        <member name="T:Azure.Core.AppContextSwitchHelper">
+            <summary>
+            Helper for interacting with AppConfig settings and their related Environment variable settings.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.AppContextSwitchHelper.GetConfigValue(System.String,System.String)">
+            <summary>
+            Determines if either an AppContext switch or its corresponding Environment Variable is set
+            </summary>
+            <param name="appContexSwitchName">Name of the AppContext switch.</param>
+            <param name="environmentVariableName">Name of the Environment variable.</param>
+            <returns>If the AppContext switch has been set, returns the value of the switch.
+            If the AppContext switch has not been set, returns the value of the environment variable.
+            False if neither is set.
+            </returns>
+        </member>
+        <member name="T:Azure.Core.Argument">
+            <summary>
+            Argument validation.
+            </summary>
+            <remarks>
+              <para>This class should be shared via source using Azure.Core.props and contain only common argument validation.
+                It is declared partial so that you can use the same familiar class name but extend it with project-specific validation.
+                To extend the functionality of this class, just declare your own partial <see cref="T:Azure.Core.Argument"/> class with project-specific methods.
+              </para>
+              <para>
+                Be sure to document exceptions thrown by these methods on your public methods.
+              </para>
+            </remarks>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertNotNull``1(``0,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is null.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertNotNull``1(System.Nullable{``0},System.String)">
+            <summary>
+            Throws if <paramref name="value"/> has not been initialized.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> has not been initialized.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertNotNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is null or an empty collection.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is an empty collection.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertNotNullOrEmpty(System.String,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is null or an empty string.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is an empty string.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertNotNullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is null, an empty string, or consists only of white-space characters.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is an empty string or consists only of white-space characters.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertNotDefault``1(``0@,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is the default value for type <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The type of structure to validate which implements <see cref="T:System.IEquatable`1"/>.</typeparam>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is the default value for type <typeparamref name="T"/>.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertInRange``1(``0,``0,``0,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is less than the <paramref name="minimum"/> or greater than the <paramref name="maximum"/>.
+            </summary>
+            <typeparam name="T">The type of to validate which implements <see cref="T:System.IComparable`1"/>.</typeparam>
+            <param name="value">The value to validate.</param>
+            <param name="minimum">The minimum value to compare.</param>
+            <param name="maximum">The maximum value to compare.</param>
+            <param name="name">The name of the parameter.</param>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertEnumDefined(System.Type,System.Object,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is not defined for <paramref name="enumType"/>.
+            </summary>
+            <param name="enumType">The type to validate against.</param>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is not defined for <paramref name="enumType"/>.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.CheckNotNull``1(``0,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> has not been initialized; otherwise, returns <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> has not been initialized.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.CheckNotNullOrEmpty(System.String,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is null or an empty string; otherwise, returns <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is an empty string.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is null.</exception>
+        </member>
+        <member name="M:Azure.Core.Argument.AssertNull``1(``0,System.String,System.String)">
+            <summary>
+            Throws if <paramref name="value"/> is not null.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="name">The name of the parameter.</param>
+            <param name="message">The error message.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="value"/> is not null.</exception>
+        </member>
+        <member name="T:Azure.Core.AsyncLockWithValue`1">
+            <summary>
+            Primitive that combines async lock and value cache
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Azure.Core.AsyncLockWithValue`1.GetLockOrValueAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Method that either returns cached value or acquire a lock.
+            If one caller has acquired a lock, other callers will be waiting for the lock to be released.
+            If value is set, lock is released and all waiters get that value.
+            If value isn't set, the next waiter in the queue will get the lock.
+            </summary>
+            <param name="async"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Azure.Core.AsyncLockWithValue`1.SetValue(`0,System.Int64@)">
+            <summary>
+            Set value to the cache and to all the waiters
+            </summary>
+            <param name="value"></param>
+            <param name="lockIndex"></param>
+        </member>
+        <member name="M:Azure.Core.AsyncLockWithValue`1.Reset(System.Int64@)">
+            <summary>
+            Release the lock and allow next waiter acquire it
+            </summary>
+        </member>
+        <member name="P:Azure.Core.AsyncLockWithValue`1.LockOrValue.HasValue">
+            <summary>
+            Returns true if lock contains the cached value. Otherwise false.
+            </summary>
+        </member>
+        <member name="P:Azure.Core.AsyncLockWithValue`1.LockOrValue.Value">
+            <summary>
+            Returns cached value if it was set when lock has been created. Throws exception otherwise.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Value isn't set.</exception>
+        </member>
+        <member name="M:Azure.Core.AsyncLockWithValue`1.LockOrValue.SetValue(`0)">
+            <summary>
+            Set value to the cache and to all the waiters.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.InvalidOperationException">Value is set already.</exception>
+        </member>
+        <member name="M:Azure.Core.Pipeline.ClientDiagnostics.#ctor(Azure.Core.ClientOptions,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.Pipeline.ClientDiagnostics"/> class.
+            </summary>
+            <param name="options">The customer provided client options object.</param>
+            <param name="suppressNestedClientActivities">Flag controlling if <see cref="T:System.Diagnostics.Activity"/>
+             created by this <see cref="T:Azure.Core.Pipeline.ClientDiagnostics"/> for client method calls should be suppressed when called
+             by other Azure SDK client methods.  It's recommended to set it to true for new clients; use default (null)
+             for backward compatibility reasons, or set it to false to explicitly disable suppression for specific cases.
+             The default value could change in the future, the flag should be only set to false if suppression for the client
+             should never be enabled.</param>
+        </member>
+        <member name="M:Azure.Core.Pipeline.ClientDiagnostics.#ctor(System.String,System.String,Azure.Core.DiagnosticsOptions,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.Pipeline.ClientDiagnostics"/> class.
+            </summary>
+            <param name="optionsNamespace">Namespace of the client class, such as Azure.Storage or Azure.AppConfiguration.</param>
+            <param name="providerNamespace">Azure Resource Provider namespace of the Azure service SDK is primarily used for.</param>
+            <param name="diagnosticsOptions">The customer provided client diagnostics options.</param>
+            <param name="suppressNestedClientActivities">Flag controlling if <see cref="T:System.Diagnostics.Activity"/>
+             created by this <see cref="T:Azure.Core.Pipeline.ClientDiagnostics"/> for client method calls should be suppressed when called
+             by other Azure SDK client methods.  It's recommended to set it to true for new clients, use default (null) for old clients
+             for backward compatibility reasons, or set it to false to explicitly disable suppression for specific cases.
+             The default value could change in the future, the flag should be only set to false if suppression for the client
+             should never be enabled.</param>
+        </member>
+        <member name="M:Azure.Core.Pipeline.DiagnosticScope.AddLink(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Adds a link to the scope. This must be called before <see cref="M:Azure.Core.Pipeline.DiagnosticScope.Start"/> has been called for the DiagnosticScope.
+            </summary>
+            <param name="traceparent">The traceparent for the link.</param>
+            <param name="tracestate">The tracestate for the link.</param>
+            <param name="attributes">Optional attributes to associate with the link.</param>
+        </member>
+        <member name="M:Azure.Core.Pipeline.DiagnosticScope.SetTraceContext(System.String,System.String)">
+            <summary>
+            Sets the trace context for the current scope.
+            </summary>
+            <param name="traceparent">The trace parent to set for the current scope.</param>
+            <param name="tracestate">The trace state to set for the current scope.</param>
+        </member>
+        <member name="M:Azure.Core.Pipeline.DiagnosticScope.Failed(System.Exception)">
+            <summary>
+            Marks the scope as failed.
+            </summary>
+            <param name="exception">The exception to associate with the failed scope.</param>
+        </member>
+        <member name="M:Azure.Core.Pipeline.DiagnosticScope.Failed(System.String)">
+            <summary>
+            Marks the scope as failed with low-cardinality error.type attribute.
+            </summary>
+            <param name="errorCode">Error code to associate with the failed scope.</param>
+        </member>
+        <member name="T:Azure.Core.Pipeline.ActivityExtensions">
+            <summary>
+            Until Activity Source is no longer considered experimental.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.Pipeline.DiagnosticScopeFactory.#ctor(System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Creates diagnostic scope factory.
+            </summary>
+            <param name="clientNamespace">The namespace which is used as a prefix for all ActivitySources created by the factory and the name of DiagnosticSource (when used).</param>
+            <param name="resourceProviderNamespace">Azure resource provider namespace.</param>
+            <param name="isActivityEnabled">Flag indicating if distributed tracing is enabled.</param>
+            <param name="suppressNestedClientActivities">Flag indicating if nested Azure SDK activities describing public API calls should be suppressed.</param>
+            <param name="isStable">Whether instrumentation is considered stable. When false, experimental feature flag controls if tracing is enabled.</param>
+        </member>
+        <member name="M:Azure.Core.Pipeline.DiagnosticScopeFactory.GetActivitySource(System.String,System.String)">
+            <summary>
+            This method combines client namespace and operation name into an ActivitySource name and creates the activity source.
+            For example:
+                ns: Azure.Storage.Blobs
+                name: BlobClient.DownloadTo
+                result Azure.Storage.Blobs.BlobClient
+            </summary>
+        </member>
+        <member name="T:Azure.Core.Pipeline.TaskExtensions.Enumerable`1">
+            <summary>
+            Both <see cref="T:Azure.Core.Pipeline.TaskExtensions.Enumerable`1"/> and <see cref="T:Azure.Core.Pipeline.TaskExtensions.Enumerator`1"/> are defined as public structs so that foreach can use duck typing
+            to call <see cref="M:Azure.Core.Pipeline.TaskExtensions.Enumerable`1.GetEnumerator"/> and avoid heap memory allocation.
+            Please don't delete this method and don't make these types private.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Azure.Core.FixedDelayWithNoJitterStrategy">
+            <summary>
+            A delay strategy that uses a fixed delay with no jitter applied. This is used by data plane LROs.
+            </summary>
+        </member>
+        <member name="T:Azure.Core.ForwardsClientCallsAttribute">
+            <summary>
+            Marks methods that call methods on other client and don't need their diagnostics verified.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.ForwardsClientCallsAttribute.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:Azure.Core.ForwardsClientCallsAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.ForwardsClientCallsAttribute.#ctor(System.Boolean)">
+            <summary>
+            Creates a new instance of <see cref="T:Azure.Core.ForwardsClientCallsAttribute"/>.
+            </summary>
+            <param name="skipChecks"> Sets whether or not diagnostic scope validation should happen. </param>
+        </member>
+        <member name="P:Azure.Core.ForwardsClientCallsAttribute.SkipChecks">
+            <summary>
+            Gets whether or not we should validate DiagnosticScope for this API.
+            In the case where there is an internal API that makes the Azure API call and a public API that uses it we need ForwardsClientCalls.
+            If the public API will cache the results then the diagnostic scope will not always be created because an Azure API is not always called.
+            In this case we need to turn off this validation for this API only.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.NextLinkOperationImplementation.GetFinalUri(System.String)">
+            <summary>
+            This function is used to get the final request uri after the lro has completed.
+            </summary>
+        </member>
+        <member name="T:Azure.Core.OperationInternal">
+            <summary>
+            A helper class used to build long-running operation instances. In order to use this helper:
+            <list type="number">
+              <item>Make sure your LRO implements the <see cref="T:Azure.Core.IOperation"/> interface.</item>
+              <item>Add a private <see cref="T:Azure.Core.OperationInternal"/> field to your LRO, and instantiate it during construction.</item>
+              <item>Delegate method calls to the <see cref="T:Azure.Core.OperationInternal"/> implementations.</item>
+            </list>
+            Supported members:
+            <list type="bullet">
+              <item>
+                <description><see cref="P:Azure.Core.OperationInternalBase.HasCompleted"/></description>
+              </item>
+              <item>
+                <description><see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>, used for <see cref="M:Azure.Operation.GetRawResponse"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternalBase.UpdateStatus(System.Threading.CancellationToken)"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternalBase.UpdateStatusAsync(System.Threading.CancellationToken)"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternalBase.WaitForCompletionResponseAsync(System.Threading.CancellationToken)"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternalBase.WaitForCompletionResponseAsync(System.TimeSpan,System.Threading.CancellationToken)"/></description>
+              </item>
+            </list>
+            </summary>
+        </member>
+        <member name="M:Azure.Core.OperationInternal.Succeeded(Azure.Response)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.OperationInternal"/> class in a final successful state.
+            </summary>
+            <param name="rawResponse">The final value of <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>.</param>
+        </member>
+        <member name="M:Azure.Core.OperationInternal.Failed(Azure.Response,Azure.RequestFailedException)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.OperationInternal"/> class in a final failed state.
+            </summary>
+            <param name="rawResponse">The final value of <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>.</param>
+            <param name="operationFailedException">The exception that will be thrown by <c>UpdateStatusAsync</c>.</param>
+        </member>
+        <member name="M:Azure.Core.OperationInternal.#ctor(Azure.Core.IOperation,Azure.Core.Pipeline.ClientDiagnostics,Azure.Response,System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}},Azure.Core.DelayStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.OperationInternal"/> class.
+            </summary>
+            <param name="operation">The long-running operation making use of this class. Passing "<c>this</c>" is expected.</param>
+            <param name="clientDiagnostics">Used for diagnostic scope and exception creation. This is expected to be the instance created during the construction of your main client.</param>
+            <param name="rawResponse">
+                The initial value of <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>. Usually, long-running operation objects can be instantiated in two ways:
+                <list type="bullet">
+                    <item>
+                        When calling a client's "<c>Start&lt;OperationName&gt;</c>" method, a service call is made to start the operation, and an <see cref="T:Azure.Operation"/> instance is returned.
+                        In this case, the response received from this service call can be passed here.
+                    </item>
+                    <item>
+                        When a user instantiates an <see cref="T:Azure.Operation"/> directly using a public constructor, there's no previous service call. In this case, passing <c>null</c> is expected.
+                    </item>
+                </list>
+            </param>
+            <param name="operationTypeName">
+                The type name of the long-running operation making use of this class. Used when creating diagnostic scopes. If left <c>null</c>, the type name will be inferred based on the
+                parameter <paramref name="operation"/>.
+            </param>
+            <param name="scopeAttributes">The attributes to use during diagnostic scope creation.</param>
+            <param name="fallbackStrategy"> The delay strategy to use. Default is <see cref="T:Azure.Core.FixedDelayWithNoJitterStrategy"/>.</param>
+        </member>
+        <member name="T:Azure.Core.IOperation">
+            <summary>
+            An interface used by <see cref="T:Azure.Core.OperationInternal"/> for making service calls and updating state. It's expected that
+            your long-running operation classes implement this interface.
+            </summary>
+        </member>
+        <member name="M:Azure.Core.IOperation.UpdateStateAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Calls the service and updates the state of the long-running operation. Properties directly handled by the
+            <see cref="T:Azure.Core.OperationInternal"/> class, such as <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>
+            don't need to be updated. Operation-specific properties, such as "<c>CreateOn</c>" or "<c>LastModified</c>",
+            must be manually updated by the operation implementing this method.
+            <example>Usage example:
+            <code>
+              async ValueTask&lt;OperationState&gt; IOperation.UpdateStateAsync(bool async, CancellationToken cancellationToken)<br/>
+              {<br/>
+                Response&lt;R&gt; response = async ? &lt;async service call&gt; : &lt;sync service call&gt;;<br/>
+                if (&lt;operation succeeded&gt;) return OperationState.Success(response.GetRawResponse(), &lt;parse response&gt;);<br/>
+                if (&lt;operation failed&gt;) return OperationState.Failure(response.GetRawResponse());<br/>
+                return OperationState.Pending(response.GetRawResponse());<br/>
+              }
+            </code>
+            </example>
+            </summary>
+            <param name="async"><c>true</c> if the call should be executed asynchronously. Otherwise, <c>false</c>.</param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>
+            A structure indicating the current operation state. The <see cref="T:Azure.Core.OperationState"/> structure must be instantiated by one of
+            its static methods:
+            <list type="bullet">
+              <item>Use <see cref="M:Azure.Core.OperationState.Success(Azure.Response)"/> when the operation has completed successfully.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState.Failure(Azure.Response,Azure.RequestFailedException)"/> when the operation has completed with failures.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState.Pending(Azure.Response)"/> when the operation has not completed yet.</item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:Azure.Core.OperationState">
+            <summary>
+            A helper structure passed to <see cref="T:Azure.Core.OperationInternal"/> to indicate the current operation state. This structure must be
+            instantiated by one of its static methods, depending on the operation state:
+            <list type="bullet">
+              <item>Use <see cref="M:Azure.Core.OperationState.Success(Azure.Response)"/> when the operation has completed successfully.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState.Failure(Azure.Response,Azure.RequestFailedException)"/> when the operation has completed with failures.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState.Pending(Azure.Response)"/> when the operation has not completed yet.</item>
+            </list>
+            </summary>
+        </member>
+        <member name="M:Azure.Core.OperationState.Success(Azure.Response)">
+            <summary>
+            Instantiates an <see cref="T:Azure.Core.OperationState"/> indicating the operation has completed successfully.
+            </summary>
+            <param name="rawResponse">The HTTP response obtained during the status update.</param>
+            <returns>A new <see cref="T:Azure.Core.OperationState"/> instance.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawResponse"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationState.Failure(Azure.Response,Azure.RequestFailedException)">
+            <summary>
+            Instantiates an <see cref="T:Azure.Core.OperationState"/> indicating the operation has completed with failures.
+            </summary>
+            <param name="rawResponse">The HTTP response obtained during the status update.</param>
+            <param name="operationFailedException">
+            The exception to throw from <c>UpdateStatus</c> because of the operation failure. If left <c>null</c>,
+            a default exception is created based on the <paramref name="rawResponse"/> parameter.
+            </param>
+            <returns>A new <see cref="T:Azure.Core.OperationState"/> instance.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawResponse"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationState.Pending(Azure.Response)">
+            <summary>
+            Instantiates an <see cref="T:Azure.Core.OperationState"/> indicating the operation has not completed yet.
+            </summary>
+            <param name="rawResponse">The HTTP response obtained during the status update.</param>
+            <returns>A new <see cref="T:Azure.Core.OperationState"/> instance.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawResponse"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:Azure.Core.OperationInternalBase.RawResponse">
+            <summary>
+            The last HTTP response received from the server. Its update already handled in calls to "<c>UpdateStatus</c>" and
+            "<c>WaitForCompletionAsync</c>", but custom methods not supported by this class, such as "<c>CancelOperation</c>",
+            must update it as well.
+            <example>Usage example:
+            <code>
+              public Response GetRawResponse() => _operationInternal.RawResponse;
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="P:Azure.Core.OperationInternalBase.HasCompleted">
+            <summary>
+            Returns <c>true</c> if the long-running operation has completed.
+            <example>Usage example:
+            <code>
+              public bool HasCompleted => _operationInternal.HasCompleted;
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="M:Azure.Core.OperationInternalBase.UpdateStatusAsync(System.Threading.CancellationToken)">
+            <summary>
+            Calls the server to get the latest status of the long-running operation, handling diagnostic scope creation for distributed
+            tracing. The default scope name can be changed with the "<c>operationTypeName</c>" parameter passed to the constructor.
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&gt; UpdateStatusAsync(CancellationToken cancellationToken) =>
+                await _operationInternal.UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The HTTP response received from the server.</returns>
+            <remarks>
+            After a successful run, this method will update <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/> and might update <see cref="P:Azure.Core.OperationInternalBase.HasCompleted"/>.
+            </remarks>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternalBase.UpdateStatus(System.Threading.CancellationToken)">
+            <summary>
+            Calls the server to get the latest status of the long-running operation, handling diagnostic scope creation for distributed
+            tracing. The default scope name can be changed with the "<c>operationTypeName</c>" parameter passed to the constructor.
+            <example>Usage example:
+            <code>
+              public Response UpdateStatus(CancellationToken cancellationToken) => _operationInternal.UpdateStatus(cancellationToken);
+            </code>
+            </example>
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The HTTP response received from the server.</returns>
+            <remarks>
+            After a successful run, this method will update <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/> and might update <see cref="P:Azure.Core.OperationInternalBase.HasCompleted"/>.
+            </remarks>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternalBase.WaitForCompletionResponseAsync(System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatusAsync(System.Threading.CancellationToken)"/> until the long-running operation completes.
+            After each service call, a retry-after header may be returned to communicate that there is no reason to poll
+            for status change until the specified time has passed.  The maximum of the retry after value and the fallback strategy
+            is then used as the wait interval.
+            Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms",
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternalBase.WaitForCompletionResponseAsync(System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatusAsync(System.Threading.CancellationToken)"/> until the long-running operation completes. The interval
+            between calls is defined by the parameter <paramref name="pollingInterval"/>, but it can change based on information returned
+            from the server. After each service call, a retry-after header may be returned to communicate that there is no reason to poll
+            for status change until the specified time has passed. In this case, the maximum value between the <paramref name="pollingInterval"/>
+            parameter and the retry-after header is chosen as the wait interval. Headers supported are: "Retry-After", "retry-after-ms",
+            and "x-ms-retry-after-ms".
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="pollingInterval">The interval between status requests to the server. <strong></strong></param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternalBase.WaitForCompletionResponse(System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatus(System.Threading.CancellationToken)"/> until the long-running operation completes.
+            After each service call, a retry-after header may be returned to communicate that there is no reason to poll
+            for status change until the specified time has passed.  The maximum of the retry after value and the fallback strategy
+            is then used as the wait interval.
+            Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms",
+            and "x-ms-retry-after-ms".
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternalBase.WaitForCompletionResponse(System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatus(System.Threading.CancellationToken)"/> until the long-running operation completes. The interval
+            between calls is defined by the parameter <paramref name="pollingInterval"/>, but it can change based on information returned
+            from the server. After each service call, a retry-after header may be returned to communicate that there is no reason to poll
+            for status change until the specified time has passed. In this case, the maximum value between the <paramref name="pollingInterval"/>
+            parameter and the retry-after header is chosen as the wait interval. Headers supported are: "Retry-After", "retry-after-ms",
+            and "x-ms-retry-after-ms".
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="pollingInterval">The interval between status requests to the server.</param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="T:Azure.Core.OperationInternal`1">
+            <summary>
+            A helper class used to build long-running operation instances. In order to use this helper:
+            <list type="number">
+              <item>Make sure your LRO implements the <see cref="T:Azure.Core.IOperation`1"/> interface.</item>
+              <item>Add a private <see cref="T:Azure.Core.OperationInternal`1"/> field to your LRO, and instantiate it during construction.</item>
+              <item>Delegate method calls to the <see cref="T:Azure.Core.OperationInternal`1"/> implementations.</item>
+            </list>
+            Supported members:
+            <list type="bullet">
+              <item>
+                <description><see cref="P:Azure.Core.OperationInternal`1.HasValue"/></description>
+              </item>
+              <item>
+                <description><see cref="P:Azure.Core.OperationInternalBase.HasCompleted"/></description>
+              </item>
+              <item>
+                <description><see cref="P:Azure.Core.OperationInternal`1.Value"/></description>
+              </item>
+              <item>
+                <description><see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>, used for <see cref="M:Azure.Operation.GetRawResponse"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternalBase.UpdateStatus(System.Threading.CancellationToken)"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternalBase.UpdateStatusAsync(System.Threading.CancellationToken)"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternal`1.WaitForCompletionAsync(System.Threading.CancellationToken)"/></description>
+              </item>
+              <item>
+                <description><see cref="M:Azure.Core.OperationInternal`1.WaitForCompletionAsync(System.TimeSpan,System.Threading.CancellationToken)"/></description>
+              </item>
+            </list>
+            </summary>
+            <typeparam name="T">The final result of the long-running operation. Must match the type used in <see cref="T:Azure.Operation`1"/>.</typeparam>
+        </member>
+        <member name="M:Azure.Core.OperationInternal`1.Succeeded(Azure.Response,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.OperationInternal"/> class in a final successful state.
+            </summary>
+            <param name="rawResponse">The final value of <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>.</param>
+            <param name="value">The final result of the long-running operation.</param>
+        </member>
+        <member name="M:Azure.Core.OperationInternal`1.Failed(Azure.Response,Azure.RequestFailedException)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.OperationInternal"/> class in a final failed state.
+            </summary>
+            <param name="rawResponse">The final value of <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>.</param>
+            <param name="operationFailedException">The exception that will be thrown by <c>UpdateStatusAsync</c>.</param>
+        </member>
+        <member name="M:Azure.Core.OperationInternal`1.#ctor(Azure.Core.IOperation{`0},Azure.Core.Pipeline.ClientDiagnostics,Azure.Response,System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}},Azure.Core.DelayStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Azure.Core.OperationInternal`1"/> class.
+            </summary>
+            <param name="operation">The long-running operation making use of this class. Passing "<c>this</c>" is expected.</param>
+            <param name="clientDiagnostics">Used for diagnostic scope and exception creation. This is expected to be the instance created during the construction of your main client.</param>
+            <param name="rawResponse">
+                The initial value of <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/>. Usually, long-running operation objects can be instantiated in two ways:
+                <list type="bullet">
+                    <item>
+                        When calling a client's "<c>Start&lt;OperationName&gt;</c>" method, a service call is made to start the operation, and an <see cref="T:Azure.Operation`1"/> instance is returned.
+                        In this case, the response received from this service call can be passed here.
+                    </item>
+                    <item>
+                        When a user instantiates an <see cref="T:Azure.Operation`1"/> directly using a public constructor, there's no previous service call. In this case, passing <c>null</c> is expected.
+                    </item>
+                </list>
+            </param>
+            <param name="operationTypeName">
+                The type name of the long-running operation making use of this class. Used when creating diagnostic scopes. If left <c>null</c>, the type name will be inferred based on the
+                parameter <paramref name="operation"/>.
+            </param>
+            <param name="scopeAttributes">The attributes to use during diagnostic scope creation.</param>
+            <param name="fallbackStrategy">The delay strategy when Retry-After header is not present.  When it is present, the longer of the two delays will be used.
+                Default is <see cref="T:Azure.Core.FixedDelayWithNoJitterStrategy"/>.</param>
+        </member>
+        <member name="P:Azure.Core.OperationInternal`1.HasValue">
+            <summary>
+            Returns <c>true</c> if the long-running operation completed successfully and has produced a final result.
+            <example>Usage example:
+            <code>
+              public bool HasValue => _operationInternal.HasValue;
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="P:Azure.Core.OperationInternal`1.Value">
+            <summary>
+            The final result of the long-running operation.
+            <example>Usage example:
+            <code>
+              public T Value => _operationInternal.Value;
+            </code>
+            </example>
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when the operation has not completed yet.</exception>
+            <exception cref="T:Azure.RequestFailedException">Thrown when the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternal`1.WaitForCompletionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatusAsync(System.Threading.CancellationToken)"/> until the long-running operation completes.
+            After each service call, a retry-after header may be returned to communicate that there is no reason to poll
+            for status change until the specified time has passed.
+            Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms",
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternal`1.WaitForCompletionAsync(System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatusAsync(System.Threading.CancellationToken)"/> until the long-running operation completes. The interval
+            between calls is defined by the parameter <paramref name="pollingInterval"/>, but it can change based on information returned
+            from the server. After each service call, a retry-after header may be returned to communicate that there is no reason to poll
+            for status change until the specified time has passed. In this case, the maximum value between the <paramref name="pollingInterval"/>
+            parameter and the retry-after header is chosen as the wait interval. Headers supported are: "Retry-After", "retry-after-ms",
+            and "x-ms-retry-after-ms".
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="pollingInterval">The interval between status requests to the server.</param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternal`1.WaitForCompletion(System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatus(System.Threading.CancellationToken)"/> until the long-running operation completes.
+            After each service call, a retry-after header may be returned to communicate that there is no reason to poll
+            for status change until the specified time has passed.
+            Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms",
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationInternal`1.WaitForCompletion(System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Periodically calls <see cref="M:Azure.Core.OperationInternalBase.UpdateStatus(System.Threading.CancellationToken)"/> until the long-running operation completes. The interval
+            between calls is defined by the <see cref="T:Azure.Core.FixedDelayWithNoJitterStrategy"/>, which takes into account any retry-after header that is returned
+            from the server.
+            <example>Usage example:
+            <code>
+              public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(CancellationToken cancellationToken) =>
+                await _operationInternal.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            </code>
+            </example>
+            </summary>
+            <param name="pollingInterval">The interval between status requests to the server.</param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
+            <exception cref="T:Azure.RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
+        </member>
+        <member name="T:Azure.Core.IOperation`1">
+            <summary>
+            An interface used by <see cref="T:Azure.Core.OperationInternal`1"/> for making service calls and updating state. It's expected that
+            your long-running operation classes implement this interface.
+            </summary>
+            <typeparam name="T">The final result of the long-running operation. Must match the type used in <see cref="T:Azure.Operation`1"/>.</typeparam>
+        </member>
+        <member name="M:Azure.Core.IOperation`1.UpdateStateAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Calls the service and updates the state of the long-running operation. Properties directly handled by the
+            <see cref="T:Azure.Core.OperationInternal`1"/> class, such as <see cref="P:Azure.Core.OperationInternalBase.RawResponse"/> or
+            <see cref="P:Azure.Core.OperationInternal`1.Value"/>, don't need to be updated. Operation-specific properties, such
+            as "<c>CreateOn</c>" or "<c>LastModified</c>", must be manually updated by the operation implementing this
+            method.
+            <example>Usage example:
+            <code>
+              async ValueTask&lt;OperationState&lt;T&gt;&gt; IOperation&lt;T&gt;.UpdateStateAsync(bool async, CancellationToken cancellationToken)<br/>
+              {<br/>
+                Response&lt;R&gt; response = async ? &lt;async service call&gt; : &lt;sync service call&gt;;<br/>
+                if (&lt;operation succeeded&gt;) return OperationState&lt;T&gt;.Success(response.GetRawResponse(), &lt;parse response&gt;);<br/>
+                if (&lt;operation failed&gt;) return OperationState&lt;T&gt;.Failure(response.GetRawResponse());<br/>
+                return OperationState&lt;T&gt;.Pending(response.GetRawResponse());<br/>
+              }
+            </code>
+            </example>
+            </summary>
+            <param name="async"><c>true</c> if the call should be executed asynchronously. Otherwise, <c>false</c>.</param>
+            <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken"/> controlling the request lifetime.</param>
+            <returns>
+            A structure indicating the current operation state. The <see cref="T:Azure.Core.OperationState`1"/> structure must be instantiated by one of
+            its static methods:
+            <list type="bullet">
+              <item>Use <see cref="M:Azure.Core.OperationState`1.Success(Azure.Response,`0)"/> when the operation has completed successfully.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState`1.Failure(Azure.Response,Azure.RequestFailedException)"/> when the operation has completed with failures.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState`1.Pending(Azure.Response)"/> when the operation has not completed yet.</item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:Azure.Core.OperationState`1">
+            <summary>
+            A helper structure passed to <see cref="T:Azure.Core.OperationInternal`1"/> to indicate the current operation state. This structure must be
+            instantiated by one of its static methods, depending on the operation state:
+            <list type="bullet">
+              <item>Use <see cref="M:Azure.Core.OperationState`1.Success(Azure.Response,`0)"/> when the operation has completed successfully.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState`1.Failure(Azure.Response,Azure.RequestFailedException)"/> when the operation has completed with failures.</item>
+              <item>Use <see cref="M:Azure.Core.OperationState`1.Pending(Azure.Response)"/> when the operation has not completed yet.</item>
+            </list>
+            </summary>
+            <typeparam name="T">The final result of the long-running operation. Must match the type used in <see cref="T:Azure.Operation`1"/>.</typeparam>
+        </member>
+        <member name="M:Azure.Core.OperationState`1.Success(Azure.Response,`0)">
+            <summary>
+            Instantiates an <see cref="T:Azure.Core.OperationState`1"/> indicating the operation has completed successfully.
+            </summary>
+            <param name="rawResponse">The HTTP response obtained during the status update.</param>
+            <param name="value">The final result of the long-running operation.</param>
+            <returns>A new <see cref="T:Azure.Core.OperationState`1"/> instance.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawResponse"/> or <paramref name="value"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationState`1.Failure(Azure.Response,Azure.RequestFailedException)">
+            <summary>
+            Instantiates an <see cref="T:Azure.Core.OperationState`1"/> indicating the operation has completed with failures.
+            </summary>
+            <param name="rawResponse">The HTTP response obtained during the status update.</param>
+            <param name="operationFailedException">
+            The exception to throw from <c>UpdateStatus</c> because of the operation failure. The same exception will be thrown when
+            <see cref="P:Azure.Core.OperationInternal`1.Value"/> is called. If left <c>null</c>, a default exception is created based on the
+            <paramref name="rawResponse"/> parameter.
+            </param>
+            <returns>A new <see cref="T:Azure.Core.OperationState`1"/> instance.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawResponse"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:Azure.Core.OperationState`1.Pending(Azure.Response)">
+            <summary>
+            Instantiates an <see cref="T:Azure.Core.OperationState`1"/> indicating the operation has not completed yet.
+            </summary>
+            <param name="rawResponse">The HTTP response obtained during the status update.</param>
+            <returns>A new <see cref="T:Azure.Core.OperationState`1"/> instance.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="rawResponse"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:Azure.Core.OperationPoller">
+            <summary>
+            Implementation of LRO polling logic.
+            </summary>
+        </member>
+        <member name="P:Azure.Core.ProtocolOperation`1.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Azure.Core.ProtocolOperation`1.Value">
+            <inheritdoc />
+        </member>
+        <member name="P:Azure.Core.ProtocolOperation`1.HasCompleted">
+            <inheritdoc />
+        </member>
+        <member name="P:Azure.Core.ProtocolOperation`1.HasValue">
+            <inheritdoc />
+        </member>
+        <member name="M:Azure.Core.ProtocolOperation`1.GetRawResponse">
+            <inheritdoc />
+        </member>
+        <member name="M:Azure.Core.ProtocolOperation`1.UpdateStatus(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Azure.Core.ProtocolOperation`1.UpdateStatusAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Azure.Core.ProtocolOperation`1.WaitForCompletionAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Azure.Core.ProtocolOperation`1.WaitForCompletionAsync(System.TimeSpan,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Azure.Core.SequentialDelayStrategy">
+            <summary>
+            A delay strategy that uses a fixed sequence of delays with no jitter applied. This is used by management LROs.
+            </summary>
+        </member>
+        <member name="P:Azure.Core.CodeGenMemberSerializationHooksAttribute.SerializationValueHook">
+            <summary>
+            Gets or sets the method name to use when serializing the property value (property name excluded)
+            The signature of the serialization hook method must be or compatible with when invoking:
+            private void SerializeHook(Utf8JsonWriter writer);
+            </summary>
+        </member>
+        <member name="P:Azure.Core.CodeGenMemberSerializationHooksAttribute.DeserializationValueHook">
+            <summary>
+            Gets or sets the method name to use when deserializing the property value from the JSON
+            private static void DeserializationHook(JsonProperty property, ref TypeOfTheProperty propertyValue); // if the property is required
+            private static void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue); // if the property is optional
+            </summary>
+        </member>
+        <member name="P:Azure.Core.CodeGenModelAttribute.Usage">
+            <summary>
+            Gets or sets a coma separated list of additional model usage modes. Allowed values: model, error, intput, output.
+            </summary>
+        </member>
+        <member name="P:Azure.Core.CodeGenModelAttribute.Formats">
+            <summary>
+            Gets or sets a coma separated list of additional model serialization formats.
+            </summary>
+        </member>
+        <member name="P:Azure.NoValueResponse`1.HasValue">
+            <inheritdoc />
+        </member>
+        <member name="T:Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter">
+            <summary> JsonConverter for managed service identity type v3. </summary>
+        </member>
+        <member name="M:Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter.Write(System.Text.Json.Utf8JsonWriter,Azure.ResourceManager.Models.ManagedServiceIdentityType,System.Text.Json.JsonSerializerOptions)">
+            <summary> Serialize managed service identity type to v3 format. </summary>
+            <param name="writer"> The writer. </param>
+            <param name="model"> The ManagedServiceIdentityType model which is v4. </param>
+            <param name="options"> The options for JsonSerializer. </param>
+        </member>
+        <member name="M:Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary> Deserialize managed service identity type from v3 format. </summary>
+            <param name="reader"> The reader. </param>
+            <param name="typeToConvert"> The type to convert </param>
+            <param name="options"> The options for JsonSerializer. </param>
+        </member>
+        <member name="T:Azure.ResourceManager.SharedExtensions">
+            <summary>
+            helper class
+            </summary>
+        </member>
+        <member name="M:Azure.ResourceManager.SharedExtensions.SubstringAfterProviderNamespace(Azure.Core.ResourceIdentifier)">
+            <summary>
+            Collects the segments in a resource identifier into a string
+            </summary>
+            <param name="resourceId">the resource identifier</param>
+            <returns></returns>
+        </member>
+        <member name="M:Azure.ResourceManager.SharedExtensions.ReplaceWith(System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            An extension method for supporting replacing one dictionary content with another one.
+            This is used to support resource tags.
+            </summary>
+            <param name="dest"> The destination dictionary in which the content will be replaced. </param>
+            <param name="src"> The source dictionary from which the content is copied from. </param>
+            <returns> The destination dictionary that has been altered. </returns>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute">
+            <summary>
+            Indicates that the specified method requires the ability to generate new code at runtime,
+            for example through <see cref="N:System.Reflection"/>.
+            </summary>
+            <remarks>
+            This allows tools to understand which methods are unsafe to call when compiling ahead of time.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute"/> class
+            with the specified message.
+            </summary>
+            <param name="message">
+            A message that contains information about the usage of dynamic code.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.Message">
+            <summary>
+            Gets a message that contains information about the usage of dynamic code.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.Url">
+            <summary>
+            Gets or sets an optional URL that contains more information about the method,
+            why it requires dynamic code, and what options a consumer has to deal with it.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute">
+            <summary>
+            Indicates that the specified method requires dynamic access to code that is not referenced
+            statically, for example through <see cref="N:System.Reflection"/>.
+            </summary>
+            <remarks>
+            This allows tools to understand which methods are unsafe to call when removing unreferenced
+            code from an application.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"/> class
+            with the specified message.
+            </summary>
+            <param name="message">
+            A message that contains information about the usage of unreferenced code.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.Message">
+            <summary>
+            Gets a message that contains information about the usage of unreferenced code.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.Url">
+            <summary>
+            Gets or sets an optional URL that contains more information about the method,
+            why it requires unreferenced code, and what options a consumer has to deal with it.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
+            <summary>
+            Suppresses reporting of a specific rule violation, allowing multiple suppressions on a
+            single code artifact.
+            </summary>
+            <remarks>
+            <see cref="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"/> is different than
+            <see cref="T:System.Diagnostics.CodeAnalysis.SuppressMessageAttribute"/> in that it doesn't have a
+            <see cref="T:System.Diagnostics.ConditionalAttribute"/>. So it is always preserved in the compiled assembly.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"/>
+            class, specifying the category of the tool and the identifier for an analysis rule.
+            </summary>
+            <param name="category">The category for the attribute.</param>
+            <param name="checkId">The identifier of the analysis rule the attribute applies to.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Category">
+            <summary>
+            Gets the category identifying the classification of the attribute.
+            </summary>
+            <remarks>
+            The <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Category"/> property describes the tool or tool analysis category
+            for which a message suppression attribute applies.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.CheckId">
+            <summary>
+            Gets the identifier of the analysis tool rule to be suppressed.
+            </summary>
+            <remarks>
+            Concatenated together, the <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Category"/> and <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.CheckId"/>
+            properties form a unique check identifier.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Scope">
+            <summary>
+            Gets or sets the scope of the code that is relevant for the attribute.
+            </summary>
+            <remarks>
+            The Scope property is an optional argument that specifies the metadata scope for which
+            the attribute is relevant.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Target">
+            <summary>
+            Gets or sets a fully qualified path that represents the target of the attribute.
+            </summary>
+            <remarks>
+            The <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Target"/> property is an optional argument identifying the analysis target
+            of the attribute. An example value is "System.IO.Stream.ctor():System.Void".
+            Because it is fully qualified, it can be long, particularly for targets such as parameters.
+            The analysis tool user interface should be capable of automatically formatting the parameter.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.MessageId">
+            <summary>
+            Gets or sets an optional argument expanding on exclusion criteria.
+            </summary>
+            <remarks>
+            The <see cref="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.MessageId"/> property is an optional argument that specifies additional
+            exclusion where the literal metadata target is not sufficiently precise. For example,
+            the <see cref="T:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute"/> cannot be applied within a method,
+            and it may be desirable to suppress a violation against a statement in the method that will
+            give a rule violation, but not against all statements in the method.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute.Justification">
+            <summary>
+            Gets or sets the justification for suppressing the code analysis message.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute">
+            <summary>
+            States a dependency that one member has on another.
+            </summary>
+            <remarks>
+            This can be used to inform tooling of a dependency that is otherwise not evident purely from
+            metadata and IL, for example a member relied on via reflection.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"/> class
+            with the specified signature of a member on the same type as the consumer.
+            </summary>
+            <param name="memberSignature">The signature of the member depended on.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"/> class
+            with the specified signature of a member on a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="memberSignature">The signature of the member depended on.</param>
+            <param name="type">The <see cref="T:System.Type"/> containing <paramref name="memberSignature"/>.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"/> class
+            with the specified signature of a member on a type in an assembly.
+            </summary>
+            <param name="memberSignature">The signature of the member depended on.</param>
+            <param name="typeName">The full name of the type containing the specified member.</param>
+            <param name="assemblyName">The assembly name of the type containing the specified member.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.#ctor(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"/> class
+            with the specified types of members on a <see cref="T:System.Type"/>.
+            </summary>
+            <param name="memberTypes">The types of members depended on.</param>
+            <param name="type">The <see cref="T:System.Type"/> containing the specified members.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.#ctor(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute"/> class
+            with the specified types of members on a type in an assembly.
+            </summary>
+            <param name="memberTypes">The types of members depended on.</param>
+            <param name="typeName">The full name of the type containing the specified members.</param>
+            <param name="assemblyName">The assembly name of the type containing the specified members.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberSignature">
+            <summary>
+            Gets the signature of the member depended on.
+            </summary>
+            <remarks>
+            Either <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberSignature"/> must be a valid string or <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberTypes"/>
+            must not equal <see cref="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.None"/>, but not both.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberTypes">
+            <summary>
+            Gets the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"/> which specifies the type
+            of members depended on.
+            </summary>
+            <remarks>
+            Either <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberSignature"/> must be a valid string or <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.MemberTypes"/>
+            must not equal <see cref="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.None"/>, but not both.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.Type">
+            <summary>
+            Gets the <see cref="T:System.Type"/> containing the specified member.
+            </summary>
+            <remarks>
+            If neither <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.Type"/> nor <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.TypeName"/> are specified,
+            the type of the consumer is assumed.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.TypeName">
+            <summary>
+            Gets the full name of the type containing the specified member.
+            </summary>
+            <remarks>
+            If neither <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.Type"/> nor <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.TypeName"/> are specified,
+            the type of the consumer is assumed.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.AssemblyName">
+            <summary>
+            Gets the assembly name of the specified type.
+            </summary>
+            <remarks>
+            <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.AssemblyName"/> is only valid when <see cref="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.TypeName"/> is specified.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute.Condition">
+            <summary>
+            Gets or sets the condition in which the dependency is applicable, e.g. "DEBUG".
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute">
+             <summary>
+             Indicates that certain members on a specified <see cref="T:System.Type"/> are accessed dynamically,
+             for example through <see cref="N:System.Reflection"/>.
+             </summary>
+             <remarks>
+             This allows tools to understand which members are being accessed during the execution
+             of a program.
+            
+             This attribute is valid on members whose type is <see cref="T:System.Type"/> or <see cref="T:System.String"/>.
+            
+             When this attribute is applied to a location of type <see cref="T:System.String"/>, the assumption is
+             that the string represents a fully qualified type name.
+            
+             When this attribute is applied to a class, interface, or struct, the members specified
+             can be accessed dynamically on <see cref="T:System.Type"/> instances returned from calling
+             <see cref="M:System.Object.GetType"/> on instances of that class, interface, or struct.
+            
+             If the attribute is applied to a method it's treated as a special case and it implies
+             the attribute should be applied to the "this" parameter of the method. As such the attribute
+             should only be used on instance methods of types assignable to System.Type (or string, but no methods
+             will use it there).
+             </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.#ctor(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"/> class
+            with the specified member types.
+            </summary>
+            <param name="memberTypes">The types of members dynamically accessed.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.MemberTypes">
+            <summary>
+            Gets the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"/> which specifies the type
+            of members dynamically accessed.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes">
+             <summary>
+             Specifies the types of members that are dynamically accessed.
+            
+             This enumeration has a <see cref="T:System.FlagsAttribute"/> attribute that allows a
+             bitwise combination of its member values.
+             </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.None">
+            <summary>
+            Specifies no members.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor">
+            <summary>
+            Specifies the default, parameterless public constructor.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors">
+            <summary>
+            Specifies all public constructors.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors">
+            <summary>
+            Specifies all non-public constructors.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods">
+            <summary>
+            Specifies all public methods.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods">
+            <summary>
+            Specifies all non-public methods.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields">
+            <summary>
+            Specifies all public fields.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields">
+            <summary>
+            Specifies all non-public fields.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicNestedTypes">
+            <summary>
+            Specifies all public nested types.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes">
+            <summary>
+            Specifies all non-public nested types.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties">
+            <summary>
+            Specifies all public properties.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties">
+            <summary>
+            Specifies all non-public properties.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents">
+            <summary>
+            Specifies all public events.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents">
+            <summary>
+            Specifies all non-public events.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.Interfaces">
+            <summary>
+            Specifies all interfaces implemented by the type.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All">
+            <summary>
+            Specifies all members.
+            </summary>
+        </member>
+    </members>
+</doc>

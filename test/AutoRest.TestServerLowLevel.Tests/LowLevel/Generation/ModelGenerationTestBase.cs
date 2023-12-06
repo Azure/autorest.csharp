@@ -66,9 +66,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 branded: true,
-                generateTestProject: true,
-                baselineContractFolder: null,
-                baselineContractVersion: null);
+                generateTestProject: true);
         }
 
 

@@ -30,6 +30,7 @@
     <PackageReference Include="System.Memory" />
     <PackageReference Include="System.Net.ClientModel" />
     <PackageReference Include="NuGet.Configuration" />
+    <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

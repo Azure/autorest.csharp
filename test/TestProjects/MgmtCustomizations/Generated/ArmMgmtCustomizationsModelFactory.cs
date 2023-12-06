@@ -75,7 +75,6 @@ namespace MgmtCustomizations.Models
             return new Dog(PetKind.Dog, name, size, dateOfBirth, sleep, bark, jump);
         }
 
-        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Cat(System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
         /// <summary> Initializes a new instance of Cat. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
@@ -84,15 +83,13 @@ namespace MgmtCustomizations.Models
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
         /// <param name="meow"> A cat can meow. </param>
-        /// <returns> A new <see cref="T:MgmtCustomizations.Models.Cat"/> instance for mocking. </returns>
-        /// </member>
+        /// <returns> A new <see cref="T:MgmtCustomizations.Models.Cat" /> instance for mocking. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Cat Cat(string name, int size, DateTimeOffset? dateOfBirth, string meow)
         {
             return Cat(name, size, dateOfBirth, default, default, meow);
         }
 
-        /// <member name="M:MgmtCustomizations.Models.ArmMgmtCustomizationsModelFactory.Dog(System.String,System.Int32,System.Nullable{System.DateTimeOffset},System.String)">
         /// <summary> Initializes a new instance of Dog. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
@@ -101,8 +98,7 @@ namespace MgmtCustomizations.Models
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
         /// <param name="bark"> A dog can bark. </param>
-        /// <returns> A new <see cref="T:MgmtCustomizations.Models.Dog"/> instance for mocking. </returns>
-        /// </member>
+        /// <returns> A new <see cref="T:MgmtCustomizations.Models.Dog" /> instance for mocking. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Dog Dog(string name, int size, DateTimeOffset? dateOfBirth, string bark)
         {

@@ -40,5 +40,6 @@
     <PackageReference Update="YamlDotNet" Version="11.2.1" />
     <PackageReference Update="System.Memory" Version="4.5.4" />
     <PackageReference Update="NuGet.Configuration" Version="6.8.0" />
+    <PackageReference Update="Microsoft.Build" Version="16.11.0" />
   </ItemGroup>
 </Project>
