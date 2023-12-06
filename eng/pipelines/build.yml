@@ -83,7 +83,9 @@ stages:
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
           - script: |
-              dotnet test AutoRest.CSharp.sln --filter Name!~Example_
+              dotnet test AutoRest.CSharp.sln
+              --filter Name!~Example_
+              --logger "trx;LogFileName=debug.trx" --logger:"console;verbosity=normal"
             displayName: "Test"
             env:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -91,7 +93,10 @@ stages:
               DOTNET_MULTILEVEL_LOOKUP: 0
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
-              dotnet test AutoRest.CSharp.sln -c Release --filter Name!~Example_
+              dotnet test AutoRest.CSharp.sln
+              -c Release
+              --filter Name!~Example_
+              --logger "trx;LogFileName=release.trx" --logger:"console;verbosity=normal"
             displayName: "Test Release Configuration"
             env:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -108,6 +113,14 @@ stages:
               npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
             displayName: 'Unit Test'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - task: PublishTestResults@2
+            condition: always()
+            displayName: "Publish .NET Test Results"
+            inputs:
+              testResultsFiles: "**/*.trx"
+              testRunTitle: "$(OSName) $(TestTargetFramework)"
+              testResultsFormat: "VSTest"
+              mergeTestResults: true
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - pwsh: >
                 ./eng/PublishRelease.ps1
