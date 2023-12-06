@@ -113,12 +113,17 @@ stages:
               npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
             displayName: 'Unit Test'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+
+          # It's important for performance to pass "test" as "searchFolder" to avoid looking under root "node_modules".
+          # PublishTestResults.searchFolder only supports absolute paths, not relative.
           - task: PublishTestResults@2
             condition: always()
             displayName: "Publish .NET Test Results"
             inputs:
+              searchFolder: "$(System.DefaultWorkingDirectory)/test"
               testResultsFiles: "**/*.trx"
               testResultsFormat: "VSTest"
+
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - pwsh: >
                 ./eng/PublishRelease.ps1
