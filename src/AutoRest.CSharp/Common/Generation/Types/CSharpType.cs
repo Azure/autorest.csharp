@@ -272,7 +272,7 @@ namespace AutoRest.CSharp.Generation.Types
                 return true;
             }
 
-            if (this is null || other is null)
+            if (other is null)
             {
                 return false;
             }
@@ -288,7 +288,7 @@ namespace AutoRest.CSharp.Generation.Types
 
             for (int i = 0; i < Arguments.Length; i++)
             {
-                if (Arguments[i].EqualsByName(other.Arguments[i]))
+                if (!Arguments[i].EqualsByName(other.Arguments[i]))
                     return false;
             }
 
