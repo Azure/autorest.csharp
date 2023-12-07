@@ -188,3 +188,16 @@ model RootModel {
 @get
 @convenientAPI(true)
 op roundTrip(@body input: RootModel): RootModel;
+
+@route("/foo")
+@doc("Sample operation with request body of a renamed model")
+@get
+@convenientAPI(true)
+op foo(@body input: ModelToRename): ModelToRename;
+
+@route("/bar")
+@doc("Sample operation with request body using a model parameter with a spread operator.")
+@get
+@convenientAPI(true)
+op bar(...ModelToRename): ModelToRename;
+

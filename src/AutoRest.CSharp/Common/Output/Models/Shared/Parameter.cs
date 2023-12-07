@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
         {
-            var name = operationParameter.Name.ToVariableName();
+            var name = ConstructParameterVariableName(operationParameter, type);
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
 
@@ -113,6 +113,34 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
             return $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+        }
+
+        /// <summary>
+        /// This method constructs the variable name for an input parameter. If the input parameter type is an input model type,
+        /// and the input parameter name is the same as the input parameter type name, the variable name is constructed using the supplied CSharpType name. Otherwise,
+        /// it will use the input parameter name by default.
+        /// </summary>
+        /// <param name="param">The input parameter.</param>
+        /// <param name="type">The constructed CSharpType for the input parameter.</param>
+        /// <returns>A string representing the variable name for the input parameter.</returns>
+        private static string ConstructParameterVariableName(InputParameter param, CSharpType type)
+        {
+            string paramName = param.Name;
+            string variableName = paramName.ToVariableName();
+            InputType paramInputType = param.Type;
+
+            if (paramInputType is InputModelType)
+            {
+                var paramInputTypeName = paramInputType.Name;
+
+                if (paramName.Equals(paramInputTypeName))
+                {
+                    variableName = !string.IsNullOrEmpty(type.Name) ? type.Name.ToVariableName() : variableName;
+                }
+
+            }
+
+            return variableName;
         }
 
         public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
