@@ -7,6 +7,5 @@
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
   "head-as-boolean": true,
-  "deserialize-null-collection-as-null-value": true,
-  "generate-tests": true
+  "deserialize-null-collection-as-null-value": true
 }
