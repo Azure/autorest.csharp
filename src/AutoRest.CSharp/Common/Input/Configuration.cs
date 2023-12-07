@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Common.Input
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
-            public const string UseOverloadsBetweenProtocolAndConvenience = "use-overloads-between-protocol-and-convenience";
             public const string KeepNonOverloadableProtocolSignature = "keep-non-overloadable-protocol-signature";
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
@@ -84,7 +83,6 @@ namespace AutoRest.CSharp.Common.Input
             bool useCoreDataFactoryReplacements,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
-            bool useOverloadsBetweenProtocolAndConvenience,
             bool keepNonOverloadableProtocolSignature,
             string? projectFolder,
             string? existingProjectFolder,
@@ -115,7 +113,6 @@ namespace AutoRest.CSharp.Common.Input
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
             DeserializeNullCollectionAsNullValue = deserializeNullCollectionAsNullValue;
             UnreferencedTypesHandling = unreferencedTypesHandling;
-            UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
             KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
@@ -262,7 +259,6 @@ namespace AutoRest.CSharp.Common.Input
         /// Default value is false, where we will construct an empty collection (ChangeTrackingList or ChangeTrackingDictionary) if we get null value for collections in the payload
         /// </summary>
         public static bool DeserializeNullCollectionAsNullValue { get; private set; }
-        public static bool UseOverloadsBetweenProtocolAndConvenience { get; private set; }
         public static bool KeepNonOverloadableProtocolSignature { get; private set; }
 
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
@@ -316,7 +312,6 @@ namespace AutoRest.CSharp.Common.Input
                 deserializeNullCollectionAsNullValue: GetOptionBoolValue(autoRest, Options.DeserializeNullCollectionAsNullValue),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
-                useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
                 projectFolder: GetProjectFolderOption(autoRest),
@@ -389,8 +384,6 @@ namespace AutoRest.CSharp.Common.Input
                     return true;
                 case Options.PublicDiscriminatorProperty:
                     return false;
-                case Options.UseOverloadsBetweenProtocolAndConvenience:
-                    return true;
                 case Options.KeepNonOverloadableProtocolSignature:
                     return false;
                 case Options.ShouldTreatBase64AsBinaryData:
@@ -476,7 +469,6 @@ namespace AutoRest.CSharp.Common.Input
                 ReadOption(root, Options.UseCoreDataFactoryReplacements),
                 oldModelFactoryEntries,
                 ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
-                ReadOption(root, Options.UseOverloadsBetweenProtocolAndConvenience),
                 ReadOption(root, Options.KeepNonOverloadableProtocolSignature),
                 projectPath ?? ReadStringOption(root, Options.ProjectFolder),
                 existingProjectFolder,
@@ -532,7 +524,6 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.GenerateModelFactory, GenerateModelFactory);
             writer.WriteNonEmptyArray(Options.ModelFactoryForHlc, ModelFactoryForHlc);
             WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, UnreferencedTypesHandling);
-            WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, UseOverloadsBetweenProtocolAndConvenience);
             WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
             WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
             writer.WriteNonEmptyArray(Options.ProtocolMethodList, ProtocolMethodList);
