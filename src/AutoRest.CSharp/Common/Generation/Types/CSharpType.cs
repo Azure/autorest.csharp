@@ -288,7 +288,7 @@ namespace AutoRest.CSharp.Generation.Types
 
             for (int i = 0; i < Arguments.Length; i++)
             {
-                if (Arguments[i].Name != other.Arguments[i].Name)
+                if (Arguments[i].EqualsByName(other.Arguments[i]))
                     return false;
             }
 
