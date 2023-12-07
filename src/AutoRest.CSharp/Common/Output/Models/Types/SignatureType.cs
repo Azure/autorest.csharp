@@ -67,9 +67,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return overloadMethods;
         }
 
-        private HashSet<MethodSignature>? _methodsToSkip;
-        public HashSet<MethodSignature> MethodsToSkip => _methodsToSkip ??= EnsureMethodsToSkip();
-        private HashSet<MethodSignature> EnsureMethodsToSkip()
+        private IReadOnlySet<MethodSignature>? _methodsToSkip;
+        public IReadOnlySet<MethodSignature> MethodsToSkip => _methodsToSkip ??= EnsureMethodsToSkip();
+        private IReadOnlySet<MethodSignature> EnsureMethodsToSkip()
         {
             if (_customization is null)
             {
@@ -92,7 +92,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                     continue;
                 }
 
-                if (!previousMethod.ReturnType.EqualsByName(item.ReturnType))
+                // We can't use CsharpType.Equals here because they could have different implementations from different versions
+                if (previousMethod.ReturnType is null && item.ReturnType is not null)
+                {
+                    continue;
+                }
+                if (previousMethod.ReturnType is not null && !previousMethod.ReturnType.EqualsByName(item.ReturnType))
                 {
                     continue;
                 }

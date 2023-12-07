@@ -291,6 +291,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                     return false;
                 }
 
+                // We can't use CsharpType.Equals here because they can have different implementations from different versions
                 var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
                 return result;
             }

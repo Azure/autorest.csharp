@@ -13,41 +13,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class TypeExtensions
     {
-
-        /// <summary>
-        /// Check whether two CSharpType instances equal or not
-        /// This is not the same as left.Equals(right) because this function only checks the names
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        public static bool EqualsByName(this CSharpType? left, CSharpType? right)
-        {
-            if (ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (left is null || right is null)
-            {
-                return false;
-            }
-
-            if (left.Name != right.Name)
-                return false;
-
-            if (left.Arguments.Length != right.Arguments.Length)
-                return false;
-
-            for (int i = 0; i < left.Arguments.Length; i++)
-            {
-                if (left.Arguments[i].Name != right.Arguments[i].Name)
-                    return false;
-            }
-
-            return true;
-        }
-
         public static CSharpType WrapPageable(this CSharpType type, bool isAsync)
         {
             return isAsync ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
