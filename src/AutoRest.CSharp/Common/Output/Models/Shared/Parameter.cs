@@ -123,26 +123,21 @@ namespace AutoRest.CSharp.Output.Models.Shared
         /// <param name="param">The input parameter.</param>
         /// <param name="type">The constructed CSharpType for the input parameter.</param>
         /// <returns>A string representing the variable name for the input parameter.</returns>
-        public static string ConstructParameterVariableName(InputParameter param, CSharpType type)
+        private static string ConstructParameterVariableName(InputParameter param, CSharpType type)
         {
-            string variableName = string.Empty;
+            string paramName = param.Name;
+            string variableName = paramName.ToVariableName();
+            InputType paramInputType = param.Type;
 
-            if (param != null)
+            if (paramInputType is InputModelType)
             {
-                string paramName = param.Name;
-                variableName = paramName.ToVariableName();
-                InputType paramInputType = param.Type;
+                var paramInputTypeName = paramInputType.Name;
 
-                if (paramInputType is InputModelType)
+                if (paramName.Equals(paramInputTypeName))
                 {
-                    var paramInputTypeName = paramInputType.Name;
-
-                    if (paramName.Equals(paramInputTypeName))
-                    {
-                        variableName = !string.IsNullOrEmpty(type.Name) ? type.Name.ToVariableName() : variableName;
-                    }
-
+                    variableName = !string.IsNullOrEmpty(type.Name) ? type.Name.ToVariableName() : variableName;
                 }
+
             }
 
             return variableName;

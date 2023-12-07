@@ -165,9 +165,9 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
             Assert.True(areStringsEqual);
         }
 
-        // Validates that the input parameter variable name is constructed correctly for a given input model type
+        // Validates that the parameter object is constructed correctly for a given input model type
         [Test]
-        public void TestConstructParameterVariableName_InputModelType()
+        public void TestFromInputParameter_InputModelType()
         {
             IReadOnlyList<InputModelProperty> modelProps = new List<InputModelProperty>();
             var derivedModels = new List<InputModelType>();
@@ -209,15 +209,18 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
 
             CSharpType cSharpType = typeFactory.CreateType(inputModel);
 
-            string result = Parameter.ConstructParameterVariableName(inputParam, cSharpType);
+            var parameter = Parameter.FromInputParameter(inputParam, cSharpType, typeFactory);
+            Assert.IsNotNull(parameter);
+
+            var result = parameter.Name;
             string expectedResult = inputParam.Name.ToVariableName();
 
             Assert.AreEqual(expectedResult, result);
         }
 
-        // Validates that the input parameter variable name is constructed correctly for a given type that is not a model
+        // Validates that the parameter object is constructed correctly for a given type that is not a model
         [Test]
-        public void TestConstructParameterVariableName_NonInputModelType()
+        public void TestFromInputParameter_NonInputModelType()
         {
             InputType literalValueType = new InputPrimitiveType(InputTypeKind.Int32, false);
             InputLiteralType literalType = new InputLiteralType("sampleLiteral", literalValueType, 21, false);
@@ -243,7 +246,10 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
 
             CSharpType cSharpType = typeFactory.CreateType(literalType);
 
-            string result = Parameter.ConstructParameterVariableName(inputParam, cSharpType);
+            var parameter = Parameter.FromInputParameter(inputParam, cSharpType, typeFactory);
+            Assert.IsNotNull(parameter);
+
+            var result = parameter.Name;
             string expectedResult = inputParam.Name.ToVariableName();
 
             Assert.AreEqual(expectedResult, result);
