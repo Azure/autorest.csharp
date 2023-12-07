@@ -23,10 +23,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case ObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
-                case EnumType {IsExtensible: true} e:
+                case EnumType { IsExtensible: true } e:
                     WriteExtensibleEnum(writer, e);
                     break;
-                case EnumType {IsExtensible: false} e:
+                case EnumType { IsExtensible: false } e:
                     WriteEnum(writer, e);
                     break;
                 default:
@@ -118,7 +118,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw("}");
             if (property.InitializationValue != null)
             {
-                writer.AppendRaw(" = ").Append(property.InitializationValue).Line($";");
+                writer.AppendRaw(" = ");
+                writer.WriteValueExpression(property.InitializationValue);
+                writer.Line($";");
             }
 
             writer.Line();

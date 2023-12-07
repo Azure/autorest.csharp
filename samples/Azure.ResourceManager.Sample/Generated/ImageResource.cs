@@ -41,6 +41,9 @@ namespace Azure.ResourceManager.Sample
         private readonly ImagesRestOperations _imageRestClient;
         private readonly ImageData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/images";
+
         /// <summary> Initializes a new instance of the <see cref="ImageResource"/> class for mocking. </summary>
         protected ImageResource()
         {
@@ -67,9 +70,6 @@ namespace Azure.ResourceManager.Sample
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/images";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -39,6 +39,9 @@ namespace MgmtMockAndSample
         private readonly VaultsRestOperations _deletedVaultVaultsRestClient;
         private readonly DeletedVaultData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/locations/deletedVaults";
+
         /// <summary> Initializes a new instance of the <see cref="DeletedVaultResource"/> class for mocking. </summary>
         protected DeletedVaultResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtMockAndSample
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/locations/deletedVaults";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
