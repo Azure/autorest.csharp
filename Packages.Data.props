@@ -3,7 +3,7 @@
   <!-- Dependency versions to mimic azure-sdk-for-net build system. -->
 
   <!-- Test only dependencies. -->
-  <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true'">
+  <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true' Or '$(IsUnitTestProject)' == 'true'">
     <PackageReference Update="Moq" Version="[4.18.2]" />
     <!-- Include the basic related files for the test framework to ensure our generated test code could build here-->
     <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestMode.cs" LinkBase="Shared/TestFramework" />
