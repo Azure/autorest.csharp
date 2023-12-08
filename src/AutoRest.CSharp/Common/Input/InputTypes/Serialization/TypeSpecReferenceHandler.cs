@@ -24,9 +24,9 @@ namespace AutoRest.CSharp.Common.Input
 
             public override void AddReference(string referenceId, object value)
             {
-                if (!_referenceIdToObjectMap.TryAdd(referenceId, value))
+                if (!_referenceIdToObjectMap.ContainsKey(referenceId))
                 {
-                    throw new JsonException();
+                    _referenceIdToObjectMap.Add(referenceId, value);
                 }
             }
 
