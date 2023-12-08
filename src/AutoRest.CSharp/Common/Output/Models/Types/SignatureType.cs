@@ -1,15 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Models.Shared;
 using System;
-using System.Linq;
-using AutoRest.CSharp.Mgmt.Decorator;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Shared;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -22,6 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     /// </summary>
     internal class SignatureType
     {
+        private readonly TypeFactory _typeFactory;
         private readonly string _defaultNamespace;
         private readonly string _defaultName;
         private readonly SignatureType? _customization;
@@ -32,15 +32,16 @@ namespace AutoRest.CSharp.Output.Models.Types
         // Updated means the method with the same name is updated in the current contract, and the list contains the previous method and current methods including overload ones
         private record MethodChangeset(IReadOnlyList<MethodSignature> Missing, IReadOnlyList<(List<MethodSignature> Current, MethodSignature Previous)> Updated) { }
 
-        public SignatureType(IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
+        public SignatureType(TypeFactory typeFactory, IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
         {
+            _typeFactory = typeFactory;
             Methods = methods;
             _defaultNamespace = defaultNamespace;
             _defaultName = defaultName;
             if (sourceInputModel is not null)
             {
-                _customization = new SignatureType(PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, defaultNamespace, defaultName);
-                _baselineContract = new SignatureType(PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
+                _customization = new SignatureType(typeFactory, PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, defaultNamespace, defaultName);
+                _baselineContract = new SignatureType(typeFactory, PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
                 _methodChangeset ??= CompareMethods(Methods.Union(_customization?.Methods ?? Array.Empty<MethodSignature>(), MethodSignature.ParameterAndReturnTypeEqualityComparer), _baselineContract?.Methods);
             }
         }
@@ -172,29 +173,29 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (compilation is null)
             {
-                return new List<MethodSignature>();
+                return Array.Empty<MethodSignature>();
             }
             var type = compilation.GetTypeByMetadataName($"{_defaultNamespace}.{_defaultName}");
             if (type is null)
             {
-                return new List<MethodSignature>();
+                return Array.Empty<MethodSignature>();
             }
             return PopulateMethods(type);
         }
 
         private IReadOnlyList<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
         {
-            var result = new List<MethodSignature>();
             if (typeSymbol is null)
             {
                 // TODO: handle missing type
-                return result;
+                return Array.Empty<MethodSignature>();
             }
-            var methods = typeSymbol!.GetMembers().OfType<IMethodSymbol>();
+            var result = new List<MethodSignature>();
+            var methods = typeSymbol.GetMembers().OfType<IMethodSymbol>();
             foreach (var method in methods)
             {
                 var description = method.GetDocumentationCommentXml();
-                if (!MgmtContext.TypeFactory.TryCreateType(method.ReturnType, out var returnType))
+                if (!_typeFactory.TryCreateType(method.ReturnType, out var returnType))
                 {
                     // TODO: handle missing method return type from MgmtOutputLibrary
                     continue;
@@ -204,7 +205,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var parameters = new List<Parameter>();
                 foreach (var parameter in method.Parameters)
                 {
-                    var methodParameter = Parameter.FromParameterSymbol(parameter);
+                    var methodParameter = FromParameterSymbol(parameter);
                     if (methodParameter is not null)
                     {
                         parameters.Add(methodParameter);
@@ -213,6 +214,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters));
             }
             return result;
+        }
+
+        private Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
+        {
+            var parameterName = parameterSymbol.Name;
+            if (_typeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
+            {
+                return new Parameter(parameterName, null, parameterType, null, ValidationType.None, null);
+            }
+            else
+            {
+                // TODO: handle missing type from MgmtOutputLibrary
+                return null;
+            }
         }
 
         private static MethodSignatureModifiers MapModifiers(IMethodSymbol methodSymbol)

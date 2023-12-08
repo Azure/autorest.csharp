@@ -66,13 +66,12 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
-        /// <param name="sleep"> A dog can sleep. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <param name="jump"> A dog can jump. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string sleep = null, string bark = null, string jump = null)
+        public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string bark = null, string jump = null)
         {
-            return new Dog(PetKind.Dog, name, size, dateOfBirth, sleep, bark, jump);
+            return new Dog(PetKind.Dog, name, size, dateOfBirth, bark, jump);
         }
 
         /// <summary> Initializes a new instance of Cat. </summary>
@@ -87,7 +86,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Cat Cat(string name, int size, DateTimeOffset? dateOfBirth, string meow)
         {
-            return Cat(name, size, dateOfBirth, default, default, meow);
+            return Cat(name, size, dateOfBirth, sleep: default, jump: default, meow);
         }
 
         /// <summary> Initializes a new instance of Dog. </summary>
@@ -102,7 +101,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Dog Dog(string name, int size, DateTimeOffset? dateOfBirth, string bark)
         {
-            return Dog(name, size, dateOfBirth, default, bark, default);
+            return Dog(name, size, dateOfBirth, bark, jump: default);
         }
     }
 }

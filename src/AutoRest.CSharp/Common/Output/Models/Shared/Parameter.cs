@@ -37,20 +37,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(name, $"{property.Description}", propertyType, null, validation, null);
         }
 
-        public static Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
-        {
-            var parameterName = parameterSymbol.Name;
-            if (MgmtContext.TypeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
-            {
-                return new Parameter(parameterName, null, parameterType, null, ValidationType.None, null);
-            }
-            else
-            {
-                // TODO: handle missing type from MgmtOutputLibrary
-                return null;
-            }
-        }
-
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
         {
             var name = ConstructParameterVariableName(operationParameter, type);
