@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -128,11 +129,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             var type = objectTypeProperty.ValueType;
             if (type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && frameworkType.IsGenericType)
             {
-                var arguments = new List<CSharpType>();
+                var arguments = new CSharpType[type.Arguments.Count];
                 bool shouldReplace = false;
                 for (int i = 0; i < type.Arguments.Count; i++)
                 {
                     var argType = type.Arguments[i];
+                    arguments[i] = argType;
                     if (argType is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace })
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
@@ -144,8 +146,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                                 new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                                 fullSerializedName,
                                 "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
+                            arguments[i] = match;
                         }
-                        arguments.Add(match ?? argType); // if we don't find a match, just use the original type
                     }
                 }
                 if (shouldReplace)
