@@ -203,33 +203,37 @@ namespace AutoRest.CSharp.Output.Models
         {
             List<List<string>> names = new List<List<string>>();
             //check operation parameters first
+            Console.WriteLine($"GetAnonModelName for {anonModel.Name}");
             foreach (var client in _rootNamespace.Clients)
             {
                 foreach (var operation in client.Operations)
                 {
                     foreach (var parameter in operation.Parameters)
                     {
+                        var visitedModels = new HashSet<InputModelType>();
                         if (IsSameType(parameter.Type, anonModel))
                         {
                             names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(parameter.Type, parameter.Name).ToCleanName() });
                         }
                         else
                         {
-                            FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names);
+                            Console.WriteLine($"FindMatchesRecursively in parameter for {parameter.Type.Name}");
+                            FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names, visitedModels);
                         }
                     }
                     foreach (var response in operation.Responses)
                     {
                         if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
                             continue;
-
+                        var visitedModels = new HashSet<InputModelType>();
                         if (IsSameType(responseType, anonModel))
                         {
                             names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, responseType.Name).ToCleanName() });
                         }
                         else
                         {
-                            FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names);
+                            Console.WriteLine($"FindMatchesRecursively in response for {responseType.Name}");
+                            FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names, visitedModels);
                         }
                     }
                 }
@@ -298,14 +302,15 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
         }
-
-        private void FindMatchesRecursively(InputType type, InputModelType anonModel, HashSet<string> createdNames, List<string> current, List<List<string>> names)
+        private void FindMatchesRecursively(InputType type, InputModelType anonModel, HashSet<string> createdNames, List<string> current, List<List<string>> names, HashSet<InputModelType> visitedModels)
         {
             InputModelType? model = GetInputModelType(type);
 
             if (model is null)
                 return;
-
+            if (visitedModels.Contains(model))
+                return;
+            visitedModels.Add(model);
             //check other model properties
             foreach (var property in model.Properties)
             {
@@ -315,7 +320,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 else
                 {
-                    FindMatchesRecursively(property.Type, anonModel, createdNames, new List<string>(current) { GetTypeName(property.Type) }, names);
+                    FindMatchesRecursively(property.Type, anonModel, createdNames, new List<string>(current) { GetTypeName(property.Type) }, names, visitedModels);
                 }
             }
         }
