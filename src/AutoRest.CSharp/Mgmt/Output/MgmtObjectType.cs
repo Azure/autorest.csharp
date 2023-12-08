@@ -125,31 +125,45 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
-            if (objectTypeProperty.ValueType.IsFrameworkType && objectTypeProperty.ValueType.FrameworkType.IsGenericType)
+            var type = objectTypeProperty.ValueType;
+            if (type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && frameworkType.IsGenericType)
             {
-                for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Count; i++)
+                var arguments = new List<CSharpType>();
+                bool shouldReplace = false;
+                for (int i = 0; i < type.Arguments.Count; i++)
                 {
-                    var argType = objectTypeProperty.ValueType.Arguments[i];
-                    if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
+                    var argType = type.Arguments[i];
+                    if (argType is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace })
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         if (match != null)
                         {
+                            shouldReplace = true;
                             string fullSerializedName = this.GetFullSerializedName(objectTypeProperty, i);
                             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                                 new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                                 fullSerializedName,
                                 "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
-                            objectTypeProperty.ValueType.Arguments[i] = match;
                         }
+                        arguments.Add(match ?? argType); // if we don't find a match, just use the original type
                     }
+                }
+                if (shouldReplace)
+                {
+                    var newType = new CSharpType(frameworkType.GetGenericTypeDefinition(), type.IsNullable, arguments);
+                    return new ObjectTypeProperty(
+                        new MemberDeclarationOptions(objectTypeProperty.Declaration.Accessibility, objectTypeProperty.Declaration.Name, newType),
+                        objectTypeProperty.Description,
+                        objectTypeProperty.IsReadOnly,
+                        objectTypeProperty.SchemaProperty
+                    );
                 }
                 return objectTypeProperty;
             }
             else
             {
                 ObjectTypeProperty propertyType = objectTypeProperty;
-                if (objectTypeProperty.ValueType.TryCast<MgmtObjectType>(out var typeToReplace))
+                if (type is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace})
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
