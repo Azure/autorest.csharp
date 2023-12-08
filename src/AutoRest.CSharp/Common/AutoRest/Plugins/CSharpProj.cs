@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
@@ -180,6 +181,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 projectFile += ".Tests";
             }
+            Console.Error.WriteLine("=====================================");
+            Console.Error.WriteLine($"Write ({DateTimeOffset.Now}): {Thread.CurrentThread.ManagedThreadId} - {config.AbsoluteProjectFolder}");
+            Console.Error.WriteLine("=====================================");
             writeFile($"{projectFile}.csproj", csProjContent);
         }
     }

@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
@@ -58,14 +59,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private async Task<CSharpCompilation?> LoadBaselineContract()
         {
-            if (!Configuration.AzureArm)
-                return null;
-
             string fullPath;
             string projectFilePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, $"{Configuration.Namespace}.csproj"));
             if (!File.Exists(projectFilePath))
                 return null;
 
+            Console.Error.WriteLine("=====================================");
+            Console.Error.WriteLine($"Read ({DateTimeOffset.Now}): {Thread.CurrentThread.ManagedThreadId} - {Configuration.AbsoluteProjectFolder}");
+            Console.Error.WriteLine("=====================================");
             var baselineVersion = ProjectRootElement.Open(projectFilePath).Properties.SingleOrDefault(p => p.Name == "ApiCompatVersion")?.Value;
 
             if (baselineVersion is not null)
@@ -115,7 +116,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), await ProtocolCompilationInput.TryCreate());
+            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), await ProtocolCompilationInput.TryCreate(), previousContract: await LoadBaselineContract());
             await LowLevelTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
             return project;
         }
@@ -159,6 +160,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var filename = file.Name.Replace('\\', '/');
                     await autoRest.WriteFile(filename, file.Text, "source-file-csharp");
                 }
+
+                // write csproj
             }
             catch (ErrorHelpers.ErrorException e)
             {
