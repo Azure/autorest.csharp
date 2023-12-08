@@ -421,21 +421,31 @@
   {
    "$id": "53",
    "Name": "LegacyClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "54"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "55",
+   "Name": "CreateResourcePollViaOperationLocation",
    "Description": "POST to create resource, poll URL via operation-location header.",
    "Operations": [
     {
-     "$id": "54",
+     "$id": "56",
      "Name": "createJob",
      "ResourceName": "CreateResourcePollViaOperationLocation",
      "Description": "Creates a Job",
      "Parameters": [
       {
-       "$id": "55",
+       "$id": "57",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "56",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -450,9 +460,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "57",
+        "$id": "59",
         "Type": {
-         "$id": "58",
+         "$id": "60",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -461,12 +471,12 @@
        }
       },
       {
-       "$id": "59",
+       "$id": "61",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "60",
+        "$id": "62",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -481,9 +491,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "63",
         "Type": {
-         "$id": "62",
+         "$id": "64",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -492,7 +502,7 @@
        }
       },
       {
-       "$id": "63",
+       "$id": "65",
        "Name": "JobData",
        "NameInRequest": "JobData",
        "Description": "Data of the job",
@@ -510,11 +520,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "64",
+       "$id": "66",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "65",
+        "$id": "67",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -529,19 +539,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "66",
+        "$id": "68",
         "Type": {
-         "$ref": "65"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "67",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "70",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -556,9 +566,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "71",
         "Type": {
-         "$ref": "68"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
@@ -566,7 +576,7 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "72",
        "StatusCodes": [
         202
        ],
@@ -576,12 +586,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "71",
+         "$id": "73",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "72",
+          "$id": "74",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -600,10 +610,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "73",
+      "$id": "75",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "74",
+       "$id": "76",
        "StatusCodes": [
         200
        ],
@@ -618,9 +628,10 @@
     }
    ],
    "Protocol": {
-    "$id": "75"
+    "$id": "77"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "LegacyClient"
   }
  ]
 }

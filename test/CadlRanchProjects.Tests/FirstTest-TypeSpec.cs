@@ -62,7 +62,7 @@ namespace CadlRanchProjects.Tests
                 optionalLiteralBool = true,
                 requiredNullableList = Array.Empty<int>(),
             };
-            Response response = await new FirstTestTypeSpecClient(host).CreateLiteralAsync(RequestContent.Create(data));
+            Response response = await new FirstTestTypeSpecClient(host).GetHelloClient().GetDemo2Client().CreateLiteralAsync(RequestContent.Create(data));
             var result = JsonDocument.Parse(response.ContentStream).RootElement;
             Assert.AreEqual("literal", result.GetProperty("name").GetString());
             Assert.AreEqual("union", result.GetProperty("requiredUnion").GetString());
