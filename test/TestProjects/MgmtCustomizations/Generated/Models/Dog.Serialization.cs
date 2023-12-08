@@ -16,16 +16,6 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sleep))
-            {
-                writer.WritePropertyName("sleep"u8);
-                writer.WriteStringValue(Sleep);
-            }
-            if (Optional.IsDefined(Jump))
-            {
-                writer.WritePropertyName("jump"u8);
-                writer.WriteStringValue(Jump);
-            }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
             if (Optional.IsDefined(Size))
@@ -58,8 +48,6 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<string> sleep = default;
-            Optional<string> jump = default;
             PetKind kind = default;
             Optional<string> name = default;
             Optional<int> size = default;
@@ -67,16 +55,6 @@ namespace MgmtCustomizations.Models
             Optional<string> bark = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("sleep"u8))
-                {
-                    sleep = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("jump"u8))
-                {
-                    jump = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString().ToPetKind();
@@ -131,7 +109,7 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Dog(kind, name.Value, size, Optional.ToNullable(dateOfBirth), sleep.Value, bark.Value, jump.Value);
+            return new Dog(kind, name.Value, size, Optional.ToNullable(dateOfBirth), bark.Value);
         }
     }
 }
