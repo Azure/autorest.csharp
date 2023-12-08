@@ -19,14 +19,16 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected string? _deprecated;
 
         private TypeDeclarationOptions? _type;
+        protected readonly SourceInputModel? _sourceInputModel;
 
         protected TypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
         {
+            _sourceInputModel = sourceInputModel;
             DefaultNamespace = defaultNamespace;
             _existingType = new Lazy<INamedTypeSymbol?>(() => sourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
-        protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) {}
+        protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
 
         public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
@@ -39,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
+        public virtual SignatureType? SignatureType => null;
 
         internal virtual Type? SerializeAs => null;
 
