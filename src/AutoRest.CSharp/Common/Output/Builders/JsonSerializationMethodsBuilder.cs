@@ -471,6 +471,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return utf8JsonWriter.WriteObjectValue(value);
             }
 
+            // These are string-like types that could implicitly convert to string type
             if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation))
             {
                 return utf8JsonWriter.WriteStringValue(value);
@@ -509,6 +510,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     : utf8JsonWriter.WriteStringValue(value);
             }
 
+            // These are string-like types that cannot implicitly convert to string type, therefore we need to call ToString on them
             if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress) || valueType == typeof(RequestMethod) || valueType == typeof(ExtendedLocationType))
             {
                 return utf8JsonWriter.WriteStringValue(value.InvokeToString());
