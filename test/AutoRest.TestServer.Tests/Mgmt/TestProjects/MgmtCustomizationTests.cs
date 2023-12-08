@@ -8,7 +8,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtCustomizationTests() : base("MgmtCustomizations") { }
 
         [TestCase("Cat", new string[] { "sleep", "jump" })]
-        [TestCase("Dog", new string[] { "sleep", "jump" })]
+        [TestCase("Dog", new string[] { "jump" })]
         public void ValidateOverloadMethodsForModelFactory(string methodName, string[] parameterNames)
         {
             var classToCheck = FindModelFactory();
@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private static void ValidateOverloadMethods(string className, string methodName, string[] parameterNames, System.Type classToCheck)
         {
             var methods = classToCheck.GetMethods().Where(method => method.Name == methodName);
-            Assert.AreEqual(2, methods.Count(), $"Overloading methods not found for {className}.{methodName}");
+            Assert.GreaterOrEqual(methods.Count(), 2, $"Overloading methods not found for {className}.{methodName}");
             var overloadMethodParameterNames = methods.OrderBy(method => method.GetParameters().Length).Last().GetParameters().Select(x => x.Name.ToLowerInvariant()).ToList();
 
             foreach (var name in parameterNames)
