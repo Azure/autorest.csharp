@@ -1,5 +1,7 @@
 param($CadlRanchPath)
 
+$ErrorActionPreference = 'Stop'
+
 if (-not $CadlRanchPath) {
     $CadlRanchPath = "$PSScriptRoot\..\..\cadl-ranch" # if cadl-ranch path is not provided, then expect it to be in the same folder as this repo and folder name is cadl-ranch
 }
