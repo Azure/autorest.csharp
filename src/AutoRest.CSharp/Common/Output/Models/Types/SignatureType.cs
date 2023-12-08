@@ -1,16 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Models.Shared;
 using System;
-using System.Linq;
-using AutoRest.CSharp.Mgmt.Decorator;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Shared;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -207,7 +205,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var parameters = new List<Parameter>();
                 foreach (var parameter in method.Parameters)
                 {
-                    var methodParameter = Parameter.FromParameterSymbol(parameter);
+                    var methodParameter = FromParameterSymbol(parameter);
                     if (methodParameter is not null)
                     {
                         parameters.Add(methodParameter);
@@ -216,6 +214,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters));
             }
             return result;
+        }
+
+        private Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
+        {
+            var parameterName = parameterSymbol.Name;
+            if (_typeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
+            {
+                return new Parameter(parameterName, null, parameterType, null, ValidationType.None, null);
+            }
+            else
+            {
+                // TODO: handle missing type from MgmtOutputLibrary
+                return null;
+            }
         }
 
         private static MethodSignatureModifiers MapModifiers(IMethodSymbol methodSymbol)

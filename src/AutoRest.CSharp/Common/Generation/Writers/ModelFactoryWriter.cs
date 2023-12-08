@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.WriteMethod(method);
                     }
 
-                    foreach (OverloadMethodSignature overloadMethod in This.SignatureType!.OverloadMethods)
+                    foreach (OverloadMethodSignature overloadMethod in This.SignatureType.OverloadMethods)
                     {
                         _writer.WriteOverloadMethod(overloadMethod);
                         _writer.Line();

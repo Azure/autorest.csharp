@@ -58,6 +58,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private async Task<CSharpCompilation?> LoadBaselineContract()
         {
+            if (!Configuration.AzureArm)
+                return null;
+
             string fullPath;
             string projectFilePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, $"{Configuration.Namespace}.csproj"));
             if (!File.Exists(projectFilePath))
