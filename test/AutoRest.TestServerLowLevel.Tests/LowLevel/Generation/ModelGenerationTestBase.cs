@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
@@ -54,7 +53,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 useCoreDataFactoryReplacements: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
-                useOverloadsBetweenProtocolAndConvenience: true,
                 keepNonOverloadableProtocolSignature: false,
                 projectFolder: ".",
                 existingProjectFolder: null,

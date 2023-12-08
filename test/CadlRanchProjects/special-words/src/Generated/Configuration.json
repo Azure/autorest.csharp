@@ -6,6 +6,5 @@
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
-  "use-overloads-between-protocol-and-convenience": false,
   "model-namespace": false
 }

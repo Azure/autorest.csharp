@@ -376,5 +376,233 @@ new Dictionary<string, string>
             };
             Response<RootModel> response = await client.RoundTripAsync(input);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Foo_ShortVersion()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+            });
+            Response response = client.Foo(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Foo_ShortVersion_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+            });
+            Response response = await client.FooAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Foo_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel input = new RenamedModel(1234);
+            Response<RenamedModel> response = client.Foo(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Foo_ShortVersion_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel input = new RenamedModel(1234);
+            Response<RenamedModel> response = await client.FooAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Foo_AllParameters()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+                optionalInt = 1234,
+            });
+            Response response = client.Foo(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Foo_AllParameters_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+                optionalInt = 1234,
+            });
+            Response response = await client.FooAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Foo_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel input = new RenamedModel(1234)
+            {
+                OptionalInt = 1234,
+            };
+            Response<RenamedModel> response = client.Foo(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Foo_AllParameters_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel input = new RenamedModel(1234)
+            {
+                OptionalInt = 1234,
+            };
+            Response<RenamedModel> response = await client.FooAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Bar_ShortVersion()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+            });
+            Response response = client.Bar(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Bar_ShortVersion_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+            });
+            Response response = await client.BarAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Bar_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel renamedModel = new RenamedModel(1234);
+            Response<RenamedModel> response = client.Bar(renamedModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Bar_ShortVersion_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel renamedModel = new RenamedModel(1234);
+            Response<RenamedModel> response = await client.BarAsync(renamedModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Bar_AllParameters()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+                optionalInt = 1234,
+            });
+            Response response = client.Bar(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Bar_AllParameters_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+                optionalInt = 1234,
+            });
+            Response response = await client.BarAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CustomizationsInTsp_Bar_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel renamedModel = new RenamedModel(1234)
+            {
+                OptionalInt = 1234,
+            };
+            Response<RenamedModel> response = client.Bar(renamedModel);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CustomizationsInTsp_Bar_AllParameters_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RenamedModel renamedModel = new RenamedModel(1234)
+            {
+                OptionalInt = 1234,
+            };
+            Response<RenamedModel> response = await client.BarAsync(renamedModel);
+        }
     }
 }

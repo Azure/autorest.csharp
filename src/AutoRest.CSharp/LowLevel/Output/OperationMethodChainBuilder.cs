@@ -141,6 +141,7 @@ namespace AutoRest.CSharp.Output.Models
                     // add protocol method sample
                     samples.Add(new(
                         _client,
+                        _typeFactory,
                         method,
                         clientExample.ClientParameters,
                         operationExample,
@@ -152,6 +153,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         samples.Add(new(
                             _client,
+                            _typeFactory,
                             method,
                             clientExample.ClientParameters,
                             operationExample,
@@ -248,7 +250,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            if (HasAmbiguityBetweenProtocolAndConvenience() && Configuration.UseOverloadsBetweenProtocolAndConvenience)
+            if (HasAmbiguityBetweenProtocolAndConvenience())
             {
                 return false;
             }
