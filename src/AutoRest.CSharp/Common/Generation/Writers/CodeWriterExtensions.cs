@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -748,6 +749,35 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
                     .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
                     .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private));
+            }
+        }
+
+        public static void WriteOverloadMethod(this CodeWriter writer, OverloadMethodSignature overloadMethod)
+        {
+            writer.WriteRawXmlDocumentation(overloadMethod.Description);
+            if (overloadMethod.IsHiddenFromUser)
+            {
+                writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
+            }
+            using (writer.WriteMethodDeclaration(overloadMethod.PreviousMethodSignature))
+            {
+                writer.Line();
+                var awaitOperation = overloadMethod.PreviousMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async) ? "await " : "";
+                writer.Append($"return {awaitOperation}{overloadMethod.MethodSignature.Name}(");
+                var set = overloadMethod.MissingParameters.ToHashSet(Parameter.TypeAndNameEqualityComparer);
+                foreach (var parameter in overloadMethod.MethodSignature.Parameters)
+                {
+                    if (set.Contains(parameter))
+                    {
+                        writer.Append($"{parameter.DefaultValue?.Value ?? "default"}, ");
+                    }
+                    else
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($");");
             }
         }
     }
