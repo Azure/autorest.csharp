@@ -26,18 +26,21 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelFactoryTypeProvider : TypeProvider
     {
-        private static readonly HashSet<MethodInfo> ExistingModelFactoryMethods = new HashSet<MethodInfo>();
+        private static readonly IReadOnlySet<MethodInfo> ExistingModelFactoryMethods;
 
         static ModelFactoryTypeProvider()
         {
+            var methods = new HashSet<MethodInfo>();
             foreach (var method in typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public))
             {
-                ExistingModelFactoryMethods.Add(method);
+                methods.Add(method);
             }
             foreach (var method in typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public))
             {
-                ExistingModelFactoryMethods.Add(method);
+                methods.Add(method);
             }
+
+            ExistingModelFactoryMethods = methods;
         }
 
         protected override string DefaultName { get; }
