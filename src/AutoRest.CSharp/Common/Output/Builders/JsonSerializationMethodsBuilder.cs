@@ -471,7 +471,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return utf8JsonWriter.WriteObjectValue(value);
             }
 
-            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation) || valueType == typeof(ExtendedLocationType))
+            if (valueType == typeof(string) || valueType == typeof(char) || valueType == typeof(Guid) || valueType == typeof(ResourceIdentifier) || valueType == typeof(ResourceType) || valueType == typeof(AzureLocation))
             {
                 return utf8JsonWriter.WriteStringValue(value);
             }
