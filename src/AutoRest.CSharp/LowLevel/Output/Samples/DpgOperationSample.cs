@@ -10,7 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -23,9 +23,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
 {
     internal class DpgOperationSample
     {
-        public DpgOperationSample(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
             _client = client;
+            _typeFactory = typeFactory;
             _method = method;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
@@ -39,6 +40,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         protected internal readonly InputOperationExample _inputOperationExample;
         protected internal readonly LowLevelClient _client;
         protected internal readonly LowLevelClientMethod _method;
+        private readonly TypeFactory _typeFactory;
         private readonly MethodSignature _operationMethodSignature;
         public bool IsAllParametersUsed { get; }
         public string ExampleKey { get; }
@@ -127,7 +129,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
             {
                 if (ProcessKnownParameters(result, parameter))
                     continue;
-
                 // find the corresponding input parameter
                 var exampleValue = FindExampleValueBySerializedName(parameterExamples, parameter.Name);
 
@@ -173,16 +174,33 @@ namespace AutoRest.CSharp.Output.Samples.Models
         }
 
         /// <summary>
-        /// This method returns all the related parameter examples on this particular method
+        /// This method returns all the related parameter examples on this particular method. For examples whose parameters
+        /// are of type InputModelType, we will try to find the corresponding type and use the CSharpType name instead of the parameter name.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// A list of parameter examples.
+        /// </returns>
         private IEnumerable<InputParameterExample> GetAllParameterExamples()
         {
             // first we return all the client parameters for reference
             foreach (var parameter in _inputClientParameterExamples)
                 yield return parameter;
             foreach (var parameter in _inputOperationExample.Parameters)
+            {
+                var inputParameter = parameter.Parameter;
+                var inputParameterName = inputParameter.Name;
+
+                if (inputParameter.Type is InputModelType model && inputParameterName.Equals(inputParameter.Type.Name))
+                {
+                    var type = _typeFactory.CreateType(model);
+                    if (type != null)
+                    {
+                        yield return parameter with { Parameter = inputParameter with { Name = type.Name } };
+                    }
+                }
+
                 yield return parameter;
+            }
         }
 
         private bool ProcessKnownParameters(Dictionary<string, InputExampleParameterValue> result, Parameter parameter)
