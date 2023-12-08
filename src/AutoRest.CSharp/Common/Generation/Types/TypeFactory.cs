@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -432,7 +433,10 @@ namespace AutoRest.CSharp.Generation.Types
 
             if (existingType != null && validator(existingType))
             {
-                var arguments = namedTypeSymbol.TypeArguments.Select(a => CreateType(a)).ToArray();
+                if (!TryPopulateArguments(namedTypeSymbol.TypeArguments, out var arguments))
+                {
+                    return false;
+                }
                 type = new CSharpType(existingType, false, arguments);
             }
             else
@@ -451,6 +455,23 @@ namespace AutoRest.CSharp.Generation.Types
                 type = type.WithNullable(true);
             }
 
+            return true;
+        }
+
+        // There can by argument type missing
+        private bool TryPopulateArguments(ImmutableArray<ITypeSymbol> typeArguments, [NotNullWhen(true)] out CSharpType[]? arguments)
+        {
+            arguments = null;
+            var result = new List<CSharpType>();
+            foreach (var typeArgtment in typeArguments)
+            {
+                if (!TryCreateType(typeArgtment, out CSharpType? type))
+                {
+                    return false;
+                }
+                result.Add(type);
+            }
+            arguments = result.ToArray();
             return true;
         }
 
