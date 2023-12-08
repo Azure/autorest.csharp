@@ -9,15 +9,19 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
     internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsEndpoint = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
     {
+        public static IEqualityComparer<Parameter> TypeAndNameEqualityComparer = new ParameterTypeAndNameEqualityComparer();
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
@@ -33,9 +37,23 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(name, $"{property.Description}", propertyType, null, validation, null);
         }
 
+        public static Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
+        {
+            var parameterName = parameterSymbol.Name;
+            if (MgmtContext.TypeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
+            {
+                return new Parameter(parameterName, null, parameterType, null, ValidationType.None, null);
+            }
+            else
+            {
+                // TODO: handle missing type from MgmtOutputLibrary
+                return null;
+            }
+        }
+
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
         {
-            var name = operationParameter.Name.ToVariableName();
+            var name = ConstructParameterVariableName(operationParameter, type);
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
 
@@ -113,6 +131,34 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
             return $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+        }
+
+        /// <summary>
+        /// This method constructs the variable name for an input parameter. If the input parameter type is an input model type,
+        /// and the input parameter name is the same as the input parameter type name, the variable name is constructed using the supplied CSharpType name. Otherwise,
+        /// it will use the input parameter name by default.
+        /// </summary>
+        /// <param name="param">The input parameter.</param>
+        /// <param name="type">The constructed CSharpType for the input parameter.</param>
+        /// <returns>A string representing the variable name for the input parameter.</returns>
+        private static string ConstructParameterVariableName(InputParameter param, CSharpType type)
+        {
+            string paramName = param.Name;
+            string variableName = paramName.ToVariableName();
+            InputType paramInputType = param.Type;
+
+            if (paramInputType is InputModelType)
+            {
+                var paramInputTypeName = paramInputType.Name;
+
+                if (paramName.Equals(paramInputTypeName))
+                {
+                    variableName = !string.IsNullOrEmpty(type.Name) ? type.Name.ToVariableName() : variableName;
+                }
+
+            }
+
+            return variableName;
         }
 
         public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
@@ -257,6 +303,32 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
+        }
+
+        private class ParameterTypeAndNameEqualityComparer : IEqualityComparer<Parameter>
+        {
+            public bool Equals(Parameter? x, Parameter? y)
+            {
+                if (Object.ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (x is null || y is null)
+                {
+                    return false;
+                }
+
+                // We can't use CsharpType.Equals here because they can have different implementations from different versions
+                var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
+                return result;
+            }
+
+            public int GetHashCode([DisallowNull] Parameter obj)
+            {
+                // remove type as part of the hash code generation as the type might have changes between versions
+                return HashCode.Combine(obj.Name);
+            }
         }
     }
 
