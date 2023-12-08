@@ -67,12 +67,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (baselineVersion is not null)
             {
-                var nugetPackagePath = SettingsUtility.GetGlobalPackagesFolder(new NullSettings());
-                fullPath = Path.Combine(nugetPackagePath, Configuration.Namespace.ToLowerInvariant(), baselineVersion, "lib", "netstandard2.0", $"{Configuration.Namespace}.dll");
-                var xmlDocumentationPath = Path.Combine(nugetPackagePath, Configuration.Namespace.ToLowerInvariant(), baselineVersion, "lib", "netstandard2.0", $"{Configuration.Namespace}.xml");
+                var nugetGlobalPackageFolder = SettingsUtility.GetGlobalPackagesFolder(new NullSettings());
+                var nugetFolder = Path.Combine(nugetGlobalPackageFolder, Configuration.Namespace.ToLowerInvariant(), baselineVersion, "lib", "netstandard2.0");
+                fullPath = Path.Combine(nugetFolder, $"{Configuration.Namespace}.dll");
                 if (File.Exists(fullPath))
                 {
-                    return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(xmlDocumentationPath, fullPath).GetCompilationAsync();
+                    return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(Path.Combine(nugetFolder, $"{Configuration.Namespace}.xml"), fullPath).GetCompilationAsync();
                 }
             }
 
