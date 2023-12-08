@@ -203,13 +203,27 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // TODO: handle missing parameter type from MgmtOutputLibrary
                 var parameters = new List<Parameter>();
+                bool isParameterTypeMissing = false;
                 foreach (var parameter in method.Parameters)
                 {
                     var methodParameter = FromParameterSymbol(parameter);
-                    if (methodParameter is not null)
+
+                    // If any parameter can't be created, it means the type was removed from current version
+                    if (methodParameter is null)
+                    {
+                        isParameterTypeMissing = true;
+                        break;
+                    }
+                    else
                     {
                         parameters.Add(methodParameter);
                     }
+                }
+
+                // Since we don't have the ability to create the missing types, if any parameter type is missing we can't continue to generate overload methods
+                if (isParameterTypeMissing)
+                {
+                    continue;
                 }
                 result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters));
             }
@@ -223,11 +237,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 return new Parameter(parameterName, null, parameterType, null, ValidationType.None, null);
             }
-            else
-            {
-                // TODO: handle missing type from MgmtOutputLibrary
-                return null;
-            }
+
+            // If the parameter type can't be found from type factory, the type was removed from current version
+            // Since we don't have the ability to create the missing types, we can't continue to generate overload methods
+            return null;
         }
 
         private static MethodSignatureModifiers MapModifiers(IMethodSymbol methodSymbol)
