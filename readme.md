@@ -102,7 +102,7 @@ This document contains some additional [technical details](https://github.com/Az
 
 [cadl-ranch](https://github.com/Azure/cadl-ranch) is similar to autorest.testserver, which provides a platform for automated testing too. The difference is the testing target of cadl-ranch is typespec generated SDK.
 
-To test local change in cadl-ranch, run `.\eng\ApplyCadlRanch.ps1 {cadl-ranch path}` or just run `.\eng\ApplyCadlRanch.ps1` if cadl-ranch folder is at the same folder of autorest.csharp.
+Sometimes when we are adding new tests in cadl-ranch, we might want to make sure the tests and corresponding mock APIs work well by applying these newly added/modified tests to autorest.csharp. To realize this, run `.\eng\ApplyCadlRanch.ps1 {cadl-ranch path}` or just run `.\eng\ApplyCadlRanch.ps1` if cadl-ranch folder is at the same folder of autorest.csharp.
 
 ## PR Merge Process
 
