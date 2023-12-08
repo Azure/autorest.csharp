@@ -26,19 +26,14 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
-        /// <param name="sleep"> A dog can sleep. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <param name="jump"> A dog can jump. </param>
-        internal Dog(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, string sleep, string bark, string jump) : base(kind, name, size, dateOfBirth)
+        internal Dog(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, string bark, string jump) : base(kind, name, size, dateOfBirth)
         {
-            Sleep = sleep;
             Bark = bark;
             Jump = jump;
             Kind = kind;
         }
-
-        /// <summary> A dog can sleep. </summary>
-        public string Sleep { get; set; }
         /// <summary> A dog can jump. </summary>
         public string Jump { get; set; }
     }

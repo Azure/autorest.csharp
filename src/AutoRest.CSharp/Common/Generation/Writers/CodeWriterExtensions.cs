@@ -769,7 +769,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (set.Contains(parameter))
                     {
-                        writer.Append($"{parameter.DefaultValue?.Value ?? "default"}, ");
+                        writer.Append($"{parameter.DefaultValue?.Value ?? $"{parameter.Name}: default"}, ");
                     }
                     else
                     {

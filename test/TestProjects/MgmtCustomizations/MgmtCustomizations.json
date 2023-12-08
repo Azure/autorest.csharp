@@ -316,10 +316,6 @@
                 }
             ],
             "properties": {
-                "sleep": {
-                    "description": "A dog can sleep",
-                    "type": "string"
-                },
                 "bark": {
                     "description": "A dog can bark",
                     "type": "string"
