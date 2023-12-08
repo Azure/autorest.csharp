@@ -38,30 +38,32 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<Method> ShouldNotBeUsedForOutput([CallerMemberName] string caller = "")
         {
             Debug.Assert(caller == nameof(OutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
-            return _methods ??= Models!.Select(CreateMethod).ToList();
+            return _methods ??= _models.Select(CreateMethod).ToList();
         }
 
         private IReadOnlyList<Method>? _outputMethods;
         public IReadOnlyList<Method> OutputMethods
             => _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
 
-        public IEnumerable<SerializableObjectType> Models { get; }
-
         public FormattableString Description => $"Model factory for models.";
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel)
+        private readonly IEnumerable<SerializableObjectType> _models;
+        private readonly TypeFactory _typeFactory;
+
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            Models = objectTypes;
+            _typeFactory = typeFactory;
+            _models = objectTypes;
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
+        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             if (!Configuration.GenerateModelFactory)
                 return null;
@@ -80,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
 
-            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
+            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, typeFactory, sourceInputModel);
         }
 
         private static string GetRPName(string defaultNamespace)
@@ -102,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
         private SignatureType? _signatureType;
-        public override SignatureType SignatureType => _signatureType ??= new SignatureType(ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
+        public override SignatureType SignatureType => _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
