@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
@@ -20,6 +22,38 @@ namespace FirstTestTypeSpec.Models
             writer.WritePropertyName("guid"u8);
             writer.WriteStringValue(Guid);
             writer.WriteEndObject();
+        }
+
+        internal static ModelWithFormat DeserializeModelWithFormat(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Uri sourceUrl = default;
+            Guid guid = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("sourceUrl"u8))
+                {
+                    sourceUrl = new Uri(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("guid"u8))
+                {
+                    guid = property.Value.GetGuid();
+                    continue;
+                }
+            }
+            return new ModelWithFormat(sourceUrl, guid);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static ModelWithFormat FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeModelWithFormat(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

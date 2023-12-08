@@ -23,10 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (schema)
             {
                 case SerializableObjectType objectSchema:
-                    if (objectSchema.IncludeSerializer || objectSchema.IncludeDeserializer)
-                    {
-                        WriteObjectSerialization(writer, objectSchema);
-                    }
+                    WriteObjectSerialization(writer, objectSchema);
                     break;
                 case EnumType { IsExtensible: false } sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
@@ -35,7 +32,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private void WriteObjectSerialization(CodeWriter writer, SerializableObjectType model)
-            => WriteObjectSerialization(writer, model, model.Declaration, model.JsonSerialization, model.XmlSerialization, model.IsStruct, model.IncludeSerializer, model.IncludeDeserializer);
+            => WriteObjectSerialization(writer, model, model.Declaration, model.JsonSerialization, model.XmlSerialization, model.IsStruct, true, true);
 
         private void WriteObjectSerialization(CodeWriter writer, SerializableObjectType model, TypeDeclarationOptions declaration, JsonObjectSerialization? jsonSerialization, XmlObjectSerialization? xmlSerialization, bool isStruct, bool includeSerializer, bool includeDeserializer)
         {
@@ -153,7 +150,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, SerializableObjectType model)
         {
-            if (JsonSerializationMethodsBuilder.BuildDeserialize(declaration, serialization, model.GetExistingType()) is {} deserialize)
+            if (JsonSerializationMethodsBuilder.BuildDeserialize(declaration, serialization, model.GetExistingType()) is { } deserialize)
             {
                 writer.WriteMethod(deserialize);
             }

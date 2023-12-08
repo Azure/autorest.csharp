@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.WriteMethodBodyStatement(Return(response));
                 }
-                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
+                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { } } serializableObjectType})
                 {
                     _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
                 }

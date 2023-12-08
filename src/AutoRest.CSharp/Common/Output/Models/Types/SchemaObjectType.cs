@@ -642,16 +642,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _supportedSerializationFormats.Contains(KnownMediaType.Xml);
         }
 
-        protected override bool EnsureIncludeSerializer()
-        {
-            return _usage.HasFlag(SchemaTypeUsage.Input);
-        }
-
-        protected override bool EnsureIncludeDeserializer()
-        {
-            return _usage.HasFlag(SchemaTypeUsage.Output);
-        }
-
         protected override JsonObjectSerialization EnsureJsonSerialization()
         {
             return _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this);

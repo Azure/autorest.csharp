@@ -756,13 +756,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type, serializerOptions);
 
-                case Resource { ResourceData: SerializableObjectType { IncludeDeserializer: true } resourceDataType } resource:
+                case Resource { ResourceData: SerializableObjectType { } resourceDataType } resource:
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);
 
-                case SerializableObjectType { IncludeDeserializer: true } type:
+                case SerializableObjectType { } type:
                     return SerializableObjectTypeExpression.Deserialize(type, element);
 
                 case EnumType clientEnum:

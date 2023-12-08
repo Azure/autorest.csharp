@@ -13,8 +13,19 @@ using Azure.Core;
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(OutputModelConverter))]
-    public partial class OutputModel
+    public partial class OutputModel : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OutputModelProperty))
+            {
+                writer.WritePropertyName("Output_Model_Property"u8);
+                writer.WriteStringValue(OutputModelProperty);
+            }
+            writer.WriteEndObject();
+        }
+
         internal static OutputModel DeserializeOutputModel(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -37,7 +48,7 @@ namespace ModelWithConverterUsage.Models
         {
             public override void Write(Utf8JsonWriter writer, OutputModel model, JsonSerializerOptions options)
             {
-                throw new NotImplementedException();
+                writer.WriteObjectValue(model);
             }
             public override OutputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

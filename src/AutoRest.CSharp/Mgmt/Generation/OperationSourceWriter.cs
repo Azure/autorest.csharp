@@ -148,7 +148,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (_opSource.IsReturningResource)
             {
                 var resourceData = _opSource.Resource!.ResourceData;
-                Debug.Assert(resourceData.IncludeDeserializer);
 
                 yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
