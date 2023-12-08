@@ -203,7 +203,6 @@ namespace AutoRest.CSharp.Output.Models
         {
             List<List<string>> names = new List<List<string>>();
             //check operation parameters first
-            Console.WriteLine($"GetAnonModelName for {anonModel.Name}");
             foreach (var client in _rootNamespace.Clients)
             {
                 foreach (var operation in client.Operations)
@@ -217,7 +216,6 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         else
                         {
-                            Console.WriteLine($"FindMatchesRecursively in parameter for {parameter.Type.Name}");
                             FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names, visitedModels);
                         }
                     }
@@ -232,7 +230,6 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         else
                         {
-                            Console.WriteLine($"FindMatchesRecursively in response for {responseType.Name}");
                             FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names, visitedModels);
                         }
                     }
