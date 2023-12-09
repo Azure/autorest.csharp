@@ -263,42 +263,5 @@ namespace AutoRest.CSharp.Generation.Types
             provider = this.Implementation as T;
             return provider != null;
         }
-
-        /// <summary>
-        /// Check whether two CSharpType instances equal or not
-        /// This is not the same as left.Equals(right) because this function only checks the names
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool EqualsByName(CSharpType? other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other is null)
-            {
-                return false;
-            }
-
-            if (Namespace != other.Namespace)
-                return false;
-
-            if (Name != other.Name)
-                return false;
-
-            if (Arguments.Count != other.Arguments.Count)
-                return false;
-
-            for (int i = 0; i < Arguments.Count; i++)
-            {
-                if (!Arguments[i].EqualsByName(other.Arguments[i]))
-                    return false;
-            }
-
-            return true;
-        }
     }
 }

@@ -9,19 +9,15 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
     internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsEndpoint = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
     {
-        public static IEqualityComparer<Parameter> TypeAndNameEqualityComparer = new ParameterTypeAndNameEqualityComparer();
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
@@ -35,20 +31,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional, or it it nullable
             var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired || property.Type.IsNullable ? ValidationType.None : ValidationType.AssertNotNull;
             return new Parameter(name, $"{property.Description}", propertyType, null, validation, null);
-        }
-
-        public static Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
-        {
-            var parameterName = parameterSymbol.Name;
-            if (MgmtContext.TypeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
-            {
-                return new Parameter(parameterName, null, parameterType, null, ValidationType.None, null);
-            }
-            else
-            {
-                // TODO: handle missing type from MgmtOutputLibrary
-                return null;
-            }
         }
 
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
@@ -303,32 +285,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
-        }
-
-        private class ParameterTypeAndNameEqualityComparer : IEqualityComparer<Parameter>
-        {
-            public bool Equals(Parameter? x, Parameter? y)
-            {
-                if (Object.ReferenceEquals(x, y))
-                {
-                    return true;
-                }
-
-                if (x is null || y is null)
-                {
-                    return false;
-                }
-
-                // We can't use CsharpType.Equals here because they can have different implementations from different versions
-                var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
-                return result;
-            }
-
-            public int GetHashCode([DisallowNull] Parameter obj)
-            {
-                // remove type as part of the hash code generation as the type might have changes between versions
-                return HashCode.Combine(obj.Name);
-            }
         }
     }
 
