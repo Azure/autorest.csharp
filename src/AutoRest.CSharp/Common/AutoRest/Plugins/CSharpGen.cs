@@ -125,6 +125,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
 
                 // write csproj
+                bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Any();
+                // TODO -- how to get the namespace???
                 new CSharpProj().Execute(codeModel, async (filename, text) =>
                 {
                     await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
