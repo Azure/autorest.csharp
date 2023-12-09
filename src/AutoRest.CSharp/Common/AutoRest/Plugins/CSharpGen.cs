@@ -162,6 +162,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
 
                 // write csproj
+                new CSharpProj().Execute(codeModel, async (filename, text) =>
+                {
+                    await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
+                }, codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal));
             }
             catch (ErrorHelpers.ErrorException e)
             {

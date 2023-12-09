@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
@@ -16,10 +17,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
-    // ReSharper disable once StringLiteralTypo
-    [PluginName("csharpproj")]
-    // ReSharper disable once IdentifierTypo
-    internal class CSharpProj : IPlugin
+    internal class CSharpProj
     {
         private string _csProjContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
 
@@ -92,27 +90,34 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             return version;
         }
-        public async Task<bool> Execute(IPluginCommunication autoRest)
+        //public async Task<bool> Execute(IPluginCommunication autoRest)
+        //{
+        //    string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+        //    if (string.IsNullOrEmpty(codeModelFileName))
+        //        throw new Exception("Generator did not receive the code model file.");
+
+        //    var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+        //    var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+
+        //    var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
+        //    bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
+        //    var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
+        //    Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
+        //    {
+        //        await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
+        //    },
+        //        codeModelYaml.Contains("x-ms-format: dfe-"), config);
+        //    return true;
+        //}
+
+        public void Execute(CodeModel codeModel, Action<string, string> writeFile, bool includeDfe)
         {
-            string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-            if (string.IsNullOrEmpty(codeModelFileName))
-                throw new Exception("Generator did not receive the code model file.");
-
-            var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-            var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-
-            var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
             bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
-            var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
-            Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
-            {
-                await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
-            },
-                codeModelYaml.Contains("x-ms-format: dfe-"), config);
-            return true;
+            var context = new BuildContext(codeModel, null, Configuration.LibraryName, Configuration.Namespace);
+            Execute(context.DefaultNamespace, needAzureKeyAuth, writeFile, includeDfe);
         }
 
-        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, bool includeAzureKeyAuth, CSharpProjConfiguration config)
+        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, bool includeAzureKeyAuth)
         {
             Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
             {
@@ -120,12 +125,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text
                 //its no longer valid xml.  We should consider a "raw files" concept in the work space
                 //so the file writing can still remain in one place
-                await File.WriteAllTextAsync(Path.Combine(config.AbsoluteProjectFolder, filename), text);
-            },
-                includeDfe, config);
+                await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
+            }, includeDfe);
         }
 
-        private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe, CSharpProjConfiguration config)
+        private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe)
         {
             if (includeDfe)
             {
@@ -135,8 +139,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>";
             }
 
-            var isTestProject = config.IsMgmtTestProject;
-            if (isTestProject)
+            var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
+            if (isMgmtTestProject)
             {
                 _coreCsProjContent += string.Format(@"
 
@@ -155,14 +159,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             string csProjContent;
-            if (config.SkipCSProjPackageReference)
+            if (Configuration.SkipCSProjPackageReference)
             {
                 string additionalContent = string.Empty;
-                if (config.AzureArm)
+                if (Configuration.AzureArm)
                 {
                     additionalContent += _armCsProjContent;
                 }
-                else if (!config.Generation1ConvenienceClient)
+                else if (!Configuration.Generation1ConvenienceClient)
                 {
                     additionalContent += _llcProjectContent;
                 }
@@ -177,12 +181,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var projectFile = defaultNamespace;
-            if (isTestProject)
+            if (isMgmtTestProject)
             {
                 projectFile += ".Tests";
             }
             Console.Error.WriteLine("=====================================");
-            Console.Error.WriteLine($"Write ({DateTimeOffset.Now}): {Thread.CurrentThread.ManagedThreadId} - {config.AbsoluteProjectFolder}");
+            Console.Error.WriteLine($"Write ({DateTimeOffset.Now}): {Thread.CurrentThread.ManagedThreadId} - {Configuration.AbsoluteProjectFolder}");
             Console.Error.WriteLine("=====================================");
             writeFile($"{projectFile}.csproj", csProjContent);
         }
