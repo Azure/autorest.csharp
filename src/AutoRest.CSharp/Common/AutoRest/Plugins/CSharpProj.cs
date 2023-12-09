@@ -109,9 +109,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         //    return true;
         //}
 
-        public void Execute(string defaultNamespace, Action<string, string> writeFile, bool includeDfe, bool includeAzureKeyAuth)
+        public void Execute(CodeModel codeModel, Action<string, string> writeFile, bool includeDfe, bool includeAzureKeyAuth)
         {
-            Execute(defaultNamespace, includeAzureKeyAuth, writeFile, includeDfe);
+            var context = new BuildContext(codeModel, null, Configuration.LibraryName, Configuration.Namespace);
+            Execute(context.DefaultNamespace, includeAzureKeyAuth, writeFile, includeDfe);
         }
 
         public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, bool includeAzureKeyAuth)
