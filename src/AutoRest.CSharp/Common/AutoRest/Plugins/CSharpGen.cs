@@ -130,7 +130,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 new CSharpProj().Execute(codeModel, async (filename, text) =>
                 {
                     await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
-                }, codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal));
+                }, codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal), needAzureKeyAuth);
             }
             catch (ErrorHelpers.ErrorException e)
             {
