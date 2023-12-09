@@ -123,6 +123,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var filename = file.Name.Replace('\\', '/');
                     await autoRest.WriteFile(filename, file.Text, "source-file-csharp");
                 }
+
+                // write csproj
+                new CSharpProj().Execute(codeModel, async (filename, text) =>
+                {
+                    await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
+                }, codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal));
             }
             catch (ErrorHelpers.ErrorException e)
             {
