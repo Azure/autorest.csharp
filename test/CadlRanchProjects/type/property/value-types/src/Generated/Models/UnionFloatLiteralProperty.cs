@@ -32,17 +32,6 @@ namespace _Type.Property.ValueTypes.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
-        /// <remarks>
-        /// Supported types:
-        /// <list type="bullet">
-        /// <item>
-        /// <description>42.42</description>
-        /// </item>
-        /// <item>
-        /// <description>43.43</description>
-        /// </item>
-        /// </list>
-        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

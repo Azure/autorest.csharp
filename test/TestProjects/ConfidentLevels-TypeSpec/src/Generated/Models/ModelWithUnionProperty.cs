@@ -32,17 +32,6 @@ namespace ConfidentLevelsInTsp.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
-        /// <remarks>
-        /// Supported types:
-        /// <list type="bullet">
-        /// <item>
-        /// <description><see cref="string"/></description>
-        /// </item>
-        /// <item>
-        /// <description><see cref="int"/></description>
-        /// </item>
-        /// </list>
-        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>
