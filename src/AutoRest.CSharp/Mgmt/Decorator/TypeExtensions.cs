@@ -26,10 +26,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (left.Name != right.Name)
                 return false;
 
-            if (left.Arguments.Length != right.Arguments.Length)
+            if (left.Arguments.Count != right.Arguments.Count)
                 return false;
 
-            for (int i = 0; i < left.Arguments.Length; i++)
+            for (int i = 0; i < left.Arguments.Count; i++)
             {
                 if (left.Arguments[i].Name != right.Arguments[i].Name)
                     return false;
