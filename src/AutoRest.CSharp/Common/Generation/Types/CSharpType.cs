@@ -89,10 +89,10 @@ namespace AutoRest.CSharp.Generation.Types
         public string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
-        public bool IsLiteral { get; init; }
-        public Constant? Literal { get; init; }
-        public bool IsUnion { get; }
-        public IReadOnlyList<CSharpType> UnionItemTypes { get; init; } = Array.Empty<CSharpType>();
+        public bool IsLiteral => Literal is not null;
+        public Constant? Literal { get; private init; }
+        public bool IsUnion => UnionItemTypes.Count > 0;
+        public IReadOnlyList<CSharpType> UnionItemTypes { get; private init; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }
         public IReadOnlyList<CSharpType> Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
@@ -229,7 +229,6 @@ namespace AutoRest.CSharp.Generation.Types
 
                 type = new CSharpType(type.FrameworkType, type.IsNullable)
                 {
-                    IsLiteral = true,
                     Literal = literal
                 };
             }
