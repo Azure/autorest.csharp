@@ -415,6 +415,26 @@ namespace AutoRest.CSharp.Generation.Types
         public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
             type = null;
+
+            IArrayTypeSymbol? arrayTypeSymbol = symbol as IArrayTypeSymbol;
+            if (arrayTypeSymbol is not null)
+            {
+                if (arrayTypeSymbol.BaseType is not null)
+                {
+                    var test = TryGetFrameworkType(arrayTypeSymbol.BaseType);
+                    if (test != null)
+                    {
+                        type = new CSharpType(typeof(Array), false, test);
+                        return true;
+                    }
+                }
+                type = _library.FindTypeByName(arrayTypeSymbol.Name);
+                if (type is null)
+                {
+                    return false;
+                }
+            }
+
             INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol == null)
             {
@@ -427,9 +447,7 @@ namespace AutoRest.CSharp.Generation.Types
                 return true;
             }
 
-            var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
-            var fullyQualifiedName = $"{fullMetadataName}, {namedTypeSymbol.ContainingAssembly.Name}";
-            var existingType = Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
+            Type? existingType = TryGetFrameworkType(namedTypeSymbol);
 
             if (existingType != null && validator(existingType))
             {
@@ -456,6 +474,13 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             return true;
+        }
+
+        private Type? TryGetFrameworkType(ISymbol namedTypeSymbol)
+        {
+            var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
+            var fullyQualifiedName = $"{fullMetadataName}, {namedTypeSymbol.ContainingAssembly.Name}";
+            return Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
         }
 
         // There can by argument type missing
