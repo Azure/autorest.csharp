@@ -124,9 +124,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     await autoRest.WriteFile(filename, file.Text, "source-file-csharp");
                 }
 
-                // write csproj
-                bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
-                new CSharpProj().Execute(Configuration.Namespace, autoRest, codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal), needAzureKeyAuth);
+                if (!Configuration.SkipCSProj)
+                {
+                    // write csproj
+                    bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
+                    new CSharpProj().Execute(Configuration.Namespace, autoRest, codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal), needAzureKeyAuth);
+                }
             }
             catch (ErrorHelpers.ErrorException e)
             {
