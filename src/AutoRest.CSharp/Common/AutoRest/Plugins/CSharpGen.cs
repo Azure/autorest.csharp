@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
 
                 // write csproj
-                bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Any();
+                bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
                 new CSharpProj().Execute(Configuration.Namespace, autoRest, codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal), needAzureKeyAuth);
             }
             catch (ErrorHelpers.ErrorException e)
