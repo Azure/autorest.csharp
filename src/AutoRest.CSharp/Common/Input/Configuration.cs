@@ -614,19 +614,6 @@ namespace AutoRest.CSharp.Common.Input
             return null;
         }
 
-        // Fetch CSharpProj configuration from Configuration
-        internal static CSharpProjConfiguration ToCSharpProjConfiguration() => new CSharpProjConfiguration
-        (
-            AbsoluteProjectFolder: AbsoluteProjectFolder,
-            AzureArm: AzureArm,
-            IsMgmtTestProject: MgmtTestConfiguration is not null,
-            LibraryName: LibraryName,
-            Namespace: Namespace,
-            SkipCSProjPackageReference: SkipCSProjPackageReference,
-            RelativeProjectFolder: RelativeProjectFolder,
-            Generation1ConvenienceClient: Generation1ConvenienceClient
-        );
-
         internal static string GetOutputFolderOption(IPluginCommunication autoRest) => TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder));
         internal static string? GetProjectFolderOption(IPluginCommunication autoRest) => autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
         internal static bool GetAzureArmOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.AzureArm);

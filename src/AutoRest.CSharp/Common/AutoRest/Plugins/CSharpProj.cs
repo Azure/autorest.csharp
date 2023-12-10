@@ -89,35 +89,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             return version;
         }
-        //public async Task<bool> Execute(IPluginCommunication autoRest)
-        //{
-        //    string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-        //    if (string.IsNullOrEmpty(codeModelFileName))
-        //        throw new Exception("Generator did not receive the code model file.");
 
-        //    var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-        //    var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+        public void Execute(string defaultNamespace, IPluginCommunication autoRest, bool includeDfe, bool includeAzureKeyAuth)
+            => Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
+            {
+                await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
+            }, includeDfe);
 
-        //    var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
-        //    bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
-        //    var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
-        //    Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
-        //    {
-        //        await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
-        //    },
-        //        codeModelYaml.Contains("x-ms-format: dfe-"), config);
-        //    return true;
-        //}
-
-        public void Execute(CodeModel codeModel, Action<string, string> writeFile, bool includeDfe, bool includeAzureKeyAuth)
-        {
-            var context = new BuildContext(codeModel, null, Configuration.LibraryName, Configuration.Namespace);
-            Execute(context.DefaultNamespace, includeAzureKeyAuth, writeFile, includeDfe);
-        }
-
-        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, bool includeAzureKeyAuth)
-        {
-            Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
+        public void Execute(string defaultNamespace, bool includeDfe, bool includeAzureKeyAuth)
+            => Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
             {
                 //TODO adding to workspace makes the formatting messed up since its a raw xml document
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text
@@ -125,7 +105,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 //so the file writing can still remain in one place
                 await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
             }, includeDfe);
-        }
 
         private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe)
         {
