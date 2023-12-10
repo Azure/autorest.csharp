@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static bool IsSinglePropertyObject(ObjectTypeProperty property)
         {
-            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+            if (property.Declaration.Type is not { IsFrameworkType: false, Implementation: ObjectType objType })
                 return false;
 
             return objType switch
@@ -164,13 +164,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
             else
             {
-                ObjectTypeProperty propertyType = objectTypeProperty;
+                ObjectTypeProperty property = objectTypeProperty;
                 if (type is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace})
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
                     {
-                        propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
+                        property = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
                         string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
                         MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                             new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                             "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
                     }
                 }
-                return propertyType;
+                return property;
             }
         }
 
@@ -245,7 +245,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
                     // by checking if this type is one of its descendants
-                    if (inheritedType.TryCast<SchemaObjectType>(out var schemaObjectType) && IsDescendantOf(schemaObjectType))
+                    if (inheritedType is { IsFrameworkType: false, Implementation: SchemaObjectType schemaObjectType } && IsDescendantOf(schemaObjectType))
                     {
                         // if the base type has a discriminator and this type is one of them
                         return inheritedType;

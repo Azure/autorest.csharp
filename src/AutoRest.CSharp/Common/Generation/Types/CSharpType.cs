@@ -252,15 +252,5 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static CSharpType FromSystemType(BuildContext context, Type type, IEnumerable<ObjectTypeProperty>? backingProperties = null)
             => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel, backingProperties);
-
-        public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
-        {
-            provider = null;
-            if (this.IsFrameworkType)
-                return false;
-
-            provider = this.Implementation as T;
-            return provider != null;
-        }
     }
 }
