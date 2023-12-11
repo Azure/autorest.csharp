@@ -5,46 +5,11 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace HlcConstants.Models
 {
     /// <summary> The RoundTripModel. </summary>
     public partial class RoundTripModel
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
         public RoundTripModel()
         {
@@ -53,12 +18,10 @@ namespace HlcConstants.Models
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
         /// <param name="requiredConstantModel"> Describes Protocol and thumbprint of Windows Remote Management listener. </param>
         /// <param name="optionalConstantModel"> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoundTripModel(ModelWithRequiredConstant requiredConstantModel, ModelWithOptionalConstant optionalConstantModel, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal RoundTripModel(ModelWithRequiredConstant requiredConstantModel, ModelWithOptionalConstant optionalConstantModel)
         {
             RequiredConstantModel = requiredConstantModel;
             OptionalConstantModel = optionalConstantModel;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>

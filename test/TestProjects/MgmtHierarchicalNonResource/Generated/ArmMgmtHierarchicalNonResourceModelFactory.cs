@@ -22,7 +22,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="MgmtHierarchicalNonResource.SharedGalleryData"/> instance for mocking. </returns>
         public static SharedGalleryData SharedGalleryData(string name = null, string location = null, string uniqueId = null)
         {
-            return new SharedGalleryData(name, location, serializedAdditionalRawData: null, uniqueId);
+            return new SharedGalleryData(name, location, uniqueId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PirSharedGalleryResource"/>. </summary>
@@ -32,7 +32,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.PirSharedGalleryResource"/> instance for mocking. </returns>
         public static PirSharedGalleryResource PirSharedGalleryResource(string name = null, string location = null, string uniqueId = null)
         {
-            return new PirSharedGalleryResource(name, location, serializedAdditionalRawData: null, uniqueId);
+            return new PirSharedGalleryResource(name, location, uniqueId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PirResource"/>. </summary>
@@ -41,7 +41,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.PirResource"/> instance for mocking. </returns>
         public static PirResource PirResource(string name = null, string location = null)
         {
-            return new PirResource(name, location, serializedAdditionalRawData: null);
+            return new PirResource(name, location);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SharedGalleryImage"/>. </summary>
@@ -63,17 +63,31 @@ namespace MgmtHierarchicalNonResource.Models
             disallowedDiskTypes ??= new List<string>();
             features ??= new List<GalleryImageFeature>();
 
-            return new SharedGalleryImage(name, location, serializedAdditionalRawData: null, uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), serializedAdditionalRawData: null) : null, hyperVGeneration, features?.ToList(), purchasePlan);
+            return new SharedGalleryImage(name, location, uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList()) : null, hyperVGeneration, features?.ToList(), purchasePlan);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GalleryImageIdentifier"/>. </summary>
         /// <param name="publisher"> The name of the gallery image definition publisher. </param>
         /// <param name="offer"> The name of the gallery image definition offer. </param>
         /// <param name="sku"> The name of the gallery image definition SKU. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="publisher"/>, <paramref name="offer"/> or <paramref name="sku"/> is null. </exception>
         /// <returns> A new <see cref="Models.GalleryImageIdentifier"/> instance for mocking. </returns>
         public static GalleryImageIdentifier GalleryImageIdentifier(string publisher = null, string offer = null, string sku = null)
         {
-            return new GalleryImageIdentifier(publisher, offer, sku, serializedAdditionalRawData: null);
+            if (publisher == null)
+            {
+                throw new ArgumentNullException(nameof(publisher));
+            }
+            if (offer == null)
+            {
+                throw new ArgumentNullException(nameof(offer));
+            }
+            if (sku == null)
+            {
+                throw new ArgumentNullException(nameof(sku));
+            }
+
+            return new GalleryImageIdentifier(publisher, offer, sku);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RecommendedMachineConfiguration"/>. </summary>
@@ -82,7 +96,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.RecommendedMachineConfiguration"/> instance for mocking. </returns>
         public static RecommendedMachineConfiguration RecommendedMachineConfiguration(ResourceRange vCpus = null, ResourceRange memory = null)
         {
-            return new RecommendedMachineConfiguration(vCpus, memory, serializedAdditionalRawData: null);
+            return new RecommendedMachineConfiguration(vCpus, memory);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceRange"/>. </summary>
@@ -91,7 +105,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.ResourceRange"/> instance for mocking. </returns>
         public static ResourceRange ResourceRange(int? min = null, int? max = null)
         {
-            return new ResourceRange(min, max, serializedAdditionalRawData: null);
+            return new ResourceRange(min, max);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GalleryImageFeature"/>. </summary>
@@ -100,7 +114,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.GalleryImageFeature"/> instance for mocking. </returns>
         public static GalleryImageFeature GalleryImageFeature(string name = null, string value = null)
         {
-            return new GalleryImageFeature(name, value, serializedAdditionalRawData: null);
+            return new GalleryImageFeature(name, value);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImagePurchasePlan"/>. </summary>
@@ -110,7 +124,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.ImagePurchasePlan"/> instance for mocking. </returns>
         public static ImagePurchasePlan ImagePurchasePlan(string name = null, string publisher = null, string product = null)
         {
-            return new ImagePurchasePlan(name, publisher, product, serializedAdditionalRawData: null);
+            return new ImagePurchasePlan(name, publisher, product);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SharedGalleryImageVersion"/>. </summary>
@@ -122,7 +136,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.SharedGalleryImageVersion"/> instance for mocking. </returns>
         public static SharedGalleryImageVersion SharedGalleryImageVersion(string name = null, string location = null, string uniqueId = null, DateTimeOffset? publishedOn = null, DateTimeOffset? endOfLifeOn = null)
         {
-            return new SharedGalleryImageVersion(name, location, serializedAdditionalRawData: null, uniqueId, publishedOn, endOfLifeOn);
+            return new SharedGalleryImageVersion(name, location, uniqueId, publishedOn, endOfLifeOn);
         }
     }
 }

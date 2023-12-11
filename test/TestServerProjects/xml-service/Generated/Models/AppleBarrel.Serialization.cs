@@ -50,6 +50,8 @@ namespace xml_service.Models
 
         internal static AppleBarrel DeserializeAppleBarrel(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             IList<string> goodApples = default;
             IList<string> badApples = default;
             if (element.Element("GoodApples") is XElement goodApplesElement)

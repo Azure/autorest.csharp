@@ -34,6 +34,8 @@ namespace xml_service.Models
 
         internal static ObjectWithXMsTextProperty DeserializeObjectWithXMsTextProperty(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string language = default;
             string content = default;
             if (element.Attribute("language") is XAttribute languageAttribute)

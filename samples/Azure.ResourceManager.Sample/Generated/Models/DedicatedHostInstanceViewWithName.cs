@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -34,12 +33,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: DedicatedHostInstanceView.statuses
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The name of the dedicated host.
         /// Serialized Name: DedicatedHostInstanceViewWithName.name
         /// </param>
-        internal DedicatedHostInstanceViewWithName(string assetId, DedicatedHostAvailableCapacity availableCapacity, IReadOnlyList<InstanceViewStatus> statuses, IDictionary<string, BinaryData> serializedAdditionalRawData, string name) : base(assetId, availableCapacity, statuses, serializedAdditionalRawData)
+        internal DedicatedHostInstanceViewWithName(string assetId, DedicatedHostAvailableCapacity availableCapacity, IReadOnlyList<InstanceViewStatus> statuses, string name) : base(assetId, availableCapacity, statuses)
         {
             Name = name;
         }

@@ -14,38 +14,6 @@ namespace CognitiveSearch.Models
     /// <summary> Represents a field in an index definition, which describes the name, data type, and search behavior of a field. </summary>
     public partial class Field
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="Field"/>. </summary>
         /// <param name="name"> The name of the field, which must be unique within the fields collection of the index or parent field. </param>
         /// <param name="type"> The data type of the field. </param>
@@ -74,8 +42,7 @@ namespace CognitiveSearch.Models
         /// <param name="indexAnalyzer"> The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. </param>
         /// <param name="synonymMaps"> A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields. </param>
         /// <param name="fields"> A list of sub-fields if this is a field of type Edm.ComplexType or Collection(Edm.ComplexType). Must be null or empty for simple fields. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Field(string name, DataType type, bool? key, bool? retrievable, bool? searchable, bool? filterable, bool? sortable, bool? facetable, AnalyzerName? analyzer, AnalyzerName? searchAnalyzer, AnalyzerName? indexAnalyzer, IList<string> synonymMaps, IList<Field> fields, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Field(string name, DataType type, bool? key, bool? retrievable, bool? searchable, bool? filterable, bool? sortable, bool? facetable, AnalyzerName? analyzer, AnalyzerName? searchAnalyzer, AnalyzerName? indexAnalyzer, IList<string> synonymMaps, IList<Field> fields)
         {
             Name = name;
             Type = type;
@@ -90,12 +57,6 @@ namespace CognitiveSearch.Models
             IndexAnalyzer = indexAnalyzer;
             SynonymMaps = synonymMaps;
             Fields = fields;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Field"/> for deserialization. </summary>
-        internal Field()
-        {
         }
 
         /// <summary> The name of the field, which must be unique within the fields collection of the index or parent field. </summary>

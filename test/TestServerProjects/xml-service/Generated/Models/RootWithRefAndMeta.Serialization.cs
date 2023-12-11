@@ -37,6 +37,8 @@ namespace xml_service.Models
 
         internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             ComplexTypeWithMeta refToModel = default;
             string something = default;
             if (element.Element("XMLComplexTypeWithMeta") is XElement xmlComplexTypeWithMetaElement)

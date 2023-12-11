@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -61,7 +60,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the customer managed disk encryption set resource id for the managed image disk.
         /// Serialized Name: ImageDisk.diskEncryptionSet
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="osType">
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: ImageOSDisk.osType
@@ -70,15 +68,10 @@ namespace Azure.ResourceManager.Sample.Models
         /// The OS State.
         /// Serialized Name: ImageOSDisk.osState
         /// </param>
-        internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, IDictionary<string, BinaryData> serializedAdditionalRawData, OperatingSystemType osType, OperatingSystemStateType osState) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet, serializedAdditionalRawData)
+        internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, OperatingSystemType osType, OperatingSystemStateType osState) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet)
         {
             OSType = osType;
             OSState = osState;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="ImageOSDisk"/> for deserialization. </summary>
-        internal ImageOSDisk()
-        {
         }
 
         /// <summary>

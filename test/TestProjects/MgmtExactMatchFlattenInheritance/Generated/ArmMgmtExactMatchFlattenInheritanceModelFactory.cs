@@ -31,7 +31,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel1Data(id, name, resourceType, systemData, tags, location, foo, fooPropertiesFoo, idPropertiesId, serializedAdditionalRawData: null);
+            return new AzureResourceFlattenModel1Data(id, name, resourceType, systemData, tags, location, foo, fooPropertiesFoo, idPropertiesId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel2"/>. </summary>
@@ -47,7 +47,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel2(id, name, resourceType, systemData, tags, location, foo, serializedAdditionalRawData: null);
+            return new AzureResourceFlattenModel2(id, name, resourceType, systemData, tags, location, foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel3"/>. </summary>
@@ -63,7 +63,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel3(id, name, resourceType, systemData, tags, location, foo, serializedAdditionalRawData: null);
+            return new AzureResourceFlattenModel3(id, name, resourceType, systemData, tags, location, foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel5"/>. </summary>
@@ -75,7 +75,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
         /// <returns> A new <see cref="Models.AzureResourceFlattenModel5"/> instance for mocking. </returns>
         public static AzureResourceFlattenModel5 AzureResourceFlattenModel5(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, int? foo = null)
         {
-            return new AzureResourceFlattenModel5(id, name, resourceType, systemData, foo, serializedAdditionalRawData: null);
+            return new AzureResourceFlattenModel5(id, name, resourceType, systemData, foo);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExactMatchFlattenInheritance.CustomModel2Data"/>. </summary>
@@ -87,7 +87,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
         /// <returns> A new <see cref="MgmtExactMatchFlattenInheritance.CustomModel2Data"/> instance for mocking. </returns>
         public static CustomModel2Data CustomModel2Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string foo = null)
         {
-            return new CustomModel2Data(id, name, resourceType, systemData, foo, serializedAdditionalRawData: null);
+            return new CustomModel2Data(id, name, resourceType, systemData, foo);
         }
     }
 }

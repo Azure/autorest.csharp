@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -27,19 +26,13 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="PhoneticTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="encoder"> The phonetic encoder to use. Default is "metaphone". </param>
         /// <param name="replaceOriginalTokens"> A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. </param>
-        internal PhoneticTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, PhoneticEncoder? encoder, bool? replaceOriginalTokens) : base(odataType, name, serializedAdditionalRawData)
+        internal PhoneticTokenFilter(string odataType, string name, PhoneticEncoder? encoder, bool? replaceOriginalTokens) : base(odataType, name)
         {
             Encoder = encoder;
             ReplaceOriginalTokens = replaceOriginalTokens;
             OdataType = odataType ?? "#Microsoft.Azure.Search.PhoneticTokenFilter";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="PhoneticTokenFilter"/> for deserialization. </summary>
-        internal PhoneticTokenFilter()
-        {
         }
 
         /// <summary> The phonetic encoder to use. Default is "metaphone". </summary>

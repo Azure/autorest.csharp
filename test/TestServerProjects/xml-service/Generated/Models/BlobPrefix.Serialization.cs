@@ -30,6 +30,8 @@ namespace xml_service.Models
 
         internal static BlobPrefix DeserializeBlobPrefix(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string name = default;
             if (element.Element("Name") is XElement nameElement)
             {

@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -15,86 +13,10 @@ using Azure.Core;
 
 namespace AuthoringTypeSpec.Models
 {
-    public partial class SwapDeploymentsJob : IUtf8JsonSerializable, IJsonModel<SwapDeploymentsJob>
+    public partial class SwapDeploymentsJob
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SwapDeploymentsJob>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<SwapDeploymentsJob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SwapDeploymentsJob>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SwapDeploymentsJob)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            writer.WritePropertyName("jobId"u8);
-            writer.WriteStringValue(JobId);
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("createdDateTime"u8);
-                writer.WriteStringValue(CreatedDateTime, "O");
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("lastUpdatedDateTime"u8);
-                writer.WriteStringValue(LastUpdatedDateTime, "O");
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("expirationDateTime"u8);
-                writer.WriteStringValue(ExpirationDateTime, "O");
-            }
-            writer.WritePropertyName("status"u8);
-            writer.WriteStringValue(Status.ToString());
-            writer.WritePropertyName("warnings"u8);
-            writer.WriteStartArray();
-            foreach (var item in Warnings)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("errors"u8);
-            JsonSerializer.Serialize(writer, Errors);
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        SwapDeploymentsJob IJsonModel<SwapDeploymentsJob>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SwapDeploymentsJob>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SwapDeploymentsJob)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSwapDeploymentsJob(document.RootElement, options);
-        }
-
-        internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -107,8 +29,6 @@ namespace AuthoringTypeSpec.Models
             IReadOnlyList<JobWarning> warnings = default;
             ResponseError errors = default;
             string id = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jobId"u8))
@@ -156,45 +76,9 @@ namespace AuthoringTypeSpec.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
+            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id);
         }
-
-        BinaryData IPersistableModel<SwapDeploymentsJob>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SwapDeploymentsJob>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SwapDeploymentsJob)} does not support '{options.Format}' format.");
-            }
-        }
-
-        SwapDeploymentsJob IPersistableModel<SwapDeploymentsJob>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SwapDeploymentsJob>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSwapDeploymentsJob(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SwapDeploymentsJob)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SwapDeploymentsJob>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
@@ -202,14 +86,6 @@ namespace AuthoringTypeSpec.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeSwapDeploymentsJob(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

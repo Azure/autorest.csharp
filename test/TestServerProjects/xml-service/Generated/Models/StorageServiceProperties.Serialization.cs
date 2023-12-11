@@ -59,6 +59,8 @@ namespace xml_service.Models
 
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             Logging logging = default;
             Metrics hourMetrics = default;
             Metrics minuteMetrics = default;

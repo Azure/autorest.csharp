@@ -33,6 +33,8 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithGuidProperty DeserializeModelWithGuidProperty(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             Guid? modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {

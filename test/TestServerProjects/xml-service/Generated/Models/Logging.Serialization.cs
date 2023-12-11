@@ -40,6 +40,8 @@ namespace xml_service.Models
 
         internal static Logging DeserializeLogging(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string version = default;
             bool delete = default;
             bool read = default;

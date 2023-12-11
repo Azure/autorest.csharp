@@ -6,45 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 
 namespace MgmtScopeResource.Models
 {
     /// <summary> Deployment properties with additional details. </summary>
     public partial class DeploymentPropertiesExtended
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="DeploymentPropertiesExtended"/>. </summary>
         internal DeploymentPropertiesExtended()
         {
@@ -59,8 +26,7 @@ namespace MgmtScopeResource.Models
         /// <param name="parameters"> Deployment parameters. </param>
         /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
         /// <param name="errorResponse"> The deployment error. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, BinaryData outputs, BinaryData parameters, DeploymentMode? mode, ErrorResponse errorResponse, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, BinaryData outputs, BinaryData parameters, DeploymentMode? mode, ErrorResponse errorResponse)
         {
             ProvisioningState = provisioningState;
             CorrelationId = correlationId;
@@ -70,7 +36,6 @@ namespace MgmtScopeResource.Models
             Parameters = parameters;
             Mode = mode;
             ErrorResponse = errorResponse;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Denotes the state of provisioning. </summary>

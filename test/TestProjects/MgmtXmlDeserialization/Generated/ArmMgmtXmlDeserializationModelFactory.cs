@@ -22,7 +22,7 @@ namespace MgmtXmlDeserialization.Models
         /// <returns> A new <see cref="MgmtXmlDeserialization.XmlInstanceData"/> instance for mocking. </returns>
         public static XmlInstanceData XmlInstanceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null)
         {
-            return new XmlInstanceData(id, name, resourceType, systemData, serializedAdditionalRawData: null);
+            return new XmlInstanceData(id, name, resourceType, systemData);
         }
     }
 }

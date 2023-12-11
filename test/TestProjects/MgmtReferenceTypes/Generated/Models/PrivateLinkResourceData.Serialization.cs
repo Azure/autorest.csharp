@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -17,86 +15,19 @@ using Azure.ResourceManager.Models;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateLinkResourceDataConverter))]
-    public partial class PrivateLinkResourceData : IUtf8JsonSerializable, IJsonModel<PrivateLinkResourceData>
+    public partial class PrivateLinkResourceData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkResourceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<PrivateLinkResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceData)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
-            {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
-            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(GroupId))
-            {
-                writer.WritePropertyName("groupId"u8);
-                writer.WriteStringValue(GroupId);
-            }
-            if (options.Format != "W" && Optional.IsCollectionDefined(RequiredMembers))
-            {
-                writer.WritePropertyName("requiredMembers"u8);
-                writer.WriteStartArray();
-                foreach (var item in RequiredMembers)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && Optional.IsCollectionDefined(RequiredZoneNames))
-            {
-                writer.WritePropertyName("requiredZoneNames"u8);
-                writer.WriteStartArray();
-                foreach (var item in RequiredZoneNames)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        PrivateLinkResourceData IJsonModel<PrivateLinkResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static PrivateLinkResourceData DeserializePrivateLinkResourceData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceData)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePrivateLinkResourceData(document.RootElement, options);
-        }
-
-        internal static PrivateLinkResourceData DeserializePrivateLinkResourceData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -182,37 +113,6 @@ namespace Azure.ResourceManager.Fake.Models
             }
             return new PrivateLinkResourceData(id, name, type, systemData.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
         }
-
-        BinaryData IPersistableModel<PrivateLinkResourceData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceData)} does not support '{options.Format}' format.");
-            }
-        }
-
-        PrivateLinkResourceData IPersistableModel<PrivateLinkResourceData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializePrivateLinkResourceData(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceData)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PrivateLinkResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class PrivateLinkResourceDataConverter : JsonConverter<PrivateLinkResourceData>
         {

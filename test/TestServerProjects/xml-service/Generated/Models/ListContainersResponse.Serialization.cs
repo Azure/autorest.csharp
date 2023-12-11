@@ -55,6 +55,8 @@ namespace xml_service.Models
 
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string serviceEndpoint = default;
             string prefix = default;
             string marker = default;

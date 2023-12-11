@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -14,38 +13,6 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Request parameter to train a new custom model. </summary>
     public partial class TrainContent
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="TrainContent"/>. </summary>
         /// <param name="source"> Source path containing the training documents. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="source"/> is null. </exception>
@@ -60,18 +27,11 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="source"> Source path containing the training documents. </param>
         /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
         /// <param name="useLabelFile"> Use label file for training a model. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TrainContent(string source, TrainSourceFilter sourceFilter, bool? useLabelFile, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal TrainContent(string source, TrainSourceFilter sourceFilter, bool? useLabelFile)
         {
             Source = source;
             SourceFilter = sourceFilter;
             UseLabelFile = useLabelFile;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="TrainContent"/> for deserialization. </summary>
-        internal TrainContent()
-        {
         }
 
         /// <summary> Source path containing the training documents. </summary>

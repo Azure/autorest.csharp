@@ -2,68 +2,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CreateResult : IUtf8JsonWriteable, IJsonModel<CreateResult>
+    public partial class CreateResult
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<CreateResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static CreateResult DeserializeCreateResult(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(CreateResult)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            writer.WritePropertyName("flagged"u8);
-            writer.WriteBooleanValue(Flagged);
-            writer.WritePropertyName("categories"u8);
-            writer.WriteObjectValue(Categories);
-            writer.WritePropertyName("category_scores"u8);
-            writer.WriteObjectValue(CategoryScores);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        CreateResult IJsonModel<CreateResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(CreateResult)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCreateResult(document.RootElement, options);
-        }
-
-        internal static CreateResult DeserializeCreateResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -71,8 +18,6 @@ namespace OpenAI.Models
             bool flagged = default;
             CreateCategories categories = default;
             CreateCategoryScores categoryScores = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("flagged"u8))
@@ -90,45 +35,9 @@ namespace OpenAI.Models
                     categoryScores = CreateCategoryScores.DeserializeCreateCategoryScores(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateResult(flagged, categories, categoryScores, serializedAdditionalRawData);
+            return new CreateResult(flagged, categories, categoryScores);
         }
-
-        BinaryData IPersistableModel<CreateResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(CreateResult)} does not support '{options.Format}' format.");
-            }
-        }
-
-        CreateResult IPersistableModel<CreateResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCreateResult(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(CreateResult)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<CreateResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
@@ -136,14 +45,6 @@ namespace OpenAI.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCreateResult(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
-        {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

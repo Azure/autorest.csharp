@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -28,17 +27,11 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleRemoteAddressCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
-        internal DeliveryRuleRemoteAddressCondition(MatchVariable name, string foo, IDictionary<string, BinaryData> serializedAdditionalRawData, RemoteAddressMatchConditionParameters parameters) : base(name, foo, serializedAdditionalRawData)
+        internal DeliveryRuleRemoteAddressCondition(MatchVariable name, string foo, RemoteAddressMatchConditionParameters parameters) : base(name, foo)
         {
             Parameters = parameters;
             Name = name;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRemoteAddressCondition"/> for deserialization. </summary>
-        internal DeliveryRuleRemoteAddressCondition()
-        {
         }
 
         /// <summary> Defines the parameters for the condition. </summary>

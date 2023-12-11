@@ -33,6 +33,8 @@ namespace xml_service.Models
 
         internal static ModelWithUrlProperty DeserializeModelWithUrlProperty(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             Uri url = default;
             if (element.Element("Url") is XElement urlElement)
             {

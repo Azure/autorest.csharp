@@ -33,6 +33,8 @@ namespace xml_service.Models
 
         internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string id = default;
             if (element.Element("ID") is XElement idElement)
             {

@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
             tapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
             hostedWorkloads ??= new List<string>();
 
-            return new NetworkInterface(id, name, type, location, tags, serializedAdditionalRawData: null, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
+            return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkSecurityGroup"/>. </summary>
@@ -66,7 +66,7 @@ namespace Azure.Network.Management.Interface.Models
             networkInterfaces ??= new List<NetworkInterface>();
             subnets ??= new List<Subnet>();
 
-            return new NetworkSecurityGroup(id, name, type, location, tags, serializedAdditionalRawData: null, etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
+            return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SecurityRule"/>. </summary>
@@ -99,7 +99,7 @@ namespace Azure.Network.Management.Interface.Models
             sourcePortRanges ??= new List<string>();
             destinationPortRanges ??= new List<string>();
 
-            return new SecurityRule(id, serializedAdditionalRawData: null, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState);
+            return new SecurityRule(id, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApplicationSecurityGroup"/>. </summary>
@@ -116,7 +116,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ApplicationSecurityGroup(id, name, type, location, tags, serializedAdditionalRawData: null, etag, resourceGuid, provisioningState);
+            return new ApplicationSecurityGroup(id, name, type, location, tags, etag, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
@@ -130,7 +130,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, name, type, location, tags, serializedAdditionalRawData: null);
+            return new Resource(id, name, type, location, tags);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Subnet"/>. </summary>
@@ -167,7 +167,7 @@ namespace Azure.Network.Management.Interface.Models
             serviceAssociationLinks ??= new List<ServiceAssociationLink>();
             delegations ??= new List<Delegation>();
 
-            return new Subnet(id, serializedAdditionalRawData: null, name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
+            return new Subnet(id, name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RouteTable"/>. </summary>
@@ -188,7 +188,7 @@ namespace Azure.Network.Management.Interface.Models
             routes ??= new List<Route>();
             subnets ??= new List<Subnet>();
 
-            return new RouteTable(id, name, type, location, tags, serializedAdditionalRawData: null, etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState);
+            return new RouteTable(id, name, type, location, tags, etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Route"/>. </summary>
@@ -202,7 +202,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.Route"/> instance for mocking. </returns>
         public static Route Route(string id = null, string name = null, string etag = null, string addressPrefix = null, RouteNextHopType? nextHopType = null, string nextHopIpAddress = null, ProvisioningState? provisioningState = null)
         {
-            return new Route(id, serializedAdditionalRawData: null, name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState);
+            return new Route(id, name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceEndpointPropertiesFormat"/>. </summary>
@@ -214,7 +214,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             locations ??= new List<string>();
 
-            return new ServiceEndpointPropertiesFormat(service, locations?.ToList(), provisioningState, serializedAdditionalRawData: null);
+            return new ServiceEndpointPropertiesFormat(service, locations?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceEndpointPolicy"/>. </summary>
@@ -235,7 +235,7 @@ namespace Azure.Network.Management.Interface.Models
             serviceEndpointPolicyDefinitions ??= new List<ServiceEndpointPolicyDefinition>();
             subnets ??= new List<Subnet>();
 
-            return new ServiceEndpointPolicy(id, name, type, location, tags, serializedAdditionalRawData: null, etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
+            return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceEndpointPolicyDefinition"/>. </summary>
@@ -251,7 +251,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             serviceResources ??= new List<string>();
 
-            return new ServiceEndpointPolicyDefinition(id, serializedAdditionalRawData: null, name, etag, description, service, serviceResources?.ToList(), provisioningState);
+            return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResources?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PrivateEndpoint"/>. </summary>
@@ -274,7 +274,7 @@ namespace Azure.Network.Management.Interface.Models
             privateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
             manualPrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
 
-            return new PrivateEndpoint(id, name, type, location, tags, serializedAdditionalRawData: null, etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList());
+            return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PrivateLinkServiceConnection"/>. </summary>
@@ -292,7 +292,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             groupIds ??= new List<string>();
 
-            return new PrivateLinkServiceConnection(id, serializedAdditionalRawData: null, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
+            return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IPConfiguration"/>. </summary>
@@ -307,7 +307,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.IPConfiguration"/> instance for mocking. </returns>
         public static IPConfiguration IPConfiguration(string id = null, string name = null, string etag = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, ProvisioningState? provisioningState = null)
         {
-            return new IPConfiguration(id, serializedAdditionalRawData: null, name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState);
+            return new IPConfiguration(id, name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PublicIPAddress"/>. </summary>
@@ -337,7 +337,7 @@ namespace Azure.Network.Management.Interface.Models
             zones ??= new List<string>();
             ipTags ??= new List<IpTag>();
 
-            return new PublicIPAddress(id, name, type, location, tags, serializedAdditionalRawData: null, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
+            return new PublicIPAddress(id, name, type, location, tags, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IPConfigurationProfile"/>. </summary>
@@ -350,7 +350,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.IPConfigurationProfile"/> instance for mocking. </returns>
         public static IPConfigurationProfile IPConfigurationProfile(string id = null, string name = null, string type = null, string etag = null, Subnet subnet = null, ProvisioningState? provisioningState = null)
         {
-            return new IPConfigurationProfile(id, serializedAdditionalRawData: null, name, type, etag, subnet, provisioningState);
+            return new IPConfigurationProfile(id, name, type, etag, subnet, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceNavigationLink"/>. </summary>
@@ -364,7 +364,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.ResourceNavigationLink"/> instance for mocking. </returns>
         public static ResourceNavigationLink ResourceNavigationLink(string id = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null)
         {
-            return new ResourceNavigationLink(id, serializedAdditionalRawData: null, name, etag, type, linkedResourceType, link, provisioningState);
+            return new ResourceNavigationLink(id, name, etag, type, linkedResourceType, link, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceAssociationLink"/>. </summary>
@@ -382,7 +382,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             locations ??= new List<string>();
 
-            return new ServiceAssociationLink(id, serializedAdditionalRawData: null, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList());
+            return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Delegation"/>. </summary>
@@ -397,7 +397,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             actions ??= new List<string>();
 
-            return new Delegation(id, serializedAdditionalRawData: null, name, etag, serviceName, actions?.ToList(), provisioningState);
+            return new Delegation(id, name, etag, serviceName, actions?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkInterfaceIPConfiguration"/>. </summary>
@@ -426,7 +426,7 @@ namespace Azure.Network.Management.Interface.Models
             loadBalancerInboundNatRules ??= new List<InboundNatRule>();
             applicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
 
-            return new NetworkInterfaceIPConfiguration(id, serializedAdditionalRawData: null, name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties);
+            return new NetworkInterfaceIPConfiguration(id, name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualNetworkTap"/>. </summary>
@@ -448,7 +448,7 @@ namespace Azure.Network.Management.Interface.Models
             tags ??= new Dictionary<string, string>();
             networkInterfaceTapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
 
-            return new VirtualNetworkTap(id, name, type, location, tags, serializedAdditionalRawData: null, etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
+            return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkInterfaceTapConfiguration"/>. </summary>
@@ -461,7 +461,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.NetworkInterfaceTapConfiguration"/> instance for mocking. </returns>
         public static NetworkInterfaceTapConfiguration NetworkInterfaceTapConfiguration(string id = null, string name = null, string etag = null, string type = null, VirtualNetworkTap virtualNetworkTap = null, ProvisioningState? provisioningState = null)
         {
-            return new NetworkInterfaceTapConfiguration(id, serializedAdditionalRawData: null, name, etag, type, virtualNetworkTap, provisioningState);
+            return new NetworkInterfaceTapConfiguration(id, name, etag, type, virtualNetworkTap, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FrontendIPConfiguration"/>. </summary>
@@ -490,7 +490,7 @@ namespace Azure.Network.Management.Interface.Models
             outboundRules ??= new List<SubResource>();
             loadBalancingRules ??= new List<SubResource>();
 
-            return new FrontendIPConfiguration(id, serializedAdditionalRawData: null, name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
+            return new FrontendIPConfiguration(id, name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApplicationGatewayBackendAddressPool"/>. </summary>
@@ -507,7 +507,7 @@ namespace Azure.Network.Management.Interface.Models
             backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
             backendAddresses ??= new List<ApplicationGatewayBackendAddress>();
 
-            return new ApplicationGatewayBackendAddressPool(id, serializedAdditionalRawData: null, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
+            return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BackendAddressPool"/>. </summary>
@@ -527,7 +527,7 @@ namespace Azure.Network.Management.Interface.Models
             loadBalancingRules ??= new List<SubResource>();
             outboundRules ??= new List<SubResource>();
 
-            return new BackendAddressPool(id, serializedAdditionalRawData: null, name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState);
+            return new BackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InboundNatRule"/>. </summary>
@@ -547,7 +547,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.InboundNatRule"/> instance for mocking. </returns>
         public static InboundNatRule InboundNatRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, NetworkInterfaceIPConfiguration backendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            return new InboundNatRule(id, serializedAdditionalRawData: null, name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
+            return new InboundNatRule(id, name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/>. </summary>
@@ -559,7 +559,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             fqdns ??= new List<string>();
 
-            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns?.ToList(), serializedAdditionalRawData: null);
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NetworkInterfaceDnsSettings"/>. </summary>
@@ -574,7 +574,7 @@ namespace Azure.Network.Management.Interface.Models
             dnsServers ??= new List<string>();
             appliedDnsServers ??= new List<string>();
 
-            return new NetworkInterfaceDnsSettings(dnsServers?.ToList(), appliedDnsServers?.ToList(), internalDnsNameLabel, internalFqdn, internalDomainNameSuffix, serializedAdditionalRawData: null);
+            return new NetworkInterfaceDnsSettings(dnsServers?.ToList(), appliedDnsServers?.ToList(), internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EffectiveRouteListResult"/>. </summary>
@@ -585,7 +585,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             value ??= new List<EffectiveRoute>();
 
-            return new EffectiveRouteListResult(value?.ToList(), nextLink, serializedAdditionalRawData: null);
+            return new EffectiveRouteListResult(value?.ToList(), nextLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EffectiveRoute"/>. </summary>
@@ -602,7 +602,7 @@ namespace Azure.Network.Management.Interface.Models
             addressPrefix ??= new List<string>();
             nextHopIpAddress ??= new List<string>();
 
-            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix?.ToList(), nextHopIpAddress?.ToList(), nextHopType, serializedAdditionalRawData: null);
+            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix?.ToList(), nextHopIpAddress?.ToList(), nextHopType);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EffectiveNetworkSecurityGroupListResult"/>. </summary>
@@ -613,7 +613,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             value ??= new List<EffectiveNetworkSecurityGroup>();
 
-            return new EffectiveNetworkSecurityGroupListResult(value?.ToList(), nextLink, serializedAdditionalRawData: null);
+            return new EffectiveNetworkSecurityGroupListResult(value?.ToList(), nextLink);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EffectiveNetworkSecurityGroup"/>. </summary>
@@ -626,7 +626,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             effectiveSecurityRules ??= new List<EffectiveNetworkSecurityRule>();
 
-            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules?.ToList(), tagMap, serializedAdditionalRawData: null);
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules?.ToList(), tagMap);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EffectiveNetworkSecurityGroupAssociation"/>. </summary>
@@ -635,7 +635,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroupAssociation"/> instance for mocking. </returns>
         public static EffectiveNetworkSecurityGroupAssociation EffectiveNetworkSecurityGroupAssociation(SubResource subnet = null, SubResource networkInterface = null)
         {
-            return new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface, serializedAdditionalRawData: null);
+            return new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EffectiveNetworkSecurityRule"/>. </summary>
@@ -664,7 +664,7 @@ namespace Azure.Network.Management.Interface.Models
             expandedSourceAddressPrefix ??= new List<string>();
             expandedDestinationAddressPrefix ??= new List<string>();
 
-            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes?.ToList(), destinationAddressPrefixes?.ToList(), expandedSourceAddressPrefix?.ToList(), expandedDestinationAddressPrefix?.ToList(), access, priority, direction, serializedAdditionalRawData: null);
+            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes?.ToList(), destinationAddressPrefixes?.ToList(), expandedSourceAddressPrefix?.ToList(), expandedDestinationAddressPrefix?.ToList(), access, priority, direction);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LoadBalancer"/>. </summary>
@@ -696,7 +696,7 @@ namespace Azure.Network.Management.Interface.Models
             inboundNatPools ??= new List<InboundNatPool>();
             outboundRules ??= new List<OutboundRule>();
 
-            return new LoadBalancer(id, name, type, location, tags, serializedAdditionalRawData: null, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
+            return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LoadBalancingRule"/>. </summary>
@@ -719,7 +719,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.LoadBalancingRule"/> instance for mocking. </returns>
         public static LoadBalancingRule LoadBalancingRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, SubResource backendAddressPool = null, SubResource probe = null, TransportProtocol? protocol = null, LoadDistribution? loadDistribution = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, bool? disableOutboundSnat = null, ProvisioningState? provisioningState = null)
         {
-            return new LoadBalancingRule(id, serializedAdditionalRawData: null, name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState);
+            return new LoadBalancingRule(id, name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Probe"/>. </summary>
@@ -739,7 +739,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             loadBalancingRules ??= new List<SubResource>();
 
-            return new Probe(id, serializedAdditionalRawData: null, name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
+            return new Probe(id, name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InboundNatPool"/>. </summary>
@@ -759,7 +759,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.InboundNatPool"/> instance for mocking. </returns>
         public static InboundNatPool InboundNatPool(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPortRangeStart = null, int? frontendPortRangeEnd = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            return new InboundNatPool(id, serializedAdditionalRawData: null, name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
+            return new InboundNatPool(id, name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutboundRule"/>. </summary>
@@ -779,7 +779,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             frontendIPConfigurations ??= new List<SubResource>();
 
-            return new OutboundRule(id, serializedAdditionalRawData: null, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
+            return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
         }
     }
 }

@@ -218,6 +218,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var scopeName = operation.Diagnostics.ScopeName;
                 var nextLinkName = pagingResponse.NextLinkPropertyName;
                 var itemName = pagingResponse.ItemPropertyName;
+                // TODO -- why we have a hard-coded Product.DeserializeProduct here???
                 FormattableString returnValue = $"{typeof(GeneratorPageableHelpers)}.{nameof(GeneratorPageableHelpers.CreateAsyncPageable)}({responseVariable}, _nextPageFunc, e => Product.DeserializeProduct(e), _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, cancellationToken)";
                 WriteCreateResultReturnValue(writer, resultType, returnValue, async);
             }

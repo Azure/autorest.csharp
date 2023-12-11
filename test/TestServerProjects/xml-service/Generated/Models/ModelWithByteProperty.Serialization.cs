@@ -33,6 +33,8 @@ namespace xml_service.Models
 
         internal static ModelWithByteProperty DeserializeModelWithByteProperty(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             byte[] bytes = default;
             if (element.Element("Bytes") is XElement bytesElement)
             {

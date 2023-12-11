@@ -5,27 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    [PersistableModelProxy(typeof(UnknownFirewallPolicyRuleCollection))]
-    public partial class FirewallPolicyRuleCollection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyRuleCollection>
+    public partial class FirewallPolicyRuleCollection : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRuleCollection>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<FirewallPolicyRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(FirewallPolicyRuleCollection)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("ruleCollectionType"u8);
             writer.WriteStringValue(RuleCollectionType.ToString());
@@ -39,40 +27,11 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        FirewallPolicyRuleCollection IJsonModel<FirewallPolicyRuleCollection>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static FirewallPolicyRuleCollection DeserializeFirewallPolicyRuleCollection(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(FirewallPolicyRuleCollection)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFirewallPolicyRuleCollection(document.RootElement, options);
-        }
-
-        internal static FirewallPolicyRuleCollection DeserializeFirewallPolicyRuleCollection(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -87,36 +46,5 @@ namespace MgmtMockAndSample.Models
             }
             return UnknownFirewallPolicyRuleCollection.DeserializeUnknownFirewallPolicyRuleCollection(element);
         }
-
-        BinaryData IPersistableModel<FirewallPolicyRuleCollection>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(FirewallPolicyRuleCollection)} does not support '{options.Format}' format.");
-            }
-        }
-
-        FirewallPolicyRuleCollection IPersistableModel<FirewallPolicyRuleCollection>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyRuleCollection>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFirewallPolicyRuleCollection(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(FirewallPolicyRuleCollection)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<FirewallPolicyRuleCollection>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

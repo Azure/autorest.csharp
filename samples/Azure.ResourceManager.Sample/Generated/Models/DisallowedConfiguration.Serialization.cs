@@ -5,74 +5,31 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class DisallowedConfiguration : IUtf8JsonSerializable, IJsonModel<DisallowedConfiguration>
+    internal partial class DisallowedConfiguration : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DisallowedConfiguration>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<DisallowedConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DisallowedConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(DisallowedConfiguration)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(VmDiskType))
             {
                 writer.WritePropertyName("vmDiskType"u8);
                 writer.WriteStringValue(VmDiskType.Value.ToString());
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        DisallowedConfiguration IJsonModel<DisallowedConfiguration>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static DisallowedConfiguration DeserializeDisallowedConfiguration(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<DisallowedConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(DisallowedConfiguration)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeDisallowedConfiguration(document.RootElement, options);
-        }
-
-        internal static DisallowedConfiguration DeserializeDisallowedConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<VmDiskType> vmDiskType = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vmDiskType"u8))
@@ -84,44 +41,8 @@ namespace Azure.ResourceManager.Sample.Models
                     vmDiskType = new VmDiskType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DisallowedConfiguration(Optional.ToNullable(vmDiskType), serializedAdditionalRawData);
+            return new DisallowedConfiguration(Optional.ToNullable(vmDiskType));
         }
-
-        BinaryData IPersistableModel<DisallowedConfiguration>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DisallowedConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(DisallowedConfiguration)} does not support '{options.Format}' format.");
-            }
-        }
-
-        DisallowedConfiguration IPersistableModel<DisallowedConfiguration>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<DisallowedConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeDisallowedConfiguration(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(DisallowedConfiguration)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<DisallowedConfiguration>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

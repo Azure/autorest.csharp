@@ -5,72 +5,29 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace CustomizationsInTsp.Models
 {
-    internal partial class ModelToMakeInternal : IUtf8JsonSerializable, IJsonModel<ModelToMakeInternal>
+    internal partial class ModelToMakeInternal : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToMakeInternal>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<ModelToMakeInternal>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ModelToMakeInternal)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        ModelToMakeInternal IJsonModel<ModelToMakeInternal>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ModelToMakeInternal DeserializeModelToMakeInternal(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ModelToMakeInternal)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelToMakeInternal(document.RootElement, options);
-        }
-
-        internal static ModelToMakeInternal DeserializeModelToMakeInternal(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             int requiredInt = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
@@ -78,45 +35,9 @@ namespace CustomizationsInTsp.Models
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelToMakeInternal(requiredInt, serializedAdditionalRawData);
+            return new ModelToMakeInternal(requiredInt);
         }
-
-        BinaryData IPersistableModel<ModelToMakeInternal>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ModelToMakeInternal)} does not support '{options.Format}' format.");
-            }
-        }
-
-        ModelToMakeInternal IPersistableModel<ModelToMakeInternal>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeModelToMakeInternal(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ModelToMakeInternal)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ModelToMakeInternal>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

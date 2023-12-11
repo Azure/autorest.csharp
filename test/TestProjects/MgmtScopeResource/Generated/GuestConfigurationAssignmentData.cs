@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -27,9 +25,8 @@ namespace MgmtScopeResource
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="properties"> Properties of the Guest configuration assignment. </param>
-        internal GuestConfigurationAssignmentData(string id, string name, string location, string resourceType, IDictionary<string, BinaryData> serializedAdditionalRawData, GuestConfigurationAssignmentProperties properties) : base(id, name, location, resourceType, serializedAdditionalRawData)
+        internal GuestConfigurationAssignmentData(string id, string name, string location, string resourceType, GuestConfigurationAssignmentProperties properties) : base(id, name, location, resourceType)
         {
             Properties = properties;
         }

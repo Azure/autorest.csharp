@@ -4,45 +4,12 @@
 
 using System;
 using System.ClientModel.Internal;
-using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
     /// <summary> The CreateImageEditRequest. </summary>
     public partial class CreateImageEditRequest
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <param name="image">
@@ -57,7 +24,6 @@ namespace OpenAI.Models
 
             Prompt = prompt;
             Image = image;
-            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
@@ -75,8 +41,7 @@ namespace OpenAI.Models
         /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
         /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateImageEditRequest(string prompt, BinaryData image, BinaryData mask, long? n, CreateImageEditRequestSize? size, CreateImageEditRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateImageEditRequest(string prompt, BinaryData image, BinaryData mask, long? n, CreateImageEditRequestSize? size, CreateImageEditRequestResponseFormat? responseFormat, string user)
         {
             Prompt = prompt;
             Image = image;
@@ -85,12 +50,6 @@ namespace OpenAI.Models
             Size = size;
             ResponseFormat = responseFormat;
             User = user;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/> for deserialization. </summary>
-        internal CreateImageEditRequest()
-        {
         }
 
         /// <summary> A text description of the desired image(s). The maximum length is 1000 characters. </summary>

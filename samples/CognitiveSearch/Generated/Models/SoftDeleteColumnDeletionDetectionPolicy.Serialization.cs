@@ -5,27 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SoftDeleteColumnDeletionDetectionPolicy : IUtf8JsonSerializable, IJsonModel<SoftDeleteColumnDeletionDetectionPolicy>
+    public partial class SoftDeleteColumnDeletionDetectionPolicy : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SoftDeleteColumnDeletionDetectionPolicy>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<SoftDeleteColumnDeletionDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SoftDeleteColumnDeletionDetectionPolicy>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SoftDeleteColumnDeletionDetectionPolicy)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(SoftDeleteColumnName))
             {
@@ -39,40 +27,11 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        SoftDeleteColumnDeletionDetectionPolicy IJsonModel<SoftDeleteColumnDeletionDetectionPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SoftDeleteColumnDeletionDetectionPolicy>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SoftDeleteColumnDeletionDetectionPolicy)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSoftDeleteColumnDeletionDetectionPolicy(document.RootElement, options);
-        }
-
-        internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -80,8 +39,6 @@ namespace CognitiveSearch.Models
             Optional<string> softDeleteColumnName = default;
             Optional<string> softDeleteMarkerValue = default;
             string odataType = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("softDeleteColumnName"u8))
@@ -99,44 +56,8 @@ namespace CognitiveSearch.Models
                     odataType = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, serializedAdditionalRawData, softDeleteColumnName.Value, softDeleteMarkerValue.Value);
+            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName.Value, softDeleteMarkerValue.Value);
         }
-
-        BinaryData IPersistableModel<SoftDeleteColumnDeletionDetectionPolicy>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SoftDeleteColumnDeletionDetectionPolicy>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SoftDeleteColumnDeletionDetectionPolicy)} does not support '{options.Format}' format.");
-            }
-        }
-
-        SoftDeleteColumnDeletionDetectionPolicy IPersistableModel<SoftDeleteColumnDeletionDetectionPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SoftDeleteColumnDeletionDetectionPolicy>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSoftDeleteColumnDeletionDetectionPolicy(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SoftDeleteColumnDeletionDetectionPolicy)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SoftDeleteColumnDeletionDetectionPolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

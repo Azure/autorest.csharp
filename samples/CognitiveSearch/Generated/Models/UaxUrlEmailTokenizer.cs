@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -27,17 +26,11 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="UaxUrlEmailTokenizer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the tokenizer. </param>
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="maxTokenLength"> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </param>
-        internal UaxUrlEmailTokenizer(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int? maxTokenLength) : base(odataType, name, serializedAdditionalRawData)
+        internal UaxUrlEmailTokenizer(string odataType, string name, int? maxTokenLength) : base(odataType, name)
         {
             MaxTokenLength = maxTokenLength;
             OdataType = odataType ?? "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UaxUrlEmailTokenizer"/> for deserialization. </summary>
-        internal UaxUrlEmailTokenizer()
-        {
         }
 
         /// <summary> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>

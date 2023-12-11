@@ -31,19 +31,13 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="PatternCaptureTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="patterns"> A list of patterns to match against each token. </param>
         /// <param name="preserveOriginal"> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </param>
-        internal PatternCaptureTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> patterns, bool? preserveOriginal) : base(odataType, name, serializedAdditionalRawData)
+        internal PatternCaptureTokenFilter(string odataType, string name, IList<string> patterns, bool? preserveOriginal) : base(odataType, name)
         {
             Patterns = patterns;
             PreserveOriginal = preserveOriginal;
             OdataType = odataType ?? "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="PatternCaptureTokenFilter"/> for deserialization. </summary>
-        internal PatternCaptureTokenFilter()
-        {
         }
 
         /// <summary> A list of patterns to match against each token. </summary>

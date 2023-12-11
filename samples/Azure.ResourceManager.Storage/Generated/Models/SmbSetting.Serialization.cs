@@ -5,27 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class SmbSetting : IUtf8JsonSerializable, IJsonModel<SmbSetting>
+    public partial class SmbSetting : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmbSetting>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<SmbSetting>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SmbSetting>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SmbSetting)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(Multichannel))
             {
@@ -52,40 +40,11 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("channelEncryption"u8);
                 writer.WriteStringValue(ChannelEncryption);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        SmbSetting IJsonModel<SmbSetting>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static SmbSetting DeserializeSmbSetting(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SmbSetting>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SmbSetting)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSmbSetting(document.RootElement, options);
-        }
-
-        internal static SmbSetting DeserializeSmbSetting(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -95,8 +54,6 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<string> authenticationMethods = default;
             Optional<string> kerberosTicketEncryption = default;
             Optional<string> channelEncryption = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("multichannel"u8))
@@ -128,44 +85,8 @@ namespace Azure.ResourceManager.Storage.Models
                     channelEncryption = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new SmbSetting(multichannel.Value, versions.Value, authenticationMethods.Value, kerberosTicketEncryption.Value, channelEncryption.Value, serializedAdditionalRawData);
+            return new SmbSetting(multichannel.Value, versions.Value, authenticationMethods.Value, kerberosTicketEncryption.Value, channelEncryption.Value);
         }
-
-        BinaryData IPersistableModel<SmbSetting>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SmbSetting>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SmbSetting)} does not support '{options.Format}' format.");
-            }
-        }
-
-        SmbSetting IPersistableModel<SmbSetting>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SmbSetting>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSmbSetting(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SmbSetting)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SmbSetting>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

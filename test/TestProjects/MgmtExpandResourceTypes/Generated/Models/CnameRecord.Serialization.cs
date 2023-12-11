@@ -5,74 +5,31 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    internal partial class CnameRecord : IUtf8JsonSerializable, IJsonModel<CnameRecord>
+    internal partial class CnameRecord : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CnameRecord>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<CnameRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CnameRecord>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(CnameRecord)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(Cname))
             {
                 writer.WritePropertyName("cname"u8);
                 writer.WriteStringValue(Cname);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        CnameRecord IJsonModel<CnameRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static CnameRecord DeserializeCnameRecord(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CnameRecord>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(CnameRecord)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCnameRecord(document.RootElement, options);
-        }
-
-        internal static CnameRecord DeserializeCnameRecord(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> cname = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("cname"u8))
@@ -80,44 +37,8 @@ namespace MgmtExpandResourceTypes.Models
                     cname = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CnameRecord(cname.Value, serializedAdditionalRawData);
+            return new CnameRecord(cname.Value);
         }
-
-        BinaryData IPersistableModel<CnameRecord>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CnameRecord>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(CnameRecord)} does not support '{options.Format}' format.");
-            }
-        }
-
-        CnameRecord IPersistableModel<CnameRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CnameRecord>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCnameRecord(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(CnameRecord)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<CnameRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

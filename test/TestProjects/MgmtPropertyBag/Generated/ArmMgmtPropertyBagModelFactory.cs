@@ -24,7 +24,7 @@ namespace MgmtPropertyBag.Models
         /// <returns> A new <see cref="MgmtPropertyBag.FooData"/> instance for mocking. </returns>
         public static FooData FooData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string details = null)
         {
-            return new FooData(id, name, resourceType, systemData, details, serializedAdditionalRawData: null);
+            return new FooData(id, name, resourceType, systemData, details);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPropertyBag.BarData"/>. </summary>
@@ -36,7 +36,7 @@ namespace MgmtPropertyBag.Models
         /// <returns> A new <see cref="MgmtPropertyBag.BarData"/> instance for mocking. </returns>
         public static BarData BarData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string details = null)
         {
-            return new BarData(id, name, resourceType, systemData, details, serializedAdditionalRawData: null);
+            return new BarData(id, name, resourceType, systemData, details);
         }
     }
 }
