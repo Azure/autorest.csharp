@@ -12,57 +12,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class CSharpProj
     {
-//        private string _csProjContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
-
-//  <PropertyGroup>
-//    <TargetFramework>netstandard2.0</TargetFramework>
-//    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-//    <Nullable>annotations</Nullable>
-//  </PropertyGroup>
-//{0}{1}{2}
-
-//</Project>
-//";
-//        private string _coreCsProjContent = @"
-//  <ItemGroup>
-//    <PackageReference Include=""Azure.Core"" />
-//  </ItemGroup>";
-
-//        private string _armCsProjContent = @"
-//  <PropertyGroup>
-//    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
-//  </PropertyGroup>
-
-//  <ItemGroup>
-//    <PackageReference Include=""Azure.ResourceManager"" />
-//  </ItemGroup>
-//";
-
-//        private string _csProjPackageReference = @"
-//  <PropertyGroup>
-//    <LangVersion>11.0</LangVersion>
-//    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
-//    <RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json</RestoreAdditionalProjectSources>
-//  </PropertyGroup>
-
-//  <ItemGroup>
-//    <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
-//  </ItemGroup>
-//";
-
-//        private string _llcProjectContent = @"
-//  <PropertyGroup>
-//    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
-//  </PropertyGroup>
-//  <ItemGroup>
-//    <PackageReference Include=""Azure.Core.Experimental"" />
-//  </ItemGroup>
-//";
-//        private string _llcAzureKeyAuth = @"
-//  <ItemGroup>
-//    <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />
-//  </ItemGroup>";
-
         internal static string GetVersion()
         {
             Assembly clientAssembly = Assembly.GetExecutingAssembly();
@@ -84,14 +33,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return version;
         }
 
-        public void Execute(string defaultNamespace, IPluginCommunication autoRest, bool includeDfe, bool includeAzureKeyAuth)
-            => Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
+        public void Execute(IPluginCommunication autoRest, bool includeDfe, bool includeAzureKeyAuth)
+            => Execute(Configuration.Namespace, includeAzureKeyAuth, async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
             }, includeDfe);
 
-        public void Execute(string defaultNamespace, bool includeDfe, bool includeAzureKeyAuth)
-            => Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
+        public void Execute(bool includeDfe, bool includeAzureKeyAuth)
+            => Execute(Configuration.Namespace, includeAzureKeyAuth, async (filename, text) =>
             {
                 //TODO adding to workspace makes the formatting messed up since its a raw xml document
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text

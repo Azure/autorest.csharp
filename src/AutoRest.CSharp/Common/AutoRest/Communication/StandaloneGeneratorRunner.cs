@@ -64,8 +64,9 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 if (options.IsNewProject)
                 {
                     bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
+                    bool includeDfe = yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal);
                     //await new NewProjectScaffolding(needAzureKeyAuth).Execute();
-                    new CSharpProj().Execute(Configuration.Namespace, yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal), needAzureKeyAuth);
+                    new CSharpProj().Execute(includeDfe, needAzureKeyAuth);
                 }
             }
             else
