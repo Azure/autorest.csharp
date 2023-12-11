@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Microsoft.CodeAnalysis;
@@ -23,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public MethodSignature WithAsync(bool isAsync) => isAsync ? MakeAsync() : MakeSync();
 
-        public MethodSignature DisableOptionalParameters()
+        public MethodSignature WithParametersRequired()
         {
             if (Parameters.All(p => p.DefaultValue is null))
             {

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                 {
-                    overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters, previous.Description, true));
+                    overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.WithParametersRequired(), missingParameters, previous.Description, true));
                 }
             }
             return overloadMethods;

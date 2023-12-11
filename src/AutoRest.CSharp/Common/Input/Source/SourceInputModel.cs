@@ -4,10 +4,17 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
+using Microsoft.Build.Construction;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using NuGet.Configuration;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Input.Source
 {
@@ -20,10 +27,10 @@ namespace AutoRest.CSharp.Input.Source
         public Compilation Customization { get; }
         public Compilation? PreviousContract { get; }
 
-        public SourceInputModel(Compilation customization, CompilationInput? existingCompilation = null, Compilation? previousContract = null)
+        public SourceInputModel(Compilation customization, CompilationInput? existingCompilation = null)
         {
             Customization = customization;
-            PreviousContract = previousContract;
+            PreviousContract = LoadBaselineContract().GetAwaiter().GetResult();
             _existingCompilation = existingCompilation;
 
             _codeGenAttributes = new CodeGenAttributes(customization);
@@ -129,6 +136,41 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return name != null;
+        }
+
+        private async Task<CSharpCompilation?> LoadBaselineContract()
+        {
+            // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
+            if (!Configuration.AzureArm)
+                return null;
+
+            string fullPath;
+            string projectFilePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, $"{Configuration.Namespace}.csproj"));
+            if (!File.Exists(projectFilePath))
+                return null;
+
+            var baselineVersion = ProjectRootElement.Open(projectFilePath).Properties.SingleOrDefault(p => p.Name == "ApiCompatVersion")?.Value;
+
+            if (baselineVersion is not null)
+            {
+                var nugetGlobalPackageFolder = SettingsUtility.GetGlobalPackagesFolder(new NullSettings());
+                var nugetFolder = Path.Combine(nugetGlobalPackageFolder, Configuration.Namespace.ToLowerInvariant(), baselineVersion, "lib", "netstandard2.0");
+                fullPath = Path.Combine(nugetFolder, $"{Configuration.Namespace}.dll");
+                if (File.Exists(fullPath))
+                {
+                    return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(Path.Combine(nugetFolder, $"{Configuration.Namespace}.xml"), fullPath);
+                }
+            }
+
+            // fallback for testing purpose
+            var baselinePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "BaselineContract", Configuration.Namespace));
+            fullPath = Path.Combine(baselinePath, $"{Configuration.Namespace}.dll");
+            if (File.Exists(fullPath))
+            {
+                return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(Path.Combine(baselinePath, $"{Configuration.Namespace}.xml"), fullPath);
+            }
+
+            return null;
         }
     }
 }

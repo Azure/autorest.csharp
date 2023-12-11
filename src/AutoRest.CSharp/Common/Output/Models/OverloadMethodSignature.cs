@@ -7,21 +7,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class OverloadMethodSignature
+    internal record OverloadMethodSignature(MethodSignature MethodSignature, MethodSignature PreviousMethodSignature, IReadOnlyList<Parameter> MissingParameters, FormattableString? Description, bool IsHiddenFromUser)
     {
-        public MethodSignature MethodSignature { get; }
-        public MethodSignature PreviousMethodSignature { get; }
-        public IReadOnlyList<Parameter> MissingParameters { get; }
-        public FormattableString? Description { get; }
-        public bool IsHiddenFromUser { get; }
-
-        public OverloadMethodSignature(MethodSignature methodSignature, MethodSignature previousMethodSignature, IReadOnlyList<Parameter> missingParameters, FormattableString? description, bool isHiddenFromUser)
-        {
-            MethodSignature = methodSignature;
-            PreviousMethodSignature = previousMethodSignature;
-            MissingParameters = missingParameters;
-            Description = description;
-            IsHiddenFromUser = isHiddenFromUser;
-        }
     }
 }
