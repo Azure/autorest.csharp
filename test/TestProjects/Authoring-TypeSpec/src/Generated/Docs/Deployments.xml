@@ -187,7 +187,7 @@ Operation operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName
     </member>
     <member name="SwapDeploymentsAsync(WaitUntil,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SwapDeploymentsAsync and parse the result.
+This sample shows how to call SwapDeploymentsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
@@ -197,14 +197,9 @@ using RequestContent content = RequestContent.Create(new
     firstDeploymentName = "<firstDeploymentName>",
     secondDeploymentName = "<secondDeploymentName>",
 });
-Operation<BinaryData> operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
+Operation operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
 ]]></code>
-This sample shows how to call SwapDeploymentsAsync with all parameters and request content and parse the result.
+This sample shows how to call SwapDeploymentsAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
@@ -214,21 +209,12 @@ using RequestContent content = RequestContent.Create(new
     firstDeploymentName = "<firstDeploymentName>",
     secondDeploymentName = "<secondDeploymentName>",
 });
-Operation<BinaryData> operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Operation operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
 ]]></code></example>
     </member>
     <member name="SwapDeployments(WaitUntil,string,RequestContent,RequestContext)">
       <example>
-This sample shows how to call SwapDeployments and parse the result.
+This sample shows how to call SwapDeployments.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
@@ -238,14 +224,9 @@ using RequestContent content = RequestContent.Create(new
     firstDeploymentName = "<firstDeploymentName>",
     secondDeploymentName = "<secondDeploymentName>",
 });
-Operation<BinaryData> operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
+Operation operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
 ]]></code>
-This sample shows how to call SwapDeployments with all parameters and request content and parse the result.
+This sample shows how to call SwapDeployments with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
@@ -255,16 +236,7 @@ using RequestContent content = RequestContent.Create(new
     firstDeploymentName = "<firstDeploymentName>",
     secondDeploymentName = "<secondDeploymentName>",
 });
-Operation<BinaryData> operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
-BinaryData responseData = operation.Value;
-
-JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+Operation operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
 ]]></code></example>
     </member>
   </members>

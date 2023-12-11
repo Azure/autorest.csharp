@@ -367,12 +367,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
         }
 
         [Test]
@@ -382,12 +377,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
         }
 
         [Test]
@@ -397,16 +387,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
         }
 
         [Test]
@@ -416,16 +397,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
         }
 
         [Test]
@@ -435,12 +407,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = client.Importx(WaitUntil.Completed, "<projectName>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = client.Importx(WaitUntil.Completed, "<projectName>");
         }
 
         [Test]
@@ -450,12 +417,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
         }
 
         [Test]
@@ -465,16 +427,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = client.Importx(WaitUntil.Completed, "<projectName>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = client.Importx(WaitUntil.Completed, "<projectName>");
         }
 
         [Test]
@@ -484,16 +437,7 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
-            Operation<BinaryData> operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
         }
 
         [Test]
@@ -507,12 +451,7 @@ namespace AuthoringTypeSpec.Samples
             {
                 modelLabel = "<modelLabel>",
             });
-            Operation<BinaryData> operation = client.Train(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = client.Train(WaitUntil.Completed, "<projectName>", content);
         }
 
         [Test]
@@ -526,12 +465,7 @@ namespace AuthoringTypeSpec.Samples
             {
                 modelLabel = "<modelLabel>",
             });
-            Operation<BinaryData> operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", content);
         }
 
         [Test]
@@ -545,16 +479,7 @@ namespace AuthoringTypeSpec.Samples
             {
                 modelLabel = "<modelLabel>",
             });
-            Operation<BinaryData> operation = client.Train(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = client.Train(WaitUntil.Completed, "<projectName>", content);
         }
 
         [Test]
@@ -568,16 +493,7 @@ namespace AuthoringTypeSpec.Samples
             {
                 modelLabel = "<modelLabel>",
             });
-            Operation<BinaryData> operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = await client.TrainAsync(WaitUntil.Completed, "<projectName>", content);
         }
     }
 }

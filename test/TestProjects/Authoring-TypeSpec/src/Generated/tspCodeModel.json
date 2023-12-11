@@ -1812,9 +1812,6 @@
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },
@@ -1918,9 +1915,6 @@
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },
@@ -2071,9 +2065,6 @@
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },
@@ -2754,9 +2745,6 @@
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },

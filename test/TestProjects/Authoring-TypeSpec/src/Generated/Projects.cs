@@ -325,7 +325,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='ExportAsync(WaitUntil,string,string,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> ExportAsync(WaitUntil waitUntil, string projectName, string projectFileVersion, RequestContext context = null)
+        public virtual async Task<Operation> ExportAsync(WaitUntil waitUntil, string projectName, string projectFileVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNull(projectFileVersion, nameof(projectFileVersion));
@@ -335,7 +335,7 @@ namespace AuthoringTypeSpec
             try
             {
                 using HttpMessage message = CreateExportRequest(projectName, projectFileVersion, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "Projects.Export", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "Projects.Export", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -363,7 +363,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='Export(WaitUntil,string,string,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Export(WaitUntil waitUntil, string projectName, string projectFileVersion, RequestContext context = null)
+        public virtual Operation Export(WaitUntil waitUntil, string projectName, string projectFileVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNull(projectFileVersion, nameof(projectFileVersion));
@@ -373,7 +373,7 @@ namespace AuthoringTypeSpec
             try
             {
                 using HttpMessage message = CreateExportRequest(projectName, projectFileVersion, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "Projects.Export", OperationFinalStateVia.OperationLocation, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "Projects.Export", OperationFinalStateVia.OperationLocation, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -400,7 +400,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='ImportxAsync(WaitUntil,string,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> ImportxAsync(WaitUntil waitUntil, string projectName, RequestContext context = null)
+        public virtual async Task<Operation> ImportxAsync(WaitUntil waitUntil, string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
@@ -409,7 +409,7 @@ namespace AuthoringTypeSpec
             try
             {
                 using HttpMessage message = CreateImportxRequest(projectName, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "Projects.Importx", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "Projects.Importx", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -436,7 +436,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='Importx(WaitUntil,string,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Importx(WaitUntil waitUntil, string projectName, RequestContext context = null)
+        public virtual Operation Importx(WaitUntil waitUntil, string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
@@ -445,7 +445,7 @@ namespace AuthoringTypeSpec
             try
             {
                 using HttpMessage message = CreateImportxRequest(projectName, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "Projects.Importx", OperationFinalStateVia.OperationLocation, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "Projects.Importx", OperationFinalStateVia.OperationLocation, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -473,7 +473,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='TrainAsync(WaitUntil,string,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> TrainAsync(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> TrainAsync(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNull(content, nameof(content));
@@ -483,7 +483,7 @@ namespace AuthoringTypeSpec
             try
             {
                 using HttpMessage message = CreateTrainRequest(projectName, content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "Projects.Train", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "Projects.Train", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -511,7 +511,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/Projects.xml" path="doc/members/member[@name='Train(WaitUntil,string,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Train(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
+        public virtual Operation Train(WaitUntil waitUntil, string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNull(content, nameof(content));
@@ -521,7 +521,7 @@ namespace AuthoringTypeSpec
             try
             {
                 using HttpMessage message = CreateTrainRequest(projectName, content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "Projects.Train", OperationFinalStateVia.OperationLocation, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "Projects.Train", OperationFinalStateVia.OperationLocation, context, waitUntil);
             }
             catch (Exception e)
             {

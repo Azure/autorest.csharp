@@ -238,12 +238,7 @@ namespace AuthoringTypeSpec.Samples
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
             });
-            Operation<BinaryData> operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
         }
 
         [Test]
@@ -258,12 +253,7 @@ namespace AuthoringTypeSpec.Samples
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
             });
-            Operation<BinaryData> operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
         }
 
         [Test]
@@ -278,16 +268,7 @@ namespace AuthoringTypeSpec.Samples
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
             });
-            Operation<BinaryData> operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", content);
         }
 
         [Test]
@@ -302,16 +283,7 @@ namespace AuthoringTypeSpec.Samples
                 firstDeploymentName = "<firstDeploymentName>",
                 secondDeploymentName = "<secondDeploymentName>",
             });
-            Operation<BinaryData> operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Operation operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", content);
         }
     }
 }
