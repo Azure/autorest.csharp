@@ -123,8 +123,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "use-overloads-between-protocol-and-convenience":
-                    options["use-overloads-between-protocol-and-convenience"],
                 "keep-non-overloadable-protocol-signature":
                     options["keep-non-overloadable-protocol-signature"],
                 "model-namespace": options["model-namespace"],
