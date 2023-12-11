@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
@@ -21,10 +20,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-<<<<<<< HEAD
 using Microsoft.CodeAnalysis;
-=======
->>>>>>> origin/feature/v3
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -51,24 +47,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-<<<<<<< HEAD
-        // TODO: remove this intermediate state once we generate it before output types
-        private IReadOnlyList<Method>? _methods;
-
-        // This method should only be called from OutputMethods as intermediate state.
-        private IReadOnlyList<Method> ShouldNotBeUsedForOutput([CallerMemberName] string caller = "")
-        {
-            Debug.Assert(caller == nameof(OutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
-            return _methods ??= _models.Select(CreateMethod).ToList();
-        }
-
-        private IReadOnlyList<Method>? _outputMethods;
-        public IReadOnlyList<Method> OutputMethods
-            => _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
-=======
         private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= Models.Select(CreateMethod);
->>>>>>> origin/feature/v3
+        public IEnumerable<Method> Methods => _methods ??= _models.Select(CreateMethod);
 
         private readonly IEnumerable<SerializableObjectType> _models;
 
@@ -78,12 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-<<<<<<< HEAD
             _models = objectTypes;
-=======
-            Models = objectTypes;
-
->>>>>>> origin/feature/v3
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
         }
