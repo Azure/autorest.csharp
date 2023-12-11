@@ -24,11 +24,6 @@ namespace MgmtPropertyBag.Models
             FooName = fooName;
         }
 
-        /// <summary> Initializes a new instance of <see cref="FooCollectionGetOptions"/> for deserialization. </summary>
-        internal FooCollectionGetOptions()
-        {
-        }
-
         /// <summary> The foo name. </summary>
         public string FooName { get; }
         /// <summary> The filter to apply on the operation. </summary>

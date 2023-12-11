@@ -39,6 +39,8 @@ namespace xml_service.Models
 
         internal static Error DeserializeError(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             int? status = default;
             string message = default;
             if (element.Element("status") is XElement statusElement)

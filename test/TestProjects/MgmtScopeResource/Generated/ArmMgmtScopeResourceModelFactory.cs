@@ -40,29 +40,7 @@ namespace MgmtScopeResource.Models
             parameters ??= new Dictionary<string, ParameterValuesValue>();
             nonComplianceMessages ??= new List<NonComplianceMessage>();
 
-            return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.Deployment"/>. </summary>
-        /// <param name="location"> The location to store the deployment data. </param>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="tags"> Deployment tags. </param>
-        /// <returns> A new <see cref="Models.Deployment"/> instance for mocking. </returns>
-        public static Deployment Deployment(string location = null, DeploymentProperties properties = null, IDictionary<string, string> tags = null)
-        {
-            tags ??= new Dictionary<string, string>();
-
-            return new Deployment(location, properties, tags, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DeploymentProperties"/>. </summary>
-        /// <param name="template"> The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both. </param>
-        /// <param name="parameters"> Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string. </param>
-        /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
-        /// <returns> A new <see cref="Models.DeploymentProperties"/> instance for mocking. </returns>
-        public static DeploymentProperties DeploymentProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default)
-        {
-            return new DeploymentProperties(template, parameters, mode, serializedAdditionalRawData: null);
+            return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.DeploymentExtendedData"/>. </summary>
@@ -78,7 +56,7 @@ namespace MgmtScopeResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DeploymentExtendedData(id, name, resourceType, systemData, location, properties, tags, serializedAdditionalRawData: null);
+            return new DeploymentExtendedData(id, name, resourceType, systemData, location, properties, tags);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentPropertiesExtended"/>. </summary>
@@ -93,7 +71,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentPropertiesExtended"/> instance for mocking. </returns>
         public static DeploymentPropertiesExtended DeploymentPropertiesExtended(ProvisioningState? provisioningState = null, string correlationId = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, BinaryData outputs = null, BinaryData parameters = null, DeploymentMode? mode = null, string error = null)
         {
-            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentValidateResult"/>. </summary>
@@ -102,7 +80,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentValidateResult"/> instance for mocking. </returns>
         public static DeploymentValidateResult DeploymentValidateResult(string error = null, DeploymentPropertiesExtended properties = null)
         {
-            return new DeploymentValidateResult(error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, properties, serializedAdditionalRawData: null);
+            return new DeploymentValidateResult(error != null ? new ErrorResponse(error) : null, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentExportResult"/>. </summary>
@@ -110,27 +88,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentExportResult"/> instance for mocking. </returns>
         public static DeploymentExportResult DeploymentExportResult(BinaryData template = null)
         {
-            return new DeploymentExportResult(template, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DeploymentWhatIf"/>. </summary>
-        /// <param name="location"> The location to store the deployment data. </param>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <returns> A new <see cref="Models.DeploymentWhatIf"/> instance for mocking. </returns>
-        public static DeploymentWhatIf DeploymentWhatIf(string location = null, DeploymentWhatIfProperties properties = null)
-        {
-            return new DeploymentWhatIf(location, properties, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DeploymentWhatIfProperties"/>. </summary>
-        /// <param name="template"> The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both. </param>
-        /// <param name="parameters"> Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string. </param>
-        /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
-        /// <param name="whatIfResultFormat"> Optional What-If operation settings. </param>
-        /// <returns> A new <see cref="Models.DeploymentWhatIfProperties"/> instance for mocking. </returns>
-        public static DeploymentWhatIfProperties DeploymentWhatIfProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default, WhatIfResultFormat? whatIfResultFormat = null)
-        {
-            return new DeploymentWhatIfProperties(template, parameters, mode, serializedAdditionalRawData: null, whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, serializedAdditionalRawData: null) : null);
+            return new DeploymentExportResult(template);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WhatIfOperationResult"/>. </summary>
@@ -142,7 +100,7 @@ namespace MgmtScopeResource.Models
         {
             changes ??= new List<WhatIfChange>();
 
-            return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, changes?.ToList(), serializedAdditionalRawData: null);
+            return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error) : null, changes?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WhatIfChange"/>. </summary>
@@ -154,7 +112,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.WhatIfChange"/> instance for mocking. </returns>
         public static WhatIfChange WhatIfChange(string resourceId = null, ChangeType changeType = default, string unsupportedReason = null, BinaryData before = null, BinaryData after = null)
         {
-            return new WhatIfChange(resourceId, changeType, unsupportedReason, before, after, serializedAdditionalRawData: null);
+            return new WhatIfChange(resourceId, changeType, unsupportedReason, before, after);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentOperation"/>. </summary>
@@ -164,7 +122,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentOperation"/> instance for mocking. </returns>
         public static DeploymentOperation DeploymentOperation(string id = null, string operationId = null, DeploymentOperationProperties properties = null)
         {
-            return new DeploymentOperation(id, operationId, properties, serializedAdditionalRawData: null);
+            return new DeploymentOperation(id, operationId, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentOperationProperties"/>. </summary>
@@ -181,7 +139,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentOperationProperties"/> instance for mocking. </returns>
         public static DeploymentOperationProperties DeploymentOperationProperties(ProvisioningOperation? provisioningOperation = null, string provisioningState = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, TimeSpan? anotherDuration = null, string serviceRequestId = null, string statusCode = null, StatusMessage statusMessage = null, BinaryData requestContent = null, BinaryData responseContent = null)
         {
-            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent, serializedAdditionalRawData: null) : null, responseContent != null ? new HttpMessage(responseContent, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent) : null, responseContent != null ? new HttpMessage(responseContent) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StatusMessage"/>. </summary>
@@ -190,7 +148,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.StatusMessage"/> instance for mocking. </returns>
         public static StatusMessage StatusMessage(string status = null, string error = null)
         {
-            return new StatusMessage(status, error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new StatusMessage(status, error != null ? new ErrorResponse(error) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TemplateHashResult"/>. </summary>
@@ -199,7 +157,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.TemplateHashResult"/> instance for mocking. </returns>
         public static TemplateHashResult TemplateHashResult(string minifiedTemplate = null, string templateHash = null)
         {
-            return new TemplateHashResult(minifiedTemplate, templateHash, serializedAdditionalRawData: null);
+            return new TemplateHashResult(minifiedTemplate, templateHash);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.ResourceLinkData"/>. </summary>
@@ -211,7 +169,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="MgmtScopeResource.ResourceLinkData"/> instance for mocking. </returns>
         public static ResourceLinkData ResourceLinkData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ResourceLinkProperties properties = null)
         {
-            return new ResourceLinkData(id, name, resourceType, systemData, properties, serializedAdditionalRawData: null);
+            return new ResourceLinkData(id, name, resourceType, systemData, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceLinkProperties"/>. </summary>
@@ -221,7 +179,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.ResourceLinkProperties"/> instance for mocking. </returns>
         public static ResourceLinkProperties ResourceLinkProperties(string sourceId = null, string targetId = null, string notes = null)
         {
-            return new ResourceLinkProperties(sourceId, targetId, notes, serializedAdditionalRawData: null);
+            return new ResourceLinkProperties(sourceId, targetId, notes);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.VMInsightsOnboardingStatusData"/>. </summary>
@@ -238,25 +196,45 @@ namespace MgmtScopeResource.Models
         {
             data ??= new List<DataContainer>();
 
-            return new VMInsightsOnboardingStatusData(id, name, resourceType, systemData, resourceId, onboardingStatus, dataStatus, data?.ToList(), serializedAdditionalRawData: null);
+            return new VMInsightsOnboardingStatusData(id, name, resourceType, systemData, resourceId, onboardingStatus, dataStatus, data?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DataContainer"/>. </summary>
         /// <param name="workspace"> Log Analytics workspace information. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="workspace"/> is null. </exception>
         /// <returns> A new <see cref="Models.DataContainer"/> instance for mocking. </returns>
         public static DataContainer DataContainer(WorkspaceInfo workspace = null)
         {
-            return new DataContainer(workspace, serializedAdditionalRawData: null);
+            if (workspace == null)
+            {
+                throw new ArgumentNullException(nameof(workspace));
+            }
+
+            return new DataContainer(workspace);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WorkspaceInfo"/>. </summary>
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="location"/> or <paramref name="customerId"/> is null. </exception>
         /// <returns> A new <see cref="Models.WorkspaceInfo"/> instance for mocking. </returns>
         public static WorkspaceInfo WorkspaceInfo(string id = null, string location = null, string customerId = null)
         {
-            return new WorkspaceInfo(id, location, customerId, serializedAdditionalRawData: null);
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (customerId == null)
+            {
+                throw new ArgumentNullException(nameof(customerId));
+            }
+
+            return new WorkspaceInfo(id, location, customerId);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.GuestConfigurationAssignmentData"/>. </summary>
@@ -268,7 +246,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="MgmtScopeResource.GuestConfigurationAssignmentData"/> instance for mocking. </returns>
         public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, string location = null, string resourceType = null, GuestConfigurationAssignmentProperties properties = null)
         {
-            return new GuestConfigurationAssignmentData(id, name, location, resourceType, serializedAdditionalRawData: null, properties);
+            return new GuestConfigurationAssignmentData(id, name, location, resourceType, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationAssignmentProperties"/>. </summary>
@@ -284,7 +262,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.GuestConfigurationAssignmentProperties"/> instance for mocking. </returns>
         public static GuestConfigurationAssignmentProperties GuestConfigurationAssignmentProperties(string targetResourceId = null, ComplianceStatus? complianceStatus = null, DateTimeOffset? lastComplianceStatusChecked = null, string latestReportId = null, string parameterHash = null, string context = null, string assignmentHash = null, ProvisioningState? provisioningState = null, string resourceType = null)
         {
-            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType, serializedAdditionalRawData: null);
+            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationBaseResource"/>. </summary>
@@ -295,7 +273,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.GuestConfigurationBaseResource"/> instance for mocking. </returns>
         public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, string location = null, string resourceType = null)
         {
-            return new GuestConfigurationBaseResource(id, name, location, resourceType, serializedAdditionalRawData: null);
+            return new GuestConfigurationBaseResource(id, name, location, resourceType);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Marketplace"/>. </summary>
@@ -336,7 +314,7 @@ namespace MgmtScopeResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Marketplace(id, name, resourceType, systemData, billingPeriodId, usageStart, usageEnd, resourceRate, offerName, resourceGroup, additionalInfo, orderNumber, instanceName, instanceId, currency, consumedQuantity, unitOfMeasure, pretaxCost, isEstimated, meterId, subscriptionGuid, subscriptionName, accountName, departmentName, consumedService, costCenter, additionalProperties, publisherName, planName, isRecurringCharge, etag, tags, serializedAdditionalRawData: null);
+            return new Marketplace(id, name, resourceType, systemData, billingPeriodId, usageStart, usageEnd, resourceRate, offerName, resourceGroup, additionalInfo, orderNumber, instanceName, instanceId, currency, consumedQuantity, unitOfMeasure, pretaxCost, isEstimated, meterId, subscriptionGuid, subscriptionName, accountName, departmentName, consumedService, costCenter, additionalProperties, publisherName, planName, isRecurringCharge, etag, tags);
         }
     }
 }

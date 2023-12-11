@@ -5,27 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class QueryStringMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<QueryStringMatchConditionParameters>
+    public partial class QueryStringMatchConditionParameters : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QueryStringMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<QueryStringMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<QueryStringMatchConditionParameters>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(QueryStringMatchConditionParameters)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
@@ -56,40 +45,11 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        QueryStringMatchConditionParameters IJsonModel<QueryStringMatchConditionParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static QueryStringMatchConditionParameters DeserializeQueryStringMatchConditionParameters(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<QueryStringMatchConditionParameters>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(QueryStringMatchConditionParameters)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeQueryStringMatchConditionParameters(document.RootElement, options);
-        }
-
-        internal static QueryStringMatchConditionParameters DeserializeQueryStringMatchConditionParameters(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -99,8 +59,6 @@ namespace MgmtDiscriminator.Models
             Optional<bool> negateCondition = default;
             Optional<IList<string>> matchValues = default;
             Optional<IList<Transform>> transforms = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -150,44 +108,8 @@ namespace MgmtDiscriminator.Models
                     transforms = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new QueryStringMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(matchValues), Optional.ToList(transforms), serializedAdditionalRawData);
+            return new QueryStringMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(matchValues), Optional.ToList(transforms));
         }
-
-        BinaryData IPersistableModel<QueryStringMatchConditionParameters>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<QueryStringMatchConditionParameters>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(QueryStringMatchConditionParameters)} does not support '{options.Format}' format.");
-            }
-        }
-
-        QueryStringMatchConditionParameters IPersistableModel<QueryStringMatchConditionParameters>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<QueryStringMatchConditionParameters>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeQueryStringMatchConditionParameters(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(QueryStringMatchConditionParameters)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<QueryStringMatchConditionParameters>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

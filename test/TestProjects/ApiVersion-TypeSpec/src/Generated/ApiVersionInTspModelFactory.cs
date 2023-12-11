@@ -17,7 +17,7 @@ namespace ApiVersionInTsp.Models
         /// <returns> A new <see cref="Models.DetectionResult"/> instance for mocking. </returns>
         public static DetectionResult DetectionResult(Guid resultId = default)
         {
-            return new DetectionResult(resultId, serializedAdditionalRawData: null);
+            return new DetectionResult(resultId);
         }
     }
 }

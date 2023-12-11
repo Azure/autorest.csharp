@@ -33,19 +33,13 @@ namespace CognitiveSearch.Models
         /// <param name="context"> Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document. </param>
         /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="maxKeyPhraseCount"> A number indicating how many key phrases to return. If absent, all identified key phrases will be returned. </param>
-        internal KeyPhraseExtractionSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, IDictionary<string, BinaryData> serializedAdditionalRawData, KeyPhraseExtractionSkillLanguage? defaultLanguageCode, int? maxKeyPhraseCount) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
+        internal KeyPhraseExtractionSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, KeyPhraseExtractionSkillLanguage? defaultLanguageCode, int? maxKeyPhraseCount) : base(odataType, name, description, context, inputs, outputs)
         {
             DefaultLanguageCode = defaultLanguageCode;
             MaxKeyPhraseCount = maxKeyPhraseCount;
             OdataType = odataType ?? "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="KeyPhraseExtractionSkill"/> for deserialization. </summary>
-        internal KeyPhraseExtractionSkill()
-        {
         }
 
         /// <summary> A value indicating which language code to use. Default is en. </summary>

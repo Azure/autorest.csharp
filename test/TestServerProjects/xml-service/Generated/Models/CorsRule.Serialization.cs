@@ -42,6 +42,8 @@ namespace xml_service.Models
 
         internal static CorsRule DeserializeCorsRule(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string allowedOrigins = default;
             string allowedMethods = default;
             string allowedHeaders = default;

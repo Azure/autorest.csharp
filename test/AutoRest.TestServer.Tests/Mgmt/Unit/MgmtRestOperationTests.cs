@@ -73,6 +73,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 keepNonOverloadableProtocolSignature: false,
                 useCoreDataFactoryReplacements: true,
+                useModelReaderWriter: true,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),

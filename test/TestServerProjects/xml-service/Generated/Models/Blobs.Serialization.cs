@@ -42,6 +42,8 @@ namespace xml_service.Models
 
         internal static Blobs DeserializeBlobs(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             IReadOnlyList<BlobPrefix> blobPrefix = default;
             IReadOnlyList<Blob> blob = default;
             var array = new List<BlobPrefix>();

@@ -25,11 +25,6 @@ namespace MgmtPropertyBag.Models
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="BarCollectionGetOptions"/> for deserialization. </summary>
-        internal BarCollectionGetOptions()
-        {
-        }
-
         /// <summary> The bar name. </summary>
         public string BarName { get; }
         /// <summary> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </summary>

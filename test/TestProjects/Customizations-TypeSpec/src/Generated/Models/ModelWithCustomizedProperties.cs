@@ -16,38 +16,6 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model with customized properties. </summary>
     public partial class ModelWithCustomizedProperties
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/>. </summary>
         /// <param name="propertyToMakeInternal"> Public property made internal. </param>
         /// <param name="renamedProperty"> Renamed property (original name: PropertyToRename). </param>
@@ -88,7 +56,6 @@ namespace CustomizationsInTsp.Models
             Vector = vector;
             VectorNullable = vectorNullable;
             VectorReadOnly = ReadOnlyMemory<float>.Empty;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/>. </summary>
@@ -112,8 +79,7 @@ namespace CustomizationsInTsp.Models
         /// <param name="vectorOptionalReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
         /// <param name="vectorNullableReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
         /// <param name="vectorOptionalNullableReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, ReadOnlyMemory<float> vector, ReadOnlyMemory<float>? vectorOptional, ReadOnlyMemory<float>? vectorNullable, ReadOnlyMemory<float>? vectorOptionalNullable, ReadOnlyMemory<float> vectorReadOnly, ReadOnlyMemory<float>? vectorOptionalReadOnly, ReadOnlyMemory<float>? vectorNullableReadOnly, ReadOnlyMemory<float>? vectorOptionalNullableReadOnly, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, ReadOnlyMemory<float> vector, ReadOnlyMemory<float>? vectorOptional, ReadOnlyMemory<float>? vectorNullable, ReadOnlyMemory<float>? vectorOptionalNullable, ReadOnlyMemory<float> vectorReadOnly, ReadOnlyMemory<float>? vectorOptionalReadOnly, ReadOnlyMemory<float>? vectorNullableReadOnly, ReadOnlyMemory<float>? vectorOptionalNullableReadOnly)
         {
             PropertyToMakeInternal = propertyToMakeInternal;
             RenamedProperty = renamedProperty;
@@ -135,12 +101,6 @@ namespace CustomizationsInTsp.Models
             VectorOptionalReadOnly = vectorOptionalReadOnly;
             VectorNullableReadOnly = vectorNullableReadOnly;
             VectorOptionalNullableReadOnly = vectorOptionalNullableReadOnly;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/> for deserialization. </summary>
-        internal ModelWithCustomizedProperties()
-        {
         }
     }
 }

@@ -25,7 +25,7 @@ namespace MgmtNoTypeReplacement.Models
         /// <returns> A new <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel1Data"/> instance for mocking. </returns>
         public static NoTypeReplacementModel1Data NoTypeReplacementModel1Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ResourceIdentifier fooId = null)
         {
-            return new NoTypeReplacementModel1Data(id, name, resourceType, systemData, fooId != null ? ResourceManagerModelFactory.SubResource(fooId) : null, serializedAdditionalRawData: null);
+            return new NoTypeReplacementModel1Data(id, name, resourceType, systemData, fooId != null ? ResourceManagerModelFactory.SubResource(fooId) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel2Data"/>. </summary>
@@ -37,7 +37,7 @@ namespace MgmtNoTypeReplacement.Models
         /// <returns> A new <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel2Data"/> instance for mocking. </returns>
         public static NoTypeReplacementModel2Data NoTypeReplacementModel2Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string fooId = null)
         {
-            return new NoTypeReplacementModel2Data(id, name, resourceType, systemData, fooId != null ? new NoSubResourceModel(fooId, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new NoTypeReplacementModel2Data(id, name, resourceType, systemData, fooId != null ? new NoSubResourceModel(fooId) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel3Data"/>. </summary>
@@ -49,7 +49,7 @@ namespace MgmtNoTypeReplacement.Models
         /// <returns> A new <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel3Data"/> instance for mocking. </returns>
         public static NoTypeReplacementModel3Data NoTypeReplacementModel3Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string fooId = null)
         {
-            return new NoTypeReplacementModel3Data(id, name, resourceType, systemData, fooId != null ? new MiddleResourceModel(new NoSubResourceModel2(fooId, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new NoTypeReplacementModel3Data(id, name, resourceType, systemData, fooId != null ? new MiddleResourceModel(new NoSubResourceModel2(fooId)) : null);
         }
     }
 }

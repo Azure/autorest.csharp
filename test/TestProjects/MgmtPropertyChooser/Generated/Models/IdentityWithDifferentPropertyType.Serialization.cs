@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -15,29 +12,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
-    public partial class IdentityWithDifferentPropertyType : IUtf8JsonSerializable, IJsonModel<IdentityWithDifferentPropertyType>
+    public partial class IdentityWithDifferentPropertyType : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IdentityWithDifferentPropertyType>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<IdentityWithDifferentPropertyType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<IdentityWithDifferentPropertyType>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(IdentityWithDifferentPropertyType)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(PrincipalId))
-            {
-                writer.WritePropertyName("principalId"u8);
-                writer.WriteStringValue(PrincipalId);
-            }
-            if (options.Format != "W" && Optional.IsDefined(TenantId))
-            {
-                writer.WritePropertyName("tenantId"u8);
-                writer.WriteNumberValue(TenantId.Value);
-            }
             if (Optional.IsDefined(ResourceIdentityType))
             {
                 writer.WritePropertyName("type"u8);
@@ -54,40 +33,11 @@ namespace MgmtPropertyChooser.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        IdentityWithDifferentPropertyType IJsonModel<IdentityWithDifferentPropertyType>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static IdentityWithDifferentPropertyType DeserializeIdentityWithDifferentPropertyType(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<IdentityWithDifferentPropertyType>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(IdentityWithDifferentPropertyType)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeIdentityWithDifferentPropertyType(document.RootElement, options);
-        }
-
-        internal static IdentityWithDifferentPropertyType DeserializeIdentityWithDifferentPropertyType(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -96,8 +46,6 @@ namespace MgmtPropertyChooser.Models
             Optional<int> tenantId = default;
             Optional<ResourceIdentityType> type = default;
             Optional<IDictionary<string, UserAssignedIdentity>> userAssignedIdentities = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("principalId"u8))
@@ -137,44 +85,8 @@ namespace MgmtPropertyChooser.Models
                     userAssignedIdentities = dictionary;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new IdentityWithDifferentPropertyType(principalId.Value, Optional.ToNullable(tenantId), Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities), serializedAdditionalRawData);
+            return new IdentityWithDifferentPropertyType(principalId.Value, Optional.ToNullable(tenantId), Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities));
         }
-
-        BinaryData IPersistableModel<IdentityWithDifferentPropertyType>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<IdentityWithDifferentPropertyType>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(IdentityWithDifferentPropertyType)} does not support '{options.Format}' format.");
-            }
-        }
-
-        IdentityWithDifferentPropertyType IPersistableModel<IdentityWithDifferentPropertyType>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<IdentityWithDifferentPropertyType>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeIdentityWithDifferentPropertyType(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(IdentityWithDifferentPropertyType)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<IdentityWithDifferentPropertyType>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

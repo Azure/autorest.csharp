@@ -5,10 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -16,78 +12,21 @@ using MgmtNoTypeReplacement.Models;
 
 namespace MgmtNoTypeReplacement
 {
-    public partial class NoTypeReplacementModel2Data : IUtf8JsonSerializable, IJsonModel<NoTypeReplacementModel2Data>
+    public partial class NoTypeReplacementModel2Data : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoTypeReplacementModel2Data>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<NoTypeReplacementModel2Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<NoTypeReplacementModel2Data>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(NoTypeReplacementModel2Data)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
                 writer.WriteObjectValue(Foo);
             }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
-            {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        NoTypeReplacementModel2Data IJsonModel<NoTypeReplacementModel2Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static NoTypeReplacementModel2Data DeserializeNoTypeReplacementModel2Data(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<NoTypeReplacementModel2Data>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(NoTypeReplacementModel2Data)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeNoTypeReplacementModel2Data(document.RootElement, options);
-        }
-
-        internal static NoTypeReplacementModel2Data DeserializeNoTypeReplacementModel2Data(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -97,8 +36,6 @@ namespace MgmtNoTypeReplacement
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -134,44 +71,8 @@ namespace MgmtNoTypeReplacement
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new NoTypeReplacementModel2Data(id, name, type, systemData.Value, foo.Value, serializedAdditionalRawData);
+            return new NoTypeReplacementModel2Data(id, name, type, systemData.Value, foo.Value);
         }
-
-        BinaryData IPersistableModel<NoTypeReplacementModel2Data>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NoTypeReplacementModel2Data>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(NoTypeReplacementModel2Data)} does not support '{options.Format}' format.");
-            }
-        }
-
-        NoTypeReplacementModel2Data IPersistableModel<NoTypeReplacementModel2Data>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NoTypeReplacementModel2Data>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeNoTypeReplacementModel2Data(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(NoTypeReplacementModel2Data)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<NoTypeReplacementModel2Data>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

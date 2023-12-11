@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -22,6 +23,12 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         }
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
+
+        private bool? _includeSerializer;
+        public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
+
+        private bool? _includeDeserializer;
+        public bool IncludeDeserializer => _includeDeserializer ??= EnsureIncludeDeserializer();
 
         private bool _jsonSerializationInitialized = false;
         private JsonObjectSerialization? _jsonSerialization;
@@ -54,6 +61,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
 
+
+        protected abstract bool EnsureIncludeSerializer();
+        protected abstract bool EnsureIncludeDeserializer();
+
         // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method
         public virtual ObjectTypeProperty? RawDataField => null;
 
@@ -62,6 +73,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private bool EnsureShouldHaveRawData()
         {
+            if (!Configuration.UseModelReaderWriter)
+                return false;
+
             if (IsPropertyBag)
                 return false;
 

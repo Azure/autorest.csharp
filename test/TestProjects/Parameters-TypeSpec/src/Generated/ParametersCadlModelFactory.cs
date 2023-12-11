@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace ParametersCadl.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -12,10 +14,16 @@ namespace ParametersCadl.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.Result"/>. </summary>
         /// <param name="id"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <returns> A new <see cref="Models.Result"/> instance for mocking. </returns>
         public static Result Result(string id = null)
         {
-            return new Result(id, serializedAdditionalRawData: null);
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return new Result(id);
         }
     }
 }

@@ -14,10 +14,16 @@ namespace Payload.ContentNegotiation.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.PngImageAsJson"/>. </summary>
         /// <param name="content"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <returns> A new <see cref="Models.PngImageAsJson"/> instance for mocking. </returns>
         public static PngImageAsJson PngImageAsJson(BinaryData content = null)
         {
-            return new PngImageAsJson(content, serializedAdditionalRawData: null);
+            if (content == null)
+            {
+                throw new ArgumentNullException(nameof(content));
+            }
+
+            return new PngImageAsJson(content);
         }
     }
 }

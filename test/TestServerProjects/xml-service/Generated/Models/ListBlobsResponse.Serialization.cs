@@ -52,6 +52,8 @@ namespace xml_service.Models
 
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string serviceEndpoint = default;
             string containerName = default;
             string prefix = default;

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
@@ -17,38 +16,6 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class LogAnalytics
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         internal LogAnalytics()
         {
@@ -75,15 +42,13 @@ namespace MgmtAcronymMapping.Models
         /// Gets the workflow trigger callback URL base path.
         /// Serialized Name: LogAnalyticsOperationResult.basePath
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri)
         {
             Properties = properties;
             ContentType = contentType;
             Content = content;
             RequestMethod = requestMethod;
             BasePathUri = basePathUri;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

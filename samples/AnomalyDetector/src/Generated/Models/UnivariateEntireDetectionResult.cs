@@ -15,38 +15,6 @@ namespace AnomalyDetector.Models
     /// <summary> The response of entire anomaly detection. </summary>
     public partial class UnivariateEntireDetectionResult
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="UnivariateEntireDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
@@ -106,7 +74,6 @@ namespace AnomalyDetector.Models
             IsNegativeAnomaly = isNegativeAnomaly.ToList();
             IsPositiveAnomaly = isPositiveAnomaly.ToList();
             Severity = new ChangeTrackingList<float>();
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="UnivariateEntireDetectionResult"/>. </summary>
@@ -154,8 +121,7 @@ namespace AnomalyDetector.Models
         /// The severity score for each input point. The larger the value is, the more
         /// sever the anomaly is. For normal points, the "severity" is always 0.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnivariateEntireDetectionResult(int period, IReadOnlyList<float> expectedValues, IReadOnlyList<float> upperMargins, IReadOnlyList<float> lowerMargins, IReadOnlyList<bool> isAnomaly, IReadOnlyList<bool> isNegativeAnomaly, IReadOnlyList<bool> isPositiveAnomaly, IReadOnlyList<float> severity, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UnivariateEntireDetectionResult(int period, IReadOnlyList<float> expectedValues, IReadOnlyList<float> upperMargins, IReadOnlyList<float> lowerMargins, IReadOnlyList<bool> isAnomaly, IReadOnlyList<bool> isNegativeAnomaly, IReadOnlyList<bool> isPositiveAnomaly, IReadOnlyList<float> severity)
         {
             Period = period;
             ExpectedValues = expectedValues;
@@ -165,12 +131,6 @@ namespace AnomalyDetector.Models
             IsNegativeAnomaly = isNegativeAnomaly;
             IsPositiveAnomaly = isPositiveAnomaly;
             Severity = severity;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnivariateEntireDetectionResult"/> for deserialization. </summary>
-        internal UnivariateEntireDetectionResult()
-        {
         }
 
         /// <summary>

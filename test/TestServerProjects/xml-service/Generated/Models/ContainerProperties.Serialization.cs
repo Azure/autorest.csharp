@@ -57,6 +57,8 @@ namespace xml_service.Models
 
         internal static ContainerProperties DeserializeContainerProperties(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             DateTimeOffset lastModified = default;
             string etag = default;
             LeaseStatusType? leaseStatus = default;

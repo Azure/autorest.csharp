@@ -45,6 +45,8 @@ namespace xml_service.Models
 
         internal static Banana DeserializeBanana(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string name = default;
             string flavor = default;
             DateTimeOffset? expiration = default;

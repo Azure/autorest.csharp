@@ -24,7 +24,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         {
             orders ??= new List<UserOrder>();
 
-            return new User(id, name, orders?.ToList(), etag, serializedAdditionalRawData: null);
+            return new User(id, name, orders?.ToList(), etag);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserOrder"/>. </summary>
@@ -34,7 +34,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <returns> A new <see cref="Models.UserOrder"/> instance for mocking. </returns>
         public static UserOrder UserOrder(int id = default, int userId = default, string detail = null)
         {
-            return new UserOrder(id, userId, detail, serializedAdditionalRawData: null);
+            return new UserOrder(id, userId, detail);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FirstItem"/>. </summary>
@@ -42,7 +42,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <returns> A new <see cref="Models.FirstItem"/> instance for mocking. </returns>
         public static FirstItem FirstItem(int id = default)
         {
-            return new FirstItem(id, serializedAdditionalRawData: null);
+            return new FirstItem(id);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SecondItem"/>. </summary>
@@ -50,7 +50,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <returns> A new <see cref="Models.SecondItem"/> instance for mocking. </returns>
         public static SecondItem SecondItem(string name = null)
         {
-            return new SecondItem(name, serializedAdditionalRawData: null);
+            return new SecondItem(name);
         }
     }
 }

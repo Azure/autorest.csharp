@@ -245,7 +245,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { } } type)
             {
-                return $"e => {type.Type}.Deserialize{type.Declaration.Name}(e)";
+                // TODO -- we no longer need this once we remove the UseModelReaderWriter flag
+                if (Configuration.UseModelReaderWriter)
+                    return $"e => {type.Type}.Deserialize{type.Declaration.Name}(e)";
+                else
+                    return $"{type.Type}.Deserialize{type.Declaration.Name}";
             }
 
             var deserializeImplementation = JsonCodeWriterExtensions.GetDeserializeValueFormattable($"e", pageItemType);

@@ -36,6 +36,8 @@ namespace xml_service.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             DateTimeOffset start = default;
             DateTimeOffset expiry = default;
             string permission = default;

@@ -5,74 +5,20 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ListServiceSasResponse : IUtf8JsonSerializable, IJsonModel<ListServiceSasResponse>
+    public partial class ListServiceSasResponse
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListServiceSasResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<ListServiceSasResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ListServiceSasResponse>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ListServiceSasResponse)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(ServiceSasToken))
-            {
-                writer.WritePropertyName("serviceSasToken"u8);
-                writer.WriteStringValue(ServiceSasToken);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        ListServiceSasResponse IJsonModel<ListServiceSasResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ListServiceSasResponse>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ListServiceSasResponse)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeListServiceSasResponse(document.RootElement, options);
-        }
-
-        internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> serviceSasToken = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("serviceSasToken"u8))
@@ -80,44 +26,8 @@ namespace Azure.ResourceManager.Storage.Models
                     serviceSasToken = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ListServiceSasResponse(serviceSasToken.Value, serializedAdditionalRawData);
+            return new ListServiceSasResponse(serviceSasToken.Value);
         }
-
-        BinaryData IPersistableModel<ListServiceSasResponse>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ListServiceSasResponse>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ListServiceSasResponse)} does not support '{options.Format}' format.");
-            }
-        }
-
-        ListServiceSasResponse IPersistableModel<ListServiceSasResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ListServiceSasResponse>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeListServiceSasResponse(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ListServiceSasResponse)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ListServiceSasResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

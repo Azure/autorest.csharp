@@ -53,6 +53,8 @@ namespace xml_service.Models
 
         internal static Slideshow DeserializeSlideshow(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string title = default;
             string date = default;
             string author = default;

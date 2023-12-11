@@ -49,6 +49,8 @@ namespace xml_service.Models
 
         internal static Slide DeserializeSlide(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string type = default;
             string title = default;
             IList<string> items = default;

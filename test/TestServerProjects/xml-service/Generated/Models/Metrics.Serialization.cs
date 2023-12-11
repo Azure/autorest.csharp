@@ -46,6 +46,8 @@ namespace xml_service.Models
 
         internal static Metrics DeserializeMetrics(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string version = default;
             bool enabled = default;
             bool? includeAPIs = default;

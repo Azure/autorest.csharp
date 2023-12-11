@@ -31,6 +31,8 @@ namespace xml_service.Models
 
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string id = default;
             AccessPolicy accessPolicy = default;
             if (element.Element("Id") is XElement idElement)

@@ -41,6 +41,8 @@ namespace xml_service.Models
 
         internal static Container DeserializeContainer(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string name = default;
             ContainerProperties properties = default;
             IReadOnlyDictionary<string, string> metadata = default;

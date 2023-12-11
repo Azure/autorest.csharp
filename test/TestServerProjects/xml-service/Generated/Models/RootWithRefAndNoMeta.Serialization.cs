@@ -37,6 +37,8 @@ namespace xml_service.Models
 
         internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             ComplexTypeNoMeta refToModel = default;
             string something = default;
             if (element.Element("RefToModel") is XElement refToModelElement)

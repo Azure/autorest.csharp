@@ -47,6 +47,8 @@ namespace xml_service.Models
 
         internal static Blob DeserializeBlob(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string name = default;
             bool deleted = default;
             string snapshot = default;

@@ -6,155 +6,26 @@
 #nullable disable
 
 using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable, IJsonModel<GuestConfigurationAssignmentProperties>
+    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GuestConfigurationAssignmentProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<GuestConfigurationAssignmentProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentProperties>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(GuestConfigurationAssignmentProperties)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(TargetResourceId))
-            {
-                if (TargetResourceId != null)
-                {
-                    writer.WritePropertyName("targetResourceId"u8);
-                    writer.WriteStringValue(TargetResourceId);
-                }
-                else
-                {
-                    writer.WriteNull("targetResourceId");
-                }
-            }
-            if (options.Format != "W" && Optional.IsDefined(ComplianceStatus))
-            {
-                writer.WritePropertyName("complianceStatus"u8);
-                writer.WriteStringValue(ComplianceStatus.Value.ToString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(LastComplianceStatusChecked))
-            {
-                if (LastComplianceStatusChecked != null)
-                {
-                    writer.WritePropertyName("lastComplianceStatusChecked"u8);
-                    writer.WriteStringValue(LastComplianceStatusChecked.Value, "O");
-                }
-                else
-                {
-                    writer.WriteNull("lastComplianceStatusChecked");
-                }
-            }
-            if (options.Format != "W" && Optional.IsDefined(LatestReportId))
-            {
-                if (LatestReportId != null)
-                {
-                    writer.WritePropertyName("latestReportId"u8);
-                    writer.WriteStringValue(LatestReportId);
-                }
-                else
-                {
-                    writer.WriteNull("latestReportId");
-                }
-            }
-            if (options.Format != "W" && Optional.IsDefined(ParameterHash))
-            {
-                if (ParameterHash != null)
-                {
-                    writer.WritePropertyName("parameterHash"u8);
-                    writer.WriteStringValue(ParameterHash);
-                }
-                else
-                {
-                    writer.WriteNull("parameterHash");
-                }
-            }
             if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
             }
-            if (options.Format != "W" && Optional.IsDefined(AssignmentHash))
-            {
-                if (AssignmentHash != null)
-                {
-                    writer.WritePropertyName("assignmentHash"u8);
-                    writer.WriteStringValue(AssignmentHash);
-                }
-                else
-                {
-                    writer.WriteNull("assignmentHash");
-                }
-            }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                if (ProvisioningState != null)
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("provisioningState");
-                }
-            }
-            if (options.Format != "W" && Optional.IsDefined(ResourceType))
-            {
-                if (ResourceType != null)
-                {
-                    writer.WritePropertyName("resourceType"u8);
-                    writer.WriteStringValue(ResourceType.Value);
-                }
-                else
-                {
-                    writer.WriteNull("resourceType");
-                }
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        GuestConfigurationAssignmentProperties IJsonModel<GuestConfigurationAssignmentProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentProperties>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(GuestConfigurationAssignmentProperties)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
-        }
-
-        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -168,8 +39,6 @@ namespace MgmtMockAndSample.Models
             Optional<string> assignmentHash = default;
             Optional<ProvisioningState?> provisioningState = default;
             Optional<ResourceType?> resourceType = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("targetResourceId"u8))
@@ -256,44 +125,8 @@ namespace MgmtMockAndSample.Models
                     resourceType = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(resourceType), serializedAdditionalRawData);
+            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(resourceType));
         }
-
-        BinaryData IPersistableModel<GuestConfigurationAssignmentProperties>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentProperties>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(GuestConfigurationAssignmentProperties)} does not support '{options.Format}' format.");
-            }
-        }
-
-        GuestConfigurationAssignmentProperties IPersistableModel<GuestConfigurationAssignmentProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<GuestConfigurationAssignmentProperties>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeGuestConfigurationAssignmentProperties(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(GuestConfigurationAssignmentProperties)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<GuestConfigurationAssignmentProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -36,6 +36,8 @@ namespace xml_service.Models
 
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             bool enabled = default;
             int? days = default;
             if (element.Element("Enabled") is XElement enabledElement)

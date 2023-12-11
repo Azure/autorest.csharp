@@ -189,6 +189,8 @@ namespace xml_service.Models
 
         internal static BlobProperties DeserializeBlobProperties(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             DateTimeOffset lastModified = default;
             string etag = default;
             long? contentLength = default;
