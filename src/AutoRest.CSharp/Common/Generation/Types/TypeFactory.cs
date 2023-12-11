@@ -426,11 +426,12 @@ namespace AutoRest.CSharp.Generation.Types
                 return false;
             }
 
-            return TryCreateTypeForINamedTypeSymbol(symbol, validator, ref type, namedTypeSymbol);
+            return TryCreateTypeForINamedTypeSymbol(symbol, validator, out type, namedTypeSymbol);
         }
 
-        private bool TryCreateTypeForINamedTypeSymbol(ITypeSymbol symbol, Func<Type, bool> validator, ref CSharpType? type, INamedTypeSymbol namedTypeSymbol)
+        private bool TryCreateTypeForINamedTypeSymbol(ITypeSymbol symbol, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType? type, INamedTypeSymbol namedTypeSymbol)
         {
+            type = null;
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
             {
                 type = CreateType(namedTypeSymbol.TypeArguments[0]).WithNullable(true);
@@ -441,7 +442,7 @@ namespace AutoRest.CSharp.Generation.Types
 
             if (existingType is not null && validator(existingType))
             {
-                if (!TryPopulateArguments(namedTypeSymbol.TypeArguments, out var arguments))
+                if (!TryPopulateArguments(namedTypeSymbol.TypeArguments, validator, out var arguments))
                 {
                     return false;
                 }
@@ -496,14 +497,14 @@ namespace AutoRest.CSharp.Generation.Types
             return Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
         }
 
-        // There can by argument type missing
-        private bool TryPopulateArguments(ImmutableArray<ITypeSymbol> typeArguments, [NotNullWhen(true)] out CSharpType[]? arguments)
+        // There can be argument type missing
+        private bool TryPopulateArguments(ImmutableArray<ITypeSymbol> typeArguments, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType[]? arguments)
         {
             arguments = null;
             var result = new List<CSharpType>();
             foreach (var typeArgtment in typeArguments)
             {
-                if (!TryCreateType(typeArgtment, out CSharpType? type))
+                if (!TryCreateType(typeArgtment, validator, out CSharpType? type))
                 {
                     return false;
                 }
