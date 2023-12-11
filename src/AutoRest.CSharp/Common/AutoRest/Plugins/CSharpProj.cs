@@ -3,16 +3,9 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
