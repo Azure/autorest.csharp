@@ -3,15 +3,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
-using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
@@ -19,18 +17,7 @@ namespace AutoRest.CSharp.Output.Models
     internal record MethodSignature(string Name, FormattableString? Summary, FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute>? Attributes = null, IReadOnlyList<CSharpType>? GenericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? GenericParameterConstraints = null, CSharpType? ExplicitInterface = null, string? NonDocumentComment = null)
         : MethodSignatureBase(Name, Summary, Description, NonDocumentComment, Modifiers, Parameters, Attributes ?? Array.Empty<CSharpAttribute>())
     {
-        public static IEqualityComparer<MethodSignature> ParameterAndReturnTypeEqualityComparer = new MethodSignatureParameterAndReturnTypeEqualityComparer();
-
         public MethodSignature WithAsync(bool isAsync) => isAsync ? MakeAsync() : MakeSync();
-
-        public MethodSignature DisableOptionalParameters()
-        {
-            if (Parameters.All(p => p.DefaultValue is null))
-            {
-                return this;
-            }
-            return this with { Parameters = Parameters.Select(p => p.ToRequired()).ToList() };
-        }
 
         private MethodSignature MakeAsync()
         {
@@ -111,31 +98,5 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         public FormattableString GetCRef() => $"{Name}({Parameters.GetTypesFormattable()})";
-
-        private class MethodSignatureParameterAndReturnTypeEqualityComparer : IEqualityComparer<MethodSignature>
-        {
-            public bool Equals(MethodSignature? x, MethodSignature? y)
-            {
-                if (ReferenceEquals(x, y))
-                {
-                    return true;
-                }
-
-                if (x is null || y is null)
-                {
-                    return false;
-                }
-
-                var result = x.Name == x.Name
-                    && x.ReturnType == y.ReturnType
-                    && x.Parameters.SequenceEqual(y.Parameters, Parameter.TypeAndNameEqualityComparer);
-                return result;
-            }
-
-            public int GetHashCode([DisallowNull] MethodSignature obj)
-            {
-                return HashCode.Combine(obj.Name, obj.ReturnType);
-            }
-        }
     }
 }

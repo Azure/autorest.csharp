@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature? _serializationConstructor;
         private InputModelType _inputModel;
         private TypeFactory _typeFactory;
+        private SourceInputModel? _sourceInputModel;
         private InputModelType[]? _derivedTypes;
         private SerializableObjectType? _defaultDerivedType;
 
@@ -49,6 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
+            _sourceInputModel = sourceInputModel;
             DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
