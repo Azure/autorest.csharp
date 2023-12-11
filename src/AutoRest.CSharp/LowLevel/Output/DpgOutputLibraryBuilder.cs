@@ -209,28 +209,26 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     foreach (var parameter in operation.Parameters)
                     {
-                        var visitedModels = new HashSet<InputModelType>();
                         if (IsSameType(parameter.Type, anonModel))
                         {
                             names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(parameter.Type, parameter.Name).ToCleanName() });
                         }
                         else
                         {
-                            FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names, visitedModels);
+                            FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names, new HashSet<InputModelType>());
                         }
                     }
                     foreach (var response in operation.Responses)
                     {
                         if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
                             continue;
-                        var visitedModels = new HashSet<InputModelType>();
                         if (IsSameType(responseType, anonModel))
                         {
                             names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, responseType.Name).ToCleanName() });
                         }
                         else
                         {
-                            FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names, visitedModels);
+                            FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names, new HashSet<InputModelType>());
                         }
                     }
                 }
