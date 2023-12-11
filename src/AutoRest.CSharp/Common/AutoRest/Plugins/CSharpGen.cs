@@ -58,6 +58,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private async Task<CSharpCompilation?> LoadBaselineContract()
         {
+            // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
             if (!Configuration.AzureArm)
                 return null;
 

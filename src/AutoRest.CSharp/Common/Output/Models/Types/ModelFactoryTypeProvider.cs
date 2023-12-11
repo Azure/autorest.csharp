@@ -43,7 +43,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IReadOnlyList<Method>? _outputMethods;
         public IReadOnlyList<Method> OutputMethods
-            => _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
+        {
+            get
+            {
+                if (SignatureType is null)
+                {
+                    return ShouldNotBeUsedForOutput();
+                }
+                return _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
+            }
+        }
 
         public FormattableString Description => $"Model factory for models.";
 
@@ -104,7 +113,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
         private SignatureType? _signatureType;
-        public override SignatureType SignatureType => _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
+        public override SignatureType? SignatureType
+        {
+            get
+            {
+                // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
+                if (!Configuration.AzureArm)
+                {
+                    return null;
+                }
+                return _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
+            }
+        }
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {

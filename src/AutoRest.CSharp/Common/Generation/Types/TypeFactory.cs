@@ -416,25 +416,22 @@ namespace AutoRest.CSharp.Generation.Types
         {
             type = null;
 
-            if (Configuration.AzureArm)
+            IArrayTypeSymbol? arrayTypeSymbol = symbol as IArrayTypeSymbol;
+            if (arrayTypeSymbol is not null)
             {
-                IArrayTypeSymbol? arrayTypeSymbol = symbol as IArrayTypeSymbol;
-                if (arrayTypeSymbol is not null)
+                if (arrayTypeSymbol.BaseType is not null)
                 {
-                    if (arrayTypeSymbol.BaseType is not null)
+                    var test = TryGetFrameworkType(arrayTypeSymbol.BaseType);
+                    if (test != null)
                     {
-                        var test = TryGetFrameworkType(arrayTypeSymbol.BaseType);
-                        if (test != null)
-                        {
-                            type = new CSharpType(typeof(Array), false, test);
-                            return true;
-                        }
+                        type = new CSharpType(typeof(Array), false, test);
+                        return true;
                     }
-                    type = _library.FindTypeByName(arrayTypeSymbol.Name);
-                    if (type is null)
-                    {
-                        return false;
-                    }
+                }
+                type = _library.FindTypeByName(arrayTypeSymbol.Name);
+                if (type is null)
+                {
+                    return false;
                 }
             }
 

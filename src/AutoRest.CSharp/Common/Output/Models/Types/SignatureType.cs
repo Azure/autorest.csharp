@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -34,6 +35,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public SignatureType(TypeFactory typeFactory, IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
         {
+            // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
+            if (!Configuration.AzureArm)
+            {
+                throw new InvalidOperationException("This type should only be used for Mgmt");
+            }
+
             _typeFactory = typeFactory;
             Methods = methods;
             _defaultNamespace = defaultNamespace;

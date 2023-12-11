@@ -34,10 +34,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.WriteMethod(method);
                     }
 
-                    foreach (OverloadMethodSignature overloadMethod in This.SignatureType.OverloadMethods)
+                    if (This.SignatureType is not null)
                     {
-                        _writer.WriteOverloadMethod(overloadMethod);
-                        _writer.Line();
+                        foreach (OverloadMethodSignature overloadMethod in This.SignatureType.OverloadMethods)
+                        {
+                            _writer.WriteOverloadMethod(overloadMethod);
+                            _writer.Line();
+                        }
                     }
                 }
             }
