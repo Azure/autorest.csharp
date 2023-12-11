@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Common.Input
 
             public override void AddReference(string referenceId, object value)
             {
+                //TODO: This is a workaround. When we resolve the duplicate schema issue https://github.com/Azure/autorest.csharp/issues/4029, we should revert it back to the original behavior.
                 if (!_referenceIdToObjectMap.ContainsKey(referenceId))
                 {
                     _referenceIdToObjectMap.Add(referenceId, value);
