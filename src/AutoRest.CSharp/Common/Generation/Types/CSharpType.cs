@@ -32,13 +32,6 @@ namespace AutoRest.CSharp.Generation.Types
         {
         }
 
-        public CSharpType(Type type, Type? serializeAs) : this(
-            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
-            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
-        {
-            SerializeAs = serializeAs;
-        }
-
         public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments)
         { }
 
@@ -100,7 +93,7 @@ namespace AutoRest.CSharp.Generation.Types
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
 
-        public Type? SerializeAs { get; }
+        public Type? SerializeAs { get; init; }
 
         public bool HasParent => IsFrameworkType ? false : Implementation is ObjectType objectType ? objectType.Inherits is not null : false;
 
