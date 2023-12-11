@@ -16,16 +16,6 @@ namespace MgmtCustomizations.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sleep))
-            {
-                writer.WritePropertyName("sleep"u8);
-                writer.WriteStringValue(Sleep);
-            }
-            if (Optional.IsDefined(Jump))
-            {
-                writer.WritePropertyName("jump"u8);
-                writer.WriteStringValue(Jump);
-            }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
             if (Optional.IsDefined(Size))
@@ -47,8 +37,6 @@ namespace MgmtCustomizations.Models
             {
                 return null;
             }
-            Optional<string> sleep = default;
-            Optional<string> jump = default;
             Optional<string> meow = default;
             PetKind kind = default;
             Optional<string> name = default;
@@ -56,16 +44,6 @@ namespace MgmtCustomizations.Models
             Optional<DateTimeOffset> dateOfBirth = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("sleep"u8))
-                {
-                    sleep = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("jump"u8))
-                {
-                    jump = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("meow"u8))
                 {
                     meow = property.Value.GetString();
@@ -96,7 +74,7 @@ namespace MgmtCustomizations.Models
                     continue;
                 }
             }
-            return new Cat(kind, name.Value, size, Optional.ToNullable(dateOfBirth), sleep.Value, jump.Value, meow.Value);
+            return new Cat(kind, name.Value, size, Optional.ToNullable(dateOfBirth), meow.Value);
         }
     }
 }

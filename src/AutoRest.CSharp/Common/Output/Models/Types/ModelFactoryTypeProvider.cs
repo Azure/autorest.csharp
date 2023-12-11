@@ -21,7 +21,10 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
+<<<<<<< HEAD
 using Microsoft.CodeAnalysis;
+=======
+>>>>>>> origin/feature/v3
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -48,6 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
+<<<<<<< HEAD
         // TODO: remove this intermediate state once we generate it before output types
         private IReadOnlyList<Method>? _methods;
 
@@ -61,6 +65,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<Method>? _outputMethods;
         public IReadOnlyList<Method> OutputMethods
             => _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
+=======
+        private IEnumerable<Method>? _methods;
+        public IEnumerable<Method> Methods => _methods ??= Models.Select(CreateMethod);
+>>>>>>> origin/feature/v3
 
         private readonly IEnumerable<SerializableObjectType> _models;
 
@@ -68,10 +76,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
+<<<<<<< HEAD
             _models = objectTypes;
+=======
+            Models = objectTypes;
+
+>>>>>>> origin/feature/v3
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
         }
@@ -98,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
         }
 
-        private static string GetRPName(string defaultNamespace)
+        public static string GetRPName(string defaultNamespace)
         {
             // for mgmt plane packages, we always have the prefix `Arm` on the name of model factories, except for Azure.ResourceManager
             var prefix = Configuration.AzureArm && !Configuration.MgmtConfiguration.IsArmCore ? "Arm" : string.Empty;
@@ -113,9 +125,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return Configuration.Namespace;
         }
-
-        private SignatureType? _signatureType;
-        public override SignatureType SignatureType => _signatureType ??= new SignatureType(ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
 
         private static ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
@@ -149,7 +158,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
                         // get the type of the first parameter of its ctor
                         var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = Snippets.New.Instance(parentPropertyType, result.GetConversion(from, to));
+                        result = New.Instance(parentPropertyType, result.GetConversion(from, to));
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
@@ -280,7 +289,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // write the initializers and validations
                 new ParameterValidationBlock(methodParameters, true),
-                Return(Snippets.New.Instance(ctorToCall.Signature, methodArguments))
+                Return(New.Instance(ctorToCall.Signature, methodArguments))
             };
 
             return new(signature, methodBody);
