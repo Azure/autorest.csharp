@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -29,13 +27,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             {
                 comment = "<comment>",
             });
-            Operation<BinaryData> operation = client.CreateJob(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("comment").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = client.CreateJob(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -48,13 +40,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             {
                 comment = "<comment>",
             });
-            Operation<BinaryData> operation = await client.CreateJobAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("comment").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Operation operation = await client.CreateJobAsync(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -64,8 +50,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
 
             JobData jobData = new JobData("<comment>");
-            Operation<JobResult> operation = client.CreateJob(WaitUntil.Completed, jobData);
-            JobResult responseData = operation.Value;
+            Operation operation = client.CreateJob(WaitUntil.Completed, jobData);
         }
 
         [Test]
@@ -75,8 +60,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
 
             JobData jobData = new JobData("<comment>");
-            Operation<JobResult> operation = await client.CreateJobAsync(WaitUntil.Completed, jobData);
-            JobResult responseData = operation.Value;
+            Operation operation = await client.CreateJobAsync(WaitUntil.Completed, jobData);
         }
 
         [Test]
@@ -89,18 +73,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             {
                 comment = "<comment>",
             });
-            Operation<BinaryData> operation = client.CreateJob(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("comment").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("results")[0].ToString());
+            Operation operation = client.CreateJob(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -113,18 +86,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             {
                 comment = "<comment>",
             });
-            Operation<BinaryData> operation = await client.CreateJobAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("comment").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("results")[0].ToString());
+            Operation operation = await client.CreateJobAsync(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -134,8 +96,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
 
             JobData jobData = new JobData("<comment>");
-            Operation<JobResult> operation = client.CreateJob(WaitUntil.Completed, jobData);
-            JobResult responseData = operation.Value;
+            Operation operation = client.CreateJob(WaitUntil.Completed, jobData);
         }
 
         [Test]
@@ -145,8 +106,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
             CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
 
             JobData jobData = new JobData("<comment>");
-            Operation<JobResult> operation = await client.CreateJobAsync(WaitUntil.Completed, jobData);
-            JobResult responseData = operation.Value;
+            Operation operation = await client.CreateJobAsync(WaitUntil.Completed, jobData);
         }
     }
 }

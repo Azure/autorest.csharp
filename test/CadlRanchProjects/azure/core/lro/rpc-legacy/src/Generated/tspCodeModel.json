@@ -617,9 +617,6 @@
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "40"
-       },
        "BodyMediaType": "Json"
       }
      },

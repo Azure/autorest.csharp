@@ -22,12 +22,7 @@ namespace CadlRanchProjects.Tests
         public Task CreateOrReplace() => Test(async (host) =>
         {
             var operation = await new LegacyClient(host, null).GetCreateResourcePollViaOperationLocationClient().CreateJobAsync(WaitUntil.Completed, new JobData("async job"));
-            var result = operation.Value;
-
-            Assert.AreEqual("job1", result.JobId);
-            Assert.AreEqual("async job", result.Comment);
-            Assert.AreEqual(JobStatus.Succeeded, result.Status);
-            Assert.AreEqual(new List<string> { "job1 result" }, result.Results);
+            Assert.IsTrue(operation.HasCompleted);
         });
     }
 }

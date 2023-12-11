@@ -53,14 +53,13 @@ namespace _Azure.Lro.RpcLegacy
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jobData"/> is null. </exception>
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,JobData,CancellationToken)']/*" />
-        public virtual async Task<Operation<JobResult>> CreateJobAsync(WaitUntil waitUntil, JobData jobData, CancellationToken cancellationToken = default)
+        public virtual async Task<Operation> CreateJobAsync(WaitUntil waitUntil, JobData jobData, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jobData, nameof(jobData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jobData.ToRequestContent();
-            Operation<BinaryData> response = await CreateJobAsync(waitUntil, content, context).ConfigureAwait(false);
-            return ProtocolOperationHelpers.Convert(response, JobResult.FromResponse, ClientDiagnostics, "CreateResourcePollViaOperationLocation.CreateJob");
+            return await CreateJobAsync(waitUntil, content, context).ConfigureAwait(false);
         }
 
         /// <summary> Creates a Job. </summary>
@@ -69,14 +68,13 @@ namespace _Azure.Lro.RpcLegacy
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jobData"/> is null. </exception>
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJob(WaitUntil,JobData,CancellationToken)']/*" />
-        public virtual Operation<JobResult> CreateJob(WaitUntil waitUntil, JobData jobData, CancellationToken cancellationToken = default)
+        public virtual Operation CreateJob(WaitUntil waitUntil, JobData jobData, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(jobData, nameof(jobData));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = jobData.ToRequestContent();
-            Operation<BinaryData> response = CreateJob(waitUntil, content, context);
-            return ProtocolOperationHelpers.Convert(response, JobResult.FromResponse, ClientDiagnostics, "CreateResourcePollViaOperationLocation.CreateJob");
+            return CreateJob(waitUntil, content, context);
         }
 
         /// <summary>
@@ -101,7 +99,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJobAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> CreateJobAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> CreateJobAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -110,7 +108,7 @@ namespace _Azure.Lro.RpcLegacy
             try
             {
                 using HttpMessage message = CreateCreateJobRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "CreateResourcePollViaOperationLocation.CreateJob", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "CreateResourcePollViaOperationLocation.CreateJob", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -141,7 +139,7 @@ namespace _Azure.Lro.RpcLegacy
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/CreateResourcePollViaOperationLocation.xml" path="doc/members/member[@name='CreateJob(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> CreateJob(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation CreateJob(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -150,7 +148,7 @@ namespace _Azure.Lro.RpcLegacy
             try
             {
                 using HttpMessage message = CreateCreateJobRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "CreateResourcePollViaOperationLocation.CreateJob", OperationFinalStateVia.OperationLocation, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "CreateResourcePollViaOperationLocation.CreateJob", OperationFinalStateVia.OperationLocation, context, waitUntil);
             }
             catch (Exception e)
             {
