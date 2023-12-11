@@ -404,8 +404,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // the parameter of this method should be the parameters on the collection's ctor + parameters on the Get method
                 // also the validations of parameters will be skipped
                 Parameters = getCollectionMethodSignature.Parameters.Concat(getOperation.MethodSignature.Parameters).ToArray(),
-                Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
+                Attributes = getOperation.MethodSignature.Attributes.Append(new CSharpAttribute(typeof(ForwardsClientCallsAttribute))).ToList()
             };
+
             var callGetCollection = new InvokeInstanceMethodExpression(
                     null,
                     getCollectionMethodSignature.Name,
