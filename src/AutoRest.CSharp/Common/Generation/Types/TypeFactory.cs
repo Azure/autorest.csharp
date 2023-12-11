@@ -416,29 +416,11 @@ namespace AutoRest.CSharp.Generation.Types
         {
             type = null;
 
-            IArrayTypeSymbol? arrayTypeSymbol = symbol as IArrayTypeSymbol;
-            if (arrayTypeSymbol is not null)
+            // We can only handle INamedTypeSymbol for now since CSharpType can't represent other types such as IArrayTypeSymbol
+            // Instead of throwing an exception, wihch causes more side effects, we just return false and let the caller handle it.
+            if (symbol is not INamedTypeSymbol namedTypeSymbol)
             {
-                if (arrayTypeSymbol.BaseType is not null)
-                {
-                    var test = TryGetFrameworkType(arrayTypeSymbol.BaseType);
-                    if (test != null)
-                    {
-                        type = new CSharpType(typeof(Array), false, test);
-                        return true;
-                    }
-                }
-                type = _library.FindTypeByName(arrayTypeSymbol.Name);
-                if (type is null)
-                {
-                    return false;
-                }
-            }
-
-            INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
-            if (namedTypeSymbol == null)
-            {
-                throw new InvalidCastException($"Unexpected type {symbol}");
+                return false;
             }
 
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
@@ -449,7 +431,7 @@ namespace AutoRest.CSharp.Generation.Types
 
             Type? existingType = TryGetFrameworkType(namedTypeSymbol);
 
-            if (existingType != null && validator(existingType))
+            if (existingType is not null && validator(existingType))
             {
                 if (!TryPopulateArguments(namedTypeSymbol.TypeArguments, out var arguments))
                 {
@@ -462,7 +444,7 @@ namespace AutoRest.CSharp.Generation.Types
                 type = _library.FindTypeByName(namedTypeSymbol.Name);
             }
 
-            if (type == null)
+            if (type is null)
             {
                 return false;
             }
