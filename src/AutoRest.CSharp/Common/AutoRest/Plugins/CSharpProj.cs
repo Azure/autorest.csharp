@@ -6,61 +6,62 @@ using System.IO;
 using System.Reflection;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class CSharpProj
     {
-        private string _csProjContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+//        private string _csProjContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Nullable>annotations</Nullable>
-  </PropertyGroup>
-{0}{1}{2}
+//  <PropertyGroup>
+//    <TargetFramework>netstandard2.0</TargetFramework>
+//    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+//    <Nullable>annotations</Nullable>
+//  </PropertyGroup>
+//{0}{1}{2}
 
-</Project>
-";
-        private string _coreCsProjContent = @"
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core"" />
-  </ItemGroup>";
+//</Project>
+//";
+//        private string _coreCsProjContent = @"
+//  <ItemGroup>
+//    <PackageReference Include=""Azure.Core"" />
+//  </ItemGroup>";
 
-        private string _armCsProjContent = @"
-  <PropertyGroup>
-    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
-  </PropertyGroup>
+//        private string _armCsProjContent = @"
+//  <PropertyGroup>
+//    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
+//  </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" />
-  </ItemGroup>
-";
+//  <ItemGroup>
+//    <PackageReference Include=""Azure.ResourceManager"" />
+//  </ItemGroup>
+//";
 
-        private string _csProjPackageReference = @"
-  <PropertyGroup>
-    <LangVersion>11.0</LangVersion>
-    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
-    <RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json</RestoreAdditionalProjectSources>
-  </PropertyGroup>
+//        private string _csProjPackageReference = @"
+//  <PropertyGroup>
+//    <LangVersion>11.0</LangVersion>
+//    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
+//    <RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json</RestoreAdditionalProjectSources>
+//  </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
-  </ItemGroup>
-";
+//  <ItemGroup>
+//    <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
+//  </ItemGroup>
+//";
 
-        private string _llcProjectContent = @"
-  <PropertyGroup>
-    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" />
-  </ItemGroup>
-";
-        private string _llcAzureKeyAuth = @"
-  <ItemGroup>
-    <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />
-  </ItemGroup>";
+//        private string _llcProjectContent = @"
+//  <PropertyGroup>
+//    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
+//  </PropertyGroup>
+//  <ItemGroup>
+//    <PackageReference Include=""Azure.Core.Experimental"" />
+//  </ItemGroup>
+//";
+//        private string _llcAzureKeyAuth = @"
+//  <ItemGroup>
+//    <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />
+//  </ItemGroup>";
 
         internal static string GetVersion()
         {
@@ -101,61 +102,94 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe)
         {
+            var projectFile = defaultNamespace;
+            if (Configuration.MgmtTestConfiguration is not null)
+            {
+                projectFile += ".Tests";
+            }
+            var csprojContent = Configuration.SkipCSProjPackageReference ? GetAzureCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace) : GetNonAzureCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace);
+            writeFile($"{projectFile}.csproj", csprojContent);
+        }
+
+        private string GetAzureCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
+        {
+            var builder = new CSProjBuilder()
+            {
+                TargetFramework = "netstandard2.0",
+                TreatWarningsAsErrors = true,
+                Nullable = "annotations",
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
+                DefineConstants = !Configuration.AzureArm && !Configuration.Generation1ConvenienceClient ? new("$(DefineConstants);EXPERIMENTAL") : null
+            };
+            builder.PackageReferences.Add(new("Azure.Core"));
             if (includeDfe)
             {
-                _coreCsProjContent += @"
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" />
-  </ItemGroup>";
+                builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
 
             var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
             if (isMgmtTestProject)
             {
-                _coreCsProjContent += string.Format(@"
+                builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
 
-  <ItemGroup>
-    <ProjectReference Include=""..\src\{0}.csproj"" />
-  </ItemGroup>
+                builder.PackageReferences.Add(new("NUnit"));
+                builder.PackageReferences.Add(new("Azure.Identity"));
 
-  <ItemGroup>
-    <PackageReference Include=""NUnit"" />
-    <PackageReference Include=""Azure.Identity"" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include = ""..\..\..\..\src\assets\TestFramework\*.cs"" />
-  </ItemGroup>", defaultNamespace);
+                builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
             }
 
-            string csProjContent;
-            if (Configuration.SkipCSProjPackageReference)
+            if (Configuration.AzureArm)
             {
-                string additionalContent = string.Empty;
-                if (Configuration.AzureArm)
-                {
-                    additionalContent += _armCsProjContent;
-                }
-                else if (!Configuration.Generation1ConvenienceClient)
-                {
-                    additionalContent += _llcProjectContent;
-                }
-
-                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
+                builder.PackageReferences.Add(new("Azure.ResourceManager"));
             }
-            else
+            else if (!Configuration.Generation1ConvenienceClient)
             {
-                var version = GetVersion();
-                var csProjPackageReference = string.Format(_csProjPackageReference, version);
-                csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
+                builder.PackageReferences.Add(new("Azure.Core.Experimental"));
             }
 
-            var projectFile = defaultNamespace;
+            if (includeAzureKeyAuth)
+            {
+                builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
+            }
+
+            return builder.Build();
+        }
+
+        private string GetNonAzureCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
+        {
+            var builder = new CSProjBuilder()
+            {
+                TargetFramework = "netstandard2.0",
+                TreatWarningsAsErrors = true,
+                Nullable = "annotations",
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
+                DefineConstants = !Configuration.AzureArm && !Configuration.Generation1ConvenienceClient ? new("$(DefineConstants);EXPERIMENTAL") : null,
+                LangVersion = "11.0",
+                IncludeGeneratorSharedCode = true,
+                RestoreAdditionalProjectSources = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json"
+            };
+            builder.PackageReferences.Add(new("Azure.Core"));
+            if (includeDfe)
+            {
+                builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
+            }
+
+            var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
             if (isMgmtTestProject)
             {
-                projectFile += ".Tests";
+                builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
+
+                builder.PackageReferences.Add(new("NUnit"));
+                builder.PackageReferences.Add(new("Azure.Identity"));
+
+                builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
             }
-            writeFile($"{projectFile}.csproj", csProjContent);
+
+            var version = GetVersion();
+
+            builder.PrivatePackageReferences.Add(new("Microsoft.Azure.AutoRest.CSharp", version));
+
+            return builder.Build();
         }
     }
 }

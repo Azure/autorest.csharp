@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 
@@ -14,6 +15,7 @@ internal class CSProjBuilder
     {
         ProjectReferences = new List<CSProjDependencyPackage>();
         PackageReferences = new List<CSProjDependencyPackage>();
+        PrivatePackageReferences = new List<CSProjDependencyPackage>();
         CompileIncludes = new List<CSProjCompileIncldue>();
     }
 
@@ -37,9 +39,23 @@ internal class CSProjBuilder
 
     public CSProjProperty<string>? NoWarn { get; init; }
 
+    public CSProjProperty<bool>? TreatWarningsAsErrors { get; init; }
+
+    public CSProjProperty<string>? Nullable { get; init; }
+
+    public CSProjProperty<bool>? IncludeManagementSharedCode { get; init; }
+
+    public CSProjProperty<bool>? IncludeGeneratorSharedCode { get; init; }
+
+    public CSProjProperty<string>? DefineConstants { get; init; }
+
+    public CSProjProperty<string>? RestoreAdditionalProjectSources { get; init; }
+
     public IList<CSProjDependencyPackage> ProjectReferences { get; }
 
     public IList<CSProjDependencyPackage> PackageReferences { get; }
+
+    public IList<CSProjDependencyPackage> PrivatePackageReferences { get; }
 
     public IList<CSProjCompileIncldue> CompileIncludes { get; }
 
@@ -55,18 +71,8 @@ internal class CSProjBuilder
         // write the Project element
         writer.WriteStartElement("Project");
         writer.WriteAttributeString("Sdk", "Microsoft.NET.Sdk");
-        writer.WriteStartElement("PropertyGroup");
-        WriteElementIfNotNull(writer, "Description", Description);
-        WriteElementIfNotNull(writer, "AssemblyTitle", AssemblyTitle);
-        WriteElementIfNotNull(writer, "Version", Version);
-        WriteElementIfNotNull(writer, "PackageTags", PackageTags);
-        WriteElementIfNotNull(writer, "TargetFrameworks", TargetFrameworks);
-        WriteElementIfNotNull(writer, "TargetFramework", TargetFramework);
-        WriteElementIfNotNull(writer, "IncludeOperationsSharedSource", IncludeOperationsSharedSource);
-        WriteElementIfNotNull(writer, "LangVersion", LangVersion);
-        WriteElementIfNotNull(writer, "GenerateDocumentationFile", GenerateDocumentationFile);
-        WriteElementIfNotNull(writer, "NoWarn", NoWarn);
-        writer.WriteEndElement();
+        // write properties
+        WriteProperties(writer);
 
         // write the first ItemGroup for compile include
         if (CompileIncludes.Count > 0)
@@ -108,6 +114,20 @@ internal class CSProjBuilder
             }
             writer.WriteEndElement();
         }
+
+        // write private package references
+        if (PrivatePackageReferences.Count > 0)
+        {
+            writer.Flush();
+            builder.AppendLine();
+            writer.WriteStartElement("ItemGroup");
+            foreach (var package in PrivatePackageReferences)
+            {
+                WritePackageReference(writer, package, true);
+            }
+            writer.WriteEndElement();
+        }
+
         writer.WriteEndDocument();
         writer.Close();
         writer.Flush();
@@ -116,6 +136,28 @@ internal class CSProjBuilder
         builder.AppendLine();
 
         return builder.ToString();
+    }
+
+    private void WriteProperties(XmlWriter writer)
+    {
+        writer.WriteStartElement("PropertyGroup");
+        // get all the properties
+        var properties = typeof(CSProjBuilder).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        var method = typeof(CSProjBuilder).GetMethod(nameof(WriteElementIfNotNull), BindingFlags.NonPublic | BindingFlags.Instance)!;
+
+        // this will write those properties in the same order as they are defined in this class
+        foreach (var property in properties)
+        {
+            // only include those CSProjProperty<T> types
+            if (property.PropertyType.GetGenericTypeDefinition() != typeof(CSProjProperty<>))
+                continue;
+            // invoke the WriteElementIfNotNull method on each of them
+            var value = property.GetValue(this);
+            var arguments = property.PropertyType.GetGenericArguments();
+            method.MakeGenericMethod(arguments).Invoke(this, new[] {writer, property.Name, value});
+        }
+        writer.WriteEndElement();
     }
 
     private void WriteElementIfNotNull<T>(XmlWriter writer, string name, CSProjProperty<T>? property) where T : notnull
@@ -159,13 +201,17 @@ internal class CSProjBuilder
         writer.WriteEndElement();
     }
 
-    private void WritePackageReference(XmlWriter writer, CSProjDependencyPackage package)
+    private void WritePackageReference(XmlWriter writer, CSProjDependencyPackage package, bool isPrivateAsset = false)
     {
         writer.WriteStartElement("PackageReference");
         writer.WriteAttributeString("Include", package.PackageName);
         if (package.Version != null)
         {
             writer.WriteAttributeString("Version", package.Version);
+        }
+        if (isPrivateAsset)
+        {
+            writer.WriteAttributeString("PrivateAssets", "All");
         }
         writer.WriteEndElement();
     }
@@ -183,5 +229,8 @@ internal class CSProjBuilder
         public CSProjDependencyPackage(string packageName) : this(packageName, null) { }
     }
 
-    public record CSProjCompileIncldue(string Include, string? LinkBase);
+    public record CSProjCompileIncldue(string Include, string? LinkBase)
+    {
+        public CSProjCompileIncldue(string include) : this(include, null) { }
+    }
 }
