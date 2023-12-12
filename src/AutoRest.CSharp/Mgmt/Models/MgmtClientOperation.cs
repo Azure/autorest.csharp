@@ -73,6 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             _extensionParameter = extensionParameter;
             IdVariableName = idVariableName;
             IsConvenientOperation = isConvenientOperation;
+            MethodSignature = EnsureMethodSignature();
         }
 
         private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null) : this(operations, idVariableName, extensionParameter, isConvenientOperation)
@@ -84,45 +85,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public MgmtRestOperation this[int index] => _operations[index];
 
-        private MethodSignature? _methodSignature;
-        public MethodSignature MethodSignature
-        {
-            get
-            {
-                if (_methodSignature != null)
-                    return _methodSignature;
-                else
-                {
-                    var attris = this._operations
-                        .Where(op => Configuration.MgmtConfiguration.PrivilegedOperations.ContainsKey(op.OperationId))
-                        .Select(op =>
-                        {
-                            var arg = Configuration.MgmtConfiguration.PrivilegedOperations[op.OperationId];
-                            MgmtReport.Instance.TransformSection.AddTransformLog(
-                                new TransformItem(TransformTypeName.PrivilegedOperations, op.OperationId, arg),
-                                op.Operation.GetFullSerializedName(),
-                                $"Operation {op.OperationId} is marked as Privileged Operation");
-                            return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), arg);
-                        })
-                        .ToList();
-
-                    _methodSignature = new MethodSignature(
-                        Name,
-                        null,
-                        Description,
-                        Accessibility == Public
-                            ? _extensionParameter != null
-                                ? Public | Static | Extension
-                                : Public | Virtual
-                            : Accessibility,
-                        IsPagingOperation
-                            ? new CSharpType(typeof(Pageable<>), ReturnType)
-                            : ReturnType, null, MethodParameters.ToArray(),
-                        attris);
-                    return _methodSignature;
-                }
-            }
-        }
+        public MethodSignature MethodSignature { get; }
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().Name;
@@ -233,6 +196,36 @@ namespace AutoRest.CSharp.Mgmt.Models
                 parameterMappings.Add(operationMappings.Key, parameterMapping);
             }
             return parameterMappings;
+        }
+
+        private MethodSignature EnsureMethodSignature()
+        {
+            var attris = this._operations
+                .Where(op => Configuration.MgmtConfiguration.PrivilegedOperations.ContainsKey(op.OperationId))
+                .Select(op =>
+                {
+                    var arg = Configuration.MgmtConfiguration.PrivilegedOperations[op.OperationId];
+                    MgmtReport.Instance.TransformSection.AddTransformLog(
+                        new TransformItem(TransformTypeName.PrivilegedOperations, op.OperationId, arg),
+                        op.Operation.GetFullSerializedName(),
+                        $"Operation {op.OperationId} is marked as Privileged Operation");
+                    return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), arg);
+                })
+                .ToList();
+
+            return new MethodSignature(
+                Name,
+                null,
+                Description,
+                Accessibility == Public
+                    ? _extensionParameter != null
+                        ? Public | Static | Extension
+                        : Public | Virtual
+                    : Accessibility,
+                IsPagingOperation
+                    ? new CSharpType(typeof(Pageable<>), ReturnType)
+                    : ReturnType, null, MethodParameters.ToArray(),
+                attris);
         }
 
         private IReadOnlyList<Parameter> EnsureMethodParameters()
