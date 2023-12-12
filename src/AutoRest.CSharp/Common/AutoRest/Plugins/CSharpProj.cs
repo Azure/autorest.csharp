@@ -56,11 +56,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 projectFile += ".Tests";
             }
-            var csprojContent = Configuration.SkipCSProjPackageReference ? GetAzureCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace) : GetNonAzureCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace);
+            var csprojContent = Configuration.SkipCSProjPackageReference ? GetCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace) : GetExternalCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace);
             writeFile($"{projectFile}.csproj", csprojContent);
         }
 
-        private string GetAzureCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
+        private string GetCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
         {
             var builder = new CSProjBuilder()
             {
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return builder.Build();
         }
 
-        private string GetNonAzureCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
+        private string GetExternalCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
         {
             var builder = new CSProjBuilder()
             {

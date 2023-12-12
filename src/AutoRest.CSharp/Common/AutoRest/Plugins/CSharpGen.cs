@@ -116,6 +116,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             try
             {
+                // generate source code
                 var project = await ExecuteAsync(codeModel);
                 await foreach (var file in project.GetGeneratedFilesAsync())
                 {
@@ -124,6 +125,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     await autoRest.WriteFile(filename, file.Text, "source-file-csharp");
                 }
 
+                // generate csproj if necessary
                 if (!Configuration.SkipCSProj)
                 {
                     // write csproj

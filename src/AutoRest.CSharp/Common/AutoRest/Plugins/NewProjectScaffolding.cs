@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 {
     internal class NewProjectScaffolding
     {
-        private string _serivceDirectoryName;
+        private string _serviceDirectoryName;
         private string _projectDirectory;
         private string _testDirectory;
         private string _serviceDirectory;
@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         public NewProjectScaffolding(bool needAzureKeyAuth)
         {
-            _serivceDirectoryName = Path.GetFileName(Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..")));
+            _serviceDirectoryName = Path.GetFileName(Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..")));
             _projectDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..");
             _testDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "tests");
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
@@ -226,7 +226,7 @@ This is a template, but your SDK readme should include details on how to contrib
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/{1}/{0}/README.png)
 ";
-            return string.Format(readmeContent, Configuration.Namespace, _serivceDirectoryName);
+            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName);
         }
 
         private string GetCiYml()
@@ -268,7 +268,7 @@ extends:
     - name: {1}
       safeName: {2}
 ";
-            return String.Format(ciYmlContent, _serivceDirectoryName, Configuration.Namespace, safeName);
+            return String.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
         }
 
         private string GetDirectoryBuildProps()
