@@ -125,17 +125,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
 
-            //var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
-            //if (isMgmtTestProject)
-            //{
-            //    builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
-
-            //    builder.PackageReferences.Add(new("NUnit"));
-            //    builder.PackageReferences.Add(new("Azure.Identity"));
-
-            //    builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
-            //}
-
             if (Configuration.AzureArm)
             {
                 builder.PackageReferences.Add(new("Azure.ResourceManager"));
@@ -171,17 +160,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
-
-            //var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
-            //if (isMgmtTestProject)
-            //{
-            //    builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
-
-            //    builder.PackageReferences.Add(new("NUnit"));
-            //    builder.PackageReferences.Add(new("Azure.Identity"));
-
-            //    builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
-            //}
 
             var version = GetVersion();
 
