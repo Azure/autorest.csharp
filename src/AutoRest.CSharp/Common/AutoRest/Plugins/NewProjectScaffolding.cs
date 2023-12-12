@@ -268,7 +268,7 @@ extends:
     - name: {1}
       safeName: {2}
 ";
-            return String.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
+            return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
         }
 
         private string GetDirectoryBuildProps()
@@ -328,18 +328,17 @@ extends:
 
         private string GetSrcCSProj() => Configuration.IsBranded ? GetBrandedSrcCSProj() : GetUnbrandedSrcCSProj();
 
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _brandedDependencyPackages = new List<CSProjBuilder.CSProjDependencyPackage>
+        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _brandedDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
         {
             new("Azure.Core"),
             new("System.Text.Json")
         };
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _unbrandedDependencyPackages = new List<CSProjBuilder.CSProjDependencyPackage>
+        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
         {
             new("System.Net.ClientModel", "1.0.0-beta.1"),
             new("System.Text.Json", "4.7.2")
         };
-
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _brandedTestDependencyPackages = new List<CSProjBuilder.CSProjDependencyPackage>
+        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _brandedTestDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
         {
             new("Azure.Identity"),
             new("NUnit"),
@@ -347,7 +346,7 @@ extends:
             new("Microsoft.NET.Test.Sdk"),
             new("Moq")
         };
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new List<CSProjBuilder.CSProjDependencyPackage>
+        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
         {
             new("NUnit", "3.13.2"),
             new("NUnit3TestAdapter", "4.4.2"),
@@ -473,7 +472,7 @@ EndProject
 	EndGlobalSection
 EndGlobal
 ";
-            return String.Format(slnContent, Configuration.Namespace);
+            return string.Format(slnContent, Configuration.Namespace);
         }
     }
 }
