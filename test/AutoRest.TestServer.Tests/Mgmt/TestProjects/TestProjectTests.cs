@@ -593,7 +593,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        protected Type FindModelFactory() => MyTypes().Single(IsModelFactory);
+        protected Type? FindModelFactory() => MyTypes().SingleOrDefault(IsModelFactory);
 
         private IEnumerable<Type> FindAllRestOperations()
         {

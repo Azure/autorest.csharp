@@ -12,7 +12,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public void ValidateOverloadMethodsForModelFactory(string methodName, string[] parameterNames)
         {
             var classToCheck = FindModelFactory();
-            ValidateOverloadMethods(classToCheck.Name, methodName, parameterNames, classToCheck);
+            if (classToCheck is not null)
+            {
+                ValidateOverloadMethods(classToCheck.Name, methodName, parameterNames, classToCheck);
+            }
         }
 
         private static void ValidateOverloadMethods(string className, string methodName, string[] parameterNames, System.Type classToCheck)

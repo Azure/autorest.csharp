@@ -120,6 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             get
             {
                 // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
+                // TODO: enable this for DPG, and check Configuration.Generate1ConvenientClient to disable it for HLC
                 if (!Configuration.AzureArm)
                 {
                     return null;
