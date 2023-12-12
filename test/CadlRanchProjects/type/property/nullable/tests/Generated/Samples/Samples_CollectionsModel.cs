@@ -21,7 +21,7 @@ namespace _Type.Property.Nullable.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_ShortVersion()
+        public void Example_CollectionsModel_GetNonNull_ShortVersion()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_ShortVersion_Async()
+        public async Task Example_CollectionsModel_GetNonNull_ShortVersion_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_ShortVersion_Convenience()
+        public void Example_CollectionsModel_GetNonNull_ShortVersion_Convenience()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -56,7 +56,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNonNull_ShortVersion_Convenience_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -65,7 +65,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters()
+        public void Example_CollectionsModel_GetNonNull_AllParameters()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -78,7 +78,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_GetNonNull_AllParameters_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -91,7 +91,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters_Convenience()
+        public void Example_CollectionsModel_GetNonNull_AllParameters_Convenience()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -100,7 +100,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNonNull_AllParameters_Convenience_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -109,7 +109,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_ShortVersion()
+        public void Example_CollectionsModel_GetNull_ShortVersion()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -122,7 +122,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_ShortVersion_Async()
+        public async Task Example_CollectionsModel_GetNull_ShortVersion_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -135,7 +135,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_ShortVersion_Convenience()
+        public void Example_CollectionsModel_GetNull_ShortVersion_Convenience()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNull_ShortVersion_Convenience_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -153,7 +153,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters()
+        public void Example_CollectionsModel_GetNull_AllParameters()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -166,7 +166,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_GetNull_AllParameters_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -179,7 +179,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters_Convenience()
+        public void Example_CollectionsModel_GetNull_AllParameters_Convenience()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -188,7 +188,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsModel_GetNull_AllParameters_Convenience_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -197,7 +197,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_ShortVersion()
+        public void Example_CollectionsModel_PatchNonNull_ShortVersion()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -219,7 +219,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_ShortVersion_Async()
+        public async Task Example_CollectionsModel_PatchNonNull_ShortVersion_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -241,7 +241,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_AllParameters()
+        public void Example_CollectionsModel_PatchNonNull_AllParameters()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -263,7 +263,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_PatchNonNull_AllParameters_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -285,7 +285,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_ShortVersion()
+        public void Example_CollectionsModel_PatchNull_ShortVersion()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -307,7 +307,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_ShortVersion_Async()
+        public async Task Example_CollectionsModel_PatchNull_ShortVersion_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -329,7 +329,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_AllParameters()
+        public void Example_CollectionsModel_PatchNull_AllParameters()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -351,7 +351,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_AllParameters_Async()
+        public async Task Example_CollectionsModel_PatchNull_AllParameters_Async()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 

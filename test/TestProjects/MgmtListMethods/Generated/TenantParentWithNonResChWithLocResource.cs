@@ -40,6 +40,9 @@ namespace MgmtListMethods
         private readonly TenantParentWithNonResChWithLocsRestOperations _tenantParentWithNonResChWithLocRestClient;
         private readonly TenantParentWithNonResChWithLocData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Tenant/tenantTests/tenantParentWithNonResChWithLocs";
+
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChWithLocResource"/> class for mocking. </summary>
         protected TenantParentWithNonResChWithLocResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Tenant/tenantTests/tenantParentWithNonResChWithLocs";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

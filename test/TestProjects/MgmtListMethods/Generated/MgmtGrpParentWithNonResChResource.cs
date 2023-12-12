@@ -41,6 +41,9 @@ namespace MgmtListMethods
         private readonly MgmtGrpParentWithNonResChesRestOperations _mgmtGrpParentWithNonResChRestClient;
         private readonly MgmtGrpParentWithNonResChData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChes";
+
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChResource"/> class for mocking. </summary>
         protected MgmtGrpParentWithNonResChResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChes";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

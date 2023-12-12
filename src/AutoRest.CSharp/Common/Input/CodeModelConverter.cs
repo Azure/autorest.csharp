@@ -452,6 +452,11 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (parameter.ClientDefaultValue != null)
             {
+                if (parameter.Origin == "modelerfour:synthesized/host" && (string)parameter.ClientDefaultValue == "")
+                {
+                    return null;
+                }
+
                 return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
             }
 

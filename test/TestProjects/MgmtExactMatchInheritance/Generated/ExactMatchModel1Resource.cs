@@ -39,6 +39,9 @@ namespace MgmtExactMatchInheritance
         private readonly ExactMatchModel1SRestOperations _exactMatchModel1RestClient;
         private readonly ExactMatchModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/exactMatchModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Resource"/> class for mocking. </summary>
         protected ExactMatchModel1Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtExactMatchInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/exactMatchModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

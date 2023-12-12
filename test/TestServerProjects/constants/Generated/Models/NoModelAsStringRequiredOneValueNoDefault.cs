@@ -16,6 +16,13 @@ namespace constants.Models
             Parameter = NoModelAsStringRequiredOneValueNoDefaultEnum.Value1;
         }
 
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringRequiredOneValueNoDefault"/>. </summary>
+        /// <param name="parameter"></param>
+        internal NoModelAsStringRequiredOneValueNoDefault(NoModelAsStringRequiredOneValueNoDefaultEnum parameter)
+        {
+            Parameter = parameter;
+        }
+
         /// <summary> Gets the parameter. </summary>
         public NoModelAsStringRequiredOneValueNoDefaultEnum Parameter { get; }
     }

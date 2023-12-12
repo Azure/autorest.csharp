@@ -41,6 +41,9 @@ namespace MgmtMultipleParentResource
         private readonly AnotherParentsRestOperations _anotherParentRestClient;
         private readonly AnotherParentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/anotherParents";
+
         /// <summary> Initializes a new instance of the <see cref="AnotherParentResource"/> class for mocking. </summary>
         protected AnotherParentResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtMultipleParentResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/anotherParents";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

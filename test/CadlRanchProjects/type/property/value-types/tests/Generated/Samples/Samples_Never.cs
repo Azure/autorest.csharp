@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNever_ShortVersion()
+        public void Example_Never_GetNever_ShortVersion()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNever_ShortVersion_Async()
+        public async Task Example_Never_GetNever_ShortVersion_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNever_ShortVersion_Convenience()
+        public void Example_Never_GetNever_ShortVersion_Convenience()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNever_ShortVersion_Convenience_Async()
+        public async Task Example_Never_GetNever_ShortVersion_Convenience_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNever_AllParameters()
+        public void Example_Never_GetNever_AllParameters()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNever_AllParameters_Async()
+        public async Task Example_Never_GetNever_AllParameters_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNever_AllParameters_Convenience()
+        public void Example_Never_GetNever_AllParameters_Convenience()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNever_AllParameters_Convenience_Async()
+        public async Task Example_Never_GetNever_AllParameters_Convenience_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Never_Put_ShortVersion()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -117,7 +117,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Never_Put_ShortVersion_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -129,7 +129,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Never_Put_ShortVersion_Convenience()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -139,7 +139,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Never_Put_ShortVersion_Convenience_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -149,7 +149,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Never_Put_AllParameters()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -161,7 +161,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Never_Put_AllParameters_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -173,7 +173,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Never_Put_AllParameters_Convenience()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -183,7 +183,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Never_Put_AllParameters_Convenience_Async()
         {
             Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 

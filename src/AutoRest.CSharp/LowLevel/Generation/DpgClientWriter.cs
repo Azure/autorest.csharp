@@ -259,6 +259,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
                         }
+                        else if (_client.ClientOptions.AdditionalParameters.Contains(parameter))
+                        {
+                            _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.{parameter.Name.ToCleanName()};");
+                        }
                         else
                         {
                             _writer.Line($"{field.Name:I} = {parameter.Name:I};");

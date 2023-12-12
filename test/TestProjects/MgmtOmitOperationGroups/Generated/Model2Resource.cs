@@ -42,6 +42,9 @@ namespace MgmtOmitOperationGroups
         private readonly Model4SRestOperations _model4sRestClient;
         private readonly Model2Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/model2s";
+
         /// <summary> Initializes a new instance of the <see cref="Model2Resource"/> class for mocking. </summary>
         protected Model2Resource()
         {
@@ -70,9 +73,6 @@ namespace MgmtOmitOperationGroups
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/model2s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -39,6 +39,9 @@ namespace MgmtNoTypeReplacement
         private readonly NoTypeReplacementModel3SRestOperations _noTypeReplacementModel3RestClient;
         private readonly NoTypeReplacementModel3Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/noTypeReplacementModel3s";
+
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel3Resource"/> class for mocking. </summary>
         protected NoTypeReplacementModel3Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtNoTypeReplacement
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/noTypeReplacementModel3s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

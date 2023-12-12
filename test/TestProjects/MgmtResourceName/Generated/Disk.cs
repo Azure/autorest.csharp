@@ -39,6 +39,9 @@ namespace MgmtResourceName
         private readonly DisksRestOperations _diskRestClient;
         private readonly DiskData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/diskResources";
+
         /// <summary> Initializes a new instance of the <see cref="Disk"/> class for mocking. </summary>
         protected Disk()
         {
@@ -65,9 +68,6 @@ namespace MgmtResourceName
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/diskResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

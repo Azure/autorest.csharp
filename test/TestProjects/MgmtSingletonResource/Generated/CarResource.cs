@@ -39,6 +39,9 @@ namespace MgmtSingletonResource
         private readonly CarsRestOperations _carRestClient;
         private readonly CarData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/cars";
+
         /// <summary> Initializes a new instance of the <see cref="CarResource"/> class for mocking. </summary>
         protected CarResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtSingletonResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/cars";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

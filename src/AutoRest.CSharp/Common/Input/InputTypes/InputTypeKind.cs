@@ -18,6 +18,8 @@ internal enum InputTypeKind
     DateTimeRFC3339,
     DateTimeRFC7231,
     DateTimeUnix,
+    Decimal,
+    Decimal128,
     DurationISO8601,
     DurationConstant,
     DurationSeconds,

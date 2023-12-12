@@ -39,6 +39,9 @@ namespace MgmtResourceName
         private readonly DisplayResourcesRestOperations _displayResourceRestClient;
         private readonly DisplayResourceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/displayResources";
+
         /// <summary> Initializes a new instance of the <see cref="DisplayResource"/> class for mocking. </summary>
         protected DisplayResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtResourceName
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/displayResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

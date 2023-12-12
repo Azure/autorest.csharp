@@ -20,7 +20,7 @@ namespace Parameters.BodyOptionality.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredExplicit_ShortVersion()
+        public void Example_BodyOptionality_RequiredExplicit_ShortVersion()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -35,7 +35,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredExplicit_ShortVersion_Async()
+        public async Task Example_BodyOptionality_RequiredExplicit_ShortVersion_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -50,7 +50,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredExplicit_ShortVersion_Convenience()
+        public void Example_BodyOptionality_RequiredExplicit_ShortVersion_Convenience()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -60,7 +60,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredExplicit_ShortVersion_Convenience_Async()
+        public async Task Example_BodyOptionality_RequiredExplicit_ShortVersion_Convenience_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -70,7 +70,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredExplicit_AllParameters()
+        public void Example_BodyOptionality_RequiredExplicit_AllParameters()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -85,7 +85,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredExplicit_AllParameters_Async()
+        public async Task Example_BodyOptionality_RequiredExplicit_AllParameters_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -100,7 +100,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredExplicit_AllParameters_Convenience()
+        public void Example_BodyOptionality_RequiredExplicit_AllParameters_Convenience()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -110,7 +110,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredExplicit_AllParameters_Convenience_Async()
+        public async Task Example_BodyOptionality_RequiredExplicit_AllParameters_Convenience_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -120,7 +120,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredImplicit_ShortVersion()
+        public void Example_BodyOptionality_RequiredImplicit_ShortVersion()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -135,7 +135,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredImplicit_ShortVersion_Async()
+        public async Task Example_BodyOptionality_RequiredImplicit_ShortVersion_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -150,7 +150,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredImplicit_ShortVersion_Convenience()
+        public void Example_BodyOptionality_RequiredImplicit_ShortVersion_Convenience()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -160,7 +160,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredImplicit_ShortVersion_Convenience_Async()
+        public async Task Example_BodyOptionality_RequiredImplicit_ShortVersion_Convenience_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -170,7 +170,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredImplicit_AllParameters()
+        public void Example_BodyOptionality_RequiredImplicit_AllParameters()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -185,7 +185,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredImplicit_AllParameters_Async()
+        public async Task Example_BodyOptionality_RequiredImplicit_AllParameters_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -200,7 +200,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RequiredImplicit_AllParameters_Convenience()
+        public void Example_BodyOptionality_RequiredImplicit_AllParameters_Convenience()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 
@@ -210,7 +210,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RequiredImplicit_AllParameters_Convenience_Async()
+        public async Task Example_BodyOptionality_RequiredImplicit_AllParameters_Convenience_Async()
         {
             BodyOptionalityClient client = new BodyOptionalityClient();
 

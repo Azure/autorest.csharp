@@ -21,7 +21,7 @@ namespace _Type.Property.Optionality.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_ShortVersion()
+        public void Example_StringLiteral_GetAll_ShortVersion()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_ShortVersion_Async()
+        public async Task Example_StringLiteral_GetAll_ShortVersion_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_ShortVersion_Convenience()
+        public void Example_StringLiteral_GetAll_ShortVersion_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_ShortVersion_Convenience_Async()
+        public async Task Example_StringLiteral_GetAll_ShortVersion_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters()
+        public void Example_StringLiteral_GetAll_AllParameters()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -75,7 +75,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_AllParameters_Async()
+        public async Task Example_StringLiteral_GetAll_AllParameters_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -87,7 +87,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters_Convenience()
+        public void Example_StringLiteral_GetAll_AllParameters_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -96,7 +96,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_AllParameters_Convenience_Async()
+        public async Task Example_StringLiteral_GetAll_AllParameters_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_ShortVersion()
+        public void Example_StringLiteral_GetDefault_ShortVersion()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -117,7 +117,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_ShortVersion_Async()
+        public async Task Example_StringLiteral_GetDefault_ShortVersion_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -129,7 +129,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_ShortVersion_Convenience()
+        public void Example_StringLiteral_GetDefault_ShortVersion_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -138,7 +138,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_ShortVersion_Convenience_Async()
+        public async Task Example_StringLiteral_GetDefault_ShortVersion_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -147,7 +147,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_AllParameters()
+        public void Example_StringLiteral_GetDefault_AllParameters()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -159,7 +159,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_AllParameters_Async()
+        public async Task Example_StringLiteral_GetDefault_AllParameters_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -171,7 +171,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_AllParameters_Convenience()
+        public void Example_StringLiteral_GetDefault_AllParameters_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -180,7 +180,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_AllParameters_Convenience_Async()
+        public async Task Example_StringLiteral_GetDefault_AllParameters_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -189,7 +189,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_ShortVersion()
+        public void Example_StringLiteral_PutAll_ShortVersion()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -201,7 +201,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_ShortVersion_Async()
+        public async Task Example_StringLiteral_PutAll_ShortVersion_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -213,7 +213,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_ShortVersion_Convenience()
+        public void Example_StringLiteral_PutAll_ShortVersion_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -223,7 +223,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_ShortVersion_Convenience_Async()
+        public async Task Example_StringLiteral_PutAll_ShortVersion_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -233,7 +233,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_AllParameters()
+        public void Example_StringLiteral_PutAll_AllParameters()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -248,7 +248,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_AllParameters_Async()
+        public async Task Example_StringLiteral_PutAll_AllParameters_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -263,7 +263,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_AllParameters_Convenience()
+        public void Example_StringLiteral_PutAll_AllParameters_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -276,7 +276,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_AllParameters_Convenience_Async()
+        public async Task Example_StringLiteral_PutAll_AllParameters_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -289,7 +289,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_ShortVersion()
+        public void Example_StringLiteral_PutDefault_ShortVersion()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -301,7 +301,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_ShortVersion_Async()
+        public async Task Example_StringLiteral_PutDefault_ShortVersion_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -313,7 +313,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_ShortVersion_Convenience()
+        public void Example_StringLiteral_PutDefault_ShortVersion_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -323,7 +323,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_ShortVersion_Convenience_Async()
+        public async Task Example_StringLiteral_PutDefault_ShortVersion_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -333,7 +333,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_AllParameters()
+        public void Example_StringLiteral_PutDefault_AllParameters()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -348,7 +348,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_AllParameters_Async()
+        public async Task Example_StringLiteral_PutDefault_AllParameters_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -363,7 +363,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_AllParameters_Convenience()
+        public void Example_StringLiteral_PutDefault_AllParameters_Convenience()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 
@@ -376,7 +376,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_AllParameters_Convenience_Async()
+        public async Task Example_StringLiteral_PutDefault_AllParameters_Convenience_Async()
         {
             StringLiteral client = new OptionalClient().GetStringLiteralClient(apiVersion: "1.0.0");
 

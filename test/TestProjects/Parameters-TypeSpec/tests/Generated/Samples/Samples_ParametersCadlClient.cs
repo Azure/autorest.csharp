@@ -20,7 +20,7 @@ namespace ParametersCadl.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_ShortVersion()
+        public void Example_ParameterOrders_Operation_ShortVersion()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -32,7 +32,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_ShortVersion_Async()
+        public async Task Example_ParameterOrders_Operation_ShortVersion_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -44,7 +44,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_ShortVersion_Convenience()
+        public void Example_ParameterOrders_Operation_ShortVersion_Convenience()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -53,7 +53,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_ShortVersion_Convenience_Async()
+        public async Task Example_ParameterOrders_Operation_ShortVersion_Convenience_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -62,7 +62,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public void Example_ParameterOrders_Operation_AllParameters()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -74,7 +74,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_AllParameters_Async()
+        public async Task Example_ParameterOrders_Operation_AllParameters_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -86,7 +86,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters_Convenience()
+        public void Example_ParameterOrders_Operation_AllParameters_Convenience()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -95,7 +95,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_AllParameters_Convenience_Async()
+        public async Task Example_ParameterOrders_Operation_AllParameters_Convenience_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -104,7 +104,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation2_ShortVersion()
+        public void Example_ParameterOrders_Operation2_ShortVersion()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -116,7 +116,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation2_ShortVersion_Async()
+        public async Task Example_ParameterOrders_Operation2_ShortVersion_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -128,7 +128,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation2_ShortVersion_Convenience()
+        public void Example_ParameterOrders_Operation2_ShortVersion_Convenience()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -137,7 +137,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation2_ShortVersion_Convenience_Async()
+        public async Task Example_ParameterOrders_Operation2_ShortVersion_Convenience_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -146,7 +146,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation2_AllParameters()
+        public void Example_ParameterOrders_Operation2_AllParameters()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -158,7 +158,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation2_AllParameters_Async()
+        public async Task Example_ParameterOrders_Operation2_AllParameters_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -170,7 +170,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation2_AllParameters_Convenience()
+        public void Example_ParameterOrders_Operation2_AllParameters_Convenience()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -179,7 +179,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation2_AllParameters_Convenience_Async()
+        public async Task Example_ParameterOrders_Operation2_AllParameters_Convenience_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 

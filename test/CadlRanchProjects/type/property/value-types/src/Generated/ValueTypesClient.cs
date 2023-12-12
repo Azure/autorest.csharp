@@ -93,6 +93,26 @@ namespace _Type.Property.ValueTypes
             return new Float(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
+        /// <summary> Initializes a new instance of Decimal. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Decimal GetDecimalClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Decimal(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of Decimal128. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Decimal128 GetDecimal128Client(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Decimal128(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
         /// <summary> Initializes a new instance of Datetime. </summary>
         /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>

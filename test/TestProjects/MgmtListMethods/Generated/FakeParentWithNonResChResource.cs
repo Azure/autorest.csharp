@@ -41,6 +41,9 @@ namespace MgmtListMethods
         private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChRestClient;
         private readonly FakeParentWithNonResChData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithNonResChes";
+
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResChResource"/> class for mocking. </summary>
         protected FakeParentWithNonResChResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithNonResChes";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

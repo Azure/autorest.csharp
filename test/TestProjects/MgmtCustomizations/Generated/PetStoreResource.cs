@@ -39,6 +39,9 @@ namespace MgmtCustomizations
         private readonly PetStoresRestOperations _petStoreRestClient;
         private readonly PetStoreData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Pets/petStore";
+
         /// <summary> Initializes a new instance of the <see cref="PetStoreResource"/> class for mocking. </summary>
         protected PetStoreResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtCustomizations
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Pets/petStore";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -18,7 +18,7 @@ namespace Authentication.ApiKey.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Valid_ShortVersion()
+        public void Example_ApiKey_Valid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
@@ -30,7 +30,7 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Valid_ShortVersion_Async()
+        public async Task Example_ApiKey_Valid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
@@ -42,7 +42,7 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Valid_AllParameters()
+        public void Example_ApiKey_Valid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
@@ -54,7 +54,7 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Valid_AllParameters_Async()
+        public async Task Example_ApiKey_Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
@@ -66,7 +66,7 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Invalid_ShortVersion()
+        public void Example_ApiKey_Invalid_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
@@ -78,7 +78,7 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Invalid_ShortVersion_Async()
+        public async Task Example_ApiKey_Invalid_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
@@ -90,7 +90,7 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Invalid_AllParameters()
+        public void Example_ApiKey_Invalid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);
@@ -102,7 +102,7 @@ namespace Authentication.ApiKey.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Invalid_AllParameters_Async()
+        public async Task Example_ApiKey_Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiKeyClient client = new ApiKeyClient(credential);

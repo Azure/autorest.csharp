@@ -39,6 +39,9 @@ namespace MgmtMockAndSample
         private readonly PrivateEndpointConnectionsRestOperations _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient;
         private readonly MgmtMockAndSamplePrivateEndpointConnectionData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/vaults/privateEndpointConnections";
+
         /// <summary> Initializes a new instance of the <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> class for mocking. </summary>
         protected MgmtMockAndSamplePrivateEndpointConnectionResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtMockAndSample
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/vaults/privateEndpointConnections";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

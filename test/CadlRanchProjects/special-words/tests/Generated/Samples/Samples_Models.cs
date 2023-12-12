@@ -19,7 +19,7 @@ namespace SpecialWords.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAnd_ShortVersion()
+        public void Example_Models_WithAnd_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAnd_ShortVersion_Async()
+        public async Task Example_Models_WithAnd_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -49,7 +49,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAnd_ShortVersion_Convenience()
+        public void Example_Models_WithAnd_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -59,7 +59,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAnd_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithAnd_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -69,7 +69,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAnd_AllParameters()
+        public void Example_Models_WithAnd_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -84,7 +84,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAnd_AllParameters_Async()
+        public async Task Example_Models_WithAnd_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -99,7 +99,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAnd_AllParameters_Convenience()
+        public void Example_Models_WithAnd_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -109,7 +109,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAnd_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithAnd_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -119,7 +119,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAs_ShortVersion()
+        public void Example_Models_WithAs_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -134,7 +134,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAs_ShortVersion_Async()
+        public async Task Example_Models_WithAs_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -149,7 +149,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAs_ShortVersion_Convenience()
+        public void Example_Models_WithAs_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -159,7 +159,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAs_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithAs_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -169,7 +169,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAs_AllParameters()
+        public void Example_Models_WithAs_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -184,7 +184,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAs_AllParameters_Async()
+        public async Task Example_Models_WithAs_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -199,7 +199,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAs_AllParameters_Convenience()
+        public void Example_Models_WithAs_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -209,7 +209,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAs_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithAs_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -219,7 +219,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAssert_ShortVersion()
+        public void Example_Models_WithAssert_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -234,7 +234,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAssert_ShortVersion_Async()
+        public async Task Example_Models_WithAssert_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -249,7 +249,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAssert_ShortVersion_Convenience()
+        public void Example_Models_WithAssert_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -259,7 +259,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAssert_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithAssert_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -269,7 +269,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAssert_AllParameters()
+        public void Example_Models_WithAssert_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -284,7 +284,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAssert_AllParameters_Async()
+        public async Task Example_Models_WithAssert_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -299,7 +299,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAssert_AllParameters_Convenience()
+        public void Example_Models_WithAssert_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -309,7 +309,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAssert_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithAssert_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -319,7 +319,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAsync_ShortVersion()
+        public void Example_Models_WithAsync_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -334,7 +334,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAsync_ShortVersion_Async()
+        public async Task Example_Models_WithAsync_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -349,7 +349,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAsync_ShortVersion_Convenience()
+        public void Example_Models_WithAsync_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -359,7 +359,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAsync_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithAsync_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -369,7 +369,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAsync_AllParameters()
+        public void Example_Models_WithAsync_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -384,7 +384,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAsync_AllParameters_Async()
+        public async Task Example_Models_WithAsync_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -399,7 +399,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAsync_AllParameters_Convenience()
+        public void Example_Models_WithAsync_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -409,7 +409,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAsync_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithAsync_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -419,7 +419,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAwait_ShortVersion()
+        public void Example_Models_WithAwait_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -434,7 +434,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAwait_ShortVersion_Async()
+        public async Task Example_Models_WithAwait_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -449,7 +449,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAwait_ShortVersion_Convenience()
+        public void Example_Models_WithAwait_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -459,7 +459,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAwait_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithAwait_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -469,7 +469,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAwait_AllParameters()
+        public void Example_Models_WithAwait_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -484,7 +484,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAwait_AllParameters_Async()
+        public async Task Example_Models_WithAwait_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -499,7 +499,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithAwait_AllParameters_Convenience()
+        public void Example_Models_WithAwait_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -509,7 +509,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithAwait_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithAwait_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -519,7 +519,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithBreak_ShortVersion()
+        public void Example_Models_WithBreak_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -534,7 +534,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithBreak_ShortVersion_Async()
+        public async Task Example_Models_WithBreak_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -549,7 +549,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithBreak_ShortVersion_Convenience()
+        public void Example_Models_WithBreak_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -559,7 +559,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithBreak_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithBreak_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -569,7 +569,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithBreak_AllParameters()
+        public void Example_Models_WithBreak_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -584,7 +584,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithBreak_AllParameters_Async()
+        public async Task Example_Models_WithBreak_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -599,7 +599,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithBreak_AllParameters_Convenience()
+        public void Example_Models_WithBreak_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -609,7 +609,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithBreak_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithBreak_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -619,7 +619,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithClass_ShortVersion()
+        public void Example_Models_WithClass_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -634,7 +634,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithClass_ShortVersion_Async()
+        public async Task Example_Models_WithClass_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -649,7 +649,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithClass_ShortVersion_Convenience()
+        public void Example_Models_WithClass_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -659,7 +659,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithClass_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithClass_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -669,7 +669,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithClass_AllParameters()
+        public void Example_Models_WithClass_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -684,7 +684,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithClass_AllParameters_Async()
+        public async Task Example_Models_WithClass_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -699,7 +699,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithClass_AllParameters_Convenience()
+        public void Example_Models_WithClass_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -709,7 +709,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithClass_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithClass_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -719,7 +719,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithConstructor_ShortVersion()
+        public void Example_Models_WithConstructor_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -734,7 +734,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithConstructor_ShortVersion_Async()
+        public async Task Example_Models_WithConstructor_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -749,7 +749,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithConstructor_ShortVersion_Convenience()
+        public void Example_Models_WithConstructor_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -759,7 +759,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithConstructor_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithConstructor_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -769,7 +769,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithConstructor_AllParameters()
+        public void Example_Models_WithConstructor_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -784,7 +784,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithConstructor_AllParameters_Async()
+        public async Task Example_Models_WithConstructor_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -799,7 +799,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithConstructor_AllParameters_Convenience()
+        public void Example_Models_WithConstructor_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -809,7 +809,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithConstructor_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithConstructor_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -819,7 +819,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithContinue_ShortVersion()
+        public void Example_Models_WithContinue_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -834,7 +834,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithContinue_ShortVersion_Async()
+        public async Task Example_Models_WithContinue_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -849,7 +849,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithContinue_ShortVersion_Convenience()
+        public void Example_Models_WithContinue_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -859,7 +859,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithContinue_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithContinue_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -869,7 +869,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithContinue_AllParameters()
+        public void Example_Models_WithContinue_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -884,7 +884,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithContinue_AllParameters_Async()
+        public async Task Example_Models_WithContinue_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -899,7 +899,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithContinue_AllParameters_Convenience()
+        public void Example_Models_WithContinue_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -909,7 +909,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithContinue_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithContinue_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -919,7 +919,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDef_ShortVersion()
+        public void Example_Models_WithDef_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -934,7 +934,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDef_ShortVersion_Async()
+        public async Task Example_Models_WithDef_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -949,7 +949,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDef_ShortVersion_Convenience()
+        public void Example_Models_WithDef_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -959,7 +959,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDef_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithDef_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -969,7 +969,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDef_AllParameters()
+        public void Example_Models_WithDef_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -984,7 +984,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDef_AllParameters_Async()
+        public async Task Example_Models_WithDef_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -999,7 +999,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDef_AllParameters_Convenience()
+        public void Example_Models_WithDef_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1009,7 +1009,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDef_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithDef_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1019,7 +1019,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDel_ShortVersion()
+        public void Example_Models_WithDel_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1034,7 +1034,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDel_ShortVersion_Async()
+        public async Task Example_Models_WithDel_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1049,7 +1049,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDel_ShortVersion_Convenience()
+        public void Example_Models_WithDel_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1059,7 +1059,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDel_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithDel_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1069,7 +1069,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDel_AllParameters()
+        public void Example_Models_WithDel_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1084,7 +1084,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDel_AllParameters_Async()
+        public async Task Example_Models_WithDel_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1099,7 +1099,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithDel_AllParameters_Convenience()
+        public void Example_Models_WithDel_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1109,7 +1109,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithDel_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithDel_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1119,7 +1119,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElif_ShortVersion()
+        public void Example_Models_WithElif_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1134,7 +1134,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElif_ShortVersion_Async()
+        public async Task Example_Models_WithElif_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1149,7 +1149,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElif_ShortVersion_Convenience()
+        public void Example_Models_WithElif_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1159,7 +1159,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElif_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithElif_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1169,7 +1169,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElif_AllParameters()
+        public void Example_Models_WithElif_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1184,7 +1184,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElif_AllParameters_Async()
+        public async Task Example_Models_WithElif_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1199,7 +1199,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElif_AllParameters_Convenience()
+        public void Example_Models_WithElif_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1209,7 +1209,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElif_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithElif_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1219,7 +1219,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElse_ShortVersion()
+        public void Example_Models_WithElse_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1234,7 +1234,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElse_ShortVersion_Async()
+        public async Task Example_Models_WithElse_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1249,7 +1249,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElse_ShortVersion_Convenience()
+        public void Example_Models_WithElse_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1259,7 +1259,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElse_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithElse_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1269,7 +1269,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElse_AllParameters()
+        public void Example_Models_WithElse_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1284,7 +1284,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElse_AllParameters_Async()
+        public async Task Example_Models_WithElse_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1299,7 +1299,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithElse_AllParameters_Convenience()
+        public void Example_Models_WithElse_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1309,7 +1309,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithElse_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithElse_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1319,7 +1319,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExcept_ShortVersion()
+        public void Example_Models_WithExcept_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1334,7 +1334,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExcept_ShortVersion_Async()
+        public async Task Example_Models_WithExcept_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1349,7 +1349,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExcept_ShortVersion_Convenience()
+        public void Example_Models_WithExcept_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1359,7 +1359,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExcept_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithExcept_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1369,7 +1369,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExcept_AllParameters()
+        public void Example_Models_WithExcept_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1384,7 +1384,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExcept_AllParameters_Async()
+        public async Task Example_Models_WithExcept_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1399,7 +1399,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExcept_AllParameters_Convenience()
+        public void Example_Models_WithExcept_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1409,7 +1409,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExcept_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithExcept_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1419,7 +1419,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExec_ShortVersion()
+        public void Example_Models_WithExec_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1434,7 +1434,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExec_ShortVersion_Async()
+        public async Task Example_Models_WithExec_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1449,7 +1449,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExec_ShortVersion_Convenience()
+        public void Example_Models_WithExec_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1459,7 +1459,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExec_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithExec_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1469,7 +1469,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExec_AllParameters()
+        public void Example_Models_WithExec_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1484,7 +1484,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExec_AllParameters_Async()
+        public async Task Example_Models_WithExec_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1499,7 +1499,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithExec_AllParameters_Convenience()
+        public void Example_Models_WithExec_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1509,7 +1509,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithExec_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithExec_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1519,7 +1519,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFinally_ShortVersion()
+        public void Example_Models_WithFinally_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1534,7 +1534,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFinally_ShortVersion_Async()
+        public async Task Example_Models_WithFinally_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1549,7 +1549,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFinally_ShortVersion_Convenience()
+        public void Example_Models_WithFinally_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1559,7 +1559,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFinally_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithFinally_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1569,7 +1569,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFinally_AllParameters()
+        public void Example_Models_WithFinally_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1584,7 +1584,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFinally_AllParameters_Async()
+        public async Task Example_Models_WithFinally_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1599,7 +1599,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFinally_AllParameters_Convenience()
+        public void Example_Models_WithFinally_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1609,7 +1609,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFinally_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithFinally_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1619,7 +1619,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFor_ShortVersion()
+        public void Example_Models_WithFor_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1634,7 +1634,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFor_ShortVersion_Async()
+        public async Task Example_Models_WithFor_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1649,7 +1649,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFor_ShortVersion_Convenience()
+        public void Example_Models_WithFor_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1659,7 +1659,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFor_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithFor_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1669,7 +1669,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFor_AllParameters()
+        public void Example_Models_WithFor_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1684,7 +1684,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFor_AllParameters_Async()
+        public async Task Example_Models_WithFor_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1699,7 +1699,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFor_AllParameters_Convenience()
+        public void Example_Models_WithFor_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1709,7 +1709,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFor_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithFor_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1719,7 +1719,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFrom_ShortVersion()
+        public void Example_Models_WithFrom_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1734,7 +1734,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFrom_ShortVersion_Async()
+        public async Task Example_Models_WithFrom_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1749,7 +1749,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFrom_ShortVersion_Convenience()
+        public void Example_Models_WithFrom_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1759,7 +1759,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFrom_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithFrom_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1769,7 +1769,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFrom_AllParameters()
+        public void Example_Models_WithFrom_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1784,7 +1784,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFrom_AllParameters_Async()
+        public async Task Example_Models_WithFrom_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1799,7 +1799,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithFrom_AllParameters_Convenience()
+        public void Example_Models_WithFrom_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1809,7 +1809,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithFrom_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithFrom_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1819,7 +1819,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithGlobal_ShortVersion()
+        public void Example_Models_WithGlobal_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1834,7 +1834,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithGlobal_ShortVersion_Async()
+        public async Task Example_Models_WithGlobal_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1849,7 +1849,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithGlobal_ShortVersion_Convenience()
+        public void Example_Models_WithGlobal_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1859,7 +1859,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithGlobal_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithGlobal_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1869,7 +1869,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithGlobal_AllParameters()
+        public void Example_Models_WithGlobal_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1884,7 +1884,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithGlobal_AllParameters_Async()
+        public async Task Example_Models_WithGlobal_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1899,7 +1899,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithGlobal_AllParameters_Convenience()
+        public void Example_Models_WithGlobal_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1909,7 +1909,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithGlobal_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithGlobal_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1919,7 +1919,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIf_ShortVersion()
+        public void Example_Models_WithIf_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1934,7 +1934,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIf_ShortVersion_Async()
+        public async Task Example_Models_WithIf_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1949,7 +1949,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIf_ShortVersion_Convenience()
+        public void Example_Models_WithIf_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1959,7 +1959,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIf_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithIf_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1969,7 +1969,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIf_AllParameters()
+        public void Example_Models_WithIf_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1984,7 +1984,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIf_AllParameters_Async()
+        public async Task Example_Models_WithIf_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -1999,7 +1999,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIf_AllParameters_Convenience()
+        public void Example_Models_WithIf_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2009,7 +2009,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIf_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithIf_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2019,7 +2019,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithImport_ShortVersion()
+        public void Example_Models_WithImport_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2034,7 +2034,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithImport_ShortVersion_Async()
+        public async Task Example_Models_WithImport_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2049,7 +2049,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithImport_ShortVersion_Convenience()
+        public void Example_Models_WithImport_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2059,7 +2059,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithImport_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithImport_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2069,7 +2069,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithImport_AllParameters()
+        public void Example_Models_WithImport_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2084,7 +2084,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithImport_AllParameters_Async()
+        public async Task Example_Models_WithImport_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2099,7 +2099,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithImport_AllParameters_Convenience()
+        public void Example_Models_WithImport_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2109,7 +2109,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithImport_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithImport_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2119,7 +2119,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIn_ShortVersion()
+        public void Example_Models_WithIn_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2134,7 +2134,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIn_ShortVersion_Async()
+        public async Task Example_Models_WithIn_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2149,7 +2149,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIn_ShortVersion_Convenience()
+        public void Example_Models_WithIn_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2159,7 +2159,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIn_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithIn_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2169,7 +2169,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIn_AllParameters()
+        public void Example_Models_WithIn_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2184,7 +2184,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIn_AllParameters_Async()
+        public async Task Example_Models_WithIn_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2199,7 +2199,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIn_AllParameters_Convenience()
+        public void Example_Models_WithIn_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2209,7 +2209,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIn_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithIn_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2219,7 +2219,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIs_ShortVersion()
+        public void Example_Models_WithIs_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2234,7 +2234,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIs_ShortVersion_Async()
+        public async Task Example_Models_WithIs_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2249,7 +2249,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIs_ShortVersion_Convenience()
+        public void Example_Models_WithIs_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2259,7 +2259,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIs_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithIs_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2269,7 +2269,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIs_AllParameters()
+        public void Example_Models_WithIs_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2284,7 +2284,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIs_AllParameters_Async()
+        public async Task Example_Models_WithIs_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2299,7 +2299,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithIs_AllParameters_Convenience()
+        public void Example_Models_WithIs_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2309,7 +2309,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithIs_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithIs_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2319,7 +2319,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithLambda_ShortVersion()
+        public void Example_Models_WithLambda_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2334,7 +2334,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithLambda_ShortVersion_Async()
+        public async Task Example_Models_WithLambda_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2349,7 +2349,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithLambda_ShortVersion_Convenience()
+        public void Example_Models_WithLambda_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2359,7 +2359,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithLambda_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithLambda_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2369,7 +2369,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithLambda_AllParameters()
+        public void Example_Models_WithLambda_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2384,7 +2384,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithLambda_AllParameters_Async()
+        public async Task Example_Models_WithLambda_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2399,7 +2399,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithLambda_AllParameters_Convenience()
+        public void Example_Models_WithLambda_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2409,7 +2409,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithLambda_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithLambda_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2419,7 +2419,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithNot_ShortVersion()
+        public void Example_Models_WithNot_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2434,7 +2434,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithNot_ShortVersion_Async()
+        public async Task Example_Models_WithNot_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2449,7 +2449,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithNot_ShortVersion_Convenience()
+        public void Example_Models_WithNot_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2459,7 +2459,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithNot_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithNot_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2469,7 +2469,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithNot_AllParameters()
+        public void Example_Models_WithNot_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2484,7 +2484,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithNot_AllParameters_Async()
+        public async Task Example_Models_WithNot_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2499,7 +2499,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithNot_AllParameters_Convenience()
+        public void Example_Models_WithNot_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2509,7 +2509,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithNot_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithNot_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2519,7 +2519,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithOr_ShortVersion()
+        public void Example_Models_WithOr_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2534,7 +2534,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithOr_ShortVersion_Async()
+        public async Task Example_Models_WithOr_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2549,7 +2549,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithOr_ShortVersion_Convenience()
+        public void Example_Models_WithOr_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2559,7 +2559,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithOr_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithOr_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2569,7 +2569,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithOr_AllParameters()
+        public void Example_Models_WithOr_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2584,7 +2584,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithOr_AllParameters_Async()
+        public async Task Example_Models_WithOr_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2599,7 +2599,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithOr_AllParameters_Convenience()
+        public void Example_Models_WithOr_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2609,7 +2609,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithOr_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithOr_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2619,7 +2619,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithPass_ShortVersion()
+        public void Example_Models_WithPass_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2634,7 +2634,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithPass_ShortVersion_Async()
+        public async Task Example_Models_WithPass_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2649,7 +2649,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithPass_ShortVersion_Convenience()
+        public void Example_Models_WithPass_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2659,7 +2659,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithPass_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithPass_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2669,7 +2669,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithPass_AllParameters()
+        public void Example_Models_WithPass_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2684,7 +2684,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithPass_AllParameters_Async()
+        public async Task Example_Models_WithPass_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2699,7 +2699,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithPass_AllParameters_Convenience()
+        public void Example_Models_WithPass_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2709,7 +2709,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithPass_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithPass_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2719,7 +2719,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithRaise_ShortVersion()
+        public void Example_Models_WithRaise_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2734,7 +2734,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithRaise_ShortVersion_Async()
+        public async Task Example_Models_WithRaise_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2749,7 +2749,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithRaise_ShortVersion_Convenience()
+        public void Example_Models_WithRaise_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2759,7 +2759,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithRaise_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithRaise_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2769,7 +2769,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithRaise_AllParameters()
+        public void Example_Models_WithRaise_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2784,7 +2784,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithRaise_AllParameters_Async()
+        public async Task Example_Models_WithRaise_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2799,7 +2799,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithRaise_AllParameters_Convenience()
+        public void Example_Models_WithRaise_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2809,7 +2809,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithRaise_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithRaise_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2819,7 +2819,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithReturn_ShortVersion()
+        public void Example_Models_WithReturn_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2834,7 +2834,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithReturn_ShortVersion_Async()
+        public async Task Example_Models_WithReturn_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2849,7 +2849,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithReturn_ShortVersion_Convenience()
+        public void Example_Models_WithReturn_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2859,7 +2859,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithReturn_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithReturn_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2869,7 +2869,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithReturn_AllParameters()
+        public void Example_Models_WithReturn_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2884,7 +2884,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithReturn_AllParameters_Async()
+        public async Task Example_Models_WithReturn_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2899,7 +2899,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithReturn_AllParameters_Convenience()
+        public void Example_Models_WithReturn_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2909,7 +2909,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithReturn_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithReturn_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2919,7 +2919,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithTry_ShortVersion()
+        public void Example_Models_WithTry_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2934,7 +2934,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithTry_ShortVersion_Async()
+        public async Task Example_Models_WithTry_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2949,7 +2949,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithTry_ShortVersion_Convenience()
+        public void Example_Models_WithTry_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2959,7 +2959,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithTry_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithTry_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2969,7 +2969,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithTry_AllParameters()
+        public void Example_Models_WithTry_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2984,7 +2984,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithTry_AllParameters_Async()
+        public async Task Example_Models_WithTry_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -2999,7 +2999,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithTry_AllParameters_Convenience()
+        public void Example_Models_WithTry_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3009,7 +3009,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithTry_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithTry_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3019,7 +3019,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWhile_ShortVersion()
+        public void Example_Models_WithWhile_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3034,7 +3034,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWhile_ShortVersion_Async()
+        public async Task Example_Models_WithWhile_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3049,7 +3049,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWhile_ShortVersion_Convenience()
+        public void Example_Models_WithWhile_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3059,7 +3059,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWhile_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithWhile_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3069,7 +3069,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWhile_AllParameters()
+        public void Example_Models_WithWhile_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3084,7 +3084,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWhile_AllParameters_Async()
+        public async Task Example_Models_WithWhile_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3099,7 +3099,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWhile_AllParameters_Convenience()
+        public void Example_Models_WithWhile_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3109,7 +3109,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWhile_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithWhile_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3119,7 +3119,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWith_ShortVersion()
+        public void Example_Models_WithWith_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3134,7 +3134,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWith_ShortVersion_Async()
+        public async Task Example_Models_WithWith_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3149,7 +3149,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWith_ShortVersion_Convenience()
+        public void Example_Models_WithWith_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3159,7 +3159,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWith_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithWith_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3169,7 +3169,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWith_AllParameters()
+        public void Example_Models_WithWith_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3184,7 +3184,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWith_AllParameters_Async()
+        public async Task Example_Models_WithWith_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3199,7 +3199,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithWith_AllParameters_Convenience()
+        public void Example_Models_WithWith_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3209,7 +3209,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithWith_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithWith_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3219,7 +3219,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithYield_ShortVersion()
+        public void Example_Models_WithYield_ShortVersion()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3234,7 +3234,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithYield_ShortVersion_Async()
+        public async Task Example_Models_WithYield_ShortVersion_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3249,7 +3249,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithYield_ShortVersion_Convenience()
+        public void Example_Models_WithYield_ShortVersion_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3259,7 +3259,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithYield_ShortVersion_Convenience_Async()
+        public async Task Example_Models_WithYield_ShortVersion_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3269,7 +3269,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithYield_AllParameters()
+        public void Example_Models_WithYield_AllParameters()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3284,7 +3284,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithYield_AllParameters_Async()
+        public async Task Example_Models_WithYield_AllParameters_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3299,7 +3299,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_WithYield_AllParameters_Convenience()
+        public void Example_Models_WithYield_AllParameters_Convenience()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 
@@ -3309,7 +3309,7 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_WithYield_AllParameters_Convenience_Async()
+        public async Task Example_Models_WithYield_AllParameters_Convenience_Async()
         {
             Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
 

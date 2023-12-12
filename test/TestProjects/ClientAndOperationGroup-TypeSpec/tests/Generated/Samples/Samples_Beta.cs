@@ -19,7 +19,7 @@ namespace ClientAndOperationGroup.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Two_ShortVersion()
+        public void Example_Beta_Two_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -32,7 +32,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Two_ShortVersion_Async()
+        public async Task Example_Beta_Two_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -45,7 +45,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Two_AllParameters()
+        public void Example_Beta_Two_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -58,7 +58,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Two_AllParameters_Async()
+        public async Task Example_Beta_Two_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -71,7 +71,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Three_ShortVersion()
+        public void Example_SubBeta_Three_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -84,7 +84,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Three_ShortVersion_Async()
+        public async Task Example_SubBeta_Three_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -97,7 +97,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Three_AllParameters()
+        public void Example_SubBeta_Three_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
@@ -110,7 +110,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Three_AllParameters_Async()
+        public async Task Example_SubBeta_Three_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();

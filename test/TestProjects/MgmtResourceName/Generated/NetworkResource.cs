@@ -39,6 +39,9 @@ namespace MgmtResourceName
         private readonly NetworkResourcesRestOperations _networkNetworkResourcesRestClient;
         private readonly NetworkData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/networkResources";
+
         /// <summary> Initializes a new instance of the <see cref="NetworkResource"/> class for mocking. </summary>
         protected NetworkResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtResourceName
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/networkResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

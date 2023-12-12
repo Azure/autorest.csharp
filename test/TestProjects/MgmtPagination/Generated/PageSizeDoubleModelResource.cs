@@ -39,6 +39,9 @@ namespace MgmtPagination
         private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelRestClient;
         private readonly PageSizeDoubleModelData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/pageSizeDoubleModel";
+
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModelResource"/> class for mocking. </summary>
         protected PageSizeDoubleModelResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtPagination
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/pageSizeDoubleModel";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

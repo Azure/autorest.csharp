@@ -302,7 +302,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected bool SkipInitializerConstructor => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.SkipInitCtor;
-        protected bool SkipSerializerConstructor => !IncludeDeserializer;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
@@ -313,7 +312,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // Skip serialization ctor if they are the same
-            if (!SkipSerializerConstructor && InitializationConstructor != SerializationConstructor)
+            if (InitializationConstructor != SerializationConstructor)
             {
                 yield return SerializationConstructor;
             }

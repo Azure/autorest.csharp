@@ -18,7 +18,7 @@ namespace Client.Structure.Service.Default.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_One_ShortVersion()
+        public void Example_Service_One_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -30,7 +30,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_One_ShortVersion_Async()
+        public async Task Example_Service_One_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -42,7 +42,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_One_AllParameters()
+        public void Example_Service_One_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -54,7 +54,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_One_AllParameters_Async()
+        public async Task Example_Service_One_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -66,7 +66,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Two_ShortVersion()
+        public void Example_Service_Two_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -78,7 +78,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Two_ShortVersion_Async()
+        public async Task Example_Service_Two_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -90,7 +90,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Two_AllParameters()
+        public void Example_Service_Two_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -102,7 +102,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Two_AllParameters_Async()
+        public async Task Example_Service_Two_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -114,7 +114,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Three_ShortVersion()
+        public void Example_Foo_Three_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -126,7 +126,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Three_ShortVersion_Async()
+        public async Task Example_Foo_Three_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -138,7 +138,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Three_AllParameters()
+        public void Example_Foo_Three_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -150,7 +150,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Three_AllParameters_Async()
+        public async Task Example_Foo_Three_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -162,7 +162,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Four_ShortVersion()
+        public void Example_Foo_Four_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -174,7 +174,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Four_ShortVersion_Async()
+        public async Task Example_Foo_Four_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -186,7 +186,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Four_AllParameters()
+        public void Example_Foo_Four_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -198,7 +198,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Four_AllParameters_Async()
+        public async Task Example_Foo_Four_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -210,7 +210,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Five_ShortVersion()
+        public void Example_Bar_Five_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -222,7 +222,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Five_ShortVersion_Async()
+        public async Task Example_Bar_Five_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -234,7 +234,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Five_AllParameters()
+        public void Example_Bar_Five_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -246,7 +246,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Five_AllParameters_Async()
+        public async Task Example_Bar_Five_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -258,7 +258,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Six_ShortVersion()
+        public void Example_Bar_Six_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -270,7 +270,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Six_ShortVersion_Async()
+        public async Task Example_Bar_Six_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -282,7 +282,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Six_AllParameters()
+        public void Example_Bar_Six_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");
@@ -294,7 +294,7 @@ namespace Client.Structure.Service.Default.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Six_AllParameters_Async()
+        public async Task Example_Bar_Six_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceClient client = new ServiceClient(endpoint, "default");

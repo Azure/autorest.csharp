@@ -37,6 +37,9 @@ namespace MgmtExtensionResource
         private readonly SubSingletonsRestOperations _subSingletonRestClient;
         private readonly SubSingletonData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Singleton/subSingletons";
+
         /// <summary> Initializes a new instance of the <see cref="SubSingletonResource"/> class for mocking. </summary>
         protected SubSingletonResource()
         {
@@ -63,9 +66,6 @@ namespace MgmtExtensionResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Singleton/subSingletons";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

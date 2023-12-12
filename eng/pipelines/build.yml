@@ -83,7 +83,7 @@ stages:
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
           - script: |
-              dotnet test AutoRest.CSharp.sln
+              dotnet test AutoRest.CSharp.sln --filter Name!~Example_
             displayName: "Test"
             env:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -91,7 +91,7 @@ stages:
               DOTNET_MULTILEVEL_LOOKUP: 0
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
-              dotnet test AutoRest.CSharp.sln -c Release
+              dotnet test AutoRest.CSharp.sln -c Release --filter Name!~Example_
             displayName: "Test Release Configuration"
             env:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1

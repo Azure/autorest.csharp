@@ -2280,6 +2280,234 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> doSomething for entity. </summary>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomethingAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> DoSomethingAsync(string p2, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoSomethingAsync(p2, context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> doSomething for entity. </summary>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomething(string,CancellationToken)']/*" />
+        public virtual Response<Thing> DoSomething(string p2, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoSomething(p2, context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] doSomething for entity
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DoSomethingAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomethingAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> DoSomethingAsync(string p2, RequestContext context)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.DoSomething");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoSomethingRequest(p2, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] doSomething for entity
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DoSomething(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomething(string,RequestContext)']/*" />
+        public virtual Response DoSomething(string p2, RequestContext context)
+        {
+            Argument.AssertNotNullOrEmpty(p2, nameof(p2));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.DoSomething");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoSomethingRequest(p2, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> doSomething for glossary. </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="h1"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomethingAsync(string,string,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> DoSomethingAsync(string id, string h1, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await DoSomethingAsync(id, h1, context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary> doSomething for glossary. </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="h1"> The <see cref="string"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomething(string,string,CancellationToken)']/*" />
+        public virtual Response<Thing> DoSomething(string id, string h1, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = DoSomething(id, h1, context);
+            return Response.FromValue(Thing.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] doSomething for glossary
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DoSomethingAsync(string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="h1"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomethingAsync(string,string,RequestContext)']/*" />
+        public virtual async Task<Response> DoSomethingAsync(string id, string h1, RequestContext context)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.DoSomething");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoSomethingRequest(id, h1, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] doSomething for glossary
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="DoSomething(string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="h1"> The <see cref="string"/> to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="h1"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DoSomething(string,string,RequestContext)']/*" />
+        public virtual Response DoSomething(string id, string h1, RequestContext context)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(h1, nameof(h1));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.DoSomething");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateDoSomethingRequest(id, h1, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2653,6 +2881,37 @@ namespace FirstTestTypeSpec
             uri.AppendPath("/stillConvenient", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateDoSomethingRequest(string p2, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/entity/doSomething/", false);
+            uri.AppendPath(p2, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateDoSomethingRequest(string id, string h1, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/glossary/doSomething/", false);
+            uri.AppendPath(id, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("h1", h1);
             request.Headers.Add("Accept", "application/json");
             return message;
         }

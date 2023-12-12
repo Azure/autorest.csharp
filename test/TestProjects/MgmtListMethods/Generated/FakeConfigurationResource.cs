@@ -39,6 +39,9 @@ namespace MgmtListMethods
         private readonly ConfigurationsRestOperations _fakeConfigurationConfigurationsRestClient;
         private readonly FakeConfigurationData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/configurations";
+
         /// <summary> Initializes a new instance of the <see cref="FakeConfigurationResource"/> class for mocking. </summary>
         protected FakeConfigurationResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/configurations";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -20,6 +20,23 @@ namespace MgmtMockAndSample.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetPatch"/>. </summary>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="identity"> Identity for the virtual machine. </param>
+        /// <param name="encryptionType"> The type of key used to encrypt the data of the disk. </param>
+        /// <param name="activeKey"> Key Vault Key Url to be used for server side encryption of Managed Disks and Snapshots. </param>
+        /// <param name="rotationToLatestKeyVersionEnabled"> Set this flag to true to enable auto-updating of this disk encryption set to the latest key version. </param>
+        /// <param name="federatedClientId"> Multi-tenant application client id to access key vault in a different tenant. Setting the value to 'None' will clear the property. </param>
+        internal DiskEncryptionSetPatch(IDictionary<string, string> tags, ManagedServiceIdentity identity, DiskEncryptionSetType? encryptionType, KeyForDiskEncryptionSet activeKey, bool? rotationToLatestKeyVersionEnabled, string federatedClientId)
+        {
+            Tags = tags;
+            Identity = identity;
+            EncryptionType = encryptionType;
+            ActiveKey = activeKey;
+            RotationToLatestKeyVersionEnabled = rotationToLatestKeyVersionEnabled;
+            FederatedClientId = federatedClientId;
+        }
+
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; }
         /// <summary> Identity for the virtual machine. </summary>

@@ -5,7 +5,8 @@
       <example>
 This sample shows how to call OperationAsync.
 <code><![CDATA[
-ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);
 
 Response response = await client.OperationAsync("2.0");
 
@@ -13,7 +14,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OperationAsync with all parameters.
 <code><![CDATA[
-ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);
 
 Response response = await client.OperationAsync("2.0");
 
@@ -24,7 +26,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Operation.
 <code><![CDATA[
-ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);
 
 Response response = client.Operation("2.0");
 
@@ -32,7 +35,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Operation with all parameters.
 <code><![CDATA[
-ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient(endpoint);
 
 Response response = client.Operation("2.0");
 

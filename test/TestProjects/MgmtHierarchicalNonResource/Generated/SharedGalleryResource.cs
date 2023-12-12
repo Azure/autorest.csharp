@@ -45,6 +45,9 @@ namespace MgmtHierarchicalNonResource
         private readonly SharedGalleryImageVersionsRestOperations _sharedGalleryImageVersionsRestClient;
         private readonly SharedGalleryData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/sharedGalleries";
+
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryResource"/> class for mocking. </summary>
         protected SharedGalleryResource()
         {
@@ -75,9 +78,6 @@ namespace MgmtHierarchicalNonResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/sharedGalleries";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

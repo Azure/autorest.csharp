@@ -40,6 +40,9 @@ namespace MgmtPropertyBag
         private readonly FoosRestOperations _fooRestClient;
         private readonly FooData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/foos";
+
         /// <summary> Initializes a new instance of the <see cref="FooResource"/> class for mocking. </summary>
         protected FooResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtPropertyBag
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/foos";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

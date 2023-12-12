@@ -21,7 +21,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetJob_ShortVersion()
+        public void Example_JobResult_GetJob_ShortVersion()
         {
             LegacyClient client = new LegacyClient();
 
@@ -35,7 +35,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetJob_ShortVersion_Async()
+        public async Task Example_JobResult_GetJob_ShortVersion_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -49,7 +49,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetJob_ShortVersion_Convenience()
+        public void Example_JobResult_GetJob_ShortVersion_Convenience()
         {
             LegacyClient client = new LegacyClient();
 
@@ -58,7 +58,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetJob_ShortVersion_Convenience_Async()
+        public async Task Example_JobResult_GetJob_ShortVersion_Convenience_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -67,7 +67,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetJob_AllParameters()
+        public void Example_JobResult_GetJob_AllParameters()
         {
             LegacyClient client = new LegacyClient();
 
@@ -86,7 +86,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetJob_AllParameters_Async()
+        public async Task Example_JobResult_GetJob_AllParameters_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -105,7 +105,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetJob_AllParameters_Convenience()
+        public void Example_JobResult_GetJob_AllParameters_Convenience()
         {
             LegacyClient client = new LegacyClient();
 
@@ -114,7 +114,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetJob_AllParameters_Convenience_Async()
+        public async Task Example_JobResult_GetJob_AllParameters_Convenience_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -123,7 +123,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateJob_ShortVersion()
+        public void Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion()
         {
             LegacyClient client = new LegacyClient();
 
@@ -142,7 +142,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateJob_ShortVersion_Async()
+        public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -161,7 +161,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateJob_ShortVersion_Convenience()
+        public void Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion_Convenience()
         {
             LegacyClient client = new LegacyClient();
 
@@ -172,7 +172,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateJob_ShortVersion_Convenience_Async()
+        public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion_Convenience_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -183,7 +183,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateJob_AllParameters()
+        public void Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters()
         {
             LegacyClient client = new LegacyClient();
 
@@ -207,7 +207,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateJob_AllParameters_Async()
+        public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters_Async()
         {
             LegacyClient client = new LegacyClient();
 
@@ -231,7 +231,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateJob_AllParameters_Convenience()
+        public void Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters_Convenience()
         {
             LegacyClient client = new LegacyClient();
 
@@ -242,7 +242,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateJob_AllParameters_Convenience_Async()
+        public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters_Convenience_Async()
         {
             LegacyClient client = new LegacyClient();
 

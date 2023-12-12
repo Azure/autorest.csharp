@@ -18,7 +18,7 @@ namespace Parameters.CollectionFormat.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Csv_ShortVersion()
+        public void Example_Header_Csv_ShortVersion()
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -29,7 +29,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Csv_ShortVersion_Async()
+        public async Task Example_Header_Csv_ShortVersion_Async()
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -40,7 +40,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Csv_AllParameters()
+        public void Example_Header_Csv_AllParameters()
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -51,7 +51,7 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Csv_AllParameters_Async()
+        public async Task Example_Header_Csv_AllParameters_Async()
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 

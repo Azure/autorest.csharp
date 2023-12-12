@@ -21,7 +21,7 @@ namespace _Type.Property.Nullable.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_ShortVersion()
+        public void Example_Bytes_GetNonNull_ShortVersion()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_ShortVersion_Async()
+        public async Task Example_Bytes_GetNonNull_ShortVersion_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_ShortVersion_Convenience()
+        public void Example_Bytes_GetNonNull_ShortVersion_Convenience()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -56,7 +56,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_ShortVersion_Convenience_Async()
+        public async Task Example_Bytes_GetNonNull_ShortVersion_Convenience_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -65,7 +65,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters()
+        public void Example_Bytes_GetNonNull_AllParameters()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -78,7 +78,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Async()
+        public async Task Example_Bytes_GetNonNull_AllParameters_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -91,7 +91,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters_Convenience()
+        public void Example_Bytes_GetNonNull_AllParameters_Convenience()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -100,7 +100,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Convenience_Async()
+        public async Task Example_Bytes_GetNonNull_AllParameters_Convenience_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -109,7 +109,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_ShortVersion()
+        public void Example_Bytes_GetNull_ShortVersion()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -122,7 +122,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_ShortVersion_Async()
+        public async Task Example_Bytes_GetNull_ShortVersion_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -135,7 +135,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_ShortVersion_Convenience()
+        public void Example_Bytes_GetNull_ShortVersion_Convenience()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_ShortVersion_Convenience_Async()
+        public async Task Example_Bytes_GetNull_ShortVersion_Convenience_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -153,7 +153,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters()
+        public void Example_Bytes_GetNull_AllParameters()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -166,7 +166,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Async()
+        public async Task Example_Bytes_GetNull_AllParameters_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -179,7 +179,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters_Convenience()
+        public void Example_Bytes_GetNull_AllParameters_Convenience()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -188,7 +188,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Convenience_Async()
+        public async Task Example_Bytes_GetNull_AllParameters_Convenience_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -197,7 +197,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_ShortVersion()
+        public void Example_Bytes_PatchNonNull_ShortVersion()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -213,7 +213,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_ShortVersion_Async()
+        public async Task Example_Bytes_PatchNonNull_ShortVersion_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -229,7 +229,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_AllParameters()
+        public void Example_Bytes_PatchNonNull_AllParameters()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -245,7 +245,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_AllParameters_Async()
+        public async Task Example_Bytes_PatchNonNull_AllParameters_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -261,7 +261,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_ShortVersion()
+        public void Example_Bytes_PatchNull_ShortVersion()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -277,7 +277,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_ShortVersion_Async()
+        public async Task Example_Bytes_PatchNull_ShortVersion_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -293,7 +293,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_AllParameters()
+        public void Example_Bytes_PatchNull_AllParameters()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 
@@ -309,7 +309,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_AllParameters_Async()
+        public async Task Example_Bytes_PatchNull_AllParameters_Async()
         {
             Bytes client = new NullableClient().GetBytesClient(apiVersion: "1.0.0");
 

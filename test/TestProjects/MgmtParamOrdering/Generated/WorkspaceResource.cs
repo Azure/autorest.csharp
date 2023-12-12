@@ -41,6 +41,9 @@ namespace MgmtParamOrdering
         private readonly WorkspacesRestOperations _workspaceRestClient;
         private readonly WorkspaceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MachineLearningServices/workspaces";
+
         /// <summary> Initializes a new instance of the <see cref="WorkspaceResource"/> class for mocking. </summary>
         protected WorkspaceResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtParamOrdering
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MachineLearningServices/workspaces";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -40,6 +40,9 @@ namespace MgmtSafeFlatten
         private readonly CommonRestOperations _typeTwoCommonRestClient;
         private readonly TypeTwoData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.TypeTwo/typeTwos";
+
         /// <summary> Initializes a new instance of the <see cref="TypeTwoResource"/> class for mocking. </summary>
         protected TypeTwoResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtSafeFlatten
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.TypeTwo/typeTwos";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -39,6 +39,9 @@ namespace MgmtSupersetFlattenInheritance
         private readonly ResourceModel1SRestOperations _resourceModel1RestClient;
         private readonly ResourceModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/resourceModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Resource"/> class for mocking. </summary>
         protected ResourceModel1Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtSupersetFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/resourceModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

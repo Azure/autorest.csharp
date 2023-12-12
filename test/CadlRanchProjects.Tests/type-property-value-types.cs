@@ -299,5 +299,31 @@ namespace CadlRanchProjects.Tests
             Response response = await new ValueTypesClient(host, null).GetUnknownArrayClient().PutAsync(new UnknownArrayProperty(new BinaryData(input)).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetDecimalClient().GetDecimalAsync();
+            Assert.AreEqual(0.33333m, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetDecimalClient().PutAsync(new DecimalProperty(0.33333m));
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal128_get() => Test(async (host) =>
+        {
+            var response = await new ValueTypesClient(host, null).GetDecimal128Client().GetDecimal128Async();
+            Assert.AreEqual(0.33333m, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_ValueTypes_Decimal128_put() => Test(async (host) =>
+        {
+            Response response = await new ValueTypesClient(host, null).GetDecimal128Client().PutAsync(new Decimal128Property(0.33333m));
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }

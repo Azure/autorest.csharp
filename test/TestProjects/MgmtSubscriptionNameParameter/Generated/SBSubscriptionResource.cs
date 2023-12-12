@@ -39,6 +39,9 @@ namespace MgmtSubscriptionNameParameter
         private readonly SubscriptionsRestOperations _sbSubscriptionSubscriptionsRestClient;
         private readonly SBSubscriptionData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.ServiceBus/subscriptions";
+
         /// <summary> Initializes a new instance of the <see cref="SBSubscriptionResource"/> class for mocking. </summary>
         protected SBSubscriptionResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtSubscriptionNameParameter
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.ServiceBus/subscriptions";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

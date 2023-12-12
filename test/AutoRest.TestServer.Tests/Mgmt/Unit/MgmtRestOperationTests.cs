@@ -71,7 +71,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 deserializeNullCollectionAsNullValue: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
-                useOverloadsBetweenProtocolAndConvenience: true,
                 keepNonOverloadableProtocolSignature: false,
                 useCoreDataFactoryReplacements: true,
                 projectFolder: "/..",

@@ -20,7 +20,7 @@ namespace Parameters.BodyOptionality.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Set_ShortVersion()
+        public void Example_OptionalExplicit_Set_ShortVersion()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -32,7 +32,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Set_ShortVersion_Async()
+        public async Task Example_OptionalExplicit_Set_ShortVersion_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -44,7 +44,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Set_ShortVersion_Convenience()
+        public void Example_OptionalExplicit_Set_ShortVersion_Convenience()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -53,7 +53,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Set_ShortVersion_Convenience_Async()
+        public async Task Example_OptionalExplicit_Set_ShortVersion_Convenience_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -62,7 +62,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Set_AllParameters()
+        public void Example_OptionalExplicit_Set_AllParameters()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -77,7 +77,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Set_AllParameters_Async()
+        public async Task Example_OptionalExplicit_Set_AllParameters_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -92,7 +92,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Set_AllParameters_Convenience()
+        public void Example_OptionalExplicit_Set_AllParameters_Convenience()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -102,7 +102,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Set_AllParameters_Convenience_Async()
+        public async Task Example_OptionalExplicit_Set_AllParameters_Convenience_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -112,7 +112,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Omit_ShortVersion()
+        public void Example_OptionalExplicit_Omit_ShortVersion()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -124,7 +124,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Omit_ShortVersion_Async()
+        public async Task Example_OptionalExplicit_Omit_ShortVersion_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -136,7 +136,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Omit_ShortVersion_Convenience()
+        public void Example_OptionalExplicit_Omit_ShortVersion_Convenience()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -145,7 +145,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Omit_ShortVersion_Convenience_Async()
+        public async Task Example_OptionalExplicit_Omit_ShortVersion_Convenience_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -154,7 +154,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Omit_AllParameters()
+        public void Example_OptionalExplicit_Omit_AllParameters()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -169,7 +169,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Omit_AllParameters_Async()
+        public async Task Example_OptionalExplicit_Omit_AllParameters_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -184,7 +184,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Omit_AllParameters_Convenience()
+        public void Example_OptionalExplicit_Omit_AllParameters_Convenience()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 
@@ -194,7 +194,7 @@ namespace Parameters.BodyOptionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Omit_AllParameters_Convenience_Async()
+        public async Task Example_OptionalExplicit_Omit_AllParameters_Convenience_Async()
         {
             OptionalExplicit client = new BodyOptionalityClient().GetOptionalExplicitClient();
 

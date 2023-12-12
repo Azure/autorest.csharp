@@ -40,11 +40,10 @@ namespace Microsoft.Extensions.Azure
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="globalStringPath"> A string value 'globalItemStringPath' that appears in the path. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="globalStringQuery"> should contain value null. </param>
-        public static IAzureClientBuilder<PathItemsClient, AutoRestUrlTestServiceClientOptions> AddPathItemsClient<TBuilder>(this TBuilder builder, Uri endpoint, string globalStringPath, AzureKeyCredential credential, string globalStringQuery)
+        public static IAzureClientBuilder<PathItemsClient, AutoRestUrlTestServiceClientOptions> AddPathItemsClient<TBuilder>(this TBuilder builder, Uri endpoint, string globalStringPath, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<PathItemsClient, AutoRestUrlTestServiceClientOptions>((options) => new PathItemsClient(endpoint, globalStringPath, credential, globalStringQuery, options));
+            return builder.RegisterClientFactory<PathItemsClient, AutoRestUrlTestServiceClientOptions>((options) => new PathItemsClient(endpoint, globalStringPath, credential, options));
         }
 
         /// <summary> Registers a <see cref="PathsClient"/> instance. </summary>

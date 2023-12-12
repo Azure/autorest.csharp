@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.Output.Models
             if (!IsSubClient)
             {
                 var requiredParameters = RestClientBuilder.GetRequiredParameters(orderedParameters).ToArray();
-                var optionalParameters = RestClientBuilder.GetOptionalParameters(orderedParameters).Append(CreateOptionsParameter()).ToArray();
+                var optionalParameters = GetOptionalParametersInConstructor(RestClientBuilder.GetOptionalParameters(orderedParameters).Append(CreateOptionsParameter())).ToArray();
 
                 return (
                     BuildPrimaryConstructors(requiredParameters, optionalParameters).ToArray(),
@@ -151,6 +151,17 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return (Array.Empty<ConstructorSignature>(), new[] { CreateMockingConstructor() });
             }
+        }
+
+        private IEnumerable<Parameter> GetOptionalParametersInConstructor(IEnumerable<Parameter> optionalParameters)
+        {
+            return optionalParameters.Where(
+                p => ClientOptions.Type.EqualsIgnoreNullable(p.Type) || p.IsEndpoint); // Endpoint is an exception, even it is optional, still need to be the parameter of constructor
+        }
+
+        public IEnumerable<Parameter> GetOptionalParametersInOptions()
+        {
+            return RestClientBuilder.GetOptionalParameters(Parameters).Where(p => !p.IsEndpoint);
         }
 
         private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)

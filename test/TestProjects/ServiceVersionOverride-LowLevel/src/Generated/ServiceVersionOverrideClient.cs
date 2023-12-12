@@ -27,8 +27,15 @@ namespace ServiceVersionOverride_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
+        /// <summary> Initializes a new instance of ServiceVersionOverrideClient for mocking. </summary>
+        protected ServiceVersionOverrideClient()
+        {
+        }
+
         /// <summary> Initializes a new instance of ServiceVersionOverrideClient. </summary>
-        public ServiceVersionOverrideClient() : this(new Uri(""), new ServiceVersionOverrideClientOptions())
+        /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ServiceVersionOverrideClient(Uri endpoint) : this(endpoint, new ServiceVersionOverrideClientOptions())
         {
         }
 

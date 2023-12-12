@@ -39,6 +39,9 @@ namespace MgmtPagination
         private readonly PageSizeIntegerModelsRestOperations _pageSizeIntegerModelRestClient;
         private readonly PageSizeIntegerModelData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/pageSizeIntegerModel";
+
         /// <summary> Initializes a new instance of the <see cref="PageSizeIntegerModelResource"/> class for mocking. </summary>
         protected PageSizeIntegerModelResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtPagination
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/pageSizeIntegerModel";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

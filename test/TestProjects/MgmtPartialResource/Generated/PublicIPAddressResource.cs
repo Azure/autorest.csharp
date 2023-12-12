@@ -39,6 +39,9 @@ namespace MgmtPartialResource
         private readonly PublicIPAddressesRestOperations _publicIPAddressRestClient;
         private readonly PublicIPAddressData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Network/publicIPAddresses";
+
         /// <summary> Initializes a new instance of the <see cref="PublicIPAddressResource"/> class for mocking. </summary>
         protected PublicIPAddressResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtPartialResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Network/publicIPAddresses";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

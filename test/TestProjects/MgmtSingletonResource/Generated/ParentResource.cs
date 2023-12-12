@@ -40,6 +40,9 @@ namespace MgmtSingletonResource
         private readonly ParentResourcesRestOperations _parentResourceRestClient;
         private readonly ParentResourceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources";
+
         /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class for mocking. </summary>
         protected ParentResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtSingletonResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

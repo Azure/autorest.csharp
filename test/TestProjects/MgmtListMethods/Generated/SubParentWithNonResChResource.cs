@@ -41,6 +41,9 @@ namespace MgmtListMethods
         private readonly SubParentWithNonResChesRestOperations _subParentWithNonResChRestClient;
         private readonly SubParentWithNonResChData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/subParentWithNonResChes";
+
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResChResource"/> class for mocking. </summary>
         protected SubParentWithNonResChResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/subParentWithNonResChes";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

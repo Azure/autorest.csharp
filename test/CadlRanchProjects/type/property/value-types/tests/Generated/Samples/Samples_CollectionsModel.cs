@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsModel_ShortVersion()
+        public void Example_CollectionsModel_GetCollectionsModel_ShortVersion()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsModel_ShortVersion_Async()
+        public async Task Example_CollectionsModel_GetCollectionsModel_ShortVersion_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsModel_ShortVersion_Convenience()
+        public void Example_CollectionsModel_GetCollectionsModel_ShortVersion_Convenience()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsModel_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsModel_GetCollectionsModel_ShortVersion_Convenience_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsModel_AllParameters()
+        public void Example_CollectionsModel_GetCollectionsModel_AllParameters()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsModel_AllParameters_Async()
+        public async Task Example_CollectionsModel_GetCollectionsModel_AllParameters_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsModel_AllParameters_Convenience()
+        public void Example_CollectionsModel_GetCollectionsModel_AllParameters_Convenience()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsModel_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsModel_GetCollectionsModel_AllParameters_Convenience_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_CollectionsModel_Put_ShortVersion()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -126,7 +126,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_CollectionsModel_Put_ShortVersion_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -147,7 +147,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_CollectionsModel_Put_ShortVersion_Convenience()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -160,7 +160,7 @@ new InnerModel("<property>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsModel_Put_ShortVersion_Convenience_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -173,7 +173,7 @@ new InnerModel("<property>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_CollectionsModel_Put_AllParameters()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -194,7 +194,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_CollectionsModel_Put_AllParameters_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -215,7 +215,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_CollectionsModel_Put_AllParameters_Convenience()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
@@ -228,7 +228,7 @@ new InnerModel("<property>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsModel_Put_AllParameters_Convenience_Async()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
