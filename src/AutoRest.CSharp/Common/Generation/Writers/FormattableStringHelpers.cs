@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
                     // TODO: Currently only BinaryData is considered, other types are still in discussion
-                    case { IsFrameworkType: true } when contentType != null && IsContentTypeBinary(contentType) && parameter.RequestLocation == RequestLocation.Body:
+                    case { IsFrameworkType: true } when contentType != null && ToMediaType(contentType) == BodyMediaType.Binary && parameter.RequestLocation == RequestLocation.Body:
                         return $"{parameter.Name:I}";
                     case { IsFrameworkType: true }:
                         return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         // TODO: This is a temporary solution. We will move this part to some common place.
-        private static bool IsContentTypeBinary(string contentType)
+        public static BodyMediaType ToMediaType(string contentType)
         {
             var typeSubs = contentType.Split('/');
             if (typeSubs.Length != 2)
@@ -144,12 +144,23 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var type = typeSubs[0];
             var subType = typeSubs[1];
-            if (type == "audio" || type == "image" || type == "video" || subType == "octet-stream")
+
+            if (subType == "json" && (type == "application" || type == "text"))
             {
-                return true;
+                return BodyMediaType.Json;
             }
 
-            return false;
+            if (type == "audio" || type == "image" || type == "video" || subType == "octet-stream")
+            {
+                return BodyMediaType.Binary;
+            }
+
+            if (type == "text")
+            {
+                return BodyMediaType.Text;
+            }
+
+            throw new NotSupportedException($"Content type {contentType} is not supported.");
         }
 
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)

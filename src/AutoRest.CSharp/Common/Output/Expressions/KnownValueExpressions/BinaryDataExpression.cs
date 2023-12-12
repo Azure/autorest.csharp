@@ -13,6 +13,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public FrameworkTypeExpression ToObjectFromJson(Type responseType)
             => new(responseType, new InvokeInstanceMethodExpression(Untyped, nameof(BinaryData.ToObjectFromJson), Array.Empty<ValueExpression>(), new[] { new CSharpType(responseType) }, false));
 
+        public StringExpression ToText() => new(Invoke(nameof(BinaryData.ToString)));
+
         public static BinaryDataExpression FromStream(StreamExpression stream, bool async)
         {
             var methodName = async ? nameof(BinaryData.FromStreamAsync) : nameof(BinaryData.FromStream);
