@@ -12,7 +12,6 @@ using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
 using Microsoft.Build.Construction;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using NuGet.Configuration;
 using AutoRest.CSharp.Common.Input;
 
@@ -138,7 +137,7 @@ namespace AutoRest.CSharp.Input.Source
             return name != null;
         }
 
-        private async Task<CSharpCompilation?> LoadBaselineContract()
+        private async Task<Compilation?> LoadBaselineContract()
         {
             // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
             if (!Configuration.AzureArm)

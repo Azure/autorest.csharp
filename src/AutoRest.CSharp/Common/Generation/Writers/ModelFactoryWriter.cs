@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.WriteXmlDocumentationSummary(This.Description);
                 using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type:D}"))
                 {
-                    foreach (var method in This.OutputMethods)
+                    foreach (var method in This.Methods)
                     {
                         _writer.WriteMethodDocumentation(method.Signature);
                         _writer.WriteMethod(method);
