@@ -57,6 +57,10 @@ namespace AutoRest.CSharp.Common.Input
                 {
                     continue;
                 }
+                /**
+                 * If the model has base model, `BaseModel` and `Properties` should be the last two items in tspCodeModel.
+                 * and `BaseModel` should be last but one, and `Properties` should be the last one.
+                 */
                 if (reader.GetString() == nameof(InputModelType.BaseModel))
                 {
                     model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
