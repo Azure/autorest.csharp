@@ -8,14 +8,9 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable)
         : InputType(Name, IsNullable)
     {
-        public InputModelType(string name, string? ns, string? accessibility, string? deprecated, string? description, InputModelTypeUsage usage, IReadOnlyList<InputModelProperty> properties, InputModelType? baseModel, IReadOnlyList<InputModelType> derivedModels, string? discriminatorValue, string? discriminatorPropertyName, bool isNullable)
-            : this(name, ns, accessibility, deprecated, description, usage, properties, derivedModels, discriminatorValue, discriminatorPropertyName, isNullable)
-        {
-            BaseModel = baseModel;
-        }
         /// <summary>
         /// Indicates if this model is the Unknown derived version of a model with discriminator
         /// </summary>
@@ -26,7 +21,7 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsPropertyBag { get; init; } = false;
 
         public bool IsAnonymousModel { get; init; } = false;
-        public InputModelType? BaseModel { get; private set; }
+        public InputModelType? BaseModel { get; private set; } = BaseModel;
         /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
          * during descerializing, we need to create the model and add it to the referernce map before load base model, otherwise, the deserialization crash.
          * Then we need to set the BaseModel to the model instance after the base model is loaded. That is BaseModel is settable.
