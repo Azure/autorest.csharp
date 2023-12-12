@@ -28,8 +28,9 @@ namespace AutoRest.CSharp.Common.Input
 
         public InputModelType? BaseModel { get; private set; }
 
-        internal void SetBaseModel(InputModelType? baseModel, [CallerMemberName] string caller = "")
+        internal void SetBaseModel(InputModelType? baseModel,[CallerFilePath] string filepath = "", [CallerMemberName] string caller = "")
         {
+            Debug.Assert(filepath.EndsWith($"{nameof(TypeSpecInputModelTypeConverter)}.cs"));
             Debug.Assert(caller == nameof(TypeSpecInputModelTypeConverter.CreateModelType), $"This method is only allowed to be called in `TypeSpecInputModelTypeConverter.CreateModelType`");
             BaseModel = baseModel;
         }
