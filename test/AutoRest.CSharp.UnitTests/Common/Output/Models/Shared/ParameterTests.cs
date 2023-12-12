@@ -37,11 +37,11 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
+                BaseModel: null,
                 DerivedModels: derivedModels,
                 IsNullable: true);
             InputParameter opParam = new InputParameter(
@@ -87,11 +87,11 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
+                BaseModel: null,
                 DerivedModels: derivedModels,
                 IsNullable: true);
             InputParameter opParam = new InputParameter(
@@ -177,11 +177,11 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
+                BaseModel: null,
                 DerivedModels: derivedModels,
                 IsNullable: true);
             InputParameter inputParam = new InputParameter(
