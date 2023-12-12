@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                     return _methodSignature;
                 else
                 {
-                    var attris = this._operations
+                    var attributes = _operations
                         .Where(op => Configuration.MgmtConfiguration.PrivilegedOperations.ContainsKey(op.OperationId))
                         .Select(op =>
                         {
@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                         IsPagingOperation
                             ? new CSharpType(typeof(Pageable<>), ReturnType)
                             : ReturnType, null, MethodParameters.ToArray(),
-                        attris);
+                        attributes);
                     return _methodSignature;
                 }
             }
