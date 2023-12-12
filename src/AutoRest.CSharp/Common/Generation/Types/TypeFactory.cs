@@ -414,22 +414,19 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
-            if (TryCreateTypeForIArrayTypeSymbol(symbol, out type))
+            type = null;
+            return symbol switch
             {
-                return true;
-            }
+                IArrayTypeSymbol arrayTypeSymbol => TryCreateTypeForIArrayTypeSymbol(arrayTypeSymbol, validator, out type),
+                INamedTypeSymbol namedTypeSymbol => TryCreateTypeForINamedTypeSymbol(namedTypeSymbol, validator, out type),
 
-            // We can only handle IArrayTypeSymbol of framework type and INamedTypeSymbol for now since CSharpType can't represent other types such as IArrayTypeSymbol of user types
-            // Instead of throwing an exception, wihch causes more side effects, we just return false and let the caller handle it.
-            if (symbol is not INamedTypeSymbol namedTypeSymbol)
-            {
-                return false;
-            }
-
-            return TryCreateTypeForINamedTypeSymbol(symbol, validator, out type, namedTypeSymbol);
+                // We can only handle IArrayTypeSymbol of framework type and INamedTypeSymbol for now since CSharpType can't represent other types such as IArrayTypeSymbol of user types
+                // Instead of throwing an exception, wihch causes more side effects, we just return false and let the caller handle it.
+                _ => false
+            };
         }
 
-        private bool TryCreateTypeForINamedTypeSymbol(ITypeSymbol symbol, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType? type, INamedTypeSymbol namedTypeSymbol)
+        private bool TryCreateTypeForINamedTypeSymbol(INamedTypeSymbol namedTypeSymbol, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
             type = null;
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
@@ -459,7 +456,7 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             if (!type.IsValueType &&
-                symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
+                namedTypeSymbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
             {
                 type = type.WithNullable(true);
             }
@@ -467,7 +464,7 @@ namespace AutoRest.CSharp.Generation.Types
             return true;
         }
 
-        private bool TryCreateTypeForIArrayTypeSymbol(ITypeSymbol symbol, [NotNullWhen(true)] out CSharpType? type)
+        private bool TryCreateTypeForIArrayTypeSymbol(IArrayTypeSymbol symbol, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
             type = null;
             if (symbol is not IArrayTypeSymbol arrayTypeSymbol)
@@ -477,14 +474,9 @@ namespace AutoRest.CSharp.Generation.Types
 
             // For IArrayTypeSymbol, we can only handle it when the element type is a framework type.
             var arrayType = TryGetFrameworkType(arrayTypeSymbol);
-            if (arrayType is not null)
+            if (arrayType is not null && validator(arrayType))
             {
-                type = new CSharpType(arrayType, false);
-                if (!type.IsValueType &&
-                    symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
-                {
-                    type = type.WithNullable(true);
-                }
+                type = new CSharpType(arrayType, arrayType.IsValueType && symbol.NullableAnnotation != NullableAnnotation.NotAnnotated);
                 return true;
             }
             return false;
@@ -518,16 +510,16 @@ namespace AutoRest.CSharp.Generation.Types
         {
             StringBuilder builder = new StringBuilder();
 
-            GetFullMetadataName(builder, namedTypeSymbol);
+            BuildFullMetadataName(builder, namedTypeSymbol);
 
             return builder.ToString();
         }
 
-        private void GetFullMetadataName(StringBuilder builder, ISymbol symbol)
+        private void BuildFullMetadataName(StringBuilder builder, ISymbol symbol)
         {
             if (symbol is IArrayTypeSymbol arrayTypeSymbol)
             {
-                GetFullMetadataName(builder, arrayTypeSymbol.ElementType);
+                BuildFullMetadataName(builder, arrayTypeSymbol.ElementType);
                 builder.Append("[]");
                 return;
             }
@@ -535,7 +527,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (symbol.ContainingNamespace != null &&
                 !symbol.ContainingNamespace.IsGlobalNamespace)
             {
-                GetFullMetadataName(builder, symbol.ContainingNamespace);
+                BuildFullMetadataName(builder, symbol.ContainingNamespace);
                 builder.Append(".");
             }
 
