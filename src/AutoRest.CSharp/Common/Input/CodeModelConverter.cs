@@ -229,27 +229,25 @@ namespace AutoRest.CSharp.Common.Input
             var properties = new List<InputModelProperty>();
             var derived = new List<InputModelType>();
             model = new InputModelType(
-                Name: schema.Language.Default.Name,
-                Namespace: schema.Extensions?.Namespace,
-                Accessibility: schema.Extensions?.Accessibility,
-                Deprecated: schema.Deprecated?.Reason,
-                Description: schema.CreateDescription(),
-                Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
+                name: schema.Language.Default.Name,
+                ns: schema.Extensions?.Namespace,
+                accessibility: schema.Extensions?.Accessibility,
+                deprecated: schema.Deprecated?.Reason,
+                description: schema.CreateDescription(),
+                usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
                 {
                     SchemaTypeUsage.Input => InputModelTypeUsage.Input,
                     SchemaTypeUsage.Output => InputModelTypeUsage.Output,
                     SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
                     _ => InputModelTypeUsage.None
                 },
-                Properties: properties,
-                DerivedModels: derived,
-                DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
-                IsNullable: false)
+                properties: properties,
+                baseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent ? GetOrCreateModel(parent, schemaUsages) : null,
+                derivedModels: derived,
+                discriminatorValue: schema.DiscriminatorValue,
+                discriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
+                isNullable: false)
             {
-                BaseModel = schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
-                    ? GetOrCreateModel(parent, schemaUsages)
-                    : null,
             };
 
             _modelsCache[schema] = model;

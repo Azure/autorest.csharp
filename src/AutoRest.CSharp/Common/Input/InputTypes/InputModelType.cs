@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -24,7 +25,14 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsPropertyBag { get; init; } = false;
 
         public bool IsAnonymousModel { get; init; } = false;
-        public InputModelType? BaseModel { get; set; }
+
+        public InputModelType? BaseModel { get; private set; }
+
+        internal void SetBaseModel(InputModelType? baseModel, [CallerMemberName] string caller = "")
+        {
+            Debug.Assert(caller == nameof(TypeSpecInputModelTypeConverter.CreateModelType), $"This method is only allowed to be called in `TypeSpecInputModelTypeConverter.CreateModelType`");
+            BaseModel = baseModel;
+        }
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
