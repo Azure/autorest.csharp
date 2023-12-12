@@ -37,13 +37,14 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 DerivedModels: derivedModels,
-                IsNullable: true);
+                IsNullable: true){
+                    BaseModel = null
+                };
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -87,13 +88,15 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 DerivedModels: derivedModels,
-                IsNullable: true);
+                IsNullable: true)
+            {
+                BaseModel = null
+            };
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -177,13 +180,15 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 DerivedModels: derivedModels,
-                IsNullable: true);
+                IsNullable: true)
+            {
+                BaseModel = null
+            };
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",

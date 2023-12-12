@@ -61,7 +61,12 @@ namespace AutoRest.CSharp.Common.Input
                 {
                     model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
                     reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
-                    if (baseModel != null) model.BaseModel = baseModel;
+                    if (baseModel != null)
+                    {
+                        model.BaseModel = baseModel;
+                        var baseModelDerived = (List<InputModelType>)resolver.ResolveReference($"{baseModel.Name}.{nameof(InputModelType.DerivedModels)}");
+                        baseModelDerived.Add(model);
+                    }
                     continue;
                 }
                 if (reader.GetString() == nameof(InputModelType.Properties))
