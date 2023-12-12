@@ -242,13 +242,15 @@ namespace AutoRest.CSharp.Common.Input
                     _ => InputModelTypeUsage.None
                 },
                 Properties: properties,
-                BaseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
-                    ? GetOrCreateModel(parent, schemaUsages)
-                    : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
-                IsNullable: false);
+                IsNullable: false)
+            {
+                BaseModel = schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
+                    ? GetOrCreateModel(parent, schemaUsages)
+                    : null,
+            };
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;

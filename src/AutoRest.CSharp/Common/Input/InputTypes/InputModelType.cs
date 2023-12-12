@@ -6,9 +6,14 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable)
         : InputType(Name, IsNullable)
     {
+        public InputModelType(string name, string? ns, string? accessibility, string? deprecated, string? description, InputModelTypeUsage usage, IReadOnlyList<InputModelProperty> properties, InputModelType? baseModel, IReadOnlyList<InputModelType> derivedModels, string? discriminatorValue, string? discriminatorPropertyName, bool isNullable)
+            : this(name, ns, accessibility, deprecated, description, usage, properties, derivedModels, discriminatorValue, discriminatorPropertyName, isNullable)
+        {
+            BaseModel = baseModel;
+        }
         /// <summary>
         /// Indicates if this model is the Unknown derived version of a model with discriminator
         /// </summary>
@@ -19,6 +24,7 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsPropertyBag { get; init; } = false;
 
         public bool IsAnonymousModel { get; init; } = false;
+        public InputModelType? BaseModel { get; set; }
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
