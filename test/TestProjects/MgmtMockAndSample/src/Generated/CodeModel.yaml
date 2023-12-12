@@ -11364,7 +11364,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/createVault.json
               responses:
                 '200':
                   body:
@@ -11564,7 +11563,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/createVaultWithNetworkAcls.json
               responses:
                 '200':
                   body:
@@ -11699,7 +11697,6 @@ operationGroups:
                     tenantId: 00000000-0000-0000-0000-000000000000
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/createVaultMissingNameParam.json
               responses:
                 '200':
                   body:
@@ -12080,7 +12077,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/updateVault.json
               responses:
                 '200':
                   body:
@@ -12361,7 +12357,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/deleteVault.json
               responses:
                 '200':
                   headers: &ref_793 {}
@@ -12482,7 +12477,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getVault.json
               responses:
                 '200':
                   body:
@@ -12670,7 +12664,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listKeysOnVault.json
               responses:
                 '200':
                   body:
@@ -12794,7 +12787,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/validateVault.json
               responses:
                 '200':
                   body:
@@ -12917,7 +12909,6 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/disableVault.json
               responses:
                 '200': {}
         language: !Languages 
@@ -13105,7 +13096,6 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/updateAccessPoliciesAdd.json
               responses:
                 '200':
                   body:
@@ -13251,7 +13241,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listVaultByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -13430,7 +13419,6 @@ operationGroups:
                 $top: 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listVaultBySubscription.json
               responses:
                 '200':
                   body:
@@ -13597,7 +13585,6 @@ operationGroups:
                 $top: 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listDeletedVaults.json
               responses:
                 '200':
                   body:
@@ -13733,7 +13720,6 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getDeletedVault.json
               responses:
                 '200':
                   body:
@@ -13868,7 +13854,6 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/purgeDeletedVault.json
               responses:
                 '200':
                   headers: &ref_881 {}
@@ -13996,7 +13981,6 @@ operationGroups:
                 vaultName:
                   name: sample-vault
                   type: Microsoft.KeyVault/vaults
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/checkVaultNameAvailability.json
               responses:
                 '200':
                   body:
@@ -14147,7 +14131,6 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14346,7 +14329,6 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/putPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14524,7 +14506,6 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/deletePrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14654,7 +14635,6 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14811,7 +14791,6 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listPrivateLinkResources.json
               responses:
                 '200':
                   body:
@@ -14962,7 +14941,6 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
                 version: aaaaaaaaaaaaaa
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -14986,7 +14964,6 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
                 version: aaa
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15093,8 +15070,6 @@ operationGroups:
                 location: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15116,8 +15091,6 @@ operationGroups:
                 location: aaaa
                 publisherName: aa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15277,8 +15250,6 @@ operationGroups:
                 location: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15301,8 +15272,6 @@ operationGroups:
                 location: aaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15473,8 +15442,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentSubscription.json
               responses:
                 '200':
                   body:
@@ -15515,7 +15482,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentTenant.json
               responses:
                 '200':
                   body:
@@ -15561,7 +15527,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create.json
               responses:
                 '200':
                   body:
@@ -15745,8 +15710,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabled.json
               responses:
                 '200':
                   body:
@@ -15792,8 +15755,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: >-
-                file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabledInProgress.json
               responses:
                 '200':
                   body:
@@ -15843,7 +15804,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update.json
               responses:
                 '200':
                   body:
@@ -15984,7 +15944,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get_WithAutoKeyRotationError.json
               responses:
                 '200':
                   body:
@@ -16015,7 +15974,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get.json
               responses:
                 '200':
                   body:
@@ -16138,7 +16096,6 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Delete.json
               responses:
                 '200': {}
                 '202': {}
@@ -16231,7 +16188,6 @@ operationGroups:
                 api-version: '2022-03-02'
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -16348,7 +16304,6 @@ operationGroups:
               parameters:
                 api-version: '2022-03-02'
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListBySubscription.json
               responses:
                 '200':
                   body:
@@ -16589,7 +16544,6 @@ operationGroups:
                     Environment: dogfood
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_CreateOrUpdate.json
               responses:
                 '200':
                   body:
@@ -16800,7 +16754,6 @@ operationGroups:
                     Slice: A
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Update.json
               responses:
                 '200':
                   body:
@@ -16978,7 +16931,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Delete.json
               responses:
                 '200': {}
                 '202': {}
@@ -17117,7 +17069,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Get.json
               responses:
                 '200':
                   body:
@@ -17260,7 +17211,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -17409,7 +17359,6 @@ operationGroups:
               parameters:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListBySubscription.json
               responses:
                 '200':
                   body:
@@ -17546,7 +17495,6 @@ operationGroups:
               parameters:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_List.json
               responses:
                 '200':
                   body:
@@ -17695,7 +17643,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_Get.json
               responses:
                 '200':
                   body:
@@ -17822,7 +17769,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_Purge.json
               responses:
                 '202': {}
           x-ms-long-running-operation: true
@@ -17949,7 +17895,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListPrivateEndpointConnectionsByResource.json
               responses:
                 '200':
                   body:
@@ -18112,7 +18057,6 @@ operationGroups:
                 privateEndpointConnectionName: sample-pec
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_getPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -18308,7 +18252,6 @@ operationGroups:
                       status: Approved
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_putPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -18485,7 +18428,6 @@ operationGroups:
                 privateEndpointConnectionName: sample-pec
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_deletePrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -18623,7 +18565,6 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_listPrivateLinkResources.json
               responses:
                 '200':
                   body:
@@ -18774,7 +18715,6 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyDelete.json
               responses:
                 '200': {}
                 '202': {}
@@ -18909,7 +18849,6 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyGet.json
               responses:
                 '200':
                   body:
@@ -19200,7 +19139,6 @@ operationGroups:
                     key1: value1
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyPut.json
               responses:
                 '200':
                   body:
@@ -19403,7 +19341,6 @@ operationGroups:
                     key1: value1
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyPutWithCustomizedEnumValue.json
               responses:
                 '200':
                   body:
@@ -19643,7 +19580,6 @@ operationGroups:
                 api-version: '2021-02-01'
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -19762,7 +19698,6 @@ operationGroups:
               parameters:
                 api-version: '2021-02-01'
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyListBySubscription.json
               responses:
                 '200':
                   body:
@@ -19945,7 +19880,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupDelete.json
               responses:
                 '200': {}
                 '202': {}
@@ -20082,7 +20016,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupGet.json
               responses:
                 '200':
                   body:
@@ -20120,7 +20053,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupGet.json
               responses:
                 '200':
                   body:
@@ -20154,7 +20086,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json
               responses:
                 '200':
                   body:
@@ -20188,7 +20119,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesGet.json
               responses:
                 '200':
                   body:
@@ -20413,7 +20343,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupPut.json
               responses:
                 '200':
                   body:
@@ -20499,7 +20428,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupPut.json
               responses:
                 '200':
                   body:
@@ -20558,7 +20486,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithDefaultsPut.json
               responses:
                 '200':
                   body:
@@ -20636,7 +20563,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json
               responses:
                 '200':
                   body:
@@ -20713,7 +20639,6 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json
               responses:
                 '200':
                   body:
@@ -20883,7 +20808,6 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesList.json
               responses:
                 '200':
                   body:
@@ -20918,7 +20842,6 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupList.json
               responses:
                 '200':
                   body:
@@ -20953,7 +20876,6 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsList.json
               responses:
                 '200':
                   body:
@@ -21079,7 +21001,6 @@ operationGroups:
             Lists available Rest API operations.:
               parameters:
                 api-version: '2021-10-01'
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listOperations.json
               responses:
                 '200':
                   body:
@@ -21479,7 +21400,6 @@ operationGroups:
                 resourceProviderNamespace: resourceProviderNamespace
                 resourceType: resourceType
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentsForResource.json
               responses:
                 '200':
                   body:
@@ -21598,7 +21518,6 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 resourceGroupName: rgname
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentsForResourceGroup.json
               responses:
                 '200':
                   body:
@@ -21726,7 +21645,6 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 roleAssignmentName: roleAssignmentName
                 scope: scope
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeleteRoleAssignmentByName.json
               responses:
                 '200':
                   body:
@@ -21879,7 +21797,6 @@ operationGroups:
                     roleDefinitionId: /subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772
                 roleAssignmentName: roleAssignmentName
                 scope: scope
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/PutRoleAssignment.json
               responses:
                 '201':
                   body:
@@ -21993,7 +21910,6 @@ operationGroups:
                 roleAssignmentName: roleAssignmentName
                 scope: scope
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentByName.json
               responses:
                 '200':
                   body:
@@ -22092,7 +22008,6 @@ operationGroups:
               parameters:
                 api-version: 2017-10-01-preview
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetAllRoleAssignments.json
               responses:
                 '200':
                   body:
@@ -22178,7 +22093,6 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 roleAssignmentName: roleAssignmentId
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ValidateRoleAssignment.json
               responses:
                 '200': {}
         language: !Languages 
@@ -22282,7 +22196,6 @@ operationGroups:
               parameters:
                 api-version: 2017-10-01-preview
                 scope: scope
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentByScope.json
               responses:
                 '200':
                   body:
@@ -22427,7 +22340,6 @@ operationGroups:
               parameters:
                 api-version: '2015-04-01'
                 subscriptionId: 089bd33f-d4ec-47fe-8ba5-0753aa5c5b33
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetTenantActivityLogsNoParams.json
               responses:
                 '200':
                   body:
@@ -22579,7 +22491,6 @@ operationGroups:
                         location: West US
                         vmSize: Large
                     string: string
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/resources/CalculateTemplateHash.json
               responses:
                 '200':
                   body:
@@ -22769,7 +22680,6 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/createOrUpdateGuestConfigurationAssignment.json
               responses:
                 '200':
                   body:
@@ -22939,7 +22849,6 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/getGuestConfigurationAssignment.json
               responses:
                 '200':
                   body:
@@ -23060,7 +22969,6 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/deleteGuestConfigurationAssignment.json
               responses:
                 '200': {}
         language: !Languages 
@@ -23164,7 +23072,6 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/listGuestConfigurationAssignments.json
               responses:
                 '200':
                   body:
@@ -23427,7 +23334,7 @@ testModel:
                 parameter: *ref_483
             operation: *ref_762
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/createVault.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -24101,7 +24008,7 @@ testModel:
                 parameter: *ref_483
             operation: *ref_762
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/createVaultWithNetworkAcls.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -24562,7 +24469,7 @@ testModel:
                 parameter: *ref_483
             operation: *ref_762
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/createVaultMissingNameParam.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -25263,7 +25170,7 @@ testModel:
                 parameter: *ref_489
             operation: *ref_788
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/updateVault.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -25791,7 +25698,7 @@ testModel:
                 parameter: *ref_791
             operation: *ref_795
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/deleteVault.json
+            originalFile: ''
             responses:
               '200':
                 headers: *ref_793
@@ -25826,7 +25733,7 @@ testModel:
                 parameter: *ref_798
             operation: *ref_801
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/getVault.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -26066,7 +25973,7 @@ testModel:
                 parameter: *ref_804
             operation: *ref_810
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/listKeysOnVault.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -26129,7 +26036,7 @@ testModel:
                 parameter: *ref_813
             operation: *ref_821
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/validateVault.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -26204,7 +26111,7 @@ testModel:
                 parameter: *ref_824
             operation: *ref_826
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/disableVault.json
+            originalFile: ''
             responses:
               '200': {}
         operation: *ref_826
@@ -26290,7 +26197,7 @@ testModel:
                 parameter: *ref_507
             operation: *ref_839
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/updateAccessPoliciesAdd.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -26435,7 +26342,7 @@ testModel:
                 parameter: *ref_842
             operation: *ref_848
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/listVaultByResourceGroup.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -26681,7 +26588,7 @@ testModel:
                 parameter: *ref_850
             operation: *ref_853
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/listVaultBySubscription.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -26922,7 +26829,7 @@ testModel:
                 parameter: *ref_854
             operation: *ref_869
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/listDeletedVaults.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27012,7 +26919,7 @@ testModel:
                 parameter: *ref_872
             operation: *ref_876
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/getDeletedVault.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27091,7 +26998,7 @@ testModel:
                 parameter: *ref_879
             operation: *ref_883
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/purgeDeletedVault.json
+            originalFile: ''
             responses:
               '200':
                 headers: *ref_881
@@ -27130,7 +27037,7 @@ testModel:
                 parameter: *ref_523
             operation: *ref_891
             operationGroup: *ref_763
-            originalFile: specification/mockSwagger/examples/checkVaultNameAvailability.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27176,7 +27083,7 @@ testModel:
                 parameter: *ref_895
             operation: *ref_910
             operationGroup: *ref_911
-            originalFile: specification/mockSwagger/examples/getPrivateEndpointConnection.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27293,7 +27200,7 @@ testModel:
                 parameter: *ref_529
             operation: *ref_919
             operationGroup: *ref_911
-            originalFile: specification/mockSwagger/examples/putPrivateEndpointConnection.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27384,7 +27291,7 @@ testModel:
                 parameter: *ref_923
             operation: *ref_927
             operationGroup: *ref_911
-            originalFile: specification/mockSwagger/examples/deletePrivateEndpointConnection.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27441,7 +27348,7 @@ testModel:
                 parameter: *ref_930
             operation: *ref_935
             operationGroup: *ref_911
-            originalFile: specification/mockSwagger/examples/listPrivateEndpointConnection.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27590,7 +27497,7 @@ testModel:
                 parameter: *ref_938
             operation: *ref_948
             operationGroup: *ref_949
-            originalFile: specification/mockSwagger/examples/listPrivateLinkResources.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27675,7 +27582,7 @@ testModel:
                 parameter: *ref_954
             operation: *ref_969
             operationGroup: *ref_970
-            originalFile: specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MaximumSet_Gen.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27766,7 +27673,7 @@ testModel:
                 parameter: *ref_954
             operation: *ref_969
             operationGroup: *ref_970
-            originalFile: specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MinimumSet_Gen.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27811,7 +27718,7 @@ testModel:
                 parameter: *ref_973
             operation: *ref_976
             operationGroup: *ref_970
-            originalFile: specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27894,7 +27801,7 @@ testModel:
                 parameter: *ref_973
             operation: *ref_976
             operationGroup: *ref_970
-            originalFile: specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -27961,7 +27868,7 @@ testModel:
                 parameter: *ref_983
             operation: *ref_986
             operationGroup: *ref_970
-            originalFile: specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -28049,7 +27956,7 @@ testModel:
                 parameter: *ref_983
             operation: *ref_986
             operationGroup: *ref_970
-            originalFile: specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -28135,7 +28042,7 @@ testModel:
                 parameter: *ref_560
             operation: *ref_1004
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentSubscription.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -28295,7 +28202,7 @@ testModel:
                 parameter: *ref_560
             operation: *ref_1004
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentTenant.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -28477,7 +28384,7 @@ testModel:
                 parameter: *ref_560
             operation: *ref_1004
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -28647,7 +28554,7 @@ testModel:
                 parameter: *ref_565
             operation: *ref_1032
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabled.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -28822,7 +28729,7 @@ testModel:
                 parameter: *ref_565
             operation: *ref_1032
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabledInProgress.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -29014,7 +28921,7 @@ testModel:
                 parameter: *ref_565
             operation: *ref_1032
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -29175,7 +29082,7 @@ testModel:
                 parameter: *ref_1038
             operation: *ref_1041
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get_WithAutoKeyRotationError.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -29282,7 +29189,7 @@ testModel:
                 parameter: *ref_1038
             operation: *ref_1041
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -29388,7 +29295,7 @@ testModel:
                 parameter: *ref_1044
             operation: *ref_1046
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Delete.json
+            originalFile: ''
             responses:
               '200': {}
               '202': {}
@@ -29417,7 +29324,7 @@ testModel:
                 parameter: *ref_1048
             operation: *ref_1053
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListByResourceGroup.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -29596,7 +29503,7 @@ testModel:
                 parameter: *ref_1054
             operation: *ref_1057
             operationGroup: *ref_1005
-            originalFile: specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListBySubscription.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -29873,7 +29780,7 @@ testModel:
                 parameter: *ref_575
             operation: *ref_1089
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/ManagedHsm_CreateOrUpdate.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -30091,7 +29998,7 @@ testModel:
                 parameter: *ref_580
             operation: *ref_1098
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/ManagedHsm_Update.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -30296,7 +30203,7 @@ testModel:
                 parameter: *ref_1101
             operation: *ref_1103
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/ManagedHsm_Delete.json
+            originalFile: ''
             responses:
               '200': {}
               '202': {}
@@ -30330,7 +30237,7 @@ testModel:
                 parameter: *ref_1106
             operation: *ref_1110
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/ManagedHsm_Get.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -30443,7 +30350,7 @@ testModel:
                 parameter: *ref_1112
             operation: *ref_1117
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/ManagedHsm_ListByResourceGroup.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -30640,7 +30547,7 @@ testModel:
                 parameter: *ref_1118
             operation: *ref_1121
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/ManagedHsm_ListBySubscription.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -30837,7 +30744,7 @@ testModel:
                 parameter: *ref_1122
             operation: *ref_1137
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/DeletedManagedHsm_List.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -30982,7 +30889,7 @@ testModel:
                 parameter: *ref_1140
             operation: *ref_1143
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/DeletedManagedHsm_Get.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -31066,7 +30973,7 @@ testModel:
                 parameter: *ref_1146
             operation: *ref_1148
             operationGroup: *ref_1090
-            originalFile: specification/mockSwagger/examples/DeletedManagedHsm_Purge.json
+            originalFile: ''
             responses:
               '202': {}
         operation: *ref_1148
@@ -31098,7 +31005,7 @@ testModel:
                 parameter: *ref_598
             operation: *ref_1167
             operationGroup: *ref_1168
-            originalFile: specification/mockSwagger/examples/ManagedHsm_ListPrivateEndpointConnectionsByResource.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -31252,7 +31159,7 @@ testModel:
                 parameter: *ref_1172
             operation: *ref_1175
             operationGroup: *ref_1168
-            originalFile: specification/mockSwagger/examples/ManagedHsm_getPrivateEndpointConnection.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -31363,7 +31270,7 @@ testModel:
                 parameter: *ref_603
             operation: *ref_1183
             operationGroup: *ref_1168
-            originalFile: specification/mockSwagger/examples/ManagedHsm_putPrivateEndpointConnection.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -31450,7 +31357,7 @@ testModel:
                 parameter: *ref_1187
             operation: *ref_1191
             operationGroup: *ref_1168
-            originalFile: specification/mockSwagger/examples/ManagedHsm_deletePrivateEndpointConnection.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -31507,7 +31414,7 @@ testModel:
                 parameter: *ref_1194
             operation: *ref_1204
             operationGroup: *ref_1205
-            originalFile: specification/mockSwagger/examples/ManagedHsm_listPrivateLinkResources.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -31582,7 +31489,7 @@ testModel:
                 parameter: *ref_1208
             operation: *ref_1210
             operationGroup: *ref_1211
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyDelete.json
+            originalFile: ''
             responses:
               '200': {}
               '202': {}
@@ -31616,7 +31523,7 @@ testModel:
                 parameter: *ref_1214
             operation: *ref_1281
             operationGroup: *ref_1211
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyGet.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -32198,7 +32105,7 @@ testModel:
                 parameter: *ref_623
             operation: *ref_1291
             operationGroup: *ref_1211
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyPut.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -33055,7 +32962,7 @@ testModel:
                 parameter: *ref_623
             operation: *ref_1291
             operationGroup: *ref_1211
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyPutWithCustomizedEnumValue.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -33652,7 +33559,7 @@ testModel:
                 parameter: *ref_1293
             operation: *ref_1297
             operationGroup: *ref_1211
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyListByResourceGroup.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -33777,7 +33684,7 @@ testModel:
                 parameter: *ref_1298
             operation: *ref_1301
             operationGroup: *ref_1211
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyListBySubscription.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -33917,7 +33824,7 @@ testModel:
                 parameter: *ref_1305
             operation: *ref_1307
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupDelete.json
+            originalFile: ''
             responses:
               '200': {}
               '202': {}
@@ -33956,7 +33863,7 @@ testModel:
                 parameter: *ref_1312
             operation: *ref_1338
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupGet.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -34098,7 +34005,7 @@ testModel:
                 parameter: *ref_1312
             operation: *ref_1338
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupGet.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -34226,7 +34133,7 @@ testModel:
                 parameter: *ref_1312
             operation: *ref_1338
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -34354,7 +34261,7 @@ testModel:
                 parameter: *ref_1312
             operation: *ref_1338
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesGet.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -34588,7 +34495,7 @@ testModel:
                 parameter: *ref_635
             operation: *ref_1362
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupPut.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -34914,7 +34821,7 @@ testModel:
                 parameter: *ref_635
             operation: *ref_1362
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupPut.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -35138,7 +35045,7 @@ testModel:
                 parameter: *ref_1357
             operation: *ref_1362
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithDefaultsPut.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -35447,7 +35354,7 @@ testModel:
                 parameter: *ref_635
             operation: *ref_1362
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -35747,7 +35654,7 @@ testModel:
                 parameter: *ref_635
             operation: *ref_1362
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -35980,7 +35887,7 @@ testModel:
                 parameter: *ref_1365
             operation: *ref_1369
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesList.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -36119,7 +36026,7 @@ testModel:
                 parameter: *ref_1365
             operation: *ref_1369
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupList.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -36253,7 +36160,7 @@ testModel:
                 parameter: *ref_1365
             operation: *ref_1369
             operationGroup: *ref_1308
-            originalFile: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsList.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -36376,7 +36283,7 @@ testModel:
                 parameter: *ref_1370
             operation: *ref_1403
             operationGroup: *ref_1404
-            originalFile: specification/mockSwagger/examples/listOperations.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37432,7 +37339,7 @@ testModel:
                 parameter: *ref_1410
             operation: *ref_1425
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/GetRoleAssignmentsForResource.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37503,7 +37410,7 @@ testModel:
                 parameter: *ref_1428
             operation: *ref_1431
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/GetRoleAssignmentsForResourceGroup.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37574,7 +37481,7 @@ testModel:
                 parameter: *ref_1434
             operation: *ref_1437
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/DeleteRoleAssignmentByName.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37660,7 +37567,7 @@ testModel:
                 parameter: *ref_658
             operation: *ref_1450
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/PutRoleAssignment.json
+            originalFile: ''
             responses:
               '201':
                 body:
@@ -37724,7 +37631,7 @@ testModel:
                 parameter: *ref_1453
             operation: *ref_1456
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/GetRoleAssignmentByName.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37783,7 +37690,7 @@ testModel:
                 parameter: *ref_1457
             operation: *ref_1460
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/GetAllRoleAssignments.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37854,7 +37761,7 @@ testModel:
                 parameter: *ref_665
             operation: *ref_1464
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/ValidateRoleAssignment.json
+            originalFile: ''
             responses:
               '200': {}
         operation: *ref_1464
@@ -37876,7 +37783,7 @@ testModel:
                 parameter: *ref_1466
             operation: *ref_1469
             operationGroup: *ref_1426
-            originalFile: specification/mockSwagger/examples/GetRoleAssignmentByScope.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37937,7 +37844,7 @@ testModel:
                 parameter: *ref_1470
             operation: *ref_1480
             operationGroup: *ref_1481
-            originalFile: specification/mockSwagger/examples/GetTenantActivityLogsNoParams.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -37996,7 +37903,7 @@ testModel:
                 parameter: *ref_675
             operation: *ref_1489
             operationGroup: *ref_1490
-            originalFile: specification/mockSwagger/examples/resources/CalculateTemplateHash.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -38071,7 +37978,7 @@ testModel:
                 parameter: *ref_681
             operation: *ref_1512
             operationGroup: *ref_1513
-            originalFile: specification/mockSwagger/examples/guestconfiguration/createOrUpdateGuestConfigurationAssignment.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -38213,7 +38120,7 @@ testModel:
                 parameter: *ref_1517
             operation: *ref_1521
             operationGroup: *ref_1513
-            originalFile: specification/mockSwagger/examples/guestconfiguration/getGuestConfigurationAssignment.json
+            originalFile: ''
             responses:
               '200':
                 body:
@@ -38298,7 +38205,7 @@ testModel:
                 parameter: *ref_1525
             operation: *ref_1527
             operationGroup: *ref_1513
-            originalFile: specification/mockSwagger/examples/guestconfiguration/deleteGuestConfigurationAssignment.json
+            originalFile: ''
             responses:
               '200': {}
         operation: *ref_1527
@@ -38330,7 +38237,7 @@ testModel:
                 parameter: *ref_1530
             operation: *ref_1534
             operationGroup: *ref_1513
-            originalFile: specification/mockSwagger/examples/guestconfiguration/listGuestConfigurationAssignments.json
+            originalFile: ''
             responses:
               '200':
                 body:

@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_RetrieveADeletedManagedHSM()
         {
-            // Generated from example definition: specification/mockSwagger/examples/DeletedManagedHsm_Get.json
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_GetDeleted" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -57,7 +57,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Exists_RetrieveADeletedManagedHSM()
         {
-            // Generated from example definition: specification/mockSwagger/examples/DeletedManagedHsm_Get.json
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_GetDeleted" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -87,7 +87,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetIfExists_RetrieveADeletedManagedHSM()
         {
-            // Generated from example definition: specification/mockSwagger/examples/DeletedManagedHsm_Get.json
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_GetDeleted" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line

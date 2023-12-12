@@ -23,6 +23,7 @@ namespace: MgmtMockAndSample
 modelerfour:
   lenient-model-deduplication: true
 
+include-x-ms-examples-original-file: false
 sample-gen:
   mock: true
   sample: true
