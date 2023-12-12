@@ -1729,10 +1729,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                level = 1234,
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.ThreeLevelRecursive(content);
 
             Console.WriteLine(response.Status);
@@ -1745,10 +1742,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                level = 1234,
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.ThreeLevelRecursiveAsync(content);
 
             Console.WriteLine(response.Status);
@@ -1761,7 +1755,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extendible input = new Extendible();
             Response response = client.ThreeLevelRecursive(input);
         }
 
@@ -1772,7 +1766,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extendible input = new Extendible();
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }
 
@@ -1785,10 +1779,16 @@ null
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
                 extension = new object[]
             {
+new
+{
+level = 1234,
+extension = new object[]
+{
 null
+},
+}
             },
             });
             Response response = client.ThreeLevelRecursive(content);
@@ -1805,10 +1805,16 @@ null
 
             using RequestContent content = RequestContent.Create(new
             {
-                level = 1234,
                 extension = new object[]
             {
+new
+{
+level = 1234,
+extension = new object[]
+{
 null
+},
+}
             },
             });
             Response response = await client.ThreeLevelRecursiveAsync(content);
@@ -1823,7 +1829,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extendible input = new Extendible
+            {
+                Extension = { new ThereLevelExtension(1234) },
+            };
             Response response = client.ThreeLevelRecursive(input);
         }
 
@@ -1834,7 +1843,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Extension input = new Extension(1234);
+            Extendible input = new Extendible
+            {
+                Extension = { new ThereLevelExtension(1234) },
+            };
             Response response = await client.ThreeLevelRecursiveAsync(input);
         }
 

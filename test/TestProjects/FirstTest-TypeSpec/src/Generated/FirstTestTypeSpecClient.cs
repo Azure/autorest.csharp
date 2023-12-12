@@ -1571,11 +1571,11 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> test three level recursive extension. </summary>
-        /// <param name="input"> The <see cref="Extension"/> to use. </param>
+        /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(Extension,CancellationToken)']/*" />
-        public virtual async Task<Response> ThreeLevelRecursiveAsync(Extension input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(Extendible,CancellationToken)']/*" />
+        public virtual async Task<Response> ThreeLevelRecursiveAsync(Extendible input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -1586,11 +1586,11 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> test three level recursive extension. </summary>
-        /// <param name="input"> The <see cref="Extension"/> to use. </param>
+        /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(Extension,CancellationToken)']/*" />
-        public virtual Response ThreeLevelRecursive(Extension input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(Extendible,CancellationToken)']/*" />
+        public virtual Response ThreeLevelRecursive(Extendible input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -1610,7 +1610,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ThreeLevelRecursiveAsync(Extension,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ThreeLevelRecursiveAsync(Extendible,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1649,7 +1649,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ThreeLevelRecursive(Extension,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ThreeLevelRecursive(Extendible,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

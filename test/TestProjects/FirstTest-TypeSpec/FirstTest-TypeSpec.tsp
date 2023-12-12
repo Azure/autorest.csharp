@@ -431,11 +431,6 @@ model Extension extends Element {
 model Element {
   extension?: Extension[];
 }
-@doc("FHIR extendible element")
-model Extendible {
-  @doc("Additional Content defined by implementations")
-  extension?: Extension[];
-}
 
 @route("/recursiveExtension")
 @doc("test parent reference child")
@@ -443,12 +438,26 @@ model Extendible {
 @convenientAPI(true)
 op recursiveExtension(@body input: Extension): void;
 
+@doc("extension")
+model ThereLevelExtension extends ThereLevelElement {
+  level: int8;
+}
+
+@doc("element")
+model ThereLevelElement {
+  extension?: ThereLevelExtension[];
+}
+@doc("FHIR extendible element")
+model Extendible {
+  @doc("Additional Content defined by implementations")
+  extension?: ThereLevelExtension[];
+}
 
 @route("/threeLevelRecursive")
 @doc("test three level recursive extension")
 @put
 @convenientAPI(true)
-op threeLevelRecursive(@body input: Extension): void;
+op threeLevelRecursive(@body input: Extendible): void;
 
 @doc("parenetModel")
 model BaseModel {

@@ -1535,14 +1535,14 @@ Response response = client.RecursiveExtension(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="ThreeLevelRecursiveAsync(Extension,CancellationToken)">
+    <member name="ThreeLevelRecursiveAsync(Extendible,CancellationToken)">
       <example>
 This sample shows how to call ThreeLevelRecursiveAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extendible input = new Extendible();
 Response response = await client.ThreeLevelRecursiveAsync(input);
 ]]></code>
 This sample shows how to call ThreeLevelRecursiveAsync with all parameters.
@@ -1550,18 +1550,21 @@ This sample shows how to call ThreeLevelRecursiveAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extendible input = new Extendible
+{
+    Extension = { new ThereLevelExtension(1234) },
+};
 Response response = await client.ThreeLevelRecursiveAsync(input);
 ]]></code></example>
     </member>
-    <member name="ThreeLevelRecursive(Extension,CancellationToken)">
+    <member name="ThreeLevelRecursive(Extendible,CancellationToken)">
       <example>
 This sample shows how to call ThreeLevelRecursive.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extendible input = new Extendible();
 Response response = client.ThreeLevelRecursive(input);
 ]]></code>
 This sample shows how to call ThreeLevelRecursive with all parameters.
@@ -1569,7 +1572,10 @@ This sample shows how to call ThreeLevelRecursive with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extendible input = new Extendible
+{
+    Extension = { new ThereLevelExtension(1234) },
+};
 Response response = client.ThreeLevelRecursive(input);
 ]]></code></example>
     </member>
@@ -1580,10 +1586,7 @@ This sample shows how to call ThreeLevelRecursiveAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-using RequestContent content = RequestContent.Create(new
-{
-    level = 1234,
-});
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.ThreeLevelRecursiveAsync(content);
 
 Console.WriteLine(response.Status);
@@ -1595,10 +1598,16 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    level = 1234,
     extension = new object[]
     {
-        null
+        new
+        {
+            level = 1234,
+            extension = new object[]
+            {
+                null
+            },
+        }
     },
 });
 Response response = await client.ThreeLevelRecursiveAsync(content);
@@ -1613,10 +1622,7 @@ This sample shows how to call ThreeLevelRecursive.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-using RequestContent content = RequestContent.Create(new
-{
-    level = 1234,
-});
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.ThreeLevelRecursive(content);
 
 Console.WriteLine(response.Status);
@@ -1628,10 +1634,16 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    level = 1234,
     extension = new object[]
     {
-        null
+        new
+        {
+            level = 1234,
+            extension = new object[]
+            {
+                null
+            },
+        }
     },
 });
 Response response = client.ThreeLevelRecursive(content);
