@@ -51,17 +51,31 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Description), ref description)
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
-                    || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
+                    || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue);
 
                 if (isKnownProperty)
                 {
                     continue;
                 }
-
-                if (reader.GetString() == nameof(InputModelType.Properties))
+                /**
+                 * If the model has base model, `BaseModel` and `Properties` should be the last two items in tspCodeModel.
+                 * and `BaseModel` should be last but one, and `Properties` should be the last one.
+                 */
+                if (reader.GetString() == nameof(InputModelType.BaseModel))
                 {
                     model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
+                    reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
+                    if (baseModel != null)
+                    {
+                        model.SetBaseModel(baseModel);
+                        var baseModelDerived = (List<InputModelType>)resolver.ResolveReference($"{baseModel.Name}.{nameof(InputModelType.DerivedModels)}");
+                        baseModelDerived.Add(model);
+                    }
+                    continue;
+                }
+                if (reader.GetString() == nameof(InputModelType.Properties))
+                {
+                    model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
