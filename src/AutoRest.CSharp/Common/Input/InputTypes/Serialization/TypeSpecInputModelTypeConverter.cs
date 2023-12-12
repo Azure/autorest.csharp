@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Common.Input
                     reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
                     if (baseModel != null)
                     {
-                        model.BaseModel = baseModel;
+                        model.SetBaseModel(baseModel);
                         var baseModelDerived = (List<InputModelType>)resolver.ResolveReference($"{baseModel.Name}.{nameof(InputModelType.DerivedModels)}");
                         baseModelDerived.Add(model);
                     }

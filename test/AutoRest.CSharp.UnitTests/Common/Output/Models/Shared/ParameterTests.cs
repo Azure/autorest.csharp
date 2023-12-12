@@ -42,9 +42,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 DerivedModels: derivedModels,
-                IsNullable: true){
-                    BaseModel = null
-                };
+                IsNullable: true);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -93,10 +91,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 DerivedModels: derivedModels,
-                IsNullable: true)
-            {
-                BaseModel = null
-            };
+                IsNullable: true);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -185,10 +180,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
                 DerivedModels: derivedModels,
-                IsNullable: true)
-            {
-                BaseModel = null
-            };
+                IsNullable: true);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
