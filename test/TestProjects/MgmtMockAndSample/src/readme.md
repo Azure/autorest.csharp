@@ -23,6 +23,15 @@ namespace: MgmtMockAndSample
 modelerfour:
   lenient-model-deduplication: true
 
+sample-gen:
+  mock: true
+  sample: true
+  output-folder: $(this-folder)../tests/Generated
+  clear-output-folder: true
+  skipped-operations: # only to test if the configuration works
+  - Vaults_GetDeleted
+  - Vaults_Update
+
 generate-arm-resource-extensions:
 - /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
 

@@ -12,7 +12,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class CSharpProj
     {
-        internal static string GetVersion()
+        private readonly bool _needAzureKeyAuth;
+        private readonly bool _includeDfe;
+
+        public CSharpProj(bool needAzureKeyAuth, bool includeDfe)
+        {
+            _needAzureKeyAuth = needAzureKeyAuth;
+            _includeDfe = includeDfe;
+        }
+
+        private static string GetVersion()
         {
             Assembly clientAssembly = Assembly.GetExecutingAssembly();
 
@@ -33,34 +42,74 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return version;
         }
 
-        public void Execute(IPluginCommunication autoRest, bool includeDfe, bool includeAzureKeyAuth)
-            => Execute(Configuration.Namespace, includeAzureKeyAuth, async (filename, text) =>
+        public void Execute(IPluginCommunication autoRest)
+            => WriteCSProjFiles(async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
-            }, includeDfe);
+            });
 
-        public void Execute(bool includeDfe, bool includeAzureKeyAuth)
-            => Execute(Configuration.Namespace, includeAzureKeyAuth, async (filename, text) =>
+        public void Execute()
+            => WriteCSProjFiles(async (filename, text) =>
             {
                 //TODO adding to workspace makes the formatting messed up since its a raw xml document
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text
                 //its no longer valid xml.  We should consider a "raw files" concept in the work space
                 //so the file writing can still remain in one place
                 await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
-            }, includeDfe);
+            });
 
-        private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe)
+        private void WriteCSProjFiles(Action<string, string> writeFile)
         {
-            var projectFile = defaultNamespace;
+            // write src csproj
+            var csprojContent = Configuration.SkipCSProjPackageReference ? GetCSProj() : GetExternalCSProj();
+            writeFile($"{Configuration.Namespace}.csproj", csprojContent);
+
+            // write test csproj when needed
             if (Configuration.MgmtTestConfiguration is not null)
             {
-                projectFile += ".Tests";
+                var testCSProjContent = GetTestCSProj();
+                string testGenProjectFolder;
+                if (Configuration.MgmtTestConfiguration.OutputFolder is { } testGenProjectOutputFolder)
+                {
+                    testGenProjectFolder = Path.Combine(testGenProjectOutputFolder, "../");
+                }
+                else
+                {
+                    testGenProjectFolder = "../";
+                }
+                Console.WriteLine(Path.Combine(testGenProjectFolder, $"{Configuration.Namespace}.Tests.csproj"));
+                writeFile(FormatPath(Path.Combine(testGenProjectFolder, $"{Configuration.Namespace}.Tests.csproj")), testCSProjContent);
             }
-            var csprojContent = Configuration.SkipCSProjPackageReference ? GetCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace) : GetExternalCSProj(includeDfe, includeAzureKeyAuth, defaultNamespace);
-            writeFile($"{projectFile}.csproj", csprojContent);
         }
 
-        private string GetCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
+        private static string FormatPath(string? path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return path ?? "";
+            return Path.GetFullPath(path.TrimEnd('/', '\\')).Replace("\\", "/");
+        }
+
+        private string GetTestCSProj()
+        {
+            var builder = new CSProjBuilder()
+            {
+                TargetFramework = "netstandard2.0",
+                TreatWarningsAsErrors = true,
+                Nullable = "annotations",
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
+            };
+
+            builder.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
+
+            builder.PackageReferences.Add(new("NUnit"));
+            builder.PackageReferences.Add(new("Azure.Identity"));
+
+            builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
+
+            return builder.Build();
+        }
+
+        private string GetCSProj()
         {
             var builder = new CSProjBuilder()
             {
@@ -71,21 +120,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 DefineConstants = !Configuration.AzureArm && !Configuration.Generation1ConvenienceClient ? new("$(DefineConstants);EXPERIMENTAL") : null
             };
             builder.PackageReferences.Add(new("Azure.Core"));
-            if (includeDfe)
+            if (_includeDfe)
             {
                 builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
 
-            var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
-            if (isMgmtTestProject)
-            {
-                builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
+            //var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
+            //if (isMgmtTestProject)
+            //{
+            //    builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
 
-                builder.PackageReferences.Add(new("NUnit"));
-                builder.PackageReferences.Add(new("Azure.Identity"));
+            //    builder.PackageReferences.Add(new("NUnit"));
+            //    builder.PackageReferences.Add(new("Azure.Identity"));
 
-                builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
-            }
+            //    builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
+            //}
 
             if (Configuration.AzureArm)
             {
@@ -96,7 +145,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 builder.PackageReferences.Add(new("Azure.Core.Experimental"));
             }
 
-            if (includeAzureKeyAuth)
+            if (_needAzureKeyAuth)
             {
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
             }
@@ -104,7 +153,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return builder.Build();
         }
 
-        private string GetExternalCSProj(bool includeDfe, bool includeAzureKeyAuth, string defaultNamespace)
+        private string GetExternalCSProj()
         {
             var builder = new CSProjBuilder()
             {
@@ -118,21 +167,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 RestoreAdditionalProjectSources = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json"
             };
             builder.PackageReferences.Add(new("Azure.Core"));
-            if (includeDfe)
+            if (_includeDfe)
             {
                 builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
 
-            var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
-            if (isMgmtTestProject)
-            {
-                builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
+            //var isMgmtTestProject = Configuration.MgmtTestConfiguration is not null;
+            //if (isMgmtTestProject)
+            //{
+            //    builder.ProjectReferences.Add(new($"..\\src\\{defaultNamespace}.csproj"));
 
-                builder.PackageReferences.Add(new("NUnit"));
-                builder.PackageReferences.Add(new("Azure.Identity"));
+            //    builder.PackageReferences.Add(new("NUnit"));
+            //    builder.PackageReferences.Add(new("Azure.Identity"));
 
-                builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
-            }
+            //    builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
+            //}
 
             var version = GetVersion();
 

@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" />
     <PackageReference Include="NUnit" />
     <PackageReference Include="Azure.Identity" />
-    <PackageReference Include="Azure.ResourceManager" />
   </ItemGroup>
 </Project>

@@ -128,10 +128,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 // generate csproj if necessary
                 if (!Configuration.SkipCSProj)
                 {
-                    // write csproj
                     bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
                     bool includeDfe = codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal);
-                    new CSharpProj().Execute(autoRest, includeDfe, needAzureKeyAuth);
+                    new CSharpProj(needAzureKeyAuth, includeDfe).Execute(autoRest);
                 }
             }
             catch (ErrorHelpers.ErrorException e)

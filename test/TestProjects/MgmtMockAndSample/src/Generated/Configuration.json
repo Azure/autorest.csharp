@@ -41,5 +41,13 @@
   "RenameMapping": {
     "Type": "EncryptionType",
     "FirewallPolicyThreatIntelWhitelist.ipAddresses": "-|ip-address"
+  },
+  "sample-gen": {
+    "SkippedOperations": [
+      "Vaults_GetDeleted",
+      "Vaults_Update"
+    ],
+    "Mock": true,
+    "Sample": true
   }
 }
