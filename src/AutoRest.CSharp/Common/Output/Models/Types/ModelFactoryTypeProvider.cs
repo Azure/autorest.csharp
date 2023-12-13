@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (property == null)
                 {
                     // if the property is not found, in order not to introduce compilation errors, we need to add a `default` into the argument list
-                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Default));
+                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Default.CastTo(ctorParameter.Type)));
                     continue;
                 }
 
@@ -196,7 +196,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // for the parameter corresponding to non-public property, we just add default or null
                 if (property.Declaration.Accessibility != "public" && property != model.Discriminator?.Property)
                 {
-                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, property.Declaration.Type.IsValueType ? Default : Null));
+                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, ctorParameter.Type.IsValueType ? Default.CastTo(ctorParameter.Type) : Null.CastTo(ctorParameter.Type)));
                     continue;
                 }
 
