@@ -5,10 +5,6 @@
   <!-- Test only dependencies. -->
   <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true' Or '$(IsUnitTestProject)' == 'true'">
     <PackageReference Update="Moq" Version="[4.18.2]" />
-    <!-- Include the basic related files for the test framework to ensure our generated test code could build here-->
-    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestMode.cs" LinkBase="Shared/TestFramework" />
-    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestBase.cs" LinkBase="Shared/TestFramework" />
-    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/TestEnvironment.cs" LinkBase="Shared/TestFramework" />
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
@@ -25,6 +21,11 @@
     <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20231116.1" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.2" PrivateAssets="All" />
+    
+    <!-- Include the basic related files for the test framework to ensure our generated test code could build here-->
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestMode.cs" LinkBase="Shared/TestFramework" />
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestBase.cs" LinkBase="Shared/TestFramework" />
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/TestEnvironment.cs" LinkBase="Shared/TestFramework" />
   </ItemGroup>
 
   <!-- All csproj dependencies. -->
