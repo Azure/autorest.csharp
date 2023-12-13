@@ -812,6 +812,9 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         let effectiveType = type;
+        if (type.kind === "Enum") {
+            typeName = getTypeName(context, type);
+        }
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName = getTypeName(context, effectiveType);
