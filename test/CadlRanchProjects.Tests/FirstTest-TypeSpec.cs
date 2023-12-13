@@ -79,17 +79,17 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(false, result.GetProperty("optionalLiteralBool").GetBoolean());
         });
         [Test]
-         public async Task FirstTest_StringBody() => await Test(async (host) =>
-         {
+        public async Task FirstTest_StringBody() => await Test(async (host) =>
+        {
             Response response = await new FirstTestTypeSpecClient(host).StringBodyAsync("test");
             Assert.AreEqual(204, response.Status);
-         });
+        });
         [Test]
         public async Task FirstTest_BoolBody() => await Test(async (host) =>
          {
              Response response = await new FirstTestTypeSpecClient(host).BoolBodyAsync(true);
-            Assert.AreEqual(204, response.Status);
-        });
+             Assert.AreEqual(204, response.Status);
+         });
 
         [Test]
         public async Task FirstTest_DateTimeBody() => await Test(async (host) =>
