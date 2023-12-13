@@ -226,10 +226,10 @@
    "Description": "Shark is a fish",
    "IsNullable": false,
    "DiscriminatorValue": "shark",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "12"
    },
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "31",
@@ -254,10 +254,10 @@
    "Description": "Tuna is a fish",
    "IsNullable": false,
    "DiscriminatorValue": "tuna",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "12"
    },
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "34",

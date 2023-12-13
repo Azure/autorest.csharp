@@ -3,6 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -19,6 +21,18 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsPropertyBag { get; init; } = false;
 
         public bool IsAnonymousModel { get; init; } = false;
+        public InputModelType? BaseModel { get; private set; } = BaseModel;
+        /** In some case, its base model will have a propety whose type is the model, in tspCodeModel.json, the property type is a reference,
+         * during descerializing, we need to create the model and add it to the referernce map before load base model, otherwise, the deserialization crash.
+         * Then we need to set the BaseModel to the model instance after the base model is loaded. That is BaseModel is settable.
+         * This function is to set the BaseModel to an existing model instance.
+         */
+        internal void SetBaseModel(InputModelType? baseModel, [CallerFilePath] string filepath = "", [CallerMemberName] string caller = "")
+        {
+            Debug.Assert(filepath.EndsWith($"{nameof(TypeSpecInputModelTypeConverter)}.cs"), $"This method is only allowed to be called in `TypeSpecInputModelTypeConverter.cs`");
+            Debug.Assert(caller == nameof(TypeSpecInputModelTypeConverter.CreateModelType), $"This method is only allowed to be called in `TypeSpecInputModelTypeConverter.CreateModelType`");
+            BaseModel = baseModel;
+        }
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
