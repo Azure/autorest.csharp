@@ -37,10 +37,10 @@
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The second level model in the normal multiple levels inheritance.",
    "IsNullable": false,
+   "Usage": "None",
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "None",
    "Properties": [
     {
      "$id": "6",
@@ -64,10 +64,10 @@
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "5"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "9",

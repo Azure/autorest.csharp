@@ -1431,5 +1431,445 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
+    <member name="RecursiveExtensionAsync(Extension,CancellationToken)">
+      <example>
+This sample shows how to call RecursiveExtensionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extension input = new Extension(1234);
+Response response = await client.RecursiveExtensionAsync(input);
+]]></code>
+This sample shows how to call RecursiveExtensionAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extension input = new Extension(1234);
+Response response = await client.RecursiveExtensionAsync(input);
+]]></code></example>
+    </member>
+    <member name="RecursiveExtension(Extension,CancellationToken)">
+      <example>
+This sample shows how to call RecursiveExtension.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extension input = new Extension(1234);
+Response response = client.RecursiveExtension(input);
+]]></code>
+This sample shows how to call RecursiveExtension with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extension input = new Extension(1234);
+Response response = client.RecursiveExtension(input);
+]]></code></example>
+    </member>
+    <member name="RecursiveExtensionAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call RecursiveExtensionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    level = 1234,
+});
+Response response = await client.RecursiveExtensionAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RecursiveExtensionAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    level = 1234,
+    extension = new object[]
+    {
+        null
+    },
+});
+Response response = await client.RecursiveExtensionAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="RecursiveExtension(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call RecursiveExtension.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    level = 1234,
+});
+Response response = client.RecursiveExtension(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RecursiveExtension with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    level = 1234,
+    extension = new object[]
+    {
+        null
+    },
+});
+Response response = client.RecursiveExtension(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="ThreeLevelRecursiveAsync(Extendible,CancellationToken)">
+      <example>
+This sample shows how to call ThreeLevelRecursiveAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extendible input = new Extendible();
+Response response = await client.ThreeLevelRecursiveAsync(input);
+]]></code>
+This sample shows how to call ThreeLevelRecursiveAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extendible input = new Extendible
+{
+    Extension = { new ThereLevelExtension(1234) },
+};
+Response response = await client.ThreeLevelRecursiveAsync(input);
+]]></code></example>
+    </member>
+    <member name="ThreeLevelRecursive(Extendible,CancellationToken)">
+      <example>
+This sample shows how to call ThreeLevelRecursive.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extendible input = new Extendible();
+Response response = client.ThreeLevelRecursive(input);
+]]></code>
+This sample shows how to call ThreeLevelRecursive with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Extendible input = new Extendible
+{
+    Extension = { new ThereLevelExtension(1234) },
+};
+Response response = client.ThreeLevelRecursive(input);
+]]></code></example>
+    </member>
+    <member name="ThreeLevelRecursiveAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call ThreeLevelRecursiveAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = await client.ThreeLevelRecursiveAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ThreeLevelRecursiveAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    extension = new object[]
+    {
+        new
+        {
+            level = 1234,
+            extension = new object[]
+            {
+                null
+            },
+        }
+    },
+});
+Response response = await client.ThreeLevelRecursiveAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="ThreeLevelRecursive(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call ThreeLevelRecursive.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = client.ThreeLevelRecursive(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ThreeLevelRecursive with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    extension = new object[]
+    {
+        new
+        {
+            level = 1234,
+            extension = new object[]
+            {
+                null
+            },
+        }
+    },
+});
+Response response = client.ThreeLevelRecursive(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="RecursiveModelsAsync(ChildModel,CancellationToken)">
+      <example>
+This sample shows how to call RecursiveModelsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ChildModel input = new ChildModel(1234, new BaseModel[]
+{
+    new BaseModel(1234)
+});
+Response response = await client.RecursiveModelsAsync(input);
+]]></code>
+This sample shows how to call RecursiveModelsAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ChildModel input = new ChildModel(1234, new BaseModel[]
+{
+    new BaseModel(1234)
+});
+Response response = await client.RecursiveModelsAsync(input);
+]]></code></example>
+    </member>
+    <member name="RecursiveModels(ChildModel,CancellationToken)">
+      <example>
+This sample shows how to call RecursiveModels.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ChildModel input = new ChildModel(1234, new BaseModel[]
+{
+    new BaseModel(1234)
+});
+Response response = client.RecursiveModels(input);
+]]></code>
+This sample shows how to call RecursiveModels with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ChildModel input = new ChildModel(1234, new BaseModel[]
+{
+    new BaseModel(1234)
+});
+Response response = client.RecursiveModels(input);
+]]></code></example>
+    </member>
+    <member name="RecursiveModelsAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call RecursiveModelsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    parent = new object[]
+    {
+        new
+        {
+            level = 1234,
+        }
+    },
+    level = 1234,
+});
+Response response = await client.RecursiveModelsAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RecursiveModelsAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    parent = new object[]
+    {
+        new
+        {
+            level = 1234,
+        }
+    },
+    level = 1234,
+});
+Response response = await client.RecursiveModelsAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="RecursiveModels(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call RecursiveModels.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    parent = new object[]
+    {
+        new
+        {
+            level = 1234,
+        }
+    },
+    level = 1234,
+});
+Response response = client.RecursiveModels(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RecursiveModels with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    parent = new object[]
+    {
+        new
+        {
+            level = 1234,
+        }
+    },
+    level = 1234,
+});
+Response response = client.RecursiveModels(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="ContainSelfModelsAsync(ContainSelf,CancellationToken)">
+      <example>
+This sample shows how to call ContainSelfModelsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ContainSelf input = new ContainSelf(default);
+Response response = await client.ContainSelfModelsAsync(input);
+]]></code>
+This sample shows how to call ContainSelfModelsAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ContainSelf input = new ContainSelf(default);
+Response response = await client.ContainSelfModelsAsync(input);
+]]></code></example>
+    </member>
+    <member name="ContainSelfModels(ContainSelf,CancellationToken)">
+      <example>
+This sample shows how to call ContainSelfModels.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ContainSelf input = new ContainSelf(default);
+Response response = client.ContainSelfModels(input);
+]]></code>
+This sample shows how to call ContainSelfModels with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ContainSelf input = new ContainSelf(default);
+Response response = client.ContainSelfModels(input);
+]]></code></example>
+    </member>
+    <member name="ContainSelfModelsAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call ContainSelfModelsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.ContainSelfModelsAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ContainSelfModelsAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = await client.ContainSelfModelsAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="ContainSelfModels(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call ContainSelfModels.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.ContainSelfModels(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ContainSelfModels with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new { });
+Response response = client.ContainSelfModels(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
   </members>
 </doc>
