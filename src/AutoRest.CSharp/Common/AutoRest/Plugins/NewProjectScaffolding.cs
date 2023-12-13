@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.AutoRest.Plugins
 {
@@ -285,7 +285,7 @@ extends:
 
         private string GetBrandedSrcCSProj()
         {
-            var builder = new CSProjBuilder()
+            var builder = new CSProjWriter()
             {
                 Description = $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience.",
                 AssemblyTitle = $"Azure SDK Code Generation {Configuration.Namespace} for Azure Data Plane",
@@ -303,12 +303,12 @@ extends:
                 builder.PackageReferences.Add(packages);
             }
 
-            return builder.Build();
+            return builder.Write();
         }
 
         private string GetUnbrandedSrcCSProj()
         {
-            var builder = new CSProjBuilder()
+            var builder = new CSProjWriter()
             {
                 Description = $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience.",
                 AssemblyTitle = $"SDK Code Generation {Configuration.Namespace}",
@@ -323,22 +323,23 @@ extends:
                 builder.PackageReferences.Add(packages);
             }
 
-            return builder.Build();
+            return builder.Write();
         }
 
         private string GetSrcCSProj() => Configuration.IsBranded ? GetBrandedSrcCSProj() : GetUnbrandedSrcCSProj();
 
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _brandedDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("Azure.Core"),
             new("System.Text.Json")
         };
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("System.Net.ClientModel", "1.0.0-beta.1"),
             new("System.Text.Json", "4.7.2")
         };
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _brandedTestDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
+
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("Azure.Identity"),
             new("NUnit"),
@@ -346,7 +347,7 @@ extends:
             new("Microsoft.NET.Test.Sdk"),
             new("Moq")
         };
-        private static readonly IReadOnlyList<CSProjBuilder.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjBuilder.CSProjDependencyPackage[]
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("NUnit", "3.13.2"),
             new("NUnit3TestAdapter", "4.4.2"),
@@ -356,7 +357,7 @@ extends:
 
         private string GetBrandedTestCSProj()
         {
-            var builder = new CSProjBuilder()
+            var writer = new CSProjWriter()
             {
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
@@ -365,35 +366,35 @@ extends:
             // add the project references
             if (_isAzureSdk)
             {
-                builder.ProjectReferences.Add(new("$(AzureCoreTestFramework)"));
+                writer.ProjectReferences.Add(new("$(AzureCoreTestFramework)"));
             }
-            builder.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
+            writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
             // add the package references
             foreach (var package in _brandedTestDependencyPackages)
             {
-                builder.PackageReferences.Add(package);
+                writer.PackageReferences.Add(package);
             }
 
-            return builder.Build();
+            return writer.Write();
         }
 
         private string GetUnbrandedTestCSProj()
         {
-            var builder = new CSProjBuilder()
+            var writer = new CSProjWriter()
             {
                 TargetFramework = "net6.0",
                 NoWarn = new("$(NoWarn);CS1591", "Ignore XML doc comments on test types and members")
             };
 
             // add the project references
-            builder.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
+            writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
             // add the package references
             foreach (var package in _unbrandedTestDependencyPackages)
             {
-                builder.PackageReferences.Add(package);
+                writer.PackageReferences.Add(package);
             }
 
-            return builder.Build();
+            return writer.Write();
         }
 
         private string GetTestCSProj() => Configuration.IsBranded ? GetBrandedTestCSProj() : GetUnbrandedTestCSProj();

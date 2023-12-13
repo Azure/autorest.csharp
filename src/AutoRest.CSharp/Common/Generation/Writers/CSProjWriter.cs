@@ -7,11 +7,11 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 
-namespace AutoRest.CSharp.Common.Output.Builders;
+namespace AutoRest.CSharp.Generation.Writers;
 
-internal class CSProjBuilder
+internal class CSProjWriter
 {
-    public CSProjBuilder()
+    public CSProjWriter()
     {
         ProjectReferences = new List<CSProjDependencyPackage>();
         PackageReferences = new List<CSProjDependencyPackage>();
@@ -59,7 +59,7 @@ internal class CSProjBuilder
 
     public IList<CSProjCompileIncldue> CompileIncludes { get; }
 
-    public string Build()
+    public string Write()
     {
         var builder = new StringBuilder();
         using var writer = XmlWriter.Create(builder, new XmlWriterSettings
@@ -142,9 +142,9 @@ internal class CSProjBuilder
     {
         writer.WriteStartElement("PropertyGroup");
         // get all the properties
-        var properties = typeof(CSProjBuilder).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        var properties = typeof(CSProjWriter).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-        var method = typeof(CSProjBuilder).GetMethod(nameof(WriteElementIfNotNull), BindingFlags.NonPublic | BindingFlags.Instance)!;
+        var method = typeof(CSProjWriter).GetMethod(nameof(WriteElementIfNotNull), BindingFlags.NonPublic | BindingFlags.Instance)!;
 
         // this will write those properties in the same order as they are defined in this class
         foreach (var property in properties)

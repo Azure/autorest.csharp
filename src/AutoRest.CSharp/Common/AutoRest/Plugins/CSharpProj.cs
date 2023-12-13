@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private string GetTestCSProj()
         {
-            var builder = new CSProjBuilder()
+            var writer = new CSProjWriter()
             {
                 TargetFramework = "netstandard2.0",
                 TreatWarningsAsErrors = true,
@@ -99,19 +99,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
             };
 
-            builder.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
+            writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
 
-            builder.PackageReferences.Add(new("NUnit"));
-            builder.PackageReferences.Add(new("Azure.Identity"));
+            writer.PackageReferences.Add(new("NUnit"));
+            writer.PackageReferences.Add(new("Azure.Identity"));
 
-            builder.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
+            writer.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
 
-            return builder.Build();
+            return writer.Write();
         }
 
         private string GetCSProj()
         {
-            var builder = new CSProjBuilder()
+            var builder = new CSProjWriter()
             {
                 TargetFramework = "netstandard2.0",
                 TreatWarningsAsErrors = true,
@@ -139,12 +139,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
             }
 
-            return builder.Build();
+            return builder.Write();
         }
 
         private string GetExternalCSProj()
         {
-            var builder = new CSProjBuilder()
+            var writer = new CSProjWriter()
             {
                 TargetFramework = "netstandard2.0",
                 TreatWarningsAsErrors = true,
@@ -155,17 +155,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 IncludeGeneratorSharedCode = true,
                 RestoreAdditionalProjectSources = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json"
             };
-            builder.PackageReferences.Add(new("Azure.Core"));
+            writer.PackageReferences.Add(new("Azure.Core"));
             if (_includeDfe)
             {
-                builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
+                writer.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
 
             var version = GetVersion();
 
-            builder.PrivatePackageReferences.Add(new("Microsoft.Azure.AutoRest.CSharp", version));
+            writer.PrivatePackageReferences.Add(new("Microsoft.Azure.AutoRest.CSharp", version));
 
-            return builder.Build();
+            return writer.Write();
         }
     }
 }
