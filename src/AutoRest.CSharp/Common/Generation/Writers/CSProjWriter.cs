@@ -138,16 +138,15 @@ internal class CSProjWriter
         return builder.ToString();
     }
 
+    private static readonly IEnumerable<PropertyInfo> _properties = typeof(CSProjWriter).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+    private static readonly MethodInfo _writeElementIfNotNullMethod = typeof(CSProjWriter).GetMethod(nameof(WriteElementIfNotNull), BindingFlags.NonPublic | BindingFlags.Instance)!;
+
     private void WriteProperties(XmlWriter writer)
     {
         writer.WriteStartElement("PropertyGroup");
-        // get all the properties
-        var properties = typeof(CSProjWriter).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-        var method = typeof(CSProjWriter).GetMethod(nameof(WriteElementIfNotNull), BindingFlags.NonPublic | BindingFlags.Instance)!;
-
         // this will write those properties in the same order as they are defined in this class
-        foreach (var property in properties)
+        // introduce this method to save the effort of writing every property one by one
+        foreach (var property in _properties)
         {
             // only include those CSProjProperty<T> types
             if (property.PropertyType.GetGenericTypeDefinition() != typeof(CSProjProperty<>))
@@ -155,7 +154,7 @@ internal class CSProjWriter
             // invoke the WriteElementIfNotNull method on each of them
             var value = property.GetValue(this);
             var arguments = property.PropertyType.GetGenericArguments();
-            method.MakeGenericMethod(arguments).Invoke(this, new[] {writer, property.Name, value});
+            _writeElementIfNotNullMethod.MakeGenericMethod(arguments).Invoke(this, new[] {writer, property.Name, value});
         }
         writer.WriteEndElement();
     }
