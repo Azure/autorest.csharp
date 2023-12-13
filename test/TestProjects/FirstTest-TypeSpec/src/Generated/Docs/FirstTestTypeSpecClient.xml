@@ -1871,6 +1871,178 @@ Response response = client.ContainSelfModels(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="EnumParameterAsync(CsProjectedEnum,CancellationToken)">
+      <example>
+This sample shows how to call EnumParameterAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
+]]></code>
+This sample shows how to call EnumParameterAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
+]]></code></example>
+    </member>
+    <member name="EnumParameter(CsProjectedEnum,CancellationToken)">
+      <example>
+This sample shows how to call EnumParameter.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.EnumParameter(CsProjectedEnum.CsOne);
+]]></code>
+This sample shows how to call EnumParameter with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.EnumParameter(CsProjectedEnum.CsOne);
+]]></code></example>
+    </member>
+    <member name="EnumParameterAsync(float,RequestContext)">
+      <example>
+This sample shows how to call EnumParameterAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.EnumParameterAsync(1.1F);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call EnumParameterAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.EnumParameterAsync(1.1F);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="EnumParameter(float,RequestContext)">
+      <example>
+This sample shows how to call EnumParameter.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.EnumParameter(1.1F);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call EnumParameter with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.EnumParameter(1.1F);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)">
+      <example>
+This sample shows how to call BodyIsModelWithProjectedEnumAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+]]></code>
+This sample shows how to call BodyIsModelWithProjectedEnumAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+]]></code></example>
+    </member>
+    <member name="BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)">
+      <example>
+This sample shows how to call BodyIsModelWithProjectedEnum.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+Response response = client.BodyIsModelWithProjectedEnum(body);
+]]></code>
+This sample shows how to call BodyIsModelWithProjectedEnum with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+Response response = client.BodyIsModelWithProjectedEnum(body);
+]]></code></example>
+    </member>
+    <member name="BodyIsModelWithProjectedEnumAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call BodyIsModelWithProjectedEnumAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    enumProperty = 1.1F,
+});
+Response response = await client.BodyIsModelWithProjectedEnumAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BodyIsModelWithProjectedEnumAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    enumProperty = 1.1F,
+});
+Response response = await client.BodyIsModelWithProjectedEnumAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="BodyIsModelWithProjectedEnum(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call BodyIsModelWithProjectedEnum.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    enumProperty = 1.1F,
+});
+Response response = client.BodyIsModelWithProjectedEnum(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BodyIsModelWithProjectedEnum with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    enumProperty = 1.1F,
+});
+Response response = client.BodyIsModelWithProjectedEnum(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
       <example>
 This sample shows how to call SayHiAsync and parse the result.
