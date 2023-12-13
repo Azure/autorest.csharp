@@ -1,8 +1,11 @@
 import "@typespec/rest";
-import "./decorators.mjs";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "./decorators.mjs";
+import "./lro.tsp";
 
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 
 @service(
@@ -120,4 +123,11 @@ namespace Pets {
   @convenientAPI(true)
   @route("/getFish")
   @get op getFish(@query kind?: string): Fish | Error;
+
+  @doc("Test that an LRO polling operation defined in a namespace wtihout @service decorator will not be generated. This should be removed after cadl-ranch test case update.")
+  @convenientAPI(true)
+  @post
+  @route("/refresh")
+  @pollingOperation(Lro.getStatus)
+  op refresh(): Error;
 }
