@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
         }
 
-        public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments)
+        public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments as IReadOnlyList<CSharpType>)
         { }
 
         public CSharpType(Type type, IReadOnlyList<CSharpType> arguments) : this(type, false, arguments)
