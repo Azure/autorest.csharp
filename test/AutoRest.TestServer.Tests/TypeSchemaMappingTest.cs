@@ -218,7 +218,6 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void UriPropertyDeserializedCorrectly()
         {
-            DateTime date = DateTime.UtcNow;
             ModelWithUriProperty model = ModelWithUriProperty.DeserializeModelWithUriProperty(JsonDocument.Parse("{\"Uri\":\"http://localhost\"}").RootElement);
 
             Assert.AreEqual("http://localhost/", model.Uri.AbsoluteUri);
@@ -263,7 +262,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelFactoryPublicMethods()
         {
-            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(MainModelFactory), nameof(ModelWithGuidProperty), nameof(ModelWithAbstractModel));
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(MainModelFactory), nameof(ModelWithGuidProperty), nameof(ModelWithAbstractModel), nameof(PublicModelWithInternalProperty));
         }
 
         [Test]
