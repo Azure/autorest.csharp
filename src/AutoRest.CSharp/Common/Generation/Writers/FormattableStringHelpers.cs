@@ -96,26 +96,20 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
-                switch (parameter.Type)
+                if (parameter.Type.IsFrameworkType)
                 {
-                    case { IsFrameworkType: true } when TypeFactory.IsReadWriteDictionary(parameter.Type):
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
-                    case { IsFrameworkType: true } when TypeFactory.IsList(parameter.Type):
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
-                    case { IsFrameworkType: false, Implementation: EnumType enumType }:
-                        if (enumType.IsExtensible)
-                        {
-                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
-                        }
-                        else
-                        {
-                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
-                        }
-                    // TODO: Currently only BinaryData is considered, other types are still in discussion
-                    case { IsFrameworkType: true } when contentType != null && ToMediaType(contentType) == BodyMediaType.Binary && parameter.RequestLocation == RequestLocation.Body:
-                        return $"{parameter.Name:I}";
-                    case { IsFrameworkType: true }:
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
+                    return parameter.GetConversionFromFrameworkToRequestContent(contentType);
+                }
+                if (parameter.Type.Implementation is EnumType enumType)
+                {
+                    if (enumType.IsExtensible)
+                    {
+                        return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
+                    }
+                    else
+                    {
+                        return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                    }
                 }
             }
 
@@ -131,6 +125,31 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return $"{parameter.Name:I}{conversionMethod}";
+        }
+
+        private static FormattableString GetConversionFromFrameworkToRequestContent(this Parameter parameter, string? contentType)
+        {
+            if (TypeFactory.IsReadWriteDictionary(parameter.Type))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+            }
+
+            if (TypeFactory.IsList(parameter.Type))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+            }
+
+            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Binary)
+            {
+                return $"{parameter.Name:I}";
+            }
+            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Text && parameter.Type.FrameworkType == typeof(string))
+            {
+                return $"{parameter.Name:I}";
+            }
+
+            return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
         }
 
         // TODO: This is a temporary solution. We will move this part to some common place.
