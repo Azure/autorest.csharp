@@ -551,7 +551,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -594,8 +597,8 @@
       },
       {
        "$id": "71",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "72",
         "Name": "String",
@@ -621,8 +624,8 @@
       },
       {
        "$id": "74",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "75",
         "Name": "String",
