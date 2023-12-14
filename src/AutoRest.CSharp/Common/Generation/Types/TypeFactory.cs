@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
-            InputUnionType unionType => new CSharpType(typeof(BinaryData), unionType.UnionItemTypes.Select(u => CreateType(u)).ToArray(), unionType.IsNullable),
+            InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray(), unionType.IsNullable),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -270,12 +270,12 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
 
         internal static bool IsOperationOfAsyncPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsAsyncPageable(type.Arguments[0]);
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsAsyncPageable(type.Arguments[0]);
 
         internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
 
         internal static bool IsOperationOfPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsPageable(type.Arguments[0]);
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
 
         internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
 
