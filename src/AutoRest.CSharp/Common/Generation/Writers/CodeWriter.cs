@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly string _newLine = "\n";
         private static readonly string _braceNewLine = "{\n";
 
-        private readonly List<string> _usingNamespaces = new List<string>();
+        private readonly HashSet<string> _usingNamespaces = new HashSet<string>();
 
         private readonly Stack<CodeWriterScope> _scopes;
         private string? _currentNamespace;
@@ -636,11 +636,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var builder = new StringBuilder(_length);
-            string[] namespaces = _usingNamespaces
-                    .Distinct()
-                    .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns => ns, StringComparer.Ordinal)
-                    .ToArray();
+            IEnumerable<string> namespaces = _usingNamespaces
+                .OrderByDescending(ns => ns.StartsWith("System"))
+                .ThenBy(ns => ns, StringComparer.Ordinal);
             if (header)
             {
                 builder.Append(Configuration.ApiTypes.LicenseString);
