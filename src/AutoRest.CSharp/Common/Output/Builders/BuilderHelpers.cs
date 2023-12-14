@@ -245,7 +245,7 @@ namespace AutoRest.CSharp.Output.Builders
                 return newType;
             }
 
-            if (newType.Arguments.Length != defaultType.Arguments.Length)
+            if (newType.Arguments.Count != defaultType.Arguments.Count)
             {
                 return newType.WithNullable(defaultType.IsNullable);
             }
@@ -253,8 +253,8 @@ namespace AutoRest.CSharp.Output.Builders
             if ((TypeFactory.IsList(newType) && TypeFactory.IsList(defaultType)) ||
                 (TypeFactory.IsDictionary(newType) && TypeFactory.IsDictionary(defaultType)))
             {
-                var arguments = new CSharpType[newType.Arguments.Length];
-                for (var i = 0; i < newType.Arguments.Length; i++)
+                var arguments = new CSharpType[newType.Arguments.Count];
+                for (var i = 0; i < newType.Arguments.Count; i++)
                 {
                     arguments[i] = PromoteNullabilityInformation(newType.Arguments[i], defaultType.Arguments[i]);
                 }
