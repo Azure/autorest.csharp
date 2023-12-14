@@ -546,6 +546,8 @@ export function getInputType(
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
+            model = models.get(name);
+            if (model) return model;
             const properties: InputModelProperty[] = [];
 
             const discriminator = getDiscriminator(program, m);
@@ -560,8 +562,8 @@ export function getInputType(
                 IsNullable: false,
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
-                BaseModel: baseModel,
                 Usage: Usage.None,
+                BaseModel: baseModel, // BaseModel should be the last but one assigned to model
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
             setUsage(context, m, model);
@@ -810,6 +812,9 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         let effectiveType = type;
+        if (type.kind === "Enum") {
+            typeName = getTypeName(context, type);
+        }
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName = getTypeName(context, effectiveType);

@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (HasDefaultPublicCtor(property.Declaration.Type))
                 {
-                    if (innerProperty.Declaration.Type.Arguments.Length > 0)
+                    if (innerProperty.Declaration.Type.Arguments.Count > 0)
                         return (true, true, false);
                     else
                         return (true, false, false);
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool HasDefaultPublicCtor(CSharpType type)
         {
-            if (!type.TryCast<ObjectType>(out var objType))
+            if (type is not { IsFrameworkType: false, Implementation: ObjectType objType })
                 return true;
 
             foreach (var ctor in objType.Constructors)
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             innerProperty = null;
 
-            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+            if (property.Declaration.Type is not { IsFrameworkType: false, Implementation: ObjectType objType })
                 return false;
 
             var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();

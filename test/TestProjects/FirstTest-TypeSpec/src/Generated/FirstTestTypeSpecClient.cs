@@ -1462,6 +1462,640 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> test parent reference child. </summary>
+        /// <param name="input"> The <see cref="Extension"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(Extension,CancellationToken)']/*" />
+        public virtual async Task<Response> RecursiveExtensionAsync(Extension input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await RecursiveExtensionAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test parent reference child. </summary>
+        /// <param name="input"> The <see cref="Extension"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(Extension,CancellationToken)']/*" />
+        public virtual Response RecursiveExtension(Extension input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = RecursiveExtension(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test parent reference child
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RecursiveExtensionAsync(Extension,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> RecursiveExtensionAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveExtension");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateRecursiveExtensionRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test parent reference child
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RecursiveExtension(Extension,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(RequestContent,RequestContext)']/*" />
+        public virtual Response RecursiveExtension(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveExtension");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateRecursiveExtensionRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> test three level recursive extension. </summary>
+        /// <param name="input"> The <see cref="Extendible"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(Extendible,CancellationToken)']/*" />
+        public virtual async Task<Response> ThreeLevelRecursiveAsync(Extendible input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await ThreeLevelRecursiveAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test three level recursive extension. </summary>
+        /// <param name="input"> The <see cref="Extendible"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(Extendible,CancellationToken)']/*" />
+        public virtual Response ThreeLevelRecursive(Extendible input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = ThreeLevelRecursive(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test three level recursive extension
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ThreeLevelRecursiveAsync(Extendible,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> ThreeLevelRecursiveAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ThreeLevelRecursive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateThreeLevelRecursiveRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test three level recursive extension
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ThreeLevelRecursive(Extendible,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(RequestContent,RequestContext)']/*" />
+        public virtual Response ThreeLevelRecursive(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ThreeLevelRecursive");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateThreeLevelRecursiveRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> test child reference parent. </summary>
+        /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(ChildModel,CancellationToken)']/*" />
+        public virtual async Task<Response> RecursiveModelsAsync(ChildModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await RecursiveModelsAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test child reference parent. </summary>
+        /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(ChildModel,CancellationToken)']/*" />
+        public virtual Response RecursiveModels(ChildModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = RecursiveModels(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test child reference parent
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RecursiveModelsAsync(ChildModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> RecursiveModelsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveModels");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateRecursiveModelsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test child reference parent
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="RecursiveModels(ChildModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(RequestContent,RequestContext)']/*" />
+        public virtual Response RecursiveModels(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.RecursiveModels");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateRecursiveModelsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> test contain self models. </summary>
+        /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(ContainSelf,CancellationToken)']/*" />
+        public virtual async Task<Response> ContainSelfModelsAsync(ContainSelf input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await ContainSelfModelsAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test contain self models. </summary>
+        /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(ContainSelf,CancellationToken)']/*" />
+        public virtual Response ContainSelfModels(ContainSelf input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = input.ToRequestContent();
+            Response response = ContainSelfModels(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test contain self models
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ContainSelfModelsAsync(ContainSelf,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> ContainSelfModelsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ContainSelfModels");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateContainSelfModelsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test contain self models
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ContainSelfModels(ContainSelf,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(RequestContent,RequestContext)']/*" />
+        public virtual Response ContainSelfModels(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ContainSelfModels");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateContainSelfModelsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> test enum parameter. </summary>
+        /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(CsProjectedEnum,CancellationToken)']/*" />
+        public virtual async Task<Response> EnumParameterAsync(CsProjectedEnum p1, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await EnumParameterAsync(p1.ToSerialSingle(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test enum parameter. </summary>
+        /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(CsProjectedEnum,CancellationToken)']/*" />
+        public virtual Response EnumParameter(CsProjectedEnum p1, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = EnumParameter(p1.ToSerialSingle(), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test enum parameter.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="EnumParameterAsync(CsProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="p1"> The <see cref="float"/> to use. Allowed values: "1.1" | "2.2" | "4.4". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(float,RequestContext)']/*" />
+        public virtual async Task<Response> EnumParameterAsync(float p1, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.EnumParameter");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateEnumParameterRequest(p1, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test enum parameter.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="EnumParameter(CsProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="p1"> The <see cref="float"/> to use. Allowed values: "1.1" | "2.2" | "4.4". </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(float,RequestContext)']/*" />
+        public virtual Response EnumParameter(float p1, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.EnumParameter");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateEnumParameterRequest(p1, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> test enum parameter. </summary>
+        /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)']/*" />
+        public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await BodyIsModelWithProjectedEnumAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> test enum parameter. </summary>
+        /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)']/*" />
+        public virtual Response BodyIsModelWithProjectedEnum(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
+            Response response = BodyIsModelWithProjectedEnum(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] test enum parameter.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BodyIsModelWithProjectedEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBodyIsModelWithProjectedEnumRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] test enum parameter.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(RequestContent,RequestContext)']/*" />
+        public virtual Response BodyIsModelWithProjectedEnum(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BodyIsModelWithProjectedEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBodyIsModelWithProjectedEnumRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary>
         /// [Protocol Method] Return hi
         /// <list type="bullet">
@@ -2735,6 +3369,101 @@ namespace FirstTestTypeSpec
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateRecursiveExtensionRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/recursiveExtension", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateThreeLevelRecursiveRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/threeLevelRecursive", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateRecursiveModelsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/recursiveModels", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateContainSelfModelsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/containSelfModels", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateEnumParameterRequest(float p1, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/enumParameter/", false);
+            uri.AppendPath(p1, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateBodyIsModelWithProjectedEnumRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/bodyIsModelWithProjectedEnum", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 

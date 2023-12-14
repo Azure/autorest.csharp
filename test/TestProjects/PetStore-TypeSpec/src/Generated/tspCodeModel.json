@@ -226,10 +226,10 @@
    "Description": "Shark is a fish",
    "IsNullable": false,
    "DiscriminatorValue": "shark",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "12"
    },
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "31",
@@ -254,10 +254,10 @@
    "Description": "Tuna is a fish",
    "IsNullable": false,
    "DiscriminatorValue": "tuna",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "12"
    },
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "34",
@@ -850,10 +850,59 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "87",
+     "Name": "refresh",
+     "ResourceName": "Pets",
+     "Description": "Test that an LRO polling operation defined in a namespace wtihout @service decorator will not be generated. This should be removed after cadl-ranch test case update.",
+     "Parameters": [
+      {
+       "$ref": "38"
+      },
+      {
+       "$id": "88",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "89",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "90",
+        "Type": {
+         "$ref": "89"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "45"
+      }
+     ],
+     "Responses": [],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{petStoreUrl}",
+     "Path": "/pets/refresh",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "87"
+    "$id": "91"
    },
    "Creatable": true
   }

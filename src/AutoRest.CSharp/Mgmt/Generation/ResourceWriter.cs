@@ -14,7 +14,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using Azure.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
@@ -148,11 +147,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var getOperation = This.GetOperation;
             var updateMethodName = updateOperation.Name;
 
-            var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
-            var awaitStr = isAsync ? "await " : String.Empty;
+            var configureStr = isAsync ? ".ConfigureAwait(false)" : string.Empty;
+            var awaitStr = isAsync ? "await " : string.Empty;
             _writer.Line($"var current = ({awaitStr}{CreateMethodName(getOperation.Name, isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
 
-            var lroParamStr = updateOperation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
+            var lroParamStr = updateOperation.IsLongRunningOperation ? "WaitUntil.Completed, " : string.Empty;
 
             var parameters = updateOperation.IsLongRunningOperation ? updateOperation.MethodSignature.Parameters.Skip(1) : updateOperation.MethodSignature.Parameters;
             var bodyParamType = parameters.First().Type;
@@ -161,7 +160,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
             {
                 bodyParamName = "patch";
-                if (bodyParamType.TryCast<ObjectType>(out var objectType))
+                if (bodyParamType is { IsFrameworkType: false, Implementation: ObjectType objectType })
                 {
                     Configuration.MgmtConfiguration.PatchInitializerCustomization.TryGetValue(bodyParamType.Name, out var customizations);
                     customizations ??= new Dictionary<string, string>();
