@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -80,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static bool IsSinglePropertyObject(ObjectTypeProperty property)
         {
-            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+            if (property.Declaration.Type is not { IsFrameworkType: false, Implementation: ObjectType objType })
                 return false;
 
             return objType switch
@@ -125,36 +126,51 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
-            if (objectTypeProperty.ValueType.IsFrameworkType && objectTypeProperty.ValueType.FrameworkType.IsGenericType)
+            var type = objectTypeProperty.ValueType;
+            if (type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && frameworkType.IsGenericType)
             {
-                for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
+                var arguments = new CSharpType[type.Arguments.Count];
+                bool shouldReplace = false;
+                for (int i = 0; i < type.Arguments.Count; i++)
                 {
-                    var argType = objectTypeProperty.ValueType.Arguments[i];
-                    if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
+                    var argType = type.Arguments[i];
+                    arguments[i] = argType;
+                    if (argType is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace })
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         if (match != null)
                         {
+                            shouldReplace = true;
                             string fullSerializedName = this.GetFullSerializedName(objectTypeProperty, i);
                             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                                 new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
                                 fullSerializedName,
                                 "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
-                            objectTypeProperty.ValueType.Arguments[i] = match;
+                            arguments[i] = match;
                         }
                     }
+                }
+                if (shouldReplace)
+                {
+                    var newType = new CSharpType(frameworkType.GetGenericTypeDefinition(), type.IsNullable, arguments);
+                    return new ObjectTypeProperty(
+                        new MemberDeclarationOptions(objectTypeProperty.Declaration.Accessibility, objectTypeProperty.Declaration.Name, newType),
+                        objectTypeProperty.Description,
+                        objectTypeProperty.IsReadOnly,
+                        objectTypeProperty.SchemaProperty
+                    );
                 }
                 return objectTypeProperty;
             }
             else
             {
-                ObjectTypeProperty propertyType = objectTypeProperty;
-                if (objectTypeProperty.ValueType.TryCast<MgmtObjectType>(out var typeToReplace))
+                ObjectTypeProperty property = objectTypeProperty;
+                if (type is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace})
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
                     {
-                        propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
+                        property = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
                         string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
                         MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                             new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
@@ -162,7 +178,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                             "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
                     }
                 }
-                return propertyType;
+                return property;
             }
         }
 
@@ -229,7 +245,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
                     // by checking if this type is one of its descendants
-                    if (inheritedType.TryCast<SchemaObjectType>(out var schemaObjectType) && IsDescendantOf(schemaObjectType))
+                    if (inheritedType is { IsFrameworkType: false, Implementation: SchemaObjectType schemaObjectType } && IsDescendantOf(schemaObjectType))
                     {
                         // if the base type has a discriminator and this type is one of them
                         return inheritedType;
@@ -321,7 +337,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal string GetFullSerializedName(ObjectTypeProperty otProperty, int argumentIndex)
         {
-            if (otProperty.ValueType.Arguments == null || otProperty.ValueType.Arguments.Length <= argumentIndex)
+            if (otProperty.ValueType.Arguments == null || otProperty.ValueType.Arguments.Count <= argumentIndex)
                 throw new ArgumentException("argumentIndex out of range");
             var argType = otProperty.ValueType.Arguments[argumentIndex];
             return $"{this.GetFullSerializedName(otProperty)}.Arguments[{argumentIndex}-{argType.Namespace}.{argType.Name}]";

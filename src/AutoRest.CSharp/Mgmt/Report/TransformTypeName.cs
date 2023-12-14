@@ -12,6 +12,7 @@ namespace AutoRest.CSharp.Mgmt.Report
         public const string FormatByNameRules = "format-by-name-rules";
         public const string KeepPluralEnums = "keep-plural-enums";
         public const string OperationGroupsToOmit = "operation-groups-to-omit";
+        public const string PrivilegedOperations = "privileged-operations";
         public const string RequestPathIsNonResource = "request-path-is-non-resource";
         public const string NoPropertyTypeReplacement = "no-property-type-replacement";
         public const string KeepPluralResourceData = "keep-plural-resource-data";

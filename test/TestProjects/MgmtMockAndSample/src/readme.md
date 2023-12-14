@@ -62,6 +62,9 @@ models-to-treat-empty-string-as-null:
 - EventData
 - ManagedHsmProperties
 
+privileged-operations:
+  Vaults_CreateOrUpdate: Test for privileged operations configuration
+
 directive:
   - from: swagger-document
     where: $.paths
