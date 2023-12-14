@@ -490,7 +490,7 @@ namespace AutoRest.CSharp.Generation.Types
         }
 
         // There can be argument type missing
-        private bool TryPopulateArguments(ImmutableArray<ITypeSymbol> typeArguments, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType[]? arguments)
+        private bool TryPopulateArguments(ImmutableArray<ITypeSymbol> typeArguments, Func<Type, bool> validator, [NotNullWhen(true)] out IReadOnlyList<CSharpType>? arguments)
         {
             arguments = null;
             var result = new List<CSharpType>();
@@ -502,7 +502,7 @@ namespace AutoRest.CSharp.Generation.Types
                 }
                 result.Add(type);
             }
-            arguments = result.ToArray();
+            arguments = result;
             return true;
         }
 
