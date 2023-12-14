@@ -586,5 +586,53 @@ namespace PetStore.Samples
 
             Response<Fish> response = await client.GetFishAsync(kind: "<kind>");
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Pets_Refresh_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+
+            Response response = client.Refresh();
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Pets_Refresh_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+
+            Response response = await client.RefreshAsync();
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Pets_Refresh_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+
+            Response response = client.Refresh();
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Pets_Refresh_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+
+            Response response = await client.RefreshAsync();
+
+            Console.WriteLine(response.Status);
+        }
     }
 }

@@ -206,7 +206,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
+                yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, new CSharpType(property.PropertyType)
+                {
+                    SerializeAs = GetSerializeAs(property.PropertyType)
+                });
             }
 
             static bool IsRequired(PropertyInfo property, Type systemType)

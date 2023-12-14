@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -17,6 +19,108 @@ namespace _Azure.Lro.RpcLegacy.Samples
 {
     public partial class Samples_CreateResourcePollViaOperationLocation
     {
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_JobResult_GetJob_ShortVersion()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response response = client.GetJob("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JobResult_GetJob_ShortVersion_Async()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response response = await client.GetJobAsync("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_JobResult_GetJob_ShortVersion_Convenience()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response<JobResult> response = client.GetJob("<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JobResult_GetJob_ShortVersion_Convenience_Async()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response<JobResult> response = await client.GetJobAsync("<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_JobResult_GetJob_AllParameters()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response response = client.GetJob("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("results")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JobResult_GetJob_AllParameters_Async()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response response = await client.GetJobAsync("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("results")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_JobResult_GetJob_AllParameters_Convenience()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response<JobResult> response = client.GetJob("<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_JobResult_GetJob_AllParameters_Convenience_Async()
+        {
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+
+            Response<JobResult> response = await client.GetJobAsync("<jobId>");
+        }
+
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion()
