@@ -42,6 +42,9 @@
     "Type": "EncryptionType",
     "FirewallPolicyThreatIntelWhitelist.ipAddresses": "-|ip-address"
   },
+  "PrivilegedOperations": {
+    "Vaults_CreateOrUpdate": "Test for privileged operations configuration"
+  },
   "sample-gen": {
     "SkippedOperations": [
       "Vaults_GetDeleted",
