@@ -662,13 +662,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
             // Normalize newlines
             var spanLines = _builder.AsSpan(0, _length).EnumerateLines();
+            int lineCount = 0;
             foreach (var line in spanLines)
             {
                 builder.Append(line.TrimEnd());
                 builder.AppendLine();
+                lineCount++;
             }
-            // Remove last new line
-            builder.Remove(builder.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+            // Remove last new line if there are more than 1
+            if (lineCount > 1)
+            {
+                builder.Remove(builder.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+            }
             return builder.ToString();
         }
 
