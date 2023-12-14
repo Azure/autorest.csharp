@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        // TODO -- this is workaround
+        // TODO -- this is workaround because we are declaring fields and properties in different way, and this raw data field and AdditionalProperties property could be converted from each other.
         private void WritePrivateRawDataField(CodeWriter writer, ObjectType schema)
         {
             if ((schema as SerializableObjectType)?.RawDataField is not { } rawDataField)
