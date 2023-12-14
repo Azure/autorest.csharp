@@ -635,11 +635,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return string.Empty;
             }
 
-            var builder = new StringBuilder();
+            var builder = new StringBuilder(_length);
             string[] namespaces = _usingNamespaces
                     .Distinct()
                     .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns => ns,StringComparer.Ordinal)
+                    .ThenBy(ns => ns, StringComparer.Ordinal)
                     .ToArray();
             if (header)
             {
@@ -661,10 +661,19 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             // Normalize newlines
-            builder.AppendLine(new string(_builder.AsSpan(0, _length).Trim()).Replace(_newLine, Environment.NewLine));
+            //builder.Append(_builder.AsSpan(0, _length).Trim());
+            var spanLines = _builder.AsSpan(0, _length).EnumerateLines();
+            foreach (var line in spanLines)
+            {
+                builder.Append(line.TrimEnd());
+                builder.AppendLine();
+            }
+            builder.Remove(builder.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+            //builder.AppendLine(new string(_builder.AsSpan(0, _length).Trim()).Replace(_newLine, Environment.NewLine));
+            return builder.ToString();
 
             // remove any trailing whitespace, for SA1028. can roll back this change after Roslyn fixes https://github.com/dotnet/roslyn/issues/28818
-            return string.Join(Environment.NewLine, builder.ToString().Split(Environment.NewLine).Select(l => l.TrimEnd()));
+            //return string.Join(Environment.NewLine, builder.ToString().Split(Environment.NewLine).Select(l => l.TrimEnd()));
         }
 
         internal class CodeWriterScope : IDisposable
