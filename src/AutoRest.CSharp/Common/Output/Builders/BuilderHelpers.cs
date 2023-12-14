@@ -191,19 +191,18 @@ namespace AutoRest.CSharp.Output.Builders
         public static string CSharpName(this HttpResponseHeader header) =>
             header.Language!.Default.Name.ToCleanName();
 
-        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false, bool isAbstract = false)
+        public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool isAbstract = false)
         {
             if (existingType != null)
             {
                 return new TypeDeclarationOptions(existingType.Name,
                     existingType.ContainingNamespace.ToDisplayString(),
                     SyntaxFacts.GetText(existingType.DeclaredAccessibility),
-                    existingType.IsAbstract || isAbstract,
-                    existingTypeOverrides
+                    existingType.IsAbstract || isAbstract
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, isAbstract, false);
+            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, isAbstract);
         }
 
         public static CSharpType GetTypeFromExisting(ISymbol existingMember, CSharpType defaultType, TypeFactory typeFactory)

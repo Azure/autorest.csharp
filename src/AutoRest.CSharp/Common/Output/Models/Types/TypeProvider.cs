@@ -49,7 +49,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 DefaultNamespace,
                 DefaultAccessibility,
                 ExistingType,
-                existingTypeOverrides: TypeKind == TypeKind.Enum,
                 isAbstract: IsAbstract);
         }
 

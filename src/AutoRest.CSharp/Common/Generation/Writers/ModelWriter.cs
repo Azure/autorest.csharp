@@ -296,11 +296,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteEnum(CodeWriter writer, EnumType enumType)
         {
-            if (enumType.Declaration.IsUserDefined)
-            {
-                return;
-            }
-
             using (writer.Namespace(enumType.Declaration.Namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{enumType.Description}");

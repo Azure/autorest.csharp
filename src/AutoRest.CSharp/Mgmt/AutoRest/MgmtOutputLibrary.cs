@@ -350,7 +350,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
         {
             var pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
-            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
+            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false);
             foreach (var restClient in RestClients)
             {
                 var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
