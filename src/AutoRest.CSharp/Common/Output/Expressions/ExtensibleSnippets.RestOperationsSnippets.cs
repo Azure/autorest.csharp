@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             public abstract TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response);
             public abstract TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response);
             public abstract TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression response);
-            public abstract TypedValueExpression GetTypedResponseFromBinaryDate(Type responseType, TypedValueExpression response, string? contentType = null);
+            public abstract TypedValueExpression GetTypedResponseFromBinaryData(Type responseType, TypedValueExpression response, string? contentType = null);
 
             public abstract MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message);
             public abstract MethodBodyStatement DeclareContentWithUtf8JsonWriter(out TypedValueExpression content, out Utf8JsonWriterExpression writer);

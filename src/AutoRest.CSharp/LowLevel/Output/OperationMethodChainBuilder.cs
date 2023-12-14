@@ -349,7 +349,7 @@ namespace AutoRest.CSharp.Output.Models
             return null;
         }
 
-        private string[]? GetReturnedResponseContentType()
+        private IReadOnlyList<string>? GetReturnedResponseContentType()
         {
             var responses = Operation.Responses.Where(r => !r.IsErrorResponse);
             return responses.Any() ? responses.First().ContentTypes : null;

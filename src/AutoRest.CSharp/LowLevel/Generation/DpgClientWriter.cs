@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryDate(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
                 }
             }
             _writer.Line();

@@ -38,12 +38,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
                 return ResponseExpression.FromValue(EnumExpression.ToEnum(enumType, rawResponse.Content.ToObjectFromJson(typeof(string))), rawResponse);
             }
 
-            public override TypedValueExpression GetTypedResponseFromBinaryDate(Type responseType, TypedValueExpression response, string? contentType = null)
+            public override TypedValueExpression GetTypedResponseFromBinaryData(Type responseType, TypedValueExpression response, string? contentType = null)
             {
                 var rawResponse = new ResponseExpression(response);
                 if (responseType == typeof(string) && contentType != null && FormattableStringHelpers.ToMediaType(contentType) == BodyMediaType.Text)
                 {
-                    return ResponseExpression.FromValue(rawResponse.Content.ToText(), rawResponse);
+                    return ResponseExpression.FromValue(rawResponse.Content.InvokeToString(), rawResponse);
                 }
                 return responseType == typeof(BinaryData)
                     ? ResponseExpression.FromValue(rawResponse.Content, rawResponse)
