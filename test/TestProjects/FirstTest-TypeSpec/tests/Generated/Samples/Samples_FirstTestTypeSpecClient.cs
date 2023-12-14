@@ -1608,6 +1608,690 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveExtension_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                level = 1234,
+            });
+            Response response = client.RecursiveExtension(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveExtension_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                level = 1234,
+            });
+            Response response = await client.RecursiveExtensionAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveExtension_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extension input = new Extension(1234);
+            Response response = client.RecursiveExtension(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveExtension_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extension input = new Extension(1234);
+            Response response = await client.RecursiveExtensionAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveExtension_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                level = 1234,
+                extension = new object[]
+            {
+null
+            },
+            });
+            Response response = client.RecursiveExtension(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveExtension_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                level = 1234,
+                extension = new object[]
+            {
+null
+            },
+            });
+            Response response = await client.RecursiveExtensionAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveExtension_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extension input = new Extension(1234);
+            Response response = client.RecursiveExtension(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveExtension_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extension input = new Extension(1234);
+            Response response = await client.RecursiveExtensionAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = client.ThreeLevelRecursive(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = await client.ThreeLevelRecursiveAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extendible input = new Extendible();
+            Response response = client.ThreeLevelRecursive(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extendible input = new Extendible();
+            Response response = await client.ThreeLevelRecursiveAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ThreeLevelRecursive_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                extension = new object[]
+            {
+new
+{
+level = 1234,
+extension = new object[]
+{
+null
+},
+}
+            },
+            });
+            Response response = client.ThreeLevelRecursive(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ThreeLevelRecursive_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                extension = new object[]
+            {
+new
+{
+level = 1234,
+extension = new object[]
+{
+null
+},
+}
+            },
+            });
+            Response response = await client.ThreeLevelRecursiveAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ThreeLevelRecursive_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extendible input = new Extendible
+            {
+                Extension = { new ThereLevelExtension(1234) },
+            };
+            Response response = client.ThreeLevelRecursive(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ThreeLevelRecursive_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Extendible input = new Extendible
+            {
+                Extension = { new ThereLevelExtension(1234) },
+            };
+            Response response = await client.ThreeLevelRecursiveAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveModels_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                parent = new object[]
+            {
+new
+{
+level = 1234,
+}
+            },
+                level = 1234,
+            });
+            Response response = client.RecursiveModels(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveModels_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                parent = new object[]
+            {
+new
+{
+level = 1234,
+}
+            },
+                level = 1234,
+            });
+            Response response = await client.RecursiveModelsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveModels_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ChildModel input = new ChildModel(1234, new BaseModel[]
+            {
+new BaseModel(1234)
+            });
+            Response response = client.RecursiveModels(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveModels_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ChildModel input = new ChildModel(1234, new BaseModel[]
+            {
+new BaseModel(1234)
+            });
+            Response response = await client.RecursiveModelsAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveModels_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                parent = new object[]
+            {
+new
+{
+level = 1234,
+}
+            },
+                level = 1234,
+            });
+            Response response = client.RecursiveModels(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveModels_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                parent = new object[]
+            {
+new
+{
+level = 1234,
+}
+            },
+                level = 1234,
+            });
+            Response response = await client.RecursiveModelsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_RecursiveModels_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ChildModel input = new ChildModel(1234, new BaseModel[]
+            {
+new BaseModel(1234)
+            });
+            Response response = client.RecursiveModels(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_RecursiveModels_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ChildModel input = new ChildModel(1234, new BaseModel[]
+            {
+new BaseModel(1234)
+            });
+            Response response = await client.RecursiveModelsAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ContainSelfModels_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.ContainSelfModels(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ContainSelfModels_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.ContainSelfModelsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ContainSelfModels_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ContainSelf input = new ContainSelf(default);
+            Response response = client.ContainSelfModels(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ContainSelfModels_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ContainSelf input = new ContainSelf(default);
+            Response response = await client.ContainSelfModelsAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ContainSelfModels_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = client.ContainSelfModels(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ContainSelfModels_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.ContainSelfModelsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_ContainSelfModels_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ContainSelf input = new ContainSelf(default);
+            Response response = client.ContainSelfModels(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_ContainSelfModels_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ContainSelf input = new ContainSelf(default);
+            Response response = await client.ContainSelfModelsAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EnumParameter_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.EnumParameter(1.1F);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EnumParameter_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.EnumParameterAsync(1.1F);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EnumParameter_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.EnumParameter(CsProjectedEnum.CsOne);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EnumParameter_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EnumParameter_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.EnumParameter(1.1F);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EnumParameter_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.EnumParameterAsync(1.1F);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_EnumParameter_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.EnumParameter(CsProjectedEnum.CsOne);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_EnumParameter_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                enumProperty = 1.1F,
+            });
+            Response response = client.BodyIsModelWithProjectedEnum(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                enumProperty = 1.1F,
+            });
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+            Response response = client.BodyIsModelWithProjectedEnum(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                enumProperty = 1.1F,
+            });
+            Response response = client.BodyIsModelWithProjectedEnum(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                enumProperty = 1.1F,
+            });
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+            Response response = client.BodyIsModelWithProjectedEnum(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

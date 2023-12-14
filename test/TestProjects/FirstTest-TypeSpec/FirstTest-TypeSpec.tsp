@@ -422,3 +422,105 @@ interface Glossary {
     op doSomething(@path id: string, @header h1: string): Thing;
 }
 
+@doc("extension")
+model Extension extends Element {
+  level: int8;
+}
+
+@doc("element")
+model Element {
+  extension?: Extension[];
+}
+
+@route("/recursiveExtension")
+@doc("test parent reference child")
+@put
+@convenientAPI(true)
+op recursiveExtension(@body input: Extension): void;
+
+@doc("extension")
+model ThereLevelExtension extends ThereLevelElement {
+  level: int8;
+}
+
+@doc("element")
+model ThereLevelElement {
+  extension?: ThereLevelExtension[];
+}
+@doc("FHIR extendible element")
+model Extendible {
+  @doc("Additional Content defined by implementations")
+  extension?: ThereLevelExtension[];
+}
+
+@route("/threeLevelRecursive")
+@doc("test three level recursive extension")
+@put
+@convenientAPI(true)
+op threeLevelRecursive(@body input: Extendible): void;
+
+@doc("parenetModel")
+model BaseModel {
+    level: int8;
+}
+
+@doc("ChildModel")
+model ChildModel extends BaseModel {
+  parent: BaseModel[];
+}
+
+@route("/recursiveModels")
+@doc("test child reference parent")
+@put
+@convenientAPI(true)
+op recursiveModels(@body input: ChildModel): void;
+
+
+@doc("containself")
+model ContainSelf{
+  self: ContainSelf;
+}
+
+@route("/containSelfModels")
+@doc("test contain self models")
+@put
+@convenientAPI(true)
+op ContainSelfModels(@body input: ContainSelf): void;
+
+
+@doc("enum with projected name")
+@fixed
+@projectedName("csharp", "CsProjectedEnum")
+enum ProjectedEnum {
+    @projectedName("csharp", "CsOne")
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
+}
+@route("/enumParameter")
+@doc("test enum parameter.")
+@get
+@convenientAPI(true)
+op enumParameter(@path p1: ProjectedEnum ): void;
+
+
+@doc("enum with projected name used in a model")
+@fixed
+@projectedName("csharp", "CsProjectedEnumInModel")
+enum ProjectedEnumInModel {
+    @projectedName("csharp", "CsOne")
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
+}
+
+model ModelWithProjectedEnum {
+    @doc("enum with projected name used in a model")
+    enumProperty: ProjectedEnumInModel;
+}
+
+@route("/bodyIsModelWithProjectedEnum")
+@doc("test enum parameter.")
+@put
+@convenientAPI(true)
+op bodyIsModelWithProjectedEnum(@body body: ModelWithProjectedEnum ): void;
