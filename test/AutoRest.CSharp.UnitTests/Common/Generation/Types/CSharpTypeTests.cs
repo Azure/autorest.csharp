@@ -121,6 +121,7 @@ namespace AutoRest.CSharp.Generation.Types.Tests
             CollectionAssert.AreEqual(actual.Arguments, input.GetGenericTypeDefinition().GetGenericArguments().Select(p => new CSharpType(p)));
         }
 
+        [TestCase]
         public void GetGenericTypeDefinitionForConstructedType()
         {
             var actual = new CSharpType(typeof(List<>), typeof(string)).GetGenericTypeDefinition();
