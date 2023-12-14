@@ -1716,8 +1716,8 @@
       },
       {
        "$id": "214",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "215",
         "Name": "String",
@@ -1743,8 +1743,8 @@
       },
       {
        "$id": "217",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "218",
         "Name": "String",
@@ -1829,8 +1829,8 @@
       },
       {
        "$id": "223",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "224",
         "Name": "String",
@@ -1856,8 +1856,8 @@
       },
       {
        "$id": "226",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "227",
         "Name": "String",
@@ -1942,8 +1942,8 @@
       },
       {
        "$id": "232",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "233",
         "Name": "String",
@@ -1969,8 +1969,8 @@
       },
       {
        "$id": "235",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "236",
         "Name": "String",
@@ -2259,8 +2259,8 @@
       },
       {
        "$id": "259",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "260",
         "Name": "String",
@@ -2286,8 +2286,8 @@
       },
       {
        "$id": "262",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "263",
         "Name": "String",
@@ -2868,7 +2868,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -2932,7 +2935,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -3432,10 +3438,7 @@
        ],
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -3538,10 +3541,7 @@
        ],
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "PUT",
@@ -3666,7 +3666,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -3818,7 +3821,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -3900,8 +3906,8 @@
       },
       {
        "$id": "402",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "403",
         "Name": "String",
@@ -3927,8 +3933,8 @@
       },
       {
        "$id": "405",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "406",
         "Name": "String",
@@ -4077,8 +4083,8 @@
       },
       {
        "$id": "416",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "417",
         "Name": "String",
@@ -4104,8 +4110,8 @@
       },
       {
        "$id": "419",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "420",
         "Name": "String",
@@ -4418,8 +4424,8 @@
       },
       {
        "$id": "447",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "448",
         "Name": "String",
@@ -4445,8 +4451,8 @@
       },
       {
        "$id": "450",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "451",
         "Name": "String",
