@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
