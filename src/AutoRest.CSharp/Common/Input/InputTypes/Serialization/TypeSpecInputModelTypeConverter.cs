@@ -108,6 +108,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var derivedModels = new List<InputModelType>();
+            // TODO -- deserialize the dictionary type
             var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyValue, IsNullable: isNullable)
             {
                 IsAnonymousModel = isAnonymousModel
