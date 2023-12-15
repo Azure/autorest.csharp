@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -23,6 +24,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (schema)
             {
+                // The corresponding ResoruceData does not exist for PartialResource, so we do not need to generate serialization methods for it.
+                case PartialResource:
+                    break;
+                case Resource resource:
+                    WriteResourceJsonSerialization(writer, resource);
+                    break;
                 case SerializableObjectType obj:
                     if (obj.IncludeSerializer || obj.IncludeDeserializer)
                     {
@@ -32,6 +39,25 @@ namespace AutoRest.CSharp.Generation.Writers
                 case EnumType { IsExtensible: false } sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
                     break;
+            }
+        }
+
+        private void WriteResourceJsonSerialization(CodeWriter writer, Resource resource)
+        {
+            var declaration = resource.Declaration;
+
+            using (writer.Namespace(declaration.Namespace))
+            {
+                var resourceDataType = resource.ResourceData.Type;
+                writer.Append($"{declaration.Accessibility} partial class {declaration.Name} : IJsonModel<{resourceDataType}>");
+
+                using (writer.Scope())
+                {
+                    foreach (var method in JsonSerializationMethodsBuilder.BuildResourceJsonSerializationMethods(resource))
+                    {
+                        writer.WriteMethod(method);
+                    }
+                }
             }
         }
 
