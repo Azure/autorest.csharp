@@ -602,7 +602,7 @@ public partial class VirtualMachineResource : ArmResource
 
 ### Mark Privileged Operations
 
-We provide a new configuration 'privileged-operations' to mark operations as privileged, which is a dictionary from the operationId to the reason why the operation should be marked as privileged
+We provide a new configuration `privileged-operations` to mark operations as privileged, which is a dictionary from the `operationId` of the operation to the reason why the operation should be marked as privileged
 
 For instance, if the operation with id `Vaults_CreateOrUpdate` should be treated as privileged operation, we could use following configuration:
 ```yaml
