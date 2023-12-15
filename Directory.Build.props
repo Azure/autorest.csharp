@@ -1,5 +1,6 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <AutorestTargetFrameworks>net7.0</AutorestTargetFrameworks>
     <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
     <RepoEngPath>$(MSBuildThisFileDirectory)eng</RepoEngPath>
     <RepoSrcPath>$(RepoRoot)src</RepoSrcPath>
