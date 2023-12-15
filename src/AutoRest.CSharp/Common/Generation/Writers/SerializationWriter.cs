@@ -44,8 +44,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteResourceJsonSerialization(CodeWriter writer, Resource resource)
         {
-            var declaration = resource.Declaration;
+            if (resource.ResourceData.JsonSerialization?.IPersistableModelTInterface is null)
+            {
+                return;
+            }
 
+            var declaration = resource.Declaration;
             using (writer.Namespace(declaration.Namespace))
             {
                 var resourceDataType = resource.ResourceData.Type;

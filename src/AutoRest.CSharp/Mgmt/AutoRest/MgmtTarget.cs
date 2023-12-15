@@ -184,7 +184,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
 
                 AddGeneratedFile(project, $"{name}.cs", writer.ToString());
-                WriteSerialization(project, resource, serializeWriter, $"Models/{name}.Serialization.cs");
+
+                // we do not need this if model reader writer feature is not enabled
+                if (Configuration.UseModelReaderWriter)
+                {
+                    WriteSerialization(project, resource, serializeWriter, $"Models/{name}.Serialization.cs");
+                }
             }
 
             // write extension class
