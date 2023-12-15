@@ -135,7 +135,23 @@ namespace AutoRest.CSharp.Generation.Types
             return true;
         }
 
-        public override int GetHashCode() => HashCode.Combine(_implementation, _type, ((System.Collections.IStructuralEquatable)Arguments).GetHashCode(EqualityComparer<CSharpType>.Default));
+        private int? _hashCode;
+
+        public override int GetHashCode()
+        {
+            // we cache the hashcode since `CSharpType` is meant to be immuttable.
+            if (_hashCode != null)
+                return _hashCode.Value;
+
+            var hashCode = new HashCode();
+            foreach (var arg in Arguments)
+            {
+                hashCode.Add(arg);
+            }
+            _hashCode = HashCode.Combine(_implementation, _type, hashCode.ToHashCode(), IsNullable);
+
+            return _hashCode.Value;
+        }
 
         public CSharpType GetGenericTypeDefinition()
             => _type is null
