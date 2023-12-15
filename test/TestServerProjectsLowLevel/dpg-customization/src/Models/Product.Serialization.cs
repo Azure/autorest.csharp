@@ -3,7 +3,7 @@
 
 #nullable disable
 
-using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 
