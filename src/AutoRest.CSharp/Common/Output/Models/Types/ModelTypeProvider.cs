@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -91,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override FormattableString CreateDescription()
         {
-            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : $"The {_inputModel.Name}.";
+            return string.IsNullOrEmpty(_inputModel.Description) ? $"The {_inputModel.Name}." : FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(_inputModel.Description));
         }
 
         private ModelTypeProviderFields EnsureFields()
