@@ -139,6 +139,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public override int GetHashCode()
         {
+            // we cache the hashcode since `CSharpType` is meant to be immuttable.
             if (_hashCode != null)
                 return _hashCode.Value;
 
