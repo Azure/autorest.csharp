@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, null, null, null, false);
 
-            var model = new ModelTypeProvider(input, "test", null);
+            var model = new ModelTypeProvider(input, "test", null, null);
             ValidateGeneratedModelCodes(model, expectedModelCodes);
         }
 
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null, null, false);
 
-            var model = new ModelTypeProvider(input, "test", null);
+            var model = new ModelTypeProvider(input, "test", null, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
                 null, new List<InputModelType>(), null, null, false);
 
-            var model = new ModelTypeProvider(input, "test", null);
+            var model = new ModelTypeProvider(input, "test", null, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 },
                 null, null, null, null, false);
 
-            var model = new ModelTypeProvider(input, "test", null);
+            var model = new ModelTypeProvider(input, "test", null, null);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
