@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static string GetDefaultNamespace(BuildContext context, Schema objectSchema, bool isResourceType)
         {
-            return isResourceType ? context.DefaultNamespace : GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
+            return isResourceType ? context.DefaultNamespace : GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
         }
 
         private HashSet<string> GetParentPropertyNames()
