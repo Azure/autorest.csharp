@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _context = context;
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
+            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
             ObjectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
@@ -88,9 +88,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
-        public bool IsInheritableCommonType => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
+        public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -104,10 +102,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
+                var existingMember = _sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, _typeFactory),
                     "Additional Properties",
                     true,
                     null
@@ -505,9 +503,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ObjectTypeProperty CreateProperty(Property property)
         {
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-            SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+            var existingMember = _sourceTypeMapping?.GetMemberByOriginalName(name);
 
-            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(memberMapping?.ExistingMember);
+            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(existingMember);
 
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
@@ -528,7 +526,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 name,
                 propertyType,
                 accessibility,
-                memberMapping?.ExistingMember,
+                existingMember,
                 _typeFactory);
 
             var type = memberDeclaration.Type;

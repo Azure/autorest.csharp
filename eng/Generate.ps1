@@ -3,6 +3,9 @@ param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fas
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
+$timer = [System.Diagnostics.Stopwatch]::new();
+$timer.Start();
+
 $ErrorActionPreference = 'Stop'
 
 # General configuration
@@ -380,9 +383,10 @@ if (!$noBuild) {
     Invoke "dotnet build $autoRestPluginProject"
 
     #build the emitter
-    Invoke-TypeSpecSetup
+    if ($typespecCount -gt 0) {
+        Invoke-TypeSpecSetup
+    }
 }
-
 
 $keys | % { $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
@@ -404,3 +408,6 @@ $keys | % { $tspDefinitions[$_] } | ForEach-Object -Parallel {
         Invoke-TypeSpec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel
+
+$timer.Stop();
+Write-Host "Elapsed Time: $($timer.Elapsed.TotalSeconds) seconds";
