@@ -19,7 +19,7 @@ using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal sealed class ModelTypeProviderFields : IObjectTypeFields<InputModelProperty>
+    internal sealed class ModelTypeProviderFields : IReadOnlyCollection<FieldDeclaration>
     {
         private readonly IReadOnlyList<FieldDeclaration> _fields;
         private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                                              !inputModelProperty.Type.IsNullable &&
                                              !TypeFactory.IsCollectionType(propertyType);
 
-                var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
+                var existingMember = sourceTypeMapping?.GetMemberByOriginalName(originalFieldName);
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
                     ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModel, inputModelProperty, typeFactory, optionalViaNullability)
