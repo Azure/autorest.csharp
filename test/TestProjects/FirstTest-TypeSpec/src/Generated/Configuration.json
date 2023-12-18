@@ -1,12 +1,12 @@
 {
   "output-folder": ".",
-  "namespace": "FirstTestTypeSpec",
-  "library-name": "FirstTestTypeSpec",
+  "namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+  "library-name": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
   "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
-  "use-model-reader-writer": false
+  "use-model-reader-writer": true
 }

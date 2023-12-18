@@ -11,12 +11,8 @@ using Azure.Core;
 
 namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 {
-    /// <summary>
-    /// The BaseModel in the discriminated set
-    /// Please note <see cref="BaseModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="ModelX"/> and <see cref="ModelY"/>.
-    /// </summary>
-    public abstract partial class BaseModel
+    /// <summary> The ModelWithPersistableOnly. </summary>
+    public partial class ModelWithPersistableOnly
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -48,37 +44,41 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        protected BaseModel(string name)
+        /// <summary> Initializes a new instance of <see cref="ModelWithPersistableOnly"/>. </summary>
+        public ModelWithPersistableOnly()
         {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
+            Fields = new ChangeTrackingList<string>();
+            KeyValuePairs = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="kind"> The kind. </param>
-        /// <param name="name"> The name property. </param>
+        /// <summary> Initializes a new instance of <see cref="ModelWithPersistableOnly"/>. </summary>
+        /// <param name="name"> The name. </param>
+        /// <param name="xProperty"> The x property. </param>
+        /// <param name="fields"> The fields property. </param>
+        /// <param name="nullProperty"> The nullable property. </param>
+        /// <param name="keyValuePairs"> The key value pairs property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithPersistableOnly(string name, int xProperty, IList<string> fields, int? nullProperty, IDictionary<string, string> keyValuePairs, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Kind = kind;
             Name = name;
+            XProperty = xProperty;
+            Fields = fields;
+            NullProperty = nullProperty;
+            KeyValuePairs = keyValuePairs;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/> for deserialization. </summary>
-        internal BaseModel()
-        {
-        }
-
-        /// <summary> The kind. </summary>
-        internal string Kind { get; set; }
-        /// <summary> The name property. </summary>
+        /// <summary> The name. </summary>
         public string Name { get; set; }
+        /// <summary> The x property. </summary>
+        public int XProperty { get; }
+        /// <summary> The fields property. </summary>
+        public IList<string> Fields { get; }
+        /// <summary> The nullable property. </summary>
+        public int? NullProperty { get; set; }
+        /// <summary> The key value pairs property. </summary>
+        public IDictionary<string, string> KeyValuePairs { get; }
     }
 }

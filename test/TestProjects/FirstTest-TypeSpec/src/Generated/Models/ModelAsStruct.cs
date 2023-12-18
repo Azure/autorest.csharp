@@ -7,16 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 {
-    /// <summary>
-    /// The BaseModel in the discriminated set
-    /// Please note <see cref="BaseModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="ModelX"/> and <see cref="ModelY"/>.
-    /// </summary>
-    public abstract partial class BaseModel
+    /// <summary> The InputAdditionalPropertiesModelStruct. </summary>
+    public readonly partial struct ModelAsStruct
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -48,37 +43,30 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private readonly IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        protected BaseModel(string name)
+        /// <summary> Initializes a new instance of <see cref="ModelAsStruct"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        public ModelAsStruct(int id)
         {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
+            Id = id;
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="kind"> The kind. </param>
-        /// <param name="name"> The name property. </param>
+        /// <summary> Initializes a new instance of <see cref="ModelAsStruct"/>. </summary>
+        /// <param name="id"> The id property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelAsStruct(int id, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Kind = kind;
-            Name = name;
+            Id = id;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/> for deserialization. </summary>
-        internal BaseModel()
+        /// <summary> Initializes a new instance of <see cref="ModelAsStruct"/> for deserialization. </summary>
+        public ModelAsStruct()
         {
         }
 
-        /// <summary> The kind. </summary>
-        internal string Kind { get; set; }
-        /// <summary> The name property. </summary>
-        public string Name { get; set; }
+        /// <summary> The id property. </summary>
+        public int Id { get; }
     }
 }

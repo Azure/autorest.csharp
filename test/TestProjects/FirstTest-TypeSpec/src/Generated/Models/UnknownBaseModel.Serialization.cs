@@ -7,14 +7,14 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 {
-    [PersistableModelProxy(typeof(UnknownBaseModel))]
-    public partial class BaseModel : IUtf8JsonSerializable, IJsonModel<BaseModel>
+    internal partial class UnknownBaseModel : IUtf8JsonSerializable, IJsonModel<BaseModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
@@ -58,10 +58,10 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeBaseModel(document.RootElement, options);
+            return DeserializeUnknownBaseModel(document.RootElement, options);
         }
 
-        internal static BaseModel DeserializeBaseModel(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static UnknownBaseModel DeserializeUnknownBaseModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -69,15 +69,29 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             {
                 return null;
             }
-            if (element.TryGetProperty("kind", out JsonElement discriminator))
+            string kind = "Unknown";
+            string name = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
             {
-                switch (discriminator.GetString())
+                if (property.NameEquals("kind"u8))
                 {
-                    case "X": return ModelX.DeserializeModelX(element);
-                    case "Y": return ModelY.DeserializeModelY(element);
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
-            return UnknownBaseModel.DeserializeUnknownBaseModel(element);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new UnknownBaseModel(kind, name, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseModel>.Write(ModelReaderWriterOptions options)
@@ -102,7 +116,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeBaseModel(document.RootElement, options);
+                        return DeserializeUnknownBaseModel(document.RootElement, options);
                     }
                 default:
                     throw new InvalidOperationException($"The model {nameof(BaseModel)} does not support '{options.Format}' format.");
@@ -113,14 +127,14 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static BaseModel FromResponse(Response response)
+        internal static new UnknownBaseModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModel(document.RootElement);
+            return DeserializeUnknownBaseModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
