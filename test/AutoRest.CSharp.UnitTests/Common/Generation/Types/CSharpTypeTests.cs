@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using NUnit.Framework;
 
@@ -51,6 +52,32 @@ namespace AutoRest.CSharp.Generation.Types.Tests
             Assert.AreEqual(cst1.GetHashCode(), cst2.GetHashCode());
         }
 
+        [TestCase(typeof(IList<>), new[] { typeof(int) })]
+        [TestCase(typeof(IReadOnlyList<>), new[] { typeof(string) })]
+        [TestCase(typeof(IDictionary<,>), new[] { typeof(string), typeof(string) })]
+        [TestCase(typeof(IReadOnlyDictionary<,>), new[] { typeof(string), typeof(int) })]
+        [TestCase(typeof(IDictionary<,>), new[] { typeof(string), typeof(IDictionary<string, int>) })]
+        public void TypesAreEqualForGenericTypes(Type type, Type[] arguments)
+        {
+            var cstArguments = arguments.Select(t => (CSharpType)t);
+            // pass the arguments in as an array
+            var cst1 = new CSharpType(type, cstArguments.ToArray());
+            // pass the arguments in as an `List<CSharpType>`
+            var cst2 = new CSharpType(type, cstArguments.ToList());
+            // pass the arguments in as an `ImmutableArray`
+            var cst3 = new CSharpType(type, cstArguments.ToImmutableArray());
+            // pass the arguments in as an `ImmutableList`
+            var cst4 = new CSharpType(type, cstArguments.ToImmutableList());
+
+            Assert.IsTrue(cst1.Equals(cst2));
+            Assert.IsTrue(cst2.Equals(cst3));
+            Assert.IsTrue(cst3.Equals(cst4));
+
+            Assert.AreEqual(cst1.GetHashCode(), cst2.GetHashCode());
+            Assert.AreEqual(cst2.GetHashCode(), cst3.GetHashCode());
+            Assert.AreEqual(cst3.GetHashCode(), cst4.GetHashCode());
+        }
+
         [TestCase(typeof(int), typeof(string))]
         [TestCase(typeof(int), typeof(IList<>))]
         [TestCase(typeof(IList<>), typeof(int))]
@@ -71,6 +98,27 @@ namespace AutoRest.CSharp.Generation.Types.Tests
             var cst1 = new CSharpType(type1);
             var cst2 = new CSharpType(type2);
             Assert.IsFalse(cst1.Equals(cst2));
+        }
+
+        [TestCase(typeof(int))]
+        [TestCase(typeof(int))]
+        [TestCase(typeof(IList<>))]
+        [TestCase(typeof(IList<int>))]
+        [TestCase(typeof(IList<int?>))]
+        [TestCase(typeof(IList<string>))]
+        [TestCase(typeof(IDictionary<int, string>))]
+        [TestCase(typeof(IDictionary<string, string>))]
+        [TestCase(typeof(IDictionary<string, int>))]
+        [TestCase(typeof(IDictionary<string, int?>))]
+        [TestCase(typeof(IDictionary<int?, string>))]
+        [TestCase(typeof(IDictionary<IDictionary<int, string>, IDictionary<string, int>>))]
+        public void TypesAreNotEqualWhenNullibilityIsDifferent(Type type)
+        {
+            var cst = new CSharpType(type);
+            var nullableCst = new CSharpType(type, isNullable: true);
+
+            Assert.IsFalse(cst.Equals(nullableCst));
+            Assert.AreNotEqual(cst.GetHashCode(), nullableCst.GetHashCode());
         }
 
         [TestCase(typeof(int), typeof(string))]
