@@ -154,12 +154,12 @@ namespace NamedTypeSymbolExtensionsTests
         {
             // Different namespace
             var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, false);
-            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null));
+            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null, null));
             Assert.IsFalse(_modelSymbol.IsSameType(modelType));
 
             // Same namespace
             input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, false);
-            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null));
+            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null, null));
             Assert.IsTrue(_modelSymbol.IsSameType(modelType));
         }
     }
