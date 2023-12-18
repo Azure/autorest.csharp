@@ -26,7 +26,8 @@ namespace CustomizationsInTsp.Models
         /// <param name="propertyEnumToBeMadeExtensible"> EnumToBeMadeExtensible. </param>
         /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
         /// <param name="propertyToMoveToCustomization"> Enum type property to move to customization code. </param>
-        internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization)
+        /// <param name="propertyModelStruct"> ModelStruct. </param>
+        internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization, ModelStruct propertyModelStruct)
         {
             PropertyExtensibleEnum = propertyExtensibleEnum;
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
@@ -38,6 +39,7 @@ namespace CustomizationsInTsp.Models
             PropertyEnumToBeMadeExtensible = propertyEnumToBeMadeExtensible;
             PropertyModelToAddAdditionalSerializableProperty = propertyModelToAddAdditionalSerializableProperty;
             PropertyToMoveToCustomization = propertyToMoveToCustomization;
+            PropertyModelStruct = propertyModelStruct;
         }
 
         /// <summary> ExtensibleEnumWithOperator. </summary>
@@ -56,5 +58,7 @@ namespace CustomizationsInTsp.Models
         public EnumToBeMadeExtensible? PropertyEnumToBeMadeExtensible { get; set; }
         /// <summary> ModelToAddAdditionalSerializableProperty. </summary>
         public ModelToAddAdditionalSerializableProperty PropertyModelToAddAdditionalSerializableProperty { get; set; }
+        /// <summary> ModelStruct. </summary>
+        public ModelStruct PropertyModelStruct { get; set; }
     }
 }

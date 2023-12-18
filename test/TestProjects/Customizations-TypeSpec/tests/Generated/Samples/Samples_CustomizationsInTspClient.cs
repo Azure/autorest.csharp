@@ -146,6 +146,12 @@ key = "<badListOfDictionaryName>",
                     requiredInt = 1234,
                 },
                 propertyToMoveToCustomization = "a",
+                propertyModelStruct = new
+                {
+                    requiredInt = 1234,
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = client.RoundTrip(content);
 
@@ -180,6 +186,9 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
         }
 
         [Test]
@@ -261,6 +270,12 @@ key = "<badListOfDictionaryName>",
                     requiredInt = 1234,
                 },
                 propertyToMoveToCustomization = "a",
+                propertyModelStruct = new
+                {
+                    requiredInt = 1234,
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = await client.RoundTripAsync(content);
 
@@ -295,6 +310,9 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
         }
 
         [Test]
@@ -333,6 +351,11 @@ new Dictionary<string, string>
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
+                PropertyModelStruct = new ModelStruct(1234)
+                {
+                    OptionalInt = 1234,
+                    OptionalString = "<optionalString>",
+                },
             };
             Response<RootModel> response = client.RoundTrip(input);
         }
@@ -373,6 +396,11 @@ new Dictionary<string, string>
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
+                PropertyModelStruct = new ModelStruct(1234)
+                {
+                    OptionalInt = 1234,
+                    OptionalString = "<optionalString>",
+                },
             };
             Response<RootModel> response = await client.RoundTripAsync(input);
         }

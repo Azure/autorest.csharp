@@ -66,6 +66,11 @@ namespace CustomizationsInTsp.Models
                 writer.WritePropertyName("propertyToMoveToCustomization"u8);
                 writer.WriteStringValue(PropertyToMoveToCustomization.Value.ToString());
             }
+            if (Optional.IsDefined(PropertyModelStruct))
+            {
+                writer.WritePropertyName("propertyModelStruct"u8);
+                writer.WriteObjectValue(PropertyModelStruct);
+            }
             writer.WriteEndObject();
         }
 
@@ -85,6 +90,7 @@ namespace CustomizationsInTsp.Models
             Optional<EnumToBeMadeExtensible> propertyEnumToBeMadeExtensible = default;
             Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
             Optional<NormalEnum> propertyToMoveToCustomization = default;
+            Optional<ModelStruct> propertyModelStruct = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyExtensibleEnum"u8))
@@ -177,8 +183,17 @@ namespace CustomizationsInTsp.Models
                     propertyToMoveToCustomization = new NormalEnum(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("propertyModelStruct"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    propertyModelStruct = ModelStruct.DeserializeModelStruct(property.Value);
+                    continue;
+                }
             }
-            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization));
+            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), propertyModelStruct.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
