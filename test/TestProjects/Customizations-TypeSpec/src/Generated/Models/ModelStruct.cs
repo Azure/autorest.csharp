@@ -12,18 +12,9 @@ namespace CustomizationsInTsp.Models
     {
         /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
-        public ModelStruct(int requiredInt)
-        {
-            RequiredInt = requiredInt;
-            OptionalInt = optionalInt;
-            OptionalString = optionalString;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
         /// <param name="optionalInt"> Optional int. </param>
         /// <param name="optionalString"> Optional string. </param>
-        internal ModelStruct(int requiredInt, int? optionalInt, string optionalString)
+        public ModelStruct(int requiredInt, int? optionalInt, string optionalString)
         {
             RequiredInt = requiredInt;
             OptionalInt = optionalInt;
@@ -31,10 +22,10 @@ namespace CustomizationsInTsp.Models
         }
 
         /// <summary> Required int. </summary>
-        public int RequiredInt { get; set; }
+        public int RequiredInt { get; }
         /// <summary> Optional int. </summary>
-        public int? OptionalInt { get; set; }
+        public int? OptionalInt { get; }
         /// <summary> Optional string. </summary>
-        public string OptionalString { get; set; }
+        public string OptionalString { get; }
     }
 }

@@ -351,11 +351,7 @@ new Dictionary<string, string>
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
-                PropertyModelStruct = new ModelStruct(1234)
-                {
-                    OptionalInt = 1234,
-                    OptionalString = "<optionalString>",
-                },
+                PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
             };
             Response<RootModel> response = client.RoundTrip(input);
         }
@@ -396,11 +392,7 @@ new Dictionary<string, string>
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
-                PropertyModelStruct = new ModelStruct(1234)
-                {
-                    OptionalInt = 1234,
-                    OptionalString = "<optionalString>",
-                },
+                PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
             };
             Response<RootModel> response = await client.RoundTripAsync(input);
         }

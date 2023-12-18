@@ -410,7 +410,7 @@ namespace AutoRest.CSharp.Output.Models
             var fields = model.Fields;
             foreach (var parameter in fields.SerializationParameters)
             {
-                var field = fields.GetFieldByParameter(parameter);
+                var field = fields.GetFieldByParameterName(parameter.Name);
                 var inputProperty = fields.GetInputByField(field);
                 if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
                     continue;

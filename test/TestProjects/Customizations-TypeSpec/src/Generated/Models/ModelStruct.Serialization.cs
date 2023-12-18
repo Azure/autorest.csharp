@@ -33,10 +33,6 @@ namespace CustomizationsInTsp.Models
 
         internal static ModelStruct DeserializeModelStruct(JsonElement element)
         {
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
             int requiredInt = default;
             Optional<int> optionalInt = default;
             Optional<string> optionalString = default;
@@ -74,7 +70,7 @@ namespace CustomizationsInTsp.Models
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
