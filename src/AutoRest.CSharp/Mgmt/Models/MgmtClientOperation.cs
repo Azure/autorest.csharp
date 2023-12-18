@@ -131,17 +131,25 @@ namespace AutoRest.CSharp.Mgmt.Models
         private FormattableString? _description;
         public FormattableString Description => _description ??= BuildDescription();
 
+        private FormattableString BuildItemDescription(string term, string desc) => $@"<item>
+<term>{term}</term>
+<description>{desc}</description>
+</item>";
+
         private FormattableString BuildDescription()
         {
             var pathInformation = _operations.Select(operation =>
-                (FormattableString)$@"<item>
-<term>Request Path</term>
-<description>{operation.Operation.GetHttpPath()}</description>
-</item>
-<item>
-<term>Operation Id</term>
-<description>{operation.OperationId}</description>
-</item>").ToArray().Join(Environment.NewLine);
+            {
+                IEnumerable<FormattableString> arr = new FormattableString[]
+                {
+                    BuildItemDescription("Request Path", operation.Operation.GetHttpPath()),
+                    BuildItemDescription("Operation Id", operation.OperationId)
+                };
+                if (operation.Resource != null)
+                    arr = arr.Append(BuildItemDescription("Resource Type", operation.Resource.ResourceType.ToString()!));
+                return arr.ToList().Join(Environment.NewLine);
+            }).ToList().Join(Environment.NewLine);
+
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";
@@ -158,10 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
                 // construct the cref name
                 FormattableString methodSignature = $"{mockingExtensionTypeName}.{Name}({MethodParameters.Skip(1).GetTypesFormattable(MethodParameters.Count - 1)})";
-                mockingInformation = $@"<item>
-<term>Mocking</term>
-<description>To mock this method, please mock {methodSignature:C} instead.</description>
-</item>";
+                mockingInformation = BuildItemDescription("Mocking", $"To mock this method, please mock {methodSignature:C} instead.");
             }
 
             FormattableString extraInformation = mockingInformation != null ? $"{pathInformation}{Environment.NewLine}{mockingInformation}" : pathInformation;
