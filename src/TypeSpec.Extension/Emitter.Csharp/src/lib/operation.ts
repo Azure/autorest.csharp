@@ -365,7 +365,7 @@ export function loadOperation(
 
         var bodyType = undefined;
         if (
-            op.verb != "delete" &&
+            op.verb !== "delete" &&
             metadata.finalResult !== undefined &&
             metadata.finalResult !== "void"
         ) {
