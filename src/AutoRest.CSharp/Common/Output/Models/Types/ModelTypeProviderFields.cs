@@ -66,7 +66,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fieldsToInputs[field] = inputModelProperty;
 
                 var parameterName = field.Name.ToVariableName();
-                var parameter = Parameter.FromModelProperty(inputModelProperty, parameterName, field.Type);
+                var parameterValidation = GetParameterValidation(field, inputModelProperty);
+                var parameter = new Parameter(
+                    Name: parameterName,
+                    Description: FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)),
+                    Type: field.Type,
+                    DefaultValue: null,
+                    Validation: parameterValidation,
+                    Initializer: null);
                 parametersToFields[parameter.Name] = field;
                 // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter with { Validation = ValidationType.None });
@@ -95,9 +102,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
                     var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModel, inputModelProperty, typeFactory, false);
+                    var parameter = new Parameter(field.Name.ToVariableName(), $"to be removed by post process", field.Type, null, ValidationType.None, null);
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
-                    serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
+                    serializationParameters.Add(parameter);
                 }
             }
 
@@ -107,6 +115,35 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             PublicConstructorParameters = publicParameters;
             SerializationParameters = serializationParameters;
+        }
+
+        private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
+        {
+            // we do not validate a parameter when it is a value type (struct or int, etc)
+            if (field.Type.IsValueType)
+            {
+                return ValidationType.None;
+            }
+
+            // or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
+            if (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient)
+            {
+                return ValidationType.None;
+            }
+
+            // or it is optional
+            if (!field.IsRequired)
+            {
+                return ValidationType.None;
+            }
+
+            // or it it nullable
+            if (field.Type.IsNullable)
+            {
+                return ValidationType.None;
+            }
+
+            return ValidationType.AssertNotNull;
         }
 
         public FieldDeclaration GetFieldByParameterName(string parameterName) => _parameterNamesToFields[parameterName];
