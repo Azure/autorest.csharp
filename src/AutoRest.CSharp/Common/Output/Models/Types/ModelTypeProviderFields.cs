@@ -111,10 +111,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 fields.Add(additionalPropertiesField);
                 serializationParameters.Add(additionalPropertiesParameter);
-                //if (isStruct)
-                //{
-                publicParameters.Add(additionalPropertiesParameter with { Validation = ValidationType.AssertNotNull });
-                //}
+                if (isStruct)
+                {
+                    publicParameters.Add(additionalPropertiesParameter with { Validation = ValidationType.AssertNotNull });
+                }
 
                 parametersToFields[additionalPropertiesParameter.Name] = additionalPropertiesField;
 
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public FieldDeclaration GetFieldByParameterName(string parameterName) => _parameterNamesToFields[parameterName];
         public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
-        public InputModelProperty GetInputByField(FieldDeclaration field) => _fieldsToInputs[field];
+        public InputModelProperty? GetInputByField(FieldDeclaration field) => _fieldsToInputs.TryGetValue(field, out var property) ? property : null;
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

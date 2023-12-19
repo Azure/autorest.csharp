@@ -24,7 +24,6 @@ import {
     getEncode,
     getFormat,
     getKnownValues,
-    getProjectedNames,
     getVisibility,
     isArrayModelType,
     isRecordModelType,
@@ -41,11 +40,6 @@ import {
     isStatusCode
 } from "@typespec/http";
 import { getResourceOperation } from "@typespec/rest";
-import {
-    projectedNameCSharpKey,
-    projectedNameClientKey,
-    projectedNameJsonKey
-} from "../constants.js";
 import { FormattedType } from "../type/formattedType.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
 import { InputModelProperty } from "../type/inputModelProperty.js";
@@ -545,7 +539,7 @@ export function getInputType(
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
-            const baseModel = getInputModelBaseType(m.baseModel);
+            const [baseModel, inheritedDictionaryType] = getInputModelBaseType(m.baseModel);
             model = models.get(name);
             if (model) return model;
             const properties: InputModelProperty[] = [];
@@ -558,14 +552,15 @@ export function getInputType(
                     ? "internal"
                     : getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
-                Description: getDoc(program, m),
+                Description: getDoc(program, m) ?? "",
                 IsNullable: false,
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 Usage: Usage.None,
+                InheritedDictionaryType: inheritedDictionaryType, // InheritedDictionaryType represent the type of additional properties property
                 BaseModel: baseModel, // BaseModel should be the last but one assigned to model
                 Properties: properties // Properties should be the last assigned to model
-            } as InputModelType;
+            };
             setUsage(context, m, model);
 
             // open generic type model which has un-instanced template parameter will not be generated. e.g.
@@ -685,22 +680,23 @@ export function getInputType(
             outputProperties.unshift(discriminatorProperty);
         }
     }
-    function getInputModelBaseType(m?: Model): InputModelType | undefined {
+
+    function getInputModelBaseType(m?: Model): [InputModelType | undefined, InputDictionaryType | undefined] {
         if (!m) {
-            return undefined;
+            return [undefined, undefined];
         }
 
-        // Arrays and dictionaries can't be a base type
-        if (m.indexer) {
-            return undefined;
+        // when base model is a record, we return the dictionary type
+        if (isRecordModelType(program, m)) {
+            return [undefined, getInputTypeForMap(m.indexer.key, m.indexer.value)];
         }
 
         // TypeSpec "primitive" types can't be base types for models
         if (program.checker.isStdType(m)) {
-            return undefined;
+            return [undefined, undefined];
         }
 
-        return getInputModelForModel(m);
+        return [getInputModelForModel(m), undefined];
     }
 
     function getFullNamespaceString(namespace: Namespace | undefined): string {

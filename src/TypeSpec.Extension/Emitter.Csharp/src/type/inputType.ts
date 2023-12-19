@@ -50,6 +50,7 @@ export interface InputModelType extends InputType {
     DiscriminatorPropertyName?: string;
     DiscriminatorValue?: string;
     DerivedModels?: InputModelType[];
+    InheritedDictionaryType?: InputDictionaryType;
 }
 
 export function isInputModelType(type: InputType): type is InputModelType {
