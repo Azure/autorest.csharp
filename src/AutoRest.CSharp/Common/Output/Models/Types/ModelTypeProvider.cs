@@ -322,7 +322,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
-                // we do not need to add intialization for raw data field
+                // we do not need to add initialization for raw data field
                 if (isInitializer && property == RawDataField)
                 {
                     continue;
