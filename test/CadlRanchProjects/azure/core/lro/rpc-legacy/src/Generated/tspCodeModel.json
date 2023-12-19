@@ -421,21 +421,31 @@
   {
    "$id": "53",
    "Name": "LegacyClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "54"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "55",
+   "Name": "CreateResourcePollViaOperationLocation",
    "Description": "POST to create resource, poll URL via operation-location header.",
    "Operations": [
     {
-     "$id": "54",
+     "$id": "56",
      "Name": "getJob",
      "ResourceName": "JobResult",
      "Description": "Poll a Job",
      "Parameters": [
       {
-       "$id": "55",
+       "$id": "57",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "56",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -450,9 +460,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "57",
+        "$id": "59",
         "Type": {
-         "$id": "58",
+         "$id": "60",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -461,12 +471,12 @@
        }
       },
       {
-       "$id": "59",
+       "$id": "61",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "60",
+        "$id": "62",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -481,9 +491,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "63",
         "Type": {
-         "$id": "62",
+         "$id": "64",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -492,12 +502,12 @@
        }
       },
       {
-       "$id": "63",
+       "$id": "65",
        "Name": "jobId",
        "NameInRequest": "jobId",
        "Description": "A processing job identifier.",
        "Type": {
-        "$id": "64",
+        "$id": "66",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -513,11 +523,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "67",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "68",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -532,9 +542,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "69",
         "Type": {
-         "$ref": "66"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
@@ -542,7 +552,7 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "70",
        "StatusCodes": [
         200
        ],
@@ -551,10 +561,7 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -566,19 +573,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "69",
+     "$id": "71",
      "Name": "createJob",
      "ResourceName": "CreateResourcePollViaOperationLocation",
      "Description": "Creates a Job",
      "Parameters": [
       {
-       "$ref": "55"
+       "$ref": "57"
       },
       {
-       "$ref": "59"
+       "$ref": "61"
       },
       {
-       "$id": "70",
+       "$id": "72",
        "Name": "JobData",
        "NameInRequest": "JobData",
        "Description": "Data of the job",
@@ -596,38 +603,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "71",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "72",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "73",
-        "Type": {
-         "$ref": "72"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "74",
+       "$id": "73",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "75",
+        "$id": "74",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -642,9 +622,36 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "76",
+        "$id": "75",
         "Type": {
-         "$ref": "75"
+         "$ref": "74"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "76",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "77",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "78",
+        "Type": {
+         "$ref": "77"
         },
         "Value": "application/json"
        }
@@ -652,7 +659,7 @@
      ],
      "Responses": [
       {
-       "$id": "77",
+       "$id": "79",
        "StatusCodes": [
         202
        ],
@@ -662,22 +669,19 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "78",
+         "$id": "80",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "79",
+          "$id": "81",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
          }
         }
        ],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -689,16 +693,13 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "80",
+      "$id": "82",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "81",
+       "$id": "83",
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "17"
-       },
        "BodyMediaType": "Json"
       }
      },
@@ -707,9 +708,10 @@
     }
    ],
    "Protocol": {
-    "$id": "82"
+    "$id": "84"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "LegacyClient"
   }
  ]
 }

@@ -973,9 +973,20 @@
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "121"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "122",
+   "Name": "AdditionalParameter",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "121",
+     "$id": "123",
      "Name": "ListMetricDimensionValues",
      "ResourceName": "DimensionValueListItem",
      "Summary": "List the dimension values for the given metric dimension name.",
@@ -988,31 +999,10 @@
        "$ref": "108"
       },
       {
-       "$id": "122",
+       "$id": "124",
        "Name": "testRunId",
        "NameInRequest": "testRunId",
        "Description": "Unique test run name as identifier",
-       "Type": {
-        "$id": "123",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "124",
-       "Name": "name",
-       "NameInRequest": "name",
-       "Description": "Dimension name",
        "Type": {
         "$id": "125",
         "Name": "string",
@@ -1031,6 +1021,27 @@
       },
       {
        "$id": "126",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Description": "Dimension name",
+       "Type": {
+        "$id": "127",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "128",
        "Name": "interval",
        "NameInRequest": "interval",
        "Description": "The interval (i.e. timegrain) of the query.",
@@ -1048,12 +1059,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "127",
+       "$id": "129",
        "Name": "metricName",
        "NameInRequest": "metricName",
        "Description": "Metric name",
        "Type": {
-        "$id": "128",
+        "$id": "130",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1069,12 +1080,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "129",
+       "$id": "131",
        "Name": "metricNamespace",
        "NameInRequest": "metricNamespace",
        "Description": "Metric namespace to query metric definitions for.",
        "Type": {
-        "$id": "130",
+        "$id": "132",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1090,12 +1101,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "131",
+       "$id": "133",
        "Name": "timespan",
        "NameInRequest": "timespan",
        "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
        "Type": {
-        "$id": "132",
+        "$id": "134",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1111,11 +1122,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "133",
+       "$id": "135",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "134",
+        "$id": "136",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1130,9 +1141,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "135",
+        "$id": "137",
         "Type": {
-         "$ref": "134"
+         "$ref": "136"
         },
         "Value": "application/json"
        }
@@ -1140,7 +1151,7 @@
      ],
      "Responses": [
       {
-       "$id": "136",
+       "$id": "138",
        "StatusCodes": [
         200
        ],
@@ -1161,15 +1172,27 @@
      "Path": "/app/test-runs/{testRunId}/metric-dimensions/{name}/values",
      "BufferResponse": true,
      "Paging": {
-      "$id": "137",
+      "$id": "139",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "140"
+   },
+   "Creatable": false,
+   "Parent": "PaginationClient"
+  },
+  {
+   "$id": "141",
+   "Name": "UseFoundationsResourceList",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "138",
+     "$id": "142",
      "Name": "list",
      "ResourceName": "LedgerEntry",
      "Description": "List upload detail for the discovery resource.",
@@ -1181,11 +1204,11 @@
        "$ref": "108"
       },
       {
-       "$id": "139",
+       "$id": "143",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "140",
+        "$id": "144",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1200,9 +1223,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "141",
+        "$id": "145",
         "Type": {
-         "$ref": "140"
+         "$ref": "144"
         },
         "Value": "application/json"
        }
@@ -1210,7 +1233,7 @@
      ],
      "Responses": [
       {
-       "$id": "142",
+       "$id": "146",
        "StatusCodes": [
         200
        ],
@@ -1231,15 +1254,27 @@
      "Path": "/app/adp/transactions",
      "BufferResponse": true,
      "Paging": {
-      "$id": "143",
+      "$id": "147",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "148"
+   },
+   "Creatable": false,
+   "Parent": "PaginationClient"
+  },
+  {
+   "$id": "149",
+   "Name": "TwoTypesItem",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "144",
+     "$id": "150",
      "Name": "listTextBlocklists",
      "ResourceName": "TextBlocklist",
      "Summary": "Get All Text Blocklists",
@@ -1252,11 +1287,11 @@
        "$ref": "108"
       },
       {
-       "$id": "145",
+       "$id": "151",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "146",
+        "$id": "152",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1271,9 +1306,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "147",
+        "$id": "153",
         "Type": {
-         "$ref": "146"
+         "$ref": "152"
         },
         "Value": "application/json"
        }
@@ -1281,7 +1316,7 @@
      ],
      "Responses": [
       {
-       "$id": "148",
+       "$id": "154",
        "StatusCodes": [
         200
        ],
@@ -1302,7 +1337,7 @@
      "Path": "/app/text/blocklists",
      "BufferResponse": true,
      "Paging": {
-      "$id": "149",
+      "$id": "155",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1310,7 +1345,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "150",
+     "$id": "156",
      "Name": "listTextBlocklistItems",
      "ResourceName": "TextBlockItem",
      "Summary": "Get All BlockItems By blocklistName",
@@ -1323,12 +1358,12 @@
        "$ref": "108"
       },
       {
-       "$id": "151",
+       "$id": "157",
        "Name": "blocklistName",
        "NameInRequest": "blocklistName",
        "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
        "Type": {
-        "$id": "152",
+        "$id": "158",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1344,12 +1379,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "153",
+       "$id": "159",
        "Name": "top",
        "NameInRequest": "top",
        "Description": "The number of result items to return.",
        "Type": {
-        "$id": "154",
+        "$id": "160",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1365,12 +1400,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "155",
+       "$id": "161",
        "Name": "skip",
        "NameInRequest": "skip",
        "Description": "The number of result items to skip.",
        "Type": {
-        "$id": "156",
+        "$id": "162",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1386,12 +1421,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "157",
+       "$id": "163",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Description": "The maximum number of result items per page.",
        "Type": {
-        "$id": "158",
+        "$id": "164",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1407,11 +1442,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "159",
+       "$id": "165",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "160",
+        "$id": "166",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1426,9 +1461,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "161",
+        "$id": "167",
         "Type": {
-         "$ref": "160"
+         "$ref": "166"
         },
         "Value": "application/json"
        }
@@ -1436,7 +1471,7 @@
      ],
      "Responses": [
       {
-       "$id": "162",
+       "$id": "168",
        "StatusCodes": [
         200
        ],
@@ -1457,15 +1492,27 @@
      "Path": "/app/text/blocklists/{blocklistName}/blockItems",
      "BufferResponse": true,
      "Paging": {
-      "$id": "163",
+      "$id": "169",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "170"
+   },
+   "Creatable": false,
+   "Parent": "PaginationClient"
+  },
+  {
+   "$id": "171",
+   "Name": "Pools",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "164",
+     "$id": "172",
      "Name": "listPools",
      "ResourceName": "Pools",
      "Description": "Lists all of the Pools in the specified Account.",
@@ -1477,12 +1524,12 @@
        "$ref": "108"
       },
       {
-       "$id": "165",
+       "$id": "173",
        "Name": "$filter",
        "NameInRequest": "$filter",
        "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
        "Type": {
-        "$id": "166",
+        "$id": "174",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1498,15 +1545,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "167",
+       "$id": "175",
        "Name": "$select",
        "NameInRequest": "$select",
        "Description": "An OData $select clause.",
        "Type": {
-        "$id": "168",
+        "$id": "176",
         "Name": "Array",
         "ElementType": {
-         "$id": "169",
+         "$id": "177",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -1525,15 +1572,15 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "170",
+       "$id": "178",
        "Name": "$expand",
        "NameInRequest": "$expand",
        "Description": "An OData $expand clause.",
        "Type": {
-        "$id": "171",
+        "$id": "179",
         "Name": "Array",
         "ElementType": {
-         "$id": "172",
+         "$id": "180",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -1552,11 +1599,11 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "173",
+       "$id": "181",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "174",
+        "$id": "182",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1571,9 +1618,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "175",
+        "$id": "183",
         "Type": {
-         "$ref": "174"
+         "$ref": "182"
         },
         "Value": "application/json"
        }
@@ -1581,7 +1628,7 @@
      ],
      "Responses": [
       {
-       "$id": "176",
+       "$id": "184",
        "StatusCodes": [
         200
        ],
@@ -1602,7 +1649,7 @@
      "Path": "/app/pools",
      "BufferResponse": true,
      "Paging": {
-      "$id": "177",
+      "$id": "185",
       "NextLinkName": "odata.nextLink",
       "ItemName": "value"
      },
@@ -1611,15 +1658,16 @@
     }
    ],
    "Protocol": {
-    "$id": "178"
+    "$id": "186"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "PaginationClient"
   }
  ],
  "Auth": {
-  "$id": "179",
+  "$id": "187",
   "OAuth2": {
-   "$id": "180",
+   "$id": "188",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]

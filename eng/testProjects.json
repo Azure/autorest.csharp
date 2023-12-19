@@ -29,7 +29,6 @@
         "encode/duration",
         "projection/projected-name",
         "payload/content-negotiation",
-        "payload/media-type",
         "payload/pageable",
         "server/path/multiple",
         "server/path/single",

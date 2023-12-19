@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static FormattableString Empty => $"";
 
+        [return: NotNullIfNotNull(nameof(s))]
         public static FormattableString? FromString(string? s) =>
             s is null ? null : s.Length == 0 ? Empty : $"{s}";
 
@@ -263,7 +264,8 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static FormattableString Join<T>(IEnumerable<T> source, int count, Func<T, object> converter, string separator, string? lastSeparator, char? format)
-            => count switch {
+            => count switch
+            {
                 0 => Empty,
                 1 => FormattableStringFactory.Create(format is not null ? $"{{0:{format}}}" : "{0}", converter(source.First())),
                 _ => FormattableStringFactory.Create(CreateFormatWithSeparator(separator, lastSeparator, format, count), source.Select(converter).ToArray())
