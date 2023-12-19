@@ -364,14 +364,14 @@ export function loadOperation(
         }
 
         var bodyType = undefined;
-        if (op.verb !== "delete") {
+        if (
+            op.verb !== "delete" &&
+            metadata.finalResult !== undefined &&
+            metadata.finalResult !== "void"
+        ) {
             const formattedType = getFormattedType(
                 program,
-                // TODO: we should check `logicalPath` or other ways to determine body type,
-                // after https://github.com/Azure/typespec-azure/issues/3725 is fixed
-                op.verb === "post"
-                    ? metadata.envelopeResult
-                    : metadata.logicalResult
+                metadata.finalEnvelopeResult as Model
             );
             bodyType = getInputType(context, formattedType, models, enums);
         }
@@ -385,14 +385,7 @@ export function loadOperation(
                 BodyType: bodyType,
                 BodyMediaType: BodyMediaType.Json
             } as OperationResponse,
-            ResultPath:
-                metadata.logicalPath ??
-                // TODO: roll back changes when `logicalPath` can be definitive
-                // https://github.com/Azure/typespec-azure/issues/3725
-                (metadata.envelopeResult != metadata.logicalResult &&
-                op.verb === "post"
-                    ? "result" // actually `result` is the only allowed path for now
-                    : undefined)
+            ResultPath: metadata.finalResultPath
         } as OperationLongRunning;
     }
 }
