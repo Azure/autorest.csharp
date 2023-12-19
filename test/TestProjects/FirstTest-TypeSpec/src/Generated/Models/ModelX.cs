@@ -26,25 +26,25 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
         /// <param name="kind"> The kind. </param>
         /// <param name="name"> The name property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="xProperty"> The XProperty property. </param>
         /// <param name="fields"> Optional list. </param>
         /// <param name="nullProperty"> Nullable integer. </param>
         /// <param name="keyValuePairs"> Optional dictionary. </param>
-        internal ModelX(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int xProperty, IList<string> fields, int? nullProperty, IDictionary<string, string> keyValuePairs) : base(kind, name, serializedAdditionalRawData)
+        /// <param name="xProperty"> The XProperty property. </param>
+        internal ModelX(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> fields, int? nullProperty, IDictionary<string, string> keyValuePairs, int xProperty) : base(kind, name, serializedAdditionalRawData)
         {
-            XProperty = xProperty;
             Fields = fields;
             NullProperty = nullProperty;
             KeyValuePairs = keyValuePairs;
+            XProperty = xProperty;
         }
 
-        /// <summary> The XProperty property. </summary>
-        public int XProperty { get; }
         /// <summary> Optional list. </summary>
         public IList<string> Fields { get; }
         /// <summary> Nullable integer. </summary>
         public int? NullProperty { get; set; }
         /// <summary> Optional dictionary. </summary>
         public IDictionary<string, string> KeyValuePairs { get; }
+        /// <summary> The XProperty property. </summary>
+        public int XProperty { get; }
     }
 }

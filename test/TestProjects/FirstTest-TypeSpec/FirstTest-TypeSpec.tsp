@@ -54,7 +54,7 @@ model ModelWithPersistableOnly {
 
     @doc("The key value pairs property.")
     keyValuePairs?: Record<string>;
-    
+
     @doc("The x property.")
     @visibility("read")
     xProperty: int32;
@@ -78,18 +78,18 @@ model BaseModel {
 model ModelX extends BaseModel {
     kind: "X";
 
+    @doc("Optional list.")
+    fields?: string[];
+
+    @doc("Nullable integer.")
+    nullProperty?: int32;
+
+    @doc("Optional dictionary.")
+    keyValuePairs?: Record<string>;
+
     @doc("The XProperty property.")
     @visibility("read")
     xProperty: int32;
-
-    @doc("Optional list.")
-    Fields?: string[];
-
-    @doc("Nullable integer.")
-    NullProperty?: int32;
-
-    @doc("Optional dictionary.")
-    KeyValuePairs?: Record<string>;
 }
 
 @doc("The ModelY in the discriminated set")

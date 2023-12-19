@@ -27,14 +27,9 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("xProperty"u8);
-                writer.WriteNumberValue(XProperty);
-            }
             if (Optional.IsCollectionDefined(Fields))
             {
-                writer.WritePropertyName("Fields"u8);
+                writer.WritePropertyName("fields"u8);
                 writer.WriteStartArray();
                 foreach (var item in Fields)
                 {
@@ -44,12 +39,12 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             }
             if (Optional.IsDefined(NullProperty))
             {
-                writer.WritePropertyName("NullProperty"u8);
+                writer.WritePropertyName("nullProperty"u8);
                 writer.WriteNumberValue(NullProperty.Value);
             }
             if (Optional.IsCollectionDefined(KeyValuePairs))
             {
-                writer.WritePropertyName("KeyValuePairs"u8);
+                writer.WritePropertyName("keyValuePairs"u8);
                 writer.WriteStartObject();
                 foreach (var item in KeyValuePairs)
                 {
@@ -57,6 +52,11 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                     writer.WriteStringValue(item.Value);
                 }
                 writer.WriteEndObject();
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("xProperty"u8);
+                writer.WriteNumberValue(XProperty);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
@@ -103,22 +103,17 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             {
                 return null;
             }
-            int xProperty = default;
             Optional<IList<string>> fields = default;
             Optional<int> nullProperty = default;
             Optional<IDictionary<string, string>> keyValuePairs = default;
+            int xProperty = default;
             string kind = default;
             Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("xProperty"u8))
-                {
-                    xProperty = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("Fields"u8))
+                if (property.NameEquals("fields"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -132,7 +127,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                     fields = array;
                     continue;
                 }
-                if (property.NameEquals("NullProperty"u8))
+                if (property.NameEquals("nullProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -141,7 +136,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                     nullProperty = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("KeyValuePairs"u8))
+                if (property.NameEquals("keyValuePairs"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -153,6 +148,11 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                         dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     keyValuePairs = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("xProperty"u8))
+                {
+                    xProperty = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("kind"u8))
@@ -171,7 +171,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelX(kind, name.Value, serializedAdditionalRawData, xProperty, Optional.ToList(fields), Optional.ToNullable(nullProperty), Optional.ToDictionary(keyValuePairs));
+            return new ModelX(kind, name.Value, serializedAdditionalRawData, Optional.ToList(fields), Optional.ToNullable(nullProperty), Optional.ToDictionary(keyValuePairs), xProperty);
         }
 
         BinaryData IPersistableModel<ModelX>.Write(ModelReaderWriterOptions options)

@@ -367,14 +367,14 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                Fields = new object[]
+                fields = new object[]
             {
-"<Fields>"
+"<fields>"
             },
-                NullProperty = 1234,
-                KeyValuePairs = new
+                nullProperty = 1234,
+                keyValuePairs = new
                 {
-                    key = "<KeyValuePairs>",
+                    key = "<keyValuePairs>",
                 },
                 kind = "X",
                 name = "<name>",
@@ -396,14 +396,14 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                Fields = new object[]
+                fields = new object[]
             {
-"<Fields>"
+"<fields>"
             },
-                NullProperty = 1234,
-                KeyValuePairs = new
+                nullProperty = 1234,
+                keyValuePairs = new
                 {
-                    key = "<KeyValuePairs>",
+                    key = "<keyValuePairs>",
                 },
                 kind = "X",
                 name = "<name>",
@@ -425,11 +425,11 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             BaseModel body = new ModelX
             {
-                Fields = { "<Fields>" },
+                Fields = { "<fields>" },
                 NullProperty = 1234,
                 KeyValuePairs =
 {
-["key"] = "<KeyValuePairs>"
+["key"] = "<keyValuePairs>"
 },
                 Name = "<name>",
             };
@@ -446,11 +446,11 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             BaseModel body = new ModelX
             {
-                Fields = { "<Fields>" },
+                Fields = { "<fields>" },
                 NullProperty = 1234,
                 KeyValuePairs =
 {
-["key"] = "<KeyValuePairs>"
+["key"] = "<keyValuePairs>"
 },
                 Name = "<name>",
             };
