@@ -16,6 +16,8 @@ modelerfour:
   lenient-model-deduplication: true
 keep-orphaned-models: AvailabilitySetSkuType
 
+branded: false
+
 use-model-reader-writer: true
 
 acronym-mapping:

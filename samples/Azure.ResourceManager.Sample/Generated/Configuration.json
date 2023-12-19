@@ -55,5 +55,6 @@
   },
   "UpdateRequiredCopy": {
     "VirtualMachineExtension": "Publisher"
-  }
+  },
+  "branded": false
 }

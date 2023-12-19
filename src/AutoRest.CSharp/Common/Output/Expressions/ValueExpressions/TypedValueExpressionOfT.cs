@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 
         private static ValueExpression ValidateType(ValueExpression untyped, Type type)
         {
-#if DEBUG
+#if false
             if (untyped is not TypedValueExpression typed)
             {
                 return untyped;
