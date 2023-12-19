@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+ "Name": "ModelReaderWriterTests",
  "Description": "This is a sample typespec project.",
  "ApiVersions": [
   "0.1.0"
@@ -54,7 +54,7 @@
      "Description": "https://api.example.com/oauth2/token"
     }
    ],
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "Description": "The AuthFlow_tokenUrl",
    "IsExtensible": true,
    "IsNullable": false,
@@ -72,7 +72,7 @@
      "Description": "https://api.example.com/oauth2/refresh"
     }
    ],
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "Description": "The AuthFlow_refreshUrl",
    "IsExtensible": true,
    "IsNullable": false,
@@ -83,7 +83,7 @@
   {
    "$id": "11",
    "Name": "ModelAsStruct",
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "Description": "The InputAdditionalPropertiesModelStruct.",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -107,7 +107,7 @@
   {
    "$id": "14",
    "Name": "ModelWithPersistableOnly",
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -202,7 +202,7 @@
   {
    "$id": "28",
    "Name": "BaseModel",
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "Description": "The BaseModel in the discriminated set",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
@@ -242,7 +242,7 @@
   {
    "$id": "33",
    "Name": "AuthFlow",
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "Description": "The auth flow model",
    "IsNullable": false,
    "Usage": "None",
@@ -311,7 +311,7 @@
   {
    "$id": "41",
    "Name": "ModelX",
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "Description": "The ModelX in the discriminated set",
    "IsNullable": false,
    "DiscriminatorValue": "X",
@@ -397,7 +397,7 @@
   {
    "$id": "53",
    "Name": "ModelY",
-   "Namespace": "System.ClientModel.Tests.Client.ModelReaderWriterTests",
+   "Namespace": "ModelReaderWriterTests",
    "Description": "The ModelY in the discriminated set",
    "IsNullable": false,
    "DiscriminatorValue": "Y",

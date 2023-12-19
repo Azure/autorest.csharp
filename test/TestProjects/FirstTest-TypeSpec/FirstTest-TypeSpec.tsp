@@ -18,7 +18,7 @@ import "@azure-tools/typespec-azure-core";
 @useAuth(
     OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
 )
-namespace System.ClientModel.Tests.Client.ModelReaderWriterTests;
+namespace ModelReaderWriterTests;
 
 @doc("The auth flow model")
 model AuthFlow {

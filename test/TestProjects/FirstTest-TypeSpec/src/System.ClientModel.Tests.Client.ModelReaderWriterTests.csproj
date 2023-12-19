@@ -1,22 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>This is the System.ClientModel.Tests.Client.ModelReaderWriterTests client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>Azure SDK Code Generation System.ClientModel.Tests.Client.ModelReaderWriterTests for Azure Data Plane</AssemblyTitle>
+    <AssemblyTitle>SDK Code Generation System.ClientModel.Tests.Client.ModelReaderWriterTests</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
     <PackageTags>System.ClientModel.Tests.Client.ModelReaderWriterTests</PackageTags>
-    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
-    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs" LinkBase="Shared/Core" />
-    <Compile Include="$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs" LinkBase="Shared/Core" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Azure.Core" />
-    <PackageReference Include="System.ClientModel" />
-    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="System.ClientModel" Version="1.0.0-alpha.20231116.3" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
 </Project>
