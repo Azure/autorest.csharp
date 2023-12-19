@@ -16,6 +16,8 @@ modelerfour:
   lenient-model-deduplication: true
 keep-orphaned-models: AvailabilitySetSkuType
 
+use-model-reader-writer: true
+
 acronym-mapping:
   Os: OS
   Ip: IP
