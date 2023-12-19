@@ -15,15 +15,9 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
     public partial class ModelX : BaseModel
     {
         /// <summary> Initializes a new instance of <see cref="ModelX"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="xProperty"> The XProperty property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public ModelX(string name, int xProperty) : base(name)
+        public ModelX()
         {
-            Argument.AssertNotNull(name, nameof(name));
-
             Kind = "X";
-            XProperty = xProperty;
             Fields = new ChangeTrackingList<string>();
             KeyValuePairs = new ChangeTrackingDictionary<string, string>();
         }
@@ -44,13 +38,8 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             KeyValuePairs = keyValuePairs;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelX"/> for deserialization. </summary>
-        internal ModelX()
-        {
-        }
-
         /// <summary> The XProperty property. </summary>
-        public int XProperty { get; set; }
+        public int XProperty { get; }
         /// <summary> Optional list. </summary>
         public IList<string> Fields { get; }
         /// <summary> Nullable integer. </summary>

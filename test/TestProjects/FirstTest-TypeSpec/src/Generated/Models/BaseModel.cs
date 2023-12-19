@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 {
@@ -51,13 +50,8 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        protected BaseModel(string name)
+        protected BaseModel()
         {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
@@ -69,11 +63,6 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             Kind = kind;
             Name = name;
             _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/> for deserialization. </summary>
-        internal BaseModel()
-        {
         }
 
         /// <summary> The kind. </summary>

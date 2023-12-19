@@ -45,9 +45,6 @@ op op1(@body body: ModelAsStruct): ModelAsStruct;
 model ModelWithPersistableOnly {
     @doc("The name.")
     name?: string;
-    @doc("The x property.")
-    @visibility("read")
-    xProperty: int32;
 
     @doc("The fields property.")
     fields?: string[];
@@ -57,6 +54,10 @@ model ModelWithPersistableOnly {
 
     @doc("The key value pairs property.")
     keyValuePairs?: Record<string>;
+    
+    @doc("The x property.")
+    @visibility("read")
+    xProperty: int32;
 }
 
 @route("/api/ModelWithPersistableOnly")
@@ -70,7 +71,7 @@ model BaseModel {
     kind: string;
 
     @doc("The name property.")
-    name: string;
+    name?: string;
 }
 
 @doc("The ModelX in the discriminated set")
@@ -78,7 +79,8 @@ model ModelX extends BaseModel {
     kind: "X";
 
     @doc("The XProperty property.")
-    XProperty: int32;
+    @visibility("read")
+    xProperty: int32;
 
     @doc("Optional list.")
     Fields?: string[];
@@ -95,7 +97,8 @@ model ModelY extends BaseModel {
     kind: "Y";
 
     @doc("The YProperty property.")
-    YProperty: string;
+    @visibility("read")
+    yProperty: string;
 }
 
 @route("/api/DiscriminatedSet")

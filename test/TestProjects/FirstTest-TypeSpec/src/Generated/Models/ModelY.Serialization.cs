@@ -27,12 +27,18 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("YProperty"u8);
-            writer.WriteStringValue(YProperty);
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("yProperty"u8);
+                writer.WriteStringValue(YProperty);
+            }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -73,12 +79,12 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             }
             string yProperty = default;
             string kind = default;
-            string name = default;
+            Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("YProperty"u8))
+                if (property.NameEquals("yProperty"u8))
                 {
                     yProperty = property.Value.GetString();
                     continue;
@@ -99,7 +105,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelY(kind, name, serializedAdditionalRawData, yProperty);
+            return new ModelY(kind, name.Value, serializedAdditionalRawData, yProperty);
         }
 
         BinaryData IPersistableModel<ModelY>.Write(ModelReaderWriterOptions options)

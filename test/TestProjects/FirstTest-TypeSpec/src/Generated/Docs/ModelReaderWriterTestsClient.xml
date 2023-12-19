@@ -206,10 +206,10 @@ Response response = await client.Op2Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("xProperty").ToString());
 Console.WriteLine(result.GetProperty("fields")[0].ToString());
 Console.WriteLine(result.GetProperty("nullProperty").ToString());
 Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code></example>
     </member>
     <member name="Op2(RequestContent,RequestContext)">
@@ -249,10 +249,10 @@ Response response = client.Op2(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("xProperty").ToString());
 Console.WriteLine(result.GetProperty("fields")[0].ToString());
 Console.WriteLine(result.GetProperty("nullProperty").ToString());
 Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code></example>
     </member>
     <member name="Op3Async(BaseModel,CancellationToken)">
@@ -263,7 +263,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-BaseModel body = new ModelX("<name>", 1234);
+BaseModel body = new ModelX();
 Response<BaseModel> response = await client.Op3Async(body);
 ]]></code>
 This sample shows how to call Op3Async with all parameters.
@@ -272,7 +272,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-BaseModel body = new ModelX("<name>", 1234)
+BaseModel body = new ModelX
 {
     Fields = { "<Fields>" },
     NullProperty = 1234,
@@ -280,6 +280,7 @@ BaseModel body = new ModelX("<name>", 1234)
     {
         ["key"] = "<KeyValuePairs>"
     },
+    Name = "<name>",
 };
 Response<BaseModel> response = await client.Op3Async(body);
 ]]></code></example>
@@ -292,7 +293,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-BaseModel body = new ModelX("<name>", 1234);
+BaseModel body = new ModelX();
 Response<BaseModel> response = client.Op3(body);
 ]]></code>
 This sample shows how to call Op3 with all parameters.
@@ -301,7 +302,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-BaseModel body = new ModelX("<name>", 1234)
+BaseModel body = new ModelX
 {
     Fields = { "<Fields>" },
     NullProperty = 1234,
@@ -309,6 +310,7 @@ BaseModel body = new ModelX("<name>", 1234)
     {
         ["key"] = "<KeyValuePairs>"
     },
+    Name = "<name>",
 };
 Response<BaseModel> response = client.Op3(body);
 ]]></code></example>
@@ -323,15 +325,12 @@ ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint,
 
 using RequestContent content = RequestContent.Create(new
 {
-    XProperty = 1234,
     kind = "X",
-    name = "<name>",
 });
 Response response = await client.Op3Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op3Async with all request content and parse the result.
 <code><![CDATA[
@@ -341,7 +340,6 @@ ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint,
 
 using RequestContent content = RequestContent.Create(new
 {
-    XProperty = 1234,
     Fields = new object[]
     {
         "<Fields>"
@@ -371,15 +369,12 @@ ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint,
 
 using RequestContent content = RequestContent.Create(new
 {
-    XProperty = 1234,
     kind = "X",
-    name = "<name>",
 });
 Response response = client.Op3(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op3 with all request content and parse the result.
 <code><![CDATA[
@@ -389,7 +384,6 @@ ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint,
 
 using RequestContent content = RequestContent.Create(new
 {
-    XProperty = 1234,
     Fields = new object[]
     {
         "<Fields>"

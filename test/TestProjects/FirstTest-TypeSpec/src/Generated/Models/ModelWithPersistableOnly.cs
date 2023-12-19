@@ -55,30 +55,30 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelWithPersistableOnly"/>. </summary>
         /// <param name="name"> The name. </param>
-        /// <param name="xProperty"> The x property. </param>
         /// <param name="fields"> The fields property. </param>
         /// <param name="nullProperty"> The nullable property. </param>
         /// <param name="keyValuePairs"> The key value pairs property. </param>
+        /// <param name="xProperty"> The x property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithPersistableOnly(string name, int xProperty, IList<string> fields, int? nullProperty, IDictionary<string, string> keyValuePairs, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithPersistableOnly(string name, IList<string> fields, int? nullProperty, IDictionary<string, string> keyValuePairs, int xProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            XProperty = xProperty;
             Fields = fields;
             NullProperty = nullProperty;
             KeyValuePairs = keyValuePairs;
+            XProperty = xProperty;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name. </summary>
         public string Name { get; set; }
-        /// <summary> The x property. </summary>
-        public int XProperty { get; }
         /// <summary> The fields property. </summary>
         public IList<string> Fields { get; }
         /// <summary> The nullable property. </summary>
         public int? NullProperty { get; set; }
         /// <summary> The key value pairs property. </summary>
         public IDictionary<string, string> KeyValuePairs { get; }
+        /// <summary> The x property. </summary>
+        public int XProperty { get; }
     }
 }

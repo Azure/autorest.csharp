@@ -127,32 +127,32 @@
     },
     {
      "$id": "17",
-     "Name": "xProperty",
-     "SerializedName": "xProperty",
-     "Description": "The x property.",
-     "Type": {
-      "$id": "18",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "19",
      "Name": "fields",
      "SerializedName": "fields",
      "Description": "The fields property.",
      "Type": {
-      "$id": "20",
+      "$id": "18",
       "Name": "Array",
       "ElementType": {
-       "$id": "21",
+       "$id": "19",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "20",
+     "Name": "nullProperty",
+     "SerializedName": "nullProperty",
+     "Description": "The nullable property.",
+     "Type": {
+      "$id": "21",
+      "Name": "int32",
+      "Kind": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -160,42 +160,42 @@
     },
     {
      "$id": "22",
-     "Name": "nullProperty",
-     "SerializedName": "nullProperty",
-     "Description": "The nullable property.",
+     "Name": "keyValuePairs",
+     "SerializedName": "keyValuePairs",
+     "Description": "The key value pairs property.",
      "Type": {
       "$id": "23",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "24",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$id": "25",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "24",
-     "Name": "keyValuePairs",
-     "SerializedName": "keyValuePairs",
-     "Description": "The key value pairs property.",
+     "$id": "26",
+     "Name": "xProperty",
+     "SerializedName": "xProperty",
+     "Description": "The x property.",
      "Type": {
-      "$id": "25",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "26",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$id": "27",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
+      "$id": "27",
+      "Name": "int32",
+      "Kind": "Int32",
       "IsNullable": false
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "IsRequired": true,
+     "IsReadOnly": true
     }
    ]
   },
@@ -234,7 +234,7 @@
       "Kind": "String",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
      "IsReadOnly": false
     }
    ]
@@ -322,8 +322,8 @@
    "Properties": [
     {
      "$id": "42",
-     "Name": "XProperty",
-     "SerializedName": "XProperty",
+     "Name": "xProperty",
+     "SerializedName": "xProperty",
      "Description": "The XProperty property.",
      "Type": {
       "$id": "43",
@@ -332,7 +332,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": true
     },
     {
      "$id": "44",
@@ -408,8 +408,8 @@
    "Properties": [
     {
      "$id": "54",
-     "Name": "YProperty",
-     "SerializedName": "YProperty",
+     "Name": "yProperty",
+     "SerializedName": "yProperty",
      "Description": "The YProperty property.",
      "Type": {
       "$id": "55",
@@ -418,7 +418,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": true
     }
    ]
   }

@@ -29,8 +29,11 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -70,7 +73,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                 return null;
             }
             string kind = "Unknown";
-            string name = default;
+            Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -91,7 +94,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new UnknownBaseModel(kind, name, serializedAdditionalRawData);
+            return new UnknownBaseModel(kind, name.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<BaseModel>.Write(ModelReaderWriterOptions options)

@@ -27,8 +27,11 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("XProperty"u8);
-            writer.WriteNumberValue(XProperty);
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("xProperty"u8);
+                writer.WriteNumberValue(XProperty);
+            }
             if (Optional.IsCollectionDefined(Fields))
             {
                 writer.WritePropertyName("Fields"u8);
@@ -57,8 +60,11 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -102,12 +108,12 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             Optional<int> nullProperty = default;
             Optional<IDictionary<string, string>> keyValuePairs = default;
             string kind = default;
-            string name = default;
+            Optional<string> name = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("XProperty"u8))
+                if (property.NameEquals("xProperty"u8))
                 {
                     xProperty = property.Value.GetInt32();
                     continue;
@@ -165,7 +171,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelX(kind, name, serializedAdditionalRawData, xProperty, Optional.ToList(fields), Optional.ToNullable(nullProperty), Optional.ToDictionary(keyValuePairs));
+            return new ModelX(kind, name.Value, serializedAdditionalRawData, xProperty, Optional.ToList(fields), Optional.ToNullable(nullProperty), Optional.ToDictionary(keyValuePairs));
         }
 
         BinaryData IPersistableModel<ModelX>.Write(ModelReaderWriterOptions options)

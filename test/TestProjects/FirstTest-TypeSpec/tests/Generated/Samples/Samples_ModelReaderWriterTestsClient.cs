@@ -218,10 +218,10 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("xProperty").ToString());
             Console.WriteLine(result.GetProperty("fields")[0].ToString());
             Console.WriteLine(result.GetProperty("nullProperty").ToString());
             Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
         [Test]
@@ -249,10 +249,10 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("xProperty").ToString());
             Console.WriteLine(result.GetProperty("fields")[0].ToString());
             Console.WriteLine(result.GetProperty("nullProperty").ToString());
             Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
         [Test]
@@ -307,15 +307,12 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                XProperty = 1234,
                 kind = "X",
-                name = "<name>",
             });
             Response response = client.Op3(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -328,15 +325,12 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                XProperty = 1234,
                 kind = "X",
-                name = "<name>",
             });
             Response response = await client.Op3Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -347,7 +341,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-            BaseModel body = new ModelX("<name>", 1234);
+            BaseModel body = new ModelX();
             Response<BaseModel> response = client.Op3(body);
         }
 
@@ -359,7 +353,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-            BaseModel body = new ModelX("<name>", 1234);
+            BaseModel body = new ModelX();
             Response<BaseModel> response = await client.Op3Async(body);
         }
 
@@ -373,7 +367,6 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                XProperty = 1234,
                 Fields = new object[]
             {
 "<Fields>"
@@ -403,7 +396,6 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                XProperty = 1234,
                 Fields = new object[]
             {
 "<Fields>"
@@ -431,7 +423,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-            BaseModel body = new ModelX("<name>", 1234)
+            BaseModel body = new ModelX
             {
                 Fields = { "<Fields>" },
                 NullProperty = 1234,
@@ -439,6 +431,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 {
 ["key"] = "<KeyValuePairs>"
 },
+                Name = "<name>",
             };
             Response<BaseModel> response = client.Op3(body);
         }
@@ -451,7 +444,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ModelReaderWriterTestsClient client = new ModelReaderWriterTestsClient(endpoint, credential);
 
-            BaseModel body = new ModelX("<name>", 1234)
+            BaseModel body = new ModelX
             {
                 Fields = { "<Fields>" },
                 NullProperty = 1234,
@@ -459,6 +452,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Samples
 {
 ["key"] = "<KeyValuePairs>"
 },
+                Name = "<name>",
             };
             Response<BaseModel> response = await client.Op3Async(body);
         }

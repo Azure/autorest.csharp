@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 {
@@ -15,16 +14,9 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
     public partial class ModelY : BaseModel
     {
         /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="yProperty"> The YProperty property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="yProperty"/> is null. </exception>
-        public ModelY(string name, string yProperty) : base(name)
+        public ModelY()
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(yProperty, nameof(yProperty));
-
             Kind = "Y";
-            YProperty = yProperty;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
@@ -37,12 +29,7 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
             YProperty = yProperty;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelY"/> for deserialization. </summary>
-        internal ModelY()
-        {
-        }
-
         /// <summary> The YProperty property. </summary>
-        public string YProperty { get; set; }
+        public string YProperty { get; }
     }
 }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
 {
@@ -15,11 +14,8 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
     internal partial class UnknownBaseModel : BaseModel
     {
         /// <summary> Initializes a new instance of <see cref="UnknownBaseModel"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal UnknownBaseModel(string name) : base(name)
+        internal UnknownBaseModel()
         {
-            Argument.AssertNotNull(name, nameof(name));
         }
 
         /// <summary> Initializes a new instance of <see cref="UnknownBaseModel"/>. </summary>
@@ -27,11 +23,6 @@ namespace System.ClientModel.Tests.Client.ModelReaderWriterTests.Models
         /// <param name="name"> The name property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownBaseModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
-        {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownBaseModel"/> for deserialization. </summary>
-        internal UnknownBaseModel()
         {
         }
     }
