@@ -188,41 +188,37 @@ export function createModelForService(
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
-            if (apiVersionIndex !== -1) {
-                if (apiVersionParam === undefined) {
-                    $lib.reportDiagnostic(program, {
-                        code: "No-APIVersion",
-                        format: { service: service.type.name },
-                        target: NoTarget
-                    });
-                    break;
-                } else {
-                    const apiVersionInOperation =
-                        op.Parameters[apiVersionIndex];
-                    if (!apiVersionInOperation.DefaultValue?.Value) {
-                        apiVersionInOperation.DefaultValue =
-                            apiVersionParam.DefaultValue;
-                    }
-                    /**
-                     * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
-                     * Three checkpoints:
-                     * the parameter is query parameter,
-                     * it is client parameter
-                     * it does not has default value, or the default value is included in the global service apiVersion.
-                     */
-                    if (
-                        apiVersions.has(
-                            apiVersionInOperation.DefaultValue?.Value
-                        ) &&
-                        apiVersionInOperation.Kind ===
-                            InputOperationParameterKind.Client &&
-                        apiVersionInOperation.Location ===
-                            apiVersionParam.Location
-                    ) {
-                        op.Parameters[apiVersionIndex] = apiVersionParam;
-                    }
+            if (apiVersionIndex === -1) {
+                continue;
+            }
+            const apiVersionInOperation = op.Parameters[apiVersionIndex];
+            if (apiVersionParam !== undefined) {
+                if (!apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersionInOperation.DefaultValue =
+                        apiVersionParam.DefaultValue;
+                }
+                /**
+                 * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                 * Three checkpoints:
+                 * the parameter is query parameter,
+                 * it is client parameter
+                 * it does not has default value, or the default value is included in the global service apiVersion.
+                 */
+                if (
+                    apiVersions.has(
+                        apiVersionInOperation.DefaultValue?.Value
+                    ) &&
+                    apiVersionInOperation.Kind ===
+                        InputOperationParameterKind.Client &&
+                    apiVersionInOperation.Location === apiVersionParam.Location
+                ) {
+                    op.Parameters[apiVersionIndex] = apiVersionParam;
+                    continue;
                 }
             }
+
+            apiVersionInOperation.Kind = InputOperationParameterKind.Method;
+            apiVersionInOperation.IsApiVersion = false;
         }
     }
 

@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models
                         uriParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: true));
                         break;
                     case RequestLocation.Path:
-                        pathParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: false));
+                        pathParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: false, isMethodParameter: operationParameter.Kind == InputOperationParameterKind.Method));
                         break;
                     case RequestLocation.Query:
                         queryParameters.Add(new QueryParameter(parameterName, reference, operationParameter.ArraySerializationDelimiter, escape, serializationFormat, operationParameter.Explode, operationParameter.IsApiVersion));
