@@ -37,7 +37,7 @@ value = 123.45F,
 }
             },
             });
-            Response response = client.DetectUnivariateEntireSeries(content);
+            Response response = client.DetectUnivariateEntireSeries("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -67,7 +67,7 @@ value = 123.45F,
 }
             },
             });
-            Response response = await client.DetectUnivariateEntireSeriesAsync(content);
+            Response response = await client.DetectUnivariateEntireSeriesAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -91,7 +91,7 @@ value = 123.45F,
             {
 new TimeSeriesPoint(123.45F)
             });
-            Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
+            Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries("v1.1", options);
         }
 
         [Test]
@@ -106,7 +106,7 @@ new TimeSeriesPoint(123.45F)
             {
 new TimeSeriesPoint(123.45F)
             });
-            Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
+            Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync("v1.1", options);
         }
 
         [Test]
@@ -135,7 +135,7 @@ value = 123.45F,
                 imputeMode = "auto",
                 imputeFixedValue = 123.45F,
             });
-            Response response = client.DetectUnivariateEntireSeries(content);
+            Response response = client.DetectUnivariateEntireSeries("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -174,7 +174,7 @@ value = 123.45F,
                 imputeMode = "auto",
                 imputeFixedValue = 123.45F,
             });
-            Response response = await client.DetectUnivariateEntireSeriesAsync(content);
+            Response response = await client.DetectUnivariateEntireSeriesAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -211,7 +211,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 ImputeMode = ImputeMode.Auto,
                 ImputeFixedValue = 123.45F,
             };
-            Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
+            Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries("v1.1", options);
         }
 
         [Test]
@@ -238,7 +238,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 ImputeMode = ImputeMode.Auto,
                 ImputeFixedValue = 123.45F,
             };
-            Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
+            Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync("v1.1", options);
         }
 
         [Test]
@@ -259,7 +259,7 @@ value = 123.45F,
 }
             },
             });
-            Response response = client.DetectUnivariateLastPoint(content);
+            Response response = client.DetectUnivariateLastPoint("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -290,7 +290,7 @@ value = 123.45F,
 }
             },
             });
-            Response response = await client.DetectUnivariateLastPointAsync(content);
+            Response response = await client.DetectUnivariateLastPointAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -315,7 +315,7 @@ value = 123.45F,
             {
 new TimeSeriesPoint(123.45F)
             });
-            Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
+            Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint("v1.1", options);
         }
 
         [Test]
@@ -330,7 +330,7 @@ new TimeSeriesPoint(123.45F)
             {
 new TimeSeriesPoint(123.45F)
             });
-            Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
+            Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync("v1.1", options);
         }
 
         [Test]
@@ -359,7 +359,7 @@ value = 123.45F,
                 imputeMode = "auto",
                 imputeFixedValue = 123.45F,
             });
-            Response response = client.DetectUnivariateLastPoint(content);
+            Response response = client.DetectUnivariateLastPoint("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -399,7 +399,7 @@ value = 123.45F,
                 imputeMode = "auto",
                 imputeFixedValue = 123.45F,
             });
-            Response response = await client.DetectUnivariateLastPointAsync(content);
+            Response response = await client.DetectUnivariateLastPointAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -437,7 +437,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 ImputeMode = ImputeMode.Auto,
                 ImputeFixedValue = 123.45F,
             };
-            Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
+            Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint("v1.1", options);
         }
 
         [Test]
@@ -464,7 +464,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 ImputeMode = ImputeMode.Auto,
                 ImputeFixedValue = 123.45F,
             };
-            Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
+            Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync("v1.1", options);
         }
 
         [Test]
@@ -486,7 +486,7 @@ value = 123.45F,
             },
                 granularity = "yearly",
             });
-            Response response = client.DetectUnivariateChangePoint(content);
+            Response response = client.DetectUnivariateChangePoint("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -511,7 +511,7 @@ value = 123.45F,
             },
                 granularity = "yearly",
             });
-            Response response = await client.DetectUnivariateChangePointAsync(content);
+            Response response = await client.DetectUnivariateChangePointAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -529,7 +529,7 @@ value = 123.45F,
             {
 new TimeSeriesPoint(123.45F)
             }, TimeGranularity.Yearly);
-            Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
+            Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint("v1.1", options);
         }
 
         [Test]
@@ -544,7 +544,7 @@ new TimeSeriesPoint(123.45F)
             {
 new TimeSeriesPoint(123.45F)
             }, TimeGranularity.Yearly);
-            Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
+            Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync("v1.1", options);
         }
 
         [Test]
@@ -571,7 +571,7 @@ value = 123.45F,
                 stableTrendWindow = 1234,
                 threshold = 123.45F,
             });
-            Response response = client.DetectUnivariateChangePoint(content);
+            Response response = client.DetectUnivariateChangePoint("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -603,7 +603,7 @@ value = 123.45F,
                 stableTrendWindow = 1234,
                 threshold = 123.45F,
             });
-            Response response = await client.DetectUnivariateChangePointAsync(content);
+            Response response = await client.DetectUnivariateChangePointAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("period").ToString());
@@ -632,7 +632,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 StableTrendWindow = 1234,
                 Threshold = 123.45F,
             };
-            Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
+            Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint("v1.1", options);
         }
 
         [Test]
@@ -656,7 +656,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 StableTrendWindow = 1234,
                 Threshold = 123.45F,
             };
-            Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
+            Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync("v1.1", options);
         }
 
         [Test]
@@ -667,7 +667,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = client.GetMultivariateBatchDetectionResult("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -687,7 +687,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = await client.GetMultivariateBatchDetectionResultAsync("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -707,7 +707,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -718,7 +718,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -729,7 +729,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = client.GetMultivariateBatchDetectionResult("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -764,7 +764,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = await client.GetMultivariateBatchDetectionResultAsync("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -799,7 +799,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<MultivariateDetectionResult> response = client.GetMultivariateBatchDetectionResult("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -810,7 +810,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<MultivariateDetectionResult> response = await client.GetMultivariateBatchDetectionResultAsync("v1.1", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -827,7 +827,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = client.TrainMultivariateModel(content);
+            Response response = client.TrainMultivariateModel("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -849,7 +849,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = await client.TrainMultivariateModelAsync(content);
+            Response response = await client.TrainMultivariateModelAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -866,7 +866,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
+            Response<AnomalyDetectionModel> response = client.TrainMultivariateModel("v1.1", modelInfo);
         }
 
         [Test]
@@ -878,7 +878,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
+            Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync("v1.1", modelInfo);
         }
 
         [Test]
@@ -938,7 +938,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
             },
                 },
             });
-            Response response = client.TrainMultivariateModel(content);
+            Response response = client.TrainMultivariateModel("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1024,7 +1024,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
             },
                 },
             });
-            Response response = await client.TrainMultivariateModelAsync(content);
+            Response response = await client.TrainMultivariateModelAsync("v1.1", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1092,7 +1092,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }},
                 },
             };
-            Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
+            Response<AnomalyDetectionModel> response = client.TrainMultivariateModel("v1.1", modelInfo);
         }
 
         [Test]
@@ -1134,7 +1134,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }},
                 },
             };
-            Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
+            Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync("v1.1", modelInfo);
         }
 
         [Test]
@@ -1145,7 +1145,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.DeleteMultivariateModel("<modelId>");
+            Response response = client.DeleteMultivariateModel("v1.1", "<modelId>");
 
             Console.WriteLine(response.Status);
         }
@@ -1158,7 +1158,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.DeleteMultivariateModelAsync("<modelId>");
+            Response response = await client.DeleteMultivariateModelAsync("v1.1", "<modelId>");
 
             Console.WriteLine(response.Status);
         }
@@ -1171,7 +1171,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.DeleteMultivariateModel("<modelId>");
+            Response response = client.DeleteMultivariateModel("v1.1", "<modelId>");
 
             Console.WriteLine(response.Status);
         }
@@ -1184,7 +1184,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.DeleteMultivariateModelAsync("<modelId>");
+            Response response = await client.DeleteMultivariateModelAsync("v1.1", "<modelId>");
 
             Console.WriteLine(response.Status);
         }
@@ -1197,7 +1197,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateModel("<modelId>", null);
+            Response response = client.GetMultivariateModel("v1.1", "<modelId>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1213,7 +1213,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateModelAsync("<modelId>", null);
+            Response response = await client.GetMultivariateModelAsync("v1.1", "<modelId>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1229,7 +1229,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
+            Response<AnomalyDetectionModel> response = client.GetMultivariateModel("v1.1", "<modelId>");
         }
 
         [Test]
@@ -1240,7 +1240,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
+            Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("v1.1", "<modelId>");
         }
 
         [Test]
@@ -1251,7 +1251,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = client.GetMultivariateModel("<modelId>", null);
+            Response response = client.GetMultivariateModel("v1.1", "<modelId>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1288,7 +1288,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response response = await client.GetMultivariateModelAsync("<modelId>", null);
+            Response response = await client.GetMultivariateModelAsync("v1.1", "<modelId>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1325,7 +1325,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<AnomalyDetectionModel> response = client.GetMultivariateModel("<modelId>");
+            Response<AnomalyDetectionModel> response = client.GetMultivariateModel("v1.1", "<modelId>");
         }
 
         [Test]
@@ -1336,7 +1336,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("<modelId>");
+            Response<AnomalyDetectionModel> response = await client.GetMultivariateModelAsync("v1.1", "<modelId>");
         }
 
         [Test]
@@ -1354,7 +1354,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", content);
+            Response response = client.DetectMultivariateBatchAnomaly("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1381,7 +1381,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", content);
+            Response response = await client.DetectMultivariateBatchAnomalyAsync("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1402,7 +1402,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
+            Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1414,7 +1414,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
+            Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1432,7 +1432,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = client.DetectMultivariateBatchAnomaly("<modelId>", content);
+            Response response = client.DetectMultivariateBatchAnomaly("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1474,7 +1474,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 startTime = "2022-05-10T14:57:31.2311892-04:00",
                 endTime = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", content);
+            Response response = await client.DetectMultivariateBatchAnomalyAsync("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -1510,7 +1510,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("<modelId>", options);
+            Response<MultivariateDetectionResult> response = client.DetectMultivariateBatchAnomaly("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1522,7 +1522,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
             MultivariateBatchDetectionOptions options = new MultivariateBatchDetectionOptions(new Uri("http://localhost:3000"), 1234, DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", options);
+            Response<MultivariateDetectionResult> response = await client.DetectMultivariateBatchAnomalyAsync("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1552,7 +1552,7 @@ values = new object[]
             },
                 topContributorCount = 1234,
             });
-            Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
+            Response response = client.DetectMultivariateLastAnomaly("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1585,7 +1585,7 @@ values = new object[]
             },
                 topContributorCount = 1234,
             });
-            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
+            Response response = await client.DetectMultivariateLastAnomalyAsync("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1603,7 +1603,7 @@ values = new object[]
             {
 new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
             }, 1234);
-            Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
+            Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1618,7 +1618,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             {
 new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
             }, 1234);
-            Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
+            Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1648,7 +1648,7 @@ values = new object[]
             },
                 topContributorCount = 1234,
             });
-            Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
+            Response response = client.DetectMultivariateLastAnomaly("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
@@ -1694,7 +1694,7 @@ values = new object[]
             },
                 topContributorCount = 1234,
             });
-            Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
+            Response response = await client.DetectMultivariateLastAnomalyAsync("v1.1", "<modelId>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("variableStates")[0].GetProperty("variable").ToString());
@@ -1725,7 +1725,7 @@ values = new object[]
             {
 new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
             }, 1234);
-            Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
+            Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1740,7 +1740,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             {
 new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.45F})
             }, 1234);
-            Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
+            Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("v1.1", "<modelId>", options);
         }
 
         [Test]
@@ -1751,7 +1751,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            foreach (BinaryData item in client.GetMultivariateModels(null, null, null))
+            foreach (BinaryData item in client.GetMultivariateModels("v1.1", null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1768,7 +1768,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.GetMultivariateModelsAsync(null, null, null))
+            await foreach (BinaryData item in client.GetMultivariateModelsAsync("v1.1", null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1785,7 +1785,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            foreach (AnomalyDetectionModel item in client.GetMultivariateModels())
+            foreach (AnomalyDetectionModel item in client.GetMultivariateModels("v1.1"))
             {
             }
         }
@@ -1798,7 +1798,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync())
+            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync("v1.1"))
             {
             }
         }
@@ -1811,7 +1811,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            foreach (BinaryData item in client.GetMultivariateModels(1234, 1234, null))
+            foreach (BinaryData item in client.GetMultivariateModels("v1.1", 1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1849,7 +1849,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.GetMultivariateModelsAsync(1234, 1234, null))
+            await foreach (BinaryData item in client.GetMultivariateModelsAsync("v1.1", 1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -1887,7 +1887,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            foreach (AnomalyDetectionModel item in client.GetMultivariateModels(skip: 1234, maxCount: 1234))
+            foreach (AnomalyDetectionModel item in client.GetMultivariateModels("v1.1", skip: 1234, maxCount: 1234))
             {
             }
         }
@@ -1900,7 +1900,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync(skip: 1234, maxCount: 1234))
+            await foreach (AnomalyDetectionModel item in client.GetMultivariateModelsAsync("v1.1", skip: 1234, maxCount: 1234))
             {
             }
         }

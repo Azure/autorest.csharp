@@ -387,7 +387,6 @@ namespace CustomizationsInTsp
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/foo", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -402,7 +401,6 @@ namespace CustomizationsInTsp
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/bar", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

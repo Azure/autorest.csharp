@@ -19,7 +19,6 @@ namespace Server.Path.Multiple
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -51,7 +50,6 @@ namespace Server.Path.Multiple
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -65,17 +63,22 @@ namespace Server.Path.Multiple
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> Pass in v1.0 for API version. The default value is "v1.0". Allowed values: "v1.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParamsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> NoOperationParamsAsync(RequestContext context = null)
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParamsAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> NoOperationParamsAsync(string apiVersion, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.NoOperationParams");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoOperationParamsRequest(context);
+                using HttpMessage message = CreateNoOperationParamsRequest(apiVersion, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -96,17 +99,22 @@ namespace Server.Path.Multiple
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> Pass in v1.0 for API version. The default value is "v1.0". Allowed values: "v1.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParams(RequestContext)']/*" />
-        public virtual Response NoOperationParams(RequestContext context = null)
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParams(string,RequestContext)']/*" />
+        public virtual Response NoOperationParams(string apiVersion, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.NoOperationParams");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoOperationParamsRequest(context);
+                using HttpMessage message = CreateNoOperationParamsRequest(apiVersion, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -127,22 +135,24 @@ namespace Server.Path.Multiple
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> Pass in v1.0 for API version. The default value is "v1.0". Allowed values: "v1.0". </param>
         /// <param name="keyword"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="keyword"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="keyword"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> or <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParamAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> WithOperationPathParamAsync(string keyword, RequestContext context = null)
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParamAsync(string,string,RequestContext)']/*" />
+        public virtual async Task<Response> WithOperationPathParamAsync(string apiVersion, string keyword, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
             Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.WithOperationPathParam");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateWithOperationPathParamRequest(keyword, context);
+                using HttpMessage message = CreateWithOperationPathParamRequest(apiVersion, keyword, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -163,22 +173,24 @@ namespace Server.Path.Multiple
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> Pass in v1.0 for API version. The default value is "v1.0". Allowed values: "v1.0". </param>
         /// <param name="keyword"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="keyword"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="keyword"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> or <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParam(string,RequestContext)']/*" />
-        public virtual Response WithOperationPathParam(string keyword, RequestContext context = null)
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParam(string,string,RequestContext)']/*" />
+        public virtual Response WithOperationPathParam(string apiVersion, string keyword, RequestContext context = null)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
             Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));
 
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.WithOperationPathParam");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateWithOperationPathParamRequest(keyword, context);
+                using HttpMessage message = CreateWithOperationPathParamRequest(apiVersion, keyword, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -188,7 +200,7 @@ namespace Server.Path.Multiple
             }
         }
 
-        internal HttpMessage CreateNoOperationParamsRequest(RequestContext context)
+        internal HttpMessage CreateNoOperationParamsRequest(string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -196,14 +208,14 @@ namespace Server.Path.Multiple
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/server/path/multiple/", false);
-            uri.AppendRaw(_apiVersion, true);
+            uri.AppendRaw(apiVersion, true);
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        internal HttpMessage CreateWithOperationPathParamRequest(string keyword, RequestContext context)
+        internal HttpMessage CreateWithOperationPathParamRequest(string apiVersion, string keyword, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -211,7 +223,7 @@ namespace Server.Path.Multiple
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/server/path/multiple/", false);
-            uri.AppendRaw(_apiVersion, true);
+            uri.AppendRaw(apiVersion, true);
             uri.AppendPath("/", false);
             uri.AppendPath(keyword, true);
             request.Uri = uri;

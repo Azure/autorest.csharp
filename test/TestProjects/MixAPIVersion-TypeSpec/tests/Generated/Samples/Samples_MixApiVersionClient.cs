@@ -135,7 +135,7 @@ namespace MixApiVersion.Samples
             {
                 age = 1234,
             });
-            Response response = client.Create(content);
+            Response response = client.Create("2022-07-09", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -153,7 +153,7 @@ namespace MixApiVersion.Samples
             {
                 age = 1234,
             });
-            Response response = await client.CreateAsync(content);
+            Response response = await client.CreateAsync("2022-07-09", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -172,7 +172,7 @@ namespace MixApiVersion.Samples
                 tag = "<tag>",
                 age = 1234,
             });
-            Response response = client.Create(content);
+            Response response = client.Create("2022-07-09", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -192,7 +192,7 @@ namespace MixApiVersion.Samples
                 tag = "<tag>",
                 age = 1234,
             });
-            Response response = await client.CreateAsync(content);
+            Response response = await client.CreateAsync("2022-07-09", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());

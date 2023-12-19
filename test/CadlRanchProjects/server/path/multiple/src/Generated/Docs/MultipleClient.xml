@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="NoOperationParamsAsync(RequestContext)">
+    <member name="NoOperationParamsAsync(string,RequestContext)">
       <example>
 This sample shows how to call NoOperationParamsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = await client.NoOperationParamsAsync();
+Response response = await client.NoOperationParamsAsync("v1.0");
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call NoOperationParamsAsync with all request content.
+This sample shows how to call NoOperationParamsAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = await client.NoOperationParamsAsync();
+Response response = await client.NoOperationParamsAsync("v1.0");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="NoOperationParams(RequestContext)">
+    <member name="NoOperationParams(string,RequestContext)">
       <example>
 This sample shows how to call NoOperationParams.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = client.NoOperationParams();
+Response response = client.NoOperationParams("v1.0");
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call NoOperationParams with all request content.
+This sample shows how to call NoOperationParams with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = client.NoOperationParams();
+Response response = client.NoOperationParams("v1.0");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="WithOperationPathParamAsync(string,RequestContext)">
+    <member name="WithOperationPathParamAsync(string,string,RequestContext)">
       <example>
 This sample shows how to call WithOperationPathParamAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = await client.WithOperationPathParamAsync("<keyword>");
+Response response = await client.WithOperationPathParamAsync("v1.0", "<keyword>");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -59,19 +59,19 @@ This sample shows how to call WithOperationPathParamAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = await client.WithOperationPathParamAsync("<keyword>");
+Response response = await client.WithOperationPathParamAsync("v1.0", "<keyword>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="WithOperationPathParam(string,RequestContext)">
+    <member name="WithOperationPathParam(string,string,RequestContext)">
       <example>
 This sample shows how to call WithOperationPathParam.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = client.WithOperationPathParam("<keyword>");
+Response response = client.WithOperationPathParam("v1.0", "<keyword>");
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -80,7 +80,7 @@ This sample shows how to call WithOperationPathParam with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MultipleClient client = new MultipleClient(endpoint);
 
-Response response = client.WithOperationPathParam("<keyword>");
+Response response = client.WithOperationPathParam("v1.0", "<keyword>");
 
 Console.WriteLine(response.Status);
 ]]></code></example>

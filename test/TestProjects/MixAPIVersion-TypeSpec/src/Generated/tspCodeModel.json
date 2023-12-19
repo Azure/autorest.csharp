@@ -493,13 +493,13 @@
         "Value": "2022-07-09"
        },
        "IsRequired": true,
-       "IsApiVersion": true,
+       "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant"
+       "Kind": "Method"
       },
       {
        "$id": "58",

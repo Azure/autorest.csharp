@@ -197,21 +197,23 @@ namespace MixApiVersion
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. The default value is "2022-07-09". </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='CreateAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='CreateAsync(string,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> CreateAsync(string apiVersion, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
             Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(apiVersion, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -231,21 +233,23 @@ namespace MixApiVersion
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. The default value is "2022-07-09". </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Create(RequestContent,RequestContext)']/*" />
-        public virtual Response Create(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Create(string,RequestContent,RequestContext)']/*" />
+        public virtual Response Create(string apiVersion, RequestContent content, RequestContext context = null)
         {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
             Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Create");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCreateRequest(content, context);
+                using HttpMessage message = CreateCreateRequest(apiVersion, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -326,7 +330,7 @@ namespace MixApiVersion
             return message;
         }
 
-        internal HttpMessage CreateCreateRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateCreateRequest(string apiVersion, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -334,7 +338,7 @@ namespace MixApiVersion
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pets", false);
-            uri.AppendQuery("apiVersion", "2022-07-09", true);
+            uri.AppendQuery("apiVersion", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

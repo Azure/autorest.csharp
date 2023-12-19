@@ -846,13 +846,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "116",
+     "$id": "112",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Parameters": [
       {
-       "$id": "117",
+       "$id": "113",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -869,11 +869,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "118",
+       "$id": "114",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "119",
+        "$id": "115",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -888,19 +888,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "120",
+        "$id": "116",
         "Type": {
-         "$ref": "119"
+         "$ref": "115"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "121",
+       "$id": "117",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "122",
+        "$id": "118",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -915,20 +915,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "123",
+        "$id": "119",
         "Type": {
-         "$ref": "122"
+         "$ref": "118"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "111"
       }
      ],
      "Responses": [
       {
-       "$id": "124",
+       "$id": "120",
        "StatusCodes": [
         200
        ],
@@ -952,13 +949,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "125",
+     "$id": "121",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Parameters": [
       {
-       "$id": "126",
+       "$id": "122",
        "Name": "ModelToRename",
        "NameInRequest": "ModelToRename",
        "Description": "Renamed model (original name: ModelToRename)",
@@ -976,11 +973,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "127",
+       "$id": "123",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "128",
+        "$id": "124",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -995,19 +992,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "129",
+        "$id": "125",
         "Type": {
-         "$ref": "128"
+         "$ref": "124"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "130",
+       "$id": "126",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "131",
+        "$id": "127",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1022,20 +1019,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "132",
+        "$id": "128",
         "Type": {
-         "$ref": "131"
+         "$ref": "127"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "111"
       }
      ],
      "Responses": [
       {
-       "$id": "133",
+       "$id": "129",
        "StatusCodes": [
         200
        ],
@@ -1060,7 +1054,7 @@
     }
    ],
    "Protocol": {
-    "$id": "134"
+    "$id": "130"
    },
    "Creatable": true
   }

@@ -23,7 +23,6 @@ namespace ApiVersionInTsp
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -65,36 +64,45 @@ namespace ApiVersionInTsp
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
+        /// <param name="apiVersion"> Api Version. The default value is "v1.2". Allowed values: "v1.1" | "v1.2". </param>
         /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(Guid,CancellationToken)']/*" />
-        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(Guid resultId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,Guid,CancellationToken)']/*" />
+        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(string apiVersion, Guid resultId, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await GetBatchDetectionResultAsync(resultId, context).ConfigureAwait(false);
+            Response response = await GetBatchDetectionResultAsync(apiVersion, resultId, context).ConfigureAwait(false);
             return Response.FromValue(DetectionResult.FromResponse(response), response);
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
+        /// <param name="apiVersion"> Api Version. The default value is "v1.2". Allowed values: "v1.1" | "v1.2". </param>
         /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(Guid,CancellationToken)']/*" />
-        public virtual Response<DetectionResult> GetBatchDetectionResult(Guid resultId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,Guid,CancellationToken)']/*" />
+        public virtual Response<DetectionResult> GetBatchDetectionResult(string apiVersion, Guid resultId, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = GetBatchDetectionResult(resultId, context);
+            Response response = GetBatchDetectionResult(apiVersion, resultId, context);
             return Response.FromValue(DetectionResult.FromResponse(response), response);
         }
 
@@ -108,23 +116,28 @@ namespace ApiVersionInTsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetBatchDetectionResultAsync(Guid,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetBatchDetectionResultAsync(string,Guid,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> Api Version. The default value is "v1.2". Allowed values: "v1.1" | "v1.2". </param>
         /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(Guid,RequestContext)']/*" />
-        public virtual async Task<Response> GetBatchDetectionResultAsync(Guid resultId, RequestContext context)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,Guid,RequestContext)']/*" />
+        public virtual async Task<Response> GetBatchDetectionResultAsync(string apiVersion, Guid resultId, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             using var scope = ClientDiagnostics.CreateScope("ApiVersionInTspClient.GetBatchDetectionResult");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBatchDetectionResultRequest(resultId, context);
+                using HttpMessage message = CreateGetBatchDetectionResultRequest(apiVersion, resultId, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -144,23 +157,28 @@ namespace ApiVersionInTsp
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetBatchDetectionResult(Guid,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetBatchDetectionResult(string,Guid,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="apiVersion"> Api Version. The default value is "v1.2". Allowed values: "v1.1" | "v1.2". </param>
         /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="apiVersion"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(Guid,RequestContext)']/*" />
-        public virtual Response GetBatchDetectionResult(Guid resultId, RequestContext context)
+        /// <include file="Docs/ApiVersionInTspClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,Guid,RequestContext)']/*" />
+        public virtual Response GetBatchDetectionResult(string apiVersion, Guid resultId, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(apiVersion, nameof(apiVersion));
+
             using var scope = ClientDiagnostics.CreateScope("ApiVersionInTspClient.GetBatchDetectionResult");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBatchDetectionResultRequest(resultId, context);
+                using HttpMessage message = CreateGetBatchDetectionResultRequest(apiVersion, resultId, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -170,7 +188,7 @@ namespace ApiVersionInTsp
             }
         }
 
-        internal HttpMessage CreateGetBatchDetectionResultRequest(Guid resultId, RequestContext context)
+        internal HttpMessage CreateGetBatchDetectionResultRequest(string apiVersion, Guid resultId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -178,7 +196,7 @@ namespace ApiVersionInTsp
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/anomalydetector/", false);
-            uri.AppendRaw(_apiVersion, true);
+            uri.AppendRaw(apiVersion, true);
             uri.AppendPath("/multivariate/detect-batch/", false);
             uri.AppendPath(resultId, true);
             request.Uri = uri;
