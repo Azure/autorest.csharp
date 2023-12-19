@@ -57,7 +57,6 @@ namespace ModelsTypeSpec.Models
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
             OptionalCollectionWithNullableIntElement = new ChangeTrackingList<int?>();
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>

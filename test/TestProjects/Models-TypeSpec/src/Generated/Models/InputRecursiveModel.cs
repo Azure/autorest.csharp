@@ -54,7 +54,6 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(message, nameof(message));
 
             Message = message;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="InputRecursiveModel"/>. </summary>

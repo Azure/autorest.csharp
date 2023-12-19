@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -53,7 +52,6 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
         protected OutputBaseModelWithDiscriminator()
         {
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>

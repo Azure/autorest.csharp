@@ -70,7 +70,6 @@ namespace ModelsTypeSpec.Models
             OptionalNullableList = new ChangeTrackingList<CollectionItem>();
             OptionalRecord = new ChangeTrackingDictionary<string, RecordItem>();
             OptionalNullableRecord = new ChangeTrackingDictionary<string, RecordItem>();
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>

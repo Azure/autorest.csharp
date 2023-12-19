@@ -54,7 +54,6 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(field, nameof(field));
 
             Field = field;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="Facet"/>. </summary>

@@ -97,7 +97,6 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableModelList = new ChangeTrackingList<CollectionItem>();
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
