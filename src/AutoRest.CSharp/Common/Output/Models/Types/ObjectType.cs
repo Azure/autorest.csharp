@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -33,6 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public bool IsStruct => ExistingType?.IsValueType ?? false;
+        protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 

@@ -77,7 +77,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
-        protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
         private SerializableObjectType? _defaultDerivedType;
         private bool _hasCalculatedDefaultDerivedType;
