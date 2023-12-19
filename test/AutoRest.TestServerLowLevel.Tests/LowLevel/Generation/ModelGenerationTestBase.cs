@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
             "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-            null, new List<InputModelType>(), null, null, false);
+            null, new List<InputModelType>(), null, null, null, false);
 
         [OneTimeSetUp]
         public void Initialize()
