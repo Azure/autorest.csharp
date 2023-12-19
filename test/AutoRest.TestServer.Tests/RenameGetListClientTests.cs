@@ -16,10 +16,10 @@ namespace AutoRest.TestServer.Tests
             var getMethod = typeof(RenameGetListClient).GetMethod("Get");
             Assert.AreEqual(null, getMethod);
 
-            var projectGetMethod = typeof(RenameGetListClient).GetMethod("GetProject");
+            var projectGetMethod = typeof(Projects).GetMethod("GetProject");
             Assert.AreNotEqual(null, projectGetMethod);
 
-            var deploymentGetMethod = typeof(RenameGetListClient).GetMethod("GetDeployment");
+            var deploymentGetMethod = typeof(Deployments).GetMethod("GetDeployment");
             Assert.AreNotEqual(null, deploymentGetMethod);
         }
 
@@ -29,10 +29,10 @@ namespace AutoRest.TestServer.Tests
             var listMethod = typeof(RenameGetListClient).GetMethod("List");
             Assert.AreEqual(null, listMethod);
 
-            var projectListMethod = typeof(RenameGetListClient).GetMethod("GetProjects");
+            var projectListMethod = typeof(Projects).GetMethod("GetProjects");
             Assert.AreNotEqual(null, projectListMethod);
 
-            var deploymentListMethod = typeof(RenameGetListClient).GetMethod("GetDeployments");
+            var deploymentListMethod = typeof(Deployments).GetMethod("GetDeployments");
             Assert.AreNotEqual(null, deploymentListMethod);
         }
 
