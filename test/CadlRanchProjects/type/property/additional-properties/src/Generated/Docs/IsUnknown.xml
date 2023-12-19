@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetIsUnknownAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetIsUnknownAsync.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetIsUnknownAsync();
+]]></code>
+This sample shows how to call GetIsUnknownAsync with all parameters.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetIsUnknownAsync();
+]]></code></example>
+    </member>
+    <member name="GetIsUnknown(CancellationToken)">
+      <example>
+This sample shows how to call GetIsUnknown.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetIsUnknown();
+]]></code>
+This sample shows how to call GetIsUnknown with all parameters.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetIsUnknown();
+]]></code></example>
+    </member>
+    <member name="GetIsUnknownAsync(RequestContext)">
+      <example>
+This sample shows how to call GetIsUnknownAsync and parse the result.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = await client.GetIsUnknownAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetIsUnknownAsync with all parameters and parse the result.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = await client.GetIsUnknownAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+    <member name="GetIsUnknown(RequestContext)">
+      <example>
+This sample shows how to call GetIsUnknown and parse the result.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = client.GetIsUnknown(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetIsUnknown with all parameters and parse the result.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = client.GetIsUnknown(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+});
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+});
+]]></code></example>
+    </member>
+    <member name="Put(IDictionary{string,BinaryData},CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+});
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, BinaryData>
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object())
+});
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new object(),
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new object(),
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new object(),
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new object(),
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

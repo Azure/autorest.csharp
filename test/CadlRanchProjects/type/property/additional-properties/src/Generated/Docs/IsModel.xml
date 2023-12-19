@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetIsModelAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetIsModelAsync.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, ModelForRecord>> response = await client.GetIsModelAsync();
+]]></code>
+This sample shows how to call GetIsModelAsync with all parameters.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, ModelForRecord>> response = await client.GetIsModelAsync();
+]]></code></example>
+    </member>
+    <member name="GetIsModel(CancellationToken)">
+      <example>
+This sample shows how to call GetIsModel.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, ModelForRecord>> response = client.GetIsModel();
+]]></code>
+This sample shows how to call GetIsModel with all parameters.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, ModelForRecord>> response = client.GetIsModel();
+]]></code></example>
+    </member>
+    <member name="GetIsModelAsync(RequestContext)">
+      <example>
+This sample shows how to call GetIsModelAsync and parse the result.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = await client.GetIsModelAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+]]></code>
+This sample shows how to call GetIsModelAsync with all parameters and parse the result.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = await client.GetIsModelAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+]]></code></example>
+    </member>
+    <member name="GetIsModel(RequestContext)">
+      <example>
+This sample shows how to call GetIsModel and parse the result.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = client.GetIsModel(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+]]></code>
+This sample shows how to call GetIsModel with all parameters and parse the result.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = client.GetIsModel(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(IDictionary{string,ModelForRecord},CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, ModelForRecord>
+{
+    ["key"] = new ModelForRecord("<state>")
+});
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, ModelForRecord>
+{
+    ["key"] = new ModelForRecord("<state>")
+});
+]]></code></example>
+    </member>
+    <member name="Put(IDictionary{string,ModelForRecord},CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, ModelForRecord>
+{
+    ["key"] = new ModelForRecord("<state>")
+});
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, ModelForRecord>
+{
+    ["key"] = new ModelForRecord("<state>")
+});
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new
+    {
+        state = "<state>",
+    },
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new
+    {
+        state = "<state>",
+    },
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new
+    {
+        state = "<state>",
+    },
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = new
+    {
+        state = "<state>",
+    },
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

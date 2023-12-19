@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetIsFloatAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetIsFloatAsync.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, float>> response = await client.GetIsFloatAsync();
+]]></code>
+This sample shows how to call GetIsFloatAsync with all parameters.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, float>> response = await client.GetIsFloatAsync();
+]]></code></example>
+    </member>
+    <member name="GetIsFloat(CancellationToken)">
+      <example>
+This sample shows how to call GetIsFloat.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, float>> response = client.GetIsFloat();
+]]></code>
+This sample shows how to call GetIsFloat with all parameters.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, float>> response = client.GetIsFloat();
+]]></code></example>
+    </member>
+    <member name="GetIsFloatAsync(RequestContext)">
+      <example>
+This sample shows how to call GetIsFloatAsync and parse the result.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = await client.GetIsFloatAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetIsFloatAsync with all parameters and parse the result.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = await client.GetIsFloatAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+    <member name="GetIsFloat(RequestContext)">
+      <example>
+This sample shows how to call GetIsFloat and parse the result.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = client.GetIsFloat(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetIsFloat with all parameters and parse the result.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = client.GetIsFloat(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+    <member name="PutAsync(IDictionary{string,float},CancellationToken)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, float>
+{
+    ["key"] = 123.45F
+});
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, float>
+{
+    ["key"] = 123.45F
+});
+]]></code></example>
+    </member>
+    <member name="Put(IDictionary{string,float},CancellationToken)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, float>
+{
+    ["key"] = 123.45F
+});
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, float>
+{
+    ["key"] = 123.45F
+});
+]]></code></example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = await client.PutAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Put.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 123.45F,
+});
+Response response = client.Put(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
