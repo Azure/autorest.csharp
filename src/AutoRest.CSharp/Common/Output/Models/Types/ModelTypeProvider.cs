@@ -306,11 +306,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(SerializationConstructorSignature.Parameters, false), baseCtor);
         }
 
-        private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool includeDiscriminator)
+        private IReadOnlyList<ObjectPropertyInitializer> GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool isInitializer)
         {
-            List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
+            List<ObjectPropertyInitializer> defaultCtorInitializers = new();
 
-            if (includeDiscriminator && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
+            // only initialization ctor initializes the discriminator
+            if (isInitializer && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -321,6 +322,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // we do not need to add intialization for raw data field
+                if (isInitializer && property == RawDataField)
+                {
+                    continue;
+                }
+
                 ReferenceOrConstant? initializationValue = null;
                 Constant? defaultInitializationValue = null;
 
@@ -375,7 +382,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            return defaultCtorInitializers.ToArray();
+            return defaultCtorInitializers;
         }
 
         protected override CSharpType? CreateInheritedType()
