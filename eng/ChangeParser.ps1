@@ -1,5 +1,8 @@
+# Usage: 
+# 1. Debug by running `.\eng\ChangeParser.ps1 -PRNumber XXXX`
+# 2. Add break point at line 114, visualize the result by seeing `$patternDictionary`
+
 param($PRNumber)
-# $PRNumber = 40292
 $diffUrl = "https://patch-diff.githubusercontent.com/raw/Azure/azure-sdk-for-net/pull/$PRNumber.diff"
 
 class Chunk {
@@ -61,48 +64,6 @@ catch {
     throw $_.Exception.Message
 }
 
-#     $responseContent = @"
-# diff --git a/eng/Packages.Data.props b/eng/Packages.Data.props
-# index e3a685d70aa9..08ee9ad78599 100644
-# --- a/eng/Packages.Data.props
-# +++ b/eng/Packages.Data.props
-# @@ -176,7 +176,7 @@
-#      All should have PrivateAssets="All" set so they don't become package dependencies
-#    -->
-#    <ItemGroup>
-# -    <PackageReference Update="Microsoft.Azure.AutoRest.CSharp" Version="3.0.0-beta.20231128.2" PrivateAssets="All" />
-# +    <PackageReference Update="Microsoft.Azure.AutoRest.CSharp" Version="3.0.0-beta.20231128.4" PrivateAssets="All" />
-#      <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20231116.1" PrivateAssets="All" />
-#      <PackageReference Update="coverlet.collector" Version="3.2.0" PrivateAssets="All" />
-#      <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1" PrivateAssets="All" />
-# diff --git a/eng/emitter-package-lock.json b/eng/emitter-package-lock.json
-# index 40183b9fe138..171d4a29bb97 100644
-# --- a/eng/emitter-package-lock.json
-# +++ b/eng/emitter-package-lock.json
-# @@ -5,7 +5,7 @@
-#    "packages": {
-#      "": {
-#        "dependencies": {
-# -        "@azure-tools/typespec-csharp": "0.2.0-beta.20231128.2"
-# +        "@azure-tools/typespec-csharp": "0.2.0-beta.20231128.4"
-#        },
-#        "devDependencies": {
-#          "@azure-tools/typespec-azure-core": "0.36.0",
-# @@ -17,9 +17,9 @@
-#        }
-#      },
-#      "node_modules/@autorest/csharp": {
-# -      "version": "3.0.0-beta.20231128.2",
-# -      "resolved": "https://registry.npmjs.org/@autorest/csharp/-/csharp-3.0.0-beta.20231128.2.tgz",
-# -      "integrity": "sha512-6A1hG5BiQwgFEXTasL4VzUBZC1VMNECSQfUWalWgYwvpIVPhoA9zfoHWikrTsQed4C+IVhlWk1dbHaiY67B+9g=="
-# +      "version": "3.0.0-beta.20231128.4",
-# +      "resolved": "https://registry.npmjs.org/@autorest/csharp/-/csharp-3.0.0-beta.20231128.4.tgz",
-# +      "integrity": "sha512-u5YBsDZKGRotPExh9YN2G8Kk1Fvj3OxFDeq4Fs046BMvJS39v3G7w1szRQOtYzQY7naVdt8AJOgG/vz0FyANzg=="
-#      },
-#      "node_modules/@azure-tools/typespec-azure-core": {
-#        "version": "0.36.0",
-# "@
-
 # Key: LeftLine_RightLine
 $patternDictionary = @{}
 $lines = $responseContent -split '\r?\n'
@@ -135,9 +96,6 @@ for ($i = 0; $i -lt $lines.Length;) {
                     $patternDictionary[$patternKey] = [System.Collections.ArrayList]::new()
                 }
                 $patternDictionary[$patternKey].Add($chunk) | out-null
-
-                # Write-Host $chunk.FileInfo
-                # Write-Host $chunk.ChunkInfo
             }
             else {
                 throw "Invalid chunk delimiter at line $j"
@@ -152,6 +110,7 @@ for ($i = 0; $i -lt $lines.Length;) {
     }
 }
 
+# Add break point here
 foreach ($patternKey in $patternDictionary.Keys) {
     $patternValue = $patternDictionary[$patternKey][0].CodeDiff
     Write-Host $patternKey
