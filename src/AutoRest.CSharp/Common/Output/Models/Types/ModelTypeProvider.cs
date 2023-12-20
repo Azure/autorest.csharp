@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -14,6 +16,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -357,7 +360,27 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), null, Discriminator, false);
+            var additionalProperties = CreateAdditionalPropertySerialization();
+            return new(Type, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, false);
+        }
+
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization()
+        {
+            foreach (var model in EnumerateHierarchy().OfType<ModelTypeProvider>())
+            {
+                if (model is { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
+                {
+                    var dictionaryValueType = additionalProperties.Declaration.Type.Arguments[1];
+                    Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonSerializationMethodsBuilder)} implicitly relies on {additionalProperties.Declaration.Name} dictionary value being non-nullable");
+
+                    var type = new CSharpType(typeof(Dictionary<,>), additionalProperties.Declaration.Type.Arguments);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false, SerializationFormat.Default);
+
+                    return new JsonAdditionalPropertiesSerialization(additionalProperties, valueSerialization, type);
+                }
+            }
+
+            return null;
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()

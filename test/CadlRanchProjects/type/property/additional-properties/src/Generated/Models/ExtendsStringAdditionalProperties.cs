@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
@@ -21,9 +22,21 @@ namespace _Type.Property.AdditionalProperties.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+            AdditionalProperties = new ChangeTrackingDictionary<string, string>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ExtendsStringAdditionalProperties"/>. </summary>
+        /// <param name="name"> The name property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        internal ExtendsStringAdditionalProperties(string name, IDictionary<string, string> additionalProperties)
+        {
+            Name = name;
+            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> The name property. </summary>
         public string Name { get; set; }
+        /// <summary> Additional Properties. </summary>
+        public IDictionary<string, string> AdditionalProperties { get; }
     }
 }

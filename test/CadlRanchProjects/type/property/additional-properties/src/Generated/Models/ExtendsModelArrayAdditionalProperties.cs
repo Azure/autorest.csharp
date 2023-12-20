@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary> The model extends from Record&lt;ModelForRecord[]&gt; type. </summary>
@@ -13,6 +16,17 @@ namespace _Type.Property.AdditionalProperties.Models
         /// <summary> Initializes a new instance of <see cref="ExtendsModelArrayAdditionalProperties"/>. </summary>
         public ExtendsModelArrayAdditionalProperties()
         {
+            AdditionalProperties = new ChangeTrackingDictionary<string, IList<ModelForRecord>>();
         }
+
+        /// <summary> Initializes a new instance of <see cref="ExtendsModelArrayAdditionalProperties"/>. </summary>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        internal ExtendsModelArrayAdditionalProperties(IDictionary<string, IList<ModelForRecord>> additionalProperties)
+        {
+            AdditionalProperties = additionalProperties;
+        }
+
+        /// <summary> Additional Properties. </summary>
+        public IDictionary<string, IList<ModelForRecord>> AdditionalProperties { get; }
     }
 }
