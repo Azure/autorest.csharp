@@ -394,7 +394,7 @@
         "Type": {
          "$ref": "44"
         },
-        "Value": "image/jpeg"
+        "Value": "application/json"
        }
       },
       {
@@ -414,7 +414,7 @@
        "Headers": [],
        "IsErrorResponse": false,
        "ContentTypes": [
-        "image/jpeg"
+        "application/json"
        ]
       }
      ],

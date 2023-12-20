@@ -247,7 +247,7 @@ namespace Payload.ContentNegotiation
             uri.AppendPath("/content-negotiation/different-body", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "image/jpeg");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
