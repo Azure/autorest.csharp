@@ -43,7 +43,7 @@ export interface InputModelType extends InputType {
     Namespace?: string;
     Accessibility?: string;
     Deprecated?: string;
-    Description: string;
+    Description?: string;
     Usage: string;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
@@ -63,7 +63,7 @@ export interface InputEnumType extends InputType {
     Namespace?: string;
     Accessibility?: string;
     Deprecated?: string;
-    Description: string;
+    Description?: string;
     IsExtensible: boolean;
     Usage: string;
 }

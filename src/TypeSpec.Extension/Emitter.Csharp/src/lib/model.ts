@@ -376,8 +376,9 @@ export function getInputType(
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsExtensible: !isFixed(program, e),
-                IsNullable: false
-            } as InputEnumType;
+                IsNullable: false,
+                Usage: Usage.None
+            };
             enums.set(name, extensibleEnum);
         }
         return extensibleEnum;
@@ -395,11 +396,11 @@ export function getInputType(
             formattedType.format,
             formattedType.encode
         );
-        const rawValueType = {
+        const rawValueType: InputPrimitiveType = {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
-        } as InputPrimitiveType;
+        };
         const literalValue = getDefaultValue(type);
         const newValueType = getLiteralValueType();
 
@@ -412,7 +413,7 @@ export function getInputType(
             LiteralValueType: newValueType,
             Value: literalValue,
             IsNullable: false
-        } as InputLiteralType;
+        };
 
         function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
@@ -429,9 +430,9 @@ export function getInputType(
                     Name: literalValue.toString(),
                     Value: literalValue,
                     Description: literalValue.toString()
-                } as InputEnumTypeValue
+                }
             ];
-            const enumType = {
+            const enumType: InputEnumType = {
                 Name: enumName,
                 EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
@@ -440,8 +441,9 @@ export function getInputType(
                 Deprecated: undefined,
                 Description: `The ${enumName}`, // TODO -- what should we put here?
                 IsExtensible: true,
-                IsNullable: false
-            } as InputEnumType;
+                IsNullable: false,
+                Usage: Usage.None
+            };
             return enumType;
         }
     }
@@ -473,11 +475,11 @@ export function getInputType(
                         "The enum member value type is not consistent."
                     );
                 }
-                const member = {
+                const member: InputEnumTypeValue = {
                     Name: getTypeName(context, option),
                     Value: option.value ?? option?.name,
                     Description: getDoc(program, option)
-                } as InputEnumTypeValue;
+                };
                 allowValues.push(member);
             }
 
@@ -490,8 +492,9 @@ export function getInputType(
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 IsExtensible: !isFixed(program, e),
-                IsNullable: false
-            } as InputEnumType;
+                IsNullable: false,
+                Usage: Usage.None
+            };
             setUsage(context, e, enumType);
             if (addToCollection) enums.set(name, enumType);
         }
@@ -515,7 +518,7 @@ export function getInputType(
                 enums
             ),
             IsNullable: false
-        } as InputListType;
+        };
     }
 
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
@@ -534,7 +537,7 @@ export function getInputType(
                 enums
             ),
             IsNullable: false
-        } as InputDictionaryType;
+        };
     }
 
     function getInputModelForModel(m: Model): InputModelType {
@@ -556,7 +559,7 @@ export function getInputType(
                     ? "internal"
                     : getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
-                Description: getDoc(program, m) ?? "",
+                Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
@@ -626,11 +629,11 @@ export function getInputType(
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const name = getTypeName(context, value);
                 const serializedName = getSerializeName(context, value);
-                const literalTypeContext = {
+                const literalTypeContext: LiteralTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
                     Namespace: model.Namespace
-                } as LiteralTypeContext;
+                };
                 const inputType = getInputType(
                     context,
                     getFormattedType(program, value),
@@ -645,17 +648,17 @@ export function getInputType(
                 ) {
                     inputType.Accessibility = undefined;
                 }
-                const inputProp = {
+                const inputProp: InputModelProperty = {
                     Name: name,
                     SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
                     Type: inputType,
                     IsRequired: !value.optional,
-                    IsReadOnly: isReadOnly
-                } as InputModelProperty;
+                    IsReadOnly: isReadOnly,
+                    IsDiscriminator: name === model.DiscriminatorPropertyName
+                };
 
-                if (name === model.DiscriminatorPropertyName) {
-                    inputProp.IsDiscriminator = true;
+                if (inputProp.IsDiscriminator){
                     discriminatorPropertyDefined = true;
                 }
                 outputProperties.push(inputProp);
@@ -666,20 +669,19 @@ export function getInputType(
             logger.info(
                 `No specified type for discriminator property '${model.DiscriminatorPropertyName}'. Assume it is a string.`
             );
-            const discriminatorProperty = {
+            const discriminatorProperty: InputModelProperty = {
                 Name: model.DiscriminatorPropertyName,
                 SerializedName: model.DiscriminatorPropertyName,
                 Description: "Discriminator",
                 IsRequired: true,
                 IsReadOnly: false,
-                IsNullable: false,
                 Type: {
                     Name: "string",
                     Kind: InputTypeKind.String,
                     IsNullable: false
                 } as InputPrimitiveType,
                 IsDiscriminator: true
-            } as InputModelProperty;
+            };
             // put default discriminator property as the first property to keep previous behavior
             outputProperties.unshift(discriminatorProperty);
         }
@@ -1019,7 +1021,7 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         type: targetType,
         format: format,
         encode: encodeData
-    } as FormattedType;
+    };
 }
 
 // This is a temporary solution. After we uptake getAllModels we should delete this.
