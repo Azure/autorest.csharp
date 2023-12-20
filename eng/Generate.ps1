@@ -382,9 +382,7 @@ if (!$noBuild) {
     Invoke "dotnet build $autoRestPluginProject"
 
     #build the emitter
-    if ($typespecCount -gt 0) {
-        Invoke-TypeSpecSetup
-    }
+    Invoke-TypeSpecSetup
 }
 
 $keys | % { $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
