@@ -540,7 +540,7 @@ export function getInputType(
         let model = models.get(name);
         if (!model) {
             const [baseModel, inheritedDictionaryType] = getInputModelBaseType(
-                m.baseModel
+                m
             );
             model = models.get(name);
             if (model) return model;
@@ -684,26 +684,34 @@ export function getInputType(
     }
 
     function getInputModelBaseType(
-        m?: Model
+        m: Model
     ): [InputModelType | undefined, InputDictionaryType | undefined] {
-        if (!m) {
-            return [undefined, undefined];
+        const baseModel = m.baseModel;
+        const sourceModel = m.sourceModel;
+
+        // we cannot have both `extends` and `is`, therefore only one of baseModel and sourceModel can be defined
+        if (sourceModel !== undefined && isRecordModelType(program, sourceModel)) {
+            return [undefined, getInputTypeForMap(sourceModel.indexer.key, sourceModel.indexer.value)];
         }
 
-        // when base model is a record, we return the dictionary type
-        if (isRecordModelType(program, m)) {
-            return [
-                undefined,
-                getInputTypeForMap(m.indexer.key, m.indexer.value)
-            ];
+        if (baseModel !== undefined) {
+            // when base model is a record, we return the dictionary type
+            if (isRecordModelType(program, baseModel)) {
+                return [
+                    undefined,
+                    getInputTypeForMap(baseModel.indexer.key, baseModel.indexer.value)
+                ];
+            }
+    
+            // TypeSpec "primitive" types can't be base types for models
+            if (program.checker.isStdType(baseModel)) {
+                return [undefined, undefined];
+            }
+    
+            return [getInputModelForModel(baseModel), undefined];
         }
 
-        // TypeSpec "primitive" types can't be base types for models
-        if (program.checker.isStdType(m)) {
-            return [undefined, undefined];
-        }
-
-        return [getInputModelForModel(m), undefined];
+        return [undefined, undefined];
     }
 
     function getFullNamespaceString(namespace: Namespace | undefined): string {

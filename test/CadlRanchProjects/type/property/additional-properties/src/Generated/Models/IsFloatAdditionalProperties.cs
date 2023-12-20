@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary> The model is from Record&lt;float32&gt; type. </summary>
@@ -15,9 +18,21 @@ namespace _Type.Property.AdditionalProperties.Models
         public IsFloatAdditionalProperties(float id)
         {
             Id = id;
+            AdditionalProperties = new ChangeTrackingDictionary<string, float>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IsFloatAdditionalProperties"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        internal IsFloatAdditionalProperties(float id, IDictionary<string, float> additionalProperties)
+        {
+            Id = id;
+            AdditionalProperties = additionalProperties;
         }
 
         /// <summary> The id property. </summary>
         public float Id { get; set; }
+        /// <summary> Additional Properties. </summary>
+        public IDictionary<string, float> AdditionalProperties { get; }
     }
 }

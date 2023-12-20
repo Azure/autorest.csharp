@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -16,6 +17,11 @@ namespace _Type.Property.AdditionalProperties.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -25,10 +31,14 @@ namespace _Type.Property.AdditionalProperties.Models
             {
                 return null;
             }
+            IDictionary<string, ModelForRecord> additionalProperties = default;
+            Dictionary<string, ModelForRecord> additionalPropertiesDictionary = new Dictionary<string, ModelForRecord>();
             foreach (var property in element.EnumerateObject())
             {
+                additionalPropertiesDictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value));
             }
-            return new IsModelAdditionalProperties();
+            additionalProperties = additionalPropertiesDictionary;
+            return new IsModelAdditionalProperties(additionalProperties);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

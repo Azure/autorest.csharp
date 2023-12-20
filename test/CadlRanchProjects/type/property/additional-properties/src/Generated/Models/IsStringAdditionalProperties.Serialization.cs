@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -18,6 +19,11 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
             writer.WriteEndObject();
         }
 
@@ -28,6 +34,8 @@ namespace _Type.Property.AdditionalProperties.Models
                 return null;
             }
             string name = default;
+            IDictionary<string, string> additionalProperties = default;
+            Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -35,8 +43,10 @@ namespace _Type.Property.AdditionalProperties.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
-            return new IsStringAdditionalProperties(name);
+            additionalProperties = additionalPropertiesDictionary;
+            return new IsStringAdditionalProperties(name, additionalProperties);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
