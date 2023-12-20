@@ -15,13 +15,17 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
     /// </summary>
     internal sealed record FormattableStringExpression : ValueExpression
     {
-        public FormattableStringExpression(string format, params ValueExpression[] args)
+        public FormattableStringExpression(string format, IReadOnlyList<ValueExpression> args)
         {
 #if DEBUG
             Validate(format, args);
 #endif
             Format = format;
             Args = args;
+        }
+
+        public FormattableStringExpression(string format, params ValueExpression[] args) : this(format, args as IReadOnlyList<ValueExpression>)
+        {
         }
 
         public string Format { get; init; }
