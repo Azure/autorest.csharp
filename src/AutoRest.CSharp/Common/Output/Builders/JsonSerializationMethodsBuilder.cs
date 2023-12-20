@@ -202,14 +202,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         using XmlWriter writer = XmlWriter.Create(stream);
                         ((IXmlSerializable)this).Write(writer, null);
                         writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
+                        // in the implementation of MemoryStream, `stream.Position` could never exceed `int.MaxValue`, therefore this if is redundant, we just need to keep the else branch
+                        //if (stream.Position > int.MaxValue)
+                        //{
+                        //    return BinaryData.FromStream(stream);
+                        //}
+                        //else
+                        //{
                             return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
+                        //}
                     */
                     var xmlCase = new SwitchCase(Serializations.XmlFormat,
                         new MethodBodyStatement[]
@@ -217,18 +218,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
                             UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
                             new InvokeInstanceMethodStatement(null, xml.WriteXmlMethodName, new[] { xmlWriter, Null, options }, false),
-                            xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
-                            new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
-                                // return BinaryData.FromStream(stream);
-                                Return(BinaryDataExpression.FromStream(stream, false)),
-                                // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                                Return(New.Instance(typeof(BinaryData),
-                                    InvokeStaticMethodExpression.Extension(
-                                        typeof(MemoryExtensions),
-                                        nameof(MemoryExtensions.AsMemory),
-                                        stream.Invoke(nameof(MemoryStream.GetBuffer)),
-                                        new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
-                                        ))))
+                            xmlWriter.Invoke(nameof(XmlWriter.Flush)).ToStatement(),
+                            // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                            Return(New.Instance(typeof(BinaryData),
+                                InvokeStaticMethodExpression.Extension(
+                                    typeof(MemoryExtensions),
+                                    nameof(MemoryExtensions.AsMemory),
+                                    stream.Invoke(nameof(MemoryStream.GetBuffer)),
+                                    new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
+                                    )))
                         }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
                     switchStatement.Add(xmlCase);
                 }
