@@ -66,6 +66,7 @@
    "$id": "9",
    "Name": "MyFlow",
    "Namespace": "Authentication.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [

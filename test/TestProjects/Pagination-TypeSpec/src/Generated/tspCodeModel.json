@@ -206,6 +206,7 @@
        "$id": "29",
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
+       "Description": "",
        "IsNullable": false,
        "Usage": "Output",
        "Properties": [
@@ -297,6 +298,7 @@
        "$id": "41",
        "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
+       "Description": "",
        "IsNullable": false,
        "Usage": "Output",
        "Properties": [
@@ -651,6 +653,7 @@
    "$id": "86",
    "Name": "AuthFlow",
    "Namespace": "Pagination",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -740,6 +743,7 @@
    "$id": "96",
    "Name": "MetricDimensions",
    "Namespace": "Pagination",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -757,6 +761,7 @@
    "$id": "98",
    "Name": "Dimension",
    "Namespace": "Pagination",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []

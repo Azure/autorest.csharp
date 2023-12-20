@@ -11,6 +11,7 @@
    "$id": "2",
    "Name": "DefaultDatetimeProperty",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -34,6 +35,7 @@
    "$id": "5",
    "Name": "Rfc3339DatetimeProperty",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -57,6 +59,7 @@
    "$id": "8",
    "Name": "Rfc7231DatetimeProperty",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -80,6 +83,7 @@
    "$id": "11",
    "Name": "UnixTimestampDatetimeProperty",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -103,6 +107,7 @@
    "$id": "14",
    "Name": "UnixTimestampArrayDatetimeProperty",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -131,6 +136,7 @@
    "$id": "18",
    "Name": "DefaultDatetimeHeader",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -139,6 +145,7 @@
    "$id": "19",
    "Name": "Rfc3339DatetimeHeader",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -147,6 +154,7 @@
    "$id": "20",
    "Name": "Rfc7231DatetimeHeader",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -155,6 +163,7 @@
    "$id": "21",
    "Name": "UnixTimestampDatetimeHeader",
    "Namespace": "Encode.Datetime",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []

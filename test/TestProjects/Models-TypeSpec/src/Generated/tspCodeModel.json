@@ -2493,6 +2493,7 @@
    "$id": "338",
    "Name": "NumericValuesFacetint32",
    "Namespace": "ModelsTypeSpec",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "BaseModel": {

@@ -79,6 +79,7 @@
        "$id": "12",
        "Name": "Toy",
        "Namespace": "MixApiVersion",
+       "Description": "",
        "IsNullable": false,
        "Usage": "None",
        "Properties": [
@@ -192,6 +193,7 @@
    "$id": "26",
    "Name": "PetId",
    "Namespace": "MixApiVersion",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []

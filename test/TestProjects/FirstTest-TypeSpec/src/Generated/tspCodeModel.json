@@ -735,6 +735,7 @@
    "$id": "101",
    "Name": "ModelWithFormat",
    "Namespace": "FirstTestTypeSpec",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -796,6 +797,7 @@
    "$id": "109",
    "Name": "Anon_1",
    "Namespace": "FirstTestTypeSpec",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -1010,6 +1012,7 @@
    "$id": "133",
    "Name": "ModelWithProjectedEnum",
    "Namespace": "FirstTestTypeSpec",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [

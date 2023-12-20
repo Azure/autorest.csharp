@@ -56,6 +56,7 @@
    "$id": "8",
    "Name": "Anon_1",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -116,6 +117,7 @@
    "$id": "17",
    "Name": "SendRequest",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -176,6 +178,7 @@
    "$id": "26",
    "Name": "Anon_2",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -230,6 +233,7 @@
    "$id": "34",
    "Name": "Anon_3",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -284,6 +288,7 @@
    "$id": "42",
    "Name": "Anon_4",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -344,6 +349,7 @@
    "$id": "51",
    "Name": "Anon_5",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -404,6 +410,7 @@
    "$id": "60",
    "Name": "Anon_6",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -420,6 +427,7 @@
         "$id": "63",
         "Name": "Cat",
         "Namespace": "Type.Union",
+        "Description": "",
         "IsNullable": false,
         "Usage": "RoundTrip",
         "Properties": [
@@ -443,6 +451,7 @@
         "$id": "66",
         "Name": "Dog",
         "Namespace": "Type.Union",
+        "Description": "",
         "IsNullable": false,
         "Usage": "RoundTrip",
         "Properties": [
@@ -480,6 +489,7 @@
    "$id": "69",
    "Name": "Anon_7",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -492,6 +502,7 @@
       "$id": "71",
       "Name": "EnumsOnlyCases",
       "Namespace": "Type.Union",
+      "Description": "",
       "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
@@ -551,6 +562,7 @@
    "$id": "76",
    "Name": "Anon_8",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -563,6 +575,7 @@
       "$id": "78",
       "Name": "StringAndArrayCases",
       "Namespace": "Type.Union",
+      "Description": "",
       "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
@@ -644,6 +657,7 @@
    "$id": "89",
    "Name": "Anon_9",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -656,6 +670,7 @@
       "$id": "91",
       "Name": "MixedLiteralsCases",
       "Namespace": "Type.Union",
+      "Description": "",
       "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [
@@ -925,6 +940,7 @@
    "$id": "132",
    "Name": "Anon_10",
    "Namespace": "Type.Union",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -937,6 +953,7 @@
       "$id": "134",
       "Name": "MixedTypesCases",
       "Namespace": "Type.Union",
+      "Description": "",
       "IsNullable": false,
       "Usage": "RoundTrip",
       "Properties": [

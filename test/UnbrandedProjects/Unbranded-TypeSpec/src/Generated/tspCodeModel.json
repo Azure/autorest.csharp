@@ -1000,6 +1000,7 @@
    "$id": "134",
    "Name": "ModelWithFormat",
    "Namespace": "UnbrandedTypeSpec",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -1061,6 +1062,7 @@
    "$id": "142",
    "Name": "Anon_1",
    "Namespace": "UnbrandedTypeSpec",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []

@@ -238,6 +238,7 @@
    "$id": "31",
    "Name": "UserListResults",
    "Namespace": "_Specs_.Azure.Core.Basic",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [

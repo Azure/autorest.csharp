@@ -643,6 +643,7 @@
    "$id": "87",
    "Name": "ModelWithFormat",
    "Namespace": "NewProjectTypeSpec",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [

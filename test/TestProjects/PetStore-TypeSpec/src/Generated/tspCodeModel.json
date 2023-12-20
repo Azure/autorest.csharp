@@ -34,6 +34,7 @@
    "$id": "5",
    "Name": "Pet",
    "Namespace": "PetStore",
+   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -126,6 +127,7 @@
    "$id": "17",
    "Name": "Toy",
    "Namespace": "PetStore",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -215,6 +217,7 @@
    "$id": "29",
    "Name": "PetId",
    "Namespace": "PetStore",
+   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []

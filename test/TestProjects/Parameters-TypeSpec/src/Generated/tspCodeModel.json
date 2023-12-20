@@ -10,6 +10,7 @@
    "$id": "2",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [

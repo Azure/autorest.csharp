@@ -11,6 +11,7 @@
    "$id": "2",
    "Name": "InvalidAuth",
    "Namespace": "Authentication.Http.Custom",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [

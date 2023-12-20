@@ -11,6 +11,7 @@
    "$id": "2",
    "Name": "BodyModel",
    "Namespace": "Parameters.BodyOptionality",
+   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
