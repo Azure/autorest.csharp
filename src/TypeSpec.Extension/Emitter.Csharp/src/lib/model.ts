@@ -341,12 +341,10 @@ export function getInputType(
 
     function getInputModelType(m: Model): InputType {
         /* Array and Map Type. */
-        if (!isNeverType(m)) {
-            if (isArrayModelType(program, m)) {
-                return getInputTypeForArray(m.indexer.value);
-            } else if (isRecordModelType(program, m)) {
-                return getInputTypeForMap(m.indexer.key, m.indexer.value);
-            }
+        if (isArrayModelType(program, m)) {
+            return getInputTypeForArray(m.indexer.value);
+        } else if (isRecordModelType(program, m)) {
+            return getInputTypeForMap(m.indexer.key, m.indexer.value);
         }
         return getInputModelForModel(m);
     }
@@ -539,7 +537,9 @@ export function getInputType(
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
-            const [baseModel, inheritedDictionaryType] = getInputModelBaseType(m.baseModel);
+            const [baseModel, inheritedDictionaryType] = getInputModelBaseType(
+                m.baseModel
+            );
             model = models.get(name);
             if (model) return model;
             const properties: InputModelProperty[] = [];
@@ -681,14 +681,19 @@ export function getInputType(
         }
     }
 
-    function getInputModelBaseType(m?: Model): [InputModelType | undefined, InputDictionaryType | undefined] {
+    function getInputModelBaseType(
+        m?: Model
+    ): [InputModelType | undefined, InputDictionaryType | undefined] {
         if (!m) {
             return [undefined, undefined];
         }
 
         // when base model is a record, we return the dictionary type
         if (isRecordModelType(program, m)) {
-            return [undefined, getInputTypeForMap(m.indexer.key, m.indexer.value)];
+            return [
+                undefined,
+                getInputTypeForMap(m.indexer.key, m.indexer.value)
+            ];
         }
 
         // TypeSpec "primitive" types can't be base types for models
