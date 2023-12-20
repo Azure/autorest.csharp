@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -29,7 +28,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -41,7 +40,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -50,7 +49,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = client.GetIsModel();
+            Response<IsModelAdditionalProperties> response = client.GetIsModel();
         }
 
         [Test]
@@ -59,7 +58,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = await client.GetIsModelAsync();
+            Response<IsModelAdditionalProperties> response = await client.GetIsModelAsync();
         }
 
         [Test]
@@ -71,7 +70,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -83,7 +82,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").GetProperty("state").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -92,7 +91,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = client.GetIsModel();
+            Response<IsModelAdditionalProperties> response = client.GetIsModel();
         }
 
         [Test]
@@ -101,7 +100,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, ModelForRecord>> response = await client.GetIsModelAsync();
+            Response<IsModelAdditionalProperties> response = await client.GetIsModelAsync();
         }
 
         [Test]
@@ -110,13 +109,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                key = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -128,13 +121,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                key = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -146,10 +133,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            IsModelAdditionalProperties body = new IsModelAdditionalProperties();
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -158,10 +143,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            IsModelAdditionalProperties body = new IsModelAdditionalProperties();
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -170,13 +153,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                key = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -188,13 +165,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                key = new
-                {
-                    state = "<state>",
-                },
-            });
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -206,10 +177,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            IsModelAdditionalProperties body = new IsModelAdditionalProperties();
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -218,10 +187,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, ModelForRecord>
-            {
-                ["key"] = new ModelForRecord("<state>")
-            });
+            IsModelAdditionalProperties body = new IsModelAdditionalProperties();
+            Response response = await client.PutAsync(body);
         }
     }
 }

@@ -7,13 +7,13 @@ This sample shows how to call GetIsStringAsync.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, string>> response = await client.GetIsStringAsync();
+Response<IsStringAdditionalProperties> response = await client.GetIsStringAsync();
 ]]></code>
 This sample shows how to call GetIsStringAsync with all parameters.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, string>> response = await client.GetIsStringAsync();
+Response<IsStringAdditionalProperties> response = await client.GetIsStringAsync();
 ]]></code></example>
     </member>
     <member name="GetIsString(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetIsString.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, string>> response = client.GetIsString();
+Response<IsStringAdditionalProperties> response = client.GetIsString();
 ]]></code>
 This sample shows how to call GetIsString with all parameters.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, string>> response = client.GetIsString();
+Response<IsStringAdditionalProperties> response = client.GetIsString();
 ]]></code></example>
     </member>
     <member name="GetIsStringAsync(RequestContext)">
@@ -40,7 +40,7 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 Response response = await client.GetIsStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetIsStringAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 Response response = await client.GetIsStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="GetIsString(RequestContext)">
@@ -61,7 +61,7 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 Response response = client.GetIsString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetIsString with all parameters and parse the result.
 <code><![CDATA[
@@ -70,49 +70,41 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 Response response = client.GetIsString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="PutAsync(IDictionary{string,string},CancellationToken)">
+    <member name="PutAsync(IsStringAdditionalProperties,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, string>
-{
-    ["key"] = "<body>"
-});
+IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, string>
-{
-    ["key"] = "<body>"
-});
+IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
-    <member name="Put(IDictionary{string,string},CancellationToken)">
+    <member name="Put(IsStringAdditionalProperties,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, string>
-{
-    ["key"] = "<body>"
-});
+IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, string>
-{
-    ["key"] = "<body>"
-});
+IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+Response response = client.Put(body);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -123,7 +115,7 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    name = "<name>",
 });
 Response response = await client.PutAsync(content);
 
@@ -135,7 +127,7 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    name = "<name>",
 });
 Response response = await client.PutAsync(content);
 
@@ -150,7 +142,7 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    name = "<name>",
 });
 Response response = client.Put(content);
 
@@ -162,7 +154,7 @@ IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion:
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = "<body>",
+    name = "<name>",
 });
 Response response = client.Put(content);
 

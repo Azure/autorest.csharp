@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -14,6 +13,7 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.AdditionalProperties;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties.Samples
 {
@@ -28,7 +28,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsFloat(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsFloatAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, float>> response = client.GetIsFloat();
+            Response<IsFloatAdditionalProperties> response = client.GetIsFloat();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, float>> response = await client.GetIsFloatAsync();
+            Response<IsFloatAdditionalProperties> response = await client.GetIsFloatAsync();
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsFloat(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsFloatAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, float>> response = client.GetIsFloat();
+            Response<IsFloatAdditionalProperties> response = client.GetIsFloat();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, float>> response = await client.GetIsFloatAsync();
+            Response<IsFloatAdditionalProperties> response = await client.GetIsFloatAsync();
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = client.Put(content);
 
@@ -126,7 +126,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = await client.PutAsync(content);
 
@@ -139,10 +139,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -151,10 +149,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -165,7 +161,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = client.Put(content);
 
@@ -180,7 +176,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = 123.45F,
+                id = 123.45F,
             });
             Response response = await client.PutAsync(content);
 
@@ -193,10 +189,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -205,10 +199,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, float>
-            {
-                ["key"] = 123.45F
-            });
+            IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
+            Response response = await client.PutAsync(body);
         }
     }
 }

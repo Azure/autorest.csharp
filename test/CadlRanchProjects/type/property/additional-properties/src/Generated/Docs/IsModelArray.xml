@@ -7,13 +7,13 @@ This sample shows how to call GetIsModelArrayAsync.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, IList<ModelForRecord>>> response = await client.GetIsModelArrayAsync();
+Response<IsModelArrayAdditionalProperties> response = await client.GetIsModelArrayAsync();
 ]]></code>
 This sample shows how to call GetIsModelArrayAsync with all parameters.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, IList<ModelForRecord>>> response = await client.GetIsModelArrayAsync();
+Response<IsModelArrayAdditionalProperties> response = await client.GetIsModelArrayAsync();
 ]]></code></example>
     </member>
     <member name="GetIsModelArray(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetIsModelArray.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, IList<ModelForRecord>>> response = client.GetIsModelArray();
+Response<IsModelArrayAdditionalProperties> response = client.GetIsModelArray();
 ]]></code>
 This sample shows how to call GetIsModelArray with all parameters.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response<IReadOnlyDictionary<string, IList<ModelForRecord>>> response = client.GetIsModelArray();
+Response<IsModelArrayAdditionalProperties> response = client.GetIsModelArray();
 ]]></code></example>
     </member>
     <member name="GetIsModelArrayAsync(RequestContext)">
@@ -40,7 +40,7 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(api
 Response response = await client.GetIsModelArrayAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>")[0].GetProperty("state").ToString());
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIsModelArrayAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(api
 Response response = await client.GetIsModelArrayAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>")[0].GetProperty("state").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetIsModelArray(RequestContext)">
@@ -61,7 +61,7 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(api
 Response response = client.GetIsModelArray(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>")[0].GetProperty("state").ToString());
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIsModelArray with all parameters and parse the result.
 <code><![CDATA[
@@ -70,61 +70,41 @@ IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(api
 Response response = client.GetIsModelArray(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>")[0].GetProperty("state").ToString());
+Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="PutAsync(IDictionary{string,IList{ModelForRecord}},CancellationToken)">
+    <member name="PutAsync(IsModelArrayAdditionalProperties,CancellationToken)">
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, IList<ModelForRecord>>
-{
-    ["key"] = new ModelForRecord[]
-    {
-        new ModelForRecord("<state>")
-    }
-});
+IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
+Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new Dictionary<string, IList<ModelForRecord>>
-{
-    ["key"] = new ModelForRecord[]
-    {
-        new ModelForRecord("<state>")
-    }
-});
+IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
+Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
-    <member name="Put(IDictionary{string,IList{ModelForRecord}},CancellationToken)">
+    <member name="Put(IsModelArrayAdditionalProperties,CancellationToken)">
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, IList<ModelForRecord>>
-{
-    ["key"] = new ModelForRecord[]
-    {
-        new ModelForRecord("<state>")
-    }
-});
+IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
+Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new Dictionary<string, IList<ModelForRecord>>
-{
-    ["key"] = new ModelForRecord[]
-    {
-        new ModelForRecord("<state>")
-    }
-});
+IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
+Response response = client.Put(body);
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -133,16 +113,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-using RequestContent content = RequestContent.Create(new
-{
-    key = new object[]
-    {
-        new
-        {
-            state = "<state>",
-        }
-    },
-});
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
@@ -151,16 +122,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-using RequestContent content = RequestContent.Create(new
-{
-    key = new object[]
-    {
-        new
-        {
-            state = "<state>",
-        }
-    },
-});
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
@@ -172,16 +134,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-using RequestContent content = RequestContent.Create(new
-{
-    key = new object[]
-    {
-        new
-        {
-            state = "<state>",
-        }
-    },
-});
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);
 
 Console.WriteLine(response.Status);
@@ -190,16 +143,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
 
-using RequestContent content = RequestContent.Create(new
-{
-    key = new object[]
-    {
-        new
-        {
-            state = "<state>",
-        }
-    },
-});
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);
 
 Console.WriteLine(response.Status);

@@ -343,7 +343,9 @@ export function getInputType(
         /* Array and Map Type. */
         if (isArrayModelType(program, m)) {
             return getInputTypeForArray(m.indexer.value);
-        } else if (isRecordModelType(program, m)) {
+        } else if (isRecordModelType(program, m) && m.sourceModel === undefined) {
+            // only when the model does not have a source model, it is really a record type
+            // when we have `model Foo is Record<string>` this should be a model with additional properties therefore it should not be parsed into a dictionary type
             return getInputTypeForMap(m.indexer.key, m.indexer.value);
         }
         return getInputModelForModel(m);

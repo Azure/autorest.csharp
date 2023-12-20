@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -14,6 +13,7 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.AdditionalProperties;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties.Samples
 {
@@ -28,7 +28,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, string>> response = client.GetIsString();
+            Response<IsStringAdditionalProperties> response = client.GetIsString();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, string>> response = await client.GetIsStringAsync();
+            Response<IsStringAdditionalProperties> response = await client.GetIsStringAsync();
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = client.GetIsString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace _Type.Property.AdditionalProperties.Samples
             Response response = await client.GetIsStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, string>> response = client.GetIsString();
+            Response<IsStringAdditionalProperties> response = client.GetIsString();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, string>> response = await client.GetIsStringAsync();
+            Response<IsStringAdditionalProperties> response = await client.GetIsStringAsync();
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -126,7 +126,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -139,10 +139,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -151,10 +149,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+            Response response = await client.PutAsync(body);
         }
 
         [Test]
@@ -165,7 +161,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                name = "<name>",
             });
             Response response = client.Put(content);
 
@@ -180,7 +176,7 @@ namespace _Type.Property.AdditionalProperties.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = "<body>",
+                name = "<name>",
             });
             Response response = await client.PutAsync(content);
 
@@ -193,10 +189,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+            Response response = client.Put(body);
         }
 
         [Test]
@@ -205,10 +199,8 @@ namespace _Type.Property.AdditionalProperties.Samples
         {
             IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, string>
-            {
-                ["key"] = "<body>"
-            });
+            IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
+            Response response = await client.PutAsync(body);
         }
     }
 }

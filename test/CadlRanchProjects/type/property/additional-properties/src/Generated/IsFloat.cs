@@ -6,13 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using _Type.Property.AdditionalProperties.Models;
 
 namespace _Type.Property.AdditionalProperties
 {
@@ -51,37 +50,21 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IsFloat.xml" path="doc/members/member[@name='GetIsFloatAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<IReadOnlyDictionary<string, float>>> GetIsFloatAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IsFloatAdditionalProperties>> GetIsFloatAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetIsFloatAsync(context).ConfigureAwait(false);
-            IReadOnlyDictionary<string, float> value = default;
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, property.Value.GetSingle());
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(IsFloatAdditionalProperties.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IsFloat.xml" path="doc/members/member[@name='GetIsFloat(CancellationToken)']/*" />
-        public virtual Response<IReadOnlyDictionary<string, float>> GetIsFloat(CancellationToken cancellationToken = default)
+        public virtual Response<IsFloatAdditionalProperties> GetIsFloat(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetIsFloat(context);
-            IReadOnlyDictionary<string, float> value = default;
-            using var document = JsonDocument.Parse(response.ContentStream);
-            Dictionary<string, float> dictionary = new Dictionary<string, float>();
-            foreach (var property in document.RootElement.EnumerateObject())
-            {
-                dictionary.Add(property.Name, property.Value.GetSingle());
-            }
-            value = dictionary;
-            return Response.FromValue(value, response);
+            return Response.FromValue(IsFloatAdditionalProperties.FromResponse(response), response);
         }
 
         /// <summary>
@@ -158,13 +141,13 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/IsFloat.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,float},CancellationToken)']/*" />
-        public virtual async Task<Response> PutAsync(IDictionary<string, float> body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/IsFloat.xml" path="doc/members/member[@name='PutAsync(IsFloatAdditionalProperties,CancellationToken)']/*" />
+        public virtual async Task<Response> PutAsync(IsFloatAdditionalProperties body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            using RequestContent content = body.ToRequestContent();
             Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -173,13 +156,13 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/IsFloat.xml" path="doc/members/member[@name='Put(IDictionary{string,float},CancellationToken)']/*" />
-        public virtual Response Put(IDictionary<string, float> body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/IsFloat.xml" path="doc/members/member[@name='Put(IsFloatAdditionalProperties,CancellationToken)']/*" />
+        public virtual Response Put(IsFloatAdditionalProperties body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            using RequestContent content = body.ToRequestContent();
             Response response = Put(content, context);
             return response;
         }
@@ -194,7 +177,7 @@ namespace _Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(IDictionary{string,float},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(IsFloatAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -233,7 +216,7 @@ namespace _Type.Property.AdditionalProperties
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(IDictionary{string,float},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(IsFloatAdditionalProperties,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
