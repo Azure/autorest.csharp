@@ -367,7 +367,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "46",
