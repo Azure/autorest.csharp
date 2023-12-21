@@ -124,7 +124,7 @@ namespace _Azure.Lro.Standard
             try
             {
                 using HttpMessage message = CreateCreateOrReplaceRequest(name, content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "StandardClient.CreateOrReplace", OperationFinalStateVia.OperationLocation, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "StandardClient.CreateOrReplace", OperationFinalStateVia.OriginalUri, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -167,7 +167,7 @@ namespace _Azure.Lro.Standard
             try
             {
                 using HttpMessage message = CreateCreateOrReplaceRequest(name, content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "StandardClient.CreateOrReplace", OperationFinalStateVia.OperationLocation, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "StandardClient.CreateOrReplace", OperationFinalStateVia.OriginalUri, context, waitUntil);
             }
             catch (Exception e)
             {

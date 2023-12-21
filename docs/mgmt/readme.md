@@ -11,6 +11,7 @@
     - [Change Parent of Request Paths](#change-parent-of-request-paths)
     - [Change Singleton Resources](#change-singleton-resources)
     - [Change the Name of Operations](#change-the-name-of-operations)
+    - [Mark Privileged Operations](#mark-privileged-operations)
     - [List Exception](#list-exception)
     - [Partial Resources](#partial-resources)
     - [Scope Resources](#scope-resources)
@@ -597,6 +598,24 @@ public partial class VirtualMachineResource : ArmResource
 -   public virtual async Task<ArmOperation> StartAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
 +   public virtual async Task<ArmOperation> PowerOnAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
 }
+```
+
+### Mark Privileged Operations
+
+We provide a new configuration `privileged-operations` to mark operations as privileged, which is a dictionary from the `operationId` of the operation to the reason why the operation should be marked as privileged
+
+For instance, if the operation with id `Vaults_CreateOrUpdate` should be treated as privileged operation, we could use following configuration:
+```yaml
+privileged-operations:
+  Vaults_CreateOrUpdate: The reason or uri about why the operation is privileged
+```
+and get the following changes in the generated code:
+```diff
++[CallerShouldAudit("The reason or uri about why the operation is privileged")]
+public virtual async Task<ArmOperation<VaultResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string vaultName, VaultCreateOrUpdateContent content, CancellationToken cancellationToken = default)
+...
++[CallerShouldAudit("The reason or uri about why the operation is privileged")]
+public virtual ArmOperation<VaultResource> CreateOrUpdate(WaitUntil waitUntil, string vaultName, VaultCreateOrUpdateContent content, CancellationToken cancellationToken = default)
 ```
 
 ### List exception

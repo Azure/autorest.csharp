@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -76,6 +77,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             //TODO if no one inherits from this we can omit the virtual
             var signatures = MethodSignatureModifiers.Internal;
+            // structs cannot have virtual members
+            if (IsStruct)
+            {
+                return signatures;
+            }
+
             var parent = GetBaseObjectType();
             if (parent is null)
             {
@@ -97,13 +104,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType), IsStruct);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
         {
             //get base public ctor params
-            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
+            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true);
 
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
@@ -112,23 +119,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_inputModel.DiscriminatorPropertyName is not null)
                 accessibility = MethodSignatureModifiers.Protected;
 
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
-
             return new ConstructorSignature(
                 Type,
                 $"Initializes a new instance of {Type:C}",
                 null,
                 accessibility,
                 fullParameterList,
-                Initializer: new(true, baseInitializers));
+                Initializer: new(true, parametersToPassToBase));
         }
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
             //get base public ctor params
-            GetConstructorParameters(Fields.SerializationParameters, out var fullParameterList, out var parametersToPassToBase, false, CreateSerializationConstructorParameter);
-
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
+            GetConstructorParameters(Fields.SerializationParameters, out var fullParameterList, out var parametersToPassToBase, false);
 
             return new ConstructorSignature(
                 Type,
@@ -136,7 +139,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,
-                Initializer: new(true, baseInitializers));
+                Initializer: new(true, parametersToPassToBase));
         }
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
@@ -193,7 +196,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return inputProperty.IsReadOnly;
         }
 
-        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
+        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer)
         {
             fullParameterList = new List<Parameter>();
             var parent = GetBaseObjectType();
@@ -204,17 +207,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parametersToPassToBase = ctor.Signature.Parameters;
                 fullParameterList.AddRange(parametersToPassToBase);
             }
-            fullParameterList.AddRange(parameters.Select(creator));
+            fullParameterList.AddRange(parameters);
         }
-
-        private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
-            => ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
-
-        private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => p with { Type = TypeFactory.GetInputType(p.Type) };
-
-        private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
-            => p with { Validation = ValidationType.None };
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
         {
