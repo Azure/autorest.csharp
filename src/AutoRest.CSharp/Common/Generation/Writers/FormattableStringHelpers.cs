@@ -97,20 +97,19 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
-                if (parameter.Type.IsFrameworkType)
+                switch (parameter.Type)
                 {
-                    return parameter.GetConversionFromFrameworkToRequestContent(contentType);
-                }
-                if (parameter.Type.Implementation is EnumType enumType)
-                {
-                    if (enumType.IsExtensible)
-                    {
-                        return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
-                    }
-                    else
-                    {
-                        return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
-                    }
+                    case { IsFrameworkType: true }:
+                        return parameter.GetConversionFromFrameworkToRequestContent(contentType);
+                    case { IsFrameworkType: false, Implementation: EnumType enumType }:
+                        if (enumType.IsExtensible)
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
+                        }
+                        else
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                        }
                 }
             }
 
