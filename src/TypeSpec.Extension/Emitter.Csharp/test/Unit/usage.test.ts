@@ -147,6 +147,43 @@ describe("Test getUsages", () => {
         assert(usages.roundTrips.includes("Foo"));
     });
 
+    it("Test the usage inheritance between base model and derived model which has model property", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("This a model of a property in base model")
+            model propertyModel {
+                @doc("name of the model.")
+                base: string;
+            }
+            @doc("This is a base model.")
+            model BaseModel {
+                @doc("name of the model.")
+                base: string;
+                @doc("a property")
+                prop: propertyModel;
+            }
+            @doc("This is a model.")
+            model Foo extends BaseModel{
+                @doc("name of the Foo")
+                name: string;
+            }
+            op test(@path id: string, @body foo: Foo): void;
+            op test2(@path id: string): BaseModel;
+      `,
+            runner
+        );
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        // verify that the baseModel will not apply the usage of derived model.
+        assert(usages.outputs.includes("BaseModel"));
+        // verify that the derived model will inherit the usage of base model
+        assert(usages.roundTrips.includes("Foo"));
+        //verify that the property model of base model will inherit the usage of the derived model
+        assert(usages.roundTrips.includes("propertyModel"));
+    });
+
     it("Test the usage of models spread alias", async () => {
         const program = await typeSpecCompile(
             `
