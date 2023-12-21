@@ -65,6 +65,10 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The name of Azure region. </param>
@@ -103,6 +107,10 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -143,6 +151,10 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>ListOrderAtResourceGroupLevel</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -166,6 +178,10 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>ListOrderAtResourceGroupLevel</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -188,6 +204,10 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -226,6 +246,10 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The name of Azure region. </param>
@@ -262,6 +286,10 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -301,6 +329,10 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -54,6 +54,10 @@ namespace MgmtDiscriminator.Mocking
         /// <term>Operation Id</term>
         /// <description>DeliveryRules_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Cdn/deliveryRules</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
@@ -76,6 +80,10 @@ namespace MgmtDiscriminator.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DeliveryRules_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Cdn/deliveryRules</description>
         /// </item>
         /// </list>
         /// </summary>

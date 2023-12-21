@@ -62,6 +62,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/model2s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="model2SName"> The <see cref="string"/> to use. </param>
@@ -83,6 +87,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/model2s</description>
         /// </item>
         /// </list>
         /// </summary>

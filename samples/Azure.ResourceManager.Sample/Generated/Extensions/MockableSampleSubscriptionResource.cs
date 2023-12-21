@@ -107,6 +107,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -132,6 +136,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -159,6 +167,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -181,6 +193,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -205,6 +221,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -226,6 +246,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -249,6 +273,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -270,6 +298,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -293,6 +325,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -314,6 +350,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -673,6 +713,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -695,6 +739,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -719,6 +767,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -741,6 +793,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -809,6 +865,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -830,6 +890,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -853,6 +917,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -874,6 +942,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>

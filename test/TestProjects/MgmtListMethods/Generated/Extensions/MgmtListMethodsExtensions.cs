@@ -587,6 +587,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -616,6 +620,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -664,6 +672,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -693,6 +705,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -741,6 +757,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -770,6 +790,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -818,6 +842,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGroupParents</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -847,6 +875,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGroupParents</description>
         /// </item>
         /// </list>
         /// <item>
@@ -895,6 +927,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -924,6 +960,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -972,6 +1012,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1001,6 +1045,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1049,6 +1097,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1078,6 +1130,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1126,6 +1182,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1155,6 +1215,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1203,6 +1267,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithNonResChes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1232,6 +1300,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithNonResChes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1280,6 +1352,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParents</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1309,6 +1385,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParents</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1357,6 +1437,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1387,6 +1471,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1436,6 +1524,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1465,6 +1557,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1513,6 +1609,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1542,6 +1642,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1590,6 +1694,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1619,6 +1727,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1667,6 +1779,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParents</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1696,6 +1812,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParents</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1727,6 +1847,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1755,6 +1879,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1782,6 +1910,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1813,6 +1945,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1843,6 +1979,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1870,6 +2010,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1899,6 +2043,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1927,6 +2075,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1954,6 +2106,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1985,6 +2141,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2015,6 +2175,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2043,6 +2207,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2070,6 +2238,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -2100,6 +2272,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2128,6 +2304,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -2158,6 +2338,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2187,6 +2371,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2215,6 +2403,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2242,6 +2434,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
         /// </item>
         /// </list>
         /// <item>
@@ -2273,6 +2469,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2303,6 +2503,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2330,6 +2534,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
         /// </item>
         /// </list>
         /// <item>
@@ -2438,6 +2646,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2468,6 +2680,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Tenant/tenantTests</description>
         /// </item>
         /// </list>
         /// <item>

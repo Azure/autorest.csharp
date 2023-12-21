@@ -55,6 +55,10 @@ namespace MgmtPropertyChooser.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -78,6 +82,10 @@ namespace MgmtPropertyChooser.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// </summary>

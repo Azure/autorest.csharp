@@ -101,6 +101,10 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Foos_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/foos</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -129,6 +133,10 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Foos_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/foos</description>
         /// </item>
         /// </list>
         /// <item>
@@ -176,6 +184,10 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -205,6 +217,10 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -233,6 +249,10 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Foos_ListWithSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/foos</description>
         /// </item>
         /// </list>
         /// <item>
@@ -264,6 +284,10 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Foos_ListWithSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/foos</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -294,6 +318,10 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Bars_ListWithSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -323,6 +351,10 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_ListWithSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// <item>

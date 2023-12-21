@@ -95,6 +95,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -118,6 +122,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -150,6 +158,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
@@ -172,6 +184,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -203,6 +219,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="subParentWithNonResChName"> Name. </param>
@@ -225,6 +245,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -256,6 +280,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>SubParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="subParentWithLocName"> Name. </param>
@@ -278,6 +306,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParentWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -309,6 +341,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>SubParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParents</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="subParentName"> Name. </param>
@@ -331,6 +367,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/subParents</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -355,6 +395,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -377,6 +421,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -398,6 +446,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -425,6 +477,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -451,6 +507,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -472,6 +532,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -495,6 +559,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -517,6 +585,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -538,6 +610,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -566,6 +642,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -593,6 +673,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -615,6 +699,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -636,6 +724,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -660,6 +752,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -682,6 +778,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -706,6 +806,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -729,6 +833,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -751,6 +859,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -772,6 +884,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -800,6 +916,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -827,6 +947,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -847,6 +971,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
         /// </item>
         /// </list>
         /// </summary>

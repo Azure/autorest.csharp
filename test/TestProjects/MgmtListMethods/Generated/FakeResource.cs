@@ -110,6 +110,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> Name. </param>
@@ -132,6 +136,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -163,6 +171,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
@@ -185,6 +197,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,6 +232,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
@@ -238,6 +258,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -269,6 +293,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeParentWithAncestorName"> Name. </param>
@@ -291,6 +319,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -322,6 +354,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
@@ -344,6 +380,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParentWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -375,6 +415,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParents</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeParentName"> Name. </param>
@@ -397,6 +441,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/fakeParents</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -428,6 +476,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Configurations_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/configurations</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="configurationName"> The name of the configuration. </param>
@@ -451,6 +503,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Configurations_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes/configurations</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="configurationName"> The name of the configuration. </param>
@@ -473,6 +529,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -507,6 +567,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -539,6 +603,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -578,6 +646,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_CreateOrUpdate</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -616,6 +688,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_UpdateConfigurations</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="value"> The parameters for updating a list of fake configuration. </param>
@@ -641,6 +717,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_UpdateConfigurations</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="value"> The parameters for updating a list of fake configuration. </param>
@@ -665,6 +745,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -715,6 +799,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -764,6 +852,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -811,6 +903,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -860,6 +956,10 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -906,6 +1006,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// </summary>

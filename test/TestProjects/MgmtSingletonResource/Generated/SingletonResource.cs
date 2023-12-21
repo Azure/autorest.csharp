@@ -100,6 +100,10 @@ namespace MgmtSingletonResource
         /// <term>Operation Id</term>
         /// <description>SingletonResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources/singletonResources</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -132,6 +136,10 @@ namespace MgmtSingletonResource
         /// <term>Operation Id</term>
         /// <description>SingletonResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources/singletonResources</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -163,6 +171,10 @@ namespace MgmtSingletonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SingletonResources_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources/singletonResources</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -201,6 +213,10 @@ namespace MgmtSingletonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SingletonResources_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources/singletonResources</description>
         /// </item>
         /// </list>
         /// </summary>

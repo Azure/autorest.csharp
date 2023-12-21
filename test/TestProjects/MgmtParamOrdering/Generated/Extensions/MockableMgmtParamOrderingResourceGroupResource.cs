@@ -55,6 +55,10 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -77,6 +81,10 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -108,6 +116,10 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -131,6 +143,10 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -163,6 +179,10 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
@@ -185,6 +205,10 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,6 +240,10 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
@@ -239,6 +267,10 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>

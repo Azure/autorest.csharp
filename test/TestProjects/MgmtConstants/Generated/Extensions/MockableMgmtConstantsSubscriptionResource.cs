@@ -53,6 +53,10 @@ namespace MgmtConstants.Mocking
         /// <term>Operation Id</term>
         /// <description>Optionals_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -75,6 +79,10 @@ namespace MgmtConstants.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Optionals_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
         /// </item>
         /// </list>
         /// </summary>

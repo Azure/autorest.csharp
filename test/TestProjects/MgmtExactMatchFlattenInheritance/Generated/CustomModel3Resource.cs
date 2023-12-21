@@ -101,6 +101,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -133,6 +137,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -164,6 +172,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -202,6 +214,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
         /// </item>
         /// </list>
         /// </summary>

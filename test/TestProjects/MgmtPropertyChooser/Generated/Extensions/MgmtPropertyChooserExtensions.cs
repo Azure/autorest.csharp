@@ -77,6 +77,10 @@ namespace MgmtPropertyChooser
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -107,6 +111,10 @@ namespace MgmtPropertyChooser
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// <item>

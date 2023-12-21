@@ -113,6 +113,10 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel1s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -141,6 +145,10 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel1s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -188,6 +196,10 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel2s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -216,6 +228,10 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel2s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -263,6 +279,10 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel3s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -291,6 +311,10 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel3s</description>
         /// </item>
         /// </list>
         /// <item>

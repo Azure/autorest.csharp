@@ -54,6 +54,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
@@ -77,6 +81,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Tenant/tenantTests</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -100,6 +100,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_GetLatest</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +135,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_GetLatest</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -54,6 +54,10 @@ namespace MgmtPartialResource.Mocking
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/publicIPAddresses</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
@@ -77,6 +81,10 @@ namespace MgmtPartialResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/publicIPAddresses</description>
         /// </item>
         /// </list>
         /// </summary>

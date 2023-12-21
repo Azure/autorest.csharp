@@ -133,6 +133,10 @@ namespace MgmtSupersetInheritance
         /// <term>Operation Id</term>
         /// <description>SupersetModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel1s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -161,6 +165,10 @@ namespace MgmtSupersetInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel1s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -208,6 +216,10 @@ namespace MgmtSupersetInheritance
         /// <term>Operation Id</term>
         /// <description>SupersetModel4s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel4s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -236,6 +248,10 @@ namespace MgmtSupersetInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel4s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel4s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -283,6 +299,10 @@ namespace MgmtSupersetInheritance
         /// <term>Operation Id</term>
         /// <description>SupersetModel6s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel6s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -311,6 +331,10 @@ namespace MgmtSupersetInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel6s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel6s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -358,6 +382,10 @@ namespace MgmtSupersetInheritance
         /// <term>Operation Id</term>
         /// <description>SupersetModel7s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel7s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -386,6 +414,10 @@ namespace MgmtSupersetInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel7s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/supersetModel7s</description>
         /// </item>
         /// </list>
         /// <item>

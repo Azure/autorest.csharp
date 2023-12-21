@@ -54,6 +54,10 @@ namespace MgmtCollectionParent.Mocking
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The name of Azure region. </param>
@@ -77,6 +81,10 @@ namespace MgmtCollectionParent.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// </summary>

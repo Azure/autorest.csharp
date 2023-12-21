@@ -66,6 +66,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_CreateOrUpdate</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -106,6 +110,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -148,6 +156,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -185,6 +197,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -224,6 +240,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_List</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
@@ -246,6 +266,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_List</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
@@ -267,6 +291,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -304,6 +332,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -339,6 +371,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -377,6 +413,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>

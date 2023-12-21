@@ -152,6 +152,10 @@ namespace MgmtMultipleParentResource
         /// <term>Operation Id</term>
         /// <description>AnotherParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/anotherParents</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -182,6 +186,10 @@ namespace MgmtMultipleParentResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AnotherParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/anotherParents</description>
         /// </item>
         /// </list>
         /// <item>
@@ -231,6 +239,10 @@ namespace MgmtMultipleParentResource
         /// <term>Operation Id</term>
         /// <description>TheParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/theParents</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -261,6 +273,10 @@ namespace MgmtMultipleParentResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TheParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/theParents</description>
         /// </item>
         /// </list>
         /// <item>

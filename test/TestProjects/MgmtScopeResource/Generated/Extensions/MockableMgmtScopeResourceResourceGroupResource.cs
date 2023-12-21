@@ -54,6 +54,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -76,6 +80,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
         /// </item>
         /// </list>
         /// </summary>

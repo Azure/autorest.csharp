@@ -115,6 +115,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/A</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -136,6 +140,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/A</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -166,6 +174,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/AAAA</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -187,6 +199,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/AAAA</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -217,6 +233,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/CAA</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -238,6 +258,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/CAA</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -268,6 +292,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/CNAME</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -289,6 +317,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/CNAME</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -319,6 +351,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/MX</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -340,6 +376,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/MX</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -370,6 +410,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/NS</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -391,6 +435,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/NS</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -421,6 +469,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/PTR</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -442,6 +494,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/PTR</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -472,6 +528,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/SOA</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -493,6 +553,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/SOA</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -523,6 +587,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/SRV</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -544,6 +612,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/SRV</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -574,6 +646,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/TXT</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -596,6 +672,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones/TXT</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
@@ -617,6 +697,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -650,6 +734,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -681,6 +769,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Delete</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -717,6 +809,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>Zones_Delete</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -752,6 +848,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>Zones_Update</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="patch"> Parameters supplied to the Update operation. </param>
@@ -786,6 +886,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -918,6 +1022,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -971,6 +1079,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1026,6 +1138,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -1075,6 +1191,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -1123,6 +1243,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1175,6 +1299,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
         /// </item>
         /// </list>
         /// </summary>

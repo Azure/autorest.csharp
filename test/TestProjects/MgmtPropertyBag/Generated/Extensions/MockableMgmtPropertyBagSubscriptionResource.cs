@@ -57,6 +57,10 @@ namespace MgmtPropertyBag.Mocking
         /// <term>Operation Id</term>
         /// <description>Foos_ListWithSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/foos</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
@@ -79,6 +83,10 @@ namespace MgmtPropertyBag.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Foos_ListWithSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/foos</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -103,6 +111,10 @@ namespace MgmtPropertyBag.Mocking
         /// <term>Operation Id</term>
         /// <description>Bars_ListWithSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
@@ -126,6 +138,10 @@ namespace MgmtPropertyBag.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_ListWithSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// </summary>

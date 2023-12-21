@@ -59,6 +59,10 @@ namespace MgmtMockAndSample.Mocking
         /// <term>Operation Id</term>
         /// <description>RoleAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -82,6 +86,10 @@ namespace MgmtMockAndSample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RoleAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/roleAssignments</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -119,6 +127,10 @@ namespace MgmtMockAndSample.Mocking
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -142,6 +154,10 @@ namespace MgmtMockAndSample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
         /// </item>
         /// </list>
         /// </summary>

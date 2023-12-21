@@ -62,6 +62,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -84,6 +88,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -108,6 +116,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
@@ -130,6 +142,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
         /// </item>
         /// </list>
         /// </summary>

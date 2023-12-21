@@ -177,6 +177,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -207,6 +211,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -256,6 +264,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -286,6 +298,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
         /// </item>
         /// </list>
         /// <item>
@@ -335,6 +351,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -364,6 +384,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// <item>
@@ -395,6 +419,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -423,6 +451,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -453,6 +485,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -481,6 +517,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -511,6 +551,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -538,6 +582,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
         /// </item>
         /// </list>
         /// <item>
@@ -567,6 +615,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -594,6 +646,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// <item>

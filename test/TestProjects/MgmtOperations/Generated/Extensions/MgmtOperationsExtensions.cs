@@ -134,6 +134,10 @@ namespace MgmtOperations
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -164,6 +168,10 @@ namespace MgmtOperations
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// <item>
@@ -213,6 +221,10 @@ namespace MgmtOperations
         /// <term>Operation Id</term>
         /// <description>UnpatchableResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/unpatchableResources</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -243,6 +255,10 @@ namespace MgmtOperations
         /// <item>
         /// <term>Operation Id</term>
         /// <description>UnpatchableResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/unpatchableResources</description>
         /// </item>
         /// </list>
         /// <item>
@@ -275,6 +291,10 @@ namespace MgmtOperations
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_TestLROMethod</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -303,6 +323,10 @@ namespace MgmtOperations
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_TestLROMethod</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// <item>

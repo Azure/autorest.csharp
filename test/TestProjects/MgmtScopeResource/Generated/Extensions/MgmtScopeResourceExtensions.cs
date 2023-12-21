@@ -80,6 +80,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -110,6 +114,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -178,6 +186,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -208,6 +220,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -240,6 +256,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSourceScope</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -268,6 +288,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSourceScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
         /// </item>
         /// </list>
         /// <item>
@@ -472,6 +496,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -501,6 +529,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -566,6 +598,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -595,6 +631,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -643,6 +683,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -672,6 +716,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -720,6 +768,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -749,6 +801,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -797,6 +853,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -826,6 +886,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -857,6 +921,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -885,6 +953,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
         /// </item>
         /// </list>
         /// <item>
@@ -932,6 +1004,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -961,6 +1037,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1010,6 +1090,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1038,6 +1122,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1068,6 +1156,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>Deployments_CalculateTemplateHash</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1095,6 +1187,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_CalculateTemplateHash</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/deployments</description>
         /// </item>
         /// </list>
         /// <item>

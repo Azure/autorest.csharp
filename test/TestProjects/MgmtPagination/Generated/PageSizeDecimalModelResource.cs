@@ -100,6 +100,10 @@ namespace MgmtPagination
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +135,10 @@ namespace MgmtPagination
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +169,10 @@ namespace MgmtPagination
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,6 +210,10 @@ namespace MgmtPagination
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
         /// </item>
         /// </list>
         /// </summary>

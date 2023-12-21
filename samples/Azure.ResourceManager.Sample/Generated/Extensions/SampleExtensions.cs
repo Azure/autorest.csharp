@@ -329,6 +329,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -358,6 +362,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// <item>
@@ -406,6 +414,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -436,6 +448,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
         /// </item>
         /// </list>
         /// <item>
@@ -485,6 +501,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -515,6 +535,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// <item>
@@ -564,6 +588,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -593,6 +621,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
         /// </item>
         /// </list>
         /// <item>
@@ -641,6 +673,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -671,6 +707,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -720,6 +760,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -750,6 +794,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
         /// </item>
         /// </list>
         /// <item>
@@ -799,6 +847,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -828,6 +880,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// <item>
@@ -879,6 +935,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -911,6 +971,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
         /// </item>
         /// </list>
         /// <item>
@@ -945,6 +1009,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -973,6 +1041,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1003,6 +1075,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1030,6 +1106,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1059,6 +1139,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1086,6 +1170,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1115,6 +1203,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1142,6 +1234,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1537,6 +1633,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1565,6 +1665,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1595,6 +1699,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1623,6 +1731,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1711,6 +1823,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1738,6 +1854,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1767,6 +1887,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1794,6 +1918,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// <item>

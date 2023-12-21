@@ -76,6 +76,10 @@ namespace MgmtXmlDeserialization
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -105,6 +109,10 @@ namespace MgmtXmlDeserialization
         /// <item>
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.XmlDeserialization/xmls</description>
         /// </item>
         /// </list>
         /// <item>

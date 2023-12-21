@@ -82,6 +82,10 @@ namespace MgmtConstants
         /// <term>Operation Id</term>
         /// <description>Optionals_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -112,6 +116,10 @@ namespace MgmtConstants
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Optionals_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -144,6 +152,10 @@ namespace MgmtConstants
         /// <term>Operation Id</term>
         /// <description>Optionals_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -172,6 +184,10 @@ namespace MgmtConstants
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Optionals_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
         /// </item>
         /// </list>
         /// <item>

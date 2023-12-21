@@ -57,6 +57,10 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> Resource location. </param>
@@ -80,6 +84,10 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
         /// </item>
         /// </list>
         /// </summary>

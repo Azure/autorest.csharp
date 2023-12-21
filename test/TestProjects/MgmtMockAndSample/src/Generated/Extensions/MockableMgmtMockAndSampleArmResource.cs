@@ -54,6 +54,10 @@ namespace MgmtMockAndSample.Mocking
         /// <term>Operation Id</term>
         /// <description>RoleAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
@@ -76,6 +80,10 @@ namespace MgmtMockAndSample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RoleAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/roleAssignments</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -151,6 +151,10 @@ namespace MgmtSingletonResource
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/cars</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -179,6 +183,10 @@ namespace MgmtSingletonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/cars</description>
         /// </item>
         /// </list>
         /// <item>
@@ -227,6 +235,10 @@ namespace MgmtSingletonResource
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -256,6 +268,10 @@ namespace MgmtSingletonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources</description>
         /// </item>
         /// </list>
         /// <item>

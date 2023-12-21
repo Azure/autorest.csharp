@@ -54,6 +54,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
@@ -76,6 +80,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -107,6 +115,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
@@ -129,6 +141,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -160,6 +176,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
@@ -182,6 +202,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGrpParentWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,6 +237,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGroupParents</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
@@ -235,6 +263,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Management/managementGroups/mgmtGroupParents</description>
         /// </item>
         /// </list>
         /// </summary>

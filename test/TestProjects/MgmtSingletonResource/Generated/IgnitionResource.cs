@@ -99,6 +99,10 @@ namespace MgmtSingletonResource
         /// <term>Operation Id</term>
         /// <description>Ignitions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/cars/ignitions</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -129,6 +133,10 @@ namespace MgmtSingletonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Ignitions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/cars/ignitions</description>
         /// </item>
         /// </list>
         /// </summary>

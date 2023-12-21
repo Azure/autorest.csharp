@@ -54,6 +54,10 @@ namespace MgmtExtensionResource.Mocking
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -76,6 +80,10 @@ namespace MgmtExtensionResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
         /// </item>
         /// </list>
         /// </summary>

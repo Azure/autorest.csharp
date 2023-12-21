@@ -95,6 +95,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel1s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -123,6 +127,10 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel1s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -170,6 +178,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -198,6 +210,10 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel5s</description>
         /// </item>
         /// </list>
         /// <item>

@@ -110,6 +110,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>EnvironmentContainers_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces/environments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> Container name. </param>
@@ -133,6 +137,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>EnvironmentContainers_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces/environments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> Container name. </param>
@@ -155,6 +163,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -188,6 +200,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -219,6 +235,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Delete</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -254,6 +274,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>Workspaces_Delete</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -287,6 +311,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -322,6 +350,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>Workspaces_Update</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="patch"> The parameters for updating a machine learning workspace. </param>
@@ -355,6 +387,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -410,6 +446,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -464,6 +504,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -513,6 +557,10 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -561,6 +609,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -613,6 +665,10 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MachineLearningServices/workspaces</description>
         /// </item>
         /// </list>
         /// </summary>

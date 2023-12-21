@@ -175,6 +175,10 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/machines</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -203,6 +207,10 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/machines</description>
         /// </item>
         /// </list>
         /// <item>
@@ -250,6 +258,10 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/diskResources</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -278,6 +290,10 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/diskResources</description>
         /// </item>
         /// </list>
         /// <item>
@@ -325,6 +341,10 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/memoryResources</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -353,6 +373,10 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/memoryResources</description>
         /// </item>
         /// </list>
         /// <item>
@@ -400,6 +424,10 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/networkResources</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -428,6 +456,10 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/networkResources</description>
         /// </item>
         /// </list>
         /// <item>
@@ -475,6 +507,10 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/displayResources</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -503,6 +539,10 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/displayResources</description>
         /// </item>
         /// </list>
         /// <item>
@@ -551,6 +591,10 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/providerOperations</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -581,6 +625,10 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/providerOperations</description>
         /// </item>
         /// </list>
         /// <item>

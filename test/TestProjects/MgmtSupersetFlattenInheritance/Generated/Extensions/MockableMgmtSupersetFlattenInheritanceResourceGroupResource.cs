@@ -94,6 +94,10 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/resourceModel1s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resourceModel1SName"> The <see cref="string"/> to use. </param>
@@ -115,6 +119,10 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/resourceModel1s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -145,6 +153,10 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/trackedResourceModel1s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The <see cref="string"/> to use. </param>
@@ -166,6 +178,10 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/trackedResourceModel1s</description>
         /// </item>
         /// </list>
         /// </summary>

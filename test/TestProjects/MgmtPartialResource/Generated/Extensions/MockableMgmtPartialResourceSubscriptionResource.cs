@@ -53,6 +53,10 @@ namespace MgmtPartialResource.Mocking
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/publicIPAddresses</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -74,6 +78,10 @@ namespace MgmtPartialResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/publicIPAddresses</description>
         /// </item>
         /// </list>
         /// </summary>

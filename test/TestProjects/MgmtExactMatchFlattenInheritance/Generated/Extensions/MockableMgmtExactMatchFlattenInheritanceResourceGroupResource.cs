@@ -75,6 +75,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/azureResourceFlattenModel1s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -97,6 +101,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/azureResourceFlattenModel1s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -128,6 +136,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel2s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -150,6 +162,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel2s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -181,6 +197,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -203,6 +223,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
         /// </item>
         /// </list>
         /// </summary>

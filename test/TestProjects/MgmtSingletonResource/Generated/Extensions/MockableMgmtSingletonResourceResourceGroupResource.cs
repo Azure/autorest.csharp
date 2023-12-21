@@ -53,6 +53,10 @@ namespace MgmtSingletonResource.Mocking
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/cars</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="carName"> The <see cref="string"/> to use. </param>
@@ -74,6 +78,10 @@ namespace MgmtSingletonResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/cars</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -105,6 +113,10 @@ namespace MgmtSingletonResource.Mocking
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="parentName"> The <see cref="string"/> to use. </param>
@@ -127,6 +139,10 @@ namespace MgmtSingletonResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Billing/parentResources</description>
         /// </item>
         /// </list>
         /// </summary>

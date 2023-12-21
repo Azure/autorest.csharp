@@ -115,6 +115,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/azureResourceFlattenModel1s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -144,6 +148,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/azureResourceFlattenModel1s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -192,6 +200,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel2s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -221,6 +233,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel2s</description>
         /// </item>
         /// </list>
         /// <item>
@@ -269,6 +285,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -298,6 +318,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/customModel3s</description>
         /// </item>
         /// </list>
         /// <item>

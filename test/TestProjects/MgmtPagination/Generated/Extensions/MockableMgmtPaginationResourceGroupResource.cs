@@ -53,6 +53,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeIntegerModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeIntegerModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -74,6 +78,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeIntegerModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeIntegerModel</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -104,6 +112,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeInt64Models_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeInt64Model</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -125,6 +137,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeInt64Models_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeInt64Model</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -155,6 +171,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeInt32Models_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeInt32Model</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -176,6 +196,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeInt32Models_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeInt32Model</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,6 +230,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeNumericModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeNumericModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -227,6 +255,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeNumericModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeNumericModel</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,6 +289,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeFloatModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeFloatModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -278,6 +314,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeFloatModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeFloatModel</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -308,6 +348,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeDoubleModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDoubleModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -329,6 +373,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeDoubleModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDoubleModel</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -359,6 +407,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -380,6 +432,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -410,6 +466,10 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeStringModel</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -431,6 +491,10 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeStringModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/pageSizeStringModel</description>
         /// </item>
         /// </list>
         /// </summary>

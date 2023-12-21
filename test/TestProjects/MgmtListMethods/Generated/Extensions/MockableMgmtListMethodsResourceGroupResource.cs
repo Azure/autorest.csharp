@@ -54,6 +54,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
@@ -76,6 +80,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -107,6 +115,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
@@ -129,6 +141,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -160,6 +176,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
@@ -182,6 +202,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,6 +237,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
@@ -235,6 +263,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -266,6 +298,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithNonResChes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
@@ -288,6 +324,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParentWithNonResChes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -319,6 +359,10 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParents</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
@@ -341,6 +385,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.MgmtListMethods/resGrpParents</description>
         /// </item>
         /// </list>
         /// </summary>

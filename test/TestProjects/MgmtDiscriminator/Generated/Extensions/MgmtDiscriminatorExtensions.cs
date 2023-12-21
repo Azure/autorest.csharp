@@ -76,6 +76,10 @@ namespace MgmtDiscriminator
         /// <term>Operation Id</term>
         /// <description>DeliveryRules_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Cdn/deliveryRules</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -105,6 +109,10 @@ namespace MgmtDiscriminator
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DeliveryRules_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Cdn/deliveryRules</description>
         /// </item>
         /// </list>
         /// <item>

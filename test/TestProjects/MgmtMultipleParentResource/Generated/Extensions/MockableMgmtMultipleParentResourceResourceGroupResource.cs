@@ -54,6 +54,10 @@ namespace MgmtMultipleParentResource.Mocking
         /// <term>Operation Id</term>
         /// <description>AnotherParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/anotherParents</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
@@ -77,6 +81,10 @@ namespace MgmtMultipleParentResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AnotherParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/anotherParents</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -109,6 +117,10 @@ namespace MgmtMultipleParentResource.Mocking
         /// <term>Operation Id</term>
         /// <description>TheParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/theParents</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="theParentName"> The name of the VM scale set. </param>
@@ -132,6 +144,10 @@ namespace MgmtMultipleParentResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TheParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/theParents</description>
         /// </item>
         /// </list>
         /// </summary>

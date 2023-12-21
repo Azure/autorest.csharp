@@ -95,6 +95,10 @@ namespace MgmtLRO
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -125,6 +129,10 @@ namespace MgmtLRO
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -174,6 +182,10 @@ namespace MgmtLRO
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -203,6 +215,10 @@ namespace MgmtLRO
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// <item>

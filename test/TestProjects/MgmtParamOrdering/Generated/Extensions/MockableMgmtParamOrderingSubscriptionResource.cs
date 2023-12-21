@@ -66,6 +66,10 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -91,6 +95,10 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -118,6 +126,10 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -140,6 +152,10 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// </summary>

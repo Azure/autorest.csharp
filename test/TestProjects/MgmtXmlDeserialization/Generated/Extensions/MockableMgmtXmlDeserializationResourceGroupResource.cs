@@ -54,6 +54,10 @@ namespace MgmtXmlDeserialization.Mocking
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="xmlName"> The name of the API Management service. </param>
@@ -76,6 +80,10 @@ namespace MgmtXmlDeserialization.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.XmlDeserialization/xmls</description>
         /// </item>
         /// </list>
         /// </summary>

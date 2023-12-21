@@ -71,6 +71,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
@@ -108,6 +112,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -147,6 +155,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_List</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -170,6 +182,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_List</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -192,6 +208,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -228,6 +248,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
@@ -262,6 +286,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -300,6 +328,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
         /// </item>
         /// </list>
         /// </summary>

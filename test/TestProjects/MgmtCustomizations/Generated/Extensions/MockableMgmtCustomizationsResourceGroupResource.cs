@@ -54,6 +54,10 @@ namespace MgmtCustomizations.Mocking
         /// <term>Operation Id</term>
         /// <description>PetStores_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Pets/petStore</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
@@ -76,6 +80,10 @@ namespace MgmtCustomizations.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PetStores_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Pets/petStore</description>
         /// </item>
         /// </list>
         /// </summary>

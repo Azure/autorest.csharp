@@ -54,6 +54,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
@@ -76,6 +80,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -114,6 +122,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
@@ -136,6 +148,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
         /// </item>
         /// </list>
         /// </summary>

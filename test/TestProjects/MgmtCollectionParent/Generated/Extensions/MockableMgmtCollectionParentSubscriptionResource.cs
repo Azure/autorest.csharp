@@ -53,6 +53,10 @@ namespace MgmtCollectionParent.Mocking
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -75,6 +79,10 @@ namespace MgmtCollectionParent.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// </summary>

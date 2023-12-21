@@ -76,6 +76,10 @@ namespace MgmtCustomizations
         /// <term>Operation Id</term>
         /// <description>PetStores_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Pets/petStore</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -105,6 +109,10 @@ namespace MgmtCustomizations
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PetStores_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Pets/petStore</description>
         /// </item>
         /// </list>
         /// <item>

@@ -105,6 +105,10 @@ namespace MgmtOmitOperationGroups
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/model2s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -136,6 +140,10 @@ namespace MgmtOmitOperationGroups
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/model2s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -166,6 +174,10 @@ namespace MgmtOmitOperationGroups
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model2s_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/model2s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -203,6 +215,10 @@ namespace MgmtOmitOperationGroups
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model2s_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/model2s</description>
         /// </item>
         /// </list>
         /// </summary>

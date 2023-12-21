@@ -81,6 +81,10 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -111,6 +115,10 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// <item>
@@ -143,6 +151,10 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -171,6 +183,10 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.EdgeOrder/locations/orders</description>
         /// </item>
         /// </list>
         /// <item>

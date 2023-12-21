@@ -55,6 +55,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -77,6 +81,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/availabilitySets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -108,6 +116,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
@@ -131,6 +143,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -163,6 +179,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -186,6 +206,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/hostGroups</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -218,6 +242,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
@@ -240,6 +268,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/sshPublicKeys</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -271,6 +303,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -294,6 +330,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachines</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -326,6 +366,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="imageName"> The name of the image. </param>
@@ -349,6 +393,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/images</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -381,6 +429,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
@@ -403,6 +455,10 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>

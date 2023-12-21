@@ -54,6 +54,10 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
@@ -76,6 +80,10 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/dnsZones</description>
         /// </item>
         /// </list>
         /// </summary>

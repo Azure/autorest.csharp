@@ -57,6 +57,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -77,6 +81,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -99,6 +107,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -119,6 +131,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
         /// </item>
         /// </list>
         /// </summary>

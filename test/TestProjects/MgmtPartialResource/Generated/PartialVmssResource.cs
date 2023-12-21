@@ -73,6 +73,10 @@ namespace MgmtPartialResource
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/publicIPAddresses</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -94,6 +98,10 @@ namespace MgmtPartialResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Network/publicIPAddresses</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -53,6 +53,10 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel1s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="noTypeReplacementModel1SName"> The <see cref="string"/> to use. </param>
@@ -74,6 +78,10 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel1s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -104,6 +112,10 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel2s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="noTypeReplacementModel2SName"> The <see cref="string"/> to use. </param>
@@ -125,6 +137,10 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel2s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -155,6 +171,10 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel3s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The <see cref="string"/> to use. </param>
@@ -176,6 +196,10 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/noTypeReplacementModel3s</description>
         /// </item>
         /// </list>
         /// </summary>

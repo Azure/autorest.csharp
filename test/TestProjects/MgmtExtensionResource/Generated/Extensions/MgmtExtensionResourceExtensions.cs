@@ -145,6 +145,10 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -174,6 +178,10 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
         /// </item>
         /// </list>
         /// <item>
@@ -239,6 +247,10 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -268,6 +280,10 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
         /// </item>
         /// </list>
         /// <item>
@@ -432,6 +448,10 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -461,6 +481,10 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetBuiltIn</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
         /// </item>
         /// </list>
         /// <item>

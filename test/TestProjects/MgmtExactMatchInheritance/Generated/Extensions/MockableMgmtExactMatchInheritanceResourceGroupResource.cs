@@ -70,6 +70,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel1s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel1SName"> The <see cref="string"/> to use. </param>
@@ -91,6 +95,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel1s</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -121,6 +129,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
@@ -142,6 +154,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/exactMatchModel5s</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -53,6 +53,10 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/machines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="machineName"> The <see cref="string"/> to use. </param>
@@ -74,6 +78,10 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/machines</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -104,6 +112,10 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/diskResources</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="diskResourceName"> The <see cref="string"/> to use. </param>
@@ -125,6 +137,10 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/diskResources</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -155,6 +171,10 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/memoryResources</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
@@ -176,6 +196,10 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/memoryResources</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,6 +230,10 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/networkResources</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="networkResourceName"> The <see cref="string"/> to use. </param>
@@ -227,6 +255,10 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/networkResources</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,6 +289,10 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/displayResources</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="displayResourceName"> The <see cref="string"/> to use. </param>
@@ -278,6 +314,10 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/displayResources</description>
         /// </item>
         /// </list>
         /// </summary>

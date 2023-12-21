@@ -54,6 +54,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
@@ -76,6 +80,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -107,6 +115,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="typeTwoName"> The name. </param>
@@ -129,6 +141,10 @@ namespace MgmtSafeFlatten.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
         /// </item>
         /// </list>
         /// </summary>

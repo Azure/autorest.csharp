@@ -54,6 +54,10 @@ namespace MgmtLRO.Mocking
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -77,6 +81,10 @@ namespace MgmtLRO.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/fakes</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -109,6 +117,10 @@ namespace MgmtLRO.Mocking
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
@@ -131,6 +143,10 @@ namespace MgmtLRO.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// </summary>

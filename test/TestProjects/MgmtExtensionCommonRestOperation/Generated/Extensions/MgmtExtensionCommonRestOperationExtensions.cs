@@ -100,6 +100,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -129,6 +133,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -177,6 +185,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -206,6 +218,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
         /// </item>
         /// </list>
         /// <item>
@@ -237,6 +253,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -264,6 +284,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeOne/typeOnes</description>
         /// </item>
         /// </list>
         /// <item>
@@ -293,6 +317,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -320,6 +348,10 @@ namespace MgmtExtensionCommonRestOperation
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.TypeTwo/typeTwos</description>
         /// </item>
         /// </list>
         /// <item>

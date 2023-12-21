@@ -62,6 +62,10 @@ namespace MgmtNonStringPathVariable
         /// <term>Operation Id</term>
         /// <description>Bars_Create</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -100,6 +104,10 @@ namespace MgmtNonStringPathVariable
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Create</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -140,6 +148,10 @@ namespace MgmtNonStringPathVariable
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
@@ -172,6 +184,10 @@ namespace MgmtNonStringPathVariable
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,6 +222,10 @@ namespace MgmtNonStringPathVariable
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
@@ -237,6 +257,10 @@ namespace MgmtNonStringPathVariable
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
@@ -267,6 +291,10 @@ namespace MgmtNonStringPathVariable
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -300,6 +328,10 @@ namespace MgmtNonStringPathVariable
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Fake/bars</description>
         /// </item>
         /// </list>
         /// </summary>

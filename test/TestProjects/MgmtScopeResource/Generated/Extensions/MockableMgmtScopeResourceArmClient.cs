@@ -72,6 +72,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -95,6 +99,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyAssignments</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -140,6 +148,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -164,6 +176,10 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -187,6 +203,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSourceScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -214,6 +234,10 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_ListAtSourceScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Resources/links</description>
         /// </item>
         /// </list>
         /// </summary>

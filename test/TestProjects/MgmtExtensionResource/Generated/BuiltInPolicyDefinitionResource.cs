@@ -99,6 +99,10 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -130,6 +134,10 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetBuiltIn</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Authorization/policyDefinitions</description>
         /// </item>
         /// </list>
         /// </summary>

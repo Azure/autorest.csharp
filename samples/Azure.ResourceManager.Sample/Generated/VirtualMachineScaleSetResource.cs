@@ -116,6 +116,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetExtensions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
@@ -139,6 +143,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetExtensions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -178,6 +186,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetVMs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualmachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
@@ -202,6 +214,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetVMs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualmachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
@@ -225,6 +241,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -258,6 +278,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -289,6 +313,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Delete</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -324,6 +352,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Delete</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -357,6 +389,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -396,6 +432,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Update</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -434,6 +474,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Deallocate</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -469,6 +513,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Deallocate</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -503,6 +551,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_DeleteInstances</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -542,6 +594,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_DeleteInstances</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -580,6 +636,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_GetInstanceView</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -609,6 +669,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_GetInstanceView</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -640,6 +704,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListSkus</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -661,6 +729,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListSkus</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -684,6 +756,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_GetOSUpgradeHistory</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -706,6 +782,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_GetOSUpgradeHistory</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -727,6 +807,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_PowerOff</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -764,6 +848,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_PowerOff</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -800,6 +888,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Restart</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -834,6 +926,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Restart</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -870,6 +966,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Start</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -904,6 +1004,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Start</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -940,6 +1044,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Redeploy</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -974,6 +1082,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Redeploy</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1010,6 +1122,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_PerformMaintenance</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1045,6 +1161,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_PerformMaintenance</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1079,6 +1199,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_UpdateInstances</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1118,6 +1242,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_UpdateInstances</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1156,6 +1284,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Reimage</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1190,6 +1322,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Reimage</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1226,6 +1362,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ReimageAll</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1260,6 +1400,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ReimageAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1296,6 +1440,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="platformUpdateDomain"> The platform update domain for which a manual recovery walk is requested. </param>
@@ -1327,6 +1475,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="platformUpdateDomain"> The platform update domain for which a manual recovery walk is requested. </param>
@@ -1357,6 +1509,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ConvertToSinglePlacementGroup</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1392,6 +1548,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ConvertToSinglePlacementGroup</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> The input object for ConvertToSinglePlacementGroup API. </param>
@@ -1425,6 +1585,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_SetOrchestrationServiceState</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1464,6 +1628,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_SetOrchestrationServiceState</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1502,6 +1670,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_Cancel</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1535,6 +1707,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_Cancel</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1570,6 +1746,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1603,6 +1783,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1638,6 +1822,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1672,6 +1860,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -1705,6 +1897,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1760,6 +1956,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -1814,6 +2014,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -1863,6 +2067,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -1911,6 +2119,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1963,6 +2175,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
         /// </item>
         /// </list>
         /// </summary>

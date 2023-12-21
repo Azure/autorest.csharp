@@ -55,6 +55,10 @@ namespace MgmtConstants.Mocking
         /// <term>Operation Id</term>
         /// <description>Optionals_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The name of the virtual machine. </param>
@@ -78,6 +82,10 @@ namespace MgmtConstants.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Optionals_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Constant/optionalMachines</description>
         /// </item>
         /// </list>
         /// </summary>

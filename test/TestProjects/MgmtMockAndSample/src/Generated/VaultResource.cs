@@ -115,6 +115,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>PrivateEndpointConnections_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults/privateEndpointConnections</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="privateEndpointConnectionName"> Name of the private endpoint connection associated with the key vault. </param>
@@ -138,6 +142,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>PrivateEndpointConnections_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults/privateEndpointConnections</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="privateEndpointConnectionName"> Name of the private endpoint connection associated with the key vault. </param>
@@ -160,6 +168,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -193,6 +205,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -224,6 +240,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Delete</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -259,6 +279,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Delete</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -292,6 +316,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -327,6 +355,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Update</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="patch"> Parameters to patch the vault. </param>
@@ -361,6 +393,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_ListKeys</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -382,6 +418,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_ListKeys</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -402,6 +442,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Validate</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -433,6 +477,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Validate</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -463,6 +511,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Disable</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -492,6 +544,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Disable</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -635,6 +691,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -688,6 +748,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -743,6 +807,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -792,6 +860,10 @@ namespace MgmtMockAndSample
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -840,6 +912,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -892,6 +968,10 @@ namespace MgmtMockAndSample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.KeyVault/vaults</description>
         /// </item>
         /// </list>
         /// </summary>

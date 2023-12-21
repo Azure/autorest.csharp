@@ -76,6 +76,10 @@ namespace MgmtSubscriptionNameParameter
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.ServiceBus/subscriptions</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -105,6 +109,10 @@ namespace MgmtSubscriptionNameParameter
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.ServiceBus/subscriptions</description>
         /// </item>
         /// </list>
         /// <item>

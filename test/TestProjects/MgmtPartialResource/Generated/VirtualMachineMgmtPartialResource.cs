@@ -73,6 +73,10 @@ namespace MgmtPartialResource
         /// <term>Operation Id</term>
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
@@ -95,6 +99,10 @@ namespace MgmtPartialResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ConfigurationProfileAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource Type</term>
+        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
         /// </item>
         /// </list>
         /// </summary>
