@@ -251,12 +251,13 @@ export function createModelForService(
                 client as SdkClient
             );
             for (const dpgGroup of dpgOperationGroups) {
-                clients.push(
-                    emitClient(
-                        { ...dpgGroup, name: dpgGroup.type.name },
-                        client
-                    )
-                );
+                var dotnetOperationGroup = {
+                    ...dpgGroup,
+                    name: dpgGroup.type.name
+                };
+                var subClient = emitClient(dotnetOperationGroup, client);
+                clients.push(subClient);
+                addChildClients(context, dotnetOperationGroup, clients);
             }
         } else {
             const dpgOperationGroups = listOperationGroupsByClient(
