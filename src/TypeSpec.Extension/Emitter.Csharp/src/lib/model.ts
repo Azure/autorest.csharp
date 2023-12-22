@@ -658,7 +658,7 @@ export function getInputType(
                     IsDiscriminator: name === model.DiscriminatorPropertyName
                 };
 
-                if (inputProp.IsDiscriminator){
+                if (inputProp.IsDiscriminator) {
                     discriminatorPropertyDefined = true;
                 }
                 outputProperties.push(inputProp);
