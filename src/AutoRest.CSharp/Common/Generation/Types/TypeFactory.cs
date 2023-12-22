@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
-            InputUnionType unionType => new CSharpType(typeof(BinaryData), unionType.UnionItemTypes.Select(u => CreateType(u)).ToArray(), unionType.IsNullable),
+            InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray(), unionType.IsNullable),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -270,12 +271,12 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
 
         internal static bool IsOperationOfAsyncPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsAsyncPageable(type.Arguments[0]);
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsAsyncPageable(type.Arguments[0]);
 
         internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
 
         internal static bool IsOperationOfPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsPageable(type.Arguments[0]);
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
 
         internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
 
@@ -414,25 +415,34 @@ namespace AutoRest.CSharp.Generation.Types
         public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
             type = null;
-            INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
-            if (namedTypeSymbol == null)
+            return symbol switch
             {
-                throw new InvalidCastException($"Unexpected type {symbol}");
-            }
+                IArrayTypeSymbol arrayTypeSymbol => TryCreateTypeForIArrayTypeSymbol(arrayTypeSymbol, validator, out type),
+                INamedTypeSymbol namedTypeSymbol => TryCreateTypeForINamedTypeSymbol(namedTypeSymbol, validator, out type),
 
+                // We can only handle IArrayTypeSymbol of framework type and INamedTypeSymbol for now since CSharpType can't represent other types such as IArrayTypeSymbol of user types
+                // Instead of throwing an exception, wihch causes more side effects, we just return false and let the caller handle it.
+                _ => false
+            };
+        }
+
+        private bool TryCreateTypeForINamedTypeSymbol(INamedTypeSymbol namedTypeSymbol, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
+        {
+            type = null;
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
             {
                 type = CreateType(namedTypeSymbol.TypeArguments[0]).WithNullable(true);
                 return true;
             }
 
-            var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
-            var fullyQualifiedName = $"{fullMetadataName}, {namedTypeSymbol.ContainingAssembly.Name}";
-            var existingType = Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
+            Type? existingType = TryGetFrameworkType(namedTypeSymbol);
 
-            if (existingType != null && validator(existingType))
+            if (existingType is not null && validator(existingType))
             {
-                var arguments = namedTypeSymbol.TypeArguments.Select(a => CreateType(a)).ToArray();
+                if (!TryPopulateArguments(namedTypeSymbol.TypeArguments, validator, out var arguments))
+                {
+                    return false;
+                }
                 type = new CSharpType(existingType, false, arguments);
             }
             else
@@ -440,13 +450,13 @@ namespace AutoRest.CSharp.Generation.Types
                 type = _library.FindTypeByName(namedTypeSymbol.Name);
             }
 
-            if (type == null)
+            if (type is null)
             {
                 return false;
             }
 
             if (!type.IsValueType &&
-                symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
+                namedTypeSymbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
             {
                 type = type.WithNullable(true);
             }
@@ -454,21 +464,70 @@ namespace AutoRest.CSharp.Generation.Types
             return true;
         }
 
+        private bool TryCreateTypeForIArrayTypeSymbol(IArrayTypeSymbol symbol, Func<Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
+        {
+            type = null;
+            if (symbol is not IArrayTypeSymbol arrayTypeSymbol)
+            {
+                return false;
+            }
+
+            // For IArrayTypeSymbol, we can only handle it when the element type is a framework type.
+            var arrayType = TryGetFrameworkType(arrayTypeSymbol);
+            if (arrayType is not null && validator(arrayType))
+            {
+                type = new CSharpType(arrayType, arrayType.IsValueType && symbol.NullableAnnotation != NullableAnnotation.NotAnnotated);
+                return true;
+            }
+            return false;
+        }
+
+        private Type? TryGetFrameworkType(ISymbol namedTypeSymbol)
+        {
+            var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
+            var fullyQualifiedName = $"{fullMetadataName}, {namedTypeSymbol.ContainingAssembly?.Name}";
+            return Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
+        }
+
+        // There can be argument type missing
+        private bool TryPopulateArguments(ImmutableArray<ITypeSymbol> typeArguments, Func<Type, bool> validator, [NotNullWhen(true)] out IReadOnlyList<CSharpType>? arguments)
+        {
+            arguments = null;
+            var result = new List<CSharpType>();
+            foreach (var typeArgtment in typeArguments)
+            {
+                if (!TryCreateType(typeArgtment, validator, out CSharpType? type))
+                {
+                    return false;
+                }
+                result.Add(type);
+            }
+            arguments = result;
+            return true;
+        }
+
         private string GetFullMetadataName(ISymbol namedTypeSymbol)
         {
             StringBuilder builder = new StringBuilder();
 
-            GetFullMetadataName(builder, namedTypeSymbol);
+            BuildFullMetadataName(builder, namedTypeSymbol);
 
             return builder.ToString();
         }
 
-        private void GetFullMetadataName(StringBuilder builder, ISymbol symbol)
+        private void BuildFullMetadataName(StringBuilder builder, ISymbol symbol)
         {
+            if (symbol is IArrayTypeSymbol arrayTypeSymbol)
+            {
+                BuildFullMetadataName(builder, arrayTypeSymbol.ElementType);
+                builder.Append("[]");
+                return;
+            }
+
             if (symbol.ContainingNamespace != null &&
                 !symbol.ContainingNamespace.IsGlobalNamespace)
             {
-                GetFullMetadataName(builder, symbol.ContainingNamespace);
+                BuildFullMetadataName(builder, symbol.ContainingNamespace);
                 builder.Append(".");
             }
 

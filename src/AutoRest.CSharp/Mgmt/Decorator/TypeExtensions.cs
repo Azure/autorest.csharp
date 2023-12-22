@@ -1,11 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.Output;
 using Azure;
 using Azure.ResourceManager;
 
@@ -26,10 +24,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (left.Name != right.Name)
                 return false;
 
-            if (left.Arguments.Length != right.Arguments.Length)
+            if (left.Arguments.Count != right.Arguments.Count)
                 return false;
 
-            for (int i = 0; i < left.Arguments.Length; i++)
+            for (int i = 0; i < left.Arguments.Count; i++)
             {
                 if (left.Arguments[i].Name != right.Arguments[i].Name)
                     return false;
@@ -59,11 +57,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var response = new CSharpType(typeof(ArmOperation<>), type);
             return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
-
-        public static bool TryCastResource(this CSharpType type, [MaybeNullWhen(false)] out Resource resource)
-            => type.TryCast<Resource>(out resource);
-
-        public static bool TryCastResourceData(this CSharpType type, [MaybeNullWhen(false)] out ResourceData data)
-            => type.TryCast<ResourceData>(out data);
     }
 }

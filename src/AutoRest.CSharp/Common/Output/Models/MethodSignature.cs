@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 Name = Name[..^5],
                 Modifiers = Modifiers ^ Async,
-                ReturnType = ReturnType?.Arguments.Length == 1
+                ReturnType = ReturnType?.Arguments.Count == 1
                     ? TypeFactory.IsOperationOfAsyncPageable(ReturnType.Arguments[0])
                         ? new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), ReturnType.Arguments[0].Arguments[0].Arguments[0]))
                         : ReturnType.Arguments[0]

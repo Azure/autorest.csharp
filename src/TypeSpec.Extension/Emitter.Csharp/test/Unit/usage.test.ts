@@ -363,4 +363,51 @@ describe("Test getUsages", () => {
         assert(usages.outputs.includes("DerivedModelWithDiscriminatorA"));
         assert(usages.outputs.includes("NestedModel"));
     });
+
+    it("Get usage for the model which is renamed by projected name", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("This is a model.")
+            @projectedName("csharp", "FooRenamed")
+            model Foo {
+                @doc("name of the Foo")
+                name: string;
+            }
+            op test(@path id: string, @body foo: Foo): Foo;
+      `,
+            runner
+        );
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        assert(usages.roundTrips.includes("FooRenamed"));
+    });
+
+    it("Test the usage of enum which is renamed via @projectedName.", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("fixed string enum")
+            @projectedName("csharp", "SimpleEnumRenamed")
+            enum SimpleEnum {
+                @doc("Enum value one")
+                One: "1",
+                @doc("Enum value two")
+                Two: "2",
+                @doc("Enum value four")
+                Four: "4"
+            }
+
+            op test(@path id: SimpleEnum): void;
+      `,
+            runner,
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: false }
+        );
+
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        assert(usages.inputs.includes("SimpleEnumRenamed"));
+    });
 });

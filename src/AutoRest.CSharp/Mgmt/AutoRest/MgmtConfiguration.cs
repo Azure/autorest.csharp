@@ -154,6 +154,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? updateRequiredCopy = default,
             JsonElement? patchInitializerCustomization = default,
             JsonElement? partialResources = default,
+            JsonElement? privilegedOperations = default,
             JsonElement? operationsToLroApiVersionOverride = default)
         {
             MgmtReport.Instance.Reset();
@@ -211,6 +212,7 @@ namespace AutoRest.CSharp.Input
             OperationIdMappings = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(operationIdMappings);
             UpdateRequiredCopy = DeserializeDictionary<string, string>(updateRequiredCopy);
             PatchInitializerCustomization = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(patchInitializerCustomization);
+            PrivilegedOperations = DeserializeDictionary<string, string>(privilegedOperations).AddToTransformerStore(Mgmt.Report.TransformTypeName.PrivilegedOperations, fromConfig: true);
             OperationsToLroApiVersionOverride = DeserializeDictionary<string, string>(operationsToLroApiVersionOverride);
         }
 
@@ -263,6 +265,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyList<string> OperationsToSkipLroApiVersionOverride { get; }
         public IReadOnlyDictionary<string, string> OperationsToLroApiVersionOverride { get; }
+        public IReadOnlyDictionary<string, string> PrivilegedOperations { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
         public IReadOnlyDictionary<string, string> UpdateRequiredCopy { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
@@ -312,6 +315,7 @@ namespace AutoRest.CSharp.Input
                 updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
                 patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult(),
                 partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult(),
+                privilegedOperations: autoRest.GetValue<JsonElement?>("privileged-operations").GetAwaiter().GetResult(),
                 operationsToLroApiVersionOverride: autoRest.GetValue<JsonElement?>("operations-to-lro-api-version-override").GetAwaiter().GetResult());
         }
 
@@ -350,6 +354,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RenameMapping), RenameMapping);
             WriteNonEmptySettings(writer, nameof(ParameterRenameMapping), ParameterRenameMapping);
             WriteNonEmptySettings(writer, nameof(IrregularPluralWords), IrregularPluralWords);
+            WriteNonEmptySettings(writer, nameof(PrivilegedOperations), PrivilegedOperations);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
             WriteNonEmptySettings(writer, nameof(PartialResources), PartialResources);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
@@ -398,6 +403,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
             root.TryGetProperty(nameof(PartialResources), out var virtualResources);
             root.TryGetProperty(nameof(RawParameterizedScopes), out var parameterizedScopesElement);
+            root.TryGetProperty(nameof(PrivilegedOperations), out var privilegedOperationsElement);
             root.TryGetProperty(nameof(OperationsToSkipLroApiVersionOverride), out var operationsToSkipLroApiVersionOverrideElement);
 
             var operationGroupToOmit = Configuration.DeserializeArray(operationGroupsToOmitElement);
@@ -422,6 +428,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
             root.TryGetProperty(nameof(UpdateRequiredCopy), out var updateRequiredCopy);
             root.TryGetProperty(nameof(PatchInitializerCustomization), out var patchInitializerCustomization);
+            root.TryGetProperty(nameof(PrivilegedOperations), out var privilegedOperations);
             root.TryGetProperty(nameof(OperationsToLroApiVersionOverride), out var operationsToLroApiVersionOverride);
 
             return new MgmtConfiguration(
@@ -462,6 +469,7 @@ namespace AutoRest.CSharp.Input
                 updateRequiredCopy: updateRequiredCopy,
                 patchInitializerCustomization: patchInitializerCustomization,
                 partialResources: virtualResources,
+                privilegedOperations: privilegedOperations,
                 operationsToLroApiVersionOverride: operationsToLroApiVersionOverride);
         }
 

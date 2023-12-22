@@ -486,3 +486,41 @@ model ContainSelf{
 @put
 @convenientAPI(true)
 op ContainSelfModels(@body input: ContainSelf): void;
+
+
+@doc("enum with projected name")
+@fixed
+@projectedName("csharp", "CsProjectedEnum")
+enum ProjectedEnum {
+    @projectedName("csharp", "CsOne")
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
+}
+@route("/enumParameter")
+@doc("test enum parameter.")
+@get
+@convenientAPI(true)
+op enumParameter(@path p1: ProjectedEnum ): void;
+
+
+@doc("enum with projected name used in a model")
+@fixed
+@projectedName("csharp", "CsProjectedEnumInModel")
+enum ProjectedEnumInModel {
+    @projectedName("csharp", "CsOne")
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
+}
+
+model ModelWithProjectedEnum {
+    @doc("enum with projected name used in a model")
+    enumProperty: ProjectedEnumInModel;
+}
+
+@route("/bodyIsModelWithProjectedEnum")
+@doc("test enum parameter.")
+@put
+@convenientAPI(true)
+op bodyIsModelWithProjectedEnum(@body body: ModelWithProjectedEnum ): void;
