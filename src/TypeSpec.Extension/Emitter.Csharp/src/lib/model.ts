@@ -68,7 +68,7 @@ import {
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { Usage } from "../type/usage.js";
-import { LoggerLevel, logger } from "./logger.js";
+import { logger } from "./logger.js";
 import {
     SdkContext,
     getAccess,
