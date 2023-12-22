@@ -921,10 +921,6 @@ export function getUsages(
                             bodyType,
                             new Set<string>()
                         ).forEach((element) => {
-                            logger.log(
-                                LoggerLevel.INFO,
-                                `${bodyType.name} add element ${element}`
-                            );
                             affectedReturnTypes.add(element);
                         });
                     }
