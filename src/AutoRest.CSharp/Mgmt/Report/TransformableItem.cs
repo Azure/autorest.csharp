@@ -18,7 +18,9 @@ namespace AutoRest.CSharp.Mgmt.Report
         }
 
         public string FullSerializedName { get; set; }
-        protected virtual List<string>? TransformTypeWhiteList { get { return null; } }
+        protected virtual HashSet<string>? TransformTypeWhiteList { get { return null; } }
+
+        private List<string>? _appliedTransformLogs;
 
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitEmptyCollections | DefaultValuesHandling.OmitNull)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -26,12 +28,18 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
             get
             {
-                var r = _transformSection.GetAppliedTransformLogs(
-                    this.FullSerializedName, this.TransformTypeWhiteList)
-                    .OrderBy(item => item.Log.Index)
-                    .Select(item => $"[{item.Log.Index}][{item.Transfom}] {item.Log.LogMessage}").ToList();
-                // return null when it's an empty list so that it will be ignored in Json
-                return r.Count == 0? null : r;
+                {
+                    if (_appliedTransformLogs is null)
+                    {
+                        var r = _transformSection.GetAppliedTransformLogs(
+                        this.FullSerializedName, this.TransformTypeWhiteList)
+                        .OrderBy(item => item.Log.Index)
+                        .Select(item => $"[{item.Log.Index}][{item.Transform}] {item.Log.LogMessage}").ToList();
+                        // return null when it's an empty list so that it will be ignored in Json
+                        _appliedTransformLogs = r.Count == 0 ? null : r;
+                    }
+                    return _appliedTransformLogs;
+                }
             }
         }
     }
