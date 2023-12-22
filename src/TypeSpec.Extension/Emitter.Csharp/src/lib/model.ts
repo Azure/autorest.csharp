@@ -915,12 +915,7 @@ export function getUsages(
                     metadata.finalResult !== undefined &&
                     metadata.finalResult !== "void"
                 ) {
-                    const formattedType = getFormattedType(
-                        program,
-                        metadata.finalEnvelopeResult as Model
-                    );
                     bodyType = metadata.finalEnvelopeResult as Model;
-
                     if (bodyType) {
                         getAllEffectedModels(
                             bodyType,
