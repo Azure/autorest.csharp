@@ -84,6 +84,7 @@ namespace NamedTypeSymbolExtensionsTests
                 publicClients: true,
                 modelNamespace: false,
                 headAsBoolean: false,
+                skipCSProj: false,
                 skipCSProjPackageReference: false,
                 generation1ConvenienceClient: false,
                 singleTopLevelClient: false,
