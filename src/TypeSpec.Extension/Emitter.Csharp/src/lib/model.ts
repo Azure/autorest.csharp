@@ -376,9 +376,8 @@ export function getInputType(
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsExtensible: !isFixed(program, e),
-                IsNullable: false,
-                Usage: Usage.None
-            };
+                IsNullable: false
+            } as InputEnumType;
             enums.set(name, extensibleEnum);
         }
         return extensibleEnum;
@@ -430,9 +429,9 @@ export function getInputType(
                     Name: literalValue.toString(),
                     Value: literalValue,
                     Description: literalValue.toString()
-                }
+                } as InputEnumTypeValue
             ];
-            const enumType: InputEnumType = {
+            const enumType = {
                 Name: enumName,
                 EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
@@ -441,9 +440,8 @@ export function getInputType(
                 Deprecated: undefined,
                 Description: `The ${enumName}`, // TODO -- what should we put here?
                 IsExtensible: true,
-                IsNullable: false,
-                Usage: Usage.None
-            };
+                IsNullable: false
+            } as InputEnumType;
             return enumType;
         }
     }
@@ -492,9 +490,8 @@ export function getInputType(
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 IsExtensible: !isFixed(program, e),
-                IsNullable: false,
-                Usage: Usage.None
-            };
+                IsNullable: false
+            } as InputEnumType;
             setUsage(context, e, enumType);
             if (addToCollection) enums.set(name, enumType);
         }
@@ -648,17 +645,17 @@ export function getInputType(
                 ) {
                     inputType.Accessibility = undefined;
                 }
-                const inputProp: InputModelProperty = {
+                const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
                     Type: inputType,
                     IsRequired: !value.optional,
-                    IsReadOnly: isReadOnly,
-                    IsDiscriminator: name === model.DiscriminatorPropertyName
-                };
+                    IsReadOnly: isReadOnly
+                } as InputModelProperty;
 
-                if (inputProp.IsDiscriminator) {
+                if (name === model.DiscriminatorPropertyName) {
+                    inputProp.IsDiscriminator = true;
                     discriminatorPropertyDefined = true;
                 }
                 outputProperties.push(inputProp);

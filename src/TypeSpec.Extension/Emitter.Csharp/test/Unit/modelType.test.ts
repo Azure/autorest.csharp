@@ -76,7 +76,6 @@ op test(@body input: Pet): Pet;
                         Kind: "String",
                         IsNullable: false
                     },
-                    IsNullable: false,
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true,
