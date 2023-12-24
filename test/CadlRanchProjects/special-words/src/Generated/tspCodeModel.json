@@ -11,7 +11,6 @@
    "$id": "2",
    "Name": "and",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -35,7 +34,6 @@
    "$id": "5",
    "Name": "as",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -59,7 +57,6 @@
    "$id": "8",
    "Name": "assert",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -83,7 +80,6 @@
    "$id": "11",
    "Name": "async",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -107,7 +103,6 @@
    "$id": "14",
    "Name": "await",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -131,7 +126,6 @@
    "$id": "17",
    "Name": "break",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -155,7 +149,6 @@
    "$id": "20",
    "Name": "class",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -179,7 +172,6 @@
    "$id": "23",
    "Name": "constructor",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -203,7 +195,6 @@
    "$id": "26",
    "Name": "continue",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -227,7 +218,6 @@
    "$id": "29",
    "Name": "def",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -251,7 +241,6 @@
    "$id": "32",
    "Name": "del",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -275,7 +264,6 @@
    "$id": "35",
    "Name": "elif",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -299,7 +287,6 @@
    "$id": "38",
    "Name": "else",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -323,7 +310,6 @@
    "$id": "41",
    "Name": "except",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -347,7 +333,6 @@
    "$id": "44",
    "Name": "exec",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -371,7 +356,6 @@
    "$id": "47",
    "Name": "finally",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -395,7 +379,6 @@
    "$id": "50",
    "Name": "for",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -419,7 +402,6 @@
    "$id": "53",
    "Name": "from",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -443,7 +425,6 @@
    "$id": "56",
    "Name": "global",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -467,7 +448,6 @@
    "$id": "59",
    "Name": "if",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -491,7 +471,6 @@
    "$id": "62",
    "Name": "import",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -515,7 +494,6 @@
    "$id": "65",
    "Name": "in",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -539,7 +517,6 @@
    "$id": "68",
    "Name": "is",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -563,7 +540,6 @@
    "$id": "71",
    "Name": "lambda",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -587,7 +563,6 @@
    "$id": "74",
    "Name": "not",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -611,7 +586,6 @@
    "$id": "77",
    "Name": "or",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -635,7 +609,6 @@
    "$id": "80",
    "Name": "pass",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -659,7 +632,6 @@
    "$id": "83",
    "Name": "raise",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -683,7 +655,6 @@
    "$id": "86",
    "Name": "return",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -707,7 +678,6 @@
    "$id": "89",
    "Name": "try",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -731,7 +701,6 @@
    "$id": "92",
    "Name": "while",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -755,7 +724,6 @@
    "$id": "95",
    "Name": "with",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -779,7 +747,6 @@
    "$id": "98",
    "Name": "yield",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -803,7 +770,6 @@
    "$id": "101",
    "Name": "SameAsModel",
    "Namespace": "SpecialWords.ModelProperties",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -827,7 +793,6 @@
    "$id": "104",
    "Name": "Base",
    "Namespace": "SpecialWords.Models",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [

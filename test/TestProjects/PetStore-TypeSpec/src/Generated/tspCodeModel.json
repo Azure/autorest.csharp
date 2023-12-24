@@ -34,7 +34,6 @@
    "$id": "5",
    "Name": "Pet",
    "Namespace": "PetStore",
-   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -98,7 +97,6 @@
      "Description": "Discriminator",
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsNullable": false,
      "Type": {
       "$id": "14",
       "Name": "string",
@@ -127,7 +125,6 @@
    "$id": "17",
    "Name": "Toy",
    "Namespace": "PetStore",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -217,7 +214,6 @@
    "$id": "29",
    "Name": "PetId",
    "Namespace": "PetStore",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []

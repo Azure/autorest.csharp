@@ -11,7 +11,6 @@
    "$id": "2",
    "Name": "DefaultBytesProperty",
    "Namespace": "Encode.Bytes",
-   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -35,7 +34,6 @@
    "$id": "5",
    "Name": "Base64BytesProperty",
    "Namespace": "Encode.Bytes",
-   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -59,7 +57,6 @@
    "$id": "8",
    "Name": "Base64urlBytesProperty",
    "Namespace": "Encode.Bytes",
-   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [
@@ -83,7 +80,6 @@
    "$id": "11",
    "Name": "Base64urlArrayBytesProperty",
    "Namespace": "Encode.Bytes",
-   "Description": "",
    "IsNullable": false,
    "Usage": "RoundTrip",
    "Properties": [

@@ -41,7 +41,6 @@
    "$id": "6",
    "Name": "Project",
    "Namespace": "RenameGetList",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -265,7 +264,6 @@
    "$id": "36",
    "Name": "Deployment",
    "Namespace": "RenameGetList",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -329,7 +327,6 @@
    "$id": "44",
    "Name": "ListQueryParams",
    "Namespace": "RenameGetList",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []

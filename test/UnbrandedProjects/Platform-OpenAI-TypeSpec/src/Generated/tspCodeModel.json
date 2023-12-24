@@ -138,7 +138,6 @@
    "$id": "16",
    "Name": "CreateTranscriptionRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -312,7 +311,6 @@
    "$id": "42",
    "Name": "CreateTranscriptionResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -336,7 +334,6 @@
    "$id": "45",
    "Name": "CreateTranslationRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -496,7 +493,6 @@
    "$id": "69",
    "Name": "CreateTranslationResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -520,7 +516,6 @@
    "$id": "72",
    "Name": "CreateChatCompletionRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -689,7 +684,6 @@
        "$id": "100",
        "Name": "ChatCompletionRequestMessage",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "Input",
        "Properties": [
@@ -793,7 +787,6 @@
           "$id": "116",
           "Name": "Anon_1",
           "Namespace": "OpenAI",
-          "Description": "",
           "IsNullable": false,
           "Usage": "None",
           "Properties": [
@@ -849,7 +842,6 @@
        "$id": "123",
        "Name": "ChatCompletionFunctions",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "Input",
        "Properties": [
@@ -890,7 +882,6 @@
           "$id": "129",
           "Name": "ChatCompletionFunctionParameters",
           "Namespace": "OpenAI",
-          "Description": "",
           "IsNullable": false,
           "Usage": "Input",
           "InheritedDictionaryType": {
@@ -959,7 +950,6 @@
         "$id": "139",
         "Name": "ChatCompletionFunctionCallOption",
         "Namespace": "OpenAI",
-        "Description": "",
         "IsNullable": false,
         "Usage": "Input",
         "Properties": [
@@ -1247,7 +1237,6 @@
        "$id": "178",
        "Name": "Anon_2",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "None",
        "Properties": [
@@ -1274,7 +1263,6 @@
           "$id": "182",
           "Name": "ChatCompletionResponseMessage",
           "Namespace": "OpenAI",
-          "Description": "",
           "IsNullable": false,
           "Usage": "Output",
           "Properties": [
@@ -1364,7 +1352,6 @@
              "$id": "196",
              "Name": "Anon_3",
              "Namespace": "OpenAI",
-             "Description": "",
              "IsNullable": false,
              "Usage": "None",
              "Properties": [
@@ -1554,7 +1541,6 @@
    "$id": "219",
    "Name": "CreateFineTuningJobRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -1652,7 +1638,6 @@
       "$id": "234",
       "Name": "Anon_4",
       "Namespace": "OpenAI",
-      "Description": "",
       "IsNullable": false,
       "Usage": "None",
       "Properties": [
@@ -1717,7 +1702,6 @@
    "$id": "242",
    "Name": "FineTuningJob",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -1918,7 +1902,6 @@
       "$id": "272",
       "Name": "Anon_5",
       "Namespace": "OpenAI",
-      "Description": "",
       "IsNullable": false,
       "Usage": "None",
       "Properties": [
@@ -2030,7 +2013,6 @@
       "$id": "288",
       "Name": "Anon_6",
       "Namespace": "OpenAI",
-      "Description": "",
       "IsNullable": true,
       "Usage": "None",
       "Properties": [
@@ -2093,7 +2075,6 @@
    "$id": "295",
    "Name": "ListPaginatedFineTuningJobsResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -2147,7 +2128,6 @@
    "$id": "302",
    "Name": "ListFineTuningJobEventsResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -2177,7 +2157,6 @@
        "$id": "307",
        "Name": "FineTuningJobEvent",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "Output",
        "Properties": [
@@ -2304,7 +2283,6 @@
    "$id": "324",
    "Name": "CreateCompletionRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -2799,7 +2777,6 @@
        "$id": "400",
        "Name": "Anon_7",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "None",
        "Properties": [
@@ -2840,7 +2817,6 @@
           "$id": "406",
           "Name": "Anon_8",
           "Namespace": "OpenAI",
-          "Description": "",
           "IsNullable": true,
           "Usage": "None",
           "Properties": [
@@ -3017,7 +2993,6 @@
    "$id": "430",
    "Name": "CreateEditRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -3143,7 +3118,6 @@
    "Name": "CreateEditResponse",
    "Namespace": "OpenAI",
    "Deprecated": "deprecated",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -3190,7 +3164,6 @@
        "$id": "455",
        "Name": "Anon_9",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "None",
        "Properties": [
@@ -3288,7 +3261,6 @@
    "$id": "467",
    "Name": "CreateEmbeddingRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -3404,7 +3376,6 @@
    "$id": "485",
    "Name": "CreateEmbeddingResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -3521,7 +3492,6 @@
       "$id": "501",
       "Name": "Anon_10",
       "Namespace": "OpenAI",
-      "Description": "",
       "IsNullable": false,
       "Usage": "None",
       "Properties": [
@@ -3570,7 +3540,6 @@
    "$id": "506",
    "Name": "ListFilesResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -3808,7 +3777,6 @@
    "$id": "540",
    "Name": "CreateFileRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -3846,7 +3814,6 @@
    "$id": "545",
    "Name": "DeleteFileResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -3898,7 +3865,6 @@
    "$id": "552",
    "Name": "CreateFineTuneRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -4326,7 +4292,6 @@
       "$id": "615",
       "Name": "Anon_11",
       "Namespace": "OpenAI",
-      "Description": "",
       "IsNullable": false,
       "Usage": "None",
       "Properties": [
@@ -4493,7 +4458,6 @@
        "$id": "638",
        "Name": "FineTuneEvent",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "Output",
        "Properties": [
@@ -4572,7 +4536,6 @@
    "$id": "647",
    "Name": "ListFineTunesResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -4612,7 +4575,6 @@
    "$id": "652",
    "Name": "ListFineTuneEventsResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -4652,7 +4614,6 @@
    "$id": "657",
    "Name": "ListModelsResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -4761,7 +4722,6 @@
    "$id": "671",
    "Name": "DeleteModelResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -4813,7 +4773,6 @@
    "$id": "678",
    "Name": "CreateImageRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -4955,7 +4914,6 @@
    "$id": "699",
    "Name": "ImagesResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -5033,7 +4991,6 @@
    "$id": "709",
    "Name": "CreateImageEditRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -5203,7 +5160,6 @@
    "$id": "734",
    "Name": "CreateImageVariationRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -5345,7 +5301,6 @@
    "$id": "755",
    "Name": "CreateModerationRequest",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -5432,7 +5387,6 @@
    "$id": "768",
    "Name": "CreateModerationResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -5476,7 +5430,6 @@
        "$id": "775",
        "Name": "Anon_12",
        "Namespace": "OpenAI",
-       "Description": "",
        "IsNullable": false,
        "Usage": "None",
        "Properties": [
@@ -5503,7 +5456,6 @@
           "$id": "779",
           "Name": "Anon_13",
           "Namespace": "OpenAI",
-          "Description": "",
           "IsNullable": false,
           "Usage": "None",
           "Properties": [
@@ -5675,7 +5627,6 @@
           "$id": "803",
           "Name": "Anon_14",
           "Namespace": "OpenAI",
-          "Description": "",
           "IsNullable": false,
           "Usage": "None",
           "Properties": [
@@ -5860,7 +5811,6 @@
    "$id": "826",
    "Name": "ErrorResponse",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -5873,7 +5823,6 @@
       "$id": "828",
       "Name": "Error",
       "Namespace": "OpenAI",
-      "Description": "",
       "IsNullable": false,
       "Usage": "Output",
       "Properties": [
@@ -5947,7 +5896,6 @@
    "$id": "837",
    "Name": "FineTuningEvent",
    "Namespace": "OpenAI",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [

@@ -130,7 +130,6 @@
    "$id": "20",
    "Name": "Project",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -538,7 +537,6 @@
    "$id": "72",
    "Name": "Deployment",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -602,7 +600,6 @@
    "$id": "80",
    "Name": "SwapDeploymentsOptions",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -640,7 +637,6 @@
    "$id": "85",
    "Name": "DeploymentJob",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -796,7 +792,6 @@
    "$id": "105",
    "Name": "SwapDeploymentsJob",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -1070,7 +1065,6 @@
    "$id": "140",
    "Name": "Job",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -1174,7 +1168,6 @@
    "$id": "153",
    "Name": "ExportedProject",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -1183,7 +1176,6 @@
    "$id": "154",
    "Name": "ListQueryParams",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -1192,7 +1184,6 @@
    "$id": "155",
    "Name": "ExportParams",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
@@ -1201,7 +1192,6 @@
    "$id": "156",
    "Name": "SwapDeploymentsParams",
    "Namespace": "AuthoringTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [

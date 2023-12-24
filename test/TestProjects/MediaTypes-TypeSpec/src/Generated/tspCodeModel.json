@@ -11,7 +11,6 @@
    "$id": "2",
    "Name": "Body",
    "Namespace": "MultipleMediaTypes",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [

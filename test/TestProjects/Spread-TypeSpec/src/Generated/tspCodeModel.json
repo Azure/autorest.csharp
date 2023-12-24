@@ -29,7 +29,6 @@
    "$id": "4",
    "Name": "Thing",
    "Namespace": "SpreadTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -67,7 +66,6 @@
    "$id": "9",
    "Name": "SpreadAliasRequest",
    "Namespace": "SpreadTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -105,7 +103,6 @@
    "$id": "14",
    "Name": "SpreadMultiTargetAliasRequest",
    "Namespace": "",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -143,7 +140,6 @@
    "$id": "19",
    "Name": "SpreadAliasWithSpreadAliasRequest",
    "Namespace": "",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -181,7 +177,6 @@
    "$id": "24",
    "Name": "SpreadAliasWithOptionalPropsRequest",
    "Namespace": "",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -271,7 +266,6 @@
    "$id": "37",
    "Name": "SpreadAliasWithCollectionsRequest",
    "Namespace": "SpreadTypeSpec",
-   "Description": "",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
