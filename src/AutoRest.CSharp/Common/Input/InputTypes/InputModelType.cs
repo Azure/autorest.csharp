@@ -41,6 +41,14 @@ namespace AutoRest.CSharp.Common.Input
             Name = name;
         }
 
+        public InputModelTypeUsage Usage { get; private set; } = Usage;
+
+        internal void SetUsage(InputModelTypeUsage usage, [CallerFilePath] string filepath = "")
+        {
+            Debug.Assert(Path.GetFileName(filepath) == $"{nameof(DpgOutputLibraryBuilder)}.cs", "This method is only allowed to be called in `DpgOutputLibraryBuilder.cs`");
+            Usage = usage;
+        }
+
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);

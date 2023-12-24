@@ -79,6 +79,9 @@ namespace AutoRest.CSharp.Output.Models
                     if (newName is not null)
                     {
                         model.SetName(newName);
+                        // TODO -- the usage should be fixed on the emitter side, this is only a workaround
+                        // this issue should be automatically fixed when we adopt the GetAllModels from TCGC
+                        model.SetUsage(GetNewUsage(model));
                     }
                 }
             }
@@ -136,6 +139,41 @@ namespace AutoRest.CSharp.Output.Models
                 var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(model, typeProvider);
             }
+        }
+
+        private InputModelTypeUsage GetNewUsage(InputModelType anonModel)
+        {
+            var containingType = GetFirstNonAnonContainingType(anonModel);
+            if (containingType is not null)
+                return containingType.Usage;
+
+            InputModelTypeUsage usage = InputModelTypeUsage.None;
+            foreach (var client in _rootNamespace.Clients)
+            {
+                foreach (var operation in client.Operations)
+                {
+                    foreach (var parameter in operation.Parameters)
+                    {
+                        if (IsSameType(parameter.Type, anonModel))
+                        {
+                            usage |= InputModelTypeUsage.Input;
+                            break;
+                        }
+                    }
+                    foreach (var response in operation.Responses)
+                    {
+                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
+                            continue;
+
+                        if (IsSameType(responseType, anonModel))
+                        {
+                            usage |= InputModelTypeUsage.Output;
+                        }
+                    }
+
+                }
+            }
+            return usage;
         }
 
         private InputModelType? GetFirstNonAnonContainingType(InputModelType anonModel)
