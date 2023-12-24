@@ -44,5 +44,13 @@
   },
   "PrivilegedOperations": {
     "Vaults_CreateOrUpdate": "Test for privileged operations configuration"
+  },
+  "sample-gen": {
+    "SkippedOperations": [
+      "Vaults_GetDeleted",
+      "Vaults_Update"
+    ],
+    "Mock": true,
+    "Sample": true
   }
 }

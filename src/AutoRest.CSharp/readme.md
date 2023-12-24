@@ -25,15 +25,6 @@ modelerfour:
   group-parameters: true
 ```
 
-```yaml !$(skip-csproj)
-pipeline:
-  csharpproj:
-    input: modelerfour/identity
-  csharpproj/emitter:
-    input: csharpproj
-    scope: output-scope
-```
-
 ```yaml $(sample-gen)
 use-extension:
   "@autorest/testmodeler": "2.6.1"
