@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
 
-            MgmtTestOutputLibrary? library = null;
+            MgmtTestOutputLibrary library;
             if (sourceInputModel == null)
             {
                 var sourceFolder = GetSourceFolder();

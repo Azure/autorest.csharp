@@ -3,75 +3,25 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static System.Net.Mime.MediaTypeNames;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
-    // ReSharper disable once StringLiteralTypo
-    [PluginName("csharpproj")]
-    // ReSharper disable once IdentifierTypo
-    internal class CSharpProj : IPlugin
+    internal class CSharpProj
     {
-        private string _csProjContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
+        private readonly bool _needAzureKeyAuth;
+        private readonly bool _includeDfe;
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Nullable>annotations</Nullable>
-  </PropertyGroup>
-{0}{1}{2}
+        public CSharpProj(bool needAzureKeyAuth, bool includeDfe)
+        {
+            _needAzureKeyAuth = needAzureKeyAuth;
+            _includeDfe = includeDfe;
+        }
 
-</Project>
-";
-        private string _coreCsProjContent = @"
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core"" />
-  </ItemGroup>";
-
-        private string _armCsProjContent = @"
-  <PropertyGroup>
-    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" />
-  </ItemGroup>
-";
-
-        private string _csProjPackageReference = @"
-  <PropertyGroup>
-    <LangVersion>11.0</LangVersion>
-    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
-    <RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json</RestoreAdditionalProjectSources>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
-  </ItemGroup>
-";
-
-        private string _llcProjectContent = @"
-  <PropertyGroup>
-    <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" />
-  </ItemGroup>
-";
-        private string _llcAzureKeyAuth = @"
-  <ItemGroup>
-    <Compile Include=""$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs"" LinkBase=""Shared/Core"" />
-  </ItemGroup>";
-
-        internal static string GetVersion()
+        private static string GetVersion()
         {
             Assembly clientAssembly = Assembly.GetExecutingAssembly();
 
@@ -91,96 +41,131 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             return version;
         }
-        public async Task<bool> Execute(IPluginCommunication autoRest)
-        {
-            string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-            if (string.IsNullOrEmpty(codeModelFileName))
-                throw new Exception("Generator did not receive the code model file.");
 
-            var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-            var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-
-            var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
-            bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
-            var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
-            Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
+        public void Execute(IPluginCommunication autoRest)
+            => WriteCSProjFiles(async (filename, text) =>
             {
-                await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
-            },
-                codeModelYaml.Contains("x-ms-format: dfe-"), config);
-            return true;
-        }
+                await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
+            });
 
-        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe, bool includeAzureKeyAuth, CSharpProjConfiguration config)
-        {
-            Execute(defaultNamespace, includeAzureKeyAuth, async (filename, text) =>
+        public void Execute()
+            => WriteCSProjFiles(async (filename, text) =>
             {
                 //TODO adding to workspace makes the formatting messed up since its a raw xml document
                 //somewhere it tries to parse it as a syntax tree and when it converts back to text
                 //its no longer valid xml.  We should consider a "raw files" concept in the work space
                 //so the file writing can still remain in one place
-                await File.WriteAllTextAsync(Path.Combine(config.AbsoluteProjectFolder, filename), text);
-            },
-                includeDfe, config);
+                await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
+            });
+
+        private void WriteCSProjFiles(Action<string, string> writeFile)
+        {
+            // write src csproj
+            var csprojContent = Configuration.SkipCSProjPackageReference ? GetCSProj() : GetExternalCSProj();
+            writeFile($"{Configuration.Namespace}.csproj", csprojContent);
+
+            // write test csproj when needed
+            if (Configuration.MgmtTestConfiguration is not null)
+            {
+                var testCSProjContent = GetTestCSProj();
+                string testGenProjectFolder;
+                if (Configuration.MgmtTestConfiguration.OutputFolder is { } testGenProjectOutputFolder)
+                {
+                    testGenProjectFolder = Path.Combine(testGenProjectOutputFolder, "../");
+                }
+                else
+                {
+                    testGenProjectFolder = "../";
+                }
+                Console.WriteLine(Path.Combine(testGenProjectFolder, $"{Configuration.Namespace}.Tests.csproj"));
+                writeFile(FormatPath(Path.Combine(testGenProjectFolder, $"{Configuration.Namespace}.Tests.csproj")), testCSProjContent);
+            }
         }
 
-        private void Execute(string defaultNamespace, bool includeAzureKeyAuth, Action<string, string> writeFile, bool includeDfe, CSharpProjConfiguration config)
+        private static string FormatPath(string? path)
         {
-            if (includeDfe)
+            if (string.IsNullOrEmpty(path))
+                return path ?? "";
+            return Path.GetFullPath(path.TrimEnd('/', '\\')).Replace("\\", "/");
+        }
+
+        private string GetTestCSProj()
+        {
+            var writer = new CSProjWriter()
             {
-                _coreCsProjContent += @"
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" />
-  </ItemGroup>";
+                TargetFramework = "netstandard2.0",
+                TreatWarningsAsErrors = true,
+                Nullable = "annotations",
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
+            };
+
+            writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
+
+            writer.PackageReferences.Add(new("NUnit"));
+            writer.PackageReferences.Add(new("Azure.Identity"));
+
+            writer.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
+
+            return writer.Write();
+        }
+
+        private string GetCSProj()
+        {
+            var builder = new CSProjWriter()
+            {
+                TargetFramework = "netstandard2.0",
+                TreatWarningsAsErrors = true,
+                Nullable = "annotations",
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
+                DefineConstants = !Configuration.AzureArm && !Configuration.Generation1ConvenienceClient ? new("$(DefineConstants);EXPERIMENTAL") : null
+            };
+            builder.PackageReferences.Add(new("Azure.Core"));
+            if (_includeDfe)
+            {
+                builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
 
-            var isTestProject = config.IsMgmtTestProject;
-            if (isTestProject)
+            if (Configuration.AzureArm)
             {
-                _coreCsProjContent += string.Format(@"
-
-  <ItemGroup>
-    <ProjectReference Include=""..\src\{0}.csproj"" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include=""NUnit"" />
-    <PackageReference Include=""Azure.Identity"" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include = ""..\..\..\..\src\assets\TestFramework\*.cs"" />
-  </ItemGroup>", defaultNamespace);
+                builder.PackageReferences.Add(new("Azure.ResourceManager"));
+            }
+            else if (!Configuration.Generation1ConvenienceClient)
+            {
+                builder.PackageReferences.Add(new("Azure.Core.Experimental"));
             }
 
-            string csProjContent;
-            if (config.SkipCSProjPackageReference)
+            if (_needAzureKeyAuth)
             {
-                string additionalContent = string.Empty;
-                if (config.AzureArm)
-                {
-                    additionalContent += _armCsProjContent;
-                }
-                else if (!config.Generation1ConvenienceClient)
-                {
-                    additionalContent += _llcProjectContent;
-                }
-
-                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
-            }
-            else
-            {
-                var version = GetVersion();
-                var csProjPackageReference = string.Format(_csProjPackageReference, version);
-                csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent, includeAzureKeyAuth ? _llcAzureKeyAuth : "");
+                builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
             }
 
-            var projectFile = defaultNamespace;
-            if (isTestProject)
+            return builder.Write();
+        }
+
+        private string GetExternalCSProj()
+        {
+            var writer = new CSProjWriter()
             {
-                projectFile += ".Tests";
+                TargetFramework = "netstandard2.0",
+                TreatWarningsAsErrors = true,
+                Nullable = "annotations",
+                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
+                DefineConstants = !Configuration.AzureArm && !Configuration.Generation1ConvenienceClient ? new("$(DefineConstants);EXPERIMENTAL") : null,
+                LangVersion = "11.0",
+                IncludeGeneratorSharedCode = true,
+                RestoreAdditionalProjectSources = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json"
+            };
+            writer.PackageReferences.Add(new("Azure.Core"));
+            if (_includeDfe)
+            {
+                writer.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
             }
-            writeFile($"{projectFile}.csproj", csProjContent);
+
+            var version = GetVersion();
+
+            writer.PrivatePackageReferences.Add(new("Microsoft.Azure.AutoRest.CSharp", version));
+
+            return writer.Write();
         }
     }
 }
