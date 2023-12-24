@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     foreach (var parameter in operation.Parameters)
                     {
-                        if (IsSameType(parameter.Type, anonModel))
+                        if (parameter.Type == anonModel)
                         {
                             usage |= InputModelTypeUsage.Input;
                             break;
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Output.Models
                         if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
                             continue;
 
-                        if (IsSameType(responseType, anonModel))
+                        if (responseType == anonModel)
                         {
                             usage |= InputModelTypeUsage.Output;
                         }
@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     foreach (var parameter in operation.Parameters)
                     {
-                        if (IsSameType(parameter.Type, anonModel))
+                        if (parameter.Type == anonModel)
                         {
                             names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(parameter.Type, parameter.Name).ToCleanName() });
                         }
@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
                             continue;
-                        if (IsSameType(responseType, anonModel))
+                        if (responseType == anonModel)
                         {
                             names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, responseType.Name).ToCleanName() });
                         }
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     foreach (var property in model.Properties)
                     {
-                        if (IsSameType(property.Type, anonModel))
+                        if (property.Type == anonModel)
                             return $"{model.Name.FirstCharToUpperCase()}{property.Name.FirstCharToUpperCase()}";
                     }
                 }
@@ -280,6 +280,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
         }
+
         private void FindMatchesRecursively(InputType type, InputModelType anonModel, HashSet<string> createdNames, List<string> current, List<List<string>> names, HashSet<InputModelType> visitedModels)
         {
             InputModelType? model = GetInputModelType(type);
@@ -292,7 +293,7 @@ namespace AutoRest.CSharp.Output.Models
             //check other model properties
             foreach (var property in model.Properties)
             {
-                if (IsSameType(property.Type, anonModel))
+                if (property.Type == anonModel)
                 {
                     names.Add(new List<string>(current) { GetNameWithCorrectPluralization(property.Type, property.Name).ToCleanName() });
                 }
@@ -329,19 +330,6 @@ namespace AutoRest.CSharp.Output.Models
                     return result.ToSingular();
                 default:
                     return result;
-            }
-        }
-
-        private bool IsSameType(InputType type, InputModelType anonModel)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    return IsSameType(listType.ElementType, anonModel);
-                case InputDictionaryType dictionaryType:
-                    return IsSameType(dictionaryType.ValueType, anonModel);
-                default:
-                    return type.Equals(anonModel);
             }
         }
 
