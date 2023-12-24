@@ -58,12 +58,30 @@ namespace AutoRest.CSharp.Output.Models
 
             if (isTspInput)
             {
+                // changes the inputNamespace in place for some anomalies
+                DecorateEnumsAndModels();
                 CreateModels(models, library.TypeFactory);
                 CreateEnums(enums, models, library.TypeFactory);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, parametersInClientOptions);
 
             return library;
+        }
+
+        private void DecorateEnumsAndModels()
+        {
+            var createdNames = new HashSet<string>();
+            foreach (var model in _rootNamespace.Models)
+            {
+                if (model.IsAnonymousModel)
+                {
+                    var newName = GetAnonModelName(model, createdNames);
+                    if (newName is not null)
+                    {
+                        model.SetName(newName);
+                    }
+                }
+            }
         }
 
         private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
@@ -111,91 +129,19 @@ namespace AutoRest.CSharp.Output.Models
         {
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
-            HashSet<string> createdNames = new HashSet<string>();
-            Dictionary<InputModelType, InputModelType> replacements = new Dictionary<InputModelType, InputModelType>();
             foreach (var model in _rootNamespace.Models)
             {
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes);
 
-                InputModelType? replacement = null;
-                if (model.IsAnonymousModel)
-                {
-                    var newName = GetAnonModelName(model, createdNames);
-                    if (newName is not null)
-                    {
-                        replacement = model.Update(newName, GetNewUsage(model));
-                        createdNames.Add(replacement.Name);
-                        replacements.Add(model, replacement);
-                    }
-                }
-
-                var typeProvider = new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, defaultDerivedType);
-                models.Add(replacement ?? model, typeProvider);
+                var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, defaultDerivedType);
+                models.Add(model, typeProvider);
             }
-
-            foreach (var pair in replacements)
-            {
-                var modelsNeedingReplacement = GetAllReferences(pair.Key, models);
-                foreach (var (modelContainingEnum, property) in modelsNeedingReplacement)
-                {
-                    models[modelContainingEnum] = models[modelContainingEnum].ReplaceProperty(property, pair.Value);
-                }
-            }
-        }
-
-        private InputModelTypeUsage GetNewUsage(InputModelType anonModel)
-        {
-            var containingType = GetFirstNonAnonContainingType(anonModel);
-            if (containingType is not null)
-                return containingType.Usage;
-
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
-            foreach (var client in _rootNamespace.Clients)
-            {
-                foreach (var operation in client.Operations)
-                {
-                    foreach (var parameter in operation.Parameters)
-                    {
-                        if (IsSameType(parameter.Type, anonModel))
-                        {
-                            usage |= InputModelTypeUsage.Input;
-                            break;
-                        }
-                    }
-                    foreach (var response in operation.Responses)
-                    {
-                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
-                            continue;
-
-                        if (IsSameType(responseType, anonModel))
-                        {
-                            usage |= InputModelTypeUsage.Output;
-                        }
-                    }
-
-                }
-            }
-            return usage;
         }
 
         private InputModelType? GetFirstNonAnonContainingType(InputModelType anonModel)
         {
             var containingType = _rootNamespace.Models.Where(m => m.GetProperty(anonModel) is not null).FirstOrDefault();
             return containingType is not null && containingType.IsAnonymousModel ? GetFirstNonAnonContainingType(containingType) : containingType;
-        }
-
-        private Dictionary<InputModelType, InputModelProperty> GetAllReferences(InputModelType key, IDictionary<InputModelType, ModelTypeProvider> models)
-        {
-            var result = new Dictionary<InputModelType, InputModelProperty>();
-            foreach (var pair in models)
-            {
-                var property = pair.Value.GetProperty(key);
-                if (property is not null)
-                {
-                    result.Add(pair.Key, property);
-                }
-            }
-            return result;
         }
 
         private string? GetAnonModelName(InputModelType anonModel, HashSet<string> createdNames)

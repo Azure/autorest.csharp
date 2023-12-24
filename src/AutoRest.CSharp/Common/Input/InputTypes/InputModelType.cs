@@ -3,7 +3,9 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -28,9 +30,15 @@ namespace AutoRest.CSharp.Common.Input
          */
         internal void SetBaseModel(InputModelType? baseModel, [CallerFilePath] string filepath = "", [CallerMemberName] string caller = "")
         {
-            Debug.Assert(filepath.EndsWith($"{nameof(TypeSpecInputModelTypeConverter)}.cs"), $"This method is only allowed to be called in `TypeSpecInputModelTypeConverter.cs`");
+            Debug.Assert(Path.GetFileName(filepath) == $"{nameof(TypeSpecInputModelTypeConverter)}.cs", "This method is only allowed to be called in `TypeSpecInputModelTypeConverter.cs`");
             Debug.Assert(caller == nameof(TypeSpecInputModelTypeConverter.CreateModelType), $"This method is only allowed to be called in `TypeSpecInputModelTypeConverter.CreateModelType`");
             BaseModel = baseModel;
+        }
+
+        internal void SetName(string name, [CallerFilePath] string filepath = "")
+        {
+            Debug.Assert(Path.GetFileName(filepath) == $"{nameof(DpgOutputLibraryBuilder)}.cs", "This method is only allowed to be called in `DpgOutputLibraryBuilder.cs`");
+            Name = name;
         }
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);

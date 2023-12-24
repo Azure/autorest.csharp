@@ -811,21 +811,19 @@ namespace FirstTestTypeSpec
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ReturnsAnonymousModel109>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
         }
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(CancellationToken)']/*" />
-        public virtual Response<object> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
+        public virtual Response<ReturnsAnonymousModel109> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ReturnsAnonymousModel(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
         }
 
         /// <summary>

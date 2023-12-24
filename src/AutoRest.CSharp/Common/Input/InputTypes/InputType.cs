@@ -5,6 +5,7 @@ namespace AutoRest.CSharp.Common.Input;
 
 internal abstract record InputType(string Name, bool IsNullable)
 {
+    public string Name { get; private protected set; } = Name;
     internal InputType GetCollectionEquivalent(InputType inputType)
     {
         switch (this)
