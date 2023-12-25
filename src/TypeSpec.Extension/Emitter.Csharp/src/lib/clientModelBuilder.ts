@@ -97,33 +97,14 @@ export function createModelForService(
         }
         defaultApiVersion = versions[versions.length - 1].value;
     }
-    const apiVersionParam: InputParameter | undefined = defaultApiVersion
+    const defaultApiVersionConstant: InputConstant | undefined = defaultApiVersion
         ? {
-              Name: "apiVersion",
-              NameInRequest: "api-version",
-              Description: "",
               Type: {
                   Name: "String",
                   Kind: InputTypeKind.String,
                   IsNullable: false
               } as InputPrimitiveType,
-              Location: RequestLocation.Query,
-              IsRequired: true,
-              IsApiVersion: true,
-              IsContentType: false,
-              IsEndpoint: false,
-              IsResourceParameter: false,
-              SkipUrlEncoding: false,
-              Explode: false,
-              Kind: InputOperationParameterKind.Client,
-              DefaultValue: {
-                  Type: {
-                      Name: "String",
-                      Kind: InputTypeKind.String,
-                      IsNullable: false
-                  } as InputPrimitiveType,
-                  Value: defaultApiVersion
-              } as InputConstant
+              Value: defaultApiVersion
           }
         : undefined;
 
@@ -192,33 +173,18 @@ export function createModelForService(
                 continue;
             }
             const apiVersionInOperation = op.Parameters[apiVersionIndex];
-            if (apiVersionParam !== undefined) {
+            if (defaultApiVersionConstant !== undefined) {
                 if (!apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersionInOperation.DefaultValue =
-                        apiVersionParam.DefaultValue;
+                    apiVersionInOperation.DefaultValue = defaultApiVersionConstant;
                 }
-                /**
-                 * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
-                 * Three checkpoints:
-                 * the parameter is query parameter,
-                 * it is client parameter
-                 * it does not has default value, or the default value is included in the global service apiVersion.
-                 */
-                if (
-                    apiVersions.has(
-                        apiVersionInOperation.DefaultValue?.Value
-                    ) &&
-                    apiVersionInOperation.Kind ===
-                        InputOperationParameterKind.Client &&
-                    apiVersionInOperation.Location === apiVersionParam.Location
-                ) {
-                    op.Parameters[apiVersionIndex] = apiVersionParam;
-                    continue;
+                if (apiVersionInOperation.Location === RequestLocation.Query) {
+                    apiVersionInOperation.NameInRequest = "api-version";
                 }
             }
-
-            apiVersionInOperation.Kind = InputOperationParameterKind.Method;
-            apiVersionInOperation.IsApiVersion = false;
+            else {
+                apiVersionInOperation.Kind = InputOperationParameterKind.Method;
+                apiVersionInOperation.IsApiVersion = false;
+            }            
         }
     }
 
