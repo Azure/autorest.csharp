@@ -691,10 +691,7 @@ export function getInputType(
         const sourceModel = m.sourceModel;
 
         // we cannot have both `extends` and `is`, therefore only one of baseModel and sourceModel can be defined
-        if (
-            sourceModel !== undefined &&
-            isRecordModelType(program, sourceModel)
-        ) {
+        if (sourceModel && isRecordModelType(program, sourceModel)) {
             return [
                 undefined,
                 getInputTypeForMap(
@@ -704,7 +701,7 @@ export function getInputType(
             ];
         }
 
-        if (baseModel !== undefined) {
+        if (baseModel) {
             // when base model is a record, we return the dictionary type
             if (isRecordModelType(program, baseModel)) {
                 return [
