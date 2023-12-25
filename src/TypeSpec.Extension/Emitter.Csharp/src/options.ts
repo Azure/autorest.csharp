@@ -32,7 +32,7 @@ export type NetEmitterOptions = {
     "head-as-boolean"?: boolean;
     "generate-tests"?: boolean;
     branded?: boolean;
-    generateTestProject?: boolean;
+    "generate-test-project"?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -103,7 +103,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "head-as-boolean": { type: "boolean", nullable: true },
         "generate-tests": { type: "boolean", nullable: true },
         branded: { type: "boolean", nullable: true, default: true },
-        generateTestProject: { type: "boolean", nullable: true, default: true }
+        "generate-test-project": { type: "boolean", nullable: true, default: true }
     },
     required: []
 };

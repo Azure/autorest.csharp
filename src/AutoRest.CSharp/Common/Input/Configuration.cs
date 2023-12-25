@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string DeserializeNullCollectionAsNullValue = "deserialize-null-collection-as-null-value";
             public const string UseCoreDataFactoryReplacements = "use-core-datafactory-replacements";
             public const string Branded = "branded";
-            public const string GenerateTestProject = "generateTestProject";
+            public const string GenerateTestProject = "generate-test-project";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -402,7 +402,7 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.Branded:
                     return true;
                 case Options.GenerateTestProject:
-                    return true;
+                    return false;
                 default:
                     return null;
             }
