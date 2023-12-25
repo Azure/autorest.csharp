@@ -408,9 +408,19 @@ namespace AutoRest.CSharp.Output.Models
         private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
         {
             var fields = model.Fields;
+            var addedParameters = new HashSet<string>();
+            foreach (var parameter in fields.PublicConstructorParameters)
+            {
+                addedParameters.Add(parameter.Name);
+                yield return parameter;
+            }
+
             foreach (var parameter in fields.SerializationParameters)
             {
-                var field = fields.GetFieldByParameter(parameter);
+                if (addedParameters.Contains(parameter.Name))
+                    continue;
+
+                var field = fields.GetFieldByParameterName(parameter.Name);
                 var inputProperty = fields.GetInputByField(field);
                 if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
                     continue;

@@ -316,6 +316,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro-parameterized-endpoints\\Generated"
     },
+    "Lro-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-TypeSpec\\src\\Generated -n"
+    },
     "media_types": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types\\Generated"
@@ -383,10 +387,6 @@
     "MgmtMockAndSample": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\src\\Generated"
-    },
-    "MgmtMockAndSample.Tests": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMockAndSample\\tests\\Generated"
     },
     "MgmtMultipleParentResource": {
       "commandName": "Project",

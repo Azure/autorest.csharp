@@ -367,7 +367,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "46",
@@ -659,7 +659,7 @@
      "BufferResponse": true,
      "LongRunning": {
       "$id": "77",
-      "FinalStateVia": 3,
+      "FinalStateVia": 2,
       "FinalResponse": {
        "$id": "78",
        "StatusCodes": [
