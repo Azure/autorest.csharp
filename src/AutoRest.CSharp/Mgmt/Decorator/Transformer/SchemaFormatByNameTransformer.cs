@@ -63,8 +63,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         internal static void Update()
         {
             SchemaFormatByNameTransformer transformer = new SchemaFormatByNameTransformer(
-                MgmtContext.CodeModel.AllSchemas,
-                MgmtContext.CodeModel.OperationGroups,
+                MgmtContext.CodeModel!.AllSchemas,
+                MgmtContext.CodeModel!.OperationGroups,
                 Configuration.MgmtConfiguration.FormatByNameRules);
             transformer.UpdateAllSchemas();
         }

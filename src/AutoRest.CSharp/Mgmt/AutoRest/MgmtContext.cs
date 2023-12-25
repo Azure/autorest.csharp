@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
@@ -15,8 +16,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static MgmtOutputLibrary Library => Context.Library;
 
-        public static CodeModel CodeModel => Context.CodeModel;
-        public static SchemaUsageProvider SchemaUsageProvider => Context.SchemaUsageProvider;
+        public static InputNamespace? InputNamespace => Context.inputNamespace;
+        public static CodeModel? CodeModel => Context.CodeModel;
+        public static SchemaUsageProvider? SchemaUsageProvider => Context.SchemaUsageProvider;
 
         public static string DefaultNamespace => Context.DefaultNamespace;
 

@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         private static void VerifyApiVersions()
         {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in MgmtContext.CodeModel!.OperationGroups)
             {
                 VerifyApiVersionsWithinOperationGroup(operationGroup);
             }

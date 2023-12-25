@@ -93,10 +93,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary()
         {
             TypeFactory = new TypeFactory(this);
-            CodeModelTransformer.Transform();
 
-            var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.SchemaUsageProvider);
-            _input = codeModelConverter.CreateNamespace();
+            if (MgmtContext.CodeModel is not null)
+            {
+                CodeModelTransformer.Transform();
+                var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.SchemaUsageProvider!);
+                _input = codeModelConverter.CreateNamespace();
+            }
+            else
+            {
+                _input = MgmtContext.InputNamespace!;
+            }
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();

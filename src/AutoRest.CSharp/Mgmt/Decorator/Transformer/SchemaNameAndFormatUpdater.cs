@@ -23,7 +23,7 @@ internal static class SchemaNameAndFormatUpdater
     {
         var renameTargets = GetRenameAndReformatTargets().ToList();
         // apply them one by one
-        foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+        foreach (var schema in MgmtContext.CodeModel!.AllSchemas)
         {
             ApplyRenameTargets(schema, renameTargets);
         }
@@ -216,9 +216,9 @@ internal static class SchemaNameAndFormatUpdater
         if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
         // first transform all the name of schemas, properties
-        UpdateAcronyms(MgmtContext.CodeModel.AllSchemas);
+        UpdateAcronyms(MgmtContext.CodeModel!.AllSchemas);
         // transform all the parameter names
-        UpdateAcronyms(MgmtContext.CodeModel.OperationGroups);
+        UpdateAcronyms(MgmtContext.CodeModel!.OperationGroups);
     }
 
     private static void ApplyNewName(Languages language, RenameAndReformatTarget rrt, string targetFullSerializedName)

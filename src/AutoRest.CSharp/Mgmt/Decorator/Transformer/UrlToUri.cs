@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
         public static void UpdateSuffix()
         {
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel!.AllSchemas)
             {
                 if (schema is not ObjectSchema objSchema)
                     continue;

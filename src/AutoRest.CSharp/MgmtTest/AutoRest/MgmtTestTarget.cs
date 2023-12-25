@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             MgmtTestOutputLibrary? library = null;
             CodeModelTransformer.Transform();
-            var codeModelConverter = new CodeModelConverter(codeModel, MgmtContext.SchemaUsageProvider);
+            var codeModelConverter = new CodeModelConverter(codeModel, MgmtContext.SchemaUsageProvider!);
             var input = codeModelConverter.CreateNamespace();
             if (sourceInputModel == null)
             {

@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         public static void UpdateSealChoiceTypes()
         {
             var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel!.AllSchemas)
             {
                 if (schema is not SealedChoiceSchema choiceSchema)
                     continue;

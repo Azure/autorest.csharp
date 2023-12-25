@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -38,8 +37,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
 
-        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
-            : base(codeModel, sourceInputModel)
+        public BuildContext(CodeModel? codeModel, SourceInputModel? sourceInputModel, InputNamespace? inputNamespace = null)
+            : base(codeModel, sourceInputModel, inputNamespace)
         {
         }
     }

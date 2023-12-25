@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
         public static void Update()
         {
             bool setSubParam = false;
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in MgmtContext.CodeModel!.OperationGroups)
             {
                 foreach (var op in operationGroup.Operations)
                 {
