@@ -63,8 +63,10 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 workspace = await new CSharpGen().ExecuteAsync(codeModel);
                 if (options.IsNewProject)
                 {
-                    bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
-                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)), needAzureKeyAuth, Configuration.ToCSharpProjConfiguration());
+                    bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
+                    bool includeDfe = yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal);
+                    //await new NewProjectScaffolding(needAzureKeyAuth).Execute();
+                    new CSharpProj(needAzureKeyAuth, includeDfe).Execute();
                 }
             }
             else
