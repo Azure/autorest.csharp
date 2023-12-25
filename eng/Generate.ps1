@@ -189,11 +189,11 @@ function Add-TestProjects-Directory($directory) {
         Add-TypeSpec $testName $directoryToUse "" $options $launchSettingsArgs
     }
     elseif (Test-Path $readmeConfigurationPath) {
-        $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true --generate-test-project=true"
+        $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"
         Add-Swagger $testName $directory $testArguments
     }
     elseif (Test-Path $possibleInputJsonFilePath) {
-        $testArguments = "--require=$configurationPath --input-file=$possibleInputJsonFilePath --generation1-convenience-client --clear-output-folder=true --generate-test-project=true"
+        $testArguments = "--require=$configurationPath --input-file=$possibleInputJsonFilePath --generation1-convenience-client --clear-output-folder=true"
         Add-Swagger $testName $directory $testArguments
     }
     else {
@@ -233,7 +233,7 @@ if (!($Exclude -contains "Samples")) {
 
         if (Test-Path $sampleConfigurationPath) {
             # for swagger samples
-            Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath --clear-output-folder=true --generate-test-project=true"
+            Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath --clear-output-folder=true"
         }
         elseif (Test-Path $tspConfigPath) {
             # for typespec projects

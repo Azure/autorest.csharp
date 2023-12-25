@@ -123,6 +123,12 @@ key = "<badListOfDictionaryName>",
                     requiredInt = 1234,
                 },
                 propertyToMoveToCustomization = "a",
+                propertyModelStruct = new
+                {
+                    requiredInt = 1234,
+                    optionalInt = 1234,
+                    optionalString = "<optionalString>",
+                },
             });
             Response response = await client.RoundTripAsync(content);
         }
@@ -163,8 +169,109 @@ new Dictionary<string, string>
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
+                PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
             };
             Response<RootModel> response = await client.RoundTripAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Foo_ShortVersion()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+            });
+            Response response = await client.FooAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Foo_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            RenamedModel input = new RenamedModel(1234);
+            Response<RenamedModel> response = await client.FooAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Foo_AllParameters()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+                optionalInt = 1234,
+            });
+            Response response = await client.FooAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Foo_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            RenamedModel input = new RenamedModel(1234)
+            {
+                OptionalInt = 1234,
+            };
+            Response<RenamedModel> response = await client.FooAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Bar_ShortVersion()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+            });
+            Response response = await client.BarAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Bar_ShortVersion_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            RenamedModel renamedModel = new RenamedModel(1234);
+            Response<RenamedModel> response = await client.BarAsync(renamedModel);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Bar_AllParameters()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredInt = 1234,
+                optionalInt = 1234,
+            });
+            Response response = await client.BarAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task CustomizationsInTsp_Bar_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = CreateCustomizationsInTspClient();
+
+            RenamedModel renamedModel = new RenamedModel(1234)
+            {
+                OptionalInt = 1234,
+            };
+            Response<RenamedModel> response = await client.BarAsync(renamedModel);
         }
     }
 }

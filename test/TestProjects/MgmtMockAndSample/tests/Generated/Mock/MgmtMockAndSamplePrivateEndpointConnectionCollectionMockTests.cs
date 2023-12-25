@@ -14,6 +14,7 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -26,7 +27,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate()
         {
             // Example: KeyVaultPutPrivateEndpointConnection
@@ -45,7 +46,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
@@ -56,7 +57,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync("sample-pec");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
@@ -67,7 +68,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync("sample-pec");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetAll()
         {
             // Example: KeyVaultListPrivateEndpointConnection
@@ -80,7 +81,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists()
         {
             // Example: KeyVaultGetPrivateEndpointConnection

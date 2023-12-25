@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -716,29 +715,7 @@ namespace FirstTestTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo_SayHi_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo_SayHi_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloAgain_ShortVersion()
+        public async Task FirstTestTypeSpec_RecursiveExtension_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -746,66 +723,26 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
-                requiredInt = 1234,
-                requiredCollection = new object[]
-            {
-"1"
-            },
-                requiredDictionary = new
-                {
-                    key = "1",
-                },
-                requiredModel = new
-                {
-                    name = "<name>",
-                    requiredUnion = "<requiredUnion>",
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23F,
-                    requiredLiteralBool = false,
-                    requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new object[]
-            {
-1234
-            },
-                },
-                requiredUnknown = new object(),
-                requiredRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                modelWithRequiredNullable = new
-                {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
-                },
+                level = 1234,
             });
-            Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
+            Response response = await client.RecursiveExtensionAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloAgain_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_RecursiveExtension_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
-            {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }), BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One));
-            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+            Extension input = new Extension(1234);
+            Response response = await client.RecursiveExtensionAsync(input);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloAgain_AllParameters()
+        public async Task FirstTestTypeSpec_RecursiveExtension_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -813,123 +750,94 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
-                requiredInt = 1234,
-                requiredCollection = new object[]
+                level = 1234,
+                extension = new object[]
             {
-"1"
+null
             },
-                requiredDictionary = new
-                {
-                    key = "1",
-                },
-                requiredModel = new
-                {
-                    name = "<name>",
-                    requiredUnion = "<requiredUnion>",
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23F,
-                    requiredLiteralBool = false,
-                    optionalLiteralString = "reject",
-                    optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56F,
-                    optionalLiteralBool = true,
-                    requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new object[]
-            {
-1234
-            },
-                    requiredNullableList = new object[]
-            {
-1234
-            },
-                },
-                intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new object[]
-            {
-1
-            },
-                floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new object[]
-            {
-1
-            },
-                floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new object[]
-            {
-1.1F
-            },
-                intFixedEnum = 1,
-                intFixedEnumCollection = new object[]
-            {
-1
-            },
-                stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
-                requiredRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                optionalRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                modelWithRequiredNullable = new
-                {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
-                },
             });
-            Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
+            Response response = await client.RecursiveExtensionAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloAgain_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_RecursiveExtension_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
+            Extension input = new Extension(1234);
+            Response response = await client.RecursiveExtensionAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new object());
+            Response response = await client.ThreeLevelRecursiveAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_ThreeLevelRecursive_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Extendible input = new Extendible();
+            Response response = await client.ThreeLevelRecursiveAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_ThreeLevelRecursive_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
             {
-                ["key"] = StringExtensibleEnum.One
-            }, new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
+                extension = new object[]
             {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-            }, BinaryData.FromObjectAsJson(new object()), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-            {
-                IntExtensibleEnum = IntExtensibleEnum.One,
-                IntExtensibleEnumCollection = { IntExtensibleEnum.One },
-                FloatExtensibleEnum = FloatExtensibleEnum.One,
-                FloatExtensibleEnumCollection = { FloatExtensibleEnum.One },
-                FloatFixedEnum = FloatFixedEnum.One,
-                FloatFixedEnumCollection = { FloatFixedEnum.One },
-                IntFixedEnum = IntFixedEnum.One,
-                IntFixedEnumCollection = { IntFixedEnum.One },
-                StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
-                OptionalRecordUnknown =
+new
 {
-["key"] = BinaryData.FromObjectAsJson(new object())
+level = 1234,
+extension = new object[]
+{
+null
 },
+}
+            },
+            });
+            Response response = await client.ThreeLevelRecursiveAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_ThreeLevelRecursive_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Extendible input = new Extendible
+            {
+                Extension = { new ThereLevelExtension(1234) },
             };
-            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+            Response response = await client.ThreeLevelRecursiveAsync(input);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_NoContentType_ShortVersion()
+        public async Task FirstTestTypeSpec_RecursiveModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -937,48 +845,36 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
-                requiredInt = 1234,
-                requiredCollection = new object[]
+                parent = new object[]
             {
-"1"
+new
+{
+level = 1234,
+}
             },
-                requiredDictionary = new
-                {
-                    key = "1",
-                },
-                requiredModel = new
-                {
-                    name = "<name>",
-                    requiredUnion = "<requiredUnion>",
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23F,
-                    requiredLiteralBool = false,
-                    requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new object[]
-            {
-1234
-            },
-                },
-                requiredUnknown = new object(),
-                requiredRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                modelWithRequiredNullable = new
-                {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
-                },
+                level = 1234,
             });
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
+            Response response = await client.RecursiveModelsAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_NoContentType_AllParameters()
+        public async Task FirstTestTypeSpec_RecursiveModels_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            ChildModel input = new ChildModel(1234, new BaseModel[]
+            {
+new BaseModel(1234)
+            });
+            Response response = await client.RecursiveModelsAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_RecursiveModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -986,126 +882,128 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredString = "<requiredString>",
-                requiredInt = 1234,
-                requiredCollection = new object[]
+                parent = new object[]
             {
-"1"
+new
+{
+level = 1234,
+}
             },
-                requiredDictionary = new
-                {
-                    key = "1",
-                },
-                requiredModel = new
-                {
-                    name = "<name>",
-                    requiredUnion = "<requiredUnion>",
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23F,
-                    requiredLiteralBool = false,
-                    optionalLiteralString = "reject",
-                    optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56F,
-                    optionalLiteralBool = true,
-                    requiredBadDescription = "<requiredBadDescription>",
-                    optionalNullableList = new object[]
-            {
-1234
-            },
-                    requiredNullableList = new object[]
-            {
-1234
-            },
-                },
-                intExtensibleEnum = 1,
-                intExtensibleEnumCollection = new object[]
-            {
-1
-            },
-                floatExtensibleEnum = 1,
-                floatExtensibleEnumCollection = new object[]
-            {
-1
-            },
-                floatFixedEnum = 1.1F,
-                floatFixedEnumCollection = new object[]
-            {
-1.1F
-            },
-                intFixedEnum = 1,
-                intFixedEnumCollection = new object[]
-            {
-1
-            },
-                stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
-                requiredRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                optionalRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                modelWithRequiredNullable = new
-                {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
-                },
+                level = 1234,
             });
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
+            Response response = await client.RecursiveModelsAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloDemo2_ShortVersion()
+        public async Task FirstTestTypeSpec_RecursiveModels_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.HelloDemo2Async(null);
+            ChildModel input = new ChildModel(1234, new BaseModel[]
+            {
+new BaseModel(1234)
+            });
+            Response response = await client.RecursiveModelsAsync(input);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloDemo2_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_ContainSelfModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.HelloDemo2Async();
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.ContainSelfModelsAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloDemo2_AllParameters()
+        public async Task FirstTestTypeSpec_ContainSelfModels_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.HelloDemo2Async(null);
+            ContainSelf input = new ContainSelf(default);
+            Response response = await client.ContainSelfModelsAsync(input);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloDemo2_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_ContainSelfModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.HelloDemo2Async();
+            using RequestContent content = RequestContent.Create(new { });
+            Response response = await client.ContainSelfModelsAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_CreateLiteral_ShortVersion()
+        public async Task FirstTestTypeSpec_ContainSelfModels_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            ContainSelf input = new ContainSelf(default);
+            Response response = await client.ContainSelfModelsAsync(input);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EnumParameter_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.EnumParameterAsync(1.1F);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EnumParameter_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EnumParameter_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.EnumParameterAsync(1.1F);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_EnumParameter_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.EnumParameterAsync(CsProjectedEnum.CsOne);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -1113,36 +1011,26 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                name = "<name>",
-                requiredUnion = "<requiredUnion>",
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
-                requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new object[]
-            {
-1234
-            },
+                enumProperty = 1.1F,
             });
-            Response response = await client.CreateLiteralAsync(content);
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_CreateLiteral_ShortVersion_Convenience()
+        public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
-            Response<Thing> response = await client.CreateLiteralAsync(body);
+            ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_CreateLiteral_AllParameters()
+        public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
@@ -1150,200 +1038,21 @@ namespace FirstTestTypeSpec.Tests
 
             using RequestContent content = RequestContent.Create(new
             {
-                name = "<name>",
-                requiredUnion = "<requiredUnion>",
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
-                optionalLiteralString = "reject",
-                optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56F,
-                optionalLiteralBool = true,
-                requiredBadDescription = "<requiredBadDescription>",
-                optionalNullableList = new object[]
-            {
-1234
-            },
-                requiredNullableList = new object[]
-            {
-1234
-            },
+                enumProperty = 1.1F,
             });
-            Response response = await client.CreateLiteralAsync(content);
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(content);
         }
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_CreateLiteral_AllParameters_Convenience()
+        public async Task FirstTestTypeSpec_BodyIsModelWithProjectedEnum_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-            };
-            Response<Thing> response = await client.CreateLiteralAsync(body);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloLiteral_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.HelloLiteralAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloLiteral_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.HelloLiteralAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloLiteral_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.HelloLiteralAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Demo2_HelloLiteral_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.HelloLiteralAsync();
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task EnumTest_GetUnknownValue_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.GetUnknownValueAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task EnumTest_GetUnknownValue_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.GetUnknownValueAsync(null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Entity_DoSomething_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.DoSomethingAsync("<p2>", null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Entity_DoSomething_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.DoSomethingAsync("<p2>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Entity_DoSomething_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.DoSomethingAsync("<p2>", null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Entity_DoSomething_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.DoSomethingAsync("<p2>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Glossary_DoSomething_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Glossary_DoSomething_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Glossary_DoSomething_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
-        }
-
-        [Test]
-        [Ignore("Please remove the Ignore attribute to let the test method run")]
-        public async Task Glossary_DoSomething_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AzureKeyCredential credential = null;
-            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
-
-            Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
+            ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
+            Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
         }
     }
 }

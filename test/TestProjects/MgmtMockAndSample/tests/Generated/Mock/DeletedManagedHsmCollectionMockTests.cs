@@ -13,6 +13,7 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -25,7 +26,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists()
         {
             // Example: Retrieve a deleted managed HSM
@@ -36,7 +37,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync(new AzureLocation("westus"), "hsm1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get()
         {
             // Example: Retrieve a deleted managed HSM
@@ -47,7 +48,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync(new AzureLocation("westus"), "hsm1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists()
         {
             // Example: Retrieve a deleted managed HSM

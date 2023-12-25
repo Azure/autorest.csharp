@@ -14,6 +14,7 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -26,7 +27,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Delete()
         {
             // Example: Delete FirewallPolicyRuleCollectionGroup
@@ -36,7 +37,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await firewallPolicyRuleCollectionGroup.DeleteAsync(WaitUntil.Completed);
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyNatRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyNatRuleCollectionGroup
@@ -46,7 +47,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await firewallPolicyRuleCollectionGroup.GetAsync();
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup
@@ -56,7 +57,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await firewallPolicyRuleCollectionGroup.GetAsync();
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With IpGroups
@@ -66,7 +67,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await firewallPolicyRuleCollectionGroup.GetAsync();
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With Web Categories
@@ -76,7 +77,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await firewallPolicyRuleCollectionGroup.GetAsync();
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update_CreateFirewallPolicyNatRuleCollectionGroup()
         {
             // Example: Create FirewallPolicyNatRuleCollectionGroup
@@ -126,7 +127,7 @@ Priority = 100,
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroup()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup
@@ -171,7 +172,7 @@ Priority = 100,
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroupWithAllDefaultValues()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup With All Default Values
@@ -181,7 +182,7 @@ Priority = 100,
             await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, new FirewallPolicyRuleCollectionGroupData());
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup With IpGroups
@@ -225,7 +226,7 @@ Name = "Example-Filter-Rule-Collection",
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup With Web Categories

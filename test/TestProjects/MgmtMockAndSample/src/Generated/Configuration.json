@@ -52,5 +52,6 @@
     ],
     "Mock": true,
     "Sample": true
-  }
+  },
+  "generate-test-project": true
 }

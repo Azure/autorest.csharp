@@ -16,6 +16,7 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -28,7 +29,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateADiskEncryptionSetWithKeyVaultFromADifferentSubscription()
         {
             // Example: Create a disk encryption set with key vault from a different subscription.
@@ -45,7 +46,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateADiskEncryptionSetWithKeyVaultFromADifferentTenant()
         {
             // Example: Create a disk encryption set with key vault from a different tenant.
@@ -68,7 +69,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateADiskEncryptionSet()
         {
             // Example: Create a disk encryption set.
@@ -87,7 +88,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.
@@ -98,7 +99,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync("myDiskEncryptionSet");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists_GetInformationAboutADiskEncryptionSet()
         {
             // Example: Get information about a disk encryption set.
@@ -109,7 +110,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync("myDiskEncryptionSet");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.
@@ -120,7 +121,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync("myDiskEncryptionSet");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetInformationAboutADiskEncryptionSet()
         {
             // Example: Get information about a disk encryption set.
@@ -131,7 +132,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync("myDiskEncryptionSet");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetAll()
         {
             // Example: List all disk encryption sets in a resource group.
@@ -144,7 +145,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.
@@ -155,7 +156,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetIfExistsAsync("myDiskEncryptionSet");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists_GetInformationAboutADiskEncryptionSet()
         {
             // Example: Get information about a disk encryption set.

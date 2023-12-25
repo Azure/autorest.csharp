@@ -12,6 +12,7 @@ using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -24,7 +25,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
@@ -34,7 +35,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await virtualMachineExtensionImage.GetAsync();
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen

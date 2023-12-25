@@ -14,6 +14,7 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -26,7 +27,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Delete()
         {
             // Example: Delete role assignment by name
@@ -36,7 +37,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await roleAssignment.DeleteAsync(WaitUntil.Completed);
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get()
         {
             // Example: Get role assignment by name
@@ -46,7 +47,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await roleAssignment.GetAsync();
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update()
         {
             // Example: Create role assignment
@@ -61,7 +62,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Validate()
         {
             // Example: Validate role assignments for subscription

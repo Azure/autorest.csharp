@@ -14,6 +14,7 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -26,7 +27,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateFirewallPolicyNatRuleCollectionGroup()
         {
             // Example: Create FirewallPolicyNatRuleCollectionGroup
@@ -77,7 +78,7 @@ Priority = 100,
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateFirewallPolicyRuleCollectionGroup()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup
@@ -123,7 +124,7 @@ Priority = 100,
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateFirewallPolicyRuleCollectionGroupWithAllDefaultValues()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup With All Default Values
@@ -134,7 +135,7 @@ Priority = 100,
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, "ruleCollectionGroup1", new FirewallPolicyRuleCollectionGroupData());
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup With IpGroups
@@ -179,7 +180,7 @@ Name = "Example-Filter-Rule-Collection",
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task CreateOrUpdate_CreateFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup With Web Categories
@@ -225,7 +226,7 @@ Name = "Example-Filter-Rule-Collection",
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists_GetFirewallPolicyNatRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyNatRuleCollectionGroup
@@ -236,7 +237,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.ExistsAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists_GetFirewallPolicyRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup
@@ -247,7 +248,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.ExistsAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists_GetFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With IpGroups
@@ -258,7 +259,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.ExistsAsync("ruleGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Exists_GetFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With Web Categories
@@ -269,7 +270,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.ExistsAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyNatRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyNatRuleCollectionGroup
@@ -280,7 +281,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.GetAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup
@@ -291,7 +292,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.GetAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With IpGroups
@@ -302,7 +303,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.GetAsync("ruleGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get_GetFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With Web Categories
@@ -313,7 +314,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.GetAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetAll_ListAllFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
             // Example: List all FirewallPolicyRuleCollectionGroup With Web Categories
@@ -326,7 +327,7 @@ Name = "Example-Filter-Rule-Collection",
             }
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetAll_ListAllFirewallPolicyRuleCollectionGroupsForAGivenFirewallPolicy()
         {
             // Example: List all FirewallPolicyRuleCollectionGroups for a given FirewallPolicy
@@ -339,7 +340,7 @@ Name = "Example-Filter-Rule-Collection",
             }
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetAll_ListAllFirewallPolicyRuleCollectionGroupsWithIpGroupsForAGivenFirewallPolicy()
         {
             // Example: List all FirewallPolicyRuleCollectionGroups with IpGroups for a given FirewallPolicy
@@ -352,7 +353,7 @@ Name = "Example-Filter-Rule-Collection",
             }
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists_GetFirewallPolicyNatRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyNatRuleCollectionGroup
@@ -363,7 +364,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.GetIfExistsAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists_GetFirewallPolicyRuleCollectionGroup()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup
@@ -374,7 +375,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.GetIfExistsAsync("ruleCollectionGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists_GetFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With IpGroups
@@ -385,7 +386,7 @@ Name = "Example-Filter-Rule-Collection",
             await collection.GetIfExistsAsync("ruleGroup1");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetIfExists_GetFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
             // Example: Get FirewallPolicyRuleCollectionGroup With Web Categories

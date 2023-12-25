@@ -15,6 +15,7 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -27,7 +28,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Delete()
         {
             // Example: Delete Firewall Policy
@@ -37,7 +38,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await firewallPolicy.DeleteAsync(WaitUntil.Completed);
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Get()
         {
             // Example: Get FirewallPolicy
@@ -47,7 +48,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await firewallPolicy.GetAsync();
         }
 
-        [RecordedTest]
+        [Test]
         public async Task GetFirewallPolicies()
         {
             // Example: List all Firewall Policies for a given subscription
@@ -59,7 +60,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update_CreateFirewallPolicy()
         {
             // Example: Create FirewallPolicy
@@ -170,7 +171,7 @@ DestinationPorts =
             });
         }
 
-        [RecordedTest]
+        [Test]
         public async Task Update_CreateFirewallPolicyWithDifferentValues()
         {
             // Example: Create FirewallPolicy with different values
