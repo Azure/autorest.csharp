@@ -382,7 +382,7 @@ extends:
         {
             var writer = new CSProjWriter()
             {
-                TargetFramework = "net6.0",
+                TargetFramework = "net7.0",
                 NoWarn = new("$(NoWarn);CS1591", "Ignore XML doc comments on test types and members")
             };
 
