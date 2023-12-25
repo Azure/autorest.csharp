@@ -116,12 +116,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             try
             {
+                // generate source code
                 var project = await ExecuteAsync(codeModel);
                 await foreach (var file in project.GetGeneratedFilesAsync())
                 {
                     // format all \ to / in filename, otherwise they will be treated as escape char when sending to autorest service
                     var filename = file.Name.Replace('\\', '/');
                     await autoRest.WriteFile(filename, file.Text, "source-file-csharp");
+                }
+
+                // generate csproj if necessary
+                if (!Configuration.SkipCSProj)
+                {
+                    bool needAzureKeyAuth = codeModel.Security.Schemes.Any(scheme => scheme is KeySecurityScheme);
+                    bool includeDfe = codeModelYaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal);
+                    new CSharpProj(needAzureKeyAuth, includeDfe).Execute(autoRest);
                 }
             }
             catch (ErrorHelpers.ErrorException e)
