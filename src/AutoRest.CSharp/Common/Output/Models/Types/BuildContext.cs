@@ -19,11 +19,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             SchemaUsageProvider = codeModel is null ? null : new SchemaUsageProvider(codeModel);
             SourceInputModel = sourceInputModel;
             DefaultNamespace = defaultNamespace;
+            InputNamespace = inputNamespace;
         }
 
         public OutputLibrary? BaseLibrary { get; protected set; }
 
-        public InputNamespace? inputNamespace { get; } = null;
+        public InputNamespace? InputNamespace { get; } = null;
         public CodeModel? CodeModel { get; }
         public SchemaUsageProvider? SchemaUsageProvider { get; }
         public string DefaultNamespace { get; }

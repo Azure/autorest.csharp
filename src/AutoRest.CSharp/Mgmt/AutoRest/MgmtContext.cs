@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static MgmtOutputLibrary Library => Context.Library;
 
-        public static InputNamespace? InputNamespace => Context.inputNamespace;
+        public static InputNamespace? InputNamespace => Context.InputNamespace;
         public static CodeModel? CodeModel => Context.CodeModel;
         public static SchemaUsageProvider? SchemaUsageProvider => Context.SchemaUsageProvider;
 
