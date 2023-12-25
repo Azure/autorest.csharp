@@ -144,6 +144,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return $"{parameter.Name:I}";
             }
+            // TODO: Here we only consider the case when body is string type. We will add support for other types.
             if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Text && parameter.Type.FrameworkType == typeof(string))
             {
                 return $"{parameter.Name:I}";
@@ -153,6 +154,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         // TODO: This is a temporary solution. We will move this part to some common place.
+        // This logic is referenced from https://github.com/Azure/autorest/blob/faf5c1168232ba8a1e8fe02fbc28667c00db8c96/packages/libs/codegen/src/media-types.ts#L53
         public static BodyMediaType ToMediaType(string contentType)
         {
             var typeSubs = contentType.Split('/');
