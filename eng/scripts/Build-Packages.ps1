@@ -58,7 +58,7 @@ finally
 }
 
 # pack the c# npm package
-Push-Location "$artifactsPath/bin/AutoRest.CSharp/Release/net6.0/"
+Push-Location "$artifactsPath/bin/AutoRest.CSharp/Release/net7.0/"
 try {
     Write-Host "Working in $PWD"
     if ($BuildNumber) {
