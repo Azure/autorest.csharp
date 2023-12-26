@@ -97,7 +97,6 @@
      "Description": "Discriminator",
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsNullable": false,
      "Type": {
       "$id": "14",
       "Name": "string",
