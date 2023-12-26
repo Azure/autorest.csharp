@@ -70,7 +70,7 @@ namespace RenameGetList.Samples
             Console.WriteLine(result.GetProperty("projectName").ToString());
             Console.WriteLine(result.GetProperty("projectKind").ToString());
             Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("settings").ToString());
             Console.WriteLine(result.GetProperty("multilingual").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("language").ToString());
@@ -93,7 +93,7 @@ namespace RenameGetList.Samples
             Console.WriteLine(result.GetProperty("projectName").ToString());
             Console.WriteLine(result.GetProperty("projectKind").ToString());
             Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("settings").ToString());
             Console.WriteLine(result.GetProperty("multilingual").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
             Console.WriteLine(result.GetProperty("language").ToString());
@@ -158,7 +158,7 @@ namespace RenameGetList.Samples
                 Console.WriteLine(result.GetProperty("projectName").ToString());
                 Console.WriteLine(result.GetProperty("projectKind").ToString());
                 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+                Console.WriteLine(result.GetProperty("settings").ToString());
                 Console.WriteLine(result.GetProperty("multilingual").ToString());
                 Console.WriteLine(result.GetProperty("description").ToString());
                 Console.WriteLine(result.GetProperty("language").ToString());
@@ -182,7 +182,7 @@ namespace RenameGetList.Samples
                 Console.WriteLine(result.GetProperty("projectName").ToString());
                 Console.WriteLine(result.GetProperty("projectKind").ToString());
                 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+                Console.WriteLine(result.GetProperty("settings").ToString());
                 Console.WriteLine(result.GetProperty("multilingual").ToString());
                 Console.WriteLine(result.GetProperty("description").ToString());
                 Console.WriteLine(result.GetProperty("language").ToString());
