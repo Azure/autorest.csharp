@@ -249,6 +249,11 @@ namespace AutoRest.CSharp.Common.Input
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
+                // TODO -- to support this, it requires more consolidation work in HLC.
+                // Currently there are only two places using this converted code mode: HLC and swagger-DPG.
+                // HLC only converts schemas into input types for operations to use, when generating models, HLC is using its original schemas, therefore whatever we put here does not change the result.
+                // swagger-DPG does not generate models therefore it also does not matter what we put here.
+                InheritedDictionaryType: null,
                 IsNullable: false);
 
             _modelsCache[schema] = model;

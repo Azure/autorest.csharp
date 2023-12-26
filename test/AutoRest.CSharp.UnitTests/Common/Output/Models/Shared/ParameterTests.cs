@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
+                InheritedDictionaryType: null,
                 IsNullable: true);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
@@ -93,6 +94,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
+                InheritedDictionaryType: null,
                 IsNullable: true);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
@@ -183,6 +185,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
+                InheritedDictionaryType: null,
                 IsNullable: true);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
