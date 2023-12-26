@@ -2,7 +2,9 @@
  "$id": "1",
  "Name": "Payload.ContentNegotiation",
  "Description": "Test describing optionality of the request body.",
- "ApiVersions": [],
+ "ApiVersions": [
+  "1.0.0"
+ ],
  "Enums": [],
  "Models": [
   {
@@ -130,52 +132,80 @@
       {
        "$id": "19",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "21",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "image/png",
+        "Name": "String",
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "21",
         "Type": {
          "$ref": "20"
         },
         "Value": "image/png"
+       }
+      },
+      {
+       "$id": "22",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "23",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
        },
+       "Location": "Query",
        "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
+       "IsApiVersion": true,
        "IsContentType": false,
        "IsEndpoint": false,
+       "IsResourceParameter": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant"
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "24",
+        "Type": {
+         "$id": "25",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "24",
+        "$id": "27",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "image/png"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -187,7 +217,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "25",
+     "$id": "28",
      "Name": "getAvatarAsJpeg",
      "ResourceName": "SameBody",
      "Parameters": [
@@ -195,54 +225,54 @@
        "$ref": "15"
       },
       {
-       "$id": "26",
+       "$id": "29",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "28",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "image/jpeg",
+        "$id": "30",
+        "Name": "String",
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
-       "DefaultValue": {
-        "$id": "29",
-        "Type": {
-         "$ref": "27"
-        },
-        "Value": "image/jpeg"
-       },
-       "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
+       "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "31",
+        "Type": {
+         "$ref": "30"
+        },
+        "Value": "image/jpeg"
+       }
+      },
+      {
+       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "31",
+        "$id": "33",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "image/jpeg"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -255,18 +285,18 @@
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "34"
    },
    "Creatable": false,
    "Parent": "ContentNegotiationClient"
   },
   {
-   "$id": "33",
+   "$id": "35",
    "Name": "DifferentBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "36",
      "Name": "getAvatarAsPng",
      "ResourceName": "DifferentBody",
      "Parameters": [
@@ -274,54 +304,54 @@
        "$ref": "15"
       },
       {
-       "$id": "35",
+       "$id": "37",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "37",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "image/png",
+        "$id": "38",
+        "Name": "String",
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
-       "DefaultValue": {
-        "$id": "38",
-        "Type": {
-         "$ref": "36"
-        },
-        "Value": "image/png"
-       },
-       "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
+       "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "39",
+        "Type": {
+         "$ref": "38"
+        },
+        "Value": "image/png"
+       }
+      },
+      {
+       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "40",
+        "$id": "41",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "image/png"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -333,7 +363,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "41",
+     "$id": "42",
      "Name": "getAvatarAsJson",
      "ResourceName": "DifferentBody",
      "Parameters": [
@@ -341,37 +371,34 @@
        "$ref": "15"
       },
       {
-       "$id": "42",
+       "$id": "43",
        "Name": "accept",
-       "NameInRequest": "accept",
+       "NameInRequest": "Accept",
        "Type": {
-        "$id": "43",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "44",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "application/json",
+        "$id": "44",
+        "Name": "String",
+        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
-       "DefaultValue": {
-        "$id": "45",
-        "Type": {
-         "$ref": "43"
-        },
-        "Value": "application/json"
-       },
-       "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
+       "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "45",
+        "Type": {
+         "$ref": "44"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "22"
       }
      ],
      "Responses": [
@@ -385,7 +412,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",

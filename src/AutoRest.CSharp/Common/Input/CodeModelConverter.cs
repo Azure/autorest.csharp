@@ -148,7 +148,8 @@ namespace AutoRest.CSharp.Common.Input
             BodyType: GetResponseBodyType(response),
             BodyMediaType: GetBodyFormat(response.HttpResponse.KnownMediaType),
             Headers: GetResponseHeaders(response.HttpResponse.Headers),
-            IsErrorResponse: false
+            IsErrorResponse: false,
+            ContentTypes: Array.Empty<string>()
         );
 
         private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(

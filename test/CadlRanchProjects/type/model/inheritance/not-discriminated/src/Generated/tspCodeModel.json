@@ -2,7 +2,9 @@
  "$id": "1",
  "Name": "Type.Model.Inheritance.NotDiscriminated",
  "Description": "Illustrates not-discriminated inheritance model.",
- "ApiVersions": [],
+ "ApiVersions": [
+  "1.0.0"
+ ],
  "Enums": [],
  "Models": [
   {
@@ -196,11 +198,42 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "24",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "25",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "26",
+        "Type": {
+         "$id": "27",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -221,7 +254,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "25",
+     "$id": "29",
      "Name": "getValid",
      "ResourceName": "NotDiscriminated",
      "Parameters": [
@@ -229,11 +262,11 @@
        "$ref": "13"
       },
       {
-       "$id": "26",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -248,17 +281,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "32",
         "Type": {
-         "$ref": "27"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "33",
        "StatusCodes": [
         200
        ],
@@ -267,7 +303,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -279,7 +318,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "30",
+     "$id": "34",
      "Name": "putValid",
      "ResourceName": "NotDiscriminated",
      "Parameters": [
@@ -287,7 +326,7 @@
        "$ref": "13"
       },
       {
-       "$id": "31",
+       "$id": "35",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -304,38 +343,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "33",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "34",
-        "Type": {
-         "$ref": "33"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "35",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -350,17 +362,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "38",
         "Type": {
-         "$ref": "36"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "39",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "40",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
@@ -369,7 +411,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -385,7 +430,7 @@
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "43"
    },
    "Creatable": true
   }

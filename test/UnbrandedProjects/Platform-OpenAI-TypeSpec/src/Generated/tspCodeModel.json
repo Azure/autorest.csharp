@@ -2,7 +2,9 @@
  "$id": "1",
  "Name": "OpenAI",
  "Description": "The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.",
- "ApiVersions": [],
+ "ApiVersions": [
+  "2.0.0"
+ ],
  "Enums": [
   {
    "$id": "2",
@@ -6149,11 +6151,42 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "873",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "874",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "875",
+        "Type": {
+         "$id": "876",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2.0.0"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "873",
+       "$id": "877",
        "StatusCodes": [
         200
        ],
@@ -6162,7 +6195,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -6178,18 +6214,18 @@
     }
    ],
    "Protocol": {
-    "$id": "874"
+    "$id": "878"
    },
    "Creatable": false,
    "Parent": "Audio"
   },
   {
-   "$id": "875",
+   "$id": "879",
    "Name": "AudioTranslations",
    "Description": "",
    "Operations": [
     {
-     "$id": "876",
+     "$id": "880",
      "Name": "create",
      "ResourceName": "Translations",
      "Summary": "Transcribes audio into the input language.",
@@ -6198,14 +6234,14 @@
        "$ref": "861"
       },
       {
-       "$id": "877",
+       "$id": "881",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "878",
+        "$id": "882",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "879",
+         "$id": "883",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -6215,9 +6251,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "880",
+        "$id": "884",
         "Type": {
-         "$ref": "878"
+         "$ref": "882"
         },
         "Value": "multipart/form-data"
        },
@@ -6231,7 +6267,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "881",
+       "$id": "885",
        "Name": "audio",
        "NameInRequest": "audio",
        "Type": {
@@ -6248,11 +6284,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "882",
+       "$id": "886",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "883",
+        "$id": "887",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6267,17 +6303,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "884",
+        "$id": "888",
         "Type": {
-         "$ref": "883"
+         "$ref": "887"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "885",
+       "$id": "889",
        "StatusCodes": [
         200
        ],
@@ -6286,7 +6325,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -6302,29 +6344,29 @@
     }
    ],
    "Protocol": {
-    "$id": "886"
+    "$id": "890"
    },
    "Creatable": false,
    "Parent": "Audio"
   },
   {
-   "$id": "887",
+   "$id": "891",
    "Name": "Chat",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "888"
+    "$id": "892"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "889",
+   "$id": "893",
    "Name": "ChatCompletions",
    "Description": "",
    "Operations": [
     {
-     "$id": "890",
+     "$id": "894",
      "Name": "create",
      "ResourceName": "Completions",
      "Parameters": [
@@ -6332,7 +6374,7 @@
        "$ref": "861"
       },
       {
-       "$id": "891",
+       "$id": "895",
        "Name": "CreateChatCompletionRequest",
        "NameInRequest": "CreateChatCompletionRequest",
        "Type": {
@@ -6349,38 +6391,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "892",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "893",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "894",
-        "Type": {
-         "$ref": "893"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "895",
+       "$id": "896",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "896",
+        "$id": "897",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6395,17 +6410,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "897",
+        "$id": "898",
         "Type": {
-         "$ref": "896"
+         "$ref": "897"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "899",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "900",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "901",
+        "Type": {
+         "$ref": "900"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "898",
+       "$id": "902",
        "StatusCodes": [
         200
        ],
@@ -6414,7 +6459,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -6430,29 +6478,29 @@
     }
    ],
    "Protocol": {
-    "$id": "899"
+    "$id": "903"
    },
    "Creatable": false,
    "Parent": "Chat"
   },
   {
-   "$id": "900",
+   "$id": "904",
    "Name": "FineTuning",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "901"
+    "$id": "905"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "902",
+   "$id": "906",
    "Name": "FineTuningJobs",
    "Description": "",
    "Operations": [
     {
-     "$id": "903",
+     "$id": "907",
      "Name": "create",
      "ResourceName": "Jobs",
      "Description": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
@@ -6461,7 +6509,7 @@
        "$ref": "861"
       },
       {
-       "$id": "904",
+       "$id": "908",
        "Name": "job",
        "NameInRequest": "job",
        "Type": {
@@ -6478,38 +6526,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "905",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "906",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "907",
-        "Type": {
-         "$ref": "906"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "908",
+       "$id": "909",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "909",
+        "$id": "910",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6524,17 +6545,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "910",
+        "$id": "911",
         "Type": {
-         "$ref": "909"
+         "$ref": "910"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "912",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "913",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "914",
+        "Type": {
+         "$ref": "913"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "911",
+       "$id": "915",
        "StatusCodes": [
         200
        ],
@@ -6543,7 +6594,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -6558,7 +6612,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "912",
+     "$id": "916",
      "Name": "listPaginated",
      "ResourceName": "Jobs",
      "Parameters": [
@@ -6566,12 +6620,12 @@
        "$ref": "861"
       },
       {
-       "$id": "913",
+       "$id": "917",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last job from the previous pagination request.",
        "Type": {
-        "$id": "914",
+        "$id": "918",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6587,12 +6641,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "915",
+       "$id": "919",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of fine-tuning jobs to retrieve.",
        "Type": {
-        "$id": "916",
+        "$id": "920",
         "Name": "safeint",
         "Kind": "Int64",
         "IsNullable": false
@@ -6608,11 +6662,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "917",
+       "$id": "921",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "918",
+        "$id": "922",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6627,17 +6681,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "919",
+        "$id": "923",
         "Type": {
-         "$ref": "918"
+         "$ref": "922"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "920",
+       "$id": "924",
        "StatusCodes": [
         200
        ],
@@ -6646,7 +6703,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -6658,7 +6718,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "921",
+     "$id": "925",
      "Name": "retrieve",
      "ResourceName": "Jobs",
      "Summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
@@ -6667,11 +6727,11 @@
        "$ref": "861"
       },
       {
-       "$id": "922",
+       "$id": "926",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Type": {
-        "$id": "923",
+        "$id": "927",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6687,11 +6747,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "924",
+       "$id": "928",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "925",
+        "$id": "929",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6706,17 +6766,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "926",
+        "$id": "930",
         "Type": {
-         "$ref": "925"
+         "$ref": "929"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "927",
+       "$id": "931",
        "StatusCodes": [
         200
        ],
@@ -6725,7 +6788,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -6737,7 +6803,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "928",
+     "$id": "932",
      "Name": "listEvents",
      "ResourceName": "Jobs",
      "Summary": "Get status updates for a fine-tuning job.",
@@ -6746,12 +6812,12 @@
        "$ref": "861"
       },
       {
-       "$id": "929",
+       "$id": "933",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to get events for.",
        "Type": {
-        "$id": "930",
+        "$id": "934",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6767,12 +6833,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "931",
+       "$id": "935",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last event from the previous pagination request.",
        "Type": {
-        "$id": "932",
+        "$id": "936",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6788,12 +6854,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "933",
+       "$id": "937",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of events to retrieve.",
        "Type": {
-        "$id": "934",
+        "$id": "938",
         "Name": "integer",
         "Kind": "Int32",
         "IsNullable": false
@@ -6809,11 +6875,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "935",
+       "$id": "939",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "936",
+        "$id": "940",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6828,17 +6894,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "937",
+        "$id": "941",
         "Type": {
-         "$ref": "936"
+         "$ref": "940"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "938",
+       "$id": "942",
        "StatusCodes": [
         200
        ],
@@ -6847,7 +6916,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -6859,7 +6931,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "939",
+     "$id": "943",
      "Name": "cancel",
      "ResourceName": "Jobs",
      "Summary": "Immediately cancel a fine-tune job.",
@@ -6868,12 +6940,12 @@
        "$ref": "861"
       },
       {
-       "$id": "940",
+       "$id": "944",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to cancel.",
        "Type": {
-        "$id": "941",
+        "$id": "945",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6889,11 +6961,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "942",
+       "$id": "946",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "943",
+        "$id": "947",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6908,17 +6980,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "944",
+        "$id": "948",
         "Type": {
-         "$ref": "943"
+         "$ref": "947"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "945",
+       "$id": "949",
        "StatusCodes": [
         200
        ],
@@ -6927,7 +7002,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -6940,18 +7018,18 @@
     }
    ],
    "Protocol": {
-    "$id": "946"
+    "$id": "950"
    },
    "Creatable": false,
    "Parent": "FineTuning"
   },
   {
-   "$id": "947",
+   "$id": "951",
    "Name": "Completions",
    "Description": "",
    "Operations": [
     {
-     "$id": "948",
+     "$id": "952",
      "Name": "create",
      "ResourceName": "Completions",
      "Parameters": [
@@ -6959,7 +7037,7 @@
        "$ref": "861"
       },
       {
-       "$id": "949",
+       "$id": "953",
        "Name": "CreateCompletionRequest",
        "NameInRequest": "CreateCompletionRequest",
        "Type": {
@@ -6976,38 +7054,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "950",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "951",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "952",
-        "Type": {
-         "$ref": "951"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "953",
+       "$id": "954",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "954",
+        "$id": "955",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7022,17 +7073,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "955",
+        "$id": "956",
         "Type": {
-         "$ref": "954"
+         "$ref": "955"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "957",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "958",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "959",
+        "Type": {
+         "$ref": "958"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "956",
+       "$id": "960",
        "StatusCodes": [
         200
        ],
@@ -7041,7 +7122,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -7057,18 +7141,18 @@
     }
    ],
    "Protocol": {
-    "$id": "957"
+    "$id": "961"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "958",
+   "$id": "962",
    "Name": "Edits",
    "Description": "",
    "Operations": [
     {
-     "$id": "959",
+     "$id": "963",
      "Name": "create",
      "ResourceName": "Edits",
      "Deprecated": "deprecated",
@@ -7077,7 +7161,7 @@
        "$ref": "861"
       },
       {
-       "$id": "960",
+       "$id": "964",
        "Name": "edit",
        "NameInRequest": "edit",
        "Type": {
@@ -7094,38 +7178,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "961",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "962",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "963",
-        "Type": {
-         "$ref": "962"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "964",
+       "$id": "965",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "965",
+        "$id": "966",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7140,17 +7197,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "966",
+        "$id": "967",
         "Type": {
-         "$ref": "965"
+         "$ref": "966"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "968",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "969",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "970",
+        "Type": {
+         "$ref": "969"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "967",
+       "$id": "971",
        "StatusCodes": [
         200
        ],
@@ -7159,7 +7246,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -7175,18 +7265,18 @@
     }
    ],
    "Protocol": {
-    "$id": "968"
+    "$id": "972"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "969",
+   "$id": "973",
    "Name": "Embeddings",
    "Description": "",
    "Operations": [
     {
-     "$id": "970",
+     "$id": "974",
      "Name": "create",
      "ResourceName": "Embeddings",
      "Summary": "Creates an embedding vector representing the input text.",
@@ -7195,7 +7285,7 @@
        "$ref": "861"
       },
       {
-       "$id": "971",
+       "$id": "975",
        "Name": "embedding",
        "NameInRequest": "embedding",
        "Type": {
@@ -7212,38 +7302,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "972",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "973",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "974",
-        "Type": {
-         "$ref": "973"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "975",
+       "$id": "976",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "976",
+        "$id": "977",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7258,17 +7321,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "977",
+        "$id": "978",
         "Type": {
-         "$ref": "976"
+         "$ref": "977"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "979",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "980",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "981",
+        "Type": {
+         "$ref": "980"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "978",
+       "$id": "982",
        "StatusCodes": [
         200
        ],
@@ -7277,7 +7370,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -7293,18 +7389,18 @@
     }
    ],
    "Protocol": {
-    "$id": "979"
+    "$id": "983"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "980",
+   "$id": "984",
    "Name": "Files",
    "Description": "",
    "Operations": [
     {
-     "$id": "981",
+     "$id": "985",
      "Name": "list",
      "ResourceName": "Files",
      "Summary": "Returns a list of files that belong to the user's organization.",
@@ -7313,11 +7409,11 @@
        "$ref": "861"
       },
       {
-       "$id": "982",
+       "$id": "986",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "983",
+        "$id": "987",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7332,17 +7428,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "984",
+        "$id": "988",
         "Type": {
-         "$ref": "983"
+         "$ref": "987"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "985",
+       "$id": "989",
        "StatusCodes": [
         200
        ],
@@ -7351,7 +7450,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -7363,7 +7465,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "986",
+     "$id": "990",
      "Name": "create",
      "ResourceName": "Files",
      "Summary": "Returns a list of files that belong to the user's organization.",
@@ -7372,14 +7474,14 @@
        "$ref": "861"
       },
       {
-       "$id": "987",
+       "$id": "991",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "988",
+        "$id": "992",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "989",
+         "$id": "993",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -7389,9 +7491,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "990",
+        "$id": "994",
         "Type": {
-         "$ref": "988"
+         "$ref": "992"
         },
         "Value": "multipart/form-data"
        },
@@ -7405,7 +7507,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "991",
+       "$id": "995",
        "Name": "file",
        "NameInRequest": "file",
        "Type": {
@@ -7422,11 +7524,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "992",
+       "$id": "996",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "993",
+        "$id": "997",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7441,17 +7543,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "994",
+        "$id": "998",
         "Type": {
-         "$ref": "993"
+         "$ref": "997"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "995",
+       "$id": "999",
        "StatusCodes": [
         200
        ],
@@ -7460,7 +7565,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -7475,7 +7583,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "996",
+     "$id": "1000",
      "Name": "retrieve",
      "ResourceName": "Files",
      "Summary": "Returns information about a specific file.",
@@ -7484,12 +7592,12 @@
        "$ref": "861"
       },
       {
-       "$id": "997",
+       "$id": "1001",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "998",
+        "$id": "1002",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7505,11 +7613,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "999",
+       "$id": "1003",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1000",
+        "$id": "1004",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7524,17 +7632,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1001",
+        "$id": "1005",
         "Type": {
-         "$ref": "1000"
+         "$ref": "1004"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1002",
+       "$id": "1006",
        "StatusCodes": [
         200
        ],
@@ -7543,7 +7654,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -7555,7 +7669,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1003",
+     "$id": "1007",
      "Name": "delete",
      "ResourceName": "Files",
      "Summary": "Delete a file",
@@ -7564,12 +7678,12 @@
        "$ref": "861"
       },
       {
-       "$id": "1004",
+       "$id": "1008",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1005",
+        "$id": "1009",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7585,11 +7699,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1006",
+       "$id": "1010",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1007",
+        "$id": "1011",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7604,17 +7718,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1008",
+        "$id": "1012",
         "Type": {
-         "$ref": "1007"
+         "$ref": "1011"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1009",
+       "$id": "1013",
        "StatusCodes": [
         200
        ],
@@ -7623,7 +7740,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "DELETE",
@@ -7635,7 +7755,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1010",
+     "$id": "1014",
      "Name": "download",
      "ResourceName": "Files",
      "Summary": "Returns the contents of the specified file.",
@@ -7644,12 +7764,12 @@
        "$ref": "861"
       },
       {
-       "$id": "1011",
+       "$id": "1015",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1012",
+        "$id": "1016",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7665,11 +7785,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1013",
+       "$id": "1017",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1014",
+        "$id": "1018",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7684,29 +7804,35 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1015",
+        "$id": "1019",
         "Type": {
-         "$ref": "1014"
+         "$ref": "1018"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1016",
+       "$id": "1020",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "1017",
+        "$id": "1021",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -7719,18 +7845,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1018"
+    "$id": "1022"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1019",
+   "$id": "1023",
    "Name": "FineTunes",
    "Description": "",
    "Operations": [
     {
-     "$id": "1020",
+     "$id": "1024",
      "Name": "create",
      "ResourceName": "FineTunes",
      "Summary": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
@@ -7740,7 +7866,7 @@
        "$ref": "861"
       },
       {
-       "$id": "1021",
+       "$id": "1025",
        "Name": "fine_tune",
        "NameInRequest": "fine_tune",
        "Type": {
@@ -7757,11 +7883,38 @@
        "Kind": "Method"
       },
       {
-       "$id": "1022",
+       "$id": "1026",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "1027",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "1028",
+        "Type": {
+         "$ref": "1027"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "1029",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "1023",
+        "$id": "1030",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7776,44 +7929,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1024",
+        "$id": "1031",
         "Type": {
-         "$ref": "1023"
+         "$ref": "1030"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "1025",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "1026",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "1027",
-        "Type": {
-         "$ref": "1026"
-        },
-        "Value": "application/json"
-       }
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1028",
+       "$id": "1032",
        "StatusCodes": [
         200
        ],
@@ -7822,7 +7951,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -7837,7 +7969,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1029",
+     "$id": "1033",
      "Name": "list",
      "ResourceName": "FineTunes",
      "Summary": "List your organization's fine-tuning jobs",
@@ -7847,11 +7979,11 @@
        "$ref": "861"
       },
       {
-       "$id": "1030",
+       "$id": "1034",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1031",
+        "$id": "1035",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7866,17 +7998,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1032",
+        "$id": "1036",
         "Type": {
-         "$ref": "1031"
+         "$ref": "1035"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1033",
+       "$id": "1037",
        "StatusCodes": [
         200
        ],
@@ -7885,7 +8020,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -7897,7 +8035,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1034",
+     "$id": "1038",
      "Name": "retrieve",
      "ResourceName": "FineTunes",
      "Summary": "Gets info about the fine-tune job.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
@@ -7907,12 +8045,12 @@
        "$ref": "861"
       },
       {
-       "$id": "1035",
+       "$id": "1039",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job",
        "Type": {
-        "$id": "1036",
+        "$id": "1040",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7928,11 +8066,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1037",
+       "$id": "1041",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1038",
+        "$id": "1042",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7947,17 +8085,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1039",
+        "$id": "1043",
         "Type": {
-         "$ref": "1038"
+         "$ref": "1042"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1040",
+       "$id": "1044",
        "StatusCodes": [
         200
        ],
@@ -7966,7 +8107,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -7978,7 +8122,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1041",
+     "$id": "1045",
      "Name": "listEvents",
      "ResourceName": "FineTunes",
      "Summary": "Get fine-grained status updates for a fine-tune job.",
@@ -7988,12 +8132,12 @@
        "$ref": "861"
       },
       {
-       "$id": "1042",
+       "$id": "1046",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to get events for.",
        "Type": {
-        "$id": "1043",
+        "$id": "1047",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8009,12 +8153,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "1044",
+       "$id": "1048",
        "Name": "stream",
        "NameInRequest": "stream",
        "Description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
        "Type": {
-        "$id": "1045",
+        "$id": "1049",
         "Name": "boolean",
         "Kind": "Boolean",
         "IsNullable": false
@@ -8030,11 +8174,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1046",
+       "$id": "1050",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1047",
+        "$id": "1051",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8049,17 +8193,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1048",
+        "$id": "1052",
         "Type": {
-         "$ref": "1047"
+         "$ref": "1051"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1049",
+       "$id": "1053",
        "StatusCodes": [
         200
        ],
@@ -8068,7 +8215,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -8080,7 +8230,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1050",
+     "$id": "1054",
      "Name": "cancel",
      "ResourceName": "FineTunes",
      "Summary": "Immediately cancel a fine-tune job.",
@@ -8090,12 +8240,12 @@
        "$ref": "861"
       },
       {
-       "$id": "1051",
+       "$id": "1055",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to cancel",
        "Type": {
-        "$id": "1052",
+        "$id": "1056",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8111,11 +8261,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1053",
+       "$id": "1057",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1054",
+        "$id": "1058",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8130,17 +8280,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1055",
+        "$id": "1059",
         "Type": {
-         "$ref": "1054"
+         "$ref": "1058"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1056",
+       "$id": "1060",
        "StatusCodes": [
         200
        ],
@@ -8149,7 +8302,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -8162,18 +8318,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1057"
+    "$id": "1061"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1058",
+   "$id": "1062",
    "Name": "ModelsOps",
    "Description": "",
    "Operations": [
     {
-     "$id": "1059",
+     "$id": "1063",
      "Name": "list",
      "ResourceName": "Models",
      "Summary": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
@@ -8182,11 +8338,11 @@
        "$ref": "861"
       },
       {
-       "$id": "1060",
+       "$id": "1064",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1061",
+        "$id": "1065",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8201,17 +8357,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1062",
+        "$id": "1066",
         "Type": {
-         "$ref": "1061"
+         "$ref": "1065"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1063",
+       "$id": "1067",
        "StatusCodes": [
         200
        ],
@@ -8220,7 +8379,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -8232,7 +8394,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1064",
+     "$id": "1068",
      "Name": "retrieve",
      "ResourceName": "Models",
      "Summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
@@ -8241,12 +8403,12 @@
        "$ref": "861"
       },
       {
-       "$id": "1065",
+       "$id": "1069",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The ID of the model to use for this request.",
        "Type": {
-        "$id": "1066",
+        "$id": "1070",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8262,11 +8424,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1067",
+       "$id": "1071",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1068",
+        "$id": "1072",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8281,17 +8443,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1069",
+        "$id": "1073",
         "Type": {
-         "$ref": "1068"
+         "$ref": "1072"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1070",
+       "$id": "1074",
        "StatusCodes": [
         200
        ],
@@ -8300,7 +8465,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -8312,7 +8480,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1071",
+     "$id": "1075",
      "Name": "delete",
      "ResourceName": "Models",
      "Summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
@@ -8321,12 +8489,12 @@
        "$ref": "861"
       },
       {
-       "$id": "1072",
+       "$id": "1076",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The model to delete",
        "Type": {
-        "$id": "1073",
+        "$id": "1077",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8342,11 +8510,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1074",
+       "$id": "1078",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1075",
+        "$id": "1079",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8361,17 +8529,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1076",
+        "$id": "1080",
         "Type": {
-         "$ref": "1075"
+         "$ref": "1079"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1077",
+       "$id": "1081",
        "StatusCodes": [
         200
        ],
@@ -8380,7 +8551,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "DELETE",
@@ -8393,18 +8567,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1078"
+    "$id": "1082"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1079",
+   "$id": "1083",
    "Name": "Images",
    "Description": "",
    "Operations": [
     {
-     "$id": "1080",
+     "$id": "1084",
      "Name": "create",
      "ResourceName": "Images",
      "Summary": "Creates an image given a prompt",
@@ -8413,7 +8587,7 @@
        "$ref": "861"
       },
       {
-       "$id": "1081",
+       "$id": "1085",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -8430,38 +8604,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1082",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "1083",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "1084",
-        "Type": {
-         "$ref": "1083"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "1085",
+       "$id": "1086",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1086",
+        "$id": "1087",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8476,17 +8623,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1087",
+        "$id": "1088",
         "Type": {
-         "$ref": "1086"
+         "$ref": "1087"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "1089",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "1090",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "1091",
+        "Type": {
+         "$ref": "1090"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1088",
+       "$id": "1092",
        "StatusCodes": [
         200
        ],
@@ -8495,7 +8672,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -8510,7 +8690,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1089",
+     "$id": "1093",
      "Name": "createEdit",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
@@ -8519,14 +8699,14 @@
        "$ref": "861"
       },
       {
-       "$id": "1090",
+       "$id": "1094",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "1091",
+        "$id": "1095",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "1092",
+         "$id": "1096",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -8536,9 +8716,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "1093",
+        "$id": "1097",
         "Type": {
-         "$ref": "1091"
+         "$ref": "1095"
         },
         "Value": "multipart/form-data"
        },
@@ -8552,7 +8732,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "1094",
+       "$id": "1098",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -8569,11 +8749,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1095",
+       "$id": "1099",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1096",
+        "$id": "1100",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8588,17 +8768,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1097",
+        "$id": "1101",
         "Type": {
-         "$ref": "1096"
+         "$ref": "1100"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1098",
+       "$id": "1102",
        "StatusCodes": [
         200
        ],
@@ -8607,7 +8790,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -8622,7 +8808,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1099",
+     "$id": "1103",
      "Name": "createVariation",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
@@ -8631,14 +8817,14 @@
        "$ref": "861"
       },
       {
-       "$id": "1100",
+       "$id": "1104",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "1101",
+        "$id": "1105",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "1102",
+         "$id": "1106",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -8648,9 +8834,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "1103",
+        "$id": "1107",
         "Type": {
-         "$ref": "1101"
+         "$ref": "1105"
         },
         "Value": "multipart/form-data"
        },
@@ -8664,7 +8850,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "1104",
+       "$id": "1108",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -8681,11 +8867,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1105",
+       "$id": "1109",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1106",
+        "$id": "1110",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8700,17 +8886,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1107",
+        "$id": "1111",
         "Type": {
-         "$ref": "1106"
+         "$ref": "1110"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1108",
+       "$id": "1112",
        "StatusCodes": [
         200
        ],
@@ -8719,7 +8908,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -8735,18 +8927,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1109"
+    "$id": "1113"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1110",
+   "$id": "1114",
    "Name": "Moderations",
    "Description": "",
    "Operations": [
     {
-     "$id": "1111",
+     "$id": "1115",
      "Name": "create",
      "ResourceName": "Moderations",
      "Summary": "Classifies if text violates OpenAI's Content Policy",
@@ -8755,7 +8947,7 @@
        "$ref": "861"
       },
       {
-       "$id": "1112",
+       "$id": "1116",
        "Name": "content",
        "NameInRequest": "content",
        "Type": {
@@ -8772,38 +8964,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1113",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "1114",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "1115",
-        "Type": {
-         "$ref": "1114"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "1116",
+       "$id": "1117",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1117",
+        "$id": "1118",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8818,17 +8983,47 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1118",
+        "$id": "1119",
         "Type": {
-         "$ref": "1117"
+         "$ref": "1118"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "1120",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "1121",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "1122",
+        "Type": {
+         "$ref": "1121"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "873"
       }
      ],
      "Responses": [
       {
-       "$id": "1119",
+       "$id": "1123",
        "StatusCodes": [
         200
        ],
@@ -8837,7 +9032,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -8853,16 +9051,16 @@
     }
    ],
    "Protocol": {
-    "$id": "1120"
+    "$id": "1124"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   }
  ],
  "Auth": {
-  "$id": "1121",
+  "$id": "1125",
   "ApiKey": {
-   "$id": "1122",
+   "$id": "1126",
    "Name": "Authorization",
    "Prefix": "Bearer"
   }
