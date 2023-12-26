@@ -428,6 +428,9 @@ namespace AutoRest.CSharp.Output.Models
 
                 var field = fields.GetFieldByParameterName(parameter.Name);
                 var inputProperty = fields.GetInputByField(field);
+                if (inputProperty is null)
+                    continue; // this means this is an additional properties property, which should never happen.
+
                 if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
                     continue;
                 var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
