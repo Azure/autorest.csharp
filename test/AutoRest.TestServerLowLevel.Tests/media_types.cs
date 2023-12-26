@@ -34,7 +34,6 @@ namespace AutoRest.TestServer.Tests
             var response = await new MediaTypesClient(host, Key, null).AnalyzeBodyAsync(RequestContent.Create(value), new ContentType("application/pdf"), new());
             Assert.AreEqual("Nice job with PDF", response.Content.ToObjectFromJson<string>());
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         });
 
         [Ignore("TODO: need to test octet-stream")]
@@ -44,7 +43,6 @@ namespace AutoRest.TestServer.Tests
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
             var response = await new MediaTypesClient(host, Key, null).AnalyzeBodyAsync(RequestContent.Create(value), ContentType.ApplicationOctetStream, new());
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         });
     }
 }
