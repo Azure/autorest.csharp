@@ -98,16 +98,17 @@ export function createModelForService(
         }
         defaultApiVersion = versions[versions.length - 1].value;
     }
-    const defaultApiVersionConstant: InputConstant | undefined = defaultApiVersion
-        ? {
-              Type: {
-                  Name: "String",
-                  Kind: InputTypeKind.String,
-                  IsNullable: false
-              } as InputPrimitiveType,
-              Value: defaultApiVersion
-          }
-        : undefined;
+    const defaultApiVersionConstant: InputConstant | undefined =
+        defaultApiVersion
+            ? {
+                  Type: {
+                      Name: "String",
+                      Kind: InputTypeKind.String,
+                      IsNullable: false
+                  } as InputPrimitiveType,
+                  Value: defaultApiVersion
+              }
+            : undefined;
 
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
@@ -174,16 +175,16 @@ export function createModelForService(
             const apiVersionInOperation = op.Parameters[apiVersionIndex];
             if (defaultApiVersionConstant !== undefined) {
                 if (!apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersionInOperation.DefaultValue = defaultApiVersionConstant;
+                    apiVersionInOperation.DefaultValue =
+                        defaultApiVersionConstant;
                 }
                 if (apiVersionInOperation.Location === RequestLocation.Query) {
                     apiVersionInOperation.NameInRequest = "api-version";
                 }
-            }
-            else {
+            } else {
                 apiVersionInOperation.Kind = InputOperationParameterKind.Method;
                 apiVersionInOperation.IsApiVersion = false;
-            }            
+            }
         }
     }
 
