@@ -756,6 +756,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\inheritance\\not-discriminated\\src\\Generated -n"
     },
+    "typespec-type/model/inheritance/recursive": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\inheritance\\recursive\\src\\Generated -n"
+    },
     "typespec-type/model/inheritance/single-discriminator": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\inheritance\\single-discriminator\\src\\Generated -n"
@@ -763,6 +767,10 @@
     "typespec-type/model/usage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\usage\\src\\Generated -n"
+    },
+    "typespec-type/property/additional-properties": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\additional-properties\\src\\Generated -n"
     },
     "typespec-type/property/nullable": {
       "commandName": "Project",

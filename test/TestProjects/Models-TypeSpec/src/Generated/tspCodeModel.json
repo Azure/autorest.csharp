@@ -198,7 +198,6 @@
      "Description": "Discriminator",
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsNullable": false,
      "Type": {
       "$id": "28",
       "Name": "string",
@@ -855,7 +854,6 @@
         "Description": "Discriminator",
         "IsRequired": true,
         "IsReadOnly": false,
-        "IsNullable": false,
         "Type": {
          "$id": "118",
          "Name": "string",
@@ -2457,7 +2455,6 @@
      "Description": "Discriminator",
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsNullable": false,
      "Type": {
       "$id": "334",
       "Name": "string",
