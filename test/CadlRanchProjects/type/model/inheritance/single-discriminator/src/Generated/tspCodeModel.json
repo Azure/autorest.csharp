@@ -93,10 +93,10 @@
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "seagull",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -106,10 +106,10 @@
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "sparrow",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -119,10 +119,10 @@
    "Description": "The second level model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "goose",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -132,10 +132,10 @@
    "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
    "IsNullable": false,
    "DiscriminatorValue": "eagle",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "16",
@@ -195,10 +195,10 @@
    "Description": "The second level legacy model in polymorphic single level inheritance.",
    "IsNullable": false,
    "DiscriminatorValue": "t-rex",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "7"
    },
-   "Usage": "Output",
    "Properties": []
   }
  ],

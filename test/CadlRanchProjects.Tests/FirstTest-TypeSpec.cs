@@ -62,7 +62,7 @@ namespace CadlRanchProjects.Tests
                 optionalLiteralBool = true,
                 requiredNullableList = Array.Empty<int>(),
             };
-            Response response = await new FirstTestTypeSpecClient(host).CreateLiteralAsync(RequestContent.Create(data));
+            Response response = await new FirstTestTypeSpecClient(host).GetHelloClient().GetDemo2Client().CreateLiteralAsync(RequestContent.Create(data));
             var result = JsonDocument.Parse(response.ContentStream).RootElement;
             Assert.AreEqual("literal", result.GetProperty("name").GetString());
             Assert.AreEqual("union", result.GetProperty("requiredUnion").GetString());
@@ -79,17 +79,17 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(false, result.GetProperty("optionalLiteralBool").GetBoolean());
         });
         [Test]
-         public async Task FirstTest_StringBody() => await Test(async (host) =>
-         {
+        public async Task FirstTest_StringBody() => await Test(async (host) =>
+        {
             Response response = await new FirstTestTypeSpecClient(host).StringBodyAsync("test");
             Assert.AreEqual(204, response.Status);
-         });
+        });
         [Test]
         public async Task FirstTest_BoolBody() => await Test(async (host) =>
          {
              Response response = await new FirstTestTypeSpecClient(host).BoolBodyAsync(true);
-            Assert.AreEqual(204, response.Status);
-        });
+             Assert.AreEqual(204, response.Status);
+         });
 
         [Test]
         public async Task FirstTest_DateTimeBody() => await Test(async (host) =>

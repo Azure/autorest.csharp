@@ -12,19 +12,19 @@ namespace CadlRanchProjects.Tests
 {
     public class ClientStructureDefaultTests : CadlRanchTestBase
     {
-        [Test]
-        public void Client_Structure_default_methods()
+        [TestCase(typeof(ServiceClient), new string[] { "One", "Two" })]
+        [TestCase(typeof(Foo), new string[] { "Three", "Four" })]
+        [TestCase(typeof(Bar), new string[] { "Five", "Six" })]
+        public void Client_Structure_default_methods(Type client, string[] methodNames)
         {
-            var methods = typeof(ServiceClient).GetMethods();
+            var methods = client.GetMethods();
             Assert.IsNotNull(methods);
-            Assert.AreEqual(6, methods.Where(method => method.Name.EndsWith("Async")).ToArray().Length);
-            /* check the existance of the methods. */
-            Assert.AreNotEqual(null, typeof(ServiceClient).GetMethod("OneAsync"));
-            Assert.AreNotEqual(null, typeof(ServiceClient).GetMethod("TwoAsync"));
-            Assert.AreNotEqual(null, typeof(ServiceClient).GetMethod("ThreeAsync"));
-            Assert.AreNotEqual(null, typeof(ServiceClient).GetMethod("FourAsync"));
-            Assert.AreNotEqual(null, typeof(ServiceClient).GetMethod("FiveAsync"));
-            Assert.AreNotEqual(null, typeof(ServiceClient).GetMethod("SixAsync"));
+            Assert.AreEqual(methodNames.Length, methods.Where(method => method.Name.EndsWith("Async")).ToArray().Length);
+            /* check the existence of the methods. */
+            foreach (var methodName in methodNames)
+            {
+                Assert.IsNotNull(client.GetMethod($"{methodName}Async"));
+            }
         }
 
         [Test]
@@ -42,25 +42,25 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Client_Structure_default_Three() => Test(async (host) =>
         {
-            Response response = await new ServiceClient(host, "default").ThreeAsync();
+            Response response = await new ServiceClient(host, "default").GetFooClient().ThreeAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_default_Four() => Test(async (host) =>
         {
-            Response response = await new ServiceClient(host, "default").FourAsync();
+            Response response = await new ServiceClient(host, "default").GetFooClient().FourAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_default_Five() => Test(async (host) =>
         {
-            Response response = await new ServiceClient(host, "default").FiveAsync();
+            Response response = await new ServiceClient(host, "default").GetBarClient().FiveAsync();
             Assert.AreEqual(204, response.Status);
         });
         [Test]
         public Task Client_Structure_default_Six() => Test(async (host) =>
         {
-            Response response = await new ServiceClient(host, "default").SixAsync();
+            Response response = await new ServiceClient(host, "default").GetBarClient().SixAsync();
             Assert.AreEqual(204, response.Status);
         });
     }

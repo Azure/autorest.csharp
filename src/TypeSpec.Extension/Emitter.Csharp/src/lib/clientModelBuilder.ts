@@ -124,7 +124,6 @@ export function createModelForService(
     let urlParameters: InputParameter[] | undefined = undefined;
     let url: string = "";
     const convenienceOperations: HttpOperation[] = [];
-    let lroMonitorOperations: Set<Operation>;
 
     //create endpoint parameter from servers
     if (servers !== undefined) {
@@ -151,7 +150,6 @@ export function createModelForService(
     }
     logger.info("routes:" + routes.length);
 
-    lroMonitorOperations = getAllLroMonitorOperations(routes, sdkContext);
     const clients: InputClient[] = [];
     const dpgClients = emitterOptions.branded
         ? listClients(sdkContext)
@@ -216,12 +214,13 @@ export function createModelForService(
                 client as SdkClient
             );
             for (const dpgGroup of dpgOperationGroups) {
-                clients.push(
-                    emitClient(
-                        { ...dpgGroup, name: dpgGroup.type.name },
-                        client
-                    )
-                );
+                var dotnetOperationGroup = {
+                    ...dpgGroup,
+                    name: dpgGroup.type.name
+                };
+                var subClient = emitClient(dotnetOperationGroup, client);
+                clients.push(subClient);
+                addChildClients(context, dotnetOperationGroup, clients);
             }
         } else {
             const dpgOperationGroups = listOperationGroupsByClient(
@@ -275,7 +274,6 @@ export function createModelForService(
             Parent: parent === undefined ? undefined : getClientName(parent)
         } as InputClient;
         for (const op of operations) {
-            if (lroMonitorOperations.has(op)) continue;
             const httpOperation = ignoreDiagnostics(
                 getHttpOperation(program, op)
             );
@@ -295,24 +293,6 @@ export function createModelForService(
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
-    }
-
-    function getAllLroMonitorOperations(
-        routes: HttpOperation[],
-        context: SdkContext
-    ): Set<Operation> {
-        const lroMonitorOperations = new Set<Operation>();
-        for (const operation of routes) {
-            const operationLink = getOperationLink(
-                context.program,
-                operation.operation,
-                "polling"
-            );
-            if (operationLink !== undefined) {
-                lroMonitorOperations.add(operationLink.linkedOperation);
-            }
-        }
-        return lroMonitorOperations;
     }
 }
 

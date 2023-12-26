@@ -187,10 +187,10 @@
    "Accessibility": "internal",
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "20"
    },
-   "Usage": "Output",
    "Properties": [
     {
      "$id": "24",
@@ -280,10 +280,10 @@
    "Description": "Used in internal operations, should be generated but not exported.",
    "IsNullable": false,
    "DiscriminatorValue": "real",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "28"
    },
-   "Usage": "Output",
    "Properties": []
   }
  ],

@@ -5,28 +5,10 @@
  "ApiVersions": [
   "2022-11-30-preview"
  ],
- "Enums": [
-  {
-   "$id": "2",
-   "Name": "Versions",
-   "EnumValueType": "String",
-   "AllowedValues": [
-    {
-     "$id": "3",
-     "Name": "2022-11-30-preview",
-     "Value": "2022-11-30-preview"
-    }
-   ],
-   "Namespace": "MixApiVersion",
-   "Description": "",
-   "IsExtensible": true,
-   "IsNullable": false,
-   "Usage": "None"
-  }
- ],
+ "Enums": [],
  "Models": [
   {
-   "$id": "4",
+   "$id": "2",
    "Name": "Pet",
    "Namespace": "MixApiVersion",
    "Description": "Pet",
@@ -34,12 +16,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "5",
+     "$id": "3",
      "Name": "name",
      "SerializedName": "name",
      "Description": "pet name",
      "Type": {
-      "$id": "6",
+      "$id": "4",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -48,12 +30,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "7",
+     "$id": "5",
      "Name": "tag",
      "SerializedName": "tag",
      "Description": "",
      "Type": {
-      "$id": "8",
+      "$id": "6",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -62,12 +44,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "9",
+     "$id": "7",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "10",
+      "$id": "8",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -78,7 +60,7 @@
    ]
   },
   {
-   "$id": "11",
+   "$id": "9",
    "Name": "PagedToy",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
@@ -86,27 +68,27 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "12",
+     "$id": "10",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Toy items on this page",
      "Type": {
-      "$id": "13",
+      "$id": "11",
       "Name": "Array",
       "ElementType": {
-       "$id": "14",
+       "$id": "12",
        "Name": "Toy",
        "Namespace": "MixApiVersion",
        "IsNullable": false,
        "Usage": "None",
        "Properties": [
         {
-         "$id": "15",
+         "$id": "13",
          "Name": "id",
          "SerializedName": "id",
          "Description": "",
          "Type": {
-          "$id": "16",
+          "$id": "14",
           "Name": "int64",
           "Kind": "Int64",
           "IsNullable": false
@@ -115,12 +97,12 @@
          "IsReadOnly": true
         },
         {
-         "$id": "17",
+         "$id": "15",
          "Name": "petId",
          "SerializedName": "petId",
          "Description": "",
          "Type": {
-          "$id": "18",
+          "$id": "16",
           "Name": "int64",
           "Kind": "Int64",
           "IsNullable": false
@@ -129,12 +111,12 @@
          "IsReadOnly": false
         },
         {
-         "$id": "19",
+         "$id": "17",
          "Name": "name",
          "SerializedName": "name",
          "Description": "",
          "Type": {
-          "$id": "20",
+          "$id": "18",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -150,12 +132,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "21",
+     "$id": "19",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "22",
+      "$id": "20",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -166,10 +148,10 @@
    ]
   },
   {
-   "$ref": "14"
+   "$ref": "12"
   },
   {
-   "$id": "23",
+   "$id": "21",
    "Name": "Error",
    "Namespace": "MixApiVersion",
    "Description": "Error",
@@ -177,12 +159,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "24",
+     "$id": "22",
      "Name": "code",
      "SerializedName": "code",
      "Description": "",
      "Type": {
-      "$id": "25",
+      "$id": "23",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -191,12 +173,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "26",
+     "$id": "24",
      "Name": "message",
      "SerializedName": "message",
      "Description": "",
      "Type": {
-      "$id": "27",
+      "$id": "25",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -207,7 +189,7 @@
    ]
   },
   {
-   "$id": "28",
+   "$id": "26",
    "Name": "PetId",
    "Namespace": "MixApiVersion",
    "IsNullable": false,
@@ -215,7 +197,7 @@
    "Properties": []
   },
   {
-   "$id": "29",
+   "$id": "27",
    "Name": "NotModifiedPet",
    "Namespace": "MixApiVersion",
    "Description": "Not modified",
@@ -223,12 +205,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "30",
+     "$id": "28",
      "Name": "body",
      "SerializedName": "body",
      "Description": "",
      "Type": {
-      "$ref": "4"
+      "$ref": "2"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -238,8 +220,18 @@
  ],
  "Clients": [
   {
-   "$id": "31",
+   "$id": "29",
    "Name": "MixApiVersionClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "30"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "31",
+   "Name": "Pets",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
@@ -424,6 +416,9 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "35"
       }
      ],
      "Responses": [
@@ -433,7 +428,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -445,7 +440,7 @@
         304
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -493,20 +488,20 @@
         "Value": "2022-07-09"
        },
        "IsRequired": true,
-       "IsApiVersion": false,
+       "IsApiVersion": true,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant"
       },
       {
        "$id": "58",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
-        "$ref": "4"
+        "$ref": "2"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -580,7 +575,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "4"
+        "$ref": "2"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -597,9 +592,21 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "66"
+   },
+   "Creatable": false,
+   "Parent": "MixApiVersionClient"
+  },
+  {
+   "$id": "67",
+   "Name": "ListPetToysResponse",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "66",
+     "$id": "68",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -612,11 +619,11 @@
        "$ref": "35"
       },
       {
-       "$id": "67",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "70",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -631,9 +638,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "71",
         "Type": {
-         "$ref": "68"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
@@ -641,12 +648,12 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "9"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -659,7 +666,7 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "71",
+      "$id": "73",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -668,9 +675,10 @@
     }
    ],
    "Protocol": {
-    "$id": "72"
+    "$id": "74"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "MixApiVersionClient"
   }
  ]
 }

@@ -523,10 +523,10 @@
    "Description": "The dog with a union type",
    "IsNullable": false,
    "DiscriminatorValue": "dog",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "63"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "69",
@@ -583,10 +583,10 @@
    "Description": "The cat without a union type",
    "IsNullable": false,
    "DiscriminatorValue": "cat",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "63"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "77",
@@ -648,10 +648,10 @@
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The derived model",
    "IsNullable": false,
+   "Usage": "Input",
    "BaseModel": {
     "$ref": "79"
    },
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "85",
@@ -675,10 +675,10 @@
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a derived model with unions",
    "IsNullable": false,
+   "Usage": "Input",
    "BaseModel": {
     "$ref": "79"
    },
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "88",
@@ -721,10 +721,10 @@
    "Description": "The cat",
    "IsNullable": false,
    "DiscriminatorValue": "cat",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "58"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "94",
@@ -749,10 +749,10 @@
    "Description": "The dog",
    "IsNullable": false,
    "DiscriminatorValue": "dog",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "58"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "97",

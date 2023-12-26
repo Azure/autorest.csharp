@@ -2,7 +2,9 @@
  "$id": "1",
  "Name": "CustomizationsInTsp",
  "Description": "CADL project to test various types of models.",
- "ApiVersions": [],
+ "ApiVersions": [
+  "0.1.0"
+ ],
  "Enums": [
   {
    "$id": "2",
@@ -717,6 +719,66 @@
      },
      "IsRequired": false,
      "IsReadOnly": false
+    },
+    {
+     "$id": "102",
+     "Name": "propertyModelStruct",
+     "SerializedName": "propertyModelStruct",
+     "Description": "ModelStruct",
+     "Type": {
+      "$id": "103",
+      "Name": "ModelStruct",
+      "Namespace": "CustomizationsInTsp",
+      "Description": "Model to make to a struct",
+      "IsNullable": false,
+      "Usage": "RoundTrip",
+      "Properties": [
+       {
+        "$id": "104",
+        "Name": "requiredInt",
+        "SerializedName": "requiredInt",
+        "Description": "Required int",
+        "Type": {
+         "$id": "105",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "106",
+        "Name": "optionalInt",
+        "SerializedName": "optionalInt",
+        "Description": "Optional int",
+        "Type": {
+         "$id": "107",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "108",
+        "Name": "optionalString",
+        "SerializedName": "optionalString",
+        "Description": "Optional string",
+        "Type": {
+         "$id": "109",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
     }
    ]
   },
@@ -734,22 +796,25 @@
   },
   {
    "$ref": "98"
+  },
+  {
+   "$ref": "103"
   }
  ],
  "Clients": [
   {
-   "$id": "102",
+   "$id": "110",
    "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "103",
+     "$id": "111",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
-       "$id": "104",
+       "$id": "112",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -766,11 +831,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "105",
+       "$id": "113",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "106",
+        "$id": "114",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -785,19 +850,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "115",
         "Type": {
-         "$ref": "106"
+         "$ref": "114"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "108",
+       "$id": "116",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "109",
+        "$id": "117",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -812,17 +877,48 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "110",
+        "$id": "118",
         "Type": {
-         "$ref": "109"
+         "$ref": "117"
         },
         "Value": "application/json"
+       }
+      },
+      {
+       "$id": "119",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "120",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "121",
+        "Type": {
+         "$id": "122",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "111",
+       "$id": "123",
        "StatusCodes": [
         200
        ],
@@ -846,13 +942,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "112",
+     "$id": "124",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Parameters": [
       {
-       "$id": "113",
+       "$id": "125",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -869,11 +965,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "114",
+       "$id": "126",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "115",
+        "$id": "127",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -888,19 +984,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "116",
+        "$id": "128",
         "Type": {
-         "$ref": "115"
+         "$ref": "127"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "117",
+       "$id": "129",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "118",
+        "$id": "130",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -915,17 +1011,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "119",
+        "$id": "131",
         "Type": {
-         "$ref": "118"
+         "$ref": "130"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "119"
       }
      ],
      "Responses": [
       {
-       "$id": "120",
+       "$id": "132",
        "StatusCodes": [
         200
        ],
@@ -949,13 +1048,13 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "121",
+     "$id": "133",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Parameters": [
       {
-       "$id": "122",
+       "$id": "134",
        "Name": "ModelToRename",
        "NameInRequest": "ModelToRename",
        "Description": "Renamed model (original name: ModelToRename)",
@@ -973,11 +1072,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "123",
+       "$id": "135",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "124",
+        "$id": "136",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -992,19 +1091,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "137",
         "Type": {
-         "$ref": "124"
+         "$ref": "136"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "126",
+       "$id": "138",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "127",
+        "$id": "139",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1019,17 +1118,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "128",
+        "$id": "140",
         "Type": {
-         "$ref": "127"
+         "$ref": "139"
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "119"
       }
      ],
      "Responses": [
       {
-       "$id": "129",
+       "$id": "141",
        "StatusCodes": [
         200
        ],
@@ -1054,7 +1156,7 @@
     }
    ],
    "Protocol": {
-    "$id": "130"
+    "$id": "142"
    },
    "Creatable": true
   }

@@ -123,10 +123,10 @@
    "Description": "Golden dog model",
    "IsNullable": false,
    "DiscriminatorValue": "golden",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "6"
    },
-   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -136,10 +136,10 @@
    "Description": "Cobra model",
    "IsNullable": false,
    "DiscriminatorValue": "cobra",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "10"
    },
-   "Usage": "RoundTrip",
    "Properties": []
   }
  ],

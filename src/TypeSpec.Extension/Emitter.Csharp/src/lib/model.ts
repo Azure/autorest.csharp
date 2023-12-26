@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { isFixed } from "@azure-tools/typespec-azure-core";
+import { getLroMetadata, isFixed } from "@azure-tools/typespec-azure-core";
 import {
     EncodeData,
     Enum,
@@ -546,6 +546,8 @@ export function getInputType(
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
+            model = models.get(name);
+            if (model) return model;
             const properties: InputModelProperty[] = [];
 
             const discriminator = getDiscriminator(program, m);
@@ -560,8 +562,8 @@ export function getInputType(
                 IsNullable: false,
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
-                BaseModel: baseModel,
                 Usage: Usage.None,
+                BaseModel: baseModel, // BaseModel should be the last but one assigned to model
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
             setUsage(context, m, model);
@@ -810,6 +812,9 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         let effectiveType = type;
+        if (type.kind === "Enum") {
+            typeName = getTypeName(context, type);
+        }
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName = getTypeName(context, effectiveType);
@@ -901,6 +906,26 @@ export function getUsages(
                     appendUsage(name, UsageFlags.Output);
                 }
             }
+            /* calculate the usage of the LRO result type. */
+            const metadata = getLroMetadata(program, op.operation);
+            if (metadata !== undefined) {
+                let bodyType: Model;
+                if (
+                    op.verb !== "delete" &&
+                    metadata.finalResult !== undefined &&
+                    metadata.finalResult !== "void"
+                ) {
+                    bodyType = metadata.finalEnvelopeResult as Model;
+                    if (bodyType) {
+                        getAllEffectedModels(
+                            bodyType,
+                            new Set<string>()
+                        ).forEach((element) => {
+                            affectedReturnTypes.add(element);
+                        });
+                    }
+                }
+            }
         }
     }
 
@@ -966,6 +991,16 @@ export function getUsages(
             for (const [_, prop] of model.properties) {
                 if (prop.type.kind === "Model") {
                     result.push(...getAllEffectedModels(prop.type, visited));
+                }
+            }
+            /*propagate usage to the property type of the base model. */
+            if (model.baseModel) {
+                for (const [_, prop] of model.baseModel.properties) {
+                    if (prop.type.kind === "Model") {
+                        result.push(
+                            ...getAllEffectedModels(prop.type, visited)
+                        );
+                    }
                 }
             }
         }

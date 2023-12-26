@@ -23,6 +23,16 @@ namespace: MgmtMockAndSample
 modelerfour:
   lenient-model-deduplication: true
 
+include-x-ms-examples-original-file: false
+sample-gen:
+  mock: true
+  sample: true
+  output-folder: $(this-folder)../tests/Generated
+  clear-output-folder: true
+  skipped-operations: # only to test if the configuration works
+  - Vaults_GetDeleted
+  - Vaults_Update
+
 generate-arm-resource-extensions:
 - /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}
 
@@ -51,6 +61,9 @@ rename-mapping:
 models-to-treat-empty-string-as-null:
 - EventData
 - ManagedHsmProperties
+
+privileged-operations:
+  Vaults_CreateOrUpdate: Test for privileged operations configuration
 
 directive:
   - from: swagger-document
