@@ -9,6 +9,7 @@
         "type/model/inheritance/single-discriminator",
         "type/model/inheritance/not-discriminated",
         "type/model/inheritance/enum-discriminator",
+        "type/model/inheritance/recursive",
         "type/property/additional-properties",
         "type/property/nullable",
         "type/property/optionality",
