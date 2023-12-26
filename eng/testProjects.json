@@ -30,6 +30,7 @@
         "encode/duration",
         "projection/projected-name",
         "payload/content-negotiation",
+        "payload/media-type",
         "payload/pageable",
         "server/path/multiple",
         "server/path/single",
@@ -40,7 +41,6 @@
         "parameters/collection-format",
         "parameters/spread",
         "parameters/body-optionality",
-        "client/structure/default",
         "client/structure/multi-client",
         "client/structure/renamed-operation",
         "client/structure/two-operation-group"
