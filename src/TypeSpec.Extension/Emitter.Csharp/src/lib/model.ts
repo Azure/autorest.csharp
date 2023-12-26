@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { isFixed } from "@azure-tools/typespec-azure-core";
+import { getLroMetadata, isFixed } from "@azure-tools/typespec-azure-core";
 import {
     EncodeData,
     Enum,
@@ -24,7 +24,6 @@ import {
     getEncode,
     getFormat,
     getKnownValues,
-    getProjectedNames,
     getVisibility,
     isArrayModelType,
     isRecordModelType,
@@ -41,11 +40,6 @@ import {
     isStatusCode
 } from "@typespec/http";
 import { getResourceOperation } from "@typespec/rest";
-import {
-    projectedNameCSharpKey,
-    projectedNameClientKey,
-    projectedNameJsonKey
-} from "../constants.js";
 import { FormattedType } from "../type/formattedType.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
 import { InputModelProperty } from "../type/inputModelProperty.js";
@@ -347,12 +341,15 @@ export function getInputType(
 
     function getInputModelType(m: Model): InputType {
         /* Array and Map Type. */
-        if (!isNeverType(m)) {
-            if (isArrayModelType(program, m)) {
-                return getInputTypeForArray(m.indexer.value);
-            } else if (isRecordModelType(program, m)) {
-                return getInputTypeForMap(m.indexer.key, m.indexer.value);
-            }
+        if (isArrayModelType(program, m)) {
+            return getInputTypeForArray(m.indexer.value);
+        } else if (
+            isRecordModelType(program, m) &&
+            m.sourceModel === undefined
+        ) {
+            // only when the model does not have a source model, it is really a record type
+            // when we have `model Foo is Record<string>` this should be a model with additional properties therefore it should not be parsed into a dictionary type
+            return getInputTypeForMap(m.indexer.key, m.indexer.value);
         }
         return getInputModelForModel(m);
     }
@@ -398,11 +395,11 @@ export function getInputType(
             formattedType.format,
             formattedType.encode
         );
-        const rawValueType = {
+        const rawValueType: InputPrimitiveType = {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
-        } as InputPrimitiveType;
+        };
         const literalValue = getDefaultValue(type);
         const newValueType = getLiteralValueType();
 
@@ -415,7 +412,7 @@ export function getInputType(
             LiteralValueType: newValueType,
             Value: literalValue,
             IsNullable: false
-        } as InputLiteralType;
+        };
 
         function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
@@ -476,11 +473,11 @@ export function getInputType(
                         "The enum member value type is not consistent."
                     );
                 }
-                const member = {
+                const member: InputEnumTypeValue = {
                     Name: getTypeName(context, option),
                     Value: option.value ?? option?.name,
                     Description: getDoc(program, option)
-                } as InputEnumTypeValue;
+                };
                 allowValues.push(member);
             }
 
@@ -518,7 +515,7 @@ export function getInputType(
                 enums
             ),
             IsNullable: false
-        } as InputListType;
+        };
     }
 
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
@@ -537,7 +534,7 @@ export function getInputType(
                 enums
             ),
             IsNullable: false
-        } as InputDictionaryType;
+        };
     }
 
     function getInputModelForModel(m: Model): InputModelType {
@@ -545,7 +542,8 @@ export function getInputType(
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
-            const baseModel = getInputModelBaseType(m.baseModel);
+            const [baseModel, inheritedDictionaryType] =
+                getInputModelBaseType(m);
             model = models.get(name);
             if (model) return model;
             const properties: InputModelProperty[] = [];
@@ -563,9 +561,10 @@ export function getInputType(
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 Usage: Usage.None,
+                InheritedDictionaryType: inheritedDictionaryType, // InheritedDictionaryType represent the type of additional properties property
                 BaseModel: baseModel, // BaseModel should be the last but one assigned to model
                 Properties: properties // Properties should be the last assigned to model
-            } as InputModelType;
+            };
             setUsage(context, m, model);
 
             // open generic type model which has un-instanced template parameter will not be generated. e.g.
@@ -627,11 +626,11 @@ export function getInputType(
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const name = getTypeName(context, value);
                 const serializedName = getSerializeName(context, value);
-                const literalTypeContext = {
+                const literalTypeContext: LiteralTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
                     Namespace: model.Namespace
-                } as LiteralTypeContext;
+                };
                 const inputType = getInputType(
                     context,
                     getFormattedType(program, value),
@@ -667,40 +666,62 @@ export function getInputType(
             logger.info(
                 `No specified type for discriminator property '${model.DiscriminatorPropertyName}'. Assume it is a string.`
             );
-            const discriminatorProperty = {
+            const discriminatorProperty: InputModelProperty = {
                 Name: model.DiscriminatorPropertyName,
                 SerializedName: model.DiscriminatorPropertyName,
                 Description: "Discriminator",
                 IsRequired: true,
                 IsReadOnly: false,
-                IsNullable: false,
                 Type: {
                     Name: "string",
                     Kind: InputTypeKind.String,
                     IsNullable: false
                 } as InputPrimitiveType,
                 IsDiscriminator: true
-            } as InputModelProperty;
+            };
             // put default discriminator property as the first property to keep previous behavior
             outputProperties.unshift(discriminatorProperty);
         }
     }
-    function getInputModelBaseType(m?: Model): InputModelType | undefined {
-        if (!m) {
-            return undefined;
+
+    function getInputModelBaseType(
+        m: Model
+    ): [InputModelType | undefined, InputDictionaryType | undefined] {
+        const baseModel = m.baseModel;
+        const sourceModel = m.sourceModel;
+
+        // we cannot have both `extends` and `is`, therefore only one of baseModel and sourceModel can be defined
+        if (sourceModel && isRecordModelType(program, sourceModel)) {
+            return [
+                undefined,
+                getInputTypeForMap(
+                    sourceModel.indexer.key,
+                    sourceModel.indexer.value
+                )
+            ];
         }
 
-        // Arrays and dictionaries can't be a base type
-        if (m.indexer) {
-            return undefined;
+        if (baseModel) {
+            // when base model is a record, we return the dictionary type
+            if (isRecordModelType(program, baseModel)) {
+                return [
+                    undefined,
+                    getInputTypeForMap(
+                        baseModel.indexer.key,
+                        baseModel.indexer.value
+                    )
+                ];
+            }
+
+            // TypeSpec "primitive" types can't be base types for models
+            if (program.checker.isStdType(baseModel)) {
+                return [undefined, undefined];
+            }
+
+            return [getInputModelForModel(baseModel), undefined];
         }
 
-        // TypeSpec "primitive" types can't be base types for models
-        if (program.checker.isStdType(m)) {
-            return undefined;
-        }
-
-        return getInputModelForModel(m);
+        return [undefined, undefined];
     }
 
     function getFullNamespaceString(namespace: Namespace | undefined): string {
@@ -906,6 +927,26 @@ export function getUsages(
                     appendUsage(name, UsageFlags.Output);
                 }
             }
+            /* calculate the usage of the LRO result type. */
+            const metadata = getLroMetadata(program, op.operation);
+            if (metadata !== undefined) {
+                let bodyType: Model;
+                if (
+                    op.verb !== "delete" &&
+                    metadata.finalResult !== undefined &&
+                    metadata.finalResult !== "void"
+                ) {
+                    bodyType = metadata.finalEnvelopeResult as Model;
+                    if (bodyType) {
+                        getAllEffectedModels(
+                            bodyType,
+                            new Set<string>()
+                        ).forEach((element) => {
+                            affectedReturnTypes.add(element);
+                        });
+                    }
+                }
+            }
         }
     }
 
@@ -973,6 +1014,16 @@ export function getUsages(
                     result.push(...getAllEffectedModels(prop.type, visited));
                 }
             }
+            /*propagate usage to the property type of the base model. */
+            if (model.baseModel) {
+                for (const [_, prop] of model.baseModel.properties) {
+                    if (prop.type.kind === "Model") {
+                        result.push(
+                            ...getAllEffectedModels(prop.type, visited)
+                        );
+                    }
+                }
+            }
         }
 
         return result;
@@ -994,7 +1045,7 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         type: targetType,
         format: format,
         encode: encodeData
-    } as FormattedType;
+    };
 }
 
 // This is a temporary solution. After we uptake getAllModels we should delete this.

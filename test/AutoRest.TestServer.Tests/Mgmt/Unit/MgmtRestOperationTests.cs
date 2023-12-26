@@ -61,6 +61,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 publicClients: true,
                 modelNamespace: true,
                 headAsBoolean: true,
+                skipCSProj: true,
                 skipCSProjPackageReference: true,
                 generation1ConvenienceClient: false,
                 singleTopLevelClient: false,

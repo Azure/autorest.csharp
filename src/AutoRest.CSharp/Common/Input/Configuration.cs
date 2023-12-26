@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string PublicClients = "public-clients";
             public const string ModelNamespace = "model-namespace";
             public const string HeadAsBoolean = "head-as-boolean";
+            public const string SkipCSProj = "skip-csproj";
             public const string SkipCSProjPackageReference = "skip-csproj-packagereference";
             public const string Generation1ConvenienceClient = "generation1-convenience-client";
             public const string SingleTopLevelClient = "single-top-level-client";
@@ -74,6 +75,7 @@ namespace AutoRest.CSharp.Common.Input
             bool publicClients,
             bool modelNamespace,
             bool headAsBoolean,
+            bool skipCSProj,
             bool skipCSProjPackageReference,
             bool generation1ConvenienceClient,
             bool singleTopLevelClient,
@@ -109,6 +111,7 @@ namespace AutoRest.CSharp.Common.Input
             PublicClients = publicClients || AzureArm;
             ModelNamespace = azureArm || modelNamespace;
             HeadAsBoolean = headAsBoolean;
+            SkipCSProj = skipCSProj;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
@@ -130,7 +133,7 @@ namespace AutoRest.CSharp.Common.Input
             if (publicClients && generation1ConvenienceClient && isAzureProject)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
-                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
+                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net7.0", "AutoRest.CSharp.dll")))
                 {
                     if (_absoluteProjectFolder is not null)
                     {
@@ -242,6 +245,7 @@ namespace AutoRest.CSharp.Common.Input
         public static bool PublicClients { get; private set; }
         public static bool ModelNamespace { get; private set; }
         public static bool HeadAsBoolean { get; private set; }
+        public static bool SkipCSProj { get; private set; }
         public static bool SkipCSProjPackageReference { get; private set; }
         public static bool Generation1ConvenienceClient { get; private set; }
         public static bool SingleTopLevelClient { get; private set; }
@@ -308,6 +312,7 @@ namespace AutoRest.CSharp.Common.Input
                 publicClients: GetOptionBoolValue(autoRest, Options.PublicClients),
                 modelNamespace: GetOptionBoolValue(autoRest, Options.ModelNamespace),
                 headAsBoolean: GetOptionBoolValue(autoRest, Options.HeadAsBoolean),
+                skipCSProj: GetOptionBoolValue(autoRest, Options.SkipCSProj),
                 skipCSProjPackageReference: GetSkipCSProjPackageReferenceOption(autoRest),
                 generation1ConvenienceClient: GetGeneration1ConvenienceClientOption(autoRest),
                 singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
@@ -376,6 +381,8 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.ModelNamespace:
                     return true;
                 case Options.HeadAsBoolean:
+                    return false;
+                case Options.SkipCSProj:
                     return false;
                 case Options.SkipCSProjPackageReference:
                     return false;
@@ -467,6 +474,7 @@ namespace AutoRest.CSharp.Common.Input
                 ReadOption(root, Options.PublicClients),
                 ReadOption(root, Options.ModelNamespace),
                 ReadOption(root, Options.HeadAsBoolean),
+                ReadOption(root, Options.SkipCSProj),
                 ReadOption(root, Options.SkipCSProjPackageReference),
                 ReadOption(root, Options.Generation1ConvenienceClient),
                 ReadOption(root, Options.SingleTopLevelClient),
@@ -528,6 +536,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.PublicClients, PublicClients);
             WriteIfNotDefault(writer, Options.ModelNamespace, ModelNamespace);
             WriteIfNotDefault(writer, Options.HeadAsBoolean, HeadAsBoolean);
+            WriteIfNotDefault(writer, Options.SkipCSProj, SkipCSProj);
             WriteIfNotDefault(writer, Options.SkipCSProjPackageReference, SkipCSProjPackageReference);
             WriteIfNotDefault(writer, Options.Generation1ConvenienceClient, Generation1ConvenienceClient);
             WriteIfNotDefault(writer, Options.SingleTopLevelClient, SingleTopLevelClient);
@@ -624,19 +633,6 @@ namespace AutoRest.CSharp.Common.Input
 
             return null;
         }
-
-        // Fetch CSharpProj configuration from Configuration
-        internal static CSharpProjConfiguration ToCSharpProjConfiguration() => new CSharpProjConfiguration
-        (
-            AbsoluteProjectFolder: AbsoluteProjectFolder,
-            AzureArm: AzureArm,
-            IsMgmtTestProject: MgmtTestConfiguration is not null,
-            LibraryName: LibraryName,
-            Namespace: Namespace,
-            SkipCSProjPackageReference: SkipCSProjPackageReference,
-            RelativeProjectFolder: RelativeProjectFolder,
-            Generation1ConvenienceClient: Generation1ConvenienceClient
-        );
 
         internal static string GetOutputFolderOption(IPluginCommunication autoRest) => TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder));
         internal static string? GetProjectFolderOption(IPluginCommunication autoRest) => autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();

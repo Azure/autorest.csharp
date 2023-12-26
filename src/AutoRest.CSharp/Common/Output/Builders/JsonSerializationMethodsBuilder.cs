@@ -616,8 +616,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray())
                 };
             }
-
-            if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
+            if (discriminator is not null && !serialization.Type.HasParent && discriminator.DefaultObjectType != null && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
             {
                 yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, null));
             }
