@@ -120,14 +120,14 @@
         "$ref": "2"
        },
        "Location": "Uri",
-       "IsApiVersion": false,
+       "IsApiVersion": true,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method",
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "16",
         "Type": {

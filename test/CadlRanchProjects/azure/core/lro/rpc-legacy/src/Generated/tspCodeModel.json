@@ -474,22 +474,14 @@
        "$id": "61",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "62",
-        "Name": "String",
+        "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
        "DefaultValue": {
         "$id": "63",
         "Type": {
@@ -499,7 +491,15 @@
          "IsNullable": false
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
        "$id": "65",
@@ -585,10 +585,31 @@
        "$ref": "57"
       },
       {
-       "$ref": "61"
+       "$id": "72",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "73",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "63"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "72",
+       "$id": "74",
        "Name": "JobData",
        "NameInRequest": "JobData",
        "Description": "Data of the job",
@@ -606,11 +627,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "75",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "76",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -625,19 +646,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "77",
         "Type": {
-         "$ref": "74"
+         "$ref": "76"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "76",
+       "$id": "78",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "77",
+        "$id": "79",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -652,9 +673,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "80",
         "Type": {
-         "$ref": "77"
+         "$ref": "79"
         },
         "Value": "application/json"
        }
@@ -662,7 +683,7 @@
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "81",
        "StatusCodes": [
         202
        ],
@@ -672,12 +693,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "80",
+         "$id": "82",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "81",
+          "$id": "83",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -699,10 +720,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "82",
+      "$id": "84",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "83",
+       "$id": "85",
        "StatusCodes": [
         200
        ],
@@ -714,7 +735,7 @@
     }
    ],
    "Protocol": {
-    "$id": "84"
+    "$id": "86"
    },
    "Creatable": false,
    "Parent": "LegacyClient"

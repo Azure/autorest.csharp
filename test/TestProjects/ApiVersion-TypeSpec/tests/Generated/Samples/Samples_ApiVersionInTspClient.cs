@@ -26,7 +26,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = client.GetBatchDetectionResult("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -40,7 +40,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -54,7 +54,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response<DetectionResult> response = client.GetBatchDetectionResult("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response<DetectionResult> response = await client.GetBatchDetectionResultAsync("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = client.GetBatchDetectionResult("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -90,7 +90,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -104,7 +104,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response<DetectionResult> response = client.GetBatchDetectionResult("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
 
         [Test]
@@ -115,7 +115,7 @@ namespace ApiVersionInTsp.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response<DetectionResult> response = await client.GetBatchDetectionResultAsync("v1.2", Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
     }
 }

@@ -20,7 +20,6 @@ namespace ParametersCadl
     public partial class ParameterOrders
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,12 +35,10 @@ namespace ParametersCadl
         /// <summary> Initializes a new instance of ParameterOrders. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal ParameterOrders(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string apiVersion)
+        internal ParameterOrders(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _apiVersion = apiVersion;
         }
 
         /// <param name="start"> The <see cref="int"/> to use. </param>
@@ -248,7 +245,6 @@ namespace ParametersCadl
             {
                 uri.AppendQuery("end", end.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -266,7 +262,6 @@ namespace ParametersCadl
             {
                 uri.AppendQuery("start", start.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

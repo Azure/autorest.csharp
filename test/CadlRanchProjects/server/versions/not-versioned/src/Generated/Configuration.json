@@ -1,0 +1,9 @@
+{
+  "output-folder": ".",
+  "namespace": "Server.Versions.NotVersioned",
+  "library-name": "Server.Versions.NotVersioned",
+  "shared-source-folders": [
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
+  ]
+}

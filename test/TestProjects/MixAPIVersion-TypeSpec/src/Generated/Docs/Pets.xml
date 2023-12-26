@@ -48,7 +48,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call ReadAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = await client.ReadAsync(1234, null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
 This sample shows how to call ReadAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = await client.ReadAsync(1234, null);
 
@@ -74,7 +74,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
 This sample shows how to call Read and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = client.Read(1234, null);
 
@@ -85,7 +85,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
 This sample shows how to call Read with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = client.Read(1234, null);
 
@@ -95,7 +95,7 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
-    <member name="CreateAsync(string,RequestContent,RequestContext)">
+    <member name="CreateAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateAsync and parse the result.
 <code><![CDATA[
@@ -106,13 +106,13 @@ using RequestContent content = RequestContent.Create(new
 {
     age = 1234,
 });
-Response response = await client.CreateAsync("2022-07-09", content);
+Response response = await client.CreateAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
-This sample shows how to call CreateAsync with all parameters and request content and parse the result.
+This sample shows how to call CreateAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-07-09");
@@ -122,7 +122,7 @@ using RequestContent content = RequestContent.Create(new
     tag = "<tag>",
     age = 1234,
 });
-Response response = await client.CreateAsync("2022-07-09", content);
+Response response = await client.CreateAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -130,7 +130,7 @@ Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code></example>
     </member>
-    <member name="Create(string,RequestContent,RequestContext)">
+    <member name="Create(RequestContent,RequestContext)">
       <example>
 This sample shows how to call Create and parse the result.
 <code><![CDATA[
@@ -141,13 +141,13 @@ using RequestContent content = RequestContent.Create(new
 {
     age = 1234,
 });
-Response response = client.Create("2022-07-09", content);
+Response response = client.Create(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
-This sample shows how to call Create with all parameters and request content and parse the result.
+This sample shows how to call Create with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-07-09");
@@ -157,7 +157,7 @@ using RequestContent content = RequestContent.Create(new
     tag = "<tag>",
     age = 1234,
 });
-Response response = client.Create("2022-07-09", content);
+Response response = client.Create(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

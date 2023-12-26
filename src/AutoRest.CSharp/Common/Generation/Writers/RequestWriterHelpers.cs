@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"var {uri:D} = new {Configuration.ApiTypes.RequestUriType}();");
                 foreach (var segment in clientMethod.Request.PathSegments)
                 {
-                    var value = segment.IsMethodParameter ? segment.Value : GetFieldReference(fields, segment.Value);
+                    var value = GetFieldReference(fields, segment.Value);
                     if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
                     {
                         writer.Append($"{uri}.Reset(");

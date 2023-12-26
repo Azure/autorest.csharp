@@ -23,7 +23,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = client.NoOperationParams("v1.0");
+            Response response = client.NoOperationParams();
 
             Console.WriteLine(response.Status);
         }
@@ -35,7 +35,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = await client.NoOperationParamsAsync("v1.0");
+            Response response = await client.NoOperationParamsAsync();
 
             Console.WriteLine(response.Status);
         }
@@ -47,7 +47,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = client.NoOperationParams("v1.0");
+            Response response = client.NoOperationParams();
 
             Console.WriteLine(response.Status);
         }
@@ -59,7 +59,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = await client.NoOperationParamsAsync("v1.0");
+            Response response = await client.NoOperationParamsAsync();
 
             Console.WriteLine(response.Status);
         }
@@ -71,7 +71,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = client.WithOperationPathParam("v1.0", "<keyword>");
+            Response response = client.WithOperationPathParam("<keyword>");
 
             Console.WriteLine(response.Status);
         }
@@ -83,7 +83,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = await client.WithOperationPathParamAsync("v1.0", "<keyword>");
+            Response response = await client.WithOperationPathParamAsync("<keyword>");
 
             Console.WriteLine(response.Status);
         }
@@ -95,7 +95,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = client.WithOperationPathParam("v1.0", "<keyword>");
+            Response response = client.WithOperationPathParam("<keyword>");
 
             Console.WriteLine(response.Status);
         }
@@ -107,7 +107,7 @@ namespace Server.Path.Multiple.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = new MultipleClient(endpoint);
 
-            Response response = await client.WithOperationPathParamAsync("v1.0", "<keyword>");
+            Response response = await client.WithOperationPathParamAsync("<keyword>");
 
             Console.WriteLine(response.Status);
         }
