@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetIsModelArrayAsync.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response<IsModelArrayAdditionalProperties> response = await client.GetIsModelArrayAsync();
 ]]></code>
 This sample shows how to call GetIsModelArrayAsync with all parameters.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response<IsModelArrayAdditionalProperties> response = await client.GetIsModelArrayAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IsModelArrayAdditionalProperties> response = await client.GetIsModelArr
       <example>
 This sample shows how to call GetIsModelArray.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response<IsModelArrayAdditionalProperties> response = client.GetIsModelArray();
 ]]></code>
 This sample shows how to call GetIsModelArray with all parameters.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response<IsModelArrayAdditionalProperties> response = client.GetIsModelArray();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IsModelArrayAdditionalProperties> response = client.GetIsModelArray();
       <example>
 This sample shows how to call GetIsModelArrayAsync and parse the result.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = await client.GetIsModelArrayAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIsModelArrayAsync with all parameters and parse the result.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = await client.GetIsModelArrayAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetIsModelArray and parse the result.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = client.GetIsModelArray(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIsModelArray with all parameters and parse the result.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 Response response = client.GetIsModelArray(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -120,7 +120,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -132,7 +132,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);
@@ -141,7 +141,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);
