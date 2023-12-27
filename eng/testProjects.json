@@ -35,6 +35,8 @@
         "payload/pageable",
         "server/path/multiple",
         "server/path/single",
+        "server/versions/not-versioned",
+        "server/versions/versioned",
         "special-headers/client-request-id",
         "special-headers/conditional-request",
         "special-headers/repeatability",

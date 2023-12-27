@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -39,12 +38,14 @@ namespace ParametersCadl
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
         }
 
-        private ParameterOrders _cachedParameterOrders;
-
         /// <summary> Initializes a new instance of ParameterOrders. </summary>
-        public virtual ParameterOrders GetParameterOrdersClient()
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual ParameterOrders GetParameterOrdersClient(string apiVersion = "2022-05-15-preview")
         {
-            return Volatile.Read(ref _cachedParameterOrders) ?? Interlocked.CompareExchange(ref _cachedParameterOrders, new ParameterOrders(ClientDiagnostics, _pipeline), null) ?? _cachedParameterOrders;
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new ParameterOrders(ClientDiagnostics, _pipeline, apiVersion);
         }
     }
 }

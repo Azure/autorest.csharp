@@ -178,9 +178,6 @@ export function createModelForService(
                     apiVersionInOperation.DefaultValue =
                         defaultApiVersionConstant;
                 }
-                if (apiVersionInOperation.Location === RequestLocation.Query) {
-                    apiVersionInOperation.NameInRequest = "api-version";
-                }
             } else {
                 apiVersionInOperation.Kind = InputOperationParameterKind.Method;
                 apiVersionInOperation.IsApiVersion = false;
