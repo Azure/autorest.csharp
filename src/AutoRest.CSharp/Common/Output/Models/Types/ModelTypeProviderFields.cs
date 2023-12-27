@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<Parameter> PublicConstructorParameters { get; }
         public IReadOnlyList<Parameter> SerializationParameters { get; }
         public int Count => _fields.Count;
+        public FieldDeclaration? AdditionalProperties { get; }
 
         public ModelTypeProviderFields(InputModelType inputModel, CSharpType modelType, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, bool isStruct)
         {
@@ -84,6 +85,40 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
                 }
+            }
+
+            if (inputModel.InheritedDictionaryType is { } additionalPropertiesType)
+            {
+                // We use a $ prefix here as AdditionalProperties comes from a swagger concept
+                // and not a swagger model/operation name to disambiguate from a possible property with
+                // the same name.
+                var existingMember = sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
+
+                var type = typeFactory.CreateType(additionalPropertiesType);
+                if (!inputModel.Usage.HasFlag(InputModelTypeUsage.Input))
+                {
+                    type = TypeFactory.GetOutputType(type);
+                }
+
+                var name = existingMember is null ? "AdditionalProperties" : existingMember.Name;
+                var declaration = new CodeWriterDeclaration(name);
+                declaration.SetActualName(name);
+
+                var accessModifiers = existingMember is null ? Public : GetAccessModifiers(existingMember);
+
+                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, Serialization.SerializationFormat.Default, true);
+                var additionalPropertiesParameter = new Parameter(name.ToVariableName(), $"Additional Properties", type, null, ValidationType.None, null);
+
+                fields.Add(additionalPropertiesField);
+                serializationParameters.Add(additionalPropertiesParameter);
+                if (isStruct)
+                {
+                    publicParameters.Add(additionalPropertiesParameter with { Validation = ValidationType.AssertNotNull });
+                }
+
+                parametersToFields[additionalPropertiesParameter.Name] = additionalPropertiesField;
+
+                AdditionalProperties = additionalPropertiesField;
             }
 
             // adding the leftover members from the source type
@@ -148,7 +183,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public FieldDeclaration GetFieldByParameterName(string parameterName) => _parameterNamesToFields[parameterName];
         public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
-        public InputModelProperty GetInputByField(FieldDeclaration field) => _fieldsToInputs[field];
+        public InputModelProperty? GetInputByField(FieldDeclaration field) => _fieldsToInputs.TryGetValue(field, out var property) ? property : null;
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -252,13 +287,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = valueType.WithNullable(false);
             }
 
-            var fieldModifiers = existingMember.DeclaredAccessibility switch
-            {
-                Accessibility.Public => Public,
-                Accessibility.Internal => Internal,
-                Accessibility.Private => Private,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            var fieldModifiers = GetAccessModifiers(existingMember);
 
             var writeAsProperty = existingMember is IPropertySymbol;
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(existingMember.Name);
@@ -278,6 +307,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 OptionalViaNullability: optionalViaNullability,
                 SerializationMapping: serialization);
         }
+
+        private static FieldModifiers GetAccessModifiers(ISymbol symbol) => symbol.DeclaredAccessibility switch
+        {
+            Accessibility.Public => Public,
+            Accessibility.Protected => Protected,
+            Accessibility.Internal => Internal,
+            Accessibility.Private => Private,
+            _ => throw new ArgumentOutOfRangeException()
+        };
 
         private static bool IsReadOnly(ISymbol existingMember) => existingMember switch
         {

@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -14,6 +16,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -27,11 +30,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
-        private InputModelType _inputModel;
-        private TypeFactory _typeFactory;
-        private SourceInputModel? _sourceInputModel;
-        private IReadOnlyList<InputModelType> _derivedTypes;
-        private SerializableObjectType? _defaultDerivedType;
+        private ObjectTypeProperty? _additionalPropertiesProperty;
+        private readonly InputModelType _inputModel;
+        private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
+        private readonly IReadOnlyList<InputModelType> _derivedModels;
+        private readonly SerializableObjectType? _defaultDerivedType;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -43,7 +47,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
-        public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
+        public override ObjectTypeProperty? AdditionalPropertiesProperty => _additionalPropertiesProperty ??= EnsureAdditionalPropertiesProperty();
+
+        private ObjectTypeProperty? EnsureAdditionalPropertiesProperty()
+            => Fields.AdditionalProperties is { } additionalPropertiesField
+                ? Properties.Last(p => p.Declaration.Name == additionalPropertiesField.Name)
+                : null;
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
@@ -57,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
             _deprecated = inputModel.Deprecated;
-            _derivedTypes = inputModel.DerivedModels;
+            _derivedModels = inputModel.DerivedModels;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
         }
 
@@ -351,7 +360,27 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), null, Discriminator, false);
+            var additionalProperties = CreateAdditionalPropertySerialization();
+            return new(Type, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, false);
+        }
+
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization()
+        {
+            foreach (var model in EnumerateHierarchy().OfType<ModelTypeProvider>())
+            {
+                if (model is { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
+                {
+                    var dictionaryValueType = additionalProperties.Declaration.Type.Arguments[1];
+                    Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonSerializationMethodsBuilder)} implicitly relies on {additionalProperties.Declaration.Name} dictionary value being non-nullable");
+
+                    var type = new CSharpType(typeof(Dictionary<,>), additionalProperties.Declaration.Type.Arguments);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false, SerializationFormat.Default);
+
+                    return new JsonAdditionalPropertiesSerialization(additionalProperties, valueSerialization, type);
+                }
+            }
+
+            return null;
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
@@ -415,7 +444,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedModels.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 
