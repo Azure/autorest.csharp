@@ -341,7 +341,9 @@ export function getInputType(
         throw new Error(`Unsupported type ${type.kind}`);
     }
 
-    function getInputModelType(m: Model): InputListType | InputDictionaryType | InputModelType {
+    function getInputModelType(
+        m: Model
+    ): InputListType | InputDictionaryType | InputModelType {
         /* Array and Map Type. */
         if (isArrayModelType(program, m)) {
             return getInputTypeForArray(m.indexer.value);
@@ -705,9 +707,11 @@ export function getInputType(
 
         if (baseModel) {
             const baseModelType = getInputModelType(baseModel);
-            
+
             if (isInputListType(baseModelType)) {
-                throw new Error("This should never happen. A model cannot inherit from Array");
+                throw new Error(
+                    "This should never happen. A model cannot inherit from Array"
+                );
             }
 
             if (isInputDictionaryType(baseModelType)) {
