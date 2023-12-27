@@ -63,6 +63,16 @@ namespace _Type.Property.AdditionalProperties
             return new ExtendsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
+        /// <summary> Initializes a new instance of ExtendsUnknownDiscriminated. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual ExtendsUnknownDiscriminated GetExtendsUnknownDiscriminatedClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new ExtendsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
         /// <summary> Initializes a new instance of IsUnknown. </summary>
         /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
@@ -81,6 +91,16 @@ namespace _Type.Property.AdditionalProperties
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return new IsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of IsUnknownDiscriminated. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual IsUnknownDiscriminated GetIsUnknownDiscriminatedClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new IsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of ExtendsString. </summary>
