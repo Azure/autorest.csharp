@@ -55,7 +55,9 @@ import {
     InputType,
     InputUnionType,
     InputUnknownType,
+    isInputDictionaryType,
     isInputEnumType,
+    isInputListType,
     isInputLiteralType,
     isInputModelType
 } from "../type/inputType.js";
@@ -339,7 +341,7 @@ export function getInputType(
         throw new Error(`Unsupported type ${type.kind}`);
     }
 
-    function getInputModelType(m: Model): InputType {
+    function getInputModelType(m: Model): InputListType | InputDictionaryType | InputModelType {
         /* Array and Map Type. */
         if (isArrayModelType(program, m)) {
             return getInputTypeForArray(m.indexer.value);
@@ -702,23 +704,17 @@ export function getInputType(
         }
 
         if (baseModel) {
-            // when base model is a record, we return the dictionary type
-            if (isRecordModelType(program, baseModel)) {
-                return [
-                    undefined,
-                    getInputTypeForMap(
-                        baseModel.indexer.key,
-                        baseModel.indexer.value
-                    )
-                ];
+            const baseModelType = getInputModelType(baseModel);
+            
+            if (isInputListType(baseModelType)) {
+                throw new Error("This should never happen. A model cannot inherit from Array");
             }
 
-            // TypeSpec "primitive" types can't be base types for models
-            if (program.checker.isStdType(baseModel)) {
-                return [undefined, undefined];
+            if (isInputDictionaryType(baseModelType)) {
+                return [undefined, baseModelType];
             }
 
-            return [getInputModelForModel(baseModel), undefined];
+            return [baseModelType, undefined];
         }
 
         return [undefined, undefined];

@@ -53,6 +53,16 @@ namespace _Type.Property.AdditionalProperties
             return new ExtendsUnknown(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
+        /// <summary> Initializes a new instance of ExtendsUnknownDerived. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual ExtendsUnknownDerived GetExtendsUnknownDerivedClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new ExtendsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
         /// <summary> Initializes a new instance of IsUnknown. </summary>
         /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
@@ -61,6 +71,16 @@ namespace _Type.Property.AdditionalProperties
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return new IsUnknown(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of IsUnknownDerived. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual IsUnknownDerived GetIsUnknownDerivedClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new IsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of ExtendsString. </summary>
