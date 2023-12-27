@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,10 +14,18 @@ using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    public partial class IsModelAdditionalProperties : IUtf8JsonSerializable
+    public partial class IsModelAdditionalProperties : IUtf8JsonSerializable, IJsonModel<IsModelAdditionalProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IsModelAdditionalProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<IsModelAdditionalProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<IsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             foreach (var item in AdditionalProperties)
             {
@@ -25,8 +35,22 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteEndObject();
         }
 
-        internal static IsModelAdditionalProperties DeserializeIsModelAdditionalProperties(JsonElement element)
+        IsModelAdditionalProperties IJsonModel<IsModelAdditionalProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<IsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIsModelAdditionalProperties(document.RootElement, options);
+        }
+
+        internal static IsModelAdditionalProperties DeserializeIsModelAdditionalProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -40,6 +64,37 @@ namespace _Type.Property.AdditionalProperties.Models
             additionalProperties = additionalPropertiesDictionary;
             return new IsModelAdditionalProperties(additionalProperties);
         }
+
+        BinaryData IPersistableModel<IsModelAdditionalProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        IsModelAdditionalProperties IPersistableModel<IsModelAdditionalProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeIsModelAdditionalProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<IsModelAdditionalProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
