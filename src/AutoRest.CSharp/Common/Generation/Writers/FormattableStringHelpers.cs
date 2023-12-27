@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -113,7 +114,10 @@ namespace AutoRest.CSharp.Generation.Writers
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
                     case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
-                        return $"{Configuration.ApiTypes.RequestContentType}.Create({parameter.Name:I}, {typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Json)})";
+                        {
+                            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+                            return $"{Configuration.ApiTypes.RequestContentType}.Create({parameter.Name:I}, {GetModelReadWriteOptions(mediaType)})";
+                        }
                 }
             }
 
@@ -185,8 +189,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 return BodyMediaType.Text;
             }
 
+            if (type == "multipart" && subType == "form-data")
+            {
+                return BodyMediaType.MultipartFormData;
+            }
+
             throw new NotSupportedException($"Content type {contentType} is not supported.");
         }
+
+        public static FormattableString GetModelReadWriteOptions(BodyMediaType? type) => type switch
+        {
+            BodyMediaType.Xml => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Xml)}",
+            BodyMediaType.MultipartFormData => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.MutipartFormData)}",
+            _ => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Json)}",
+        };
 
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch

@@ -10,6 +10,7 @@ internal enum BodyMediaType
     Form,
     Json,
     Multipart,
+    MultipartFormData,
     Text,
     Xml
 }

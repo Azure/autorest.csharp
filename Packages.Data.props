@@ -15,7 +15,7 @@
 
   <!-- Library only dependencies. -->
   <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
-    <PackageReference Update="System.Text.Json" Version="4.7.2" />
+    <PackageReference Update="System.Text.Json" Version="8.0.0" />
   
     <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
     <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20231116.1" PrivateAssets="All" />
@@ -36,7 +36,7 @@
     <PackageReference Update="CommandLineParser" Version="2.9.1" />
     <PackageReference Update="Humanizer.Core" Version="2.13.14" />
     <PackageReference Update="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.1.0" />
-    <PackageReference Update="System.Text.Json" Version="4.7.2" />
+    <PackageReference Update="System.Text.Json" Version="8.0.0" />
     <PackageReference Update="YamlDotNet" Version="11.2.1" />
     <PackageReference Update="System.Memory" Version="4.5.4" />
   </ItemGroup>
