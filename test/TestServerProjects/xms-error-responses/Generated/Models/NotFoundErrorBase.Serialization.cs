@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace xms_error_responses.Models
 {
@@ -26,28 +25,7 @@ namespace xms_error_responses.Models
                     case "InvalidResourceLink": return LinkNotFound.DeserializeLinkNotFound(element);
                 }
             }
-            Optional<string> reason = default;
-            string whatNotFound = default;
-            Optional<string> someBaseProp = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("reason"u8))
-                {
-                    reason = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("whatNotFound"u8))
-                {
-                    whatNotFound = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("someBaseProp"u8))
-                {
-                    someBaseProp = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new NotFoundErrorBase(someBaseProp.Value, reason.Value, whatNotFound);
+            return UnknownNotFoundErrorBase.DeserializeUnknownNotFoundErrorBase(element);
         }
     }
 }

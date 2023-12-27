@@ -333,8 +333,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray())
                 };
             }
-            // we redirect the serialization to the `DefaultObjectType` if possible. We could only do this when there is a discriminator, and the discriminator does not have a discriminator value, and there is an unknown default object type to fall back, and I am not that fallback type.
-            if (discriminator is not null && discriminator.Value is null && discriminator.DefaultObjectType != null && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
+            // we redirect the deserialization to the `DefaultObjectType` (the unknown version of the discriminated set) if possible.
+            // We could only do this when there is a discriminator, and the discriminator does not have a value (having a value indicating it is the child instead of base), and there is an unknown default object type to fall back, and I am not that fallback type.
+            if (discriminator is { Value: null, DefaultObjectType: { } defaultObjectType } && !serialization.Type.Equals(defaultObjectType.Type))
             {
                 yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, null));
             }
