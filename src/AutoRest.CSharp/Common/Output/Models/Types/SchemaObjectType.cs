@@ -47,9 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _serializationBuilder = new SerializationBuilder();
             _usage = inputModel.Usage;
 
-            var hasUsage = _usage.HasFlag(InputModelTypeUsage.RoundTrip);
-
-            DefaultAccessibility = inputModel.Accessibility ?? (hasUsage ? "public" : "internal");
+            DefaultAccessibility = inputModel.Accessibility ?? "public";
 
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 

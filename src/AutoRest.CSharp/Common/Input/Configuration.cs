@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Common.Input
             _libraryName = libraryName;
             _sharedSourceFolders = sharedSourceFolders;
             SaveInputs = saveInputs;
-            AzureArm = azureArm;
+            AzureArm = true;  // azureArm; TODO: set this based on configuration
             PublicClients = publicClients || AzureArm;
             ModelNamespace = azureArm || modelNamespace;
             HeadAsBoolean = headAsBoolean;

@@ -83,7 +83,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), await ProtocolCompilationInput.TryCreate());
-            await DpgTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
+            //await DpgTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
+
+            // TODO: add a config to distinguish between mgmt and dpg
+            await MgmtTarget.ExecuteAsync(project, null, sourceInputModel, rootNamespace);
             return project;
         }
 

@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (constant.Value == null)
             {
                 // Cast helps the overload resolution
-                return $"({constant.Type}){null:L}";
+                return $"({constant.Type})null";
             }
 
             if (constant.IsNewInstanceSentinel)

@@ -734,6 +734,7 @@ export function getInputType(
     function getInputModelForIntrinsicType(type: IntrinsicType): InputType {
         switch (type.name) {
             case "unknown":
+            case "void":
                 return {
                     Name: "Intrinsic",
                     Kind: "unknown",

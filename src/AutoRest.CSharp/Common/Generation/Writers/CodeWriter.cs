@@ -142,6 +142,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     : span.Slice(0, formatSeparatorIndex));
 
                 var argument = formattableString.GetArgument(index);
+                if (argument is null)
+                {
+                    continue;
+                }
                 var isDeclaration = span.EndsWith(declarationFormatString);
                 var isIdentifier = span.EndsWith(identifierFormatString);
                 var isLiteralFormat = span.EndsWith(literalFormatString);

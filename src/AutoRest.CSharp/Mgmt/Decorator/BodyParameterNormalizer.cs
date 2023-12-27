@@ -55,7 +55,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             string oriName = bodyParam.Name;
             var newName = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type, resourceDataDictionary, renamingMap);
-            renamingMap.Add(bodyParam, newName);
+            // TODO: fix the duplciated key update issue
+            // renamingMap.Add(bodyParam, newName);
+            renamingMap[bodyParam] = newName;
             string fullSerializedName = operation.GetFullSerializedName(bodyParam);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
