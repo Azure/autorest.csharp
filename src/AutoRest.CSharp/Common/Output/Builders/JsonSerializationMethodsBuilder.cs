@@ -19,6 +19,7 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -114,7 +115,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml)
+        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, MulitipartFormDataObjectSerialization? multipart)
         {
             // we do not need this if model reader writer feature is not enabled
             if (!Configuration.UseModelReaderWriter)
@@ -133,7 +134,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelWriteMethodBody(json, xml, options, iModelTInterface).ToArray()
+                BuildModelWriteMethodBody(json, xml, multipart, options, iModelTInterface).ToArray()
             );
 
             // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
@@ -179,7 +180,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
             }
 
-            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json, XmlObjectSerialization? xml, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json, XmlObjectSerialization? xml, MulitipartFormDataObjectSerialization? multipart, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
                 yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
@@ -231,6 +232,49 @@ namespace AutoRest.CSharp.Common.Output.Builders
                                         ))))
                         }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
                     switchStatement.Add(xmlCase);
+                }
+
+                if (multipart != null)
+                {
+                    /*
+                    string boundary = Guid.NewGuid().ToString();
+                    var content = new MultipartFormDataContent(boundary);
+                    content.Add(BinaryData.FromString(InternalNonAzureModelName), "model", null);
+                    content.Add(BinaryData.FromBytes(AudioData.ToArray()), "file", "@file.wav", null);
+                    if (Optional.IsDefined(ResponseFormat))
+                    {
+                        content.Add(BinaryData.FromString(ResponseFormat.ToString()), "response_format", null);
+                    }
+                    if (Optional.IsDefined(Prompt))
+                    {
+                        content.Add(BinaryData.FromString(Prompt), "prompt", null);
+                    }
+                    if (Optional.IsDefined(Temperature))
+                    {
+                        content.Add(BinaryData.FromString($"{Temperature}"), "temperature", null);
+                    }
+
+                    BinaryData binaryData = content.ToContent();
+                    binaryData.contentType = $"multipart/{_subtype}; boundary={boundary}";
+                    return binaryData;
+                    */
+                    /*
+                    var mpCase = new SwitchCase(Serializations.MultipartFormDataFormat,
+                                               Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options }))
+                                                                      );
+                    */
+                    /*
+                    var mpCase = new SwitchCase(Serializations.MultipartFormDataFormat,
+                        new MethodBodyStatement[]
+                        {
+                            Declare(typeof(string), "boundary", new InvokeInstanceMethodExpression(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid), Array.Empty<ValueExpression>()), nameof(Guid.ToString), Array.Empty<ValueExpression>(), null, false), out var boundary),
+                            UsingDeclare("content", typeof(MultipartFormDataContent), New.Instance(typeof(MultipartFormDataContent), new[]{boundary}), out var content),
+                            Snippets.Return(New.Instance(typeof(BinaryData)))
+                        }, addScope: true);
+                    */
+                    var mpCase = new SwitchCase(Serializations.MultipartFormDataFormat,
+                        MultipartSerializationMethodsBuilder.BuildMultipartSerializationMethodBody(multipart, options).ToArray(), addScope: true);
+                    switchStatement.Add(mpCase);
                 }
 
                 // default case
@@ -387,6 +431,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 options?.Format,
                 statement);
         }
+
+
 
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
             => serialization switch
@@ -1189,7 +1235,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 : new[] { element.GetRawText(), options };
             return new InvokeStaticMethodExpression(typeof(JsonSerializer), nameof(JsonSerializer.Deserialize), arguments, new[] { serializationType });
         }
-
         private static MethodBodyStatement InvokeJsonSerializerSerializeMethod(ValueExpression writer, ValueExpression value)
             => new InvokeStaticMethodStatement(typeof(JsonSerializer), nameof(JsonSerializer.Serialize), new[] { writer, value });
 

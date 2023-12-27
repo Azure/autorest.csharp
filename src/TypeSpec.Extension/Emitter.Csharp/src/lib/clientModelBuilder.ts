@@ -324,6 +324,13 @@ export function createModelForService(
             );
 
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
+            const bodyParameter = inputOperation.Parameters.find((value) => value.Location === RequestLocation.Body);
+            if (bodyParameter && bodyParameter.Type && bodyParameter.Type as InputModelType) {
+                const inputModelType = bodyParameter.Type as InputModelType;
+                if (inputModelType.MediaTypes) {
+                    inputOperation.RequestMediaTypes?.forEach((item) => {if (!inputModelType.MediaTypes?.includes(item)) inputModelType.MediaTypes?.push(item);});
+                }
+            }
             inputClient.Operations.push(inputOperation);
             if (inputOperation.GenerateConvenienceMethod)
                 convenienceOperations.push(httpOperation);

@@ -42,6 +42,7 @@ import {
     InputModelType,
     InputType,
     isInputLiteralType,
+    isInputModelType,
     isInputUnionType
 } from "../type/inputType.js";
 import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
@@ -154,6 +155,13 @@ export function loadOperation(
             mediaTypes.push(...mediaTypeValues);
         }
     }
+    // const bodyParameter = parameters.find((value) => value.Location === RequestLocation.Body);
+    // if (bodyParameter && bodyParameter.Type && bodyParameter.Type as InputModelType) {
+    //     const inputModelType = bodyParameter.Type as InputModelType;
+    //     if (inputModelType.MediaTypes) {
+    //         mediaTypes.forEach((item) => {if (!inputModelType.MediaTypes?.includes(item)) inputModelType.MediaTypes?.push(item);});
+    //     }
+    // }
     const requestMethod = parseHttpRequestMethod(verb);
     const generateProtocol: boolean = shouldGenerateProtocol(sdkContext, op);
     const generateConvenience: boolean =

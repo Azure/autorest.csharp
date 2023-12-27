@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -89,6 +90,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
         public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
+
+        public IReadOnlyList<String> MediaTypes => ObjectSchema.Extensions != null ? ObjectSchema.Extensions.Formats : new List<string>();
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -733,6 +736,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         }
 
+        protected override MulitipartFormDataObjectSerialization? BuildMultipartFormDataSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Multipart) ? _serializationBuilder.BuildMultipartFormDataObjectSerialization(this) : null;
+        }
         private SerializableObjectType? BuildDefaultDerivedType()
         {
             if (_hasCalculatedDefaultDerivedType)

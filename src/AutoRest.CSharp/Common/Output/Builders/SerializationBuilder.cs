@@ -4,10 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -17,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -320,6 +323,75 @@ namespace AutoRest.CSharp.Output.Builders
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectType);
             return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
+        }
+
+        public MulitipartFormDataObjectSerialization BuildMultipartFormDataObjectSerialization(SchemaObjectType objectType)
+        {
+            /*TODO: This is a temporary implementation. We need to revisit this and make it more robust.
+             *             * The current implementation assumes that the object is a flat object and does not have any nested objects.
+             *                         * We need to revisit this and make it more robust.
+             *                                   */
+            var properties = new List<MultipartPropertySerialization>();
+            foreach (ObjectTypeProperty property in objectType.Properties.ToArray())
+            {
+                var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
+                var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
+                if (parameter is null)
+                {
+                    throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
+                }
+
+                var serializedName = schemaProperty.SerializedName;
+                var isRequired = schemaProperty.IsRequired;
+                var shouldExcludeInWireSerialization = schemaProperty.IsReadOnly;
+                var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+
+                var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
+                //var toBinaryDataExpression = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression.NullableStructValue() });
+                ValueExpression toBinaryDataExpression;
+
+                if (property.Declaration.Type.IsFrameworkType)
+                {
+                    toBinaryDataExpression = property switch
+                    {
+                        _ when property.Declaration.Type.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(float) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => memberValueExpression,
+                        _ => throw new InvalidOperationException($"Unsupported type {property.Declaration.Type} for serialization")
+                    };
+                } else
+                {
+                    toBinaryDataExpression = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() });
+                }
+
+                TypedMemberExpression? enumerableExpression = null;
+                if (property.SchemaProperty is not null && property.SchemaProperty.Extensions is not null && property.SchemaProperty.Extensions.IsEmbeddingsVector)
+                {
+                    enumerableExpression = property.Declaration.Type.IsNullable
+                        ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                        : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                }
+                var propertySerialization =  new MultipartPropertySerialization(
+                    parameter.Name,
+                    memberValueExpression,
+                    serializedName,
+                    property.ValueType,
+                    isRequired,
+                    toBinaryDataExpression,
+                    shouldExcludeInWireSerialization);
+                properties.Add(propertySerialization);
+            }
+            //var additionalProperties = CreateAdditionalProperties(objectType);
+            MultipartAdditionalPropertiesSerialization? additionalProperties = null;
+            return new MulitipartFormDataObjectSerialization(objectType,
+                objectType.SerializationConstructor.Signature.Parameters,
+                properties,
+                additionalProperties,
+                objectType.Discriminator,
+                false);
         }
 
         private class SerializationPropertyBag

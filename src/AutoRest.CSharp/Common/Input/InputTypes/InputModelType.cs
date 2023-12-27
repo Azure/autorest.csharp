@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable, IReadOnlyList<string> MediaTypes)
         : InputType(Name, IsNullable)
     {
         /// <summary>
@@ -71,7 +71,8 @@ namespace AutoRest.CSharp.Common.Input
                 DerivedModels,
                 DiscriminatorValue,
                 DiscriminatorPropertyName,
-                IsNullable);
+                IsNullable,
+                MediaTypes);
         }
 
         internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
@@ -88,7 +89,8 @@ namespace AutoRest.CSharp.Common.Input
                 DerivedModels,
                 DiscriminatorValue,
                 DiscriminatorPropertyName,
-                IsNullable);
+                IsNullable,
+                MediaTypes);
         }
 
         private IReadOnlyList<InputModelProperty> GetNewProperties(InputModelProperty property, InputType inputType)

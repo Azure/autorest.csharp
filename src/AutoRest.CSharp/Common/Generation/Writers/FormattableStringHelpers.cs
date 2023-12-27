@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -15,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using YamlDotNet.Core.Tokens;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -117,6 +119,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         return $"{parameter.Name:I}";
                     case { IsFrameworkType: true }:
                         return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
+                    case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
+                        return $"{Configuration.ApiTypes.RequestContentType}.Create({parameter.Name:I}, {typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Json)})";
                 }
             }
 
@@ -160,7 +164,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
                 { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
                 { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
+                //{ IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
+                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{nameof(RequestContent.Create)}",
                 _ => null
             };
 

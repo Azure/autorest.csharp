@@ -563,6 +563,7 @@ export function getInputType(
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 Usage: Usage.None,
+                MediaTypes: [],
                 BaseModel: baseModel, // BaseModel should be the last but one assigned to model
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;

@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -224,6 +226,60 @@ namespace AutoRest.CSharp.Output.Models.Types
                         ShouldExcludeInWireSerialization(property, inputModelProperty),
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                         customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
+                        enumerableExpression: enumerableExpression);
+                    ;
+                }
+            }
+        }
+
+        private IEnumerable<MultipartPropertySerialization> CreateMPPropertySerializations()
+        {
+            foreach (var objType in EnumerateHierarchy())
+            {
+                foreach (var property in objType.Properties)
+                {
+                    if (property.InputModelProperty is not { } inputModelProperty)
+                        continue;
+
+                    var declaredName = property.Declaration.Name;
+                    var serializedName = inputModelProperty.SerializedName;
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
+                    var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
+                    //var toBinaryDataExpression = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression.NullableStructValue() });
+                    ValueExpression toBinaryDataExpression;
+                    if (property.Declaration.Type.IsFrameworkType)
+                    {
+                        toBinaryDataExpression = property switch
+                        {
+                            _ when property.Declaration.Type.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression.NullableStructValue() }),
+                            _ when property.Declaration.Type.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { memberValueExpression.NullableStructValue() }),
+                            _ when property.Declaration.Type.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { memberValueExpression.NullableStructValue() }),
+                            _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
+                            _ when property.Declaration.Type.FrameworkType == typeof(float) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
+                            _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => memberValueExpression,
+                            _ => throw new InvalidOperationException($"Unsupported type {property.Declaration.Type} for serialization")
+                        };
+                    }
+                    else
+                    {
+                        toBinaryDataExpression = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() });
+                    }
+                    TypedMemberExpression? enumerableExpression = null;
+                    if (TypeFactory.IsReadOnlyMemory(property.Declaration.Type))
+                    {
+                        enumerableExpression = property.Declaration.Type.IsNullable
+                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                    }
+
+                    yield return new MultipartPropertySerialization(
+                        declaredName.ToVariableName(),
+                        memberValueExpression,
+                        serializedName,
+                        property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
+                        property.IsRequired,
+                        toBinaryDataExpression,
+                        ShouldExcludeInWireSerialization(property, inputModelProperty),
                         enumerableExpression: enumerableExpression);
                     ;
                 }
@@ -454,6 +510,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
+        /*TODO: build real multipart serialization */
+        protected override MulitipartFormDataObjectSerialization? BuildMultipartFormDataSerialization()
+        {
+            if (EnsureIncludeSerializer() && _inputModel.MediaTypes.Contains("multipart/form-data"))
+            {
+                return new MulitipartFormDataObjectSerialization(this, SerializationConstructorSignature.Parameters, CreateMPPropertySerializations().ToArray(), null, Discriminator, false);
+            }
+            return null;
+        }
         protected override bool EnsureIncludeSerializer()
         {
             // TODO -- this should always return true when use model reader writer is enabled.

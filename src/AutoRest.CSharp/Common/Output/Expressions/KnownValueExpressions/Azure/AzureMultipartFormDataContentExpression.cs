@@ -8,12 +8,11 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
-    internal sealed record MultipartFormDataContentExpression(ValueExpression Untyped) : TypedValueExpression<MultipartFormDataContent>(Untyped)
+    internal sealed record AzureMultipartFormDataContentExpression(ValueExpression Untyped) : TypedValueExpression<AzureMultipartFormDataContent>(Untyped)
     {
         public MethodBodyStatement Add(RequestContentExpression requestContent, string name, ValueExpression headers)
-            => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataContent.Add), new[] { requestContent, Literal(name), headers }, false);
-
+            => new InvokeInstanceMethodStatement(Untyped, nameof(AzureMultipartFormDataContent.Add), new[] { requestContent, Literal(name), headers }, false);
         public MethodBodyStatement ApplyToRequest(RequestExpression request)
-            => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataContent.ApplyToRequest), request);
+            => new InvokeInstanceMethodStatement(Untyped, nameof(AzureMultipartFormDataContent.ApplyToRequest), request);
     }
 }

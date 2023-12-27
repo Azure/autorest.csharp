@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -38,6 +39,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private XmlObjectSerialization? _xmlSerialization;
         public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
 
+        private bool _multipartSerializationInitialized = false;
+        private MulitipartFormDataObjectSerialization? _multipartSerialization;
+        public MulitipartFormDataObjectSerialization? MultipartSerialization => EnsureMultipartFormDataSerialization();
+
         private JsonObjectSerialization? EnsureJsonSerialization()
         {
             if (_jsonSerializationInitialized)
@@ -58,8 +63,17 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return _xmlSerialization;
         }
 
+        private MulitipartFormDataObjectSerialization? EnsureMultipartFormDataSerialization()
+        {
+            if (_multipartSerializationInitialized)
+                return _multipartSerialization;
+            _multipartSerializationInitialized = true;
+            _multipartSerialization = BuildMultipartFormDataSerialization();
+            return _multipartSerialization;
+        }
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
+        protected abstract MulitipartFormDataObjectSerialization? BuildMultipartFormDataSerialization();
 
 
         protected abstract bool EnsureIncludeSerializer();

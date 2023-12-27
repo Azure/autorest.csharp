@@ -248,7 +248,8 @@ namespace AutoRest.CSharp.Common.Input
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
-                IsNullable: false);
+                IsNullable: false,
+                MediaTypes: schema.Extensions != null ? schema.Extensions.Formats : Array.Empty<string>());
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;

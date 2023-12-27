@@ -115,8 +115,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, ListExpression value, out ListExpression variable)
             => Var(name, value, d => new ListExpression(value.ItemType, d), out variable);
 
-        public static DeclarationStatement Var(string name, MultipartFormDataContentExpression value, out MultipartFormDataContentExpression variable)
-            => Var(name, value, d => new MultipartFormDataContentExpression(d), out variable);
+        //public static DeclarationStatement Var(string name, AzureMultipartFormDataContentExpression value, out AzureMultipartFormDataContentExpression variable)
+        //    => Var(name, value, d => new AzureMultipartFormDataContentExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, OperationExpression value, out OperationExpression variable)
             => Var(name, value, d => new OperationExpression(d), out variable);

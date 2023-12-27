@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var declaration = model.Declaration;
             var json = model.JsonSerialization;
             var xml = model.XmlSerialization;
+            var multipart = model.MultipartSerialization;
 
             if (json == null && xml == null)
             {
@@ -89,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteJsonSerialization(writer, model, json);
                     }
 
-                    WriteIModelImplementations(writer, model, json, xml);
+                    WriteIModelImplementations(writer, model, json, xml, multipart);
 
                     foreach (var method in model.Methods)
                     {
@@ -195,9 +197,9 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <param name="model"></param>
         /// <param name="json"></param>
         /// <param name="xml"></param>
-        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml)
+        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, MulitipartFormDataObjectSerialization? multipart)
         {
-            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml, multipart))
             {
                 writer.WriteMethod(method);
             }

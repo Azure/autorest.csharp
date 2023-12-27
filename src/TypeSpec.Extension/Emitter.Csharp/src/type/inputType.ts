@@ -45,11 +45,11 @@ export interface InputModelType extends InputType {
     Deprecated?: string;
     Description: string;
     Usage: string;
-    Properties: InputModelProperty[];
-    BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
     DiscriminatorValue?: string;
-    DerivedModels?: InputModelType[];
+    MediaTypes?: string[];
+    BaseModel?: InputModelType;
+    Properties: InputModelProperty[];
 }
 
 export function isInputModelType(type: InputType): type is InputModelType {
