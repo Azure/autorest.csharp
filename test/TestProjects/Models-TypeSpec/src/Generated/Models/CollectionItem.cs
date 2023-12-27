@@ -54,7 +54,6 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredModelRecord = requiredModelRecord;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionItem"/>. </summary>

@@ -72,7 +72,6 @@ namespace ModelsTypeSpec.Models
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
             RequiredCollectionWithNullableIntElement = requiredCollectionWithNullableIntElement.ToList();
             OptionalCollectionWithNullableBooleanElement = new ChangeTrackingList<bool?>();
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/>. </summary>

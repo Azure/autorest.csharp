@@ -57,6 +57,7 @@ import { loadOperation } from "./operation.js";
 import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
+import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
@@ -251,12 +252,13 @@ export function createModelForService(
                 client as SdkClient
             );
             for (const dpgGroup of dpgOperationGroups) {
-                clients.push(
-                    emitClient(
-                        { ...dpgGroup, name: dpgGroup.type.name },
-                        client
-                    )
-                );
+                var dotnetOperationGroup = {
+                    ...dpgGroup,
+                    name: dpgGroup.type.name
+                };
+                var subClient = emitClient(dotnetOperationGroup, client);
+                clients.push(subClient);
+                addChildClients(context, dotnetOperationGroup, clients);
             }
         } else {
             const dpgOperationGroups = listOperationGroupsByClient(
@@ -392,41 +394,6 @@ function applyDefaultContentTypeAndAcceptParameter(
             )
         );
     }
-}
-
-function createContentTypeOrAcceptParameter(
-    mediaTypes: string[],
-    name: string,
-    nameInRequest: string
-): InputParameter {
-    const isContentType: boolean =
-        nameInRequest.toLowerCase() === "content-type";
-    const inputType: InputType = {
-        Name: "String",
-        Kind: InputTypeKind.String,
-        IsNullable: false
-    } as InputPrimitiveType;
-    return {
-        Name: name,
-        NameInRequest: nameInRequest,
-        Type: inputType,
-        Location: RequestLocation.Header,
-        IsApiVersion: false,
-        IsResourceParameter: false,
-        IsContentType: isContentType,
-        IsRequired: true,
-        IsEndpoint: false,
-        SkipUrlEncoding: false,
-        Explode: false,
-        Kind: InputOperationParameterKind.Constant,
-        DefaultValue:
-            mediaTypes.length === 1
-                ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
-                : undefined
-    } as InputParameter;
 }
 
 function processNamespace(

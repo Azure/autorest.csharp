@@ -35,18 +35,28 @@
    "$id": "5",
    "Name": "ParametersCadlClient",
    "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "6"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "7",
+   "Name": "ParameterOrders",
+   "Description": "",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "8",
      "Name": "Operation",
      "ResourceName": "ParameterOrders",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "9",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "8",
+        "$id": "10",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -62,11 +72,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "9",
+       "$id": "11",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "10",
+        "$id": "12",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -82,11 +92,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "11",
+       "$id": "13",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "12",
+        "$id": "14",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -101,20 +111,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "15",
         "Type": {
-         "$ref": "12"
+         "$ref": "14"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "14",
+       "$id": "16",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "15",
+        "$id": "17",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -129,9 +139,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "18",
         "Type": {
-         "$id": "17",
+         "$id": "19",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -142,7 +152,7 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "20",
        "StatusCodes": [
         200
        ],
@@ -151,7 +161,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -163,16 +176,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "21",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
      "Parameters": [
       {
-       "$id": "20",
+       "$id": "22",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "21",
+        "$id": "23",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -188,11 +201,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "22",
+       "$id": "24",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "23",
+        "$id": "25",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -208,11 +221,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "27",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -227,20 +240,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "28",
         "Type": {
-         "$ref": "25"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "14"
+       "$ref": "16"
       }
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -249,7 +262,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "HEAD",
@@ -262,9 +278,10 @@
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "30"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "ParametersCadlClient"
   }
  ]
 }

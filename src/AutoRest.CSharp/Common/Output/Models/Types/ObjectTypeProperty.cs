@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     [DebuggerDisplay("Name: {Declaration.Name}, Type: {Declaration.Type}")]
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty)
+        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty? inputModelProperty)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),

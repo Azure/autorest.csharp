@@ -233,7 +233,7 @@ namespace Payload.ContentNegotiation
             uri.AppendPath("/content-negotiation/different-body", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("accept", "image/png");
+            request.Headers.Add("Accept", "image/png");
             return message;
         }
 
@@ -247,7 +247,7 @@ namespace Payload.ContentNegotiation
             uri.AppendPath("/content-negotiation/different-body", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("accept", "application/json");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

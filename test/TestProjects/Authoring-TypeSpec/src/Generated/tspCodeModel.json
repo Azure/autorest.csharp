@@ -179,31 +179,40 @@
      "Description": "The project settings.",
      "Type": {
       "$id": "27",
-      "Name": "Dictionary",
-      "KeyType": {
+      "Name": "ProjectSettings",
+      "Namespace": "AuthoringTypeSpec",
+      "Description": "Represents the settings used to define the project behavior.",
+      "IsNullable": false,
+      "Usage": "None",
+      "InheritedDictionaryType": {
        "$id": "28",
-       "Name": "string",
-       "Kind": "String",
+       "Name": "Dictionary",
+       "KeyType": {
+        "$id": "29",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "ValueType": {
+        "$id": "30",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
        "IsNullable": false
       },
-      "ValueType": {
-       "$id": "29",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+      "Properties": []
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "30",
+     "$id": "31",
      "Name": "multilingual",
      "SerializedName": "multilingual",
      "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
-      "$id": "31",
+      "$id": "32",
       "Name": "boolean",
       "Kind": "Boolean",
       "IsNullable": false
@@ -212,12 +221,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "32",
+     "$id": "33",
      "Name": "description",
      "SerializedName": "description",
      "Description": "The project description.",
      "Type": {
-      "$id": "33",
+      "$id": "34",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -226,12 +235,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "34",
+     "$id": "35",
      "Name": "language",
      "SerializedName": "language",
      "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
-      "$id": "35",
+      "$id": "36",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -240,12 +249,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "36",
+     "$id": "37",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
      "Description": "Represents the project creation datetime.",
      "Type": {
-      "$id": "37",
+      "$id": "38",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -254,12 +263,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "38",
+     "$id": "39",
      "Name": "lastModifiedDateTime",
      "SerializedName": "lastModifiedDateTime",
      "Description": "Represents the project last modification datetime.",
      "Type": {
-      "$id": "39",
+      "$id": "40",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -268,12 +277,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "40",
+     "$id": "41",
      "Name": "lastTrainedDateTime",
      "SerializedName": "lastTrainedDateTime",
      "Description": "Represents the project last training datetime.",
      "Type": {
-      "$id": "41",
+      "$id": "42",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -282,12 +291,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "42",
+     "$id": "43",
      "Name": "lastDeployedDateTime",
      "SerializedName": "lastDeployedDateTime",
      "Description": "Represents the project last deployment datetime.",
      "Type": {
-      "$id": "43",
+      "$id": "44",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -298,7 +307,10 @@
    ]
   },
   {
-   "$id": "44",
+   "$ref": "27"
+  },
+  {
+   "$id": "45",
    "Name": "OperationStatusneverError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
@@ -306,12 +318,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "45",
+     "$id": "46",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
      "Type": {
-      "$id": "46",
+      "$id": "47",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -320,7 +332,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "47",
+     "$id": "48",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
@@ -331,12 +343,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "48",
+     "$id": "49",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
-      "$id": "49",
+      "$id": "50",
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
@@ -344,12 +356,12 @@
       "Usage": "Output",
       "Properties": [
        {
-        "$id": "50",
+        "$id": "51",
         "Name": "code",
         "SerializedName": "code",
         "Description": "One of a server-defined set of error codes.",
         "Type": {
-         "$id": "51",
+         "$id": "52",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -358,12 +370,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "52",
+        "$id": "53",
         "Name": "message",
         "SerializedName": "message",
         "Description": "A human-readable representation of the error.",
         "Type": {
-         "$id": "53",
+         "$id": "54",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -372,12 +384,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "54",
+        "$id": "55",
         "Name": "target",
         "SerializedName": "target",
         "Description": "The target of the error.",
         "Type": {
-         "$id": "55",
+         "$id": "56",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -386,15 +398,15 @@
         "IsReadOnly": false
        },
        {
-        "$id": "56",
+        "$id": "57",
         "Name": "details",
         "SerializedName": "details",
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
-         "$id": "57",
+         "$id": "58",
          "Name": "Array",
          "ElementType": {
-          "$ref": "49"
+          "$ref": "50"
          },
          "IsNullable": false
         },
@@ -402,12 +414,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "58",
+        "$id": "59",
         "Name": "innererror",
         "SerializedName": "innererror",
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
-         "$id": "59",
+         "$id": "60",
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -415,12 +427,12 @@
          "Usage": "Output",
          "Properties": [
           {
-           "$id": "60",
+           "$id": "61",
            "Name": "code",
            "SerializedName": "code",
            "Description": "One of a server-defined set of error codes.",
            "Type": {
-            "$id": "61",
+            "$id": "62",
             "Name": "string",
             "Kind": "String",
             "IsNullable": false
@@ -429,12 +441,12 @@
            "IsReadOnly": false
           },
           {
-           "$id": "62",
+           "$id": "63",
            "Name": "InnerErrorObject",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {
-            "$ref": "59"
+            "$ref": "60"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -452,13 +464,13 @@
    ]
   },
   {
-   "$ref": "49"
+   "$ref": "50"
   },
   {
-   "$ref": "59"
+   "$ref": "60"
   },
   {
-   "$id": "63",
+   "$id": "64",
    "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
@@ -466,12 +478,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "64",
+     "$id": "65",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Project items on this page",
      "Type": {
-      "$id": "65",
+      "$id": "66",
       "Name": "Array",
       "ElementType": {
        "$ref": "20"
@@ -482,12 +494,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "66",
+     "$id": "67",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "67",
+      "$id": "68",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -498,7 +510,7 @@
    ]
   },
   {
-   "$id": "68",
+   "$id": "69",
    "Name": "TrainingJobOptions",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Training job parameters.",
@@ -506,12 +518,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "69",
+     "$id": "70",
      "Name": "modelLabel",
      "SerializedName": "modelLabel",
      "Description": "",
      "Type": {
-      "$id": "70",
+      "$id": "71",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -522,19 +534,19 @@
    ]
   },
   {
-   "$id": "71",
+   "$id": "72",
    "Name": "Deployment",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
-     "$id": "72",
+     "$id": "73",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "73",
+      "$id": "74",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -545,7 +557,7 @@
    ]
   },
   {
-   "$id": "74",
+   "$id": "75",
    "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
@@ -553,15 +565,15 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "75",
+     "$id": "76",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Deployment items on this page",
      "Type": {
-      "$id": "76",
+      "$id": "77",
       "Name": "Array",
       "ElementType": {
-       "$ref": "71"
+       "$ref": "72"
       },
       "IsNullable": false
      },
@@ -569,12 +581,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "77",
+     "$id": "78",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "78",
+      "$id": "79",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -585,19 +597,19 @@
    ]
   },
   {
-   "$id": "79",
+   "$id": "80",
    "Name": "SwapDeploymentsOptions",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
-     "$id": "80",
+     "$id": "81",
      "Name": "firstDeploymentName",
      "SerializedName": "firstDeploymentName",
      "Description": "Represents the first deployment name.",
      "Type": {
-      "$id": "81",
+      "$id": "82",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -606,12 +618,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "82",
+     "$id": "83",
      "Name": "secondDeploymentName",
      "SerializedName": "secondDeploymentName",
      "Description": "Represents the second deployment name.",
      "Type": {
-      "$id": "83",
+      "$id": "84",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -622,19 +634,19 @@
    ]
   },
   {
-   "$id": "84",
+   "$id": "85",
    "Name": "DeploymentJob",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "85",
+     "$id": "86",
      "Name": "jobId",
      "SerializedName": "jobId",
      "Description": "The job ID.",
      "Type": {
-      "$id": "86",
+      "$id": "87",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -643,12 +655,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "87",
+     "$id": "88",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
      "Description": "The creation date time of the job.",
      "Type": {
-      "$id": "88",
+      "$id": "89",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -657,12 +669,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "89",
+     "$id": "90",
      "Name": "lastUpdatedDateTime",
      "SerializedName": "lastUpdatedDateTime",
      "Description": "The the last date time the job was updated.",
      "Type": {
-      "$id": "90",
+      "$id": "91",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -671,12 +683,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "91",
+     "$id": "92",
      "Name": "expirationDateTime",
      "SerializedName": "expirationDateTime",
      "Description": "The expiration date time of the job.",
      "Type": {
-      "$id": "92",
+      "$id": "93",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -685,7 +697,7 @@
      "IsReadOnly": true
     },
     {
-     "$id": "93",
+     "$id": "94",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The job status.",
@@ -696,15 +708,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "94",
+     "$id": "95",
      "Name": "warnings",
      "SerializedName": "warnings",
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
-      "$id": "95",
+      "$id": "96",
       "Name": "Array",
       "ElementType": {
-       "$id": "96",
+       "$id": "97",
        "Name": "JobWarning",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a warning that was encountered while executing the request.",
@@ -712,12 +724,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "97",
+         "$id": "98",
          "Name": "code",
          "SerializedName": "code",
          "Description": "The warning code.",
          "Type": {
-          "$id": "98",
+          "$id": "99",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -726,12 +738,12 @@
          "IsReadOnly": false
         },
         {
-         "$id": "99",
+         "$id": "100",
          "Name": "message",
          "SerializedName": "message",
          "Description": "The warning message.",
          "Type": {
-          "$id": "100",
+          "$id": "101",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -747,23 +759,23 @@
      "IsReadOnly": false
     },
     {
-     "$id": "101",
+     "$id": "102",
      "Name": "errors",
      "SerializedName": "errors",
      "Description": "The errors encountered while executing the job.",
      "Type": {
-      "$ref": "49"
+      "$ref": "50"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "102",
+     "$id": "103",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "103",
+      "$id": "104",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -774,22 +786,22 @@
    ]
   },
   {
-   "$ref": "96"
+   "$ref": "97"
   },
   {
-   "$id": "104",
+   "$id": "105",
    "Name": "SwapDeploymentsJob",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "105",
+     "$id": "106",
      "Name": "jobId",
      "SerializedName": "jobId",
      "Description": "The job ID.",
      "Type": {
-      "$id": "106",
+      "$id": "107",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -798,12 +810,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "107",
+     "$id": "108",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
      "Description": "The creation date time of the job.",
      "Type": {
-      "$id": "108",
+      "$id": "109",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -812,12 +824,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "109",
+     "$id": "110",
      "Name": "lastUpdatedDateTime",
      "SerializedName": "lastUpdatedDateTime",
      "Description": "The the last date time the job was updated.",
      "Type": {
-      "$id": "110",
+      "$id": "111",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -826,12 +838,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "111",
+     "$id": "112",
      "Name": "expirationDateTime",
      "SerializedName": "expirationDateTime",
      "Description": "The expiration date time of the job.",
      "Type": {
-      "$id": "112",
+      "$id": "113",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -840,7 +852,7 @@
      "IsReadOnly": true
     },
     {
-     "$id": "113",
+     "$id": "114",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The job status.",
@@ -851,15 +863,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "114",
+     "$id": "115",
      "Name": "warnings",
      "SerializedName": "warnings",
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
-      "$id": "115",
+      "$id": "116",
       "Name": "Array",
       "ElementType": {
-       "$ref": "96"
+       "$ref": "97"
       },
       "IsNullable": false
      },
@@ -867,23 +879,23 @@
      "IsReadOnly": false
     },
     {
-     "$id": "116",
+     "$id": "117",
      "Name": "errors",
      "SerializedName": "errors",
      "Description": "The errors encountered while executing the job.",
      "Type": {
-      "$ref": "49"
+      "$ref": "50"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "117",
+     "$id": "118",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "118",
+      "$id": "119",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -894,7 +906,7 @@
    ]
   },
   {
-   "$id": "119",
+   "$id": "120",
    "Name": "PagedSupportedLanguage",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of SupportedLanguage items",
@@ -902,15 +914,15 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "120",
+     "$id": "121",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The SupportedLanguage items on this page",
      "Type": {
-      "$id": "121",
+      "$id": "122",
       "Name": "Array",
       "ElementType": {
-       "$id": "122",
+       "$id": "123",
        "Name": "SupportedLanguage",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a supported language.",
@@ -918,12 +930,12 @@
        "Usage": "None",
        "Properties": [
         {
-         "$id": "123",
+         "$id": "124",
          "Name": "languageName",
          "SerializedName": "languageName",
          "Description": "The language name.",
          "Type": {
-          "$id": "124",
+          "$id": "125",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -932,12 +944,12 @@
          "IsReadOnly": false
         },
         {
-         "$id": "125",
+         "$id": "126",
          "Name": "languageCode",
          "SerializedName": "languageCode",
          "Description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
          "Type": {
-          "$id": "126",
+          "$id": "127",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -953,12 +965,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "127",
+     "$id": "128",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "128",
+      "$id": "129",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -969,10 +981,10 @@
    ]
   },
   {
-   "$ref": "122"
+   "$ref": "123"
   },
   {
-   "$id": "129",
+   "$id": "130",
    "Name": "PagedTrainingConfigVersion",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of TrainingConfigVersion items",
@@ -980,15 +992,15 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "130",
+     "$id": "131",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The TrainingConfigVersion items on this page",
      "Type": {
-      "$id": "131",
+      "$id": "132",
       "Name": "Array",
       "ElementType": {
-       "$id": "132",
+       "$id": "133",
        "Name": "TrainingConfigVersion",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a training config version.",
@@ -996,12 +1008,12 @@
        "Usage": "None",
        "Properties": [
         {
-         "$id": "133",
+         "$id": "134",
          "Name": "trainingConfigVersionStr",
          "SerializedName": "trainingConfigVersionStr",
          "Description": "Represents the version of the config.",
          "Type": {
-          "$id": "134",
+          "$id": "135",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -1010,12 +1022,12 @@
          "IsReadOnly": false
         },
         {
-         "$id": "135",
+         "$id": "136",
          "Name": "modelExpirationDate",
          "SerializedName": "modelExpirationDate",
          "Description": "Represents the training config version expiration date.",
          "Type": {
-          "$id": "136",
+          "$id": "137",
           "Name": "plainDate",
           "Kind": "Date",
           "IsNullable": false
@@ -1031,12 +1043,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "137",
+     "$id": "138",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "138",
+      "$id": "139",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -1047,22 +1059,22 @@
    ]
   },
   {
-   "$ref": "132"
+   "$ref": "133"
   },
   {
-   "$id": "139",
+   "$id": "140",
    "Name": "Job",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
-     "$id": "140",
+     "$id": "141",
      "Name": "jobId",
      "SerializedName": "jobId",
      "Description": "The job ID.",
      "Type": {
-      "$id": "141",
+      "$id": "142",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -1071,12 +1083,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "142",
+     "$id": "143",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
      "Description": "The creation date time of the job.",
      "Type": {
-      "$id": "143",
+      "$id": "144",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -1085,12 +1097,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "144",
+     "$id": "145",
      "Name": "lastUpdatedDateTime",
      "SerializedName": "lastUpdatedDateTime",
      "Description": "The the last date time the job was updated.",
      "Type": {
-      "$id": "145",
+      "$id": "146",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -1099,12 +1111,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "146",
+     "$id": "147",
      "Name": "expirationDateTime",
      "SerializedName": "expirationDateTime",
      "Description": "The expiration date time of the job.",
      "Type": {
-      "$id": "147",
+      "$id": "148",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -1113,7 +1125,7 @@
      "IsReadOnly": true
     },
     {
-     "$id": "148",
+     "$id": "149",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The job status.",
@@ -1124,15 +1136,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "149",
+     "$id": "150",
      "Name": "warnings",
      "SerializedName": "warnings",
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
-      "$id": "150",
+      "$id": "151",
       "Name": "Array",
       "ElementType": {
-       "$ref": "96"
+       "$ref": "97"
       },
       "IsNullable": false
      },
@@ -1140,12 +1152,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "151",
+     "$id": "152",
      "Name": "errors",
      "SerializedName": "errors",
      "Description": "The errors encountered while executing the job.",
      "Type": {
-      "$ref": "49"
+      "$ref": "50"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1153,7 +1165,7 @@
    ]
   },
   {
-   "$id": "152",
+   "$id": "153",
    "Name": "ExportedProject",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1161,7 +1173,7 @@
    "Properties": []
   },
   {
-   "$id": "153",
+   "$id": "154",
    "Name": "ListQueryParams",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1169,7 +1181,7 @@
    "Properties": []
   },
   {
-   "$id": "154",
+   "$id": "155",
    "Name": "ExportParams",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1177,19 +1189,19 @@
    "Properties": []
   },
   {
-   "$id": "155",
+   "$id": "156",
    "Name": "SwapDeploymentsParams",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
-     "$id": "156",
+     "$id": "157",
      "Name": "body",
      "SerializedName": "body",
      "Description": "The body schema of the operation.",
      "Type": {
-      "$ref": "79"
+      "$ref": "80"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1199,22 +1211,32 @@
  ],
  "Clients": [
   {
-   "$id": "157",
+   "$id": "158",
    "Name": "AuthoringTypeSpecClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "159"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "160",
+   "Name": "Projects",
    "Description": "",
    "Operations": [
     {
-     "$id": "158",
+     "$id": "161",
      "Name": "createOrUpdate",
      "ResourceName": "Project",
      "Description": "Creates a new project or updates an existing one.",
      "Parameters": [
       {
-       "$id": "159",
+       "$id": "162",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "160",
+        "$id": "163",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -1230,12 +1252,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "161",
+       "$id": "164",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "162",
+        "$id": "165",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1250,9 +1272,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "163",
+        "$id": "166",
         "Type": {
-         "$id": "164",
+         "$id": "167",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -1261,11 +1283,11 @@
        }
       },
       {
-       "$id": "165",
+       "$id": "168",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "166",
+        "$id": "169",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1281,7 +1303,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "167",
+       "$id": "170",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -1297,33 +1319,6 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
-      },
-      {
-       "$id": "168",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "169",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "170",
-        "Type": {
-         "$ref": "169"
-        },
-        "Value": "application/json"
-       }
       },
       {
        "$id": "171",
@@ -1351,38 +1346,40 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "174",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "175",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "176",
+        "Type": {
+         "$ref": "175"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "174",
-       "StatusCodes": [
-        201
-       ],
-       "BodyType": {
-        "$ref": "20"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "175",
-         "Name": "Operation-Location",
-         "NameInResponse": "operationLocation",
-         "Description": "The location for monitoring the operation state.",
-         "Type": {
-          "$id": "176",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
-          "IsNullable": false
-         }
-        }
-       ],
-       "IsErrorResponse": false
-      },
-      {
        "$id": "177",
        "StatusCodes": [
-        200
+        201
        ],
        "BodyType": {
         "$ref": "20"
@@ -1402,7 +1399,38 @@
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      },
+      {
+       "$id": "180",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "20"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "181",
+         "Name": "Operation-Location",
+         "NameInResponse": "operationLocation",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$id": "182",
+          "Name": "ResourceLocation",
+          "Kind": "Uri",
+          "IsNullable": false
+         }
+        }
+       ],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -1414,10 +1442,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "180",
-      "FinalStateVia": 3,
+      "$id": "183",
+      "FinalStateVia": 2,
       "FinalResponse": {
-       "$id": "181",
+       "$id": "184",
        "StatusCodes": [
         200
        ],
@@ -1431,23 +1459,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "182",
+     "$id": "185",
      "Name": "get",
      "ResourceName": "Project",
      "Description": "Gets the details of a project.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "183",
+       "$id": "186",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "184",
+        "$id": "187",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1463,11 +1491,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "185",
+       "$id": "188",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "186",
+        "$id": "189",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1482,9 +1510,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "187",
+        "$id": "190",
         "Type": {
-         "$ref": "186"
+         "$ref": "189"
         },
         "Value": "application/json"
        }
@@ -1492,7 +1520,7 @@
      ],
      "Responses": [
       {
-       "$id": "188",
+       "$id": "191",
        "StatusCodes": [
         200
        ],
@@ -1501,7 +1529,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1513,23 +1544,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "189",
+     "$id": "192",
      "Name": "delete",
      "ResourceName": "Project",
      "Description": "Deletes a project.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "190",
+       "$id": "193",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "191",
+        "$id": "194",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1545,11 +1576,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "192",
+       "$id": "195",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "193",
+        "$id": "196",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1564,9 +1595,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "194",
+        "$id": "197",
         "Type": {
-         "$ref": "193"
+         "$ref": "196"
         },
         "Value": "application/json"
        }
@@ -1574,29 +1605,32 @@
      ],
      "Responses": [
       {
-       "$id": "195",
+       "$id": "198",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "44"
+        "$ref": "45"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "196",
+         "$id": "199",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "197",
+          "$id": "200",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "DELETE",
@@ -1605,10 +1639,10 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "198",
+      "$id": "201",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "199",
+       "$id": "202",
        "StatusCodes": [
         204
        ],
@@ -1619,23 +1653,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "200",
+     "$id": "203",
      "Name": "list",
      "ResourceName": "Project",
      "Description": "Lists the existing projects.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "201",
+       "$id": "204",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "202",
+        "$id": "205",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1650,9 +1684,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "203",
+        "$id": "206",
         "Type": {
-         "$ref": "202"
+         "$ref": "205"
         },
         "Value": "application/json"
        }
@@ -1660,16 +1694,19 @@
      ],
      "Responses": [
       {
-       "$id": "204",
+       "$id": "207",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "63"
+        "$ref": "64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1678,7 +1715,7 @@
      "Path": "/authoring/analyze-text/projects",
      "BufferResponse": true,
      "Paging": {
-      "$id": "205",
+      "$id": "208",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1686,23 +1723,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "206",
+     "$id": "209",
      "Name": "export",
      "ResourceName": "Projects",
      "Description": "Triggers a job to export a project's data.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "207",
+       "$id": "210",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "208",
+        "$id": "211",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1718,11 +1755,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "209",
+       "$id": "212",
        "Name": "projectFileVersion",
        "NameInRequest": "projectFileVersion",
        "Type": {
-        "$id": "210",
+        "$id": "213",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1738,11 +1775,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "211",
+       "$id": "214",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "212",
+        "$id": "215",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1757,9 +1794,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "213",
+        "$id": "216",
         "Type": {
-         "$ref": "212"
+         "$ref": "215"
         },
         "Value": "application/json"
        }
@@ -1767,19 +1804,19 @@
      ],
      "Responses": [
       {
-       "$id": "214",
+       "$id": "217",
        "StatusCodes": [
         202
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "215",
+         "$id": "218",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "216",
+          "$id": "219",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -1795,16 +1832,13 @@
      "Path": "/authoring/analyze-text/projects/{projectName}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "217",
+      "$id": "220",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "218",
+       "$id": "221",
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },
@@ -1812,23 +1846,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "219",
+     "$id": "222",
      "Name": "importx",
      "ResourceName": "Projects",
      "Description": "Triggers a job to export a project's data.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "220",
+       "$id": "223",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "221",
+        "$id": "224",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1844,11 +1878,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "222",
+       "$id": "225",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "223",
+        "$id": "226",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1863,9 +1897,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "224",
+        "$id": "227",
         "Type": {
-         "$ref": "223"
+         "$ref": "226"
         },
         "Value": "application/json"
        }
@@ -1873,19 +1907,19 @@
      ],
      "Responses": [
       {
-       "$id": "225",
+       "$id": "228",
        "StatusCodes": [
         202
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "226",
+         "$id": "229",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "227",
+          "$id": "230",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -1901,16 +1935,13 @@
      "Path": "/authoring/analyze-text/projects/{projectName}:importx",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "228",
+      "$id": "231",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "229",
+       "$id": "232",
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },
@@ -1918,23 +1949,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "230",
+     "$id": "233",
      "Name": "train",
      "ResourceName": "Projects",
      "Description": "Triggers a training job for a project.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "231",
+       "$id": "234",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "232",
+        "$id": "235",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1950,11 +1981,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "233",
+       "$id": "236",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "68"
+        "$ref": "69"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1967,11 +1998,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "234",
+       "$id": "237",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "235",
+        "$id": "238",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1986,19 +2017,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "236",
+        "$id": "239",
         "Type": {
-         "$ref": "235"
+         "$ref": "238"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "237",
+       "$id": "240",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "238",
+        "$id": "241",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2013,9 +2044,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "239",
+        "$id": "242",
         "Type": {
-         "$ref": "238"
+         "$ref": "241"
         },
         "Value": "application/json"
        }
@@ -2023,19 +2054,19 @@
      ],
      "Responses": [
       {
-       "$id": "240",
+       "$id": "243",
        "StatusCodes": [
         202
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "241",
+         "$id": "244",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "242",
+          "$id": "245",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -2054,40 +2085,49 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "243",
+      "$id": "246",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "244",
+       "$id": "247",
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "248"
+   },
+   "Creatable": false,
+   "Parent": "AuthoringTypeSpecClient"
+  },
+  {
+   "$id": "249",
+   "Name": "Deployments",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "245",
+     "$id": "250",
      "Name": "getDeployment",
      "ResourceName": "Deployment",
      "Description": "Gets the details of a deployment.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "246",
+       "$id": "251",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "247",
+        "$id": "252",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2103,11 +2143,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "248",
+       "$id": "253",
        "Name": "deploymentName",
        "NameInRequest": "deploymentName",
        "Type": {
-        "$id": "249",
+        "$id": "254",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2123,11 +2163,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "250",
+       "$id": "255",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "251",
+        "$id": "256",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2142,9 +2182,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "252",
+        "$id": "257",
         "Type": {
-         "$ref": "251"
+         "$ref": "256"
         },
         "Value": "application/json"
        }
@@ -2152,16 +2192,19 @@
      ],
      "Responses": [
       {
-       "$id": "253",
+       "$id": "258",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "71"
+        "$ref": "72"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2173,23 +2216,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "254",
+     "$id": "259",
      "Name": "deployProject",
      "ResourceName": "Deployment",
      "Description": "Creates a new deployment or replaces an existing one.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "255",
+       "$id": "260",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "256",
+        "$id": "261",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2205,11 +2248,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "257",
+       "$id": "262",
        "Name": "deploymentName",
        "NameInRequest": "deploymentName",
        "Type": {
-        "$id": "258",
+        "$id": "263",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2225,12 +2268,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "259",
+       "$id": "264",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
        "Type": {
-        "$ref": "71"
+        "$ref": "72"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2243,11 +2286,38 @@
        "Kind": "Method"
       },
       {
-       "$id": "260",
+       "$id": "265",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "266",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "267",
+        "Type": {
+         "$ref": "266"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "268",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "261",
+        "$id": "269",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2262,36 +2332,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "262",
+        "$id": "270",
         "Type": {
-         "$ref": "261"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "263",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "264",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "265",
-        "Type": {
-         "$ref": "264"
+         "$ref": "269"
         },
         "Value": "application/json"
        }
@@ -2299,54 +2342,60 @@
      ],
      "Responses": [
       {
-       "$id": "266",
+       "$id": "271",
        "StatusCodes": [
         201
        ],
        "BodyType": {
-        "$ref": "71"
+        "$ref": "72"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "267",
+         "$id": "272",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "268",
+          "$id": "273",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       },
       {
-       "$id": "269",
+       "$id": "274",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "71"
+        "$ref": "72"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "270",
+         "$id": "275",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "271",
+          "$id": "276",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -2358,15 +2407,15 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "272",
-      "FinalStateVia": 3,
+      "$id": "277",
+      "FinalStateVia": 2,
       "FinalResponse": {
-       "$id": "273",
+       "$id": "278",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "71"
+        "$ref": "72"
        },
        "BodyMediaType": "Json"
       }
@@ -2375,23 +2424,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "274",
+     "$id": "279",
      "Name": "deleteDeployment",
      "ResourceName": "Deployment",
      "Description": "Deletes a project deployment.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "275",
+       "$id": "280",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "276",
+        "$id": "281",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2407,11 +2456,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "277",
+       "$id": "282",
        "Name": "deploymentName",
        "NameInRequest": "deploymentName",
        "Type": {
-        "$id": "278",
+        "$id": "283",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2427,11 +2476,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "279",
+       "$id": "284",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "280",
+        "$id": "285",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2446,9 +2495,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "281",
+        "$id": "286",
         "Type": {
-         "$ref": "280"
+         "$ref": "285"
         },
         "Value": "application/json"
        }
@@ -2456,29 +2505,32 @@
      ],
      "Responses": [
       {
-       "$id": "282",
+       "$id": "287",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "44"
+        "$ref": "45"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "283",
+         "$id": "288",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "284",
+          "$id": "289",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "DELETE",
@@ -2487,10 +2539,10 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "285",
+      "$id": "290",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "286",
+       "$id": "291",
        "StatusCodes": [
         204
        ],
@@ -2501,23 +2553,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "287",
+     "$id": "292",
      "Name": "list",
      "ResourceName": "Deployment",
      "Description": "Lists the existing deployments.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "288",
+       "$id": "293",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "289",
+        "$id": "294",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2533,11 +2585,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "290",
+       "$id": "295",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "291",
+        "$id": "296",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2552,9 +2604,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "292",
+        "$id": "297",
         "Type": {
-         "$ref": "291"
+         "$ref": "296"
         },
         "Value": "application/json"
        }
@@ -2562,16 +2614,19 @@
      ],
      "Responses": [
       {
-       "$id": "293",
+       "$id": "298",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "74"
+        "$ref": "75"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2580,7 +2635,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments",
      "BufferResponse": true,
      "Paging": {
-      "$id": "294",
+      "$id": "299",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -2588,23 +2643,23 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "295",
+     "$id": "300",
      "Name": "swapDeployments",
      "ResourceName": "Deployments",
      "Description": "Swaps two existing deployments with each other.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "296",
+       "$id": "301",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "297",
+        "$id": "302",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2620,12 +2675,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "298",
+       "$id": "303",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "The body schema of the operation.",
        "Type": {
-        "$ref": "79"
+        "$ref": "80"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2638,11 +2693,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "299",
+       "$id": "304",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "300",
+        "$id": "305",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2657,19 +2712,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "301",
+        "$id": "306",
         "Type": {
-         "$ref": "300"
+         "$ref": "305"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "302",
+       "$id": "307",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "303",
+        "$id": "308",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2684,9 +2739,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "304",
+        "$id": "309",
         "Type": {
-         "$ref": "303"
+         "$ref": "308"
         },
         "Value": "application/json"
        }
@@ -2694,19 +2749,19 @@
      ],
      "Responses": [
       {
-       "$id": "305",
+       "$id": "310",
        "StatusCodes": [
         202
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "306",
+         "$id": "311",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "307",
+          "$id": "312",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -2725,40 +2780,49 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "308",
+      "$id": "313",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "309",
+       "$id": "314",
        "StatusCodes": [
         200
        ],
-       "BodyType": {
-        "$ref": "44"
-       },
        "BodyMediaType": "Json"
       }
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "315"
+   },
+   "Creatable": false,
+   "Parent": "AuthoringTypeSpecClient"
+  },
+  {
+   "$id": "316",
+   "Name": "Jobs",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "310",
+     "$id": "317",
      "Name": "getDeploymentStatus",
      "ResourceName": "DeploymentJob",
      "Description": "Gets the status of an existing deployment job.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "311",
+       "$id": "318",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "312",
+        "$id": "319",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2774,11 +2838,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "313",
+       "$id": "320",
        "Name": "deploymentName",
        "NameInRequest": "deploymentName",
        "Type": {
-        "$id": "314",
+        "$id": "321",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -2792,93 +2856,11 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method"
-      },
-      {
-       "$id": "315",
-       "Name": "jobId",
-       "NameInRequest": "jobId",
-       "Type": {
-        "$id": "316",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "317",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "318",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "319",
-        "Type": {
-         "$ref": "318"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "320",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "84"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{Endpoint}/language",
-     "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "321",
-     "Name": "getSwapDeploymentsStatus",
-     "ResourceName": "SwapDeploymentsJob",
-     "Description": "Gets the status of an existing swap deployment job.",
-     "Parameters": [
-      {
-       "$ref": "159"
-      },
-      {
-       "$ref": "161"
       },
       {
        "$id": "322",
-       "Name": "projectName",
-       "NameInRequest": "projectName",
+       "Name": "jobId",
+       "NameInRequest": "jobId",
        "Type": {
         "$id": "323",
         "Name": "string",
@@ -2897,50 +2879,10 @@
       },
       {
        "$id": "324",
-       "Name": "deploymentName",
-       "NameInRequest": "deploymentName",
-       "Type": {
-        "$id": "325",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "326",
-       "Name": "jobId",
-       "NameInRequest": "jobId",
-       "Type": {
-        "$id": "327",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "328",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "329",
+        "$id": "325",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2955,9 +2897,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "330",
+        "$id": "326",
         "Type": {
-         "$ref": "329"
+         "$ref": "325"
         },
         "Value": "application/json"
        }
@@ -2965,46 +2907,93 @@
      ],
      "Responses": [
       {
-       "$id": "331",
+       "$id": "327",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "104"
+        "$ref": "85"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
-     "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/swap/jobs/{jobId}",
+     "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "332",
-     "Name": "getSupportedLanguages",
-     "ResourceName": "Global",
+     "$id": "328",
+     "Name": "getSwapDeploymentsStatus",
+     "ResourceName": "SwapDeploymentsJob",
+     "Description": "Gets the status of an existing swap deployment job.",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
+      },
+      {
+       "$ref": "164"
+      },
+      {
+       "$id": "329",
+       "Name": "projectName",
+       "NameInRequest": "projectName",
+       "Type": {
+        "$id": "330",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "331",
+       "Name": "deploymentName",
+       "NameInRequest": "deploymentName",
+       "Type": {
+        "$id": "332",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
       },
       {
        "$id": "333",
-       "Name": "top",
-       "NameInRequest": "top",
+       "Name": "jobId",
+       "NameInRequest": "jobId",
        "Type": {
         "$id": "334",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Name": "string",
+        "Kind": "String",
         "IsNullable": false
        },
-       "Location": "Query",
-       "IsRequired": false,
+       "Location": "Path",
+       "IsRequired": true,
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
@@ -3015,53 +3004,10 @@
       },
       {
        "$id": "335",
-       "Name": "skip",
-       "NameInRequest": "skip",
-       "Type": {
-        "$id": "336",
-        "Name": "int32",
-        "Kind": "Int32",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "337",
-       "Name": "maxpagesize",
-       "NameInRequest": "maxpagesize",
-       "Type": {
-        "$id": "338",
-        "Name": "int32",
-        "Kind": "Int32",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$ref": "161"
-      },
-      {
-       "$id": "339",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "340",
+        "$id": "336",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3076,9 +3022,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "341",
+        "$id": "337",
         "Type": {
-         "$ref": "340"
+         "$ref": "336"
         },
         "Value": "application/json"
        }
@@ -3086,16 +3032,155 @@
      ],
      "Responses": [
       {
-       "$id": "342",
+       "$id": "338",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "119"
+        "$ref": "105"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{Endpoint}/language",
+     "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/swap/jobs/{jobId}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "339"
+   },
+   "Creatable": false,
+   "Parent": "AuthoringTypeSpecClient"
+  },
+  {
+   "$id": "340",
+   "Name": "Global",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "341",
+     "Name": "getSupportedLanguages",
+     "ResourceName": "Global",
+     "Parameters": [
+      {
+       "$ref": "162"
+      },
+      {
+       "$id": "342",
+       "Name": "top",
+       "NameInRequest": "top",
+       "Type": {
+        "$id": "343",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "344",
+       "Name": "skip",
+       "NameInRequest": "skip",
+       "Type": {
+        "$id": "345",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "346",
+       "Name": "maxpagesize",
+       "NameInRequest": "maxpagesize",
+       "Type": {
+        "$id": "347",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$ref": "164"
+      },
+      {
+       "$id": "348",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "349",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "350",
+        "Type": {
+         "$ref": "349"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "351",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "120"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -3104,7 +3189,7 @@
      "Path": "/authoring/analyze-text/projects/global/languages",
      "BufferResponse": true,
      "Paging": {
-      "$id": "343",
+      "$id": "352",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -3112,19 +3197,19 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "344",
+     "$id": "353",
      "Name": "listTrainingConfigVersions",
      "ResourceName": "Global",
      "Parameters": [
       {
-       "$ref": "159"
+       "$ref": "162"
       },
       {
-       "$id": "345",
+       "$id": "354",
        "Name": "top",
        "NameInRequest": "top",
        "Type": {
-        "$id": "346",
+        "$id": "355",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -3140,11 +3225,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "347",
+       "$id": "356",
        "Name": "skip",
        "NameInRequest": "skip",
        "Type": {
-        "$id": "348",
+        "$id": "357",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -3160,11 +3245,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "349",
+       "$id": "358",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Type": {
-        "$id": "350",
+        "$id": "359",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -3180,14 +3265,14 @@
        "Kind": "Method"
       },
       {
-       "$ref": "161"
+       "$ref": "164"
       },
       {
-       "$id": "351",
+       "$id": "360",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "352",
+        "$id": "361",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3202,9 +3287,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "353",
+        "$id": "362",
         "Type": {
-         "$ref": "352"
+         "$ref": "361"
         },
         "Value": "application/json"
        }
@@ -3212,16 +3297,19 @@
      ],
      "Responses": [
       {
-       "$id": "354",
+       "$id": "363",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "129"
+        "$ref": "130"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -3230,7 +3318,7 @@
      "Path": "/authoring/analyze-text/projects/global/training-config-versions",
      "BufferResponse": true,
      "Paging": {
-      "$id": "355",
+      "$id": "364",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -3239,9 +3327,10 @@
     }
    ],
    "Protocol": {
-    "$id": "356"
+    "$id": "365"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "AuthoringTypeSpecClient"
   }
  ]
 }

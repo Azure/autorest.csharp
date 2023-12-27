@@ -54,7 +54,6 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
 
             BaseModelProp = baseModelProp;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="NoUseBase"/>. </summary>

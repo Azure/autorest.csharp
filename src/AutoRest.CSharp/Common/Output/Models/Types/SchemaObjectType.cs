@@ -81,7 +81,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
-        protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
         private SerializableObjectType? _defaultDerivedType;
         private bool _hasCalculatedDefaultDerivedType;
@@ -259,7 +258,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 signature,
-                serializationInitializers.ToArray(),
+                serializationInitializers,
                 baseSerializationCtor);
         }
 
@@ -285,6 +284,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // we do not need to add intialization for raw data field
+                if (property == RawDataField)
+                {
+                    continue;
+                }
                 // Only required properties that are not discriminators go into default ctor
                 // skip the flattened properties, we should never include them in the constructors
                 if (property == Discriminator?.Property || property is FlattenedObjectTypeProperty)
@@ -370,8 +374,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(
                 Type,
                 IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
-                defaultCtorParameters.ToArray(),
-                defaultCtorInitializers.ToArray(),
+                defaultCtorParameters,
+                defaultCtorInitializers,
                 baseCtor);
         }
 
@@ -728,7 +732,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(this) : null;
+            return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
         }
 
         protected override XmlObjectSerialization? BuildXmlSerialization()

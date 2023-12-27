@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            yield return Return(New.Instance(objectSerialization.Type, arguments.ToArray()));
+            yield return Return(New.Instance(objectSerialization.Type, arguments));
         }
 
         public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, StreamExpression stream)

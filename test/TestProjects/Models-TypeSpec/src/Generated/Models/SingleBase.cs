@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
@@ -51,7 +50,6 @@ namespace ModelsTypeSpec.Models
         protected SingleBase(int size)
         {
             Size = size;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="SingleBase"/>. </summary>

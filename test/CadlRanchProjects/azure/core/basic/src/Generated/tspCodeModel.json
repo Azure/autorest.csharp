@@ -619,7 +619,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       },
       {
        "$id": "76",
@@ -631,7 +634,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PATCH",
@@ -699,8 +705,8 @@
       },
       {
        "$id": "81",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "82",
         "Name": "String",
@@ -710,7 +716,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": true,
+       "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -726,8 +732,8 @@
       },
       {
        "$id": "84",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "85",
         "Name": "String",
@@ -737,7 +743,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": false,
+       "IsContentType": true,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -763,7 +769,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       },
       {
        "$id": "88",
@@ -775,7 +784,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -862,7 +874,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1087,7 +1102,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1154,7 +1172,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1220,8 +1241,8 @@
       },
       {
        "$id": "128",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
         "Name": "String",
@@ -1231,7 +1252,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": true,
+       "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -1247,8 +1268,8 @@
       },
       {
        "$id": "131",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "132",
         "Name": "String",
@@ -1258,7 +1279,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": false,
+       "IsContentType": true,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -1284,7 +1305,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1354,7 +1378,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1545,7 +1572,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1555,9 +1585,20 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "158"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "159",
+   "Name": "TwoModelsAsPageItem",
+   "Description": "",
+   "Operations": [
     {
-     "$id": "158",
+     "$id": "160",
      "Name": "listFirstItem",
      "ResourceName": "TwoModelsAsPageItem",
      "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
@@ -1569,11 +1610,11 @@
        "$ref": "61"
       },
       {
-       "$id": "159",
+       "$id": "161",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "160",
+        "$id": "162",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1588,9 +1629,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "161",
+        "$id": "163",
         "Type": {
-         "$ref": "160"
+         "$ref": "162"
         },
         "Value": "application/json"
        }
@@ -1598,7 +1639,7 @@
      ],
      "Responses": [
       {
-       "$id": "162",
+       "$id": "164",
        "StatusCodes": [
         200
        ],
@@ -1607,7 +1648,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1616,7 +1660,7 @@
      "Path": "/azure/core/basic/first-item",
      "BufferResponse": true,
      "Paging": {
-      "$id": "163",
+      "$id": "165",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1624,7 +1668,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "164",
+     "$id": "166",
      "Name": "listSecondItem",
      "ResourceName": "TwoModelsAsPageItem",
      "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
@@ -1636,11 +1680,11 @@
        "$ref": "61"
       },
       {
-       "$id": "165",
+       "$id": "167",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "166",
+        "$id": "168",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1655,9 +1699,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "167",
+        "$id": "169",
         "Type": {
-         "$ref": "166"
+         "$ref": "168"
         },
         "Value": "application/json"
        }
@@ -1665,7 +1709,7 @@
      ],
      "Responses": [
       {
-       "$id": "168",
+       "$id": "170",
        "StatusCodes": [
         200
        ],
@@ -1674,7 +1718,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1683,7 +1730,7 @@
      "Path": "/azure/core/basic/second-item",
      "BufferResponse": true,
      "Paging": {
-      "$id": "169",
+      "$id": "171",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1692,9 +1739,10 @@
     }
    ],
    "Protocol": {
-    "$id": "170"
+    "$id": "172"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "BasicClient"
   }
  ]
 }
