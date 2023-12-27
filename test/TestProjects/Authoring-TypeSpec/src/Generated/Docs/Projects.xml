@@ -31,7 +31,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -71,7 +71,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -112,7 +112,7 @@ await foreach (BinaryData item in client.GetProjectsAsync())
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+    Console.WriteLine(result.GetProperty("settings").ToString());
     Console.WriteLine(result.GetProperty("multilingual").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
     Console.WriteLine(result.GetProperty("language").ToString());
@@ -154,7 +154,7 @@ foreach (BinaryData item in client.GetProjects())
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+    Console.WriteLine(result.GetProperty("settings").ToString());
     Console.WriteLine(result.GetProperty("multilingual").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
     Console.WriteLine(result.GetProperty("language").ToString());
@@ -200,10 +200,7 @@ using RequestContent content = RequestContent.Create(new
 {
     projectKind = "CustomSingleLabelClassification",
     storageInputContainerName = "<storageInputContainerName>",
-    settings = new
-    {
-        key = "<settings>",
-    },
+    settings = new object(),
     multilingual = true,
     description = "<description>",
     language = "<language>",
@@ -215,7 +212,7 @@ JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -260,10 +257,7 @@ using RequestContent content = RequestContent.Create(new
 {
     projectKind = "CustomSingleLabelClassification",
     storageInputContainerName = "<storageInputContainerName>",
-    settings = new
-    {
-        key = "<settings>",
-    },
+    settings = new object(),
     multilingual = true,
     description = "<description>",
     language = "<language>",
@@ -275,7 +269,7 @@ JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());

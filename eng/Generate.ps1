@@ -340,8 +340,8 @@ if (![string]::IsNullOrWhiteSpace($filter)) {
     }
 }
 
-if ($reset -or $env:TF_BUILD) {
-    $typespecCount = ([string]::IsNullOrWhiteSpace($filter) ? $tspDefinitions : $tspDefinitions.Keys.Where({ $_ -match $filter })).Count
+$typespecCount = ([string]::IsNullOrWhiteSpace($filter) ? $tspDefinitions : $tspDefinitions.Keys.Where({ $_ -match $filter })).Count
+if ($reset -or $env:TF_BUILD) {    
     $swaggerCount = $keys.Count - $typespecCount
     if ($swaggerCount -gt 0) {
         AutoRest-Reset;

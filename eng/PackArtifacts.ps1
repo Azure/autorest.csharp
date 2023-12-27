@@ -25,7 +25,7 @@ finally {
 }
 
 # Pack autorest.csharp npm package "@autorest/csharp"
-$artifactsPath = Resolve-Path (Join-Path $repoRoot '/artifacts/bin/AutoRest.CSharp/Release/net6.0/')
+$artifactsPath = Resolve-Path (Join-Path $repoRoot '/artifacts/bin/AutoRest.CSharp/Release/net7.0/')
 Push-Location $artifactsPath
 try {
     npm version --no-git-tag-version $alphaVersion | Out-Null;

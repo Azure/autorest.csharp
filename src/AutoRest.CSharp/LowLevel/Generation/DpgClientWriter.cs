@@ -225,8 +225,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(_client.ClientOptions.Type));
                 _writer.Line($"{_client.Fields.ClientDiagnosticsProperty.Name:I} = new {_client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
-                FormattableString perCallPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
-                FormattableString perRetryPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
+                FormattableString perCallPolicies = $"{typeof(Array)}.{nameof(Array.Empty)}<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
+                FormattableString perRetryPolicies = $"{typeof(Array)}.{nameof(Array.Empty)}<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryDate(responseType.FrameworkType, response)));
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
                 }
             }
             _writer.Line();

@@ -367,7 +367,7 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "46",
@@ -544,8 +544,8 @@
       },
       {
        "$id": "65",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "66",
         "Name": "String",
@@ -555,7 +555,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": true,
+       "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -571,8 +571,8 @@
       },
       {
        "$id": "68",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
        "Type": {
         "$id": "69",
         "Name": "String",
@@ -582,7 +582,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": false,
+       "IsContentType": true,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -621,7 +621,10 @@
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       },
       {
        "$id": "74",
@@ -646,7 +649,10 @@
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -760,7 +766,10 @@
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "DELETE",
@@ -889,7 +898,10 @@
          }
         }
        ],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",

@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Common.Input
             if (publicClients && generation1ConvenienceClient && isAzureProject)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
-                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
+                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net7.0", "AutoRest.CSharp.dll")))
                 {
                     if (_absoluteProjectFolder is not null)
                     {
