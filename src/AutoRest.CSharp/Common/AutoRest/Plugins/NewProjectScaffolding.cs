@@ -302,6 +302,11 @@ extends:
             {
                 builder.PackageReferences.Add(packages);
             }
+            // TODO -- add this to _brandedDependencyPackages when we remove this flag
+            if (Configuration.UseModelReaderWriter)
+            {
+                builder.PackageReferences.Add(new("System.ClientModel"));
+            }
 
             return builder.Write();
         }
@@ -331,7 +336,6 @@ extends:
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("Azure.Core"),
-            new("System.ClientModel"),
             new("System.Text.Json")
         };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]

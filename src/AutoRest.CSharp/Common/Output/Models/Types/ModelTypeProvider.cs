@@ -441,13 +441,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
-            foreach (var obj in EnumerateHierarchy())
+            InputType? additionalPropertiesValueType = null;
+            foreach (var model in EnumerateHierarchy())
             {
-                additionalPropertiesProperty = obj.AdditionalPropertiesProperty ?? (obj as SerializableObjectType)?.RawDataField;
+                additionalPropertiesProperty = model.AdditionalPropertiesProperty ?? (model as SerializableObjectType)?.RawDataField;
                 if (additionalPropertiesProperty != null)
                 {
                     // if this is a real "AdditionalProperties", we should NOT exclude it in wire
-                    shouldExcludeInWireSerialization = additionalPropertiesProperty != obj.AdditionalPropertiesProperty;
+                    shouldExcludeInWireSerialization = additionalPropertiesProperty != model.AdditionalPropertiesProperty;
+                    if (model is ModelTypeProvider { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
+                    {
+                        additionalPropertiesValueType = inheritedDictionaryType.ValueType;
+                    }
                     break;
                 }
             }
@@ -459,7 +464,17 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
             Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            var valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+            JsonSerialization valueSerialization;
+            if (additionalPropertiesValueType is not null)
+            {
+                // build the serialization when there is an input type corresponding to it
+                valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, dictionaryValueType, false, SerializationFormat.Default);
+            }
+            else
+            {
+                // build a simple one from its type when there is not an input type corresponding to it (indicating it is a raw data field)
+                valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+            }
 
             return new JsonAdditionalPropertiesSerialization(
                 additionalPropertiesProperty,

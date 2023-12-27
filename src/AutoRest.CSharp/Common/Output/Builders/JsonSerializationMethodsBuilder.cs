@@ -700,7 +700,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
             // in the case here, this line returns an empty statement, we only want the value here
-            DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
+            yield return DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
             var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
 
             yield return Serializations.WrapInCheckNotWire(
