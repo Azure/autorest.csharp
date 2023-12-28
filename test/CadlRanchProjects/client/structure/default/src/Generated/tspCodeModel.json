@@ -237,12 +237,23 @@
   },
   {
    "$id": "26",
-   "Name": "Foo",
+   "Name": "Baz",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "27"
+   },
+   "Creatable": false,
+   "Parent": "ServiceClient"
+  },
+  {
+   "$id": "28",
+   "Name": "BazFoo",
    "Description": "",
    "Operations": [
     {
-     "$id": "27",
-     "Name": "three",
+     "$id": "29",
+     "Name": "seven",
      "ResourceName": "Foo",
      "Parameters": [
       {
@@ -252,11 +263,11 @@
        "$ref": "11"
       },
       {
-       "$id": "28",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -271,9 +282,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "32",
         "Type": {
-         "$ref": "29"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
@@ -284,7 +295,226 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "33",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/seven",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "34"
+   },
+   "Creatable": false,
+   "Parent": "Baz"
+  },
+  {
+   "$id": "35",
+   "Name": "Qux",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "36",
+     "Name": "eight",
+     "ResourceName": "Qux",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "37",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "38",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "39",
+        "Type": {
+         "$ref": "38"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "15"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "40",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/eight",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "41"
+   },
+   "Creatable": false,
+   "Parent": "ServiceClient"
+  },
+  {
+   "$id": "42",
+   "Name": "QuxBar",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "43",
+     "Name": "nine",
+     "ResourceName": "Bar",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "44",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "45",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "46",
+        "Type": {
+         "$ref": "45"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "15"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "47",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/nine",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "48"
+   },
+   "Creatable": false,
+   "Parent": "Qux"
+  },
+  {
+   "$id": "49",
+   "Name": "Foo",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "50",
+     "Name": "three",
+     "ResourceName": "Foo",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "51",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "52",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "53",
+        "Type": {
+         "$ref": "52"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "15"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "54",
        "StatusCodes": [
         204
        ],
@@ -302,7 +532,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "32",
+     "$id": "55",
      "Name": "four",
      "ResourceName": "Foo",
      "Parameters": [
@@ -313,11 +543,11 @@
        "$ref": "11"
       },
       {
-       "$id": "33",
+       "$id": "56",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "57",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -332,9 +562,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "58",
         "Type": {
-         "$ref": "34"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
@@ -345,7 +575,7 @@
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "59",
        "StatusCodes": [
         204
        ],
@@ -364,18 +594,18 @@
     }
    ],
    "Protocol": {
-    "$id": "37"
+    "$id": "60"
    },
    "Creatable": false,
    "Parent": "ServiceClient"
   },
   {
-   "$id": "38",
+   "$id": "61",
    "Name": "Bar",
    "Description": "",
    "Operations": [
     {
-     "$id": "39",
+     "$id": "62",
      "Name": "five",
      "ResourceName": "Bar",
      "Parameters": [
@@ -386,11 +616,11 @@
        "$ref": "11"
       },
       {
-       "$id": "40",
+       "$id": "63",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "41",
+        "$id": "64",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -405,9 +635,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "65",
         "Type": {
-         "$ref": "41"
+         "$ref": "64"
         },
         "Value": "application/json"
        }
@@ -418,7 +648,7 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "66",
        "StatusCodes": [
         204
        ],
@@ -436,7 +666,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "44",
+     "$id": "67",
      "Name": "six",
      "ResourceName": "Bar",
      "Parameters": [
@@ -447,11 +677,11 @@
        "$ref": "11"
       },
       {
-       "$id": "45",
+       "$id": "68",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "69",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -466,9 +696,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "70",
         "Type": {
-         "$ref": "46"
+         "$ref": "69"
         },
         "Value": "application/json"
        }
@@ -479,7 +709,7 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "71",
        "StatusCodes": [
         204
        ],
@@ -498,7 +728,7 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "72"
    },
    "Creatable": false,
    "Parent": "ServiceClient"

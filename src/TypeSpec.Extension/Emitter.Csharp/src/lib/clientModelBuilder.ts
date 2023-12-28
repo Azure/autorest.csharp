@@ -179,12 +179,7 @@ export function createModelForService(
     logger.info("routes:" + routes.length);
 
     const clients: InputClient[] = [];
-    const dpgClients = emitterOptions.branded
-        ? listClients(sdkContext)
-        : listClientsByNamespace(
-              context,
-              context.program.getGlobalNamespaceType()
-          );
+    const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
         clients.push(emitClient(client));
         addChildClients(context, client, clients);
@@ -246,55 +241,37 @@ export function createModelForService(
         client: SdkClient | DotnetSdkOperationGroup,
         clients: InputClient[]
     ) {
-        if (emitterOptions.branded) {
-            const dpgOperationGroups = listOperationGroups(
-                sdkContext,
-                client as SdkClient
-            );
-            for (const dpgGroup of dpgOperationGroups) {
-                var dotnetOperationGroup = {
-                    ...dpgGroup,
-                    name: dpgGroup.type.name
-                };
-                var subClient = emitClient(dotnetOperationGroup, client);
-                clients.push(subClient);
-                addChildClients(context, dotnetOperationGroup, clients);
-            }
-        } else {
-            const dpgOperationGroups = listOperationGroupsByClient(
-                context,
-                client
-            );
-            for (const dpgGroup of dpgOperationGroups) {
-                clients.push(emitClient(dpgGroup, client));
-                addChildClients(context, dpgGroup, clients);
-            }
+        const dpgOperationGroups = listOperationGroups(
+            sdkContext,
+            client as SdkClient
+        );
+        for (const dpgGroup of dpgOperationGroups) {
+            var dotnetOperationGroup = {
+                ...dpgGroup,
+                name: dpgGroup.type.name
+            };
+            var subClient = emitClient(dotnetOperationGroup, client);
+            clients.push(subClient);
+            addChildClients(context, dotnetOperationGroup, clients);
         }
     }
 
     function getClientName(
         client: SdkClient | DotnetSdkOperationGroup
     ): string {
-        if (emitterOptions.branded) {
-            return client.kind === ClientKind.SdkClient
-                ? client.name
-                : client.type.name;
-        } else {
-            return client.kind === ClientKind.SdkClient
-                ? `${client.name}Client`
-                : client.name === "Models"
-                ? "ModelsOps"
-                : client.name; //quick fix for reserved namespace need something more robust
+        if (client.kind === ClientKind.SdkClient) {
+            return client.name;
         }
+
+        var pathParts = client.groupPath.split(".");
+        return pathParts?.length >= 3 ? pathParts.slice(pathParts.length - 2).join("") : client.name === "Models" ? "ModelsOps" : client.name;
     }
 
     function emitClient(
         client: SdkClient | DotnetSdkOperationGroup,
         parent?: SdkClient | DotnetSdkOperationGroup
     ): InputClient {
-        const operations = emitterOptions.branded
-            ? listOperationsInOperationGroup(sdkContext, client)
-            : listOperations(context, client);
+        const operations = listOperationsInOperationGroup(sdkContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(

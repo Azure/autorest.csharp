@@ -70,21 +70,6 @@ namespace Client.Structure.Service.Default
             _apiVersion = options.Version;
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='OneAsync(RequestContext)']/*" />
         public virtual async Task<Response> OneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.One");
@@ -101,21 +86,6 @@ namespace Client.Structure.Service.Default
             }
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='One(RequestContext)']/*" />
         public virtual Response One(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.One");
@@ -132,21 +102,6 @@ namespace Client.Structure.Service.Default
             }
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='TwoAsync(RequestContext)']/*" />
         public virtual async Task<Response> TwoAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.Two");
@@ -163,21 +118,6 @@ namespace Client.Structure.Service.Default
             }
         }
 
-        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
-        /// <summary>
-        /// [Protocol Method]
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='Two(RequestContext)']/*" />
         public virtual Response Two(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.Two");
@@ -194,8 +134,22 @@ namespace Client.Structure.Service.Default
             }
         }
 
+        private Baz _cachedBaz;
+        private Qux _cachedQux;
         private Foo _cachedFoo;
         private Bar _cachedBar;
+
+        /// <summary> Initializes a new instance of Baz. </summary>
+        public virtual Baz GetBazClient()
+        {
+            return Volatile.Read(ref _cachedBaz) ?? Interlocked.CompareExchange(ref _cachedBaz, new Baz(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedBaz;
+        }
+
+        /// <summary> Initializes a new instance of Qux. </summary>
+        public virtual Qux GetQuxClient()
+        {
+            return Volatile.Read(ref _cachedQux) ?? Interlocked.CompareExchange(ref _cachedQux, new Qux(ClientDiagnostics, _pipeline, _endpoint, _client, _apiVersion), null) ?? _cachedQux;
+        }
 
         /// <summary> Initializes a new instance of Foo. </summary>
         public virtual Foo GetFooClient()

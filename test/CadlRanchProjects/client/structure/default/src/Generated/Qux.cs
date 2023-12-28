@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -14,8 +15,8 @@ using Azure.Core.Pipeline;
 namespace Client.Structure.Service.Default
 {
     // Data plane generated sub-client.
-    /// <summary> The Foo sub-client. </summary>
-    public partial class Foo
+    /// <summary> The Qux sub-client. </summary>
+    public partial class Qux
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -28,18 +29,18 @@ namespace Client.Structure.Service.Default
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Foo for mocking. </summary>
-        protected Foo()
+        /// <summary> Initializes a new instance of Qux for mocking. </summary>
+        protected Qux()
         {
         }
 
-        /// <summary> Initializes a new instance of Foo. </summary>
+        /// <summary> Initializes a new instance of Qux. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
         /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal Foo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client, string apiVersion)
+        internal Qux(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -48,13 +49,13 @@ namespace Client.Structure.Service.Default
             _apiVersion = apiVersion;
         }
 
-        public virtual async Task<Response> ThreeAsync(RequestContext context = null)
+        public virtual async Task<Response> EightAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Foo.Three");
+            using var scope = ClientDiagnostics.CreateScope("Qux.Eight");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateThreeRequest(context);
+                using HttpMessage message = CreateEightRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -64,13 +65,13 @@ namespace Client.Structure.Service.Default
             }
         }
 
-        public virtual Response Three(RequestContext context = null)
+        public virtual Response Eight(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("Foo.Three");
+            using var scope = ClientDiagnostics.CreateScope("Qux.Eight");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateThreeRequest(context);
+                using HttpMessage message = CreateEightRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -80,39 +81,15 @@ namespace Client.Structure.Service.Default
             }
         }
 
-        public virtual async Task<Response> FourAsync(RequestContext context = null)
+        private QuxBar _cachedQuxBar;
+
+        /// <summary> Initializes a new instance of QuxBar. </summary>
+        public virtual QuxBar GetQuxBarClient()
         {
-            using var scope = ClientDiagnostics.CreateScope("Foo.Four");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateFourRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return Volatile.Read(ref _cachedQuxBar) ?? Interlocked.CompareExchange(ref _cachedQuxBar, new QuxBar(ClientDiagnostics, _pipeline, _endpoint, _client, _apiVersion), null) ?? _cachedQuxBar;
         }
 
-        public virtual Response Four(RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Foo.Four");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateFourRequest(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        internal HttpMessage CreateThreeRequest(RequestContext context)
+        internal HttpMessage CreateEightRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -121,23 +98,7 @@ namespace Client.Structure.Service.Default
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
-            uri.AppendPath("/three", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateFourRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
-            uri.AppendPath("/four", false);
+            uri.AppendPath("/eight", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
