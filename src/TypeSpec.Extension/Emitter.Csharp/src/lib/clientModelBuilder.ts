@@ -92,7 +92,7 @@ export function createModelForService(
     const apiVersions: Set<string> | undefined = new Set<string>();
     let defaultApiVersion: string | undefined = undefined;
     const versions = getVersions(program, service.type)[1]?.getVersions();
-    if (versions) {
+    if (versions && versions.length > 0) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
         }
@@ -180,7 +180,6 @@ export function createModelForService(
                 }
             } else {
                 apiVersionInOperation.Kind = InputOperationParameterKind.Method;
-                apiVersionInOperation.IsApiVersion = false;
             }
         }
     }
