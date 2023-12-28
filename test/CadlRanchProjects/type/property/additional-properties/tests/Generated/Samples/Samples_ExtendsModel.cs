@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_GetExtendsModel_ShortVersion()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response response = client.GetExtendsModel(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_GetExtendsModel_ShortVersion_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response response = await client.GetExtendsModelAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_GetExtendsModel_ShortVersion_Convenience()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response<ExtendsModelAdditionalProperties> response = client.GetExtendsModel();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_GetExtendsModel_ShortVersion_Convenience_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response<ExtendsModelAdditionalProperties> response = await client.GetExtendsModelAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_GetExtendsModel_AllParameters()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response response = client.GetExtendsModel(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_GetExtendsModel_AllParameters_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response response = await client.GetExtendsModelAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_GetExtendsModel_AllParameters_Convenience()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response<ExtendsModelAdditionalProperties> response = client.GetExtendsModel();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_GetExtendsModel_AllParameters_Convenience_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             Response<ExtendsModelAdditionalProperties> response = await client.GetExtendsModelAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_Put_ShortVersion()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -119,7 +119,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_Put_ShortVersion_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -131,7 +131,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_Put_ShortVersion_Convenience()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = client.Put(body);
@@ -141,7 +141,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_Put_ShortVersion_Convenience_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = await client.PutAsync(body);
@@ -151,7 +151,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_Put_AllParameters()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -163,7 +163,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_Put_AllParameters_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -175,7 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModel_Put_AllParameters_Convenience()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = client.Put(body);
@@ -185,7 +185,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModel_Put_AllParameters_Convenience_Async()
         {
-            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+            ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
             ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
             Response response = await client.PutAsync(body);
