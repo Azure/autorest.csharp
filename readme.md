@@ -113,6 +113,24 @@ Once this is done we want to ensure this regen PR is discoverable as well as the
 - Next have any stakeholders that would need to review do so in this PR and mark it as approved or request changes.
 - Once all stakeholders review and approve of the PR we are ready for the next step of merging the autorest.csharp PR.
 
+Sometimes this PR minght be too big to review, for example, https://github.com/Azure/azure-sdk-for-net/pull/40513. These kinds of PR are all expected to have same pattern. But there are too many file changes so that we cannot go one by one. There is an experimental script to parse the diff of that PR and cluster same pattern into a dictionary. So that we could kind of make sure the change is expected.
+
+Here "kind of" means we never have a way could 100% be sure we do the correct clustering. It is just to help us find out abnormal pattern to some degree. Put it another way, it is not accurate but better than nothing.
+
+Here "experimental" means we currently don't have a visualizer to see the result, so that it is not that user friendly. This part would improve later.
+
+Usage: 
+1. Choose an IDE, for example, VS Code, and install the powershell debugger extension.
+2. Add break point at line marked as "# Add break point here", we will visualize the result by seeing `$patternDictionary`.
+3. Debug by running `.\eng\ChangeParser.ps1 -PRNumber XXXX` and see what's in the `$patternDictionary`.
+
+Idealy, it would be like
+
+![patternDictionary](./docs/images/patternDictionary.png)
+
+Go through all of these patterns and almost all the diffs are falling into pattern `[8_9]`. There are several abnormal patterns not in this pattern. So you should review these by checking whether the diff is expected like
+![codeDiff](./docs/images/codeDiff.png)
+
 ### Merge azure-sdk-for-net PR
 
 When the autorest.csharp PR gets merged there will be an automatic azure-sdk-for-net PR created under the [azure-sdk fork](https://github.com/azure-sdk/azure-sdk-for-net) but this PR will not contain any of the Export-API changes nor will it contain any custom changes to fix test cases / snippet references.  It is therefore recommended that we merge this PR into our custom PR we made to validate there are no additional changes we didn't expect.

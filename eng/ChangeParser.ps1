@@ -1,6 +1,7 @@
 # Usage: 
-# 1. Debug by running `.\eng\ChangeParser.ps1 -PRNumber XXXX`
-# 2. Add break point at line 114, visualize the result by seeing `$patternDictionary`
+# 1. Choose an IDE, for example, VS Code, and install the powershell debugger extension.
+# 2. Add break point at line marked as "# Add break point here", we will visualize the result by seeing `$patternDictionary`.
+# 3. Debug by running `.\eng\ChangeParser.ps1 -PRNumber XXXX` and see what in the `$patternDictionary`.
 
 param($PRNumber)
 $diffUrl = "https://patch-diff.githubusercontent.com/raw/Azure/azure-sdk-for-net/pull/$PRNumber.diff"
