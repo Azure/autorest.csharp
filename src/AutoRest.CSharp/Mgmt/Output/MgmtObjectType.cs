@@ -199,8 +199,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // We need this redundant check as the internal backing schema will not be a part of the discriminator implementations of its base type.
             if (ObjectSchema.DiscriminatorValue == "Unknown" &&
-                ObjectSchema.Parents?.All.Count == 1 &&
-                ObjectSchema.Parents.All.First().Equals(schemaObjectType.ObjectSchema))
+                ObjectSchema.Parents?.Immediate.Count == 1 &&
+                ObjectSchema.Parents.Immediate.First().Equals(schemaObjectType.ObjectSchema))
             {
                 descendantTypes.Add(Type);
             }
