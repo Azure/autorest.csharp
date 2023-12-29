@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call WithAndAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAndAsync("<and>");
 
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAndAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAndAsync("<and>");
 
@@ -24,7 +24,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAnd.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAnd("<and>");
 
@@ -32,7 +32,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAnd with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAnd("<and>");
 
@@ -43,7 +43,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAsAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAsAsync("<as>");
 
@@ -51,7 +51,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAsAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAsAsync("<as>");
 
@@ -62,7 +62,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAs.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAs("<as>");
 
@@ -70,7 +70,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAs with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAs("<as>");
 
@@ -81,7 +81,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAssertAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAssertAsync("<assert>");
 
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAssertAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAssertAsync("<assert>");
 
@@ -100,7 +100,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAssert.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAssert("<assert>");
 
@@ -108,7 +108,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAssert with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAssert("<assert>");
 
@@ -119,7 +119,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAsyncAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAsyncAsync("<async>");
 
@@ -127,7 +127,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAsyncAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAsyncAsync("<async>");
 
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAsync("<async>");
 
@@ -146,7 +146,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAsync("<async>");
 
@@ -157,7 +157,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAwaitAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAwaitAsync("<await>");
 
@@ -165,7 +165,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAwaitAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithAwaitAsync("<await>");
 
@@ -176,7 +176,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAwait.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAwait("<await>");
 
@@ -184,7 +184,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAwait with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithAwait("<await>");
 
@@ -195,7 +195,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithBreakAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithBreakAsync("<break>");
 
@@ -203,7 +203,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithBreakAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithBreakAsync("<break>");
 
@@ -214,7 +214,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithBreak.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithBreak("<break>");
 
@@ -222,7 +222,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithBreak with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithBreak("<break>");
 
@@ -233,7 +233,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithClassAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithClassAsync("<class>");
 
@@ -241,7 +241,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithClassAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithClassAsync("<class>");
 
@@ -252,7 +252,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithClass.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithClass("<class>");
 
@@ -260,7 +260,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithClass with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithClass("<class>");
 
@@ -271,7 +271,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithConstructorAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithConstructorAsync("<constructor>");
 
@@ -279,7 +279,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithConstructorAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithConstructorAsync("<constructor>");
 
@@ -290,7 +290,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithConstructor.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithConstructor("<constructor>");
 
@@ -298,7 +298,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithConstructor with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithConstructor("<constructor>");
 
@@ -309,7 +309,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithContinueAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithContinueAsync("<continue>");
 
@@ -317,7 +317,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithContinueAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithContinueAsync("<continue>");
 
@@ -328,7 +328,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithContinue.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithContinue("<continue>");
 
@@ -336,7 +336,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithContinue with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithContinue("<continue>");
 
@@ -347,7 +347,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDefAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithDefAsync("<def>");
 
@@ -355,7 +355,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDefAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithDefAsync("<def>");
 
@@ -366,7 +366,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDef.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithDef("<def>");
 
@@ -374,7 +374,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDef with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithDef("<def>");
 
@@ -385,7 +385,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDelAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithDelAsync("<del>");
 
@@ -393,7 +393,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDelAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithDelAsync("<del>");
 
@@ -404,7 +404,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDel.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithDel("<del>");
 
@@ -412,7 +412,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDel with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithDel("<del>");
 
@@ -423,7 +423,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElifAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithElifAsync("<elif>");
 
@@ -431,7 +431,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElifAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithElifAsync("<elif>");
 
@@ -442,7 +442,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElif.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithElif("<elif>");
 
@@ -450,7 +450,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElif with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithElif("<elif>");
 
@@ -461,7 +461,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElseAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithElseAsync("<else>");
 
@@ -469,7 +469,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElseAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithElseAsync("<else>");
 
@@ -480,7 +480,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElse.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithElse("<else>");
 
@@ -488,7 +488,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElse with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithElse("<else>");
 
@@ -499,7 +499,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExceptAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithExceptAsync("<except>");
 
@@ -507,7 +507,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExceptAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithExceptAsync("<except>");
 
@@ -518,7 +518,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExcept.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithExcept("<except>");
 
@@ -526,7 +526,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExcept with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithExcept("<except>");
 
@@ -537,7 +537,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExecAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithExecAsync("<exec>");
 
@@ -545,7 +545,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExecAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithExecAsync("<exec>");
 
@@ -556,7 +556,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExec.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithExec("<exec>");
 
@@ -564,7 +564,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExec with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithExec("<exec>");
 
@@ -575,7 +575,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFinallyAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithFinallyAsync("<finally>");
 
@@ -583,7 +583,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFinallyAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithFinallyAsync("<finally>");
 
@@ -594,7 +594,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFinally.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithFinally("<finally>");
 
@@ -602,7 +602,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFinally with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithFinally("<finally>");
 
@@ -613,7 +613,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithForAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithForAsync("<for>");
 
@@ -621,7 +621,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithForAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithForAsync("<for>");
 
@@ -632,7 +632,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFor.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithFor("<for>");
 
@@ -640,7 +640,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFor with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithFor("<for>");
 
@@ -651,7 +651,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFromAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithFromAsync("<from>");
 
@@ -659,7 +659,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFromAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithFromAsync("<from>");
 
@@ -670,7 +670,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFrom.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithFrom("<from>");
 
@@ -678,7 +678,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFrom with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithFrom("<from>");
 
@@ -689,7 +689,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithGlobalAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithGlobalAsync("<global>");
 
@@ -697,7 +697,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithGlobalAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithGlobalAsync("<global>");
 
@@ -708,7 +708,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithGlobal.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithGlobal("<global>");
 
@@ -716,7 +716,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithGlobal with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithGlobal("<global>");
 
@@ -727,7 +727,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIfAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithIfAsync("<if>");
 
@@ -735,7 +735,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIfAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithIfAsync("<if>");
 
@@ -746,7 +746,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIf.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithIf("<if>");
 
@@ -754,7 +754,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIf with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithIf("<if>");
 
@@ -765,7 +765,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithImportAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithImportAsync("<import>");
 
@@ -773,7 +773,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithImportAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithImportAsync("<import>");
 
@@ -784,7 +784,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithImport.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithImport("<import>");
 
@@ -792,7 +792,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithImport with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithImport("<import>");
 
@@ -803,7 +803,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithInAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithInAsync("<in>");
 
@@ -811,7 +811,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithInAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithInAsync("<in>");
 
@@ -822,7 +822,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIn.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithIn("<in>");
 
@@ -830,7 +830,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIn with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithIn("<in>");
 
@@ -841,7 +841,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIsAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithIsAsync("<is>");
 
@@ -849,7 +849,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIsAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithIsAsync("<is>");
 
@@ -860,7 +860,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIs.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithIs("<is>");
 
@@ -868,7 +868,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIs with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithIs("<is>");
 
@@ -879,7 +879,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithLambdaAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithLambdaAsync("<lambda>");
 
@@ -887,7 +887,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithLambdaAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithLambdaAsync("<lambda>");
 
@@ -898,7 +898,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithLambda.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithLambda("<lambda>");
 
@@ -906,7 +906,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithLambda with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithLambda("<lambda>");
 
@@ -917,7 +917,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithNotAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithNotAsync("<not>");
 
@@ -925,7 +925,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithNotAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithNotAsync("<not>");
 
@@ -936,7 +936,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithNot.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithNot("<not>");
 
@@ -944,7 +944,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithNot with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithNot("<not>");
 
@@ -955,7 +955,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithOrAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithOrAsync("<or>");
 
@@ -963,7 +963,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithOrAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithOrAsync("<or>");
 
@@ -974,7 +974,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithOr.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithOr("<or>");
 
@@ -982,7 +982,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithOr with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithOr("<or>");
 
@@ -993,7 +993,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithPassAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithPassAsync("<pass>");
 
@@ -1001,7 +1001,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithPassAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithPassAsync("<pass>");
 
@@ -1012,7 +1012,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithPass.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithPass("<pass>");
 
@@ -1020,7 +1020,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithPass with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithPass("<pass>");
 
@@ -1031,7 +1031,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithRaiseAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithRaiseAsync("<raise>");
 
@@ -1039,7 +1039,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithRaiseAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithRaiseAsync("<raise>");
 
@@ -1050,7 +1050,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithRaise.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithRaise("<raise>");
 
@@ -1058,7 +1058,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithRaise with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithRaise("<raise>");
 
@@ -1069,7 +1069,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithReturnAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithReturnAsync("<return>");
 
@@ -1077,7 +1077,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithReturnAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithReturnAsync("<return>");
 
@@ -1088,7 +1088,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithReturn.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithReturn("<return>");
 
@@ -1096,7 +1096,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithReturn with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithReturn("<return>");
 
@@ -1107,7 +1107,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithTryAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithTryAsync("<try>");
 
@@ -1115,7 +1115,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithTryAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithTryAsync("<try>");
 
@@ -1126,7 +1126,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithTry.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithTry("<try>");
 
@@ -1134,7 +1134,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithTry with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithTry("<try>");
 
@@ -1145,7 +1145,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWhileAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithWhileAsync("<while>");
 
@@ -1153,7 +1153,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWhileAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithWhileAsync("<while>");
 
@@ -1164,7 +1164,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWhile.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithWhile("<while>");
 
@@ -1172,7 +1172,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWhile with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithWhile("<while>");
 
@@ -1183,7 +1183,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWithAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithWithAsync("<with>");
 
@@ -1191,7 +1191,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWithAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithWithAsync("<with>");
 
@@ -1202,7 +1202,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWith.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithWith("<with>");
 
@@ -1210,7 +1210,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWith with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithWith("<with>");
 
@@ -1221,7 +1221,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithYieldAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithYieldAsync("<yield>");
 
@@ -1229,7 +1229,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithYieldAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithYieldAsync("<yield>");
 
@@ -1240,7 +1240,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithYield.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithYield("<yield>");
 
@@ -1248,7 +1248,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithYield with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithYield("<yield>");
 
@@ -1259,7 +1259,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithCancellationTokenAsync.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithCancellationTokenAsync("<cancellationToken>");
 
@@ -1267,7 +1267,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithCancellationTokenAsync with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = await client.WithCancellationTokenAsync("<cancellationToken>");
 
@@ -1278,7 +1278,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithCancellationToken.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithCancellationToken("<cancellationToken>");
 
@@ -1286,7 +1286,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithCancellationToken with all parameters.
 <code><![CDATA[
-Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+Parameters client = new SpecialWordsClient().GetParametersClient();
 
 Response response = client.WithCancellationToken("<cancellationToken>");
 

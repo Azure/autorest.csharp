@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_GetMixedLiteral_ShortVersion()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = client.GetMixedLiteral(null);
 
@@ -38,7 +38,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_GetMixedLiteral_ShortVersion_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = await client.GetMixedLiteralAsync(null);
 
@@ -53,7 +53,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_GetMixedLiteral_ShortVersion_Convenience()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response<object> response = client.GetMixedLiteral();
         }
@@ -62,7 +62,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_GetMixedLiteral_ShortVersion_Convenience_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response<object> response = await client.GetMixedLiteralAsync();
         }
@@ -71,7 +71,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_GetMixedLiteral_AllParameters()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = client.GetMixedLiteral(null);
 
@@ -86,7 +86,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_GetMixedLiteral_AllParameters_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = await client.GetMixedLiteralAsync(null);
 
@@ -101,7 +101,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_GetMixedLiteral_AllParameters_Convenience()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response<object> response = client.GetMixedLiteral();
         }
@@ -110,7 +110,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_GetMixedLiteral_AllParameters_Convenience_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response<object> response = await client.GetMixedLiteralAsync();
         }
@@ -119,7 +119,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_Send_ShortVersion()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -134,7 +134,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_Send_ShortVersion_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -149,7 +149,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_Send_ShortVersion_Convenience()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -158,7 +158,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_Send_ShortVersion_Convenience_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }
@@ -167,7 +167,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_Send_AllParameters()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -182,7 +182,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_Send_AllParameters_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -197,7 +197,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedLiterals_Send_AllParameters_Convenience()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -206,7 +206,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedLiterals_Send_AllParameters_Convenience_Async()
         {
-            MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+            MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }

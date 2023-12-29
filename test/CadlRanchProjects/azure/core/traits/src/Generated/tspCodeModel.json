@@ -160,22 +160,14 @@
        "$id": "21",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "22",
-        "Name": "String",
+        "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
        "DefaultValue": {
         "$id": "23",
         "Type": {
@@ -185,7 +177,15 @@
          "IsNullable": false
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
        "$id": "25",
@@ -434,15 +434,36 @@
        "$ref": "17"
       },
       {
-       "$ref": "21"
+       "$id": "50",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "51",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "23"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "50",
+       "$id": "52",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "51",
+        "$id": "53",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -458,12 +479,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "52",
+       "$id": "54",
        "Name": "repeatabilityRequestId",
        "NameInRequest": "Repeatability-Request-ID",
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "53",
+        "$id": "55",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -479,12 +500,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "56",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Description": "Specifies the date and time at which the request was first created.",
        "Type": {
-        "$id": "55",
+        "$id": "57",
         "Name": "utcDateTime",
         "Kind": "DateTime",
         "IsNullable": false
@@ -500,7 +521,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "56",
+       "$id": "58",
        "Name": "UserActionParam",
        "NameInRequest": "UserActionParam",
        "Description": "User action param",
@@ -518,11 +539,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "57",
+       "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "60",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -537,19 +558,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "61",
         "Type": {
-         "$ref": "58"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "60",
+       "$id": "62",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "61",
+        "$id": "63",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -564,9 +585,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "62",
+        "$id": "64",
         "Type": {
-         "$ref": "61"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
@@ -574,7 +595,7 @@
      ],
      "Responses": [
       {
-       "$id": "63",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
@@ -584,19 +605,19 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "64",
+         "$id": "66",
          "Name": "Repeatability-Result",
          "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$id": "65",
+          "$id": "67",
           "Name": "Union",
           "UnionItemTypes": [
            {
-            "$id": "66",
+            "$id": "68",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "67",
+             "$id": "69",
              "Name": "String",
              "Kind": "String",
              "IsNullable": false
@@ -605,10 +626,10 @@
             "IsNullable": false
            },
            {
-            "$id": "68",
+            "$id": "70",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "69",
+             "$id": "71",
              "Name": "String",
              "Kind": "String",
              "IsNullable": false
@@ -640,7 +661,7 @@
     }
    ],
    "Protocol": {
-    "$id": "70"
+    "$id": "72"
    },
    "Creatable": true
   }

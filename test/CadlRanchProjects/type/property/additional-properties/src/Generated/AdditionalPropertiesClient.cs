@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,144 +44,103 @@ namespace _Type.Property.AdditionalProperties
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of ExtendsUnknown. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtendsUnknown GetExtendsUnknownClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private ExtendsUnknown _cachedExtendsUnknown;
+        private ExtendsUnknownDerived _cachedExtendsUnknownDerived;
+        private ExtendsUnknownDiscriminated _cachedExtendsUnknownDiscriminated;
+        private IsUnknown _cachedIsUnknown;
+        private IsUnknownDerived _cachedIsUnknownDerived;
+        private IsUnknownDiscriminated _cachedIsUnknownDiscriminated;
+        private ExtendsString _cachedExtendsString;
+        private IsString _cachedIsString;
+        private ExtendsFloat _cachedExtendsFloat;
+        private IsFloat _cachedIsFloat;
+        private ExtendsModel _cachedExtendsModel;
+        private IsModel _cachedIsModel;
+        private ExtendsModelArray _cachedExtendsModelArray;
+        private IsModelArray _cachedIsModelArray;
 
-            return new ExtendsUnknown(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of ExtendsUnknown. </summary>
+        public virtual ExtendsUnknown GetExtendsUnknownClient()
+        {
+            return Volatile.Read(ref _cachedExtendsUnknown) ?? Interlocked.CompareExchange(ref _cachedExtendsUnknown, new ExtendsUnknown(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsUnknown;
         }
 
         /// <summary> Initializes a new instance of ExtendsUnknownDerived. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtendsUnknownDerived GetExtendsUnknownDerivedClient(string apiVersion = "1.0.0")
+        public virtual ExtendsUnknownDerived GetExtendsUnknownDerivedClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ExtendsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedExtendsUnknownDerived) ?? Interlocked.CompareExchange(ref _cachedExtendsUnknownDerived, new ExtendsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsUnknownDerived;
         }
 
         /// <summary> Initializes a new instance of ExtendsUnknownDiscriminated. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtendsUnknownDiscriminated GetExtendsUnknownDiscriminatedClient(string apiVersion = "1.0.0")
+        public virtual ExtendsUnknownDiscriminated GetExtendsUnknownDiscriminatedClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ExtendsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedExtendsUnknownDiscriminated) ?? Interlocked.CompareExchange(ref _cachedExtendsUnknownDiscriminated, new ExtendsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsUnknownDiscriminated;
         }
 
         /// <summary> Initializes a new instance of IsUnknown. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IsUnknown GetIsUnknownClient(string apiVersion = "1.0.0")
+        public virtual IsUnknown GetIsUnknownClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IsUnknown(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIsUnknown) ?? Interlocked.CompareExchange(ref _cachedIsUnknown, new IsUnknown(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsUnknown;
         }
 
         /// <summary> Initializes a new instance of IsUnknownDerived. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IsUnknownDerived GetIsUnknownDerivedClient(string apiVersion = "1.0.0")
+        public virtual IsUnknownDerived GetIsUnknownDerivedClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIsUnknownDerived) ?? Interlocked.CompareExchange(ref _cachedIsUnknownDerived, new IsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsUnknownDerived;
         }
 
         /// <summary> Initializes a new instance of IsUnknownDiscriminated. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IsUnknownDiscriminated GetIsUnknownDiscriminatedClient(string apiVersion = "1.0.0")
+        public virtual IsUnknownDiscriminated GetIsUnknownDiscriminatedClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIsUnknownDiscriminated) ?? Interlocked.CompareExchange(ref _cachedIsUnknownDiscriminated, new IsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsUnknownDiscriminated;
         }
 
         /// <summary> Initializes a new instance of ExtendsString. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtendsString GetExtendsStringClient(string apiVersion = "1.0.0")
+        public virtual ExtendsString GetExtendsStringClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ExtendsString(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedExtendsString) ?? Interlocked.CompareExchange(ref _cachedExtendsString, new ExtendsString(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsString;
         }
 
         /// <summary> Initializes a new instance of IsString. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IsString GetIsStringClient(string apiVersion = "1.0.0")
+        public virtual IsString GetIsStringClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IsString(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIsString) ?? Interlocked.CompareExchange(ref _cachedIsString, new IsString(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsString;
         }
 
         /// <summary> Initializes a new instance of ExtendsFloat. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtendsFloat GetExtendsFloatClient(string apiVersion = "1.0.0")
+        public virtual ExtendsFloat GetExtendsFloatClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ExtendsFloat(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedExtendsFloat) ?? Interlocked.CompareExchange(ref _cachedExtendsFloat, new ExtendsFloat(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsFloat;
         }
 
         /// <summary> Initializes a new instance of IsFloat. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IsFloat GetIsFloatClient(string apiVersion = "1.0.0")
+        public virtual IsFloat GetIsFloatClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IsFloat(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIsFloat) ?? Interlocked.CompareExchange(ref _cachedIsFloat, new IsFloat(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsFloat;
         }
 
         /// <summary> Initializes a new instance of ExtendsModel. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtendsModel GetExtendsModelClient(string apiVersion = "1.0.0")
+        public virtual ExtendsModel GetExtendsModelClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ExtendsModel(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedExtendsModel) ?? Interlocked.CompareExchange(ref _cachedExtendsModel, new ExtendsModel(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsModel;
         }
 
         /// <summary> Initializes a new instance of IsModel. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IsModel GetIsModelClient(string apiVersion = "1.0.0")
+        public virtual IsModel GetIsModelClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IsModel(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIsModel) ?? Interlocked.CompareExchange(ref _cachedIsModel, new IsModel(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsModel;
         }
 
         /// <summary> Initializes a new instance of ExtendsModelArray. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ExtendsModelArray GetExtendsModelArrayClient(string apiVersion = "1.0.0")
+        public virtual ExtendsModelArray GetExtendsModelArrayClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ExtendsModelArray(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedExtendsModelArray) ?? Interlocked.CompareExchange(ref _cachedExtendsModelArray, new ExtendsModelArray(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsModelArray;
         }
 
         /// <summary> Initializes a new instance of IsModelArray. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IsModelArray GetIsModelArrayClient(string apiVersion = "1.0.0")
+        public virtual IsModelArray GetIsModelArrayClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IsModelArray(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIsModelArray) ?? Interlocked.CompareExchange(ref _cachedIsModelArray, new IsModelArray(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsModelArray;
         }
     }
 }

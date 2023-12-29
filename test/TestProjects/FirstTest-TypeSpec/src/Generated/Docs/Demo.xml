@@ -6,7 +6,7 @@
 This sample shows how to call SayHiAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -23,7 +23,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHiAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -48,7 +48,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHi and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 This sample shows how to call SayHi with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 

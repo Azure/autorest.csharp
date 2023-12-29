@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_GetIsString_ShortVersion()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response response = client.GetIsString(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_GetIsString_ShortVersion_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response response = await client.GetIsStringAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_GetIsString_ShortVersion_Convenience()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response<IsStringAdditionalProperties> response = client.GetIsString();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_GetIsString_ShortVersion_Convenience_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response<IsStringAdditionalProperties> response = await client.GetIsStringAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_GetIsString_AllParameters()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response response = client.GetIsString(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_GetIsString_AllParameters_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response response = await client.GetIsStringAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_GetIsString_AllParameters_Convenience()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response<IsStringAdditionalProperties> response = client.GetIsString();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_GetIsString_AllParameters_Convenience_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             Response<IsStringAdditionalProperties> response = await client.GetIsStringAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_Put_ShortVersion()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_Put_ShortVersion_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_Put_ShortVersion_Convenience()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_Put_ShortVersion_Convenience_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_Put_AllParameters()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_Put_AllParameters_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsString_Put_AllParameters_Convenience()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsString_Put_AllParameters_Convenience_Async()
         {
-            IsString client = new AdditionalPropertiesClient().GetIsStringClient(apiVersion: "1.0.0");
+            IsString client = new AdditionalPropertiesClient().GetIsStringClient();
 
             IsStringAdditionalProperties body = new IsStringAdditionalProperties("<name>");
             Response response = await client.PutAsync(body);

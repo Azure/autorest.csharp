@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetIsUnknownAsync.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response<IsUnknownAdditionalProperties> response = await client.GetIsUnknownAsync();
 ]]></code>
 This sample shows how to call GetIsUnknownAsync with all parameters.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response<IsUnknownAdditionalProperties> response = await client.GetIsUnknownAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IsUnknownAdditionalProperties> response = await client.GetIsUnknownAsyn
       <example>
 This sample shows how to call GetIsUnknown.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response<IsUnknownAdditionalProperties> response = client.GetIsUnknown();
 ]]></code>
 This sample shows how to call GetIsUnknown with all parameters.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response<IsUnknownAdditionalProperties> response = client.GetIsUnknown();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IsUnknownAdditionalProperties> response = client.GetIsUnknown();
       <example>
 This sample shows how to call GetIsUnknownAsync and parse the result.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response response = await client.GetIsUnknownAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetIsUnknownAsync with all parameters and parse the result.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response response = await client.GetIsUnknownAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call GetIsUnknown and parse the result.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response response = client.GetIsUnknown(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetIsUnknown with all parameters and parse the result.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 Response response = client.GetIsUnknown(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 IsUnknownAdditionalProperties body = new IsUnknownAdditionalProperties("<name>");
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 IsUnknownAdditionalProperties body = new IsUnknownAdditionalProperties("<name>");
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 IsUnknownAdditionalProperties body = new IsUnknownAdditionalProperties("<name>");
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 IsUnknownAdditionalProperties body = new IsUnknownAdditionalProperties("<name>");
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient(apiVersion: "1.0.0");
+IsUnknown client = new AdditionalPropertiesClient().GetIsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {

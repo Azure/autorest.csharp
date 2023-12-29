@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetExtendsUnknownAsync.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response<ExtendsUnknownAdditionalProperties> response = await client.GetExtendsUnknownAsync();
 ]]></code>
 This sample shows how to call GetExtendsUnknownAsync with all parameters.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response<ExtendsUnknownAdditionalProperties> response = await client.GetExtendsUnknownAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<ExtendsUnknownAdditionalProperties> response = await client.GetExtendsU
       <example>
 This sample shows how to call GetExtendsUnknown.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response<ExtendsUnknownAdditionalProperties> response = client.GetExtendsUnknown();
 ]]></code>
 This sample shows how to call GetExtendsUnknown with all parameters.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response<ExtendsUnknownAdditionalProperties> response = client.GetExtendsUnknown();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<ExtendsUnknownAdditionalProperties> response = client.GetExtendsUnknown
       <example>
 This sample shows how to call GetExtendsUnknownAsync and parse the result.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response response = await client.GetExtendsUnknownAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetExtendsUnknownAsync with all parameters and parse the result.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response response = await client.GetExtendsUnknownAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call GetExtendsUnknown and parse the result.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response response = client.GetExtendsUnknown(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetExtendsUnknown with all parameters and parse the result.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 Response response = client.GetExtendsUnknown(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
 using RequestContent content = RequestContent.Create(new
 {

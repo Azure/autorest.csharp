@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetIsUnknownDiscriminatedAsync.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response<IsUnknownAdditionalPropertiesDiscriminated> response = await client.GetIsUnknownDiscriminatedAsync();
 ]]></code>
 This sample shows how to call GetIsUnknownDiscriminatedAsync with all parameters.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response<IsUnknownAdditionalPropertiesDiscriminated> response = await client.GetIsUnknownDiscriminatedAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IsUnknownAdditionalPropertiesDiscriminated> response = await client.Get
       <example>
 This sample shows how to call GetIsUnknownDiscriminated.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response<IsUnknownAdditionalPropertiesDiscriminated> response = client.GetIsUnknownDiscriminated();
 ]]></code>
 This sample shows how to call GetIsUnknownDiscriminated with all parameters.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response<IsUnknownAdditionalPropertiesDiscriminated> response = client.GetIsUnknownDiscriminated();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IsUnknownAdditionalPropertiesDiscriminated> response = client.GetIsUnkn
       <example>
 This sample shows how to call GetIsUnknownDiscriminatedAsync and parse the result.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
@@ -45,7 +45,7 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetIsUnknownDiscriminatedAsync with all parameters and parse the result.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
@@ -58,7 +58,7 @@ Console.WriteLine(result.GetProperty("kind").ToString());
       <example>
 This sample shows how to call GetIsUnknownDiscriminated and parse the result.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response response = client.GetIsUnknownDiscriminated(null);
 
@@ -68,7 +68,7 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call GetIsUnknownDiscriminated with all parameters and parse the result.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 Response response = client.GetIsUnknownDiscriminated(null);
 
@@ -81,14 +81,14 @@ Console.WriteLine(result.GetProperty("kind").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234)
 {
@@ -101,14 +101,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234)
 {
@@ -121,7 +121,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -135,7 +135,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -153,7 +153,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -167,7 +167,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
 using RequestContent content = RequestContent.Create(new
 {

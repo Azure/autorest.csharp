@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Client.Structure.Service.Default.csproj" />
+    <ProjectReference Include="..\src\Server.Versions.Versioned.csproj" />
   </ItemGroup>
 
   <ItemGroup>

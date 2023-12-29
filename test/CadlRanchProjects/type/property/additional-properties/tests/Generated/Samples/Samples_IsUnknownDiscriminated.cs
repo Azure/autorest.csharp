@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_ShortVersion()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response response = client.GetIsUnknownDiscriminated(null);
 
@@ -36,7 +36,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_ShortVersion_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
@@ -49,7 +49,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_ShortVersion_Convenience()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response<IsUnknownAdditionalPropertiesDiscriminated> response = client.GetIsUnknownDiscriminated();
         }
@@ -58,7 +58,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_ShortVersion_Convenience_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response<IsUnknownAdditionalPropertiesDiscriminated> response = await client.GetIsUnknownDiscriminatedAsync();
         }
@@ -67,7 +67,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_AllParameters()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response response = client.GetIsUnknownDiscriminated(null);
 
@@ -80,7 +80,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_AllParameters_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response response = await client.GetIsUnknownDiscriminatedAsync(null);
 
@@ -93,7 +93,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_AllParameters_Convenience()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response<IsUnknownAdditionalPropertiesDiscriminated> response = client.GetIsUnknownDiscriminated();
         }
@@ -102,7 +102,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_GetIsUnknownDiscriminated_AllParameters_Convenience_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             Response<IsUnknownAdditionalPropertiesDiscriminated> response = await client.GetIsUnknownDiscriminatedAsync();
         }
@@ -111,7 +111,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_Put_ShortVersion()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -128,7 +128,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_Put_ShortVersion_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -145,7 +145,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_Put_ShortVersion_Convenience()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234);
             Response response = client.Put(body);
@@ -155,7 +155,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_Put_ShortVersion_Convenience_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234);
             Response response = await client.PutAsync(body);
@@ -165,7 +165,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_Put_AllParameters()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -183,7 +183,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_Put_AllParameters_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -201,7 +201,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsUnknownDiscriminated_Put_AllParameters_Convenience()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234)
             {
@@ -214,7 +214,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsUnknownDiscriminated_Put_AllParameters_Convenience_Async()
         {
-            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient(apiVersion: "1.0.0");
+            IsUnknownDiscriminated client = new AdditionalPropertiesClient().GetIsUnknownDiscriminatedClient();
 
             IsUnknownAdditionalPropertiesDiscriminated body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("<name>", 1234)
             {

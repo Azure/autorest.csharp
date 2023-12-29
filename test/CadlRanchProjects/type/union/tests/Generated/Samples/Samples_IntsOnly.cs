@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_GetIntsOnly_ShortVersion()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = client.GetIntsOnly(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_GetIntsOnly_ShortVersion_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = await client.GetIntsOnlyAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_GetIntsOnly_ShortVersion_Convenience()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response<object> response = client.GetIntsOnly();
         }
@@ -56,7 +56,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_GetIntsOnly_ShortVersion_Convenience_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response<object> response = await client.GetIntsOnlyAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_GetIntsOnly_AllParameters()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = client.GetIntsOnly(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_GetIntsOnly_AllParameters_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = await client.GetIntsOnlyAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_GetIntsOnly_AllParameters_Convenience()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response<object> response = client.GetIntsOnly();
         }
@@ -98,7 +98,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_GetIntsOnly_AllParameters_Convenience_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response<object> response = await client.GetIntsOnlyAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_Send_ShortVersion()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_Send_ShortVersion_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_Send_ShortVersion_Convenience()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -146,7 +146,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_Send_ShortVersion_Convenience_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }
@@ -155,7 +155,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_Send_AllParameters()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -170,7 +170,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_Send_AllParameters_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -185,7 +185,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntsOnly_Send_AllParameters_Convenience()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -194,7 +194,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntsOnly_Send_AllParameters_Convenience_Async()
         {
-            IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
+            IntsOnly client = new UnionClient().GetIntsOnlyClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }

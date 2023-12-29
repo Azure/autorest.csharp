@@ -20,7 +20,6 @@ namespace ClientAndOperationGroup
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -52,7 +51,6 @@ namespace ClientAndOperationGroup
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary>
@@ -181,13 +179,13 @@ namespace ClientAndOperationGroup
         /// <summary> Initializes a new instance of Beta. </summary>
         public virtual Beta GetBetaClient()
         {
-            return Volatile.Read(ref _cachedBeta) ?? Interlocked.CompareExchange(ref _cachedBeta, new Beta(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedBeta;
+            return Volatile.Read(ref _cachedBeta) ?? Interlocked.CompareExchange(ref _cachedBeta, new Beta(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedBeta;
         }
 
         /// <summary> Initializes a new instance of Gamma. </summary>
         public virtual Gamma GetGammaClient()
         {
-            return Volatile.Read(ref _cachedGamma) ?? Interlocked.CompareExchange(ref _cachedGamma, new Gamma(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedGamma;
+            return Volatile.Read(ref _cachedGamma) ?? Interlocked.CompareExchange(ref _cachedGamma, new Gamma(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedGamma;
         }
 
         internal HttpMessage CreateZeroRequest(RequestContext context)
@@ -198,7 +196,6 @@ namespace ClientAndOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -212,7 +209,6 @@ namespace ClientAndOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/Alpha", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

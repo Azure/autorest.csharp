@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core;
 
 namespace lro
@@ -13,25 +12,5 @@ namespace lro
     /// <summary> Client options for LroClient. </summary>
     public partial class LroClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "0.1.0". </summary>
-            V0_1_0 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of LroClientOptions. </summary>
-        public LroClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V0_1_0 => "0.1.0",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }
