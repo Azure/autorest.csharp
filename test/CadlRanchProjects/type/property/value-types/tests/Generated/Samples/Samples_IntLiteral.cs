@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_GetIntLiteral_ShortVersion()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response response = client.GetIntLiteral(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_GetIntLiteral_ShortVersion_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response response = await client.GetIntLiteralAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_GetIntLiteral_ShortVersion_Convenience()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response<IntLiteralProperty> response = client.GetIntLiteral();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_GetIntLiteral_ShortVersion_Convenience_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response<IntLiteralProperty> response = await client.GetIntLiteralAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_GetIntLiteral_AllParameters()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response response = client.GetIntLiteral(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_GetIntLiteral_AllParameters_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response response = await client.GetIntLiteralAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_GetIntLiteral_AllParameters_Convenience()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response<IntLiteralProperty> response = client.GetIntLiteral();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_GetIntLiteral_AllParameters_Convenience_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             Response<IntLiteralProperty> response = await client.GetIntLiteralAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_Put_ShortVersion()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_Put_ShortVersion_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_Put_ShortVersion_Convenience()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             IntLiteralProperty body = new IntLiteralProperty();
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_Put_ShortVersion_Convenience_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             IntLiteralProperty body = new IntLiteralProperty();
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_Put_AllParameters()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_Put_AllParameters_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IntLiteral_Put_AllParameters_Convenience()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             IntLiteralProperty body = new IntLiteralProperty();
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IntLiteral_Put_AllParameters_Convenience_Async()
         {
-            IntLiteral client = new ValueTypesClient().GetIntLiteralClient(apiVersion: "1.0.0");
+            IntLiteral client = new ValueTypesClient().GetIntLiteralClient();
 
             IntLiteralProperty body = new IntLiteralProperty();
             Response response = await client.PutAsync(body);

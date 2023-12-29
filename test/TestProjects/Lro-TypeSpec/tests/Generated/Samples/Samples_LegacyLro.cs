@@ -25,9 +25,9 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            Response response = client.GetJob(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = client.GetJob(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), "<apiVersion>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -40,9 +40,9 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            Response response = await client.GetJobAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = await client.GetJobAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), "<apiVersion>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -55,9 +55,9 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            Response response = client.GetJob(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = client.GetJob(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), "<apiVersion>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -78,9 +78,9 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
-            Response response = await client.GetJobAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
+            Response response = await client.GetJobAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), "<apiVersion>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -101,7 +101,7 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -110,7 +110,7 @@ namespace lro.Samples
 "<patients>"
             },
             });
-            Operation<BinaryData> operation = client.CreateJob(WaitUntil.Completed, content);
+            Operation<BinaryData> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", content);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -123,7 +123,7 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -132,7 +132,7 @@ namespace lro.Samples
 "<patients>"
             },
             });
-            Operation<BinaryData> operation = await client.CreateJobAsync(WaitUntil.Completed, content);
+            Operation<BinaryData> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", content);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -145,10 +145,10 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" });
-            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
 
@@ -158,10 +158,10 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" });
-            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
 
@@ -171,7 +171,7 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -181,7 +181,7 @@ namespace lro.Samples
             },
                 configuration = "<configuration>",
             });
-            Operation<BinaryData> operation = client.CreateJob(WaitUntil.Completed, content);
+            Operation<BinaryData> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", content);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -194,7 +194,7 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -204,7 +204,7 @@ namespace lro.Samples
             },
                 configuration = "<configuration>",
             });
-            Operation<BinaryData> operation = await client.CreateJobAsync(WaitUntil.Completed, content);
+            Operation<BinaryData> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", content);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -217,13 +217,13 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" })
             {
                 Configuration = "<configuration>",
             };
-            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = client.CreateJob(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
 
@@ -233,13 +233,13 @@ namespace lro.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient(apiVersion: "0.1.0");
+            LegacyLro client = new LroClient(endpoint, credential).GetLegacyLroClient();
 
             RadiologyInsightsData radiologyInsightsData = new RadiologyInsightsData(new string[] { "<patients>" })
             {
                 Configuration = "<configuration>",
             };
-            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, radiologyInsightsData);
+            Operation<RadiologyInsightsInferenceResult> operation = await client.CreateJobAsync(WaitUntil.Completed, "<apiVersion>", radiologyInsightsData);
             RadiologyInsightsInferenceResult responseData = operation.Value;
         }
     }

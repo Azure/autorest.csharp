@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,104 +44,75 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of StringsOnly. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual StringsOnly GetStringsOnlyClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private StringsOnly _cachedStringsOnly;
+        private StringExtensible _cachedStringExtensible;
+        private StringExtensibleNamed _cachedStringExtensibleNamed;
+        private IntsOnly _cachedIntsOnly;
+        private FloatsOnly _cachedFloatsOnly;
+        private ModelsOnly _cachedModelsOnly;
+        private EnumsOnly _cachedEnumsOnly;
+        private StringAndArray _cachedStringAndArray;
+        private MixedLiterals _cachedMixedLiterals;
+        private MixedTypes _cachedMixedTypes;
 
-            return new StringsOnly(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of StringsOnly. </summary>
+        public virtual StringsOnly GetStringsOnlyClient()
+        {
+            return Volatile.Read(ref _cachedStringsOnly) ?? Interlocked.CompareExchange(ref _cachedStringsOnly, new StringsOnly(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedStringsOnly;
         }
 
         /// <summary> Initializes a new instance of StringExtensible. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual StringExtensible GetStringExtensibleClient(string apiVersion = "1.0.0")
+        public virtual StringExtensible GetStringExtensibleClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new StringExtensible(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedStringExtensible) ?? Interlocked.CompareExchange(ref _cachedStringExtensible, new StringExtensible(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedStringExtensible;
         }
 
         /// <summary> Initializes a new instance of StringExtensibleNamed. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual StringExtensibleNamed GetStringExtensibleNamedClient(string apiVersion = "1.0.0")
+        public virtual StringExtensibleNamed GetStringExtensibleNamedClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new StringExtensibleNamed(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedStringExtensibleNamed) ?? Interlocked.CompareExchange(ref _cachedStringExtensibleNamed, new StringExtensibleNamed(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedStringExtensibleNamed;
         }
 
         /// <summary> Initializes a new instance of IntsOnly. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual IntsOnly GetIntsOnlyClient(string apiVersion = "1.0.0")
+        public virtual IntsOnly GetIntsOnlyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new IntsOnly(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedIntsOnly) ?? Interlocked.CompareExchange(ref _cachedIntsOnly, new IntsOnly(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIntsOnly;
         }
 
         /// <summary> Initializes a new instance of FloatsOnly. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual FloatsOnly GetFloatsOnlyClient(string apiVersion = "1.0.0")
+        public virtual FloatsOnly GetFloatsOnlyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new FloatsOnly(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedFloatsOnly) ?? Interlocked.CompareExchange(ref _cachedFloatsOnly, new FloatsOnly(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedFloatsOnly;
         }
 
         /// <summary> Initializes a new instance of ModelsOnly. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ModelsOnly GetModelsOnlyClient(string apiVersion = "1.0.0")
+        public virtual ModelsOnly GetModelsOnlyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ModelsOnly(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedModelsOnly) ?? Interlocked.CompareExchange(ref _cachedModelsOnly, new ModelsOnly(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModelsOnly;
         }
 
         /// <summary> Initializes a new instance of EnumsOnly. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual EnumsOnly GetEnumsOnlyClient(string apiVersion = "1.0.0")
+        public virtual EnumsOnly GetEnumsOnlyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new EnumsOnly(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedEnumsOnly) ?? Interlocked.CompareExchange(ref _cachedEnumsOnly, new EnumsOnly(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedEnumsOnly;
         }
 
         /// <summary> Initializes a new instance of StringAndArray. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual StringAndArray GetStringAndArrayClient(string apiVersion = "1.0.0")
+        public virtual StringAndArray GetStringAndArrayClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new StringAndArray(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedStringAndArray) ?? Interlocked.CompareExchange(ref _cachedStringAndArray, new StringAndArray(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedStringAndArray;
         }
 
         /// <summary> Initializes a new instance of MixedLiterals. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual MixedLiterals GetMixedLiteralsClient(string apiVersion = "1.0.0")
+        public virtual MixedLiterals GetMixedLiteralsClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new MixedLiterals(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedMixedLiterals) ?? Interlocked.CompareExchange(ref _cachedMixedLiterals, new MixedLiterals(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedMixedLiterals;
         }
 
         /// <summary> Initializes a new instance of MixedTypes. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual MixedTypes GetMixedTypesClient(string apiVersion = "1.0.0")
+        public virtual MixedTypes GetMixedTypesClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new MixedTypes(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedMixedTypes) ?? Interlocked.CompareExchange(ref _cachedMixedTypes, new MixedTypes(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedMixedTypes;
         }
     }
 }
