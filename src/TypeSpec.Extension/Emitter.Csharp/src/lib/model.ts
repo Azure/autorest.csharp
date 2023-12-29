@@ -688,6 +688,12 @@ export function getInputType(
         }
     }
 
+    // in the real cases of tsp, because now we use `extends` or `is` to represent additional properties,
+    // and tsp only supports one base model, we can only have one of baseModel and sourceModel defined
+    // but it is valid case that a model has a base model as well as additional properties
+    // which is the reason we did not define the return type as `InputModelType | InputDictionaryType | undefined`
+    // to keep the possibility that we could have both `baseModel` and `inheritedDictionaryType` defined in the future
+    // tsp might support this in the future.
     function getInputModelBaseType(m: Model): {
         baseModel?: InputModelType;
         inheritedDictionaryType?: InputDictionaryType;
