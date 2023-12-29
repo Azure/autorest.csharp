@@ -546,7 +546,7 @@ export function getInputType(
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
-            const [baseModel, inheritedDictionaryType] =
+            const { baseModel, inheritedDictionaryType } =
                 getInputModelBaseType(m);
             model = models.get(name);
             if (model) return model;
@@ -688,40 +688,48 @@ export function getInputType(
         }
     }
 
-    function getInputModelBaseType(
-        m: Model
-    ): [InputModelType | undefined, InputDictionaryType | undefined] {
+    function getInputModelBaseType(m: Model): {
+        baseModel?: InputModelType;
+        inheritedDictionaryType?: InputDictionaryType;
+    } {
         const baseModel = m.baseModel;
         const sourceModel = m.sourceModel;
 
         // we cannot have both `extends` and `is`, therefore only one of baseModel and sourceModel can be defined
         if (sourceModel && isRecordModelType(program, sourceModel)) {
-            return [
-                undefined,
-                getInputTypeForMap(
+            return {
+                inheritedDictionaryType: getInputTypeForMap(
                     sourceModel.indexer.key,
                     sourceModel.indexer.value
                 )
-            ];
+            };
         }
 
         if (baseModel) {
             const baseModelType = getInputModelType(baseModel);
 
             if (isInputListType(baseModelType)) {
-                throw new Error(
-                    "This should never happen. A model cannot inherit from Array"
-                );
+                // tsp never allows array to be the base model of a model
+                // meaning that it should be invalid tsp if you write:
+                // model Foo extends Bar[] {}
+                // or
+                // model Foo extends Array<Bar> {}
+                // therefore it is safe that here we just return empty result here because this will be unreachable
+                return {};
             }
 
             if (isInputDictionaryType(baseModelType)) {
-                return [undefined, baseModelType];
+                return {
+                    inheritedDictionaryType: baseModelType
+                };
             }
 
-            return [baseModelType, undefined];
+            return {
+                baseModel: baseModelType
+            };
         }
 
-        return [undefined, undefined];
+        return {};
     }
 
     function getFullNamespaceString(namespace: Namespace | undefined): string {
