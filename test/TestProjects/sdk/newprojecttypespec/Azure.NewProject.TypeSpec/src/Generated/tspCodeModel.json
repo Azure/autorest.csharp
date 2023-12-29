@@ -1116,8 +1116,8 @@
        "NameInRequest": "action",
        "Type": {
         "$id": "149",
-        "Name": "string",
-        "Kind": "DateTime",
+        "Name": "plainDate",
+        "Kind": "Date",
         "IsNullable": false
        },
        "Location": "Path",

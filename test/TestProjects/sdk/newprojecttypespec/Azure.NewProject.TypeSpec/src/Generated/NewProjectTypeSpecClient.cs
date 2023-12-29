@@ -727,7 +727,7 @@ namespace Azure.NewProject.TypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
-            uri.AppendPath(action, "O", true);
+            uri.AppendPath(action, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

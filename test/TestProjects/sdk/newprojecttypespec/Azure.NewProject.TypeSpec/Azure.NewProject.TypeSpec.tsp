@@ -262,7 +262,7 @@ namespace Hello.Demo2 {
 @doc("top level method")
 @get
 @convenientAPI(true)
-op topAction(@path @format("date") action: string): Thing;
+op topAction(@path action: plainDate): Thing;
 
 @route("/top2")
 @doc("top level method2")
