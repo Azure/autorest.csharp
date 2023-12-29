@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -49,24 +50,19 @@ namespace Azure.NewProject.TypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Demo. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Demo GetDemoClient(string apiVersion = "0.1.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Demo _cachedDemo;
+        private Demo2 _cachedDemo2;
 
-            return new Demo(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Demo. </summary>
+        public virtual Demo GetDemoClient()
+        {
+            return Volatile.Read(ref _cachedDemo) ?? Interlocked.CompareExchange(ref _cachedDemo, new Demo(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedDemo;
         }
 
         /// <summary> Initializes a new instance of Demo2. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Demo2 GetDemo2Client(string apiVersion = "0.1.0")
+        public virtual Demo2 GetDemo2Client()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Demo2(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDemo2) ?? Interlocked.CompareExchange(ref _cachedDemo2, new Demo2(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedDemo2;
         }
     }
 }

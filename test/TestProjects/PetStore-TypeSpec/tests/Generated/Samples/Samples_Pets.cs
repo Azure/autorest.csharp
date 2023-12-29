@@ -24,7 +24,7 @@ namespace PetStore.Samples
         public void Example_Pets_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.Delete(1234);
 
@@ -36,7 +36,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Delete_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.DeleteAsync(1234);
 
@@ -48,7 +48,7 @@ namespace PetStore.Samples
         public void Example_Pets_Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.Delete(1234);
 
@@ -60,7 +60,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.DeleteAsync(1234);
 
@@ -72,7 +72,7 @@ namespace PetStore.Samples
         public void Example_Pets_Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.Read(1234, null);
 
@@ -86,7 +86,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Read_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.ReadAsync(1234, null);
 
@@ -100,7 +100,7 @@ namespace PetStore.Samples
         public void Example_Pets_Read_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = client.Read(1234);
         }
@@ -110,7 +110,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Read_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = await client.ReadAsync(1234);
         }
@@ -120,7 +120,7 @@ namespace PetStore.Samples
         public void Example_Pets_Read_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.Read(1234, null);
 
@@ -135,7 +135,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Read_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.ReadAsync(1234, null);
 
@@ -150,7 +150,7 @@ namespace PetStore.Samples
         public void Example_Pets_Read_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = client.Read(1234);
         }
@@ -160,7 +160,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Read_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = await client.ReadAsync(1234);
         }
@@ -170,7 +170,7 @@ namespace PetStore.Samples
         public void Example_Pets_Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -189,7 +189,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Create_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -208,7 +208,7 @@ namespace PetStore.Samples
         public void Example_Pets_Create_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Pet pet = new Pet("<name>", 1234);
             Response<Pet> response = client.Create(pet);
@@ -219,7 +219,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Create_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Pet pet = new Pet("<name>", 1234);
             Response<Pet> response = await client.CreateAsync(pet);
@@ -230,7 +230,7 @@ namespace PetStore.Samples
         public void Example_Pets_Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -251,7 +251,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Create_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -272,7 +272,7 @@ namespace PetStore.Samples
         public void Example_Pets_Create_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Pet pet = new Pet("<name>", 1234)
             {
@@ -286,7 +286,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Create_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Pet pet = new Pet("<name>", 1234)
             {
@@ -300,7 +300,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetPetByKind_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.GetPetByKind("dog");
 
@@ -314,7 +314,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetPetByKind_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.GetPetByKindAsync("dog");
 
@@ -328,7 +328,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetPetByKind_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = client.GetPetByKind(PetKind.Dog);
         }
@@ -338,7 +338,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetPetByKind_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = await client.GetPetByKindAsync(PetKind.Dog);
         }
@@ -348,7 +348,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetPetByKind_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.GetPetByKind("dog");
 
@@ -363,7 +363,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetPetByKind_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.GetPetByKindAsync("dog");
 
@@ -378,7 +378,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetPetByKind_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = client.GetPetByKind(PetKind.Dog);
         }
@@ -388,7 +388,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetPetByKind_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = await client.GetPetByKindAsync(PetKind.Dog);
         }
@@ -398,7 +398,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFirstPet_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.GetFirstPet(null, null);
 
@@ -412,7 +412,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFirstPet_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.GetFirstPetAsync(null, null);
 
@@ -426,7 +426,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFirstPet_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = client.GetFirstPet();
         }
@@ -436,7 +436,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFirstPet_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = await client.GetFirstPetAsync();
         }
@@ -446,7 +446,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFirstPet_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.GetFirstPet(1234, null);
 
@@ -461,7 +461,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFirstPet_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.GetFirstPetAsync(1234, null);
 
@@ -476,7 +476,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFirstPet_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = client.GetFirstPet(start: 1234);
         }
@@ -486,7 +486,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFirstPet_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Pet> response = await client.GetFirstPetAsync(start: 1234);
         }
@@ -496,7 +496,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFish_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.GetFish(null, null);
 
@@ -510,7 +510,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFish_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.GetFishAsync(null, null);
 
@@ -524,7 +524,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFish_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Fish> response = client.GetFish();
         }
@@ -534,7 +534,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFish_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Fish> response = await client.GetFishAsync();
         }
@@ -544,7 +544,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFish_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.GetFish("<kind>", null);
 
@@ -558,7 +558,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFish_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.GetFishAsync("<kind>", null);
 
@@ -572,7 +572,7 @@ namespace PetStore.Samples
         public void Example_Pets_GetFish_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Fish> response = client.GetFish(kind: "<kind>");
         }
@@ -582,7 +582,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_GetFish_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response<Fish> response = await client.GetFishAsync(kind: "<kind>");
         }
@@ -592,7 +592,7 @@ namespace PetStore.Samples
         public void Example_Pets_Refresh_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.Refresh();
 
@@ -604,7 +604,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Refresh_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.RefreshAsync();
 
@@ -616,7 +616,7 @@ namespace PetStore.Samples
         public void Example_Pets_Refresh_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = client.Refresh();
 
@@ -628,7 +628,7 @@ namespace PetStore.Samples
         public async Task Example_Pets_Refresh_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new PetStoreClient(endpoint).GetPetsClient(apiVersion: "2021-03-25");
+            Pets client = new PetStoreClient(endpoint).GetPetsClient();
 
             Response response = await client.RefreshAsync();
 

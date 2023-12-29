@@ -5,14 +5,14 @@
       <example>
 This sample shows how to call WithAndAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 And body = new And("<name>");
 Response response = await client.WithAndAsync(body);
 ]]></code>
 This sample shows how to call WithAndAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 And body = new And("<name>");
 Response response = await client.WithAndAsync(body);
@@ -22,14 +22,14 @@ Response response = await client.WithAndAsync(body);
       <example>
 This sample shows how to call WithAnd.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 And body = new And("<name>");
 Response response = client.WithAnd(body);
 ]]></code>
 This sample shows how to call WithAnd with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 And body = new And("<name>");
 Response response = client.WithAnd(body);
@@ -39,7 +39,7 @@ Response response = client.WithAnd(body);
       <example>
 This sample shows how to call WithAndAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -51,7 +51,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAndAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -66,7 +66,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAnd.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -78,7 +78,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAnd with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -93,14 +93,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAsAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 As body = new As("<name>");
 Response response = await client.WithAsAsync(body);
 ]]></code>
 This sample shows how to call WithAsAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 As body = new As("<name>");
 Response response = await client.WithAsAsync(body);
@@ -110,14 +110,14 @@ Response response = await client.WithAsAsync(body);
       <example>
 This sample shows how to call WithAs.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 As body = new As("<name>");
 Response response = client.WithAs(body);
 ]]></code>
 This sample shows how to call WithAs with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 As body = new As("<name>");
 Response response = client.WithAs(body);
@@ -127,7 +127,7 @@ Response response = client.WithAs(body);
       <example>
 This sample shows how to call WithAsAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -139,7 +139,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAsAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -154,7 +154,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAs.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -166,7 +166,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAs with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -181,14 +181,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAssertAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Assert body = new Assert("<name>");
 Response response = await client.WithAssertAsync(body);
 ]]></code>
 This sample shows how to call WithAssertAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Assert body = new Assert("<name>");
 Response response = await client.WithAssertAsync(body);
@@ -198,14 +198,14 @@ Response response = await client.WithAssertAsync(body);
       <example>
 This sample shows how to call WithAssert.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Assert body = new Assert("<name>");
 Response response = client.WithAssert(body);
 ]]></code>
 This sample shows how to call WithAssert with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Assert body = new Assert("<name>");
 Response response = client.WithAssert(body);
@@ -215,7 +215,7 @@ Response response = client.WithAssert(body);
       <example>
 This sample shows how to call WithAssertAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -227,7 +227,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAssertAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -242,7 +242,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAssert.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -254,7 +254,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAssert with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -269,14 +269,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAsyncAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Async body = new Async("<name>");
 Response response = await client.WithAsyncAsync(body);
 ]]></code>
 This sample shows how to call WithAsyncAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Async body = new Async("<name>");
 Response response = await client.WithAsyncAsync(body);
@@ -286,14 +286,14 @@ Response response = await client.WithAsyncAsync(body);
       <example>
 This sample shows how to call WithAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Async body = new Async("<name>");
 Response response = client.WithAsync(body);
 ]]></code>
 This sample shows how to call WithAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Async body = new Async("<name>");
 Response response = client.WithAsync(body);
@@ -303,7 +303,7 @@ Response response = client.WithAsync(body);
       <example>
 This sample shows how to call WithAsyncAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -315,7 +315,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAsyncAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -330,7 +330,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -342,7 +342,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -357,14 +357,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAwaitAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Await body = new Await("<name>");
 Response response = await client.WithAwaitAsync(body);
 ]]></code>
 This sample shows how to call WithAwaitAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Await body = new Await("<name>");
 Response response = await client.WithAwaitAsync(body);
@@ -374,14 +374,14 @@ Response response = await client.WithAwaitAsync(body);
       <example>
 This sample shows how to call WithAwait.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Await body = new Await("<name>");
 Response response = client.WithAwait(body);
 ]]></code>
 This sample shows how to call WithAwait with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Await body = new Await("<name>");
 Response response = client.WithAwait(body);
@@ -391,7 +391,7 @@ Response response = client.WithAwait(body);
       <example>
 This sample shows how to call WithAwaitAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -403,7 +403,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAwaitAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -418,7 +418,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithAwait.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -430,7 +430,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithAwait with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -445,14 +445,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithBreakAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Break body = new Break("<name>");
 Response response = await client.WithBreakAsync(body);
 ]]></code>
 This sample shows how to call WithBreakAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Break body = new Break("<name>");
 Response response = await client.WithBreakAsync(body);
@@ -462,14 +462,14 @@ Response response = await client.WithBreakAsync(body);
       <example>
 This sample shows how to call WithBreak.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Break body = new Break("<name>");
 Response response = client.WithBreak(body);
 ]]></code>
 This sample shows how to call WithBreak with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Break body = new Break("<name>");
 Response response = client.WithBreak(body);
@@ -479,7 +479,7 @@ Response response = client.WithBreak(body);
       <example>
 This sample shows how to call WithBreakAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -491,7 +491,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithBreakAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -506,7 +506,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithBreak.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -518,7 +518,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithBreak with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -533,14 +533,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithClassAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Class body = new Class("<name>");
 Response response = await client.WithClassAsync(body);
 ]]></code>
 This sample shows how to call WithClassAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Class body = new Class("<name>");
 Response response = await client.WithClassAsync(body);
@@ -550,14 +550,14 @@ Response response = await client.WithClassAsync(body);
       <example>
 This sample shows how to call WithClass.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Class body = new Class("<name>");
 Response response = client.WithClass(body);
 ]]></code>
 This sample shows how to call WithClass with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Class body = new Class("<name>");
 Response response = client.WithClass(body);
@@ -567,7 +567,7 @@ Response response = client.WithClass(body);
       <example>
 This sample shows how to call WithClassAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -579,7 +579,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithClassAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -594,7 +594,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithClass.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -606,7 +606,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithClass with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -621,14 +621,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithConstructorAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Constructor body = new Constructor("<name>");
 Response response = await client.WithConstructorAsync(body);
 ]]></code>
 This sample shows how to call WithConstructorAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Constructor body = new Constructor("<name>");
 Response response = await client.WithConstructorAsync(body);
@@ -638,14 +638,14 @@ Response response = await client.WithConstructorAsync(body);
       <example>
 This sample shows how to call WithConstructor.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Constructor body = new Constructor("<name>");
 Response response = client.WithConstructor(body);
 ]]></code>
 This sample shows how to call WithConstructor with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Constructor body = new Constructor("<name>");
 Response response = client.WithConstructor(body);
@@ -655,7 +655,7 @@ Response response = client.WithConstructor(body);
       <example>
 This sample shows how to call WithConstructorAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -667,7 +667,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithConstructorAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -682,7 +682,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithConstructor.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -694,7 +694,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithConstructor with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -709,14 +709,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithContinueAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Continue body = new Continue("<name>");
 Response response = await client.WithContinueAsync(body);
 ]]></code>
 This sample shows how to call WithContinueAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Continue body = new Continue("<name>");
 Response response = await client.WithContinueAsync(body);
@@ -726,14 +726,14 @@ Response response = await client.WithContinueAsync(body);
       <example>
 This sample shows how to call WithContinue.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Continue body = new Continue("<name>");
 Response response = client.WithContinue(body);
 ]]></code>
 This sample shows how to call WithContinue with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Continue body = new Continue("<name>");
 Response response = client.WithContinue(body);
@@ -743,7 +743,7 @@ Response response = client.WithContinue(body);
       <example>
 This sample shows how to call WithContinueAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -755,7 +755,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithContinueAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -770,7 +770,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithContinue.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -782,7 +782,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithContinue with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -797,14 +797,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDefAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Def body = new Def("<name>");
 Response response = await client.WithDefAsync(body);
 ]]></code>
 This sample shows how to call WithDefAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Def body = new Def("<name>");
 Response response = await client.WithDefAsync(body);
@@ -814,14 +814,14 @@ Response response = await client.WithDefAsync(body);
       <example>
 This sample shows how to call WithDef.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Def body = new Def("<name>");
 Response response = client.WithDef(body);
 ]]></code>
 This sample shows how to call WithDef with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Def body = new Def("<name>");
 Response response = client.WithDef(body);
@@ -831,7 +831,7 @@ Response response = client.WithDef(body);
       <example>
 This sample shows how to call WithDefAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -843,7 +843,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDefAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -858,7 +858,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDef.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -870,7 +870,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDef with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -885,14 +885,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDelAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Del body = new Del("<name>");
 Response response = await client.WithDelAsync(body);
 ]]></code>
 This sample shows how to call WithDelAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Del body = new Del("<name>");
 Response response = await client.WithDelAsync(body);
@@ -902,14 +902,14 @@ Response response = await client.WithDelAsync(body);
       <example>
 This sample shows how to call WithDel.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Del body = new Del("<name>");
 Response response = client.WithDel(body);
 ]]></code>
 This sample shows how to call WithDel with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Del body = new Del("<name>");
 Response response = client.WithDel(body);
@@ -919,7 +919,7 @@ Response response = client.WithDel(body);
       <example>
 This sample shows how to call WithDelAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -931,7 +931,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDelAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -946,7 +946,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithDel.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -958,7 +958,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithDel with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -973,14 +973,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElifAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Elif body = new Elif("<name>");
 Response response = await client.WithElifAsync(body);
 ]]></code>
 This sample shows how to call WithElifAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Elif body = new Elif("<name>");
 Response response = await client.WithElifAsync(body);
@@ -990,14 +990,14 @@ Response response = await client.WithElifAsync(body);
       <example>
 This sample shows how to call WithElif.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Elif body = new Elif("<name>");
 Response response = client.WithElif(body);
 ]]></code>
 This sample shows how to call WithElif with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Elif body = new Elif("<name>");
 Response response = client.WithElif(body);
@@ -1007,7 +1007,7 @@ Response response = client.WithElif(body);
       <example>
 This sample shows how to call WithElifAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1019,7 +1019,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElifAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1034,7 +1034,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElif.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1046,7 +1046,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElif with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1061,14 +1061,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElseAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Else body = new Else("<name>");
 Response response = await client.WithElseAsync(body);
 ]]></code>
 This sample shows how to call WithElseAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Else body = new Else("<name>");
 Response response = await client.WithElseAsync(body);
@@ -1078,14 +1078,14 @@ Response response = await client.WithElseAsync(body);
       <example>
 This sample shows how to call WithElse.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Else body = new Else("<name>");
 Response response = client.WithElse(body);
 ]]></code>
 This sample shows how to call WithElse with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Else body = new Else("<name>");
 Response response = client.WithElse(body);
@@ -1095,7 +1095,7 @@ Response response = client.WithElse(body);
       <example>
 This sample shows how to call WithElseAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1107,7 +1107,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElseAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1122,7 +1122,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithElse.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1134,7 +1134,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithElse with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1149,14 +1149,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExceptAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Except body = new Except("<name>");
 Response response = await client.WithExceptAsync(body);
 ]]></code>
 This sample shows how to call WithExceptAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Except body = new Except("<name>");
 Response response = await client.WithExceptAsync(body);
@@ -1166,14 +1166,14 @@ Response response = await client.WithExceptAsync(body);
       <example>
 This sample shows how to call WithExcept.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Except body = new Except("<name>");
 Response response = client.WithExcept(body);
 ]]></code>
 This sample shows how to call WithExcept with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Except body = new Except("<name>");
 Response response = client.WithExcept(body);
@@ -1183,7 +1183,7 @@ Response response = client.WithExcept(body);
       <example>
 This sample shows how to call WithExceptAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1195,7 +1195,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExceptAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1210,7 +1210,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExcept.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1222,7 +1222,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExcept with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1237,14 +1237,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExecAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Exec body = new Exec("<name>");
 Response response = await client.WithExecAsync(body);
 ]]></code>
 This sample shows how to call WithExecAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Exec body = new Exec("<name>");
 Response response = await client.WithExecAsync(body);
@@ -1254,14 +1254,14 @@ Response response = await client.WithExecAsync(body);
       <example>
 This sample shows how to call WithExec.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Exec body = new Exec("<name>");
 Response response = client.WithExec(body);
 ]]></code>
 This sample shows how to call WithExec with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Exec body = new Exec("<name>");
 Response response = client.WithExec(body);
@@ -1271,7 +1271,7 @@ Response response = client.WithExec(body);
       <example>
 This sample shows how to call WithExecAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1283,7 +1283,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExecAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1298,7 +1298,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithExec.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1310,7 +1310,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithExec with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1325,14 +1325,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFinallyAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Finally body = new Finally("<name>");
 Response response = await client.WithFinallyAsync(body);
 ]]></code>
 This sample shows how to call WithFinallyAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Finally body = new Finally("<name>");
 Response response = await client.WithFinallyAsync(body);
@@ -1342,14 +1342,14 @@ Response response = await client.WithFinallyAsync(body);
       <example>
 This sample shows how to call WithFinally.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Finally body = new Finally("<name>");
 Response response = client.WithFinally(body);
 ]]></code>
 This sample shows how to call WithFinally with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Finally body = new Finally("<name>");
 Response response = client.WithFinally(body);
@@ -1359,7 +1359,7 @@ Response response = client.WithFinally(body);
       <example>
 This sample shows how to call WithFinallyAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1371,7 +1371,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFinallyAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1386,7 +1386,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFinally.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1398,7 +1398,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFinally with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1413,14 +1413,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithForAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 For body = new For("<name>");
 Response response = await client.WithForAsync(body);
 ]]></code>
 This sample shows how to call WithForAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 For body = new For("<name>");
 Response response = await client.WithForAsync(body);
@@ -1430,14 +1430,14 @@ Response response = await client.WithForAsync(body);
       <example>
 This sample shows how to call WithFor.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 For body = new For("<name>");
 Response response = client.WithFor(body);
 ]]></code>
 This sample shows how to call WithFor with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 For body = new For("<name>");
 Response response = client.WithFor(body);
@@ -1447,7 +1447,7 @@ Response response = client.WithFor(body);
       <example>
 This sample shows how to call WithForAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1459,7 +1459,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithForAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1474,7 +1474,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFor.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1486,7 +1486,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFor with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1501,14 +1501,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFromAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 From body = new From("<name>");
 Response response = await client.WithFromAsync(body);
 ]]></code>
 This sample shows how to call WithFromAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 From body = new From("<name>");
 Response response = await client.WithFromAsync(body);
@@ -1518,14 +1518,14 @@ Response response = await client.WithFromAsync(body);
       <example>
 This sample shows how to call WithFrom.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 From body = new From("<name>");
 Response response = client.WithFrom(body);
 ]]></code>
 This sample shows how to call WithFrom with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 From body = new From("<name>");
 Response response = client.WithFrom(body);
@@ -1535,7 +1535,7 @@ Response response = client.WithFrom(body);
       <example>
 This sample shows how to call WithFromAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1547,7 +1547,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFromAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1562,7 +1562,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithFrom.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1574,7 +1574,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithFrom with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1589,14 +1589,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithGlobalAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Global body = new Global("<name>");
 Response response = await client.WithGlobalAsync(body);
 ]]></code>
 This sample shows how to call WithGlobalAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Global body = new Global("<name>");
 Response response = await client.WithGlobalAsync(body);
@@ -1606,14 +1606,14 @@ Response response = await client.WithGlobalAsync(body);
       <example>
 This sample shows how to call WithGlobal.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Global body = new Global("<name>");
 Response response = client.WithGlobal(body);
 ]]></code>
 This sample shows how to call WithGlobal with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Global body = new Global("<name>");
 Response response = client.WithGlobal(body);
@@ -1623,7 +1623,7 @@ Response response = client.WithGlobal(body);
       <example>
 This sample shows how to call WithGlobalAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1635,7 +1635,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithGlobalAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1650,7 +1650,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithGlobal.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1662,7 +1662,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithGlobal with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1677,14 +1677,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIfAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 If body = new If("<name>");
 Response response = await client.WithIfAsync(body);
 ]]></code>
 This sample shows how to call WithIfAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 If body = new If("<name>");
 Response response = await client.WithIfAsync(body);
@@ -1694,14 +1694,14 @@ Response response = await client.WithIfAsync(body);
       <example>
 This sample shows how to call WithIf.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 If body = new If("<name>");
 Response response = client.WithIf(body);
 ]]></code>
 This sample shows how to call WithIf with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 If body = new If("<name>");
 Response response = client.WithIf(body);
@@ -1711,7 +1711,7 @@ Response response = client.WithIf(body);
       <example>
 This sample shows how to call WithIfAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1723,7 +1723,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIfAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1738,7 +1738,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIf.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1750,7 +1750,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIf with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1765,14 +1765,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithImportAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Import body = new Import("<name>");
 Response response = await client.WithImportAsync(body);
 ]]></code>
 This sample shows how to call WithImportAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Import body = new Import("<name>");
 Response response = await client.WithImportAsync(body);
@@ -1782,14 +1782,14 @@ Response response = await client.WithImportAsync(body);
       <example>
 This sample shows how to call WithImport.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Import body = new Import("<name>");
 Response response = client.WithImport(body);
 ]]></code>
 This sample shows how to call WithImport with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Import body = new Import("<name>");
 Response response = client.WithImport(body);
@@ -1799,7 +1799,7 @@ Response response = client.WithImport(body);
       <example>
 This sample shows how to call WithImportAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1811,7 +1811,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithImportAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1826,7 +1826,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithImport.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1838,7 +1838,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithImport with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1853,14 +1853,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithInAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 In body = new In("<name>");
 Response response = await client.WithInAsync(body);
 ]]></code>
 This sample shows how to call WithInAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 In body = new In("<name>");
 Response response = await client.WithInAsync(body);
@@ -1870,14 +1870,14 @@ Response response = await client.WithInAsync(body);
       <example>
 This sample shows how to call WithIn.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 In body = new In("<name>");
 Response response = client.WithIn(body);
 ]]></code>
 This sample shows how to call WithIn with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 In body = new In("<name>");
 Response response = client.WithIn(body);
@@ -1887,7 +1887,7 @@ Response response = client.WithIn(body);
       <example>
 This sample shows how to call WithInAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1899,7 +1899,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithInAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1914,7 +1914,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIn.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1926,7 +1926,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIn with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1941,14 +1941,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIsAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Is body = new Is("<name>");
 Response response = await client.WithIsAsync(body);
 ]]></code>
 This sample shows how to call WithIsAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Is body = new Is("<name>");
 Response response = await client.WithIsAsync(body);
@@ -1958,14 +1958,14 @@ Response response = await client.WithIsAsync(body);
       <example>
 This sample shows how to call WithIs.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Is body = new Is("<name>");
 Response response = client.WithIs(body);
 ]]></code>
 This sample shows how to call WithIs with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Is body = new Is("<name>");
 Response response = client.WithIs(body);
@@ -1975,7 +1975,7 @@ Response response = client.WithIs(body);
       <example>
 This sample shows how to call WithIsAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -1987,7 +1987,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIsAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2002,7 +2002,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithIs.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2014,7 +2014,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithIs with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2029,14 +2029,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithLambdaAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Lambda body = new Lambda("<name>");
 Response response = await client.WithLambdaAsync(body);
 ]]></code>
 This sample shows how to call WithLambdaAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Lambda body = new Lambda("<name>");
 Response response = await client.WithLambdaAsync(body);
@@ -2046,14 +2046,14 @@ Response response = await client.WithLambdaAsync(body);
       <example>
 This sample shows how to call WithLambda.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Lambda body = new Lambda("<name>");
 Response response = client.WithLambda(body);
 ]]></code>
 This sample shows how to call WithLambda with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Lambda body = new Lambda("<name>");
 Response response = client.WithLambda(body);
@@ -2063,7 +2063,7 @@ Response response = client.WithLambda(body);
       <example>
 This sample shows how to call WithLambdaAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2075,7 +2075,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithLambdaAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2090,7 +2090,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithLambda.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2102,7 +2102,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithLambda with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2117,14 +2117,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithNotAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Not body = new Not("<name>");
 Response response = await client.WithNotAsync(body);
 ]]></code>
 This sample shows how to call WithNotAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Not body = new Not("<name>");
 Response response = await client.WithNotAsync(body);
@@ -2134,14 +2134,14 @@ Response response = await client.WithNotAsync(body);
       <example>
 This sample shows how to call WithNot.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Not body = new Not("<name>");
 Response response = client.WithNot(body);
 ]]></code>
 This sample shows how to call WithNot with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Not body = new Not("<name>");
 Response response = client.WithNot(body);
@@ -2151,7 +2151,7 @@ Response response = client.WithNot(body);
       <example>
 This sample shows how to call WithNotAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2163,7 +2163,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithNotAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2178,7 +2178,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithNot.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2190,7 +2190,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithNot with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2205,14 +2205,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithOrAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Or body = new Or("<name>");
 Response response = await client.WithOrAsync(body);
 ]]></code>
 This sample shows how to call WithOrAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Or body = new Or("<name>");
 Response response = await client.WithOrAsync(body);
@@ -2222,14 +2222,14 @@ Response response = await client.WithOrAsync(body);
       <example>
 This sample shows how to call WithOr.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Or body = new Or("<name>");
 Response response = client.WithOr(body);
 ]]></code>
 This sample shows how to call WithOr with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Or body = new Or("<name>");
 Response response = client.WithOr(body);
@@ -2239,7 +2239,7 @@ Response response = client.WithOr(body);
       <example>
 This sample shows how to call WithOrAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2251,7 +2251,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithOrAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2266,7 +2266,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithOr.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2278,7 +2278,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithOr with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2293,14 +2293,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithPassAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Pass body = new Pass("<name>");
 Response response = await client.WithPassAsync(body);
 ]]></code>
 This sample shows how to call WithPassAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Pass body = new Pass("<name>");
 Response response = await client.WithPassAsync(body);
@@ -2310,14 +2310,14 @@ Response response = await client.WithPassAsync(body);
       <example>
 This sample shows how to call WithPass.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Pass body = new Pass("<name>");
 Response response = client.WithPass(body);
 ]]></code>
 This sample shows how to call WithPass with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Pass body = new Pass("<name>");
 Response response = client.WithPass(body);
@@ -2327,7 +2327,7 @@ Response response = client.WithPass(body);
       <example>
 This sample shows how to call WithPassAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2339,7 +2339,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithPassAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2354,7 +2354,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithPass.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2366,7 +2366,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithPass with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2381,14 +2381,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithRaiseAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Raise body = new Raise("<name>");
 Response response = await client.WithRaiseAsync(body);
 ]]></code>
 This sample shows how to call WithRaiseAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Raise body = new Raise("<name>");
 Response response = await client.WithRaiseAsync(body);
@@ -2398,14 +2398,14 @@ Response response = await client.WithRaiseAsync(body);
       <example>
 This sample shows how to call WithRaise.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Raise body = new Raise("<name>");
 Response response = client.WithRaise(body);
 ]]></code>
 This sample shows how to call WithRaise with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Raise body = new Raise("<name>");
 Response response = client.WithRaise(body);
@@ -2415,7 +2415,7 @@ Response response = client.WithRaise(body);
       <example>
 This sample shows how to call WithRaiseAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2427,7 +2427,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithRaiseAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2442,7 +2442,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithRaise.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2454,7 +2454,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithRaise with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2469,14 +2469,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithReturnAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Return body = new Return("<name>");
 Response response = await client.WithReturnAsync(body);
 ]]></code>
 This sample shows how to call WithReturnAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Return body = new Return("<name>");
 Response response = await client.WithReturnAsync(body);
@@ -2486,14 +2486,14 @@ Response response = await client.WithReturnAsync(body);
       <example>
 This sample shows how to call WithReturn.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Return body = new Return("<name>");
 Response response = client.WithReturn(body);
 ]]></code>
 This sample shows how to call WithReturn with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Return body = new Return("<name>");
 Response response = client.WithReturn(body);
@@ -2503,7 +2503,7 @@ Response response = client.WithReturn(body);
       <example>
 This sample shows how to call WithReturnAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2515,7 +2515,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithReturnAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2530,7 +2530,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithReturn.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2542,7 +2542,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithReturn with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2557,14 +2557,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithTryAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Try body = new Try("<name>");
 Response response = await client.WithTryAsync(body);
 ]]></code>
 This sample shows how to call WithTryAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Try body = new Try("<name>");
 Response response = await client.WithTryAsync(body);
@@ -2574,14 +2574,14 @@ Response response = await client.WithTryAsync(body);
       <example>
 This sample shows how to call WithTry.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Try body = new Try("<name>");
 Response response = client.WithTry(body);
 ]]></code>
 This sample shows how to call WithTry with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Try body = new Try("<name>");
 Response response = client.WithTry(body);
@@ -2591,7 +2591,7 @@ Response response = client.WithTry(body);
       <example>
 This sample shows how to call WithTryAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2603,7 +2603,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithTryAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2618,7 +2618,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithTry.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2630,7 +2630,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithTry with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2645,14 +2645,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWhileAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 While body = new While("<name>");
 Response response = await client.WithWhileAsync(body);
 ]]></code>
 This sample shows how to call WithWhileAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 While body = new While("<name>");
 Response response = await client.WithWhileAsync(body);
@@ -2662,14 +2662,14 @@ Response response = await client.WithWhileAsync(body);
       <example>
 This sample shows how to call WithWhile.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 While body = new While("<name>");
 Response response = client.WithWhile(body);
 ]]></code>
 This sample shows how to call WithWhile with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 While body = new While("<name>");
 Response response = client.WithWhile(body);
@@ -2679,7 +2679,7 @@ Response response = client.WithWhile(body);
       <example>
 This sample shows how to call WithWhileAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2691,7 +2691,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWhileAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2706,7 +2706,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWhile.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2718,7 +2718,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWhile with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2733,14 +2733,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWithAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 With body = new With("<name>");
 Response response = await client.WithWithAsync(body);
 ]]></code>
 This sample shows how to call WithWithAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 With body = new With("<name>");
 Response response = await client.WithWithAsync(body);
@@ -2750,14 +2750,14 @@ Response response = await client.WithWithAsync(body);
       <example>
 This sample shows how to call WithWith.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 With body = new With("<name>");
 Response response = client.WithWith(body);
 ]]></code>
 This sample shows how to call WithWith with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 With body = new With("<name>");
 Response response = client.WithWith(body);
@@ -2767,7 +2767,7 @@ Response response = client.WithWith(body);
       <example>
 This sample shows how to call WithWithAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2779,7 +2779,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWithAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2794,7 +2794,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithWith.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2806,7 +2806,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithWith with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2821,14 +2821,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithYieldAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Yield body = new Yield("<name>");
 Response response = await client.WithYieldAsync(body);
 ]]></code>
 This sample shows how to call WithYieldAsync with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Yield body = new Yield("<name>");
 Response response = await client.WithYieldAsync(body);
@@ -2838,14 +2838,14 @@ Response response = await client.WithYieldAsync(body);
       <example>
 This sample shows how to call WithYield.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Yield body = new Yield("<name>");
 Response response = client.WithYield(body);
 ]]></code>
 This sample shows how to call WithYield with all parameters.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 Yield body = new Yield("<name>");
 Response response = client.WithYield(body);
@@ -2855,7 +2855,7 @@ Response response = client.WithYield(body);
       <example>
 This sample shows how to call WithYieldAsync.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2867,7 +2867,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithYieldAsync with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2882,7 +2882,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call WithYield.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -2894,7 +2894,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call WithYield with all request content.
 <code><![CDATA[
-Models client = new SpecialWordsClient().GetModelsClient(apiVersion: "1.0.0");
+Models client = new SpecialWordsClient().GetModelsClient();
 
 using RequestContent content = RequestContent.Create(new
 {

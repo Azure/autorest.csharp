@@ -21,7 +21,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -46,7 +45,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -709,7 +707,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -723,7 +720,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -739,7 +735,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/recursivemodel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -753,7 +748,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/recursivemodel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -769,7 +763,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/missingdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -783,7 +776,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/wrongdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -797,7 +789,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/legacy-model", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

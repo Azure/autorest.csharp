@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -84,14 +85,12 @@ namespace lro
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of LegacyLro. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual LegacyLro GetLegacyLroClient(string apiVersion = "0.1.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private LegacyLro _cachedLegacyLro;
 
-            return new LegacyLro(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of LegacyLro. </summary>
+        public virtual LegacyLro GetLegacyLroClient()
+        {
+            return Volatile.Read(ref _cachedLegacyLro) ?? Interlocked.CompareExchange(ref _cachedLegacyLro, new LegacyLro(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedLegacyLro;
         }
     }
 }

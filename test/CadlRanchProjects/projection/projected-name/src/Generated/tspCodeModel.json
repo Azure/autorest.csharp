@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Projection.ProjectedName",
  "Description": "Projection",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
@@ -214,42 +212,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "29",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "30",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "31",
-        "Type": {
-         "$id": "32",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "29",
        "StatusCodes": [
         204
        ],
@@ -267,7 +234,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "34",
+     "$id": "30",
      "Name": "parameter",
      "ResourceName": "ProjectedName",
      "Parameters": [
@@ -275,11 +242,11 @@
        "$ref": "22"
       },
       {
-       "$id": "35",
+       "$id": "31",
        "Name": "clientName",
        "NameInRequest": "default-name",
        "Type": {
-        "$id": "36",
+        "$id": "32",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -295,11 +262,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "37",
+       "$id": "33",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "38",
+        "$id": "34",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -314,20 +281,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "39",
+        "$id": "35",
         "Type": {
-         "$ref": "38"
+         "$ref": "34"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "36",
        "StatusCodes": [
         204
        ],
@@ -346,17 +310,17 @@
     }
    ],
    "Protocol": {
-    "$id": "41"
+    "$id": "37"
    },
    "Creatable": true
   },
   {
-   "$id": "42",
+   "$id": "38",
    "Name": "Property",
    "Description": "",
    "Operations": [
     {
-     "$id": "43",
+     "$id": "39",
      "Name": "json",
      "ResourceName": "Property",
      "Parameters": [
@@ -364,7 +328,7 @@
        "$ref": "22"
       },
       {
-       "$id": "44",
+       "$id": "40",
        "Name": "JsonProjectedNameModel",
        "NameInRequest": "JsonProjectedNameModel",
        "Type": {
@@ -381,11 +345,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "41",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "46",
+        "$id": "42",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -400,19 +364,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "43",
         "Type": {
-         "$ref": "46"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "48",
+       "$id": "44",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
+        "$id": "45",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -427,20 +391,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "46",
         "Type": {
-         "$ref": "49"
+         "$ref": "45"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "51",
+       "$id": "47",
        "StatusCodes": [
         204
        ],
@@ -461,7 +422,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "52",
+     "$id": "48",
      "Name": "client",
      "ResourceName": "Property",
      "Parameters": [
@@ -469,7 +430,7 @@
        "$ref": "22"
       },
       {
-       "$id": "53",
+       "$id": "49",
        "Name": "ClientProjectedNameModel",
        "NameInRequest": "ClientProjectedNameModel",
        "Type": {
@@ -486,11 +447,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "50",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "55",
+        "$id": "51",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -505,19 +466,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "52",
         "Type": {
-         "$ref": "55"
+         "$ref": "51"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "57",
+       "$id": "53",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "54",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -532,20 +493,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "55",
         "Type": {
-         "$ref": "58"
+         "$ref": "54"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "56",
        "StatusCodes": [
         204
        ],
@@ -566,7 +524,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "61",
+     "$id": "57",
      "Name": "language",
      "ResourceName": "Property",
      "Parameters": [
@@ -574,7 +532,7 @@
        "$ref": "22"
       },
       {
-       "$id": "62",
+       "$id": "58",
        "Name": "LanguageProjectedNameModel",
        "NameInRequest": "LanguageProjectedNameModel",
        "Type": {
@@ -591,11 +549,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "59",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "64",
+        "$id": "60",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -610,19 +568,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "65",
+        "$id": "61",
         "Type": {
-         "$ref": "64"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "66",
+       "$id": "62",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "67",
+        "$id": "63",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -637,20 +595,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "68",
+        "$id": "64",
         "Type": {
-         "$ref": "67"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "65",
        "StatusCodes": [
         204
        ],
@@ -671,7 +626,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "70",
+     "$id": "66",
      "Name": "jsonAndClient",
      "ResourceName": "Property",
      "Parameters": [
@@ -679,7 +634,7 @@
        "$ref": "22"
       },
       {
-       "$id": "71",
+       "$id": "67",
        "Name": "JsonAndClientProjectedNameModel",
        "NameInRequest": "JsonAndClientProjectedNameModel",
        "Type": {
@@ -696,11 +651,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "72",
+       "$id": "68",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "73",
+        "$id": "69",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -715,19 +670,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "74",
+        "$id": "70",
         "Type": {
-         "$ref": "73"
+         "$ref": "69"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "75",
+       "$id": "71",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "76",
+        "$id": "72",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -742,20 +697,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "77",
+        "$id": "73",
         "Type": {
-         "$ref": "76"
+         "$ref": "72"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "78",
+       "$id": "74",
        "StatusCodes": [
         204
        ],
@@ -777,18 +729,18 @@
     }
    ],
    "Protocol": {
-    "$id": "79"
+    "$id": "75"
    },
    "Creatable": false,
    "Parent": "ProjectedNameClient"
   },
   {
-   "$id": "80",
+   "$id": "76",
    "Name": "Model",
    "Description": "",
    "Operations": [
     {
-     "$id": "81",
+     "$id": "77",
      "Name": "client",
      "ResourceName": "Model",
      "Parameters": [
@@ -796,7 +748,7 @@
        "$ref": "22"
       },
       {
-       "$id": "82",
+       "$id": "78",
        "Name": "ClientModel",
        "NameInRequest": "ModelWithClientProjectedName",
        "Type": {
@@ -813,11 +765,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "79",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "84",
+        "$id": "80",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -832,19 +784,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "85",
+        "$id": "81",
         "Type": {
-         "$ref": "84"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "86",
+       "$id": "82",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "87",
+        "$id": "83",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -859,20 +811,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "88",
+        "$id": "84",
         "Type": {
-         "$ref": "87"
+         "$ref": "83"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "85",
        "StatusCodes": [
         204
        ],
@@ -893,7 +842,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "90",
+     "$id": "86",
      "Name": "language",
      "ResourceName": "Model",
      "Parameters": [
@@ -901,7 +850,7 @@
        "$ref": "22"
       },
       {
-       "$id": "91",
+       "$id": "87",
        "Name": "CSModel",
        "NameInRequest": "ModelWithLanguageProjectedName",
        "Type": {
@@ -918,11 +867,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "92",
+       "$id": "88",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "93",
+        "$id": "89",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -937,19 +886,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "94",
+        "$id": "90",
         "Type": {
-         "$ref": "93"
+         "$ref": "89"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "95",
+       "$id": "91",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "96",
+        "$id": "92",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -964,20 +913,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "97",
+        "$id": "93",
         "Type": {
-         "$ref": "96"
+         "$ref": "92"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "29"
       }
      ],
      "Responses": [
       {
-       "$id": "98",
+       "$id": "94",
        "StatusCodes": [
         204
        ],
@@ -999,7 +945,7 @@
     }
    ],
    "Protocol": {
-    "$id": "99"
+    "$id": "95"
    },
    "Creatable": false,
    "Parent": "ProjectedNameClient"

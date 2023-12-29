@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_GetMixedType_ShortVersion()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = client.GetMixedType(null);
 
@@ -38,7 +38,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_GetMixedType_ShortVersion_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = await client.GetMixedTypeAsync(null);
 
@@ -53,7 +53,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_GetMixedType_ShortVersion_Convenience()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response<object> response = client.GetMixedType();
         }
@@ -62,7 +62,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_GetMixedType_ShortVersion_Convenience_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response<object> response = await client.GetMixedTypeAsync();
         }
@@ -71,7 +71,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_GetMixedType_AllParameters()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = client.GetMixedType(null);
 
@@ -86,7 +86,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_GetMixedType_AllParameters_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = await client.GetMixedTypeAsync(null);
 
@@ -101,7 +101,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_GetMixedType_AllParameters_Convenience()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response<object> response = client.GetMixedType();
         }
@@ -110,7 +110,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_GetMixedType_AllParameters_Convenience_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response<object> response = await client.GetMixedTypeAsync();
         }
@@ -119,7 +119,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_Send_ShortVersion()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -134,7 +134,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_Send_ShortVersion_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -149,7 +149,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_Send_ShortVersion_Convenience()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -158,7 +158,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_Send_ShortVersion_Convenience_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }
@@ -167,7 +167,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_Send_AllParameters()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -182,7 +182,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_Send_AllParameters_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -197,7 +197,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MixedTypes_Send_AllParameters_Convenience()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -206,7 +206,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MixedTypes_Send_AllParameters_Convenience_Async()
         {
-            MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+            MixedTypes client = new UnionClient().GetMixedTypesClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }

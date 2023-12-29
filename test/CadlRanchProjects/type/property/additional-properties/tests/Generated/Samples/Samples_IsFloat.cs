@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_GetIsFloat_ShortVersion()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response response = client.GetIsFloat(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_GetIsFloat_ShortVersion_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response response = await client.GetIsFloatAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_GetIsFloat_ShortVersion_Convenience()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response<IsFloatAdditionalProperties> response = client.GetIsFloat();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_GetIsFloat_ShortVersion_Convenience_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response<IsFloatAdditionalProperties> response = await client.GetIsFloatAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_GetIsFloat_AllParameters()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response response = client.GetIsFloat(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_GetIsFloat_AllParameters_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response response = await client.GetIsFloatAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_GetIsFloat_AllParameters_Convenience()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response<IsFloatAdditionalProperties> response = client.GetIsFloat();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_GetIsFloat_AllParameters_Convenience_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             Response<IsFloatAdditionalProperties> response = await client.GetIsFloatAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_Put_ShortVersion()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_Put_ShortVersion_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_Put_ShortVersion_Convenience()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_Put_ShortVersion_Convenience_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_Put_AllParameters()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_Put_AllParameters_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsFloat_Put_AllParameters_Convenience()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsFloat_Put_AllParameters_Convenience_Async()
         {
-            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+            IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
             IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
             Response response = await client.PutAsync(body);

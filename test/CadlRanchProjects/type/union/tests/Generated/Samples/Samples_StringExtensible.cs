@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_GetStringExtensible_ShortVersion()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = client.GetStringExtensible(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_GetStringExtensible_ShortVersion_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = await client.GetStringExtensibleAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_GetStringExtensible_ShortVersion_Convenience()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response<object> response = client.GetStringExtensible();
         }
@@ -56,7 +56,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_GetStringExtensible_ShortVersion_Convenience_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response<object> response = await client.GetStringExtensibleAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_GetStringExtensible_AllParameters()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = client.GetStringExtensible(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_GetStringExtensible_AllParameters_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = await client.GetStringExtensibleAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_GetStringExtensible_AllParameters_Convenience()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response<object> response = client.GetStringExtensible();
         }
@@ -98,7 +98,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_GetStringExtensible_AllParameters_Convenience_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response<object> response = await client.GetStringExtensibleAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_Send_ShortVersion()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_Send_ShortVersion_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_Send_ShortVersion_Convenience()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -146,7 +146,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_Send_ShortVersion_Convenience_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }
@@ -155,7 +155,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_Send_AllParameters()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -170,7 +170,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_Send_AllParameters_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -185,7 +185,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensible_Send_AllParameters_Convenience()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -194,7 +194,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensible_Send_AllParameters_Convenience_Async()
         {
-            StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
+            StringExtensible client = new UnionClient().GetStringExtensibleClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }

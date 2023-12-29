@@ -712,6 +712,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\path\\single\\src\\Generated -n"
     },
+    "typespec-server/versions/not-versioned": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\versions\\not-versioned\\src\\Generated -n"
+    },
+    "typespec-server/versions/versioned": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\versions\\versioned\\src\\Generated -n"
+    },
     "typespec-special-headers/client-request-id": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\client-request-id\\src\\Generated -n"

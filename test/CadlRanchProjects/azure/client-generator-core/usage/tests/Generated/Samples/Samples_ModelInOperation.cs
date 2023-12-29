@@ -23,7 +23,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_InputToInputOutput_ShortVersion()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -38,7 +38,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_InputToInputOutput_ShortVersion_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -53,7 +53,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_InputToInputOutput_ShortVersion_Convenience()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
@@ -63,7 +63,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_InputToInputOutput_ShortVersion_Convenience_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
@@ -73,7 +73,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_InputToInputOutput_AllParameters()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -88,7 +88,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_InputToInputOutput_AllParameters_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -103,7 +103,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_InputToInputOutput_AllParameters_Convenience()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             InputModel body = new InputModel("<name>");
             Response response = client.InputToInputOutput(body);
@@ -113,7 +113,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_InputToInputOutput_AllParameters_Convenience_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
@@ -123,7 +123,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_OutputToInputOutput_ShortVersion()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response response = client.OutputToInputOutput(null);
 
@@ -135,7 +135,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_OutputToInputOutput_ShortVersion_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response response = await client.OutputToInputOutputAsync(null);
 
@@ -147,7 +147,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_OutputToInputOutput_ShortVersion_Convenience()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response<OutputModel> response = client.OutputToInputOutput();
         }
@@ -156,7 +156,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_OutputToInputOutput_ShortVersion_Convenience_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response<OutputModel> response = await client.OutputToInputOutputAsync();
         }
@@ -165,7 +165,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_OutputToInputOutput_AllParameters()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response response = client.OutputToInputOutput(null);
 
@@ -177,7 +177,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_OutputToInputOutput_AllParameters_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response response = await client.OutputToInputOutputAsync(null);
 
@@ -189,7 +189,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelInOperation_OutputToInputOutput_AllParameters_Convenience()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response<OutputModel> response = client.OutputToInputOutput();
         }
@@ -198,7 +198,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelInOperation_OutputToInputOutput_AllParameters_Convenience_Async()
         {
-            ModelInOperation client = new UsageClient().GetModelInOperationClient(apiVersion: "1.0.0");
+            ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
             Response<OutputModel> response = await client.OutputToInputOutputAsync();
         }

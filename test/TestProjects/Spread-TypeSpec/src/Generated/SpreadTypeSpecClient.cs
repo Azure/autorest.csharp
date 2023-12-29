@@ -23,7 +23,6 @@ namespace SpreadTypeSpec
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -55,7 +54,6 @@ namespace SpreadTypeSpec
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary> spread a model as body. </summary>
@@ -944,7 +942,6 @@ namespace SpreadTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadModel", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -960,7 +957,6 @@ namespace SpreadTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAlias", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -977,7 +973,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadMultiTargetAlias/", false);
             uri.AppendPath(id, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
             request.Headers.Add("Accept", "application/json");
@@ -995,7 +990,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithModel/", false);
             uri.AppendPath(id, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
             request.Headers.Add("Accept", "application/json");
@@ -1013,7 +1007,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithSpreadAlias/", false);
             uri.AppendPath(id, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
             request.Headers.Add("Accept", "application/json");
@@ -1031,7 +1024,6 @@ namespace SpreadTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithOptionalProps/", false);
             uri.AppendPath(id, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
             request.Headers.Add("Accept", "application/json");
@@ -1048,7 +1040,6 @@ namespace SpreadTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithCollections", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

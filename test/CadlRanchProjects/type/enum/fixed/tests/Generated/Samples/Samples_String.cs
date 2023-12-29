@@ -23,7 +23,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_GetKnownValue_ShortVersion()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = client.GetKnownValue(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_GetKnownValue_ShortVersion_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = await client.GetKnownValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_GetKnownValue_ShortVersion_Convenience()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response<DaysOfWeekEnum> response = client.GetKnownValue();
         }
@@ -56,7 +56,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_GetKnownValue_ShortVersion_Convenience_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response<DaysOfWeekEnum> response = await client.GetKnownValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_GetKnownValue_AllParameters()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = client.GetKnownValue(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_GetKnownValue_AllParameters_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = await client.GetKnownValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_GetKnownValue_AllParameters_Convenience()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response<DaysOfWeekEnum> response = client.GetKnownValue();
         }
@@ -98,7 +98,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_GetKnownValue_AllParameters_Convenience_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response<DaysOfWeekEnum> response = await client.GetKnownValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutKnownValue_ShortVersion()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
@@ -119,7 +119,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutKnownValue_ShortVersion_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
@@ -131,7 +131,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutKnownValue_ShortVersion_Convenience()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
         }
@@ -140,7 +140,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutKnownValue_ShortVersion_Convenience_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
         }
@@ -149,7 +149,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutKnownValue_AllParameters()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
@@ -161,7 +161,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutKnownValue_AllParameters_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
@@ -173,7 +173,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutKnownValue_AllParameters_Convenience()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
         }
@@ -182,7 +182,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutKnownValue_AllParameters_Convenience_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
         }
@@ -191,7 +191,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutUnknownValue_ShortVersion()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
@@ -203,7 +203,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutUnknownValue_ShortVersion_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
@@ -215,7 +215,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutUnknownValue_ShortVersion_Convenience()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
         }
@@ -224,7 +224,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutUnknownValue_ShortVersion_Convenience_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
         }
@@ -233,7 +233,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutUnknownValue_AllParameters()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
@@ -245,7 +245,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutUnknownValue_AllParameters_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
@@ -257,7 +257,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_String_PutUnknownValue_AllParameters_Convenience()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
         }
@@ -266,7 +266,7 @@ namespace _Type._Enum.Fixed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_String_PutUnknownValue_AllParameters_Convenience_Async()
         {
-            String client = new FixedClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new FixedClient().GetStringClient();
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
         }
