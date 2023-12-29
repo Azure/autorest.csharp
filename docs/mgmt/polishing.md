@@ -238,6 +238,30 @@ The content after `Serialized Name:` is the "original name" you would like to us
 
 Because this configuration adds quite a few extra content to the xml documents, it is not recommended to have this flag on an official SDK, be sure to remove the configuration and regenerate the SDK after all the rename work is done.
 
+### Example of the usage of `rename-mapping`
+
+Usually you could follow the following steps to make sure the rename-mapping is working as expected:
+1. Add the following configuration in your `autorest.md`, and then **regenerate** your library (details could be found in [`How to get original name` section](#how-to-get-original-name)).
+```
+mgmt-debug:
+  show-serialized-names: true
+```
+2. Now you should see code changes adding `Serialized Name` in your library. Find the `Serialized Name` of the member or type you would like to change, here as an example, we change the name of a property, and you should see this in the code change:
+```diff
+    /// <summary>
+    /// Specifies the storage settings for the virtual machine disks.
++   /// Serialized Name: Image.properties.storageProfile
+    /// </summary>
+    public ImageStorageProfile StorageProfile { get; set; }
+```
+3. Now you need to copy the `Serialized Name` of this property and put it in your `rename-mapping` with your new property name like this:
+```
+rename-mapping:
+    Image.properties.storageProfile: YourNewNameHere
+```
+If you would like to change the format of this property, please follow the instructions in [this section](#change-the-format-of-a-property).
+4. Remove the `mgmt-debug` configuration and **regenerate** your library again. You should see change has been applied to your library.
+
 ## Rename a parameter in an operation
 
 There is a configuration that allows you to change the parameter names in an operation. For instance,
