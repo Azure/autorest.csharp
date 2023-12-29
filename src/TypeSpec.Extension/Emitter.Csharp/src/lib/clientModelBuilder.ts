@@ -87,59 +87,33 @@ export function createModelForService(
         context,
         "@azure-tools/typespec-csharp"
     );
-    const title = service.title;
     const serviceNamespaceType = service.type;
-    const apiVersions: Set<string> = new Set<string>();
-    let version = service.version;
-    if (version && version !== mockApiVersion) {
-        apiVersions.add(version);
-    }
+
+    const apiVersions: Set<string> | undefined = new Set<string>();
+    let defaultApiVersion: string | undefined = undefined;
     const versions = getVersions(program, service.type)[1]?.getVersions();
-    if (versions) {
+    if (versions && versions.length > 0) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
         }
-        version = versions[versions.length - 1].value; //default version
+        defaultApiVersion = versions[versions.length - 1].value;
     }
+    const defaultApiVersionConstant: InputConstant | undefined =
+        defaultApiVersion
+            ? {
+                  Type: {
+                      Name: "String",
+                      Kind: InputTypeKind.String,
+                      IsNullable: false
+                  } as InputPrimitiveType,
+                  Value: defaultApiVersion
+              }
+            : undefined;
 
-    if (apiVersions.size === 0) {
-        $lib.reportDiagnostic(program, {
-            code: "No-APIVersion",
-            format: { service: service.type.name },
-            target: NoTarget
-        });
-    }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-    const apiVersionParam: InputParameter = {
-        Name: "apiVersion",
-        NameInRequest: "api-version",
-        Description: "",
-        Type: {
-            Name: "String",
-            Kind: InputTypeKind.String,
-            IsNullable: false
-        } as InputPrimitiveType,
-        Location: RequestLocation.Query,
-        IsRequired: true,
-        IsApiVersion: true,
-        IsContentType: false,
-        IsEndpoint: false,
-        IsResourceParameter: false,
-        SkipUrlEncoding: false,
-        Explode: false,
-        Kind: InputOperationParameterKind.Client,
-        DefaultValue: {
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Value: version
-        } as InputConstant
-    };
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
@@ -195,31 +169,17 @@ export function createModelForService(
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
-            if (apiVersionIndex !== -1) {
-                const apiVersionInOperation = op.Parameters[apiVersionIndex];
+            if (apiVersionIndex === -1) {
+                continue;
+            }
+            const apiVersionInOperation = op.Parameters[apiVersionIndex];
+            if (defaultApiVersionConstant !== undefined) {
                 if (!apiVersionInOperation.DefaultValue?.Value) {
                     apiVersionInOperation.DefaultValue =
-                        apiVersionParam.DefaultValue;
-                }
-                /**
-                 * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
-                 * Three checkpoints:
-                 * the parameter is query parameter,
-                 * it is client parameter
-                 * it does not has default value, or the default value is included in the global service apiVersion.
-                 */
-                if (
-                    apiVersions.has(
-                        apiVersionInOperation.DefaultValue?.Value
-                    ) &&
-                    apiVersionInOperation.Kind ===
-                        InputOperationParameterKind.Client &&
-                    apiVersionInOperation.Location === apiVersionParam.Location
-                ) {
-                    op.Parameters[apiVersionIndex] = apiVersionParam;
+                        defaultApiVersionConstant;
                 }
             } else {
-                op.Parameters.push(apiVersionParam);
+                apiVersionInOperation.Kind = InputOperationParameterKind.Method;
             }
         }
     }

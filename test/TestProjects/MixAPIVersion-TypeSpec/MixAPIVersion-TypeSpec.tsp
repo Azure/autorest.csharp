@@ -9,8 +9,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-
-@service({title:"PetStore", version:"2022-11-30-preview"})
+@versioned(Versions)
+@service({title:"PetStore"})
 @doc("This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.")
 @server(
     "{petStoreUrl}",
@@ -19,8 +19,12 @@ using Azure.Core;
         petStoreUrl: string,
     }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace MixApiVersion;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "2022-11-30-preview"
+}
 
 // Model types
 @doc("Pet")

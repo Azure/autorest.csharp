@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetExtendsModelAsync.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response<ExtendsModelAdditionalProperties> response = await client.GetExtendsModelAsync();
 ]]></code>
 This sample shows how to call GetExtendsModelAsync with all parameters.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response<ExtendsModelAdditionalProperties> response = await client.GetExtendsModelAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<ExtendsModelAdditionalProperties> response = await client.GetExtendsMod
       <example>
 This sample shows how to call GetExtendsModel.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response<ExtendsModelAdditionalProperties> response = client.GetExtendsModel();
 ]]></code>
 This sample shows how to call GetExtendsModel with all parameters.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response<ExtendsModelAdditionalProperties> response = client.GetExtendsModel();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<ExtendsModelAdditionalProperties> response = client.GetExtendsModel();
       <example>
 This sample shows how to call GetExtendsModelAsync and parse the result.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response response = await client.GetExtendsModelAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetExtendsModelAsync with all parameters and parse the result.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response response = await client.GetExtendsModelAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetExtendsModel and parse the result.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response response = client.GetExtendsModel(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetExtendsModel with all parameters and parse the result.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 Response response = client.GetExtendsModel(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -120,7 +120,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -132,7 +132,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);
@@ -141,7 +141,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient(apiVersion: "1.0.0");
+ExtendsModel client = new AdditionalPropertiesClient().GetExtendsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);

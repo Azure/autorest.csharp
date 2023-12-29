@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Payload.ContentNegotiation",
  "Description": "Test describing optionality of the request body.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
@@ -155,47 +153,16 @@
         },
         "Value": "image/png"
        }
-      },
-      {
-       "$id": "22",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "23",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "24",
-        "Type": {
-         "$id": "25",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "27",
+        "$id": "23",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -217,7 +184,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "28",
+     "$id": "24",
      "Name": "getAvatarAsJpeg",
      "ResourceName": "SameBody",
      "Parameters": [
@@ -225,11 +192,11 @@
        "$ref": "15"
       },
       {
-       "$id": "29",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -244,25 +211,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "27",
         "Type": {
-         "$ref": "30"
+         "$ref": "26"
         },
         "Value": "image/jpeg"
        }
-      },
-      {
-       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "33",
+        "$id": "29",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -285,18 +249,18 @@
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "30"
    },
    "Creatable": false,
    "Parent": "ContentNegotiationClient"
   },
   {
-   "$id": "35",
+   "$id": "31",
    "Name": "DifferentBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "36",
+     "$id": "32",
      "Name": "getAvatarAsPng",
      "ResourceName": "DifferentBody",
      "Parameters": [
@@ -304,11 +268,11 @@
        "$ref": "15"
       },
       {
-       "$id": "37",
+       "$id": "33",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "38",
+        "$id": "34",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -323,25 +287,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "39",
+        "$id": "35",
         "Type": {
-         "$ref": "38"
+         "$ref": "34"
         },
         "Value": "image/png"
        }
-      },
-      {
-       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "36",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "41",
+        "$id": "37",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -363,7 +324,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "42",
+     "$id": "38",
      "Name": "getAvatarAsJson",
      "ResourceName": "DifferentBody",
      "Parameters": [
@@ -371,11 +332,11 @@
        "$ref": "15"
       },
       {
-       "$id": "43",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "40",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -390,20 +351,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "41",
         "Type": {
-         "$ref": "44"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "22"
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
@@ -428,7 +386,7 @@
     }
    ],
    "Protocol": {
-    "$id": "47"
+    "$id": "43"
    },
    "Creatable": false,
    "Parent": "ContentNegotiationClient"

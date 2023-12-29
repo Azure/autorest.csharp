@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetModelsOnlyAsync.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response<object> response = await client.GetModelsOnlyAsync();
 ]]></code>
 This sample shows how to call GetModelsOnlyAsync with all parameters.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response<object> response = await client.GetModelsOnlyAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<object> response = await client.GetModelsOnlyAsync();
       <example>
 This sample shows how to call GetModelsOnly.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response<object> response = client.GetModelsOnly();
 ]]></code>
 This sample shows how to call GetModelsOnly with all parameters.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response<object> response = client.GetModelsOnly();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<object> response = client.GetModelsOnly();
       <example>
 This sample shows how to call GetModelsOnlyAsync and parse the result.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = await client.GetModelsOnlyAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetModelsOnlyAsync with all parameters and parse the result.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = await client.GetModelsOnlyAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
       <example>
 This sample shows how to call GetModelsOnly and parse the result.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = client.GetModelsOnly(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetModelsOnly with all parameters and parse the result.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = client.GetModelsOnly(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("prop").ToString());
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code></example>
@@ -92,13 +92,13 @@ Response response = await client.SendAsync(SendRequestProp.A);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code></example>
@@ -107,7 +107,7 @@ Response response = client.Send(SendRequestProp.A);
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -119,7 +119,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendAsync with all request content.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -134,7 +134,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -146,7 +146,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Send with all request content.
 <code><![CDATA[
-ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {

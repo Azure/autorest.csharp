@@ -51,7 +51,7 @@ namespace MixApiVersion
         }
 
         /// <summary> Initializes a new instance of Pets. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Pets GetPetsClient(string apiVersion = "2022-11-30-preview")
         {
@@ -61,7 +61,7 @@ namespace MixApiVersion
         }
 
         /// <summary> Initializes a new instance of ListPetToysResponse. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ListPetToysResponse GetListPetToysResponseClient(string apiVersion = "2022-11-30-preview")
         {

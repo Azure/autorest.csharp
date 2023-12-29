@@ -22,7 +22,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsText_ShortVersion()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = client.SendAsText(content);
@@ -34,7 +34,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsText_ShortVersion_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = await client.SendAsTextAsync(content);
@@ -46,7 +46,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsText_ShortVersion_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.SendAsText("<text>");
         }
@@ -55,7 +55,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsText_ShortVersion_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.SendAsTextAsync("<text>");
         }
@@ -64,7 +64,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsText_AllParameters()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = client.SendAsText(content);
@@ -76,7 +76,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsText_AllParameters_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = await client.SendAsTextAsync(content);
@@ -88,7 +88,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsText_AllParameters_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.SendAsText("<text>");
         }
@@ -97,7 +97,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsText_AllParameters_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.SendAsTextAsync("<text>");
         }
@@ -106,7 +106,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsText_ShortVersion()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.GetAsText(null);
 
@@ -118,7 +118,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsText_ShortVersion_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.GetAsTextAsync(null);
 
@@ -130,7 +130,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsText_ShortVersion_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = client.GetAsText();
         }
@@ -139,7 +139,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsText_ShortVersion_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = await client.GetAsTextAsync();
         }
@@ -148,7 +148,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsText_AllParameters()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.GetAsText(null);
 
@@ -160,7 +160,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsText_AllParameters_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.GetAsTextAsync(null);
 
@@ -172,7 +172,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsText_AllParameters_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = client.GetAsText();
         }
@@ -181,7 +181,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsText_AllParameters_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = await client.GetAsTextAsync();
         }
@@ -190,7 +190,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsJson_ShortVersion()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = client.SendAsJson(content);
@@ -202,7 +202,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsJson_ShortVersion_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = await client.SendAsJsonAsync(content);
@@ -214,7 +214,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsJson_ShortVersion_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.SendAsJson("<text>");
         }
@@ -223,7 +223,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsJson_ShortVersion_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.SendAsJsonAsync("<text>");
         }
@@ -232,7 +232,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsJson_AllParameters()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = client.SendAsJson(content);
@@ -244,7 +244,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsJson_AllParameters_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             using RequestContent content = RequestContent.Create("<text>");
             Response response = await client.SendAsJsonAsync(content);
@@ -256,7 +256,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_SendAsJson_AllParameters_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.SendAsJson("<text>");
         }
@@ -265,7 +265,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_SendAsJson_AllParameters_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.SendAsJsonAsync("<text>");
         }
@@ -274,7 +274,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsJson_ShortVersion()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.GetAsJson(null);
 
@@ -286,7 +286,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsJson_ShortVersion_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.GetAsJsonAsync(null);
 
@@ -298,7 +298,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsJson_ShortVersion_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = client.GetAsJson();
         }
@@ -307,7 +307,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsJson_ShortVersion_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = await client.GetAsJsonAsync();
         }
@@ -316,7 +316,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsJson_AllParameters()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = client.GetAsJson(null);
 
@@ -328,7 +328,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsJson_AllParameters_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response response = await client.GetAsJsonAsync(null);
 
@@ -340,7 +340,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringBody_GetAsJson_AllParameters_Convenience()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = client.GetAsJson();
         }
@@ -349,7 +349,7 @@ namespace Payload.MediaType.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringBody_GetAsJson_AllParameters_Convenience_Async()
         {
-            StringBody client = new MediaTypeClient().GetStringBodyClient(apiVersion: "1.0.0");
+            StringBody client = new MediaTypeClient().GetStringBodyClient();
 
             Response<string> response = await client.GetAsJsonAsync();
         }
