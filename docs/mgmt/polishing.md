@@ -8,6 +8,7 @@
     - [Rename a property in a class](#rename-a-property-in-a-class)
     - [Change the format of a property](#change-the-format-of-a-property)
     - [Rename an enumeration value in an enumeration type](#rename-an-enumeration-value-in-an-enumeration-type)
+    - [Example of the usage of `rename-mapping`](#example-of-the-usage-of-rename-mapping)
   - [Rename a parameter in an operation](#rename-a-parameter-in-an-operation)
   - [Irregular Plural Words](#irregular-plural-words)
   - [Keep Plural Enums](#keep-plural-enums)
