@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 
             public abstract TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response);
             public abstract TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response);
+            public abstract TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response, ValueExpression modelReaderwriterOption);
             public abstract TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression response);
             public abstract TypedValueExpression GetTypedResponseFromBinaryData(Type responseType, TypedValueExpression response, string? contentType = null);
 

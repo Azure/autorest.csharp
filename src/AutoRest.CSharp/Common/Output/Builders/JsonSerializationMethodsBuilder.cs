@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, MulitipartFormDataObjectSerialization? multipart)
+        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, MultipartFormDataObjectSerialization? multipart)
         {
             // we do not need this if model reader writer feature is not enabled
             if (!Configuration.UseModelReaderWriter)
@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelCreateMethodBody(model, json != null, xml != null, data, options, iModelTInterface).ToArray()
+                BuildModelCreateMethodBody(model, json != null, xml != null, multipart, data, options, iModelTInterface).ToArray()
             );
 
             // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
             }
 
-            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json, XmlObjectSerialization? xml, MulitipartFormDataObjectSerialization? multipart, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json, XmlObjectSerialization? xml, MultipartFormDataObjectSerialization? multipart, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
                 yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
@@ -288,7 +288,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return switchStatement;
             }
 
-            static IEnumerable<MethodBodyStatement> BuildModelCreateMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            static IEnumerable<MethodBodyStatement> BuildModelCreateMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, MultipartFormDataObjectSerialization? multipart, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
                 yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
@@ -319,6 +319,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     switchStatement.Add(xmlCase);
                 }
 
+                if (multipart != null)
+                {
+                    // return DeserializeMultipartCollection(data, options);
+                    var mpCase = new SwitchCase(Serializations.MultipartFormDataFormat,
+                                               MultipartSerializationMethodsBuilder.BuildMultipartDeSerializationMethodBody(multipart, data, options).ToArray(), addScope: true);
+                    switchStatement.Add(mpCase);
+                }
                 // default case
                 /*
                  * throw new InvalidOperationException($"The model {nameof(T)} does not support '{options.Format}' format.");

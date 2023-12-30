@@ -40,8 +40,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
 
         private bool _multipartSerializationInitialized = false;
-        private MulitipartFormDataObjectSerialization? _multipartSerialization;
-        public MulitipartFormDataObjectSerialization? MultipartSerialization => EnsureMultipartFormDataSerialization();
+        private MultipartFormDataObjectSerialization? _multipartSerialization;
+        public MultipartFormDataObjectSerialization? MultipartSerialization => EnsureMultipartFormDataSerialization();
 
         private JsonObjectSerialization? EnsureJsonSerialization()
         {
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return _xmlSerialization;
         }
 
-        private MulitipartFormDataObjectSerialization? EnsureMultipartFormDataSerialization()
+        private MultipartFormDataObjectSerialization? EnsureMultipartFormDataSerialization()
         {
             if (_multipartSerializationInitialized)
                 return _multipartSerialization;
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         }
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
-        protected abstract MulitipartFormDataObjectSerialization? BuildMultipartFormDataSerialization();
+        protected abstract MultipartFormDataObjectSerialization? BuildMultipartFormDataSerialization();
 
 
         protected abstract bool EnsureIncludeSerializer();

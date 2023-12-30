@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel.Primitives;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -25,11 +26,19 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
             public override TypedValueExpression GetTypedResponseFromValue(TypedValueExpression value, TypedValueExpression response)
                 => ResponseExpression.FromValue(value, new ResponseExpression(response));
 
-            public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response)
+            public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response) => GetTypedResponseFromModel(type, response, new ValueExpression()); //TODO: add model reader writer options
+            public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response, ValueExpression modelReaderWriterOptions)
             {
                 var rawResponse = new ResponseExpression(response);
-                var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { rawResponse });
-                return ResponseExpression.FromValue(model, rawResponse);
+                if (Configuration.UseModelReaderWriter)
+                {
+                    ValueExpression value = new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Read), new[] { rawResponse.Content, modelReaderWriterOptions }, new[] { type.Type});
+                    return ResponseExpression.FromValue(value, rawResponse);
+                } else
+                {
+                    var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { rawResponse.Content });
+                    return ResponseExpression.FromValue(model, rawResponse);
+                }
             }
 
             public override TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression response)

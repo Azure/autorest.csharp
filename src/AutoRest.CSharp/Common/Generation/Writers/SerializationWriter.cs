@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <param name="model"></param>
         /// <param name="json"></param>
         /// <param name="xml"></param>
-        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, MulitipartFormDataObjectSerialization? multipart)
+        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, MultipartFormDataObjectSerialization? multipart)
         {
             foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml, multipart))
             {

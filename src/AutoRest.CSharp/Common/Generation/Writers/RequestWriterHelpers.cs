@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteHeaders(writer, clientMethod, request, content: true, fields);
 
                         var multipartContent = new CodeWriterDeclaration("content");
-                        writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
+                        writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormData)}();");
 
                         foreach (var bodyParameter in multipartRequestBody.RequestBodyParts)
                         {
@@ -296,6 +296,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                }
+                if (header.IsContentHeader && value.IsConstant)
+                {
+                    writer.Append($"content.ContentType ?? ");
+
                 }
 
                 if (value.Type.Equals(typeof(ContentType)))

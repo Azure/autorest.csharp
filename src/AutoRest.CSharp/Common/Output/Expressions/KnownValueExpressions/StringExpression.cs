@@ -18,5 +18,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public static StringExpression Format(StringExpression format, params ValueExpression[] args)
             => new(new InvokeStaticMethodExpression(typeof(string), nameof(string.Format), args.Prepend(format).ToArray()));
+        public static StringExpression SubString(StringExpression value, ValueExpression startIndex) => new(new InvokeInstanceMethodExpression(value, nameof(string.Substring), new[] { startIndex }, null, false));
     }
 }

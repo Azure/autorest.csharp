@@ -19,7 +19,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -166,6 +166,22 @@ namespace AutoRest.CSharp.Output.Builders
                 InputListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 _ => new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
+            };
+        }
+
+        public static MultipartSerialization BuildMulipartSerialization(InputType inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat)
+        {
+            if (valueType.IsFrameworkType && valueType.FrameworkType == typeof(JsonElement))
+            {
+                return new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
+            }
+
+            return inputType switch
+            {
+                //CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType, isCollectionElement),
+                //InputListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                //InputDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                _ => new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }
 
@@ -325,7 +341,7 @@ namespace AutoRest.CSharp.Output.Builders
             return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
-        public MulitipartFormDataObjectSerialization BuildMultipartFormDataObjectSerialization(SchemaObjectType objectType)
+        public MultipartFormDataObjectSerialization BuildMultipartFormDataObjectSerialization(SchemaObjectType objectType)
         {
             /*TODO: This is a temporary implementation. We need to revisit this and make it more robust.
              *             * The current implementation assumes that the object is a flat object and does not have any nested objects.
@@ -348,23 +364,42 @@ namespace AutoRest.CSharp.Output.Builders
 
                 var memberValueExpression = new TypedMemberExpression(null, property.Declaration.Name, property.Declaration.Type);
                 //var toBinaryDataExpression = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression.NullableStructValue() });
-                ValueExpression toBinaryDataExpression;
+                ValueExpression serializedValue;
 
                 if (property.Declaration.Type.IsFrameworkType)
                 {
-                    toBinaryDataExpression = property switch
+                    serializedValue = property switch
                     {
                         _ when property.Declaration.Type.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression.NullableStructValue() }),
                         _ when property.Declaration.Type.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { memberValueExpression.NullableStructValue() }),
                         _ when property.Declaration.Type.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { memberValueExpression.NullableStructValue() }),
                         _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
                         _ when property.Declaration.Type.FrameworkType == typeof(float) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
-                        _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => memberValueExpression,
+                        _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(memberValueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
                         _ => throw new InvalidOperationException($"Unsupported type {property.Declaration.Type} for serialization")
                     };
                 } else
                 {
-                    toBinaryDataExpression = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() });
+                    serializedValue = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() });
+                }
+
+                ValueExpression deserializedValue;
+                if (property.Declaration.Type.IsFrameworkType)
+                {
+                    deserializedValue = property switch
+                    {
+                        _ when property.Declaration.Type.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToString), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToArray), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToStream), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(float) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression.NullableStructValue() }),
+                        _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => memberValueExpression,
+                        _ => throw new InvalidOperationException($"Unsupported type {property.Declaration.Type} for serialization")
+                    };
+                }
+                else
+                {
+                    deserializedValue = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression.NullableStructValue() });
                 }
 
                 TypedMemberExpression? enumerableExpression = null;
@@ -380,13 +415,14 @@ namespace AutoRest.CSharp.Output.Builders
                     serializedName,
                     property.ValueType,
                     isRequired,
-                    toBinaryDataExpression,
-                    shouldExcludeInWireSerialization);
+                    serializedValue,
+                    shouldExcludeInWireSerialization,
+                    deserializedValue);
                 properties.Add(propertySerialization);
             }
             //var additionalProperties = CreateAdditionalProperties(objectType);
             MultipartAdditionalPropertiesSerialization? additionalProperties = null;
-            return new MulitipartFormDataObjectSerialization(objectType,
+            return new MultipartFormDataObjectSerialization(objectType,
                 objectType.SerializationConstructor.Signature.Parameters,
                 properties,
                 additionalProperties,

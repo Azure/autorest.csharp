@@ -9,9 +9,9 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MulitipartFormDataObjectSerialization
+    internal class MultipartFormDataObjectSerialization
     {
-        public MulitipartFormDataObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<MultipartPropertySerialization> properties, MultipartAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, bool includeConverter)
+        public MultipartFormDataObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<MultipartPropertySerialization> properties, MultipartAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, bool includeConverter)
         {
             Type = model.Type;
             ConstructorParameters = constructorParameters;

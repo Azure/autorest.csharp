@@ -6,13 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
-    internal class MulitipartFormDataSerialization: MulitipartSerialization
+    internal abstract class MultipartSerialization: ObjectSerialization
     {
-        public MulitipartFormDataSerialization() : base("form-data")
+        protected MultipartSerialization(bool isNullable)
         {
+            IsNullable = isNullable;
         }
+        public bool IsNullable { get; }
     }
 }

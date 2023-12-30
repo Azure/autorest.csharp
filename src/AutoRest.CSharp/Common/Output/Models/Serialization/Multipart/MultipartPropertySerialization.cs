@@ -20,15 +20,18 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
             string serializedName,
             CSharpType? serializedType,
             bool isRequired,
-            ValueExpression toBinaryDataExpress,
+            ValueExpression serializedValue,
             bool shouldExcludeInWireSerialization,
+            ValueExpression? deserializedValue,
             TypedValueExpression? enumerableExpression = null)
             : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression)
         {
-            ToBinaryDataExpression = toBinaryDataExpress;
+            SerializedValue = serializedValue;
+            DeserializedValue = deserializedValue;
         }
 
-        public ValueExpression ToBinaryDataExpression { get;}
+        public ValueExpression SerializedValue { get;}
+        public ValueExpression? DeserializedValue { get;}
         public string ContentType { get; set; } = "application/octet-stream";
     }
 }

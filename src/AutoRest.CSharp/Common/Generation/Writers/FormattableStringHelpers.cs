@@ -200,7 +200,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static FormattableString GetModelReadWriteOptions(BodyMediaType? type) => type switch
         {
             BodyMediaType.Xml => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Xml)}",
-            BodyMediaType.MultipartFormData => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.MutipartFormData)}",
+            BodyMediaType.MultipartFormData => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.MultipartFormData)}",
             _ => $"{typeof(ModelReaderWriterOptions)}.{nameof(ModelReaderWriterOptions.Json)}",
         };
 

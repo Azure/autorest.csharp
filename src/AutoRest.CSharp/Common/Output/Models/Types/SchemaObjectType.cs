@@ -740,7 +740,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         }
 
-        protected override MulitipartFormDataObjectSerialization? BuildMultipartFormDataSerialization()
+        protected override MultipartFormDataObjectSerialization? BuildMultipartFormDataSerialization()
         {
             return _supportedSerializationFormats.Contains(KnownMediaType.Multipart) ? _serializationBuilder.BuildMultipartFormDataObjectSerialization(this) : null;
         }

@@ -36,6 +36,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { response });
                 return ResultExpression.FromValue(model, response);
             }
+            //TODO: support ModelReaderWriterOptions
+            public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression result, ValueExpression options)
+            {
+                var response = GetRawResponse(result);
+                var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { response });
+                return ResultExpression.FromValue(model, response);
+            }
 
             public override TypedValueExpression GetTypedResponseFromEnum(EnumType enumType, TypedValueExpression result)
             {

@@ -29,6 +29,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using System.ClientModel.Primitives;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -317,7 +318,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { } } serializableObjectType})
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
+                    ValueExpression options = new MemberExpression(typeof(ModelReaderWriterOptions), nameof(ModelReaderWriterOptions.MultipartFormData)); //TODO: add options according to the serialization format
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response, options)));
                 }
                 else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
                 {
