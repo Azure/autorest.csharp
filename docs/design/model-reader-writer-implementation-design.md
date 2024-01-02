@@ -56,12 +56,115 @@ Therefore we need a way to let our customer could publicly access to our interna
 
 ## Scope: Goals and Non-Goals
 
+### Goals
+
+Design a proper implementation for the model reader writer to consume, which should keep our current wire behavior unchanged, and meet the requirement for our customers to persistantly store their data from the models.
+
+### Non-Goals
+
+This is not a design for the APIs in model reader writer.
+
 ## Feature Design
 
-[Describe what the solution is, including the naming and scope,  what options are considered and why the proposed options is chosen] 
+### Introduction of the methods in the interfaces
 
-<Your content here> 
+The definitions of the interfaces we would like to implement are:
+```csharp
+namespace System.ClientModel.Primitives
+{
+    public partial interface IJsonModel<out T> : System.ClientModel.Primitives.IPersistableModel<T>
+    {
+        T Create(ref System.Text.Json.Utf8JsonReader reader, System.ClientModel.Primitives.ModelReaderWriterOptions options);
+        void Write(System.Text.Json.Utf8JsonWriter writer, System.ClientModel.Primitives.ModelReaderWriterOptions options);
+    }
+    public partial interface IPersistableModel<out T>
+    {
+        T Create(System.BinaryData data, System.ClientModel.Primitives.ModelReaderWriterOptions options);
+        string GetFormatFromOptions(System.ClientModel.Primitives.ModelReaderWriterOptions options);
+        System.BinaryData Write(System.ClientModel.Primitives.ModelReaderWriterOptions options);
+    }
+    public partial class ModelReaderWriterOptions
+    {
+        public ModelReaderWriterOptions(string format) { }
+        public string Format { get { throw null; } }
+        public static System.ClientModel.Primitives.ModelReaderWriterOptions Json { get { throw null; } }
+        public static System.ClientModel.Primitives.ModelReaderWriterOptions Xml { get { throw null; } }
+    }
+}
+```
 
-## Detailed Implementation
+The methods in `IJsonModel<T>` controls how the model writes into a JSON or reads from JSON via `Utf8JsonWriter` or `Utf8JsonReader`. The methods in `IPersistableModel<T>` controls how the model writes into a BinaryData or reads from a BinaryData which serves a general purpose of serialization and deserialization including JSON case.
 
-<Your content here> 
+### Implementation design
+
+Our general principals are:
+1. The behavior should keep unchanged when the library calls it on wire.
+2. When the customer calls the `ModelReaderWriter.Read` API, it should properly deserialize all the content in the input into the model (including the properties that this model does not currently support).
+3. When the customer calls the `ModelReaderWriter.Write` API, it should properly serialize all the properties into the result (including the properties that this model does not currently support).
+
+#### The `Create` methods
+
+#### The `Write` methods
+
+For the `IJsonModel<T>.Write` method, it should iterate all the properties on this model, and write it into the `Utf8JsonWriter`.
+
+To keep the behavior unchanged for wire cases, we should now implement the internal interface method `IUtf8JsonSerializable.Write(Utf8JsonWriter)` in this way:
+```csharp
+public partial class Foo : IUtf8JsonSerializable, IJsonModel<Foo>
+{
+    void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Foo>)this).Write(writer, new ModelReaderWriterOptions("W"));
+}
+```
+
+The cast `(IJsonModel<Foo>)this` is required because the method implementation of all interfaces will be explicitly implemented. And here we use `W` as the format for wire serialization and deserialization.
+
+For readonly properties, we should not write it on wire because we previously did not write it, we should check the value of `Format` in the `options`. For example we have a model `Foo` with two properties `A` and `B`:
+```csharp
+public partial class Foo
+{
+    public string A { get; set; } // this property is not readonly
+
+    public string B { get; } // this property is readonly
+}
+```
+
+The implementation of `IJsonModel<T>.Write` should also validate the format because the methods on this interface could only support Json:
+```csharp
+var format = options.Format == "W" ? ((IPersistableModel<T>)this).GetFormatFromOptions(options) : options.Format;
+if (format != "J")
+{
+    throw new InvalidOperationException($"The model {nameof(T)} does not support '{format}' format.");
+}
+```
+In this implementation, the method `IPersistableModel<T>.GetFormatFromOptions` is called to get the real format when we get the format of `W` which represents "wire", and then throw exception if the actual format is not `J` which represents "json".
+
+In the wire serialization, we will only write property `A`, and in a Json serialization (invoked by our customer via `ModelReaderWriter`), we will write both properties `A` and `B`, therefore the implementation should be:
+```csharp
+public partial class Foo : IUtf8JsonSerializable, IJsonModel<Foo>
+{
+    void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Foo>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+    void IJsonModel<Foo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+    {
+        var format = options.Format == "W" ? ((IPersistableModel<Foo>)this).GetFormatFromOptions(options) : options.Format;
+        if (format != "J")
+        {
+            throw new InvalidOperationException($"The model {nameof(Foo)} does not support '{format}' format.");
+        }
+
+        writer.WriteStartObject();
+        if (Optional.IsDefined(A))
+        {
+            writer.WritePropertyName("a"u8);
+            writer.WriteStringValue(A);
+        }
+        if (options.Format != "W" && Optional.IsDefined(B))
+        {
+            writer.WritePropertyName("b"u8);
+            writer.WriteStringValue(B);
+        }
+        /* the part to handle the unsupported properties on this model */
+        writer.WriteEndObject();
+    }
+}
+```
