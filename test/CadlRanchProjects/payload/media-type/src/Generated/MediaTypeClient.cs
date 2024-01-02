@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,14 +44,12 @@ namespace Payload.MediaType
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of StringBody. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual StringBody GetStringBodyClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private StringBody _cachedStringBody;
 
-            return new StringBody(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of StringBody. </summary>
+        public virtual StringBody GetStringBodyClient()
+        {
+            return Volatile.Read(ref _cachedStringBody) ?? Interlocked.CompareExchange(ref _cachedStringBody, new StringBody(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedStringBody;
         }
     }
 }

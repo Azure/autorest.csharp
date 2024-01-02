@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetExtendsFloatAsync.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response<ExtendsFloatAdditionalProperties> response = await client.GetExtendsFloatAsync();
 ]]></code>
 This sample shows how to call GetExtendsFloatAsync with all parameters.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response<ExtendsFloatAdditionalProperties> response = await client.GetExtendsFloatAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<ExtendsFloatAdditionalProperties> response = await client.GetExtendsFlo
       <example>
 This sample shows how to call GetExtendsFloat.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response<ExtendsFloatAdditionalProperties> response = client.GetExtendsFloat();
 ]]></code>
 This sample shows how to call GetExtendsFloat with all parameters.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response<ExtendsFloatAdditionalProperties> response = client.GetExtendsFloat();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<ExtendsFloatAdditionalProperties> response = client.GetExtendsFloat();
       <example>
 This sample shows how to call GetExtendsFloatAsync and parse the result.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response response = await client.GetExtendsFloatAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetExtendsFloatAsync with all parameters and parse the result.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response response = await client.GetExtendsFloatAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call GetExtendsFloat and parse the result.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response response = client.GetExtendsFloat(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetExtendsFloat with all parameters and parse the result.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 Response response = client.GetExtendsFloat(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {

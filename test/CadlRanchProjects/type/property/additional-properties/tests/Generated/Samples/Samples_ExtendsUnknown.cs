@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_GetExtendsUnknown_ShortVersion()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response response = client.GetExtendsUnknown(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_GetExtendsUnknown_ShortVersion_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response response = await client.GetExtendsUnknownAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_GetExtendsUnknown_ShortVersion_Convenience()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response<ExtendsUnknownAdditionalProperties> response = client.GetExtendsUnknown();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_GetExtendsUnknown_ShortVersion_Convenience_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response<ExtendsUnknownAdditionalProperties> response = await client.GetExtendsUnknownAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_GetExtendsUnknown_AllParameters()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response response = client.GetExtendsUnknown(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_GetExtendsUnknown_AllParameters_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response response = await client.GetExtendsUnknownAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_GetExtendsUnknown_AllParameters_Convenience()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response<ExtendsUnknownAdditionalProperties> response = client.GetExtendsUnknown();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_GetExtendsUnknown_AllParameters_Convenience_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             Response<ExtendsUnknownAdditionalProperties> response = await client.GetExtendsUnknownAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_Put_ShortVersion()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_Put_ShortVersion_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_Put_ShortVersion_Convenience()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_Put_ShortVersion_Convenience_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_Put_AllParameters()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_Put_AllParameters_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsUnknown_Put_AllParameters_Convenience()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsUnknown_Put_AllParameters_Convenience_Async()
         {
-            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient(apiVersion: "1.0.0");
+            ExtendsUnknown client = new AdditionalPropertiesClient().GetExtendsUnknownClient();
 
             ExtendsUnknownAdditionalProperties body = new ExtendsUnknownAdditionalProperties("<name>");
             Response response = await client.PutAsync(body);

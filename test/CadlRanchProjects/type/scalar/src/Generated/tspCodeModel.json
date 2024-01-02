@@ -1,9 +1,7 @@
 {
  "$id": "1",
  "Name": "Type.Scalar",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [
@@ -85,47 +83,16 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "13",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "14",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "15",
-        "Type": {
-         "$id": "16",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "13",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "18",
+        "$id": "14",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -147,7 +114,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "15",
      "Name": "put",
      "ResourceName": "String",
      "Description": "put string value",
@@ -156,12 +123,12 @@
        "$ref": "6"
       },
       {
-       "$id": "20",
+       "$id": "16",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "21",
+        "$id": "17",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -177,11 +144,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "22",
+       "$id": "18",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "23",
+        "$id": "19",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -196,19 +163,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "24",
+        "$id": "20",
         "Type": {
-         "$ref": "23"
+         "$ref": "19"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "25",
+       "$id": "21",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "26",
+        "$id": "22",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -223,20 +190,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "23",
         "Type": {
-         "$ref": "26"
+         "$ref": "22"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -258,18 +222,18 @@
     }
    ],
    "Protocol": {
-    "$id": "29"
+    "$id": "25"
    },
    "Creatable": false,
    "Parent": "ScalarClient"
   },
   {
-   "$id": "30",
+   "$id": "26",
    "Name": "Boolean",
    "Description": "",
    "Operations": [
     {
-     "$id": "31",
+     "$id": "27",
      "Name": "get",
      "ResourceName": "Boolean",
      "Description": "get boolean value",
@@ -278,11 +242,11 @@
        "$ref": "6"
       },
       {
-       "$id": "32",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
+        "$id": "29",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -297,25 +261,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "30",
         "Type": {
-         "$ref": "33"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "36",
+        "$id": "32",
         "Name": "boolean",
         "Kind": "Boolean",
         "IsNullable": false
@@ -337,7 +298,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "37",
+     "$id": "33",
      "Name": "put",
      "ResourceName": "Boolean",
      "Description": "put boolean value",
@@ -346,12 +307,12 @@
        "$ref": "6"
       },
       {
-       "$id": "38",
+       "$id": "34",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "39",
+        "$id": "35",
         "Name": "boolean",
         "Kind": "Boolean",
         "IsNullable": false
@@ -367,11 +328,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "40",
+       "$id": "36",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "41",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -386,19 +347,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "38",
         "Type": {
-         "$ref": "41"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "43",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "40",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -413,20 +374,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "41",
         "Type": {
-         "$ref": "44"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -448,18 +406,18 @@
     }
    ],
    "Protocol": {
-    "$id": "47"
+    "$id": "43"
    },
    "Creatable": false,
    "Parent": "ScalarClient"
   },
   {
-   "$id": "48",
+   "$id": "44",
    "Name": "Unknown",
    "Description": "",
    "Operations": [
     {
-     "$id": "49",
+     "$id": "45",
      "Name": "get",
      "ResourceName": "Unknown",
      "Description": "get unknown value",
@@ -468,11 +426,11 @@
        "$ref": "6"
       },
       {
-       "$id": "50",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "51",
+        "$id": "47",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -487,25 +445,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "48",
         "Type": {
-         "$ref": "51"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "54",
+        "$id": "50",
         "Name": "Intrinsic",
         "Kind": "unknown",
         "IsNullable": false
@@ -527,7 +482,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "55",
+     "$id": "51",
      "Name": "put",
      "ResourceName": "Unknown",
      "Description": "put unknown value",
@@ -536,12 +491,12 @@
        "$ref": "6"
       },
       {
-       "$id": "56",
+       "$id": "52",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "57",
+        "$id": "53",
         "Name": "Intrinsic",
         "Kind": "unknown",
         "IsNullable": false
@@ -557,11 +512,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "58",
+       "$id": "54",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "59",
+        "$id": "55",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -576,19 +531,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "56",
         "Type": {
-         "$ref": "59"
+         "$ref": "55"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "61",
+       "$id": "57",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "62",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -603,20 +558,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "63",
+        "$id": "59",
         "Type": {
-         "$ref": "62"
+         "$ref": "58"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "64",
+       "$id": "60",
        "StatusCodes": [
         204
        ],
@@ -638,18 +590,18 @@
     }
    ],
    "Protocol": {
-    "$id": "65"
+    "$id": "61"
    },
    "Creatable": false,
    "Parent": "ScalarClient"
   },
   {
-   "$id": "66",
+   "$id": "62",
    "Name": "DecimalType",
    "Description": "Decimal type",
    "Operations": [
     {
-     "$id": "67",
+     "$id": "63",
      "Name": "responseBody",
      "ResourceName": "DecimalType",
      "Parameters": [
@@ -657,11 +609,11 @@
        "$ref": "6"
       },
       {
-       "$id": "68",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "69",
+        "$id": "65",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -676,25 +628,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "70",
+        "$id": "66",
         "Type": {
-         "$ref": "69"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "71",
+       "$id": "67",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "72",
+        "$id": "68",
         "Name": "decimal",
         "Kind": "Decimal",
         "IsNullable": false
@@ -716,7 +665,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "73",
+     "$id": "69",
      "Name": "requestBody",
      "ResourceName": "DecimalType",
      "Parameters": [
@@ -724,11 +673,11 @@
        "$ref": "6"
       },
       {
-       "$id": "74",
+       "$id": "70",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "75",
+        "$id": "71",
         "Name": "decimal",
         "Kind": "Decimal",
         "IsNullable": false
@@ -744,11 +693,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "76",
+       "$id": "72",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "77",
+        "$id": "73",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -763,19 +712,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "74",
         "Type": {
-         "$ref": "77"
+         "$ref": "73"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "79",
+       "$id": "75",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "80",
+        "$id": "76",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -790,20 +739,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "77",
         "Type": {
-         "$ref": "80"
+         "$ref": "76"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "82",
+       "$id": "78",
        "StatusCodes": [
         204
        ],
@@ -824,7 +770,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "83",
+     "$id": "79",
      "Name": "requestParameter",
      "ResourceName": "DecimalType",
      "Parameters": [
@@ -832,11 +778,11 @@
        "$ref": "6"
       },
       {
-       "$id": "84",
+       "$id": "80",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "85",
+        "$id": "81",
         "Name": "decimal",
         "Kind": "Decimal",
         "IsNullable": false
@@ -852,11 +798,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "86",
+       "$id": "82",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "87",
+        "$id": "83",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -871,20 +817,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "88",
+        "$id": "84",
         "Type": {
-         "$ref": "87"
+         "$ref": "83"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "85",
        "StatusCodes": [
         204
        ],
@@ -903,18 +846,18 @@
     }
    ],
    "Protocol": {
-    "$id": "90"
+    "$id": "86"
    },
    "Creatable": false,
    "Parent": "ScalarClient"
   },
   {
-   "$id": "91",
+   "$id": "87",
    "Name": "Decimal128Type",
    "Description": "Decimal128 type",
    "Operations": [
     {
-     "$id": "92",
+     "$id": "88",
      "Name": "responseBody",
      "ResourceName": "Decimal128Type",
      "Parameters": [
@@ -922,11 +865,11 @@
        "$ref": "6"
       },
       {
-       "$id": "93",
+       "$id": "89",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
+        "$id": "90",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -941,25 +884,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "95",
+        "$id": "91",
         "Type": {
-         "$ref": "94"
+         "$ref": "90"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "96",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "97",
+        "$id": "93",
         "Name": "decimal128",
         "Kind": "Decimal128",
         "IsNullable": false
@@ -981,7 +921,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "98",
+     "$id": "94",
      "Name": "requestBody",
      "ResourceName": "Decimal128Type",
      "Parameters": [
@@ -989,11 +929,11 @@
        "$ref": "6"
       },
       {
-       "$id": "99",
+       "$id": "95",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "100",
+        "$id": "96",
         "Name": "decimal128",
         "Kind": "Decimal128",
         "IsNullable": false
@@ -1009,11 +949,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "101",
+       "$id": "97",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "102",
+        "$id": "98",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1028,19 +968,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "103",
+        "$id": "99",
         "Type": {
-         "$ref": "102"
+         "$ref": "98"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "104",
+       "$id": "100",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "105",
+        "$id": "101",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1055,20 +995,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "106",
+        "$id": "102",
         "Type": {
-         "$ref": "105"
+         "$ref": "101"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "107",
+       "$id": "103",
        "StatusCodes": [
         204
        ],
@@ -1089,7 +1026,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "108",
+     "$id": "104",
      "Name": "requestParameter",
      "ResourceName": "Decimal128Type",
      "Parameters": [
@@ -1097,11 +1034,11 @@
        "$ref": "6"
       },
       {
-       "$id": "109",
+       "$id": "105",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "110",
+        "$id": "106",
         "Name": "decimal128",
         "Kind": "Decimal128",
         "IsNullable": false
@@ -1117,11 +1054,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "111",
+       "$id": "107",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "112",
+        "$id": "108",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1136,20 +1073,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "109",
         "Type": {
-         "$ref": "112"
+         "$ref": "108"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "114",
+       "$id": "110",
        "StatusCodes": [
         204
        ],
@@ -1168,18 +1102,18 @@
     }
    ],
    "Protocol": {
-    "$id": "115"
+    "$id": "111"
    },
    "Creatable": false,
    "Parent": "ScalarClient"
   },
   {
-   "$id": "116",
+   "$id": "112",
    "Name": "DecimalVerify",
    "Description": "Decimal type verification",
    "Operations": [
     {
-     "$id": "117",
+     "$id": "113",
      "Name": "prepareVerify",
      "ResourceName": "DecimalVerify",
      "Parameters": [
@@ -1187,11 +1121,11 @@
        "$ref": "6"
       },
       {
-       "$id": "118",
+       "$id": "114",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "119",
+        "$id": "115",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1206,28 +1140,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "120",
+        "$id": "116",
         "Type": {
-         "$ref": "119"
+         "$ref": "115"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "121",
+       "$id": "117",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "122",
+        "$id": "118",
         "Name": "Array",
         "ElementType": {
-         "$id": "123",
+         "$id": "119",
          "Name": "decimal",
          "Kind": "Decimal",
          "IsNullable": false
@@ -1251,7 +1182,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "124",
+     "$id": "120",
      "Name": "verify",
      "ResourceName": "DecimalVerify",
      "Parameters": [
@@ -1259,11 +1190,11 @@
        "$ref": "6"
       },
       {
-       "$id": "125",
+       "$id": "121",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "126",
+        "$id": "122",
         "Name": "decimal",
         "Kind": "Decimal",
         "IsNullable": false
@@ -1279,11 +1210,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "127",
+       "$id": "123",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "128",
+        "$id": "124",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1298,19 +1229,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "129",
+        "$id": "125",
         "Type": {
-         "$ref": "128"
+         "$ref": "124"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "130",
+       "$id": "126",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "131",
+        "$id": "127",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1325,20 +1256,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "132",
+        "$id": "128",
         "Type": {
-         "$ref": "131"
+         "$ref": "127"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "133",
+       "$id": "129",
        "StatusCodes": [
         204
        ],
@@ -1360,18 +1288,18 @@
     }
    ],
    "Protocol": {
-    "$id": "134"
+    "$id": "130"
    },
    "Creatable": false,
    "Parent": "ScalarClient"
   },
   {
-   "$id": "135",
+   "$id": "131",
    "Name": "Decimal128Verify",
    "Description": "Decimal128 type verification",
    "Operations": [
     {
-     "$id": "136",
+     "$id": "132",
      "Name": "prepareVerify",
      "ResourceName": "Decimal128Verify",
      "Parameters": [
@@ -1379,11 +1307,11 @@
        "$ref": "6"
       },
       {
-       "$id": "137",
+       "$id": "133",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "138",
+        "$id": "134",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1398,28 +1326,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "139",
+        "$id": "135",
         "Type": {
-         "$ref": "138"
+         "$ref": "134"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "140",
+       "$id": "136",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "141",
+        "$id": "137",
         "Name": "Array",
         "ElementType": {
-         "$id": "142",
+         "$id": "138",
          "Name": "decimal",
          "Kind": "Decimal",
          "IsNullable": false
@@ -1443,7 +1368,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "143",
+     "$id": "139",
      "Name": "verify",
      "ResourceName": "Decimal128Verify",
      "Parameters": [
@@ -1451,11 +1376,11 @@
        "$ref": "6"
       },
       {
-       "$id": "144",
+       "$id": "140",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "145",
+        "$id": "141",
         "Name": "decimal",
         "Kind": "Decimal",
         "IsNullable": false
@@ -1471,11 +1396,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "146",
+       "$id": "142",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "147",
+        "$id": "143",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1490,19 +1415,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "148",
+        "$id": "144",
         "Type": {
-         "$ref": "147"
+         "$ref": "143"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "149",
+       "$id": "145",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "150",
+        "$id": "146",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1517,20 +1442,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "151",
+        "$id": "147",
         "Type": {
-         "$ref": "150"
+         "$ref": "146"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "152",
+       "$id": "148",
        "StatusCodes": [
         204
        ],
@@ -1552,7 +1474,7 @@
     }
    ],
    "Protocol": {
-    "$id": "153"
+    "$id": "149"
    },
    "Creatable": false,
    "Parent": "ScalarClient"

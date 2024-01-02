@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetEnumsOnlyAsync.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response<object> response = await client.GetEnumsOnlyAsync();
 ]]></code>
 This sample shows how to call GetEnumsOnlyAsync with all parameters.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response<object> response = await client.GetEnumsOnlyAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<object> response = await client.GetEnumsOnlyAsync();
       <example>
 This sample shows how to call GetEnumsOnly.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response<object> response = client.GetEnumsOnly();
 ]]></code>
 This sample shows how to call GetEnumsOnly with all parameters.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response<object> response = client.GetEnumsOnly();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<object> response = client.GetEnumsOnly();
       <example>
 This sample shows how to call GetEnumsOnlyAsync and parse the result.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = await client.GetEnumsOnlyAsync(null);
 
@@ -45,7 +45,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
 ]]></code>
 This sample shows how to call GetEnumsOnlyAsync with all parameters and parse the result.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = await client.GetEnumsOnlyAsync(null);
 
@@ -58,7 +58,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
       <example>
 This sample shows how to call GetEnumsOnly and parse the result.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = client.GetEnumsOnly(null);
 
@@ -68,7 +68,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
 ]]></code>
 This sample shows how to call GetEnumsOnly with all parameters and parse the result.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = client.GetEnumsOnly(null);
 
@@ -81,13 +81,13 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code></example>
@@ -96,13 +96,13 @@ Response response = await client.SendAsync(SendRequestProp.A);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code></example>
@@ -111,7 +111,7 @@ Response response = client.Send(SendRequestProp.A);
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendAsync with all request content.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Send with all request content.
 <code><![CDATA[
-EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {

@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetMixedTypeAsync.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response<object> response = await client.GetMixedTypeAsync();
 ]]></code>
 This sample shows how to call GetMixedTypeAsync with all parameters.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response<object> response = await client.GetMixedTypeAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<object> response = await client.GetMixedTypeAsync();
       <example>
 This sample shows how to call GetMixedType.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response<object> response = client.GetMixedType();
 ]]></code>
 This sample shows how to call GetMixedType with all parameters.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response<object> response = client.GetMixedType();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<object> response = client.GetMixedType();
       <example>
 This sample shows how to call GetMixedTypeAsync and parse the result.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = await client.GetMixedTypeAsync(null);
 
@@ -47,7 +47,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
 ]]></code>
 This sample shows how to call GetMixedTypeAsync with all parameters and parse the result.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = await client.GetMixedTypeAsync(null);
 
@@ -62,7 +62,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
       <example>
 This sample shows how to call GetMixedType and parse the result.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = client.GetMixedType(null);
 
@@ -74,7 +74,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
 ]]></code>
 This sample shows how to call GetMixedType with all parameters and parse the result.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = client.GetMixedType(null);
 
@@ -89,13 +89,13 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code></example>
@@ -104,13 +104,13 @@ Response response = await client.SendAsync(SendRequestProp.A);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code></example>
@@ -119,7 +119,7 @@ Response response = client.Send(SendRequestProp.A);
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -131,7 +131,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendAsync with all request content.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -146,7 +146,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -158,7 +158,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Send with all request content.
 <code><![CDATA[
-MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
+MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {

@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_GetExtendsFloat_ShortVersion()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response response = client.GetExtendsFloat(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_GetExtendsFloat_ShortVersion_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response response = await client.GetExtendsFloatAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_GetExtendsFloat_ShortVersion_Convenience()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response<ExtendsFloatAdditionalProperties> response = client.GetExtendsFloat();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_GetExtendsFloat_ShortVersion_Convenience_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response<ExtendsFloatAdditionalProperties> response = await client.GetExtendsFloatAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_GetExtendsFloat_AllParameters()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response response = client.GetExtendsFloat(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_GetExtendsFloat_AllParameters_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response response = await client.GetExtendsFloatAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_GetExtendsFloat_AllParameters_Convenience()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response<ExtendsFloatAdditionalProperties> response = client.GetExtendsFloat();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_GetExtendsFloat_AllParameters_Convenience_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             Response<ExtendsFloatAdditionalProperties> response = await client.GetExtendsFloatAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_Put_ShortVersion()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_Put_ShortVersion_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_Put_ShortVersion_Convenience()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_Put_ShortVersion_Convenience_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_Put_AllParameters()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_Put_AllParameters_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsFloat_Put_AllParameters_Convenience()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsFloat_Put_AllParameters_Convenience_Async()
         {
-            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient(apiVersion: "1.0.0");
+            ExtendsFloat client = new AdditionalPropertiesClient().GetExtendsFloatClient();
 
             ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(123.45F);
             Response response = await client.PutAsync(body);

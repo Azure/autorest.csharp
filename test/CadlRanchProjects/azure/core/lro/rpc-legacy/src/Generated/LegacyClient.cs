@@ -44,7 +44,7 @@ namespace _Azure.Lro.RpcLegacy
         }
 
         /// <summary> Initializes a new instance of CreateResourcePollViaOperationLocation. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CreateResourcePollViaOperationLocation GetCreateResourcePollViaOperationLocationClient(string apiVersion = "2022-12-01-preview")
         {

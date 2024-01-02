@@ -23,7 +23,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -43,7 +43,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -63,7 +63,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -87,7 +87,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 

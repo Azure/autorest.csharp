@@ -26,7 +26,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -81,7 +81,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -136,7 +136,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
             {
@@ -154,7 +154,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
             {
@@ -172,7 +172,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -273,7 +273,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -374,7 +374,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
             {
@@ -414,7 +414,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum>
             {
@@ -454,7 +454,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -509,7 +509,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -564,7 +564,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -665,7 +665,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -766,7 +766,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = client.HelloDemo2(null);
 
@@ -786,7 +786,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloDemo2Async(null);
 
@@ -806,7 +806,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = client.HelloDemo2();
         }
@@ -817,7 +817,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloDemo2Async();
         }
@@ -828,7 +828,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = client.HelloDemo2(null);
 
@@ -852,7 +852,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloDemo2Async(null);
 
@@ -876,7 +876,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = client.HelloDemo2();
         }
@@ -887,7 +887,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloDemo2Async();
         }
@@ -898,7 +898,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -928,7 +928,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -958,7 +958,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
             Response<Thing> response = client.CreateLiteral(body);
@@ -970,7 +970,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
             Response<Thing> response = await client.CreateLiteralAsync(body);
@@ -982,7 +982,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1020,7 +1020,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1058,7 +1058,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
             {
@@ -1076,7 +1076,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
             {
@@ -1094,7 +1094,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = client.HelloLiteral(null);
 
@@ -1114,7 +1114,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
 
@@ -1134,7 +1134,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
         }
@@ -1145,7 +1145,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }
@@ -1156,7 +1156,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = client.HelloLiteral(null);
 
@@ -1180,7 +1180,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
 
@@ -1204,7 +1204,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
         }
@@ -1215,7 +1215,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }

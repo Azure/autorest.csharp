@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,14 +44,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of ModelInOperation. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ModelInOperation GetModelInOperationClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private ModelInOperation _cachedModelInOperation;
 
-            return new ModelInOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of ModelInOperation. </summary>
+        public virtual ModelInOperation GetModelInOperationClient()
+        {
+            return Volatile.Read(ref _cachedModelInOperation) ?? Interlocked.CompareExchange(ref _cachedModelInOperation, new ModelInOperation(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModelInOperation;
         }
     }
 }
