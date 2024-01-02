@@ -52,7 +52,7 @@ op test(@body input: Pet): Pet;
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const [root, _] = createModel(context);
         const models = root.Models;
         const petModel = models.find((m) => m.Name === "Pet");
         const catModel = models.find((m) => m.Name === "Cat");

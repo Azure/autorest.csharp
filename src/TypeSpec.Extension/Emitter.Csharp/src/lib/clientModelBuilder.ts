@@ -60,7 +60,7 @@ import { $lib } from "../emitter.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
-): CodeModel {
+): [CodeModel, boolean?] {
     const services = listServices(context.program);
     if (services.length === 0) {
         services.push({ type: context.program.getGlobalNamespaceType() });
@@ -79,7 +79,7 @@ export function createModel(
 export function createModelForService(
     context: EmitContext<NetEmitterOptions>,
     service: Service
-): CodeModel {
+): [CodeModel, boolean?] {
     const emitterOptions = resolveOptions(context);
     const program = context.program;
     const sdkContext = createSdkContext(context);
@@ -237,7 +237,7 @@ export function createModelForService(
         Clients: clients,
         Auth: auth
     } as CodeModel;
-    return clientModel;
+    return [clientModel, sdkContext.arm];
 
     function addChildClients(
         context: EmitContext<NetEmitterOptions>,
