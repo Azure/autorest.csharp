@@ -257,6 +257,75 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsUnknownDerived_get() => Test(async (host) =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsUnknownDerivedClient().GetExtendsUnknownDerivedAsync();
+            var value = response.Value;
+            Assert.AreEqual("ExtendsUnknownAdditionalProperties", value.Name);
+            Assert.AreEqual(314, value.Index);
+            Assert.AreEqual(2.71828f, value.Age);
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
+            Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
+            Assert.AreEqual(true, value.AdditionalProperties["prop2"].ToObjectFromJson<bool>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop3"));
+            Assert.AreEqual("abc", value.AdditionalProperties["prop3"].ToObjectFromJson<string>());
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsUnknownDerived_put() => Test(async (host) =>
+        {
+            var value = new ExtendsUnknownAdditionalPropertiesDerived("ExtendsUnknownAdditionalProperties", 314)
+            {
+                Age = 2.71828f,
+                AdditionalProperties =
+                {
+                    ["prop1"] = BinaryData.FromObjectAsJson(32),
+                    ["prop2"] = BinaryData.FromObjectAsJson(true),
+                    ["prop3"] = BinaryData.FromObjectAsJson("abc")
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsUnknownDerivedClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsUnknownDiscriminated_get() => Test(async (host) =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsUnknownDiscriminatedClient().GetExtendsUnknownDiscriminatedAsync();
+            var value = response.Value;
+            Assert.AreEqual("Derived", value.Name);
+            Assert.AreEqual("derived", value.Kind);
+            var derived = value as ExtendsUnknownAdditionalPropertiesDiscriminatedDerived;
+            Assert.IsNotNull(derived);
+            Assert.AreEqual(314, derived.Index);
+            Assert.AreEqual(2.71828f, derived.Age);
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
+            Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
+            Assert.AreEqual(true, value.AdditionalProperties["prop2"].ToObjectFromJson<bool>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop3"));
+            Assert.AreEqual("abc", value.AdditionalProperties["prop3"].ToObjectFromJson<string>());
+        });
+
+        [Test]
+        public Task Type_Property_AdditionalProperties_ExtendsUnknownDiscriminated_put() => Test(async (host) =>
+        {
+            var value = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
+            {
+                Age = 2.71828f,
+                AdditionalProperties =
+                {
+                    ["prop1"] = BinaryData.FromObjectAsJson(32),
+                    ["prop2"] = BinaryData.FromObjectAsJson(true),
+                    ["prop3"] = BinaryData.FromObjectAsJson("abc")
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetExtendsUnknownDiscriminatedClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
         public Task Type_Property_AdditionalProperties_IsUnknown_get() => Test(async (host) =>
         {
             var response = await new AdditionalPropertiesClient(host, null).GetIsUnknownClient().GetIsUnknownAsync();
@@ -286,100 +355,73 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(204, response.Status);
         });
 
-        //[Test]
-        //public Task Type_Property_Nullable_Duration_patchNull() => Test(async (host) =>
-        //{
-        //    string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-        //    var response = await new NullableClient(host, null).GetDurationClient().PatchNullAsync(RequestContent.Create(value));
-        //    Assert.AreEqual(204, response.Status);
-        //});
+        [Test]
+        public Task Type_Property_AdditionalProperties_IsUnknownDerived_get() => Test(async (host) =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetIsUnknownDerivedClient().GetIsUnknownDerivedAsync();
+            var value = response.Value;
+            Assert.AreEqual("IsUnknownAdditionalProperties", value.Name);
+            Assert.AreEqual(314, value.Index);
+            Assert.AreEqual(2.71828f, value.Age);
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
+            Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
+            Assert.AreEqual(true, value.AdditionalProperties["prop2"].ToObjectFromJson<bool>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop3"));
+            Assert.AreEqual("abc", value.AdditionalProperties["prop3"].ToObjectFromJson<string>());
+        });
 
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsByte_getNonNull() => Test(async (host) =>
-        //{
-        //    var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNonNullAsync();
-        //    Assert.AreEqual("foo", response.Value.RequiredProperty);
-        //    Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.First().ToString());
-        //    Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), response.Value.NullableProperty.Last().ToString());
-        //});
+        [Test]
+        public Task Type_Property_AdditionalProperties_IsUnknownDerived_put() => Test(async (host) =>
+        {
+            var value = new IsUnknownAdditionalPropertiesDerived("IsUnknownAdditionalProperties", 314)
+            {
+                Age = 2.71828f,
+                AdditionalProperties =
+                {
+                    ["prop1"] = BinaryData.FromObjectAsJson(32),
+                    ["prop2"] = BinaryData.FromObjectAsJson(true),
+                    ["prop3"] = BinaryData.FromObjectAsJson("abc")
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetIsUnknownDerivedClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
 
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsByte_getNull() => Test(async (host) =>
-        //{
-        //    var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
-        //    Assert.AreEqual("foo", response.Value.RequiredProperty);
-        //    // we will never construct a null collection therefore this property is actually undefined here.
-        //    Assert.IsNotNull(response.Value.NullableProperty);
-        //    Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
-        //});
+        [Test]
+        public Task Type_Property_AdditionalProperties_IsUnknownDiscriminated_get() => Test(async (host) =>
+        {
+            var response = await new AdditionalPropertiesClient(host, null).GetIsUnknownDiscriminatedClient().GetIsUnknownDiscriminatedAsync();
+            var value = response.Value;
+            Assert.AreEqual("Derived", value.Name);
+            Assert.AreEqual("derived", value.Kind);
+            var derived = value as IsUnknownAdditionalPropertiesDiscriminatedDerived;
+            Assert.IsNotNull(derived);
+            Assert.AreEqual(314, derived.Index);
+            Assert.AreEqual(2.71828f, derived.Age);
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop1"));
+            Assert.AreEqual(32, value.AdditionalProperties["prop1"].ToObjectFromJson<int>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop2"));
+            Assert.AreEqual(true, value.AdditionalProperties["prop2"].ToObjectFromJson<bool>());
+            Assert.IsTrue(value.AdditionalProperties.ContainsKey("prop3"));
+            Assert.AreEqual("abc", value.AdditionalProperties["prop3"].ToObjectFromJson<string>());
+        });
 
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsByte_patchNonNull() => Test(async (host) =>
-        //{
-        //    var value = new
-        //    {
-        //        requiredProperty = "foo",
-        //        nullableProperty = new[] { "aGVsbG8sIHdvcmxkIQ==", "aGVsbG8sIHdvcmxkIQ==" }
-        //    };
-        //    var response = await new NullableClient(host, null).GetCollectionsByteClient().PatchNonNullAsync(RequestContent.Create(value));
-        //    Assert.AreEqual(204, response.Status);
-        //});
-
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsByte_patchNull() => Test(async (host) =>
-        //{
-        //    string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-        //    var response = await new NullableClient(host, null).GetCollectionsByteClient().PatchNullAsync(RequestContent.Create(value));
-        //    Assert.AreEqual(204, response.Status);
-        //});
-
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsModel_getNonNull() => Test(async (host) =>
-        //{
-        //    var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNonNullAsync();
-        //    Assert.AreEqual("foo", response.Value.RequiredProperty);
-        //    Assert.AreEqual("hello", response.Value.NullableProperty.First().Property);
-        //    Assert.AreEqual("world", response.Value.NullableProperty.Last().Property);
-        //});
-
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsModel_getNull() => Test(async (host) =>
-        //{
-        //    var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNullAsync();
-        //    Assert.AreEqual("foo", response.Value.RequiredProperty);
-        //    // we will never construct a null collection therefore this property is actually undefined here.
-        //    Assert.IsNotNull(response.Value.NullableProperty);
-        //    Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
-        //});
-
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsModel_patchNonNull() => Test(async (host) =>
-        //{
-        //    var value = new
-        //    {
-        //        requiredProperty = "foo",
-        //        nullableProperty = new[]
-        //        {
-        //            new
-        //            {
-        //                property = "hello"
-        //            },
-        //            new
-        //            {
-        //                property = "world"
-        //            }
-        //        }
-        //    };
-        //    var response = await new NullableClient(host, null).GetCollectionsModelClient().PatchNonNullAsync(RequestContent.Create(value));
-        //    Assert.AreEqual(204, response.Status);
-        //});
-
-        //[Test]
-        //public Task Type_Property_Nullable_CollectionsModel_patchNull() => Test(async (host) =>
-        //{
-        //    string value = "{ \"requiredProperty\": \"foo\", \"nullableProperty\": null }";
-        //    var response = await new NullableClient(host, null).GetCollectionsModelClient().PatchNullAsync(RequestContent.Create(value));
-        //    Assert.AreEqual(204, response.Status);
-        //});
+        [Test]
+        public Task Type_Property_AdditionalProperties_IsUnknownDiscriminated_put() => Test(async (host) =>
+        {
+            var value = new IsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
+            {
+                Age = 2.71828f,
+                AdditionalProperties =
+                {
+                    ["prop1"] = BinaryData.FromObjectAsJson(32),
+                    ["prop2"] = BinaryData.FromObjectAsJson(true),
+                    ["prop3"] = BinaryData.FromObjectAsJson("abc")
+                }
+            };
+            var response = await new AdditionalPropertiesClient(host, null).GetIsUnknownDiscriminatedClient().PutAsync(value);
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }

@@ -45,7 +45,11 @@ namespace _Type.Property.AdditionalProperties
         }
 
         private ExtendsUnknown _cachedExtendsUnknown;
+        private ExtendsUnknownDerived _cachedExtendsUnknownDerived;
+        private ExtendsUnknownDiscriminated _cachedExtendsUnknownDiscriminated;
         private IsUnknown _cachedIsUnknown;
+        private IsUnknownDerived _cachedIsUnknownDerived;
+        private IsUnknownDiscriminated _cachedIsUnknownDiscriminated;
         private ExtendsString _cachedExtendsString;
         private IsString _cachedIsString;
         private ExtendsFloat _cachedExtendsFloat;
@@ -61,10 +65,34 @@ namespace _Type.Property.AdditionalProperties
             return Volatile.Read(ref _cachedExtendsUnknown) ?? Interlocked.CompareExchange(ref _cachedExtendsUnknown, new ExtendsUnknown(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsUnknown;
         }
 
+        /// <summary> Initializes a new instance of ExtendsUnknownDerived. </summary>
+        public virtual ExtendsUnknownDerived GetExtendsUnknownDerivedClient()
+        {
+            return Volatile.Read(ref _cachedExtendsUnknownDerived) ?? Interlocked.CompareExchange(ref _cachedExtendsUnknownDerived, new ExtendsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsUnknownDerived;
+        }
+
+        /// <summary> Initializes a new instance of ExtendsUnknownDiscriminated. </summary>
+        public virtual ExtendsUnknownDiscriminated GetExtendsUnknownDiscriminatedClient()
+        {
+            return Volatile.Read(ref _cachedExtendsUnknownDiscriminated) ?? Interlocked.CompareExchange(ref _cachedExtendsUnknownDiscriminated, new ExtendsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedExtendsUnknownDiscriminated;
+        }
+
         /// <summary> Initializes a new instance of IsUnknown. </summary>
         public virtual IsUnknown GetIsUnknownClient()
         {
             return Volatile.Read(ref _cachedIsUnknown) ?? Interlocked.CompareExchange(ref _cachedIsUnknown, new IsUnknown(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsUnknown;
+        }
+
+        /// <summary> Initializes a new instance of IsUnknownDerived. </summary>
+        public virtual IsUnknownDerived GetIsUnknownDerivedClient()
+        {
+            return Volatile.Read(ref _cachedIsUnknownDerived) ?? Interlocked.CompareExchange(ref _cachedIsUnknownDerived, new IsUnknownDerived(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsUnknownDerived;
+        }
+
+        /// <summary> Initializes a new instance of IsUnknownDiscriminated. </summary>
+        public virtual IsUnknownDiscriminated GetIsUnknownDiscriminatedClient()
+        {
+            return Volatile.Read(ref _cachedIsUnknownDiscriminated) ?? Interlocked.CompareExchange(ref _cachedIsUnknownDiscriminated, new IsUnknownDiscriminated(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIsUnknownDiscriminated;
         }
 
         /// <summary> Initializes a new instance of ExtendsString. </summary>
