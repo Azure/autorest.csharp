@@ -46,20 +46,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='GetIntsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetIntsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse3>> GetIntsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetIntsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse3.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='GetIntsOnly(CancellationToken)']/*" />
-        public virtual Response<object> GetIntsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse3> GetIntsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetIntsOnly(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse3.FromResponse(response), response);
         }
 
         /// <summary>
@@ -134,23 +134,29 @@ namespace _Type.Union
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='SendAsync(SendRequestProp,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='SendAsync(BinaryData,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(BinaryData prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = await SendAsync(sendRequest.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest3 sendRequest3 = new SendRequest3(prop);
+            Response response = await SendAsync(sendRequest3.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='Send(SendRequestProp,CancellationToken)']/*" />
-        public virtual Response Send(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/IntsOnly.xml" path="doc/members/member[@name='Send(BinaryData,CancellationToken)']/*" />
+        public virtual Response Send(BinaryData prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = Send(sendRequest.ToRequestContent(), context);
+            SendRequest3 sendRequest3 = new SendRequest3(prop);
+            Response response = Send(sendRequest3.ToRequestContent(), context);
             return response;
         }
 
@@ -164,7 +170,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(BinaryData,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -203,7 +209,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(BinaryData,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

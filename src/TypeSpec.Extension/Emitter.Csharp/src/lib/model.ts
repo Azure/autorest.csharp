@@ -538,7 +538,6 @@ export function getInputType(
     }
 
     function getInputModelForModel(m: Model): InputModelType {
-        m = getEffectiveSchemaType(context, m) as Model;
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
@@ -837,8 +836,7 @@ export function getUsages(
             typeName = getTypeName(context, type);
         }
         if (type.kind === "Model") {
-            effectiveType = getEffectiveSchemaType(context, type) as Model;
-            typeName = getTypeName(context, effectiveType);
+            typeName = getTypeName(context, effectiveType as Model);
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {

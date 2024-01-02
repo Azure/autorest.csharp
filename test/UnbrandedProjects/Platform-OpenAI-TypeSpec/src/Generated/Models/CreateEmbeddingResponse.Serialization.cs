@@ -19,7 +19,7 @@ namespace OpenAI.Models
             CreateEmbeddingResponseObject @object = default;
             string model = default;
             IReadOnlyList<Embedding> data = default;
-            CreateUsage usage = default;
+            CreateEmbeddingResponseUsage usage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("object"u8))
@@ -44,7 +44,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("usage"u8))
                 {
-                    usage = CreateUsage.DeserializeCreateUsage(property.Value);
+                    usage = CreateEmbeddingResponseUsage.DeserializeCreateEmbeddingResponseUsage(property.Value);
                     continue;
                 }
             }

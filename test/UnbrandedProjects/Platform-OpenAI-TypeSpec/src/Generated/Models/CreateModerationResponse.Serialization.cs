@@ -18,7 +18,7 @@ namespace OpenAI.Models
             }
             string id = default;
             string model = default;
-            IReadOnlyList<CreateResult> results = default;
+            IReadOnlyList<CreateModerationResponseResult> results = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -33,10 +33,10 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("results"u8))
                 {
-                    List<CreateResult> array = new List<CreateResult>();
+                    List<CreateModerationResponseResult> array = new List<CreateModerationResponseResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateResult.DeserializeCreateResult(item));
+                        array.Add(CreateModerationResponseResult.DeserializeCreateModerationResponseResult(item));
                     }
                     results = array;
                     continue;

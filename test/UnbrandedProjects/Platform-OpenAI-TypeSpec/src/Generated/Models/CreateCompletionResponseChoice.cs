@@ -22,7 +22,7 @@ namespace OpenAI.Models
         /// content filters.
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
-        internal CreateCompletionResponseChoice(long index, string text, CreateLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason)
+        internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason)
         {
             ClientUtilities.AssertNotNull(text, nameof(text));
 
@@ -37,7 +37,7 @@ namespace OpenAI.Models
         /// <summary> Gets the text. </summary>
         public string Text { get; }
         /// <summary> Gets the logprobs. </summary>
-        public CreateLogprobs Logprobs { get; }
+        public CreateCompletionResponseChoiceLogprobs Logprobs { get; }
         /// <summary>
         /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
         /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
