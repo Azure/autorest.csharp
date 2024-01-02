@@ -102,13 +102,33 @@ Our general principals are:
 2. When the customer calls the `ModelReaderWriter.Read` API, it should properly deserialize all the content in the input into the model (including the properties that this model does not currently support).
 3. When the customer calls the `ModelReaderWriter.Write` API, it should properly serialize all the properties into the result (including the properties that this model does not currently support).
 
-#### The `Create` methods
+We should have the following methods in a model:
 
-#### The `Write` methods
+1. `IUtf8JsonSerializable.Write(Utf8JsonWriter writer)` method.
+2. `IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)` method.
+3. `IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)` method.
+4. `IPersistableModel<T>.Write(ModelReaderWriterOptions options)` method.
+5. `IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)` method.
+6. the static `Deserialize{ModelName}(JsonElement element, ModelReaderWriterOptions options = null)` method.
 
-For the `IJsonModel<T>.Write` method, it should iterate all the properties on this model, and write it into the `Utf8JsonWriter`.
+If the model supports `xml` format, it will contain the following methods:
+1. `IXmlSerializable.Write(XmlWriter writer, string nameHint)` method.
+2. `WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)` method.
+3. the static `Deserialize{ModelName}(XElement element, ModelReaderWriterOptions options = null)` method.
 
-To keep the behavior unchanged for wire cases, we should now implement the internal interface method `IUtf8JsonSerializable.Write(Utf8JsonWriter)` in this way:
+#### The changes on models
+
+All models will now have a field `private IDictionary<string, BinaryData> _serializedAdditionalRawData`, if the model has a base type, the field should change to `private protected IDictionary<string, BinaryData> _serializedAdditionalRawData`.
+
+This private field works exactly the same as additional properties property, it should vanish when the model or any of its base type has an additional properties property defined.
+
+All models will always have an internal constructor that takes all properties as parameters and the `serializedAdditionalRawData` if itself or any of its direct or indirect base type has `serializedAdditionalRawData` field.
+
+All models will always have an internal constructor with no parameter if it does not have one for deserialization.
+
+#### The `IUtf8JsonSerializable.Write(Utf8JsonWriter writer)` method
+
+Our operations will call this method to serialize the model into payload, to keep the behavior unchanged for wire cases, we should now implement the internal interface method `IUtf8JsonSerializable.Write(Utf8JsonWriter)` in this way:
 ```csharp
 public partial class Foo : IUtf8JsonSerializable, IJsonModel<Foo>
 {
@@ -117,6 +137,10 @@ public partial class Foo : IUtf8JsonSerializable, IJsonModel<Foo>
 ```
 
 The cast `(IJsonModel<Foo>)this` is required because the method implementation of all interfaces will be explicitly implemented. And here we use `W` as the format for wire serialization and deserialization.
+
+#### The `IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)` method
+
+This method should iterate all the properties on this model, and write it into the `Utf8JsonWriter`.
 
 For readonly properties, we should not write it on wire because we previously did not write it, we should check the value of `Format` in the `options`. For example we have a model `Foo` with two properties `A` and `B`:
 ```csharp
@@ -138,7 +162,7 @@ if (format != "J")
 ```
 In this implementation, the method `IPersistableModel<T>.GetFormatFromOptions` is called to get the real format when we get the format of `W` which represents "wire", and then throw exception if the actual format is not `J` which represents "json".
 
-In the wire serialization, we will only write property `A`, and in a Json serialization (invoked by our customer via `ModelReaderWriter`), we will write both properties `A` and `B`, therefore the implementation should be:
+In the wire serialization, we will only write property `A`, and in a Json serialization (invoked by our customer via `ModelReaderWriter`), we will write both properties `A` and `B` as well as everything in the `_serializedAdditionalRawData`, therefore the implementation should be:
 ```csharp
 public partial class Foo : IUtf8JsonSerializable, IJsonModel<Foo>
 {
@@ -163,8 +187,58 @@ public partial class Foo : IUtf8JsonSerializable, IJsonModel<Foo>
             writer.WritePropertyName("b"u8);
             writer.WriteStringValue(B);
         }
-        /* the part to handle the unsupported properties on this model */
+        if (options.Format != "W" && _serializedAdditionalRawData != null)
+        {
+            foreach (var item in _serializedAdditionalRawData)
+            {
+                writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+                writer.WriteRawValue(item.Value);
+#else
+                using (JsonDocument document = JsonDocument.Parse(item.Value))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+        }
         writer.WriteEndObject();
     }
 }
 ```
+
+#### The `IPersistableModel<T>.Write(ModelReaderWriterOptions options)` method
+
+This method should switch all possible formats this model supports, and calls their respective implementations, such as:
+
+```csharp
+public partial class Foo : IUtf8JsonSerializable, IJsonModel<Foo>, IXmlSerializable, IPersistableModel<Foo>
+{
+    BinaryData IPersistableModel<Foo>.Write(ModelReaderWriterOptions options)
+    {
+        var format = options.Format == "W" ? ((IPersistableModel<Foo>)this).GetFormatFromOptions(options) : options.Format;
+
+        switch (format)
+        {
+            case "J":
+                return ModelReaderWriter.Write(this, options);
+            case "X":
+                {
+                    using MemoryStream stream = new MemoryStream();
+                    using XmlWriter writer = XmlWriter.Create(stream);
+                    WriteInternal(writer, null, options);
+                    writer.Flush();
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                }
+            default:
+                throw new InvalidOperationException($"The model {nameof(Foo)} does not support '{options.Format}' format.");
+        }
+    }
+}
+```
+
+The `J` case we just call `ModelReaderWriter.Write`, and this will not raise an infinite call issue because the implementation of `ModelReaderWriter.Write` will end up in the method `IJsonModel<T>.Write` and will not circle back to this method.
+
+#### The `Create` methods
+
+These `Create` methods will just call the corresponding implementation of the static `Deserialize{ModelName}` method.
