@@ -17,4 +17,5 @@ export interface Configuration {
     "methods-to-keep-client-default-value"?: string[];
     "head-as-boolean"?: boolean;
     "deserialize-null-collection-as-null-value"?: boolean;
+    "azure-arm"?: boolean;
 }

@@ -58,7 +58,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const root = createModel(context);
+        const [root, azureArm] = createModel(context);
         if (
             context.program.diagnostics.length > 0 &&
             context.program.diagnostics.filter(
@@ -160,7 +160,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 generateTestProject:
                     options["generateTestProject"] === true
                         ? undefined
-                        : options["generateTestProject"]
+                        : options["generateTestProject"],
+                "azure-arm": azureArm
             } as Configuration;
 
             await program.host.writeFile(

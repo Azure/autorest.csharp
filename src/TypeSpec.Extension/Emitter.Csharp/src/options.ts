@@ -32,6 +32,7 @@ export type NetEmitterOptions = {
     "head-as-boolean"?: boolean;
     branded?: boolean;
     generateTestProject?: boolean;
+    arm?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -101,7 +102,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "package-dir": { type: "string", nullable: true },
         "head-as-boolean": { type: "boolean", nullable: true },
         branded: { type: "boolean", nullable: true, default: true },
-        generateTestProject: { type: "boolean", nullable: true, default: true }
+        generateTestProject: { type: "boolean", nullable: true, default: true },
+        arm: { type: "boolean", nullable: true, default: false }
     },
     required: []
 };
