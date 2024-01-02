@@ -8,6 +8,5 @@
   ],
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
-  "branded": false,
-  "generateTestProject": false
+  "branded": false
 }

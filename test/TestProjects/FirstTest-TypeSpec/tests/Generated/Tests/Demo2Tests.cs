@@ -29,7 +29,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -78,7 +78,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
             {
@@ -96,7 +96,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -179,7 +179,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
             {
@@ -220,7 +220,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -269,7 +269,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -352,7 +352,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloDemo2Async(null);
         }
@@ -363,7 +363,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloDemo2Async();
         }
@@ -374,7 +374,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloDemo2Async(null);
         }
@@ -385,7 +385,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloDemo2Async();
         }
@@ -396,7 +396,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -421,7 +421,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
             Response<Thing> response = await client.CreateLiteralAsync(body);
@@ -433,7 +433,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -466,7 +466,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
             {
@@ -485,7 +485,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
         }
@@ -496,7 +496,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }
@@ -507,7 +507,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
         }
@@ -518,7 +518,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client(apiVersion: "0.1.0");
+            Demo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }

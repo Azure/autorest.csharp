@@ -26,7 +26,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
         }
@@ -37,7 +37,7 @@ namespace FirstTestTypeSpec.Tests
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = null;
-            Demo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
         }

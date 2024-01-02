@@ -6,8 +6,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure.Core.TestFramework", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.NewProject.TypeSpec", "src\Azure.NewProject.TypeSpec.csproj", "{28FF4005-4467-4E36-92E7-DEA27DEB1519}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.NewProject.TypeSpec.Tests", "tests\Azure.NewProject.TypeSpec.Tests.csproj", "{1F1CD1D4-9932-4B73-99D8-C252A67D4B46}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
