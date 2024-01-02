@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var pathInformation = _operations.Select(operation =>
             {
-                string resourceTypeItem = String.Empty;
+                string resourceTypeItem = string.Empty;
                 if (operation.Resource != null)
                     resourceTypeItem = $@"
 <item>
