@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetMixedLiteralAsync.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response<object> response = await client.GetMixedLiteralAsync();
 ]]></code>
 This sample shows how to call GetMixedLiteralAsync with all parameters.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response<object> response = await client.GetMixedLiteralAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<object> response = await client.GetMixedLiteralAsync();
       <example>
 This sample shows how to call GetMixedLiteral.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response<object> response = client.GetMixedLiteral();
 ]]></code>
 This sample shows how to call GetMixedLiteral with all parameters.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response<object> response = client.GetMixedLiteral();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<object> response = client.GetMixedLiteral();
       <example>
 This sample shows how to call GetMixedLiteralAsync and parse the result.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = await client.GetMixedLiteralAsync(null);
 
@@ -47,7 +47,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("booleanLiteral").ToStr
 ]]></code>
 This sample shows how to call GetMixedLiteralAsync with all parameters and parse the result.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = await client.GetMixedLiteralAsync(null);
 
@@ -62,7 +62,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("booleanLiteral").ToStr
       <example>
 This sample shows how to call GetMixedLiteral and parse the result.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = client.GetMixedLiteral(null);
 
@@ -74,7 +74,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("booleanLiteral").ToStr
 ]]></code>
 This sample shows how to call GetMixedLiteral with all parameters and parse the result.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = client.GetMixedLiteral(null);
 
@@ -89,13 +89,13 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("booleanLiteral").ToStr
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code></example>
@@ -104,13 +104,13 @@ Response response = await client.SendAsync(SendRequestProp.A);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code></example>
@@ -119,7 +119,7 @@ Response response = client.Send(SendRequestProp.A);
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -131,7 +131,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendAsync with all request content.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -146,7 +146,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -158,7 +158,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Send with all request content.
 <code><![CDATA[
-MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
+MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {

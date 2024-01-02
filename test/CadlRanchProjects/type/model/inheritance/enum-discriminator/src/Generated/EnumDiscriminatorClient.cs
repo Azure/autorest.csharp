@@ -21,7 +21,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -46,7 +45,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <summary> Receive model with extensible enum discriminator type. </summary>
@@ -813,7 +811,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/extensible-enum", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -827,7 +824,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/extensible-enum", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -843,7 +839,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/extensible-enum/missingdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -857,7 +852,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/extensible-enum/wrongdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -871,7 +865,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/fixed-enum", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -885,7 +878,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/fixed-enum", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -901,7 +893,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/fixed-enum/missingdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -915,7 +906,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/enum-discriminator/fixed-enum/wrongdiscriminator", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

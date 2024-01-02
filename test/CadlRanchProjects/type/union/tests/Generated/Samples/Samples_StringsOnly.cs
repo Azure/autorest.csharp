@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_GetStringsOnly_ShortVersion()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = client.GetStringsOnly(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_GetStringsOnly_ShortVersion_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = await client.GetStringsOnlyAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_GetStringsOnly_ShortVersion_Convenience()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response<object> response = client.GetStringsOnly();
         }
@@ -56,7 +56,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_GetStringsOnly_ShortVersion_Convenience_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response<object> response = await client.GetStringsOnlyAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_GetStringsOnly_AllParameters()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = client.GetStringsOnly(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_GetStringsOnly_AllParameters_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = await client.GetStringsOnlyAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_GetStringsOnly_AllParameters_Convenience()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response<object> response = client.GetStringsOnly();
         }
@@ -98,7 +98,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_GetStringsOnly_AllParameters_Convenience_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response<object> response = await client.GetStringsOnlyAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_Send_ShortVersion()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_Send_ShortVersion_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_Send_ShortVersion_Convenience()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -146,7 +146,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_Send_ShortVersion_Convenience_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }
@@ -155,7 +155,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_Send_AllParameters()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -170,7 +170,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_Send_AllParameters_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -185,7 +185,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringsOnly_Send_AllParameters_Convenience()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -194,7 +194,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringsOnly_Send_AllParameters_Convenience_Async()
         {
-            StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+            StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }

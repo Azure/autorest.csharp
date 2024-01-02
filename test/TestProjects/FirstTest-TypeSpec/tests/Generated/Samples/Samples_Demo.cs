@@ -22,7 +22,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -42,7 +42,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -62,7 +62,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -87,7 +87,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient(apiVersion: "0.1.0");
+            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 

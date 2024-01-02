@@ -20,7 +20,6 @@ namespace Client.Structure.Service.Multiple.Client
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _client;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -58,7 +57,6 @@ namespace Client.Structure.Service.Multiple.Client
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
             _client = client;
-            _apiVersion = options.Version;
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -257,7 +255,6 @@ namespace Client.Structure.Service.Multiple.Client
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/two", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -273,7 +270,6 @@ namespace Client.Structure.Service.Multiple.Client
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/four", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -289,7 +285,6 @@ namespace Client.Structure.Service.Multiple.Client
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/six", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

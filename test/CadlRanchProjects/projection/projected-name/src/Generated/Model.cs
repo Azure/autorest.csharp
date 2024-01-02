@@ -21,7 +21,6 @@ namespace Projection.ProjectedName
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,13 +37,11 @@ namespace Projection.ProjectedName
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <param name="clientModel"> The <see cref="ClientModel"/> to use. </param>
@@ -267,7 +264,6 @@ namespace Projection.ProjectedName
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/projection/projected-name/model/client", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -283,7 +279,6 @@ namespace Projection.ProjectedName
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/projection/projected-name/model/language", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

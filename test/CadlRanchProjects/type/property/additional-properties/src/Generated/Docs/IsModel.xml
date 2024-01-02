@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetIsModelAsync.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response<IsModelAdditionalProperties> response = await client.GetIsModelAsync();
 ]]></code>
 This sample shows how to call GetIsModelAsync with all parameters.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response<IsModelAdditionalProperties> response = await client.GetIsModelAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IsModelAdditionalProperties> response = await client.GetIsModelAsync();
       <example>
 This sample shows how to call GetIsModel.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response<IsModelAdditionalProperties> response = client.GetIsModel();
 ]]></code>
 This sample shows how to call GetIsModel with all parameters.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response<IsModelAdditionalProperties> response = client.GetIsModel();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IsModelAdditionalProperties> response = client.GetIsModel();
       <example>
 This sample shows how to call GetIsModelAsync and parse the result.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response response = await client.GetIsModelAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIsModelAsync with all parameters and parse the result.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response response = await client.GetIsModelAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetIsModel and parse the result.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response response = client.GetIsModel(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetIsModel with all parameters and parse the result.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 Response response = client.GetIsModel(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 IsModelAdditionalProperties body = new IsModelAdditionalProperties();
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 IsModelAdditionalProperties body = new IsModelAdditionalProperties();
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 IsModelAdditionalProperties body = new IsModelAdditionalProperties();
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 IsModelAdditionalProperties body = new IsModelAdditionalProperties();
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -120,7 +120,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -132,7 +132,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);
@@ -141,7 +141,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);

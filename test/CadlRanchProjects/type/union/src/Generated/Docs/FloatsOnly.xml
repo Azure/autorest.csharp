@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetFloatsOnlyAsync.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response<object> response = await client.GetFloatsOnlyAsync();
 ]]></code>
 This sample shows how to call GetFloatsOnlyAsync with all parameters.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response<object> response = await client.GetFloatsOnlyAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<object> response = await client.GetFloatsOnlyAsync();
       <example>
 This sample shows how to call GetFloatsOnly.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response<object> response = client.GetFloatsOnly();
 ]]></code>
 This sample shows how to call GetFloatsOnly with all parameters.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response<object> response = client.GetFloatsOnly();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<object> response = client.GetFloatsOnly();
       <example>
 This sample shows how to call GetFloatsOnlyAsync and parse the result.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = await client.GetFloatsOnlyAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetFloatsOnlyAsync with all parameters and parse the result.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = await client.GetFloatsOnlyAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
       <example>
 This sample shows how to call GetFloatsOnly and parse the result.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = client.GetFloatsOnly(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetFloatsOnly with all parameters and parse the result.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = client.GetFloatsOnly(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("prop").ToString());
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code></example>
@@ -92,13 +92,13 @@ Response response = await client.SendAsync(SendRequestProp.A);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code></example>
@@ -107,7 +107,7 @@ Response response = client.Send(SendRequestProp.A);
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -119,7 +119,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendAsync with all request content.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -134,7 +134,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -146,7 +146,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Send with all request content.
 <code><![CDATA[
-FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
