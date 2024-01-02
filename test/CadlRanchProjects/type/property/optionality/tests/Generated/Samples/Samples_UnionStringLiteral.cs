@@ -23,7 +23,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetAll_ShortVersion()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = client.GetAll(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetAll_ShortVersion_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetAll_ShortVersion_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = client.GetAll();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetAll_ShortVersion_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = await client.GetAllAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetAll_AllParameters()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = client.GetAll(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetAll_AllParameters_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetAll_AllParameters_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = client.GetAll();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetAll_AllParameters_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = await client.GetAllAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetDefault_ShortVersion()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = client.GetDefault(null);
 
@@ -119,7 +119,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetDefault_ShortVersion_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -131,7 +131,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetDefault_ShortVersion_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = client.GetDefault();
         }
@@ -140,7 +140,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetDefault_ShortVersion_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = await client.GetDefaultAsync();
         }
@@ -149,7 +149,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetDefault_AllParameters()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = client.GetDefault(null);
 
@@ -161,7 +161,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetDefault_AllParameters_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -173,7 +173,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_GetDefault_AllParameters_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = client.GetDefault();
         }
@@ -182,7 +182,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_GetDefault_AllParameters_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             Response<UnionStringLiteralProperty> response = await client.GetDefaultAsync();
         }
@@ -191,7 +191,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutAll_ShortVersion()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
@@ -203,7 +203,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutAll_ShortVersion_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
@@ -215,7 +215,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutAll_ShortVersion_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty();
             Response response = client.PutAll(body);
@@ -225,7 +225,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutAll_ShortVersion_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty();
             Response response = await client.PutAllAsync(body);
@@ -235,7 +235,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutAll_AllParameters()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -250,7 +250,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutAll_AllParameters_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -265,7 +265,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutAll_AllParameters_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty
             {
@@ -278,7 +278,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutAll_AllParameters_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty
             {
@@ -291,7 +291,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutDefault_ShortVersion()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
@@ -303,7 +303,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutDefault_ShortVersion_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
@@ -315,7 +315,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutDefault_ShortVersion_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty();
             Response response = client.PutDefault(body);
@@ -325,7 +325,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutDefault_ShortVersion_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty();
             Response response = await client.PutDefaultAsync(body);
@@ -335,7 +335,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutDefault_AllParameters()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -350,7 +350,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutDefault_AllParameters_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -365,7 +365,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionStringLiteral_PutDefault_AllParameters_Convenience()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty
             {
@@ -378,7 +378,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionStringLiteral_PutDefault_AllParameters_Convenience_Async()
         {
-            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient(apiVersion: "1.0.0");
+            UnionStringLiteral client = new OptionalClient().GetUnionStringLiteralClient();
 
             UnionStringLiteralProperty body = new UnionStringLiteralProperty
             {

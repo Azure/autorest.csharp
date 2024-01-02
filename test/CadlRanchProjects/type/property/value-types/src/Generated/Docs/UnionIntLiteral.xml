@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetUnionIntLiteralAsync.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response<UnionIntLiteralProperty> response = await client.GetUnionIntLiteralAsync();
 ]]></code>
 This sample shows how to call GetUnionIntLiteralAsync with all parameters.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response<UnionIntLiteralProperty> response = await client.GetUnionIntLiteralAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<UnionIntLiteralProperty> response = await client.GetUnionIntLiteralAsyn
       <example>
 This sample shows how to call GetUnionIntLiteral.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response<UnionIntLiteralProperty> response = client.GetUnionIntLiteral();
 ]]></code>
 This sample shows how to call GetUnionIntLiteral with all parameters.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response<UnionIntLiteralProperty> response = client.GetUnionIntLiteral();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<UnionIntLiteralProperty> response = client.GetUnionIntLiteral();
       <example>
 This sample shows how to call GetUnionIntLiteralAsync and parse the result.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response response = await client.GetUnionIntLiteralAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnionIntLiteralAsync with all parameters and parse the result.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response response = await client.GetUnionIntLiteralAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call GetUnionIntLiteral and parse the result.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response response = client.GetUnionIntLiteral(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetUnionIntLiteral with all parameters and parse the result.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 Response response = client.GetUnionIntLiteral(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 UnionIntLiteralProperty body = new UnionIntLiteralProperty(BinaryData.FromObjectAsJson(42));
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient(apiVersion: "1.0.0");
+UnionIntLiteral client = new ValueTypesClient().GetUnionIntLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {

@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_GetEnumsOnly_ShortVersion()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = client.GetEnumsOnly(null);
 
@@ -36,7 +36,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_GetEnumsOnly_ShortVersion_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = await client.GetEnumsOnlyAsync(null);
 
@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_GetEnumsOnly_ShortVersion_Convenience()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response<object> response = client.GetEnumsOnly();
         }
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_GetEnumsOnly_ShortVersion_Convenience_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response<object> response = await client.GetEnumsOnlyAsync();
         }
@@ -67,7 +67,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_GetEnumsOnly_AllParameters()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = client.GetEnumsOnly(null);
 
@@ -80,7 +80,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_GetEnumsOnly_AllParameters_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = await client.GetEnumsOnlyAsync(null);
 
@@ -93,7 +93,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_GetEnumsOnly_AllParameters_Convenience()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response<object> response = client.GetEnumsOnly();
         }
@@ -102,7 +102,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_GetEnumsOnly_AllParameters_Convenience_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response<object> response = await client.GetEnumsOnlyAsync();
         }
@@ -111,7 +111,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_Send_ShortVersion()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -126,7 +126,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_Send_ShortVersion_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -141,7 +141,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_Send_ShortVersion_Convenience()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -150,7 +150,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_Send_ShortVersion_Convenience_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }
@@ -159,7 +159,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_Send_AllParameters()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -174,7 +174,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_Send_AllParameters_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -189,7 +189,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumsOnly_Send_AllParameters_Convenience()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = client.Send(SendRequestProp.A);
         }
@@ -198,7 +198,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumsOnly_Send_AllParameters_Convenience_Async()
         {
-            EnumsOnly client = new UnionClient().GetEnumsOnlyClient(apiVersion: "1.0.0");
+            EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
             Response response = await client.SendAsync(SendRequestProp.A);
         }
