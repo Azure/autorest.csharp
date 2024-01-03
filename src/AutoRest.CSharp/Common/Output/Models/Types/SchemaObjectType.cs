@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool _hasCalculatedDefaultDerivedType;
         public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.DiscriminatorValue == null;
 
         public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
 

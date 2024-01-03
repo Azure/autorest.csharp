@@ -40,6 +40,11 @@ namespace _Type.Property.AdditionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDiscriminated"/> for deserialization. </summary>
+        internal IsUnknownAdditionalPropertiesDiscriminated()
+        {
+        }
+
         /// <summary> The name property. </summary>
         public string Name { get; set; }
         /// <summary> The discriminator. </summary>

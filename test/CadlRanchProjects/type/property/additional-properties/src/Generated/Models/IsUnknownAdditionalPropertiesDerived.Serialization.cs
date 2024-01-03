@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -13,10 +14,18 @@ using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    public partial class IsUnknownAdditionalPropertiesDerived : IUtf8JsonSerializable
+    public partial class IsUnknownAdditionalPropertiesDerived : IUtf8JsonSerializable, IJsonModel<IsUnknownAdditionalPropertiesDerived>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IsUnknownAdditionalPropertiesDerived>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<IsUnknownAdditionalPropertiesDerived>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<IsUnknownAdditionalPropertiesDerived>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IsUnknownAdditionalPropertiesDerived)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
@@ -42,8 +51,22 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteEndObject();
         }
 
-        internal static IsUnknownAdditionalPropertiesDerived DeserializeIsUnknownAdditionalPropertiesDerived(JsonElement element)
+        IsUnknownAdditionalPropertiesDerived IJsonModel<IsUnknownAdditionalPropertiesDerived>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<IsUnknownAdditionalPropertiesDerived>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new InvalidOperationException($"The model {nameof(IsUnknownAdditionalPropertiesDerived)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeIsUnknownAdditionalPropertiesDerived(document.RootElement, options);
+        }
+
+        internal static IsUnknownAdditionalPropertiesDerived DeserializeIsUnknownAdditionalPropertiesDerived(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -79,6 +102,37 @@ namespace _Type.Property.AdditionalProperties.Models
             additionalProperties = additionalPropertiesDictionary;
             return new IsUnknownAdditionalPropertiesDerived(name, additionalProperties, index, Optional.ToNullable(age));
         }
+
+        BinaryData IPersistableModel<IsUnknownAdditionalPropertiesDerived>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IsUnknownAdditionalPropertiesDerived>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IsUnknownAdditionalPropertiesDerived)} does not support '{options.Format}' format.");
+            }
+        }
+
+        IsUnknownAdditionalPropertiesDerived IPersistableModel<IsUnknownAdditionalPropertiesDerived>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<IsUnknownAdditionalPropertiesDerived>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeIsUnknownAdditionalPropertiesDerived(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IsUnknownAdditionalPropertiesDerived)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<IsUnknownAdditionalPropertiesDerived>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
