@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -84,6 +85,18 @@ namespace MgmtDiscriminator.Models
         public static Pet Pet(string id = null)
         {
             return new UnknownPet(default, id);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="MgmtDiscriminator.ArtifactData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="kind"> Specifies the kind of blueprint artifact. </param>
+        /// <returns> A new <see cref="MgmtDiscriminator.ArtifactData"/> instance for mocking. </returns>
+        public static ArtifactData ArtifactData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string kind = "Unknown")
+        {
+            return new UnknownArtifact(id, name, resourceType, systemData, kind);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
@@ -210,6 +223,36 @@ namespace MgmtDiscriminator.Models
         public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(string foo = null, RouteConfigurationOverrideActionParameters parameters = null)
         {
             return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, parameters);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.TemplateArtifact"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="template"> The Resource Manager template blueprint artifact body. </param>
+        /// <param name="resourceGroup"> If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed. </param>
+        /// <param name="parameters"> Resource Manager template blueprint artifact parameter values. </param>
+        /// <returns> A new <see cref="Models.TemplateArtifact"/> instance for mocking. </returns>
+        public static TemplateArtifact TemplateArtifact(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, BinaryData template = null, string resourceGroup = null, IDictionary<string, BinaryData> parameters = null)
+        {
+            parameters ??= new Dictionary<string, BinaryData>();
+
+            return new TemplateArtifact(id, name, resourceType, systemData, ArtifactKind.Template, template, resourceGroup, parameters);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.RoleAssignmentArtifact"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="roleDefinitionId"> Azure resource ID of the RoleDefinition. </param>
+        /// <param name="principalIds"> Array of user or group identities in Azure Active Directory. The roleDefinition will apply to each identity. </param>
+        /// <param name="resourceGroup"> RoleAssignment will be scope to this resourceGroup. If empty, it scopes to the subscription. </param>
+        /// <returns> A new <see cref="Models.RoleAssignmentArtifact"/> instance for mocking. </returns>
+        public static RoleAssignmentArtifact RoleAssignmentArtifact(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string roleDefinitionId = null, BinaryData principalIds = null, string resourceGroup = null)
+        {
+            return new RoleAssignmentArtifact(id, name, resourceType, systemData, ArtifactKind.RoleAssignment, roleDefinitionId, principalIds, resourceGroup);
         }
     }
 }
