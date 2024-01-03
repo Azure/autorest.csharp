@@ -448,7 +448,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const [root, _] = createModel(context);
         const models = root.Models;
         const extendsUnknownModel = models.find(
             (m) => m.Name === "ExtendsUnknown"
@@ -642,7 +642,7 @@ op op5(@body body: IsFooArray): IsFooArray;
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context);
+        const [root, _] = createModel(context);
         const models = root.Models;
         const isUnknownModel = models.find((m) => m.Name === "IsUnknown");
         const isStringModel = models.find((m) => m.Name === "IsString");
