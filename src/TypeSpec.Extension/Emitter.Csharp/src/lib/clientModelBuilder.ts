@@ -7,7 +7,7 @@ import {
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    SdkOperationGroup,
+    SdkOperationGroup
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -38,7 +38,7 @@ import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType,
+    InputPrimitiveType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";

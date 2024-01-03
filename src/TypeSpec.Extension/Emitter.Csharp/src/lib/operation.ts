@@ -124,7 +124,7 @@ export function loadOperation(
             if (bodyParameter.Type.Name == "") {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
-                var bodyModelType = (bodyParameter.Type as InputModelType);
+                var bodyModelType = bodyParameter.Type as InputModelType;
                 bodyModelType.Usage = Usage.Input;
                 // update models cache
                 models.delete("");
