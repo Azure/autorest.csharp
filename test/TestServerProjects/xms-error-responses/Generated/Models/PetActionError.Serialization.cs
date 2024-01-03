@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace xms_error_responses.Models
 {
@@ -26,28 +25,7 @@ namespace xms_error_responses.Models
                     case "PetSadError": return PetSadError.DeserializePetSadError(element);
                 }
             }
-            string errorType = default;
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("errorType"u8))
-                {
-                    errorType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("errorMessage"u8))
-                {
-                    errorMessage = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("actionResponse"u8))
-                {
-                    actionResponse = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new PetActionError(actionResponse.Value, errorType, errorMessage.Value);
+            return UnknownPetActionError.DeserializeUnknownPetActionError(element);
         }
     }
 }
