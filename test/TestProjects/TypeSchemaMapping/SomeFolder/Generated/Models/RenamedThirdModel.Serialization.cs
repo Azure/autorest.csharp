@@ -23,7 +23,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<RenamedThirdModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(RenamedThirdModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -60,7 +60,7 @@ namespace CustomNamespace
             var format = options.Format == "W" ? ((IPersistableModel<RenamedThirdModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(RenamedThirdModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -117,7 +117,7 @@ namespace CustomNamespace
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(RenamedThirdModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support '{options.Format}' format.");
             }
         }
 
@@ -133,7 +133,7 @@ namespace CustomNamespace
                         return DeserializeRenamedThirdModel(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(RenamedThirdModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support '{options.Format}' format.");
             }
         }
 

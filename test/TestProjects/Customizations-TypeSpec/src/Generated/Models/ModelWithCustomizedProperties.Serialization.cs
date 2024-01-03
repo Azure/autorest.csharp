@@ -23,7 +23,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomizedProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -232,7 +232,7 @@ namespace CustomizationsInTsp.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomizedProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -521,7 +521,7 @@ namespace CustomizationsInTsp.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
             }
         }
 
@@ -537,7 +537,7 @@ namespace CustomizationsInTsp.Models
                         return DeserializeModelWithCustomizedProperties(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
             }
         }
 

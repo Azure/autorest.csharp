@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<IsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(IsModelAdditionalProperties)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -40,7 +40,7 @@ namespace _Type.Property.AdditionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<IsModelAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(IsModelAdditionalProperties)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -74,7 +74,7 @@ namespace _Type.Property.AdditionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(IsModelAdditionalProperties)} does not support '{options.Format}' format.");
             }
         }
 
@@ -90,7 +90,7 @@ namespace _Type.Property.AdditionalProperties.Models
                         return DeserializeIsModelAdditionalProperties(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(IsModelAdditionalProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(IsModelAdditionalProperties)} does not support '{options.Format}' format.");
             }
         }
 

@@ -96,7 +96,7 @@ namespace xml_service.Models
                         return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(Blob)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Blob)} does not support '{options.Format}' format.");
             }
         }
 
@@ -109,7 +109,7 @@ namespace xml_service.Models
                 case "X":
                     return DeserializeBlob(XElement.Load(data.ToStream()), options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(Blob)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Blob)} does not support '{options.Format}' format.");
             }
         }
 

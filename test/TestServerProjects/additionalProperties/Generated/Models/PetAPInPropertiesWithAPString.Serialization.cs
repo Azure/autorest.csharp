@@ -22,7 +22,7 @@ namespace additionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetAPInPropertiesWithAPString>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -64,7 +64,7 @@ namespace additionalProperties.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetAPInPropertiesWithAPString>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -141,7 +141,7 @@ namespace additionalProperties.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{options.Format}' format.");
             }
         }
 
@@ -157,7 +157,7 @@ namespace additionalProperties.Models
                         return DeserializePetAPInPropertiesWithAPString(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{options.Format}' format.");
             }
         }
 
