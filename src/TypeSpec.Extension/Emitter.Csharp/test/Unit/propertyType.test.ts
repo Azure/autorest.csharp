@@ -26,7 +26,7 @@ describe("Test GetInputType for array", () => {
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const [root, _] = createModel(context);
+        const root: CodeModel = createModel(context);
         deepStrictEqual(
             root.Clients[0].Operations[0].Parameters[0].Type.Name,
             "Array"
@@ -55,7 +55,7 @@ describe("Test GetInputType for array", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const [root, _] = createModel(context);
+        const root: CodeModel = createModel(context);
         deepStrictEqual(
             root.Clients[0].Operations[0].Responses[0].BodyType?.Name,
             "Array"
@@ -106,7 +106,7 @@ describe("Test GetInputType for enum", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const [root, _] = createModel(context);
+        const root: CodeModel = createModel(context);
         assert(
             isEqual(
                 {
@@ -168,7 +168,7 @@ describe("Test GetInputType for enum", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const [root, _] = createModel(context);
+        const root: CodeModel = createModel(context);
         assert(
             isEqual(
                 {
@@ -223,7 +223,7 @@ describe("Test GetInputType for enum", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const [root, _] = createModel(context);
+        const root: CodeModel = createModel(context);
         assert(
             isEqual(
                 {

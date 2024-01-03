@@ -58,7 +58,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const [root, azureArm] = createModel(context);
+        const root = createModel(context);
         if (
             context.program.diagnostics.length > 0 &&
             context.program.diagnostics.filter(
@@ -123,8 +123,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "use-overloads-between-protocol-and-convenience":
-                    options["use-overloads-between-protocol-and-convenience"],
                 "keep-non-overloadable-protocol-signature":
                     options["keep-non-overloadable-protocol-signature"],
                 "model-namespace": options["model-namespace"],
@@ -162,8 +160,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 generateTestProject:
                     options["generateTestProject"] === true
                         ? undefined
-                        : options["generateTestProject"],
-                "azure-arm": azureArm
+                        : options["generateTestProject"]
             } as Configuration;
 
             await program.host.writeFile(

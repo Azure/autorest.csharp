@@ -21,7 +21,6 @@ export type NetEmitterOptions = {
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
     "existing-project-folder"?: string;
-    "use-overloads-between-protocol-and-convenience"?: boolean;
     "keep-non-overloadable-protocol-signature"?: boolean;
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
@@ -33,7 +32,6 @@ export type NetEmitterOptions = {
     "head-as-boolean"?: boolean;
     branded?: boolean;
     generateTestProject?: boolean;
-    arm?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -65,10 +63,6 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "filter-out-core-models": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
         "existing-project-folder": { type: "string", nullable: true },
-        "use-overloads-between-protocol-and-convenience": {
-            type: "boolean",
-            nullable: true
-        },
         "keep-non-overloadable-protocol-signature": {
             type: "boolean",
             nullable: true
@@ -107,8 +101,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "package-dir": { type: "string", nullable: true },
         "head-as-boolean": { type: "boolean", nullable: true },
         branded: { type: "boolean", nullable: true, default: true },
-        generateTestProject: { type: "boolean", nullable: true, default: true },
-        arm: { type: "boolean", nullable: true, default: false }
+        generateTestProject: { type: "boolean", nullable: true, default: true }
     },
     required: []
 };
@@ -123,7 +116,6 @@ const defaultOptions = {
     "save-inputs": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
-    "use-overloads-between-protocol-and-convenience": true,
     "package-name": undefined,
     debug: undefined,
     "models-to-treat-empty-string-as-null": undefined,

@@ -3,19 +3,11 @@ import assert, { deepStrictEqual } from "assert";
 import {
     createEmitterContext,
     createEmitterTestHost,
+    createNetSdkContext,
     typeSpecCompile
 } from "./utils/TestUtil.js";
-import {
-    HttpOperation,
-    getAllHttpServices,
-    getHttpService
-} from "@typespec/http";
-import { ignoreDiagnostics } from "@typespec/compiler";
+import { getAllHttpServices } from "@typespec/http";
 import { getUsages } from "../../src/lib/model.js";
-import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
-import { createModel } from "../../src/lib/clientModelBuilder.js";
-import { CodeModel } from "../../src/type/codeModel.js";
-import { Usage } from "../../src/type/usage.js";
 
 describe("Test getUsages", () => {
     let runner: TestHost;
@@ -37,7 +29,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("Foo"));
@@ -56,7 +48,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.outputs.includes("Foo"));
@@ -75,7 +67,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -95,7 +87,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -120,7 +112,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("TemplateModelFoo"));
@@ -146,13 +138,50 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         // verify that the baseModel will not apply the usage of derived model.
         assert(usages.outputs.includes("BaseModel"));
         // verify that the derived model will inherit the usage of base model
         assert(usages.roundTrips.includes("Foo"));
+    });
+
+    it("Test the usage inheritance between base model and derived model which has model property", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("This a model of a property in base model")
+            model propertyModel {
+                @doc("name of the model.")
+                base: string;
+            }
+            @doc("This is a base model.")
+            model BaseModel {
+                @doc("name of the model.")
+                base: string;
+                @doc("a property")
+                prop: propertyModel;
+            }
+            @doc("This is a model.")
+            model Foo extends BaseModel{
+                @doc("name of the Foo")
+                name: string;
+            }
+            op test(@path id: string, @body foo: Foo): void;
+            op test2(@path id: string): BaseModel;
+      `,
+            runner
+        );
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        // verify that the baseModel will not apply the usage of derived model.
+        assert(usages.outputs.includes("BaseModel"));
+        // verify that the derived model will inherit the usage of base model
+        assert(usages.roundTrips.includes("Foo"));
+        //verify that the property model of base model will inherit the usage of the derived model
+        assert(usages.roundTrips.includes("propertyModel"));
     });
 
     it("Test the usage of models spread alias", async () => {
@@ -168,7 +197,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("TestRequest"));
@@ -214,7 +243,7 @@ describe("Test getUsages", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("BatchCreateFooListItemsRequest"));
@@ -246,7 +275,7 @@ describe("Test getUsages", () => {
         );
 
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -300,7 +329,7 @@ describe("Test getUsages", () => {
         );
 
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.inputs.includes("BaseModelWithDiscriminator"));
@@ -364,11 +393,215 @@ describe("Test getUsages", () => {
         );
 
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.outputs.includes("BaseModelWithDiscriminator"));
         assert(usages.outputs.includes("DerivedModelWithDiscriminatorA"));
         assert(usages.outputs.includes("NestedModel"));
+    });
+
+    it("Get usage for the model which is renamed by projected name", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("This is a model.")
+            @projectedName("csharp", "FooRenamed")
+            model Foo {
+                @doc("name of the Foo")
+                name: string;
+            }
+            op test(@path id: string, @body foo: Foo): Foo;
+      `,
+            runner
+        );
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        assert(usages.roundTrips.includes("FooRenamed"));
+    });
+
+    it("Test the usage of enum which is renamed via @projectedName.", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("fixed string enum")
+            @projectedName("csharp", "SimpleEnumRenamed")
+            enum SimpleEnum {
+                @doc("Enum value one")
+                One: "1",
+                @doc("Enum value two")
+                Two: "2",
+                @doc("Enum value four")
+                Four: "4"
+            }
+
+            op test(@path id: SimpleEnum): void;
+      `,
+            runner,
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: false }
+        );
+
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        assert(usages.inputs.includes("SimpleEnumRenamed"));
+    });
+
+    it("Test the usage of return type of a customized LRO operation.", async () => {
+        const program = await typeSpecCompile(
+            `
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next version"
+@doc("The status of the processing job.")
+@lroStatus
+enum JobStatus {
+  NotStarted: "notStarted",
+  Running: "running",
+  Succeeded: "succeeded",
+  Failed: "failed",
+  Canceled: "canceled",
+}
+
+@doc("Provides status details for long running operations.")
+model HealthInsightsOperationStatus<
+  TStatusResult = never,
+  TStatusError = Foundations.Error
+> {
+  @key("operationId")
+  @doc("The unique ID of the operation.")
+  @visibility("read")
+  id: Azure.Core.uuid;
+
+  @doc("The status of the operation")
+  @visibility("read")
+  @lroStatus
+  status: JobStatus;
+
+  @doc("The date and time when the processing job was created.")
+  @visibility("read")
+  createdDateTime?: utcDateTime;
+
+  @doc("The date and time when the processing job is set to expire.")
+  @visibility("read")
+  expirationDateTime?: utcDateTime;
+
+  @doc("The date and time when the processing job was last updated.")
+  @visibility("read")
+  lastUpdateDateTime?: utcDateTime;
+
+  @doc("Error object that describes the error when status is Failed.")
+  error?: TStatusError;
+
+  @doc("The result of the operation.")
+  @lroResult
+  result?: TStatusResult;
+}
+
+@doc("The location of an instance of {name}", TResource)
+scalar HealthInsightsResourceLocation<TResource extends {}> extends url;
+
+@doc("Metadata for long running operation status monitor locations")
+model HealthInsightsLongRunningStatusLocation<TStatusResult = never> {
+  @pollingLocation
+  @doc("The location for monitoring the operation state.")
+  @TypeSpec.Http.header("Operation-Location")
+  operationLocation: HealthInsightsResourceLocation<HealthInsightsOperationStatus<TStatusResult>>;
+}
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
+@doc("Long running RPC operation template")
+op HealthInsightsLongRunningRpcOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  Traits extends Record<unknown> = {}
+> is Azure.Core.RpcOperation<
+  TParams & RepeatabilityRequestHeaders,
+  Foundations.AcceptedResponse<HealthInsightsLongRunningStatusLocation<TResponse> &
+    Foundations.RetryAfterHeader> &
+    RepeatabilityResponseHeaders &
+    HealthInsightsOperationStatus,
+  Traits
+>;
+@trait("HealthInsightsRetryAfterTrait")
+@doc("Health Insights retry after trait")
+model HealthInsightsRetryAfterTrait {
+  #suppress "@azure-tools/typespec-providerhub/no-inline-model" "This inline model is never used directly in operations."
+  @doc("The retry-after header.")
+  retryAfter: {
+    @traitLocation(TraitLocation.Response)
+    response: Foundations.RetryAfterHeader;
+  };
+}
+
+@doc("The inference results for the Radiology Insights request.")
+model RadiologyInsightsInferenceResult {
+    id: string;
+}
+alias Request = {
+    @doc("The list of patients, including their clinical information and data.")
+    patients: string[];
+  };
+@resource("radiology-insights/jobs")
+@doc("The response for the Radiology Insights request.")
+model RadiologyInsightsResult
+  is HealthInsightsOperationStatus<RadiologyInsightsInferenceResult>;
+
+  @doc("The body of the Radiology Insights request.")
+  model RadiologyInsightsData {
+    ...Request;
+  
+    @doc("Configuration affecting the Radiology Insights model's inference.")
+    configuration?: string;
+  }
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
+@doc("Long running Pool operation template")
+op HealthInsightsLongRunningPollOperation<TResult extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
+  {
+    @doc("A processing job identifier.")
+    @path("id")
+    id: Azure.Core.uuid;
+  },
+  TResult,
+  HealthInsightsRetryAfterTrait
+>;
+
+interface LegacyLro {
+    #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
+    @summary("Get Radiology Insights job details")
+    @tag("RadiologyInsights")
+    @doc("Gets the status and details of the Radiology Insights job.")
+    @get
+    @route("/radiology-insights/jobs/{id}")
+    @convenientAPI(false)
+    getJob is HealthInsightsLongRunningPollOperation<RadiologyInsightsResult>;
+  
+    #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
+    @summary("Create Radiology Insights job")
+    @tag("RadiologyInsights")
+    @doc("Creates a Radiology Insights job with the given request body.")
+    @pollingOperation(LegacyLro.getJob)
+    @route("/radiology-insights/jobs")
+    @convenientAPI(true)
+    createJob is HealthInsightsLongRunningRpcOperation<
+      RadiologyInsightsData,
+      RadiologyInsightsResult
+    >;
+  }
+      `,
+            runner,
+            {
+                IsNamespaceNeeded: true,
+                IsAzureCoreNeeded: true,
+                IsTCGCNeeded: true
+            }
+        );
+
+        const context = createEmitterContext(program);
+        const sdkContext = createNetSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const convenienceOperations = services[0].operations.slice(1);
+        const usages = getUsages(sdkContext, convenienceOperations);
+        assert(usages.outputs.includes("RadiologyInsightsInferenceResult"));
     });
 });

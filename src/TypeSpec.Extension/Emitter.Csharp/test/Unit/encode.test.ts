@@ -4,10 +4,10 @@ import isEqual from "lodash.isequal";
 import {
     createEmitterContext,
     createEmitterTestHost,
+    createNetSdkContext,
     navigateModels,
     typeSpecCompile
 } from "./utils/TestUtil.js";
-import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import { getAllHttpServices } from "@typespec/http";
 import { InputEnumType, InputModelType } from "../../src/type/inputType.js";
 import { loadOperation } from "../../src/lib/operation.js";
@@ -31,7 +31,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -68,7 +68,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -105,7 +105,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -142,7 +142,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -173,7 +173,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -204,7 +204,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -235,7 +235,7 @@ describe("Test encode duration", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();

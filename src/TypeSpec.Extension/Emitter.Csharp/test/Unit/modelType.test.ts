@@ -6,11 +6,16 @@ import {
     typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost,
-    navigateModels
+    navigateModels,
+    createNetSdkContext
 } from "./utils/TestUtil.js";
 import isEqual from "lodash.isequal";
-import { InputEnumType, InputModelType } from "../../src/type/inputType.js";
-import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    InputDictionaryType,
+    InputEnumType,
+    InputListType,
+    InputModelType
+} from "../../src/type/inputType.js";
 import { getAllHttpServices } from "@typespec/http";
 
 describe("Discriminator property", () => {
@@ -52,7 +57,7 @@ op test(@body input: Pet): Pet;
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const [root, _] = createModel(context);
+        const root: CodeModel = createModel(context);
         const models = root.Models;
         const petModel = models.find((m) => m.Name === "Pet");
         const catModel = models.find((m) => m.Name === "Cat");
@@ -76,7 +81,6 @@ op test(@body input: Pet): Pet;
                         Kind: "String",
                         IsNullable: false
                     },
-                    IsNullable: false,
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true,
@@ -152,7 +156,7 @@ op test(@body input: Pet): Pet;
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -284,7 +288,7 @@ op test(@body input: Pet): Pet;
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -375,6 +379,388 @@ op test(@body input: Pet): Pet;
         assert(
             dogDiscriminatorProperty === undefined,
             "Dog model should not have the discriminator property"
+        );
+    });
+});
+
+describe("Additional Properties property should work with extends syntax", () => {
+    let runner: TestHost;
+
+    beforeEach(async () => {
+        runner = await createEmitterTestHost();
+    });
+
+    it("Model extends Record should have additional properties property", async () => {
+        const program = await typeSpecCompile(
+            `
+@doc("Extends Record<unknown>")
+model ExtendsUnknown extends Record<unknown> {
+    @doc("The name.")
+    name: string;
+}
+
+@doc("Extends Record<string>")
+model ExtendsString extends Record<string> {
+    @doc("The name.")
+    name: string;
+}
+
+@doc("Extends Record<int32>")
+model ExtendsInt32 extends Record<int32> {
+    @doc("The name.")
+    name: int32;
+}
+
+@doc("Extends Record<Foo>")
+model ExtendsFoo extends Record<Foo> {
+    @doc("The name.")
+    name: Foo;
+}
+
+@doc("Extends Record<Foo[]>")
+model ExtendsFooArray extends Record<Foo[]> {
+    @doc("The name.")
+    name: Foo[];
+}
+
+@doc("The Foo")
+model Foo {
+    @doc("The name.")
+    name: string;
+}
+
+@route("/op1")
+op op1(@body body: ExtendsUnknown): ExtendsUnknown;
+
+@route("/op2")
+op op2(@body body: ExtendsString): ExtendsString;
+
+@route("/op3")
+op op3(@body body: ExtendsInt32): ExtendsInt32;
+
+@route("/op4")
+op op4(@body body: ExtendsFoo): ExtendsFoo;
+
+@route("/op5")
+op op5(@body body: ExtendsFooArray): ExtendsFooArray;
+`,
+            runner
+        );
+        runner.compileAndDiagnose;
+        const context = createEmitterContext(program);
+        const root: CodeModel = createModel(context);
+        const models = root.Models;
+        const extendsUnknownModel = models.find(
+            (m) => m.Name === "ExtendsUnknown"
+        );
+        const extendsStringModel = models.find(
+            (m) => m.Name === "ExtendsString"
+        );
+        const extendsInt32Model = models.find((m) => m.Name === "ExtendsInt32");
+        const extendsFooModel = models.find((m) => m.Name === "ExtendsFoo");
+        const extendsFooArrayModel = models.find(
+            (m) => m.Name === "ExtendsFooArray"
+        );
+        const fooModel = models.find((m) => m.Name === "Foo");
+        assert(extendsUnknownModel !== undefined);
+        assert(extendsStringModel !== undefined);
+        assert(extendsInt32Model !== undefined);
+        assert(extendsFooModel !== undefined);
+        assert(extendsFooArrayModel !== undefined);
+        // assert the inherited dictionary type is expected
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "Intrinsic",
+                        Kind: "unknown",
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                extendsUnknownModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                extendsUnknownModel.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                extendsStringModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                extendsStringModel.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "int32",
+                        Kind: "Int32",
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                extendsInt32Model.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                extendsInt32Model.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: fooModel
+                } as InputDictionaryType,
+                extendsFooModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                extendsFooModel.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "Array",
+                        ElementType: fooModel,
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                extendsFooArrayModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                extendsFooArrayModel.InheritedDictionaryType
+            )}`
+        );
+    });
+});
+
+describe("Additional Properties property should work with is syntax", () => {
+    let runner: TestHost;
+
+    beforeEach(async () => {
+        runner = await createEmitterTestHost();
+    });
+
+    it("Model is Record should have additional properties property", async () => {
+        const program = await typeSpecCompile(
+            `
+@doc("Is Record<unknown>")
+model IsUnknown is Record<unknown> {
+    @doc("The name.")
+    name: string;
+}
+
+@doc("Is Record<string>")
+model IsString is Record<string> {
+    @doc("The name.")
+    name: string;
+}
+
+@doc("Is Record<int32>")
+model IsInt32 is Record<int32> {
+    @doc("The name.")
+    name: int32;
+}
+
+@doc("Is Record<Foo>")
+model IsFoo is Record<Foo> {
+    @doc("The name.")
+    name: Foo;
+}
+
+@doc("Is Record<Foo[]>")
+model IsFooArray is Record<Foo[]> {
+    @doc("The name.")
+    name: Foo[];
+}
+
+@doc("The Foo")
+model Foo {
+    @doc("The name.")
+    name: string;
+}
+
+@route("/op1")
+op op1(@body body: IsUnknown): IsUnknown;
+
+@route("/op2")
+op op2(@body body: IsString): IsString;
+
+@route("/op3")
+op op3(@body body: IsInt32): IsInt32;
+
+@route("/op4")
+op op4(@body body: IsFoo): IsFoo;
+
+@route("/op5")
+op op5(@body body: IsFooArray): IsFooArray;
+`,
+            runner
+        );
+        runner.compileAndDiagnose;
+        const context = createEmitterContext(program);
+        const root: CodeModel = createModel(context);
+        const models = root.Models;
+        const isUnknownModel = models.find((m) => m.Name === "IsUnknown");
+        const isStringModel = models.find((m) => m.Name === "IsString");
+        const isInt32Model = models.find((m) => m.Name === "IsInt32");
+        const isFooModel = models.find((m) => m.Name === "IsFoo");
+        const isFooArrayModel = models.find((m) => m.Name === "IsFooArray");
+        const fooModel = models.find((m) => m.Name === "Foo");
+        assert(isUnknownModel !== undefined);
+        assert(isStringModel !== undefined);
+        assert(isInt32Model !== undefined);
+        assert(isFooModel !== undefined);
+        assert(isFooArrayModel !== undefined);
+        // assert the inherited dictionary type is expected
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "Intrinsic",
+                        Kind: "unknown",
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                isUnknownModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                isUnknownModel.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                isStringModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                isStringModel.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "int32",
+                        Kind: "Int32",
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                isInt32Model.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                isInt32Model.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: fooModel
+                } as InputDictionaryType,
+                isFooModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                isFooModel.InheritedDictionaryType
+            )}`
+        );
+        assert(
+            isEqual(
+                {
+                    Name: "Dictionary",
+                    IsNullable: false,
+                    KeyType: {
+                        Name: "string",
+                        Kind: "String",
+                        IsNullable: false
+                    },
+                    ValueType: {
+                        Name: "Array",
+                        ElementType: fooModel,
+                        IsNullable: false
+                    }
+                } as InputDictionaryType,
+                isFooArrayModel.InheritedDictionaryType
+            ),
+            `Inherited dictionary type is not correct, got ${JSON.stringify(
+                isFooArrayModel.InheritedDictionaryType
+            )}`
         );
     });
 });
