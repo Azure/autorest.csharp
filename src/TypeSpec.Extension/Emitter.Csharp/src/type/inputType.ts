@@ -43,13 +43,14 @@ export interface InputModelType extends InputType {
     Namespace?: string;
     Accessibility?: string;
     Deprecated?: string;
-    Description: string;
+    Description?: string;
     Usage: string;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
     DiscriminatorValue?: string;
     DerivedModels?: InputModelType[];
+    InheritedDictionaryType?: InputDictionaryType;
 }
 
 export function isInputModelType(type: InputType): type is InputModelType {
@@ -62,7 +63,7 @@ export interface InputEnumType extends InputType {
     Namespace?: string;
     Accessibility?: string;
     Deprecated?: string;
-    Description: string;
+    Description?: string;
     IsExtensible: boolean;
     Usage: string;
 }

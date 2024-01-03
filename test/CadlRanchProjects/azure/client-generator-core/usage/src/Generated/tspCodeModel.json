@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "_Specs_.Azure.ClientGenerator.Core.Usage",
  "Description": "Test for internal decorator.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
@@ -204,42 +202,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "26",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "27",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "28",
-        "Type": {
-         "$id": "29",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -260,7 +227,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "31",
+     "$id": "27",
      "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
@@ -269,11 +236,11 @@
        "$ref": "15"
       },
       {
-       "$id": "32",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
+        "$id": "29",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -288,20 +255,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "30",
         "Type": {
-         "$ref": "33"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "26"
       }
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
@@ -310,7 +274,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -323,7 +290,7 @@
     }
    ],
    "Protocol": {
-    "$id": "36"
+    "$id": "32"
    },
    "Creatable": false,
    "Parent": "UsageClient"

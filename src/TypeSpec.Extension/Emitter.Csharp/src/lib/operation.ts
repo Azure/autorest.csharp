@@ -22,7 +22,7 @@ import {
     Namespace,
     Operation
 } from "@typespec/compiler";
-import { getResourceOperation, ResourceOperation } from "@typespec/rest";
+import { getResourceOperation } from "@typespec/rest";
 import {
     HttpOperation,
     HttpOperationParameter,
@@ -64,7 +64,11 @@ import {
     getFormattedType,
     getInputType
 } from "./model.js";
-import { capitalize, getProjectedNameForCsharp, getTypeName } from "./utils.js";
+import {
+    capitalize,
+    createContentTypeOrAcceptParameter,
+    getTypeName
+} from "./utils.js";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -133,6 +137,24 @@ export function loadOperation(
         const operationResponse = loadOperationResponse(sdkContext, res);
         if (operationResponse) {
             responses.push(operationResponse);
+        }
+        if (
+            operationResponse?.ContentTypes &&
+            operationResponse.ContentTypes.length > 0
+        ) {
+            const acceptParameter = createContentTypeOrAcceptParameter(
+                [operationResponse.ContentTypes[0]], // We currently only support one content type per response
+                "accept",
+                "Accept"
+            );
+            const acceptIndex = parameters.findIndex(
+                (p) => p.NameInRequest.toLowerCase() === "accept"
+            );
+            if (acceptIndex > -1) {
+                parameters.splice(acceptIndex, 1, acceptParameter);
+            } else {
+                parameters.push(acceptParameter);
+            }
         }
     }
 
@@ -350,7 +372,8 @@ export function loadOperation(
             BodyType: type,
             BodyMediaType: BodyMediaType.Json,
             Headers: responseHeaders,
-            IsErrorResponse: isErrorModel(program, response.type)
+            IsErrorResponse: isErrorModel(program, response.type),
+            ContentTypes: body?.contentTypes
         } as OperationResponse;
     }
 

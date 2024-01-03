@@ -51,7 +51,7 @@ namespace RenameGetList
         }
 
         /// <summary> Initializes a new instance of Projects. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Projects GetProjectsClient(string apiVersion = "2022-05-15-preview")
         {
@@ -61,7 +61,7 @@ namespace RenameGetList
         }
 
         /// <summary> Initializes a new instance of Deployments. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Deployments GetDeploymentsClient(string apiVersion = "2022-05-15-preview")
         {

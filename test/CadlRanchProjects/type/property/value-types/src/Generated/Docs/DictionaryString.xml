@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetDictionaryStringAsync.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response<DictionaryStringProperty> response = await client.GetDictionaryStringAsync();
 ]]></code>
 This sample shows how to call GetDictionaryStringAsync with all parameters.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response<DictionaryStringProperty> response = await client.GetDictionaryStringAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<DictionaryStringProperty> response = await client.GetDictionaryStringAs
       <example>
 This sample shows how to call GetDictionaryString.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response<DictionaryStringProperty> response = client.GetDictionaryString();
 ]]></code>
 This sample shows how to call GetDictionaryString with all parameters.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response<DictionaryStringProperty> response = client.GetDictionaryString();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<DictionaryStringProperty> response = client.GetDictionaryString();
       <example>
 This sample shows how to call GetDictionaryStringAsync and parse the result.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = await client.GetDictionaryStringAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString()
 ]]></code>
 This sample shows how to call GetDictionaryStringAsync with all parameters and parse the result.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = await client.GetDictionaryStringAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString()
       <example>
 This sample shows how to call GetDictionaryString and parse the result.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = client.GetDictionaryString(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString()
 ]]></code>
 This sample shows how to call GetDictionaryString with all parameters and parse the result.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 Response response = client.GetDictionaryString(null);
 
@@ -77,7 +77,7 @@ Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString()
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
 {
@@ -87,7 +87,7 @@ Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
 {
@@ -100,7 +100,7 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
 {
@@ -110,7 +110,7 @@ Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>
 {
@@ -123,7 +123,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -156,7 +156,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -171,7 +171,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {

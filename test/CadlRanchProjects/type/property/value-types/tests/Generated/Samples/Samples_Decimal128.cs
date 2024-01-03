@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_GetDecimal128_ShortVersion()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response response = client.GetDecimal128(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_GetDecimal128_ShortVersion_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response response = await client.GetDecimal128Async(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_GetDecimal128_ShortVersion_Convenience()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response<Decimal128Property> response = client.GetDecimal128();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_GetDecimal128_ShortVersion_Convenience_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response<Decimal128Property> response = await client.GetDecimal128Async();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_GetDecimal128_AllParameters()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response response = client.GetDecimal128(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_GetDecimal128_AllParameters_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response response = await client.GetDecimal128Async(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_GetDecimal128_AllParameters_Convenience()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response<Decimal128Property> response = client.GetDecimal128();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_GetDecimal128_AllParameters_Convenience_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Response<Decimal128Property> response = await client.GetDecimal128Async();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_Put_ShortVersion()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_Put_ShortVersion_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_Put_ShortVersion_Convenience()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Decimal128Property body = new Decimal128Property(default);
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_Put_ShortVersion_Convenience_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Decimal128Property body = new Decimal128Property(default);
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_Put_AllParameters()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_Put_AllParameters_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal128_Put_AllParameters_Convenience()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Decimal128Property body = new Decimal128Property(default);
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal128_Put_AllParameters_Convenience_Async()
         {
-            Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+            Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
             Decimal128Property body = new Decimal128Property(default);
             Response response = await client.PutAsync(body);

@@ -78,17 +78,9 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void DiscriminatorValueIsSetOnObjectConstruction()
+        public void DiscriminatorBaseTypeIsAbstract()
         {
-            var baseClassWithDiscriminator = new BaseClassWithDiscriminator();
-            Assert.AreEqual(null, baseClassWithDiscriminator.DiscriminatorProperty);
-        }
-
-        [Test]
-        public void DiscriminatorValueIsSetOnObjectSerializationConstruction()
-        {
-            var baseClassWithDiscriminator = new BaseClassWithDiscriminator();
-            Assert.AreEqual(null, baseClassWithDiscriminator.DiscriminatorProperty);
+            Assert.IsTrue(typeof(BaseClassWithDiscriminator).IsAbstract);
         }
 
         [Test]

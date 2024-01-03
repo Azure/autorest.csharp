@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Type.Union",
  "Description": "Describe scenarios for various combinations of unions.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
@@ -1197,42 +1195,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "170",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "171",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "172",
-        "Type": {
-         "$id": "173",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "174",
+       "$id": "170",
        "StatusCodes": [
         200
        ],
@@ -1241,7 +1208,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1253,7 +1223,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "175",
+     "$id": "171",
      "Name": "send",
      "ResourceName": "StringsOnly",
      "Parameters": [
@@ -1261,7 +1231,7 @@
        "$ref": "163"
       },
       {
-       "$id": "176",
+       "$id": "172",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -1278,11 +1248,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "177",
+       "$id": "173",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "178",
+        "$id": "174",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1297,19 +1267,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "179",
+        "$id": "175",
         "Type": {
-         "$ref": "178"
+         "$ref": "174"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "180",
+       "$id": "176",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "181",
+        "$id": "177",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1324,20 +1294,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "182",
+        "$id": "178",
         "Type": {
-         "$ref": "181"
+         "$ref": "177"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "183",
+       "$id": "179",
        "StatusCodes": [
         204
        ],
@@ -1359,18 +1326,18 @@
     }
    ],
    "Protocol": {
-    "$id": "184"
+    "$id": "180"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "185",
+   "$id": "181",
    "Name": "StringExtensible",
    "Description": "Describe union of string string | \"b\" | \"c\"",
    "Operations": [
     {
-     "$id": "186",
+     "$id": "182",
      "Name": "get",
      "ResourceName": "StringExtensible",
      "Parameters": [
@@ -1378,11 +1345,11 @@
        "$ref": "163"
       },
       {
-       "$id": "187",
+       "$id": "183",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "188",
+        "$id": "184",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1397,20 +1364,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "189",
+        "$id": "185",
         "Type": {
-         "$ref": "188"
+         "$ref": "184"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "190",
+       "$id": "186",
        "StatusCodes": [
         200
        ],
@@ -1419,7 +1383,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1431,7 +1398,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "191",
+     "$id": "187",
      "Name": "send",
      "ResourceName": "StringExtensible",
      "Parameters": [
@@ -1439,7 +1406,7 @@
        "$ref": "163"
       },
       {
-       "$id": "192",
+       "$id": "188",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -1456,11 +1423,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "193",
+       "$id": "189",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "194",
+        "$id": "190",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1475,19 +1442,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "195",
+        "$id": "191",
         "Type": {
-         "$ref": "194"
+         "$ref": "190"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "196",
+       "$id": "192",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "197",
+        "$id": "193",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1502,20 +1469,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "198",
+        "$id": "194",
         "Type": {
-         "$ref": "197"
+         "$ref": "193"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "199",
+       "$id": "195",
        "StatusCodes": [
         204
        ],
@@ -1537,18 +1501,18 @@
     }
    ],
    "Protocol": {
-    "$id": "200"
+    "$id": "196"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "201",
+   "$id": "197",
    "Name": "StringExtensibleNamed",
    "Description": "Describe union of string string | \"b\" | \"c\" but where the union is named and some of the variants are named",
    "Operations": [
     {
-     "$id": "202",
+     "$id": "198",
      "Name": "get",
      "ResourceName": "StringExtensibleNamed",
      "Parameters": [
@@ -1556,11 +1520,11 @@
        "$ref": "163"
       },
       {
-       "$id": "203",
+       "$id": "199",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "204",
+        "$id": "200",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1575,20 +1539,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "205",
+        "$id": "201",
         "Type": {
-         "$ref": "204"
+         "$ref": "200"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "206",
+       "$id": "202",
        "StatusCodes": [
         200
        ],
@@ -1597,7 +1558,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1609,7 +1573,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "207",
+     "$id": "203",
      "Name": "send",
      "ResourceName": "StringExtensibleNamed",
      "Parameters": [
@@ -1617,7 +1581,7 @@
        "$ref": "163"
       },
       {
-       "$id": "208",
+       "$id": "204",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -1634,11 +1598,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "209",
+       "$id": "205",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "210",
+        "$id": "206",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1653,19 +1617,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "211",
+        "$id": "207",
         "Type": {
-         "$ref": "210"
+         "$ref": "206"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "212",
+       "$id": "208",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "213",
+        "$id": "209",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1680,20 +1644,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "214",
+        "$id": "210",
         "Type": {
-         "$ref": "213"
+         "$ref": "209"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "215",
+       "$id": "211",
        "StatusCodes": [
         204
        ],
@@ -1715,18 +1676,18 @@
     }
    ],
    "Protocol": {
-    "$id": "216"
+    "$id": "212"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "217",
+   "$id": "213",
    "Name": "IntsOnly",
    "Description": "Describe union of integer 1 | 2 | 3",
    "Operations": [
     {
-     "$id": "218",
+     "$id": "214",
      "Name": "get",
      "ResourceName": "IntsOnly",
      "Parameters": [
@@ -1734,11 +1695,11 @@
        "$ref": "163"
       },
       {
-       "$id": "219",
+       "$id": "215",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "220",
+        "$id": "216",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1753,20 +1714,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "221",
+        "$id": "217",
         "Type": {
-         "$ref": "220"
+         "$ref": "216"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "222",
+       "$id": "218",
        "StatusCodes": [
         200
        ],
@@ -1775,7 +1733,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1787,7 +1748,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "223",
+     "$id": "219",
      "Name": "send",
      "ResourceName": "IntsOnly",
      "Parameters": [
@@ -1795,7 +1756,7 @@
        "$ref": "163"
       },
       {
-       "$id": "224",
+       "$id": "220",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -1812,11 +1773,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "225",
+       "$id": "221",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "226",
+        "$id": "222",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1831,19 +1792,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "227",
+        "$id": "223",
         "Type": {
-         "$ref": "226"
+         "$ref": "222"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "228",
+       "$id": "224",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "229",
+        "$id": "225",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1858,20 +1819,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "230",
+        "$id": "226",
         "Type": {
-         "$ref": "229"
+         "$ref": "225"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "231",
+       "$id": "227",
        "StatusCodes": [
         204
        ],
@@ -1893,18 +1851,18 @@
     }
    ],
    "Protocol": {
-    "$id": "232"
+    "$id": "228"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "233",
+   "$id": "229",
    "Name": "FloatsOnly",
    "Description": "Describe union of floats 1.1 | 2.2 | 3.3",
    "Operations": [
     {
-     "$id": "234",
+     "$id": "230",
      "Name": "get",
      "ResourceName": "FloatsOnly",
      "Parameters": [
@@ -1912,11 +1870,11 @@
        "$ref": "163"
       },
       {
-       "$id": "235",
+       "$id": "231",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "236",
+        "$id": "232",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1931,20 +1889,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "237",
+        "$id": "233",
         "Type": {
-         "$ref": "236"
+         "$ref": "232"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "238",
+       "$id": "234",
        "StatusCodes": [
         200
        ],
@@ -1953,7 +1908,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1965,7 +1923,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "239",
+     "$id": "235",
      "Name": "send",
      "ResourceName": "FloatsOnly",
      "Parameters": [
@@ -1973,7 +1931,7 @@
        "$ref": "163"
       },
       {
-       "$id": "240",
+       "$id": "236",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -1990,11 +1948,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "241",
+       "$id": "237",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "242",
+        "$id": "238",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2009,19 +1967,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "243",
+        "$id": "239",
         "Type": {
-         "$ref": "242"
+         "$ref": "238"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "244",
+       "$id": "240",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "245",
+        "$id": "241",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2036,20 +1994,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "246",
+        "$id": "242",
         "Type": {
-         "$ref": "245"
+         "$ref": "241"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "247",
+       "$id": "243",
        "StatusCodes": [
         204
        ],
@@ -2071,18 +2026,18 @@
     }
    ],
    "Protocol": {
-    "$id": "248"
+    "$id": "244"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "249",
+   "$id": "245",
    "Name": "ModelsOnly",
    "Description": "Describe union of models",
    "Operations": [
     {
-     "$id": "250",
+     "$id": "246",
      "Name": "get",
      "ResourceName": "ModelsOnly",
      "Parameters": [
@@ -2090,11 +2045,11 @@
        "$ref": "163"
       },
       {
-       "$id": "251",
+       "$id": "247",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "252",
+        "$id": "248",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2109,20 +2064,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "253",
+        "$id": "249",
         "Type": {
-         "$ref": "252"
+         "$ref": "248"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "254",
+       "$id": "250",
        "StatusCodes": [
         200
        ],
@@ -2131,7 +2083,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2143,7 +2098,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "255",
+     "$id": "251",
      "Name": "send",
      "ResourceName": "ModelsOnly",
      "Parameters": [
@@ -2151,7 +2106,7 @@
        "$ref": "163"
       },
       {
-       "$id": "256",
+       "$id": "252",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -2168,11 +2123,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "257",
+       "$id": "253",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "258",
+        "$id": "254",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2187,19 +2142,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "259",
+        "$id": "255",
         "Type": {
-         "$ref": "258"
+         "$ref": "254"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "260",
+       "$id": "256",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "261",
+        "$id": "257",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2214,20 +2169,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "262",
+        "$id": "258",
         "Type": {
-         "$ref": "261"
+         "$ref": "257"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "263",
+       "$id": "259",
        "StatusCodes": [
         204
        ],
@@ -2249,18 +2201,18 @@
     }
    ],
    "Protocol": {
-    "$id": "264"
+    "$id": "260"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "265",
+   "$id": "261",
    "Name": "EnumsOnly",
    "Description": "Describe union of 2 different enums",
    "Operations": [
     {
-     "$id": "266",
+     "$id": "262",
      "Name": "get",
      "ResourceName": "EnumsOnly",
      "Parameters": [
@@ -2268,11 +2220,11 @@
        "$ref": "163"
       },
       {
-       "$id": "267",
+       "$id": "263",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "268",
+        "$id": "264",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2287,20 +2239,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "269",
+        "$id": "265",
         "Type": {
-         "$ref": "268"
+         "$ref": "264"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "270",
+       "$id": "266",
        "StatusCodes": [
         200
        ],
@@ -2309,7 +2258,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2321,7 +2273,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "271",
+     "$id": "267",
      "Name": "send",
      "ResourceName": "EnumsOnly",
      "Parameters": [
@@ -2329,7 +2281,7 @@
        "$ref": "163"
       },
       {
-       "$id": "272",
+       "$id": "268",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -2346,11 +2298,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "273",
+       "$id": "269",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "274",
+        "$id": "270",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2365,19 +2317,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "275",
+        "$id": "271",
         "Type": {
-         "$ref": "274"
+         "$ref": "270"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "276",
+       "$id": "272",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "277",
+        "$id": "273",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2392,20 +2344,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "278",
+        "$id": "274",
         "Type": {
-         "$ref": "277"
+         "$ref": "273"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "279",
+       "$id": "275",
        "StatusCodes": [
         204
        ],
@@ -2427,18 +2376,18 @@
     }
    ],
    "Protocol": {
-    "$id": "280"
+    "$id": "276"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "281",
+   "$id": "277",
    "Name": "StringAndArray",
    "Description": "Describe union of a string and an array of strings",
    "Operations": [
     {
-     "$id": "282",
+     "$id": "278",
      "Name": "get",
      "ResourceName": "StringAndArray",
      "Parameters": [
@@ -2446,11 +2395,11 @@
        "$ref": "163"
       },
       {
-       "$id": "283",
+       "$id": "279",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "284",
+        "$id": "280",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2465,20 +2414,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "285",
+        "$id": "281",
         "Type": {
-         "$ref": "284"
+         "$ref": "280"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "286",
+       "$id": "282",
        "StatusCodes": [
         200
        ],
@@ -2487,7 +2433,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2499,7 +2448,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "287",
+     "$id": "283",
      "Name": "send",
      "ResourceName": "StringAndArray",
      "Parameters": [
@@ -2507,7 +2456,7 @@
        "$ref": "163"
       },
       {
-       "$id": "288",
+       "$id": "284",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -2524,11 +2473,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "289",
+       "$id": "285",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "290",
+        "$id": "286",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2543,19 +2492,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "291",
+        "$id": "287",
         "Type": {
-         "$ref": "290"
+         "$ref": "286"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "292",
+       "$id": "288",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "293",
+        "$id": "289",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2570,20 +2519,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "294",
+        "$id": "290",
         "Type": {
-         "$ref": "293"
+         "$ref": "289"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "295",
+       "$id": "291",
        "StatusCodes": [
         204
        ],
@@ -2605,18 +2551,18 @@
     }
    ],
    "Protocol": {
-    "$id": "296"
+    "$id": "292"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "297",
+   "$id": "293",
    "Name": "MixedLiterals",
    "Description": "Describe union of floats \"a\" | 2 | 3.3",
    "Operations": [
     {
-     "$id": "298",
+     "$id": "294",
      "Name": "get",
      "ResourceName": "MixedLiterals",
      "Parameters": [
@@ -2624,11 +2570,11 @@
        "$ref": "163"
       },
       {
-       "$id": "299",
+       "$id": "295",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "300",
+        "$id": "296",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2643,20 +2589,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "301",
+        "$id": "297",
         "Type": {
-         "$ref": "300"
+         "$ref": "296"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "302",
+       "$id": "298",
        "StatusCodes": [
         200
        ],
@@ -2665,7 +2608,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2677,7 +2623,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "303",
+     "$id": "299",
      "Name": "send",
      "ResourceName": "MixedLiterals",
      "Parameters": [
@@ -2685,7 +2631,7 @@
        "$ref": "163"
       },
       {
-       "$id": "304",
+       "$id": "300",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -2702,11 +2648,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "305",
+       "$id": "301",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "306",
+        "$id": "302",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2721,19 +2667,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "307",
+        "$id": "303",
         "Type": {
-         "$ref": "306"
+         "$ref": "302"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "308",
+       "$id": "304",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "309",
+        "$id": "305",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2748,20 +2694,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "310",
+        "$id": "306",
         "Type": {
-         "$ref": "309"
+         "$ref": "305"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "311",
+       "$id": "307",
        "StatusCodes": [
         204
        ],
@@ -2783,18 +2726,18 @@
     }
    ],
    "Protocol": {
-    "$id": "312"
+    "$id": "308"
    },
    "Creatable": false,
    "Parent": "UnionClient"
   },
   {
-   "$id": "313",
+   "$id": "309",
    "Name": "MixedTypes",
    "Description": "Describe union of floats \"a\" | 2 | 3.3",
    "Operations": [
     {
-     "$id": "314",
+     "$id": "310",
      "Name": "get",
      "ResourceName": "MixedTypes",
      "Parameters": [
@@ -2802,11 +2745,11 @@
        "$ref": "163"
       },
       {
-       "$id": "315",
+       "$id": "311",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "316",
+        "$id": "312",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2821,20 +2764,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "317",
+        "$id": "313",
         "Type": {
-         "$ref": "316"
+         "$ref": "312"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "318",
+       "$id": "314",
        "StatusCodes": [
         200
        ],
@@ -2843,7 +2783,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2855,7 +2798,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "319",
+     "$id": "315",
      "Name": "send",
      "ResourceName": "MixedTypes",
      "Parameters": [
@@ -2863,7 +2806,7 @@
        "$ref": "163"
       },
       {
-       "$id": "320",
+       "$id": "316",
        "Name": "SendRequest",
        "NameInRequest": "SendRequest",
        "Type": {
@@ -2880,11 +2823,11 @@
        "Kind": "Spread"
       },
       {
-       "$id": "321",
+       "$id": "317",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "322",
+        "$id": "318",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2899,19 +2842,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "323",
+        "$id": "319",
         "Type": {
-         "$ref": "322"
+         "$ref": "318"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "324",
+       "$id": "320",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "325",
+        "$id": "321",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2926,20 +2869,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "326",
+        "$id": "322",
         "Type": {
-         "$ref": "325"
+         "$ref": "321"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "170"
       }
      ],
      "Responses": [
       {
-       "$id": "327",
+       "$id": "323",
        "StatusCodes": [
         204
        ],
@@ -2961,7 +2901,7 @@
     }
    ],
    "Protocol": {
-    "$id": "328"
+    "$id": "324"
    },
    "Creatable": false,
    "Parent": "UnionClient"

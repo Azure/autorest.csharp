@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -50,14 +51,12 @@ namespace PetStore
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Pets. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Pets GetPetsClient(string apiVersion = "2021-03-25")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Pets _cachedPets;
 
-            return new Pets(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Pets. </summary>
+        public virtual Pets GetPetsClient()
+        {
+            return Volatile.Read(ref _cachedPets) ?? Interlocked.CompareExchange(ref _cachedPets, new Pets(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedPets;
         }
     }
 }

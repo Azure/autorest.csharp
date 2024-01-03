@@ -1,9 +1,7 @@
 {
  "$id": "1",
  "Name": "Type.Enum.Extensible",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
@@ -139,42 +137,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "21",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "22",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "23",
-        "Type": {
-         "$id": "24",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
@@ -183,7 +150,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -195,7 +165,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "26",
+     "$id": "22",
      "Name": "getUnknownValue",
      "ResourceName": "String",
      "Parameters": [
@@ -203,11 +173,11 @@
        "$ref": "14"
       },
       {
-       "$id": "27",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "28",
+        "$id": "24",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -222,20 +192,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "25",
         "Type": {
-         "$ref": "28"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "21"
       }
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -244,7 +211,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -256,7 +226,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "31",
+     "$id": "27",
      "Name": "putKnownValue",
      "ResourceName": "String",
      "Parameters": [
@@ -264,7 +234,7 @@
        "$ref": "14"
       },
       {
-       "$id": "32",
+       "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -281,11 +251,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "33",
+       "$id": "29",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "34",
+        "$id": "30",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -300,19 +270,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "31",
         "Type": {
-         "$ref": "34"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "36",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
+        "$id": "33",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -327,20 +297,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "34",
         "Type": {
-         "$ref": "37"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "21"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "35",
        "StatusCodes": [
         204
        ],
@@ -361,7 +328,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "36",
      "Name": "putUnknownValue",
      "ResourceName": "String",
      "Parameters": [
@@ -369,7 +336,7 @@
        "$ref": "14"
       },
       {
-       "$id": "41",
+       "$id": "37",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -386,11 +353,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "42",
+       "$id": "38",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "43",
+        "$id": "39",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -405,19 +372,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "40",
         "Type": {
-         "$ref": "43"
+         "$ref": "39"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "45",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "42",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -432,20 +399,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "43",
         "Type": {
-         "$ref": "46"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "21"
       }
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "44",
        "StatusCodes": [
         204
        ],
@@ -467,7 +431,7 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "45"
    },
    "Creatable": false,
    "Parent": "ExtensibleClient"
