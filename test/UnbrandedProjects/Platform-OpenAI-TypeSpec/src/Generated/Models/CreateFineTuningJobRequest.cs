@@ -3,7 +3,7 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel.Internal;
+using System.ClientModel.Internal;
 
 namespace OpenAI.Models
 {

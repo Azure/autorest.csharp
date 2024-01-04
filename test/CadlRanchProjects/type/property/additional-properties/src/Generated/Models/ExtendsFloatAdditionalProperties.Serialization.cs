@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -12,10 +14,18 @@ using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    public partial class ExtendsFloatAdditionalProperties : IUtf8JsonSerializable
+    public partial class ExtendsFloatAdditionalProperties : IUtf8JsonSerializable, IJsonModel<ExtendsFloatAdditionalProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtendsFloatAdditionalProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<ExtendsFloatAdditionalProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ExtendsFloatAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ExtendsFloatAdditionalProperties)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
@@ -27,8 +37,22 @@ namespace _Type.Property.AdditionalProperties.Models
             writer.WriteEndObject();
         }
 
-        internal static ExtendsFloatAdditionalProperties DeserializeExtendsFloatAdditionalProperties(JsonElement element)
+        ExtendsFloatAdditionalProperties IJsonModel<ExtendsFloatAdditionalProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<ExtendsFloatAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(ExtendsFloatAdditionalProperties)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeExtendsFloatAdditionalProperties(document.RootElement, options);
+        }
+
+        internal static ExtendsFloatAdditionalProperties DeserializeExtendsFloatAdditionalProperties(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -48,6 +72,37 @@ namespace _Type.Property.AdditionalProperties.Models
             additionalProperties = additionalPropertiesDictionary;
             return new ExtendsFloatAdditionalProperties(id, additionalProperties);
         }
+
+        BinaryData IPersistableModel<ExtendsFloatAdditionalProperties>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ExtendsFloatAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(ExtendsFloatAdditionalProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        ExtendsFloatAdditionalProperties IPersistableModel<ExtendsFloatAdditionalProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<ExtendsFloatAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeExtendsFloatAdditionalProperties(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(ExtendsFloatAdditionalProperties)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<ExtendsFloatAdditionalProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>

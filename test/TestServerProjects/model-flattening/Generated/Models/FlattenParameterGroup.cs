@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace model_flattening.Models
@@ -13,6 +14,38 @@ namespace model_flattening.Models
     /// <summary> Parameter group. </summary>
     public partial class FlattenParameterGroup
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
@@ -35,7 +68,8 @@ namespace model_flattening.Models
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        internal FlattenParameterGroup(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FlattenParameterGroup(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             SimpleBodyProduct = simpleBodyProduct;
@@ -45,6 +79,12 @@ namespace model_flattening.Models
             Capacity = capacity;
             GenericValue = genericValue;
             OdataValue = odataValue;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/> for deserialization. </summary>
+        internal FlattenParameterGroup()
+        {
         }
 
         /// <summary> Product name with value 'groupproduct'. </summary>

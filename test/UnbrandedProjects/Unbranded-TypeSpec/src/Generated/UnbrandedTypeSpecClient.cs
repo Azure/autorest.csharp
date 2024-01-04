@@ -3,10 +3,10 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Core.Pipeline;
-using System.Net.ClientModel.Internal;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
+using System.ClientModel.Primitives.Pipeline;
 using System.Threading;
 using System.Threading.Tasks;
 using UnbrandedTypeSpec.Models;

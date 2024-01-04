@@ -134,6 +134,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 builder.PackageReferences.Add(new("Azure.Core.Experimental"));
             }
 
+            if (Configuration.UseModelReaderWriter)
+            {
+                builder.PackageReferences.Add(new("System.ClientModel"));
+            }
+
             if (_needAzureKeyAuth)
             {
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
@@ -159,6 +164,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_includeDfe)
             {
                 writer.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
+            }
+
+            if (Configuration.UseModelReaderWriter)
+            {
+                writer.PackageReferences.Add(new("System.ClientModel"));
             }
 
             var version = GetVersion();
