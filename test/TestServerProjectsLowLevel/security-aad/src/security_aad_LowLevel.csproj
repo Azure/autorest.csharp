@@ -9,5 +9,6 @@
   <ItemGroup>
     <PackageReference Include="Azure.Core" />
     <PackageReference Include="Azure.Core.Experimental" />
+    <PackageReference Include="System.ClientModel" />
   </ItemGroup>
 </Project>

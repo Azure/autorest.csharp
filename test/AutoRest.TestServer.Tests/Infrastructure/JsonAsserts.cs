@@ -8,7 +8,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 {
     internal static class JsonAsserts
     {
-        public static void AssertSerialization(string expected, IUtf8JsonSerializable serializable)
+        public static void AssertWireSerialization(string expected, IUtf8JsonSerializable serializable)
         {
             using var memoryStream = new MemoryStream();
 
@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             Assert.AreEqual(expected, text);
         }
 
-        public static JsonElement AssertSerializes(IUtf8JsonSerializable serializable)
+        public static JsonElement AssertWireSerializes(IUtf8JsonSerializable serializable)
         {
             using var memoryStream = new MemoryStream();
 
@@ -33,8 +33,5 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             return JsonDocument.Parse(memoryStream.ToArray()).RootElement;
         }
-
-        public static JsonElement Parse(string content)
-            => JsonDocument.Parse(content).RootElement;
     }
 }
