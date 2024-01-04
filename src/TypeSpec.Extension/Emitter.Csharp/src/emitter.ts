@@ -59,7 +59,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const root = createModel(context);
+        const sdkContext = createSdkContext(
+            context,
+            "@azure-tools/typespec-csharp"
+        );
+        const root = createModel(context, sdkContext);
         if (
             context.program.diagnostics.length > 0 &&
             context.program.diagnostics.filter(
@@ -113,10 +117,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
 
             //emit configuration.json
-            const sdkContext = createSdkContext(
-                context,
-                "@azure-tools/typespec-csharp"
-            );
             const configurations = {
                 "output-folder": ".",
                 namespace: options.namespace ?? tspNamespace,

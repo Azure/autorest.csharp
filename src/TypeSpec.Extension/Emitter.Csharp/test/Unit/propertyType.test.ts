@@ -5,7 +5,8 @@ import { CodeModel } from "../../src/type/codeModel.js";
 import {
     typeSpecCompile,
     createEmitterContext,
-    createEmitterTestHost
+    createEmitterTestHost,
+    createNetSdkContext
 } from "./utils/TestUtil.js";
 import { InputEnumType } from "../../src/type/inputType.js";
 import isEqual from "lodash.isequal";
@@ -26,7 +27,8 @@ describe("Test GetInputType for array", () => {
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const root = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(context, sdkContext);
         deepStrictEqual(
             root.Clients[0].Operations[0].Parameters[0].Type.Name,
             "Array"
@@ -55,7 +57,8 @@ describe("Test GetInputType for array", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const root = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(context, sdkContext);
         deepStrictEqual(
             root.Clients[0].Operations[0].Responses[0].BodyType?.Name,
             "Array"
@@ -106,7 +109,8 @@ describe("Test GetInputType for enum", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const root = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(context, sdkContext);
         assert(
             isEqual(
                 {
@@ -168,7 +172,8 @@ describe("Test GetInputType for enum", () => {
             { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
-        const root = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(context, sdkContext);
         assert(
             isEqual(
                 {
@@ -223,7 +228,8 @@ describe("Test GetInputType for enum", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const root = createModel(context);
+        const sdkContext = createNetSdkContext(context);
+        const root = createModel(context, sdkContext);
         assert(
             isEqual(
                 {

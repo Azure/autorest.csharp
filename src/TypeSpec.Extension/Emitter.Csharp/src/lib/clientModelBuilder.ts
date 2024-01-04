@@ -3,7 +3,6 @@
 
 import {
     SdkClient,
-    createSdkContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
@@ -60,7 +59,8 @@ import { $lib } from "../emitter.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
-    context: EmitContext<NetEmitterOptions>
+    context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext
 ): CodeModel {
     const services = listServices(context.program);
     if (services.length === 0) {
@@ -74,19 +74,16 @@ export function createModel(
         throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
-    return createModelForService(context, service);
+    return createModelForService(context, sdkContext, service);
 }
 
 export function createModelForService(
     context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext,
     service: Service
 ): CodeModel {
     const emitterOptions = resolveOptions(context);
     const program = context.program;
-    const sdkContext = createSdkContext(
-        context,
-        "@azure-tools/typespec-csharp"
-    );
     const serviceNamespaceType = service.type;
 
     const apiVersions: Set<string> | undefined = new Set<string>();
