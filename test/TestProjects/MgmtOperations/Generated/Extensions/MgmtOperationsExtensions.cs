@@ -135,8 +135,12 @@ namespace MgmtOperations
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -170,8 +174,12 @@ namespace MgmtOperations
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -222,8 +230,12 @@ namespace MgmtOperations
         /// <description>UnpatchableResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/unpatchableResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="UnpatchableResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -257,8 +269,12 @@ namespace MgmtOperations
         /// <description>UnpatchableResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/unpatchableResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="UnpatchableResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -292,8 +308,12 @@ namespace MgmtOperations
         /// <description>AvailabilitySets_TestLROMethod</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -325,8 +345,12 @@ namespace MgmtOperations
         /// <description>AvailabilitySets_TestLROMethod</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>

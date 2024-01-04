@@ -104,8 +104,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -141,8 +145,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -178,8 +186,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,8 +228,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -254,8 +270,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -292,8 +312,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -330,8 +354,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -388,8 +416,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -446,8 +478,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -499,8 +535,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -552,8 +592,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -608,8 +652,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/proximityPlacementGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

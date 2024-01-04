@@ -54,8 +54,12 @@ namespace MgmtPartialResource.Mocking
         /// <description>PublicIPAddresses_ListAll</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/publicIPAddresses</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PublicIPAddressResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -80,8 +84,12 @@ namespace MgmtPartialResource.Mocking
         /// <description>PublicIPAddresses_ListAll</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/publicIPAddresses</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PublicIPAddressResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

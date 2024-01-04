@@ -103,8 +103,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,8 +143,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -175,8 +183,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,8 +225,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -251,8 +267,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -293,8 +313,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -335,8 +359,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -388,8 +416,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -441,8 +473,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -493,8 +529,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -545,8 +585,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -596,8 +640,12 @@ namespace MgmtPartialResource
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Automanage/configurationProfileAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

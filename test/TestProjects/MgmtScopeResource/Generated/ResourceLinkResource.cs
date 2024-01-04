@@ -100,8 +100,12 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -136,8 +140,12 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -172,8 +180,12 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -210,8 +222,12 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -248,8 +264,12 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -290,8 +310,12 @@ namespace MgmtScopeResource
         /// <description>ResourceLinks_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

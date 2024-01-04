@@ -99,8 +99,12 @@ namespace MgmtScopeResource
         /// <description>VMInsights_GetOnboardingStatus</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Insights/vmInsightsOnboardingStatuses</description>
+        /// <term>Default Api Version</term>
+        /// <description>2018-11-27-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VMInsightsOnboardingStatusResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -135,8 +139,12 @@ namespace MgmtScopeResource
         /// <description>VMInsights_GetOnboardingStatus</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Insights/vmInsightsOnboardingStatuses</description>
+        /// <term>Default Api Version</term>
+        /// <description>2018-11-27-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VMInsightsOnboardingStatusResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

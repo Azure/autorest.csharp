@@ -77,8 +77,12 @@ namespace MgmtSubscriptionNameParameter
         /// <description>Subscriptions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.ServiceBus/subscriptions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -111,8 +115,12 @@ namespace MgmtSubscriptionNameParameter
         /// <description>Subscriptions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.ServiceBus/subscriptions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
         /// </item>
         /// </list>
         /// <item>

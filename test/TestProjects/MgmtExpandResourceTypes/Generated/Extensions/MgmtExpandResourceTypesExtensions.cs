@@ -273,8 +273,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -307,8 +311,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -341,8 +349,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -374,8 +386,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -406,6 +422,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>DnsResourceReference_GetByTargetResources</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -433,6 +453,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DnsResourceReference_GetByTargetResources</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// <item>

@@ -102,8 +102,12 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicyRuleCollectionGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies/ruleCollectionGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyRuleCollectionGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -138,8 +142,12 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicyRuleCollectionGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies/ruleCollectionGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyRuleCollectionGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -174,8 +182,12 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicyRuleCollectionGroups_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies/ruleCollectionGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyRuleCollectionGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -212,8 +224,12 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicyRuleCollectionGroups_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies/ruleCollectionGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyRuleCollectionGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -250,8 +266,12 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicyRuleCollectionGroups_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies/ruleCollectionGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyRuleCollectionGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -292,8 +312,12 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicyRuleCollectionGroups_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies/ruleCollectionGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyRuleCollectionGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

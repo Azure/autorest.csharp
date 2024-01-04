@@ -135,13 +135,24 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var pathInformation = _operations.Select(operation =>
             {
-                string resourceTypeItem = "";
+                FormattableString resourceItem = $"";
                 if (operation.Resource != null)
-                    resourceTypeItem = $@"
+                {
+                    resourceItem = $@"
 <item>
-<term>Resource Type</term>
-<description>{operation.Resource.ResourceType}</description>
+<term>Resource</term>
+<description>{operation.Resource.Type:C}</description>
 </item>";
+                }
+                FormattableString defaultApiVersion = $"";
+                if (operation.Operation.ApiVersions.Any())
+                {
+                    defaultApiVersion = $@"
+<item>
+<term>Default Api Version</term>
+<description>{string.Join(", ", operation.Operation.ApiVersions.Select(v => v.Version))}</description>
+</item>";
+                }
                     return (FormattableString)$@"<item>
 <term>Request Path</term>
 <description>{operation.Operation.GetHttpPath()}</description>
@@ -149,7 +160,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 <item>
 <term>Operation Id</term>
 <description>{operation.OperationId}</description>
-</item>{resourceTypeItem}";
+</item>{defaultApiVersion}{resourceItem}";
             }).ToArray().Join(Environment.NewLine);
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}

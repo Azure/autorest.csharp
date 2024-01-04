@@ -54,8 +54,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeIntegerModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeIntegerModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeIntegerModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -80,8 +84,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeIntegerModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeIntegerModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeIntegerModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -113,8 +121,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeInt64Models_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeInt64Model</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt64ModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,8 +151,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeInt64Models_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeInt64Model</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt64ModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -172,8 +188,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeInt32Models_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeInt32Model</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt32ModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,8 +218,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeInt32Models_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeInt32Model</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt32ModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -231,8 +255,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeNumericModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeNumericModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeNumericModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,8 +285,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeNumericModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeNumericModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeNumericModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -290,8 +322,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeFloatModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeFloatModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeFloatModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -316,8 +352,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeFloatModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeFloatModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeFloatModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -349,8 +389,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeDoubleModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeDoubleModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDoubleModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -375,8 +419,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeDoubleModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeDoubleModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDoubleModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -408,8 +456,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDecimalModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -434,8 +486,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeDecimalModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDecimalModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -467,8 +523,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeStringModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -493,8 +553,12 @@ namespace MgmtPagination.Mocking
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeStringModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

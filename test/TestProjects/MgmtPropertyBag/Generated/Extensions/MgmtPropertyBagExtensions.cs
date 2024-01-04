@@ -102,8 +102,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -135,8 +139,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -185,8 +193,12 @@ namespace MgmtPropertyBag
         /// <description>Bars_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/bars</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -218,8 +230,12 @@ namespace MgmtPropertyBag
         /// <description>Bars_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/bars</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -251,8 +267,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_ListWithSubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -285,8 +305,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_ListWithSubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -319,8 +343,12 @@ namespace MgmtPropertyBag
         /// <description>Bars_ListWithSubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/bars</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -353,8 +381,12 @@ namespace MgmtPropertyBag
         /// <description>Bars_ListWithSubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/bars</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// <item>

@@ -103,8 +103,12 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSetExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -140,8 +144,12 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSetExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -177,8 +185,12 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSetExtensions_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -215,8 +227,12 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSetExtensions_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -253,8 +269,12 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSetExtensions_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -295,8 +315,12 @@ namespace MgmtAcronymMapping
         /// <description>VirtualMachineScaleSetExtensions_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

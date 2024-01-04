@@ -114,8 +114,12 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/noTypeReplacementModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -147,8 +151,12 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/noTypeReplacementModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -197,8 +205,12 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/noTypeReplacementModel2s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -230,8 +242,12 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/noTypeReplacementModel2s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -280,8 +296,12 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/noTypeReplacementModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel3Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -313,8 +333,12 @@ namespace MgmtNoTypeReplacement
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/noTypeReplacementModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel3Resource"/></description>
         /// </item>
         /// </list>
         /// <item>

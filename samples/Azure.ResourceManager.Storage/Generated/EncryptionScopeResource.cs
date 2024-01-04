@@ -102,8 +102,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>EncryptionScopes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/encryptionScopes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EncryptionScopeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -138,8 +142,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>EncryptionScopes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/encryptionScopes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EncryptionScopeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -174,8 +182,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>EncryptionScopes_Patch</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/encryptionScopes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EncryptionScopeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -212,8 +224,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>EncryptionScopes_Patch</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/encryptionScopes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EncryptionScopeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

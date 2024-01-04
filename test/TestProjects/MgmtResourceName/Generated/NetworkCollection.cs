@@ -65,8 +65,12 @@ namespace MgmtResourceName
         /// <description>NetworkResources_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -109,8 +113,12 @@ namespace MgmtResourceName
         /// <description>NetworkResources_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -153,8 +161,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -193,8 +205,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -233,8 +249,12 @@ namespace MgmtResourceName
         /// <description>NetworkResources_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,8 +277,12 @@ namespace MgmtResourceName
         /// <description>NetworkResources_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -282,8 +306,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -321,8 +349,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -360,8 +392,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -401,8 +437,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

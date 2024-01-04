@@ -102,8 +102,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedVaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -138,8 +142,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedVaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -174,8 +182,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_PurgeDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedVaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -212,8 +224,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_PurgeDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedVaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

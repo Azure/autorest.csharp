@@ -58,8 +58,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -103,8 +107,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -148,8 +156,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -189,8 +201,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -230,8 +246,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_ListForResourceGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -242,8 +262,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_ListForResource</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -254,8 +278,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_ListForManagementGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -266,8 +294,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -315,8 +347,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_ListForResourceGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -327,8 +363,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_ListForResource</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -339,8 +379,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_ListForManagementGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -351,8 +395,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -400,8 +448,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -439,8 +491,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -478,8 +534,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -519,8 +579,12 @@ namespace MgmtScopeResource
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

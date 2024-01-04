@@ -109,8 +109,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -145,8 +149,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -181,8 +189,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_DeleteAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -219,8 +231,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_DeleteAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,8 +273,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_CreateOrUpdateAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -299,8 +319,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_CreateOrUpdateAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -341,8 +365,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_CancelAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -375,8 +403,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_CancelAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -409,8 +441,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_ValidateAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -451,8 +487,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_ValidateAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -493,8 +533,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_ExportTemplateAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -527,8 +571,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_ExportTemplateAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -561,8 +609,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIf</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -573,8 +625,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIfAtManagementGroupScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -585,8 +641,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIfAtSubscriptionScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -597,8 +657,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIfAtTenantScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -670,8 +734,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIf</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -682,8 +750,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIfAtManagementGroupScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -694,8 +766,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIfAtSubscriptionScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// <item>
         /// <term>Request Path</term>
@@ -706,8 +782,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_WhatIfAtTenantScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -778,6 +858,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>DeploymentOperations_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
@@ -812,6 +896,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DeploymentOperations_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -848,6 +936,10 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>DeploymentOperations_ListAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="top"> The number of results to return. </param>
@@ -870,6 +962,10 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DeploymentOperations_ListAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -895,8 +991,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_CheckExistenceAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -929,8 +1029,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_CheckExistenceAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -963,8 +1067,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1021,8 +1129,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1079,8 +1191,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1132,8 +1248,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1185,8 +1305,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1241,8 +1365,12 @@ namespace MgmtScopeResource
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

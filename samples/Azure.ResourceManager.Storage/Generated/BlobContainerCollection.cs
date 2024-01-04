@@ -66,8 +66,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -111,8 +115,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -156,8 +164,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -197,8 +209,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -238,8 +254,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -267,8 +287,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -296,8 +320,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -335,8 +363,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -374,8 +406,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -415,8 +451,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

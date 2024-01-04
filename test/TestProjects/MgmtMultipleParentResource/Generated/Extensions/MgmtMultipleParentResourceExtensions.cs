@@ -153,8 +153,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -188,8 +192,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -240,8 +248,12 @@ namespace MgmtMultipleParentResource
         /// <description>TheParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TheParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -275,8 +287,12 @@ namespace MgmtMultipleParentResource
         /// <description>TheParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TheParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>

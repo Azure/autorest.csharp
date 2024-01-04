@@ -55,8 +55,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -82,8 +86,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -116,8 +124,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -143,8 +155,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -177,8 +193,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>ManagedHsms_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/managedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -204,8 +224,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>ManagedHsms_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/managedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -238,8 +262,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>FirewallPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -266,8 +294,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>FirewallPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -56,8 +56,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -83,8 +87,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>AvailabilitySets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/availabilitySets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -117,8 +125,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/hostGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -145,8 +157,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/hostGroups</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -180,8 +196,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -207,8 +227,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -241,8 +265,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -269,8 +297,12 @@ namespace MgmtParamOrdering.Mocking
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

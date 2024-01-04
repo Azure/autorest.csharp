@@ -146,8 +146,12 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ManagementGroupPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -180,8 +184,12 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetAtManagementGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ManagementGroupPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -248,8 +256,12 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubscriptionPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -282,8 +294,12 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubscriptionPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -315,6 +331,10 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>CheckDnsNameAvailability</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -344,6 +364,10 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CheckDnsNameAvailability</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -375,6 +399,10 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>OrphanedPost_ValidateSomething</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -402,6 +430,10 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>OrphanedPost_ValidateSomething</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -449,8 +481,12 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BuiltInPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -483,8 +519,12 @@ namespace MgmtExtensionResource
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BuiltInPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// <item>

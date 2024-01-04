@@ -63,8 +63,12 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -105,8 +109,12 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -147,8 +155,12 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -187,8 +199,12 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -227,8 +243,12 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -269,8 +289,12 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

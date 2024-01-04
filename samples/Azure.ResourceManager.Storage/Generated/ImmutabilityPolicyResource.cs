@@ -102,8 +102,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_GetImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,8 +143,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_GetImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -176,8 +184,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_DeleteImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -218,8 +230,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_DeleteImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -260,8 +276,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_CreateOrUpdateImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -303,8 +323,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_CreateOrUpdateImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -346,8 +370,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_LockImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -384,8 +412,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_LockImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -422,8 +454,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_ExtendImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -461,8 +497,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobContainers_ExtendImmutabilityPolicy</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImmutabilityPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

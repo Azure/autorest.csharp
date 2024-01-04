@@ -101,8 +101,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -137,8 +141,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -173,8 +181,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -211,8 +223,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -249,8 +265,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -291,8 +311,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -333,8 +357,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Validate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -367,8 +395,12 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Validate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/roleAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2017-10-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RoleAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

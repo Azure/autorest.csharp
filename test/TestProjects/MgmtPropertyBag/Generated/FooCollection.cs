@@ -67,8 +67,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -115,8 +119,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -163,8 +171,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -203,8 +215,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -243,8 +259,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -271,8 +291,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -299,8 +323,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -337,8 +365,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -375,8 +407,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -415,8 +451,12 @@ namespace MgmtPropertyBag
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -101,8 +101,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeOne</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -135,8 +139,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeOne</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -186,8 +194,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeTwo</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -220,8 +232,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_GetTypeTwo</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -254,8 +270,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -286,8 +306,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeOne/typeOnes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -318,8 +342,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -350,8 +378,12 @@ namespace MgmtSafeFlatten
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.TypeTwo/typeTwos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// <item>

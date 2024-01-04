@@ -100,8 +100,12 @@ namespace MgmtExtensionResource
         /// <description>SubSingletons_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Singleton/subSingletons</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -136,8 +140,12 @@ namespace MgmtExtensionResource
         /// <description>SubSingletons_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Singleton/subSingletons</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -172,8 +180,12 @@ namespace MgmtExtensionResource
         /// <description>SubSingletons_Execute</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Singleton/subSingletons</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,8 +218,12 @@ namespace MgmtExtensionResource
         /// <description>SubSingletons_Execute</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Singleton/subSingletons</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

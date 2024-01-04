@@ -101,8 +101,12 @@ namespace MgmtPagination
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeStringModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -136,8 +140,12 @@ namespace MgmtPagination
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeStringModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -171,8 +179,12 @@ namespace MgmtPagination
         /// <description>PageSizeStringModels_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeStringModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -212,8 +224,12 @@ namespace MgmtPagination
         /// <description>PageSizeStringModels_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/pageSizeStringModel</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

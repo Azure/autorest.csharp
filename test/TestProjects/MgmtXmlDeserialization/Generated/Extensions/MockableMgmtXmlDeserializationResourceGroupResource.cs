@@ -55,8 +55,12 @@ namespace MgmtXmlDeserialization.Mocking
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -82,8 +86,12 @@ namespace MgmtXmlDeserialization.Mocking
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -96,8 +96,12 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/resourceModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -129,8 +133,12 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>ResourceModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/resourceModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -179,8 +187,12 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/trackedResourceModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -212,8 +224,12 @@ namespace MgmtSupersetFlattenInheritance
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/trackedResourceModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -244,6 +260,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel1s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -271,6 +291,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel1s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -297,6 +321,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -327,6 +355,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel1s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -356,6 +388,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -383,6 +419,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -412,6 +452,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -439,6 +483,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -465,6 +513,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -495,6 +547,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -524,6 +580,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -551,6 +611,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -580,6 +644,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel1s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -607,6 +675,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel1s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -633,6 +705,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubResourceModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -663,6 +739,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel1s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -692,6 +772,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -719,6 +803,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -748,6 +836,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -775,6 +867,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -801,6 +897,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubResourceModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -831,6 +931,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -860,6 +964,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>SubResourceModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -887,6 +995,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubResourceModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -916,6 +1028,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel1s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -943,6 +1059,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel1s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -969,6 +1089,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -999,6 +1123,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel1s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1028,6 +1156,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1055,6 +1187,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1084,6 +1220,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1111,6 +1251,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1137,6 +1281,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1167,6 +1315,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1196,6 +1348,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1223,6 +1379,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>WritableSubResourceModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1252,6 +1412,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>ResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1279,6 +1443,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>ResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1305,6 +1473,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1335,6 +1507,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>ResourceModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1364,6 +1540,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>ResourceModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1391,6 +1571,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1420,6 +1604,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1447,6 +1635,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1473,6 +1665,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1503,6 +1699,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1532,6 +1732,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1560,6 +1764,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1587,6 +1795,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NonResourceModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1617,6 +1829,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>NonResourceModel1s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1646,6 +1862,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>NonResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1673,6 +1893,10 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NonResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
         /// </item>
         /// </list>
         /// <item>

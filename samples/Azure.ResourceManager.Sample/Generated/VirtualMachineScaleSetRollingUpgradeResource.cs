@@ -101,8 +101,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetRollingUpgrades_GetLatest</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetRollingUpgradeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -137,8 +141,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetRollingUpgrades_GetLatest</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetRollingUpgradeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

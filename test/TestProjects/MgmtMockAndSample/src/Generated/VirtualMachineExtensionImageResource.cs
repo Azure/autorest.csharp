@@ -104,8 +104,12 @@ namespace MgmtMockAndSample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -140,8 +144,12 @@ namespace MgmtMockAndSample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

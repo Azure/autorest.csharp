@@ -104,8 +104,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -141,8 +145,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -178,8 +186,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,8 +228,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -254,8 +270,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -296,8 +316,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -338,8 +362,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -396,8 +424,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -454,8 +486,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -507,8 +543,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -560,8 +600,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -616,8 +660,12 @@ namespace MgmtAcronymMapping
         /// <description>Images_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/images</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

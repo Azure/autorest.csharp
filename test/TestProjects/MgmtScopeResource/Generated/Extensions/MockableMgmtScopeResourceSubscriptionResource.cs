@@ -63,8 +63,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -90,8 +94,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>Deployments_GetAtScope</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/deployments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -117,8 +125,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>ResourceLinks_ListAtSubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -144,8 +156,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>ResourceLinks_ListAtSubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Resources/links</description>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

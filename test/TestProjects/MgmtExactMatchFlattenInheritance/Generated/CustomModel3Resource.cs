@@ -102,8 +102,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -138,8 +142,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -174,8 +182,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,8 +228,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

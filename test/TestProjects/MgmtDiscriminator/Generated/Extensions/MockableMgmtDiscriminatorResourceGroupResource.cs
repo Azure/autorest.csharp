@@ -55,8 +55,12 @@ namespace MgmtDiscriminator.Mocking
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Cdn/deliveryRules</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -82,8 +86,12 @@ namespace MgmtDiscriminator.Mocking
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Cdn/deliveryRules</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

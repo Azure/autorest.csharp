@@ -58,6 +58,14 @@ namespace MgmtDiscriminator
         /// <term>Operation Id</term>
         /// <description>Artifacts_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -88,6 +96,14 @@ namespace MgmtDiscriminator
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Artifacts_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -176,8 +192,12 @@ namespace MgmtDiscriminator
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Cdn/deliveryRules</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -210,8 +230,12 @@ namespace MgmtDiscriminator
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Cdn/deliveryRules</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
         /// </item>
         /// </list>
         /// <item>

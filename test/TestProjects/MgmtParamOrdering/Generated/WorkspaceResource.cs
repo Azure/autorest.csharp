@@ -111,8 +111,12 @@ namespace MgmtParamOrdering
         /// <description>EnvironmentContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces/environments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EnvironmentContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -138,8 +142,12 @@ namespace MgmtParamOrdering
         /// <description>EnvironmentContainers_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces/environments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EnvironmentContainerResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -165,8 +173,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -201,8 +213,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -237,8 +253,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -275,8 +295,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -313,8 +337,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -351,8 +379,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -389,8 +421,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -447,8 +483,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -505,8 +545,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -558,8 +602,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -611,8 +659,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -667,8 +719,12 @@ namespace MgmtParamOrdering
         /// <description>Workspaces_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MachineLearningServices/workspaces</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

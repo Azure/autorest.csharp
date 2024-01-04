@@ -66,8 +66,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -92,8 +96,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -125,8 +133,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel4s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel4s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel4Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -151,8 +163,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel4s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel4s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel4Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -184,8 +200,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel6s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel6s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel6Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -210,8 +230,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel6s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel6s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel6Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -243,8 +267,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel7s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel7s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -269,8 +297,12 @@ namespace MgmtSupersetInheritance.Mocking
         /// <description>SupersetModel7s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel7s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -293,6 +325,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -330,6 +366,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>SupersetModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="supersetModel2SName"> The <see cref="string"/> to use. </param>
@@ -366,6 +406,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>SupersetModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="supersetModel2SName"> The <see cref="string"/> to use. </param>
@@ -400,6 +444,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>SupersetModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="supersetModel2SName"> The <see cref="string"/> to use. </param>
@@ -433,6 +481,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel3s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -470,6 +522,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>SupersetModel3s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="supersetModel3SName"> The <see cref="string"/> to use. </param>
@@ -506,6 +562,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>SupersetModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="supersetModel3SName"> The <see cref="string"/> to use. </param>
@@ -539,6 +599,10 @@ namespace MgmtSupersetInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>

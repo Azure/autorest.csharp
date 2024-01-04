@@ -74,8 +74,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -117,8 +121,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -160,8 +168,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_ListTypes</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -185,8 +197,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_ListTypes</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -210,8 +226,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_ListVersions</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -243,8 +263,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_ListVersions</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -276,8 +300,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -317,8 +345,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -358,8 +390,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -401,8 +437,12 @@ namespace MgmtParent
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -108,8 +108,12 @@ namespace MgmtListMethods
         /// <description>TenantParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParentWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -135,8 +139,12 @@ namespace MgmtListMethods
         /// <description>TenantParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParentWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -169,8 +177,12 @@ namespace MgmtListMethods
         /// <description>TenantParentWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParentWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -196,8 +208,12 @@ namespace MgmtListMethods
         /// <description>TenantParentWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParentWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -230,8 +246,12 @@ namespace MgmtListMethods
         /// <description>TenantParentWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParentWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,8 +277,12 @@ namespace MgmtListMethods
         /// <description>TenantParentWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParentWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -291,8 +315,12 @@ namespace MgmtListMethods
         /// <description>TenantParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -318,8 +346,12 @@ namespace MgmtListMethods
         /// <description>TenantParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests/tenantParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -345,8 +377,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -382,8 +418,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -419,8 +459,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -461,8 +505,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Create</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -503,8 +551,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -556,8 +608,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -609,8 +665,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -661,8 +721,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -713,8 +777,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -764,8 +832,12 @@ namespace MgmtListMethods
         /// <description>TenantTests_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Tenant/tenantTests</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

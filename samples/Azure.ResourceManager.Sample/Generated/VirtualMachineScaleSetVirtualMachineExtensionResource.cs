@@ -105,8 +105,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -142,8 +146,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -179,8 +187,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -217,8 +229,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -255,8 +271,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -297,8 +317,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -339,8 +363,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -397,8 +425,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -455,8 +487,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -508,8 +544,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -561,8 +601,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -617,8 +661,12 @@ namespace Azure.ResourceManager.Sample
         /// <description>VirtualMachineScaleSetVMExtensions_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -55,8 +55,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -82,8 +86,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -123,8 +131,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2022-01-25</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="GuestConfigurationAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -150,8 +162,12 @@ namespace MgmtScopeResource.Mocking
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.GuestConfiguration/guestConfigurationAssignments</description>
+        /// <term>Default Api Version</term>
+        /// <description>2022-01-25</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="GuestConfigurationAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -102,8 +102,12 @@ namespace MgmtSingletonResource
         /// <description>Brakes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/cars/brakes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BrakeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -137,8 +141,12 @@ namespace MgmtSingletonResource
         /// <description>Brakes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/cars/brakes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BrakeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

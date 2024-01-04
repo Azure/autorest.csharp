@@ -108,8 +108,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>FileShares_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/fileServices/shares</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FileShareResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -137,8 +141,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>FileShares_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/fileServices/shares</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FileShareResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -166,8 +174,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>FileServices_GetServiceProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/fileServices</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FileServiceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -202,8 +214,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>FileServices_GetServiceProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/fileServices</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FileServiceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -238,8 +254,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>FileServices_SetServiceProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/fileServices</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FileServiceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -280,8 +300,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>FileServices_SetServiceProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/fileServices</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FileServiceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

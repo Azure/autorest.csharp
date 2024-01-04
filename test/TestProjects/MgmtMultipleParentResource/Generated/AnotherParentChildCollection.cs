@@ -65,8 +65,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -110,8 +114,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -155,8 +163,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -197,8 +209,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -239,8 +255,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -266,8 +286,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -293,8 +317,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -333,8 +361,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -373,8 +405,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -415,8 +451,12 @@ namespace MgmtMultipleParentResource
         /// <description>AnotherChildren_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/anotherParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

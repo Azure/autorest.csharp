@@ -176,8 +176,12 @@ namespace MgmtResourceName
         /// <description>Machines_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/machines</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -209,8 +213,12 @@ namespace MgmtResourceName
         /// <description>Machines_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/machines</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -259,8 +267,12 @@ namespace MgmtResourceName
         /// <description>Disks_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -292,8 +304,12 @@ namespace MgmtResourceName
         /// <description>Disks_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -342,8 +358,12 @@ namespace MgmtResourceName
         /// <description>MemoryResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/memoryResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -375,8 +395,12 @@ namespace MgmtResourceName
         /// <description>MemoryResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/memoryResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -425,8 +449,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -458,8 +486,12 @@ namespace MgmtResourceName
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -508,8 +540,12 @@ namespace MgmtResourceName
         /// <description>displayResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/displayResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -541,8 +577,12 @@ namespace MgmtResourceName
         /// <description>displayResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/displayResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -592,8 +632,12 @@ namespace MgmtResourceName
         /// <description>ProviderOperations_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/providerOperations</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -627,8 +671,12 @@ namespace MgmtResourceName
         /// <description>ProviderOperations_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/providerOperations</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
         /// </item>
         /// </list>
         /// <item>

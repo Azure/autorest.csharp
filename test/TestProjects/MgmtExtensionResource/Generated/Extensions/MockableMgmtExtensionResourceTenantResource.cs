@@ -55,8 +55,12 @@ namespace MgmtExtensionResource.Mocking
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BuiltInPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -82,8 +86,12 @@ namespace MgmtExtensionResource.Mocking
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/policyDefinitions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BuiltInPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -103,8 +103,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,8 +143,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -175,8 +183,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,8 +225,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -251,8 +267,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -293,8 +313,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

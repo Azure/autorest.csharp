@@ -112,8 +112,12 @@ namespace MgmtHierarchicalNonResource
         /// <description>SharedGalleries_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -149,8 +153,12 @@ namespace MgmtHierarchicalNonResource
         /// <description>SharedGalleries_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -185,6 +193,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -208,6 +220,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -230,6 +246,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -266,6 +286,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
@@ -301,6 +325,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
@@ -329,6 +357,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
@@ -356,6 +388,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -393,6 +429,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>

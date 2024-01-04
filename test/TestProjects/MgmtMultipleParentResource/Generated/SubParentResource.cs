@@ -111,8 +111,12 @@ namespace MgmtMultipleParentResource
         /// <description>Children_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TheParentSubParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,8 +143,12 @@ namespace MgmtMultipleParentResource
         /// <description>Children_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents/children</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TheParentSubParentChildResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -167,8 +175,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -204,8 +216,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -241,8 +257,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -279,8 +299,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -317,8 +341,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -359,8 +387,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -401,8 +433,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -459,8 +495,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -517,8 +557,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -570,8 +614,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -623,8 +671,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -679,8 +731,12 @@ namespace MgmtMultipleParentResource
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/theParents/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

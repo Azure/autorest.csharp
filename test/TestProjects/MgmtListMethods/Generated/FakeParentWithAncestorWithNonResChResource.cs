@@ -104,8 +104,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -140,8 +144,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -176,8 +184,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -218,8 +230,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -260,8 +276,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_ListNonResourceChild</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -285,8 +305,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_ListNonResourceChild</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -310,8 +334,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -363,8 +391,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -416,8 +448,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -468,8 +504,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -520,8 +560,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -571,8 +615,12 @@ namespace MgmtListMethods
         /// <description>FakeParentWithAncestorWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

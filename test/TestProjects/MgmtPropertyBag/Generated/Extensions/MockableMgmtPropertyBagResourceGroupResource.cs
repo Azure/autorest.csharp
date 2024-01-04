@@ -56,8 +56,12 @@ namespace MgmtPropertyBag.Mocking
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -82,8 +86,12 @@ namespace MgmtPropertyBag.Mocking
         /// <description>Foos_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/foos</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -115,8 +123,12 @@ namespace MgmtPropertyBag.Mocking
         /// <description>Bars_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/bars</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -141,8 +153,12 @@ namespace MgmtPropertyBag.Mocking
         /// <description>Bars_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/bars</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

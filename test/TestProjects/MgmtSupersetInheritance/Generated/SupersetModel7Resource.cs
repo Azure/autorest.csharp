@@ -101,8 +101,12 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel7s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel7s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -136,8 +140,12 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel7s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel7s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -171,8 +179,12 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel7s_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel7s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -212,8 +224,12 @@ namespace MgmtSupersetInheritance
         /// <description>SupersetModel7s_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/supersetModel7s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -116,8 +116,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/azureResourceFlattenModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AzureResourceFlattenModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -150,8 +154,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>AzureResourceFlattenModel1s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/azureResourceFlattenModel1s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AzureResourceFlattenModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -201,8 +209,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel2s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel2s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -235,8 +247,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel2s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel2s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -286,8 +302,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -320,8 +340,12 @@ namespace MgmtExactMatchFlattenInheritance
         /// <description>CustomModel3s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/customModel3s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -353,6 +377,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -381,6 +409,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -408,6 +440,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -439,6 +475,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -469,6 +509,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -497,6 +541,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -527,6 +575,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -555,6 +607,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -582,6 +638,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -613,6 +673,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -643,6 +707,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -671,6 +739,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -701,6 +773,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -729,6 +805,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -756,6 +836,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -787,6 +871,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -817,6 +905,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -845,6 +937,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -875,6 +971,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -903,6 +1003,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -930,6 +1034,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -961,6 +1069,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -991,6 +1103,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1019,6 +1135,10 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>

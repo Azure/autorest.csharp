@@ -292,8 +292,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -327,8 +331,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -379,8 +387,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>DeletedAccounts_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/locations/deletedAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedAccountResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -414,8 +426,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>DeletedAccounts_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/locations/deletedAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedAccountResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -448,6 +464,10 @@ namespace Azure.ResourceManager.Storage
         /// <term>Operation Id</term>
         /// <description>Skus_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -475,6 +495,10 @@ namespace Azure.ResourceManager.Storage
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Skus_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -505,8 +529,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -537,8 +565,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -568,6 +600,10 @@ namespace Azure.ResourceManager.Storage
         /// <term>Operation Id</term>
         /// <description>Usages_ListByLocation</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -596,6 +632,10 @@ namespace Azure.ResourceManager.Storage
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Usages_ListByLocation</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
         /// </item>
         /// </list>
         /// <item>

@@ -58,8 +58,12 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <description>SharedGalleries_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -86,8 +90,12 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <description>SharedGalleries_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/sharedGalleries</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

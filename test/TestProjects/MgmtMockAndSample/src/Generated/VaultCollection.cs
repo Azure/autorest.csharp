@@ -67,8 +67,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -113,8 +117,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -159,8 +167,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -200,8 +212,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -241,8 +257,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_ListByResourceGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -268,8 +288,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_ListByResourceGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -295,8 +319,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -334,8 +362,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -373,8 +405,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -414,8 +450,12 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

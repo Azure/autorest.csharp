@@ -61,8 +61,12 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <description>Zones_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -88,8 +92,12 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <description>Zones_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -113,6 +121,10 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DnsResourceReference_GetByTargetResources</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -147,6 +159,10 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DnsResourceReference_GetByTargetResources</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// </summary>

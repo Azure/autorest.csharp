@@ -54,8 +54,12 @@ namespace MgmtResourceName.Mocking
         /// <description>Machines_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/machines</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -80,8 +84,12 @@ namespace MgmtResourceName.Mocking
         /// <description>Machines_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/machines</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -113,8 +121,12 @@ namespace MgmtResourceName.Mocking
         /// <description>Disks_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,8 +151,12 @@ namespace MgmtResourceName.Mocking
         /// <description>Disks_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -172,8 +188,12 @@ namespace MgmtResourceName.Mocking
         /// <description>MemoryResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/memoryResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,8 +218,12 @@ namespace MgmtResourceName.Mocking
         /// <description>MemoryResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/memoryResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -231,8 +255,12 @@ namespace MgmtResourceName.Mocking
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,8 +285,12 @@ namespace MgmtResourceName.Mocking
         /// <description>networkResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/networkResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -290,8 +322,12 @@ namespace MgmtResourceName.Mocking
         /// <description>displayResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/displayResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -316,8 +352,12 @@ namespace MgmtResourceName.Mocking
         /// <description>displayResources_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/displayResources</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

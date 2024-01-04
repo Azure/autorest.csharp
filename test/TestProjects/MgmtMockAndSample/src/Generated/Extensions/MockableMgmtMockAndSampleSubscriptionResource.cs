@@ -84,8 +84,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedVaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -112,8 +116,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedVaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedVaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -151,8 +159,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -181,8 +193,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/locations/publishers/artifacttypes/types/versions</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -218,8 +234,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -246,8 +266,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/locations/deletedManagedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeletedManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -274,8 +298,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -301,8 +329,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -327,6 +359,10 @@ namespace MgmtMockAndSample.Mocking
         /// <term>Operation Id</term>
         /// <description>Vaults_ListDeleted</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -348,6 +384,10 @@ namespace MgmtMockAndSample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Vaults_ListDeleted</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -372,8 +412,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_CheckNameAvailability</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -410,8 +454,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>Vaults_CheckNameAvailability</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/vaults</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VaultResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -448,8 +496,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>DiskEncryptionSets_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -474,8 +526,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>DiskEncryptionSets_List</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -500,8 +556,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>ManagedHsms_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/managedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -527,8 +587,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>ManagedHsms_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.KeyVault/managedHSMs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ManagedHsmResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -553,6 +617,10 @@ namespace MgmtMockAndSample.Mocking
         /// <term>Operation Id</term>
         /// <description>ManagedHsms_ListDeleted</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -574,6 +642,10 @@ namespace MgmtMockAndSample.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ManagedHsms_ListDeleted</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -598,8 +670,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>FirewallPolicies_ListAll</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -624,8 +700,12 @@ namespace MgmtMockAndSample.Mocking
         /// <description>FirewallPolicies_ListAll</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/firewallPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-02-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FirewallPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

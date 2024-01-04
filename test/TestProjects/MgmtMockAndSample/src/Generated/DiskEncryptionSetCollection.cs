@@ -66,8 +66,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -111,8 +115,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -156,8 +164,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -197,8 +209,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -238,8 +254,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_ListByResourceGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -264,8 +284,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_ListByResourceGroup</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -290,8 +314,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -329,8 +357,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -368,8 +400,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -409,8 +445,12 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/diskEncryptionSets</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-10-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DiskEncryptionSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -103,8 +103,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,8 +143,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -175,8 +183,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -217,8 +229,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -259,8 +275,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -312,8 +332,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -365,8 +389,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -417,8 +445,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -469,8 +501,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -520,8 +556,12 @@ namespace MgmtListMethods
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

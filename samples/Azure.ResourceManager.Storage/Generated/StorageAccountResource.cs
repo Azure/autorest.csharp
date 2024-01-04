@@ -137,8 +137,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -162,8 +166,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>BlobInventoryPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/inventoryPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BlobInventoryPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -194,8 +202,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>PrivateEndpointConnections_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/privateEndpointConnections</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StoragePrivateEndpointConnectionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -221,8 +233,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>PrivateEndpointConnections_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/privateEndpointConnections</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StoragePrivateEndpointConnectionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -255,8 +271,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>ObjectReplicationPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/objectReplicationPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ObjectReplicationPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -282,8 +302,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>ObjectReplicationPolicies_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/objectReplicationPolicies</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ObjectReplicationPolicyResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -316,8 +340,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>EncryptionScopes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/encryptionScopes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EncryptionScopeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -343,8 +371,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>EncryptionScopes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts/encryptionScopes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="EncryptionScopeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -370,8 +402,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -407,8 +443,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -444,8 +484,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -482,8 +526,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -520,8 +568,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -558,8 +610,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -596,8 +652,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_ListKeys</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -631,8 +691,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_ListKeys</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -666,8 +730,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_RegenerateKey</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -704,8 +772,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_RegenerateKey</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -742,8 +814,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_ListAccountSAS</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -780,8 +856,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_ListAccountSAS</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -818,8 +898,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_ListServiceSAS</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -856,8 +940,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_ListServiceSAS</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -894,8 +982,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_Failover</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -932,8 +1024,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_Failover</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -970,8 +1066,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_HierarchicalNamespaceMigration</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1012,8 +1112,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_HierarchicalNamespaceMigration</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1054,8 +1158,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_AbortHierarchicalNamespaceMigration</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1092,8 +1200,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_AbortHierarchicalNamespaceMigration</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1130,8 +1242,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_RestoreBlobRanges</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1172,8 +1288,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_RestoreBlobRanges</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1214,8 +1334,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_RevokeUserDelegationKeys</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1248,8 +1372,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_RevokeUserDelegationKeys</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1281,6 +1409,10 @@ namespace Azure.ResourceManager.Storage
         /// <term>Operation Id</term>
         /// <description>PrivateLinkResources_ListByStorageAccount</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1301,6 +1433,10 @@ namespace Azure.ResourceManager.Storage
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PrivateLinkResources_ListByStorageAccount</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1324,8 +1460,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1382,8 +1522,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1440,8 +1584,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1493,8 +1641,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1546,8 +1698,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1602,8 +1758,12 @@ namespace Azure.ResourceManager.Storage
         /// <description>StorageAccounts_GetProperties</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Storage/storageAccounts</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="StorageAccountResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

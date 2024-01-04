@@ -55,8 +55,12 @@ namespace MgmtResourceName.Mocking
         /// <description>ProviderOperations_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/providerOperations</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -83,8 +87,12 @@ namespace MgmtResourceName.Mocking
         /// <description>ProviderOperations_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Authorization/providerOperations</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

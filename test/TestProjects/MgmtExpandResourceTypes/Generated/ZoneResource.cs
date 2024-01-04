@@ -116,8 +116,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/A</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetAResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -142,8 +146,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/A</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetAResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -175,8 +183,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/AAAA</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetAaaaResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -201,8 +213,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/AAAA</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetAaaaResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -234,8 +250,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/CAA</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetCaaResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -260,8 +280,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/CAA</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetCaaResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -293,8 +317,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/CNAME</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetCNameResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -319,8 +347,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/CNAME</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetCNameResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -352,8 +384,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/MX</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetMxResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -378,8 +414,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/MX</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetMxResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -411,8 +451,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/NS</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetNsResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -437,8 +481,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/NS</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetNsResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -470,8 +518,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/PTR</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetPtrResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -496,8 +548,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/PTR</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetPtrResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -529,8 +585,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/SOA</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetSoaResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -555,8 +615,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/SOA</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetSoaResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -588,8 +652,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/SRV</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetSrvResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -614,8 +682,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/SRV</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetSrvResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -647,8 +719,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/TXT</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetTxtResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -673,8 +749,12 @@ namespace MgmtExpandResourceTypes
         /// <description>RecordSets_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones/TXT</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="RecordSetTxtResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -699,8 +779,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -735,8 +819,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -771,8 +859,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -810,8 +902,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -849,8 +945,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -888,8 +988,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Update</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -926,6 +1030,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_ListByDnsZone</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
@@ -949,6 +1057,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_ListByDnsZone</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -974,6 +1086,10 @@ namespace MgmtExpandResourceTypes
         /// <term>Operation Id</term>
         /// <description>RecordSets_ListAllByDnsZone</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
@@ -997,6 +1113,10 @@ namespace MgmtExpandResourceTypes
         /// <item>
         /// <term>Operation Id</term>
         /// <description>RecordSets_ListAllByDnsZone</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1023,8 +1143,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1081,8 +1205,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1139,8 +1267,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1192,8 +1324,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1245,8 +1381,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1301,8 +1441,12 @@ namespace MgmtExpandResourceTypes
         /// <description>Zones_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Network/dnsZones</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

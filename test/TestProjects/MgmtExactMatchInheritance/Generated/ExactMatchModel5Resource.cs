@@ -102,8 +102,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -137,8 +141,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -172,8 +180,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,8 +225,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Put</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -255,8 +271,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -308,8 +328,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -361,8 +385,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -413,8 +441,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -465,8 +497,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -516,8 +552,12 @@ namespace MgmtExactMatchInheritance
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Compute/exactMatchModel5s</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

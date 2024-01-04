@@ -102,8 +102,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -138,8 +142,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -174,8 +182,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,8 +228,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Delete</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -258,8 +274,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -301,8 +321,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_CreateOrUpdate</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -344,8 +368,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_GetEntityTag</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -378,8 +406,12 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_GetEntityTag</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.XmlDeserialization/xmls</description>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

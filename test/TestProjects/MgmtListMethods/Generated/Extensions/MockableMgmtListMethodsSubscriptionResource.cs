@@ -96,8 +96,12 @@ namespace MgmtListMethods.Mocking
         /// <description>Fakes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -124,8 +128,12 @@ namespace MgmtListMethods.Mocking
         /// <description>Fakes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -159,8 +167,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -186,8 +198,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParentWithNonResChWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -220,8 +236,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParentWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -247,8 +267,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParentWithNonResChes_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParentWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -281,8 +305,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParentWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParentWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -308,8 +336,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParentWithLocs_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParentWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -342,8 +374,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -369,8 +405,12 @@ namespace MgmtListMethods.Mocking
         /// <description>SubParents_Get</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/subParents</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -396,8 +436,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -422,8 +466,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -448,8 +496,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -478,8 +530,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -508,8 +564,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -534,8 +594,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -560,8 +624,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -586,8 +654,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -612,8 +684,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -643,8 +719,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -674,8 +754,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -700,8 +784,12 @@ namespace MgmtListMethods.Mocking
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.Fake/fakes/fakeParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -726,8 +814,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -753,8 +845,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -780,8 +876,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -807,8 +907,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -834,8 +938,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -860,8 +968,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -886,8 +998,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -917,8 +1033,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -948,8 +1068,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -973,8 +1097,12 @@ namespace MgmtListMethods.Mocking
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
         /// <item>
-        /// <term>Resource Type</term>
-        /// <description>Microsoft.MgmtListMethods/resGrpParentWithAncestors</description>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -996,6 +1124,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Quotas_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -1024,6 +1156,10 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Quotas_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
