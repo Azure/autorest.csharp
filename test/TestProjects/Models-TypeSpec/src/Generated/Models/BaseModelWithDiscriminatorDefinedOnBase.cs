@@ -23,8 +23,6 @@ namespace ModelsTypeSpec.Models
         protected BaseModelWithDiscriminatorDefinedOnBase(string kind) : base(kind)
         {
             Argument.AssertNotNull(kind, nameof(kind));
-
-            Kind = kind;
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminatorDefinedOnBase"/>. </summary>
@@ -32,12 +30,9 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalString"> Optional string. </param>
         internal BaseModelWithDiscriminatorDefinedOnBase(string kind, string optionalString) : base(kind)
         {
-            Kind = kind;
             OptionalString = optionalString;
         }
 
-        /// <summary> Discriminator. </summary>
-        internal string Kind { get; set; }
         /// <summary> Optional string. </summary>
         public string OptionalString { get; set; }
     }

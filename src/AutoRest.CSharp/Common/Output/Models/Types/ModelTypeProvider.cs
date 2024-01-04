@@ -3,8 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -337,10 +335,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
+        private HashSet<string> GetParentPropertyNames()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
+        }
+
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            var existingPropertyNames = GetParentPropertyNames();
             foreach (var field in Fields)
-                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field));
+            {
+                var property = new ObjectTypeProperty(field, Fields.GetInputByField(field));
+                if (existingPropertyNames.Contains(property.Declaration.Name))
+                    continue;
+                yield return property;
+            }
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -461,7 +474,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 //only load implementations for the base type
                 implementations = _derivedModels.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
-                property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
+                // find the discriminator corresponding property in this type or its base type or more
+                property = GetPropertyForInputPropertyName(discriminatorPropertyName);
             }
 
             if (_inputModel.DiscriminatorValue != null)
@@ -476,6 +490,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
+        }
+
+        private ObjectTypeProperty GetPropertyForInputPropertyName(string inputPropertyName)
+        {
+            foreach (var obj in EnumerateHierarchy())
+            {
+                var property = obj.Properties.FirstOrDefault(p => p.InputModelProperty?.Name == inputPropertyName);
+                if (property is not null)
+                    return property;
+            }
+
+            throw new InvalidOperationException($"Expecting discriminator property {inputPropertyName} on model {Declaration.Name}, but found none");
         }
 
         internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)

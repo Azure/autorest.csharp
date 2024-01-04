@@ -19,18 +19,18 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            string kind = "Unknown";
             Optional<string> optionalString = default;
+            string kind = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("optionalString"u8))
                 {
                     optionalString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
                     continue;
                 }
             }

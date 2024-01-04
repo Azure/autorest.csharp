@@ -388,6 +388,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private HashSet<string?> GetParentPropertySerializedNames()
         {
+            // TODO -- this is not really getting the serialized name of the properties as advertised in the method name
+            // this is just getting the name of the schema property.
+            // this is a guard of not having compilation errors because we cannot define the properties with the same name as properties defined in base types, therefore here we should get the set by the declaration name of the property
             return EnumerateHierarchy()
                 .Skip(1)
                 .SelectMany(type => type.Properties)

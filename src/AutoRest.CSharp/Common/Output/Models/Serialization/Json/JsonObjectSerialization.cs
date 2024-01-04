@@ -6,6 +6,25 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.Output.Models.Serialization.Json;
+namespace AutoRest.CSharp.Output.Models.Serialization.Json
+{
+    internal record JsonObjectSerialization
+    {
+        public JsonObjectSerialization(CSharpType type, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<JsonPropertySerialization> properties, JsonAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, bool includeConverter)
+        {
+            Type = type;
+            ConstructorParameters = constructorParameters;
+            Properties = properties;
+            AdditionalProperties = additionalProperties;
+            Discriminator = discriminator;
+            IncludeConverter = includeConverter;
+        }
 
-internal record JsonObjectSerialization(CSharpType Type, IReadOnlyList<Parameter> ConstructorParameters, IReadOnlyList<JsonPropertySerialization> Properties, JsonAdditionalPropertiesSerialization? AdditionalProperties, ObjectTypeDiscriminator? Discriminator, bool IncludeConverter);
+        public CSharpType Type { get; }
+        public IReadOnlyList<Parameter> ConstructorParameters { get; }
+        public IReadOnlyList<JsonPropertySerialization> Properties { get; }
+        public JsonAdditionalPropertiesSerialization? AdditionalProperties { get; }
+        public ObjectTypeDiscriminator? Discriminator { get; }
+        public bool IncludeConverter { get; }
+    }
+}

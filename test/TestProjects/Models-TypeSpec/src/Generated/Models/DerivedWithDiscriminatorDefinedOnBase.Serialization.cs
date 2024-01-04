@@ -23,13 +23,13 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
             }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
             if (Optional.IsDefined(OptionalString))
             {
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
             }
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
             writer.WriteEndObject();
         }
 
@@ -41,8 +41,8 @@ namespace ModelsTypeSpec.Models
             }
             string requiredString = default;
             Optional<int> optionalInt = default;
-            string kind = default;
             Optional<string> optionalString = default;
+            string kind = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -59,14 +59,14 @@ namespace ModelsTypeSpec.Models
                     optionalInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("optionalString"u8))
                 {
                     optionalString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
                     continue;
                 }
             }

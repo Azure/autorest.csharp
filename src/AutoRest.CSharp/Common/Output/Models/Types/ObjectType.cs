@@ -35,8 +35,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsStruct => ExistingType?.IsValueType ?? false;
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
-        public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
-        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+        public IReadOnlyList<ObjectTypeConstructor> Constructors => _constructors ??= BuildConstructors().ToArray();
+        public IReadOnlyList<ObjectTypeProperty> Properties => _properties ??= BuildProperties().ToArray();
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
