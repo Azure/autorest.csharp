@@ -116,7 +116,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             const sdkContext = createSdkContext(
                 context,
                 "@azure-tools/typespec-csharp"
-            )
+            );
             const configurations = {
                 "output-folder": ".",
                 namespace: options.namespace ?? tspNamespace,
