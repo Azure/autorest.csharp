@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var pathInformation = _operations.Select(operation =>
             {
-                FormattableString resourceItem = $"";
+                FormattableString resourceItem = string.Empty;
                 if (operation.Resource != null)
                 {
                     resourceItem = $@"
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 <description>{operation.Resource.Type:C}</description>
 </item>";
                 }
-                FormattableString defaultApiVersion = $"";
+                FormattableString defaultApiVersion = string.Empty;
                 if (operation.Operation.ApiVersions.Any())
                 {
                     defaultApiVersion = $@"
