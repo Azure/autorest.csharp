@@ -61,7 +61,7 @@ import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
-): [CodeModel, boolean?] {
+): CodeModel {
     const services = listServices(context.program);
     if (services.length === 0) {
         services.push({ type: context.program.getGlobalNamespaceType() });
@@ -80,7 +80,7 @@ export function createModel(
 export function createModelForService(
     context: EmitContext<NetEmitterOptions>,
     service: Service
-): [CodeModel, boolean?] {
+): CodeModel {
     const emitterOptions = resolveOptions(context);
     const program = context.program;
     const sdkContext = createSdkContext(
@@ -199,7 +199,7 @@ export function createModelForService(
         Clients: clients,
         Auth: auth
     } as CodeModel;
-    return [clientModel, sdkContext.arm];
+    return clientModel;
 
     function addChildClients(
         context: EmitContext<NetEmitterOptions>,
