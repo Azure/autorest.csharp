@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The UnknownMyBaseType. </summary>
@@ -14,7 +17,8 @@ namespace body_complex.Models
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
-        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1) : base(kind, propB1, propBH1)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, propB1, propBH1, serializedAdditionalRawData)
         {
             Kind = kind;
         }
