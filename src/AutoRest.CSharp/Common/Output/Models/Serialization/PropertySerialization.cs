@@ -6,7 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
-    internal abstract class PropertySerialization
+    internal abstract record PropertySerialization
     {
         /// <summary>
         /// Name of the parameter in serialization constructor. Used in deserialization logic only

@@ -1,6 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)">
+      <example>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>");
+Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+]]></code>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>")
+{
+    OptionalInt = 1234,
+    OptionalString = "<optionalString>",
+};
+Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+]]></code></example>
+    </member>
+    <member name="PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)">
+      <example>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>");
+Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
+]]></code>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>")
+{
+    OptionalInt = 1234,
+    OptionalString = "<optionalString>",
+};
+Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
+]]></code></example>
+    </member>
+    <member name="PutBaseModelWithDiscriminatorDefinedOnBaseAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredString = "<requiredString>",
+    kind = "A",
+});
+Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredString = "<requiredString>",
+    optionalInt = 1234,
+    kind = "A",
+    optionalString = "<optionalString>",
+});
+Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("optionalString").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code></example>
+    </member>
+    <member name="PutBaseModelWithDiscriminatorDefinedOnBase(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredString = "<requiredString>",
+    kind = "A",
+});
+Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredString = "<requiredString>",
+    optionalInt = 1234,
+    kind = "A",
+    optionalString = "<optionalString>",
+});
+Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("optionalString").ToString());
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code></example>
+    </member>
     <member name="GetOutputDiscriminatorModelAsync(CancellationToken)">
       <example>
 This sample shows how to call GetOutputDiscriminatorModelAsync.

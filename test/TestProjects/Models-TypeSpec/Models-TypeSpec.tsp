@@ -40,6 +40,8 @@ model BaseModelWithARequiredProperty {
 @doc("A base model in the discriminated set inheriting from a base with the predefined discriminator property")
 @discriminator("kind")
 model BaseModelWithDiscriminatorDefinedOnBase extends BaseModelWithARequiredProperty {
+    @doc("Optional string.")
+    optionalString?: string;
 }
 
 @doc("A derived class in the discriminated set inheriting from a base with the predefined discriminator property")

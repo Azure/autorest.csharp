@@ -6,7 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
-    internal class JsonPropertySerialization : PropertySerialization
+    internal record JsonPropertySerialization : PropertySerialization
     {
         public JsonPropertySerialization(
             string parameterName,

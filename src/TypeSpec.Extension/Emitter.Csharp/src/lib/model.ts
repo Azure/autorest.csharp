@@ -667,6 +667,9 @@ export function getInputType(
         });
 
         if (model.DiscriminatorPropertyName && !discriminatorPropertyDefined) {
+            // if the discriminator property has already been defined on one of the base models of myself,
+            // we still need to add a property here because the `IsDiscriminator` property would be different from the one inherited from the base model
+            // TODO -- need to confirm how TCGC handles this case
             logger.info(
                 `No specified type for discriminator property '${model.DiscriminatorPropertyName}'. Assume it is a string.`
             );
