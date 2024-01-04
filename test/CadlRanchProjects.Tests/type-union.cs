@@ -3,12 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using _Type.Union;
 using _Type.Union.Models;
 
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure.Core;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -95,7 +95,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new UnionClient(host, null).GetModelsOnlyClient().GetModelsOnlyAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            AssertEqual(BinaryData.FromObjectAsJson(new { name = "test" }), response.Value.Prop);
+            AssertEqual(new Cat("test"), Cat.DeserializeCat(JsonDocument.Parse(response.Value.Prop).RootElement));
         });
 
         [Test]
@@ -187,6 +187,11 @@ namespace CadlRanchProjects.Tests
             var sourceData = source.ToArray();
             var targetDate = target.ToArray();
             CollectionAssert.AreEqual(sourceData, targetDate);
+        }
+
+        private void AssertEqual(Cat cat1, Cat cat2)
+        {
+            Assert.IsTrue(cat1 == cat2 || cat1.Name == cat2.Name);
         }
     }
 }
