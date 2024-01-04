@@ -48,6 +48,9 @@
         "client/structure/renamed-operation",
         "client/structure/two-operation-group"
     ],
+    "CadlRanchProjectsNonAzure":[
+        "authentication/http/custom"
+    ],
     "TestServerProjects": [
         "additionalProperties",
         "azure-parameter-grouping",
