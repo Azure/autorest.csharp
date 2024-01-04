@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
 
                 var field = existingMember is not null
-                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModel, inputModelProperty, typeFactory, optionalViaNullability)
+                    ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
                     : CreateField(originalFieldName, propertyType, inputModel, inputModelProperty, isStruct, optionalViaNullability);
 
                 if (existingMember is not null)
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, Serialization.SerializationFormat.Default, true);
                 var additionalPropertiesParameter = new Parameter(name.ToVariableName(), $"Additional Properties", type, null, ValidationType.None, null);
 
-                fields.Add(additionalPropertiesField);
+                // we intentionally do not add this field into the field list to avoid cyclic references
                 serializationParameters.Add(additionalPropertiesParameter);
                 if (isStruct)
                 {
@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // therefore the top type here is reasonable
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
-                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModel, inputModelProperty, typeFactory, false);
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModelProperty, typeFactory, false);
                     var parameter = new Parameter(field.Name.ToVariableName(), $"to be removed by post process", field.Type, null, ValidationType.None, null);
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
         {
             if (optionalViaNullability)
             {

@@ -12,6 +12,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     {
         public JsonElementExpression RootElement => new(Property(nameof(JsonDocument.RootElement)));
 
+        public static JsonDocumentExpression ParseValue(ValueExpression reader) => new(InvokeStatic(nameof(JsonDocument.ParseValue), reader));
+        public static JsonDocumentExpression Parse(ValueExpression json) => new(InvokeStatic(nameof(JsonDocument.Parse), json));
         public static JsonDocumentExpression Parse(BinaryDataExpression binaryData) => new(InvokeStatic(nameof(JsonDocument.Parse), binaryData));
         public static JsonDocumentExpression Parse(StreamExpression stream) => new(InvokeStatic(nameof(JsonDocument.Parse), stream));
 

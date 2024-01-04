@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             var methodSignature = sample.OperationMethodSignature.WithAsync(isAsync);
             var parameterExpressions = sample.GetValueExpressionsForParameters(methodSignature.Parameters, variableDeclarations);
-            var invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
+            ValueExpression invocation = clientVar.Invoke(methodSignature, parameterExpressions.ToArray(), addConfigureAwaitFalse: false);
             var returnType = GetReturnType(methodSignature.ReturnType);
             VariableReference resultVar = sample.IsLongRunning
                 ? new VariableReference(returnType, "operation")

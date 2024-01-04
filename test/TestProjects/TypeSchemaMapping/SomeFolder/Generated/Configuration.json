@@ -10,5 +10,6 @@
   "skip-csproj": true,
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
-  "project-folder": "../../"
+  "project-folder": "../../",
+  "use-model-reader-writer": true
 }
