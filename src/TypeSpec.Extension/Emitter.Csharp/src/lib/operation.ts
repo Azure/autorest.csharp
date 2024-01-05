@@ -303,10 +303,9 @@ export function loadOperation(
         context: SdkContext,
         body: ModelProperty | Model
     ): InputParameter {
-        const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, type),
+            getFormattedType(program, body),
             models,
             enums
         );

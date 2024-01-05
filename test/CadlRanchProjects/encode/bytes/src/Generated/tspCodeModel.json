@@ -1674,7 +1674,7 @@
        "Type": {
         "$id": "166",
         "Name": "bytes",
-        "Kind": "Bytes",
+        "Kind": "BytesBase64Url",
         "IsNullable": false
        },
        "Location": "Body",
