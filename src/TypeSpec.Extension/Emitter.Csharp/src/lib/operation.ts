@@ -71,7 +71,7 @@ import {
 } from "./utils.js";
 
 export function loadOperation(
-    context: EmitContext<NetEmitterOptions>,
+    context: EmitContext<any>,
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,

@@ -129,7 +129,7 @@ const defaultOptions = {
     generateTestProject: true
 };
 
-export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
+export function resolveOptions(context: EmitContext<any>) {
     const emitterOptions = context.options;
     const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };

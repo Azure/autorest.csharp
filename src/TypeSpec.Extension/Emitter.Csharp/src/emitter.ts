@@ -63,7 +63,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             context,
             "@azure-tools/typespec-csharp"
         );
-        const root = createModel(context, sdkContext);
+        const root = createModel(sdkContext);
         if (
             context.program.diagnostics.length > 0 &&
             context.program.diagnostics.filter(

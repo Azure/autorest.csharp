@@ -1,7 +1,6 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert, { deepStrictEqual } from "assert";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
-import { CodeModel } from "../../src/type/codeModel.js";
 import {
     typeSpecCompile,
     createEmitterContext,
@@ -28,7 +27,7 @@ describe("Test GetInputType for array", () => {
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const root = createModel(context, sdkContext);
+        const root = createModel(sdkContext);
         deepStrictEqual(
             root.Clients[0].Operations[0].Parameters[0].Type.Name,
             "Array"
@@ -58,7 +57,7 @@ describe("Test GetInputType for array", () => {
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const root = createModel(context, sdkContext);
+        const root = createModel(sdkContext);
         deepStrictEqual(
             root.Clients[0].Operations[0].Responses[0].BodyType?.Name,
             "Array"
@@ -110,7 +109,7 @@ describe("Test GetInputType for enum", () => {
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const root = createModel(context, sdkContext);
+        const root = createModel(sdkContext);
         assert(
             isEqual(
                 {
@@ -173,7 +172,7 @@ describe("Test GetInputType for enum", () => {
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const root = createModel(context, sdkContext);
+        const root = createModel(sdkContext);
         assert(
             isEqual(
                 {
@@ -229,7 +228,7 @@ describe("Test GetInputType for enum", () => {
         );
         const context = createEmitterContext(program);
         const sdkContext = createNetSdkContext(context);
-        const root = createModel(context, sdkContext);
+        const root = createModel(sdkContext);
         assert(
             isEqual(
                 {
