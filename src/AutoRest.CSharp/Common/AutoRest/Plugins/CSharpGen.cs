@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel)
         {
             ValidateConfiguration();
+
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
