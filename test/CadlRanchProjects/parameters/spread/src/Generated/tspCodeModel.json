@@ -339,7 +339,7 @@
       {
        "$id": "43",
        "Name": "SpreadAsRequestBodyRequest",
-       "NameInRequest": "SpreadAsRequestBodyRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "5"
        },
@@ -481,7 +481,7 @@
       {
        "$id": "56",
        "Name": "SpreadAsRequestParameterRequest",
-       "NameInRequest": "SpreadAsRequestParameterRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "8"
        },
@@ -623,7 +623,7 @@
       {
        "$id": "69",
        "Name": "SpreadWithMultipleParametersRequest",
-       "NameInRequest": "SpreadWithMultipleParametersRequest",
+       "NameInRequest": "",
        "Type": {
         "$ref": "11"
        },

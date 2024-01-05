@@ -7,8 +7,7 @@ import {
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    SdkOperationGroup,
-    SdkContext
+    SdkOperationGroup
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -39,8 +38,7 @@ import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType,
-    InputType
+    InputPrimitiveType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
@@ -50,11 +48,9 @@ import { resolveServers } from "./typespecServer.js";
 import { InputClient } from "../type/inputClient.js";
 import { ClientKind } from "../type/clientKind.js";
 import { InputOperation } from "../type/inputOperation.js";
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import { getUsages, navigateModels } from "./model.js";
 import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
-import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
@@ -276,7 +272,7 @@ export function createModelForService(
                 getHttpOperation(program, op)
             );
             const inputOperation: InputOperation = loadOperation(
-                context,
+                sdkContext,
                 httpOperation,
                 url,
                 urlParameters,

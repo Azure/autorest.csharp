@@ -51,7 +51,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<object> response = client.GetEnumsOnly();
+            Response<GetResponse6> response = client.GetEnumsOnly();
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<object> response = await client.GetEnumsOnlyAsync();
+            Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<object> response = client.GetEnumsOnly();
+            Response<GetResponse6> response = client.GetEnumsOnly();
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response<object> response = await client.GetEnumsOnlyAsync();
+            Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
         }
 
         [Test]
@@ -115,7 +115,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    lr = "left",
+                    ud = "up",
+                },
             });
             Response response = client.Send(content);
 
@@ -130,7 +134,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    lr = "left",
+                    ud = "up",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -143,7 +151,8 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -152,7 +161,8 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+            Response response = await client.SendAsync(prop);
         }
 
         [Test]
@@ -163,7 +173,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    lr = "left",
+                    ud = "up",
+                },
             });
             Response response = client.Send(content);
 
@@ -178,7 +192,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    lr = "left",
+                    ud = "up",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -191,7 +209,8 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -200,7 +219,8 @@ namespace _Type.Union.Samples
         {
             EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+            Response response = await client.SendAsync(prop);
         }
     }
 }
