@@ -159,16 +159,12 @@ namespace AutoRest.CSharp.Input.Source
                 {
                     return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(Path.Combine(nugetFolder, $"{Configuration.Namespace}.xml"), fullPath);
                 }
+                else
+                {
+                    throw new InvalidOperationException($"Can't find Baseline contract assembly ({Configuration.Namespace}@{baselineVersion}) from Nuget Global Package Folder at {fullPath}. " +
+                        $"Please make sure the baseline nuget package has been installed properly");
+                }
             }
-
-            // fallback for testing purpose
-            var baselinePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "BaselineContract", Configuration.Namespace));
-            fullPath = Path.Combine(baselinePath, $"{Configuration.Namespace}.dll");
-            if (File.Exists(fullPath))
-            {
-                return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(Path.Combine(baselinePath, $"{Configuration.Namespace}.xml"), fullPath);
-            }
-
             return null;
         }
     }

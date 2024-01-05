@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
+    <ApiCompatVersion>1.0.0</ApiCompatVersion>
   </PropertyGroup>
 
   <PropertyGroup>

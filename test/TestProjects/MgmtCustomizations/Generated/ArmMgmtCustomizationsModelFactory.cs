@@ -74,7 +74,7 @@ namespace MgmtCustomizations.Models
             return new Dog(PetKind.Dog, name, size, dateOfBirth, bark, jump);
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary> Initializes a new instance of <see cref="T:MgmtCustomizations.Models.Cat" />. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
@@ -89,7 +89,7 @@ namespace MgmtCustomizations.Models
             return Cat(name, size, dateOfBirth, sleep: default, jump: default, meow);
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="T:MgmtCustomizations.Models.Dog" />. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
