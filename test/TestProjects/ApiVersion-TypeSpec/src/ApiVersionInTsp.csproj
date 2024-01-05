@@ -18,5 +18,4 @@
     <PackageReference Include="System.ClientModel" />
     <PackageReference Include="System.Text.Json" />
   </ItemGroup>
-
 </Project>

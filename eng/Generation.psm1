@@ -85,7 +85,7 @@ function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $s
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
-        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
+        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net7.0/AutoRest.CSharp.dll"
         Try
         {
             $typespecFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"

@@ -22,7 +22,7 @@ namespace media_types.Models
             var format = options.Format == "W" ? ((IPersistableModel<SourcePath>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(SourcePath)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SourcePath)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -54,7 +54,7 @@ namespace media_types.Models
             var format = options.Format == "W" ? ((IPersistableModel<SourcePath>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(SourcePath)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SourcePath)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -97,7 +97,7 @@ namespace media_types.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
             }
         }
 
@@ -113,7 +113,7 @@ namespace media_types.Models
                         return DeserializeSourcePath(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
             }
         }
 

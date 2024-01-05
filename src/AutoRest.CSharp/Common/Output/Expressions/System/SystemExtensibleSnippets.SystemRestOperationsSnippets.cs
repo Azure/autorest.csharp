@@ -8,11 +8,13 @@ using System.ClientModel.Primitives;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -41,9 +43,13 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 return ResultExpression.FromValue(EnumExpression.ToEnum(enumType, response.Content.ToObjectFromJson(typeof(string))), response);
             }
 
-            public override TypedValueExpression GetTypedResponseFromBinaryDate(Type responseType, TypedValueExpression result)
+            public override TypedValueExpression GetTypedResponseFromBinaryData(Type responseType, TypedValueExpression result, string? contentType = null)
             {
                 var rawResponse = GetRawResponse(result);
+                if (responseType == typeof(string) && contentType != null && FormattableStringHelpers.ToMediaType(contentType) == BodyMediaType.Text)
+                {
+                    return ResultExpression.FromValue(rawResponse.Content.InvokeToString(), rawResponse);
+                }
                 return responseType == typeof(BinaryData)
                     ? ResultExpression.FromValue(rawResponse.Content, rawResponse)
                     : ResultExpression.FromValue(rawResponse.Content.ToObjectFromJson(responseType), rawResponse);

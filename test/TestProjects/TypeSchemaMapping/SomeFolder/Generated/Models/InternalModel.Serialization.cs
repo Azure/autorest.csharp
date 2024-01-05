@@ -22,7 +22,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<InternalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(InternalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InternalModel)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -54,7 +54,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<InternalModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(InternalModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(InternalModel)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -97,7 +97,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(InternalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InternalModel)} does not support '{options.Format}' format.");
             }
         }
 
@@ -113,7 +113,7 @@ namespace TypeSchemaMapping.Models
                         return DeserializeInternalModel(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(InternalModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(InternalModel)} does not support '{options.Format}' format.");
             }
         }
 

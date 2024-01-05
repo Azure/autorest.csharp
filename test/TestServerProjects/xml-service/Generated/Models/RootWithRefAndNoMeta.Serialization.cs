@@ -63,17 +63,10 @@ namespace xml_service.Models
                         using XmlWriter writer = XmlWriter.Create(stream);
                         WriteInternal(writer, null, options);
                         writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
+                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(RootWithRefAndNoMeta)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RootWithRefAndNoMeta)} does not support '{options.Format}' format.");
             }
         }
 
@@ -86,7 +79,7 @@ namespace xml_service.Models
                 case "X":
                     return DeserializeRootWithRefAndNoMeta(XElement.Load(data.ToStream()), options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(RootWithRefAndNoMeta)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(RootWithRefAndNoMeta)} does not support '{options.Format}' format.");
             }
         }
 

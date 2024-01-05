@@ -71,6 +71,20 @@ namespace ModelsTypeSpec.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="NoUseBase"/>. </summary>
+        /// <param name="baseModelProp"> base model property. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoUseBase(string baseModelProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            BaseModelProp = baseModelProp;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="NoUseBase"/> for deserialization. </summary>
+        internal NoUseBase()
+        {
+        }
+
         /// <summary> base model property. </summary>
         public string BaseModelProp { get; }
     }

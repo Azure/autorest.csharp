@@ -24,6 +24,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             Args = args;
         }
 
+        public FormattableStringExpression(string format, params ValueExpression[] args) : this(format, args as IReadOnlyList<ValueExpression>)
+        {
+        }
+
         public string Format { get; init; }
         public IReadOnlyList<ValueExpression> Args { get; init; }
 

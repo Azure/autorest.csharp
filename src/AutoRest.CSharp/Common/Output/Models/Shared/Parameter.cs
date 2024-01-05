@@ -28,13 +28,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return this with { DefaultValue = null };
         }
 
-        public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
-        {
-            // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional, or it it nullable
-            var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired || property.Type.IsNullable ? ValidationType.None : ValidationType.AssertNotNull;
-            return new Parameter(name, $"{property.Description}", propertyType, null, validation, null);
-        }
-
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
         {
             var name = ConstructParameterVariableName(operationParameter, type);

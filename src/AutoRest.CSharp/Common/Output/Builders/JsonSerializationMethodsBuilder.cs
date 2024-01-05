@@ -43,61 +43,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildResourceJsonSerializationMethods(Resource resource)
-        {
-            var resourceDataType = resource.ResourceData.Type;
-            var jsonModelInterface = new CSharpType(typeof(IJsonModel<>), resourceDataType);
-            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
-            var modelReaderWriter = new CSharpType(typeof(ModelReaderWriter));
-            var iModelTInterface = new CSharpType(typeof(IPersistableModel<>), resourceDataType);
-            var data = new BinaryDataExpression(KnownParameters.Serializations.Data);
-
-
-            // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-            var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
-            yield return new Method(
-                new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
-                new MethodBodyStatement[]
-                {
-                    // writer.WriteStringValue(ModelReaderWriter.Write(Data, options));
-                    new InvokeInstanceMethodStatement(writer, "WriteStringValue", new ValueExpression[] { new InvokeStaticMethodExpression(modelReaderWriter, "Write", new ValueExpression[] { new MemberExpression(This, "Data"), options }, new List<CSharpType> { resourceDataType }) }, false)
-                });
-
-            // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-            var reader = new Parameter("reader", null, typeof(Utf8JsonReader), null, CSharp.Output.Models.Shared.ValidationType.None, null);
-            yield return new Method(
-                new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
-                new MethodBodyStatement[]
-                {
-                    // return ModelReaderWriter.Read<ResourceData>(new BinaryData(reader.ValueSequence));
-                    Return(new InvokeStaticMethodExpression(modelReaderWriter, "Read", new List<ValueExpression> { New.Instance(new CSharpType(typeof(BinaryData)), new MemberExpression(reader, "ValueSequence")), options }, new List<CSharpType> { resourceDataType }))
-                });
-
-            // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
-            yield return new Method(
-                new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                new MethodBodyStatement[]
-                {
-                    // return ModelReaderWriter.Write<ResourceData>(Data, options);
-                    Return(new InvokeStaticMethodExpression(modelReaderWriter, "Write", new List<ValueExpression> { new MemberExpression(This, "Data"), options}, new List<CSharpType>{ resourceDataType }))
-                });
-
-            // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
-            yield return new Method(
-                new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                new MethodBodyStatement[]
-                {
-                    // return ModelReaderWriter.Read<ResourceData>(new BinaryData(reader.ValueSequence));
-                    Return(new InvokeStaticMethodExpression(modelReaderWriter, "Read", new List<ValueExpression> { data, options }, new List<CSharpType> { resourceDataType }))
-                });
-
-            // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
-            yield return new Method(
-                new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                Serializations.JsonFormat
-                );
-        }
-
         public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
         {
             var jsonModelInterface = json.IJsonModelInterface;
@@ -257,14 +202,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         using XmlWriter writer = XmlWriter.Create(stream);
                         ((IXmlSerializable)this).Write(writer, null);
                         writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
+                        // in the implementation of MemoryStream, `stream.Position` could never exceed `int.MaxValue`, therefore this if is redundant, we just need to keep the else branch
+                        //if (stream.Position > int.MaxValue)
+                        //{
+                        //    return BinaryData.FromStream(stream);
+                        //}
+                        //else
+                        //{
                             return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
+                        //}
                     */
                     var xmlCase = new SwitchCase(Serializations.XmlFormat,
                         new MethodBodyStatement[]
@@ -272,18 +218,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
                             UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
                             new InvokeInstanceMethodStatement(null, xml.WriteXmlMethodName, new[] { xmlWriter, Null, options }, false),
-                            xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
-                            new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
-                                // return BinaryData.FromStream(stream);
-                                Return(BinaryDataExpression.FromStream(stream, false)),
-                                // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                                Return(New.Instance(typeof(BinaryData),
-                                    InvokeStaticMethodExpression.Extension(
-                                        typeof(MemoryExtensions),
-                                        nameof(MemoryExtensions.AsMemory),
-                                        stream.Invoke(nameof(MemoryStream.GetBuffer)),
-                                        new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
-                                        ))))
+                            xmlWriter.Invoke(nameof(XmlWriter.Flush)).ToStatement(),
+                            // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                            Return(New.Instance(typeof(BinaryData),
+                                InvokeStaticMethodExpression.Extension(
+                                    typeof(MemoryExtensions),
+                                    nameof(MemoryExtensions.AsMemory),
+                                    stream.Invoke(nameof(MemoryStream.GetBuffer)),
+                                    new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
+                                    )))
                         }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
                     switchStatement.Add(xmlCase);
                 }
@@ -673,8 +616,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new SwitchStatement(discriminatorElement.GetString(), GetDiscriminatorCases(jsonElement, discriminator).ToArray())
                 };
             }
-
-            if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
+            // we redirect the deserialization to the `DefaultObjectType` (the unknown version of the discriminated set) if possible.
+            // We could only do this when there is a discriminator, and the discriminator does not have a value (having a value indicating it is the child instead of base), and there is an unknown default object type to fall back, and I am not that fallback type.
+            if (discriminator is { Value: null, DefaultObjectType: { } defaultObjectType } && !serialization.Type.Equals(defaultObjectType.Type))
             {
                 yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, null));
             }
@@ -758,7 +702,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
             // in the case here, this line returns an empty statement, we only want the value here
-            DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
+            yield return DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
             var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
 
             yield return Serializations.WrapInCheckNotWire(

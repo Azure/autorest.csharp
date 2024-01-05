@@ -22,7 +22,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetHungryOrThirstyError>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(PetHungryOrThirstyError)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -71,7 +71,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetHungryOrThirstyError>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(PetHungryOrThirstyError)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -138,7 +138,7 @@ namespace xms_error_responses.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
             }
         }
 
@@ -154,7 +154,7 @@ namespace xms_error_responses.Models
                         return DeserializePetHungryOrThirstyError(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
             }
         }
 

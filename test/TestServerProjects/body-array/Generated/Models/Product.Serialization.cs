@@ -22,7 +22,7 @@ namespace body_array.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -59,7 +59,7 @@ namespace body_array.Models
             var format = options.Format == "W" ? ((IPersistableModel<Product>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(Product)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Product)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -112,7 +112,7 @@ namespace body_array.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
             }
         }
 
@@ -128,7 +128,7 @@ namespace body_array.Models
                         return DeserializeProduct(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(Product)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Product)} does not support '{options.Format}' format.");
             }
         }
 

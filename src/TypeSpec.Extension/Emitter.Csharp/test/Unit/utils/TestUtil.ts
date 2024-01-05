@@ -65,7 +65,7 @@ export async function typeSpecCompile(
     using TypeSpec.Rest; 
     using TypeSpec.Http;
     using TypeSpec.Versioning;
-    ${needAzureCore ? "using Azure.Core;" : ""}
+    ${needAzureCore ? "using Azure.Core;\nusing Azure.Core.Traits;" : ""}
     ${needTCGC ? "using Azure.ClientGenerator.Core;" : ""}
     
     ${needNamespaces ? namespace : ""}

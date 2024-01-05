@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input;
 

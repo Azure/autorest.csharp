@@ -24,12 +24,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (schema)
             {
-                // The corresponding ResoruceData does not exist for PartialResource, so we do not need to generate serialization methods for it.
-                case PartialResource:
-                    break;
-                case Resource resource:
-                    WriteResourceJsonSerialization(writer, resource);
-                    break;
                 case SerializableObjectType obj:
                     if (obj.IncludeSerializer || obj.IncludeDeserializer)
                     {
@@ -39,29 +33,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 case EnumType { IsExtensible: false } sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
                     break;
-            }
-        }
-
-        private void WriteResourceJsonSerialization(CodeWriter writer, Resource resource)
-        {
-            if (resource.ResourceData.JsonSerialization?.IPersistableModelTInterface is null)
-            {
-                return;
-            }
-
-            var declaration = resource.Declaration;
-            using (writer.Namespace(declaration.Namespace))
-            {
-                var resourceDataType = resource.ResourceData.Type;
-                writer.Append($"{declaration.Accessibility} partial class {declaration.Name} : IJsonModel<{resourceDataType}>");
-
-                using (writer.Scope())
-                {
-                    foreach (var method in JsonSerializationMethodsBuilder.BuildResourceJsonSerializationMethods(resource))
-                    {
-                        writer.WriteMethod(method);
-                    }
-                }
             }
         }
 

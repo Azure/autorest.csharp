@@ -22,7 +22,7 @@ namespace paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyParam>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(BodyParam)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyParam)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -54,7 +54,7 @@ namespace paging.Models
             var format = options.Format == "W" ? ((IPersistableModel<BodyParam>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(BodyParam)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BodyParam)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -97,7 +97,7 @@ namespace paging.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(BodyParam)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyParam)} does not support '{options.Format}' format.");
             }
         }
 
@@ -113,7 +113,7 @@ namespace paging.Models
                         return DeserializeBodyParam(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(BodyParam)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BodyParam)} does not support '{options.Format}' format.");
             }
         }
 

@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static MethodBodyStatement ThrowValidationFailException(ValueExpression format, CSharpType typeOfT)
                 => Throw(New.Instance(
-                    typeof(InvalidOperationException),
+                    typeof(FormatException),
                     new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
                     {
                         Nameof(typeOfT),

@@ -22,7 +22,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DotFish>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(DotFish)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DotFish)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -56,7 +56,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<DotFish>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(DotFish)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(DotFish)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -105,7 +105,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
             }
         }
 
@@ -121,7 +121,7 @@ namespace body_complex.Models
                         return DeserializeUnknownDotFish(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
             }
         }
 

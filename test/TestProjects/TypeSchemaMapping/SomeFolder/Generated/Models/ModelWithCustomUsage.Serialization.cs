@@ -51,7 +51,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomUsage>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsage)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -83,7 +83,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomUsage>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsage)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -131,17 +131,10 @@ namespace TypeSchemaMapping.Models
                         using XmlWriter writer = XmlWriter.Create(stream);
                         WriteInternal(writer, null, options);
                         writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
+                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
         }
 
@@ -159,7 +152,7 @@ namespace TypeSchemaMapping.Models
                 case "X":
                     return DeserializeModelWithCustomUsage(XElement.Load(data.ToStream()), options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
         }
 

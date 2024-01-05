@@ -115,7 +115,6 @@ namespace AutoRest.CSharp.Output.Models
             Dictionary<InputModelType, InputModelType> replacements = new Dictionary<InputModelType, InputModelType>();
             foreach (var model in _rootNamespace.Models)
             {
-                InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes);
 
                 InputModelType? replacement = null;
@@ -130,7 +129,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
                 }
 
-                var typeProvider = new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType);
+                var typeProvider = new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, defaultDerivedType);
                 models.Add(replacement ?? model, typeProvider);
             }
 
@@ -393,11 +392,12 @@ namespace AutoRest.CSharp.Output.Models
                         Array.Empty<InputModelType>(),
                         "Unknown", //TODO: do we need to support extensible enum / int values?
                         null,
+                        null,
                         false)
                     {
                         IsUnknownDiscriminatorModel = true
                     };
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, null);
                     defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                     models.Add(unknownDerviedType, defaultDerivedType);
                 }
@@ -474,12 +474,6 @@ namespace AutoRest.CSharp.Output.Models
                 : $"Client options for {_libraryName} library clients.";
 
             IReadOnlyList<string>? apiVersions = _sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions;
-            if (!Configuration.IsBranded)
-            {
-                if (apiVersions.Count > 1)
-                    throw new InvalidOperationException("Multiple API versions are not supported in the unbranded path.");
-                apiVersions = null;
-            }
             return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel)
             {
                 AdditionalParameters = parametersInClientOptions

@@ -71,6 +71,20 @@ namespace ModelsTypeSpec.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="Facet"/>. </summary>
+        /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Facet(string field, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            Field = field;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Facet"/> for deserialization. </summary>
+        internal Facet()
+        {
+        }
+
         /// <summary> A field to facet by, where the field is attributed as 'facetable'. </summary>
         public string Field { get; }
     }

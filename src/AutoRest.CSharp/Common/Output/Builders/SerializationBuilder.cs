@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Builders
                 case DictionarySchema dictionarySchema:
                     return new XmlDictionarySerialization(
                         TypeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType,TypeFactory.GetElementType(type), null, false),
+                        BuildXmlElementSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), null, false),
                         xmlName);
                 default:
                     return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
@@ -318,7 +318,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
-            var additionalProperties = CreateAdditionalProperties(objectType);
+            var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
             return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
@@ -358,6 +358,7 @@ namespace AutoRest.CSharp.Output.Builders
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectType objectType)
         {
+            var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
             bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
             foreach (var obj in objectType.EnumerateHierarchy())
@@ -378,7 +379,15 @@ namespace AutoRest.CSharp.Output.Builders
 
             var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
             Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            var valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+            JsonSerialization valueSerialization;
+            if (inheritedDictionarySchema is not null)
+            {
+                valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, dictionaryValueType, false);
+            }
+            else
+            {
+                valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+            }
 
             return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,

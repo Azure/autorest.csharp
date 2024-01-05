@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetStringAndArrayAsync.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response<object> response = await client.GetStringAndArrayAsync();
 ]]></code>
 This sample shows how to call GetStringAndArrayAsync with all parameters.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response<object> response = await client.GetStringAndArrayAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<object> response = await client.GetStringAndArrayAsync();
       <example>
 This sample shows how to call GetStringAndArray.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response<object> response = client.GetStringAndArray();
 ]]></code>
 This sample shows how to call GetStringAndArray with all parameters.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response<object> response = client.GetStringAndArray();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<object> response = client.GetStringAndArray();
       <example>
 This sample shows how to call GetStringAndArrayAsync and parse the result.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = await client.GetStringAndArrayAsync(null);
 
@@ -45,7 +45,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
 ]]></code>
 This sample shows how to call GetStringAndArrayAsync with all parameters and parse the result.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = await client.GetStringAndArrayAsync(null);
 
@@ -58,7 +58,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
       <example>
 This sample shows how to call GetStringAndArray and parse the result.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = client.GetStringAndArray(null);
 
@@ -68,7 +68,7 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
 ]]></code>
 This sample shows how to call GetStringAndArray with all parameters and parse the result.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = client.GetStringAndArray(null);
 
@@ -81,13 +81,13 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code></example>
@@ -96,13 +96,13 @@ Response response = await client.SendAsync(SendRequestProp.A);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code></example>
@@ -111,7 +111,7 @@ Response response = client.Send(SendRequestProp.A);
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendAsync with all request content.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Send with all request content.
 <code><![CDATA[
-StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
