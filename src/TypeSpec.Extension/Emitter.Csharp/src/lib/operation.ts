@@ -116,12 +116,12 @@ export function loadOperation(
                 sdkContext,
                 effectiveBodyType
             );
-            if (effectiveBodyType.name == "") {
+            if (effectiveBodyType.name === "") {
                 bodyParameter.Kind = InputOperationParameterKind.Spread;
             }
             // TODO: remove this after https://github.com/Azure/typespec-azure/issues/69 is resolved
             // workaround for alias model
-            if (bodyParameter.Type.Name == "") {
+            if (bodyParameter.Type.Name === "") {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
                 var bodyModelType = bodyParameter.Type as InputModelType;
