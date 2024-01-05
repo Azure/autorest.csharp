@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -62,7 +63,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetOutputDiscriminatorModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(OutputBaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputBaseModelWithDiscriminator>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -71,7 +72,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetOutputDiscriminatorModel(context);
-            return Response.FromValue(OutputBaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputBaseModelWithDiscriminator>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -156,7 +157,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await InputToRoundTripAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Input model that has property of its own type. </summary>
@@ -171,7 +172,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = InputToRoundTrip(content, context);
-            return Response.FromValue(RoundTripModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -264,7 +265,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await InputToRoundTripPrimitiveAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripPrimitiveModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Input to RoundTripPrimitive. </summary>
@@ -279,7 +280,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = InputToRoundTripPrimitive(content, context);
-            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripPrimitiveModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -372,7 +373,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await InputToRoundTripOptionalAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripOptionalModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
@@ -387,7 +388,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = InputToRoundTripOptional(content, context);
-            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripOptionalModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -480,7 +481,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await InputToRoundTripReadOnlyAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripReadOnlyModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Input to RoundTripReadOnly. </summary>
@@ -495,7 +496,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = InputToRoundTripReadOnly(content, context);
-            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripReadOnlyModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -588,7 +589,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await RoundTripToOutputAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> RoundTrip to Output. </summary>
@@ -603,7 +604,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = RoundTripToOutput(content, context);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -804,7 +805,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await RoundTripRecursiveAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripRecursiveModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> RoundTrip recursive model. </summary>
@@ -819,7 +820,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = RoundTripRecursive(content, context);
-            return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripRecursiveModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -907,7 +908,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SelfReferenceAsync(context).ConfigureAwait(false);
-            return Response.FromValue(ErrorModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<ErrorModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Returns model that has property of its own type. </summary>
@@ -917,7 +918,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SelfReference(context);
-            return Response.FromValue(ErrorModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<ErrorModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -998,7 +999,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FixedFloatEnumAsync(input.ToSerialSingle(), context).ConfigureAwait(false);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Returns model that has property of its own type. </summary>
@@ -1009,7 +1010,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FixedFloatEnum(input.ToSerialSingle(), context);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -1092,7 +1093,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ExtenisbleIntEnumAsync(input.ToSerialInt32(), context).ConfigureAwait(false);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Returns model that has property of its own type. </summary>
@@ -1103,7 +1104,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ExtenisbleIntEnum(input.ToSerialInt32(), context);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<OutputModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -1190,7 +1191,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await RoundTripToOutputWithNoUseBaseAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripOnNoUse>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Returns RoundTripOnNoUse. </summary>
@@ -1205,7 +1206,7 @@ namespace ModelsTypeSpec
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = RoundTripToOutputWithNoUseBase(content, context);
-            return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RoundTripOnNoUse>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -1293,7 +1294,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AnalyzeConversationAsync(context).ConfigureAwait(false);
-            return Response.FromValue(BaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<BaseModelWithDiscriminator>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Resource collection action operation template. </summary>
@@ -1303,7 +1304,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AnalyzeConversation(context);
-            return Response.FromValue(BaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<BaseModelWithDiscriminator>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -1382,7 +1383,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetSingleBaseAsync(context).ConfigureAwait(false);
-            return Response.FromValue(SingleBase.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<SingleBase>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1391,7 +1392,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetSingleBase(context);
-            return Response.FromValue(SingleBase.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<SingleBase>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -1578,7 +1579,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pet", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1592,7 +1592,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTrip", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1608,7 +1607,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripPrimitive", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1624,7 +1622,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripOptional", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1640,7 +1637,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripReadOnly", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1656,7 +1652,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/roundTripToOutput", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1672,7 +1667,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputRecursive", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1688,7 +1682,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/roundTripRecursive", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1704,7 +1697,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/selfReference", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1719,7 +1711,6 @@ namespace ModelsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/fixedFloatEnum", false);
             uri.AppendQuery("input", input, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1734,7 +1725,6 @@ namespace ModelsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/extenisbleIntEnum", false);
             uri.AppendQuery("input", input, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1748,7 +1738,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1778,7 +1767,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/single", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1792,7 +1780,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/genericType", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

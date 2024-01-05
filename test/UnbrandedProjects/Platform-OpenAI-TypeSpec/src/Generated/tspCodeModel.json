@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "OpenAI",
  "Description": "The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.",
- "ApiVersions": [
-  "2.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
@@ -140,6 +138,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
    "Properties": [
     {
      "$id": "17",
@@ -313,6 +314,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "43",
@@ -336,6 +338,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
    "Properties": [
     {
      "$id": "46",
@@ -495,6 +500,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "70",
@@ -518,6 +524,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "73",
@@ -686,6 +695,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Input",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "101",
@@ -789,6 +799,7 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "None",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "117",
@@ -844,6 +855,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Input",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "124",
@@ -884,6 +896,7 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Input",
+          "MediaTypes": [],
           "InheritedDictionaryType": {
            "$id": "130",
            "Name": "Dictionary",
@@ -952,6 +965,7 @@
         "Namespace": "OpenAI",
         "IsNullable": false,
         "Usage": "Input",
+        "MediaTypes": [],
         "Properties": [
          {
           "$id": "140",
@@ -1168,6 +1182,7 @@
    "Description": "Represents a chat completion response returned by model, based on the provided input.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "168",
@@ -1239,6 +1254,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "None",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "179",
@@ -1265,6 +1281,7 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Output",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "183",
@@ -1354,6 +1371,7 @@
              "Namespace": "OpenAI",
              "IsNullable": false,
              "Usage": "None",
+             "MediaTypes": [],
              "Properties": [
               {
                "$id": "197",
@@ -1475,6 +1493,7 @@
       "Description": "Usage statistics for the completion request.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "213",
@@ -1543,6 +1562,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "220",
@@ -1640,6 +1662,7 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "None",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "235",
@@ -1704,6 +1727,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "243",
@@ -1904,6 +1928,7 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "None",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "273",
@@ -2015,6 +2040,7 @@
       "Namespace": "OpenAI",
       "IsNullable": true,
       "Usage": "None",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "289",
@@ -2077,6 +2103,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "296",
@@ -2130,6 +2157,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "303",
@@ -2159,6 +2187,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "308",
@@ -2285,6 +2314,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "325",
@@ -2708,6 +2740,7 @@
    "Description": "Represents a completion response from the API. Note: both the streamed and non-streamed response\nobjects share the same shape (unlike the chat endpoint).",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "390",
@@ -2779,6 +2812,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "None",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "401",
@@ -2819,6 +2853,7 @@
           "Namespace": "OpenAI",
           "IsNullable": true,
           "Usage": "None",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "407",
@@ -2995,6 +3030,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "431",
@@ -3120,6 +3158,7 @@
    "Deprecated": "deprecated",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "449",
@@ -3166,6 +3205,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "None",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "456",
@@ -3263,6 +3303,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "468",
@@ -3378,6 +3421,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "486",
@@ -3425,6 +3469,7 @@
        "Description": "Represents an embedding vector returned by embedding endpoint.",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "493",
@@ -3494,6 +3539,7 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "None",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "502",
@@ -3542,6 +3588,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "507",
@@ -3572,6 +3619,7 @@
        "Description": "The `File` object represents a document that has been uploaded to OpenAI.",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "512",
@@ -3779,6 +3827,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
    "Properties": [
     {
      "$id": "541",
@@ -3816,6 +3867,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "546",
@@ -3867,6 +3919,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "553",
@@ -4106,6 +4161,7 @@
    "Description": "The `FineTune` object represents a legacy fine-tune job that has been created through the API.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "588",
@@ -4294,6 +4350,7 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "None",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "616",
@@ -4460,6 +4517,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "639",
@@ -4538,6 +4596,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "648",
@@ -4577,6 +4636,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "653",
@@ -4616,6 +4676,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "658",
@@ -4646,6 +4707,7 @@
        "Description": "Describes an OpenAI model offering that can be used with the API.",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "663",
@@ -4724,6 +4786,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "672",
@@ -4775,6 +4838,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "679",
@@ -4916,6 +4982,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "700",
@@ -4946,6 +5013,7 @@
        "Description": "Represents the url or the content of an image generated by the OpenAI API.",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "705",
@@ -4993,6 +5061,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
    "Properties": [
     {
      "$id": "710",
@@ -5162,6 +5233,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
    "Properties": [
     {
      "$id": "735",
@@ -5303,6 +5377,9 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "756",
@@ -5389,6 +5466,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "769",
@@ -5432,6 +5510,7 @@
        "Namespace": "OpenAI",
        "IsNullable": false,
        "Usage": "None",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "776",
@@ -5458,6 +5537,7 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "None",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "780",
@@ -5629,6 +5709,7 @@
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "None",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "804",
@@ -5813,6 +5894,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "827",
@@ -5825,6 +5907,7 @@
       "Namespace": "OpenAI",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "829",
@@ -5898,6 +5981,7 @@
    "Namespace": "OpenAI",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "838",
@@ -6162,42 +6246,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "874",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "875",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "876",
-        "Type": {
-         "$id": "877",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "2.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "878",
+       "$id": "874",
        "StatusCodes": [
         200
        ],
@@ -6225,18 +6278,18 @@
     }
    ],
    "Protocol": {
-    "$id": "879"
+    "$id": "875"
    },
    "Creatable": false,
    "Parent": "Audio"
   },
   {
-   "$id": "880",
+   "$id": "876",
    "Name": "AudioTranslations",
    "Description": "",
    "Operations": [
     {
-     "$id": "881",
+     "$id": "877",
      "Name": "create",
      "ResourceName": "Translations",
      "Summary": "Transcribes audio into the input language.",
@@ -6245,14 +6298,14 @@
        "$ref": "862"
       },
       {
-       "$id": "882",
+       "$id": "878",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "883",
+        "$id": "879",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "884",
+         "$id": "880",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -6262,9 +6315,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "885",
+        "$id": "881",
         "Type": {
-         "$ref": "883"
+         "$ref": "879"
         },
         "Value": "multipart/form-data"
        },
@@ -6278,7 +6331,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "886",
+       "$id": "882",
        "Name": "audio",
        "NameInRequest": "audio",
        "Type": {
@@ -6295,11 +6348,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "887",
+       "$id": "883",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "888",
+        "$id": "884",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6314,20 +6367,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "889",
+        "$id": "885",
         "Type": {
-         "$ref": "888"
+         "$ref": "884"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "890",
+       "$id": "886",
        "StatusCodes": [
         200
        ],
@@ -6355,29 +6405,29 @@
     }
    ],
    "Protocol": {
-    "$id": "891"
+    "$id": "887"
    },
    "Creatable": false,
    "Parent": "Audio"
   },
   {
-   "$id": "892",
+   "$id": "888",
    "Name": "Chat",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "893"
+    "$id": "889"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "894",
+   "$id": "890",
    "Name": "ChatCompletions",
    "Description": "",
    "Operations": [
     {
-     "$id": "895",
+     "$id": "891",
      "Name": "create",
      "ResourceName": "Completions",
      "Parameters": [
@@ -6385,7 +6435,7 @@
        "$ref": "862"
       },
       {
-       "$id": "896",
+       "$id": "892",
        "Name": "CreateChatCompletionRequest",
        "NameInRequest": "CreateChatCompletionRequest",
        "Type": {
@@ -6402,11 +6452,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "897",
+       "$id": "893",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "898",
+        "$id": "894",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6421,19 +6471,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "899",
+        "$id": "895",
         "Type": {
-         "$ref": "898"
+         "$ref": "894"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "900",
+       "$id": "896",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "901",
+        "$id": "897",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6448,20 +6498,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "902",
+        "$id": "898",
         "Type": {
-         "$ref": "901"
+         "$ref": "897"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "903",
+       "$id": "899",
        "StatusCodes": [
         200
        ],
@@ -6489,29 +6536,29 @@
     }
    ],
    "Protocol": {
-    "$id": "904"
+    "$id": "900"
    },
    "Creatable": false,
    "Parent": "Chat"
   },
   {
-   "$id": "905",
+   "$id": "901",
    "Name": "FineTuning",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "906"
+    "$id": "902"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "907",
+   "$id": "903",
    "Name": "FineTuningJobs",
    "Description": "",
    "Operations": [
     {
-     "$id": "908",
+     "$id": "904",
      "Name": "create",
      "ResourceName": "Jobs",
      "Description": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
@@ -6520,7 +6567,7 @@
        "$ref": "862"
       },
       {
-       "$id": "909",
+       "$id": "905",
        "Name": "job",
        "NameInRequest": "job",
        "Type": {
@@ -6537,11 +6584,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "910",
+       "$id": "906",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "911",
+        "$id": "907",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6556,19 +6603,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "912",
+        "$id": "908",
         "Type": {
-         "$ref": "911"
+         "$ref": "907"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "913",
+       "$id": "909",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "914",
+        "$id": "910",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6583,20 +6630,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "915",
+        "$id": "911",
         "Type": {
-         "$ref": "914"
+         "$ref": "910"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "916",
+       "$id": "912",
        "StatusCodes": [
         200
        ],
@@ -6623,7 +6667,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "917",
+     "$id": "913",
      "Name": "listPaginated",
      "ResourceName": "Jobs",
      "Parameters": [
@@ -6631,12 +6675,12 @@
        "$ref": "862"
       },
       {
-       "$id": "918",
+       "$id": "914",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last job from the previous pagination request.",
        "Type": {
-        "$id": "919",
+        "$id": "915",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6652,12 +6696,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "920",
+       "$id": "916",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of fine-tuning jobs to retrieve.",
        "Type": {
-        "$id": "921",
+        "$id": "917",
         "Name": "safeint",
         "Kind": "Int64",
         "IsNullable": false
@@ -6673,11 +6717,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "922",
+       "$id": "918",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "923",
+        "$id": "919",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6692,20 +6736,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "924",
+        "$id": "920",
         "Type": {
-         "$ref": "923"
+         "$ref": "919"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "925",
+       "$id": "921",
        "StatusCodes": [
         200
        ],
@@ -6729,7 +6770,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "926",
+     "$id": "922",
      "Name": "retrieve",
      "ResourceName": "Jobs",
      "Summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
@@ -6738,11 +6779,11 @@
        "$ref": "862"
       },
       {
-       "$id": "927",
+       "$id": "923",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Type": {
-        "$id": "928",
+        "$id": "924",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6758,11 +6799,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "929",
+       "$id": "925",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "930",
+        "$id": "926",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6777,20 +6818,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "931",
+        "$id": "927",
         "Type": {
-         "$ref": "930"
+         "$ref": "926"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "932",
+       "$id": "928",
        "StatusCodes": [
         200
        ],
@@ -6814,7 +6852,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "933",
+     "$id": "929",
      "Name": "listEvents",
      "ResourceName": "Jobs",
      "Summary": "Get status updates for a fine-tuning job.",
@@ -6823,12 +6861,12 @@
        "$ref": "862"
       },
       {
-       "$id": "934",
+       "$id": "930",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to get events for.",
        "Type": {
-        "$id": "935",
+        "$id": "931",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6844,12 +6882,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "936",
+       "$id": "932",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last event from the previous pagination request.",
        "Type": {
-        "$id": "937",
+        "$id": "933",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6865,12 +6903,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "938",
+       "$id": "934",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of events to retrieve.",
        "Type": {
-        "$id": "939",
+        "$id": "935",
         "Name": "integer",
         "Kind": "Int32",
         "IsNullable": false
@@ -6886,11 +6924,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "940",
+       "$id": "936",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "941",
+        "$id": "937",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6905,20 +6943,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "942",
+        "$id": "938",
         "Type": {
-         "$ref": "941"
+         "$ref": "937"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "943",
+       "$id": "939",
        "StatusCodes": [
         200
        ],
@@ -6942,7 +6977,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "944",
+     "$id": "940",
      "Name": "cancel",
      "ResourceName": "Jobs",
      "Summary": "Immediately cancel a fine-tune job.",
@@ -6951,12 +6986,12 @@
        "$ref": "862"
       },
       {
-       "$id": "945",
+       "$id": "941",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to cancel.",
        "Type": {
-        "$id": "946",
+        "$id": "942",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -6972,11 +7007,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "947",
+       "$id": "943",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "948",
+        "$id": "944",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -6991,20 +7026,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "949",
+        "$id": "945",
         "Type": {
-         "$ref": "948"
+         "$ref": "944"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "950",
+       "$id": "946",
        "StatusCodes": [
         200
        ],
@@ -7029,18 +7061,18 @@
     }
    ],
    "Protocol": {
-    "$id": "951"
+    "$id": "947"
    },
    "Creatable": false,
    "Parent": "FineTuning"
   },
   {
-   "$id": "952",
+   "$id": "948",
    "Name": "Completions",
    "Description": "",
    "Operations": [
     {
-     "$id": "953",
+     "$id": "949",
      "Name": "create",
      "ResourceName": "Completions",
      "Parameters": [
@@ -7048,7 +7080,7 @@
        "$ref": "862"
       },
       {
-       "$id": "954",
+       "$id": "950",
        "Name": "CreateCompletionRequest",
        "NameInRequest": "CreateCompletionRequest",
        "Type": {
@@ -7065,11 +7097,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "955",
+       "$id": "951",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "956",
+        "$id": "952",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7084,19 +7116,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "957",
+        "$id": "953",
         "Type": {
-         "$ref": "956"
+         "$ref": "952"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "958",
+       "$id": "954",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "959",
+        "$id": "955",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7111,20 +7143,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "960",
+        "$id": "956",
         "Type": {
-         "$ref": "959"
+         "$ref": "955"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "961",
+       "$id": "957",
        "StatusCodes": [
         200
        ],
@@ -7152,18 +7181,18 @@
     }
    ],
    "Protocol": {
-    "$id": "962"
+    "$id": "958"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "963",
+   "$id": "959",
    "Name": "Edits",
    "Description": "",
    "Operations": [
     {
-     "$id": "964",
+     "$id": "960",
      "Name": "create",
      "ResourceName": "Edits",
      "Deprecated": "deprecated",
@@ -7172,7 +7201,7 @@
        "$ref": "862"
       },
       {
-       "$id": "965",
+       "$id": "961",
        "Name": "edit",
        "NameInRequest": "edit",
        "Type": {
@@ -7189,11 +7218,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "966",
+       "$id": "962",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "967",
+        "$id": "963",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7208,19 +7237,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "968",
+        "$id": "964",
         "Type": {
-         "$ref": "967"
+         "$ref": "963"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "969",
+       "$id": "965",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "970",
+        "$id": "966",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7235,20 +7264,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "971",
+        "$id": "967",
         "Type": {
-         "$ref": "970"
+         "$ref": "966"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "972",
+       "$id": "968",
        "StatusCodes": [
         200
        ],
@@ -7276,18 +7302,18 @@
     }
    ],
    "Protocol": {
-    "$id": "973"
+    "$id": "969"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "974",
+   "$id": "970",
    "Name": "Embeddings",
    "Description": "",
    "Operations": [
     {
-     "$id": "975",
+     "$id": "971",
      "Name": "create",
      "ResourceName": "Embeddings",
      "Summary": "Creates an embedding vector representing the input text.",
@@ -7296,7 +7322,7 @@
        "$ref": "862"
       },
       {
-       "$id": "976",
+       "$id": "972",
        "Name": "embedding",
        "NameInRequest": "embedding",
        "Type": {
@@ -7313,11 +7339,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "977",
+       "$id": "973",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "978",
+        "$id": "974",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7332,19 +7358,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "979",
+        "$id": "975",
         "Type": {
-         "$ref": "978"
+         "$ref": "974"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "980",
+       "$id": "976",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "981",
+        "$id": "977",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7359,20 +7385,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "982",
+        "$id": "978",
         "Type": {
-         "$ref": "981"
+         "$ref": "977"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "983",
+       "$id": "979",
        "StatusCodes": [
         200
        ],
@@ -7400,18 +7423,18 @@
     }
    ],
    "Protocol": {
-    "$id": "984"
+    "$id": "980"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "985",
+   "$id": "981",
    "Name": "Files",
    "Description": "",
    "Operations": [
     {
-     "$id": "986",
+     "$id": "982",
      "Name": "list",
      "ResourceName": "Files",
      "Summary": "Returns a list of files that belong to the user's organization.",
@@ -7420,11 +7443,11 @@
        "$ref": "862"
       },
       {
-       "$id": "987",
+       "$id": "983",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "988",
+        "$id": "984",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7439,20 +7462,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "989",
+        "$id": "985",
         "Type": {
-         "$ref": "988"
+         "$ref": "984"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "990",
+       "$id": "986",
        "StatusCodes": [
         200
        ],
@@ -7476,7 +7496,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "991",
+     "$id": "987",
      "Name": "create",
      "ResourceName": "Files",
      "Summary": "Returns a list of files that belong to the user's organization.",
@@ -7485,14 +7505,14 @@
        "$ref": "862"
       },
       {
-       "$id": "992",
+       "$id": "988",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "993",
+        "$id": "989",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "994",
+         "$id": "990",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -7502,9 +7522,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "995",
+        "$id": "991",
         "Type": {
-         "$ref": "993"
+         "$ref": "989"
         },
         "Value": "multipart/form-data"
        },
@@ -7518,7 +7538,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "996",
+       "$id": "992",
        "Name": "file",
        "NameInRequest": "file",
        "Type": {
@@ -7535,11 +7555,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "997",
+       "$id": "993",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "998",
+        "$id": "994",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7554,20 +7574,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "999",
+        "$id": "995",
         "Type": {
-         "$ref": "998"
+         "$ref": "994"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1000",
+       "$id": "996",
        "StatusCodes": [
         200
        ],
@@ -7594,7 +7611,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1001",
+     "$id": "997",
      "Name": "retrieve",
      "ResourceName": "Files",
      "Summary": "Returns information about a specific file.",
@@ -7603,12 +7620,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1002",
+       "$id": "998",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1003",
+        "$id": "999",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7624,11 +7641,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1004",
+       "$id": "1000",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1005",
+        "$id": "1001",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7643,20 +7660,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1006",
+        "$id": "1002",
         "Type": {
-         "$ref": "1005"
+         "$ref": "1001"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1007",
+       "$id": "1003",
        "StatusCodes": [
         200
        ],
@@ -7680,7 +7694,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1008",
+     "$id": "1004",
      "Name": "delete",
      "ResourceName": "Files",
      "Summary": "Delete a file",
@@ -7689,12 +7703,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1009",
+       "$id": "1005",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1010",
+        "$id": "1006",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7710,11 +7724,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1011",
+       "$id": "1007",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1012",
+        "$id": "1008",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7729,20 +7743,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1013",
+        "$id": "1009",
         "Type": {
-         "$ref": "1012"
+         "$ref": "1008"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1014",
+       "$id": "1010",
        "StatusCodes": [
         200
        ],
@@ -7766,7 +7777,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1015",
+     "$id": "1011",
      "Name": "download",
      "ResourceName": "Files",
      "Summary": "Returns the contents of the specified file.",
@@ -7775,12 +7786,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1016",
+       "$id": "1012",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1017",
+        "$id": "1013",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7796,11 +7807,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1018",
+       "$id": "1014",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1019",
+        "$id": "1015",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7815,25 +7826,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1020",
+        "$id": "1016",
         "Type": {
-         "$ref": "1019"
+         "$ref": "1015"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1021",
+       "$id": "1017",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "1022",
+        "$id": "1018",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -7856,18 +7864,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1023"
+    "$id": "1019"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1024",
+   "$id": "1020",
    "Name": "FineTunes",
    "Description": "",
    "Operations": [
     {
-     "$id": "1025",
+     "$id": "1021",
      "Name": "create",
      "ResourceName": "FineTunes",
      "Summary": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
@@ -7877,7 +7885,7 @@
        "$ref": "862"
       },
       {
-       "$id": "1026",
+       "$id": "1022",
        "Name": "fine_tune",
        "NameInRequest": "fine_tune",
        "Type": {
@@ -7894,11 +7902,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1027",
+       "$id": "1023",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1028",
+        "$id": "1024",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7913,19 +7921,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1029",
+        "$id": "1025",
         "Type": {
-         "$ref": "1028"
+         "$ref": "1024"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "1030",
+       "$id": "1026",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "1031",
+        "$id": "1027",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -7940,20 +7948,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1032",
+        "$id": "1028",
         "Type": {
-         "$ref": "1031"
+         "$ref": "1027"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1033",
+       "$id": "1029",
        "StatusCodes": [
         200
        ],
@@ -7980,7 +7985,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1034",
+     "$id": "1030",
      "Name": "list",
      "ResourceName": "FineTunes",
      "Summary": "List your organization's fine-tuning jobs",
@@ -7990,11 +7995,11 @@
        "$ref": "862"
       },
       {
-       "$id": "1035",
+       "$id": "1031",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1036",
+        "$id": "1032",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8009,20 +8014,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1037",
+        "$id": "1033",
         "Type": {
-         "$ref": "1036"
+         "$ref": "1032"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1038",
+       "$id": "1034",
        "StatusCodes": [
         200
        ],
@@ -8046,7 +8048,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1039",
+     "$id": "1035",
      "Name": "retrieve",
      "ResourceName": "FineTunes",
      "Summary": "Gets info about the fine-tune job.\n\n[Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)",
@@ -8056,12 +8058,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1040",
+       "$id": "1036",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job",
        "Type": {
-        "$id": "1041",
+        "$id": "1037",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8077,11 +8079,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1042",
+       "$id": "1038",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1043",
+        "$id": "1039",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8096,20 +8098,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1044",
+        "$id": "1040",
         "Type": {
-         "$ref": "1043"
+         "$ref": "1039"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1045",
+       "$id": "1041",
        "StatusCodes": [
         200
        ],
@@ -8133,7 +8132,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1046",
+     "$id": "1042",
      "Name": "listEvents",
      "ResourceName": "FineTunes",
      "Summary": "Get fine-grained status updates for a fine-tune job.",
@@ -8143,12 +8142,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1047",
+       "$id": "1043",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to get events for.",
        "Type": {
-        "$id": "1048",
+        "$id": "1044",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8164,12 +8163,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "1049",
+       "$id": "1045",
        "Name": "stream",
        "NameInRequest": "stream",
        "Description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
        "Type": {
-        "$id": "1050",
+        "$id": "1046",
         "Name": "boolean",
         "Kind": "Boolean",
         "IsNullable": false
@@ -8185,11 +8184,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1051",
+       "$id": "1047",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1052",
+        "$id": "1048",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8204,20 +8203,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1053",
+        "$id": "1049",
         "Type": {
-         "$ref": "1052"
+         "$ref": "1048"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1054",
+       "$id": "1050",
        "StatusCodes": [
         200
        ],
@@ -8241,7 +8237,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1055",
+     "$id": "1051",
      "Name": "cancel",
      "ResourceName": "FineTunes",
      "Summary": "Immediately cancel a fine-tune job.",
@@ -8251,12 +8247,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1056",
+       "$id": "1052",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to cancel",
        "Type": {
-        "$id": "1057",
+        "$id": "1053",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8272,11 +8268,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1058",
+       "$id": "1054",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1059",
+        "$id": "1055",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8291,20 +8287,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1060",
+        "$id": "1056",
         "Type": {
-         "$ref": "1059"
+         "$ref": "1055"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1061",
+       "$id": "1057",
        "StatusCodes": [
         200
        ],
@@ -8329,18 +8322,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1062"
+    "$id": "1058"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1063",
+   "$id": "1059",
    "Name": "ModelsOps",
    "Description": "",
    "Operations": [
     {
-     "$id": "1064",
+     "$id": "1060",
      "Name": "list",
      "ResourceName": "Models",
      "Summary": "Lists the currently available models, and provides basic information about each one such as the\nowner and availability.",
@@ -8349,11 +8342,11 @@
        "$ref": "862"
       },
       {
-       "$id": "1065",
+       "$id": "1061",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1066",
+        "$id": "1062",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8368,20 +8361,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1067",
+        "$id": "1063",
         "Type": {
-         "$ref": "1066"
+         "$ref": "1062"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1068",
+       "$id": "1064",
        "StatusCodes": [
         200
        ],
@@ -8405,7 +8395,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1069",
+     "$id": "1065",
      "Name": "retrieve",
      "ResourceName": "Models",
      "Summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
@@ -8414,12 +8404,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1070",
+       "$id": "1066",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The ID of the model to use for this request.",
        "Type": {
-        "$id": "1071",
+        "$id": "1067",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8435,11 +8425,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1072",
+       "$id": "1068",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1073",
+        "$id": "1069",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8454,20 +8444,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1074",
+        "$id": "1070",
         "Type": {
-         "$ref": "1073"
+         "$ref": "1069"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1075",
+       "$id": "1071",
        "StatusCodes": [
         200
        ],
@@ -8491,7 +8478,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1076",
+     "$id": "1072",
      "Name": "delete",
      "ResourceName": "Models",
      "Summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
@@ -8500,12 +8487,12 @@
        "$ref": "862"
       },
       {
-       "$id": "1077",
+       "$id": "1073",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The model to delete",
        "Type": {
-        "$id": "1078",
+        "$id": "1074",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -8521,11 +8508,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1079",
+       "$id": "1075",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1080",
+        "$id": "1076",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8540,20 +8527,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1081",
+        "$id": "1077",
         "Type": {
-         "$ref": "1080"
+         "$ref": "1076"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1082",
+       "$id": "1078",
        "StatusCodes": [
         200
        ],
@@ -8578,18 +8562,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1083"
+    "$id": "1079"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1084",
+   "$id": "1080",
    "Name": "Images",
    "Description": "",
    "Operations": [
     {
-     "$id": "1085",
+     "$id": "1081",
      "Name": "create",
      "ResourceName": "Images",
      "Summary": "Creates an image given a prompt",
@@ -8598,7 +8582,7 @@
        "$ref": "862"
       },
       {
-       "$id": "1086",
+       "$id": "1082",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -8615,11 +8599,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1087",
+       "$id": "1083",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1088",
+        "$id": "1084",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8634,19 +8618,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1089",
+        "$id": "1085",
         "Type": {
-         "$ref": "1088"
+         "$ref": "1084"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "1090",
+       "$id": "1086",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "1091",
+        "$id": "1087",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8661,20 +8645,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1092",
+        "$id": "1088",
         "Type": {
-         "$ref": "1091"
+         "$ref": "1087"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1093",
+       "$id": "1089",
        "StatusCodes": [
         200
        ],
@@ -8701,7 +8682,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1094",
+     "$id": "1090",
      "Name": "createEdit",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
@@ -8710,14 +8691,14 @@
        "$ref": "862"
       },
       {
-       "$id": "1095",
+       "$id": "1091",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "1096",
+        "$id": "1092",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "1097",
+         "$id": "1093",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -8727,9 +8708,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "1098",
+        "$id": "1094",
         "Type": {
-         "$ref": "1096"
+         "$ref": "1092"
         },
         "Value": "multipart/form-data"
        },
@@ -8743,7 +8724,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "1099",
+       "$id": "1095",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -8760,11 +8741,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1100",
+       "$id": "1096",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1101",
+        "$id": "1097",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8779,20 +8760,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1102",
+        "$id": "1098",
         "Type": {
-         "$ref": "1101"
+         "$ref": "1097"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1103",
+       "$id": "1099",
        "StatusCodes": [
         200
        ],
@@ -8819,7 +8797,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "1104",
+     "$id": "1100",
      "Name": "createVariation",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
@@ -8828,14 +8806,14 @@
        "$ref": "862"
       },
       {
-       "$id": "1105",
+       "$id": "1101",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "1106",
+        "$id": "1102",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "1107",
+         "$id": "1103",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -8845,9 +8823,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "1108",
+        "$id": "1104",
         "Type": {
-         "$ref": "1106"
+         "$ref": "1102"
         },
         "Value": "multipart/form-data"
        },
@@ -8861,7 +8839,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "1109",
+       "$id": "1105",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -8878,11 +8856,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1110",
+       "$id": "1106",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1111",
+        "$id": "1107",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8897,20 +8875,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1112",
+        "$id": "1108",
         "Type": {
-         "$ref": "1111"
+         "$ref": "1107"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1113",
+       "$id": "1109",
        "StatusCodes": [
         200
        ],
@@ -8938,18 +8913,18 @@
     }
    ],
    "Protocol": {
-    "$id": "1114"
+    "$id": "1110"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   },
   {
-   "$id": "1115",
+   "$id": "1111",
    "Name": "Moderations",
    "Description": "",
    "Operations": [
     {
-     "$id": "1116",
+     "$id": "1112",
      "Name": "create",
      "ResourceName": "Moderations",
      "Summary": "Classifies if text violates OpenAI's Content Policy",
@@ -8958,7 +8933,7 @@
        "$ref": "862"
       },
       {
-       "$id": "1117",
+       "$id": "1113",
        "Name": "content",
        "NameInRequest": "content",
        "Type": {
@@ -8975,11 +8950,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "1118",
+       "$id": "1114",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1119",
+        "$id": "1115",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -8994,19 +8969,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1120",
+        "$id": "1116",
         "Type": {
-         "$ref": "1119"
+         "$ref": "1115"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "1121",
+       "$id": "1117",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "1122",
+        "$id": "1118",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -9021,20 +8996,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "1123",
+        "$id": "1119",
         "Type": {
-         "$ref": "1122"
+         "$ref": "1118"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "874"
       }
      ],
      "Responses": [
       {
-       "$id": "1124",
+       "$id": "1120",
        "StatusCodes": [
         200
        ],
@@ -9062,16 +9034,16 @@
     }
    ],
    "Protocol": {
-    "$id": "1125"
+    "$id": "1121"
    },
    "Creatable": false,
    "Parent": "OpenAIClient"
   }
  ],
  "Auth": {
-  "$id": "1126",
+  "$id": "1122",
   "ApiKey": {
-   "$id": "1127",
+   "$id": "1123",
    "Name": "Authorization",
    "Prefix": "Bearer"
   }

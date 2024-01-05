@@ -22,7 +22,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Sawshark>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(Sawshark)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sawshark)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -80,7 +80,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<Sawshark>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(Sawshark)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Sawshark)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -176,7 +176,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(Sawshark)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sawshark)} does not support '{options.Format}' format.");
             }
         }
 
@@ -192,7 +192,7 @@ namespace body_complex.Models
                         return DeserializeSawshark(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(Sawshark)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Sawshark)} does not support '{options.Format}' format.");
             }
         }
 

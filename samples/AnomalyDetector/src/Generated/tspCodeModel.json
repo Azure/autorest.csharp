@@ -361,6 +361,9 @@
    "Description": "The request of entire or last anomaly detection.",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "58",
@@ -377,6 +380,7 @@
        "Description": "The definition of input timeseries points.",
        "IsNullable": false,
        "Usage": "Input",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "61",
@@ -517,6 +521,7 @@
    "Description": "The response of entire anomaly detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "78",
@@ -674,6 +679,7 @@
    "Description": "The response of last anomaly detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "102",
@@ -810,6 +816,9 @@
    "Description": "The request of change point detection.",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "121",
@@ -903,6 +912,7 @@
    "Description": "The response of change point detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "133",
@@ -965,6 +975,7 @@
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "142",
@@ -992,6 +1003,7 @@
       "Description": "Multivariate anomaly detection status.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "146",
@@ -1019,6 +1031,7 @@
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "IsNullable": false,
           "Usage": "RoundTrip",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "150",
@@ -1070,6 +1083,7 @@
           "Description": "Variable Status.",
           "IsNullable": false,
           "Usage": "RoundTrip",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "157",
@@ -1160,6 +1174,9 @@
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "IsNullable": false,
          "Usage": "RoundTrip",
+         "MediaTypes": [
+          "application/json"
+         ],
          "Properties": [
           {
            "$id": "169",
@@ -1242,6 +1259,7 @@
        "Description": "Anomaly status and information.",
        "IsNullable": false,
        "Usage": "Output",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "180",
@@ -1269,6 +1287,7 @@
           "Description": "Detailed information of the anomalous timestamp.",
           "IsNullable": false,
           "Usage": "Output",
+          "MediaTypes": [],
           "Properties": [
            {
             "$id": "184",
@@ -1327,6 +1346,7 @@
               "Description": "Interpretation of the anomalous timestamp.",
               "IsNullable": false,
               "Usage": "Output",
+              "MediaTypes": [],
               "Properties": [
                {
                 "$id": "193",
@@ -1368,6 +1388,7 @@
                  "Description": "Correlation changes among the anomalous variables",
                  "IsNullable": false,
                  "Usage": "Output",
+                 "MediaTypes": [],
                  "Properties": [
                   {
                    "$id": "199",
@@ -1461,6 +1482,9 @@
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "205",
@@ -1555,6 +1579,7 @@
       "Description": "An optional field, indicating the manner to align multiple variables.",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "218",
@@ -1636,6 +1661,7 @@
       "Description": "Diagnostics information to help inspect the states of model or variable.",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "227",
@@ -1649,6 +1675,7 @@
          "Description": "Model status.",
          "IsNullable": false,
          "Usage": "RoundTrip",
+         "MediaTypes": [],
          "Properties": [
           {
            "$id": "229",
@@ -1770,6 +1797,7 @@
    "Description": "Response of getting a model.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "244",
@@ -1833,6 +1861,7 @@
    "Description": "Response of listing models.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "252",
@@ -1901,6 +1930,9 @@
    "Description": "Request of last detection.",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "261",
@@ -1917,6 +1949,7 @@
        "Description": "Variable values.",
        "IsNullable": false,
        "Usage": "Input",
+       "MediaTypes": [],
        "Properties": [
         {
          "$id": "264",
@@ -2003,6 +2036,7 @@
    "Description": "Results of last detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "275",
@@ -2045,6 +2079,7 @@
    "Description": "Error information returned by the API.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "280",
@@ -2080,6 +2115,7 @@
    "Description": "Error response",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "284",

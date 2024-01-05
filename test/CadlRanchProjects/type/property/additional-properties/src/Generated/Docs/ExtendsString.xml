@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetExtendsStringAsync.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response<ExtendsStringAdditionalProperties> response = await client.GetExtendsStringAsync();
 ]]></code>
 This sample shows how to call GetExtendsStringAsync with all parameters.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response<ExtendsStringAdditionalProperties> response = await client.GetExtendsStringAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<ExtendsStringAdditionalProperties> response = await client.GetExtendsSt
       <example>
 This sample shows how to call GetExtendsString.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response<ExtendsStringAdditionalProperties> response = client.GetExtendsString();
 ]]></code>
 This sample shows how to call GetExtendsString with all parameters.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response<ExtendsStringAdditionalProperties> response = client.GetExtendsString();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<ExtendsStringAdditionalProperties> response = client.GetExtendsString()
       <example>
 This sample shows how to call GetExtendsStringAsync and parse the result.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response response = await client.GetExtendsStringAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetExtendsStringAsync with all parameters and parse the result.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response response = await client.GetExtendsStringAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call GetExtendsString and parse the result.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response response = client.GetExtendsString(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetExtendsString with all parameters and parse the result.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 Response response = client.GetExtendsString(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
 using RequestContent content = RequestContent.Create(new
 {

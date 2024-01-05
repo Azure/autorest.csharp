@@ -55,7 +55,9 @@ import {
     InputType,
     InputUnionType,
     InputUnknownType,
+    isInputDictionaryType,
     isInputEnumType,
+    isInputListType,
     isInputLiteralType,
     isInputModelType
 } from "../type/inputType.js";
@@ -339,7 +341,9 @@ export function getInputType(
         throw new Error(`Unsupported type ${type.kind}`);
     }
 
-    function getInputModelType(m: Model): InputType {
+    function getInputModelType(
+        m: Model
+    ): InputListType | InputDictionaryType | InputModelType {
         /* Array and Map Type. */
         if (isArrayModelType(program, m)) {
             return getInputTypeForArray(m.indexer.value);
@@ -542,7 +546,7 @@ export function getInputType(
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
-            const [baseModel, inheritedDictionaryType] =
+            const { baseModel, inheritedDictionaryType } =
                 getInputModelBaseType(m);
             model = models.get(name);
             if (model) return model;
@@ -685,44 +689,54 @@ export function getInputType(
         }
     }
 
-    function getInputModelBaseType(
-        m: Model
-    ): [InputModelType | undefined, InputDictionaryType | undefined] {
+    // in the real cases of tsp, because now we use `extends` or `is` to represent additional properties,
+    // and tsp only supports one base model, we can only have one of baseModel and sourceModel defined
+    // but it is valid case that a model has a base model as well as additional properties
+    // which is the reason we did not define the return type as `InputModelType | InputDictionaryType | undefined`
+    // to keep the possibility that we could have both `baseModel` and `inheritedDictionaryType` defined in the future
+    // tsp might support this in the future.
+    function getInputModelBaseType(m: Model): {
+        baseModel?: InputModelType;
+        inheritedDictionaryType?: InputDictionaryType;
+    } {
         const baseModel = m.baseModel;
         const sourceModel = m.sourceModel;
 
         // we cannot have both `extends` and `is`, therefore only one of baseModel and sourceModel can be defined
         if (sourceModel && isRecordModelType(program, sourceModel)) {
-            return [
-                undefined,
-                getInputTypeForMap(
+            return {
+                inheritedDictionaryType: getInputTypeForMap(
                     sourceModel.indexer.key,
                     sourceModel.indexer.value
                 )
-            ];
+            };
         }
 
         if (baseModel) {
-            // when base model is a record, we return the dictionary type
-            if (isRecordModelType(program, baseModel)) {
-                return [
-                    undefined,
-                    getInputTypeForMap(
-                        baseModel.indexer.key,
-                        baseModel.indexer.value
-                    )
-                ];
+            const baseModelType = getInputModelType(baseModel);
+
+            if (isInputListType(baseModelType)) {
+                // tsp never allows array to be the base model of a model
+                // meaning that it should be invalid tsp if you write:
+                // model Foo extends Bar[] {}
+                // or
+                // model Foo extends Array<Bar> {}
+                // therefore it is safe that here we just return empty result here because this will be unreachable
+                return {};
             }
 
-            // TypeSpec "primitive" types can't be base types for models
-            if (program.checker.isStdType(baseModel)) {
-                return [undefined, undefined];
+            if (isInputDictionaryType(baseModelType)) {
+                return {
+                    inheritedDictionaryType: baseModelType
+                };
             }
 
-            return [getInputModelForModel(baseModel), undefined];
+            return {
+                baseModel: baseModelType
+            };
         }
 
-        return [undefined, undefined];
+        return {};
     }
 
     function getFullNamespaceString(namespace: Namespace | undefined): string {

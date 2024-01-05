@@ -22,7 +22,7 @@ namespace model_flattening.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProductWrapper>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(ProductWrapper)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProductWrapper)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,7 +57,7 @@ namespace model_flattening.Models
             var format = options.Format == "W" ? ((IPersistableModel<ProductWrapper>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(ProductWrapper)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(ProductWrapper)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -112,7 +112,7 @@ namespace model_flattening.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(ProductWrapper)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProductWrapper)} does not support '{options.Format}' format.");
             }
         }
 
@@ -128,7 +128,7 @@ namespace model_flattening.Models
                         return DeserializeProductWrapper(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(ProductWrapper)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProductWrapper)} does not support '{options.Format}' format.");
             }
         }
 

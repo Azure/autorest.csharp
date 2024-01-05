@@ -7,12 +7,12 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace xms_error_responses.Models
 {
+    [PersistableModelProxy(typeof(UnknownPetActionError))]
     public partial class PetActionError : IUtf8JsonSerializable, IJsonModel<PetActionError>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetActionError>)this).Write(writer, new ModelReaderWriterOptions("W"));
@@ -22,7 +22,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetActionError>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(PetActionError)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetActionError)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -61,7 +61,7 @@ namespace xms_error_responses.Models
             var format = options.Format == "W" ? ((IPersistableModel<PetActionError>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(PetActionError)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(PetActionError)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -84,35 +84,7 @@ namespace xms_error_responses.Models
                     case "PetSadError": return PetSadError.DeserializePetSadError(element);
                 }
             }
-            string errorType = default;
-            Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("errorType"u8))
-                {
-                    errorType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("errorMessage"u8))
-                {
-                    errorMessage = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("actionResponse"u8))
-                {
-                    actionResponse = property.Value.GetString();
-                    continue;
-                }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetActionError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value);
+            return UnknownPetActionError.DeserializeUnknownPetActionError(element);
         }
 
         BinaryData IPersistableModel<PetActionError>.Write(ModelReaderWriterOptions options)
@@ -124,7 +96,7 @@ namespace xms_error_responses.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(PetActionError)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetActionError)} does not support '{options.Format}' format.");
             }
         }
 
@@ -140,7 +112,7 @@ namespace xms_error_responses.Models
                         return DeserializePetActionError(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(PetActionError)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(PetActionError)} does not support '{options.Format}' format.");
             }
         }
 

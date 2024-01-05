@@ -59,6 +59,7 @@
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "9",

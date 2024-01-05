@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(BaseModelWithProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BaseModelWithProperties)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +55,7 @@ namespace ModelsTypeSpec.Models
             var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(BaseModelWithProperties)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BaseModelWithProperties)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -98,7 +98,7 @@ namespace ModelsTypeSpec.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(BaseModelWithProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BaseModelWithProperties)} does not support '{options.Format}' format.");
             }
         }
 
@@ -114,7 +114,7 @@ namespace ModelsTypeSpec.Models
                         return DeserializeBaseModelWithProperties(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(BaseModelWithProperties)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BaseModelWithProperties)} does not support '{options.Format}' format.");
             }
         }
 

@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_GetDecimal_ShortVersion()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response response = client.GetDecimal(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_GetDecimal_ShortVersion_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response response = await client.GetDecimalAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_GetDecimal_ShortVersion_Convenience()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response<DecimalProperty> response = client.GetDecimal();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_GetDecimal_ShortVersion_Convenience_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response<DecimalProperty> response = await client.GetDecimalAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_GetDecimal_AllParameters()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response response = client.GetDecimal(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_GetDecimal_AllParameters_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response response = await client.GetDecimalAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_GetDecimal_AllParameters_Convenience()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response<DecimalProperty> response = client.GetDecimal();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_GetDecimal_AllParameters_Convenience_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             Response<DecimalProperty> response = await client.GetDecimalAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_Put_ShortVersion()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_Put_ShortVersion_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_Put_ShortVersion_Convenience()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             DecimalProperty body = new DecimalProperty(default);
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_Put_ShortVersion_Convenience_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             DecimalProperty body = new DecimalProperty(default);
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_Put_AllParameters()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_Put_AllParameters_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Decimal_Put_AllParameters_Convenience()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             DecimalProperty body = new DecimalProperty(default);
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Decimal_Put_AllParameters_Convenience_Async()
         {
-            Decimal client = new ValueTypesClient().GetDecimalClient(apiVersion: "1.0.0");
+            Decimal client = new ValueTypesClient().GetDecimalClient();
 
             DecimalProperty body = new DecimalProperty(default);
             Response response = await client.PutAsync(body);

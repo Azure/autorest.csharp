@@ -22,7 +22,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SmartSalmon)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -73,7 +73,7 @@ namespace body_complex.Models
             var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(SmartSalmon)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -162,7 +162,7 @@ namespace body_complex.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SmartSalmon)} does not support '{options.Format}' format.");
             }
         }
 
@@ -178,7 +178,7 @@ namespace body_complex.Models
                         return DeserializeSmartSalmon(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(SmartSalmon)} does not support '{options.Format}' format.");
             }
         }
 

@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_GetIsModel_ShortVersion()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response response = client.GetIsModel(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_GetIsModel_ShortVersion_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response response = await client.GetIsModelAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_GetIsModel_ShortVersion_Convenience()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response<IsModelAdditionalProperties> response = client.GetIsModel();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_GetIsModel_ShortVersion_Convenience_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response<IsModelAdditionalProperties> response = await client.GetIsModelAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_GetIsModel_AllParameters()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response response = client.GetIsModel(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_GetIsModel_AllParameters_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response response = await client.GetIsModelAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_GetIsModel_AllParameters_Convenience()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response<IsModelAdditionalProperties> response = client.GetIsModel();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_GetIsModel_AllParameters_Convenience_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             Response<IsModelAdditionalProperties> response = await client.GetIsModelAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_Put_ShortVersion()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -119,7 +119,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_Put_ShortVersion_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -131,7 +131,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_Put_ShortVersion_Convenience()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             IsModelAdditionalProperties body = new IsModelAdditionalProperties();
             Response response = client.Put(body);
@@ -141,7 +141,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_Put_ShortVersion_Convenience_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             IsModelAdditionalProperties body = new IsModelAdditionalProperties();
             Response response = await client.PutAsync(body);
@@ -151,7 +151,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_Put_AllParameters()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -163,7 +163,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_Put_AllParameters_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -175,7 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModel_Put_AllParameters_Convenience()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             IsModelAdditionalProperties body = new IsModelAdditionalProperties();
             Response response = client.Put(body);
@@ -185,7 +185,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModel_Put_AllParameters_Convenience_Async()
         {
-            IsModel client = new AdditionalPropertiesClient().GetIsModelClient(apiVersion: "1.0.0");
+            IsModel client = new AdditionalPropertiesClient().GetIsModelClient();
 
             IsModelAdditionalProperties body = new IsModelAdditionalProperties();
             Response response = await client.PutAsync(body);

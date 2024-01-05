@@ -48,7 +48,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call ReadAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = await client.ReadAsync(1234, null);
 
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
 This sample shows how to call ReadAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = await client.ReadAsync(1234, null);
 
@@ -74,7 +74,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
 This sample shows how to call Read and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = client.Read(1234, null);
 
@@ -85,7 +85,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
 This sample shows how to call Read with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
 Response response = client.Read(1234, null);
 

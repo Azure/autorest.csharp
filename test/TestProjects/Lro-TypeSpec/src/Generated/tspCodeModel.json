@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "lro",
  "Description": "This is a sample typespec lro project.",
- "ApiVersions": [
-  "0.1.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
@@ -124,6 +122,7 @@
    "Description": "The response for the Radiology Insights request.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "18",
@@ -204,6 +203,7 @@
       "Description": "The error object.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "29",
@@ -275,6 +275,7 @@
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "IsNullable": false,
          "Usage": "Output",
+         "MediaTypes": [],
          "Properties": [
           {
            "$id": "39",
@@ -323,6 +324,7 @@
       "Description": "The inference results for the Radiology Insights request.",
       "IsNullable": false,
       "Usage": "Output",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "44",
@@ -361,6 +363,9 @@
    "Description": "The body of the Radiology Insights request.",
    "IsNullable": false,
    "Usage": "Input",
+   "MediaTypes": [
+    "application/json"
+   ],
    "Properties": [
     {
      "$id": "47",
@@ -404,6 +409,7 @@
    "Description": "Provides status details for long running operations.",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "53",
@@ -492,6 +498,7 @@
    "Description": "The auth flow model",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "64",
@@ -561,6 +568,7 @@
    "Description": "Health Insights retry after trait",
    "IsNullable": false,
    "Usage": "None",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "72",
@@ -573,6 +581,7 @@
       "Namespace": "lro",
       "IsNullable": false,
       "Usage": "None",
+      "MediaTypes": [],
       "Properties": [
        {
         "$id": "74",
@@ -586,6 +595,7 @@
          "Description": "The retry-after envelope.",
          "IsNullable": false,
          "Usage": "None",
+         "MediaTypes": [],
          "Properties": []
         },
         "IsRequired": true,
@@ -652,40 +662,30 @@
        "$id": "82",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "83",
-        "Name": "String",
+        "Name": "string",
         "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "IsRequired": true,
        "IsApiVersion": true,
+       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "IsResourceParameter": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "84",
-        "Type": {
-         "$id": "85",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "0.1.0"
-       }
+       "Kind": "Method"
       },
       {
-       "$id": "86",
+       "$id": "84",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "A processing job identifier.",
        "Type": {
-        "$id": "87",
+        "$id": "85",
         "Name": "uuid",
         "Kind": "Guid",
         "IsNullable": false
@@ -701,11 +701,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "88",
+       "$id": "86",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "89",
+        "$id": "87",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -720,9 +720,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "90",
+        "$id": "88",
         "Type": {
-         "$ref": "89"
+         "$ref": "87"
         },
         "Value": "application/json"
        }
@@ -730,7 +730,7 @@
      ],
      "Responses": [
       {
-       "$id": "91",
+       "$id": "89",
        "StatusCodes": [
         200
        ],
@@ -740,12 +740,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "92",
+         "$id": "90",
          "Name": "Retry-After",
          "NameInResponse": "retryAfter",
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
-          "$id": "93",
+          "$id": "91",
           "Name": "int32",
           "Kind": "Int32",
           "IsNullable": false
@@ -767,7 +767,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "94",
+     "$id": "92",
      "Name": "createJob",
      "ResourceName": "LegacyLro",
      "Summary": "Create Radiology Insights job",
@@ -777,7 +777,25 @@
        "$ref": "80"
       },
       {
-       "$ref": "82"
+       "$id": "93",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "94",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
       },
       {
        "$id": "95",

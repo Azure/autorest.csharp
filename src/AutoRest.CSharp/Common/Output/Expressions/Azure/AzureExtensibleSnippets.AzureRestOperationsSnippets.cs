@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
                     return ResponseExpression.FromValue(value, rawResponse);
                 } else
                 {
-                    var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { rawResponse.Content });
+                    var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { rawResponse });
                     return ResponseExpression.FromValue(model, rawResponse);
                 }
             }

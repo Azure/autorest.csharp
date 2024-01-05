@@ -26,9 +26,9 @@
     <PackageReference Include="System.Text.Json" />
     <PackageReference Include="YamlDotNet" />
     <PackageReference Include="nunit" />
-    <PackageReference Include="System.ClientModel" />
     <!-- Any stable version of System.Memory should work here. -->
     <PackageReference Include="System.Memory" />
+    <PackageReference Include="System.ClientModel" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

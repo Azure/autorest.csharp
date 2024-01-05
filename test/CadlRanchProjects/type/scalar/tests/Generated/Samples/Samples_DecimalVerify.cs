@@ -23,7 +23,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_PrepareVerify_ShortVersion()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = client.PrepareVerify(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_PrepareVerify_ShortVersion_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = await client.PrepareVerifyAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_PrepareVerify_ShortVersion_Convenience()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response<IReadOnlyList<decimal>> response = client.PrepareVerify();
         }
@@ -56,7 +56,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_PrepareVerify_ShortVersion_Convenience_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response<IReadOnlyList<decimal>> response = await client.PrepareVerifyAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_PrepareVerify_AllParameters()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = client.PrepareVerify(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_PrepareVerify_AllParameters_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = await client.PrepareVerifyAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_PrepareVerify_AllParameters_Convenience()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response<IReadOnlyList<decimal>> response = client.PrepareVerify();
         }
@@ -98,7 +98,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_PrepareVerify_AllParameters_Convenience_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response<IReadOnlyList<decimal>> response = await client.PrepareVerifyAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_Verify_ShortVersion()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Verify(content);
@@ -119,7 +119,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_Verify_ShortVersion_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.VerifyAsync(content);
@@ -131,7 +131,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_Verify_ShortVersion_Convenience()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = client.Verify((decimal)default);
         }
@@ -140,7 +140,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_Verify_ShortVersion_Convenience_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = await client.VerifyAsync((decimal)default);
         }
@@ -149,7 +149,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_Verify_AllParameters()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Verify(content);
@@ -161,7 +161,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_Verify_AllParameters_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.VerifyAsync(content);
@@ -173,7 +173,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalVerify_Verify_AllParameters_Convenience()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = client.Verify((decimal)default);
         }
@@ -182,7 +182,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalVerify_Verify_AllParameters_Convenience_Async()
         {
-            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient(apiVersion: "1.0.0");
+            DecimalVerify client = new ScalarClient().GetDecimalVerifyClient();
 
             Response response = await client.VerifyAsync((decimal)default);
         }

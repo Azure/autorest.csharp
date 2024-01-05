@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access
@@ -13,25 +12,5 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
     /// <summary> Client options for AccessClient. </summary>
     public partial class AccessClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "1.0.0". </summary>
-            V1_0_0 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of AccessClientOptions. </summary>
-        public AccessClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V1_0_0 => "1.0.0",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }

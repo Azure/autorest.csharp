@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="BasicAsync(MultiPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call BasicAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = await client.BasicAsync(body);
+]]></code>
+This sample shows how to call BasicAsync with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = await client.BasicAsync(body);
+]]></code></example>
+    </member>
+    <member name="Basic(MultiPartRequest,CancellationToken)">
+      <example>
+This sample shows how to call Basic.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = client.Basic(body);
+]]></code>
+This sample shows how to call Basic with all parameters.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
+Response response = client.Basic(body);
+]]></code></example>
+    </member>
+    <member name="BasicAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call BasicAsync.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = await client.BasicAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call BasicAsync with all request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = await client.BasicAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Basic(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Basic.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = client.Basic(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Basic with all request content.
+<code><![CDATA[
+FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    profileImage = new object(),
+});
+Response response = client.Basic(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

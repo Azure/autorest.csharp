@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -20,7 +21,6 @@ namespace CustomizationsInTsp
     public partial class CustomizationsInTspClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -41,7 +41,6 @@ namespace CustomizationsInTsp
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _apiVersion = options.Version;
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
@@ -56,7 +55,7 @@ namespace CustomizationsInTsp
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await RoundTripAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RootModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RootModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
@@ -71,7 +70,7 @@ namespace CustomizationsInTsp
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = RoundTrip(content, context);
-            return Response.FromValue(RootModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RootModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -164,7 +163,7 @@ namespace CustomizationsInTsp
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = await FooAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RenamedModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RenamedModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Sample operation with request body of a renamed model. </summary>
@@ -179,7 +178,7 @@ namespace CustomizationsInTsp
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = input.ToRequestContent();
             Response response = Foo(content, context);
-            return Response.FromValue(RenamedModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RenamedModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -272,7 +271,7 @@ namespace CustomizationsInTsp
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = renamedModel.ToRequestContent();
             Response response = await BarAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(RenamedModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RenamedModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
@@ -287,7 +286,7 @@ namespace CustomizationsInTsp
             RequestContext context = FromCancellationToken(cancellationToken);
             using RequestContent content = renamedModel.ToRequestContent();
             Response response = Bar(content, context);
-            return Response.FromValue(RenamedModel.FromResponse(response), response);
+            return Response.FromValue(ModelReaderWriter.Read<RenamedModel>(response.Content, ModelReaderWriterOptions.MultipartFormData), response);
         }
 
         /// <summary>
@@ -375,7 +374,6 @@ namespace CustomizationsInTsp
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/inputToRoundTrip", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -390,7 +388,6 @@ namespace CustomizationsInTsp
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/foo", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -405,7 +402,6 @@ namespace CustomizationsInTsp
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendPath("/bar", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

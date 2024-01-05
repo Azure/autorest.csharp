@@ -113,11 +113,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
+                    /* when Auzre.Core is updated to 2.0.0
                     case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
                         {
                             BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
                             return $"{Configuration.ApiTypes.RequestContentType}.Create({parameter.Name:I}, {GetModelReadWriteOptions(mediaType)})";
                         }
+                    */
                 }
             }
 
@@ -211,8 +213,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
                 { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
                 { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
-                //{ IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{nameof(RequestContent.Create)}",
+                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
                 _ => null
             };
 

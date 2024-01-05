@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,14 +44,12 @@ namespace _Type._Enum.Extensible
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual String GetStringClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private String _cachedString;
 
-            return new String(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of String. </summary>
+        public virtual String GetStringClient()
+        {
+            return Volatile.Read(ref _cachedString) ?? Interlocked.CompareExchange(ref _cachedString, new String(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedString;
         }
     }
 }

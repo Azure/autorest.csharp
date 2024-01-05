@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_GetExtendsModelArray_ShortVersion()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response response = client.GetExtendsModelArray(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_GetExtendsModelArray_ShortVersion_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response response = await client.GetExtendsModelArrayAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_GetExtendsModelArray_ShortVersion_Convenience()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response<ExtendsModelArrayAdditionalProperties> response = client.GetExtendsModelArray();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_GetExtendsModelArray_ShortVersion_Convenience_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response<ExtendsModelArrayAdditionalProperties> response = await client.GetExtendsModelArrayAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_GetExtendsModelArray_AllParameters()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response response = client.GetExtendsModelArray(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_GetExtendsModelArray_AllParameters_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response response = await client.GetExtendsModelArrayAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_GetExtendsModelArray_AllParameters_Convenience()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response<ExtendsModelArrayAdditionalProperties> response = client.GetExtendsModelArray();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_GetExtendsModelArray_AllParameters_Convenience_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             Response<ExtendsModelArrayAdditionalProperties> response = await client.GetExtendsModelArrayAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_Put_ShortVersion()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -119,7 +119,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_Put_ShortVersion_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -131,7 +131,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_Put_ShortVersion_Convenience()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = client.Put(body);
@@ -141,7 +141,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_Put_ShortVersion_Convenience_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = await client.PutAsync(body);
@@ -151,7 +151,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_Put_AllParameters()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -163,7 +163,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_Put_AllParameters_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -175,7 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsModelArray_Put_AllParameters_Convenience()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = client.Put(body);
@@ -185,7 +185,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsModelArray_Put_AllParameters_Convenience_Async()
         {
-            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient(apiVersion: "1.0.0");
+            ExtendsModelArray client = new AdditionalPropertiesClient().GetExtendsModelArrayClient();
 
             ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
             Response response = await client.PutAsync(body);

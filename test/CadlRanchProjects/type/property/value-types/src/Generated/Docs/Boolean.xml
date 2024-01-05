@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetBooleanAsync.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response<BooleanProperty> response = await client.GetBooleanAsync();
 ]]></code>
 This sample shows how to call GetBooleanAsync with all parameters.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response<BooleanProperty> response = await client.GetBooleanAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<BooleanProperty> response = await client.GetBooleanAsync();
       <example>
 This sample shows how to call GetBoolean.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response<BooleanProperty> response = client.GetBoolean();
 ]]></code>
 This sample shows how to call GetBoolean with all parameters.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response<BooleanProperty> response = client.GetBoolean();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<BooleanProperty> response = client.GetBoolean();
       <example>
 This sample shows how to call GetBooleanAsync and parse the result.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response response = await client.GetBooleanAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBooleanAsync with all parameters and parse the result.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response response = await client.GetBooleanAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call GetBoolean and parse the result.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response response = client.GetBoolean(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetBoolean with all parameters and parse the result.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 Response response = client.GetBoolean(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 BooleanProperty body = new BooleanProperty(true);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 BooleanProperty body = new BooleanProperty(true);
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 BooleanProperty body = new BooleanProperty(true);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 BooleanProperty body = new BooleanProperty(true);
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Boolean client = new ValueTypesClient().GetBooleanClient(apiVersion: "1.0.0");
+Boolean client = new ValueTypesClient().GetBooleanClient();
 
 using RequestContent content = RequestContent.Create(new
 {

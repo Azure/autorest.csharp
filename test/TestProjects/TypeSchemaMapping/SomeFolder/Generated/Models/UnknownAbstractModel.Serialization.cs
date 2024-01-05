@@ -22,7 +22,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<AbstractModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(AbstractModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AbstractModel)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -51,7 +51,7 @@ namespace TypeSchemaMapping.Models
             var format = options.Format == "W" ? ((IPersistableModel<AbstractModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(AbstractModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(AbstractModel)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -94,7 +94,7 @@ namespace TypeSchemaMapping.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
             }
         }
 
@@ -110,7 +110,7 @@ namespace TypeSchemaMapping.Models
                         return DeserializeUnknownAbstractModel(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
             }
         }
 
