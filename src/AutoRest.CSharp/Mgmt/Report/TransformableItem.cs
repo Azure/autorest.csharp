@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -31,14 +32,13 @@ namespace AutoRest.CSharp.Mgmt.Report
                 {
                     if (_appliedTransformLogs is null)
                     {
-                        var r = _transformSection.GetAppliedTransformLogs(
+                        _appliedTransformLogs = _transformSection.GetAppliedTransformLogs(
                         this.FullSerializedName, this.TransformTypeWhiteList)
                         .OrderBy(item => item.Log.Index)
                         .Select(item => $"[{item.Log.Index}][{item.Transform}] {item.Log.LogMessage}").ToList();
-                        // return null when it's an empty list so that it will be ignored in Json
-                        _appliedTransformLogs = r.Count == 0 ? null : r;
                     }
-                    return _appliedTransformLogs;
+                    // return null when it's an empty list so that it will be ignored in Json
+                    return _appliedTransformLogs.Count == 0 ? null : _appliedTransformLogs;
                 }
             }
         }
