@@ -2,8 +2,8 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 
 namespace OpenAI.Models

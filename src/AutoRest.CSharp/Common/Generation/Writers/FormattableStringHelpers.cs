@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static FormattableString Empty => $"";
 
+        [return: NotNullIfNotNull(nameof(s))]
         public static FormattableString? FromString(string? s) =>
             s is null ? null : s.Length == 0 ? Empty : $"{s}";
 
@@ -98,10 +99,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 switch (parameter.Type)
                 {
-                    case { IsFrameworkType: true } when TypeFactory.IsReadWriteDictionary(parameter.Type):
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
-                    case { IsFrameworkType: true } when TypeFactory.IsList(parameter.Type):
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                    case { IsFrameworkType: true }:
+                        return parameter.GetConversionFromFrameworkToRequestContent(contentType);
                     case { IsFrameworkType: false, Implementation: EnumType enumType }:
                         if (enumType.IsExtensible)
                         {
@@ -111,11 +110,6 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
-                    // TODO: Currently only BinaryData is considered, other types are still in discussion
-                    case { IsFrameworkType: true } when contentType != null && IsContentTypeBinary(contentType) && parameter.RequestLocation == RequestLocation.Body:
-                        return $"{parameter.Name:I}";
-                    case { IsFrameworkType: true }:
-                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
                 }
             }
 
@@ -133,8 +127,35 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{parameter.Name:I}{conversionMethod}";
         }
 
+        private static FormattableString GetConversionFromFrameworkToRequestContent(this Parameter parameter, string? contentType)
+        {
+            if (TypeFactory.IsReadWriteDictionary(parameter.Type))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+            }
+
+            if (TypeFactory.IsList(parameter.Type))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+            }
+
+            BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
+            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Binary)
+            {
+                return $"{parameter.Name:I}";
+            }
+            // TODO: Here we only consider the case when body is string type. We will add support for other types.
+            if (parameter.RequestLocation == RequestLocation.Body && mediaType == BodyMediaType.Text && parameter.Type.FrameworkType == typeof(string))
+            {
+                return $"{parameter.Name:I}";
+            }
+
+            return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
+        }
+
         // TODO: This is a temporary solution. We will move this part to some common place.
-        private static bool IsContentTypeBinary(string contentType)
+        // This logic is referenced from https://github.com/Azure/autorest/blob/faf5c1168232ba8a1e8fe02fbc28667c00db8c96/packages/libs/codegen/src/media-types.ts#L53
+        public static BodyMediaType ToMediaType(string contentType)
         {
             var typeSubs = contentType.Split('/');
             if (typeSubs.Length != 2)
@@ -144,12 +165,23 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var type = typeSubs[0];
             var subType = typeSubs[1];
-            if (type == "audio" || type == "image" || type == "video" || subType == "octet-stream")
+
+            if (subType == "json" && (type == "application" || type == "text"))
             {
-                return true;
+                return BodyMediaType.Json;
             }
 
-            return false;
+            if (type == "audio" || type == "image" || type == "video" || subType == "octet-stream")
+            {
+                return BodyMediaType.Binary;
+            }
+
+            if (type == "text")
+            {
+                return BodyMediaType.Text;
+            }
+
+            throw new NotSupportedException($"Content type {contentType} is not supported.");
         }
 
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
@@ -233,7 +265,8 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static FormattableString Join<T>(IEnumerable<T> source, int count, Func<T, object> converter, string separator, string? lastSeparator, char? format)
-            => count switch {
+            => count switch
+            {
                 0 => Empty,
                 1 => FormattableStringFactory.Create(format is not null ? $"{{0:{format}}}" : "{0}", converter(source.First())),
                 _ => FormattableStringFactory.Create(CreateFormatWithSeparator(separator, lastSeparator, format, count), source.Select(converter).ToArray())

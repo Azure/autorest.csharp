@@ -30,6 +30,11 @@ namespace AdditionalPropertiesEx.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InputAdditionalPropertiesModel"/> for deserialization. </summary>
+        internal InputAdditionalPropertiesModel()
+        {
+        }
+
         /// <summary> Gets the id. </summary>
         public int Id { get; }
         /// <summary> Additional Properties. </summary>

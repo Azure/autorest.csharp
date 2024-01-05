@@ -20,12 +20,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
         public EnumType(ChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, true), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, true), GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 
         public EnumType(SealedChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, false), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, false), GetDefaultModelNamespace(schema.Extensions?.Namespace, context.DefaultNamespace), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 
@@ -88,9 +88,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var value in _allowedValues)
             {
                 var name = BuilderHelpers.DisambiguateName(Type, value.Name.ToCleanName());
-                var memberMapping = _typeMapping?.GetForMember(name);
+                var existingMember = _typeMapping?.GetMemberByOriginalName(name);
                 values.Add(new EnumTypeValue(
-                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _typeFactory),
+                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", existingMember, _typeFactory),
                     CreateDescription(value),
                     BuilderHelpers.ParseConstant(value.Value, ValueType)));
             }

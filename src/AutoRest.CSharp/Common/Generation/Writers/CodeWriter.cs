@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
@@ -20,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly string _newLine = "\n";
         private static readonly string _braceNewLine = "{\n";
 
-        private readonly List<string> _usingNamespaces = new List<string>();
+        private readonly HashSet<string> _usingNamespaces = new HashSet<string>();
 
         private readonly Stack<CodeWriterScope> _scopes;
         private string? _currentNamespace;
@@ -174,6 +175,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         break;
                     case CodeWriterDeclaration declaration:
                         Append(declaration);
+                        break;
+                    case ValueExpression expression:
+                        this.WriteValueExpression(expression);
                         break;
                     case var _ when isLiteralFormat:
                         Literal(argument);
@@ -384,7 +388,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (arguments is not null)
             {
-                for (int i = 0; i < arguments.Length; i++)
+                for (int i = 0; i < arguments.Count; i++)
                 {
                     var argument = arguments[i];
                     if (argument is { IsFrameworkType: true, FrameworkType.IsGenericParameter: true })
@@ -646,12 +650,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 return string.Empty;
             }
 
-            var builder = new StringBuilder();
-            string[] namespaces = _usingNamespaces
-                    .Distinct()
-                    .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns => ns,StringComparer.Ordinal)
-                    .ToArray();
+            var builder = new StringBuilder(_length);
+            IEnumerable<string> namespaces = _usingNamespaces
+                .OrderByDescending(ns => ns.StartsWith("System"))
+                .ThenBy(ns => ns, StringComparer.Ordinal);
             if (header)
             {
                 builder.Append(Configuration.ApiTypes.LicenseString);
@@ -672,10 +674,20 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             // Normalize newlines
-            builder.AppendLine(new string(_builder.AsSpan(0, _length).Trim()).Replace(_newLine, Environment.NewLine));
-
-            // remove any trailing whitespace, for SA1028. can roll back this change after Roslyn fixes https://github.com/dotnet/roslyn/issues/28818
-            return string.Join(Environment.NewLine, builder.ToString().Split(Environment.NewLine).Select(l => l.TrimEnd()));
+            var spanLines = _builder.AsSpan(0, _length).EnumerateLines();
+            int lineCount = 0;
+            foreach (var line in spanLines)
+            {
+                builder.Append(line.TrimEnd());
+                builder.AppendLine();
+                lineCount++;
+            }
+            // Remove last new line if there are more than 1
+            if (lineCount > 1)
+            {
+                builder.Remove(builder.Length - Environment.NewLine.Length, Environment.NewLine.Length);
+            }
+            return builder.ToString();
         }
 
         internal class CodeWriterScope : IDisposable

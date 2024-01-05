@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core;
 
 namespace _Type._Array
@@ -13,25 +12,5 @@ namespace _Type._Array
     /// <summary> Client options for ArrayClient. </summary>
     public partial class ArrayClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "1.0.0". </summary>
-            V1_0_0 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of ArrayClientOptions. </summary>
-        public ArrayClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V1_0_0 => "1.0.0",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }

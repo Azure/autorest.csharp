@@ -32,11 +32,11 @@ function CopyAll([string[]]$files, [string]$source, [string]$destination)
     }
 }
 
-$files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'HttpMessageSanitizer.cs',
+$files = @('AsyncLockWithValue.cs', 'CallerShouldAuditAttribute.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory.cs', 'HttpMessageSanitizer.cs',
     'OperationInternalBase.cs', 'OperationInternal.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
     'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
     'OperationPoller.cs', 'FixedDelayWithNoJitterStrategy.cs', 'SequentialDelayStrategy.cs',
-    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs', 'AzureResourceProviderNamespaceAttribute.cs',
+    'ForwardsClientCallsAttribute.cs', 'VoidValue.cs', 'AzureResourceProviderNamespaceAttribute.cs',
     'ChangeTrackingDictionary.cs',
     'ChangeTrackingList.cs',
     'FormUrlEncodedContent.cs',

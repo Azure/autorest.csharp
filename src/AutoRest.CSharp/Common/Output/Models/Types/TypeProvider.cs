@@ -71,9 +71,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return defaultNamespace;
         }
 
-        public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
-            => GetDefaultModelNamespace(namespaceExtension, context.DefaultNamespace);
-
         public override bool Equals(object? obj)
         {
             if (obj is null)

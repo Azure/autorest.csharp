@@ -74,6 +74,7 @@ namespace MgmtMockAndSample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> or <paramref name="content"/> is null. </exception>
+        [CallerShouldAudit("Test for privileged operations configuration")]
         public virtual async Task<ArmOperation<VaultResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string vaultName, VaultCreateOrUpdateContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
@@ -115,6 +116,7 @@ namespace MgmtMockAndSample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> or <paramref name="content"/> is null. </exception>
+        [CallerShouldAudit("Test for privileged operations configuration")]
         public virtual ArmOperation<VaultResource> CreateOrUpdate(WaitUntil waitUntil, string vaultName, VaultCreateOrUpdateContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));

@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call DefaultAsync.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.DefaultAsync();
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.DefaultAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<BinaryData> response = await client.DefaultAsync();
       <example>
 This sample shows how to call Default.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.Default();
 ]]></code>
 This sample shows how to call Default with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.Default();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<BinaryData> response = client.Default();
       <example>
 This sample shows how to call DefaultAsync and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.DefaultAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.DefaultAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Default and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.Default(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Default with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.Default(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call OctetStreamAsync.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.OctetStreamAsync();
 ]]></code>
 This sample shows how to call OctetStreamAsync with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.OctetStreamAsync();
 ]]></code></example>
@@ -92,13 +92,13 @@ Response<BinaryData> response = await client.OctetStreamAsync();
       <example>
 This sample shows how to call OctetStream.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.OctetStream();
 ]]></code>
 This sample shows how to call OctetStream with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.OctetStream();
 ]]></code></example>
@@ -107,7 +107,7 @@ Response<BinaryData> response = client.OctetStream();
       <example>
 This sample shows how to call OctetStreamAsync and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.OctetStreamAsync(null);
 
@@ -116,7 +116,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OctetStreamAsync with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.OctetStreamAsync(null);
 
@@ -128,7 +128,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call OctetStream and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.OctetStream(null);
 
@@ -137,7 +137,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call OctetStream with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.OctetStream(null);
 
@@ -149,13 +149,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call CustomContentTypeAsync.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.CustomContentTypeAsync();
 ]]></code>
 This sample shows how to call CustomContentTypeAsync with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.CustomContentTypeAsync();
 ]]></code></example>
@@ -164,13 +164,13 @@ Response<BinaryData> response = await client.CustomContentTypeAsync();
       <example>
 This sample shows how to call CustomContentType.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.CustomContentType();
 ]]></code>
 This sample shows how to call CustomContentType with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.CustomContentType();
 ]]></code></example>
@@ -179,7 +179,7 @@ Response<BinaryData> response = client.CustomContentType();
       <example>
 This sample shows how to call CustomContentTypeAsync and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.CustomContentTypeAsync(null);
 
@@ -188,7 +188,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CustomContentTypeAsync with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.CustomContentTypeAsync(null);
 
@@ -200,7 +200,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call CustomContentType and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.CustomContentType(null);
 
@@ -209,7 +209,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CustomContentType with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.CustomContentType(null);
 
@@ -221,13 +221,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Base64Async.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.Base64Async();
 ]]></code>
 This sample shows how to call Base64Async with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.Base64Async();
 ]]></code></example>
@@ -236,13 +236,13 @@ Response<BinaryData> response = await client.Base64Async();
       <example>
 This sample shows how to call Base64.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.Base64();
 ]]></code>
 This sample shows how to call Base64 with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.Base64();
 ]]></code></example>
@@ -251,7 +251,7 @@ Response<BinaryData> response = client.Base64();
       <example>
 This sample shows how to call Base64Async and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.Base64Async(null);
 
@@ -260,7 +260,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Base64Async with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.Base64Async(null);
 
@@ -272,7 +272,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Base64 and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.Base64(null);
 
@@ -281,7 +281,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Base64 with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.Base64(null);
 
@@ -293,13 +293,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Base64urlAsync.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.Base64urlAsync();
 ]]></code>
 This sample shows how to call Base64urlAsync with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = await client.Base64urlAsync();
 ]]></code></example>
@@ -308,13 +308,13 @@ Response<BinaryData> response = await client.Base64urlAsync();
       <example>
 This sample shows how to call Base64url.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.Base64url();
 ]]></code>
 This sample shows how to call Base64url with all parameters.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response<BinaryData> response = client.Base64url();
 ]]></code></example>
@@ -323,7 +323,7 @@ Response<BinaryData> response = client.Base64url();
       <example>
 This sample shows how to call Base64urlAsync and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.Base64urlAsync(null);
 
@@ -332,7 +332,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Base64urlAsync with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = await client.Base64urlAsync(null);
 
@@ -344,7 +344,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call Base64url and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.Base64url(null);
 
@@ -353,7 +353,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Base64url with all parameters and parse the result.
 <code><![CDATA[
-ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+ResponseBody client = new BytesClient().GetResponseBodyClient();
 
 Response response = client.Base64url(null);
 

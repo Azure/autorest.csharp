@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
             "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-            null, new List<InputModelType>(), null, null, false);
+            null, new List<InputModelType>(), null, null, null, false);
 
         [OneTimeSetUp]
         public void Initialize()
@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 publicClients: true,
                 modelNamespace: false,
                 headAsBoolean: false,
+                skipCSProj: false,
                 skipCSProjPackageReference: false,
                 generation1ConvenienceClient: false,
                 singleTopLevelClient: false,
@@ -51,6 +52,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 publicDiscriminatorProperty: false,
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
+                useModelReaderWriter: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 keepNonOverloadableProtocolSignature: false,

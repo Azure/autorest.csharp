@@ -5,16 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Slideshow : IXmlSerializable
+    public partial class Slideshow : IXmlSerializable, IPersistableModel<Slideshow>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "slideshow");
             if (Optional.IsDefined(Title))
@@ -45,8 +48,12 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Slideshow DeserializeSlideshow(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static Slideshow DeserializeSlideshow(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string title = default;
             string date = default;
             string author = default;
@@ -69,7 +76,41 @@ namespace xml_service.Models
                 array.Add(Slide.DeserializeSlide(e));
             }
             slides = array;
-            return new Slideshow(title, date, author, slides);
+            return new Slideshow(title, date, author, slides, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<Slideshow>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Slideshow>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(Slideshow)} does not support '{options.Format}' format.");
+            }
+        }
+
+        Slideshow IPersistableModel<Slideshow>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<Slideshow>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeSlideshow(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new FormatException($"The model {nameof(Slideshow)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<Slideshow>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

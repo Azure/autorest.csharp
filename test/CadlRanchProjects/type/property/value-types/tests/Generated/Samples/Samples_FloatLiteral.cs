@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_GetFloatLiteral_ShortVersion()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response response = client.GetFloatLiteral(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_GetFloatLiteral_ShortVersion_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response response = await client.GetFloatLiteralAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_GetFloatLiteral_ShortVersion_Convenience()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response<FloatLiteralProperty> response = client.GetFloatLiteral();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_GetFloatLiteral_ShortVersion_Convenience_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response<FloatLiteralProperty> response = await client.GetFloatLiteralAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_GetFloatLiteral_AllParameters()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response response = client.GetFloatLiteral(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_GetFloatLiteral_AllParameters_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response response = await client.GetFloatLiteralAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_GetFloatLiteral_AllParameters_Convenience()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response<FloatLiteralProperty> response = client.GetFloatLiteral();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_GetFloatLiteral_AllParameters_Convenience_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             Response<FloatLiteralProperty> response = await client.GetFloatLiteralAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_Put_ShortVersion()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_Put_ShortVersion_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_Put_ShortVersion_Convenience()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             FloatLiteralProperty body = new FloatLiteralProperty();
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_Put_ShortVersion_Convenience_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             FloatLiteralProperty body = new FloatLiteralProperty();
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_Put_AllParameters()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_Put_AllParameters_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatLiteral_Put_AllParameters_Convenience()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             FloatLiteralProperty body = new FloatLiteralProperty();
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatLiteral_Put_AllParameters_Convenience_Async()
         {
-            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient(apiVersion: "1.0.0");
+            FloatLiteral client = new ValueTypesClient().GetFloatLiteralClient();
 
             FloatLiteralProperty body = new FloatLiteralProperty();
             Response response = await client.PutAsync(body);

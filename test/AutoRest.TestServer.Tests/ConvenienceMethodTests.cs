@@ -238,10 +238,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void SetKeepNonOverloadableProtocolSignature()
         {
-            var method = typeof(MixApiVersionClient).GetMethod("Delete");
+            var getPetsClientMethod = typeof(MixApiVersionClient).GetMethod("GetPetsClient");
+            Assert.AreEqual(typeof(Pets), getPetsClientMethod.ReturnType);
+
+            var method = getPetsClientMethod.ReturnType.GetMethod("Delete");
             Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
 
-            method = typeof(MixApiVersionClient).GetMethod("Read");
+            method = getPetsClientMethod.ReturnType.GetMethod("Read");
             Assert.AreEqual(false, method.GetParameters().Last().IsOptional);
         }
     }

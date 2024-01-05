@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetDecimal128Async.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response<Decimal128Property> response = await client.GetDecimal128Async();
 ]]></code>
 This sample shows how to call GetDecimal128Async with all parameters.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response<Decimal128Property> response = await client.GetDecimal128Async();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<Decimal128Property> response = await client.GetDecimal128Async();
       <example>
 This sample shows how to call GetDecimal128.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response<Decimal128Property> response = client.GetDecimal128();
 ]]></code>
 This sample shows how to call GetDecimal128 with all parameters.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response<Decimal128Property> response = client.GetDecimal128();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<Decimal128Property> response = client.GetDecimal128();
       <example>
 This sample shows how to call GetDecimal128Async and parse the result.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response response = await client.GetDecimal128Async(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDecimal128Async with all parameters and parse the result.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response response = await client.GetDecimal128Async(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call GetDecimal128 and parse the result.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response response = client.GetDecimal128(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetDecimal128 with all parameters and parse the result.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Response response = client.GetDecimal128(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Decimal128Property body = new Decimal128Property(default);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Decimal128Property body = new Decimal128Property(default);
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Decimal128Property body = new Decimal128Property(default);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 Decimal128Property body = new Decimal128Property(default);
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Decimal128 client = new ValueTypesClient().GetDecimal128Client(apiVersion: "1.0.0");
+Decimal128 client = new ValueTypesClient().GetDecimal128Client();
 
 using RequestContent content = RequestContent.Create(new
 {

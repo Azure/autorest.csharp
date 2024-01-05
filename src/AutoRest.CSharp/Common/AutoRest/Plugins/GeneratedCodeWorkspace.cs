@@ -2,12 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.ClientModel;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
+using Microsoft.CodeAnalysis.Text;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -122,18 +123,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
                 }
 
-                documents.Add(Task.Run(() => ProcessDocument(compilation, document, suppressedTypeNames)));
+                documents.Add(ProcessDocument(compilation, document, suppressedTypeNames));
             }
-
+            var docs = await Task.WhenAll(documents);
             var needProcessGeneratedDocs = _xmlDocFiles.Any();
             var generatedDocs = new Dictionary<string, SyntaxTree>();
 
-            foreach (var task in documents)
+            foreach (var doc in docs)
             {
-                var processed = await task;
+                var processed = doc;
 
-                processed = await Simplifier.ReduceAsync(processed);
-                processed = await Formatter.FormatAsync(processed);
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
                 if (needProcessGeneratedDocs) // TODO -- this is a workaround. In HLC, in some cases, there are multiple documents with the same name added in this list, and we get "dictionary same key has been added" exception
@@ -166,6 +165,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 document = document.WithSyntaxRoot(SA1505Rewriter.Visit(modelRemoveRewriter.Visit(await syntaxTree.GetRootAsync())));
             }
 
+            document = await Simplifier.ReduceAsync(document);
+            document = await Formatter.FormatAsync(document);
             return document;
         }
 

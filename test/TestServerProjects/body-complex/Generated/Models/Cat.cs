@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -22,9 +23,10 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="color"></param>
         /// <param name="hates"></param>
-        internal Cat(int? id, string name, string color, IList<Dog> hates) : base(id, name)
+        internal Cat(int? id, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string color, IList<Dog> hates) : base(id, name, serializedAdditionalRawData)
         {
             Color = color;
             Hates = hates;
