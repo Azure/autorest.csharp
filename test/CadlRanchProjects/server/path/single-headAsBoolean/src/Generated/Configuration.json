@@ -6,6 +6,5 @@
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"
   ],
-  "head-as-boolean": true,
-  "azure-arm": false
+  "head-as-boolean": true
 }
