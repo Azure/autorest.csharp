@@ -272,7 +272,6 @@ export function createModelForService(
                 getHttpOperation(program, op)
             );
             const inputOperation: InputOperation = loadOperation(
-                context.program,
                 sdkContext,
                 httpOperation,
                 url,

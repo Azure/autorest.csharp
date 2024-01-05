@@ -36,7 +36,6 @@ describe("Test encode duration", () => {
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
         const operation = loadOperation(
-            context.program,
             sdkContext,
             services[0].operations[0],
             "",
@@ -74,7 +73,6 @@ describe("Test encode duration", () => {
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
         const operation = loadOperation(
-            context.program,
             sdkContext,
             services[0].operations[0],
             "",
@@ -112,7 +110,6 @@ describe("Test encode duration", () => {
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
         const operation = loadOperation(
-            context.program,
             sdkContext,
             services[0].operations[0],
             "",

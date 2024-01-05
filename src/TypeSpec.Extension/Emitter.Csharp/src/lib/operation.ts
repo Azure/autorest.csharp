@@ -71,7 +71,6 @@ import {
 import { Usage } from "../type/usage.js";
 
 export function loadOperation(
-    program: Program,
     sdkContext: SdkContext,
     operation: HttpOperation,
     uri: string,
@@ -86,6 +85,7 @@ export function loadOperation(
         verb,
         parameters: typespecParameters
     } = operation;
+    const program = sdkContext.program;
     logger.info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
