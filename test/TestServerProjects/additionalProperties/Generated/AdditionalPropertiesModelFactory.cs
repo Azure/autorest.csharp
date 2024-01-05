@@ -75,7 +75,7 @@ namespace additionalProperties.Models
         {
             additionalProperties ??= new Dictionary<string, float>();
 
-            return new PetAPInProperties(id, name, status, additionalProperties);
+            return new PetAPInProperties(id, name, status, additionalProperties, serializedAdditionalRawData: null);
         }
     }
 }

@@ -10,5 +10,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     internal sealed record StreamExpression(ValueExpression Untyped) : TypedValueExpression<Stream>(Untyped)
     {
         public MethodBodyStatement CopyTo(StreamExpression destination) => new InvokeInstanceMethodStatement(Untyped, nameof(Stream.CopyTo), destination);
+
+        public ValueExpression Position => new TypedMemberExpression(this, nameof(Stream.Position), typeof(long));
     }
 }

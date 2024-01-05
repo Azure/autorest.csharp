@@ -372,7 +372,8 @@ namespace AutoRest.CSharp.Output.Models
                 InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
 
                 //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+                // TODO -- remove this condition completely when remove the UseModelReaderWriter flag
+                if (!Configuration.UseModelReaderWriter && !actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
                     return null;
 
                 string defaultDerivedName = $"Unknown{actualBase.Name}";

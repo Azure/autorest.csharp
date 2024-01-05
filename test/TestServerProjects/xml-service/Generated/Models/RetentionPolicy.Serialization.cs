@@ -5,15 +5,18 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class RetentionPolicy : IXmlSerializable
+    public partial class RetentionPolicy : IXmlSerializable, IPersistableModel<RetentionPolicy>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "RetentionPolicy");
             writer.WriteStartElement("Enabled");
@@ -28,8 +31,12 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static RetentionPolicy DeserializeRetentionPolicy(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
+
+        internal static RetentionPolicy DeserializeRetentionPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             bool enabled = default;
             int? days = default;
             if (element.Element("Enabled") is XElement enabledElement)
@@ -40,7 +47,41 @@ namespace xml_service.Models
             {
                 days = (int?)daysElement;
             }
-            return new RetentionPolicy(enabled, days);
+            return new RetentionPolicy(enabled, days, serializedAdditionalRawData: null);
         }
+
+        BinaryData IPersistableModel<RetentionPolicy>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RetentionPolicy>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        WriteInternal(writer, null, options);
+                        writer.Flush();
+                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(RetentionPolicy)} does not support '{options.Format}' format.");
+            }
+        }
+
+        RetentionPolicy IPersistableModel<RetentionPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<RetentionPolicy>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "X":
+                    return DeserializeRetentionPolicy(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new FormatException($"The model {nameof(RetentionPolicy)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<RetentionPolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }
