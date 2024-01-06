@@ -28,6 +28,36 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             return new ModelWithPersistableOnly(name, fields?.ToList(), nullProperty, keyValuePairs, xProperty, serializedAdditionalRawData: null);
         }
 
+        /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceData"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="location"> The location property. </param>
+        /// <param name="tags"> The tags property. </param>
+        /// <returns> A new <see cref="Models.TrackedResourceData"/> instance for mocking. </returns>
+        public static TrackedResourceData TrackedResourceData(string id = null, string name = null, string resourceType = null, string location = null, IReadOnlyDictionary<string, string> tags = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new TrackedResourceData(id, name, resourceType, location, tags, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AvailabilitySetData"/>. </summary>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="location"> The location property. </param>
+        /// <param name="tags"> The tags property. </param>
+        /// <param name="sku"> The sku. </param>
+        /// <param name="properties"> The properties property. </param>
+        /// <returns> A new <see cref="Models.AvailabilitySetData"/> instance for mocking. </returns>
+        public static AvailabilitySetData AvailabilitySetData(string id = null, string name = null, string resourceType = null, string location = null, IReadOnlyDictionary<string, string> tags = null, ComputeSku sku = null, AvailabilitySetProperties properties = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new AvailabilitySetData(id, name, resourceType, location, tags, serializedAdditionalRawData: null, sku, properties);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.ModelX"/>. </summary>
         /// <param name="name"> The name property. </param>
         /// <param name="fields"> Optional list. </param>

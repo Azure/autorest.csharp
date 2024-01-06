@@ -432,5 +432,221 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             };
             Response<BaseModel> response = await client.Op3Async(body);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = "<location>",
+            });
+            Response response = client.Op4(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                location = "<location>",
+            });
+            Response response = await client.Op4Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            AvailabilitySetData body = new AvailabilitySetData("<location>");
+            Response<AvailabilitySetData> response = client.Op4(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            AvailabilitySetData body = new AvailabilitySetData("<location>");
+            Response<AvailabilitySetData> response = await client.Op4Async(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                sku = new
+                {
+                    name = "<name>",
+                    tier = "<tier>",
+                    capacity = 1234L,
+                },
+                properties = new
+                {
+                    virtualMachines = new object[]
+            {
+new
+{
+id = "<id>",
+}
+            },
+                    platformFaultDomainCount = 1234,
+                    platformUpdateDomainCount = 1234,
+                },
+                location = "<location>",
+                tags = new
+                {
+                    key = "<tags>",
+                },
+            });
+            Response response = client.Op4(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("sku").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("sku").GetProperty("tier").ToString());
+            Console.WriteLine(result.GetProperty("sku").GetProperty("capacity").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("virtualMachines")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("platformFaultDomainCount").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("platformUpdateDomainCount").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                sku = new
+                {
+                    name = "<name>",
+                    tier = "<tier>",
+                    capacity = 1234L,
+                },
+                properties = new
+                {
+                    virtualMachines = new object[]
+            {
+new
+{
+id = "<id>",
+}
+            },
+                    platformFaultDomainCount = 1234,
+                    platformUpdateDomainCount = 1234,
+                },
+                location = "<location>",
+                tags = new
+                {
+                    key = "<tags>",
+                },
+            });
+            Response response = await client.Op4Async(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("sku").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("sku").GetProperty("tier").ToString());
+            Console.WriteLine(result.GetProperty("sku").GetProperty("capacity").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("virtualMachines")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("platformFaultDomainCount").ToString());
+            Console.WriteLine(result.GetProperty("properties").GetProperty("platformUpdateDomainCount").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            AvailabilitySetData body = new AvailabilitySetData("<location>")
+            {
+                Sku = new ComputeSku
+                {
+                    Name = "<name>",
+                    Tier = "<tier>",
+                    Capacity = 1234L,
+                },
+                Properties = new AvailabilitySetProperties
+                {
+                    VirtualMachines = {new WritableSubResource
+{
+Id = new ResourceIdentifier("<id>"),
+}},
+                    PlatformFaultDomainCount = 1234,
+                    PlatformUpdateDomainCount = 1234,
+                },
+            };
+            Response<AvailabilitySetData> response = client.Op4(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            AvailabilitySetData body = new AvailabilitySetData("<location>")
+            {
+                Sku = new ComputeSku
+                {
+                    Name = "<name>",
+                    Tier = "<tier>",
+                    Capacity = 1234L,
+                },
+                Properties = new AvailabilitySetProperties
+                {
+                    VirtualMachines = {new WritableSubResource
+{
+Id = new ResourceIdentifier("<id>"),
+}},
+                    PlatformFaultDomainCount = 1234,
+                    PlatformUpdateDomainCount = 1234,
+                },
+            };
+            Response<AvailabilitySetData> response = await client.Op4Async(body);
+        }
     }
 }

@@ -93,3 +93,66 @@ model ModelY extends BaseModel {
 @route("/api/DiscriminatedSet")
 @convenientAPI(true)
 op op3(@body body: BaseModel): BaseModel;
+
+@doc("The tracked resource data")
+model TrackedResourceData {
+    @doc("The id property.")
+    @visibility("read")
+    id: string;
+
+    @doc("The name property.")
+    @visibility("read")
+    name: string;
+
+    @doc("The resource type.")
+    @visibility("read")
+    resourceType: string;
+
+    @doc("The location property.")
+    location: string;
+
+    @doc("The tags property.")
+    tags?: Record<string>;
+}
+
+@doc("The availability set data")
+model AvailabilitySetData extends TrackedResourceData {
+    @doc("The sku.")
+    sku?: ComputeSku;
+    
+    @doc("The properties property.")
+    properties?: AvailabilitySetProperties;
+}
+
+@doc("The availability set properties")
+model AvailabilitySetProperties {
+    @doc("The virtual machines.")
+    virtualMachines?: WritableSubResource[];
+
+    @doc("The platform fault domain count property.")
+    platformFaultDomainCount?: int32;
+
+    @doc("The platform update domain count property.")
+    platformUpdateDomainCount?: int32;
+}
+
+model ComputeSku {
+    @doc("The sku name.")
+    name?: string;
+
+    @doc("Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.")
+    tier?: string;
+    
+    @doc("Specifies the number of virtual machines in the scale set.")
+    capacity?: int64;
+}
+
+@doc("The writable sub resource")
+model WritableSubResource {
+    @doc("The resource id")
+    id?: string;
+}
+
+@route("/api/AvailabilitySet")
+@convenientAPI(true)
+op op4(@body body: AvailabilitySetData): AvailabilitySetData;

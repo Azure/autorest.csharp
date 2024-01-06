@@ -166,6 +166,261 @@
   },
   {
    "$id": "24",
+   "Name": "TrackedResourceData",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The tracked resource data",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "25",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The id property.",
+     "Type": {
+      "$id": "26",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "27",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name property.",
+     "Type": {
+      "$id": "28",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "29",
+     "Name": "resourceType",
+     "SerializedName": "resourceType",
+     "Description": "The resource type.",
+     "Type": {
+      "$id": "30",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "31",
+     "Name": "location",
+     "SerializedName": "location",
+     "Description": "The location property.",
+     "Type": {
+      "$id": "32",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "33",
+     "Name": "tags",
+     "SerializedName": "tags",
+     "Description": "The tags property.",
+     "Type": {
+      "$id": "34",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "35",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$id": "36",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "37",
+   "Name": "AvailabilitySetData",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The availability set data",
+   "IsNullable": false,
+   "Usage": "RoundTrip",
+   "BaseModel": {
+    "$ref": "24"
+   },
+   "Properties": [
+    {
+     "$id": "38",
+     "Name": "sku",
+     "SerializedName": "sku",
+     "Description": "The sku.",
+     "Type": {
+      "$id": "39",
+      "Name": "ComputeSku",
+      "Namespace": "ModelReaderWriterValidationTypeSpec",
+      "IsNullable": false,
+      "Usage": "RoundTrip",
+      "Properties": [
+       {
+        "$id": "40",
+        "Name": "name",
+        "SerializedName": "name",
+        "Description": "The sku name.",
+        "Type": {
+         "$id": "41",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "42",
+        "Name": "tier",
+        "SerializedName": "tier",
+        "Description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
+        "Type": {
+         "$id": "43",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "44",
+        "Name": "capacity",
+        "SerializedName": "capacity",
+        "Description": "Specifies the number of virtual machines in the scale set.",
+        "Type": {
+         "$id": "45",
+         "Name": "int64",
+         "Kind": "Int64",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "46",
+     "Name": "properties",
+     "SerializedName": "properties",
+     "Description": "The properties property.",
+     "Type": {
+      "$id": "47",
+      "Name": "AvailabilitySetProperties",
+      "Namespace": "ModelReaderWriterValidationTypeSpec",
+      "Description": "The availability set properties",
+      "IsNullable": false,
+      "Usage": "RoundTrip",
+      "Properties": [
+       {
+        "$id": "48",
+        "Name": "virtualMachines",
+        "SerializedName": "virtualMachines",
+        "Description": "The virtual machines.",
+        "Type": {
+         "$id": "49",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "50",
+          "Name": "WritableSubResource",
+          "Namespace": "ModelReaderWriterValidationTypeSpec",
+          "Description": "The writable sub resource",
+          "IsNullable": false,
+          "Usage": "RoundTrip",
+          "Properties": [
+           {
+            "$id": "51",
+            "Name": "id",
+            "SerializedName": "id",
+            "Description": "The resource id",
+            "Type": {
+             "$id": "52",
+             "Name": "string",
+             "Kind": "String",
+             "IsNullable": false
+            },
+            "IsRequired": false,
+            "IsReadOnly": false
+           }
+          ]
+         },
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "53",
+        "Name": "platformFaultDomainCount",
+        "SerializedName": "platformFaultDomainCount",
+        "Description": "The platform fault domain count property.",
+        "Type": {
+         "$id": "54",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       },
+       {
+        "$id": "55",
+        "Name": "platformUpdateDomainCount",
+        "SerializedName": "platformUpdateDomainCount",
+        "Description": "The platform update domain count property.",
+        "Type": {
+         "$id": "56",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": false,
+        "IsReadOnly": false
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "39"
+  },
+  {
+   "$ref": "47"
+  },
+  {
+   "$ref": "50"
+  },
+  {
+   "$id": "57",
    "Name": "ModelX",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelX in the discriminated set",
@@ -177,15 +432,15 @@
    },
    "Properties": [
     {
-     "$id": "25",
+     "$id": "58",
      "Name": "fields",
      "SerializedName": "fields",
      "Description": "Optional list.",
      "Type": {
-      "$id": "26",
+      "$id": "59",
       "Name": "Array",
       "ElementType": {
-       "$id": "27",
+       "$id": "60",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -196,12 +451,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "28",
+     "$id": "61",
      "Name": "nullProperty",
      "SerializedName": "nullProperty",
      "Description": "Nullable integer.",
      "Type": {
-      "$id": "29",
+      "$id": "62",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -210,21 +465,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "30",
+     "$id": "63",
      "Name": "keyValuePairs",
      "SerializedName": "keyValuePairs",
      "Description": "Optional dictionary.",
      "Type": {
-      "$id": "31",
+      "$id": "64",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "32",
+       "$id": "65",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "33",
+       "$id": "66",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -235,12 +490,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "34",
+     "$id": "67",
      "Name": "xProperty",
      "SerializedName": "xProperty",
      "Description": "The XProperty property.",
      "Type": {
-      "$id": "35",
+      "$id": "68",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -251,7 +506,7 @@
    ]
   },
   {
-   "$id": "36",
+   "$id": "69",
    "Name": "ModelY",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
    "Description": "The ModelY in the discriminated set",
@@ -263,12 +518,12 @@
    },
    "Properties": [
     {
-     "$id": "37",
+     "$id": "70",
      "Name": "yProperty",
      "SerializedName": "yProperty",
      "Description": "The YProperty property.",
      "Type": {
-      "$id": "38",
+      "$id": "71",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -281,21 +536,21 @@
  ],
  "Clients": [
   {
-   "$id": "39",
+   "$id": "72",
    "Name": "ModelReaderWriterValidationTypeSpecClient",
    "Description": "This is a typespec project to validation the model reader writer functionalities.",
    "Operations": [
     {
-     "$id": "40",
+     "$id": "73",
      "Name": "op1",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$id": "41",
+       "$id": "74",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "42",
+        "$id": "75",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -311,7 +566,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "43",
+       "$id": "76",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -328,11 +583,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "44",
+       "$id": "77",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "45",
+        "$id": "78",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -347,19 +602,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "46",
+        "$id": "79",
         "Type": {
-         "$ref": "45"
+         "$ref": "78"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "47",
+       "$id": "80",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "48",
+        "$id": "81",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -374,9 +629,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "49",
+        "$id": "82",
         "Type": {
-         "$ref": "48"
+         "$ref": "81"
         },
         "Value": "application/json"
        }
@@ -384,7 +639,7 @@
      ],
      "Responses": [
       {
-       "$id": "50",
+       "$id": "83",
        "StatusCodes": [
         200
        ],
@@ -411,15 +666,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "51",
+     "$id": "84",
      "Name": "op2",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "41"
+       "$ref": "74"
       },
       {
-       "$id": "52",
+       "$id": "85",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -436,11 +691,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "53",
+       "$id": "86",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
+        "$id": "87",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -455,19 +710,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "88",
         "Type": {
-         "$ref": "54"
+         "$ref": "87"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "56",
+       "$id": "89",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "57",
+        "$id": "90",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -482,9 +737,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "58",
+        "$id": "91",
         "Type": {
-         "$ref": "57"
+         "$ref": "90"
         },
         "Value": "application/json"
        }
@@ -492,7 +747,7 @@
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
@@ -519,15 +774,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "60",
+     "$id": "93",
      "Name": "op3",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Parameters": [
       {
-       "$ref": "41"
+       "$ref": "74"
       },
       {
-       "$id": "61",
+       "$id": "94",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -544,11 +799,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "62",
+       "$id": "95",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "96",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -563,19 +818,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "97",
         "Type": {
-         "$ref": "63"
+         "$ref": "96"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "65",
+       "$id": "98",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "66",
+        "$id": "99",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -590,9 +845,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "100",
         "Type": {
-         "$ref": "66"
+         "$ref": "99"
         },
         "Value": "application/json"
        }
@@ -600,7 +855,7 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "101",
        "StatusCodes": [
         200
        ],
@@ -625,10 +880,118 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "102",
+     "Name": "op4",
+     "ResourceName": "ModelReaderWriterValidationTypeSpec",
+     "Parameters": [
+      {
+       "$ref": "74"
+      },
+      {
+       "$id": "103",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "37"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "104",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "105",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "106",
+        "Type": {
+         "$ref": "105"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "107",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "108",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "109",
+        "Type": {
+         "$ref": "108"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "110",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "37"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}",
+     "Path": "/api/AvailabilitySet",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "69"
+    "$id": "111"
    },
    "Creatable": true
   }
