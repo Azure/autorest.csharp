@@ -65,9 +65,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName})"))
+                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(string)} operationId)"))
                     {
-                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString});");
+                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, operationId);");
                     }
                     _writer.Line();
 
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer
                         .LineRaw("#pragma warning disable CA1822")
                         .LineRaw($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]")
-                        .LineRaw("public override string Id => throw new NotImplementedException();")
+                        .LineRaw("public override string Id => _operation.GetOperationId();")
                         .LineRaw("#pragma warning restore CA1822")
                         .Line();
 
