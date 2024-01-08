@@ -55,7 +55,9 @@ import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
 
-export function createModel(sdkContext: SdkContext): CodeModel {
+export function createModel(
+    sdkContext: SdkContext<NetEmitterOptions>
+): CodeModel {
     const services = listServices(sdkContext.emitContext.program);
     if (services.length === 0) {
         services.push({
@@ -74,7 +76,7 @@ export function createModel(sdkContext: SdkContext): CodeModel {
 }
 
 export function createModelForService(
-    sdkContext: SdkContext,
+    sdkContext: SdkContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
     const emitterOptions = resolveOptions(sdkContext.emitContext);
@@ -194,7 +196,7 @@ export function createModelForService(
     return clientModel;
 
     function addChildClients(
-        context: EmitContext<any>,
+        context: EmitContext<NetEmitterOptions>,
         client: SdkClient | DotnetSdkOperationGroup,
         clients: InputClient[]
     ) {
@@ -402,7 +404,7 @@ function processInterface(
 }
 
 function listClientsByNamespace(
-    context: EmitContext<any>,
+    context: EmitContext<NetEmitterOptions>,
     ns: Namespace
 ): SdkClient[] {
     var clients: SdkClient[] = [];
@@ -449,7 +451,7 @@ interface DotnetSdkOperationGroup extends SdkOperationGroup {
 }
 
 function listOperations(
-    context: EmitContext<any>,
+    context: EmitContext<NetEmitterOptions>,
     client: SdkClient | DotnetSdkOperationGroup
 ): Operation[] {
     const operations: Operation[] = [];
