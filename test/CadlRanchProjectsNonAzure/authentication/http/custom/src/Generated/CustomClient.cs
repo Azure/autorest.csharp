@@ -3,17 +3,17 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Core.Pipeline;
-using System.Net.ClientModel.Internal;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
+using System.ClientModel.Primitives.Pipeline;
 using System.Threading.Tasks;
 
 namespace Authentication.Http.Custom
 {
-    // Data plane generated sub-client.
+    // Data plane generated client.
     /// <summary> Illustrates clients generated with generic HTTP auth. </summary>
-    public partial class HttpCustom
+    public partial class CustomClient
     {
         private const string AuthorizationHeader = "Authorization";
         private readonly KeyCredential _keyCredential;
@@ -27,21 +27,32 @@ namespace Authentication.Http.Custom
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual MessagePipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of HttpCustom for mocking. </summary>
-        protected HttpCustom()
+        /// <summary> Initializes a new instance of CustomClient for mocking. </summary>
+        protected CustomClient()
         {
         }
 
-        /// <summary> Initializes a new instance of HttpCustom. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
-        internal HttpCustom(TelemetrySource clientDiagnostics, MessagePipeline pipeline, KeyCredential keyCredential, Uri endpoint)
+        /// <summary> Initializes a new instance of CustomClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public CustomClient(KeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new CustomClientOptions())
         {
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
-            _keyCredential = keyCredential;
+        }
+
+        /// <summary> Initializes a new instance of CustomClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public CustomClient(Uri endpoint, KeyCredential credential, CustomClientOptions options)
+        {
+            ClientUtilities.AssertNotNull(endpoint, nameof(endpoint));
+            ClientUtilities.AssertNotNull(credential, nameof(credential));
+            options ??= new CustomClientOptions();
+
+            ClientDiagnostics = new TelemetrySource(options, true);
+            _keyCredential = credential;
+            _pipeline = MessagePipeline.Create(options, new IPipelinePolicy<PipelineMessage>[] { new KeyCredentialPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<IPipelinePolicy<PipelineMessage>>());
             _endpoint = endpoint;
         }
 
@@ -61,7 +72,7 @@ namespace Authentication.Http.Custom
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> ValidAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("HttpCustom.Valid");
+            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Valid");
             scope.Start();
             try
             {
@@ -91,7 +102,7 @@ namespace Authentication.Http.Custom
         /// <returns> The response returned from the service. </returns>
         public virtual Result Valid(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("HttpCustom.Valid");
+            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Valid");
             scope.Start();
             try
             {
@@ -121,7 +132,7 @@ namespace Authentication.Http.Custom
         /// <returns> The response returned from the service. </returns>
         public virtual async Task<Result> InvalidAsync(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("HttpCustom.Invalid");
+            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Invalid");
             scope.Start();
             try
             {
@@ -151,7 +162,7 @@ namespace Authentication.Http.Custom
         /// <returns> The response returned from the service. </returns>
         public virtual Result Invalid(RequestOptions context = null)
         {
-            using var scope = ClientDiagnostics.CreateSpan("HttpCustom.Invalid");
+            using var scope = ClientDiagnostics.CreateSpan("CustomClient.Invalid");
             scope.Start();
             try
             {
