@@ -120,7 +120,7 @@ model TrackedResourceData {
 model AvailabilitySetData extends TrackedResourceData {
     @doc("The sku.")
     sku?: ComputeSku;
-    
+
     @doc("The properties property.")
     properties?: AvailabilitySetProperties;
 }
@@ -143,7 +143,7 @@ model ComputeSku {
 
     @doc("Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.")
     tier?: string;
-    
+
     @doc("Specifies the number of virtual machines in the scale set.")
     capacity?: int64;
 }
@@ -157,3 +157,215 @@ model WritableSubResource {
 @route("/api/AvailabilitySet")
 @convenientAPI(true)
 op op4(@body body: AvailabilitySetData): AvailabilitySetData;
+
+@doc("""
+A class representing the ResourceProvider data model.
+Resource provider information.
+""")
+model ResourceProviderData {
+    @doc("The provider ID.")
+    id?: string;
+
+    @doc("The namespace of the resource provider.")
+    `namespace`?: string;
+
+    @doc("The registration state of the resource provider.")
+    registrationState?: string;
+
+    @doc("The registration policy of the resource provider.")
+    registrationPolicy?: string;
+
+    @doc("The collection of provider resource types.")
+    resourceTypes?: ProviderResourceType[];
+
+    @doc("The provider authorization consent state.")
+    providerAuthorizationConsentState?: ProviderAuthorizationConsentState;
+}
+
+@doc("The provider authorization consent state.")
+enum ProviderAuthorizationConsentState {
+    @doc("The provider authorization consent state is not specified.")
+    NotSpecified: "NotSpecified",
+
+    @doc("The provider authorization consent state is required.")
+    Required: "Required",
+
+    @doc("The provider authorization consent state is not required.")
+    NotRequired: "NotRequired",
+
+    @doc("The provider authorization consent state is consented.")
+    Consented: "Consented",
+}
+
+model ProviderResourceType {
+    @doc("The resource type.")
+    resourceType?: string;
+
+    @doc("The collection of locations where this resource type can be created.")
+    locations?: string[];
+
+    @doc("The location mappings that are supported by this resource type.")
+    locationMappings?: ProviderExtendedLocation[];
+
+    @doc("The aliases that are supported by this resource type.")
+    aliases?: ResourceTypeAlias[];
+
+    @doc("The API version.")
+    apiVersions?: string[];
+
+    @doc("The default API version.")
+    defaultApiVersion?: string;
+
+    @doc("Gets the zone mappings.")
+    zoneMappings?: ZoneMapping[];
+
+    @doc("The API profiles for the resource provider.")
+    apiProfiles?: ApiProfile[];
+
+    @doc("The additional capabilities offered by this resource type.")
+    capabilities?: string;
+
+    @doc("The properties.")
+    properties?: Record<string>;
+}
+
+@doc("The provider extended location.")
+model ProviderExtendedLocation {
+    @doc("The azure location.")
+    location?: string; // TODO -- find if there is a way for azure-location
+
+    @doc("The extended location type.")
+    providerExtendedLocationType?: string;
+
+    @doc("The extended locations for the azure location.")
+    extendedLocations?: string[];
+}
+
+@doc("The ZoneMapping.")
+model ZoneMapping {
+    @doc("The location of the zone mapping.")
+    location?: string; // TODO -- find if there is a way for azure-location
+
+    @doc("The zones.")
+    zones?: string[];
+}
+
+model ApiProfile {
+    @doc("The profile version.")
+    profileVersion?: string;
+
+    @doc("The API version.")
+    apiVersion?: string;
+}
+
+@doc("The alias type.")
+model ResourceTypeAlias {
+    @doc("The alias name.")
+    name?: string;
+
+    @doc("The paths for an alias.")
+    paths?: ResourceTypeAliasPath[];
+
+    @doc("The type of the alias.")
+    aliasType?: ResourceTypeAliasType;
+
+    @doc("The default path for an alias.")
+    defaultPath?: string;
+
+    @doc("The default pattern for an alias.")
+    defaultPattern?: ResourceTypeAliasPattern;
+
+    @doc("The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.")
+    defaultMetadata?: ResourceTypeAliasPathMetadata;
+}
+
+@doc("The type of the paths for alias.")
+model ResourceTypeAliasPath {
+    @doc("The path of an alias.")
+    path?: string;
+
+    @doc("The API versions.")
+    apiVersions?: string[];
+
+    @doc("The pattern for an alias path.")
+    pattern?: ResourceTypeAliasPattern;
+
+    @doc("The metadata of the alias path. If missing, fall back to the default metadata of the alias.")
+    metadata?: ResourceTypeAliasPathMetadata;
+}
+
+@doc("The type of the alias.")
+@fixed
+enum ResourceTypeAliasType {
+    @doc("Alias type is unknown (same as not providing alias type).")
+    NotSpecified,
+
+    @doc("Alias value is not secret.")
+    PlainText,
+
+    @doc("Alias value is secret.")
+    Mask,
+}
+
+@doc("The type of the pattern for an alias path.")
+model ResourceTypeAliasPattern {
+    @doc("The alias pattern phrase.")
+    phrase?: string;
+
+    @doc("The alias pattern variable.")
+    variable?: string;
+
+    @doc("The type of alias pattern.")
+    patternType?: ResourceTypeAliasPatternType;
+}
+
+@doc("The ResourceTypeAliasPathMetadata.")
+model ResourceTypeAliasPathMetadata {
+    @doc("The type of the token that the alias path is referring to.")
+    tokenType?: ResourceTypeAliasPathTokenType;
+
+    @doc("The attributes of the token that the alias path is referring to.")
+    attributes?: ResourceTypeAliasPathAttributes;
+}
+
+@doc("The type of alias pattern.")
+@fixed
+enum ResourceTypeAliasPatternType {
+    @doc("NotSpecified is not allowed.")
+    NotSpecified,
+
+    @doc("Extract is the only allowed value.")
+    Extract,
+}
+
+@doc("The type of the token that the alias path is referring to.")
+enum ResourceTypeAliasPathTokenType {
+    @doc("The token type is not specified.")
+    NotSpecified: "NotSpecified";
+    @doc("The token type can be anything.")
+    Any: "Any";
+    @doc("The token type is string.")
+    String: "String";
+    @doc("The token type is object.")
+    Object: "Object";
+    @doc("The token type is array.")
+    Array: "Array";
+    @doc("The token type is integer.")
+    Integer: "Integer";
+    @doc("The token type is number.")
+    Number: "Number";
+    @doc("The token type is boolean.")
+    Boolean: "Boolean";
+}
+
+@doc("The attributes of the token that the alias path is referring to.")
+enum ResourceTypeAliasPathAttributes {
+    @doc("The token that the alias path is referring to has no attributes.")
+    None: "None";
+    @doc("The token that the alias path is referring to is modifiable by policies with 'modify' effect.")
+    Modifiable: "Modifiable";
+}
+
+@route("/api/ResourceProvider")
+@convenientAPI(true)
+op op5(): ResourceProviderData;

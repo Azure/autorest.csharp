@@ -648,5 +648,161 @@ Id = new ResourceIdentifier("<id>"),
             };
             Response<AvailabilitySetData> response = await client.Op4Async(body);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response response = client.Op5(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response response = await client.Op5Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response<ResourceProviderData> response = client.Op5();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response<ResourceProviderData> response = await client.Op5Async();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response response = client.Op5(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("namespace").ToString());
+            Console.WriteLine(result.GetProperty("registrationState").ToString());
+            Console.WriteLine(result.GetProperty("registrationPolicy").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locations")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("providerExtendedLocationType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("extendedLocations")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("path").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("apiVersions")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("pattern").GetProperty("phrase").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("pattern").GetProperty("variable").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("pattern").GetProperty("patternType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("tokenType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("attributes").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("aliasType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPath").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("phrase").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("variable").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("patternType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("tokenType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("attributes").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiVersions")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("defaultApiVersion").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("zones")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("profileVersion").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("apiVersion").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("capabilities").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response response = await client.Op5Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("namespace").ToString());
+            Console.WriteLine(result.GetProperty("registrationState").ToString());
+            Console.WriteLine(result.GetProperty("registrationPolicy").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locations")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("providerExtendedLocationType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("extendedLocations")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("path").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("apiVersions")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("pattern").GetProperty("phrase").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("pattern").GetProperty("variable").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("pattern").GetProperty("patternType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("tokenType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("attributes").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("aliasType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPath").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("phrase").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("variable").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("patternType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("tokenType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("attributes").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiVersions")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("defaultApiVersion").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("location").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("zones")[0].ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("profileVersion").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("apiVersion").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("capabilities").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response<ResourceProviderData> response = client.Op5();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
+
+            Response<ResourceProviderData> response = await client.Op5Async();
+        }
     }
 }
