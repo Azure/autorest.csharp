@@ -106,7 +106,8 @@ model TrackedResourceData {
 
     @doc("The resource type.")
     @visibility("read")
-    resourceType: string;
+    @projectedName("csharp", "resourceType")
+    type: string;
 
     @doc("The location property.")
     location: string;

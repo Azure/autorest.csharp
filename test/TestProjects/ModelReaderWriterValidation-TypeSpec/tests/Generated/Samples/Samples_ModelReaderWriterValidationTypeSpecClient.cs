@@ -449,7 +449,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
         }
 
@@ -469,7 +469,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
         }
 
@@ -539,7 +539,7 @@ id = "<id>",
             Console.WriteLine(result.GetProperty("properties").GetProperty("platformUpdateDomainCount").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
         }
@@ -588,7 +588,7 @@ id = "<id>",
             Console.WriteLine(result.GetProperty("properties").GetProperty("platformUpdateDomainCount").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("resourceType").ToString());
+            Console.WriteLine(result.GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
         }

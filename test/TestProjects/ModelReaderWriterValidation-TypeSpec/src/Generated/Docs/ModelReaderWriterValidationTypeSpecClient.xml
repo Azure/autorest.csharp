@@ -467,7 +467,7 @@ Response response = await client.Op4Async(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code>
 This sample shows how to call Op4Async with all request content and parse the result.
@@ -512,7 +512,7 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("platformFaultDom
 Console.WriteLine(result.GetProperty("properties").GetProperty("platformUpdateDomainCount").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
 ]]></code></example>
@@ -533,7 +533,7 @@ Response response = client.Op4(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code>
 This sample shows how to call Op4 with all request content and parse the result.
@@ -578,7 +578,7 @@ Console.WriteLine(result.GetProperty("properties").GetProperty("platformFaultDom
 Console.WriteLine(result.GetProperty("properties").GetProperty("platformUpdateDomainCount").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("resourceType").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("location").ToString());
 Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
 ]]></code></example>

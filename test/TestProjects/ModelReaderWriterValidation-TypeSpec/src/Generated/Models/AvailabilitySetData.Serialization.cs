@@ -49,7 +49,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             if (options.Format != "W")
             {
-                writer.WritePropertyName("resourceType"u8);
+                writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
             writer.WritePropertyName("location"u8);
@@ -107,7 +107,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             Optional<AvailabilitySetProperties> properties = default;
             string id = default;
             string name = default;
-            string resourceType = default;
+            string type = default;
             string location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -142,9 +142,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("resourceType"u8))
+                if (property.NameEquals("type"u8))
                 {
-                    resourceType = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"u8))
@@ -172,7 +172,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new AvailabilitySetData(id, name, resourceType, location, Optional.ToDictionary(tags), serializedAdditionalRawData, sku.Value, properties.Value);
+            return new AvailabilitySetData(id, name, type, location, Optional.ToDictionary(tags), serializedAdditionalRawData, sku.Value, properties.Value);
         }
 
         BinaryData IPersistableModel<AvailabilitySetData>.Write(ModelReaderWriterOptions options)

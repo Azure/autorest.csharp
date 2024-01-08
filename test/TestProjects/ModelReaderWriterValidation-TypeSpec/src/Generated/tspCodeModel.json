@@ -203,7 +203,7 @@
     {
      "$id": "29",
      "Name": "resourceType",
-     "SerializedName": "resourceType",
+     "SerializedName": "type",
      "Description": "The resource type.",
      "Type": {
       "$id": "30",
