@@ -7,13 +7,13 @@ This sample shows how to call GetMixedLiteralAsync.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response<object> response = await client.GetMixedLiteralAsync();
+Response<GetResponse8> response = await client.GetMixedLiteralAsync();
 ]]></code>
 This sample shows how to call GetMixedLiteralAsync with all parameters.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response<object> response = await client.GetMixedLiteralAsync();
+Response<GetResponse8> response = await client.GetMixedLiteralAsync();
 ]]></code></example>
     </member>
     <member name="GetMixedLiteral(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetMixedLiteral.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response<object> response = client.GetMixedLiteral();
+Response<GetResponse8> response = client.GetMixedLiteral();
 ]]></code>
 This sample shows how to call GetMixedLiteral with all parameters.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response<object> response = client.GetMixedLiteral();
+Response<GetResponse8> response = client.GetMixedLiteral();
 ]]></code></example>
     </member>
     <member name="GetMixedLiteralAsync(RequestContext)">
@@ -85,34 +85,38 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("floatLiteral").ToStrin
 Console.WriteLine(result.GetProperty("prop").GetProperty("booleanLiteral").ToString());
 ]]></code></example>
     </member>
-    <member name="SendAsync(SendRequestProp,CancellationToken)">
+    <member name="SendAsync(MixedLiteralsCases,CancellationToken)">
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+Response response = await client.SendAsync(prop);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+Response response = await client.SendAsync(prop);
 ]]></code></example>
     </member>
-    <member name="Send(SendRequestProp,CancellationToken)">
+    <member name="Send(MixedLiteralsCases,CancellationToken)">
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response response = client.Send(SendRequestProp.A);
+MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+Response response = client.Send(prop);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-Response response = client.Send(SendRequestProp.A);
+MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+Response response = client.Send(prop);
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">
@@ -123,7 +127,13 @@ MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        stringLiteral = "a",
+        intLiteral = "a",
+        floatLiteral = "a",
+        booleanLiteral = "a",
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -135,7 +145,13 @@ MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        stringLiteral = "a",
+        intLiteral = "a",
+        floatLiteral = "a",
+        booleanLiteral = "a",
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -150,7 +166,13 @@ MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        stringLiteral = "a",
+        intLiteral = "a",
+        floatLiteral = "a",
+        booleanLiteral = "a",
+    },
 });
 Response response = client.Send(content);
 
@@ -162,7 +184,13 @@ MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        stringLiteral = "a",
+        intLiteral = "a",
+        floatLiteral = "a",
+        booleanLiteral = "a",
+    },
 });
 Response response = client.Send(content);
 

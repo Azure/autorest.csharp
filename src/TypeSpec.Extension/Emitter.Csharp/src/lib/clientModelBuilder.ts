@@ -6,8 +6,7 @@ import {
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    SdkOperationGroup,
-    SdkContext
+    SdkOperationGroup
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -268,7 +267,7 @@ export function createModelForService(
                 getHttpOperation(program, op)
             );
             const inputOperation: InputOperation = loadOperation(
-                sdkContext.emitContext,
+                sdkContext,
                 httpOperation,
                 url,
                 urlParameters,

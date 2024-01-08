@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -51,7 +52,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = client.GetStringAndArray();
+            Response<GetResponse7> response = client.GetStringAndArray();
         }
 
         [Test]
@@ -60,7 +61,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = await client.GetStringAndArrayAsync();
+            Response<GetResponse7> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]
@@ -95,7 +96,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = client.GetStringAndArray();
+            Response<GetResponse7> response = client.GetStringAndArray();
         }
 
         [Test]
@@ -104,7 +105,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = await client.GetStringAndArrayAsync();
+            Response<GetResponse7> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]
@@ -115,7 +116,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = client.Send(content);
 
@@ -130,7 +135,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -143,7 +152,8 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -152,7 +162,8 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = await client.SendAsync(prop);
         }
 
         [Test]
@@ -163,7 +174,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = client.Send(content);
 
@@ -178,7 +193,11 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -191,7 +210,8 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -200,7 +220,8 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = await client.SendAsync(prop);
         }
     }
 }
