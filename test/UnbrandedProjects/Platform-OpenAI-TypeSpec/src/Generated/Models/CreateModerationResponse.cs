@@ -17,7 +17,7 @@ namespace OpenAI.Models
         /// <param name="model"> The model used to generate the moderation results. </param>
         /// <param name="results"> A list of moderation objects. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/> or <paramref name="results"/> is null. </exception>
-        internal CreateModerationResponse(string id, string model, IEnumerable<CreateResult> results)
+        internal CreateModerationResponse(string id, string model, IEnumerable<CreateModerationResponseResult> results)
         {
             ClientUtilities.AssertNotNull(id, nameof(id));
             ClientUtilities.AssertNotNull(model, nameof(model));
@@ -32,7 +32,7 @@ namespace OpenAI.Models
         /// <param name="id"> The unique identifier for the moderation request. </param>
         /// <param name="model"> The model used to generate the moderation results. </param>
         /// <param name="results"> A list of moderation objects. </param>
-        internal CreateModerationResponse(string id, string model, IReadOnlyList<CreateResult> results)
+        internal CreateModerationResponse(string id, string model, IReadOnlyList<CreateModerationResponseResult> results)
         {
             Id = id;
             Model = model;
@@ -44,6 +44,6 @@ namespace OpenAI.Models
         /// <summary> The model used to generate the moderation results. </summary>
         public string Model { get; }
         /// <summary> A list of moderation objects. </summary>
-        public IReadOnlyList<CreateResult> Results { get; }
+        public IReadOnlyList<CreateModerationResponseResult> Results { get; }
     }
 }

@@ -567,7 +567,7 @@
      "Description": "The retry-after header.",
      "Type": {
       "$id": "73",
-      "Name": "Anon_1",
+      "Name": "HealthInsightsRetryAfterTraitRetryAfter",
       "Namespace": "lro",
       "IsNullable": false,
       "Usage": "None",

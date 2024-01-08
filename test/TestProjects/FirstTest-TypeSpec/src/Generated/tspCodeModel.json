@@ -792,10 +792,10 @@
   },
   {
    "$id": "109",
-   "Name": "Anon_1",
+   "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "FirstTestTypeSpec",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": []
   },
   {
