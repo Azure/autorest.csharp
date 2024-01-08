@@ -71,7 +71,7 @@ import {
 import { Usage } from "../type/usage.js";
 
 export function loadOperation(
-    sdkContext: SdkContext,
+    sdkContext: SdkContext<NetEmitterOptions>,
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,

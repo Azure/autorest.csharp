@@ -3,11 +3,11 @@
 
 import {
     SdkClient,
-    createSdkContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    SdkOperationGroup
+    SdkOperationGroup,
+    SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -56,11 +56,13 @@ import { $lib } from "../emitter.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
-    context: EmitContext<NetEmitterOptions>
+    sdkContext: SdkContext<NetEmitterOptions>
 ): CodeModel {
-    const services = listServices(context.program);
+    const services = listServices(sdkContext.emitContext.program);
     if (services.length === 0) {
-        services.push({ type: context.program.getGlobalNamespaceType() });
+        services.push({
+            type: sdkContext.emitContext.program.getGlobalNamespaceType()
+        });
     }
 
     // TODO: support multiple service. Current only chose the first service.
@@ -70,19 +72,15 @@ export function createModel(
         throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
-    return createModelForService(context, service);
+    return createModelForService(sdkContext, service);
 }
 
 export function createModelForService(
-    context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
-    const emitterOptions = resolveOptions(context);
-    const program = context.program;
-    const sdkContext = createSdkContext(
-        context,
-        "@azure-tools/typespec-csharp"
-    );
+    const emitterOptions = resolveOptions(sdkContext.emitContext);
+    const program = sdkContext.emitContext.program;
     const serviceNamespaceType = service.type;
 
     const apiVersions: Set<string> | undefined = new Set<string>();
@@ -152,12 +150,12 @@ export function createModelForService(
     const dpgClients = emitterOptions.branded
         ? listClients(sdkContext)
         : listClientsByNamespace(
-              context,
-              context.program.getGlobalNamespaceType()
+              sdkContext.emitContext,
+              sdkContext.emitContext.program.getGlobalNamespaceType()
           );
     for (const client of dpgClients) {
         clients.push(emitClient(client));
-        addChildClients(context, client, clients);
+        addChildClients(sdkContext.emitContext, client, clients);
     }
 
     for (const client of clients) {
@@ -250,7 +248,7 @@ export function createModelForService(
     ): InputClient {
         const operations = emitterOptions.branded
             ? listOperationsInOperationGroup(sdkContext, client)
-            : listOperations(context, client);
+            : listOperations(sdkContext.emitContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
