@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
     Program,
     resolvePath,
@@ -58,7 +59,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const root = createModel(context);
+        const sdkContext = createSdkContext(
+            context,
+            "@azure-tools/typespec-csharp"
+        );
+        const root = createModel(sdkContext);
         if (
             context.program.diagnostics.length > 0 &&
             context.program.diagnostics.filter(
@@ -161,7 +166,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     options["generateTestProject"] === true
                         ? undefined
                         : options["generateTestProject"],
-                "use-model-reader-writer": options["use-model-reader-writer"]
+                "use-model-reader-writer": options["use-model-reader-writer"],
+                "azure-arm":
+                    sdkContext.arm === false ? undefined : sdkContext.arm
             } as Configuration;
 
             await program.host.writeFile(
