@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -120,21 +119,6 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private string GetTypeName(InputType type) => type switch
-        {
-            InputListType listType => GetTypeName(listType.ElementType),
-            InputDictionaryType dictionaryType => GetTypeName(dictionaryType.ValueType),
-            _ => type.Name
-        };
-
-        private InputModelType? GetInputModelType(InputType type) => type switch
-        {
-            InputModelType model => model,
-            InputListType listType => GetInputModelType(listType.ElementType),
-            InputDictionaryType dictionaryType => GetInputModelType(dictionaryType.ValueType),
-            _ => null
-        };
-
         private string GetNameWithCorrectPluralization(InputType type, string name)
         {
             //TODO: Probably needs special casing for ipThing to become IPThing
@@ -146,19 +130,6 @@ namespace AutoRest.CSharp.Output.Models
                     return result.ToSingular();
                 default:
                     return result;
-            }
-        }
-
-        private bool IsSameType(InputType type, InputModelType anonModel)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    return IsSameType(listType.ElementType, anonModel);
-                case InputDictionaryType dictionaryType:
-                    return IsSameType(dictionaryType.ValueType, anonModel);
-                default:
-                    return type.Equals(anonModel);
             }
         }
 

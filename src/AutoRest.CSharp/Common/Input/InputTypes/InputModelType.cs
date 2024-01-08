@@ -56,24 +56,6 @@ namespace AutoRest.CSharp.Common.Input
             }
         }
 
-        internal InputModelType Update(string newName, InputModelTypeUsage usage)
-        {
-            return new InputModelType(
-                newName,
-                Namespace,
-                Accessibility,
-                Deprecated,
-                Description,
-                usage,
-                Properties,
-                BaseModel,
-                DerivedModels,
-                DiscriminatorValue,
-                DiscriminatorPropertyName,
-                InheritedDictionaryType,
-                IsNullable);
-        }
-
         internal InputModelType ReplaceProperty(InputModelProperty property, InputType inputType)
         {
             return new InputModelType(
