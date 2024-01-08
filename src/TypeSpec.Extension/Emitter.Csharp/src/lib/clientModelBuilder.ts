@@ -6,7 +6,8 @@ import {
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    SdkOperationGroup
+    SdkOperationGroup,
+    SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
