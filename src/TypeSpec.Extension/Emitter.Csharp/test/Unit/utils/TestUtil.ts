@@ -130,6 +130,6 @@ export function navigateModels(
 /* We always need to pass in the emitter name now that it is required so making a helper to do this. */
 export function createNetSdkContext(
     program: EmitContext<NetEmitterOptions>
-): SdkContext {
+): SdkContext<NetEmitterOptions> {
     return createSdkContext(program, "@azure-tools/typespec-azure");
 }

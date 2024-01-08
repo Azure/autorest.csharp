@@ -255,7 +255,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(isBase ? ": base(" : ": this(");
                     foreach (var argument in arguments)
                     {
-                        writer.WriteValueExpression(new FormattableStringToExpression(argument));
+                        writer.WriteValueExpression(argument);
                         writer.AppendRaw(", ");
                     }
                     writer.RemoveTrailingComma();
@@ -320,6 +320,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.AppendRaw("]");
             }
+
+            writer.AppendRawIf("ref ", clientParameter.IsRef);
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)

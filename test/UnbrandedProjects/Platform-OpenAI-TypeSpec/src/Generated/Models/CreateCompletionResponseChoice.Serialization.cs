@@ -2,7 +2,7 @@
 
 #nullable disable
 
-using System.Net.ClientModel.Core;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -17,7 +17,7 @@ namespace OpenAI.Models
             }
             long index = default;
             string text = default;
-            CreateLogprobs logprobs = default;
+            CreateCompletionResponseChoiceLogprobs logprobs = default;
             CreateCompletionResponseChoiceFinishReason finishReason = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -38,7 +38,7 @@ namespace OpenAI.Models
                         logprobs = null;
                         continue;
                     }
-                    logprobs = CreateLogprobs.DeserializeCreateLogprobs(property.Value);
+                    logprobs = CreateCompletionResponseChoiceLogprobs.DeserializeCreateCompletionResponseChoiceLogprobs(property.Value);
                     continue;
                 }
                 if (property.NameEquals("finish_reason"u8))

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace httpInfrastructure.Models
 {
     /// <summary> The B. </summary>
@@ -17,8 +20,9 @@ namespace httpInfrastructure.Models
 
         /// <summary> Initializes a new instance of <see cref="B"/>. </summary>
         /// <param name="statusCode"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="textStatusCode"></param>
-        internal B(string statusCode, string textStatusCode) : base(statusCode)
+        internal B(string statusCode, IDictionary<string, BinaryData> serializedAdditionalRawData, string textStatusCode) : base(statusCode, serializedAdditionalRawData)
         {
             TextStatusCode = textStatusCode;
         }

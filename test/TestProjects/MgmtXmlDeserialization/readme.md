@@ -11,4 +11,5 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/MgmtXmlDeserialization.json
 namespace: Azure.XmlDeserialization
+use-model-reader-writer: true
 ```

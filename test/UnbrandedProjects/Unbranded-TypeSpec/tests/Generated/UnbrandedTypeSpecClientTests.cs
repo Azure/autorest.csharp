@@ -3,7 +3,7 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
+using System.ClientModel;
 using NUnit.Framework;
 using UnbrandedTypeSpec;
 

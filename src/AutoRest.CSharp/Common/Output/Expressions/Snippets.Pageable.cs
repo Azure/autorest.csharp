@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return new FuncExpression(new[] { e.Declaration }, BinaryDataExpression.FromString(new JsonElementExpression(e).GetRawText()));
             }
 
-            if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type })
+            if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { } } type })
             {
                 return SerializableObjectTypeExpression.DeserializeDelegate(type);
             }
