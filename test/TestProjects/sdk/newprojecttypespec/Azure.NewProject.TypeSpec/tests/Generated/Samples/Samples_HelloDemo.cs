@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Azure.NewProject.TypeSpec.Samples
 {
-    public partial class Samples_Demo
+    public partial class Samples_HelloDemo
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -23,7 +23,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -43,7 +43,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -63,7 +63,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -87,7 +87,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 

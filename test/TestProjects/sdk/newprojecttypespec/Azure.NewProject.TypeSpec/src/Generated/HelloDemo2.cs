@@ -16,8 +16,8 @@ using Azure.NewProject.TypeSpec.Models;
 namespace Azure.NewProject.TypeSpec
 {
     // Data plane generated sub-client.
-    /// <summary> The Demo2 sub-client. </summary>
-    public partial class Demo2
+    /// <summary> The HelloDemo2 sub-client. </summary>
+    public partial class HelloDemo2
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
@@ -32,18 +32,18 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Demo2 for mocking. </summary>
-        protected Demo2()
+        /// <summary> Initializes a new instance of HelloDemo2 for mocking. </summary>
+        protected HelloDemo2()
         {
         }
 
-        /// <summary> Initializes a new instance of Demo2. </summary>
+        /// <summary> Initializes a new instance of HelloDemo2. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        internal Demo2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
+        internal HelloDemo2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -59,7 +59,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -79,7 +79,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgain(string,string,RoundTripModel,CancellationToken)']/*" />
         public virtual Response<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -115,14 +115,14 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.HelloAgain");
             scope.Start();
             try
             {
@@ -159,14 +159,14 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.HelloAgain");
             scope.Start();
             try
             {
@@ -198,14 +198,14 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.NoContentType");
             scope.Start();
             try
             {
@@ -237,14 +237,14 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.NoContentType");
             scope.Start();
             try
             {
@@ -258,101 +258,11 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await HelloDemo2Async(context).ConfigureAwait(false);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary> Return hi in demo2. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
-        public virtual Response<Thing> HelloDemo2(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = HelloDemo2(context);
-            return Response.FromValue(Thing.FromResponse(response), response);
-        }
-
-        /// <summary>
-        /// [Protocol Method] Return hi in demo2
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="HelloDemo2Async(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
-        public virtual async Task<Response> HelloDemo2Async(RequestContext context)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloDemo2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloDemo2Request(context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// [Protocol Method] Return hi in demo2
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
-        public virtual Response HelloDemo2(RequestContext context)
-        {
-            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloDemo2");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateHelloDemo2Request(context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -367,7 +277,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -398,12 +308,12 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.CreateLiteral");
             scope.Start();
             try
             {
@@ -437,12 +347,12 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
         public virtual Response CreateLiteral(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo2.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.CreateLiteral");
             scope.Start();
             try
             {
@@ -458,7 +368,7 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -468,7 +378,7 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         public virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -494,10 +404,10 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
         public virtual async Task<Response> HelloLiteralAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.HelloLiteral");
             scope.Start();
             try
             {
@@ -529,10 +439,10 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo2.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
         public virtual Response HelloLiteral(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("Demo2.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo2.HelloLiteral");
             scope.Start();
             try
             {
@@ -577,19 +487,6 @@ namespace Azure.NewProject.TypeSpec
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            return message;
-        }
-
-        internal HttpMessage CreateHelloDemo2Request(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/demoHi", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
