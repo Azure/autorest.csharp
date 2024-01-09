@@ -81,10 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("#pragma warning disable CA1822")
-                        .LineRaw($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]")
                         .LineRaw("public override string Id => _operation.GetOperationId();")
-                        .LineRaw("#pragma warning restore CA1822")
                         .Line();
 
                     if (_isGeneric)
