@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = client.GetModelsOnly();
+            Response<GetResponse5> response = client.GetModelsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = await client.GetModelsOnlyAsync();
+            Response<GetResponse5> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = client.GetModelsOnly();
+            Response<GetResponse5> response = client.GetModelsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = await client.GetModelsOnlyAsync();
+            Response<GetResponse5> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]
@@ -111,7 +111,10 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = client.Send(content);
 
@@ -126,7 +129,10 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -139,7 +145,10 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
 
         [Test]
@@ -148,7 +157,10 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
 
         [Test]
@@ -159,7 +171,10 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = client.Send(content);
 
@@ -174,7 +189,10 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -187,7 +205,10 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
 
         [Test]
@@ -196,7 +217,10 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
     }
 }

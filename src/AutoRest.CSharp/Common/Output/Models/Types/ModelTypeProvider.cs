@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -623,11 +622,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeFactory,
                 _defaultDerivedType);
             return result;
-        }
-
-        internal InputModelProperty? GetProperty(InputModelType key)
-        {
-            return _inputModel.GetProperty(key);
         }
     }
 }

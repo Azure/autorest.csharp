@@ -7,13 +7,13 @@ This sample shows how to call GetStringAndArrayAsync.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response<object> response = await client.GetStringAndArrayAsync();
+Response<GetResponse7> response = await client.GetStringAndArrayAsync();
 ]]></code>
 This sample shows how to call GetStringAndArrayAsync with all parameters.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response<object> response = await client.GetStringAndArrayAsync();
+Response<GetResponse7> response = await client.GetStringAndArrayAsync();
 ]]></code></example>
     </member>
     <member name="GetStringAndArray(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetStringAndArray.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response<object> response = client.GetStringAndArray();
+Response<GetResponse7> response = client.GetStringAndArray();
 ]]></code>
 This sample shows how to call GetStringAndArray with all parameters.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response<object> response = client.GetStringAndArray();
+Response<GetResponse7> response = client.GetStringAndArray();
 ]]></code></example>
     </member>
     <member name="GetStringAndArrayAsync(RequestContext)">
@@ -77,34 +77,38 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
 ]]></code></example>
     </member>
-    <member name="SendAsync(SendRequestProp,CancellationToken)">
+    <member name="SendAsync(StringAndArrayCases,CancellationToken)">
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+Response response = await client.SendAsync(prop);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+Response response = await client.SendAsync(prop);
 ]]></code></example>
     </member>
-    <member name="Send(SendRequestProp,CancellationToken)">
+    <member name="Send(StringAndArrayCases,CancellationToken)">
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response response = client.Send(SendRequestProp.A);
+StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+Response response = client.Send(prop);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-Response response = client.Send(SendRequestProp.A);
+StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+Response response = client.Send(prop);
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">
@@ -115,7 +119,11 @@ StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["string"] = "<string>",
+        ["array"] = "<array>"
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -127,7 +135,11 @@ StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["string"] = "<string>",
+        ["array"] = "<array>"
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -142,7 +154,11 @@ StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["string"] = "<string>",
+        ["array"] = "<array>"
+    },
 });
 Response response = client.Send(content);
 
@@ -154,7 +170,11 @@ StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["string"] = "<string>",
+        ["array"] = "<array>"
+    },
 });
 Response response = client.Send(content);
 

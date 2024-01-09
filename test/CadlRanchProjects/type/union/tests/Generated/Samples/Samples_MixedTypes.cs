@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -55,7 +56,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<object> response = client.GetMixedType();
+            Response<GetResponse9> response = client.GetMixedType();
         }
 
         [Test]
@@ -64,7 +65,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<object> response = await client.GetMixedTypeAsync();
+            Response<GetResponse9> response = await client.GetMixedTypeAsync();
         }
 
         [Test]
@@ -103,7 +104,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<object> response = client.GetMixedType();
+            Response<GetResponse9> response = client.GetMixedType();
         }
 
         [Test]
@@ -112,7 +113,7 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response<object> response = await client.GetMixedTypeAsync();
+            Response<GetResponse9> response = await client.GetMixedTypeAsync();
         }
 
         [Test]
@@ -123,7 +124,16 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["model"] = new
+                    {
+                        name = "<name>",
+                    },
+                    ["literal"] = null,
+                    ["int"] = null,
+                    ["boolean"] = null
+                },
             });
             Response response = client.Send(content);
 
@@ -138,7 +148,16 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["model"] = new
+                    {
+                        name = "<name>",
+                    },
+                    ["literal"] = null,
+                    ["int"] = null,
+                    ["boolean"] = null
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -151,7 +170,11 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }), null, null, null);
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -160,7 +183,11 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }), null, null, null);
+            Response response = await client.SendAsync(prop);
         }
 
         [Test]
@@ -171,7 +198,16 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["model"] = new
+                    {
+                        name = "<name>",
+                    },
+                    ["literal"] = null,
+                    ["int"] = null,
+                    ["boolean"] = null
+                },
             });
             Response response = client.Send(content);
 
@@ -186,7 +222,16 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["model"] = new
+                    {
+                        name = "<name>",
+                    },
+                    ["literal"] = null,
+                    ["int"] = null,
+                    ["boolean"] = null
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -199,7 +244,11 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }), null, null, null);
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -208,7 +257,11 @@ namespace _Type.Union.Samples
         {
             MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }), null, null, null);
+            Response response = await client.SendAsync(prop);
         }
     }
 }

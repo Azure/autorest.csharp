@@ -46,20 +46,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteralAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse8>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMixedLiteralAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse8.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteral(CancellationToken)']/*" />
-        public virtual Response<object> GetMixedLiteral(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse8> GetMixedLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMixedLiteral(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse8.FromResponse(response), response);
         }
 
         /// <summary>
@@ -134,23 +134,29 @@ namespace _Type.Union
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='SendAsync(SendRequestProp,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='SendAsync(MixedLiteralsCases,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(MixedLiteralsCases prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = await SendAsync(sendRequest.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest8 sendRequest8 = new SendRequest8(prop);
+            Response response = await SendAsync(sendRequest8.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='Send(SendRequestProp,CancellationToken)']/*" />
-        public virtual Response Send(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='Send(MixedLiteralsCases,CancellationToken)']/*" />
+        public virtual Response Send(MixedLiteralsCases prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = Send(sendRequest.ToRequestContent(), context);
+            SendRequest8 sendRequest8 = new SendRequest8(prop);
+            Response response = Send(sendRequest8.ToRequestContent(), context);
             return response;
         }
 
@@ -164,7 +170,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(MixedLiteralsCases,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -203,7 +209,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(MixedLiteralsCases,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
