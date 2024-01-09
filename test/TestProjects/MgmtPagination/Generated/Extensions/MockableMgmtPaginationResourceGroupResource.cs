@@ -53,6 +53,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeIntegerModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeIntegerModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -74,6 +82,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeIntegerModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeIntegerModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -104,6 +120,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeInt64Models_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt64ModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -125,6 +149,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeInt64Models_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt64ModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -155,6 +187,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeInt32Models_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt32ModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -176,6 +216,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeInt32Models_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeInt32ModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,6 +254,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeNumericModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeNumericModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -227,6 +283,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeNumericModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeNumericModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,6 +321,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeFloatModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeFloatModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -278,6 +350,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeFloatModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeFloatModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -308,6 +388,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeDoubleModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDoubleModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -329,6 +417,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeDoubleModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDoubleModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -359,6 +455,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDecimalModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -380,6 +484,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeDecimalModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeDecimalModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -410,6 +522,14 @@ namespace MgmtPagination.Mocking
         /// <term>Operation Id</term>
         /// <description>PageSizeStringModels_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -431,6 +551,14 @@ namespace MgmtPagination.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PageSizeStringModels_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PageSizeStringModelResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

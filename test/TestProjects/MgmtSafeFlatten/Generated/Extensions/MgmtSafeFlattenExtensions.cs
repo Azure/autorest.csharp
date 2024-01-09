@@ -100,6 +100,14 @@ namespace MgmtSafeFlatten
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -129,6 +137,14 @@ namespace MgmtSafeFlatten
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -177,6 +193,14 @@ namespace MgmtSafeFlatten
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -206,6 +230,14 @@ namespace MgmtSafeFlatten
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -237,6 +269,14 @@ namespace MgmtSafeFlatten
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -264,6 +304,14 @@ namespace MgmtSafeFlatten
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -293,6 +341,14 @@ namespace MgmtSafeFlatten
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -320,6 +376,14 @@ namespace MgmtSafeFlatten
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// <item>

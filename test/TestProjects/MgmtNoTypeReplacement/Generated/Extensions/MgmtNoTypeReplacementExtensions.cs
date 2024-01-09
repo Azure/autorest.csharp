@@ -113,6 +113,14 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -141,6 +149,14 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -188,6 +204,14 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -216,6 +240,14 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -263,6 +295,14 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel3Resource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -291,6 +331,14 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel3Resource"/></description>
         /// </item>
         /// </list>
         /// <item>

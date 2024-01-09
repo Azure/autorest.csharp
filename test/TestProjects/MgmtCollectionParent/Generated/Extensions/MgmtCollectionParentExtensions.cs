@@ -81,6 +81,14 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OrderResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -111,6 +119,14 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>GetOrderByName</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OrderResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -143,6 +159,14 @@ namespace MgmtCollectionParent
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OrderResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -171,6 +195,14 @@ namespace MgmtCollectionParent
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OrderResource"/></description>
         /// </item>
         /// </list>
         /// <item>

@@ -102,6 +102,14 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Foos_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
@@ -138,6 +146,14 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Foos_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -176,6 +192,14 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Foos_Update</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="patch"> The foo parameters supplied to the Update operation. </param>
@@ -209,6 +233,14 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Foos_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -244,6 +276,14 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Foos_Reconnect</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
@@ -276,6 +316,14 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Foos_Reconnect</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -57,6 +57,14 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> Resource location. </param>
@@ -80,6 +88,14 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
