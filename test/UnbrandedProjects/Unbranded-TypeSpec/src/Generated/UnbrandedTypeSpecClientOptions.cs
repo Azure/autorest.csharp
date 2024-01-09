@@ -2,7 +2,7 @@
 
 #nullable disable
 
-using System.Net.ClientModel;
+using System.ClientModel;
 
 namespace UnbrandedTypeSpec
 {

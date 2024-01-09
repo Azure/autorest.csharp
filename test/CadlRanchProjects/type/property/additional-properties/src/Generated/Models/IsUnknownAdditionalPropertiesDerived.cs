@@ -36,6 +36,11 @@ namespace _Type.Property.AdditionalProperties.Models
             Age = age;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDerived"/> for deserialization. </summary>
+        internal IsUnknownAdditionalPropertiesDerived()
+        {
+        }
+
         /// <summary> The index property. </summary>
         public int Index { get; set; }
         /// <summary> The age property. </summary>

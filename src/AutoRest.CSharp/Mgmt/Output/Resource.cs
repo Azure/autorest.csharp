@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Parameters: new[] { KnownParameters.ArmClient, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new FormattableString[] { $"{KnownParameters.ArmClient.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+                    Arguments: new ValueExpression[] { KnownParameters.ArmClient, ResourceDataIdExpression(ResourceDataParameter) }));
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);
@@ -569,17 +569,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new Method(signature, methodBody);
         }
 
-        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
+        public ValueExpression ResourceDataIdExpression(ValueExpression dataExpression)
         {
+            var id = dataExpression.Property("Id");
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
+                return Snippets.New.Instance(typeof(ResourceIdentifier), id);
             }
             else
             {
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return $"{dataExpression}.Id";
+                return id;
             }
         }
 

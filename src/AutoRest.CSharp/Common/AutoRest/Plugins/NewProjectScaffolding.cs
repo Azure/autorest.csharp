@@ -302,6 +302,11 @@ extends:
             {
                 builder.PackageReferences.Add(packages);
             }
+            // TODO -- add this to _brandedDependencyPackages when we remove this flag
+            if (Configuration.UseModelReaderWriter)
+            {
+                builder.PackageReferences.Add(new("System.ClientModel"));
+            }
 
             return builder.Write();
         }
@@ -335,7 +340,7 @@ extends:
         };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
-            new("System.Net.ClientModel", "1.0.0-beta.1"),
+            new("System.ClientModel", "1.0.0-beta.3"),
             new("System.Text.Json", "4.7.2")
         };
 

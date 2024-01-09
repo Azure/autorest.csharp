@@ -29,5 +29,10 @@ namespace _Type.Property.AdditionalProperties.Models
         internal UnknownIsUnknownAdditionalPropertiesDiscriminated(string name, string kind, IDictionary<string, BinaryData> additionalProperties) : base(name, kind, additionalProperties)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownIsUnknownAdditionalPropertiesDiscriminated"/> for deserialization. </summary>
+        internal UnknownIsUnknownAdditionalPropertiesDiscriminated()
+        {
+        }
     }
 }

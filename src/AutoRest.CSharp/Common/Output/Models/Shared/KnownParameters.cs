@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal static class KnownParameters
+    internal static partial class KnownParameters
     {
         private static readonly CSharpType MatchConditionsType = new(typeof(MatchConditions), true);
         private static readonly CSharpType RequestConditionsType = new(typeof(RequestConditions), true);

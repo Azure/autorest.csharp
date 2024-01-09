@@ -34,6 +34,11 @@ namespace _Type.Property.AdditionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IsStringAdditionalProperties"/> for deserialization. </summary>
+        internal IsStringAdditionalProperties()
+        {
+        }
+
         /// <summary> The name property. </summary>
         public string Name { get; set; }
         /// <summary> Additional Properties. </summary>

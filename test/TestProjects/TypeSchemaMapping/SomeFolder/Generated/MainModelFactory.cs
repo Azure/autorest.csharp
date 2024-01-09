@@ -17,7 +17,7 @@ namespace TypeSchemaMapping.Models
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>
         public static ModelWithGuidProperty ModelWithGuidProperty(Guid? modelProperty = null)
         {
-            return new ModelWithGuidProperty(modelProperty);
+            return new ModelWithGuidProperty(modelProperty, serializedAdditionalRawData: null);
         }
     }
 }

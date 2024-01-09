@@ -34,6 +34,11 @@ namespace _Type.Property.AdditionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalProperties"/> for deserialization. </summary>
+        internal ExtendsUnknownAdditionalProperties()
+        {
+        }
+
         /// <summary> The name property. </summary>
         public string Name { get; set; }
         /// <summary>
