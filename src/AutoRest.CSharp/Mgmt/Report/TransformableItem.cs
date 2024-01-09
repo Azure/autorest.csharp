@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Report
         }
 
         public string FullSerializedName { get; set; }
-        protected virtual HashSet<string>? TransformTypeWhiteList { get { return null; } }
+        protected virtual HashSet<string>? TransformTypeAllowList { get { return null; } }
 
         private List<string>? _appliedTransformLogs;
 
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Report
                     if (_appliedTransformLogs is null)
                     {
                         _appliedTransformLogs = _transformSection.GetAppliedTransformLogs(
-                        this.FullSerializedName, this.TransformTypeWhiteList)
+                        this.FullSerializedName, this.TransformTypeAllowList)
                         .OrderBy(item => item.Log.Index)
                         .Select(item => $"[{item.Log.Index}][{item.Transform}] {item.Log.LogMessage}").ToList();
                     }
