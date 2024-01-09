@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Encode.Bytes",
  "Description": "Test for encode decorator on bytes.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
@@ -203,42 +201,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "28",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "29",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "30",
-        "Type": {
-         "$id": "31",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -256,7 +223,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "33",
+     "$id": "29",
      "Name": "base64",
      "ResourceName": "Query",
      "Parameters": [
@@ -264,11 +231,11 @@
        "$ref": "19"
       },
       {
-       "$id": "34",
+       "$id": "30",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "35",
+        "$id": "31",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -284,11 +251,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "36",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "37",
+        "$id": "33",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -303,20 +270,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "34",
         "Type": {
-         "$ref": "37"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "35",
        "StatusCodes": [
         204
        ],
@@ -334,7 +298,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "36",
      "Name": "base64url",
      "ResourceName": "Query",
      "Parameters": [
@@ -342,11 +306,11 @@
        "$ref": "19"
       },
       {
-       "$id": "41",
+       "$id": "37",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "42",
+        "$id": "38",
         "Name": "bytes",
         "Kind": "BytesBase64Url",
         "IsNullable": false
@@ -362,11 +326,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "43",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "40",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -381,20 +345,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "41",
         "Type": {
-         "$ref": "44"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -412,7 +373,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "43",
      "Name": "base64urlArray",
      "ResourceName": "Query",
      "Parameters": [
@@ -420,14 +381,14 @@
        "$ref": "19"
       },
       {
-       "$id": "48",
+       "$id": "44",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "49",
+        "$id": "45",
         "Name": "Array",
         "ElementType": {
-         "$id": "50",
+         "$id": "46",
          "Name": "base64urlBytes",
          "Kind": "BytesBase64Url",
          "IsNullable": false
@@ -446,11 +407,11 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "51",
+       "$id": "47",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "52",
+        "$id": "48",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -465,20 +426,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "53",
+        "$id": "49",
         "Type": {
-         "$ref": "52"
+         "$ref": "48"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "54",
+       "$id": "50",
        "StatusCodes": [
         204
        ],
@@ -497,18 +455,18 @@
     }
    ],
    "Protocol": {
-    "$id": "55"
+    "$id": "51"
    },
    "Creatable": false,
    "Parent": "BytesClient"
   },
   {
-   "$id": "56",
+   "$id": "52",
    "Name": "Property",
    "Description": "",
    "Operations": [
     {
-     "$id": "57",
+     "$id": "53",
      "Name": "default",
      "ResourceName": "Property",
      "Parameters": [
@@ -516,7 +474,7 @@
        "$ref": "19"
       },
       {
-       "$id": "58",
+       "$id": "54",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -533,38 +491,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "59",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "60",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "61",
-        "Type": {
-         "$ref": "60"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "62",
+       "$id": "55",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "56",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -579,20 +510,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "64",
+        "$id": "57",
         "Type": {
-         "$ref": "63"
+         "$ref": "56"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "28"
+       "$id": "58",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "59",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "60",
+        "Type": {
+         "$ref": "59"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "61",
        "StatusCodes": [
         200
        ],
@@ -601,7 +556,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -616,7 +574,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "66",
+     "$id": "62",
      "Name": "base64",
      "ResourceName": "Property",
      "Parameters": [
@@ -624,7 +582,7 @@
        "$ref": "19"
       },
       {
-       "$id": "67",
+       "$id": "63",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -641,38 +599,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "68",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "69",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "70",
-        "Type": {
-         "$ref": "69"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "71",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "72",
+        "$id": "65",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -687,20 +618,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "73",
+        "$id": "66",
         "Type": {
-         "$ref": "72"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "28"
+       "$id": "67",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "68",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "69",
+        "Type": {
+         "$ref": "68"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "74",
+       "$id": "70",
        "StatusCodes": [
         200
        ],
@@ -709,7 +664,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -724,7 +682,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "75",
+     "$id": "71",
      "Name": "base64url",
      "ResourceName": "Property",
      "Parameters": [
@@ -732,7 +690,7 @@
        "$ref": "19"
       },
       {
-       "$id": "76",
+       "$id": "72",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -749,38 +707,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "77",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "78",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "79",
-        "Type": {
-         "$ref": "78"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "80",
+       "$id": "73",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "81",
+        "$id": "74",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -795,20 +726,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "82",
+        "$id": "75",
         "Type": {
-         "$ref": "81"
+         "$ref": "74"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "28"
+       "$id": "76",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "77",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "78",
+        "Type": {
+         "$ref": "77"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "83",
+       "$id": "79",
        "StatusCodes": [
         200
        ],
@@ -817,7 +772,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -832,7 +790,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "84",
+     "$id": "80",
      "Name": "base64urlArray",
      "ResourceName": "Property",
      "Parameters": [
@@ -840,7 +798,7 @@
        "$ref": "19"
       },
       {
-       "$id": "85",
+       "$id": "81",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -857,38 +815,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "86",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "87",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "88",
-        "Type": {
-         "$ref": "87"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "89",
+       "$id": "82",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "90",
+        "$id": "83",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -903,20 +834,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "84",
         "Type": {
-         "$ref": "90"
+         "$ref": "83"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "28"
+       "$id": "85",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "86",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "87",
+        "Type": {
+         "$ref": "86"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "92",
+       "$id": "88",
        "StatusCodes": [
         200
        ],
@@ -925,7 +880,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -941,18 +899,18 @@
     }
    ],
    "Protocol": {
-    "$id": "93"
+    "$id": "89"
    },
    "Creatable": false,
    "Parent": "BytesClient"
   },
   {
-   "$id": "94",
+   "$id": "90",
    "Name": "Header",
    "Description": "",
    "Operations": [
     {
-     "$id": "95",
+     "$id": "91",
      "Name": "default",
      "ResourceName": "Header",
      "Parameters": [
@@ -960,11 +918,11 @@
        "$ref": "19"
       },
       {
-       "$id": "96",
+       "$id": "92",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "97",
+        "$id": "93",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -980,11 +938,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "98",
+       "$id": "94",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "99",
+        "$id": "95",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -999,20 +957,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "100",
+        "$id": "96",
         "Type": {
-         "$ref": "99"
+         "$ref": "95"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "101",
+       "$id": "97",
        "StatusCodes": [
         204
        ],
@@ -1030,7 +985,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "102",
+     "$id": "98",
      "Name": "base64",
      "ResourceName": "Header",
      "Parameters": [
@@ -1038,11 +993,11 @@
        "$ref": "19"
       },
       {
-       "$id": "103",
+       "$id": "99",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "104",
+        "$id": "100",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -1058,11 +1013,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "105",
+       "$id": "101",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "106",
+        "$id": "102",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1077,20 +1032,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "103",
         "Type": {
-         "$ref": "106"
+         "$ref": "102"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "104",
        "StatusCodes": [
         204
        ],
@@ -1108,7 +1060,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "109",
+     "$id": "105",
      "Name": "base64url",
      "ResourceName": "Header",
      "Parameters": [
@@ -1116,11 +1068,11 @@
        "$ref": "19"
       },
       {
-       "$id": "110",
+       "$id": "106",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "111",
+        "$id": "107",
         "Name": "bytes",
         "Kind": "BytesBase64Url",
         "IsNullable": false
@@ -1136,11 +1088,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "112",
+       "$id": "108",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
+        "$id": "109",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1155,20 +1107,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "114",
+        "$id": "110",
         "Type": {
-         "$ref": "113"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "111",
        "StatusCodes": [
         204
        ],
@@ -1186,7 +1135,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "116",
+     "$id": "112",
      "Name": "base64urlArray",
      "ResourceName": "Header",
      "Parameters": [
@@ -1194,14 +1143,14 @@
        "$ref": "19"
       },
       {
-       "$id": "117",
+       "$id": "113",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "118",
+        "$id": "114",
         "Name": "Array",
         "ElementType": {
-         "$id": "119",
+         "$id": "115",
          "Name": "base64urlBytes",
          "Kind": "BytesBase64Url",
          "IsNullable": false
@@ -1220,11 +1169,11 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "120",
+       "$id": "116",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "121",
+        "$id": "117",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1239,20 +1188,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "118",
         "Type": {
-         "$ref": "121"
+         "$ref": "117"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "123",
+       "$id": "119",
        "StatusCodes": [
         204
        ],
@@ -1271,18 +1217,18 @@
     }
    ],
    "Protocol": {
-    "$id": "124"
+    "$id": "120"
    },
    "Creatable": false,
    "Parent": "BytesClient"
   },
   {
-   "$id": "125",
+   "$id": "121",
    "Name": "RequestBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "126",
+     "$id": "122",
      "Name": "default",
      "ResourceName": "RequestBody",
      "Parameters": [
@@ -1290,11 +1236,11 @@
        "$ref": "19"
       },
       {
-       "$id": "127",
+       "$id": "123",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "128",
+        "$id": "124",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -1310,11 +1256,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "129",
+       "$id": "125",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "130",
+        "$id": "126",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1329,19 +1275,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "131",
+        "$id": "127",
         "Type": {
-         "$ref": "130"
+         "$ref": "126"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "132",
+       "$id": "128",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "133",
+        "$id": "129",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1356,20 +1302,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "134",
+        "$id": "130",
         "Type": {
-         "$ref": "133"
+         "$ref": "129"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "135",
+       "$id": "131",
        "StatusCodes": [
         204
        ],
@@ -1390,7 +1333,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "136",
+     "$id": "132",
      "Name": "octetStream",
      "ResourceName": "RequestBody",
      "Parameters": [
@@ -1398,14 +1341,14 @@
        "$ref": "19"
       },
       {
-       "$id": "137",
+       "$id": "133",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "138",
+        "$id": "134",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "139",
+         "$id": "135",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -1415,9 +1358,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "140",
+        "$id": "136",
         "Type": {
-         "$ref": "138"
+         "$ref": "134"
         },
         "Value": "application/octet-stream"
        },
@@ -1431,11 +1374,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "141",
+       "$id": "137",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "142",
+        "$id": "138",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -1451,11 +1394,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "143",
+       "$id": "139",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "144",
+        "$id": "140",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1470,20 +1413,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "145",
+        "$id": "141",
         "Type": {
-         "$ref": "144"
+         "$ref": "140"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "146",
+       "$id": "142",
        "StatusCodes": [
         204
        ],
@@ -1504,7 +1444,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "147",
+     "$id": "143",
      "Name": "customContentType",
      "ResourceName": "RequestBody",
      "Parameters": [
@@ -1512,14 +1452,14 @@
        "$ref": "19"
       },
       {
-       "$id": "148",
+       "$id": "144",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "149",
+        "$id": "145",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "150",
+         "$id": "146",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -1529,9 +1469,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "151",
+        "$id": "147",
         "Type": {
-         "$ref": "149"
+         "$ref": "145"
         },
         "Value": "image/png"
        },
@@ -1545,11 +1485,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "152",
+       "$id": "148",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "153",
+        "$id": "149",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -1565,11 +1505,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "154",
+       "$id": "150",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
+        "$id": "151",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1584,20 +1524,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "156",
+        "$id": "152",
         "Type": {
-         "$ref": "155"
+         "$ref": "151"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "157",
+       "$id": "153",
        "StatusCodes": [
         204
        ],
@@ -1618,7 +1555,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "158",
+     "$id": "154",
      "Name": "base64",
      "ResourceName": "RequestBody",
      "Parameters": [
@@ -1626,11 +1563,11 @@
        "$ref": "19"
       },
       {
-       "$id": "159",
+       "$id": "155",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "160",
+        "$id": "156",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -1646,11 +1583,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "161",
+       "$id": "157",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "162",
+        "$id": "158",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1665,19 +1602,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "163",
+        "$id": "159",
         "Type": {
-         "$ref": "162"
+         "$ref": "158"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "164",
+       "$id": "160",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "165",
+        "$id": "161",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1692,20 +1629,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "166",
+        "$id": "162",
         "Type": {
-         "$ref": "165"
+         "$ref": "161"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "167",
+       "$id": "163",
        "StatusCodes": [
         204
        ],
@@ -1726,7 +1660,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "168",
+     "$id": "164",
      "Name": "base64url",
      "ResourceName": "RequestBody",
      "Parameters": [
@@ -1734,11 +1668,11 @@
        "$ref": "19"
       },
       {
-       "$id": "169",
+       "$id": "165",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "170",
+        "$id": "166",
         "Name": "bytes",
         "Kind": "BytesBase64Url",
         "IsNullable": false
@@ -1754,11 +1688,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "171",
+       "$id": "167",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "172",
+        "$id": "168",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1773,19 +1707,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "173",
+        "$id": "169",
         "Type": {
-         "$ref": "172"
+         "$ref": "168"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "174",
+       "$id": "170",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "175",
+        "$id": "171",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1800,20 +1734,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "176",
+        "$id": "172",
         "Type": {
-         "$ref": "175"
+         "$ref": "171"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "177",
+       "$id": "173",
        "StatusCodes": [
         204
        ],
@@ -1835,18 +1766,18 @@
     }
    ],
    "Protocol": {
-    "$id": "178"
+    "$id": "174"
    },
    "Creatable": false,
    "Parent": "BytesClient"
   },
   {
-   "$id": "179",
+   "$id": "175",
    "Name": "ResponseBody",
    "Description": "",
    "Operations": [
     {
-     "$id": "180",
+     "$id": "176",
      "Name": "default",
      "ResourceName": "ResponseBody",
      "Parameters": [
@@ -1854,11 +1785,11 @@
        "$ref": "19"
       },
       {
-       "$id": "181",
+       "$id": "177",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "182",
+        "$id": "178",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1873,32 +1804,32 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "183",
+        "$id": "179",
         "Type": {
-         "$ref": "182"
+         "$ref": "178"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "184",
+       "$id": "180",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "185",
+        "$id": "181",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1910,7 +1841,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "186",
+     "$id": "182",
      "Name": "octetStream",
      "ResourceName": "ResponseBody",
      "Parameters": [
@@ -1918,11 +1849,11 @@
        "$ref": "19"
       },
       {
-       "$id": "187",
+       "$id": "183",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "188",
+        "$id": "184",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1937,32 +1868,32 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "189",
+        "$id": "185",
         "Type": {
-         "$ref": "188"
+         "$ref": "184"
         },
-        "Value": "application/json"
+        "Value": "application/octet-stream"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "190",
+       "$id": "186",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "191",
+        "$id": "187",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/octet-stream"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -1974,7 +1905,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "192",
+     "$id": "188",
      "Name": "customContentType",
      "ResourceName": "ResponseBody",
      "Parameters": [
@@ -1982,11 +1913,11 @@
        "$ref": "19"
       },
       {
-       "$id": "193",
+       "$id": "189",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "194",
+        "$id": "190",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2001,32 +1932,32 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "195",
+        "$id": "191",
         "Type": {
-         "$ref": "194"
+         "$ref": "190"
         },
-        "Value": "application/json"
+        "Value": "image/png"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "196",
+       "$id": "192",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "197",
+        "$id": "193",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "image/png"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2038,7 +1969,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "198",
+     "$id": "194",
      "Name": "base64",
      "ResourceName": "ResponseBody",
      "Parameters": [
@@ -2046,11 +1977,11 @@
        "$ref": "19"
       },
       {
-       "$id": "199",
+       "$id": "195",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "200",
+        "$id": "196",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2065,32 +1996,32 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "201",
+        "$id": "197",
         "Type": {
-         "$ref": "200"
+         "$ref": "196"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "202",
+       "$id": "198",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "203",
+        "$id": "199",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2102,7 +2033,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "204",
+     "$id": "200",
      "Name": "base64url",
      "ResourceName": "ResponseBody",
      "Parameters": [
@@ -2110,11 +2041,11 @@
        "$ref": "19"
       },
       {
-       "$id": "205",
+       "$id": "201",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "206",
+        "$id": "202",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2129,32 +2060,32 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "207",
+        "$id": "203",
         "Type": {
-         "$ref": "206"
+         "$ref": "202"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "208",
+       "$id": "204",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "209",
+        "$id": "205",
         "Name": "base64urlBytes",
         "Kind": "BytesBase64Url",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -2167,7 +2098,7 @@
     }
    ],
    "Protocol": {
-    "$id": "210"
+    "$id": "206"
    },
    "Creatable": false,
    "Parent": "BytesClient"

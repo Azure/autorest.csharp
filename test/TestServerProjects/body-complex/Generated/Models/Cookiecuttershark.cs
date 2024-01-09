@@ -29,11 +29,17 @@ namespace body_complex.Models
         /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cookiecuttershark"/>, <see cref="Goblinshark"/>, <see cref="Salmon"/>, <see cref="Sawshark"/>, <see cref="Shark"/> and <see cref="SmartSalmon"/>.
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="age"></param>
         /// <param name="birthday"></param>
-        internal Cookiecuttershark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday) : base(fishtype, species, length, siblings, age, birthday)
+        internal Cookiecuttershark(string fishtype, string species, float length, IList<Fish> siblings, IDictionary<string, BinaryData> serializedAdditionalRawData, int? age, DateTimeOffset birthday) : base(fishtype, species, length, siblings, serializedAdditionalRawData, age, birthday)
         {
             Fishtype = fishtype ?? "cookiecuttershark";
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Cookiecuttershark"/> for deserialization. </summary>
+        internal Cookiecuttershark()
+        {
         }
     }
 }

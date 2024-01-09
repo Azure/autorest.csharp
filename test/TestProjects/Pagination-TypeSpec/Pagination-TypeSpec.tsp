@@ -16,13 +16,12 @@ using Azure.ClientGenerator.Core;
 //
 
 // TODO: Use `Uri` type when available: https://github.com/microsoft/cadl/issues/654
+@versioned(Versions)
 @service(
     {
-        title: "Pagination Service",
-        version: "2022-05-13"
+        title: "Pagination Service"
     }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
   "{pagnationUri}",
   "Pagination Service",
@@ -32,6 +31,11 @@ using Azure.ClientGenerator.Core;
 )
 @useAuth(OAuth2Auth<[AuthFlow]>)
 namespace Pagination;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "2022-05-13"
+}
 
 model AuthFlow {
     type: OAuth2FlowType.clientCredentials;

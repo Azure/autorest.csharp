@@ -5,11 +5,46 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class Grouper
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         public Grouper()
         {
@@ -18,10 +53,12 @@ namespace azure_parameter_grouping.Models
         /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         /// <param name="groupedConstant"> A grouped parameter that is a constant. </param>
         /// <param name="groupedParameter"> Optional parameter part of a parameter grouping. </param>
-        internal Grouper(EncryptionAlgorithmType? groupedConstant, string groupedParameter)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Grouper(EncryptionAlgorithmType? groupedConstant, string groupedParameter, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             GroupedConstant = groupedConstant;
             GroupedParameter = groupedParameter;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A grouped parameter that is a constant. </summary>

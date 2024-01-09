@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core;
 
 namespace Authentication.Http.Custom
@@ -13,25 +12,5 @@ namespace Authentication.Http.Custom
     /// <summary> Client options for CustomClient. </summary>
     public partial class CustomClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "1.0.0". </summary>
-            V1_0_0 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of CustomClientOptions. </summary>
-        public CustomClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V1_0_0 => "1.0.0",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }

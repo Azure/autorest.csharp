@@ -4,22 +4,40 @@
  "ApiVersions": [
   "2022-05-15-preview"
  ],
- "Enums": [],
- "Models": [
+ "Enums": [
   {
    "$id": "2",
+   "Name": "Versions",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "2022-05-15-preview",
+     "Value": "2022-05-15-preview"
+    }
+   ],
+   "Namespace": "ParametersCadl",
+   "Description": "",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "4",
    "Name": "Result",
    "Namespace": "ParametersCadl.ParameterOrders",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "5",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "4",
+      "$id": "6",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -32,21 +50,31 @@
  ],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "7",
    "Name": "ParametersCadlClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "8"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "9",
+   "Name": "ParameterOrders",
    "Description": "",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "10",
      "Name": "Operation",
      "ResourceName": "ParameterOrders",
      "Parameters": [
       {
-       "$id": "7",
+       "$id": "11",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "8",
+        "$id": "12",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -62,11 +90,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "9",
+       "$id": "13",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "10",
+        "$id": "14",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -82,11 +110,41 @@
        "Kind": "Method"
       },
       {
-       "$id": "11",
+       "$id": "15",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Type": {
+        "$id": "16",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$id": "17",
+        "Type": {
+         "$id": "18",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-05-15-preview"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "12",
+        "$id": "20",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -101,57 +159,29 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "21",
         "Type": {
-         "$ref": "12"
+         "$ref": "20"
         },
         "Value": "application/json"
-       }
-      },
-      {
-       "$id": "14",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "15",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "16",
-        "Type": {
-         "$id": "17",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "2022-05-15-preview"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "4"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -163,16 +193,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "23",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
      "Parameters": [
       {
-       "$id": "20",
+       "$id": "24",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "21",
+        "$id": "25",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -188,11 +218,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "22",
+       "$id": "26",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "23",
+        "$id": "27",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -208,11 +238,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "29",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -227,29 +257,29 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "30",
         "Type": {
-         "$ref": "25"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "14"
       }
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "4"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "HEAD",
@@ -262,9 +292,10 @@
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "32"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "ParametersCadlClient"
   }
  ]
 }

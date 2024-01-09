@@ -3,7 +3,6 @@
 
 import {
     SdkClient,
-    createSdkContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
@@ -39,8 +38,7 @@ import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType,
-    InputType
+    InputPrimitiveType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
@@ -50,20 +48,21 @@ import { resolveServers } from "./typespecServer.js";
 import { InputClient } from "../type/inputClient.js";
 import { ClientKind } from "../type/clientKind.js";
 import { InputOperation } from "../type/inputOperation.js";
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import { getUsages, navigateModels } from "./model.js";
 import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
-import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
+import { createContentTypeOrAcceptParameter } from "./utils.js";
 
 export function createModel(
-    context: EmitContext<NetEmitterOptions>
+    sdkContext: SdkContext<NetEmitterOptions>
 ): CodeModel {
-    const services = listServices(context.program);
+    const services = listServices(sdkContext.emitContext.program);
     if (services.length === 0) {
-        services.push({ type: context.program.getGlobalNamespaceType() });
+        services.push({
+            type: sdkContext.emitContext.program.getGlobalNamespaceType()
+        });
     }
 
     // TODO: support multiple service. Current only chose the first service.
@@ -73,72 +72,42 @@ export function createModel(
         throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
-    return createModelForService(context, service);
+    return createModelForService(sdkContext, service);
 }
 
 export function createModelForService(
-    context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
-    const emitterOptions = resolveOptions(context);
-    const program = context.program;
-    const sdkContext = createSdkContext(
-        context,
-        "@azure-tools/typespec-csharp"
-    );
-    const title = service.title;
+    const emitterOptions = resolveOptions(sdkContext.emitContext);
+    const program = sdkContext.emitContext.program;
     const serviceNamespaceType = service.type;
-    const apiVersions: Set<string> = new Set<string>();
-    let version = service.version;
-    if (version && version !== mockApiVersion) {
-        apiVersions.add(version);
-    }
+
+    const apiVersions: Set<string> | undefined = new Set<string>();
+    let defaultApiVersion: string | undefined = undefined;
     const versions = getVersions(program, service.type)[1]?.getVersions();
-    if (versions) {
+    if (versions && versions.length > 0) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
         }
-        version = versions[versions.length - 1].value; //default version
+        defaultApiVersion = versions[versions.length - 1].value;
     }
+    const defaultApiVersionConstant: InputConstant | undefined =
+        defaultApiVersion
+            ? {
+                  Type: {
+                      Name: "String",
+                      Kind: InputTypeKind.String,
+                      IsNullable: false
+                  } as InputPrimitiveType,
+                  Value: defaultApiVersion
+              }
+            : undefined;
 
-    if (apiVersions.size === 0) {
-        $lib.reportDiagnostic(program, {
-            code: "No-APIVersion",
-            format: { service: service.type.name },
-            target: NoTarget
-        });
-    }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-    const apiVersionParam: InputParameter = {
-        Name: "apiVersion",
-        NameInRequest: "api-version",
-        Description: "",
-        Type: {
-            Name: "String",
-            Kind: InputTypeKind.String,
-            IsNullable: false
-        } as InputPrimitiveType,
-        Location: RequestLocation.Query,
-        IsRequired: true,
-        IsApiVersion: true,
-        IsContentType: false,
-        IsEndpoint: false,
-        IsResourceParameter: false,
-        SkipUrlEncoding: false,
-        Explode: false,
-        Kind: InputOperationParameterKind.Client,
-        DefaultValue: {
-            Type: {
-                Name: "String",
-                Kind: InputTypeKind.String,
-                IsNullable: false
-            } as InputPrimitiveType,
-            Value: version
-        } as InputConstant
-    };
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
@@ -151,7 +120,6 @@ export function createModelForService(
     let urlParameters: InputParameter[] | undefined = undefined;
     let url: string = "";
     const convenienceOperations: HttpOperation[] = [];
-    let lroMonitorOperations: Set<Operation>;
 
     //create endpoint parameter from servers
     if (servers !== undefined) {
@@ -178,17 +146,16 @@ export function createModelForService(
     }
     logger.info("routes:" + routes.length);
 
-    lroMonitorOperations = getAllLroMonitorOperations(routes, sdkContext);
     const clients: InputClient[] = [];
     const dpgClients = emitterOptions.branded
         ? listClients(sdkContext)
         : listClientsByNamespace(
-              context,
-              context.program.getGlobalNamespaceType()
+              sdkContext.emitContext,
+              sdkContext.emitContext.program.getGlobalNamespaceType()
           );
     for (const client of dpgClients) {
         clients.push(emitClient(client));
-        addChildClients(context, client, clients);
+        addChildClients(sdkContext.emitContext, client, clients);
     }
 
     for (const client of clients) {
@@ -196,31 +163,17 @@ export function createModelForService(
             const apiVersionIndex = op.Parameters.findIndex(
                 (value: InputParameter) => value.IsApiVersion
             );
-            if (apiVersionIndex !== -1) {
-                const apiVersionInOperation = op.Parameters[apiVersionIndex];
+            if (apiVersionIndex === -1) {
+                continue;
+            }
+            const apiVersionInOperation = op.Parameters[apiVersionIndex];
+            if (defaultApiVersionConstant !== undefined) {
                 if (!apiVersionInOperation.DefaultValue?.Value) {
                     apiVersionInOperation.DefaultValue =
-                        apiVersionParam.DefaultValue;
-                }
-                /**
-                 * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
-                 * Three checkpoints:
-                 * the parameter is query parameter,
-                 * it is client parameter
-                 * it does not has default value, or the default value is included in the global service apiVersion.
-                 */
-                if (
-                    apiVersions.has(
-                        apiVersionInOperation.DefaultValue?.Value
-                    ) &&
-                    apiVersionInOperation.Kind ===
-                        InputOperationParameterKind.Client &&
-                    apiVersionInOperation.Location === apiVersionParam.Location
-                ) {
-                    op.Parameters[apiVersionIndex] = apiVersionParam;
+                        defaultApiVersionConstant;
                 }
             } else {
-                op.Parameters.push(apiVersionParam);
+                apiVersionInOperation.Kind = InputOperationParameterKind.Method;
             }
         }
     }
@@ -253,12 +206,13 @@ export function createModelForService(
                 client as SdkClient
             );
             for (const dpgGroup of dpgOperationGroups) {
-                clients.push(
-                    emitClient(
-                        { ...dpgGroup, name: dpgGroup.type.name },
-                        client
-                    )
-                );
+                var dotnetOperationGroup = {
+                    ...dpgGroup,
+                    name: dpgGroup.type.name
+                };
+                var subClient = emitClient(dotnetOperationGroup, client);
+                clients.push(subClient);
+                addChildClients(context, dotnetOperationGroup, clients);
             }
         } else {
             const dpgOperationGroups = listOperationGroupsByClient(
@@ -294,7 +248,7 @@ export function createModelForService(
     ): InputClient {
         const operations = emitterOptions.branded
             ? listOperationsInOperationGroup(sdkContext, client)
-            : listOperations(context, client);
+            : listOperations(sdkContext.emitContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
@@ -312,12 +266,11 @@ export function createModelForService(
             Parent: parent === undefined ? undefined : getClientName(parent)
         } as InputClient;
         for (const op of operations) {
-            if (lroMonitorOperations.has(op)) continue;
             const httpOperation = ignoreDiagnostics(
                 getHttpOperation(program, op)
             );
             const inputOperation: InputOperation = loadOperation(
-                context,
+                sdkContext,
                 httpOperation,
                 url,
                 urlParameters,
@@ -332,24 +285,6 @@ export function createModelForService(
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
-    }
-
-    function getAllLroMonitorOperations(
-        routes: HttpOperation[],
-        context: SdkContext
-    ): Set<Operation> {
-        const lroMonitorOperations = new Set<Operation>();
-        for (const operation of routes) {
-            const operationLink = getOperationLink(
-                context.program,
-                operation.operation,
-                "polling"
-            );
-            if (operationLink !== undefined) {
-                lroMonitorOperations.add(operationLink.linkedOperation);
-            }
-        }
-        return lroMonitorOperations;
     }
 }
 
@@ -406,41 +341,6 @@ function applyDefaultContentTypeAndAcceptParameter(
             )
         );
     }
-}
-
-function createContentTypeOrAcceptParameter(
-    mediaTypes: string[],
-    name: string,
-    nameInRequest: string
-): InputParameter {
-    const isContentType: boolean =
-        nameInRequest.toLowerCase() === "content-type";
-    const inputType: InputType = {
-        Name: "String",
-        Kind: InputTypeKind.String,
-        IsNullable: false
-    } as InputPrimitiveType;
-    return {
-        Name: name,
-        NameInRequest: nameInRequest,
-        Type: inputType,
-        Location: RequestLocation.Header,
-        IsApiVersion: false,
-        IsResourceParameter: false,
-        IsContentType: isContentType,
-        IsRequired: true,
-        IsEndpoint: false,
-        SkipUrlEncoding: false,
-        Explode: false,
-        Kind: InputOperationParameterKind.Constant,
-        DefaultValue:
-            mediaTypes.length === 1
-                ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
-                : undefined
-    } as InputParameter;
 }
 
 function processNamespace(

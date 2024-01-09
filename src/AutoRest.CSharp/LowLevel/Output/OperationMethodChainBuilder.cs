@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Output.Models
                     throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
                 }
 
-                if (responseType.TryCast<ModelTypeProvider>(out var modelType))
+                if (responseType is { IsFrameworkType: false, Implementation: ModelTypeProvider modelType })
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
                     var propertyType = property.ValueType.WithNullable(false);
@@ -349,6 +349,12 @@ namespace AutoRest.CSharp.Output.Models
             return null;
         }
 
+        private IReadOnlyList<string>? GetReturnedResponseContentType()
+        {
+            var responses = Operation.Responses.Where(r => !r.IsErrorResponse);
+            return responses.Any() ? responses.First().ContentTypes : null;
+        }
+
         private ConvenienceMethod? BuildConvenienceMethod(bool shouldRequestContextOptional, ConvenienceMethodGenerationInfo generationInfo)
         {
             if (!generationInfo.IsConvenienceMethodGenerated)
@@ -374,7 +380,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (parameterChain.IsSpreadParameter)
                     {
-                        if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
+                        if (convenienceParameter.Type is { IsFrameworkType: false, Implementation: ModelTypeProvider model })
                         {
                             var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
 
@@ -402,16 +408,29 @@ namespace AutoRest.CSharp.Output.Models
             }
             var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, Operation.RequestMediaTypes, diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, Operation.RequestMediaTypes, GetReturnedResponseContentType(), diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }
 
         private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
         {
             var fields = model.Fields;
+            var addedParameters = new HashSet<string>();
+            foreach (var parameter in fields.PublicConstructorParameters)
+            {
+                addedParameters.Add(parameter.Name);
+                yield return parameter;
+            }
+
             foreach (var parameter in fields.SerializationParameters)
             {
-                var field = fields.GetFieldByParameter(parameter);
+                if (addedParameters.Contains(parameter.Name))
+                    continue;
+
+                var field = fields.GetFieldByParameterName(parameter.Name);
                 var inputProperty = fields.GetInputByField(field);
+                if (inputProperty is null)
+                    continue; // this means this is an additional properties property, which should never happen.
+
                 if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
                     continue;
                 var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);

@@ -37,12 +37,13 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
+                BaseModel: null,
                 DerivedModels: derivedModels,
+                InheritedDictionaryType: null,
                 IsNullable: true);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
@@ -87,12 +88,13 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
+                BaseModel: null,
                 DerivedModels: derivedModels,
+                InheritedDictionaryType: null,
                 IsNullable: true);
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
@@ -177,12 +179,13 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Accessibility: "accessibility",
                 Deprecated: "test",
                 Description: "sample",
-                BaseModel: null,
                 DiscriminatorValue: null,
                 DiscriminatorPropertyName: null,
                 Usage: new InputModelTypeUsage(),
                 Properties: modelProps,
+                BaseModel: null,
                 DerivedModels: derivedModels,
+                InheritedDictionaryType: null,
                 IsNullable: true);
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",

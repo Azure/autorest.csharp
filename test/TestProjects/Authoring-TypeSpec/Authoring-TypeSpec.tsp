@@ -12,10 +12,10 @@ using Azure.ClientGenerator.Core;
 
 // NOTE: These features are missing:
 // - Security definition for apiKey
+@versioned(Versions)
 @service(
     {
-        title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
-        version: "2022-05-15-preview"
+        title: "Microsoft Cognitive Language Service - Analyze Text Authoring"
     }
 )
 @server(
@@ -25,9 +25,13 @@ using Azure.ClientGenerator.Core;
     Endpoint: Endpoint,
   }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @route("/authoring/analyze-text/")
 namespace AuthoringTypeSpec;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "2022-05-15-preview"
+}
 
 // Common Parameters
 

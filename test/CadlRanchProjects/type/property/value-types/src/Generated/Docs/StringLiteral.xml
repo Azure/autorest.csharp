@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetStringLiteralAsync.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response<StringLiteralProperty> response = await client.GetStringLiteralAsync();
 ]]></code>
 This sample shows how to call GetStringLiteralAsync with all parameters.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response<StringLiteralProperty> response = await client.GetStringLiteralAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<StringLiteralProperty> response = await client.GetStringLiteralAsync();
       <example>
 This sample shows how to call GetStringLiteral.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response<StringLiteralProperty> response = client.GetStringLiteral();
 ]]></code>
 This sample shows how to call GetStringLiteral with all parameters.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response<StringLiteralProperty> response = client.GetStringLiteral();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<StringLiteralProperty> response = client.GetStringLiteral();
       <example>
 This sample shows how to call GetStringLiteralAsync and parse the result.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response response = await client.GetStringLiteralAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetStringLiteralAsync with all parameters and parse the result.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response response = await client.GetStringLiteralAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call GetStringLiteral and parse the result.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response response = client.GetStringLiteral(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetStringLiteral with all parameters and parse the result.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 Response response = client.GetStringLiteral(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 StringLiteralProperty body = new StringLiteralProperty();
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 StringLiteralProperty body = new StringLiteralProperty();
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 StringLiteralProperty body = new StringLiteralProperty();
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 StringLiteralProperty body = new StringLiteralProperty();
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-StringLiteral client = new ValueTypesClient().GetStringLiteralClient(apiVersion: "1.0.0");
+StringLiteral client = new ValueTypesClient().GetStringLiteralClient();
 
 using RequestContent content = RequestContent.Create(new
 {

@@ -15,7 +15,16 @@ import {
     projectedNameClientKey,
     projectedNameJsonKey
 } from "../constants.js";
-import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    SdkContext,
+    getSdkModel
+} from "@azure-tools/typespec-client-generator-core";
+import { InputParameter } from "../type/inputParameter.js";
+import { InputPrimitiveType, InputType } from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { RequestLocation } from "../type/requestLocation.js";
+import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
+import { InputConstant } from "../type/inputConstant.js";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -35,19 +44,6 @@ export function getNameForTemplate(model: Model): string {
 
     return model.name;
 }
-
-const anonCounter = (function () {
-    let count = 0; // Private counter variable
-
-    return {
-        increment: function () {
-            return ++count;
-        },
-        getCount: function () {
-            return count;
-        }
-    };
-})();
 
 export function getProjectedNameForCsharp(
     context: SdkContext,
@@ -71,8 +67,8 @@ export function getTypeName(
     if (type.kind === "Model") {
         name = getNameForTemplate(type);
         if (name === "") {
-            anonCounter.increment();
-            return `Anon_${anonCounter.getCount()}`;
+            const sdkModel = getSdkModel(context, type as Model);
+            return sdkModel.generatedName || sdkModel.name;
         }
         return name;
     }
@@ -87,4 +83,39 @@ export function getSerializeName(
         getProjectedName(context.program, type, projectedNameJsonKey) ??
         type.name
     );
+}
+
+export function createContentTypeOrAcceptParameter(
+    mediaTypes: string[],
+    name: string,
+    nameInRequest: string
+): InputParameter {
+    const isContentType: boolean =
+        nameInRequest.toLowerCase() === "content-type";
+    const inputType: InputType = {
+        Name: "String",
+        Kind: InputTypeKind.String,
+        IsNullable: false
+    } as InputPrimitiveType;
+    return {
+        Name: name,
+        NameInRequest: nameInRequest,
+        Type: inputType,
+        Location: RequestLocation.Header,
+        IsApiVersion: false,
+        IsResourceParameter: false,
+        IsContentType: isContentType,
+        IsRequired: true,
+        IsEndpoint: false,
+        SkipUrlEncoding: false,
+        Explode: false,
+        Kind: InputOperationParameterKind.Constant,
+        DefaultValue:
+            mediaTypes.length === 1
+                ? ({
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
+                : undefined
+    } as InputParameter;
 }

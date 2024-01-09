@@ -5,37 +5,37 @@
       <example>
 This sample shows how to call GetStringsOnlyAsync.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response<object> response = await client.GetStringsOnlyAsync();
+Response<GetResponse> response = await client.GetStringsOnlyAsync();
 ]]></code>
 This sample shows how to call GetStringsOnlyAsync with all parameters.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response<object> response = await client.GetStringsOnlyAsync();
+Response<GetResponse> response = await client.GetStringsOnlyAsync();
 ]]></code></example>
     </member>
     <member name="GetStringsOnly(CancellationToken)">
       <example>
 This sample shows how to call GetStringsOnly.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response<object> response = client.GetStringsOnly();
+Response<GetResponse> response = client.GetStringsOnly();
 ]]></code>
 This sample shows how to call GetStringsOnly with all parameters.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
-Response<object> response = client.GetStringsOnly();
+Response<GetResponse> response = client.GetStringsOnly();
 ]]></code></example>
     </member>
     <member name="GetStringsOnlyAsync(RequestContext)">
       <example>
 This sample shows how to call GetStringsOnlyAsync and parse the result.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = await client.GetStringsOnlyAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetStringsOnlyAsync with all parameters and parse the result.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = await client.GetStringsOnlyAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
       <example>
 This sample shows how to call GetStringsOnly and parse the result.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = client.GetStringsOnly(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call GetStringsOnly with all parameters and parse the result.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = client.GetStringsOnly(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("prop").ToString());
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = await client.SendAsync(SendRequestProp.A);
 ]]></code></example>
@@ -92,13 +92,13 @@ Response response = await client.SendAsync(SendRequestProp.A);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 Response response = client.Send(SendRequestProp.A);
 ]]></code></example>
@@ -107,7 +107,7 @@ Response response = client.Send(SendRequestProp.A);
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -119,7 +119,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SendAsync with all request content.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -134,7 +134,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -146,7 +146,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Send with all request content.
 <code><![CDATA[
-StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
+StringsOnly client = new UnionClient().GetStringsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {

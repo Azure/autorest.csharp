@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -111,229 +110,14 @@ namespace AutoRest.CSharp.Output.Models
         {
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
-            HashSet<string> createdNames = new HashSet<string>();
-            Dictionary<InputModelType, InputModelType> replacements = new Dictionary<InputModelType, InputModelType>();
             foreach (var model in _rootNamespace.Models)
             {
-                InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
-                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes);
 
-                InputModelType? replacement = null;
-                if (model.IsAnonymousModel)
-                {
-                    var newName = GetAnonModelName(model, createdNames);
-                    if (newName is not null)
-                    {
-                        replacement = model.Update(newName, GetNewUsage(model));
-                        createdNames.Add(replacement.Name);
-                        replacements.Add(model, replacement);
-                    }
-                }
-
-                var typeProvider = new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType);
-                models.Add(replacement ?? model, typeProvider);
-            }
-
-            foreach (var pair in replacements)
-            {
-                var modelsNeedingReplacement = GetAllReferences(pair.Key, models);
-                foreach (var (modelContainingEnum, property) in modelsNeedingReplacement)
-                {
-                    models[modelContainingEnum] = models[modelContainingEnum].ReplaceProperty(property, pair.Value);
-                }
+                var typeProvider = new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, defaultDerivedType);
+                models.Add(model, typeProvider);
             }
         }
-
-        private InputModelTypeUsage GetNewUsage(InputModelType anonModel)
-        {
-            var containingType = GetFirstNonAnonContainingType(anonModel);
-            if (containingType is not null)
-                return containingType.Usage;
-
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
-            foreach (var client in _rootNamespace.Clients)
-            {
-                foreach (var operation in client.Operations)
-                {
-                    foreach (var parameter in operation.Parameters)
-                    {
-                        if (IsSameType(parameter.Type, anonModel))
-                        {
-                            usage |= InputModelTypeUsage.Input;
-                            break;
-                        }
-                    }
-                    foreach (var response in operation.Responses)
-                    {
-                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
-                            continue;
-
-                        if (IsSameType(responseType, anonModel))
-                        {
-                            usage |= InputModelTypeUsage.Output;
-                        }
-                    }
-
-                }
-            }
-            return usage;
-        }
-
-        private InputModelType? GetFirstNonAnonContainingType(InputModelType anonModel)
-        {
-            var containingType = _rootNamespace.Models.Where(m => m.GetProperty(anonModel) is not null).FirstOrDefault();
-            return containingType is not null && containingType.IsAnonymousModel ? GetFirstNonAnonContainingType(containingType) : containingType;
-        }
-
-        private Dictionary<InputModelType, InputModelProperty> GetAllReferences(InputModelType key, IDictionary<InputModelType, ModelTypeProvider> models)
-        {
-            var result = new Dictionary<InputModelType, InputModelProperty>();
-            foreach (var pair in models)
-            {
-                var property = pair.Value.GetProperty(key);
-                if (property is not null)
-                {
-                    result.Add(pair.Key, property);
-                }
-            }
-            return result;
-        }
-
-        private string? GetAnonModelName(InputModelType anonModel, HashSet<string> createdNames)
-        {
-            List<List<string>> names = new List<List<string>>();
-            //check operation parameters first
-            foreach (var client in _rootNamespace.Clients)
-            {
-                foreach (var operation in client.Operations)
-                {
-                    foreach (var parameter in operation.Parameters)
-                    {
-                        if (IsSameType(parameter.Type, anonModel))
-                        {
-                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(parameter.Type, parameter.Name).ToCleanName() });
-                        }
-                        else
-                        {
-                            FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names);
-                        }
-                    }
-                    foreach (var response in operation.Responses)
-                    {
-                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
-                            continue;
-
-                        if (IsSameType(responseType, anonModel))
-                        {
-                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, responseType.Name).ToCleanName() });
-                        }
-                        else
-                        {
-                            FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names);
-                        }
-                    }
-                }
-            }
-
-            if (names.Count == 0)
-            {
-                foreach (var model in _rootNamespace.Models)
-                {
-                    foreach (var property in model.Properties)
-                    {
-                        if (IsSameType(property.Type, anonModel))
-                            return $"{model.Name.FirstCharToUpperCase()}{property.Name.FirstCharToUpperCase()}";
-                    }
-                }
-                return $"{_rootNamespace.Name}Model{anonModel.Name}";
-            }
-            if (names.Count == 1)
-            {
-                var newName = $"{names[0][0]}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                if (createdNames.Contains(newName))
-                {
-                    if (names[0].Count >= 2)
-                    {
-                        newName = $"{names[0][1].FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                    }
-                    else
-                    {
-                        newName = $"{names[0][0].FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                    }
-                }
-                return newName;
-            }
-            else
-            {
-                int smallest = int.MaxValue;
-                foreach (var list in names)
-                {
-                    smallest = Math.Min(smallest, list.Count);
-                }
-                int equalElements = 0;
-                for (int offset = 0; offset < smallest; offset++)
-                {
-                    string comparator = names[0][names[0].Count - 1 - offset];
-                    if (names.All(list => list[list.Count - 1 - offset] == comparator))
-                    {
-                        equalElements++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                if (equalElements == 1)
-                {
-                    return $"{_rootNamespace.Name.FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                }
-                else
-                {
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = names[0].Count - equalElements; i < names[0].Count; i++)
-                    {
-                        sb.Append(names[0][i].FirstCharToUpperCase());
-                    }
-                    return sb.ToString();
-                }
-            }
-        }
-
-        private void FindMatchesRecursively(InputType type, InputModelType anonModel, HashSet<string> createdNames, List<string> current, List<List<string>> names)
-        {
-            InputModelType? model = GetInputModelType(type);
-
-            if (model is null)
-                return;
-
-            //check other model properties
-            foreach (var property in model.Properties)
-            {
-                if (IsSameType(property.Type, anonModel))
-                {
-                    names.Add(new List<string>(current) { GetNameWithCorrectPluralization(property.Type, property.Name).ToCleanName() });
-                }
-                else
-                {
-                    FindMatchesRecursively(property.Type, anonModel, createdNames, new List<string>(current) { GetTypeName(property.Type) }, names);
-                }
-            }
-        }
-
-        private string GetTypeName(InputType type) => type switch
-        {
-            InputListType listType => GetTypeName(listType.ElementType),
-            InputDictionaryType dictionaryType => GetTypeName(dictionaryType.ValueType),
-            _ => type.Name
-        };
-
-        private InputModelType? GetInputModelType(InputType type) => type switch
-        {
-            InputModelType model => model,
-            InputListType listType => GetInputModelType(listType.ElementType),
-            InputDictionaryType dictionaryType => GetInputModelType(dictionaryType.ValueType),
-            _ => null
-        };
 
         private string GetNameWithCorrectPluralization(InputType type, string name)
         {
@@ -349,20 +133,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private bool IsSameType(InputType type, InputModelType anonModel)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    return IsSameType(listType.ElementType, anonModel);
-                case InputDictionaryType dictionaryType:
-                    return IsSameType(dictionaryType.ValueType, anonModel);
-                default:
-                    return type.Equals(anonModel);
-            }
-        }
-
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, IReadOnlyList<InputModelType> derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
@@ -373,7 +144,8 @@ namespace AutoRest.CSharp.Output.Models
                 InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
 
                 //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+                // TODO -- remove this condition completely when remove the UseModelReaderWriter flag
+                if (!Configuration.UseModelReaderWriter && !actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
                     return null;
 
                 string defaultDerivedName = $"Unknown{actualBase.Name}";
@@ -392,11 +164,12 @@ namespace AutoRest.CSharp.Output.Models
                         Array.Empty<InputModelType>(),
                         "Unknown", //TODO: do we need to support extensible enum / int values?
                         null,
+                        null,
                         false)
                     {
                         IsUnknownDiscriminatorModel = true
                     };
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, null);
                     defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                     models.Add(unknownDerviedType, defaultDerivedType);
                 }
@@ -473,12 +246,6 @@ namespace AutoRest.CSharp.Output.Models
                 : $"Client options for {_libraryName} library clients.";
 
             IReadOnlyList<string>? apiVersions = _sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions;
-            if (!Configuration.IsBranded)
-            {
-                if (apiVersions.Count > 1)
-                    throw new InvalidOperationException("Multiple API versions are not supported in the unbranded path.");
-                apiVersions = null;
-            }
             return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel)
             {
                 AdditionalParameters = parametersInClientOptions

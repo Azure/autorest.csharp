@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core;
 
 namespace MultipleMediaTypes
@@ -13,25 +12,5 @@ namespace MultipleMediaTypes
     /// <summary> Client options for MultipleMediaTypesClient. </summary>
     public partial class MultipleMediaTypesClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V2021_03_25;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "2021-03-25". </summary>
-            V2021_03_25 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of MultipleMediaTypesClientOptions. </summary>
-        public MultipleMediaTypesClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V2021_03_25 => "2021-03-25",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }

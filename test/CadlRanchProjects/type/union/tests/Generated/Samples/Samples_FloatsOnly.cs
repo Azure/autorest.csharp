@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_GetFloatsOnly_ShortVersion()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             Response response = client.GetFloatsOnly(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_GetFloatsOnly_ShortVersion_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             Response response = await client.GetFloatsOnlyAsync(null);
 
@@ -47,25 +47,25 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_GetFloatsOnly_ShortVersion_Convenience()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<object> response = client.GetFloatsOnly();
+            Response<GetResponse4> response = client.GetFloatsOnly();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_GetFloatsOnly_ShortVersion_Convenience_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<object> response = await client.GetFloatsOnlyAsync();
+            Response<GetResponse4> response = await client.GetFloatsOnlyAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_GetFloatsOnly_AllParameters()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             Response response = client.GetFloatsOnly(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_GetFloatsOnly_AllParameters_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             Response response = await client.GetFloatsOnlyAsync(null);
 
@@ -89,29 +89,29 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_GetFloatsOnly_AllParameters_Convenience()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<object> response = client.GetFloatsOnly();
+            Response<GetResponse4> response = client.GetFloatsOnly();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_GetFloatsOnly_AllParameters_Convenience_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response<object> response = await client.GetFloatsOnlyAsync();
+            Response<GetResponse4> response = await client.GetFloatsOnlyAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_Send_ShortVersion()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = 1.1,
             });
             Response response = client.Send(content);
 
@@ -122,11 +122,11 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_Send_ShortVersion_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = 1.1,
             });
             Response response = await client.SendAsync(content);
 
@@ -137,29 +137,29 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_Send_ShortVersion_Convenience()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(BinaryData.FromObjectAsJson(1.1));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_Send_ShortVersion_Convenience_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(1.1));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_Send_AllParameters()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = 1.1,
             });
             Response response = client.Send(content);
 
@@ -170,11 +170,11 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_Send_AllParameters_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = 1.1,
             });
             Response response = await client.SendAsync(content);
 
@@ -185,18 +185,18 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatsOnly_Send_AllParameters_Convenience()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(BinaryData.FromObjectAsJson(1.1));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatsOnly_Send_AllParameters_Convenience_Async()
         {
-            FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+            FloatsOnly client = new UnionClient().GetFloatsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(1.1));
         }
     }
 }
