@@ -15,14 +15,14 @@ using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
 {
-    public partial class Samples_Demo
+    public partial class Samples_HelloDemo
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -42,7 +42,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -62,7 +62,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -87,7 +87,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            HelloDemo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
