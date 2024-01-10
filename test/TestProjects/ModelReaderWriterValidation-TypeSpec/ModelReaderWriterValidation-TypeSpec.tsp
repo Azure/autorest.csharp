@@ -235,7 +235,8 @@ model ProviderExtendedLocation {
     location?: string; // TODO -- find if there is a way for azure-location
 
     @doc("The extended location type.")
-    providerExtendedLocationType?: string;
+    @projectedName("csharp", "providerExtendedLocationType")
+    type?: string;
 
     @doc("The extended locations for the azure location.")
     extendedLocations?: string[];

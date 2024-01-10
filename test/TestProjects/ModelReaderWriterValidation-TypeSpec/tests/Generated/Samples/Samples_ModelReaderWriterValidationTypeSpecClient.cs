@@ -712,7 +712,7 @@ Id = new ResourceIdentifier("<id>"),
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("resourceType").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locations")[0].ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("providerExtendedLocationType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("extendedLocations")[0].ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("path").ToString());
@@ -757,7 +757,7 @@ Id = new ResourceIdentifier("<id>"),
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("resourceType").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locations")[0].ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("providerExtendedLocationType").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("locationMappings")[0].GetProperty("extendedLocations")[0].ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("path").ToString());

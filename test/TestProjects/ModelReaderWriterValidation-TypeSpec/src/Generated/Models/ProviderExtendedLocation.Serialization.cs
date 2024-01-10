@@ -34,7 +34,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
             if (Optional.IsDefined(ProviderExtendedLocationType))
             {
-                writer.WritePropertyName("providerExtendedLocationType"u8);
+                writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ProviderExtendedLocationType);
             }
             if (Optional.IsCollectionDefined(ExtendedLocations))
@@ -86,7 +86,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 return null;
             }
             Optional<string> location = default;
-            Optional<string> providerExtendedLocationType = default;
+            Optional<string> type = default;
             Optional<IReadOnlyList<string>> extendedLocations = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -97,9 +97,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                     location = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("providerExtendedLocationType"u8))
+                if (property.NameEquals("type"u8))
                 {
-                    providerExtendedLocationType = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("extendedLocations"u8))
@@ -122,7 +122,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProviderExtendedLocation(location.Value, providerExtendedLocationType.Value, Optional.ToList(extendedLocations), serializedAdditionalRawData);
+            return new ProviderExtendedLocation(location.Value, type.Value, Optional.ToList(extendedLocations), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProviderExtendedLocation>.Write(ModelReaderWriterOptions options)

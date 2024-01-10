@@ -739,7 +739,7 @@
             {
              "$id": "103",
              "Name": "providerExtendedLocationType",
-             "SerializedName": "providerExtendedLocationType",
+             "SerializedName": "type",
              "Description": "The extended location type.",
              "Type": {
               "$id": "104",
