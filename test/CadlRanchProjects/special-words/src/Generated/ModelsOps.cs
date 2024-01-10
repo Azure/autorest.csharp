@@ -16,7 +16,7 @@ namespace SpecialWords
 {
     // Data plane generated sub-client.
     /// <summary> Verify model names. </summary>
-    public partial class Models
+    public partial class ModelsOps
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -27,16 +27,16 @@ namespace SpecialWords
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Models for mocking. </summary>
-        protected Models()
+        /// <summary> Initializes a new instance of ModelsOps for mocking. </summary>
+        protected ModelsOps()
         {
         }
 
-        /// <summary> Initializes a new instance of Models. </summary>
+        /// <summary> Initializes a new instance of ModelsOps. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        internal Models(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
+        internal ModelsOps(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -46,7 +46,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="And"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAndAsync(And,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAndAsync(And,CancellationToken)']/*" />
         public virtual async Task<Response> WithAndAsync(And body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -60,7 +60,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="And"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAnd(And,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAnd(And,CancellationToken)']/*" />
         public virtual Response WithAnd(And body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -91,12 +91,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAndAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAndAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAndAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAnd");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAnd");
             scope.Start();
             try
             {
@@ -130,12 +130,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAnd(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAnd(RequestContent,RequestContext)']/*" />
         public virtual Response WithAnd(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAnd");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAnd");
             scope.Start();
             try
             {
@@ -152,7 +152,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="As"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsAsync(As,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsAsync(As,CancellationToken)']/*" />
         public virtual async Task<Response> WithAsAsync(As body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -166,7 +166,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="As"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAs(As,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAs(As,CancellationToken)']/*" />
         public virtual Response WithAs(As body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -197,12 +197,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAsAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAs");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAs");
             scope.Start();
             try
             {
@@ -236,12 +236,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAs(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAs(RequestContent,RequestContext)']/*" />
         public virtual Response WithAs(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAs");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAs");
             scope.Start();
             try
             {
@@ -258,7 +258,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Assert"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAssertAsync(Assert,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssertAsync(Assert,CancellationToken)']/*" />
         public virtual async Task<Response> WithAssertAsync(Assert body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -272,7 +272,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Assert"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAssert(Assert,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssert(Assert,CancellationToken)']/*" />
         public virtual Response WithAssert(Assert body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -303,12 +303,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAssertAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssertAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAssertAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAssert");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAssert");
             scope.Start();
             try
             {
@@ -342,12 +342,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAssert(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAssert(RequestContent,RequestContext)']/*" />
         public virtual Response WithAssert(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAssert");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAssert");
             scope.Start();
             try
             {
@@ -364,7 +364,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Async"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsyncAsync(Async,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsyncAsync(Async,CancellationToken)']/*" />
         public virtual async Task<Response> WithAsyncAsync(Async body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -378,7 +378,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Async"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsync(Async,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsync(Async,CancellationToken)']/*" />
         public virtual Response WithAsync(Async body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -409,12 +409,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsyncAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsyncAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAsyncAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAsync");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAsync");
             scope.Start();
             try
             {
@@ -448,12 +448,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAsync(RequestContent,RequestContext)']/*" />
         public virtual Response WithAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAsync");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAsync");
             scope.Start();
             try
             {
@@ -470,7 +470,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Await"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAwaitAsync(Await,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwaitAsync(Await,CancellationToken)']/*" />
         public virtual async Task<Response> WithAwaitAsync(Await body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -484,7 +484,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Await"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAwait(Await,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwait(Await,CancellationToken)']/*" />
         public virtual Response WithAwait(Await body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -515,12 +515,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAwaitAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwaitAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithAwaitAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAwait");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAwait");
             scope.Start();
             try
             {
@@ -554,12 +554,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithAwait(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithAwait(RequestContent,RequestContext)']/*" />
         public virtual Response WithAwait(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithAwait");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithAwait");
             scope.Start();
             try
             {
@@ -576,7 +576,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Break"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithBreakAsync(Break,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreakAsync(Break,CancellationToken)']/*" />
         public virtual async Task<Response> WithBreakAsync(Break body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -590,7 +590,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Break"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithBreak(Break,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreak(Break,CancellationToken)']/*" />
         public virtual Response WithBreak(Break body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -621,12 +621,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithBreakAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreakAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithBreakAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithBreak");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithBreak");
             scope.Start();
             try
             {
@@ -660,12 +660,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithBreak(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithBreak(RequestContent,RequestContext)']/*" />
         public virtual Response WithBreak(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithBreak");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithBreak");
             scope.Start();
             try
             {
@@ -682,7 +682,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithClassAsync(Class,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClassAsync(Class,CancellationToken)']/*" />
         public virtual async Task<Response> WithClassAsync(Class body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -696,7 +696,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithClass(Class,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClass(Class,CancellationToken)']/*" />
         public virtual Response WithClass(Class body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -727,12 +727,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithClassAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClassAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithClassAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithClass");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithClass");
             scope.Start();
             try
             {
@@ -766,12 +766,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithClass(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithClass(RequestContent,RequestContext)']/*" />
         public virtual Response WithClass(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithClass");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithClass");
             scope.Start();
             try
             {
@@ -788,7 +788,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Constructor"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithConstructorAsync(Constructor,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructorAsync(Constructor,CancellationToken)']/*" />
         public virtual async Task<Response> WithConstructorAsync(Constructor body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -802,7 +802,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Constructor"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithConstructor(Constructor,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructor(Constructor,CancellationToken)']/*" />
         public virtual Response WithConstructor(Constructor body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -833,12 +833,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithConstructorAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructorAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithConstructorAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithConstructor");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithConstructor");
             scope.Start();
             try
             {
@@ -872,12 +872,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithConstructor(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithConstructor(RequestContent,RequestContext)']/*" />
         public virtual Response WithConstructor(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithConstructor");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithConstructor");
             scope.Start();
             try
             {
@@ -894,7 +894,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Continue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithContinueAsync(Continue,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinueAsync(Continue,CancellationToken)']/*" />
         public virtual async Task<Response> WithContinueAsync(Continue body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -908,7 +908,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Continue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithContinue(Continue,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinue(Continue,CancellationToken)']/*" />
         public virtual Response WithContinue(Continue body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -939,12 +939,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithContinueAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithContinueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithContinue");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithContinue");
             scope.Start();
             try
             {
@@ -978,12 +978,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithContinue(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithContinue(RequestContent,RequestContext)']/*" />
         public virtual Response WithContinue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithContinue");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithContinue");
             scope.Start();
             try
             {
@@ -1000,7 +1000,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Def"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDefAsync(Def,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDefAsync(Def,CancellationToken)']/*" />
         public virtual async Task<Response> WithDefAsync(Def body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1014,7 +1014,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Def"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDef(Def,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDef(Def,CancellationToken)']/*" />
         public virtual Response WithDef(Def body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1045,12 +1045,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDefAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDefAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithDefAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithDef");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDef");
             scope.Start();
             try
             {
@@ -1084,12 +1084,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDef(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDef(RequestContent,RequestContext)']/*" />
         public virtual Response WithDef(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithDef");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDef");
             scope.Start();
             try
             {
@@ -1106,7 +1106,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Del"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDelAsync(Del,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDelAsync(Del,CancellationToken)']/*" />
         public virtual async Task<Response> WithDelAsync(Del body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1120,7 +1120,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Del"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDel(Del,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDel(Del,CancellationToken)']/*" />
         public virtual Response WithDel(Del body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1151,12 +1151,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithDelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithDel");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDel");
             scope.Start();
             try
             {
@@ -1190,12 +1190,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithDel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithDel(RequestContent,RequestContext)']/*" />
         public virtual Response WithDel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithDel");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithDel");
             scope.Start();
             try
             {
@@ -1212,7 +1212,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Elif"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElifAsync(Elif,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElifAsync(Elif,CancellationToken)']/*" />
         public virtual async Task<Response> WithElifAsync(Elif body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1226,7 +1226,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Elif"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElif(Elif,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElif(Elif,CancellationToken)']/*" />
         public virtual Response WithElif(Elif body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1257,12 +1257,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElifAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElifAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithElifAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithElif");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElif");
             scope.Start();
             try
             {
@@ -1296,12 +1296,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElif(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElif(RequestContent,RequestContext)']/*" />
         public virtual Response WithElif(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithElif");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElif");
             scope.Start();
             try
             {
@@ -1318,7 +1318,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Else"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElseAsync(Else,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElseAsync(Else,CancellationToken)']/*" />
         public virtual async Task<Response> WithElseAsync(Else body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1332,7 +1332,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Else"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElse(Else,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElse(Else,CancellationToken)']/*" />
         public virtual Response WithElse(Else body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1363,12 +1363,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElseAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElseAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithElseAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithElse");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElse");
             scope.Start();
             try
             {
@@ -1402,12 +1402,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithElse(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithElse(RequestContent,RequestContext)']/*" />
         public virtual Response WithElse(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithElse");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithElse");
             scope.Start();
             try
             {
@@ -1424,7 +1424,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Except"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExceptAsync(Except,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExceptAsync(Except,CancellationToken)']/*" />
         public virtual async Task<Response> WithExceptAsync(Except body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1438,7 +1438,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Except"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExcept(Except,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExcept(Except,CancellationToken)']/*" />
         public virtual Response WithExcept(Except body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1469,12 +1469,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExceptAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExceptAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithExceptAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithExcept");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExcept");
             scope.Start();
             try
             {
@@ -1508,12 +1508,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExcept(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExcept(RequestContent,RequestContext)']/*" />
         public virtual Response WithExcept(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithExcept");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExcept");
             scope.Start();
             try
             {
@@ -1530,7 +1530,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Exec"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExecAsync(Exec,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExecAsync(Exec,CancellationToken)']/*" />
         public virtual async Task<Response> WithExecAsync(Exec body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1544,7 +1544,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Exec"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExec(Exec,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExec(Exec,CancellationToken)']/*" />
         public virtual Response WithExec(Exec body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1575,12 +1575,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExecAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExecAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithExecAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithExec");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExec");
             scope.Start();
             try
             {
@@ -1614,12 +1614,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithExec(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithExec(RequestContent,RequestContext)']/*" />
         public virtual Response WithExec(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithExec");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithExec");
             scope.Start();
             try
             {
@@ -1636,7 +1636,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Finally"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFinallyAsync(Finally,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinallyAsync(Finally,CancellationToken)']/*" />
         public virtual async Task<Response> WithFinallyAsync(Finally body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1650,7 +1650,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Finally"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFinally(Finally,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinally(Finally,CancellationToken)']/*" />
         public virtual Response WithFinally(Finally body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1681,12 +1681,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFinallyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinallyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithFinallyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithFinally");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFinally");
             scope.Start();
             try
             {
@@ -1720,12 +1720,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFinally(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFinally(RequestContent,RequestContext)']/*" />
         public virtual Response WithFinally(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithFinally");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFinally");
             scope.Start();
             try
             {
@@ -1742,7 +1742,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="For"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithForAsync(For,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithForAsync(For,CancellationToken)']/*" />
         public virtual async Task<Response> WithForAsync(For body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1756,7 +1756,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="For"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFor(For,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFor(For,CancellationToken)']/*" />
         public virtual Response WithFor(For body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1787,12 +1787,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithForAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithForAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithForAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithFor");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFor");
             scope.Start();
             try
             {
@@ -1826,12 +1826,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFor(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFor(RequestContent,RequestContext)']/*" />
         public virtual Response WithFor(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithFor");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFor");
             scope.Start();
             try
             {
@@ -1848,7 +1848,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="From"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFromAsync(From,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFromAsync(From,CancellationToken)']/*" />
         public virtual async Task<Response> WithFromAsync(From body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1862,7 +1862,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="From"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFrom(From,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFrom(From,CancellationToken)']/*" />
         public virtual Response WithFrom(From body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1893,12 +1893,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFromAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFromAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithFromAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithFrom");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFrom");
             scope.Start();
             try
             {
@@ -1932,12 +1932,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithFrom(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithFrom(RequestContent,RequestContext)']/*" />
         public virtual Response WithFrom(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithFrom");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithFrom");
             scope.Start();
             try
             {
@@ -1954,7 +1954,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Global"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithGlobalAsync(Global,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobalAsync(Global,CancellationToken)']/*" />
         public virtual async Task<Response> WithGlobalAsync(Global body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1968,7 +1968,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Global"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithGlobal(Global,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobal(Global,CancellationToken)']/*" />
         public virtual Response WithGlobal(Global body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1999,12 +1999,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithGlobalAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobalAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithGlobalAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithGlobal");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithGlobal");
             scope.Start();
             try
             {
@@ -2038,12 +2038,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithGlobal(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithGlobal(RequestContent,RequestContext)']/*" />
         public virtual Response WithGlobal(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithGlobal");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithGlobal");
             scope.Start();
             try
             {
@@ -2060,7 +2060,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="If"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIfAsync(If,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIfAsync(If,CancellationToken)']/*" />
         public virtual async Task<Response> WithIfAsync(If body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2074,7 +2074,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="If"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIf(If,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIf(If,CancellationToken)']/*" />
         public virtual Response WithIf(If body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2105,12 +2105,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIfAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIfAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithIfAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithIf");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIf");
             scope.Start();
             try
             {
@@ -2144,12 +2144,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIf(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIf(RequestContent,RequestContext)']/*" />
         public virtual Response WithIf(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithIf");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIf");
             scope.Start();
             try
             {
@@ -2166,7 +2166,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Import"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithImportAsync(Import,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImportAsync(Import,CancellationToken)']/*" />
         public virtual async Task<Response> WithImportAsync(Import body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2180,7 +2180,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Import"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithImport(Import,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImport(Import,CancellationToken)']/*" />
         public virtual Response WithImport(Import body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2211,12 +2211,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithImportAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImportAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithImportAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithImport");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithImport");
             scope.Start();
             try
             {
@@ -2250,12 +2250,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithImport(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithImport(RequestContent,RequestContext)']/*" />
         public virtual Response WithImport(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithImport");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithImport");
             scope.Start();
             try
             {
@@ -2272,7 +2272,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="In"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithInAsync(In,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithInAsync(In,CancellationToken)']/*" />
         public virtual async Task<Response> WithInAsync(In body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2286,7 +2286,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="In"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIn(In,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIn(In,CancellationToken)']/*" />
         public virtual Response WithIn(In body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2317,12 +2317,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithInAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithInAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithInAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithIn");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIn");
             scope.Start();
             try
             {
@@ -2356,12 +2356,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIn(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIn(RequestContent,RequestContext)']/*" />
         public virtual Response WithIn(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithIn");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIn");
             scope.Start();
             try
             {
@@ -2378,7 +2378,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Is"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIsAsync(Is,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIsAsync(Is,CancellationToken)']/*" />
         public virtual async Task<Response> WithIsAsync(Is body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2392,7 +2392,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Is"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIs(Is,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIs(Is,CancellationToken)']/*" />
         public virtual Response WithIs(Is body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2423,12 +2423,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIsAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithIsAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithIs");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIs");
             scope.Start();
             try
             {
@@ -2462,12 +2462,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithIs(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithIs(RequestContent,RequestContext)']/*" />
         public virtual Response WithIs(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithIs");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithIs");
             scope.Start();
             try
             {
@@ -2484,7 +2484,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Lambda"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithLambdaAsync(Lambda,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambdaAsync(Lambda,CancellationToken)']/*" />
         public virtual async Task<Response> WithLambdaAsync(Lambda body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2498,7 +2498,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Lambda"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithLambda(Lambda,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambda(Lambda,CancellationToken)']/*" />
         public virtual Response WithLambda(Lambda body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2529,12 +2529,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithLambdaAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambdaAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithLambdaAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithLambda");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithLambda");
             scope.Start();
             try
             {
@@ -2568,12 +2568,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithLambda(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithLambda(RequestContent,RequestContext)']/*" />
         public virtual Response WithLambda(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithLambda");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithLambda");
             scope.Start();
             try
             {
@@ -2590,7 +2590,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Not"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithNotAsync(Not,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNotAsync(Not,CancellationToken)']/*" />
         public virtual async Task<Response> WithNotAsync(Not body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2604,7 +2604,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Not"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithNot(Not,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNot(Not,CancellationToken)']/*" />
         public virtual Response WithNot(Not body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2635,12 +2635,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithNotAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNotAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithNotAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithNot");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithNot");
             scope.Start();
             try
             {
@@ -2674,12 +2674,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithNot(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithNot(RequestContent,RequestContext)']/*" />
         public virtual Response WithNot(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithNot");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithNot");
             scope.Start();
             try
             {
@@ -2696,7 +2696,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Or"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithOrAsync(Or,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOrAsync(Or,CancellationToken)']/*" />
         public virtual async Task<Response> WithOrAsync(Or body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2710,7 +2710,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Or"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithOr(Or,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOr(Or,CancellationToken)']/*" />
         public virtual Response WithOr(Or body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2741,12 +2741,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithOrAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOrAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithOrAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithOr");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithOr");
             scope.Start();
             try
             {
@@ -2780,12 +2780,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithOr(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithOr(RequestContent,RequestContext)']/*" />
         public virtual Response WithOr(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithOr");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithOr");
             scope.Start();
             try
             {
@@ -2802,7 +2802,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Pass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithPassAsync(Pass,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPassAsync(Pass,CancellationToken)']/*" />
         public virtual async Task<Response> WithPassAsync(Pass body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2816,7 +2816,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Pass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithPass(Pass,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPass(Pass,CancellationToken)']/*" />
         public virtual Response WithPass(Pass body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2847,12 +2847,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithPassAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPassAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithPassAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithPass");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithPass");
             scope.Start();
             try
             {
@@ -2886,12 +2886,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithPass(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithPass(RequestContent,RequestContext)']/*" />
         public virtual Response WithPass(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithPass");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithPass");
             scope.Start();
             try
             {
@@ -2908,7 +2908,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Raise"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithRaiseAsync(Raise,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaiseAsync(Raise,CancellationToken)']/*" />
         public virtual async Task<Response> WithRaiseAsync(Raise body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2922,7 +2922,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Raise"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithRaise(Raise,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaise(Raise,CancellationToken)']/*" />
         public virtual Response WithRaise(Raise body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2953,12 +2953,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithRaiseAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaiseAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithRaiseAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithRaise");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithRaise");
             scope.Start();
             try
             {
@@ -2992,12 +2992,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithRaise(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithRaise(RequestContent,RequestContext)']/*" />
         public virtual Response WithRaise(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithRaise");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithRaise");
             scope.Start();
             try
             {
@@ -3014,7 +3014,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Return"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithReturnAsync(Return,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturnAsync(Return,CancellationToken)']/*" />
         public virtual async Task<Response> WithReturnAsync(Return body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3028,7 +3028,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Return"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithReturn(Return,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturn(Return,CancellationToken)']/*" />
         public virtual Response WithReturn(Return body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3059,12 +3059,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithReturnAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturnAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithReturnAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithReturn");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithReturn");
             scope.Start();
             try
             {
@@ -3098,12 +3098,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithReturn(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithReturn(RequestContent,RequestContext)']/*" />
         public virtual Response WithReturn(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithReturn");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithReturn");
             scope.Start();
             try
             {
@@ -3120,7 +3120,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Try"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithTryAsync(Try,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTryAsync(Try,CancellationToken)']/*" />
         public virtual async Task<Response> WithTryAsync(Try body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3134,7 +3134,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Try"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithTry(Try,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTry(Try,CancellationToken)']/*" />
         public virtual Response WithTry(Try body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3165,12 +3165,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithTryAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTryAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithTryAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithTry");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithTry");
             scope.Start();
             try
             {
@@ -3204,12 +3204,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithTry(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithTry(RequestContent,RequestContext)']/*" />
         public virtual Response WithTry(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithTry");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithTry");
             scope.Start();
             try
             {
@@ -3226,7 +3226,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="While"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWhileAsync(While,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhileAsync(While,CancellationToken)']/*" />
         public virtual async Task<Response> WithWhileAsync(While body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3240,7 +3240,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="While"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWhile(While,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhile(While,CancellationToken)']/*" />
         public virtual Response WithWhile(While body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3271,12 +3271,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWhileAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhileAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithWhileAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithWhile");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWhile");
             scope.Start();
             try
             {
@@ -3310,12 +3310,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWhile(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWhile(RequestContent,RequestContext)']/*" />
         public virtual Response WithWhile(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithWhile");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWhile");
             scope.Start();
             try
             {
@@ -3332,7 +3332,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="With"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWithAsync(With,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWithAsync(With,CancellationToken)']/*" />
         public virtual async Task<Response> WithWithAsync(With body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3346,7 +3346,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="With"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWith(With,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWith(With,CancellationToken)']/*" />
         public virtual Response WithWith(With body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3377,12 +3377,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWithAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWithAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithWithAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithWith");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWith");
             scope.Start();
             try
             {
@@ -3416,12 +3416,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithWith(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithWith(RequestContent,RequestContext)']/*" />
         public virtual Response WithWith(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithWith");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithWith");
             scope.Start();
             try
             {
@@ -3438,7 +3438,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Yield"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithYieldAsync(Yield,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYieldAsync(Yield,CancellationToken)']/*" />
         public virtual async Task<Response> WithYieldAsync(Yield body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3452,7 +3452,7 @@ namespace SpecialWords
         /// <param name="body"> The <see cref="Yield"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithYield(Yield,CancellationToken)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYield(Yield,CancellationToken)']/*" />
         public virtual Response WithYield(Yield body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -3483,12 +3483,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithYieldAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYieldAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> WithYieldAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithYield");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithYield");
             scope.Start();
             try
             {
@@ -3522,12 +3522,12 @@ namespace SpecialWords
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Models.xml" path="doc/members/member[@name='WithYield(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ModelsOps.xml" path="doc/members/member[@name='WithYield(RequestContent,RequestContext)']/*" />
         public virtual Response WithYield(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Models.WithYield");
+            using var scope = ClientDiagnostics.CreateScope("ModelsOps.WithYield");
             scope.Start();
             try
             {
