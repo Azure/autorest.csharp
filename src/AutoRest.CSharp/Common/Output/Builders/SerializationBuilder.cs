@@ -171,65 +171,12 @@ namespace AutoRest.CSharp.Output.Builders
         }
         public static MultipartSerialization BuildMulipartSerialization(InputType? inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat, ValueExpression memberValueExpression)
         {
-            ValueExpression serializedValue;
-            if (valueType.IsFrameworkType)
-            {
-                serializedValue = valueType switch
-                {
-                    _ when valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { memberValueExpression }),
-                    _ when valueType.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { memberValueExpression }),
-                    _ when valueType.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { memberValueExpression }),
-                    _ when valueType.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(memberValueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
-                    _ when valueType.IsFrameworkType => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression }, new[] { valueType }),
-                    /*
-                    _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
-                    _ when property.Declaration.Type.FrameworkType == typeof(float) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
-                    _ when property.Declaration.Type.FrameworkType == typeof(double) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
-                    _ when property.Declaration.Type.FrameworkType == typeof(long) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression.NullableStructValue() }),
-                    _ when property.Declaration.Type.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(memberValueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
-                    */
-                    _ => throw new InvalidOperationException($"Unsupported type {valueType} for serialization")
-                };
-            }
-            else
-            {
-                serializedValue = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { memberValueExpression });
-            }
-            ValueExpression deserializedValue;
-            if (valueType.IsFrameworkType)
-            {
-                deserializedValue = valueType switch
-                {
-                    _ when valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToString), new[] { memberValueExpression }),
-                    _ when valueType.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToArray), new[] { memberValueExpression }),
-                    _ when valueType.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToStream), new[] { memberValueExpression }),
-                    /*
-                    _ when property.Declaration.Type.FrameworkType == typeof(Int32) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression.NullableStructValue() }),
-                    _ when property.Declaration.Type.FrameworkType == typeof(float) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression.NullableStructValue() }),
-                    _ when property.Declaration.Type.FrameworkType == typeof(double) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression.NullableStructValue() }),
-                    _ when property.Declaration.Type.FrameworkType == typeof(long) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression.NullableStructValue() }),
-                    */
-                    _ when valueType.FrameworkType == typeof(BinaryData) => memberValueExpression,
-                    _ when valueType.IsFrameworkType => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression }, new[] { valueType }),
-                    _ => throw new InvalidOperationException($"Unsupported type {valueType} for serialization")
-                };
-            }
-            else
-            {
-                deserializedValue = new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { memberValueExpression });
-            }
-            /*
-            if (valueType.IsFrameworkType)
-            {
-                return new MultipartValueSerialization(valueType, serializationFormat, serializedValue, deserializedValue, valueType.IsNullable || isCollectionElement);
-            }
-            */
             return inputType switch
             {
                 //CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType, isCollectionElement),
                 InputListType listType => new MultipartArraySerialization(TypeFactory.GetImplementationType(valueType), BuildMulipartSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat, new VariableReference(TypeFactory.GetElementType(valueType), "item")), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new MultipartDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildMulipartSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat, memberValueExpression), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                _ => new MultipartValueSerialization(valueType, serializationFormat, serializedValue, deserializedValue, valueType.IsNullable || isCollectionElement)// nullable CSharp type like int?, Etag?, and reference type in collection
+                _ => new MultipartValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement)// nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }
 
@@ -457,7 +404,7 @@ namespace AutoRest.CSharp.Output.Builders
                         ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
                         : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
                 }
-                ObjectSerialization valueSerialization = new MultipartValueSerialization(property.ValueType, SerializationFormat.Default, serializedValue, deserializedValue, property.IsRequired);
+                ObjectSerialization valueSerialization = new MultipartValueSerialization(property.ValueType, SerializationFormat.Default, property.IsRequired);
                 var propertySerialization =  new MultipartPropertySerialization(
                     parameter.Name,
                     memberValueExpression,

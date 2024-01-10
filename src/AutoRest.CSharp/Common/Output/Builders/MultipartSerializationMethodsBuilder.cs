@@ -110,7 +110,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static MethodBodyStatement SerializeValue(MultipartFormDataExpression mulitpartContent, MultipartValueSerialization serialization, ValueExpression valueExpression, string serializedName) => serialization switch
         {
             _ when serialization.Type != null && serialization.Type.FrameworkType == typeof(BinaryData) => mulitpartContent.Add(BuildValueSerizationExpression(serialization.Type, valueExpression), serializedName, serializedName + ".wav", Null),
-            _ => mulitpartContent.Add(serialization.SerializedValue, serializedName)
+            _ when serialization.Type != null  => mulitpartContent.Add(BuildValueSerizationExpression(serialization.Type, valueExpression), serializedName),
+            _ => mulitpartContent.Add(valueExpression, serializedName)//TODO: check when no serialization Type scenario
         };
         private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch
         {
