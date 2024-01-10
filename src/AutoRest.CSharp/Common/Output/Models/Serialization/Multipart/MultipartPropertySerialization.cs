@@ -14,11 +14,13 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
 {
     internal class MultipartPropertySerialization: PropertySerialization
     {
+        /*
         public MultipartPropertySerialization(
             string parameterName,
             TypedValueExpression value,
             string serializedName,
             CSharpType? serializedType,
+            ObjectSerialization valueSerialization,
             bool isRequired,
             ValueExpression serializedValue,
             bool shouldExcludeInWireSerialization,
@@ -26,6 +28,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
             TypedValueExpression? enumerableExpression = null)
             : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression)
         {
+            ValueSerialization = valueSerialization;
             SerializedValue = serializedValue;
             DeserializedValue = deserializedValue;
         }
@@ -33,5 +36,23 @@ namespace AutoRest.CSharp.Common.Output.Models.Serialization.Multipart
         public ValueExpression SerializedValue { get;}
         public ValueExpression? DeserializedValue { get;}
         public string ContentType { get; set; } = "application/octet-stream";
+        public ObjectSerialization ValueSerialization { get;}
+        */
+        public MultipartPropertySerialization(
+            string parameterName,
+            TypedValueExpression value,
+            string serializedName,
+            CSharpType? serializedType,
+            ObjectSerialization valueSerialization,
+            bool isRequired,
+            bool shouldExcludeInWireSerialization,
+            TypedValueExpression? enumerableExpression = null)
+            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression)
+        {
+            ValueSerialization = valueSerialization;
+        }
+
+        public string ContentType { get; set; } = "application/octet-stream";
+        public ObjectSerialization ValueSerialization { get; }
     }
 }

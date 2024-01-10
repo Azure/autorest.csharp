@@ -20,10 +20,8 @@ using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using static System.ClientModel.MultipartFormData;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -84,11 +82,56 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 */
             }
         }
-        private static MethodBodyStatement WritePropertySerialization(MultipartFormDataExpression mulitpartContent, MultipartPropertySerialization serialization) => serialization switch
+        private static MethodBodyStatement WritePropertySerialization(MultipartFormDataExpression mulitpartContent, MultipartPropertySerialization serialization)
         {
-            _ when serialization.SerializedType != null && serialization.SerializedType.FrameworkType == typeof(BinaryData) => mulitpartContent.Add(serialization.SerializedValue, serialization.SerializedName, serialization.SerializedName + ".wav", Null),
-            _ => mulitpartContent.Add(serialization.SerializedValue, serialization.SerializedName)
+            return new[]
+            {
+                SerializationExression(mulitpartContent, serialization.ValueSerialization,serialization.Value, serialization.SerializedName)
+            };
+        }
+        private static MethodBodyStatement SerializationExression(MultipartFormDataExpression mulitpartContent, ObjectSerialization serialization, TypedValueExpression value, string serializedName) => serialization switch
+        {
+            MultipartArraySerialization arraySerialization => SerializeArray(mulitpartContent, arraySerialization, value, serializedName),
+            MultipartValueSerialization valueSerialization => SerializeValue(mulitpartContent, valueSerialization, value.NullableStructValue(), serializedName),
+            _ => throw new NotImplementedException()
         };
+        private static MethodBodyStatement SerializeArray(MultipartFormDataExpression mulitpartContent, MultipartArraySerialization serialization, ValueExpression value, string serializedName)
+        {
+            return new[]
+            {
+                //new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType)
+                new ForeachStatement(TypeFactory.GetElementType(serialization.ImplementationType), "item", value, false, out var item)
+                {
+                    SerializationExression(mulitpartContent, serialization.ValueSerialization, item, serializedName)
+                }
+            };
+        }
+
+        private static MethodBodyStatement SerializeValue(MultipartFormDataExpression mulitpartContent, MultipartValueSerialization serialization, ValueExpression valueExpression, string serializedName) => serialization switch
+        {
+            _ when serialization.Type != null && serialization.Type.FrameworkType == typeof(BinaryData) => mulitpartContent.Add(BuildValueSerizationExpression(serialization.Type, valueExpression), serializedName, serializedName + ".wav", Null),
+            _ => mulitpartContent.Add(serialization.SerializedValue, serializedName)
+        };
+        private static ValueExpression BuildValueSerizationExpression(CSharpType valueType,  ValueExpression valueExpression) => valueType switch
+        {
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[] { valueExpression }),
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[] { valueExpression }),
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromStream), new[] { valueExpression }),
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => new InvokeInstanceMethodExpression(valueExpression, nameof(BinaryData.WithMediaType), new[] { Literal("application/octet-stream") }, null, false),
+            _ when valueType.IsFrameworkType => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression }, new[] { valueType }),
+            _ => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[] { valueExpression })
+        };
+
+        private static ValueExpression BuildValueDeserializationExpression(CSharpType valueType, ValueExpression valueExpression) => valueType switch
+        {
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(string) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToString), new[] { valueExpression }),
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(byte[]) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToArray), new[] { valueExpression }),
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(Stream) => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToStream), new[] { valueExpression }),
+            _ when valueType.IsFrameworkType && valueType.FrameworkType == typeof(BinaryData) => valueExpression,
+            _ => new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.ToObjectFromJson), new[] { valueExpression })
+
+        };
+
         /*TODO: handle additionalProperties and polymorphism.*/
         /// Collects a list of properties being read from all level of object hierarchy
         private static void CollectPropertiesForDeserialization(IDictionary<MultipartPropertySerialization, VariableReference> propertyVariables, MultipartFormDataObjectSerialization multipart)
@@ -181,9 +224,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     _ when frameworkType.FrameworkType == typeof(string) => nameof(BinaryData.ToString),
                     _ when frameworkType.FrameworkType == typeof(byte[]) => nameof(BinaryData.ToArray),
                     _ when frameworkType.FrameworkType == typeof(Stream) => nameof(BinaryData.ToStream),
+                    _  => nameof(BinaryData.ToObjectFromJson),
+                    /*
                     _ when frameworkType.FrameworkType == typeof(Int32) => nameof(BinaryData.ToObjectFromJson),
                     _ when frameworkType.FrameworkType == typeof(float) => nameof(BinaryData.ToObjectFromJson),
-                    _ => throw new InvalidOperationException($"Unsupported type {frameworkType.FrameworkType.Name} for serialization")
+                    _ => throw new InvalidOperationException($"Unsupported type {frameworkType.FrameworkType.Name} for deserialization")
+                    */
                 };
             }
             else
@@ -200,9 +246,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     _ when frameworkType.FrameworkType == typeof(string) => null,
                     _ when frameworkType.FrameworkType == typeof(byte[]) => null,
                     _ when frameworkType.FrameworkType == typeof(Stream) => null,
+                    _ => new List<CSharpType>() { frameworkType },
+                    /*
                     _ when frameworkType.FrameworkType == typeof(Int32) => new List<CSharpType>() { frameworkType },
                     _ when frameworkType.FrameworkType == typeof(float) => new List<CSharpType>() { frameworkType },
                     _ => throw new InvalidOperationException($"Unsupported type {frameworkType.FrameworkType.Name} for serialization")
+                    */
                 };
             } else
             {
