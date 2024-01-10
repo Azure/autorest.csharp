@@ -8,6 +8,7 @@ import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import { InputTypeKind } from "./inputTypeKind.js";
 
 export interface InputType {
+    Name: string;
     Kind: InputTypeKind;
     IsNullable: boolean;
 }
@@ -18,6 +19,7 @@ export interface InputPrimitiveType extends InputType {
 
 export interface InputLiteralType extends InputType {
     Kind: InputTypeKind.Literal;
+    Name: InputTypeKind.Literal; // literal type does not really have a name right now, we just use its kind
     LiteralValueType: InputType;
     Value: any;
 }
@@ -28,6 +30,7 @@ export function isInputLiteralType(type: InputType): type is InputLiteralType {
 
 export interface InputUnionType extends InputType {
     Kind: InputTypeKind.Union;
+    Name: InputTypeKind.Union; // union type does not really have a name right now, we just use its kind
     UnionItemTypes: InputType[];
 }
 
@@ -74,6 +77,7 @@ export function isInputEnumType(type: InputType): type is InputEnumType {
 
 export interface InputListType extends InputType {
     Kind: InputTypeKind.Array;
+    Name: InputTypeKind.Array; // array type does not really have a name right now, we just use its kind
     ElementType: InputType;
 }
 
@@ -83,6 +87,7 @@ export function isInputListType(type: InputType): type is InputListType {
 
 export interface InputDictionaryType extends InputType {
     Kind: InputTypeKind.Dictionary;
+    Name: InputTypeKind.Dictionary; // dictionary type does not really have a name right now, we just use its kind
     KeyType: InputType;
     ValueType: InputType;
 }
@@ -94,8 +99,8 @@ export function isInputDictionaryType(
 }
 
 export interface InputIntrinsicType extends InputType {
-    Name: InputIntrinsicTypeKind;
     Kind: InputTypeKind.Intrinsic;
+    Name: InputIntrinsicTypeKind;
     IsNullable: false;
 }
 

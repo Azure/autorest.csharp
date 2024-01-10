@@ -415,6 +415,7 @@ export function getInputType(
 
         return {
             Kind: InputTypeKind.Literal,
+            Name: InputTypeKind.Literal,
             LiteralValueType: newValueType,
             Value: literalValue,
             IsNullable: false
@@ -523,6 +524,7 @@ export function getInputType(
     function getInputTypeForArray(elementType: Type): InputListType {
         return {
             Kind: InputTypeKind.Array,
+            Name: InputTypeKind.Array,
             ElementType: getInputType(
                 context,
                 getFormattedType(program, elementType),
@@ -536,6 +538,7 @@ export function getInputType(
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
             Kind: InputTypeKind.Dictionary,
+            Name: InputTypeKind.Dictionary,
             KeyType: getInputType(
                 context,
                 getFormattedType(program, key),

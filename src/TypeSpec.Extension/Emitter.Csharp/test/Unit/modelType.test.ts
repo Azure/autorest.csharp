@@ -481,6 +481,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -503,6 +504,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -525,6 +527,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -547,6 +550,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -565,6 +569,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -573,6 +578,7 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
                     },
                     ValueType: {
                         Kind: InputTypeKind.Array,
+                        Name: InputTypeKind.Array,
                         ElementType: fooModel,
                         IsNullable: false
                     }
@@ -670,6 +676,7 @@ op op5(@body body: IsFooArray): IsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -692,6 +699,7 @@ op op5(@body body: IsFooArray): IsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -714,6 +722,7 @@ op op5(@body body: IsFooArray): IsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -736,6 +745,7 @@ op op5(@body body: IsFooArray): IsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -754,6 +764,7 @@ op op5(@body body: IsFooArray): IsFooArray;
             isEqual(
                 {
                     Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
                         Kind: InputTypeKind.Primitive,
@@ -762,6 +773,7 @@ op op5(@body body: IsFooArray): IsFooArray;
                     },
                     ValueType: {
                         Kind: InputTypeKind.Array,
+                        Name: InputTypeKind.Array,
                         ElementType: fooModel,
                         IsNullable: false
                     }

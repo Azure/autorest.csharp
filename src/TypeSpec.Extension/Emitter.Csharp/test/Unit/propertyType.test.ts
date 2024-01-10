@@ -38,6 +38,7 @@ describe("Test GetInputType for array", () => {
             isEqual(
                 {
                     Kind: InputTypeKind.Array,
+                    Name: InputTypeKind.Array,
                     ElementType: {
                         Kind: InputTypeKind.Primitive,
                         Name: InputPrimitiveTypeKind.String,
@@ -68,6 +69,7 @@ describe("Test GetInputType for array", () => {
             isEqual(
                 {
                     Kind: InputTypeKind.Array,
+                    Name: InputTypeKind.Array,
                     ElementType: {
                         Kind: InputTypeKind.Primitive,
                         Name: InputPrimitiveTypeKind.String,
