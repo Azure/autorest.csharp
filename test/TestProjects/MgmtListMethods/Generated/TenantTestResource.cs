@@ -107,6 +107,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
@@ -129,6 +137,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -160,6 +176,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
@@ -182,6 +206,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,6 +245,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
@@ -235,6 +275,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -266,6 +314,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
@@ -289,6 +345,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantParentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
@@ -311,6 +375,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -345,6 +417,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -377,6 +457,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Create</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -416,6 +504,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantTests_Create</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -453,6 +549,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -503,6 +607,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -552,6 +664,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -599,6 +719,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -648,6 +776,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -694,6 +830,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
