@@ -787,8 +787,8 @@ export function getInputType(
         }
     }
 
-    function getInputTypeForUnion(union: Union): InputType {
-        let ItemTypes: InputType[] = [];
+    function getInputTypeForUnion(union: Union): InputUnionType | InputType {
+        let itemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
 
         let hasNullType = false;
@@ -806,23 +806,24 @@ export function getInputType(
                 hasNullType = true;
                 continue;
             }
-            ItemTypes.push(inputType);
+            itemTypes.push(inputType);
         }
 
         if (hasNullType) {
-            ItemTypes = ItemTypes.map((i) => {
+            itemTypes = itemTypes.map((i) => {
                 i.IsNullable = true;
                 return i;
             });
         }
 
-        return ItemTypes.length > 1
-            ? ({
+        return itemTypes.length > 1
+            ? {
                   Kind: InputTypeKind.Union,
-                  UnionItemTypes: ItemTypes,
+                  Name: InputTypeKind.Union,
+                  UnionItemTypes: itemTypes,
                   IsNullable: false
-              } as InputUnionType)
-            : ItemTypes[0];
+              }
+            : itemTypes[0];
     }
 }
 

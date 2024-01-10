@@ -10,7 +10,11 @@ import {
 } from "./utils/TestUtil.js";
 import { getAllHttpServices } from "@typespec/http";
 import { loadOperation } from "../../src/lib/operation.js";
-import { InputEnumType, InputModelType, InputPrimitiveType } from "../../src/type/inputType.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType
+} from "../../src/type/inputType.js";
 import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
 import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 
