@@ -7,6 +7,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "Interval",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -49,6 +50,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Enum",
    "Name": "OAuth2FlowType",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -85,6 +87,7 @@
   },
   {
    "$id": "13",
+   "Kind": "Enum",
    "Name": "AuthFlow_tokenUrl",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -103,6 +106,7 @@
   },
   {
    "$id": "15",
+   "Kind": "Enum",
    "Name": "AuthFlow_refreshUrl",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -121,6 +125,7 @@
   },
   {
    "$id": "17",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -138,6 +143,7 @@
   },
   {
    "$id": "19",
+   "Kind": "Enum",
    "Name": "LedgerUserRoleKV",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -167,6 +173,7 @@
  "Models": [
   {
    "$id": "23",
+   "Kind": "Model",
    "Name": "ListLedgerEntryInputBody",
    "Namespace": "Pagination",
    "Description": "Type for input model body",
@@ -180,8 +187,8 @@
      "Description": "Required string",
      "Type": {
       "$id": "25",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -194,8 +201,8 @@
      "Description": "Required int",
      "Type": {
       "$id": "27",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -205,6 +212,7 @@
   },
   {
    "$id": "28",
+   "Kind": "Model",
    "Name": "PagedLedgerEntries",
    "Namespace": "Pagination",
    "Description": "Paginated ledger entries",
@@ -218,9 +226,11 @@
      "Description": "Array of ledger entries",
      "Type": {
       "$id": "30",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "31",
+       "Kind": "Model",
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
        "IsNullable": false,
@@ -233,8 +243,8 @@
          "Description": "Contents of the ledger entry.",
          "Type": {
           "$id": "33",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -247,8 +257,8 @@
          "Description": "",
          "Type": {
           "$id": "35",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -261,8 +271,8 @@
          "Description": "",
          "Type": {
           "$id": "37",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -282,8 +292,8 @@
      "Description": "Path to retrieve next page of ledger entries",
      "Type": {
       "$id": "39",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -296,6 +306,7 @@
   },
   {
    "$id": "40",
+   "Kind": "Model",
    "Name": "PagedDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of DimensionValueListItem items",
@@ -309,9 +320,11 @@
      "Description": "The DimensionValueListItem items on this page",
      "Type": {
       "$id": "42",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "43",
+       "Kind": "Model",
        "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
        "IsNullable": false,
@@ -324,11 +337,12 @@
          "Description": "",
          "Type": {
           "$id": "45",
+          "Kind": "Array",
           "Name": "Array",
           "ElementType": {
            "$id": "46",
-           "Name": "string",
-           "Kind": "String",
+           "Kind": "Primitive",
+           "Name": "String",
            "IsNullable": false
           },
           "IsNullable": false
@@ -350,8 +364,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "48",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -364,6 +378,7 @@
   },
   {
    "$id": "49",
+   "Kind": "Model",
    "Name": "PagedLedgerEntry",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of LedgerEntry items",
@@ -377,6 +392,7 @@
      "Description": "The LedgerEntry items on this page",
      "Type": {
       "$id": "51",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "31"
@@ -393,8 +409,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "53",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -404,6 +420,7 @@
   },
   {
    "$id": "54",
+   "Kind": "Model",
    "Name": "PagedTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
@@ -417,9 +434,11 @@
      "Description": "The TextBlocklist items on this page",
      "Type": {
       "$id": "56",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "57",
+       "Kind": "Model",
        "Name": "TextBlocklist",
        "Namespace": "Pagination",
        "Description": "Text Blocklist.",
@@ -433,8 +452,8 @@
          "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
          "Type": {
           "$id": "59",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -447,8 +466,8 @@
          "Description": "Text blocklist description.",
          "Type": {
           "$id": "61",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -468,8 +487,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "63",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -482,6 +501,7 @@
   },
   {
    "$id": "64",
+   "Kind": "Model",
    "Name": "PagedTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
@@ -495,9 +515,11 @@
      "Description": "The TextBlockItem items on this page",
      "Type": {
       "$id": "66",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "67",
+       "Kind": "Model",
        "Name": "TextBlockItem",
        "Namespace": "Pagination",
        "Description": "Item in TextBlocklist.",
@@ -511,8 +533,8 @@
          "Description": "Block Item Id. It will be uuid.",
          "Type": {
           "$id": "69",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -525,8 +547,8 @@
          "Description": "Block item description.",
          "Type": {
           "$id": "71",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -539,8 +561,8 @@
          "Description": "Block item content.",
          "Type": {
           "$id": "73",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -560,8 +582,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "75",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -574,6 +596,7 @@
   },
   {
    "$id": "76",
+   "Kind": "Model",
    "Name": "BatchPoolListResult",
    "Namespace": "Pagination",
    "Description": "The result of listing the Pools in an Account.",
@@ -587,9 +610,11 @@
      "Description": "The list of Pools.",
      "Type": {
       "$id": "78",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "79",
+       "Kind": "Model",
        "Name": "BatchPool",
        "Namespace": "Pagination",
        "Description": "A Pool in the Azure Batch service.",
@@ -603,8 +628,8 @@
          "Description": "A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).",
          "Type": {
           "$id": "81",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -617,8 +642,8 @@
          "Description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
          "Type": {
           "$id": "83",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -631,8 +656,8 @@
          "Description": "The URL of the Pool.",
          "Type": {
           "$id": "85",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -652,8 +677,8 @@
      "Description": "The URL to get the next set of results.",
      "Type": {
       "$id": "87",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -666,6 +691,7 @@
   },
   {
    "$id": "88",
+   "Kind": "Model",
    "Name": "AuthFlow",
    "Namespace": "Pagination",
    "IsNullable": false,
@@ -689,6 +715,7 @@
      "Description": "",
      "Type": {
       "$id": "91",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "13"
@@ -706,6 +733,7 @@
      "Description": "",
      "Type": {
       "$id": "93",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "15"
@@ -723,8 +751,8 @@
      "Description": "",
      "Type": {
       "$id": "95",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -734,6 +762,7 @@
   },
   {
    "$id": "96",
+   "Kind": "Model",
    "Name": "ListLedgerEntryInput",
    "Namespace": "Pagination",
    "Description": "Input model for the ListPaginationLedgerEntries",
@@ -755,6 +784,7 @@
   },
   {
    "$id": "98",
+   "Kind": "Model",
    "Name": "MetricDimensions",
    "Namespace": "Pagination",
    "IsNullable": false,
@@ -763,6 +793,7 @@
   },
   {
    "$id": "99",
+   "Kind": "Model",
    "Name": "TestRuns",
    "Namespace": "Pagination",
    "Description": "Load test run model",
@@ -772,6 +803,7 @@
   },
   {
    "$id": "100",
+   "Kind": "Model",
    "Name": "Dimension",
    "Namespace": "Pagination",
    "IsNullable": false,
@@ -780,6 +812,7 @@
   },
   {
    "$id": "101",
+   "Kind": "Model",
    "Name": "BatchRequestHeaders",
    "Namespace": "Pagination",
    "Description": "Client related response header values",
@@ -789,6 +822,7 @@
   },
   {
    "$id": "102",
+   "Kind": "Model",
    "Name": "BatchResponseHeaders",
    "Namespace": "Pagination",
    "Description": "Client related response header values",
@@ -798,6 +832,7 @@
   },
   {
    "$id": "103",
+   "Kind": "Model",
    "Name": "BatchError",
    "Namespace": "Pagination",
    "Description": "An error response received from the Azure Batch service.",
@@ -811,8 +846,8 @@
      "Description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
      "Type": {
       "$id": "105",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -840,8 +875,8 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "109",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -861,8 +896,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "111",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -870,8 +905,8 @@
         "$id": "112",
         "Type": {
          "$id": "113",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-05-13"
@@ -909,8 +944,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "116",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -936,8 +971,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "119",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1019,8 +1054,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "127",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1043,8 +1078,8 @@
        "Description": "Unique test run name as identifier",
        "Type": {
         "$id": "129",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1064,8 +1099,8 @@
        "Description": "Dimension name",
        "Type": {
         "$id": "131",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1103,8 +1138,8 @@
        "Description": "Metric name",
        "Type": {
         "$id": "134",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1124,8 +1159,8 @@
        "Description": "Metric namespace to query metric definitions for.",
        "Type": {
         "$id": "136",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1145,8 +1180,8 @@
        "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
        "Type": {
         "$id": "138",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1165,8 +1200,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "140",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1245,8 +1280,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "148",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1268,8 +1303,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "150",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1349,8 +1384,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "158",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1372,8 +1407,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "160",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1441,8 +1476,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "166",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1465,8 +1500,8 @@
        "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
        "Type": {
         "$id": "168",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1486,8 +1521,8 @@
        "Description": "The number of result items to return.",
        "Type": {
         "$id": "170",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1507,8 +1542,8 @@
        "Description": "The number of result items to skip.",
        "Type": {
         "$id": "172",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1528,8 +1563,8 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "174",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1548,8 +1583,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "176",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1628,8 +1663,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "184",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1652,8 +1687,8 @@
        "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
        "Type": {
         "$id": "186",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1673,11 +1708,12 @@
        "Description": "An OData $select clause.",
        "Type": {
         "$id": "188",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "189",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1700,11 +1736,12 @@
        "Description": "An OData $expand clause.",
        "Type": {
         "$id": "191",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "192",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1726,8 +1763,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "194",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

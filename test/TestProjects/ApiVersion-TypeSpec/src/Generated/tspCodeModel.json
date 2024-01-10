@@ -30,6 +30,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -54,6 +55,7 @@
  "Models": [
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "DetectionResult",
    "Namespace": "ApiVersionInTsp",
    "Description": "Detection results for the given resultId.",
@@ -67,8 +69,8 @@
      "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
       "$id": "10",
-      "Name": "string",
-      "Kind": "Guid",
+      "Kind": "Primitive",
+      "Name": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -97,8 +99,8 @@
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
         "$id": "14",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -132,8 +134,8 @@
         "$id": "16",
         "Type": {
          "$id": "17",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "v1.2"
@@ -145,8 +147,8 @@
        "NameInRequest": "resultId",
        "Type": {
         "$id": "19",
-        "Name": "string",
-        "Kind": "Guid",
+        "Kind": "Primitive",
+        "Name": "Guid",
         "IsNullable": false
        },
        "Location": "Path",
@@ -165,8 +167,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

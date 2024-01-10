@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "Body",
    "Namespace": "MultipleMediaTypes",
    "IsNullable": false,
@@ -19,8 +20,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -46,8 +47,8 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "8",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -66,15 +67,17 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "10",
+        "Kind": "Union",
         "Name": "Union",
         "UnionItemTypes": [
          {
           "$id": "11",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$id": "12",
+           "Kind": "Primitive",
            "Name": "String",
-           "Kind": "String",
            "IsNullable": false
           },
           "Value": "application/json",
@@ -82,11 +85,12 @@
          },
          {
           "$id": "13",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$id": "14",
+           "Kind": "Primitive",
            "Name": "String",
-           "Kind": "String",
            "IsNullable": false
           },
           "Value": "application/octet-stream",
@@ -111,8 +115,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "16",
-        "Name": "bytes",
-        "Kind": "Bytes",
+        "Kind": "Primitive",
+        "Name": "Bytes",
         "IsNullable": false
        },
        "Location": "Body",
@@ -131,8 +135,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -190,15 +194,17 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "23",
+        "Kind": "Union",
         "Name": "Union",
         "UnionItemTypes": [
          {
           "$id": "24",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$id": "25",
+           "Kind": "Primitive",
            "Name": "String",
-           "Kind": "String",
            "IsNullable": false
           },
           "Value": "application/json",
@@ -206,11 +212,12 @@
          },
          {
           "$id": "26",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$id": "27",
+           "Kind": "Primitive",
            "Name": "String",
-           "Kind": "String",
            "IsNullable": false
           },
           "Value": "application/octet-stream",
@@ -218,11 +225,12 @@
          },
          {
           "$id": "28",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$id": "29",
+           "Kind": "Primitive",
            "Name": "String",
-           "Kind": "String",
            "IsNullable": false
           },
           "Value": "text/plain",
@@ -247,8 +255,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "31",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Body",
@@ -267,8 +275,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -327,11 +335,12 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "38",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "39",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/json",
@@ -377,8 +386,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "43",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

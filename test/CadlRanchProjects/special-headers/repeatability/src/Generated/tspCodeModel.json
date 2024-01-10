@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "RepeatableResponse",
    "Namespace": "SpecialHeaders.Repeatability",
    "IsNullable": false,
@@ -33,8 +34,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "6",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -50,8 +51,8 @@
         "$id": "7",
         "Type": {
          "$id": "8",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -63,8 +64,8 @@
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
         "$id": "10",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -83,8 +84,8 @@
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
         "$id": "12",
-        "Name": "utcDateTime",
-        "Kind": "DateTime",
+        "Kind": "Primitive",
+        "Name": "DateTime",
         "IsNullable": false
        },
        "Location": "Header",
@@ -103,8 +104,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -140,15 +141,17 @@
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
           "$id": "18",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "19",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "20",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "accepted",
@@ -156,11 +159,12 @@
            },
            {
             "$id": "21",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "22",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "rejected",

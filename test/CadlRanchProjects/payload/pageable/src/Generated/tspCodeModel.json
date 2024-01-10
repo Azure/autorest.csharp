@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "PagedUser",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of User items",
@@ -20,9 +21,11 @@
      "Description": "The User items on this page",
      "Type": {
       "$id": "4",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "5",
+       "Kind": "Model",
        "Name": "User",
        "Namespace": "Payload.Pageable",
        "Description": "User model",
@@ -36,8 +39,8 @@
          "Description": "User name",
          "Type": {
           "$id": "7",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -57,8 +60,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "9",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -89,8 +92,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "13",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -106,8 +109,8 @@
         "$id": "14",
         "Type": {
          "$id": "15",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -120,8 +123,8 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "17",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -140,8 +143,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

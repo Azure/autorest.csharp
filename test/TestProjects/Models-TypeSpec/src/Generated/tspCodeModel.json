@@ -8,6 +8,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "FixedStringEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -35,6 +36,7 @@
   },
   {
    "$id": "6",
+   "Kind": "Enum",
    "Name": "FixedIntEnum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -63,6 +65,7 @@
   },
   {
    "$id": "10",
+   "Kind": "Enum",
    "Name": "ExtensibleEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -91,6 +94,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Enum",
    "Name": "FixedFloatEnum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -119,6 +123,7 @@
   },
   {
    "$id": "18",
+   "Kind": "Enum",
    "Name": "ExtensibleIntEnum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -147,6 +152,7 @@
   },
   {
    "$id": "22",
+   "Kind": "Enum",
    "Name": "Int32ValuesFacet_kind",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -165,6 +171,7 @@
   },
   {
    "$id": "24",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -184,6 +191,7 @@
  "Models": [
   {
    "$id": "26",
+   "Kind": "Model",
    "Name": "OutputBaseModelWithDiscriminator",
    "Namespace": "ModelsTypeSpec",
    "Description": "Output model with a discriminator",
@@ -200,8 +208,8 @@
      "IsReadOnly": false,
      "Type": {
       "$id": "28",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -210,6 +218,7 @@
   },
   {
    "$id": "29",
+   "Kind": "Model",
    "Name": "InputModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used only as input",
@@ -223,8 +232,8 @@
      "Description": "Required string",
      "Type": {
       "$id": "31",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -237,8 +246,8 @@
      "Description": "Required int",
      "Type": {
       "$id": "33",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -251,8 +260,8 @@
      "Description": "Required nullable int",
      "Type": {
       "$id": "35",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -265,8 +274,8 @@
      "Description": "Required nullable string",
      "Type": {
       "$id": "37",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -279,8 +288,8 @@
      "Description": "Optional nullable int",
      "Type": {
       "$id": "39",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -293,8 +302,8 @@
      "Description": "Optional nullable string",
      "Type": {
       "$id": "41",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -307,6 +316,7 @@
      "Description": "Required model",
      "Type": {
       "$id": "43",
+      "Kind": "Model",
       "Name": "BaseModel",
       "Namespace": "ModelsTypeSpec",
       "Description": "Base model",
@@ -335,11 +345,12 @@
      "Description": "Required primitive value type collection",
      "Type": {
       "$id": "46",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "47",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -354,11 +365,12 @@
      "Description": "Required primitive reference type collection",
      "Type": {
       "$id": "49",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "50",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -373,9 +385,11 @@
      "Description": "Required model collection",
      "Type": {
       "$id": "52",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "53",
+       "Kind": "Model",
        "Name": "CollectionItem",
        "Namespace": "ModelsTypeSpec",
        "Description": "Collection item model",
@@ -389,15 +403,17 @@
          "Description": "Required model record",
          "Type": {
           "$id": "55",
+          "Kind": "Dictionary",
           "Name": "Dictionary",
           "KeyType": {
            "$id": "56",
-           "Name": "string",
-           "Kind": "String",
+           "Kind": "Primitive",
+           "Name": "String",
            "IsNullable": false
           },
           "ValueType": {
            "$id": "57",
+           "Kind": "Model",
            "Name": "RecordItem",
            "Namespace": "ModelsTypeSpec",
            "Description": "Record item model",
@@ -405,6 +421,7 @@
            "Usage": "RoundTrip",
            "BaseModel": {
             "$id": "58",
+            "Kind": "Model",
             "Name": "DerivedModel",
             "Namespace": "ModelsTypeSpec",
             "Description": "Derived model",
@@ -421,6 +438,7 @@
               "Description": "Required collection",
               "Type": {
                "$id": "60",
+               "Kind": "Array",
                "Name": "Array",
                "ElementType": {
                 "$ref": "53"
@@ -453,11 +471,12 @@
      "Description": "Required model record",
      "Type": {
       "$id": "62",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "63",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -475,11 +494,12 @@
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
       "$id": "65",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "66",
-       "Name": "float32",
-       "Kind": "Float32",
+       "Kind": "Primitive",
+       "Name": "Float32",
        "IsNullable": true
       },
       "IsNullable": false
@@ -494,11 +514,12 @@
      "Description": "Required collection of which the element is a nullable boolean",
      "Type": {
       "$id": "68",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "69",
-       "Name": "boolean",
-       "Kind": "Boolean",
+       "Kind": "Primitive",
+       "Name": "Boolean",
        "IsNullable": true
       },
       "IsNullable": false
@@ -513,6 +534,7 @@
      "Description": "Required model nullable collection",
      "Type": {
       "$id": "71",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -529,11 +551,12 @@
      "Description": "Required string nullable collection",
      "Type": {
       "$id": "73",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "74",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": true
@@ -548,11 +571,12 @@
      "Description": "Required int nullable collection",
      "Type": {
       "$id": "76",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "77",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -567,6 +591,7 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "79",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -583,11 +608,12 @@
      "Description": "Optional string collection",
      "Type": {
       "$id": "81",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "82",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -602,11 +628,12 @@
      "Description": "Optional int collection",
      "Type": {
       "$id": "84",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "85",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -621,6 +648,7 @@
      "Description": "Optional model nullable collection",
      "Type": {
       "$id": "87",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -637,11 +665,12 @@
      "Description": "Optional string nullable collection",
      "Type": {
       "$id": "89",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "90",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": true
@@ -656,11 +685,12 @@
      "Description": "Optional int nullable collection",
      "Type": {
       "$id": "92",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "93",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -684,6 +714,7 @@
   },
   {
    "$id": "94",
+   "Kind": "Model",
    "Name": "RoundTripModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output",
@@ -700,8 +731,8 @@
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "96",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -714,8 +745,8 @@
      "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "98",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -728,8 +759,8 @@
      "Description": "Optional string",
      "Type": {
       "$id": "100",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -742,8 +773,8 @@
      "Description": "Optional int",
      "Type": {
       "$id": "102",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -756,8 +787,8 @@
      "Description": "Required nullable int",
      "Type": {
       "$id": "104",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -770,8 +801,8 @@
      "Description": "Required nullable string",
      "Type": {
       "$id": "106",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -784,8 +815,8 @@
      "Description": "Optional nullable int",
      "Type": {
       "$id": "108",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -798,8 +829,8 @@
      "Description": "Optional nullable string",
      "Type": {
       "$id": "110",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -812,8 +843,8 @@
      "Description": "Required readonly int",
      "Type": {
       "$id": "112",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -826,8 +857,8 @@
      "Description": "Optional readonly int",
      "Type": {
       "$id": "114",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -840,6 +871,7 @@
      "Description": "Required model with discriminator",
      "Type": {
       "$id": "116",
+      "Kind": "Model",
       "Name": "BaseModelWithDiscriminator",
       "Namespace": "ModelsTypeSpec",
       "Description": "Base model with discriminator property.",
@@ -856,8 +888,8 @@
         "IsReadOnly": false,
         "Type": {
          "$id": "118",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsDiscriminator": true
@@ -869,8 +901,8 @@
         "Description": "Optional property on base",
         "Type": {
          "$id": "120",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -883,8 +915,8 @@
         "Description": "Required property on base",
         "Type": {
          "$id": "122",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -935,6 +967,7 @@
      "Description": "Required collection",
      "Type": {
       "$id": "127",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -951,17 +984,18 @@
      "Description": "Required int record",
      "Type": {
       "$id": "129",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "130",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "131",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -976,17 +1010,18 @@
      "Description": "Required string record",
      "Type": {
       "$id": "133",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "134",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "135",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1001,11 +1036,12 @@
      "Description": "Required Model Record",
      "Type": {
       "$id": "137",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "138",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -1023,8 +1059,8 @@
      "Description": "Required bytes",
      "Type": {
       "$id": "140",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1037,8 +1073,8 @@
      "Description": "Optional bytes",
      "Type": {
       "$id": "142",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1051,11 +1087,12 @@
      "Description": "Required uint8[]",
      "Type": {
       "$id": "144",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "145",
-       "Name": "uint8",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1070,11 +1107,12 @@
      "Description": "Optional uint8[]",
      "Type": {
       "$id": "147",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "148",
-       "Name": "uint8",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1089,8 +1127,8 @@
      "Description": "Required unknown",
      "Type": {
       "$id": "150",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1103,8 +1141,8 @@
      "Description": "Optional unknown",
      "Type": {
       "$id": "152",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1117,11 +1155,12 @@
      "Description": "Required int8[]",
      "Type": {
       "$id": "154",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "155",
-       "Name": "int8",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1136,11 +1175,12 @@
      "Description": "Optional int8[]",
      "Type": {
       "$id": "157",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "158",
-       "Name": "int8",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1155,11 +1195,12 @@
      "Description": "Required nullable int list",
      "Type": {
       "$id": "160",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "161",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -1174,11 +1215,12 @@
      "Description": "Required nullable string list",
      "Type": {
       "$id": "163",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "164",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": true
@@ -1193,11 +1235,12 @@
      "Description": "Optional nullable model list",
      "Type": {
       "$id": "166",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "167",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -1212,11 +1255,12 @@
      "Description": "Optional nullable string list",
      "Type": {
       "$id": "169",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "170",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": true
@@ -1231,6 +1275,7 @@
   },
   {
    "$id": "171",
+   "Kind": "Model",
    "Name": "RoundTripPrimitiveModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output with primitive types",
@@ -1247,8 +1292,8 @@
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "173",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1261,8 +1306,8 @@
      "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "175",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1275,8 +1320,8 @@
      "Description": "Required int64, illustrating a value type property.",
      "Type": {
       "$id": "177",
-      "Name": "int64",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1289,8 +1334,8 @@
      "Description": "Required safeint, illustrating a value type property.",
      "Type": {
       "$id": "179",
-      "Name": "safeint",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1303,8 +1348,8 @@
      "Description": "Required float, illustrating a value type property.",
      "Type": {
       "$id": "181",
-      "Name": "float32",
-      "Kind": "Float32",
+      "Kind": "Primitive",
+      "Name": "Float32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1317,8 +1362,8 @@
      "Description": "Required double, illustrating a value type property.",
      "Type": {
       "$id": "183",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1331,8 +1376,8 @@
      "Description": "Required bolean, illustrating a value type property.",
      "Type": {
       "$id": "185",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1345,8 +1390,8 @@
      "Description": "Required date time offset, illustrating a reference type property.",
      "Type": {
       "$id": "187",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1359,8 +1404,8 @@
      "Description": "Required time span, illustrating a value type property.",
      "Type": {
       "$id": "189",
-      "Name": "duration",
-      "Kind": "DurationISO8601",
+      "Kind": "Primitive",
+      "Name": "DurationISO8601",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1373,11 +1418,12 @@
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
       "$id": "191",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "192",
-       "Name": "float32",
-       "Kind": "Float32",
+       "Kind": "Primitive",
+       "Name": "Float32",
        "IsNullable": true
       },
       "IsNullable": false
@@ -1389,6 +1435,7 @@
   },
   {
    "$id": "193",
+   "Kind": "Model",
    "Name": "RoundTripOptionalModel",
    "Namespace": "ModelsTypeSpec",
    "Deprecated": "deprecated for test",
@@ -1403,8 +1450,8 @@
      "Description": "Optional string, illustrating an optional reference type property.",
      "Type": {
       "$id": "195",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1417,8 +1464,8 @@
      "Description": "Optional int, illustrating an optional value type property.",
      "Type": {
       "$id": "197",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1431,11 +1478,12 @@
      "Description": "Optional string collection.",
      "Type": {
       "$id": "199",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "200",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1450,11 +1498,12 @@
      "Description": "Optional int collection.",
      "Type": {
       "$id": "202",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "203",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1469,6 +1518,7 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "205",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -1496,6 +1546,7 @@
      "Description": "Optional model with properties on base",
      "Type": {
       "$id": "208",
+      "Kind": "Model",
       "Name": "DerivedModelWithProperties",
       "Namespace": "ModelsTypeSpec",
       "Description": "Derived model with properties",
@@ -1503,6 +1554,7 @@
       "Usage": "RoundTrip",
       "BaseModel": {
        "$id": "209",
+       "Kind": "Model",
        "Name": "BaseModelWithProperties",
        "Namespace": "ModelsTypeSpec",
        "Description": "Base model with properties",
@@ -1516,8 +1568,8 @@
          "Description": "Optional properties on base",
          "Type": {
           "$id": "211",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -1533,6 +1585,7 @@
         "Description": "Required collection",
         "Type": {
          "$id": "213",
+         "Kind": "Array",
          "Name": "Array",
          "ElementType": {
           "$ref": "53"
@@ -1576,17 +1629,18 @@
      "Description": "Optional int record",
      "Type": {
       "$id": "217",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "218",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "219",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1601,17 +1655,18 @@
      "Description": "Optional string record",
      "Type": {
       "$id": "221",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "222",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "223",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1626,11 +1681,12 @@
      "Description": "Optional model record",
      "Type": {
       "$id": "225",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "226",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -1648,8 +1704,8 @@
      "Description": "Optional plainDate",
      "Type": {
       "$id": "228",
-      "Name": "plainDate",
-      "Kind": "Date",
+      "Kind": "Primitive",
+      "Name": "Date",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1662,8 +1718,8 @@
      "Description": "Optional plainTime",
      "Type": {
       "$id": "230",
-      "Name": "plainTime",
-      "Kind": "Time",
+      "Kind": "Primitive",
+      "Name": "Time",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1676,11 +1732,12 @@
      "Description": "Optional collection of which the element is a nullable int",
      "Type": {
       "$id": "232",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "233",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": true
       },
       "IsNullable": false
@@ -1698,6 +1755,7 @@
   },
   {
    "$id": "234",
+   "Kind": "Model",
    "Name": "RoundTripReadOnlyModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Output model with readonly properties.",
@@ -1711,8 +1769,8 @@
      "Description": "Required string, illustrating a readonly reference type property.",
      "Type": {
       "$id": "236",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1725,8 +1783,8 @@
      "Description": "Required int, illustrating a readonly value type property.",
      "Type": {
       "$id": "238",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1739,8 +1797,8 @@
      "Description": "Optional string, illustrating a readonly reference type property.",
      "Type": {
       "$id": "240",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1753,8 +1811,8 @@
      "Description": "Optional int, illustrating a readonly value type property.",
      "Type": {
       "$id": "242",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1833,11 +1891,12 @@
      "Description": "Required readonly string collection.",
      "Type": {
       "$id": "250",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "251",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1852,11 +1911,12 @@
      "Description": "Required readonly int collection.",
      "Type": {
       "$id": "253",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "254",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1871,6 +1931,7 @@
      "Description": "Required model collection",
      "Type": {
       "$id": "256",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -1887,17 +1948,18 @@
      "Description": "Required int record",
      "Type": {
       "$id": "258",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "259",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "260",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1912,17 +1974,18 @@
      "Description": "Required string record",
      "Type": {
       "$id": "262",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "263",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "264",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1937,11 +2000,12 @@
      "Description": "Required model record",
      "Type": {
       "$id": "266",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "267",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -1959,11 +2023,12 @@
      "Description": "Optional readonly string collection.",
      "Type": {
       "$id": "269",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "270",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1978,11 +2043,12 @@
      "Description": "Optional readonly int collection.",
      "Type": {
       "$id": "272",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "273",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1997,6 +2063,7 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "275",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -2013,17 +2080,18 @@
      "Description": "Optional int record",
      "Type": {
       "$id": "277",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "278",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "279",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -2038,17 +2106,18 @@
      "Description": "Optional string record",
      "Type": {
       "$id": "281",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "282",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "283",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -2063,11 +2132,12 @@
      "Description": "Optional model record",
      "Type": {
       "$id": "285",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "286",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -2085,11 +2155,12 @@
      "Description": "Required collection of which the element is a nullable int",
      "Type": {
       "$id": "288",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "289",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": true
       },
       "IsNullable": false
@@ -2104,11 +2175,12 @@
      "Description": "Optional collection of which the element is a nullable boolean",
      "Type": {
       "$id": "291",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "292",
-       "Name": "boolean",
-       "Kind": "Boolean",
+       "Kind": "Primitive",
+       "Name": "Boolean",
        "IsNullable": true
       },
       "IsNullable": false
@@ -2120,6 +2192,7 @@
   },
   {
    "$id": "293",
+   "Kind": "Model",
    "Name": "OutputModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used only as output",
@@ -2133,8 +2206,8 @@
      "Description": "Required string",
      "Type": {
       "$id": "295",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2147,8 +2220,8 @@
      "Description": "Required int",
      "Type": {
       "$id": "297",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2172,6 +2245,7 @@
      "Description": "Required collection",
      "Type": {
       "$id": "300",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -2188,11 +2262,12 @@
      "Description": "Required model record",
      "Type": {
       "$id": "302",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "303",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -2210,6 +2285,7 @@
      "Description": "Optional model collection",
      "Type": {
       "$id": "305",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -2226,6 +2302,7 @@
      "Description": "Optional model nullable collection",
      "Type": {
       "$id": "307",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -2242,11 +2319,12 @@
      "Description": "Optional model record",
      "Type": {
       "$id": "309",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "310",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -2264,11 +2342,12 @@
      "Description": "Optional model nullable record",
      "Type": {
       "$id": "312",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "313",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -2283,6 +2362,7 @@
   },
   {
    "$id": "314",
+   "Kind": "Model",
    "Name": "InputRecursiveModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Input model that has property of its own type",
@@ -2296,8 +2376,8 @@
      "Description": "Message",
      "Type": {
       "$id": "316",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2318,6 +2398,7 @@
   },
   {
    "$id": "318",
+   "Kind": "Model",
    "Name": "RoundTripRecursiveModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Roundtrip model that has property of its own type",
@@ -2331,8 +2412,8 @@
      "Description": "Message",
      "Type": {
       "$id": "320",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2353,6 +2434,7 @@
   },
   {
    "$id": "322",
+   "Kind": "Model",
    "Name": "ErrorModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Output model that has property of its own type",
@@ -2366,8 +2448,8 @@
      "Description": "Error message",
      "Type": {
       "$id": "324",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2388,6 +2470,7 @@
   },
   {
    "$id": "326",
+   "Kind": "Model",
    "Name": "NoUseBase",
    "Namespace": "ModelsTypeSpec",
    "Description": "Base model",
@@ -2401,8 +2484,8 @@
      "Description": "base model property",
      "Type": {
       "$id": "328",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2412,6 +2495,7 @@
   },
   {
    "$id": "329",
+   "Kind": "Model",
    "Name": "RoundTripOnNoUse",
    "Namespace": "ModelsTypeSpec",
    "Description": "Derived model",
@@ -2428,6 +2512,7 @@
      "Description": "Required collection",
      "Type": {
       "$id": "331",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "53"
@@ -2441,6 +2526,7 @@
   },
   {
    "$id": "332",
+   "Kind": "Model",
    "Name": "SingleBase",
    "Namespace": "ModelsTypeSpec",
    "Description": "Single base model without any child model.",
@@ -2457,8 +2543,8 @@
      "IsReadOnly": false,
      "Type": {
       "$id": "334",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -2470,8 +2556,8 @@
      "Description": "",
      "Type": {
       "$id": "336",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2481,6 +2567,7 @@
   },
   {
    "$id": "337",
+   "Kind": "Model",
    "Name": "Facet",
    "Namespace": "ModelsTypeSpec",
    "Description": "Facet",
@@ -2494,8 +2581,8 @@
      "Description": "A field to facet by, where the field is attributed as 'facetable'",
      "Type": {
       "$id": "339",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2505,6 +2592,7 @@
   },
   {
    "$id": "340",
+   "Kind": "Model",
    "Name": "NumericValuesFacetint32",
    "Namespace": "ModelsTypeSpec",
    "IsNullable": false,
@@ -2520,11 +2608,12 @@
      "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
      "Type": {
       "$id": "342",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "343",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": false
@@ -2539,8 +2628,8 @@
      "Description": "",
      "Type": {
       "$id": "345",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2550,6 +2639,7 @@
   },
   {
    "$id": "346",
+   "Kind": "Model",
    "Name": "Int32ValuesFacet",
    "Namespace": "ModelsTypeSpec",
    "Description": "Facets an int32 field by the specified value ranges.",
@@ -2566,6 +2656,7 @@
      "Description": "The facet type.",
      "Type": {
       "$id": "348",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "22"
@@ -2580,6 +2671,7 @@
   },
   {
    "$id": "349",
+   "Kind": "Model",
    "Name": "DerivedModelWithDiscriminatorA",
    "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
@@ -2597,8 +2689,8 @@
      "Description": "Required string.",
      "Type": {
       "$id": "351",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2608,6 +2700,7 @@
   },
   {
    "$id": "352",
+   "Kind": "Model",
    "Name": "DerivedModelWithDiscriminatorB",
    "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
@@ -2625,8 +2718,8 @@
      "Description": "Required int.",
      "Type": {
       "$id": "354",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2636,6 +2729,7 @@
   },
   {
    "$id": "355",
+   "Kind": "Model",
    "Name": "FirstDerivedOutputModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "First derived model as an output",
@@ -2653,8 +2747,8 @@
      "Description": "",
      "Type": {
       "$id": "357",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2664,6 +2758,7 @@
   },
   {
    "$id": "358",
+   "Kind": "Model",
    "Name": "SecondDerivedOutputModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Second derived model as an output",
@@ -2681,8 +2776,8 @@
      "Description": "",
      "Type": {
       "$id": "360",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2692,6 +2787,7 @@
   },
   {
    "$id": "361",
+   "Kind": "Model",
    "Name": "Foo",
    "Namespace": "ModelsTypeSpec",
    "Description": "This is a model.",
@@ -2705,8 +2801,8 @@
      "Description": "id of Foo",
      "Type": {
       "$id": "363",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2719,8 +2815,8 @@
      "Description": "name of Foo",
      "Type": {
       "$id": "365",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2746,8 +2842,8 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "369",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -2766,8 +2862,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "371",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2845,8 +2941,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "377",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2872,8 +2968,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "380",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2954,8 +3050,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "386",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2981,8 +3077,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "389",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3063,8 +3159,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "395",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3090,8 +3186,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "398",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3173,8 +3269,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "404",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3200,8 +3296,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "407",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3282,8 +3378,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "413",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3309,8 +3405,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "416",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3391,8 +3487,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "422",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3418,8 +3514,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "425",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3494,8 +3590,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "431",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3521,8 +3617,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "434",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3586,8 +3682,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "439",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3665,8 +3761,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "445",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3744,8 +3840,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "451",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3823,8 +3919,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "457",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3850,8 +3946,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "460",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3916,8 +4012,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "465",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3925,8 +4021,8 @@
         "$id": "466",
         "Type": {
          "$id": "467",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "0.1.0"
@@ -3946,8 +4042,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "469",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4007,8 +4103,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "474",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4085,8 +4181,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "480",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -4112,8 +4208,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "483",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

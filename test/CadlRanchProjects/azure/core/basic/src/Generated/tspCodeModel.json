@@ -8,6 +8,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ListItemInputExtensibleEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -32,6 +33,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -52,6 +54,7 @@
  "Models": [
   {
    "$id": "7",
+   "Kind": "Model",
    "Name": "User",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "Details about a user.",
@@ -65,8 +68,8 @@
      "Description": "The user's id.",
      "Type": {
       "$id": "9",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -79,8 +82,8 @@
      "Description": "The user's name.",
      "Type": {
       "$id": "11",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -93,9 +96,11 @@
      "Description": "The user's order list",
      "Type": {
       "$id": "13",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "14",
+       "Kind": "Model",
        "Name": "UserOrder",
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "UserOrder for testing list with expand.",
@@ -109,8 +114,8 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "16",
-          "Name": "int32",
-          "Kind": "Int32",
+          "Kind": "Primitive",
+          "Name": "Int32",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -123,8 +128,8 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "18",
-          "Name": "int32",
-          "Kind": "Int32",
+          "Kind": "Primitive",
+          "Name": "Int32",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -137,8 +142,8 @@
          "Description": "The user's order detail",
          "Type": {
           "$id": "20",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -158,8 +163,8 @@
      "Description": "The entity tag for this resource.",
      "Type": {
       "$id": "22",
-      "Name": "eTag",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -172,6 +177,7 @@
   },
   {
    "$id": "23",
+   "Kind": "Model",
    "Name": "PagedUser",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of User items",
@@ -185,6 +191,7 @@
      "Description": "The User items on this page",
      "Type": {
       "$id": "25",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "7"
@@ -201,8 +208,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "27",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -212,6 +219,7 @@
   },
   {
    "$id": "28",
+   "Kind": "Model",
    "Name": "ListItemInputBody",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The body of the input.",
@@ -225,8 +233,8 @@
      "Description": "The name of the input.",
      "Type": {
       "$id": "30",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -236,6 +244,7 @@
   },
   {
    "$id": "31",
+   "Kind": "Model",
    "Name": "UserListResults",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "IsNullable": false,
@@ -248,6 +257,7 @@
      "Description": "List of items.",
      "Type": {
       "$id": "33",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "7"
@@ -264,8 +274,8 @@
      "Description": "Link to fetch more items.",
      "Type": {
       "$id": "35",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -275,6 +285,7 @@
   },
   {
    "$id": "36",
+   "Kind": "Model",
    "Name": "PagedFirstItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of FirstItem items",
@@ -288,9 +299,11 @@
      "Description": "The FirstItem items on this page",
      "Type": {
       "$id": "38",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "39",
+       "Kind": "Model",
        "Name": "FirstItem",
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "First item.",
@@ -304,8 +317,8 @@
          "Description": "The id of the item.",
          "Type": {
           "$id": "41",
-          "Name": "int32",
-          "Kind": "Int32",
+          "Kind": "Primitive",
+          "Name": "Int32",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -325,8 +338,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "43",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -339,6 +352,7 @@
   },
   {
    "$id": "44",
+   "Kind": "Model",
    "Name": "PagedSecondItem",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of SecondItem items",
@@ -352,9 +366,11 @@
      "Description": "The SecondItem items on this page",
      "Type": {
       "$id": "46",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "47",
+       "Kind": "Model",
        "Name": "SecondItem",
        "Namespace": "_Specs_.Azure.Core.Basic",
        "Description": "Second item.",
@@ -368,8 +384,8 @@
          "Description": "The name of the item.",
          "Type": {
           "$id": "49",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -389,8 +405,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "51",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -403,6 +419,7 @@
   },
   {
    "$id": "52",
+   "Kind": "Model",
    "Name": "UserExportParams",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The parameters for exporting a user.",
@@ -412,6 +429,7 @@
   },
   {
    "$id": "53",
+   "Kind": "Model",
    "Name": "ListItemInput",
    "Namespace": "_Specs_.Azure.Core.Basic",
    "Description": "The parameters for listing users.",
@@ -452,8 +470,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "58",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -469,8 +487,8 @@
         "$id": "59",
         "Type": {
          "$id": "60",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -483,8 +501,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "62",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -492,8 +510,8 @@
         "$id": "63",
         "Type": {
          "$id": "64",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-12-01-preview"
@@ -514,8 +532,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "66",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -535,11 +553,12 @@
        "Description": "This request has a JSON Merge Patch body.",
        "Type": {
         "$id": "68",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "69",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -586,8 +605,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "73",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -668,8 +687,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "79",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -692,8 +711,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "81",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -730,8 +749,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "84",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -757,8 +776,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "87",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -839,8 +858,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "93",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -863,8 +882,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "95",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -883,8 +902,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "97",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -947,8 +966,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "102",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -971,8 +990,8 @@
        "Description": "The number of result items to return.",
        "Type": {
         "$id": "104",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -992,8 +1011,8 @@
        "Description": "The number of result items to skip.",
        "Type": {
         "$id": "106",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1013,8 +1032,8 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "108",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1034,11 +1053,12 @@
        "Description": "Expressions that specify the order of returned results.",
        "Type": {
         "$id": "110",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "111",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1060,8 +1080,8 @@
        "Description": "Filter the result list using the given expression.",
        "Type": {
         "$id": "113",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1081,11 +1101,12 @@
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
         "$id": "115",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "116",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1107,11 +1128,12 @@
        "Description": "Expand the indicated resources into the response.",
        "Type": {
         "$id": "118",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "119",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1132,8 +1154,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "121",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1200,8 +1222,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "127",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1223,8 +1245,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1291,8 +1313,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "135",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1350,8 +1372,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "139",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1377,8 +1399,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "142",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1448,8 +1470,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "148",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1471,8 +1493,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "150",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1540,8 +1562,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "156",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1564,8 +1586,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "158",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1584,8 +1606,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "160",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1642,8 +1664,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "165",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1666,8 +1688,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "167",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1687,8 +1709,8 @@
        "Description": "The format of the data.",
        "Type": {
         "$id": "169",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1707,8 +1729,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "171",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1781,8 +1803,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "178",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1804,8 +1826,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "180",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1872,8 +1894,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "186",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1895,8 +1917,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "188",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
