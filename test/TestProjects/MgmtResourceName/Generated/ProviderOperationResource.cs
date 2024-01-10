@@ -99,6 +99,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> Specifies whether to expand the values. </param>
@@ -131,6 +139,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

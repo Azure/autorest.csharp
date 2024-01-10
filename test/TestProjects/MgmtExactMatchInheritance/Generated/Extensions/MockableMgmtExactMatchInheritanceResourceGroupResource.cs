@@ -70,6 +70,14 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel1SName"> The <see cref="string"/> to use. </param>
@@ -91,6 +99,14 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -121,6 +137,14 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
@@ -143,6 +167,14 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
@@ -164,6 +196,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -201,6 +237,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel2SName"> The <see cref="string"/> to use. </param>
@@ -237,6 +277,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -257,6 +301,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -276,6 +324,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -313,6 +365,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel3SName"> The <see cref="string"/> to use. </param>
@@ -349,6 +405,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel3SName"> The <see cref="string"/> to use. </param>
@@ -383,6 +443,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="exactMatchModel3SName"> The <see cref="string"/> to use. </param>
@@ -416,6 +480,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel4s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -452,6 +520,10 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel4s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -62,6 +62,14 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -84,6 +92,14 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_GetAtScope</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -117,6 +133,14 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
@@ -139,6 +163,14 @@ namespace MgmtScopeResource.Mocking
         /// <term>Operation Id</term>
         /// <description>ResourceLinks_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2016-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceLinkResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
@@ -160,6 +192,14 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_CalculateTemplateHash</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -194,6 +234,14 @@ namespace MgmtScopeResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Deployments_CalculateTemplateHash</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-04-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeploymentExtendedResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

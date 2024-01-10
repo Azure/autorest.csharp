@@ -53,6 +53,14 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="noTypeReplacementModel1SName"> The <see cref="string"/> to use. </param>
@@ -74,6 +82,14 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -104,6 +120,14 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="noTypeReplacementModel2SName"> The <see cref="string"/> to use. </param>
@@ -125,6 +149,14 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -155,6 +187,14 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel3Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The <see cref="string"/> to use. </param>
@@ -176,6 +216,14 @@ namespace MgmtNoTypeReplacement.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel3Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

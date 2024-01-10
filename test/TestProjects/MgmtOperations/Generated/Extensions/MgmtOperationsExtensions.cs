@@ -134,6 +134,14 @@ namespace MgmtOperations
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -164,6 +172,14 @@ namespace MgmtOperations
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -213,6 +229,14 @@ namespace MgmtOperations
         /// <term>Operation Id</term>
         /// <description>UnpatchableResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="UnpatchableResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -243,6 +267,14 @@ namespace MgmtOperations
         /// <item>
         /// <term>Operation Id</term>
         /// <description>UnpatchableResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="UnpatchableResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -275,6 +307,14 @@ namespace MgmtOperations
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_TestLROMethod</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -303,6 +343,14 @@ namespace MgmtOperations
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_TestLROMethod</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>

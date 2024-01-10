@@ -55,6 +55,14 @@ namespace MgmtAcronymMapping.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
@@ -78,6 +86,14 @@ namespace MgmtAcronymMapping.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -110,6 +126,14 @@ namespace MgmtAcronymMapping.Mocking
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="imageName"> The name of the image. </param>
@@ -133,6 +157,14 @@ namespace MgmtAcronymMapping.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -165,6 +197,14 @@ namespace MgmtAcronymMapping.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
@@ -187,6 +227,14 @@ namespace MgmtAcronymMapping.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
