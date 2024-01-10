@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature EnsurePublicConstructorSignature()
         {
             //get base public ctor params
-            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, out var baseInitializers, true);
+            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var baseInitializers, true);
 
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             //get base public ctor params
-            GetConstructorParameters(parameters, out var fullParameterList, out var parametersToPassToBase, out var baseInitializers, false);
+            GetConstructorParameters(parameters, out var fullParameterList, out var baseInitializers, false);
 
             return new ConstructorSignature(
                 Type,
@@ -270,11 +270,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             return inputProperty.IsReadOnly;
         }
 
-        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out IReadOnlyList<Parameter> fullParameterList, out IReadOnlyList<Parameter> parametersToPassToBase, out IReadOnlyList<ValueExpression> baseInitializers, bool isInitializer)
+        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out IReadOnlyList<Parameter> fullParameterList, out IReadOnlyList<ValueExpression> baseInitializers, bool isInitializer)
         {
             var parameterList = new List<Parameter>();
             var parent = GetBaseObjectType();
-            parametersToPassToBase = Array.Empty<Parameter>();
             baseInitializers = Array.Empty<ValueExpression>();
             if (parent is not null)
             {
@@ -283,6 +282,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var baseParameterInitializers = new List<ValueExpression>();
                 foreach (var p in ctor.Signature.Parameters)
                 {
+                    // TODO -- we need to validate if the parameter now corresponds to a discriminator
                     if (p.IsRawData && AdditionalPropertiesProperty != null)
                     {
                         baseParameterInitializers.Add(Snippets.Null);
@@ -295,11 +295,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
                 parameterList.AddRange(baseParameters);
-                parametersToPassToBase = baseParameters;
                 baseInitializers = baseParameterInitializers;
             }
             parameterList.AddRange(parameters);
-            fullParameterList = parameterList;
+            fullParameterList = parameterList.DistinctBy(p => p.Name).ToArray(); // we filter out the parameters with the same name since we might have the same property both in myself and my base.
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
@@ -584,7 +583,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 //only load implementations for the base type
                 implementations = _derivedModels.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
                 // find the discriminator corresponding property in this type or its base type or more
-                property = GetPropertyForInputPropertyName(discriminatorPropertyName);
+                property = GetPropertyForDiscriminator(discriminatorPropertyName);
             }
 
             if (_inputModel.DiscriminatorValue != null)
@@ -601,7 +600,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        private ObjectTypeProperty GetPropertyForInputPropertyName(string inputPropertyName)
+        private ObjectTypeProperty GetPropertyForDiscriminator(string inputPropertyName)
         {
             foreach (var obj in EnumerateHierarchy())
             {

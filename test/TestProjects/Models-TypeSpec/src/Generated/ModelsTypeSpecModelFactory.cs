@@ -14,6 +14,23 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsTypeSpecModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithARequiredProperty"/>. </summary>
+        /// <param name="kind"> Required kind. </param>
+        /// <returns> A new <see cref="Models.BaseModelWithARequiredProperty"/> instance for mocking. </returns>
+        public static BaseModelWithARequiredProperty BaseModelWithARequiredProperty(string kind = null)
+        {
+            return new BaseModelWithARequiredProperty(kind, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithDiscriminatorDefinedOnBase"/>. </summary>
+        /// <param name="kind"> Required kind. </param>
+        /// <param name="optionalString"> Optional string. </param>
+        /// <returns> A new <see cref="Models.BaseModelWithDiscriminatorDefinedOnBase"/> instance for mocking. </returns>
+        public static BaseModelWithDiscriminatorDefinedOnBase BaseModelWithDiscriminatorDefinedOnBase(string kind = null, string optionalString = null)
+        {
+            return new UnknownBaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData: null, optionalString);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -273,7 +290,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.DerivedWithDiscriminatorDefinedOnBase"/> instance for mocking. </returns>
         public static DerivedWithDiscriminatorDefinedOnBase DerivedWithDiscriminatorDefinedOnBase(string optionalString = null, string requiredString = null, int? optionalInt = null)
         {
-            return new DerivedWithDiscriminatorDefinedOnBase("A", optionalString, requiredString, optionalInt);
+            return new DerivedWithDiscriminatorDefinedOnBase("A", serializedAdditionalRawData: null, optionalString, requiredString, optionalInt);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
