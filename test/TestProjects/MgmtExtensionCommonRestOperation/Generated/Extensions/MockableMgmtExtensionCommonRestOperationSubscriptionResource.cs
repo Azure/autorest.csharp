@@ -57,6 +57,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -77,6 +85,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -99,6 +115,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -119,6 +143,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

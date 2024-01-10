@@ -53,6 +53,14 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="machineName"> The <see cref="string"/> to use. </param>
@@ -74,6 +82,14 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -104,6 +120,14 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="diskResourceName"> The <see cref="string"/> to use. </param>
@@ -125,6 +149,14 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -155,6 +187,14 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
@@ -176,6 +216,14 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,6 +254,14 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="networkResourceName"> The <see cref="string"/> to use. </param>
@@ -227,6 +283,14 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -257,6 +321,14 @@ namespace MgmtResourceName.Mocking
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="displayResourceName"> The <see cref="string"/> to use. </param>
@@ -278,6 +350,14 @@ namespace MgmtResourceName.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

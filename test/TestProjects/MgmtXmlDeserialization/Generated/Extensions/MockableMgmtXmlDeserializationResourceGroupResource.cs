@@ -54,6 +54,14 @@ namespace MgmtXmlDeserialization.Mocking
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="xmlName"> The name of the API Management service. </param>
@@ -76,6 +84,14 @@ namespace MgmtXmlDeserialization.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

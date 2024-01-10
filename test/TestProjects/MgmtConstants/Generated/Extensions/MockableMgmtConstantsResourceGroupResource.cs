@@ -55,6 +55,14 @@ namespace MgmtConstants.Mocking
         /// <term>Operation Id</term>
         /// <description>Optionals_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OptionalMachineResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The name of the virtual machine. </param>
@@ -78,6 +86,14 @@ namespace MgmtConstants.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Optionals_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OptionalMachineResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

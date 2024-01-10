@@ -73,6 +73,14 @@ namespace MgmtExtensionResource.Mocking
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubscriptionPolicyDefinitionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -96,6 +104,14 @@ namespace MgmtExtensionResource.Mocking
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubscriptionPolicyDefinitionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -118,6 +134,10 @@ namespace MgmtExtensionResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CheckDnsNameAvailability</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -156,6 +176,10 @@ namespace MgmtExtensionResource.Mocking
         /// <term>Operation Id</term>
         /// <description>CheckDnsNameAvailability</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The location of the domain name. </param>
@@ -193,6 +217,10 @@ namespace MgmtExtensionResource.Mocking
         /// <term>Operation Id</term>
         /// <description>OrphanedPost_ValidateSomething</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="content"> Information to validate. </param>
@@ -226,6 +254,10 @@ namespace MgmtExtensionResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>OrphanedPost_ValidateSomething</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
         /// </item>
         /// </list>
         /// </summary>

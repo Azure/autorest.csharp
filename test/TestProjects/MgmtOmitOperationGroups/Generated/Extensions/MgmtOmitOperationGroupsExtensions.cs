@@ -76,6 +76,14 @@ namespace MgmtOmitOperationGroups
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Model2Resource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -104,6 +112,14 @@ namespace MgmtOmitOperationGroups
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Model2Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -134,6 +150,10 @@ namespace MgmtOmitOperationGroups
         /// <term>Operation Id</term>
         /// <description>Model5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -161,6 +181,10 @@ namespace MgmtOmitOperationGroups
         /// <term>Operation Id</term>
         /// <description>Model5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -187,6 +211,10 @@ namespace MgmtOmitOperationGroups
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model5s_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -217,6 +245,10 @@ namespace MgmtOmitOperationGroups
         /// <term>Operation Id</term>
         /// <description>Model5s_CreateOrUpdate</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -246,6 +278,10 @@ namespace MgmtOmitOperationGroups
         /// <term>Operation Id</term>
         /// <description>Model5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -273,6 +309,10 @@ namespace MgmtOmitOperationGroups
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model5s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
