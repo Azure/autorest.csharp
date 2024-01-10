@@ -10,7 +10,9 @@ import {
 } from "./utils/TestUtil.js";
 import { getAllHttpServices } from "@typespec/http";
 import { loadOperation } from "../../src/lib/operation.js";
-import { InputEnumType, InputModelType } from "../../src/type/inputType.js";
+import { InputEnumType, InputModelType, InputPrimitiveType } from "../../src/type/inputType.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
 
 describe("Test string format", () => {
     let runner: TestHost;
@@ -43,10 +45,10 @@ describe("Test string format", () => {
         assert(
             isEqual(
                 {
-                    Name: "url",
-                    Kind: "Uri",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Uri,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 operation.Parameters[0].Type
             )
         );
@@ -74,10 +76,10 @@ describe("Test string format", () => {
         assert(
             isEqual(
                 {
-                    Name: "url",
-                    Kind: "Uri",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Uri,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 foo.Properties[0].Type
             )
         );
@@ -107,8 +109,8 @@ describe("Test string format", () => {
         assert(
             isEqual(
                 {
-                    Name: "string",
-                    Kind: "Uri",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Uri,
                     IsNullable: false
                 },
                 operation.Parameters[0].Type
@@ -139,8 +141,8 @@ describe("Test string format", () => {
         assert(
             isEqual(
                 {
-                    Name: "string",
-                    Kind: "Uri",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Uri,
                     IsNullable: false
                 },
                 foo.Properties[0].Type
@@ -172,8 +174,8 @@ describe("Test string format", () => {
         assert(
             isEqual(
                 {
-                    Name: "string",
-                    Kind: "Guid",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Guid,
                     IsNullable: false
                 },
                 operation.Parameters[0].Type
@@ -204,10 +206,10 @@ describe("Test string format", () => {
         assert(
             isEqual(
                 {
-                    Name: "string",
-                    Kind: "Guid",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.Guid,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 foo.Properties[0].Type
             )
         );

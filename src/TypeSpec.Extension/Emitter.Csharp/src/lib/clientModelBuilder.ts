@@ -40,7 +40,7 @@ import {
     InputModelType,
     InputPrimitiveType
 } from "../type/inputType.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { getExternalDocs } from "./decorators.js";
 import { processServiceAuthentication } from "./serviceAuthentication.js";
@@ -54,6 +54,7 @@ import { loadOperation } from "./operation.js";
 import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function createModel(
     sdkContext: SdkContext<NetEmitterOptions>
@@ -96,8 +97,8 @@ export function createModelForService(
         defaultApiVersion
             ? {
                   Type: {
-                      Name: "String",
-                      Kind: InputTypeKind.String,
+                      Kind: InputTypeKind.Primitive,
+                      Name: InputPrimitiveTypeKind.String,
                       IsNullable: false
                   } as InputPrimitiveType,
                   Value: defaultApiVersion
