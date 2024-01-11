@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteMethodDeclarationNoScope(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            // CSharpAtribute does not accept non-string arguments
+            // CSharpAttribute does not accept non-string arguments
             if (methodBase.IsHiddenFromUser)
             {
                 writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
