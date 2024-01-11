@@ -20,5 +20,10 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         internal UnknownBaseModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownBaseModel"/> for deserialization. </summary>
+        internal UnknownBaseModel()
+        {
+        }
     }
 }
