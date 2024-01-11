@@ -95,6 +95,14 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -123,6 +131,14 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -170,6 +186,14 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -198,6 +222,14 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel5s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel5Resource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -228,6 +260,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -256,6 +292,10 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -286,6 +326,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -313,6 +357,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -339,6 +387,10 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -369,6 +421,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -398,6 +454,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -425,6 +485,10 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -454,6 +518,10 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel4s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -482,6 +550,10 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel4s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>

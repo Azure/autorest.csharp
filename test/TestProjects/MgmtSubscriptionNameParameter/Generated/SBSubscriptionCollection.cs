@@ -65,6 +65,14 @@ namespace MgmtSubscriptionNameParameter
         /// <term>Operation Id</term>
         /// <description>Subscriptions_CreateOrUpdate</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -105,6 +113,14 @@ namespace MgmtSubscriptionNameParameter
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Subscriptions_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -147,6 +163,14 @@ namespace MgmtSubscriptionNameParameter
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
@@ -183,6 +207,14 @@ namespace MgmtSubscriptionNameParameter
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -221,6 +253,14 @@ namespace MgmtSubscriptionNameParameter
         /// <term>Operation Id</term>
         /// <description>Subscriptions_ListByTopic</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skip"> Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls. </param>
@@ -245,6 +285,14 @@ namespace MgmtSubscriptionNameParameter
         /// <term>Operation Id</term>
         /// <description>Subscriptions_ListByTopic</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skip"> Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls. </param>
@@ -268,6 +316,14 @@ namespace MgmtSubscriptionNameParameter
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -304,6 +360,14 @@ namespace MgmtSubscriptionNameParameter
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
@@ -338,6 +402,14 @@ namespace MgmtSubscriptionNameParameter
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -375,6 +447,14 @@ namespace MgmtSubscriptionNameParameter
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Subscriptions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SBSubscriptionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
