@@ -8,7 +8,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal abstract record MethodSignatureBase(string Name, FormattableString? Summary, FormattableString? Description, string? NonDocumentComment, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute> Attributes)
+    internal abstract record MethodSignatureBase(string Name, FormattableString? Summary, FormattableString? Description, string? NonDocumentComment, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute> Attributes, bool IsRawSummaryText = false, bool IsHiddenFromUser = false)
     {
         public FormattableString? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
         public FormattableString? DescriptionText => Summary.IsNullOrEmpty() || Description == Summary || Description?.ToString() == Summary?.ToString() ? $"" : Description;

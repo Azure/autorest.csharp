@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new GeneratedCodeWorkspace(project);
         }
 
-        public static async Task<CSharpCompilation> CreatePreviousContractFromDll(string xmlDocumentationpath, string dllPath)
+        public static async Task<Compilation> CreatePreviousContractFromDll(string xmlDocumentationpath, string dllPath)
         {
             var workspace = new AdhocWorkspace();
             Project project = workspace.AddProject("PreviousContract", LanguageNames.CSharp);

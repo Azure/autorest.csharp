@@ -86,7 +86,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Cat Cat(string name, int size, DateTimeOffset? dateOfBirth, string meow)
         {
-            return Cat(name, size, dateOfBirth, sleep: default, jump: default, meow);
+            return Cat(name: name, size: size, dateOfBirth: dateOfBirth, sleep: default, jump: default, meow: meow);
         }
 
         /// <summary> Initializes a new instance of <see cref="T:MgmtCustomizations.Models.Dog" />. </summary>
@@ -101,7 +101,7 @@ namespace MgmtCustomizations.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static Dog Dog(string name, int size, DateTimeOffset? dateOfBirth, string bark)
         {
-            return Dog(name, size, dateOfBirth, bark, jump: default);
+            return Dog(name: name, size: size, dateOfBirth: dateOfBirth, bark: bark, jump: default);
         }
     }
 }

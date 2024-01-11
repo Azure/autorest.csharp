@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -32,15 +31,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         _writer.WriteMethodDocumentation(method.Signature);
                         _writer.WriteMethod(method);
-                    }
-
-                    if (This.SignatureType is not null)
-                    {
-                        foreach (OverloadMethodSignature overloadMethod in This.SignatureType.OverloadMethods)
-                        {
-                            _writer.WriteOverloadMethod(overloadMethod);
-                            _writer.Line();
-                        }
                     }
                 }
             }

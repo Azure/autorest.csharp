@@ -151,6 +151,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteMethodDeclarationNoScope(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
+            // CSharpAtribute does not accept non-string arguments
+            if (methodBase.IsHiddenFromUser)
+            {
+                writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
+            }
+
             if (methodBase.Attributes is { } attributes)
             {
                 foreach (var attribute in attributes)
@@ -275,6 +281,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
+            if (methodBase.IsRawSummaryText)
+            {
+                return writer.WriteRawXmlDocumentation(methodBase.Description);
+            }
+
             if (methodBase.NonDocumentComment is { } comment)
             {
                 writer.Line($"// {comment}");
@@ -751,35 +762,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
                     .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
                     .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private));
-            }
-        }
-
-        public static void WriteOverloadMethod(this CodeWriter writer, OverloadMethodSignature overloadMethod)
-        {
-            writer.WriteRawXmlDocumentation(overloadMethod.Description);
-            if (overloadMethod.IsHiddenFromUser)
-            {
-                writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
-            }
-            using (writer.WriteMethodDeclaration(overloadMethod.PreviousMethodSignature))
-            {
-                writer.Line();
-                var awaitOperation = overloadMethod.PreviousMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async) ? "await " : "";
-                writer.Append($"return {awaitOperation}{overloadMethod.MethodSignature.Name}(");
-                var set = overloadMethod.MissingParameters.ToHashSet(Parameter.TypeAndNameEqualityComparer);
-                foreach (var parameter in overloadMethod.MethodSignature.Parameters)
-                {
-                    if (set.Contains(parameter))
-                    {
-                        writer.Append($"{parameter.DefaultValue?.Value ?? $"{parameter.Name}: default"}, ");
-                    }
-                    else
-                    {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-                }
-                writer.RemoveTrailingComma();
-                writer.Line($");");
             }
         }
     }

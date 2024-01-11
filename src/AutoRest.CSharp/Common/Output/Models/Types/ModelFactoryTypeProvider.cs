@@ -52,7 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // The overloading feature is not enabled, we jsut return the original methods
                     return ShouldNotBeUsedForOutput();
                 }
-                return _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
+                // filter out duplicate methods in custom code and combine overload methods
+                return _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).Concat(SignatureType.OverloadMethods).ToList();
             }
         }
 

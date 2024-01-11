@@ -6,10 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using Microsoft.CodeAnalysis;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -53,26 +57,46 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private IReadOnlyList<OverloadMethodSignature>? _overloadMethods;
-        public IReadOnlyList<OverloadMethodSignature> OverloadMethods => _overloadMethods ??= EnsureOverloadMethods();
+        private IReadOnlyList<Method>? _overloadMethods;
+        public IReadOnlyList<Method> OverloadMethods => _overloadMethods ??= EnsureOverloadMethods();
 
-        private IReadOnlyList<OverloadMethodSignature> EnsureOverloadMethods()
+        private IReadOnlyList<Method> EnsureOverloadMethods()
         {
-            var overloadMethods = new List<OverloadMethodSignature>();
+            var overloadMethods = new List<Method>();
             var updated = _methodChangeset?.Updated;
             if (updated is null)
             {
-                return Array.Empty<OverloadMethodSignature>();
+                return Array.Empty<Method>();
             }
 
             foreach (var (current, previous) in updated)
             {
                 if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                 {
-                    overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.WithParametersRequired(), missingParameters, previous.Description, true));
+                    var overloadMethodSignature = new OverloadMethodSignature(currentMethodToCall, previous.WithParametersRequired(), missingParameters, previous.Description, true);
+                    overloadMethods.Add(new Method(overloadMethodSignature.PreviousMethodSignature with { IsHiddenFromUser = true }, BuildOverloadMethodBody(overloadMethodSignature)));
                 }
             }
             return overloadMethods;
+        }
+
+        private MethodBodyStatement BuildOverloadMethodBody(OverloadMethodSignature overloadMethodSignature)
+            => Return(new InvokeInstanceMethodExpression(null, overloadMethodSignature.MethodSignature.Name, BuildOverloadMethodParameters(overloadMethodSignature), null, overloadMethodSignature.PreviousMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async)));
+
+        private IReadOnlyList<ValueExpression> BuildOverloadMethodParameters(OverloadMethodSignature overloadMethodSignature)
+        {
+            var parameters = new List<ValueExpression>();
+            var set = overloadMethodSignature.MissingParameters.ToHashSet(Parameter.TypeAndNameEqualityComparer);
+            foreach (var parameter in overloadMethodSignature.MethodSignature.Parameters)
+            {
+                if (set.Contains(parameter))
+                {
+                    parameters.Add(new PositionalParameterReference(parameter.Name, Default.CastTo(parameter.Type)));
+                    continue;
+                }
+                parameters.Add(new PositionalParameterReference(parameter));
+            }
+            return parameters;
         }
 
         private IReadOnlySet<MethodSignature>? _methodsToSkip;
@@ -232,7 +256,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     continue;
                 }
-                result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters));
+                result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters, IsRawSummayText: true));
             }
             return result;
         }
