@@ -7,7 +7,7 @@ This sample shows how to call SayHiAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -24,7 +24,7 @@ This sample shows how to call SayHiAsync with all parameters and parse the resul
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -48,7 +48,7 @@ This sample shows how to call SayHi and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -65,7 +65,7 @@ This sample shows how to call SayHi with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-Demo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetDemoClient();
+HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
