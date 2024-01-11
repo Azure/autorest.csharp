@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
@@ -103,7 +104,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="providerExtendedLocationType"> The extended location type. </param>
         /// <param name="extendedLocations"> The extended locations for the azure location. </param>
         /// <returns> A new <see cref="Models.ProviderExtendedLocation"/> instance for mocking. </returns>
-        public static ProviderExtendedLocation ProviderExtendedLocation(string location = null, string providerExtendedLocationType = null, IEnumerable<string> extendedLocations = null)
+        public static ProviderExtendedLocation ProviderExtendedLocation(AzureLocation? location = null, string providerExtendedLocationType = null, IEnumerable<string> extendedLocations = null)
         {
             extendedLocations ??= new List<string>();
 
@@ -161,7 +162,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="location"> The location of the zone mapping. </param>
         /// <param name="zones"> The zones. </param>
         /// <returns> A new <see cref="Models.ZoneMapping"/> instance for mocking. </returns>
-        public static ZoneMapping ZoneMapping(string location = null, IEnumerable<string> zones = null)
+        public static ZoneMapping ZoneMapping(AzureLocation? location = null, IEnumerable<string> zones = null)
         {
             zones ??= new List<string>();
 

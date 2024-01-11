@@ -232,7 +232,8 @@ model ProviderResourceType {
 @doc("The provider extended location.")
 model ProviderExtendedLocation {
     @doc("The azure location.")
-    location?: string; // TODO -- find if there is a way for azure-location
+    @format("azurelocation")
+    location?: string;
 
     @doc("The extended location type.")
     @projectedName("csharp", "providerExtendedLocationType")
@@ -245,7 +246,8 @@ model ProviderExtendedLocation {
 @doc("The ZoneMapping.")
 model ZoneMapping {
     @doc("The location of the zone mapping.")
-    location?: string; // TODO -- find if there is a way for azure-location
+    @format("azurelocation")
+    location?: string;
 
     @doc("The zones.")
     zones?: string[];

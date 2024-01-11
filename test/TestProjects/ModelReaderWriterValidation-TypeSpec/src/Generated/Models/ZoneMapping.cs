@@ -56,7 +56,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="location"> The location of the zone mapping. </param>
         /// <param name="zones"> The zones. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ZoneMapping(string location, IReadOnlyList<string> zones, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ZoneMapping(AzureLocation? location, IReadOnlyList<string> zones, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Location = location;
             Zones = zones;
@@ -64,7 +64,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> The location of the zone mapping. </summary>
-        public string Location { get; }
+        public AzureLocation? Location { get; }
         /// <summary> The zones. </summary>
         public IReadOnlyList<string> Zones { get; }
     }

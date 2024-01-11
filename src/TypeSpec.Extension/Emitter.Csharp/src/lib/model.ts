@@ -162,6 +162,8 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     return InputTypeKind.Uri;
                 case "uuid":
                     return InputTypeKind.Guid;
+                case "azurelocation":
+                    return InputTypeKind.AzureLocation;
                 default:
                     if (format) {
                         logger.warn(`invalid format ${format}`);
