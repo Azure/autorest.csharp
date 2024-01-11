@@ -104,6 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             IsPropertyBag = inputModel.IsPropertyBag;
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
+            SkipInitializerConstructor = IsUnknownDerivedType;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -471,7 +472,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            yield return InitializationConstructor;
+            if (!SkipInitializerConstructor)
+                yield return InitializationConstructor;
+
             if (SerializationConstructor != InitializationConstructor)
                 yield return SerializationConstructor;
 
