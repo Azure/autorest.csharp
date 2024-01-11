@@ -302,7 +302,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public JsonObjectSerialization BuildJsonObjectSerialization(SchemaObjectType objectType)
+        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
             var propertyBag = new SerializationPropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
@@ -356,7 +356,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectType objectType)
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType)
         {
             var inheritedDictionarySchema = objectSchema.Parents!.All.OfType<DictionarySchema>().FirstOrDefault();
             bool shouldExcludeInWireSerialization = false;

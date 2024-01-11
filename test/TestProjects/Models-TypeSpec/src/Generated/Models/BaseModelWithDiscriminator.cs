@@ -54,7 +54,6 @@ namespace ModelsTypeSpec.Models
         protected BaseModelWithDiscriminator(int requiredPropertyOnBase)
         {
             RequiredPropertyOnBase = requiredPropertyOnBase;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminator"/>. </summary>

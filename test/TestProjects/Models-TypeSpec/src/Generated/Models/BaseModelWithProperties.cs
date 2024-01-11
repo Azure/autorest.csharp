@@ -48,7 +48,6 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
         internal BaseModelWithProperties()
         {
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>

@@ -48,14 +48,6 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         public BaseModel()
         {
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
-        }
-
-        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModel(IDictionary<string, BinaryData> serializedAdditionalRawData)
-        {
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>

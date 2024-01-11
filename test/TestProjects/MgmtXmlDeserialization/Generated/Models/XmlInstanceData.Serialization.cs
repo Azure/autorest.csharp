@@ -42,21 +42,11 @@ namespace MgmtXmlDeserialization
             }
             if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                id = new ResourceIdentifier((string)idElement);
+                writer.WriteStartElement("systemData");
+                writer.WriteValue(SystemData);
+                writer.WriteEndElement();
             }
-            if (element.Element("name") is XElement nameElement)
-            {
-                name = (string)nameElement;
-            }
-            if (element.Element("type") is XElement typeElement)
-            {
-                resourceType = (string)typeElement;
-            }
-            if (element.Element("systemData") is XElement systemDataElement)
-            {
-                systemData = null;
-            }
-            return new XmlInstanceData(id, name, resourceType, systemData);
+            writer.WriteEndElement();
         }
 
         void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
@@ -125,7 +115,7 @@ namespace MgmtXmlDeserialization
                 {
                     writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
+                    writer.WriteRawValue(item.Value);
 #else
                     using (JsonDocument document = JsonDocument.Parse(item.Value))
                     {

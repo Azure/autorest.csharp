@@ -71,20 +71,6 @@ namespace ModelsTypeSpec.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="CollectionItem"/>. </summary>
-        /// <param name="requiredModelRecord"> Required model record. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CollectionItem(IDictionary<string, RecordItem> requiredModelRecord, IDictionary<string, BinaryData> serializedAdditionalRawData)
-        {
-            RequiredModelRecord = requiredModelRecord;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="CollectionItem"/> for deserialization. </summary>
-        internal CollectionItem()
-        {
-        }
-
         /// <summary> Required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
