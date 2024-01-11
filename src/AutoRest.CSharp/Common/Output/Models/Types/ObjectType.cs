@@ -33,6 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        protected bool SkipInitializerConstructor { get; init; }
         public bool IsUnknownDerivedType { get; protected init; }
         public bool IsPropertyBag { get; protected init; }
         public bool IsStruct => ExistingType?.IsValueType ?? false;

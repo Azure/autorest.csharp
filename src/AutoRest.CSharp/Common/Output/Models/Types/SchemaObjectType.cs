@@ -73,6 +73,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
             IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
+            // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
+            SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -378,9 +380,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
 
-        protected bool SkipInitializerConstructor => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.SkipInitCtor;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
