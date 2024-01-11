@@ -486,13 +486,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (SerializationConstructor != InitializationConstructor)
                 yield return SerializationConstructor;
 
-            // add an extra empty ctor if we do not have a ctor with no parameters
-            var accessibility = IsStruct ? MethodSignatureModifiers.Public : MethodSignatureModifiers.Internal;
-            if (Configuration.UseModelReaderWriter && InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
-                yield return new(
-                    new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
-                    Array.Empty<ObjectPropertyInitializer>(),
-                    null);
+            if (EmptyConstructor != null)
+                yield return EmptyConstructor;
         }
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
