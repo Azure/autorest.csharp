@@ -587,6 +587,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -616,6 +624,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -664,6 +680,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -693,6 +717,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -741,6 +773,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -770,6 +810,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -818,6 +866,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGroupParentResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -847,6 +903,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGroupParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -895,6 +959,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -924,6 +996,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -972,6 +1052,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1001,6 +1089,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1049,6 +1145,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1078,6 +1182,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1126,6 +1238,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1155,6 +1275,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1203,6 +1331,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1232,6 +1368,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1280,6 +1424,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1309,6 +1461,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1357,6 +1517,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1387,6 +1555,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1436,6 +1612,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1465,6 +1649,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1513,6 +1705,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1542,6 +1742,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1590,6 +1798,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1619,6 +1835,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1667,6 +1891,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>SubParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1696,6 +1928,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1727,6 +1967,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1755,6 +2003,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1782,6 +2038,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1813,6 +2077,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1843,6 +2115,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1870,6 +2150,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithNonResChes_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1899,6 +2187,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1927,6 +2223,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1954,6 +2258,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1985,6 +2297,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestorWithLocs_ListTestByLocations</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2015,6 +2335,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2043,6 +2371,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>FakeParentWithAncestors_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeParentWithAncestorResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2070,6 +2406,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -2100,6 +2444,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2128,6 +2480,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -2158,6 +2518,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2187,6 +2555,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2215,6 +2591,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListTest</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2242,6 +2626,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -2273,6 +2665,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2303,6 +2703,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2331,6 +2739,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_NonPageableListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2358,6 +2774,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Quotas_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -2389,6 +2809,10 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Quotas_Update</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -2438,6 +2862,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -2468,6 +2900,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TenantTests_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TenantTestResource"/></description>
         /// </item>
         /// </list>
         /// <item>

@@ -54,6 +54,14 @@ namespace MgmtNonStringPathVariable.Mocking
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -75,6 +83,14 @@ namespace MgmtNonStringPathVariable.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -105,6 +121,14 @@ namespace MgmtNonStringPathVariable.Mocking
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
@@ -125,6 +149,14 @@ namespace MgmtNonStringPathVariable.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

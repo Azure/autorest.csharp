@@ -10,19 +10,20 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using FirstTestTypeSpec;
+using Azure.NewProject.TypeSpec;
 using NUnit.Framework;
 
-namespace FirstTestTypeSpec.Samples
+namespace Azure.NewProject.TypeSpec.Samples
 {
-    public partial class Samples_Demo
+    public partial class Samples_HelloDemo
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo_SayHi_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
@@ -34,7 +35,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -42,7 +42,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
@@ -54,7 +55,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -62,7 +62,8 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -78,8 +79,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -87,7 +86,8 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo_SayHi_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemoClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
             Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
@@ -103,8 +103,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
     }
 }

@@ -329,6 +329,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -358,6 +366,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -406,6 +422,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -436,6 +460,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -485,6 +517,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -515,6 +555,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -564,6 +612,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SshPublicKeyResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -593,6 +649,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SshPublicKeyResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -641,6 +705,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -671,6 +743,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -720,6 +800,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -750,6 +838,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -799,6 +895,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -828,6 +932,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -879,6 +991,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -911,6 +1031,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -945,6 +1073,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -973,6 +1109,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1003,6 +1147,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1030,6 +1182,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProximityPlacementGroups_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProximityPlacementGroupResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1059,6 +1219,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1086,6 +1254,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1115,6 +1291,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SshPublicKeyResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1143,6 +1327,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>SshPublicKeys_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SshPublicKeyResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1170,6 +1362,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1204,6 +1400,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1237,6 +1437,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1266,6 +1470,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1294,6 +1502,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_ListOffers</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1326,6 +1538,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_ListOffers</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1357,6 +1573,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_ListPublishers</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1386,6 +1606,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_ListPublishers</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1414,6 +1638,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_ListSkus</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1447,6 +1675,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineImages_ListSkus</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1479,6 +1711,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>Usage_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1507,6 +1743,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Usage_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1537,6 +1777,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1565,6 +1813,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1595,6 +1851,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1623,6 +1887,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1653,6 +1925,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineSizes_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1681,6 +1957,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineSizes_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1711,6 +1991,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1738,6 +2026,14 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -1767,6 +2063,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1795,6 +2099,14 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1822,6 +2134,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -1853,6 +2169,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1883,6 +2203,10 @@ namespace Azure.ResourceManager.Sample
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportThrottledRequests</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -1912,6 +2236,10 @@ namespace Azure.ResourceManager.Sample
         /// <item>
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportThrottledRequests</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>

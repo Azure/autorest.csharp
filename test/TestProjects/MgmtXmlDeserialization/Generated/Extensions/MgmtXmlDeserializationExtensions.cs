@@ -76,6 +76,14 @@ namespace MgmtXmlDeserialization
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -105,6 +113,14 @@ namespace MgmtXmlDeserialization
         /// <item>
         /// <term>Operation Id</term>
         /// <description>XmlDeserialization_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-08-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="XmlInstanceResource"/></description>
         /// </item>
         /// </list>
         /// <item>

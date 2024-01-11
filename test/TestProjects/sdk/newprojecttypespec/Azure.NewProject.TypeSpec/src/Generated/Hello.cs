@@ -50,19 +50,19 @@ namespace Azure.NewProject.TypeSpec
             _endpoint = endpoint;
         }
 
-        private Demo _cachedDemo;
-        private Demo2 _cachedDemo2;
+        private HelloDemo _cachedHelloDemo;
+        private HelloDemo2 _cachedHelloDemo2;
 
-        /// <summary> Initializes a new instance of Demo. </summary>
-        public virtual Demo GetDemoClient()
+        /// <summary> Initializes a new instance of HelloDemo. </summary>
+        public virtual HelloDemo GetHelloDemoClient()
         {
-            return Volatile.Read(ref _cachedDemo) ?? Interlocked.CompareExchange(ref _cachedDemo, new Demo(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedDemo;
+            return Volatile.Read(ref _cachedHelloDemo) ?? Interlocked.CompareExchange(ref _cachedHelloDemo, new HelloDemo(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedHelloDemo;
         }
 
-        /// <summary> Initializes a new instance of Demo2. </summary>
-        public virtual Demo2 GetDemo2Client()
+        /// <summary> Initializes a new instance of HelloDemo2. </summary>
+        public virtual HelloDemo2 GetHelloDemo2Client()
         {
-            return Volatile.Read(ref _cachedDemo2) ?? Interlocked.CompareExchange(ref _cachedDemo2, new Demo2(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedDemo2;
+            return Volatile.Read(ref _cachedHelloDemo2) ?? Interlocked.CompareExchange(ref _cachedHelloDemo2, new HelloDemo2(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedHelloDemo2;
         }
     }
 }

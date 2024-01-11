@@ -53,6 +53,14 @@ namespace MgmtConstants.Mocking
         /// <term>Operation Id</term>
         /// <description>Optionals_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OptionalMachineResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -75,6 +83,14 @@ namespace MgmtConstants.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Optionals_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OptionalMachineResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

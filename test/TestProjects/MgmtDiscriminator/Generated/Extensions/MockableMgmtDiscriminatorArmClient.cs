@@ -59,6 +59,14 @@ namespace MgmtDiscriminator.Mocking
         /// <term>Operation Id</term>
         /// <description>Artifacts_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="scope"> The scope that the resource will apply against. </param>
@@ -82,6 +90,14 @@ namespace MgmtDiscriminator.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Artifacts_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

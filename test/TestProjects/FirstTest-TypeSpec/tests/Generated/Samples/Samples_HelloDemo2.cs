@@ -18,14 +18,14 @@ using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
 {
-    public partial class Samples_Demo2
+    public partial class Samples_HelloDemo2
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -93,7 +93,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -161,7 +161,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloAgain_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
             {
@@ -178,7 +178,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
             {
@@ -195,7 +195,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -314,7 +314,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -433,7 +433,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloAgain_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
             {
@@ -473,7 +473,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloAgain_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[] { StringFixedEnum.One }, new Dictionary<string, StringExtensibleEnum?>
             {
@@ -513,7 +513,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_NoContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -581,7 +581,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_NoContentType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -649,7 +649,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -768,7 +768,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_NoContentType_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -884,12 +884,12 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Demo2_HelloDemo2_ShortVersion()
+        public void Example_Demo2_HelloDemoAgain_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Response response = client.HelloDemo2(null);
+            Response response = client.HelloDemoAgain(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -904,12 +904,12 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Demo2_HelloDemo2_ShortVersion_Async()
+        public async Task Example_Demo2_HelloDemoAgain_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Response response = await client.HelloDemo2Async(null);
+            Response response = await client.HelloDemoAgainAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -924,57 +924,32 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Demo2_HelloDemo2_ShortVersion_Convenience()
+        public void Example_Demo2_HelloDemoAgain_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Response<Thing> response = client.HelloDemo2();
+            Response<Thing> response = client.HelloDemoAgain();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Demo2_HelloDemo2_ShortVersion_Convenience_Async()
+        public async Task Example_Demo2_HelloDemoAgain_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Response<Thing> response = await client.HelloDemo2Async();
+            Response<Thing> response = await client.HelloDemoAgainAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Demo2_HelloDemo2_AllParameters()
+        public void Example_Demo2_HelloDemoAgain_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Response response = client.HelloDemo2(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Demo2_HelloDemo2_AllParameters_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
-
-            Response response = await client.HelloDemo2Async(null);
+            Response response = client.HelloDemoAgain(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -994,22 +969,47 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Demo2_HelloDemo2_AllParameters_Convenience()
+        public async Task Example_Demo2_HelloDemoAgain_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Response<Thing> response = client.HelloDemo2();
+            Response response = await client.HelloDemoAgainAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Demo2_HelloDemo2_AllParameters_Convenience_Async()
+        public void Example_Demo2_HelloDemoAgain_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-            Response<Thing> response = await client.HelloDemo2Async();
+            Response<Thing> response = client.HelloDemoAgain();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Demo2_HelloDemoAgain_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
+
+            Response<Thing> response = await client.HelloDemoAgainAsync();
         }
 
         [Test]
@@ -1017,7 +1017,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1051,7 +1051,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1085,7 +1085,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
             Response<Thing> response = client.CreateLiteral(body);
@@ -1096,7 +1096,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
             Response<Thing> response = await client.CreateLiteralAsync(body);
@@ -1107,7 +1107,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1154,7 +1154,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -1201,7 +1201,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_CreateLiteral_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
             {
@@ -1219,7 +1219,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_CreateLiteral_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
             {
@@ -1237,7 +1237,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloLiteral(null);
 
@@ -1257,7 +1257,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
 
@@ -1277,7 +1277,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
         }
@@ -1287,7 +1287,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }
@@ -1297,7 +1297,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloLiteral(null);
 
@@ -1322,7 +1322,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
 
@@ -1347,7 +1347,7 @@ namespace FirstTestTypeSpec.Samples
         public void Example_Demo2_HelloLiteral_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
         }
@@ -1357,7 +1357,7 @@ namespace FirstTestTypeSpec.Samples
         public async Task Example_Demo2_HelloLiteral_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Demo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetDemo2Client();
+            HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
         }

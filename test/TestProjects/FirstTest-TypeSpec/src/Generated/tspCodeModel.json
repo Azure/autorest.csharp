@@ -3481,7 +3481,7 @@
   },
   {
    "$id": "370",
-   "Name": "Demo",
+   "Name": "HelloDemo",
    "Description": "Hello world service",
    "Operations": [
     {
@@ -3615,7 +3615,7 @@
   },
   {
    "$id": "383",
-   "Name": "Demo2",
+   "Name": "HelloDemo2",
    "Description": "",
    "Operations": [
     {
@@ -3924,7 +3924,7 @@
     },
     {
      "$id": "411",
-     "Name": "helloDemo2",
+     "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Parameters": [

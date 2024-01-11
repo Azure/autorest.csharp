@@ -53,6 +53,14 @@ namespace MgmtCollectionParent.Mocking
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OrderResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -75,6 +83,14 @@ namespace MgmtCollectionParent.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ListOrderAtSubscriptionLevel</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="OrderResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
