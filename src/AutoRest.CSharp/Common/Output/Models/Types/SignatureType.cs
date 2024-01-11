@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                 {
-                    var overloadMethodSignature = new OverloadMethodSignature(currentMethodToCall, previous.WithParametersRequired(), missingParameters, previous.Description, true);
+                    var overloadMethodSignature = new OverloadMethodSignature(currentMethodToCall, previous.WithParametersRequired(), missingParameters, previous.Description);
                     overloadMethods.Add(new Method(overloadMethodSignature.PreviousMethodSignature with { IsHiddenFromUser = true }, BuildOverloadMethodBody(overloadMethodSignature)));
                 }
             }

@@ -7,7 +7,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record OverloadMethodSignature(MethodSignature MethodSignature, MethodSignature PreviousMethodSignature, IReadOnlyList<Parameter> MissingParameters, FormattableString? Description, bool IsHiddenFromUser)
+    internal record OverloadMethodSignature(MethodSignature MethodSignature, MethodSignature PreviousMethodSignature, IReadOnlyList<Parameter> MissingParameters, FormattableString? Description)
     {
     }
 }
