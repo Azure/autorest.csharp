@@ -14,11 +14,6 @@ namespace ModelReaderWriterValidationTypeSpec.Models
     internal partial class UnknownBaseModel : BaseModel
     {
         /// <summary> Initializes a new instance of <see cref="UnknownBaseModel"/>. </summary>
-        internal UnknownBaseModel()
-        {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownBaseModel"/>. </summary>
         /// <param name="kind"> The kind. </param>
         /// <param name="name"> The name property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
