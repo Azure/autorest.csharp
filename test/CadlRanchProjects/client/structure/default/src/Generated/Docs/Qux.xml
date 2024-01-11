@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="EightAsync(RequestContext)">
+      <example>
+This sample shows how to call EightAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Qux client = new ServiceClient(endpoint, "default").GetQuxClient();
+
+Response response = await client.EightAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call EightAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Qux client = new ServiceClient(endpoint, "default").GetQuxClient();
+
+Response response = await client.EightAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Eight(RequestContext)">
+      <example>
+This sample shows how to call Eight.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Qux client = new ServiceClient(endpoint, "default").GetQuxClient();
+
+Response response = client.Eight();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Eight with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Qux client = new ServiceClient(endpoint, "default").GetQuxClient();
+
+Response response = client.Eight();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

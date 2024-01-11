@@ -63,5 +63,23 @@ namespace CadlRanchProjects.Tests
             Response response = await new ServiceClient(host, "default").GetBarClient().SixAsync();
             Assert.AreEqual(204, response.Status);
         });
+        [Test]
+        public Task Client_Structure_default_Seven() => Test(async (host) =>
+        {
+            Response response = await new ServiceClient(host, "default").GetBazClient().GetBazFooClient().SevenAsync();
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Client_Structure_default_Eight() => Test(async (host) =>
+        {
+            Response response = await new ServiceClient(host, "default").GetQuxClient().EightAsync();
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Client_Structure_default_Nine() => Test(async (host) =>
+        {
+            Response response = await new ServiceClient(host, "default").GetQuxClient().GetQuxBarClient().NineAsync();
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }

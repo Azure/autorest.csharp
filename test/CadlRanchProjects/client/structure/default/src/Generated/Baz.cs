@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.Threading;
 using Azure.Core.Pipeline;
 
 namespace Client.Structure.Service.Default
@@ -17,6 +17,7 @@ namespace Client.Structure.Service.Default
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _client;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -33,24 +34,21 @@ namespace Client.Structure.Service.Default
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        internal Baz(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        internal Baz(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
+            _client = client;
         }
 
-        /// <summary> Initializes a new instance of BazFoo. </summary>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="apiVersion"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual BazFoo GetBazFooClient(string client, string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private BazFoo _cachedBazFoo;
 
-            return new BazFoo(ClientDiagnostics, _pipeline, _endpoint, client, apiVersion);
+        /// <summary> Initializes a new instance of BazFoo. </summary>
+        public virtual BazFoo GetBazFooClient()
+        {
+            return Volatile.Read(ref _cachedBazFoo) ?? Interlocked.CompareExchange(ref _cachedBazFoo, new BazFoo(ClientDiagnostics, _pipeline, _endpoint, _client), null) ?? _cachedBazFoo;
         }
     }
 }
