@@ -57,7 +57,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="providerExtendedLocationType"> The extended location type. </param>
         /// <param name="extendedLocations"> The extended locations for the azure location. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProviderExtendedLocation(AzureLocation? location, string providerExtendedLocationType, IReadOnlyList<string> extendedLocations, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ProviderExtendedLocation(string location, string providerExtendedLocationType, IReadOnlyList<string> extendedLocations, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Location = location;
             ProviderExtendedLocationType = providerExtendedLocationType;
@@ -66,7 +66,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> The azure location. </summary>
-        public AzureLocation? Location { get; }
+        public string Location { get; }
         /// <summary> The extended location type. </summary>
         public string ProviderExtendedLocationType { get; }
         /// <summary> The extended locations for the azure location. </summary>

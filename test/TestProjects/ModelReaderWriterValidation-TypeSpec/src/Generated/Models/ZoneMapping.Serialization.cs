@@ -30,7 +30,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location.Value);
+                writer.WriteStringValue(Location);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -80,7 +80,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<AzureLocation> location = default;
+            Optional<string> location = default;
             Optional<IReadOnlyList<string>> zones = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -88,11 +88,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 if (property.NameEquals("location"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    location = new AzureLocation(property.Value.GetString());
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("zones"u8))
@@ -115,7 +111,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ZoneMapping(Optional.ToNullable(location), Optional.ToList(zones), serializedAdditionalRawData);
+            return new ZoneMapping(location.Value, Optional.ToList(zones), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ZoneMapping>.Write(ModelReaderWriterOptions options)

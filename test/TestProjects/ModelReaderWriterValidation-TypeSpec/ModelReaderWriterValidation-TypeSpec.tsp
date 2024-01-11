@@ -232,8 +232,7 @@ model ProviderResourceType {
 @doc("The provider extended location.")
 model ProviderExtendedLocation {
     @doc("The azure location.")
-    @format("azurelocation")
-    location?: string;
+    location?: string; // serialization of azure-location is not roundtrip therefore we cannot change it here
 
     @doc("The extended location type.")
     @projectedName("csharp", "providerExtendedLocationType")
@@ -246,8 +245,7 @@ model ProviderExtendedLocation {
 @doc("The ZoneMapping.")
 model ZoneMapping {
     @doc("The location of the zone mapping.")
-    @format("azurelocation")
-    location?: string;
+    location?: string; // serialization of azure-location is not roundtrip therefore we cannot change it here
 
     @doc("The zones.")
     zones?: string[];

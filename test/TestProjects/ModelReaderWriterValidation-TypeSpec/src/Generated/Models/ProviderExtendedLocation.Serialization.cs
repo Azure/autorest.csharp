@@ -30,7 +30,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location"u8);
-                writer.WriteStringValue(Location.Value);
+                writer.WriteStringValue(Location);
             }
             if (Optional.IsDefined(ProviderExtendedLocationType))
             {
@@ -85,7 +85,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 return null;
             }
-            Optional<AzureLocation> location = default;
+            Optional<string> location = default;
             Optional<string> type = default;
             Optional<IReadOnlyList<string>> extendedLocations = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -94,11 +94,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             {
                 if (property.NameEquals("location"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    location = new AzureLocation(property.Value.GetString());
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"u8))
@@ -126,7 +122,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ProviderExtendedLocation(Optional.ToNullable(location), type.Value, Optional.ToList(extendedLocations), serializedAdditionalRawData);
+            return new ProviderExtendedLocation(location.Value, type.Value, Optional.ToList(extendedLocations), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ProviderExtendedLocation>.Write(ModelReaderWriterOptions options)
