@@ -19,5 +19,10 @@ namespace ModelsTypeSpec.Models
         internal UnknownOutputBaseModelWithDiscriminator(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, serializedAdditionalRawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownOutputBaseModelWithDiscriminator"/> for deserialization. </summary>
+        internal UnknownOutputBaseModelWithDiscriminator()
+        {
+        }
     }
 }

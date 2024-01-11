@@ -22,5 +22,10 @@ namespace xms_error_responses.Models
         {
             WhatNotFound = whatNotFound ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownNotFoundErrorBase"/> for deserialization. </summary>
+        internal UnknownNotFoundErrorBase()
+        {
+        }
     }
 }
