@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_GetIsModelArray_ShortVersion()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response response = client.GetIsModelArray(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_GetIsModelArray_ShortVersion_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response response = await client.GetIsModelArrayAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_GetIsModelArray_ShortVersion_Convenience()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response<IsModelArrayAdditionalProperties> response = client.GetIsModelArray();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_GetIsModelArray_ShortVersion_Convenience_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response<IsModelArrayAdditionalProperties> response = await client.GetIsModelArrayAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_GetIsModelArray_AllParameters()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response response = client.GetIsModelArray(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_GetIsModelArray_AllParameters_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response response = await client.GetIsModelArrayAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_GetIsModelArray_AllParameters_Convenience()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response<IsModelArrayAdditionalProperties> response = client.GetIsModelArray();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_GetIsModelArray_AllParameters_Convenience_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             Response<IsModelArrayAdditionalProperties> response = await client.GetIsModelArrayAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_Put_ShortVersion()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -119,7 +119,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_Put_ShortVersion_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -131,7 +131,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_Put_ShortVersion_Convenience()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
             Response response = client.Put(body);
@@ -141,7 +141,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_Put_ShortVersion_Convenience_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
             Response response = await client.PutAsync(body);
@@ -151,7 +151,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_Put_AllParameters()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.Put(content);
@@ -163,7 +163,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_Put_AllParameters_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
@@ -175,7 +175,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_IsModelArray_Put_AllParameters_Convenience()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
             Response response = client.Put(body);
@@ -185,7 +185,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_IsModelArray_Put_AllParameters_Convenience_Async()
         {
-            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient(apiVersion: "1.0.0");
+            IsModelArray client = new AdditionalPropertiesClient().GetIsModelArrayClient();
 
             IsModelArrayAdditionalProperties body = new IsModelArrayAdditionalProperties();
             Response response = await client.PutAsync(body);

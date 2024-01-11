@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -23,7 +24,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_GetStringAndArray_ShortVersion()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             Response response = client.GetStringAndArray(null);
 
@@ -36,7 +37,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_GetStringAndArray_ShortVersion_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             Response response = await client.GetStringAndArrayAsync(null);
 
@@ -49,25 +50,25 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_GetStringAndArray_ShortVersion_Convenience()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = client.GetStringAndArray();
+            Response<GetResponse7> response = client.GetStringAndArray();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_GetStringAndArray_ShortVersion_Convenience_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = await client.GetStringAndArrayAsync();
+            Response<GetResponse7> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_GetStringAndArray_AllParameters()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             Response response = client.GetStringAndArray(null);
 
@@ -80,7 +81,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_GetStringAndArray_AllParameters_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             Response response = await client.GetStringAndArrayAsync(null);
 
@@ -93,29 +94,33 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_GetStringAndArray_AllParameters_Convenience()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = client.GetStringAndArray();
+            Response<GetResponse7> response = client.GetStringAndArray();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_GetStringAndArray_AllParameters_Convenience_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response<object> response = await client.GetStringAndArrayAsync();
+            Response<GetResponse7> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_Send_ShortVersion()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = client.Send(content);
 
@@ -126,11 +131,15 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_Send_ShortVersion_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -141,29 +150,35 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_Send_ShortVersion_Convenience()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = client.Send(prop);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_Send_ShortVersion_Convenience_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = await client.SendAsync(prop);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_Send_AllParameters()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = client.Send(content);
 
@@ -174,11 +189,15 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_Send_AllParameters_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new Dictionary<string, object>
+                {
+                    ["string"] = "<string>",
+                    ["array"] = "<array>"
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -189,18 +208,20 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringAndArray_Send_AllParameters_Convenience()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = client.Send(prop);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringAndArray_Send_AllParameters_Convenience_Async()
         {
-            StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+            StringAndArray client = new UnionClient().GetStringAndArrayClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            StringAndArrayCases prop = new StringAndArrayCases(BinaryData.FromObjectAsJson("<string>"), BinaryData.FromObjectAsJson("<array>"));
+            Response response = await client.SendAsync(prop);
         }
     }
 }

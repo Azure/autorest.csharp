@@ -22,7 +22,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_ResponseBody_ShortVersion()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = client.ResponseBody(null);
 
@@ -34,7 +34,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_ResponseBody_ShortVersion_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = await client.ResponseBodyAsync(null);
 
@@ -46,7 +46,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_ResponseBody_ShortVersion_Convenience()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response<decimal> response = client.ResponseBody();
         }
@@ -55,7 +55,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_ResponseBody_ShortVersion_Convenience_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response<decimal> response = await client.ResponseBodyAsync();
         }
@@ -64,7 +64,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_ResponseBody_AllParameters()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = client.ResponseBody(null);
 
@@ -76,7 +76,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_ResponseBody_AllParameters_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = await client.ResponseBodyAsync(null);
 
@@ -88,7 +88,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_ResponseBody_AllParameters_Convenience()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response<decimal> response = client.ResponseBody();
         }
@@ -97,7 +97,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_ResponseBody_AllParameters_Convenience_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response<decimal> response = await client.ResponseBodyAsync();
         }
@@ -106,7 +106,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_RequestBody_ShortVersion()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.RequestBody(content);
@@ -118,7 +118,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_RequestBody_ShortVersion_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RequestBodyAsync(content);
@@ -130,7 +130,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_RequestBody_ShortVersion_Convenience()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = client.RequestBody((decimal)default);
         }
@@ -139,7 +139,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_RequestBody_ShortVersion_Convenience_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = await client.RequestBodyAsync((decimal)default);
         }
@@ -148,7 +148,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_RequestBody_AllParameters()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.RequestBody(content);
@@ -160,7 +160,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_RequestBody_AllParameters_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RequestBodyAsync(content);
@@ -172,7 +172,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_RequestBody_AllParameters_Convenience()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = client.RequestBody((decimal)default);
         }
@@ -181,7 +181,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_RequestBody_AllParameters_Convenience_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = await client.RequestBodyAsync((decimal)default);
         }
@@ -190,7 +190,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_RequestParameter_ShortVersion()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = client.RequestParameter(default);
 
@@ -201,7 +201,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_RequestParameter_ShortVersion_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = await client.RequestParameterAsync(default);
 
@@ -212,7 +212,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DecimalType_RequestParameter_AllParameters()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = client.RequestParameter(default);
 
@@ -223,7 +223,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DecimalType_RequestParameter_AllParameters_Async()
         {
-            DecimalType client = new ScalarClient().GetDecimalTypeClient(apiVersion: "1.0.0");
+            DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
             Response response = await client.RequestParameterAsync(default);
 

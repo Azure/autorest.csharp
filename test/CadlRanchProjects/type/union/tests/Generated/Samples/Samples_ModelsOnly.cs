@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_GetModelsOnly_ShortVersion()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             Response response = client.GetModelsOnly(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_GetModelsOnly_ShortVersion_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             Response response = await client.GetModelsOnlyAsync(null);
 
@@ -47,25 +47,25 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_GetModelsOnly_ShortVersion_Convenience()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = client.GetModelsOnly();
+            Response<GetResponse5> response = client.GetModelsOnly();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_GetModelsOnly_ShortVersion_Convenience_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = await client.GetModelsOnlyAsync();
+            Response<GetResponse5> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_GetModelsOnly_AllParameters()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             Response response = client.GetModelsOnly(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_GetModelsOnly_AllParameters_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             Response response = await client.GetModelsOnlyAsync(null);
 
@@ -89,29 +89,32 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_GetModelsOnly_AllParameters_Convenience()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = client.GetModelsOnly();
+            Response<GetResponse5> response = client.GetModelsOnly();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_GetModelsOnly_AllParameters_Convenience_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response<object> response = await client.GetModelsOnlyAsync();
+            Response<GetResponse5> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_Send_ShortVersion()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = client.Send(content);
 
@@ -122,11 +125,14 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_Send_ShortVersion_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -137,29 +143,38 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_Send_ShortVersion_Convenience()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_Send_ShortVersion_Convenience_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_Send_AllParameters()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = client.Send(content);
 
@@ -170,11 +185,14 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_Send_AllParameters_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    name = "<name>",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -185,18 +203,24 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelsOnly_Send_AllParameters_Convenience()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelsOnly_Send_AllParameters_Convenience_Async()
         {
-            ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
+            ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(BinaryData.FromObjectAsJson(new
+            {
+                name = "<name>",
+            }));
         }
     }
 }

@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_GetUnionFloatLiteral_ShortVersion()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response response = client.GetUnionFloatLiteral(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_GetUnionFloatLiteral_ShortVersion_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response response = await client.GetUnionFloatLiteralAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_GetUnionFloatLiteral_ShortVersion_Convenience()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response<UnionFloatLiteralProperty> response = client.GetUnionFloatLiteral();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_GetUnionFloatLiteral_ShortVersion_Convenience_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response<UnionFloatLiteralProperty> response = await client.GetUnionFloatLiteralAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_GetUnionFloatLiteral_AllParameters()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response response = client.GetUnionFloatLiteral(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_GetUnionFloatLiteral_AllParameters_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response response = await client.GetUnionFloatLiteralAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_GetUnionFloatLiteral_AllParameters_Convenience()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response<UnionFloatLiteralProperty> response = client.GetUnionFloatLiteral();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_GetUnionFloatLiteral_AllParameters_Convenience_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             Response<UnionFloatLiteralProperty> response = await client.GetUnionFloatLiteralAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_Put_ShortVersion()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_Put_ShortVersion_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_Put_ShortVersion_Convenience()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(BinaryData.FromObjectAsJson(42.42));
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_Put_ShortVersion_Convenience_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(BinaryData.FromObjectAsJson(42.42));
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_Put_AllParameters()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_Put_AllParameters_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnionFloatLiteral_Put_AllParameters_Convenience()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(BinaryData.FromObjectAsJson(42.42));
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnionFloatLiteral_Put_AllParameters_Convenience_Async()
         {
-            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient(apiVersion: "1.0.0");
+            UnionFloatLiteral client = new ValueTypesClient().GetUnionFloatLiteralClient();
 
             UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(BinaryData.FromObjectAsJson(42.42));
             Response response = await client.PutAsync(body);

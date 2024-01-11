@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetIsFloatAsync.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response<IsFloatAdditionalProperties> response = await client.GetIsFloatAsync();
 ]]></code>
 This sample shows how to call GetIsFloatAsync with all parameters.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response<IsFloatAdditionalProperties> response = await client.GetIsFloatAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<IsFloatAdditionalProperties> response = await client.GetIsFloatAsync();
       <example>
 This sample shows how to call GetIsFloat.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response<IsFloatAdditionalProperties> response = client.GetIsFloat();
 ]]></code>
 This sample shows how to call GetIsFloat with all parameters.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response<IsFloatAdditionalProperties> response = client.GetIsFloat();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<IsFloatAdditionalProperties> response = client.GetIsFloat();
       <example>
 This sample shows how to call GetIsFloatAsync and parse the result.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response response = await client.GetIsFloatAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetIsFloatAsync with all parameters and parse the result.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response response = await client.GetIsFloatAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call GetIsFloat and parse the result.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response response = client.GetIsFloat(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetIsFloat with all parameters and parse the result.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 Response response = client.GetIsFloat(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(123.45F);
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient(apiVersion: "1.0.0");
+IsFloat client = new AdditionalPropertiesClient().GetIsFloatClient();
 
 using RequestContent content = RequestContent.Create(new
 {

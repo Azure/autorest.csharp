@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using MgmtDiscriminator;
@@ -36,6 +40,78 @@ namespace MgmtDiscriminator.Mocking
             return apiVersion;
         }
 
+        /// <summary> Gets a collection of ArtifactResources in the ArmClient. </summary>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <returns> An object representing collection of ArtifactResources and their operations over a ArtifactResource. </returns>
+        public virtual ArtifactCollection GetArtifacts(ResourceIdentifier scope)
+        {
+            return new ArtifactCollection(Client, scope);
+        }
+
+        /// <summary>
+        /// Get a blueprint artifact.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceScope}/providers/Microsoft.Blueprint/artifacts/{artifactName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Artifacts_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="artifactName"> Name of the blueprint artifact. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual async Task<Response<ArtifactResource>> GetArtifactAsync(ResourceIdentifier scope, string artifactName, CancellationToken cancellationToken = default)
+        {
+            return await GetArtifacts(scope).GetAsync(artifactName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a blueprint artifact.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceScope}/providers/Microsoft.Blueprint/artifacts/{artifactName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Artifacts_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="artifactName"> Name of the blueprint artifact. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="artifactName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual Response<ArtifactResource> GetArtifact(ResourceIdentifier scope, string artifactName, CancellationToken cancellationToken = default)
+        {
+            return GetArtifacts(scope).Get(artifactName, cancellationToken);
+        }
+
         /// <summary>
         /// Gets an object representing a <see cref="DeliveryRuleResource"/> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource"/> <see cref="ResourceIdentifier"/> from its components.
@@ -46,6 +122,18 @@ namespace MgmtDiscriminator.Mocking
         {
             DeliveryRuleResource.ValidateResourceId(id);
             return new DeliveryRuleResource(Client, id);
+        }
+
+        /// <summary>
+        /// Gets an object representing an <see cref="ArtifactResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ArtifactResource.CreateResourceIdentifier" /> to create an <see cref="ArtifactResource"/> <see cref="ResourceIdentifier"/> from its components.
+        /// </summary>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ArtifactResource"/> object. </returns>
+        public virtual ArtifactResource GetArtifactResource(ResourceIdentifier id)
+        {
+            ArtifactResource.ValidateResourceId(id);
+            return new ArtifactResource(Client, id);
         }
     }
 }

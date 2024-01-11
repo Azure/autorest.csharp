@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_GetBooleanLiteral_ShortVersion()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response response = client.GetBooleanLiteral(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_GetBooleanLiteral_ShortVersion_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response response = await client.GetBooleanLiteralAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_GetBooleanLiteral_ShortVersion_Convenience()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response<BooleanLiteralProperty> response = client.GetBooleanLiteral();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_GetBooleanLiteral_ShortVersion_Convenience_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response<BooleanLiteralProperty> response = await client.GetBooleanLiteralAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_GetBooleanLiteral_AllParameters()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response response = client.GetBooleanLiteral(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_GetBooleanLiteral_AllParameters_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response response = await client.GetBooleanLiteralAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_GetBooleanLiteral_AllParameters_Convenience()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response<BooleanLiteralProperty> response = client.GetBooleanLiteral();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_GetBooleanLiteral_AllParameters_Convenience_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             Response<BooleanLiteralProperty> response = await client.GetBooleanLiteralAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_Put_ShortVersion()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_Put_ShortVersion_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_Put_ShortVersion_Convenience()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             BooleanLiteralProperty body = new BooleanLiteralProperty();
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_Put_ShortVersion_Convenience_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             BooleanLiteralProperty body = new BooleanLiteralProperty();
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_Put_AllParameters()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_Put_AllParameters_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_BooleanLiteral_Put_AllParameters_Convenience()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             BooleanLiteralProperty body = new BooleanLiteralProperty();
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_BooleanLiteral_Put_AllParameters_Convenience_Async()
         {
-            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient(apiVersion: "1.0.0");
+            BooleanLiteral client = new ValueTypesClient().GetBooleanLiteralClient();
 
             BooleanLiteralProperty body = new BooleanLiteralProperty();
             Response response = await client.PutAsync(body);

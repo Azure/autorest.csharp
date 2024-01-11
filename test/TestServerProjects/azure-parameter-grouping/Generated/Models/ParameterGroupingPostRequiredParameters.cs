@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace azure_parameter_grouping.Models
@@ -13,6 +14,38 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostRequiredParameters
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/>. </summary>
         /// <param name="path"> Path parameter. </param>
         /// <param name="body"></param>
@@ -30,12 +63,19 @@ namespace azure_parameter_grouping.Models
         /// <param name="query"> Query parameter with default. </param>
         /// <param name="path"> Path parameter. </param>
         /// <param name="body"></param>
-        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CustomHeader = customHeader;
             Query = query;
             Path = path;
             Body = body;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/> for deserialization. </summary>
+        internal ParameterGroupingPostRequiredParameters()
+        {
         }
 
         /// <summary> Gets or sets the custom header. </summary>

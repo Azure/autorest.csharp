@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
-using NUnit.Framework;
-using ModelWithConverterUsage.Models;
 using System.Text.Json;
+using ModelWithConverterUsage.Models;
+using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -16,7 +16,10 @@ namespace AutoRest.TestServer.Tests
             var model = new ModelClass(EnumProperty.A)
             {
                 StringProperty = "test_str",
-                ObjProperty = new Product("str")
+                ObjProperty = new Product()
+                {
+                    ConstProperty = "str"
+                }
             };
 
             var jsonAsString = JsonSerializer.Serialize(model);
@@ -55,7 +58,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void SerializeProductModel()
         {
-            var model = new Product("test_str");
+            var model = new Product()
+            {
+                ConstProperty = "test_str"
+            };
 
             var jsonAsString = JsonSerializer.Serialize(model);
             Assert.AreEqual("{\"ConstProperty\":\"test_str\"}", jsonAsString);
@@ -86,14 +92,16 @@ namespace AutoRest.TestServer.Tests
         public void DeserializeInputModel()
         {
             string jsonString = @"{""Input_Model_Property"": ""test_str""}";
-            Assert.That(() => JsonSerializer.Deserialize<InputModel>(jsonString), Throws.InstanceOf<NotImplementedException>());
+            var model = JsonSerializer.Deserialize<InputModel>(jsonString);
+            Assert.AreEqual("test_str", model.InputModelProperty);
         }
 
         [Test]
         public void SerializeOutputModel()
         {
-            var model = new OutputModel("test_str");
-            Assert.That(() => JsonSerializer.Serialize(model), Throws.InstanceOf<NotImplementedException>());
+            var model = ModelWithConverterUsageModelFactory.OutputModel("test_str");
+            var json = JsonSerializer.Serialize(model);
+            Assert.AreEqual(@"{""Output_Model_Property"":""test_str""}", json);
         }
 
         [Test]

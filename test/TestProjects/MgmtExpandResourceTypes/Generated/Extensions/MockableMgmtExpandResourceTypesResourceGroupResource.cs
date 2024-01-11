@@ -54,6 +54,14 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
@@ -76,6 +84,14 @@ namespace MgmtExpandResourceTypes.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Zones_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ZoneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

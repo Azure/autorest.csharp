@@ -55,7 +55,8 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     }
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
-    Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs --clear-output-folder=true"
+    # TODO -- remove the flag when the feature is generally available
+    Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs --clear-output-folder=true --use-model-reader-writer=true"
 }
 
 function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory, [string]$outputProjectDir = "") {
@@ -71,7 +72,12 @@ function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [stri
     $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
     $clientTsp = Join-Path $cadlRanchFilePath $testName "client.tsp"
     $mainTypeSpecFile = If (Test-Path $clientTsp) { Resolve-Path $clientTsp } Else { Resolve-Path $tspMain }
-    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
+    if ($projectPrefix -eq "typespec-nonAzure-") {
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true --option @azure-tools/typespec-csharp.branded=false" "-n"
+    }
+    else {
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
+    }
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
@@ -248,7 +254,7 @@ if (!($Exclude -contains "Samples")) {
     }
 }
 
-# TypeSpec projects
+# Azure cadl ranch projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 
 $cadlRanchProjectPaths = $testData.CadlRanchProjects
@@ -256,6 +262,17 @@ $cadlRanchProjectPaths = $testData.CadlRanchProjects
 if (!($Exclude -contains "CadlRanchProjects")) {
     foreach ($testPath in $cadlRanchProjectPaths) {
         Add-CadlRanch-TypeSpec $testPath "typespec-" $cadlRanchProjectDirectory
+    }
+}
+
+# Non azure cadl ranch projects
+$cadlRanchProjectNonAzureDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjectsNonAzure'
+
+$cadlRanchProjectNonAzurePaths = $testData.CadlRanchProjectsNonAzure
+
+if (!($Exclude -contains "CadlRanchProjectsNonAzure")) {
+    foreach ($testPath in $cadlRanchProjectNonAzurePaths) {
+        Add-CadlRanch-TypeSpec $testPath "typespec-nonAzure-" $cadlRanchProjectNonAzureDirectory
     }
 }
 

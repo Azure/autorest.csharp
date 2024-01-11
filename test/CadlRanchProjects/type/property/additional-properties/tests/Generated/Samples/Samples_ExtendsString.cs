@@ -23,7 +23,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_GetExtendsString_ShortVersion()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response response = client.GetExtendsString(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_GetExtendsString_ShortVersion_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response response = await client.GetExtendsStringAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_GetExtendsString_ShortVersion_Convenience()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response<ExtendsStringAdditionalProperties> response = client.GetExtendsString();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_GetExtendsString_ShortVersion_Convenience_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response<ExtendsStringAdditionalProperties> response = await client.GetExtendsStringAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_GetExtendsString_AllParameters()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response response = client.GetExtendsString(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_GetExtendsString_AllParameters_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response response = await client.GetExtendsStringAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_GetExtendsString_AllParameters_Convenience()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response<ExtendsStringAdditionalProperties> response = client.GetExtendsString();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_GetExtendsString_AllParameters_Convenience_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             Response<ExtendsStringAdditionalProperties> response = await client.GetExtendsStringAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_Put_ShortVersion()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_Put_ShortVersion_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_Put_ShortVersion_Convenience()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_Put_ShortVersion_Convenience_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_Put_AllParameters()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_Put_AllParameters_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ExtendsString_Put_AllParameters_Convenience()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.AdditionalProperties.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ExtendsString_Put_AllParameters_Convenience_Async()
         {
-            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient(apiVersion: "1.0.0");
+            ExtendsString client = new AdditionalPropertiesClient().GetExtendsStringClient();
 
             ExtendsStringAdditionalProperties body = new ExtendsStringAdditionalProperties("<name>");
             Response response = await client.PutAsync(body);

@@ -23,7 +23,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_GetStringExtensibleNamed_ShortVersion()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             Response response = client.GetStringExtensibleNamed(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_GetStringExtensibleNamed_ShortVersion_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             Response response = await client.GetStringExtensibleNamedAsync(null);
 
@@ -47,25 +47,25 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_GetStringExtensibleNamed_ShortVersion_Convenience()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<object> response = client.GetStringExtensibleNamed();
+            Response<GetResponse2> response = client.GetStringExtensibleNamed();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_GetStringExtensibleNamed_ShortVersion_Convenience_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<object> response = await client.GetStringExtensibleNamedAsync();
+            Response<GetResponse2> response = await client.GetStringExtensibleNamedAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_GetStringExtensibleNamed_AllParameters()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             Response response = client.GetStringExtensibleNamed(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_GetStringExtensibleNamed_AllParameters_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             Response response = await client.GetStringExtensibleNamedAsync(null);
 
@@ -89,29 +89,29 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_GetStringExtensibleNamed_AllParameters_Convenience()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<object> response = client.GetStringExtensibleNamed();
+            Response<GetResponse2> response = client.GetStringExtensibleNamed();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_GetStringExtensibleNamed_AllParameters_Convenience_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response<object> response = await client.GetStringExtensibleNamedAsync();
+            Response<GetResponse2> response = await client.GetStringExtensibleNamedAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_Send_ShortVersion()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = "<prop>",
             });
             Response response = client.Send(content);
 
@@ -122,11 +122,11 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_Send_ShortVersion_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = "<prop>",
             });
             Response response = await client.SendAsync(content);
 
@@ -137,29 +137,29 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_Send_ShortVersion_Convenience()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(new SendRequest2Prop("<prop>"));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_Send_ShortVersion_Convenience_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(new SendRequest2Prop("<prop>"));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_Send_AllParameters()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = "<prop>",
             });
             Response response = client.Send(content);
 
@@ -170,11 +170,11 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_Send_AllParameters_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = "<prop>",
             });
             Response response = await client.SendAsync(content);
 
@@ -185,18 +185,18 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_StringExtensibleNamed_Send_AllParameters_Convenience()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            Response response = client.Send(new SendRequest2Prop("<prop>"));
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_StringExtensibleNamed_Send_AllParameters_Convenience_Async()
         {
-            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
+            StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            Response response = await client.SendAsync(new SendRequest2Prop("<prop>"));
         }
     }
 }

@@ -151,6 +151,14 @@ namespace MgmtSingletonResource
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CarResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -179,6 +187,14 @@ namespace MgmtSingletonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CarResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -227,6 +243,14 @@ namespace MgmtSingletonResource
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ParentResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -256,6 +280,14 @@ namespace MgmtSingletonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>

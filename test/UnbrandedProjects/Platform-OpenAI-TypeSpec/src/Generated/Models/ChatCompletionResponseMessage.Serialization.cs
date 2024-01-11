@@ -2,8 +2,8 @@
 
 #nullable disable
 
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -18,7 +18,7 @@ namespace OpenAI.Models
             }
             ChatCompletionResponseMessageRole role = default;
             string content = default;
-            OptionalProperty<CreateChatCompletionResponseFunctionCall> functionCall = default;
+            OptionalProperty<ChatCompletionResponseMessageFunctionCall> functionCall = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("role"u8))
@@ -42,7 +42,7 @@ namespace OpenAI.Models
                     {
                         continue;
                     }
-                    functionCall = CreateChatCompletionResponseFunctionCall.DeserializeCreateChatCompletionResponseFunctionCall(property.Value);
+                    functionCall = ChatCompletionResponseMessageFunctionCall.DeserializeChatCompletionResponseMessageFunctionCall(property.Value);
                     continue;
                 }
             }

@@ -2,8 +2,8 @@
 
 #nullable disable
 
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -19,7 +19,7 @@ namespace OpenAI.Models
             CreateEmbeddingResponseObject @object = default;
             string model = default;
             IReadOnlyList<Embedding> data = default;
-            CreateUsage usage = default;
+            CreateEmbeddingResponseUsage usage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("object"u8))
@@ -44,7 +44,7 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("usage"u8))
                 {
-                    usage = CreateUsage.DeserializeCreateUsage(property.Value);
+                    usage = CreateEmbeddingResponseUsage.DeserializeCreateEmbeddingResponseUsage(property.Value);
                     continue;
                 }
             }

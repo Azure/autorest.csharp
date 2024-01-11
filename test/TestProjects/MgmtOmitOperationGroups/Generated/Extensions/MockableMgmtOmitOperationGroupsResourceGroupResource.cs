@@ -62,6 +62,14 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Model2Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="model2SName"> The <see cref="string"/> to use. </param>
@@ -83,6 +91,14 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Model2Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -106,6 +122,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <term>Operation Id</term>
         /// <description>Model5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -126,6 +146,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <term>Operation Id</term>
         /// <description>Model5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,6 +169,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model5s_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -182,6 +210,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <term>Operation Id</term>
         /// <description>Model5s_CreateOrUpdate</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="model5SName"> The <see cref="string"/> to use. </param>
@@ -218,6 +250,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <term>Operation Id</term>
         /// <description>Model5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="model5SName"> The <see cref="string"/> to use. </param>
@@ -251,6 +287,10 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Model5s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>

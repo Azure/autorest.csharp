@@ -3,3 +3,4 @@ options:
     generate-convenience-methods: false
     deserialize-null-collection-as-null-value: true
     head-as-boolean: true
+    use-model-reader-writer: false

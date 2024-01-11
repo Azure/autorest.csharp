@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call ResponseBodyAsync.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response<decimal> response = await client.ResponseBodyAsync();
 ]]></code>
 This sample shows how to call ResponseBodyAsync with all parameters.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response<decimal> response = await client.ResponseBodyAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<decimal> response = await client.ResponseBodyAsync();
       <example>
 This sample shows how to call ResponseBody.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response<decimal> response = client.ResponseBody();
 ]]></code>
 This sample shows how to call ResponseBody with all parameters.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response<decimal> response = client.ResponseBody();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<decimal> response = client.ResponseBody();
       <example>
 This sample shows how to call ResponseBodyAsync and parse the result.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = await client.ResponseBodyAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ResponseBodyAsync with all parameters and parse the result.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = await client.ResponseBodyAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call ResponseBody and parse the result.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = client.ResponseBody(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ResponseBody with all parameters and parse the result.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = client.ResponseBody(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call RequestBodyAsync.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = await client.RequestBodyAsync((decimal)default);
 ]]></code>
 This sample shows how to call RequestBodyAsync with all parameters.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = await client.RequestBodyAsync((decimal)default);
 ]]></code></example>
@@ -92,13 +92,13 @@ Response response = await client.RequestBodyAsync((decimal)default);
       <example>
 This sample shows how to call RequestBody.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = client.RequestBody((decimal)default);
 ]]></code>
 This sample shows how to call RequestBody with all parameters.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = client.RequestBody((decimal)default);
 ]]></code></example>
@@ -107,7 +107,7 @@ Response response = client.RequestBody((decimal)default);
       <example>
 This sample shows how to call RequestBodyAsync.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.RequestBodyAsync(content);
@@ -116,7 +116,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequestBodyAsync with all request content.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.RequestBodyAsync(content);
@@ -128,7 +128,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call RequestBody.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.RequestBody(content);
@@ -137,7 +137,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequestBody with all request content.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.RequestBody(content);
@@ -149,7 +149,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call RequestParameterAsync.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = await client.RequestParameterAsync(default);
 
@@ -157,7 +157,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequestParameterAsync with all parameters.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = await client.RequestParameterAsync(default);
 
@@ -168,7 +168,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call RequestParameter.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = client.RequestParameter(default);
 
@@ -176,7 +176,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call RequestParameter with all parameters.
 <code><![CDATA[
-Decimal128Type client = new ScalarClient().GetDecimal128TypeClient(apiVersion: "1.0.0");
+Decimal128Type client = new ScalarClient().GetDecimal128TypeClient();
 
 Response response = client.RequestParameter(default);
 

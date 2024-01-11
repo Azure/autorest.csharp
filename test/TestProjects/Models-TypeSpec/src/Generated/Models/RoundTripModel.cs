@@ -73,6 +73,7 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="nonRequiredString"> Optional string. </param>
@@ -103,7 +104,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredNullableStringList"> Required nullable string list. </param>
         /// <param name="nonRequiredNullableIntList"> Optional nullable model list. </param>
         /// <param name="nonRequiredNullableStringList"> Optional nullable string list. </param>
-        internal RoundTripModel(string requiredString, int requiredInt, string nonRequiredString, int? nonRequiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, int requiredReadonlyInt, int? nonRequiredReadonlyInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<int> requiredUint8Array, IList<int> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<int> requiredInt8Array, IList<int> optionalInt8Array, IList<int> requiredNullableIntList, IList<string> requiredNullableStringList, IList<int> nonRequiredNullableIntList, IList<string> nonRequiredNullableStringList)
+        internal RoundTripModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, string nonRequiredString, int? nonRequiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, int requiredReadonlyInt, int? nonRequiredReadonlyInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<int> requiredUint8Array, IList<int> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<int> requiredInt8Array, IList<int> optionalInt8Array, IList<int> requiredNullableIntList, IList<string> requiredNullableStringList, IList<int> nonRequiredNullableIntList, IList<string> nonRequiredNullableStringList) : base(serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -135,6 +136,11 @@ namespace ModelsTypeSpec.Models
             RequiredNullableStringList = requiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
             NonRequiredNullableStringList = nonRequiredNullableStringList;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/> for deserialization. </summary>
+        internal RoundTripModel()
+        {
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>

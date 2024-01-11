@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -49,24 +50,19 @@ namespace FirstTestTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Demo. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Demo GetDemoClient(string apiVersion = "0.1.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private HelloDemo _cachedHelloDemo;
+        private HelloDemo2 _cachedHelloDemo2;
 
-            return new Demo(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of HelloDemo. </summary>
+        public virtual HelloDemo GetHelloDemoClient()
+        {
+            return Volatile.Read(ref _cachedHelloDemo) ?? Interlocked.CompareExchange(ref _cachedHelloDemo, new HelloDemo(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedHelloDemo;
         }
 
-        /// <summary> Initializes a new instance of Demo2. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Demo2 GetDemo2Client(string apiVersion = "0.1.0")
+        /// <summary> Initializes a new instance of HelloDemo2. </summary>
+        public virtual HelloDemo2 GetHelloDemo2Client()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Demo2(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedHelloDemo2) ?? Interlocked.CompareExchange(ref _cachedHelloDemo2, new HelloDemo2(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedHelloDemo2;
         }
     }
 }

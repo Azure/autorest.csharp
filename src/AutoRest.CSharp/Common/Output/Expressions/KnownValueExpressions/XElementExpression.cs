@@ -19,11 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public ValueExpression GetDateTimeOffsetValue(string? format) => Extensible.XElement.GetDateTimeOffsetValue(this, format);
         public ValueExpression GetObjectValue(string? format) => Extensible.XElement.GetObjectValue(this, format);
         public ValueExpression GetTimeSpanValue(string? format) => Extensible.XElement.GetTimeSpanValue(this, format);
-    }
 
-    internal sealed record XAttributeExpression(ValueExpression Untyped) : TypedValueExpression<XAttribute>(Untyped)
-    {
-        public XNameExpression Name => new(Property(nameof(XAttribute.Name)));
-        public StringExpression Value => new(Property(nameof(XAttribute.Value)));
+        public static XElementExpression Load(StreamExpression stream) => new(new InvokeStaticMethodExpression(typeof(XElement), nameof(XElement.Load), new[] { stream }));
     }
 }

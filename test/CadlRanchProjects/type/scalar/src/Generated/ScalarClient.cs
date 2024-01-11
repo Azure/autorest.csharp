@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,74 +44,54 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual String GetStringClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private String _cachedString;
+        private Boolean _cachedBoolean;
+        private Unknown _cachedUnknown;
+        private DecimalType _cachedDecimalType;
+        private Decimal128Type _cachedDecimal128Type;
+        private DecimalVerify _cachedDecimalVerify;
+        private Decimal128Verify _cachedDecimal128Verify;
 
-            return new String(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of String. </summary>
+        public virtual String GetStringClient()
+        {
+            return Volatile.Read(ref _cachedString) ?? Interlocked.CompareExchange(ref _cachedString, new String(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedString;
         }
 
         /// <summary> Initializes a new instance of Boolean. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Boolean GetBooleanClient(string apiVersion = "1.0.0")
+        public virtual Boolean GetBooleanClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Boolean(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedBoolean) ?? Interlocked.CompareExchange(ref _cachedBoolean, new Boolean(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedBoolean;
         }
 
         /// <summary> Initializes a new instance of Unknown. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Unknown GetUnknownClient(string apiVersion = "1.0.0")
+        public virtual Unknown GetUnknownClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Unknown(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedUnknown) ?? Interlocked.CompareExchange(ref _cachedUnknown, new Unknown(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnknown;
         }
 
         /// <summary> Initializes a new instance of DecimalType. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DecimalType GetDecimalTypeClient(string apiVersion = "1.0.0")
+        public virtual DecimalType GetDecimalTypeClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new DecimalType(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimalType) ?? Interlocked.CompareExchange(ref _cachedDecimalType, new DecimalType(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimalType;
         }
 
         /// <summary> Initializes a new instance of Decimal128Type. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Decimal128Type GetDecimal128TypeClient(string apiVersion = "1.0.0")
+        public virtual Decimal128Type GetDecimal128TypeClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Decimal128Type(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimal128Type) ?? Interlocked.CompareExchange(ref _cachedDecimal128Type, new Decimal128Type(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimal128Type;
         }
 
         /// <summary> Initializes a new instance of DecimalVerify. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DecimalVerify GetDecimalVerifyClient(string apiVersion = "1.0.0")
+        public virtual DecimalVerify GetDecimalVerifyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new DecimalVerify(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimalVerify) ?? Interlocked.CompareExchange(ref _cachedDecimalVerify, new DecimalVerify(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimalVerify;
         }
 
         /// <summary> Initializes a new instance of Decimal128Verify. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Decimal128Verify GetDecimal128VerifyClient(string apiVersion = "1.0.0")
+        public virtual Decimal128Verify GetDecimal128VerifyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Decimal128Verify(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDecimal128Verify) ?? Interlocked.CompareExchange(ref _cachedDecimal128Verify, new Decimal128Verify(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDecimal128Verify;
         }
     }
 }
