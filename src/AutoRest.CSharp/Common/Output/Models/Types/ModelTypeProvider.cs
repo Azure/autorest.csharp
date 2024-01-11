@@ -278,14 +278,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             baseInitializers = Array.Empty<ValueExpression>();
             if (parent is not null)
             {
-                var isDiscriminatorInherited = IsDiscriminatorInherited(out var discriminatorParameterName);
+                var discriminatorParameterName = Discriminator?.Property.Declaration.Name.ToVariableName();
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
                 var baseParameters = new List<Parameter>();
                 var baseParameterInitializers = new List<ValueExpression>();
                 foreach (var p in ctor.Signature.Parameters)
                 {
                     // we check if we should have the discriminator to our ctor only when we are building the initialization ctor
-                    if (isInitializer && isDiscriminatorInherited && p.Name == discriminatorParameterName)
+                    if (isInitializer && IsDiscriminatorInheritedOnBase && p.Name == discriminatorParameterName)
                     {
                         // if this is base
                         if (Discriminator is { Value: null })
@@ -322,14 +322,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             fullParameterList = parameterList.DistinctBy(p => p.Name).ToArray(); // we filter out the parameters with the same name since we might have the same property both in myself and my base.
         }
 
-        private bool IsDiscriminatorInherited([MaybeNullWhen(false)] out string discriminatorParameterName)
+        private bool? _isDiscriminatorInheritedOnBase;
+        internal bool IsDiscriminatorInheritedOnBase => _isDiscriminatorInheritedOnBase ??= EnsureIsDiscriminatorInheritedOnBase();
+
+        private bool EnsureIsDiscriminatorInheritedOnBase()
         {
-            discriminatorParameterName = null;
             if (Discriminator is null)
                 return false;
 
+            if (Discriminator is { Value: { } })
+            {
+                var parent = GetBaseObjectType() as ModelTypeProvider;
+                return parent?.IsDiscriminatorInheritedOnBase ?? false;
+            }
+
             var property = Discriminator.Property;
-            discriminatorParameterName = property.Declaration.Name.ToVariableName();
             // if the property corresponding to the discriminator could not be found on this type, it means we are inheriting the discriminator
             return !Properties.Contains(property);
         }
@@ -361,7 +368,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<ObjectPropertyInitializer> defaultCtorInitializers = new();
 
             // only initialization ctor initializes the discriminator
-            if (isInitializer && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
+            // and we should not initialize the discriminator again when the discriminator is inherited (it should show up in the ctor)
+            if (isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !IsUnknownDerivedType)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }

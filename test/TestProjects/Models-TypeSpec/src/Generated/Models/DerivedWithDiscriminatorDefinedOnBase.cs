@@ -21,7 +21,6 @@ namespace ModelsTypeSpec.Models
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
 
-            Kind = "A";
             RequiredString = requiredString;
         }
 
