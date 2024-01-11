@@ -271,7 +271,7 @@ namespace Hello.Demo2 {
     @doc("Return hi in demo2")
     @get
     @convenientAPI(true)
-    op helloDemo2(): Thing;
+    op helloDemoAgain(): Thing;
 
     @route("/literal")
     @doc("Create with literal value")

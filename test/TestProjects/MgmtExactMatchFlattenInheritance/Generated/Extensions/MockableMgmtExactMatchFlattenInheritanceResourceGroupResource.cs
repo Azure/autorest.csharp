@@ -75,6 +75,14 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AzureResourceFlattenModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -97,6 +105,14 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AzureResourceFlattenModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -128,6 +144,14 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -150,6 +174,14 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -181,6 +213,14 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -203,6 +243,14 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel3Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -227,6 +275,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -248,6 +300,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -268,6 +324,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -306,6 +366,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -343,6 +407,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -377,6 +445,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel2s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -413,6 +485,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -434,6 +510,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -454,6 +534,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -492,6 +576,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -529,6 +617,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -563,6 +655,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel3s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -599,6 +695,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -620,6 +720,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -640,6 +744,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -678,6 +786,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -715,6 +827,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -749,6 +865,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel4s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -785,6 +905,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -806,6 +930,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -826,6 +954,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -863,6 +995,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -899,6 +1035,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
@@ -933,6 +1073,10 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AzureResourceFlattenModel5s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>

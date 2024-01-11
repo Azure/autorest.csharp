@@ -44,15 +44,15 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
-        private Models _cachedModels;
+        private ModelsOps _cachedModelsOps;
         private ModelProperties _cachedModelProperties;
         private Operations _cachedOperations;
         private Parameters _cachedParameters;
 
-        /// <summary> Initializes a new instance of Models. </summary>
-        public virtual Models GetModelsClient()
+        /// <summary> Initializes a new instance of ModelsOps. </summary>
+        public virtual ModelsOps GetModelsOpsClient()
         {
-            return Volatile.Read(ref _cachedModels) ?? Interlocked.CompareExchange(ref _cachedModels, new Models(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModels;
+            return Volatile.Read(ref _cachedModelsOps) ?? Interlocked.CompareExchange(ref _cachedModelsOps, new ModelsOps(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModelsOps;
         }
 
         /// <summary> Initializes a new instance of ModelProperties. </summary>

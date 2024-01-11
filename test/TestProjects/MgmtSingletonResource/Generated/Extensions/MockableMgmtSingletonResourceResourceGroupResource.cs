@@ -53,6 +53,14 @@ namespace MgmtSingletonResource.Mocking
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CarResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="carName"> The <see cref="string"/> to use. </param>
@@ -74,6 +82,14 @@ namespace MgmtSingletonResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Cars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -105,6 +121,14 @@ namespace MgmtSingletonResource.Mocking
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ParentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="parentName"> The <see cref="string"/> to use. </param>
@@ -127,6 +151,14 @@ namespace MgmtSingletonResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ParentResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
