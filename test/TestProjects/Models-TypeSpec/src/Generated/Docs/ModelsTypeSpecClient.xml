@@ -8,7 +8,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>");
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
 ]]></code>
 This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync with all parameters.
@@ -16,7 +16,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync wi
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>")
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
 {
     OptionalInt = 1234,
     OptionalString = "<optionalString>",
@@ -31,7 +31,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>");
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
 ]]></code>
 This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase with all parameters.
@@ -39,7 +39,7 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase with al
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("A", "<requiredString>")
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
 {
     OptionalInt = 1234,
     OptionalString = "<optionalString>",
