@@ -11,11 +11,11 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.NewProject.TypeSpec
+namespace FirstTestTypeSpec
 {
     // Data plane generated sub-client.
     /// <summary> Hello world service. </summary>
-    public partial class Demo
+    public partial class HelloDemo
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
@@ -30,18 +30,18 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Demo for mocking. </summary>
-        protected Demo()
+        /// <summary> Initializes a new instance of HelloDemo for mocking. </summary>
+        protected HelloDemo()
         {
         }
 
-        /// <summary> Initializes a new instance of Demo. </summary>
+        /// <summary> Initializes a new instance of HelloDemo. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        internal Demo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
+        internal HelloDemo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -67,13 +67,13 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo.SayHi");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo.SayHi");
             scope.Start();
             try
             {
@@ -104,13 +104,13 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Demo.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
+        /// <include file="Docs/HelloDemo.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateScope("Demo.SayHi");
+            using var scope = ClientDiagnostics.CreateScope("HelloDemo.SayHi");
             scope.Start();
             try
             {
