@@ -20,5 +20,10 @@ namespace ModelsTypeSpec.Models
         internal UnknownBaseModelWithDiscriminatorDefinedOnBase(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData, string optionalString) : base(kind, serializedAdditionalRawData, optionalString)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownBaseModelWithDiscriminatorDefinedOnBase"/> for deserialization. </summary>
+        internal UnknownBaseModelWithDiscriminatorDefinedOnBase()
+        {
+        }
     }
 }
