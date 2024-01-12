@@ -117,8 +117,6 @@ namespace AutoRest.CSharp.Common.Decorator
                         actualBaseSchema.Children.Immediate.Add(defaultDerivedSchema);
                     }
 
-                    defaultDerivedSchema.Extensions = new RecordOfStringAndAny { { "x-ms-skip-init-ctor", true } };
-
                     HashSet<string> usages = new HashSet<string>() { "Model" };
                     if (actualBaseSchema.Usage.Contains(SchemaContext.Input))
                         usages.Add("Input");
@@ -131,6 +129,7 @@ namespace AutoRest.CSharp.Common.Decorator
                     if (actualBaseSchema.Extensions?.Usage?.Contains("input", StringComparison.OrdinalIgnoreCase) ?? false)
                         extensionUsages.Add("Input");
 
+                    defaultDerivedSchema.Extensions = new RecordOfStringAndAny();
                     if (extensionUsages.Count > 0)
                     {
                         defaultDerivedSchema.Extensions.Add("x-csharp-usage", string.Join(',', extensionUsages));
