@@ -75,6 +75,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
+            IsInheritableCommonType = ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -88,8 +89,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.DiscriminatorValue == null;
-
-        public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -468,6 +467,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private HashSet<string?> GetParentPropertySerializedNames()
         {
+            // TODO -- this is not really getting the serialized name of the properties as advertised in the method name
+            // this is just getting the name of the schema property.
+            // this is a guard of not having compilation errors because we cannot define the properties with the same name as properties defined in base types, therefore here we should get the set by the declaration name of the property
             return EnumerateHierarchy()
                 .Skip(1)
                 .SelectMany(type => type.Properties)
