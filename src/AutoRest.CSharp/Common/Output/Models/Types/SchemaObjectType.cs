@@ -73,6 +73,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
             IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
+            // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
+            SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
+            IsInheritableCommonType = ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -86,8 +89,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.DiscriminatorValue == null;
-
-        public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -378,9 +379,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
 
-        protected bool SkipInitializerConstructor => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.SkipInitCtor;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
@@ -392,13 +390,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (InitializationConstructor != SerializationConstructor)
                 yield return SerializationConstructor;
 
-            // add an extra empty ctor if we do not have a ctor with no parameters
-            var accessibility = IsStruct ? Public : Internal;
-            if (Configuration.UseModelReaderWriter && InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
-                yield return new(
-                    new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
-                    Array.Empty<ObjectPropertyInitializer>(),
-                    null);
+            if (EmptyConstructor != null)
+                yield return EmptyConstructor;
         }
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
