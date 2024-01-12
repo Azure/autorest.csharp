@@ -14,12 +14,6 @@ namespace ModelsTypeSpec.Models
     internal partial class UnknownBaseModelWithDiscriminator : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of <see cref="UnknownBaseModelWithDiscriminator"/>. </summary>
-        /// <param name="requiredPropertyOnBase"> Required property on base. </param>
-        internal UnknownBaseModelWithDiscriminator(int requiredPropertyOnBase) : base(requiredPropertyOnBase)
-        {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownBaseModelWithDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
