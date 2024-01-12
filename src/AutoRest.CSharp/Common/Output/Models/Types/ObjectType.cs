@@ -35,6 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        protected bool IsInheritableCommonType { get; init; } = false;
         protected bool SkipInitializerConstructor { get; init; }
         public bool IsUnknownDerivedType { get; protected init; }
         public bool IsPropertyBag { get; protected init; }
@@ -68,7 +69,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (initCtorParameterCount > 0 && serializationCtorParameterCount > 0)
             {
-                var accessibility = IsStruct ? MethodSignatureModifiers.Public : MethodSignatureModifiers.Internal;
+                var accessibility = IsStruct ? MethodSignatureModifiers.Public :
+                    IsInheritableCommonType ? MethodSignatureModifiers.Protected : MethodSignatureModifiers.Internal;
                 return new(
                     new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
                     Array.Empty<ObjectPropertyInitializer>(),
