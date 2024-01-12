@@ -208,8 +208,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
         {
-            var order = new List<string>(); // this collection keeps tracking the order of properties being added
-            var result = new Dictionary<string, JsonPropertySerialization>(); // this dictionary keeps the containing data of the properties
             foreach (var objType in EnumerateHierarchy())
             {
                 foreach (var property in objType.Properties)
@@ -230,29 +228,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                             : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
                     }
 
-                    var parameterName = declaredName.ToVariableName();
-                    order.Add(parameterName);
-                    // only add when it does not exist
-                    if (!result.ContainsKey(parameterName))
-                    {
-                        result.Add(parameterName, new JsonPropertySerialization(
-                            declaredName.ToVariableName(),
-                            memberValueExpression,
-                            serializedName,
-                            property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
-                            valueSerialization,
-                            property.IsRequired,
-                            ShouldExcludeInWireSerialization(property, inputModelProperty),
-                            customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                            customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
-                            enumerableExpression: enumerableExpression));
-                    }
+                    yield return new JsonPropertySerialization(
+                        declaredName.ToVariableName(),
+                        memberValueExpression,
+                        serializedName,
+                        property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
+                        valueSerialization,
+                        property.IsRequired,
+                        ShouldExcludeInWireSerialization(property, inputModelProperty),
+                        customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
+                        enumerableExpression: enumerableExpression);
                 }
-            }
-
-            foreach (var parameterName in order.Distinct())
-            {
-                yield return result[parameterName];
             }
         }
 
