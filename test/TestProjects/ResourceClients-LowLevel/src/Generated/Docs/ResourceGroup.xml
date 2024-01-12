@@ -6,7 +6,7 @@
 This sample shows how to call GetGroupAsync and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 Response response = await client.GetGroupAsync(null);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetGroupAsync with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 Response response = await client.GetGroupAsync(null);
 
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetGroup and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 Response response = client.GetGroup(null);
 
@@ -39,7 +39,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetGroup with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 Response response = client.GetGroup(null);
 
@@ -52,7 +52,7 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetItemsAsync and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
@@ -63,7 +63,7 @@ await foreach (BinaryData item in client.GetItemsAsync(null))
 This sample shows how to call GetItemsAsync with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 await foreach (BinaryData item in client.GetItemsAsync(null))
 {
@@ -77,7 +77,7 @@ await foreach (BinaryData item in client.GetItemsAsync(null))
 This sample shows how to call GetItems and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 foreach (BinaryData item in client.GetItems(null))
 {
@@ -88,7 +88,7 @@ foreach (BinaryData item in client.GetItems(null))
 This sample shows how to call GetItems with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
-ResourceGroup client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>");
+ResourceGroup client = new ResourceServiceClient("<GroupId>", null, credential).GetResourceGroup();
 
 foreach (BinaryData item in client.GetItems(null))
 {

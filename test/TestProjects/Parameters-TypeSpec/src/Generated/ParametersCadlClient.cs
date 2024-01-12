@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -16,6 +17,7 @@ namespace ParametersCadl
     public partial class ParametersCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,16 +38,15 @@ namespace ParametersCadl
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _apiVersion = options.Version;
         }
 
-        /// <summary> Initializes a new instance of ParameterOrders. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ParameterOrders GetParameterOrdersClient(string apiVersion = "2022-05-15-preview")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private ParameterOrders _cachedParameterOrders;
 
-            return new ParameterOrders(ClientDiagnostics, _pipeline, apiVersion);
+        /// <summary> Initializes a new instance of ParameterOrders. </summary>
+        public virtual ParameterOrders GetParameterOrdersClient()
+        {
+            return Volatile.Read(ref _cachedParameterOrders) ?? Interlocked.CompareExchange(ref _cachedParameterOrders, new ParameterOrders(ClientDiagnostics, _pipeline, _apiVersion), null) ?? _cachedParameterOrders;
         }
     }
 }

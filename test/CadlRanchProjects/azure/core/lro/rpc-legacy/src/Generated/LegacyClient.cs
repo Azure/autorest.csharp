@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -17,6 +18,7 @@ namespace _Azure.Lro.RpcLegacy
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -41,16 +43,15 @@ namespace _Azure.Lro.RpcLegacy
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
-        /// <summary> Initializes a new instance of CreateResourcePollViaOperationLocation. </summary>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual CreateResourcePollViaOperationLocation GetCreateResourcePollViaOperationLocationClient(string apiVersion = "2022-12-01-preview")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private CreateResourcePollViaOperationLocation _cachedCreateResourcePollViaOperationLocation;
 
-            return new CreateResourcePollViaOperationLocation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of CreateResourcePollViaOperationLocation. </summary>
+        public virtual CreateResourcePollViaOperationLocation GetCreateResourcePollViaOperationLocationClient()
+        {
+            return Volatile.Read(ref _cachedCreateResourcePollViaOperationLocation) ?? Interlocked.CompareExchange(ref _cachedCreateResourcePollViaOperationLocation, new CreateResourcePollViaOperationLocation(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedCreateResourcePollViaOperationLocation;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = client.GetAccountProperties(null);
 
@@ -38,7 +38,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = await client.GetAccountPropertiesAsync(null);
 
@@ -52,7 +52,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = client.GetAccountProperties(null);
 
@@ -103,7 +103,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = await client.GetAccountPropertiesAsync(null);
 
@@ -154,7 +154,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.UpdateAccountProperties(content);
@@ -169,7 +169,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.UpdateAccountPropertiesAsync(content);
@@ -184,7 +184,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -239,7 +239,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -294,7 +294,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = client.GetAccessKeys(null);
 
@@ -308,7 +308,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = await client.GetAccessKeysAsync(null);
 
@@ -322,7 +322,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = client.GetAccessKeys(null);
 
@@ -337,7 +337,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             Response response = await client.GetAccessKeysAsync(null);
 
@@ -352,7 +352,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.RegenerateAccessKey(content);
@@ -367,7 +367,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RegenerateAccessKeyAsync(content);
@@ -382,7 +382,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -401,7 +401,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -420,7 +420,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             foreach (BinaryData item in client.GetResourceSetRules(null, null))
             {
@@ -435,7 +435,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             await foreach (BinaryData item in client.GetResourceSetRulesAsync(null, null))
             {
@@ -450,7 +450,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             foreach (BinaryData item in client.GetResourceSetRules("<skipToken>", null))
             {
@@ -549,7 +549,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         {
             Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
-            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+            PurviewAccountsClient client = new PurviewAccountsClient(endpoint, null, credential);
 
             await foreach (BinaryData item in client.GetResourceSetRulesAsync("<skipToken>", null))
             {

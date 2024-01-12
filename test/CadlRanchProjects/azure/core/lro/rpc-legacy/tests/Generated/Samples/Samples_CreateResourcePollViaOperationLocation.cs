@@ -23,7 +23,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_JobResult_GetJob_ShortVersion()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response response = client.GetJob("<jobId>", null);
 
@@ -37,7 +37,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_JobResult_GetJob_ShortVersion_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response response = await client.GetJobAsync("<jobId>", null);
 
@@ -51,7 +51,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_JobResult_GetJob_ShortVersion_Convenience()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response<JobResult> response = client.GetJob("<jobId>");
         }
@@ -60,7 +60,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_JobResult_GetJob_ShortVersion_Convenience_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response<JobResult> response = await client.GetJobAsync("<jobId>");
         }
@@ -69,7 +69,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_JobResult_GetJob_AllParameters()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response response = client.GetJob("<jobId>", null);
 
@@ -88,7 +88,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_JobResult_GetJob_AllParameters_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response response = await client.GetJobAsync("<jobId>", null);
 
@@ -107,7 +107,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_JobResult_GetJob_AllParameters_Convenience()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response<JobResult> response = client.GetJob("<jobId>");
         }
@@ -116,7 +116,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_JobResult_GetJob_AllParameters_Convenience_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             Response<JobResult> response = await client.GetJobAsync("<jobId>");
         }
@@ -125,7 +125,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -138,7 +138,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -151,7 +151,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion_Convenience()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             JobData jobData = new JobData("<comment>");
             Operation operation = client.CreateJob(WaitUntil.Completed, jobData);
@@ -161,7 +161,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_ShortVersion_Convenience_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             JobData jobData = new JobData("<comment>");
             Operation operation = await client.CreateJobAsync(WaitUntil.Completed, jobData);
@@ -171,7 +171,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -184,7 +184,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -197,7 +197,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters_Convenience()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             JobData jobData = new JobData("<comment>");
             Operation operation = client.CreateJob(WaitUntil.Completed, jobData);
@@ -207,7 +207,7 @@ namespace _Azure.Lro.RpcLegacy.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateResourcePollViaOperationLocation_CreateJob_AllParameters_Convenience_Async()
         {
-            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient(apiVersion: "2022-12-01-preview");
+            CreateResourcePollViaOperationLocation client = new LegacyClient().GetCreateResourcePollViaOperationLocationClient();
 
             JobData jobData = new JobData("<comment>");
             Operation operation = await client.CreateJobAsync(WaitUntil.Completed, jobData);

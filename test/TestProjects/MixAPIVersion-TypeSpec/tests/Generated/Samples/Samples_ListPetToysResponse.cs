@@ -22,7 +22,7 @@ namespace MixApiVersion.Samples
         public void Example_Toy_GetPets_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient(apiVersion: "2022-11-30-preview");
+            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient();
 
             foreach (BinaryData item in client.GetPets(null))
             {
@@ -38,7 +38,7 @@ namespace MixApiVersion.Samples
         public async Task Example_Toy_GetPets_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient(apiVersion: "2022-11-30-preview");
+            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient();
 
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
@@ -54,7 +54,7 @@ namespace MixApiVersion.Samples
         public void Example_Toy_GetPets_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient(apiVersion: "2022-11-30-preview");
+            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient();
 
             foreach (BinaryData item in client.GetPets(null))
             {
@@ -70,7 +70,7 @@ namespace MixApiVersion.Samples
         public async Task Example_Toy_GetPets_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient(apiVersion: "2022-11-30-preview");
+            ListPetToysResponse client = new MixApiVersionClient(endpoint).GetListPetToysResponseClient();
 
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {

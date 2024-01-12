@@ -22,7 +22,7 @@ namespace ResourceClients_LowLevel.Samples
         public void Example_GetParameters_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             Response response = client.GetParameters(null);
 
@@ -35,7 +35,7 @@ namespace ResourceClients_LowLevel.Samples
         public async Task Example_GetParameters_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             Response response = await client.GetParametersAsync(null);
 
@@ -48,7 +48,7 @@ namespace ResourceClients_LowLevel.Samples
         public void Example_GetParameters_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             Response response = client.GetParameters(null);
 
@@ -61,7 +61,7 @@ namespace ResourceClients_LowLevel.Samples
         public async Task Example_GetParameters_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             Response response = await client.GetParametersAsync(null);
 
@@ -74,7 +74,7 @@ namespace ResourceClients_LowLevel.Samples
         public void Example_GetGroups_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             foreach (BinaryData item in client.GetGroups(null))
             {
@@ -88,7 +88,7 @@ namespace ResourceClients_LowLevel.Samples
         public async Task Example_GetGroups_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
@@ -102,7 +102,7 @@ namespace ResourceClients_LowLevel.Samples
         public void Example_GetGroups_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             foreach (BinaryData item in client.GetGroups(null))
             {
@@ -116,7 +116,7 @@ namespace ResourceClients_LowLevel.Samples
         public async Task Example_GetGroups_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
@@ -130,7 +130,7 @@ namespace ResourceClients_LowLevel.Samples
         public void Example_GetAllItems_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             foreach (BinaryData item in client.GetAllItems(null))
             {
@@ -144,7 +144,7 @@ namespace ResourceClients_LowLevel.Samples
         public async Task Example_GetAllItems_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             await foreach (BinaryData item in client.GetAllItemsAsync(null))
             {
@@ -158,7 +158,7 @@ namespace ResourceClients_LowLevel.Samples
         public void Example_GetAllItems_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             foreach (BinaryData item in client.GetAllItems(null))
             {
@@ -172,7 +172,7 @@ namespace ResourceClients_LowLevel.Samples
         public async Task Example_GetAllItems_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = new ResourceServiceClient(credential);
+            ResourceServiceClient client = new ResourceServiceClient(null, null, credential);
 
             await foreach (BinaryData item in client.GetAllItemsAsync(null))
             {

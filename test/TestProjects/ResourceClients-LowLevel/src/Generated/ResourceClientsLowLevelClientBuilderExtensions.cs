@@ -18,11 +18,13 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="ResourceServiceClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="groupId"> Group identifier. </param>
+        /// <param name="itemId"> Item identifier. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<ResourceServiceClient, ResourceServiceClientOptions> AddResourceServiceClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<ResourceServiceClient, ResourceServiceClientOptions> AddResourceServiceClient<TBuilder>(this TBuilder builder, Uri endpoint, string groupId, string itemId, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ResourceServiceClient, ResourceServiceClientOptions>((options) => new ResourceServiceClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<ResourceServiceClient, ResourceServiceClientOptions>((options) => new ResourceServiceClient(endpoint, groupId, itemId, credential, options));
         }
 
         /// <summary> Registers a <see cref="ResourceServiceClient"/> instance. </summary>

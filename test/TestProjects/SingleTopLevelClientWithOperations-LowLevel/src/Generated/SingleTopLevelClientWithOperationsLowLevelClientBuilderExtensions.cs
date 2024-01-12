@@ -18,11 +18,12 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="TopLevelClientWithOperationClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="clientParameter"> The <see cref="string"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<TopLevelClientWithOperationClient, TopLevelClientWithOperationClientOptions> AddTopLevelClientWithOperationClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<TopLevelClientWithOperationClient, TopLevelClientWithOperationClientOptions> AddTopLevelClientWithOperationClient<TBuilder>(this TBuilder builder, Uri endpoint, string clientParameter, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<TopLevelClientWithOperationClient, TopLevelClientWithOperationClientOptions>((options) => new TopLevelClientWithOperationClient(endpoint, credential, options));
+            return builder.RegisterClientFactory<TopLevelClientWithOperationClient, TopLevelClientWithOperationClientOptions>((options) => new TopLevelClientWithOperationClient(endpoint, clientParameter, credential, options));
         }
 
         /// <summary> Registers a <see cref="TopLevelClientWithOperationClient"/> instance. </summary>

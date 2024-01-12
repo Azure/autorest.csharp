@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -17,6 +18,7 @@ namespace Client.Structure.Service.TwoOperationGroup
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _client;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -31,45 +33,44 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         /// <summary> Initializes a new instance of TwoOperationGroupClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public TwoOperationGroupClient(Uri endpoint) : this(endpoint, new TwoOperationGroupClientOptions())
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="client"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
+        public TwoOperationGroupClient(Uri endpoint, string client) : this(endpoint, client, new TwoOperationGroupClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TwoOperationGroupClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public TwoOperationGroupClient(Uri endpoint, TwoOperationGroupClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="client"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
+        public TwoOperationGroupClient(Uri endpoint, string client, TwoOperationGroupClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNullOrEmpty(client, nameof(client));
             options ??= new TwoOperationGroupClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
+            _client = client;
         }
 
-        /// <summary> Initializes a new instance of Group1. </summary>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Group1 GetGroup1Client(string client)
-        {
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
+        private Group1 _cachedGroup1;
+        private Group2 _cachedGroup2;
 
-            return new Group1(ClientDiagnostics, _pipeline, _endpoint, client);
+        /// <summary> Initializes a new instance of Group1. </summary>
+        public virtual Group1 GetGroup1Client()
+        {
+            return Volatile.Read(ref _cachedGroup1) ?? Interlocked.CompareExchange(ref _cachedGroup1, new Group1(ClientDiagnostics, _pipeline, _endpoint, _client), null) ?? _cachedGroup1;
         }
 
         /// <summary> Initializes a new instance of Group2. </summary>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Group2 GetGroup2Client(string client)
+        public virtual Group2 GetGroup2Client()
         {
-            Argument.AssertNotNullOrEmpty(client, nameof(client));
-
-            return new Group2(ClientDiagnostics, _pipeline, _endpoint, client);
+            return Volatile.Read(ref _cachedGroup2) ?? Interlocked.CompareExchange(ref _cachedGroup2, new Group2(ClientDiagnostics, _pipeline, _endpoint, _client), null) ?? _cachedGroup2;
         }
     }
 }

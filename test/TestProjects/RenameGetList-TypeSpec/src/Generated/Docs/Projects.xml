@@ -6,7 +6,7 @@
 This sample shows how to call GetProjectAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 Response response = await client.GetProjectAsync("<projectName>", null);
 
@@ -23,7 +23,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProjectAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 Response response = await client.GetProjectAsync("<projectName>", null);
 
@@ -46,7 +46,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProject and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 Response response = client.GetProject("<projectName>", null);
 
@@ -63,7 +63,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProject with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 Response response = client.GetProject("<projectName>", null);
 
@@ -86,7 +86,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 await foreach (BinaryData item in client.GetProjectsAsync(null))
 {
@@ -104,7 +104,7 @@ await foreach (BinaryData item in client.GetProjectsAsync(null))
 This sample shows how to call GetProjectsAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 await foreach (BinaryData item in client.GetProjectsAsync(null))
 {
@@ -128,7 +128,7 @@ await foreach (BinaryData item in client.GetProjectsAsync(null))
 This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 foreach (BinaryData item in client.GetProjects(null))
 {
@@ -146,7 +146,7 @@ foreach (BinaryData item in client.GetProjects(null))
 This sample shows how to call GetProjects with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
 foreach (BinaryData item in client.GetProjects(null))
 {

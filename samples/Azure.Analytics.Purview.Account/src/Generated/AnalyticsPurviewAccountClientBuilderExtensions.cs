@@ -17,10 +17,11 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="PurviewAccountsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
-        public static IAzureClientBuilder<PurviewAccountsClient, PurviewAccountsClientOptions> AddPurviewAccountsClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        /// <param name="collectionName"> The <see cref="string"/> to use. </param>
+        public static IAzureClientBuilder<PurviewAccountsClient, PurviewAccountsClientOptions> AddPurviewAccountsClient<TBuilder>(this TBuilder builder, Uri endpoint, string collectionName)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<PurviewAccountsClient, PurviewAccountsClientOptions>((options, cred) => new PurviewAccountsClient(endpoint, cred, options));
+            return builder.RegisterClientFactory<PurviewAccountsClient, PurviewAccountsClientOptions>((options, cred) => new PurviewAccountsClient(endpoint, collectionName, cred, options));
         }
 
         /// <summary> Registers a <see cref="PurviewAccountsClient"/> instance. </summary>

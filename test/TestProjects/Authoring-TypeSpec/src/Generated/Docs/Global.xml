@@ -6,7 +6,7 @@
 This sample shows how to call GetSupportedLanguagesAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 await foreach (BinaryData item in client.GetSupportedLanguagesAsync())
 {
@@ -18,7 +18,7 @@ await foreach (BinaryData item in client.GetSupportedLanguagesAsync())
 This sample shows how to call GetSupportedLanguagesAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {
@@ -33,7 +33,7 @@ await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 12
 This sample shows how to call GetSupportedLanguages and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 foreach (BinaryData item in client.GetSupportedLanguages())
 {
@@ -45,7 +45,7 @@ foreach (BinaryData item in client.GetSupportedLanguages())
 This sample shows how to call GetSupportedLanguages with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 foreach (BinaryData item in client.GetSupportedLanguages(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {
@@ -60,7 +60,7 @@ foreach (BinaryData item in client.GetSupportedLanguages(maxCount: 1234, skip: 1
 This sample shows how to call GetTrainingConfigVersionsAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync())
 {
@@ -72,7 +72,7 @@ await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync())
 This sample shows how to call GetTrainingConfigVersionsAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {
@@ -87,7 +87,7 @@ await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount
 This sample shows how to call GetTrainingConfigVersions and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 foreach (BinaryData item in client.GetTrainingConfigVersions())
 {
@@ -99,7 +99,7 @@ foreach (BinaryData item in client.GetTrainingConfigVersions())
 This sample shows how to call GetTrainingConfigVersions with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient(apiVersion: "2022-05-15-preview");
+Global client = new AuthoringTypeSpecClient(endpoint).GetGlobalClient();
 
 foreach (BinaryData item in client.GetTrainingConfigVersions(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {

@@ -6,7 +6,7 @@
 This sample shows how to call GetDeploymentAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
@@ -16,7 +16,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call GetDeploymentAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
@@ -29,7 +29,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call GetDeployment and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
@@ -39,7 +39,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call GetDeployment with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
@@ -52,7 +52,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call GetDeploymentsAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 {
@@ -63,7 +63,7 @@ await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 This sample shows how to call GetDeploymentsAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 {
@@ -77,7 +77,7 @@ await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 This sample shows how to call GetDeployments and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 foreach (BinaryData item in client.GetDeployments("<projectName>"))
 {
@@ -88,7 +88,7 @@ foreach (BinaryData item in client.GetDeployments("<projectName>"))
 This sample shows how to call GetDeployments with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 foreach (BinaryData item in client.GetDeployments("<projectName>"))
 {
@@ -102,7 +102,7 @@ foreach (BinaryData item in client.GetDeployments("<projectName>"))
 This sample shows how to call DeployProjectAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
@@ -114,7 +114,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call DeployProjectAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Operation<BinaryData> operation = await client.DeployProjectAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
@@ -129,7 +129,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call DeployProject and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Operation<BinaryData> operation = client.DeployProject(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
@@ -141,7 +141,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call DeployProject with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Operation<BinaryData> operation = client.DeployProject(WaitUntil.Completed, "<projectName>", "<deploymentName>", content);
@@ -156,14 +156,14 @@ Console.WriteLine(result.GetProperty("name").ToString());
 This sample shows how to call DeleteDeploymentAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
 ]]></code>
 This sample shows how to call DeleteDeploymentAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
 ]]></code></example>
@@ -173,14 +173,14 @@ Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<
 This sample shows how to call DeleteDeployment.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Operation operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName>", "<deploymentName>");
 ]]></code>
 This sample shows how to call DeleteDeployment with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 Operation operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName>", "<deploymentName>");
 ]]></code></example>
@@ -190,7 +190,7 @@ Operation operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName
 This sample shows how to call SwapDeploymentsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -202,7 +202,7 @@ Operation operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<p
 This sample shows how to call SwapDeploymentsAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -217,7 +217,7 @@ Operation operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<p
 This sample shows how to call SwapDeployments.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -229,7 +229,7 @@ Operation operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>
 This sample shows how to call SwapDeployments with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
+Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
