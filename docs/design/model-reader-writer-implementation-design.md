@@ -54,6 +54,10 @@ Therefore we need a way to let our customer could publicly access to our interna
 
 `System.ClientModel.Primitives.ModelReaderWriter` is designed to solve this problem. It provides utility methods to serialize and deserialize models. In the meantime, to use its functionality, our models need to implement the interfaces defined in namespace `System.ClientModel.Primitives`: `IPersistableModel<T>` and `IJsonModel<T>`.
 
+Once a model is implemented by these interfaces, the model could be used in the `Write` and `Read` method of `System.ClientModel.Primitives.ModelReaderWriter` static class to serialize and deserialize.
+
+If we still want to use the model in `System.Text.JsonSerialize` or other json serialization framework like `Newtonsoft.Json`, a converter will be needed to pass in as an option to the serializer. For details of this, please refer to the official document of `System.ClientModel`.
+
 ## Scope: Goals and Non-Goals
 
 ### Goals
