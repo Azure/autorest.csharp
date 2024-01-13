@@ -8,7 +8,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
-    internal class JsonAdditionalPropertiesSerialization : JsonPropertySerialization
+    internal record JsonAdditionalPropertiesSerialization : JsonPropertySerialization
     {
         public CSharpType Type { get; }
 

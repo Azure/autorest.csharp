@@ -10,5 +10,5 @@ export interface InputModelProperty {
     Type: InputType;
     IsRequired: boolean;
     IsReadOnly: boolean;
-    IsDiscriminator: boolean;
+    IsDiscriminator?: boolean;
 }

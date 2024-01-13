@@ -367,8 +367,11 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
             var constructor = objectType.InitializationConstructor;
             // build a map from parameter name to property
-            var propertyDict = properties.ToDictionary(
-                property => property.Declaration.Name.ToVariableName(), property => property);
+            // before the ToDictionary, we use GroupBy to group the properties by their name first because there might be cases that we define the same property in both this model and its base model
+            // by taking the first in the group, we are taking the property defined the lower level of the inheritance tree aka from the derived model
+            var propertyDict = properties.GroupBy(property => property.Declaration.Name)
+                .ToDictionary(
+                    group => group.Key.ToVariableName(), group => group.First());
             // find the corresponding properties in the parameters
             var arguments = new List<ValueExpression>();
             foreach (var parameter in constructor.Signature.Parameters)
