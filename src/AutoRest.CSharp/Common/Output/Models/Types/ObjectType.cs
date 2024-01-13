@@ -35,13 +35,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        protected bool IsInheritableCommonType { get; init; } = false;
         protected bool SkipInitializerConstructor { get; init; }
         public bool IsUnknownDerivedType { get; protected init; }
         public bool IsPropertyBag { get; protected init; }
         public bool IsStruct => ExistingType?.IsValueType ?? false;
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
-        public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
-        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+        public IReadOnlyList<ObjectTypeConstructor> Constructors => _constructors ??= BuildConstructors().ToArray();
+        public IReadOnlyList<ObjectTypeProperty> Properties => _properties ??= BuildProperties().ToArray();
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
@@ -68,7 +69,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (initCtorParameterCount > 0 && serializationCtorParameterCount > 0)
             {
-                var accessibility = IsStruct ? MethodSignatureModifiers.Public : MethodSignatureModifiers.Internal;
+                var accessibility = IsStruct ? MethodSignatureModifiers.Public :
+                    IsInheritableCommonType ? MethodSignatureModifiers.Protected : MethodSignatureModifiers.Internal;
                 return new(
                     new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
                     Array.Empty<ObjectPropertyInitializer>(),

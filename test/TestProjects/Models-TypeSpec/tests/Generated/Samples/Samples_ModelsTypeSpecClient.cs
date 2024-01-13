@@ -22,6 +22,140 @@ namespace ModelsTypeSpec.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                kind = "A",
+            });
+            Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                kind = "A",
+            });
+            Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                optionalInt = 1234,
+                kind = "A",
+                optionalString = "<optionalString>",
+            });
+            Response response = client.PutBaseModelWithDiscriminatorDefinedOnBase(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                optionalInt = 1234,
+                kind = "A",
+                optionalString = "<optionalString>",
+            });
+            Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            {
+                OptionalInt = 1234,
+                OptionalString = "<optionalString>",
+            };
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            {
+                OptionalInt = 1234,
+                OptionalString = "<optionalString>",
+            };
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ModelsTypeSpec_GetOutputDiscriminatorModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
