@@ -7,13 +7,13 @@ This sample shows how to call GetEnumsOnlyAsync.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<object> response = await client.GetEnumsOnlyAsync();
+Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
 ]]></code>
 This sample shows how to call GetEnumsOnlyAsync with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<object> response = await client.GetEnumsOnlyAsync();
+Response<GetResponse6> response = await client.GetEnumsOnlyAsync();
 ]]></code></example>
     </member>
     <member name="GetEnumsOnly(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetEnumsOnly.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<object> response = client.GetEnumsOnly();
+Response<GetResponse6> response = client.GetEnumsOnly();
 ]]></code>
 This sample shows how to call GetEnumsOnly with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response<object> response = client.GetEnumsOnly();
+Response<GetResponse6> response = client.GetEnumsOnly();
 ]]></code></example>
     </member>
     <member name="GetEnumsOnlyAsync(RequestContext)">
@@ -77,34 +77,38 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
 ]]></code></example>
     </member>
-    <member name="SendAsync(SendRequestProp,CancellationToken)">
+    <member name="SendAsync(EnumsOnlyCases,CancellationToken)">
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+Response response = await client.SendAsync(prop);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+Response response = await client.SendAsync(prop);
 ]]></code></example>
     </member>
-    <member name="Send(SendRequestProp,CancellationToken)">
+    <member name="Send(EnumsOnlyCases,CancellationToken)">
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response response = client.Send(SendRequestProp.A);
+EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+Response response = client.Send(prop);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
-Response response = client.Send(SendRequestProp.A);
+EnumsOnlyCases prop = new EnumsOnlyCases(BinaryData.FromObjectAsJson("left"), BinaryData.FromObjectAsJson("up"));
+Response response = client.Send(prop);
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">
@@ -115,7 +119,11 @@ EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        lr = "left",
+        ud = "up",
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -127,7 +135,11 @@ EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        lr = "left",
+        ud = "up",
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -142,7 +154,11 @@ EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        lr = "left",
+        ud = "up",
+    },
 });
 Response response = client.Send(content);
 
@@ -154,7 +170,11 @@ EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new
+    {
+        lr = "left",
+        ud = "up",
+    },
 });
 Response response = client.Send(content);
 

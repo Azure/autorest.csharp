@@ -542,7 +542,6 @@ export function getInputType(
     }
 
     function getInputModelForModel(m: Model): InputModelType {
-        m = getEffectiveSchemaType(context, m) as Model;
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
@@ -667,6 +666,9 @@ export function getInputType(
         });
 
         if (model.DiscriminatorPropertyName && !discriminatorPropertyDefined) {
+            // if the discriminator property has already been defined on one of the base models of myself,
+            // we still need to add a property here because the `IsDiscriminator` property would be different from the one inherited from the base model
+            // TODO -- need to confirm how TCGC handles this case
             logger.info(
                 `No specified type for discriminator property '${model.DiscriminatorPropertyName}'. Assume it is a string.`
             );
@@ -851,8 +853,7 @@ export function getUsages(
             typeName = getTypeName(context, type);
         }
         if (type.kind === "Model") {
-            effectiveType = getEffectiveSchemaType(context, type) as Model;
-            typeName = getTypeName(context, effectiveType);
+            typeName = getTypeName(context, effectiveType as Model);
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {

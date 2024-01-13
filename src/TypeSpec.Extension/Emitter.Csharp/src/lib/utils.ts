@@ -15,7 +15,10 @@ import {
     projectedNameClientKey,
     projectedNameJsonKey
 } from "../constants.js";
-import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    SdkContext,
+    getSdkModel
+} from "@azure-tools/typespec-client-generator-core";
 import { InputParameter } from "../type/inputParameter.js";
 import { InputPrimitiveType, InputType } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
@@ -42,19 +45,6 @@ export function getNameForTemplate(model: Model): string {
     return model.name;
 }
 
-const anonCounter = (function () {
-    let count = 0; // Private counter variable
-
-    return {
-        increment: function () {
-            return ++count;
-        },
-        getCount: function () {
-            return count;
-        }
-    };
-})();
-
 export function getProjectedNameForCsharp(
     context: SdkContext,
     type: Type
@@ -77,8 +67,8 @@ export function getTypeName(
     if (type.kind === "Model") {
         name = getNameForTemplate(type);
         if (name === "") {
-            anonCounter.increment();
-            return `Anon_${anonCounter.getCount()}`;
+            const sdkModel = getSdkModel(context, type as Model);
+            return sdkModel.generatedName || sdkModel.name;
         }
         return name;
     }

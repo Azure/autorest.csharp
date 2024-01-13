@@ -1300,20 +1300,20 @@ namespace UnbrandedTypeSpec
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Result<object>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Result<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = await ReturnsAnonymousModelAsync(context).ConfigureAwait(false);
-            return Result.FromValue(result.GetRawResponse().Content.ToObjectFromJson<object>(), result.GetRawResponse());
+            return Result.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Result<object> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
+        public virtual Result<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
             RequestOptions context = FromCancellationToken(cancellationToken);
             Result result = ReturnsAnonymousModel(context);
-            return Result.FromValue(result.GetRawResponse().Content.ToObjectFromJson<object>(), result.GetRawResponse());
+            return Result.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>

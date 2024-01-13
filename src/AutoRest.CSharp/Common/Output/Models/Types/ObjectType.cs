@@ -4,10 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Shared;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -33,12 +35,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
+        protected bool IsInheritableCommonType { get; init; } = false;
+        protected bool SkipInitializerConstructor { get; init; }
         public bool IsUnknownDerivedType { get; protected init; }
         public bool IsPropertyBag { get; protected init; }
         public bool IsStruct => ExistingType?.IsValueType ?? false;
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
-        public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
-        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+        public IReadOnlyList<ObjectTypeConstructor> Constructors => _constructors ??= BuildConstructors().ToArray();
+        public IReadOnlyList<ObjectTypeProperty> Properties => _properties ??= BuildProperties().ToArray();
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
@@ -47,10 +51,34 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
 
+        private ObjectTypeConstructor? _emptyConstructor;
+        public ObjectTypeConstructor? EmptyConstructor => _emptyConstructor ??= BuildEmptyConstructor();
+
         public FormattableString Description => _description ??= $"{CreateDescription()}{CreateExtraDescriptionWithDiscriminator()}";
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
+        protected ObjectTypeConstructor? BuildEmptyConstructor()
+        {
+            if (!Configuration.UseModelReaderWriter)
+                return null;
+
+            // check if any other ctor has parameters
+            var initCtorParameterCount = SkipInitializerConstructor ? int.MaxValue : InitializationConstructor.Signature.Parameters.Count; // if the ctor is skipped, we return a large number to avoid the case that the skipped ctor has 0 parameter.
+            var serializationCtorParameterCount = SerializationConstructor.Signature.Parameters.Count;
+
+            if (initCtorParameterCount > 0 && serializationCtorParameterCount > 0)
+            {
+                var accessibility = IsStruct ? MethodSignatureModifiers.Public :
+                    IsInheritableCommonType ? MethodSignatureModifiers.Protected : MethodSignatureModifiers.Internal;
+                return new(
+                    new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
+                    Array.Empty<ObjectPropertyInitializer>(),
+                    null);
+            }
+
+            return null;
+        }
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract FormattableString CreateDescription();

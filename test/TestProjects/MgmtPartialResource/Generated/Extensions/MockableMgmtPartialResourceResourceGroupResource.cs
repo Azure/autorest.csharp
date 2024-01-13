@@ -54,6 +54,14 @@ namespace MgmtPartialResource.Mocking
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PublicIPAddressResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
@@ -77,6 +85,14 @@ namespace MgmtPartialResource.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PublicIPAddresses_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="PublicIPAddressResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
