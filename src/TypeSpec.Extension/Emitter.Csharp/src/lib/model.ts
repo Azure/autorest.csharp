@@ -1065,14 +1065,14 @@ export function getUsages(
 
 export function getFormattedType(program: Program, type: Type): FormattedType {
     let targetType = type;
-    let format = getFormat(program, type);
+    const format = getFormat(program, type);
     if (type.kind === "ModelProperty") {
         targetType = type.type;
     }
-    let encodeData = undefined;
-    if (type.kind === "Scalar" || type.kind === "ModelProperty") {
-        encodeData = getEncode(program, type);
-    }
+    const encodeData =
+        type.kind === "Scalar" || type.kind === "ModelProperty"
+            ? getEncode(program, type)
+            : undefined;
 
     return {
         type: targetType,
