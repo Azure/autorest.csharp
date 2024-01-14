@@ -904,8 +904,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value)
+        public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value) => DeserializeValue(serialization, element, out value, out _);
+
+        public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value, out BoolExpression? condition)
         {
+            condition = null;
             switch (serialization)
             {
                 case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.ImplementationType):
@@ -1015,7 +1018,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (serializationType.SerializeAs != null)
             {
-                return new CastExpression(GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat, serializationType), serializationType);
+                return GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat, serializationType).CastTo(serializationType);
             }
 
             if (serializationType.IsFrameworkType)
@@ -1089,6 +1092,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return variable;
         }
 
+        // TODO -- make this method to return a condition as well to check ValueKind to avoid exceptions
         public static ValueExpression GetFrameworkTypeValueExpression(Type frameworkType, JsonElementExpression element, SerializationFormat format, CSharpType? serializationType)
         {
             if (frameworkType == typeof(ETag) ||
