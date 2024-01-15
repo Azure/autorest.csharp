@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             bool isNullable = false;
             bool isBaseElement = true;
             InputType elementType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean, isNullable);
-            InputListType type = new InputListType("InputListType", elementType, isNullable);
+            InputListType type = new InputListType(elementType, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -61,8 +61,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             bool isNullable = false;
             bool isBaseElement = true;
             InputType elementType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean, isNullable);
-            InputType listElementType = new InputListType("InputListType1", elementType, isNullable);
-            InputListType type = new InputListType("InputListType2", listElementType, isNullable);
+            InputType listElementType = new InputListType(elementType, isNullable);
+            InputListType type = new InputListType(listElementType, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -80,8 +80,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             bool isBaseElement = true;
             InputType keyType = new InputPrimitiveType(InputPrimitiveTypeKind.String, isNullable);
             InputType valueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32, isNullable);
-            InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
-            InputType listElementType = new InputListType("InputListType1", dictionaryType, isNullable);
+            InputDictionaryType dictionaryType = new InputDictionaryType(keyType, valueType, isNullable);
+            InputType listElementType = new InputListType(dictionaryType, isNullable);
 
             CSharpType cSharpType = typeFactory.CreateType(listElementType);
 
@@ -100,21 +100,21 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             // dictionary type
             InputType keyType = new InputPrimitiveType(InputPrimitiveTypeKind.String, isNullable);
             InputType valueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32, isNullable);
-            InputType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
+            InputType dictionaryType = new InputDictionaryType(keyType, valueType, isNullable);
 
             // literal types
             InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32, isNullable);
-            InputLiteralType literalType = new InputLiteralType("InputLiteralType", literalValueType, 21, isNullable);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, isNullable);
 
             InputType stringLiteralValueType = new InputPrimitiveType(InputPrimitiveTypeKind.String, isNullable);
-            InputLiteralType stringLiteralType = new InputLiteralType("InputLiteralType", stringLiteralValueType, "test", isNullable);
+            InputLiteralType stringLiteralType = new InputLiteralType(stringLiteralValueType, "test", isNullable);
 
             InputType boolLiteralValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean, isNullable);
-            InputLiteralType boolLiteralType = new InputLiteralType("InputLiteralType", boolLiteralValueType, true, isNullable);
+            InputLiteralType boolLiteralType = new InputLiteralType(boolLiteralValueType, true, isNullable);
 
             InputType dateTimeLiteralValueType = new InputPrimitiveType(InputPrimitiveTypeKind.DateTime, isNullable);
             var dateTime = new DateTimeOffset(1,2,3,4,5,6, TimeSpan.Zero);
-            InputLiteralType dateTimeLiteralType = new InputLiteralType("InputLiteralType", dateTimeLiteralValueType, dateTime, isNullable);
+            InputLiteralType dateTimeLiteralType = new InputLiteralType(dateTimeLiteralValueType, dateTime, isNullable);
 
             var unionItems = new List<CSharpType>
             {
