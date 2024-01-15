@@ -6,6 +6,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ModelWithIntegerLiteralTypeProperty_id",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -24,6 +25,7 @@
   },
   {
    "$id": "4",
+   "Kind": "Enum",
    "Name": "ModelWithFloatLiteralTypeProperty_id",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -44,6 +46,7 @@
  "Models": [
   {
    "$id": "6",
+   "Kind": "Model",
    "Name": "ModelWithUnionProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model with union types",
@@ -57,18 +60,19 @@
      "Description": "This is a union property",
      "Type": {
       "$id": "8",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "9",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "10",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        }
       ],
@@ -81,6 +85,7 @@
   },
   {
    "$id": "11",
+   "Kind": "Model",
    "Name": "UsualModel",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model without union types",
@@ -94,8 +99,8 @@
      "Description": "The name",
      "Type": {
       "$id": "13",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -108,8 +113,8 @@
      "Description": "The age",
      "Type": {
       "$id": "15",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -122,8 +127,8 @@
      "Description": "The size",
      "Type": {
       "$id": "17",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -133,6 +138,7 @@
   },
   {
    "$id": "18",
+   "Kind": "Model",
    "Name": "AnotherModelWithUnionProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is another model with union types",
@@ -146,21 +152,23 @@
      "Description": "This is a union property",
      "Type": {
       "$id": "20",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "21",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "22",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "23",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -175,6 +183,7 @@
   },
   {
    "$id": "24",
+   "Kind": "Model",
    "Name": "NonConfidentModelWithSelfReference",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "Non-confident model that contains self reference",
@@ -188,8 +197,8 @@
      "Description": "The name",
      "Type": {
       "$id": "26",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -202,6 +211,7 @@
      "Description": "The self reference",
      "Type": {
       "$id": "28",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "24"
@@ -218,21 +228,23 @@
      "Description": "The non-confident part",
      "Type": {
       "$id": "30",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "31",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "32",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "33",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -247,6 +259,7 @@
   },
   {
    "$id": "34",
+   "Kind": "Model",
    "Name": "NonConfidentModelWithIndirectSelfReference",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The model that contains self reference",
@@ -260,8 +273,8 @@
      "Description": "The name",
      "Type": {
       "$id": "36",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -274,9 +287,11 @@
      "Description": "The self reference",
      "Type": {
       "$id": "38",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "39",
+       "Kind": "Model",
        "Name": "IndirectSelfReferenceModel",
        "Namespace": "ConfidentLevelsInTsp",
        "Description": "Indirect self reference model",
@@ -290,8 +305,8 @@
          "Description": "Something not important",
          "Type": {
           "$id": "41",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -315,21 +330,23 @@
          "Description": "The non-confident part",
          "Type": {
           "$id": "44",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "45",
-            "Name": "string",
-            "Kind": "String",
+            "Kind": "Primitive",
+            "Name": "String",
             "IsNullable": false
            },
            {
             "$id": "46",
+            "Kind": "Array",
             "Name": "Array",
             "ElementType": {
              "$id": "47",
-             "Name": "int32",
-             "Kind": "Int32",
+             "Kind": "Primitive",
+             "Name": "Int32",
              "IsNullable": false
             },
             "IsNullable": false
@@ -354,6 +371,7 @@
   },
   {
    "$id": "48",
+   "Kind": "Model",
    "Name": "ModelWithIntegerLiteralTypeProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model with a property of literal type of numbers",
@@ -367,8 +385,8 @@
      "Description": "The name",
      "Type": {
       "$id": "50",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -381,6 +399,7 @@
      "Description": "The id",
      "Type": {
       "$id": "52",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "2"
@@ -395,6 +414,7 @@
   },
   {
    "$id": "53",
+   "Kind": "Model",
    "Name": "ModelWithFloatLiteralTypeProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model with a property of literal type of numbers",
@@ -408,8 +428,8 @@
      "Description": "The name",
      "Type": {
       "$id": "55",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -422,6 +442,7 @@
      "Description": "The id",
      "Type": {
       "$id": "57",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "4"
@@ -436,6 +457,7 @@
   },
   {
    "$id": "58",
+   "Kind": "Model",
    "Name": "Pet",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The base Pet model",
@@ -452,8 +474,8 @@
      "IsReadOnly": false,
      "Type": {
       "$id": "60",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -465,8 +487,8 @@
      "Description": "The name of the pet",
      "Type": {
       "$id": "62",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -476,6 +498,7 @@
   },
   {
    "$id": "63",
+   "Kind": "Model",
    "Name": "PollutedPet",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The base Pet model polluted by union in derived type",
@@ -492,8 +515,8 @@
      "IsReadOnly": false,
      "Type": {
       "$id": "65",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -505,8 +528,8 @@
      "Description": "The name of the pet",
      "Type": {
       "$id": "67",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -516,6 +539,7 @@
   },
   {
    "$id": "68",
+   "Kind": "Model",
    "Name": "PollutedDog",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The dog with a union type",
@@ -533,8 +557,8 @@
      "Description": "Woof",
      "Type": {
       "$id": "70",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -547,21 +571,23 @@
      "Description": "Color, could be specified by a string or by an array of int as RGB",
      "Type": {
       "$id": "72",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "73",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "74",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "75",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -576,6 +602,7 @@
   },
   {
    "$id": "76",
+   "Kind": "Model",
    "Name": "UnpollutedCat",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The cat without a union type",
@@ -593,8 +620,8 @@
      "Description": "Meow",
      "Type": {
       "$id": "78",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -604,6 +631,7 @@
   },
   {
    "$id": "79",
+   "Kind": "Model",
    "Name": "BaseModel",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The base model",
@@ -617,8 +645,8 @@
      "Description": "The name",
      "Type": {
       "$id": "81",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -631,8 +659,8 @@
      "Description": "The size",
      "Type": {
       "$id": "83",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -642,6 +670,7 @@
   },
   {
    "$id": "84",
+   "Kind": "Model",
    "Name": "DerivedModel",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The derived model",
@@ -658,8 +687,8 @@
      "Description": "The age",
      "Type": {
       "$id": "86",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -669,6 +698,7 @@
   },
   {
    "$id": "87",
+   "Kind": "Model",
    "Name": "DerivedModelWithUnion",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a derived model with unions",
@@ -685,21 +715,23 @@
      "Description": "The union property",
      "Type": {
       "$id": "89",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "90",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "91",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "92",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -714,6 +746,7 @@
   },
   {
    "$id": "93",
+   "Kind": "Model",
    "Name": "Cat",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The cat",
@@ -731,8 +764,8 @@
      "Description": "Meow",
      "Type": {
       "$id": "95",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -742,6 +775,7 @@
   },
   {
    "$id": "96",
+   "Kind": "Model",
    "Name": "Dog",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The dog",
@@ -759,8 +793,8 @@
      "Description": "Woof",
      "Type": {
       "$id": "98",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -787,8 +821,8 @@
        "NameInRequest": "host",
        "Type": {
         "$id": "102",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -824,8 +858,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "105",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -851,8 +885,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "108",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -927,8 +961,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "114",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -954,8 +988,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "117",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1036,8 +1070,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "123",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1063,8 +1097,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "126",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1139,8 +1173,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "132",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1166,8 +1200,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "135",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1242,8 +1276,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "141",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1269,8 +1303,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "144",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1345,8 +1379,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "150",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1372,8 +1406,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "153",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1448,8 +1482,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "159",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1475,8 +1509,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "162",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1557,8 +1591,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "168",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1584,8 +1618,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "171",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1666,8 +1700,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "177",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1693,8 +1727,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "180",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1775,8 +1809,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "186",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1802,8 +1836,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "189",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1884,8 +1918,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "195",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1911,8 +1945,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "198",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1987,8 +2021,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "204",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2014,8 +2048,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "207",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
