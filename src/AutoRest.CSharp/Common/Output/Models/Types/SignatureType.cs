@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class SignatureType
     {
         private readonly TypeFactory _typeFactory;
-        private readonly string _defaultNamespace;
-        private readonly string _defaultName;
+        private readonly string _namespace;
+        private readonly string _name;
         private readonly SignatureType? _customization;
         private readonly SignatureType? _baselineContract;
         private readonly MethodChangeset? _methodChangeset;
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         // Updated means the method with the same name is updated in the current contract, and the list contains the previous method and current methods including overload ones
         private record MethodChangeset(IReadOnlyList<MethodSignature> Missing, IReadOnlyList<(List<MethodSignature> Current, MethodSignature Previous)> Updated) { }
 
-        public SignatureType(TypeFactory typeFactory, IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
+        public SignatureType(TypeFactory typeFactory, IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string @namespace, string name)
         {
             // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
             if (!Configuration.AzureArm)
@@ -47,12 +47,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _typeFactory = typeFactory;
             Methods = methods;
-            _defaultNamespace = defaultNamespace;
-            _defaultName = defaultName;
+            _namespace = @namespace;
+            _name = name;
             if (sourceInputModel is not null)
             {
-                _customization = new SignatureType(typeFactory, PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, defaultNamespace, defaultName);
-                _baselineContract = new SignatureType(typeFactory, PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
+                _customization = new SignatureType(typeFactory, PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, @namespace, name);
+                _baselineContract = new SignatureType(typeFactory, PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, @namespace, name);
                 _methodChangeset ??= CompareMethods(Methods.Union(_customization?.Methods ?? Array.Empty<MethodSignature>(), MethodSignature.ParameterAndReturnTypeEqualityComparer), _baselineContract?.Methods);
             }
         }
@@ -63,8 +63,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<Method> EnsureOverloadMethods()
         {
             var overloadMethods = new List<Method>();
-            var updated = _methodChangeset?.Updated;
-            if (updated is null)
+            if (_methodChangeset?.Updated is not { } updated)
             {
                 return Array.Empty<Method>();
             }
@@ -206,7 +205,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 return Array.Empty<MethodSignature>();
             }
-            var type = compilation.GetTypeByMetadataName($"{_defaultNamespace}.{_defaultName}");
+            var type = compilation.GetTypeByMetadataName($"{_namespace}.{_name}");
             if (type is null)
             {
                 return Array.Empty<MethodSignature>();

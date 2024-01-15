@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     return null;
                 }
-                return _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
+                return _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, Declaration.Namespace, Declaration.Name);
             }
         }
 

@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new GeneratedCodeWorkspace(project);
         }
 
-        public static async Task<Compilation> CreatePreviousContractFromDll(string xmlDocumentationpath, string dllPath)
+        public static async Task<Compilation?> CreatePreviousContractFromDll(string xmlDocumentationpath, string dllPath)
         {
             var workspace = new AdhocWorkspace();
             Project project = workspace.AddProject("PreviousContract", LanguageNames.CSharp);
@@ -263,7 +263,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 .WithCompilationOptions(new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
             project = project.AddMetadataReference(MetadataReference.CreateFromFile(dllPath, documentation: XmlDocumentationProvider.CreateFromFile(xmlDocumentationpath)));
-            return await (new GeneratedCodeWorkspace(project)).GetCompilationAsync();
+            return await project.GetCompilationAsync();
         }
 
         private static Project CreateGeneratedCodeProject()
