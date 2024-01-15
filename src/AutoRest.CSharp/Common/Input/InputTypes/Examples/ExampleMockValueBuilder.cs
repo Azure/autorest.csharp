@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     // when it is constant, it could have DefaultValue
                     value = InputExampleValue.Value(parameter.Type, parameter.DefaultValue.Value);
                 }
-                else if (parameter.Type is InputUnionType unionType && unionType.UnionItemTypes.First() is InputLiteralType literalType)
+                else if (parameter.Type is IUnionType unionType && unionType.UnionItemTypes.First() is ILiteralType literalType)
                 {
                     // or it could be a union of literal types
                     value = InputExampleValue.Value(parameter.Type, literalType.Value);
@@ -88,30 +88,30 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 return new(parameter, value);
             }
 
-            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name, useAllParameters, new HashSet<InputModelType>());
+            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name, useAllParameters, new HashSet<IModelType>());
             return new(parameter, exampleValue);
         }
 
-        private static InputExampleValue BuildExampleValue(InputType type, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels) => type switch
+        private static InputExampleValue BuildExampleValue(IType type, string? hint, bool useAllParameters, HashSet<IModelType> visitedModels) => type switch
         {
-            InputListType listType => BuildListExampleValue(listType, hint, useAllParameters, visitedModels),
-            InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, useAllParameters, visitedModels),
-            InputEnumType enumType => BuildEnumExampleValue(enumType),
-            InputPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
-            InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
-            InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels),
-            InputUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint, useAllParameters, visitedModels),
+            IListType listType => BuildListExampleValue(listType, hint, useAllParameters, visitedModels),
+            IDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, useAllParameters, visitedModels),
+            IEnumType enumType => BuildEnumExampleValue(enumType),
+            IPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
+            ILiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
+            IModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels),
+            IUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint, useAllParameters, visitedModels),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())
         };
 
-        private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildListExampleValue(IListType listType, string? hint, bool useAllParameters, HashSet<IModelType> visitedModels)
         {
             var exampleElementValue = BuildExampleValue(listType.ElementType, hint, useAllParameters, visitedModels);
 
             return InputExampleValue.List(listType, new[] { exampleElementValue });
         }
 
-        private static InputExampleValue BuildDictionaryExampleValue(InputDictionaryType dictionaryType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildDictionaryExampleValue(IDictionaryType dictionaryType, string? hint, bool useAllParameters, HashSet<IModelType> visitedModels)
         {
             var exampleValue = BuildExampleValue(dictionaryType.ValueType, hint, useAllParameters, visitedModels);
 
@@ -121,40 +121,40 @@ namespace AutoRest.CSharp.Common.Input.Examples
             });
         }
 
-        private static InputExampleValue BuildEnumExampleValue(InputEnumType enumType)
+        private static InputExampleValue BuildEnumExampleValue(IEnumType enumType)
         {
             var enumValue = enumType.AllowedValues.First();
             return InputExampleValue.Value(enumType, enumValue.Value);
         }
 
-        private static InputExampleValue BuildPrimitiveExampleValue(InputPrimitiveType primitiveType, string? hint) => primitiveType.Kind switch
+        private static InputExampleValue BuildPrimitiveExampleValue(IPrimitiveType primitiveType, string? hint) => primitiveType.Kind switch
         {
-            InputTypeKind.Stream => InputExampleValue.Stream(primitiveType, "<filePath>"),
-            InputTypeKind.Boolean => InputExampleValue.Value(primitiveType, true),
-            InputTypeKind.Date => InputExampleValue.Value(primitiveType, "2022-05-10"),
-            InputTypeKind.DateTime => InputExampleValue.Value(primitiveType, "2022-05-10T14:57:31.2311892-04:00"),
-            InputTypeKind.DateTimeISO8601 => InputExampleValue.Value(primitiveType, "2022-05-10T18:57:31.2311892Z"),
-            InputTypeKind.DateTimeRFC1123 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),
-            InputTypeKind.DateTimeRFC3339 => InputExampleValue.Value(primitiveType, "2022-05-10T18:57:31.2311892Z"),
-            InputTypeKind.DateTimeRFC7231 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),
-            InputTypeKind.DateTimeUnix => InputExampleValue.Value(primitiveType, 1652209051),
-            InputTypeKind.Float32 => InputExampleValue.Value(primitiveType, 123.45f),
-            InputTypeKind.Float64 => InputExampleValue.Value(primitiveType, 123.45d),
-            InputTypeKind.Float128 => InputExampleValue.Value(primitiveType, 123.45m),
-            InputTypeKind.Guid => InputExampleValue.Value(primitiveType, "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"),
-            InputTypeKind.Int32 => InputExampleValue.Value(primitiveType, 1234),
-            InputTypeKind.Int64 => InputExampleValue.Value(primitiveType, 1234L),
-            InputTypeKind.String => string.IsNullOrWhiteSpace(hint) ? InputExampleValue.Value(primitiveType, "<String>") : InputExampleValue.Value(primitiveType, $"<{hint}>"),
-            InputTypeKind.DurationISO8601 => InputExampleValue.Value(primitiveType, "PT1H23M45S"),
-            InputTypeKind.DurationConstant => InputExampleValue.Value(primitiveType, "01:23:45"),
-            InputTypeKind.Time => InputExampleValue.Value(primitiveType, "01:23:45"),
-            InputTypeKind.Uri => InputExampleValue.Value(primitiveType, "http://localhost:3000"),
-            InputTypeKind.DurationSeconds => InputExampleValue.Value(primitiveType, 10),
-            InputTypeKind.DurationSecondsFloat => InputExampleValue.Value(primitiveType, 10f),
+            InputPrimitiveTypeKind.Stream => InputExampleValue.Stream(primitiveType, "<filePath>"),
+            InputPrimitiveTypeKind.Boolean => InputExampleValue.Value(primitiveType, true),
+            InputPrimitiveTypeKind.Date => InputExampleValue.Value(primitiveType, "2022-05-10"),
+            InputPrimitiveTypeKind.DateTime => InputExampleValue.Value(primitiveType, "2022-05-10T14:57:31.2311892-04:00"),
+            InputPrimitiveTypeKind.DateTimeISO8601 => InputExampleValue.Value(primitiveType, "2022-05-10T18:57:31.2311892Z"),
+            InputPrimitiveTypeKind.DateTimeRFC1123 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),
+            InputPrimitiveTypeKind.DateTimeRFC3339 => InputExampleValue.Value(primitiveType, "2022-05-10T18:57:31.2311892Z"),
+            InputPrimitiveTypeKind.DateTimeRFC7231 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),
+            InputPrimitiveTypeKind.DateTimeUnix => InputExampleValue.Value(primitiveType, 1652209051),
+            InputPrimitiveTypeKind.Float32 => InputExampleValue.Value(primitiveType, 123.45f),
+            InputPrimitiveTypeKind.Float64 => InputExampleValue.Value(primitiveType, 123.45d),
+            InputPrimitiveTypeKind.Float128 => InputExampleValue.Value(primitiveType, 123.45m),
+            InputPrimitiveTypeKind.Guid => InputExampleValue.Value(primitiveType, "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"),
+            InputPrimitiveTypeKind.Int32 => InputExampleValue.Value(primitiveType, 1234),
+            InputPrimitiveTypeKind.Int64 => InputExampleValue.Value(primitiveType, 1234L),
+            InputPrimitiveTypeKind.String => string.IsNullOrWhiteSpace(hint) ? InputExampleValue.Value(primitiveType, "<String>") : InputExampleValue.Value(primitiveType, $"<{hint}>"),
+            InputPrimitiveTypeKind.DurationISO8601 => InputExampleValue.Value(primitiveType, "PT1H23M45S"),
+            InputPrimitiveTypeKind.DurationConstant => InputExampleValue.Value(primitiveType, "01:23:45"),
+            InputPrimitiveTypeKind.Time => InputExampleValue.Value(primitiveType, "01:23:45"),
+            InputPrimitiveTypeKind.Uri => InputExampleValue.Value(primitiveType, "http://localhost:3000"),
+            InputPrimitiveTypeKind.DurationSeconds => InputExampleValue.Value(primitiveType, 10),
+            InputPrimitiveTypeKind.DurationSecondsFloat => InputExampleValue.Value(primitiveType, 10f),
             _ => InputExampleValue.Object(primitiveType, new Dictionary<string, InputExampleValue>())
         };
 
-        private static InputExampleValue BuildModelExampleValue(InputModelType model, bool useAllParameters, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildModelExampleValue(IModelType model, bool useAllParameters, HashSet<IModelType> visitedModels)
         {
             if (visitedModels.Contains(model))
                 return InputExampleValue.Null(model);

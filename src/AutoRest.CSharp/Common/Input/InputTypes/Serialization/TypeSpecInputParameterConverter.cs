@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Common.Input
 
             string? nameInRequest = null;
             string? description = null;
-            InputType? parameterType = null;
+            IType? parameterType = null;
             string? location = null;
             InputConstant? defaultValue = null;
             VirtualParameter? virtualParameter = null;

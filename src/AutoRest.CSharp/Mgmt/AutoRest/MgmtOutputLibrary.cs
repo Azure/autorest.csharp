@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         internal CachedDictionary<Schema, TypeProvider> SchemaMap { get; }
 
-        private CachedDictionary<InputEnumType, EnumType> AllEnumMap { get; }
+        private CachedDictionary<IEnumType, EnumType> AllEnumMap { get; }
 
         private CachedDictionary<RequestPath, HashSet<Operation>> ChildOperations { get; }
 
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             AllSchemaMap = new CachedDictionary<Schema, TypeProvider>(InitializeModels);
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
-            AllEnumMap = new CachedDictionary<InputEnumType, EnumType>(EnsureAllEnumMap);
+            AllEnumMap = new CachedDictionary<IEnumType, EnumType>(EnsureAllEnumMap);
             ChildOperations = new CachedDictionary<RequestPath, HashSet<Operation>>(EnsureResourceChildOperations);
 
             // initialize the property bag collection
@@ -450,9 +450,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return AllSchemaMap.Where(kv => !(kv.Value is ResourceData)).ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
-        public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
+        public Dictionary<IEnumType, EnumType> EnsureAllEnumMap()
         {
-            var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
+            var dictionary = new Dictionary<IEnumType, EnumType>(IEnumType.IgnoreNullabilityComparer);
             foreach (var (schema, typeProvider) in AllSchemaMap)
             {
                 switch (schema)
@@ -767,8 +767,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return rawRequestPathToResourceData;
         }
 
-        public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap[enumType].Type;
-        public override CSharpType ResolveModel(InputModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
+        public override CSharpType ResolveEnum(IEnumType enumType) => AllEnumMap[enumType].Type;
+        public override CSharpType ResolveModel(IModelType model) => throw new NotImplementedException($"{nameof(ResolveModel)} is not implemented for MPG yet.");
 
         public override CSharpType FindTypeForSchema(Schema schema) => FindTypeProviderForSchema(schema).Type;
 

@@ -389,8 +389,8 @@ namespace AutoRest.CSharp.Common.Input
             ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false), false),
-            DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
+            ArraySchema array when IsDPG => new InputListType(CreateType(array.ElementType, modelsCache, array.NullableItems ?? false), false),
+            DictionarySchema dictionary when IsDPG => new InputDictionaryType(InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
             ObjectSchema objectSchema when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             AnySchema when IsDPG => InputIntrinsicType.Unknown,
@@ -412,15 +412,15 @@ namespace AutoRest.CSharp.Common.Input
             var rawValue = constantSchema.Value.Value;
             object normalizedValue = kind switch
             {
-                InputTypeKind.Boolean => bool.Parse(rawValue.ToString()!),
-                InputTypeKind.Int32 => int.Parse(rawValue.ToString()!),
-                InputTypeKind.Int64 => long.Parse(rawValue.ToString()!),
-                InputTypeKind.Float32 => float.Parse(rawValue.ToString()!),
-                InputTypeKind.Float64 => double.Parse(rawValue.ToString()!),
+                InputPrimitiveTypeKind.Boolean => bool.Parse(rawValue.ToString()!),
+                InputPrimitiveTypeKind.Int32 => int.Parse(rawValue.ToString()!),
+                InputPrimitiveTypeKind.Int64 => long.Parse(rawValue.ToString()!),
+                InputPrimitiveTypeKind.Float32 => float.Parse(rawValue.ToString()!),
+                InputPrimitiveTypeKind.Float64 => double.Parse(rawValue.ToString()!),
                 _ => rawValue
             };
 
-            return new InputLiteralType("Literal", valueType, normalizedValue, false);
+            return new InputLiteralType(valueType, normalizedValue, false);
         }
 
         public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(

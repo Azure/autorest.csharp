@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputLiteralType(string Name, InputType LiteralValueType, object Value, bool IsNullable) : InputType(Name, IsNullable);
+internal record InputLiteralType(IType LiteralValueType, object Value, bool IsNullable) : InputType("Literal", IsNullable), ILiteralType;

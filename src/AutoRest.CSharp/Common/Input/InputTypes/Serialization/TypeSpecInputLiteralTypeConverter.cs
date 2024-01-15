@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class TypeSpecInputLiteralTypeConverter : JsonConverter<InputLiteralType>
+    internal class TypeSpecInputLiteralTypeConverter : JsonConverter<ILiteralType>
     {
         private readonly TypeSpecReferenceHandler _referenceHandler;
         public TypeSpecInputLiteralTypeConverter(TypeSpecReferenceHandler referenceHandler)
@@ -18,34 +18,34 @@ namespace AutoRest.CSharp.Common.Input
             _referenceHandler = referenceHandler;
         }
 
-        public override InputLiteralType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-           => reader.ReadReferenceAndResolve<InputLiteralType>(_referenceHandler.CurrentResolver) ?? CreateInputLiteralType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+        public override ILiteralType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+           => reader.ReadReferenceAndResolve<ILiteralType>(_referenceHandler.CurrentResolver) ?? CreateInputLiteralType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputLiteralType value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, ILiteralType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputLiteralType CreateInputLiteralType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        public static ILiteralType CreateInputLiteralType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
             bool isNullable = false;
             object? value = null;
-            InputType? type = null;
+            IType? type = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputLiteralType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputLiteralType.IsNullable), ref isNullable)
-                    || reader.TryReadWithConverter(nameof(InputLiteralType.LiteralValueType), options, ref type);
+                    || reader.TryReadString(nameof(ILiteralType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(ILiteralType.IsNullable), ref isNullable)
+                    || reader.TryReadWithConverter(nameof(ILiteralType.LiteralValueType), options, ref type);
 
                 if (isKnownProperty)
                 {
                     continue;
                 }
 
-                if (reader.GetString() == nameof(InputLiteralType.Value))
+                if (reader.GetString() == nameof(ILiteralType.Value))
                 {
-                    value = ReadLiteralValue(ref reader, nameof(InputLiteralType.Value), options, type);
+                    value = ReadLiteralValue(ref reader, nameof(ILiteralType.Value), options, type);
                 }
                 else
                 {
@@ -53,13 +53,11 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            name = name ?? throw new JsonException($"{nameof(InputLiteralType)} must have a name.");
-
             type = type ?? throw new JsonException("InputConstant must have type");
 
             value = value ?? throw new JsonException("InputConstant must have value");
 
-            var literalType = new InputLiteralType(name, type, value, isNullable);
+            var literalType = new InputLiteralType(type, value, isNullable);
 
             if (id != null)
             {
@@ -68,7 +66,7 @@ namespace AutoRest.CSharp.Common.Input
             return literalType;
         }
 
-        public static object ReadLiteralValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, InputType? type)
+        public static object ReadLiteralValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, IType? type)
         {
             if (type == null)
             {
@@ -88,17 +86,17 @@ namespace AutoRest.CSharp.Common.Input
             // get the kind of the primitive type or the underlying type of the enum
             var kind = type switch
             {
-                InputPrimitiveType primitiveType => primitiveType.Kind,
-                InputEnumType enumType => enumType.EnumValueType.Kind,
+                IPrimitiveType primitiveType => primitiveType.Kind,
+                IEnumType enumType => enumType.EnumValueType.Kind,
                 _ => throw new JsonException($"Not supported literal type {type.GetType()}.")
             };
             object value = kind switch
             {
-                InputTypeKind.String => reader.GetString() ?? throw new JsonException(),
-                InputTypeKind.Int32 => reader.GetInt32(),
-                InputTypeKind.Float32 => reader.GetSingle(),
-                InputTypeKind.Float64 => reader.GetDouble(),
-                InputTypeKind.Boolean => reader.GetBoolean(),
+                InputPrimitiveTypeKind.String => reader.GetString() ?? throw new JsonException(),
+                InputPrimitiveTypeKind.Int32 => reader.GetInt32(),
+                InputPrimitiveTypeKind.Float32 => reader.GetSingle(),
+                InputPrimitiveTypeKind.Float64 => reader.GetDouble(),
+                InputPrimitiveTypeKind.Boolean => reader.GetBoolean(),
                 _ => throw new JsonException($"Not supported literal type {kind}.")
             };
             reader.Read();

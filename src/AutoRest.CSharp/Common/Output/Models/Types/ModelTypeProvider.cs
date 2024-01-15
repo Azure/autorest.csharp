@@ -30,10 +30,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
         private ObjectTypeProperty? _additionalPropertiesProperty;
-        private readonly InputModelType _inputModel;
+        private readonly IModelType _inputModel;
         private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
-        private readonly IReadOnlyList<InputModelType> _derivedModels;
+        private readonly IReadOnlyList<IModelType> _derivedModels;
         private readonly SerializableObjectType? _defaultDerivedType;
 
         protected override string DefaultName { get; }
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return false;
         }
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, SerializableObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(IModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;
@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
+        private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, IModelProperty inputProperty)
         {
             if (inputProperty.IsDiscriminator)
             {
@@ -491,7 +491,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             bool shouldExcludeInWireSerialization = false;
             ObjectTypeProperty? additionalPropertiesProperty = null;
-            InputType? additionalPropertiesValueType = null;
+            IType? additionalPropertiesValueType = null;
             foreach (var model in EnumerateHierarchy())
             {
                 additionalPropertiesProperty = model.AdditionalPropertiesProperty ?? (model as SerializableObjectType)?.RawDataField;
@@ -635,17 +635,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             throw new InvalidOperationException($"Expecting discriminator property {inputPropertyName} on model {Declaration.Name}, but found none");
-        }
-
-        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
-        {
-            var result = new ModelTypeProvider(
-                _inputModel.ReplaceProperty(property, inputType),
-                DefaultNamespace,
-                _sourceInputModel,
-                _typeFactory,
-                _defaultDerivedType);
-            return result;
         }
     }
 }

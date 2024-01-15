@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 if (parameter.Kind == InputOperationParameterKind.Spread)
                 {
                     // when it is a spread parameter, it should always be InputModelType
-                    var modelType = parameter.Type as InputModelType;
+                    var modelType = parameter.Type as IModelType;
                     var objectExampleValue = parameterExample.ExampleValue as InputExampleObjectValue;
                     Debug.Assert(modelType != null);
                     Debug.Assert(objectExampleValue != null);
@@ -370,10 +370,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
 
         public bool HasResponseBody => _method.ResponseBodyType != null;
-        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream };
+        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream };
 
-        private InputType? _resultType;
-        public InputType? ResultType => _resultType ??= GetEffectiveResponseType();
+        private IType? _resultType;
+        public IType? ResultType => _resultType ??= GetEffectiveResponseType();
 
         /// <summary>
         /// This method returns the Type we would like to deal with in the sample code.
@@ -381,16 +381,16 @@ namespace AutoRest.CSharp.Output.Samples.Models
         /// For pageable operation, it is the InputType of the item
         /// </summary>
         /// <returns></returns>
-        private InputType? GetEffectiveResponseType()
+        private IType? GetEffectiveResponseType()
         {
             var responseType = _method.ResponseBodyType;
             if (_method.PagingInfo == null)
                 return responseType;
 
             var pagingItemName = _method.PagingInfo.ItemName;
-            var listResultType = responseType as InputModelType;
+            var listResultType = responseType as IModelType;
             var itemsArrayProperty = listResultType?.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
-            return (itemsArrayProperty?.Type as InputListType)?.ElementType;
+            return (itemsArrayProperty?.Type as IListType)?.ElementType;
         }
 
         // TODO -- this needs a refactor when we consolidate things around customization code https://github.com/Azure/autorest.csharp/issues/3370

@@ -3,25 +3,15 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsNullable)
+internal abstract record InputType(string Name, bool IsNullable) : IType
 {
-    internal InputType GetCollectionEquivalent(InputType inputType)
+    public IType WithNullable(bool isNullable)
     {
-        switch (this)
+        if (IsNullable == isNullable)
         {
-            case InputListType listType:
-                return new InputListType(
-                    listType.Name,
-                    listType.ElementType.GetCollectionEquivalent(inputType),
-                    listType.IsNullable);
-            case InputDictionaryType dictionaryType:
-                return new InputDictionaryType(
-                    dictionaryType.Name,
-                    dictionaryType.KeyType,
-                    dictionaryType.ValueType.GetCollectionEquivalent(inputType),
-                    dictionaryType.IsNullable);
-            default:
-                return inputType;
+            return this;
         }
+
+        return this with { IsNullable = isNullable };
     }
 }

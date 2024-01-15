@@ -13,7 +13,7 @@ internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, Opera
     /// <summary>
     /// Meaningful return type of the long running operation.
     /// </summary>
-    public InputType? ReturnType
+    public IType? ReturnType
     {
         get
         {
@@ -23,7 +23,7 @@ internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, Opera
             if (ResultPath is null)
                 return FinalResponse.BodyType;
 
-            var rawResponseType = (InputModelType)FinalResponse.BodyType;
+            var rawResponseType = (IModelType)FinalResponse.BodyType;
             return rawResponseType.Properties.FirstOrDefault(p => p.SerializedName == ResultPath)!.Type;
         }
     }

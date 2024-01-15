@@ -17,15 +17,15 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override InputConstant Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputConstant>(_referenceHandler.CurrentResolver) ?? CreateInputConstant(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+            => reader.ReadReferenceAndResolve<InputConstant>(_referenceHandler.CurrentResolver) ?? CreateInputConstant(ref reader, null, options, _referenceHandler.CurrentResolver);
 
         public override void Write(Utf8JsonWriter writer, InputConstant value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputConstant CreateInputConstant(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        public static InputConstant CreateInputConstant(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            InputType? type = null;
+            IType? type = null;
 
             reader.TryReadReferenceId(ref isFirstProperty, ref id);
             if (!reader.TryReadWithConverter(nameof(InputConstant.Type), options, ref type))
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
             return constant;
         }
 
-        public static object ReadConstantValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, InputType? type)
+        public static object ReadConstantValue(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, IType? type)
         {
             if (type == null)
             {
@@ -64,24 +64,25 @@ namespace AutoRest.CSharp.Common.Input
 
             reader.Read();
             object? value;
-            switch (type) {
-                case InputPrimitiveType primitype:
-                    switch (primitype.Kind)
+            switch (type)
+            {
+                case IPrimitiveType primitive:
+                    switch (primitive.Kind)
                     {
-                        case InputTypeKind.String:
+                        case InputPrimitiveTypeKind.String:
                             value = reader.GetString() ?? throw new JsonException();
                             break;
-                        case InputTypeKind.Uri:
+                        case InputPrimitiveTypeKind.Uri:
                             var stringvalue = reader.GetString() ?? throw new JsonException();
                             value = new Uri(stringvalue);
                             break;
-                        case InputTypeKind.Int32:
+                        case InputPrimitiveTypeKind.Int32:
                             value = reader.GetInt32();
                             break;
-                        case InputTypeKind.Int64:
+                        case InputPrimitiveTypeKind.Int64:
                             value = reader.GetInt64();
                             break;
-                        case InputTypeKind.Boolean:
+                        case InputPrimitiveTypeKind.Boolean:
                             value = reader.GetBoolean();
                             break;
                         default:
@@ -90,23 +91,23 @@ namespace AutoRest.CSharp.Common.Input
 
                     }
                     break;
-                case InputEnumType enumType:
+                case IEnumType enumType:
                     switch (enumType.EnumValueType.Kind)
                     {
-                        case InputTypeKind.String:
+                        case InputPrimitiveTypeKind.String:
                             value = reader.GetString() ?? throw new JsonException();
                             break;
-                        case InputTypeKind.Int32:
+                        case InputPrimitiveTypeKind.Int32:
                             value = reader.GetInt32();
                             break;
-                        case InputTypeKind.Float32:
+                        case InputPrimitiveTypeKind.Float32:
                             value = reader.GetDouble();
                             break;
                         default:
                             throw new JsonException($"Unsupported enum value type: {enumType.EnumValueType.Kind}");
                     }
                     break;
-                case InputLiteralType literalType:
+                case ILiteralType literalType:
                     value = literalType.Value;
                     break;
                 default:

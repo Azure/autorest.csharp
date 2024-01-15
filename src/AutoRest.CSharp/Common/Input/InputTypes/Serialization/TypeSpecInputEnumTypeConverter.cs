@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class TypeSpecInputEnumTypeConverter : JsonConverter<InputEnumType>
+    internal sealed class TypeSpecInputEnumTypeConverter : JsonConverter<IEnumType>
     {
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
@@ -17,13 +17,13 @@ namespace AutoRest.CSharp.Common.Input
             _referenceHandler = referenceHandler;
         }
 
-        public override InputEnumType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputEnumType>(_referenceHandler.CurrentResolver) ?? CreateEnumType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+        public override IEnumType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            => reader.ReadReferenceAndResolve<IEnumType>(_referenceHandler.CurrentResolver) ?? CreateEnumType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputEnumType value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IEnumType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputEnumType CreateEnumType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        public static IEnumType CreateEnumType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
             bool isNullable = false;
@@ -34,21 +34,21 @@ namespace AutoRest.CSharp.Common.Input
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             string? usageString = null;
             bool isExtendable = false;
-            InputPrimitiveType? valueType = null;
+            IPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputEnumType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputEnumType.IsNullable), ref isNullable)
-                    || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
-                    || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
-                    || reader.TryReadString(nameof(InputEnumType.Deprecated), ref deprecated)
-                    || reader.TryReadString(nameof(InputEnumType.Description), ref description)
-                    || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
-                    || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
-                    || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
-                    || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
+                    || reader.TryReadString(nameof(IEnumType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(IEnumType.IsNullable), ref isNullable)
+                    || reader.TryReadString(nameof(IEnumType.Namespace), ref ns)
+                    || reader.TryReadString(nameof(IEnumType.Accessibility), ref accessibility)
+                    || reader.TryReadString(nameof(IEnumType.Deprecated), ref deprecated)
+                    || reader.TryReadString(nameof(IEnumType.Description), ref description)
+                    || reader.TryReadString(nameof(IEnumType.Usage), ref usageString)
+                    || reader.TryReadBoolean(nameof(IEnumType.IsExtensible), ref isExtendable)
+                    || reader.TryReadPrimitiveType(nameof(IEnumType.EnumValueType), ref valueType)
+                    || reader.TryReadWithConverter(nameof(IEnumType.AllowedValues), options, ref allowedValues);
 
                 if (!isKnownProperty)
                 {
@@ -75,24 +75,24 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Enum must have at least one value");
             }
 
-            InputPrimitiveType? currentType = null;
+            IPrimitiveType? currentType = null;
             foreach (var value in allowedValues)
             {
                 switch (value.Value)
                 {
                     case int i:
-                        if (currentType == InputPrimitiveType.String)
+                        if (currentType?.Kind == InputPrimitiveTypeKind.String)
                             throw new JsonException($"Enum value types are not consistent.");
-                        if (currentType != InputPrimitiveType.Float32)
+                        if (currentType?.Kind != InputPrimitiveTypeKind.Float32)
                             currentType = InputPrimitiveType.Int32;
                         break;
                     case float f:
-                        if (currentType == InputPrimitiveType.String)
+                        if (currentType?.Kind == InputPrimitiveTypeKind.String)
                             throw new JsonException($"Enum value types are not consistent.");
                         currentType = InputPrimitiveType.Float32;
                         break;
                     case string:
-                        if (currentType == InputPrimitiveType.Int32 || currentType == InputPrimitiveType.Float32)
+                        if (currentType?.Kind == InputPrimitiveTypeKind.Int32 || currentType?.Kind == InputPrimitiveTypeKind.Float32)
                             throw new JsonException($"Enum value types are not consistent.");
                         currentType = InputPrimitiveType.String;
                         break;
@@ -110,25 +110,25 @@ namespace AutoRest.CSharp.Common.Input
             return enumType;
         }
 
-        private static IReadOnlyList<InputEnumTypeValue> NormalizeValues(IReadOnlyList<InputEnumTypeValue> allowedValues, InputPrimitiveType valueType)
+        private static IReadOnlyList<InputEnumTypeValue> NormalizeValues(IReadOnlyList<InputEnumTypeValue> allowedValues, IPrimitiveType valueType)
         {
             var concreteValues = new List<InputEnumTypeValue>(allowedValues.Count);
 
             switch (valueType.Kind)
             {
-                case InputTypeKind.String:
+                case InputPrimitiveTypeKind.String:
                     foreach (var value in allowedValues)
                     {
                         concreteValues.Add(new InputEnumTypeStringValue(value.Name, (string)value.Value, value.Description));
                     }
                     break;
-                case InputTypeKind.Int32:
+                case InputPrimitiveTypeKind.Int32:
                     foreach (var value in allowedValues)
                     {
                         concreteValues.Add(new InputEnumTypeIntegerValue(value.Name, (int)value.Value, value.Description));
                     }
                     break;
-                case InputTypeKind.Float32:
+                case InputPrimitiveTypeKind.Float32:
                     foreach (var value in allowedValues)
                     {
                         switch (value.Value)

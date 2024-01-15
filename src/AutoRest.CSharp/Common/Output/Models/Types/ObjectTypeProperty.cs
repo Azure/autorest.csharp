@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     [DebuggerDisplay("Name: {Declaration.Name}, Type: {Declaration.Type}")]
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty? inputModelProperty)
+        public ObjectTypeProperty(FieldDeclaration field, IModelProperty? inputModelProperty)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, IModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private FormattableString? _propertyDescription;
         public FormattableString PropertyDescription => _propertyDescription ??= $"{FormattedDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
         public Property? SchemaProperty { get; }
-        public InputModelProperty? InputModelProperty { get; }
+        public IModelProperty? InputModelProperty { get; }
         private FormattableString? _parameterDescription;
         private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
         public FormattableString ParameterDescription => _parameterDescription ??= $"{_baseParameterDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";

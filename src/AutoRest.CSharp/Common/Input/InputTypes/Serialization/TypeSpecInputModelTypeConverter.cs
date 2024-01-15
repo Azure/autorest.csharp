@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class TypeSpecInputModelTypeConverter : JsonConverter<InputModelType>
+    internal sealed class TypeSpecInputModelTypeConverter : JsonConverter<IModelType>
     {
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
@@ -17,19 +17,19 @@ namespace AutoRest.CSharp.Common.Input
             _referenceHandler = referenceHandler;
         }
 
-        public override InputModelType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override IModelType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             => ReadModelType(ref reader, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputModelType value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IModelType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private static InputModelType? ReadModelType(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
-            => reader.ReadReferenceAndResolve<InputModelType>(resolver) ?? CreateModelType(ref reader, null, null, options, resolver);
+        private static IModelType? ReadModelType(ref Utf8JsonReader reader, JsonSerializerOptions options, ReferenceResolver resolver)
+            => reader.ReadReferenceAndResolve<IModelType>(resolver) ?? CreateModelType(ref reader, null, null, options, resolver);
 
-        public static InputModelType CreateModelType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        public static IModelType CreateModelType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
-            var properties = new List<InputModelProperty>();
+            var properties = new List<IModelProperty>();
             bool isNullable = false;
             string? ns = null;
             string? accessibility = null;
@@ -38,22 +38,22 @@ namespace AutoRest.CSharp.Common.Input
             string? usageString = null;
             string? discriminatorPropertyName = null;
             string? discriminatorValue = null;
-            InputDictionaryType? inheritedDictionaryType = null;
-            InputModelType? baseModel = null;
-            InputModelType? model = null;
+            IDictionaryType? inheritedDictionaryType = null;
+            IModelType? baseModel = null;
+            IModelType? model = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputModelType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable)
-                    || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
-                    || reader.TryReadString(nameof(InputModelType.Accessibility), ref accessibility)
-                    || reader.TryReadString(nameof(InputModelType.Deprecated), ref deprecated)
-                    || reader.TryReadString(nameof(InputModelType.Description), ref description)
-                    || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
-                    || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
-                    || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.InheritedDictionaryType), options, ref inheritedDictionaryType);
+                    || reader.TryReadString(nameof(IModelType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(IModelType.IsNullable), ref isNullable)
+                    || reader.TryReadString(nameof(IModelType.Namespace), ref ns)
+                    || reader.TryReadString(nameof(IModelType.Accessibility), ref accessibility)
+                    || reader.TryReadString(nameof(IModelType.Deprecated), ref deprecated)
+                    || reader.TryReadString(nameof(IModelType.Description), ref description)
+                    || reader.TryReadString(nameof(IModelType.Usage), ref usageString)
+                    || reader.TryReadString(nameof(IModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
+                    || reader.TryReadString(nameof(IModelType.DiscriminatorValue), ref discriminatorValue)
+                    || reader.TryReadWithConverter(nameof(IModelType.InheritedDictionaryType), options, ref inheritedDictionaryType);
 
                 if (isKnownProperty)
                 {
@@ -63,26 +63,26 @@ namespace AutoRest.CSharp.Common.Input
                  * If the model has base model, `BaseModel` and `Properties` should be the last two items in tspCodeModel.
                  * and `BaseModel` should be last but one, and `Properties` should be the last one.
                  */
-                if (reader.GetString() == nameof(InputModelType.BaseModel))
+                if (reader.GetString() == nameof(IModelType.BaseModel))
                 {
                     model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
-                    reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
+                    reader.TryReadWithConverter(nameof(IModelType.BaseModel), options, ref baseModel);
                     if (baseModel != null)
                     {
-                        model.SetBaseModel(baseModel);
-                        var baseModelDerived = (List<InputModelType>)resolver.ResolveReference($"{baseModel.Name}.{nameof(InputModelType.DerivedModels)}");
+                        ((InputModelType)model).BaseModel = baseModel;
+                        var baseModelDerived = (List<IModelType>)resolver.ResolveReference($"{baseModel.Name}.{nameof(IModelType.DerivedModels)}");
                         baseModelDerived.Add(model);
                     }
                     continue;
                 }
-                if (reader.GetString() == nameof(InputModelType.Properties))
+                if (reader.GetString() == nameof(IModelType.Properties))
                 {
                     model = model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
                     {
-                        throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property.");
+                        throw new JsonException($"{nameof(IModelType)}.{nameof(IModelType.Properties)} must be the last defined property.");
                     }
                 }
                 else
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Common.Input
             return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, inheritedDictionaryType, isNullable, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, InputDictionaryType? inheritedDictionaryType, bool isNullable, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, IModelType? baseModel, IReadOnlyList<IModelProperty> properties, IDictionaryType? inheritedDictionaryType, bool isNullable, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
             InputModelTypeUsage usage = InputModelTypeUsage.None;
@@ -103,25 +103,25 @@ namespace AutoRest.CSharp.Common.Input
                 Enum.TryParse(usageString, ignoreCase: true, out usage);
             }
 
-            var derivedModels = new List<InputModelType>();
+            var derivedModels = new List<IModelType>();
             var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyValue, inheritedDictionaryType, IsNullable: isNullable);
 
             if (id is not null)
             {
                 resolver.AddReference(id, model);
-                resolver.AddReference($"{model.Name}.{nameof(InputModelType.DerivedModels)}", derivedModels);
+                resolver.AddReference($"{model.Name}.{nameof(IModelType.DerivedModels)}", derivedModels);
             }
 
             if (baseModel is not null)
             {
-                var baseModelDerived = (List<InputModelType>)resolver.ResolveReference($"{baseModel.Name}.{nameof(InputModelType.DerivedModels)}");
+                var baseModelDerived = (List<IModelType>)resolver.ResolveReference($"{baseModel.Name}.{nameof(IModelType.DerivedModels)}");
                 baseModelDerived.Add(model);
             }
 
             return model;
         }
 
-        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options)
+        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<IModelProperty> properties, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
@@ -131,8 +131,8 @@ namespace AutoRest.CSharp.Common.Input
 
             while (reader.TokenType != JsonTokenType.EndArray)
             {
-                var property = reader.ReadWithConverter<InputModelProperty>(options);
-                properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));
+                var property = reader.ReadWithConverter<IModelProperty>(options);
+                properties.Add(property ?? throw new JsonException($"null {nameof(IModelProperty)} is not allowed"));
             }
             reader.Read();
         }

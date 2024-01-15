@@ -5,20 +5,20 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal abstract record InputExampleValue(InputType Type)
+    internal abstract record InputExampleValue(IType Type)
     {
-        public static InputExampleValue Null(InputType type) => new InputExampleRawValue(type, null);
-        public static InputExampleValue Value(InputType type, object? rawValue) => new InputExampleRawValue(type, rawValue);
-        public static InputExampleValue List(InputType type, IReadOnlyList<InputExampleValue> values) => new InputExampleListValue(type, values);
-        public static InputExampleValue Object(InputType type, IReadOnlyDictionary<string, InputExampleValue> properties) => new InputExampleObjectValue(type, properties);
-        public static InputExampleValue Stream(InputType type, string filename) => new InputExampleStreamValue(type, filename);
+        public static InputExampleValue Null(IType type) => new InputExampleRawValue(type, null);
+        public static InputExampleValue Value(IType type, object? rawValue) => new InputExampleRawValue(type, rawValue);
+        public static InputExampleValue List(IType type, IReadOnlyList<InputExampleValue> values) => new InputExampleListValue(type, values);
+        public static InputExampleValue Object(IType type, IReadOnlyDictionary<string, InputExampleValue> properties) => new InputExampleObjectValue(type, properties);
+        public static InputExampleValue Stream(IType type, string filename) => new InputExampleStreamValue(type, filename);
     }
 
-    internal record InputExampleRawValue(InputType Type, object? RawValue) : InputExampleValue(Type);
+    internal record InputExampleRawValue(IType Type, object? RawValue) : InputExampleValue(Type);
 
-    internal record InputExampleListValue(InputType Type, IReadOnlyList<InputExampleValue> Values) : InputExampleValue(Type);
+    internal record InputExampleListValue(IType Type, IReadOnlyList<InputExampleValue> Values) : InputExampleValue(Type);
 
-    internal record InputExampleObjectValue(InputType Type, IReadOnlyDictionary<string, InputExampleValue> Values): InputExampleValue(Type);
+    internal record InputExampleObjectValue(IType Type, IReadOnlyDictionary<string, InputExampleValue> Values): InputExampleValue(Type);
 
-    internal record InputExampleStreamValue(InputType Type, string Filename): InputExampleValue(Type);
+    internal record InputExampleStreamValue(IType Type, string Filename): InputExampleValue(Type);
 }

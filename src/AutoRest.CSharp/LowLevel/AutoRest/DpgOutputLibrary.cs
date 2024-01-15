@@ -16,8 +16,8 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class DpgOutputLibrary : OutputLibrary
     {
         private readonly string _libraryName;
-        private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
-        private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
+        private readonly IReadOnlyDictionary<IEnumType, EnumType> _enums;
+        private readonly IReadOnlyDictionary<IModelType, ModelTypeProvider> _models;
         private readonly bool _isTspInput;
         private readonly SourceInputModel? _sourceInputModel;
 
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(Models);
 
-        public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<IEnumType, EnumType> enums, IReadOnlyDictionary<IModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this);
             _libraryName = libraryName;
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client) => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
 
-        public override CSharpType ResolveEnum(InputEnumType enumType)
+        public override CSharpType ResolveEnum(IEnumType enumType)
         {
             if (!_isTspInput || enumType.Usage == InputModelTypeUsage.None)
             {
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
         }
 
-        public override CSharpType ResolveModel(InputModelType model)
+        public override CSharpType ResolveModel(IModelType model)
             => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object), model.IsNullable);
 
         public override CSharpType? FindTypeByName(string originalName)

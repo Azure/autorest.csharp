@@ -49,68 +49,70 @@ namespace AutoRest.CSharp.Output.Models
 
             SetRequestsToClients(clientInfosByName.Values);
 
-            var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            var enums = new Dictionary<IEnumType, EnumType>(IEnumType.IgnoreNullabilityComparer);
+            var models = new Dictionary<IModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
             var library = new DpgOutputLibrary(_libraryName, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
             if (isTspInput)
             {
-                CreateModels(models, library.TypeFactory);
-                CreateEnums(enums, models, library.TypeFactory);
+                var inputEnums = new List<IEnumType>(_rootNamespace.Enums);
+                var inputModels = new List<IModelType>(_rootNamespace.Models);
+                BuildUpExtraEnumsFromLiteralUnions(inputEnums, inputModels);
+
+                CreateModels(inputModels, models, library.TypeFactory);
+                CreateEnums(inputEnums, enums, library.TypeFactory);
             }
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, parametersInClientOptions);
 
             return library;
         }
 
-        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        private void BuildUpExtraEnumsFromLiteralUnions(IList<IEnumType> inputEnums, IList<IModelType> inputModels)
         {
-            foreach (var inputEnum in _rootNamespace.Enums)
-            {
-                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
-            }
-
-            List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
-            foreach (var model in models.Keys)
+            foreach (var model in inputModels)
             {
                 foreach (var property in model.Properties)
                 {
-                    if (property.Type is not InputUnionType union)
+                    // skip non-union types
+                    if (property.Type is not IUnionType union)
                         continue;
 
                     if (union.IsAllLiteralString() || union.IsAllLiteralStringPlusString())
                     {
-                        string modelname = models[model].Type.Name;
-                        InputEnumType inputEnum = new InputEnumType(
-                            $"{modelname}{GetNameWithCorrectPluralization(union, property.Name)}",
+                        var modelName = model.Name;
+                        var newEnumType = new InputEnumType(
+                            $"{modelName}{GetNameWithCorrectPluralization(union, property.Name)}",
                             model.Namespace,
                             model.Accessibility,
                             null,
-                            $"Enum for {property.Name} in {modelname}",
+                            $"Enum for {property.Name} in {modelName}",
                             model.Usage,
                             InputPrimitiveType.String,
-                            union.GetEnum(),
+                            union.GetEnumValues(),
                             true,
                             union.IsNullable);
-                        enumsToReplace.Add((model, property, inputEnum));
-                        dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
+                        ((InputModelProperty)property).Type = newEnumType;
+                        inputEnums.Add(newEnumType);
                     }
                 }
             }
+        }
 
-            foreach (var (containingModel, property, enumType) in enumsToReplace)
+        private void CreateEnums(IEnumerable<IEnumType> inputEnums, IDictionary<IEnumType, EnumType> dictionary, TypeFactory typeFactory)
+        {
+            foreach (var inputEnum in inputEnums)
             {
-                models[containingModel] = models[containingModel].ReplaceProperty(property, enumType);
+                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
         }
 
-        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
+        private void CreateModels(IEnumerable<IModelType> inputModels, IDictionary<IModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
-            foreach (var model in _rootNamespace.Models)
+            foreach (var model in inputModels)
             {
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes);
 
@@ -119,21 +121,21 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private string GetNameWithCorrectPluralization(InputType type, string name)
+        private string GetNameWithCorrectPluralization(IType type, string name)
         {
             //TODO: Probably needs special casing for ipThing to become IPThing
             string result = name.FirstCharToUpperCase();
             switch (type)
             {
-                case InputListType:
-                case InputDictionaryType:
+                case IListType:
+                case IDictionaryType:
                     return result.ToSingular();
                 default:
                     return result;
             }
         }
 
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<IModelType, ModelTypeProvider> models, TypeFactory typeFactory, IModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
@@ -141,7 +143,7 @@ namespace AutoRest.CSharp.Output.Models
             bool isChildPolyType = model.DiscriminatorValue is not null;
             if (isBasePolyType || isChildPolyType)
             {
-                InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
+                var actualBase = isBasePolyType ? model : model.BaseModel!;
 
                 //Since the unknown type is used for deserialization only we don't need to create if its an input only model
                 // TODO -- remove this condition completely when remove the UseModelReaderWriter flag

@@ -3,14 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class TypeSpecInputUnionTypeConverter : JsonConverter<InputUnionType>
+    internal class TypeSpecInputUnionTypeConverter : JsonConverter<IUnionType>
     {
         private readonly TypeSpecReferenceHandler _referenceHandler;
         public TypeSpecInputUnionTypeConverter(TypeSpecReferenceHandler referenceHandler)
@@ -18,29 +16,29 @@ namespace AutoRest.CSharp.Common.Input
             _referenceHandler = referenceHandler;
         }
 
-        public override InputUnionType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputUnionType>(_referenceHandler.CurrentResolver) ?? CreateInputUnionType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+        public override IUnionType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            => reader.ReadReferenceAndResolve<IUnionType>(_referenceHandler.CurrentResolver) ?? CreateInputUnionType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputUnionType value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IUnionType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputUnionType CreateInputUnionType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        public static IUnionType CreateInputUnionType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
             bool isNullable = false;
-            var unionItemTypes = new List<InputType>();
+            var unionItemTypes = new List<IType>();
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputUnionType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputUnionType.IsNullable), ref isNullable);
+                    || reader.TryReadString(nameof(IUnionType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(IUnionType.IsNullable), ref isNullable);
 
                 if (isKnownProperty)
                 {
                     continue;
                 }
 
-                if (reader.GetString() == nameof(InputUnionType.UnionItemTypes))
+                if (reader.GetString() == nameof(IUnionType.UnionItemTypes))
                 {
                     reader.Read();
                     CreateUnionItemTypes(ref reader, unionItemTypes, options);
@@ -51,13 +49,13 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            name = name ?? throw new JsonException($"{nameof(InputLiteralType)} must have a name.");
+            name = name ?? throw new JsonException($"{nameof(IUnionType)} must have a name.");
             if (unionItemTypes == null || unionItemTypes.Count == 0)
             {
                 throw new JsonException("Union must have a least one union type");
             }
 
-            var unionType = new InputUnionType(name, unionItemTypes, isNullable);
+            var unionType = new InputUnionType(unionItemTypes, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, unionType);
@@ -65,7 +63,7 @@ namespace AutoRest.CSharp.Common.Input
             return unionType;
         }
 
-        private static void CreateUnionItemTypes(ref Utf8JsonReader reader, ICollection<InputType> itemTypes, JsonSerializerOptions options)
+        private static void CreateUnionItemTypes(ref Utf8JsonReader reader, ICollection<IType> itemTypes, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
@@ -75,8 +73,8 @@ namespace AutoRest.CSharp.Common.Input
 
             while (reader.TokenType != JsonTokenType.EndArray)
             {
-                var type = reader.ReadWithConverter<InputType>(options);
-                itemTypes.Add(type ?? throw new JsonException($"null {nameof(InputType)} isn't allowed"));
+                var type = reader.ReadWithConverter<IType>(options);
+                itemTypes.Add(type ?? throw new JsonException($"null {nameof(IType)} isn't allowed"));
             }
             reader.Read();
         }

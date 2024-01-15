@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputConstant(object? Value, InputType Type);
+internal record InputConstant(object? Value, IType Type);

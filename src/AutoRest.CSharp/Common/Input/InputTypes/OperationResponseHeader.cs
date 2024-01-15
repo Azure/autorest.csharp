@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record OperationResponseHeader(string Name, string NameInResponse, string Description, InputType Type)
+internal record OperationResponseHeader(string Name, string NameInResponse, string Description, IType Type)
 {
     public OperationResponseHeader() : this("", "", "", InputPrimitiveType.String) { }
 }

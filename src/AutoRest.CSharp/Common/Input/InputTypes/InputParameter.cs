@@ -11,7 +11,7 @@ internal record InputParameter(
     string Name,
     string NameInRequest,
     string? Description,
-    InputType Type,
+    IType Type,
     RequestLocation Location,
     InputConstant? DefaultValue,
     VirtualParameter? VirtualParameter,
@@ -51,15 +51,15 @@ internal record InputParameter(
     private SerializationFormat? _serializationFormat;
     public SerializationFormat SerializationFormat => _serializationFormat ??= GetSerializationFormat(Type, Location);
 
-    private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
+    private static SerializationFormat GetSerializationFormat(IType parameterType, RequestLocation requestLocation)
     {
         var affectType = parameterType switch
         {
-            InputListType listType => listType.ElementType,
-            InputDictionaryType dictionaryType => dictionaryType.ValueType,
+            IListType listType => listType.ElementType,
+            IDictionaryType dictionaryType => dictionaryType.ValueType,
             _ => parameterType
         };
-        if (affectType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
+        if (affectType is IPrimitiveType { Kind: InputPrimitiveTypeKind.DateTime })
         {
             if (requestLocation == RequestLocation.Header)
             {

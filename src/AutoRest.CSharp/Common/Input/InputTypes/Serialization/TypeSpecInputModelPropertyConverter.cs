@@ -5,11 +5,10 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal sealed class TypeSpecInputModelPropertyConverter : JsonConverter<InputModelProperty>
+    internal sealed class TypeSpecInputModelPropertyConverter : JsonConverter<IModelProperty>
     {
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
@@ -18,18 +17,18 @@ namespace AutoRest.CSharp.Common.Input
             _referenceHandler = referenceHandler;
         }
 
-        public override InputModelProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputModelProperty>(_referenceHandler.CurrentResolver) ?? ReadInputModelProperty(ref reader, null, null, options, _referenceHandler.CurrentResolver);
+        public override IModelProperty Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            => reader.ReadReferenceAndResolve<IModelProperty>(_referenceHandler.CurrentResolver) ?? ReadInputModelProperty(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
-        public override void Write(Utf8JsonWriter writer, InputModelProperty value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IModelProperty value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private static InputModelProperty ReadInputModelProperty(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
+        private static IModelProperty ReadInputModelProperty(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = true;
             string? serializedName = null;
             string? description = null;
-            InputType? propertyType = null;
+            IType? propertyType = null;
             bool isReadOnly = false;
             bool isRequired = false;
             bool isDiscriminator = false;
@@ -37,13 +36,13 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputModelProperty.Name), ref name)
-                    || reader.TryReadString(nameof(InputModelProperty.SerializedName), ref serializedName)
-                    || reader.TryReadString(nameof(InputModelProperty.Description), ref description)
-                    || reader.TryReadWithConverter(nameof(InputModelProperty.Type), options, ref propertyType)
-                    || reader.TryReadBoolean(nameof(InputModelProperty.IsReadOnly), ref isReadOnly)
-                    || reader.TryReadBoolean(nameof(InputModelProperty.IsRequired), ref isRequired)
-                    || reader.TryReadBoolean(nameof(InputModelProperty.IsDiscriminator), ref isDiscriminator);
+                    || reader.TryReadString(nameof(IModelProperty.Name), ref name)
+                    || reader.TryReadString(nameof(IModelProperty.SerializedName), ref serializedName)
+                    || reader.TryReadString(nameof(IModelProperty.Description), ref description)
+                    || reader.TryReadWithConverter(nameof(IModelProperty.Type), options, ref propertyType)
+                    || reader.TryReadBoolean(nameof(IModelProperty.IsReadOnly), ref isReadOnly)
+                    || reader.TryReadBoolean(nameof(IModelProperty.IsRequired), ref isRequired)
+                    || reader.TryReadBoolean(nameof(IModelProperty.IsDiscriminator), ref isDiscriminator);
 
                 if (!isKnownProperty)
                 {
@@ -51,10 +50,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");
-            description = description ?? throw new JsonException($"{nameof(InputModelProperty)} must have a description.");
+            name = name ?? throw new JsonException($"{nameof(IModelProperty)} must have a name.");
+            description = description ?? throw new JsonException($"{nameof(IModelProperty)} must have a description.");
             description = BuilderHelpers.EscapeXmlDocDescription(description);
-            propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
+            propertyType = propertyType ?? throw new JsonException($"{nameof(IModelProperty)} must have a property type.");
 
             var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator);
             if (id != null)

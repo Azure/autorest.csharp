@@ -305,7 +305,7 @@ namespace AutoRest.CSharp.Output.Models
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters[0];
                     if (bodyMediaType == BodyMediaType.Binary ||
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
-                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputTypeKind.Stream })
+                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream })
                     {
                         body = new BinaryRequestBody(bodyParameterValue);
                     }
@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
+            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type).Implementation;
             var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
 
             return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -385,7 +385,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new StringResponseBody();
             }
 
-            if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            if (bodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream })
             {
                 return new StreamResponseBody();
             }

@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputIntrinsicType(InputIntrinsicTypeKind Kind) : InputType(Kind.ToString(), false)
+internal record InputIntrinsicType(InputIntrinsicTypeKind Kind) : InputType(Kind.ToString(), false), IIntrinsicType
 {
     public static InputIntrinsicType ErrorType { get; } = new(InputIntrinsicTypeKind.ErrorType);
     public static InputIntrinsicType Void { get; } = new(InputIntrinsicTypeKind.Void);

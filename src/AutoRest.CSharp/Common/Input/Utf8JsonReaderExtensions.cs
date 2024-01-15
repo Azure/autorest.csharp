@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Common.Input
             return true;
         }
 
-        public static bool TryReadPrimitiveType(this ref Utf8JsonReader reader, string propertyName, ref InputPrimitiveType? value)
+        public static bool TryReadPrimitiveType(this ref Utf8JsonReader reader, string propertyName, ref IPrimitiveType? value)
         {
             if (reader.TokenType != JsonTokenType.PropertyName)
             {

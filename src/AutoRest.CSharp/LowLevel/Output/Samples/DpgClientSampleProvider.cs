@@ -266,7 +266,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 yield return Declare(resultVar, JsonDocumentExpression.Parse(new StreamExpression(streamVar)).RootElement);
 
                 var responseParsingStatements = new List<MethodBodyStatement>();
-                BuildResponseParseStatements(sample.IsAllParametersUsed, sample.ResultType, resultVar, responseParsingStatements, new HashSet<InputType>());
+                BuildResponseParseStatements(sample.IsAllParametersUsed, sample.ResultType, resultVar, responseParsingStatements, new HashSet<IType>());
 
                 yield return responseParsingStatements;
             }
@@ -281,25 +281,25 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
-        private static void BuildResponseParseStatements(bool useAllProperties, InputType type, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<InputType> visitedTypes)
+        private static void BuildResponseParseStatements(bool useAllProperties, IType type, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<IType> visitedTypes)
         {
             switch (type)
             {
-                case InputListType listType:
+                case IListType listType:
                     if (visitedTypes.Contains(listType.ElementType))
                         return;
                     // <invocation>[0]
                     invocation = new IndexerExpression(invocation, Literal(0));
                     BuildResponseParseStatements(useAllProperties, listType.ElementType, invocation, statements, visitedTypes);
                     return;
-                case InputDictionaryType dictionaryType:
+                case IDictionaryType dictionaryType:
                     if (visitedTypes.Contains(dictionaryType.ValueType))
                         return;
                     // <invocation>.GetProperty("<key>")
                     invocation = invocation.Invoke("GetProperty", Literal("<key>"));
                     BuildResponseParseStatements(useAllProperties, dictionaryType.ValueType, invocation, statements, visitedTypes);
                     return;
-                case InputModelType modelType:
+                case IModelType modelType:
                     BuildResponseParseStatementsForModelType(useAllProperties, modelType, invocation, statements, visitedTypes);
                     return;
             }
@@ -308,7 +308,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             statements.Add(statement);
         }
 
-        private static void BuildResponseParseStatementsForModelType(bool useAllProperties, InputModelType model, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<InputType> visitedTypes)
+        private static void BuildResponseParseStatementsForModelType(bool useAllProperties, IModelType model, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<IType> visitedTypes)
         {
             var allProperties = model.GetSelfAndBaseModels().SelectMany(m => m.Properties);
             var propertiesToExplore = useAllProperties

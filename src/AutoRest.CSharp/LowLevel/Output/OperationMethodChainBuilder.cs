@@ -176,10 +176,12 @@ namespace AutoRest.CSharp.Output.Models
         {
             // we do not generate convenience method if the emitter does not allow it.
             if (!Operation.GenerateConvenienceMethod)
+            {
                 return new()
                 {
                     IsConvenienceMethodGenerated = false
                 };
+            }
 
             // if the protocol method is generated and the parameters are the same in protocol and convenience, we do not generate the convenience.
             if (Operation.GenerateProtocolMethod && !IsConvenienceMethodMeaningful())
@@ -191,27 +193,10 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            // check if there is anything not confident inside this operation
-            var confidentLevel = OperationConfidenceChecker.GetConfidenceLevel(Operation, _typeFactory);
-            return confidentLevel switch
+            return new()
             {
-                ConvenienceMethodConfidenceLevel.Confident => new()
-                {
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = false
-                },
-                ConvenienceMethodConfidenceLevel.Internal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.NotConfident,
-                    IsConvenienceMethodGenerated = true,
-                    IsConvenienceMethodInternal = true
-                },
-                ConvenienceMethodConfidenceLevel.Removal => new()
-                {
-                    Message = ConvenienceMethodOmittingMessage.AnonymousModel,
-                    IsConvenienceMethodGenerated = false
-                },
-                _ => throw new InvalidOperationException($"unhandled case {confidentLevel} for operation {Operation}")
+                IsConvenienceMethodGenerated = true,
+                IsConvenienceMethodInternal = false
             };
         }
 
@@ -333,7 +318,7 @@ namespace AutoRest.CSharp.Output.Models
             return null;
         }
 
-        private InputType? GetReturnedResponseInputType()
+        private IType? GetReturnedResponseInputType()
         {
             if (Operation.LongRunning != null)
             {
@@ -683,10 +668,10 @@ namespace AutoRest.CSharp.Output.Models
             return parameter;
         }
 
-        private CSharpType? ChangeTypeForProtocolMethod(InputType type) => type switch
+        private CSharpType? ChangeTypeForProtocolMethod(IType type) => type switch
         {
-            InputEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
-            InputModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
+            IEnumType enumType => _typeFactory.CreateType(enumType.EnumValueType).WithNullable(enumType.IsNullable),
+            IModelType modelType => new CSharpType(typeof(object), modelType.IsNullable),
             _ => null
         };
 

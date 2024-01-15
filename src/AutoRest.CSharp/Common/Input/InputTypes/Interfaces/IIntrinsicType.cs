@@ -3,11 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-public enum InputIntrinsicTypeKind
+public interface IIntrinsicType : IType
 {
-    ErrorType,
-    Void,
-    Never,
-    Unknown,
-    Null,
+    InputIntrinsicTypeKind Kind { get; }
 }

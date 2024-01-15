@@ -42,51 +42,51 @@ namespace AutoRest.CSharp.Output.Builders
             return SerializationFormat.Default;
         }
 
-        public static SerializationFormat GetSerializationFormat(InputType type) => type switch
+        public static SerializationFormat GetSerializationFormat(IType type) => type switch
         {
-            InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
-            InputListType listType => GetSerializationFormat(listType.ElementType),
-            InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
-            InputPrimitiveType primitiveType => primitiveType.Kind switch
+            ILiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
+            IListType listType => GetSerializationFormat(listType.ElementType),
+            IDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
+            IPrimitiveType primitiveType => primitiveType.Kind switch
             {
-                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
-                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
-                InputTypeKind.Date => SerializationFormat.Date_ISO8601,
-                InputTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
-                InputTypeKind.DateTimeRFC3339 => SerializationFormat.DateTime_RFC3339,
-                InputTypeKind.DateTimeRFC7231 => SerializationFormat.DateTime_RFC7231,
-                InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
-                InputTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
-                InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
-                InputTypeKind.DurationSeconds => SerializationFormat.Duration_Seconds,
-                InputTypeKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
-                InputTypeKind.Time => SerializationFormat.Time_ISO8601,
+                InputPrimitiveTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
+                InputPrimitiveTypeKind.Bytes => SerializationFormat.Bytes_Base64,
+                InputPrimitiveTypeKind.Date => SerializationFormat.Date_ISO8601,
+                InputPrimitiveTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
+                InputPrimitiveTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
+                InputPrimitiveTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+                InputPrimitiveTypeKind.DateTimeRFC3339 => SerializationFormat.DateTime_RFC3339,
+                InputPrimitiveTypeKind.DateTimeRFC7231 => SerializationFormat.DateTime_RFC7231,
+                InputPrimitiveTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
+                InputPrimitiveTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
+                InputPrimitiveTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
+                InputPrimitiveTypeKind.DurationSeconds => SerializationFormat.Duration_Seconds,
+                InputPrimitiveTypeKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
+                InputPrimitiveTypeKind.Time => SerializationFormat.Time_ISO8601,
                 _ => SerializationFormat.Default
             },
             _ => SerializationFormat.Default
         };
 
-        internal static SerializationFormat GetSerializationFormat(InputType inputType, CSharpType valueType)
+        internal static SerializationFormat GetSerializationFormat(IType inputType, CSharpType valueType)
         {
             var serializationFormat = GetSerializationFormat(inputType);
             return serializationFormat != SerializationFormat.Default ? serializationFormat : GetDefaultSerializationFormat(valueType);
         }
 
-        public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type, SerializationFormat? serializationFormat) => bodyMediaType switch
+        public static ObjectSerialization Build(BodyMediaType bodyMediaType, IType inputType, CSharpType type, SerializationFormat? serializationFormat) => bodyMediaType switch
         {
             BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
             BodyMediaType.Json => BuildJsonSerialization(inputType, type, false, serializationFormat ?? GetSerializationFormat(inputType, type)),
             _ => throw new NotImplementedException(bodyMediaType.ToString())
         };
 
-        private static XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
+        private static XmlElementSerialization BuildXmlElementSerialization(IType inputType, CSharpType type, string? name, bool isRoot)
         {
             return inputType switch
             {
-                InputListType listType => new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name, isRoot),
-                InputDictionaryType dictionaryType => new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name),
+                IListType listType => new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name, isRoot),
+                IDictionaryType dictionaryType => new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name),
                 CodeModelType cmt => BuildXmlElementSerialization(cmt.Schema, type, name, isRoot),
                 _ => new XmlElementValueSerialization(name ?? inputType.Name, new XmlValueSerialization(type, GetSerializationFormat(inputType)))
             };
@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Output.Builders
             return false;
         }
 
-        public static JsonSerialization BuildJsonSerialization(InputType inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat)
+        public static JsonSerialization BuildJsonSerialization(IType inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat)
         {
             if (valueType.IsFrameworkType && valueType.FrameworkType == typeof(JsonElement))
             {
@@ -160,8 +160,8 @@ namespace AutoRest.CSharp.Output.Builders
             return inputType switch
             {
                 CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType, isCollectionElement),
-                InputListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                InputDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                IListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                IDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 _ => new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }

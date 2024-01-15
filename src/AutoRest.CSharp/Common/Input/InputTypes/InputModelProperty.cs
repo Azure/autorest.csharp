@@ -5,7 +5,8 @@ using System;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputModelProperty(string Name, string SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+internal record InputModelProperty(string Name, string SerializedName, string Description, IType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator) : IModelProperty
 {
+    public IType Type { get; internal set; } = Type;
     public FormattableString? DefaultValue { get; init; }
 }

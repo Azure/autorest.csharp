@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal sealed class ModelTypeProviderFields : IReadOnlyCollection<FieldDeclaration>
     {
         private readonly IReadOnlyList<FieldDeclaration> _fields;
-        private readonly IReadOnlyDictionary<FieldDeclaration, InputModelProperty> _fieldsToInputs;
+        private readonly IReadOnlyDictionary<FieldDeclaration, IModelProperty> _fieldsToInputs;
         // parameter name should be unique since it's bound to field property
         private readonly IReadOnlyDictionary<string, FieldDeclaration> _parameterNamesToFields;
 
@@ -31,10 +31,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(InputModelType inputModel, CSharpType modelType, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, bool isStruct)
+        public ModelTypeProviderFields(IModelType inputModel, CSharpType modelType, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, bool isStruct)
         {
             var fields = new List<FieldDeclaration>();
-            var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
+            var fieldsToInputs = new Dictionary<FieldDeclaration, IModelProperty>();
             var publicParameters = new List<Parameter>();
             var serializationParameters = new List<Parameter>();
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // for classes, only required + not readonly + not constant + not discriminator could get into the public ctor
                 // for structs, all properties must be set in the public ctor
-                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, IsReadOnly: false, Type: not InputLiteralType })
+                if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, IsReadOnly: false, Type: not ILiteralType })
                 {
                     publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
                 }
@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             SerializationParameters = serializationParameters;
         }
 
-        private static ValidationType GetParameterValidation(FieldDeclaration field, InputModelProperty inputModelProperty)
+        private static ValidationType GetParameterValidation(FieldDeclaration field, IModelProperty inputModelProperty)
         {
             // we do not validate a parameter when it is a value type (struct or int, etc)
             if (field.Type.IsValueType)
@@ -183,12 +183,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public FieldDeclaration GetFieldByParameterName(string parameterName) => _parameterNamesToFields[parameterName];
         public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
-        public InputModelProperty? GetInputByField(FieldDeclaration field) => _fieldsToInputs.TryGetValue(field, out var property) ? property : null;
+        public IModelProperty? GetInputByField(FieldDeclaration field) => _fieldsToInputs.TryGetValue(field, out var property) ? property : null;
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static bool ShouldPropertyOmitSetter(InputModelType inputModel, InputModelProperty property, CSharpType type, bool isStruct)
+        private static bool ShouldPropertyOmitSetter(IModelType inputModel, IModelProperty property, CSharpType type, bool isStruct)
         {
             if (property.IsDiscriminator)
             {
@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // required constant property does not need setter
-            if (property.Type is InputLiteralType && property.IsRequired)
+            if (property.Type is ILiteralType && property.IsRequired)
             {
                 return true;
             }
@@ -232,7 +232,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return property.IsRequired && inputModel.Usage.HasFlag(InputModelTypeUsage.Input) && !inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
         }
 
-        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, bool isStruct, bool optionalViaNullability)
+        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, IModelType inputModel, IModelProperty inputModelProperty, bool isStruct, bool optionalViaNullability)
         {
             var valueType = originalType;
             if (optionalViaNullability)
@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SetterModifiers: setterModifiers);
         }
 
-        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
+        private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, IModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
         {
             if (optionalViaNullability)
             {
@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotSupportedException($"'{existingMember.ContainingType.Name}.{existingMember.Name}' must be either field or property.")
         };
 
-        private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage usage, in InputModelProperty property, TypeFactory typeFactory)
+        private static CSharpType GetPropertyDefaultType(in InputModelTypeUsage usage, in IModelProperty property, TypeFactory typeFactory)
         {
             var propertyType = typeFactory.CreateType(property.Type);
 
@@ -337,14 +337,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return propertyType;
         }
 
-        private static ValueExpression? GetPropertyInitializationValue(CSharpType propertyType, InputModelProperty inputModelProperty)
+        private static ValueExpression? GetPropertyInitializationValue(CSharpType propertyType, IModelProperty inputModelProperty)
         {
             // if the default value is set somewhere else, we just return it.
             if (inputModelProperty.DefaultValue != null)
                 return new FormattableStringToExpression(inputModelProperty.DefaultValue);
 
             // if it is not set, we check if this property is a literal type, and use the literal type as its default value.
-            if (inputModelProperty.Type is not InputLiteralType literalType || !inputModelProperty.IsRequired)
+            if (inputModelProperty.Type is not ILiteralType literalType || !inputModelProperty.IsRequired)
             {
                 return null;
             }

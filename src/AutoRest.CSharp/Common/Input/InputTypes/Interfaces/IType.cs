@@ -3,11 +3,10 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-public enum InputIntrinsicTypeKind
+public interface IType
 {
-    ErrorType,
-    Void,
-    Never,
-    Unknown,
-    Null,
+    string Name { get; }
+    bool IsNullable { get; }
+
+    IType WithNullable(bool isNullable);
 }
