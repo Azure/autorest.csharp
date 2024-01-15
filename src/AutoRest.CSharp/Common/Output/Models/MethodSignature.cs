@@ -15,8 +15,8 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record MethodSignature(string Name, FormattableString? Summary, FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute>? Attributes = null, IReadOnlyList<CSharpType>? GenericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? GenericParameterConstraints = null, CSharpType? ExplicitInterface = null, string? NonDocumentComment = null, bool IsRawSummayText = false, bool IsHiddenFromUser = false)
-        : MethodSignatureBase(Name, Summary, Description, NonDocumentComment, Modifiers, Parameters, Attributes ?? Array.Empty<CSharpAttribute>(), IsRawSummaryText: IsRawSummayText, IsHiddenFromUser: IsHiddenFromUser)
+    internal record MethodSignature(string Name, FormattableString? Summary, FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute>? Attributes = null, IReadOnlyList<CSharpType>? GenericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? GenericParameterConstraints = null, CSharpType? ExplicitInterface = null, string? NonDocumentComment = null, bool IsRawSummaryText = false)
+        : MethodSignatureBase(Name, Summary, Description, NonDocumentComment, Modifiers, Parameters, Attributes ?? Array.Empty<CSharpAttribute>(), IsRawSummaryText: IsRawSummaryText)
     {
         public static IEqualityComparer<MethodSignature> ParameterAndReturnTypeEqualityComparer = new MethodSignatureParameterAndReturnTypeEqualityComparer();
 

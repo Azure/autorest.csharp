@@ -151,12 +151,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteMethodDeclarationNoScope(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            // CSharpAttribute does not accept non-string arguments
-            if (methodBase.IsHiddenFromUser)
-            {
-                writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
-            }
-
             if (methodBase.Attributes is { } attributes)
             {
                 foreach (var attribute in attributes)
@@ -166,7 +160,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"[{attribute.Type}(");
                         foreach (var argument in attribute.Arguments)
                         {
-                            writer.Append($"{argument:L}, ");
+                            writer.WriteValueExpression(argument);
                         }
                         writer.RemoveTrailingComma();
                         writer.LineRaw(")]");

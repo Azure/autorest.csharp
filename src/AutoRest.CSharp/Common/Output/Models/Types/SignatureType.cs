@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -73,7 +74,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                 {
                     var overloadMethodSignature = new OverloadMethodSignature(currentMethodToCall, previous.WithParametersRequired(), missingParameters, previous.Description);
-                    overloadMethods.Add(new Method(overloadMethodSignature.PreviousMethodSignature with { IsHiddenFromUser = true }, BuildOverloadMethodBody(overloadMethodSignature)));
+                    var previousMethodSignature = overloadMethodSignature.PreviousMethodSignature with { Attributes = new CSharpAttribute[]{new CSharpAttribute(typeof(EditorBrowsableAttribute), FrameworkEnumValue(EditorBrowsableState.Never)) }};
+                    overloadMethods.Add(new Method(previousMethodSignature, BuildOverloadMethodBody(overloadMethodSignature)));
                 }
             }
             return overloadMethods;
@@ -255,7 +257,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     continue;
                 }
-                result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters, IsRawSummayText: true));
+                result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters, IsRawSummaryText: true));
             }
             return result;
         }
