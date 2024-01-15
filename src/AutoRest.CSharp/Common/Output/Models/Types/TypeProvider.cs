@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private string GetDebuggerDisplay()
         {
             if (_type is null)
-                return "<pending calculation";
+                return "<pending calculation>";
 
             return $"TypeProvider ({Declaration.Accessibility} {Declaration.Namespace}.{Declaration.Name}";
         }
