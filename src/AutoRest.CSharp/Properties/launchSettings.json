@@ -480,6 +480,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelNamespace\\Generated"
     },
+    "ModelReaderWriterValidation-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelReaderWriterValidation-TypeSpec\\src\\Generated -n"
+    },
     "Models-TypeSpec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-TypeSpec\\src\\Generated -n"

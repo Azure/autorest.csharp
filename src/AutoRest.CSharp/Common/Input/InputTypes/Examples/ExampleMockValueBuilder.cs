@@ -178,6 +178,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     if (!useAllParameters && !property.IsRequired)
                         continue;
 
+                    // this means a property is defined both on the base and derived type, we skip other occurrences only keep the first
+                    // which means we only keep the property defined in the lowest layer (derived types)
+                    if (dict.ContainsKey(property.SerializedName))
+                        continue;
+
                     InputExampleValue exampleValue;
                     if (property.IsDiscriminator)
                     {
