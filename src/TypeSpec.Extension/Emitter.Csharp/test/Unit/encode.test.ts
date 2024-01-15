@@ -9,8 +9,14 @@ import {
     typeSpecCompile
 } from "./utils/TestUtil.js";
 import { getAllHttpServices } from "@typespec/http";
-import { InputEnumType, InputModelType } from "../../src/type/inputType.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType
+} from "../../src/type/inputType.js";
 import { loadOperation } from "../../src/lib/operation.js";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
 
 describe("Test encode duration", () => {
     let runner: TestHost;
@@ -47,10 +53,10 @@ describe("Test encode duration", () => {
         assert(
             isEqual(
                 {
-                    Name: "duration",
-                    Kind: "DurationISO8601",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.DurationISO8601,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 operation.Parameters[0].Type
             )
         );
@@ -84,10 +90,10 @@ describe("Test encode duration", () => {
         assert(
             isEqual(
                 {
-                    Name: "duration",
-                    Kind: "DurationSeconds",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.DurationSeconds,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 operation.Parameters[0].Type
             )
         );
@@ -121,10 +127,10 @@ describe("Test encode duration", () => {
         assert(
             isEqual(
                 {
-                    Name: "duration",
-                    Kind: "DurationSecondsFloat",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.DurationSecondsFloat,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 operation.Parameters[0].Type
             )
         );
@@ -152,10 +158,10 @@ describe("Test encode duration", () => {
         assert(
             isEqual(
                 {
-                    Name: "duration",
-                    Kind: "DurationISO8601",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.DurationISO8601,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 durationProperty.Properties[0].Type
             )
         );
@@ -183,10 +189,10 @@ describe("Test encode duration", () => {
         assert(
             isEqual(
                 {
-                    Name: "duration",
-                    Kind: "DurationISO8601",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.DurationISO8601,
                     IsNullable: false
-                },
+                } as InputPrimitiveType,
                 durationProperty.Properties[0].Type
             )
         );
@@ -214,8 +220,8 @@ describe("Test encode duration", () => {
         assert(
             isEqual(
                 {
-                    Name: "duration",
-                    Kind: "DurationSeconds",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.DurationSeconds,
                     IsNullable: false
                 },
                 durationProperty.Properties[0].Type
@@ -245,8 +251,8 @@ describe("Test encode duration", () => {
         assert(
             isEqual(
                 {
-                    Name: "duration",
-                    Kind: "DurationSecondsFloat",
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.DurationSecondsFloat,
                     IsNullable: false
                 },
                 durationProperty.Properties[0].Type
