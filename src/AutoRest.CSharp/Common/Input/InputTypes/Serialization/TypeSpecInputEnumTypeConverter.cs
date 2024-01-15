@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             string? usageString = null;
             bool isExtendable = false;
             IPrimitiveType? valueType = null;
-            IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
+            IReadOnlyList<IEnumTypeValue>? allowedValues = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -80,13 +80,13 @@ namespace AutoRest.CSharp.Common.Input
             {
                 switch (value.Value)
                 {
-                    case int i:
+                    case int:
                         if (currentType?.Kind == InputPrimitiveTypeKind.String)
                             throw new JsonException($"Enum value types are not consistent.");
                         if (currentType?.Kind != InputPrimitiveTypeKind.Float32)
                             currentType = InputPrimitiveType.Int32;
                         break;
-                    case float f:
+                    case float:
                         if (currentType?.Kind == InputPrimitiveTypeKind.String)
                             throw new JsonException($"Enum value types are not consistent.");
                         currentType = InputPrimitiveType.Float32;
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Common.Input
                         currentType = InputPrimitiveType.String;
                         break;
                     default:
-                        throw new JsonException($"Unsupported enum value type, expect string, int or float.");
+                        throw new JsonException($"Unsupported enum value type {value.GetType()}, expect string, int or float.");
                 }
             }
             valueType = currentType ?? throw new JsonException("Enum value type must be set.");
@@ -110,9 +110,9 @@ namespace AutoRest.CSharp.Common.Input
             return enumType;
         }
 
-        private static IReadOnlyList<InputEnumTypeValue> NormalizeValues(IReadOnlyList<InputEnumTypeValue> allowedValues, IPrimitiveType valueType)
+        private static IReadOnlyList<IEnumTypeValue> NormalizeValues(IReadOnlyList<IEnumTypeValue> allowedValues, IPrimitiveType valueType)
         {
-            var concreteValues = new List<InputEnumTypeValue>(allowedValues.Count);
+            var concreteValues = new List<IEnumTypeValue>(allowedValues.Count);
 
             switch (valueType.Kind)
             {

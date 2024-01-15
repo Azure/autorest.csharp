@@ -3,8 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputEnumTypeValue(string Name, object Value, string? Description)
+internal record InputEnumTypeValue(string Name, object Value, string? Description) : IEnumTypeValue
 {
-    public virtual string GetJsonValueString() => GetValueString();
-    public string GetValueString() => (Value.ToString() ?? string.Empty);
+    public string GetValueString() => Value.ToString() ?? string.Empty;
 }

@@ -15,7 +15,7 @@ internal interface IEnumType : IType
     string Description { get; }
     InputModelTypeUsage Usage { get; }
     IPrimitiveType EnumValueType { get; }
-    IReadOnlyList<InputEnumTypeValue> AllowedValues { get; }
+    IReadOnlyList<IEnumTypeValue> AllowedValues { get; }
     bool IsExtensible { get; }
     public static IEqualityComparer<IEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
 

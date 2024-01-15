@@ -111,7 +111,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = client.Send(content);
 
@@ -126,7 +126,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = await client.SendAsync(content);
 
@@ -139,7 +139,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = client.Send(new SendRequest2Prop("<prop>"));
+            Response response = client.Send(SendRequest2Prop.B);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = await client.SendAsync(new SendRequest2Prop("<prop>"));
+            Response response = await client.SendAsync(SendRequest2Prop.B);
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = client.Send(content);
 
@@ -174,7 +174,7 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "<prop>",
+                prop = "b",
             });
             Response response = await client.SendAsync(content);
 
@@ -187,7 +187,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = client.Send(new SendRequest2Prop("<prop>"));
+            Response response = client.Send(SendRequest2Prop.B);
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace _Type.Union.Samples
         {
             StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient();
 
-            Response response = await client.SendAsync(new SendRequest2Prop("<prop>"));
+            Response response = await client.SendAsync(SendRequest2Prop.B);
         }
     }
 }

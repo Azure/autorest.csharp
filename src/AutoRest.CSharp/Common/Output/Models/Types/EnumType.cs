@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class EnumType : TypeProvider
     {
-        private readonly IEnumerable<InputEnumTypeValue> _allowedValues;
+        private readonly IEnumerable<IEnumTypeValue> _allowedValues;
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return values;
         }
 
-        private static string CreateDescription(InputEnumTypeValue value)
+        private static string CreateDescription(IEnumTypeValue value)
         {
             var description = string.IsNullOrWhiteSpace(value.Description)
                 ? value.GetValueString()
