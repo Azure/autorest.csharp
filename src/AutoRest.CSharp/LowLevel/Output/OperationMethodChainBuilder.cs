@@ -671,12 +671,15 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
                 }
-
                 return new Reference(field.Name, field.Type);
             }
 
             if (operationParameter.Kind is InputOperationParameterKind.Constant && parameter.DefaultValue is not null)
             {
+                if (operationParameter.IsContentType && parameter.DefaultValue.HasValue && $"{parameter.DefaultValue.Value.Value:L}".StartsWith("multipart"))
+                {
+                    return new Reference($"content.{nameof(RequestContent.ContentType)}", typeof(string));
+                }
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
 

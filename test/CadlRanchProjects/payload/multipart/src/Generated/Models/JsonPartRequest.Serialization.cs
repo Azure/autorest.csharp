@@ -15,21 +15,21 @@ using Azure.Core;
 
 namespace Payload.MultiPart.Models
 {
-    public partial class MultiPartRequest : IUtf8JsonSerializable, IJsonModel<MultiPartRequest>
+    public partial class JsonPartRequest : IUtf8JsonSerializable, IJsonModel<JsonPartRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultiPartRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonPartRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<MultiPartRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<JsonPartRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<MultiPartRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<JsonPartRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MultiPartRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JsonPartRequest)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("id"u8);
-            writer.WriteStringValue(Id);
+            writer.WritePropertyName("address"u8);
+            writer.WriteObjectValue(Address);
             writer.WritePropertyName("profileImage"u8);
             writer.WriteBase64StringValue(ProfileImage.ToArray(), "D");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -50,19 +50,19 @@ namespace Payload.MultiPart.Models
             writer.WriteEndObject();
         }
 
-        MultiPartRequest IJsonModel<MultiPartRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        JsonPartRequest IJsonModel<JsonPartRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<MultiPartRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<JsonPartRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MultiPartRequest)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(JsonPartRequest)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeMultiPartRequest(document.RootElement, options);
+            return DeserializeJsonPartRequest(document.RootElement, options);
         }
 
-        internal static MultiPartRequest DeserializeMultiPartRequest(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static JsonPartRequest DeserializeJsonPartRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -70,15 +70,15 @@ namespace Payload.MultiPart.Models
             {
                 return null;
             }
-            string id = default;
+            Address address = default;
             BinaryData profileImage = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"u8))
+                if (property.NameEquals("address"u8))
                 {
-                    id = property.Value.GetString();
+                    address = Address.DeserializeAddress(property.Value);
                     continue;
                 }
                 if (property.NameEquals("profileImage"u8))
@@ -92,12 +92,12 @@ namespace Payload.MultiPart.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MultiPartRequest(id, profileImage, serializedAdditionalRawData);
+            return new JsonPartRequest(address, profileImage, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<MultiPartRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<JsonPartRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<MultiPartRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<JsonPartRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -107,31 +107,31 @@ namespace Payload.MultiPart.Models
                     {
                         string boundary = Guid.NewGuid().ToString();
                         using MultipartFormData content = new MultipartFormData(boundary);
-                        content.Add(BinaryData.FromString(Id), "id");
+                        content.Add(BinaryData.FromObjectAsJson(Address), "address");
                         content.Add(ProfileImage.WithMediaType("application/octet-stream"), "profileImage", "profileImage.wav", null);
                         BinaryData binaryData = content.ToContent();
                         return binaryData;
                     }
                 default:
-                    throw new FormatException($"The model {nameof(MultiPartRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JsonPartRequest)} does not support '{options.Format}' format.");
             }
         }
 
-        MultiPartRequest IPersistableModel<MultiPartRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
+        JsonPartRequest IPersistableModel<JsonPartRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<MultiPartRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<JsonPartRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeMultiPartRequest(document.RootElement, options);
+                        return DeserializeJsonPartRequest(document.RootElement, options);
                     }
                 case "MPFD":
                     {
                         using MultipartFormData content = MultipartFormData.Create(data);
-                        string id = default;
+                        Address address = default;
                         BinaryData profileImage = default;
                         IDictionary<string, BinaryData> serializedAdditionalRawData = default;
                         Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -139,9 +139,9 @@ namespace Payload.MultiPart.Models
                         foreach (FormDataItem part in multiParts)
                         {
                             string propertyName = part.Name;
-                            if (propertyName == "id")
+                            if (propertyName == "address")
                             {
-                                id = part.Content.ToString();
+                                address = part.Content.ToObjectFromJson<Address>();
                                 continue;
                             }
                             if (propertyName == "profileImage")
@@ -151,21 +151,21 @@ namespace Payload.MultiPart.Models
                             }
                         }
                         serializedAdditionalRawData = additionalPropertiesDictionary;
-                        return new MultiPartRequest(id, profileImage, serializedAdditionalRawData);
+                        return new JsonPartRequest(address, profileImage, serializedAdditionalRawData);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(MultiPartRequest)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(JsonPartRequest)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<MultiPartRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<JsonPartRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static MultiPartRequest FromResponse(Response response)
+        internal static JsonPartRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultiPartRequest(document.RootElement);
+            return DeserializeJsonPartRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

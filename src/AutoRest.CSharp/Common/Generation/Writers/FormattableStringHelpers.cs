@@ -113,13 +113,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
-                    /* when Auzre.Core is updated to 2.0.0
                     case { IsFrameworkType: false, Implementation: ModelTypeProvider }:
                         {
                             BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
-                            return $"{Configuration.ApiTypes.RequestContentType}.Create({parameter.Name:I}, {GetModelReadWriteOptions(mediaType)})";
+                            /* Remove this if check when Azure.Core upgrade to 1.0.2 */
+                            if (mediaType == BodyMediaType.MultipartFormData)
+                            {
+                                return $"{Configuration.ApiTypes.RequestContentType}.{Configuration.ApiTypes.RequestContentCreateFromModelName}({parameter.Name:I}, {GetModelReadWriteOptions(mediaType)})";
+                            }
+                            break;
                         }
-                    */
                 }
             }
 

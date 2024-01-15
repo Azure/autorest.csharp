@@ -22,7 +22,6 @@ namespace Payload.MultiPart
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -39,13 +38,11 @@ namespace Payload.MultiPart
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal FormData(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal FormData(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <summary> Test content-type: multipart/form-data. </summary>
@@ -156,6 +153,546 @@ namespace Payload.MultiPart
             }
         }
 
+        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
+        /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='ComplexAsync(ComplexPartsRequest,CancellationToken)']/*" />
+        public virtual async Task<Response> ComplexAsync(ComplexPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = await ComplexAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
+        /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='Complex(ComplexPartsRequest,CancellationToken)']/*" />
+        public virtual Response Complex(ComplexPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = Complex(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ComplexAsync(ComplexPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='ComplexAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> ComplexAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.Complex");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateComplexRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Complex(ComplexPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='Complex(RequestContent,RequestContext)']/*" />
+        public virtual Response Complex(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.Complex");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateComplexRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
+        /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonPartAsync(JsonPartRequest,CancellationToken)']/*" />
+        public virtual async Task<Response> JsonPartAsync(JsonPartRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = await JsonPartAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
+        /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonPart(JsonPartRequest,CancellationToken)']/*" />
+        public virtual Response JsonPart(JsonPartRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = JsonPart(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains json part and binary part
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="JsonPartAsync(JsonPartRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonPartAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> JsonPartAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.JsonPart");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateJsonPartRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains json part and binary part
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="JsonPart(JsonPartRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonPart(RequestContent,RequestContext)']/*" />
+        public virtual Response JsonPart(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.JsonPart");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateJsonPartRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='BinaryArrayPartsAsync(BinaryArrayPartsRequest,CancellationToken)']/*" />
+        public virtual async Task<Response> BinaryArrayPartsAsync(BinaryArrayPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = await BinaryArrayPartsAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='BinaryArrayParts(BinaryArrayPartsRequest,CancellationToken)']/*" />
+        public virtual Response BinaryArrayParts(BinaryArrayPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = BinaryArrayParts(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="BinaryArrayPartsAsync(BinaryArrayPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='BinaryArrayPartsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> BinaryArrayPartsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.BinaryArrayParts");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBinaryArrayPartsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="BinaryArrayParts(BinaryArrayPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='BinaryArrayParts(RequestContent,RequestContext)']/*" />
+        public virtual Response BinaryArrayParts(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.BinaryArrayParts");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBinaryArrayPartsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
+        /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonArrayPartsAsync(JsonArrayPartsRequest,CancellationToken)']/*" />
+        public virtual async Task<Response> JsonArrayPartsAsync(JsonArrayPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = await JsonArrayPartsAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
+        /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonArrayParts(JsonArrayPartsRequest,CancellationToken)']/*" />
+        public virtual Response JsonArrayParts(JsonArrayPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = JsonArrayParts(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi json parts
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="JsonArrayPartsAsync(JsonArrayPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonArrayPartsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> JsonArrayPartsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.JsonArrayParts");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateJsonArrayPartsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi json parts
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="JsonArrayParts(JsonArrayPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='JsonArrayParts(RequestContent,RequestContext)']/*" />
+        public virtual Response JsonArrayParts(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.JsonArrayParts");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateJsonArrayPartsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='MultiBinaryPartsAsync(MultiBinaryPartsRequest,CancellationToken)']/*" />
+        public virtual async Task<Response> MultiBinaryPartsAsync(MultiBinaryPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = await MultiBinaryPartsAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='MultiBinaryParts(MultiBinaryPartsRequest,CancellationToken)']/*" />
+        public virtual Response MultiBinaryParts(MultiBinaryPartsRequest body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            Response response = MultiBinaryParts(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="MultiBinaryPartsAsync(MultiBinaryPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='MultiBinaryPartsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> MultiBinaryPartsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.MultiBinaryParts");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMultiBinaryPartsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="MultiBinaryParts(MultiBinaryPartsRequest,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FormData.xml" path="doc/members/member[@name='MultiBinaryParts(RequestContent,RequestContext)']/*" />
+        public virtual Response MultiBinaryParts(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FormData.MultiBinaryParts");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMultiBinaryPartsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateBasicRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -164,10 +701,84 @@ namespace Payload.MultiPart
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/mixed-parts", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("content-type", content.ContentType ?? "multipart/form-data");
+            request.Headers.Add("content-type", content.ContentType);
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateComplexRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/multipart/form-data/complex-parts", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", content.ContentType);
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateJsonPartRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/multipart/form-data/json-part", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", content.ContentType);
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateBinaryArrayPartsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/multipart/form-data/binary-array-parts", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", content.ContentType);
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateJsonArrayPartsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/multipart/form-data/json-array-parts", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", content.ContentType);
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateMultiBinaryPartsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/multipart/form-data/multi-binary-parts", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("content-type", content.ContentType);
             request.Content = content;
             return message;
         }

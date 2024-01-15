@@ -22,7 +22,7 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FormData_Basic_ShortVersion()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -38,7 +38,7 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FormData_Basic_ShortVersion_Async()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -54,7 +54,7 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FormData_Basic_ShortVersion_Convenience()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
             Response response = client.Basic(body);
@@ -64,7 +64,7 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FormData_Basic_ShortVersion_Convenience_Async()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
             Response response = await client.BasicAsync(body);
@@ -74,7 +74,7 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FormData_Basic_AllParameters()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -90,7 +90,7 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FormData_Basic_AllParameters_Async()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -106,7 +106,7 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FormData_Basic_AllParameters_Convenience()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
             Response response = client.Basic(body);
@@ -116,10 +116,678 @@ namespace Payload.MultiPart.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FormData_Basic_AllParameters_Convenience_Async()
         {
-            FormData client = new MultiPartClient().GetFormDataClient(apiVersion: "1.0.0");
+            FormData client = new MultiPartClient().GetFormDataClient();
 
             MultiPartRequest body = new MultiPartRequest("<id>", BinaryData.FromObjectAsJson(new object()));
             Response response = await client.BasicAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_Complex_ShortVersion()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+null
+            },
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = client.Complex(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_Complex_ShortVersion_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+null
+            },
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = await client.ComplexAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_Complex_ShortVersion_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+default
+            }, new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = client.Complex(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_Complex_ShortVersion_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+default
+            }, new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = await client.ComplexAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_Complex_AllParameters()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+null
+            },
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = client.Complex(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_Complex_AllParameters_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+null
+            },
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = await client.ComplexAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_Complex_AllParameters_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+default
+            }, new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = client.Complex(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_Complex_AllParameters_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+default
+            }, new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = await client.ComplexAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonPart_ShortVersion()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+            });
+            Response response = client.JsonPart(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonPart_ShortVersion_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+            });
+            Response response = await client.JsonPartAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonPart_ShortVersion_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+            Response response = client.JsonPart(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonPart_ShortVersion_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+            Response response = await client.JsonPartAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonPart_AllParameters()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+            });
+            Response response = client.JsonPart(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonPart_AllParameters_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                address = new
+                {
+                    city = "<city>",
+                },
+                profileImage = new object(),
+            });
+            Response response = await client.JsonPartAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonPart_AllParameters_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+            Response response = client.JsonPart(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonPart_AllParameters_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonPartRequest body = new JsonPartRequest(new Address("<city>"), BinaryData.FromObjectAsJson(new object()));
+            Response response = await client.JsonPartAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_BinaryArrayParts_ShortVersion()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = client.BinaryArrayParts(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_BinaryArrayParts_ShortVersion_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = await client.BinaryArrayPartsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_BinaryArrayParts_ShortVersion_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = client.BinaryArrayParts(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_BinaryArrayParts_ShortVersion_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = await client.BinaryArrayPartsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_BinaryArrayParts_AllParameters()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = client.BinaryArrayParts(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_BinaryArrayParts_AllParameters_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                id = "<id>",
+                pictures = new object[]
+            {
+new object()
+            },
+            });
+            Response response = await client.BinaryArrayPartsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_BinaryArrayParts_AllParameters_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = client.BinaryArrayParts(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_BinaryArrayParts_AllParameters_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new BinaryData[]
+            {
+BinaryData.FromObjectAsJson(new object())
+            });
+            Response response = await client.BinaryArrayPartsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonArrayParts_ShortVersion()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+new
+{
+city = "<city>",
+}
+            },
+            });
+            Response response = client.JsonArrayParts(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonArrayParts_ShortVersion_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+new
+{
+city = "<city>",
+}
+            },
+            });
+            Response response = await client.JsonArrayPartsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonArrayParts_ShortVersion_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+new Address("<city>")
+            });
+            Response response = client.JsonArrayParts(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonArrayParts_ShortVersion_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+new Address("<city>")
+            });
+            Response response = await client.JsonArrayPartsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonArrayParts_AllParameters()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+new
+{
+city = "<city>",
+}
+            },
+            });
+            Response response = client.JsonArrayParts(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonArrayParts_AllParameters_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+                previousAddresses = new object[]
+            {
+new
+{
+city = "<city>",
+}
+            },
+            });
+            Response response = await client.JsonArrayPartsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_JsonArrayParts_AllParameters_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+new Address("<city>")
+            });
+            Response response = client.JsonArrayParts(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_JsonArrayParts_AllParameters_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            JsonArrayPartsRequest body = new JsonArrayPartsRequest(BinaryData.FromObjectAsJson(new object()), new Address[]
+            {
+new Address("<city>")
+            });
+            Response response = await client.JsonArrayPartsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_MultiBinaryParts_ShortVersion()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+            });
+            Response response = client.MultiBinaryParts(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_MultiBinaryParts_ShortVersion_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+            });
+            Response response = await client.MultiBinaryPartsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_MultiBinaryParts_ShortVersion_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()));
+            Response response = client.MultiBinaryParts(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_MultiBinaryParts_ShortVersion_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()));
+            Response response = await client.MultiBinaryPartsAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_MultiBinaryParts_AllParameters()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+                picture = new object(),
+            });
+            Response response = client.MultiBinaryParts(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_MultiBinaryParts_AllParameters_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                profileImage = new object(),
+                picture = new object(),
+            });
+            Response response = await client.MultiBinaryPartsAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FormData_MultiBinaryParts_AllParameters_Convenience()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()))
+            {
+                Picture = BinaryData.FromObjectAsJson(new object()),
+            };
+            Response response = client.MultiBinaryParts(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FormData_MultiBinaryParts_AllParameters_Convenience_Async()
+        {
+            FormData client = new MultiPartClient().GetFormDataClient();
+
+            MultiBinaryPartsRequest body = new MultiBinaryPartsRequest(BinaryData.FromObjectAsJson(new object()))
+            {
+                Picture = BinaryData.FromObjectAsJson(new object()),
+            };
+            Response response = await client.MultiBinaryPartsAsync(body);
         }
     }
 }

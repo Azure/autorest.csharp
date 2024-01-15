@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Payload.MultiPart",
  "Description": "Test for multipart",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
@@ -46,37 +44,311 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "7",
+   "Name": "ComplexPartsRequest",
+   "Namespace": "Payload.MultiPart",
+   "IsNullable": false,
+   "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
+   "Properties": [
+    {
+     "$id": "8",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
+     "Type": {
+      "$id": "9",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "10",
+     "Name": "address",
+     "SerializedName": "address",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Name": "Address",
+      "Namespace": "Payload.MultiPart",
+      "IsNullable": false,
+      "Usage": "Input",
+      "MediaTypes": [],
+      "Properties": [
+       {
+        "$id": "12",
+        "Name": "city",
+        "SerializedName": "city",
+        "Description": "",
+        "Type": {
+         "$id": "13",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false
+       }
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "14",
+     "Name": "profileImage",
+     "SerializedName": "profileImage",
+     "Description": "",
+     "Type": {
+      "$id": "15",
+      "Name": "bytes",
+      "Kind": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "16",
+     "Name": "previousAddresses",
+     "SerializedName": "previousAddresses",
+     "Description": "",
+     "Type": {
+      "$id": "17",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "11"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "18",
+     "Name": "pictures",
+     "SerializedName": "pictures",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "20",
+       "Name": "bytes",
+       "Kind": "Bytes",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "11"
+  },
+  {
+   "$id": "21",
+   "Name": "JsonPartRequest",
+   "Namespace": "Payload.MultiPart",
+   "IsNullable": false,
+   "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
+   "Properties": [
+    {
+     "$id": "22",
+     "Name": "address",
+     "SerializedName": "address",
+     "Description": "",
+     "Type": {
+      "$ref": "11"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "23",
+     "Name": "profileImage",
+     "SerializedName": "profileImage",
+     "Description": "",
+     "Type": {
+      "$id": "24",
+      "Name": "bytes",
+      "Kind": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "25",
+   "Name": "BinaryArrayPartsRequest",
+   "Namespace": "Payload.MultiPart",
+   "IsNullable": false,
+   "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
+   "Properties": [
+    {
+     "$id": "26",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
+     "Type": {
+      "$id": "27",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "28",
+     "Name": "pictures",
+     "SerializedName": "pictures",
+     "Description": "",
+     "Type": {
+      "$id": "29",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "30",
+       "Name": "bytes",
+       "Kind": "Bytes",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "31",
+   "Name": "JsonArrayPartsRequest",
+   "Namespace": "Payload.MultiPart",
+   "IsNullable": false,
+   "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
+   "Properties": [
+    {
+     "$id": "32",
+     "Name": "profileImage",
+     "SerializedName": "profileImage",
+     "Description": "",
+     "Type": {
+      "$id": "33",
+      "Name": "bytes",
+      "Kind": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "34",
+     "Name": "previousAddresses",
+     "SerializedName": "previousAddresses",
+     "Description": "",
+     "Type": {
+      "$id": "35",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "11"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "36",
+   "Name": "MultiBinaryPartsRequest",
+   "Namespace": "Payload.MultiPart",
+   "IsNullable": false,
+   "Usage": "Input",
+   "MediaTypes": [
+    "multipart/form-data"
+   ],
+   "Properties": [
+    {
+     "$id": "37",
+     "Name": "profileImage",
+     "SerializedName": "profileImage",
+     "Description": "",
+     "Type": {
+      "$id": "38",
+      "Name": "bytes",
+      "Kind": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "39",
+     "Name": "picture",
+     "SerializedName": "picture",
+     "Description": "",
+     "Type": {
+      "$id": "40",
+      "Name": "bytes",
+      "Kind": "Bytes",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "7",
+   "$id": "41",
    "Name": "MultiPartClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "8"
+    "$id": "42"
    },
    "Creatable": true
   },
   {
-   "$id": "9",
+   "$id": "43",
    "Name": "FormData",
    "Description": "",
    "Operations": [
     {
-     "$id": "10",
+     "$id": "44",
      "Name": "basic",
      "ResourceName": "FormData",
      "Description": "Test content-type: multipart/form-data",
      "Parameters": [
       {
-       "$id": "11",
+       "$id": "45",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "12",
+        "$id": "46",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -91,9 +363,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "47",
         "Type": {
-         "$id": "14",
+         "$id": "48",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -102,14 +374,14 @@
        }
       },
       {
-       "$id": "15",
+       "$id": "49",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "16",
+        "$id": "50",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "17",
+         "$id": "51",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -119,9 +391,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "52",
         "Type": {
-         "$ref": "16"
+         "$ref": "50"
         },
         "Value": "multipart/form-data"
        },
@@ -135,7 +407,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "19",
+       "$id": "53",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -152,11 +424,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "20",
+       "$id": "54",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "21",
+        "$id": "55",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -171,48 +443,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "56",
         "Type": {
-         "$ref": "21"
+         "$ref": "55"
         },
         "Value": "application/json"
-       }
-      },
-      {
-       "$id": "23",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "24",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "25",
-        "Type": {
-         "$id": "26",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "57",
        "StatusCodes": [
         204
        ],
@@ -231,10 +472,555 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "58",
+     "Name": "complex",
+     "ResourceName": "FormData",
+     "Description": "Test content-type: multipart/form-data for mixed scenarios",
+     "Parameters": [
+      {
+       "$ref": "45"
+      },
+      {
+       "$id": "59",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "60",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "61",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "multipart/form-data",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "62",
+        "Type": {
+         "$ref": "60"
+        },
+        "Value": "multipart/form-data"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "63",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "7"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "64",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "65",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "66",
+        "Type": {
+         "$ref": "65"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "67",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/multipart/form-data/complex-parts",
+     "RequestMediaTypes": [
+      "multipart/form-data"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "68",
+     "Name": "jsonPart",
+     "ResourceName": "FormData",
+     "Description": "Test content-type: multipart/form-data for scenario contains json part and binary part ",
+     "Parameters": [
+      {
+       "$ref": "45"
+      },
+      {
+       "$id": "69",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "70",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "71",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "multipart/form-data",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "72",
+        "Type": {
+         "$ref": "70"
+        },
+        "Value": "multipart/form-data"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "73",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "21"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "74",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "75",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "76",
+        "Type": {
+         "$ref": "75"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "77",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/multipart/form-data/json-part",
+     "RequestMediaTypes": [
+      "multipart/form-data"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "78",
+     "Name": "binaryArrayParts",
+     "ResourceName": "FormData",
+     "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Parameters": [
+      {
+       "$ref": "45"
+      },
+      {
+       "$id": "79",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "80",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "81",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "multipart/form-data",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "82",
+        "Type": {
+         "$ref": "80"
+        },
+        "Value": "multipart/form-data"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "83",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "25"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "84",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "85",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "86",
+        "Type": {
+         "$ref": "85"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "87",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/multipart/form-data/binary-array-parts",
+     "RequestMediaTypes": [
+      "multipart/form-data"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "88",
+     "Name": "jsonArrayParts",
+     "ResourceName": "FormData",
+     "Description": "Test content-type: multipart/form-data for scenario contains multi json parts",
+     "Parameters": [
+      {
+       "$ref": "45"
+      },
+      {
+       "$id": "89",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "90",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "91",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "multipart/form-data",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "92",
+        "Type": {
+         "$ref": "90"
+        },
+        "Value": "multipart/form-data"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "93",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "31"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "94",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "95",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "96",
+        "Type": {
+         "$ref": "95"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "97",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/multipart/form-data/json-array-parts",
+     "RequestMediaTypes": [
+      "multipart/form-data"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "98",
+     "Name": "multiBinaryParts",
+     "ResourceName": "FormData",
+     "Description": "Test content-type: multipart/form-data for scenario contains multi binary parts",
+     "Parameters": [
+      {
+       "$ref": "45"
+      },
+      {
+       "$id": "99",
+       "Name": "contentType",
+       "NameInRequest": "content-type",
+       "Type": {
+        "$id": "100",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "101",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "multipart/form-data",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "DefaultValue": {
+        "$id": "102",
+        "Type": {
+         "$ref": "100"
+        },
+        "Value": "multipart/form-data"
+       },
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "103",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "36"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "104",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "105",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "106",
+        "Type": {
+         "$ref": "105"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "107",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/multipart/form-data/multi-binary-parts",
+     "RequestMediaTypes": [
+      "multipart/form-data"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "108"
    },
    "Creatable": false,
    "Parent": "MultiPartClient"

@@ -83,6 +83,7 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type RequestContentType { get; }
         public abstract string ToRequestContentName { get; }
         public abstract string RequestContentCreateName { get; }
+        public abstract string RequestContentCreateFromModelName { get; }
 
         public abstract Type IUtf8JsonSerializableType { get; }
         public abstract Type IXmlSerializableType { get; }

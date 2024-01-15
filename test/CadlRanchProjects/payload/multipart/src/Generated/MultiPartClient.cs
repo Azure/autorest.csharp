@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,14 +44,12 @@ namespace Payload.MultiPart
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of FormData. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual FormData GetFormDataClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private FormData _cachedFormData;
 
-            return new FormData(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of FormData. </summary>
+        public virtual FormData GetFormDataClient()
+        {
+            return Volatile.Read(ref _cachedFormData) ?? Interlocked.CompareExchange(ref _cachedFormData, new FormData(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedFormData;
         }
     }
 }

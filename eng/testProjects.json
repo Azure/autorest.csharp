@@ -32,6 +32,7 @@
         "projection/projected-name",
         "payload/content-negotiation",
         "payload/media-type",
+        "payload/multipart",
         "payload/pageable",
         "server/path/multiple",
         "server/path/single",
