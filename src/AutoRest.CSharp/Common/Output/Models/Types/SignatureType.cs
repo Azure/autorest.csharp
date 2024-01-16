@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -257,7 +258,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     continue;
                 }
-                result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters, IsRawSummaryText: true));
+                result.Add(new MethodSignature(method.Name, null, $"{description}", BuilderHelpers.MapModifiers(method), returnType, null, parameters, IsRawSummaryText: true));
             }
             return result;
         }
@@ -273,47 +274,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             // If the parameter type can't be found from type factory, the type was removed from current version
             // Since we don't have the ability to create the missing types, we can't continue to generate overload methods
             return null;
-        }
-
-        private static MethodSignatureModifiers MapModifiers(IMethodSymbol methodSymbol)
-        {
-            var modifiers = MethodSignatureModifiers.None;
-            var accessibility = methodSymbol.DeclaredAccessibility;
-            switch (accessibility)
-            {
-                case Accessibility.Public:
-                    modifiers |= MethodSignatureModifiers.Public;
-                    break;
-                case Accessibility.Internal:
-                    modifiers |= MethodSignatureModifiers.Internal;
-                    break;
-                case Accessibility.Private:
-                    modifiers |= MethodSignatureModifiers.Private;
-                    break;
-                case Accessibility.Protected:
-                    modifiers |= MethodSignatureModifiers.Protected;
-                    break;
-                case Accessibility.ProtectedAndInternal:
-                    modifiers |= MethodSignatureModifiers.Protected | MethodSignatureModifiers.Internal;
-                    break;
-            }
-            if (methodSymbol.IsStatic)
-            {
-                modifiers |= MethodSignatureModifiers.Static;
-            }
-            if (methodSymbol.IsAsync)
-            {
-                modifiers |= MethodSignatureModifiers.Async;
-            }
-            if (methodSymbol.IsVirtual)
-            {
-                modifiers |= MethodSignatureModifiers.Virtual;
-            }
-            if (methodSymbol.IsOverride)
-            {
-                modifiers |= MethodSignatureModifiers.Override;
-            }
-            return modifiers;
         }
     }
 }
