@@ -59,7 +59,10 @@ namespace _Type.Property.AdditionalProperties.Models
             Dictionary<string, ModelForRecord> additionalPropertiesDictionary = new Dictionary<string, ModelForRecord>();
             foreach (var property in element.EnumerateObject())
             {
-                additionalPropertiesDictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value));
+                if (property.Value.ValueKind == JsonValueKind.Object)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, ModelForRecord.DeserializeModelForRecord(property.Value));
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
             return new IsModelAdditionalProperties(additionalProperties);

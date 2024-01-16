@@ -67,7 +67,10 @@ namespace _Type.Property.AdditionalProperties.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                if (property.Value.ValueKind == JsonValueKind.String)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
             return new ExtendsStringAdditionalProperties(name, additionalProperties);

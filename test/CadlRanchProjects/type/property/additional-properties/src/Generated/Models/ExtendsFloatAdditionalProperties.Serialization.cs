@@ -67,7 +67,10 @@ namespace _Type.Property.AdditionalProperties.Models
                     id = property.Value.GetSingle();
                     continue;
                 }
-                additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
+                if (property.Value.ValueKind == JsonValueKind.Number)
+                {
+                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetSingle());
+                }
             }
             additionalProperties = additionalPropertiesDictionary;
             return new ExtendsFloatAdditionalProperties(id, additionalProperties);

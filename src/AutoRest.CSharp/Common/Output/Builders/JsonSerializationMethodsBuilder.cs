@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
@@ -620,7 +619,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // We could only do this when there is a discriminator, and the discriminator does not have a value (having a value indicating it is the child instead of base), and there is an unknown default object type to fall back, and I am not that fallback type.
             if (discriminator is { Value: null, DefaultObjectType: { } defaultObjectType } && !serialization.Type.Equals(defaultObjectType.Type))
             {
-                yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, null));
+                yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, null, out _));
             }
             else
             {
@@ -632,7 +631,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (var implementation in discriminator.Implementations)
             {
-                yield return new SwitchCase(Literal(implementation.Key), Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null)), true);
+                yield return new SwitchCase(Literal(implementation.Key), Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null, out _)), true);
             }
         }
 
@@ -701,9 +700,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonAdditionalPropertiesSerialization additionalPropertiesSerialization, JsonPropertyExpression jsonProperty, DictionaryExpression dictionary, ModelReaderWriterOptionsExpression? options, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
             yield return DeserializeIntoObjectProperties(propertySerializations, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
-            // in the case here, this line returns an empty statement, we only want the value here
-            yield return DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
+            var deserializeStatements = DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value, out var condition);
             var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
+
+            if (condition is not null)
+            {
+                additionalPropertiesStatement = new IfStatement(condition)
+                {
+                    deserializeStatements,
+                    additionalPropertiesStatement
+                };
+            }
 
             yield return Serializations.WrapInCheckNotWire(
                 additionalPropertiesSerialization,
@@ -908,11 +915,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static MethodBodyStatement DeserializeValue(JsonSerialization serialization, JsonElementExpression element, out ValueExpression value, out BoolExpression? condition)
         {
-            condition = null;
             switch (serialization)
             {
                 case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.ImplementationType):
                     var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.ImplementationType, "array");
+                    condition = element.ValueKindEquals(JsonValueKind.Array);
                     value = readOnlyMemory;
                     VariableReference index = new VariableReference(typeof(int), "index");
 
@@ -929,6 +936,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case JsonArraySerialization jsonArray:
                     var array = new VariableReference(jsonArray.ImplementationType, "array");
+                    condition = element.ValueKindEquals(JsonValueKind.Array);
                     value = array;
 
                     return new MethodBodyStatement[]
@@ -949,16 +957,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             DeserializeDictionaryValue(jsonDictionary.ValueSerialization, dictionary, new JsonPropertyExpression(property))
                         }
                     };
+                    condition = element.ValueKindEquals(JsonValueKind.Object);
                     value = dictionary;
                     return deserializeDictionaryStatement;
 
                 case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
                     var declareSerializeOptions = Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions);
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format, serializeOptions);
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, out condition, valueSerialization.Format, serializeOptions);
                     return declareSerializeOptions;
 
                 case JsonValueSerialization valueSerialization:
-                    value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format);
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, out condition, valueSerialization.Format);
                     return EmptyStatement;
 
                 default:
@@ -1015,10 +1024,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
+            => GetDeserializeValueExpression(element, serializationType, out _, serializationFormat, serializerOptions);
+
+        public static ValueExpression GetDeserializeValueExpression(JsonElementExpression element, CSharpType serializationType, out BoolExpression? condition, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
         {
             if (serializationType.SerializeAs != null)
             {
-                return GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat, serializationType).CastTo(serializationType);
+                return GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat, serializationType, out condition).CastTo(serializationType);
             }
 
             if (serializationType.IsFrameworkType)
@@ -1029,30 +1041,36 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     frameworkType = serializationType.Arguments[0].FrameworkType;
                 }
 
-                return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
+                return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType, out condition);
             }
 
-            return GetDeserializeImplementation(serializationType.Implementation, element, serializerOptions);
+            return GetDeserializeImplementation(serializationType.Implementation, element, serializerOptions, out condition);
         }
 
-        public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ValueExpression? serializerOptions)
+        public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ValueExpression? serializerOptions) => GetDeserializeImplementation(implementation, element, serializerOptions);
+
+        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ValueExpression? serializerOptions, out BoolExpression? condition)
         {
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
+                    condition = element.ValueKindEquals(JsonValueKind.Object);
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type, serializerOptions);
 
                 case Resource { ResourceData: SerializableObjectType resourceDataType } resource:
+                    condition = element.ValueKindEquals(JsonValueKind.Object);
                     return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
+                    condition = element.ValueKindEquals(JsonValueKind.Object);
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);
 
                 case SerializableObjectType type:
+                    condition = element.ValueKindEquals(JsonValueKind.Object);
                     return SerializableObjectTypeExpression.Deserialize(type, element);
 
                 case EnumType clientEnum:
-                    var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);
+                    var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null, out condition);
                     return EnumExpression.ToEnum(clientEnum, value);
 
                 default:
@@ -1092,9 +1110,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return variable;
         }
 
-        // TODO -- make this method to return a condition as well to check ValueKind to avoid exceptions
-        public static ValueExpression GetFrameworkTypeValueExpression(Type frameworkType, JsonElementExpression element, SerializationFormat format, CSharpType? serializationType)
+        private static ValueExpression GetFrameworkTypeValueExpression(Type frameworkType, JsonElementExpression element, SerializationFormat format, CSharpType? serializationType, out BoolExpression? condition)
         {
+            condition = null;
             if (frameworkType == typeof(ETag) ||
                 frameworkType == typeof(Uri) ||
                 frameworkType == typeof(ResourceIdentifier) ||
@@ -1104,11 +1122,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 frameworkType == typeof(AzureLocation) ||
                 frameworkType == typeof(ExtendedLocationType))
             {
+                condition = element.ValueKindEqualsString();
                 return New.Instance(frameworkType, element.GetString());
             }
 
             if (frameworkType == typeof(IPAddress))
             {
+                condition = element.ValueKindEqualsString();
                 return new InvokeStaticMethodExpression(typeof(IPAddress), nameof(IPAddress.Parse), new[] { element.GetString() });
             }
 
@@ -1129,50 +1149,93 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (frameworkType == typeof(object))
                 return element.GetObject();
             if (frameworkType == typeof(bool))
+            {
+                condition = Or(element.ValueKindEquals(JsonValueKind.True), element.ValueKindEquals(JsonValueKind.False));
                 return element.GetBoolean();
+            }
             if (frameworkType == typeof(char))
+            {
+                condition = element.ValueKindEqualsString();
                 return element.GetChar();
+            }
 
             if (frameworkType == typeof(short))
+            {
+                condition = element.ValueKindEquals(JsonValueKind.Number);
                 return element.GetInt16();
+            }
             if (frameworkType == typeof(int))
+            {
+                condition = element.ValueKindEquals(JsonValueKind.Number);
                 return element.GetInt32();
+            }
             if (frameworkType == typeof(long))
+            {
+                condition = element.ValueKindEquals(JsonValueKind.Number);
                 return element.GetInt64();
+            }
             if (frameworkType == typeof(float))
+            {
+                condition = element.ValueKindEquals(JsonValueKind.Number);
                 return element.GetSingle();
+            }
             if (frameworkType == typeof(double))
+            {
+                condition = element.ValueKindEquals(JsonValueKind.Number);
                 return element.GetDouble();
+            }
             if (frameworkType == typeof(decimal))
+            {
+                condition = element.ValueKindEquals(JsonValueKind.Number);
                 return element.GetDecimal();
+            }
             if (frameworkType == typeof(string))
+            {
+                condition = element.ValueKindEqualsString();
                 return element.GetString();
+            }
             if (frameworkType == typeof(Guid))
+            {
+                condition = element.ValueKindEqualsString();
                 return element.GetGuid();
+            }
             if (frameworkType == typeof(byte[]))
                 return element.GetBytesFromBase64(format.ToFormatSpecifier());
 
             if (frameworkType == typeof(DateTimeOffset))
             {
-                return format == SerializationFormat.DateTime_Unix
-                    ? DateTimeOffsetExpression.FromUnixTimeSeconds(element.GetInt64())
-                    : element.GetDateTimeOffset(format.ToFormatSpecifier());
+                if (format == SerializationFormat.DateTime_Unix)
+                {
+                    condition = element.ValueKindEquals(JsonValueKind.Number);
+                    return DateTimeOffsetExpression.FromUnixTimeSeconds(element.GetInt64());
+                }
+                else
+                {
+                    condition = element.ValueKindEqualsString();
+                    return element.GetDateTimeOffset(format.ToFormatSpecifier());
+                }
             }
 
             if (frameworkType == typeof(DateTime))
+            {
+                condition = element.ValueKindEqualsString();
                 return element.GetDateTime();
+            }
             if (frameworkType == typeof(TimeSpan))
             {
                 if (format == SerializationFormat.Duration_Seconds)
                 {
+                    condition = element.ValueKindEquals(JsonValueKind.Number);
                     return TimeSpanExpression.FromSeconds(element.GetInt32());
                 }
 
                 if (format == SerializationFormat.Duration_Seconds_Float)
                 {
+                    condition = element.ValueKindEquals(JsonValueKind.Number);
                     return TimeSpanExpression.FromSeconds(element.GetDouble());
                 }
 
+                condition = element.ValueKindEqualsString();
                 return element.GetTimeSpan(format.ToFormatSpecifier());
             }
 
