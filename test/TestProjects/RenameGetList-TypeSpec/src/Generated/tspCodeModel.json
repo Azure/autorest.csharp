@@ -7,6 +7,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ProjectKind",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -37,6 +38,7 @@
   },
   {
    "$id": "6",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -56,6 +58,7 @@
  "Models": [
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "Project",
    "Namespace": "RenameGetList",
    "IsNullable": false,
@@ -68,8 +71,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -93,8 +96,8 @@
      "Description": "The storage container name.",
      "Type": {
       "$id": "13",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -107,6 +110,7 @@
      "Description": "The project settings.",
      "Type": {
       "$id": "15",
+      "Kind": "Model",
       "Name": "ProjectSettings",
       "Namespace": "RenameGetList",
       "Description": "Represents the settings used to define the project behavior.",
@@ -114,17 +118,18 @@
       "Usage": "None",
       "InheritedDictionaryType": {
        "$id": "16",
+       "Kind": "Dictionary",
        "Name": "Dictionary",
        "KeyType": {
         "$id": "17",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "ValueType": {
         "$id": "18",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "IsNullable": false
@@ -141,8 +146,8 @@
      "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
       "$id": "20",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -155,8 +160,8 @@
      "Description": "The project description.",
      "Type": {
       "$id": "22",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -169,8 +174,8 @@
      "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
       "$id": "24",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -183,8 +188,8 @@
      "Description": "Represents the project creation datetime.",
      "Type": {
       "$id": "26",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -197,8 +202,8 @@
      "Description": "Represents the project last modification datetime.",
      "Type": {
       "$id": "28",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -211,8 +216,8 @@
      "Description": "Represents the project last training datetime.",
      "Type": {
       "$id": "30",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -225,8 +230,8 @@
      "Description": "Represents the project last deployment datetime.",
      "Type": {
       "$id": "32",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -239,6 +244,7 @@
   },
   {
    "$id": "33",
+   "Kind": "Model",
    "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
@@ -252,6 +258,7 @@
      "Description": "The Project items on this page",
      "Type": {
       "$id": "35",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "8"
@@ -268,8 +275,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "37",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -279,6 +286,7 @@
   },
   {
    "$id": "38",
+   "Kind": "Model",
    "Name": "Deployment",
    "Namespace": "RenameGetList",
    "IsNullable": false,
@@ -291,8 +299,8 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -302,6 +310,7 @@
   },
   {
    "$id": "41",
+   "Kind": "Model",
    "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
@@ -315,6 +324,7 @@
      "Description": "The Deployment items on this page",
      "Type": {
       "$id": "43",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "38"
@@ -331,8 +341,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "45",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -342,6 +352,7 @@
   },
   {
    "$id": "46",
+   "Kind": "Model",
    "Name": "ListQueryParams",
    "Namespace": "RenameGetList",
    "IsNullable": false,
@@ -377,8 +388,8 @@
        "NameInRequest": "Endpoint",
        "Type": {
         "$id": "52",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -398,8 +409,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "54",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -407,8 +418,8 @@
         "$id": "55",
         "Type": {
          "$id": "56",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
@@ -428,8 +439,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "58",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -448,8 +459,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -511,8 +522,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "65",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -534,8 +545,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "67",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -614,8 +625,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "75",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -637,8 +648,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "77",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -657,8 +668,8 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "79",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -677,8 +688,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "81",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -740,8 +751,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "86",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -763,8 +774,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "88",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -783,8 +794,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "90",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

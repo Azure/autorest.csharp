@@ -41,6 +41,7 @@ import {
     InputModelType,
     InputType,
     isInputLiteralType,
+    isInputModelType,
     isInputUnionType
 } from "../type/inputType.js";
 import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
@@ -69,6 +70,7 @@ import {
     getTypeName
 } from "./utils.js";
 import { Usage } from "../type/usage.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function loadOperation(
     sdkContext: SdkContext<NetEmitterOptions>,
@@ -121,7 +123,10 @@ export function loadOperation(
             }
             // TODO: remove this after https://github.com/Azure/typespec-azure/issues/69 is resolved
             // workaround for alias model
-            if (bodyParameter.Type.Name === "") {
+            if (
+                isInputModelType(bodyParameter.Type) &&
+                bodyParameter.Type.Name === ""
+            ) {
                 // give body type a name
                 bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
                 var bodyModelType = bodyParameter.Type as InputModelType;
@@ -268,7 +273,7 @@ export function loadOperation(
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind =
-            isContentType || inputType.Name === "Literal"
+            isContentType || inputType.Kind === InputTypeKind.Literal
                 ? InputOperationParameterKind.Constant
                 : isApiVer
                 ? defaultValue

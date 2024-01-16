@@ -8,6 +8,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -27,6 +28,7 @@
  "Models": [
   {
    "$id": "4",
+   "Kind": "Model",
    "Name": "Pet",
    "Namespace": "MixApiVersion",
    "Description": "Pet",
@@ -40,8 +42,8 @@
      "Description": "pet name",
      "Type": {
       "$id": "6",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -54,8 +56,8 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -68,8 +70,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -79,6 +81,7 @@
   },
   {
    "$id": "11",
+   "Kind": "Model",
    "Name": "PagedToy",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
@@ -92,9 +95,11 @@
      "Description": "The Toy items on this page",
      "Type": {
       "$id": "13",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "14",
+       "Kind": "Model",
        "Name": "Toy",
        "Namespace": "MixApiVersion",
        "IsNullable": false,
@@ -107,8 +112,8 @@
          "Description": "",
          "Type": {
           "$id": "16",
-          "Name": "int64",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -121,8 +126,8 @@
          "Description": "",
          "Type": {
           "$id": "18",
-          "Name": "int64",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -135,8 +140,8 @@
          "Description": "",
          "Type": {
           "$id": "20",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -156,8 +161,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "22",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -170,6 +175,7 @@
   },
   {
    "$id": "23",
+   "Kind": "Model",
    "Name": "Error",
    "Namespace": "MixApiVersion",
    "Description": "Error",
@@ -183,8 +189,8 @@
      "Description": "",
      "Type": {
       "$id": "25",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -197,8 +203,8 @@
      "Description": "",
      "Type": {
       "$id": "27",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -208,6 +214,7 @@
   },
   {
    "$id": "28",
+   "Kind": "Model",
    "Name": "PetId",
    "Namespace": "MixApiVersion",
    "IsNullable": false,
@@ -216,6 +223,7 @@
   },
   {
    "$id": "29",
+   "Kind": "Model",
    "Name": "NotModifiedPet",
    "Namespace": "MixApiVersion",
    "Description": "Not modified",
@@ -265,8 +273,8 @@
        "NameInRequest": "petStoreUrl",
        "Type": {
         "$id": "36",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -286,8 +294,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "38",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -295,8 +303,8 @@
         "$id": "39",
         "Type": {
          "$id": "40",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-11-30-preview"
@@ -317,8 +325,8 @@
        "Description": "pet name",
        "Type": {
         "$id": "42",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -337,8 +345,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "44",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -394,8 +402,8 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "49",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Path",
@@ -414,8 +422,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "51",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -490,11 +498,12 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "57",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "58",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-07-09",
@@ -540,8 +549,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "62",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -567,8 +576,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "65",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -646,8 +655,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "72",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -669,8 +678,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "74",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

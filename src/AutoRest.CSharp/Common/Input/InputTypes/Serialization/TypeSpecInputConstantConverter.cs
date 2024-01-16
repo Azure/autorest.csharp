@@ -109,10 +109,8 @@ namespace AutoRest.CSharp.Common.Input
                 case InputLiteralType literalType:
                     value = literalType.Value;
                     break;
-                case InputModelType model:
-                    throw new JsonException($"Not supported type: InputModelType");
                 default:
-                    throw new JsonException($"Not supported type: {type.Name}");
+                    throw new JsonException($"Not supported type: {type.GetType()}");
             }
             reader.Read();
             return value;
