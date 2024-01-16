@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    [DebuggerDisplay("Name: {Declaration.Name}, Namespace: {Declaration.Namespace}")]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal abstract class TypeProvider
     {
         private readonly Lazy<INamedTypeSymbol?> _existingType;
@@ -87,6 +87,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override int GetHashCode()
         {
             return HashCode.Combine(DefaultName, DefaultNamespace, DefaultAccessibility, TypeKind);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            if (_type is null)
+                return "<pending calculation>";
+
+            return $"TypeProvider ({Declaration.Accessibility} {Declaration.Namespace}.{Declaration.Name}";
         }
     }
 }

@@ -7,6 +7,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ProjectKind",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -37,6 +38,7 @@
   },
   {
    "$id": "6",
+   "Kind": "Enum",
    "Name": "OperationState",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -79,6 +81,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Enum",
    "Name": "JobStatus",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -126,6 +129,7 @@
   },
   {
    "$id": "20",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -145,6 +149,7 @@
  "Models": [
   {
    "$id": "22",
+   "Kind": "Model",
    "Name": "Project",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -157,8 +162,8 @@
      "Description": "",
      "Type": {
       "$id": "24",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -182,8 +187,8 @@
      "Description": "The storage container name.",
      "Type": {
       "$id": "27",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -196,6 +201,7 @@
      "Description": "The project settings.",
      "Type": {
       "$id": "29",
+      "Kind": "Model",
       "Name": "ProjectSettings",
       "Namespace": "AuthoringTypeSpec",
       "Description": "Represents the settings used to define the project behavior.",
@@ -203,17 +209,18 @@
       "Usage": "None",
       "InheritedDictionaryType": {
        "$id": "30",
+       "Kind": "Dictionary",
        "Name": "Dictionary",
        "KeyType": {
         "$id": "31",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "ValueType": {
         "$id": "32",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "IsNullable": false
@@ -230,8 +237,8 @@
      "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
       "$id": "34",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -244,8 +251,8 @@
      "Description": "The project description.",
      "Type": {
       "$id": "36",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -258,8 +265,8 @@
      "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
       "$id": "38",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -272,8 +279,8 @@
      "Description": "Represents the project creation datetime.",
      "Type": {
       "$id": "40",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -286,8 +293,8 @@
      "Description": "Represents the project last modification datetime.",
      "Type": {
       "$id": "42",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -300,8 +307,8 @@
      "Description": "Represents the project last training datetime.",
      "Type": {
       "$id": "44",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -314,8 +321,8 @@
      "Description": "Represents the project last deployment datetime.",
      "Type": {
       "$id": "46",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -328,6 +335,7 @@
   },
   {
    "$id": "47",
+   "Kind": "Model",
    "Name": "OperationStatusneverError",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Provides status details for long running operations.",
@@ -341,8 +349,8 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "49",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -366,6 +374,7 @@
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$id": "52",
+      "Kind": "Model",
       "Name": "Error",
       "Namespace": "Azure.Core.Foundations",
       "Description": "The error object.",
@@ -379,8 +388,8 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "54",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -393,8 +402,8 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "56",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -407,8 +416,8 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "58",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -421,6 +430,7 @@
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
          "$id": "60",
+         "Kind": "Array",
          "Name": "Array",
          "ElementType": {
           "$ref": "52"
@@ -437,6 +447,7 @@
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
          "$id": "62",
+         "Kind": "Model",
          "Name": "InnerError",
          "Namespace": "Azure.Core.Foundations",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -450,8 +461,8 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "64",
-            "Name": "string",
-            "Kind": "String",
+            "Kind": "Primitive",
+            "Name": "String",
             "IsNullable": false
            },
            "IsRequired": false,
@@ -488,6 +499,7 @@
   },
   {
    "$id": "66",
+   "Kind": "Model",
    "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
@@ -501,6 +513,7 @@
      "Description": "The Project items on this page",
      "Type": {
       "$id": "68",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "22"
@@ -517,8 +530,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "70",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -528,6 +541,7 @@
   },
   {
    "$id": "71",
+   "Kind": "Model",
    "Name": "TrainingJobOptions",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Training job parameters.",
@@ -541,8 +555,8 @@
      "Description": "",
      "Type": {
       "$id": "73",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -552,6 +566,7 @@
   },
   {
    "$id": "74",
+   "Kind": "Model",
    "Name": "Deployment",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -564,8 +579,8 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -575,6 +590,7 @@
   },
   {
    "$id": "77",
+   "Kind": "Model",
    "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
@@ -588,6 +604,7 @@
      "Description": "The Deployment items on this page",
      "Type": {
       "$id": "79",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "74"
@@ -604,8 +621,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "81",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -615,6 +632,7 @@
   },
   {
    "$id": "82",
+   "Kind": "Model",
    "Name": "SwapDeploymentsOptions",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -627,8 +645,8 @@
      "Description": "Represents the first deployment name.",
      "Type": {
       "$id": "84",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -641,8 +659,8 @@
      "Description": "Represents the second deployment name.",
      "Type": {
       "$id": "86",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -652,6 +670,7 @@
   },
   {
    "$id": "87",
+   "Kind": "Model",
    "Name": "DeploymentJob",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -664,8 +683,8 @@
      "Description": "The job ID.",
      "Type": {
       "$id": "89",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -678,8 +697,8 @@
      "Description": "The creation date time of the job.",
      "Type": {
       "$id": "91",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -692,8 +711,8 @@
      "Description": "The the last date time the job was updated.",
      "Type": {
       "$id": "93",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -706,8 +725,8 @@
      "Description": "The expiration date time of the job.",
      "Type": {
       "$id": "95",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -731,9 +750,11 @@
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
       "$id": "98",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "99",
+       "Kind": "Model",
        "Name": "JobWarning",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a warning that was encountered while executing the request.",
@@ -747,8 +768,8 @@
          "Description": "The warning code.",
          "Type": {
           "$id": "101",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -761,8 +782,8 @@
          "Description": "The warning message.",
          "Type": {
           "$id": "103",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -793,8 +814,8 @@
      "Description": "",
      "Type": {
       "$id": "106",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -807,6 +828,7 @@
   },
   {
    "$id": "107",
+   "Kind": "Model",
    "Name": "SwapDeploymentsJob",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -819,8 +841,8 @@
      "Description": "The job ID.",
      "Type": {
       "$id": "109",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -833,8 +855,8 @@
      "Description": "The creation date time of the job.",
      "Type": {
       "$id": "111",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -847,8 +869,8 @@
      "Description": "The the last date time the job was updated.",
      "Type": {
       "$id": "113",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -861,8 +883,8 @@
      "Description": "The expiration date time of the job.",
      "Type": {
       "$id": "115",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -886,6 +908,7 @@
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
       "$id": "118",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "99"
@@ -913,8 +936,8 @@
      "Description": "",
      "Type": {
       "$id": "121",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -924,6 +947,7 @@
   },
   {
    "$id": "122",
+   "Kind": "Model",
    "Name": "PagedSupportedLanguage",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of SupportedLanguage items",
@@ -937,9 +961,11 @@
      "Description": "The SupportedLanguage items on this page",
      "Type": {
       "$id": "124",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "125",
+       "Kind": "Model",
        "Name": "SupportedLanguage",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a supported language.",
@@ -953,8 +979,8 @@
          "Description": "The language name.",
          "Type": {
           "$id": "127",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -967,8 +993,8 @@
          "Description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
          "Type": {
           "$id": "129",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -988,8 +1014,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "131",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1002,6 +1028,7 @@
   },
   {
    "$id": "132",
+   "Kind": "Model",
    "Name": "PagedTrainingConfigVersion",
    "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of TrainingConfigVersion items",
@@ -1015,9 +1042,11 @@
      "Description": "The TrainingConfigVersion items on this page",
      "Type": {
       "$id": "134",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "135",
+       "Kind": "Model",
        "Name": "TrainingConfigVersion",
        "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a training config version.",
@@ -1031,8 +1060,8 @@
          "Description": "Represents the version of the config.",
          "Type": {
           "$id": "137",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1045,8 +1074,8 @@
          "Description": "Represents the training config version expiration date.",
          "Type": {
           "$id": "139",
-          "Name": "plainDate",
-          "Kind": "Date",
+          "Kind": "Primitive",
+          "Name": "Date",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1066,8 +1095,8 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "141",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1080,6 +1109,7 @@
   },
   {
    "$id": "142",
+   "Kind": "Model",
    "Name": "Job",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1092,8 +1122,8 @@
      "Description": "The job ID.",
      "Type": {
       "$id": "144",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1106,8 +1136,8 @@
      "Description": "The creation date time of the job.",
      "Type": {
       "$id": "146",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1120,8 +1150,8 @@
      "Description": "The the last date time the job was updated.",
      "Type": {
       "$id": "148",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1134,8 +1164,8 @@
      "Description": "The expiration date time of the job.",
      "Type": {
       "$id": "150",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1159,6 +1189,7 @@
      "Description": "The warnings that were encountered while executing the job.",
      "Type": {
       "$id": "153",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "99"
@@ -1183,6 +1214,7 @@
   },
   {
    "$id": "155",
+   "Kind": "Model",
    "Name": "ExportedProject",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1191,6 +1223,7 @@
   },
   {
    "$id": "156",
+   "Kind": "Model",
    "Name": "ListQueryParams",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1199,6 +1232,7 @@
   },
   {
    "$id": "157",
+   "Kind": "Model",
    "Name": "ExportParams",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1207,6 +1241,7 @@
   },
   {
    "$id": "158",
+   "Kind": "Model",
    "Name": "SwapDeploymentsParams",
    "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
@@ -1254,8 +1289,8 @@
        "NameInRequest": "Endpoint",
        "Type": {
         "$id": "165",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -1275,8 +1310,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "167",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1284,8 +1319,8 @@
         "$id": "168",
         "Type": {
          "$id": "169",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
@@ -1305,8 +1340,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "171",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1343,8 +1378,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "174",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1370,8 +1405,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "177",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1410,8 +1445,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "181",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -1438,8 +1473,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "184",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -1491,8 +1526,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "189",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1514,8 +1549,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "191",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1534,8 +1569,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "193",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1597,8 +1632,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "198",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1620,8 +1655,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "200",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1640,8 +1675,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "202",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1680,8 +1715,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "206",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -1727,8 +1762,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "211",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1750,8 +1785,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "213",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1818,8 +1853,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "219",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1841,8 +1876,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "221",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1861,8 +1896,8 @@
        "NameInRequest": "projectFileVersion",
        "Type": {
         "$id": "223",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1881,8 +1916,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "225",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1918,8 +1953,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "229",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -1962,8 +1997,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "234",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1985,8 +2020,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "236",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2005,8 +2040,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "238",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2042,8 +2077,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "242",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -2086,8 +2121,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "247",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2109,8 +2144,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "249",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2146,8 +2181,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "252",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2173,8 +2208,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "255",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2210,8 +2245,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "259",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -2269,8 +2304,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "266",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2292,8 +2327,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "268",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2312,8 +2347,8 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "270",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2332,8 +2367,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "272",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2395,8 +2430,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "277",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2418,8 +2453,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "279",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2438,8 +2473,8 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "281",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2476,8 +2511,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "284",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2503,8 +2538,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "287",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2543,8 +2578,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "291",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -2571,8 +2606,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "294",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -2624,8 +2659,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "299",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2647,8 +2682,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "301",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2667,8 +2702,8 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "303",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2687,8 +2722,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "305",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2727,8 +2762,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "309",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -2774,8 +2809,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "314",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2797,8 +2832,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "316",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2817,8 +2852,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "318",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2885,8 +2920,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "324",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -2908,8 +2943,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "326",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2946,8 +2981,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "329",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2973,8 +3008,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "332",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3010,8 +3045,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "336",
-          "Name": "ResourceLocation",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          }
         }
@@ -3069,8 +3104,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "343",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3092,8 +3127,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "345",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3112,8 +3147,8 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "347",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3132,8 +3167,8 @@
        "NameInRequest": "jobId",
        "Type": {
         "$id": "349",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3152,8 +3187,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "351",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3215,8 +3250,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "356",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3238,8 +3273,8 @@
        "NameInRequest": "projectName",
        "Type": {
         "$id": "358",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3258,8 +3293,8 @@
        "NameInRequest": "deploymentName",
        "Type": {
         "$id": "360",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3278,8 +3313,8 @@
        "NameInRequest": "jobId",
        "Type": {
         "$id": "362",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -3298,8 +3333,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "364",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3371,8 +3406,8 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "371",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3391,8 +3426,8 @@
        "NameInRequest": "skip",
        "Type": {
         "$id": "373",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3411,8 +3446,8 @@
        "NameInRequest": "maxpagesize",
        "Type": {
         "$id": "375",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3432,8 +3467,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "377",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3455,8 +3490,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "379",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -3521,8 +3556,8 @@
        "NameInRequest": "top",
        "Type": {
         "$id": "385",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3541,8 +3576,8 @@
        "NameInRequest": "skip",
        "Type": {
         "$id": "387",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3561,8 +3596,8 @@
        "NameInRequest": "maxpagesize",
        "Type": {
         "$id": "389",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3582,8 +3617,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "391",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -3605,8 +3640,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "393",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

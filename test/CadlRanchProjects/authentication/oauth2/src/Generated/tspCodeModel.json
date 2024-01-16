@@ -6,6 +6,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "OAuth2FlowType",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -42,6 +43,7 @@
   },
   {
    "$id": "7",
+   "Kind": "Enum",
    "Name": "MyFlow_authorizationUrl",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -62,6 +64,7 @@
  "Models": [
   {
    "$id": "9",
+   "Kind": "Model",
    "Name": "InvalidAuth",
    "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
@@ -74,8 +77,8 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -85,6 +88,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Model",
    "Name": "MyFlow",
    "Namespace": "Authentication.OAuth2",
    "IsNullable": false,
@@ -108,6 +112,7 @@
      "Description": "",
      "Type": {
       "$id": "15",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "7"
@@ -125,8 +130,8 @@
      "Description": "",
      "Type": {
       "$id": "17",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -154,8 +159,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "21",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -171,8 +176,8 @@
         "$id": "22",
         "Type": {
          "$id": "23",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -184,8 +189,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "25",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -240,8 +245,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "30",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

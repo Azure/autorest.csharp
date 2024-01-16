@@ -33,8 +33,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "7",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -50,8 +50,8 @@
         "$id": "8",
         "Type": {
          "$id": "9",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -64,11 +64,12 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "11",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "12",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -89,8 +90,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "14",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -145,11 +146,12 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "19",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "20",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -171,8 +173,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -227,11 +229,12 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "27",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "28",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -253,8 +256,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "30",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -309,11 +312,12 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "35",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "36",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -335,8 +339,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -391,11 +395,12 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "43",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "44",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -417,8 +422,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "46",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -485,11 +490,12 @@
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
         "$id": "53",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "54",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -511,8 +517,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "56",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "PngImageAsJson",
    "Namespace": "Payload.ContentNegotiation.DifferentBody",
    "IsNullable": false,
@@ -19,8 +20,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -30,6 +31,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "PngImage",
    "Namespace": "Payload.ContentNegotiation.SameBody",
    "IsNullable": false,
@@ -42,8 +44,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -53,6 +55,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "JpegImage",
    "Namespace": "Payload.ContentNegotiation.SameBody",
    "IsNullable": false,
@@ -65,8 +68,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -103,8 +106,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "16",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -120,8 +123,8 @@
         "$id": "17",
         "Type": {
          "$id": "18",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -133,8 +136,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -163,8 +166,8 @@
        ],
        "BodyType": {
         "$id": "23",
-        "Name": "bytes",
-        "Kind": "Bytes",
+        "Kind": "Primitive",
+        "Name": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -197,8 +200,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "26",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -227,8 +230,8 @@
        ],
        "BodyType": {
         "$id": "29",
-        "Name": "bytes",
-        "Kind": "Bytes",
+        "Kind": "Primitive",
+        "Name": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -273,8 +276,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -303,8 +306,8 @@
        ],
        "BodyType": {
         "$id": "37",
-        "Name": "bytes",
-        "Kind": "Bytes",
+        "Kind": "Primitive",
+        "Name": "Bytes",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -337,8 +340,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "40",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

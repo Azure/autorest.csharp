@@ -17,12 +17,12 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public override InputDictionaryType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => reader.ReadReferenceAndResolve<InputDictionaryType>(_referenceHandler.CurrentResolver) ?? CreateDictionaryType(ref reader, null, null, options);
+            => reader.ReadReferenceAndResolve<InputDictionaryType>(_referenceHandler.CurrentResolver) ?? CreateDictionaryType(ref reader, null, null, options, _referenceHandler.CurrentResolver);
 
         public override void Write(Utf8JsonWriter writer, InputDictionaryType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        public static InputDictionaryType CreateDictionaryType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options)
+        public static InputDictionaryType CreateDictionaryType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
             bool isNullable = false;
@@ -42,10 +42,16 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
+            name = name ?? throw new JsonException("Dictionary must have name");
             keyType = keyType ?? throw new JsonException("Dictionary must have key type");
             valueType = valueType ?? throw new JsonException("Dictionary must have value type");
 
-            return new InputDictionaryType(name ?? "Dictionary", keyType, valueType, isNullable);
+            var dictType = new InputDictionaryType(name, keyType, valueType, isNullable);
+            if (id != null)
+            {
+                resolver.AddReference(id, dictType);
+            }
+            return dictType;
         }
     }
 }

@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "InnerModel",
    "Namespace": "Type.Array",
    "Description": "Array inner model",
@@ -20,8 +21,8 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -34,6 +35,7 @@
      "Description": "",
      "Type": {
       "$id": "6",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -74,8 +76,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "12",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -91,8 +93,8 @@
         "$id": "13",
         "Type": {
          "$id": "14",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -104,8 +106,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "16",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -134,11 +136,12 @@
        ],
        "BodyType": {
         "$id": "19",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "20",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -173,11 +176,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "23",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "24",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -198,8 +202,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "26",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -225,8 +229,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "29",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -295,8 +299,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "36",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -325,11 +329,12 @@
        ],
        "BodyType": {
         "$id": "39",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "40",
-         "Name": "int64",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsNullable": false
@@ -364,11 +369,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "43",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "44",
-         "Name": "int64",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsNullable": false
@@ -389,8 +395,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "46",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -416,8 +422,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "49",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -486,8 +492,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "56",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -516,11 +522,12 @@
        ],
        "BodyType": {
         "$id": "59",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "60",
-         "Name": "boolean",
-         "Kind": "Boolean",
+         "Kind": "Primitive",
+         "Name": "Boolean",
          "IsNullable": false
         },
         "IsNullable": false
@@ -555,11 +562,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "63",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "64",
-         "Name": "boolean",
-         "Kind": "Boolean",
+         "Kind": "Primitive",
+         "Name": "Boolean",
          "IsNullable": false
         },
         "IsNullable": false
@@ -580,8 +588,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "66",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -607,8 +615,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "69",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -677,8 +685,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "76",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -707,11 +715,12 @@
        ],
        "BodyType": {
         "$id": "79",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "80",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -746,11 +755,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "83",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "84",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -771,8 +781,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "86",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -798,8 +808,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "89",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -868,8 +878,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "96",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -898,11 +908,12 @@
        ],
        "BodyType": {
         "$id": "99",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "100",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -937,11 +948,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "103",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "104",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -962,8 +974,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "106",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -989,8 +1001,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "109",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1059,8 +1071,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "116",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1089,11 +1101,12 @@
        ],
        "BodyType": {
         "$id": "119",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "120",
-         "Name": "utcDateTime",
-         "Kind": "DateTime",
+         "Kind": "Primitive",
+         "Name": "DateTime",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1128,11 +1141,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "123",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "124",
-         "Name": "utcDateTime",
-         "Kind": "DateTime",
+         "Kind": "Primitive",
+         "Name": "DateTime",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1153,8 +1167,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "126",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1180,8 +1194,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1250,8 +1264,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "136",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1280,11 +1294,12 @@
        ],
        "BodyType": {
         "$id": "139",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "140",
-         "Name": "duration",
-         "Kind": "DurationISO8601",
+         "Kind": "Primitive",
+         "Name": "DurationISO8601",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1319,11 +1334,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "143",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "144",
-         "Name": "duration",
-         "Kind": "DurationISO8601",
+         "Kind": "Primitive",
+         "Name": "DurationISO8601",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1344,8 +1360,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "146",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1371,8 +1387,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "149",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1441,8 +1457,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "156",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1471,11 +1487,12 @@
        ],
        "BodyType": {
         "$id": "159",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "160",
-         "Name": "Intrinsic",
-         "Kind": "unknown",
+         "Kind": "Intrinsic",
+         "Name": "unknown",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1510,11 +1527,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "163",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "164",
-         "Name": "Intrinsic",
-         "Kind": "unknown",
+         "Kind": "Intrinsic",
+         "Name": "unknown",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1535,8 +1553,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "166",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1562,8 +1580,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "169",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1632,8 +1650,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "176",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1662,6 +1680,7 @@
        ],
        "BodyType": {
         "$id": "179",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$ref": "2"
@@ -1698,6 +1717,7 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "182",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$ref": "2"
@@ -1720,8 +1740,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "184",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1747,8 +1767,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "187",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1817,8 +1837,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "194",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1847,11 +1867,12 @@
        ],
        "BodyType": {
         "$id": "197",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "198",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": true
         },
         "IsNullable": false
@@ -1886,11 +1907,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "201",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "202",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": true
         },
         "IsNullable": false
@@ -1911,8 +1933,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "204",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1938,8 +1960,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "207",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
