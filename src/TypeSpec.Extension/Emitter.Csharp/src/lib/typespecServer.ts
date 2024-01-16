@@ -12,10 +12,11 @@ import {
     InputPrimitiveType,
     InputType
 } from "../type/inputType.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { getInputType, getFormattedType } from "./model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export interface TypeSpecServer {
     url: string;
@@ -57,8 +58,8 @@ export function resolveServers(
             const value = prop.default ? getDefaultValue(prop.default) : "";
             const inputType: InputType = isEndpoint
                 ? ({
-                      Name: "Uri",
-                      Kind: InputTypeKind.Uri,
+                      Kind: InputTypeKind.Primitive,
+                      Name: InputPrimitiveTypeKind.Uri,
                       IsNullable: false
                   } as InputPrimitiveType)
                 : getInputType(
@@ -102,8 +103,8 @@ export function resolveServers(
                 NameInRequest: "host",
                 Description: server.description,
                 Type: {
-                    Name: "String",
-                    Kind: InputTypeKind.String,
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
                     IsNullable: false
                 } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
@@ -117,8 +118,8 @@ export function resolveServers(
                 Kind: InputOperationParameterKind.Client,
                 DefaultValue: {
                     Type: {
-                        Name: "String",
-                        Kind: InputTypeKind.String,
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     } as InputPrimitiveType,
                     Value: server.url

@@ -6,6 +6,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "OAuth2FlowType",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -42,6 +43,7 @@
   },
   {
    "$id": "7",
+   "Kind": "Enum",
    "Name": "MyFlow_authorizationUrl",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -62,6 +64,7 @@
  "Models": [
   {
    "$id": "9",
+   "Kind": "Model",
    "Name": "MyFlow",
    "Namespace": "Authentication.Union",
    "IsNullable": false,
@@ -85,6 +88,7 @@
      "Description": "",
      "Type": {
       "$id": "12",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "7"
@@ -102,8 +106,8 @@
      "Description": "",
      "Type": {
       "$id": "14",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -131,8 +135,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "18",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -148,8 +152,8 @@
         "$id": "19",
         "Type": {
          "$id": "20",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -161,8 +165,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -217,8 +221,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputType.Name), ref name)
+                    || reader.TryReadString(nameof(InputModelType.Name), ref name)
                     || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable)
                     || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputModelType.Accessibility), ref accessibility)

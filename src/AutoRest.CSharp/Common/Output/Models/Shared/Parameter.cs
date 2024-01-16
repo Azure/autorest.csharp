@@ -122,9 +122,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             string paramName = param.Name;
             string variableName = paramName.ToVariableName();
-            InputType paramInputType = param.Type;
 
-            if (paramInputType is InputModelType)
+            if (param.Type is InputModelType paramInputType)
             {
                 var paramInputTypeName = paramInputType.Name;
 

@@ -2,44 +2,45 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
+import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
 import { InputModelProperty } from "./inputModelProperty.js";
+import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import { InputTypeKind } from "./inputTypeKind.js";
 
 export interface InputType {
     Name: string;
+    Kind: InputTypeKind;
     IsNullable: boolean;
 }
 
 export interface InputPrimitiveType extends InputType {
-    Kind: InputTypeKind;
+    Name: InputPrimitiveTypeKind;
 }
 
 export interface InputLiteralType extends InputType {
-    Name: "Literal";
+    Kind: InputTypeKind.Literal;
+    Name: InputTypeKind.Literal; // literal type does not really have a name right now, we just use its kind
     LiteralValueType: InputType;
     Value: any;
 }
 
 export function isInputLiteralType(type: InputType): type is InputLiteralType {
-    return (
-        type.Name === "Literal" &&
-        (type as InputLiteralType).LiteralValueType !== undefined
-    );
+    return type.Kind === InputTypeKind.Literal;
 }
 
 export interface InputUnionType extends InputType {
-    Name: "Union";
+    Kind: InputTypeKind.Union;
+    Name: InputTypeKind.Union; // union type does not really have a name right now, we just use its kind
     UnionItemTypes: InputType[];
 }
 
 export function isInputUnionType(type: InputType): type is InputUnionType {
-    return (
-        type.Name === "Union" &&
-        (type as InputUnionType).UnionItemTypes !== undefined
-    );
+    return type.Kind === InputTypeKind.Union;
 }
 
 export interface InputModelType extends InputType {
+    Kind: InputTypeKind.Model;
+    Name: string;
     Namespace?: string;
     Accessibility?: string;
     Deprecated?: string;
@@ -54,10 +55,12 @@ export interface InputModelType extends InputType {
 }
 
 export function isInputModelType(type: InputType): type is InputModelType {
-    return (type as InputModelType).Properties !== undefined;
+    return type.Kind === InputTypeKind.Model;
 }
 
 export interface InputEnumType extends InputType {
+    Kind: InputTypeKind.Enum;
+    Name: string;
     EnumValueType: string;
     AllowedValues: InputEnumTypeValue[];
     Namespace?: string;
@@ -69,24 +72,22 @@ export interface InputEnumType extends InputType {
 }
 
 export function isInputEnumType(type: InputType): type is InputEnumType {
-    return (
-        (type as InputEnumType).AllowedValues !== undefined &&
-        (type as InputEnumType).EnumValueType !== undefined
-    );
+    return type.Kind === InputTypeKind.Enum;
 }
 
 export interface InputListType extends InputType {
+    Kind: InputTypeKind.Array;
+    Name: InputTypeKind.Array; // array type does not really have a name right now, we just use its kind
     ElementType: InputType;
 }
 
 export function isInputListType(type: InputType): type is InputListType {
-    return (
-        type.Name === "Array" &&
-        (type as InputListType).ElementType !== undefined
-    );
+    return type.Kind === InputTypeKind.Array;
 }
 
 export interface InputDictionaryType extends InputType {
+    Kind: InputTypeKind.Dictionary;
+    Name: InputTypeKind.Dictionary; // dictionary type does not really have a name right now, we just use its kind
     KeyType: InputType;
     ValueType: InputType;
 }
@@ -94,35 +95,17 @@ export interface InputDictionaryType extends InputType {
 export function isInputDictionaryType(
     type: InputType
 ): type is InputDictionaryType {
-    return (
-        type.Name === "Dictionary" &&
-        (type as InputDictionaryType).KeyType !== undefined &&
-        (type as InputDictionaryType).ValueType !== undefined
-    );
+    return type.Kind === InputTypeKind.Dictionary;
 }
 
 export interface InputIntrinsicType extends InputType {
-    Name: "Intrinsic";
+    Kind: InputTypeKind.Intrinsic;
+    Name: InputIntrinsicTypeKind;
     IsNullable: false;
-    Kind: "ErrorType" | "void" | "never" | "unknown" | "null";
 }
 
-export interface InputErrorType extends InputIntrinsicType {
-    Kind: "ErrorType";
-}
-
-export interface InputVoidType extends InputIntrinsicType {
-    Kind: "void";
-}
-
-export interface InputNeverType extends InputIntrinsicType {
-    Kind: "never";
-}
-
-export interface InputUnknownType extends InputIntrinsicType {
-    Kind: "unknown";
-}
-
-export interface InputNullType extends InputIntrinsicType {
-    Kind: "null";
+export function isInputIntrinsicType(
+    type: InputType
+): type is InputIntrinsicType {
+    return type.Kind === InputTypeKind.Intrinsic;
 }

@@ -165,7 +165,15 @@ namespace AutoRest.CSharp.Common.Input.Examples
             // if this model has a discriminator, we should return a derived type
             if (model.DiscriminatorPropertyName != null)
             {
-                model = model.DerivedModels.First();
+                var derived = model.DerivedModels.FirstOrDefault();
+                if (derived is null)
+                {
+                    return InputExampleValue.Null(model);
+                }
+                else
+                {
+                    model = derived;
+                }
             }
             // then, we just iterate all the properties
             foreach (var modelOrBase in model.GetSelfAndBaseModels())
@@ -176,6 +184,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
                         continue;
 
                     if (!useAllParameters && !property.IsRequired)
+                        continue;
+
+                    // this means a property is defined both on the base and derived type, we skip other occurrences only keep the first
+                    // which means we only keep the property defined in the lowest layer (derived types)
+                    if (dict.ContainsKey(property.SerializedName))
                         continue;
 
                     InputExampleValue exampleValue;
