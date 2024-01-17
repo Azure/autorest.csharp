@@ -530,5 +530,56 @@ namespace TypeSchemaMapping
                     throw new RequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateOperationWithErrorResponseRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationWithErrorResponse", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<CustomizedModel>> OperationWithErrorResponseAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithErrorResponseRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        CustomizedModel value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<CustomizedModel> OperationWithErrorResponse(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithErrorResponseRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        CustomizedModel value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = CustomizedModel.DeserializeCustomizedModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
     }
 }

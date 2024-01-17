@@ -303,6 +303,38 @@ namespace CustomNamespace
             }
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<CustomizedModel>> OperationWithErrorResponseAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithErrorResponse");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationWithErrorResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CustomizedModel> OperationWithErrorResponse(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithErrorResponse");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationWithErrorResponse(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="body"> The <see cref="CustomizedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)

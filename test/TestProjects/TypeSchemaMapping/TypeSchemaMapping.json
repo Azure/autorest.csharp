@@ -1,20 +1,20 @@
 ﻿{
-  "swagger": "2.0",
-  "info": {
-    "title": "Schema mapping",
-    "description": "Schema mapping",
-    "version": "1.0.0"
-  },
-  "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+    "swagger": "2.0",
+    "info": {
+        "title": "Schema mapping",
+        "description": "Schema mapping",
+        "version": "1.0.0"
+    },
+    "host": "localhost:3000",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/Operation/": {
             "put": {
@@ -182,16 +182,40 @@
                     }
                 }
             }
+        },
+        "/OperationWithErrorResponse": {
+            "post": {
+                "operationId": "OperationWithErrorResponse",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Model"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
         "AbstractModel": {
             "type": "object",
             "properties": {
-                "DiscriminatorProperty": { "type": "string" }
+                "DiscriminatorProperty": {
+                    "type": "string"
+                }
             },
             "discriminator": "DiscriminatorProperty",
-            "required": [ "DiscriminatorProperty" ]
+            "required": [
+                "DiscriminatorProperty"
+            ]
         },
         "DerivedFromAbstractModel": {
             "type": "object",
@@ -234,7 +258,9 @@
                 },
                 "InternalListProperty": {
                     "type": "array",
-                    "items": { "$ref": "#/definitions/InternalModel" },
+                    "items": {
+                        "$ref": "#/definitions/InternalModel"
+                    },
                     "readOnly": true
                 }
             }
@@ -522,6 +548,17 @@
             "x-ms-enum": {
                 "name": "EnumToBeSkipped",
                 "modelAsString": false
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
             }
         }
     }

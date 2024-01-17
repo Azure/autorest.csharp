@@ -12,6 +12,15 @@ namespace TypeSchemaMapping.Models
     /// <summary> Model factory for models. </summary>
     internal static partial class MainModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.Error"/>. </summary>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
+        /// <returns> A new <see cref="Models.Error"/> instance for mocking. </returns>
+        public static Error Error(string code = null, string message = null)
+        {
+            return new Error(code, message, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>
