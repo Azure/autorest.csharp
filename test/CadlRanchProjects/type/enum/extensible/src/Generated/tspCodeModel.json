@@ -5,6 +5,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "DaysOfWeekExtensibleEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -87,8 +88,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "15",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -104,8 +105,8 @@
         "$id": "16",
         "Type": {
          "$id": "17",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -117,8 +118,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -178,8 +179,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "24",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -256,8 +257,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "30",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -283,8 +284,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -358,8 +359,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "39",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -385,8 +386,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "42",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

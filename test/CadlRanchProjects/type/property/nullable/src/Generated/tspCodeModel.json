@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "StringProperty",
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
@@ -20,8 +21,8 @@
      "Description": "Required property",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -34,8 +35,8 @@
      "Description": "Property",
      "Type": {
       "$id": "6",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -45,6 +46,7 @@
   },
   {
    "$id": "7",
+   "Kind": "Model",
    "Name": "BytesProperty",
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
@@ -58,8 +60,8 @@
      "Description": "Required property",
      "Type": {
       "$id": "9",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -72,8 +74,8 @@
      "Description": "Property",
      "Type": {
       "$id": "11",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -83,6 +85,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Model",
    "Name": "DatetimeProperty",
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a datetime property",
@@ -96,8 +99,8 @@
      "Description": "Required property",
      "Type": {
       "$id": "14",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -110,8 +113,8 @@
      "Description": "Property",
      "Type": {
       "$id": "16",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -121,6 +124,7 @@
   },
   {
    "$id": "17",
+   "Kind": "Model",
    "Name": "DurationProperty",
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a duration property",
@@ -134,8 +138,8 @@
      "Description": "Required property",
      "Type": {
       "$id": "19",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -148,8 +152,8 @@
      "Description": "Property",
      "Type": {
       "$id": "21",
-      "Name": "duration",
-      "Kind": "DurationISO8601",
+      "Kind": "Primitive",
+      "Name": "DurationISO8601",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -159,6 +163,7 @@
   },
   {
    "$id": "22",
+   "Kind": "Model",
    "Name": "CollectionsByteProperty",
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection bytes properties",
@@ -172,8 +177,8 @@
      "Description": "Required property",
      "Type": {
       "$id": "24",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -186,11 +191,12 @@
      "Description": "Property",
      "Type": {
       "$id": "26",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "27",
-       "Name": "bytes",
-       "Kind": "Bytes",
+       "Kind": "Primitive",
+       "Name": "Bytes",
        "IsNullable": false
       },
       "IsNullable": true
@@ -202,6 +208,7 @@
   },
   {
    "$id": "28",
+   "Kind": "Model",
    "Name": "CollectionsModelProperty",
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection models properties",
@@ -215,8 +222,8 @@
      "Description": "Required property",
      "Type": {
       "$id": "30",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -229,9 +236,11 @@
      "Description": "Property",
      "Type": {
       "$id": "32",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "33",
+       "Kind": "Model",
        "Name": "InnerModel",
        "Namespace": "Type.Property.Nullable",
        "Description": "Inner model used in collections model property",
@@ -245,8 +254,8 @@
          "Description": "Inner model property",
          "Type": {
           "$id": "35",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -294,8 +303,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "41",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -311,8 +320,8 @@
         "$id": "42",
         "Type": {
          "$id": "43",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -324,8 +333,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "45",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -386,8 +395,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "50",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -449,11 +458,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "55",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "56",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -499,8 +509,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -559,11 +569,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "65",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "66",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -609,8 +620,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "70",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -680,8 +691,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "77",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -742,8 +753,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "82",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -805,11 +816,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "87",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "88",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -855,8 +867,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "92",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -915,11 +927,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "97",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "98",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -965,8 +978,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "102",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1036,8 +1049,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "109",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1098,8 +1111,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "114",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1161,11 +1174,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "119",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "120",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -1211,8 +1225,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "124",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1271,11 +1285,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "129",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "130",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -1321,8 +1336,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "134",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1392,8 +1407,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "141",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1454,8 +1469,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "146",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1517,11 +1532,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "151",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "152",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -1567,8 +1583,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "156",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1627,11 +1643,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "161",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "162",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -1677,8 +1694,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "166",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1748,8 +1765,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "173",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1810,8 +1827,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "178",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1873,11 +1890,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "183",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "184",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -1923,8 +1941,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "188",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1983,11 +2001,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "193",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "194",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -2033,8 +2052,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "198",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2104,8 +2123,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "205",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2166,8 +2185,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "210",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2229,11 +2248,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "215",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "216",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -2279,8 +2299,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "220",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2339,11 +2359,12 @@
        "Description": "content-type is application/merge-patch+json",
        "Type": {
         "$id": "225",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "226",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
@@ -2389,8 +2410,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "230",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

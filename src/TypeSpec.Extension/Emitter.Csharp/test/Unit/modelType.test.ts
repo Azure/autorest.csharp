@@ -16,6 +16,10 @@ import {
     InputModelType
 } from "../../src/type/inputType.js";
 import { getAllHttpServices } from "@typespec/http";
+import { InputTypeKind } from "../../src/type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../../src/type/inputPrimitiveTypeKind.js";
+import { InputIntrinsicTypeKind } from "../../src/type/inputIntrinsicTypeKind.js";
+import { InputModelProperty } from "../../src/type/inputModelProperty.js";
 
 describe("Discriminator property", () => {
     let runner: TestHost;
@@ -77,15 +81,15 @@ op test(@body input: Pet): Pet;
                     Name: "kind",
                     SerializedName: "kind",
                     Type: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true,
                     Description: "Discriminator"
-                },
+                } as InputModelProperty,
                 discriminatorProperty
             ),
             `Discriminator property is not correct, got ${JSON.stringify(
@@ -121,7 +125,7 @@ op test(@body input: Pet): Pet;
     it("Discriminator property is enum with no enum value defined", async () => {
         const program = await typeSpecCompile(
             `
-        @doc("Int based extensible enum")
+        @doc("The pet kind")
         enum PetKind {
             Cat,
             Dog,
@@ -179,11 +183,12 @@ op test(@body input: Pet): Pet;
                     SerializedName: "kind",
                     Description: "The kind of the pet",
                     Type: {
+                        Kind: InputTypeKind.Enum,
                         Name: "PetKind",
                         Namespace: "Azure.Csharp.Testing",
+                        Description: "The pet kind",
                         Accessibility: undefined,
                         Deprecated: undefined,
-                        Description: "Int based extensible enum",
                         EnumValueType: "String",
                         AllowedValues: [
                             {
@@ -198,12 +203,13 @@ op test(@body input: Pet): Pet;
                             }
                         ],
                         IsExtensible: true,
-                        IsNullable: false
+                        IsNullable: false,
+                        Usage: "None"
                     },
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true
-                },
+                } as InputModelProperty,
                 discriminatorProperty
             ),
             `Discriminator property is not correct, got ${JSON.stringify(
@@ -253,7 +259,7 @@ op test(@body input: Pet): Pet;
     it("Discriminator property is enum with enum value defined", async () => {
         const program = await typeSpecCompile(
             `
-        @doc("Int based extensible enum")
+        @doc("The pet kind")
         enum PetKind {
             Cat : "cat",
             Dog : "dog",
@@ -311,11 +317,12 @@ op test(@body input: Pet): Pet;
                     SerializedName: "kind",
                     Description: "The kind of the pet",
                     Type: {
+                        Kind: InputTypeKind.Enum,
                         Name: "PetKind",
                         Namespace: "Azure.Csharp.Testing",
                         Accessibility: undefined,
                         Deprecated: undefined,
-                        Description: "Int based extensible enum",
+                        Description: "The pet kind",
                         EnumValueType: "String",
                         AllowedValues: [
                             {
@@ -330,12 +337,13 @@ op test(@body input: Pet): Pet;
                             }
                         ],
                         IsExtensible: true,
-                        IsNullable: false
+                        IsNullable: false,
+                        Usage: "None"
                     },
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true
-                },
+                } as InputModelProperty,
                 discriminatorProperty
             ),
             `Discriminator property is not correct, got ${JSON.stringify(
@@ -472,16 +480,17 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "Intrinsic",
-                        Kind: "unknown",
+                        Kind: InputTypeKind.Intrinsic,
+                        Name: InputIntrinsicTypeKind.Unknown,
                         IsNullable: false
                     }
                 } as InputDictionaryType,
@@ -494,16 +503,17 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     }
                 } as InputDictionaryType,
@@ -516,16 +526,17 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "int32",
-                        Kind: "Int32",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.Int32,
                         IsNullable: false
                     }
                 } as InputDictionaryType,
@@ -538,11 +549,12 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: fooModel
@@ -556,15 +568,17 @@ op op5(@body body: ExtendsFooArray): ExtendsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "Array",
+                        Kind: InputTypeKind.Array,
+                        Name: InputTypeKind.Array,
                         ElementType: fooModel,
                         IsNullable: false
                     }
@@ -661,16 +675,17 @@ op op5(@body body: IsFooArray): IsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "Intrinsic",
-                        Kind: "unknown",
+                        Kind: InputTypeKind.Intrinsic,
+                        Name: InputIntrinsicTypeKind.Unknown,
                         IsNullable: false
                     }
                 } as InputDictionaryType,
@@ -683,16 +698,17 @@ op op5(@body body: IsFooArray): IsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     }
                 } as InputDictionaryType,
@@ -705,16 +721,17 @@ op op5(@body body: IsFooArray): IsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "int32",
-                        Kind: "Int32",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.Int32,
                         IsNullable: false
                     }
                 } as InputDictionaryType,
@@ -727,11 +744,12 @@ op op5(@body body: IsFooArray): IsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: fooModel
@@ -745,15 +763,17 @@ op op5(@body body: IsFooArray): IsFooArray;
         assert(
             isEqual(
                 {
-                    Name: "Dictionary",
+                    Kind: InputTypeKind.Dictionary,
+                    Name: InputTypeKind.Dictionary,
                     IsNullable: false,
                     KeyType: {
-                        Name: "string",
-                        Kind: "String",
+                        Kind: InputTypeKind.Primitive,
+                        Name: InputPrimitiveTypeKind.String,
                         IsNullable: false
                     },
                     ValueType: {
-                        Name: "Array",
+                        Kind: InputTypeKind.Array,
+                        Name: InputTypeKind.Array,
                         ElementType: fooModel,
                         IsNullable: false
                     }
