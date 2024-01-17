@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= GetDefaultName(InputModel, IsResourceType);
         private string? _defaultNamespace;
-        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(InputModel, IsResourceType);
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(IsResourceType);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
@@ -43,9 +43,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return isResourceType ? name + "Data" : name;
         }
 
-        private static string GetDefaultNamespace(InputModelType inputModelType, bool isResourceType)
+        private static string GetDefaultNamespace(bool isResourceType)
         {
-            return isResourceType ? Configuration.Namespace : GetDefaultNamespace(inputModelType.Namespace, MgmtContext.Context);
+            return isResourceType ? Configuration.Namespace : $"{Configuration.Namespace}.Models";
         }
 
         private HashSet<string> GetParentPropertyNames()
