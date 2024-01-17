@@ -8,6 +8,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -70,6 +72,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
+            IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
+            // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
+            SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
+            IsInheritableCommonType = ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -82,9 +88,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool _hasCalculatedDefaultDerivedType;
         public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
-
-        public bool IsInheritableCommonType => ObjectSchema is { Extensions: { } extensions } && (extensions.MgmtReferenceType || extensions.MgmtTypeReferenceType);
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.DiscriminatorValue == null;
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -111,6 +115,42 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        private ObjectTypeProperty? _rawDataField;
+        public override ObjectTypeProperty? RawDataField
+        {
+            get
+            {
+                if (_rawDataField != null)
+                    return _rawDataField;
+
+                if (AdditionalPropertiesProperty != null || !ShouldHaveRawData)
+                    return null;
+
+                // when this model has derived types, the accessibility should change from private to `protected internal`
+                string accessibility = HasDerivedTypes() ? "private protected" : "private";
+
+                _rawDataField = new ObjectTypeProperty(
+                    BuilderHelpers.CreateMemberDeclaration(PrivateAdditionalPropertiesPropertyName,
+                        _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
+                    PrivateAdditionalPropertiesPropertyDescription,
+                    true,
+                    null);
+
+                return _rawDataField;
+            }
+        }
+
+        private bool HasDerivedTypes()
+        {
+            if (ObjectSchema.Children is not null && ObjectSchema.Children.All.Count > 0)
+                return true;
+
+            if (ObjectSchema.Discriminator is not null)
+                return true;
+
+            return false;
+        }
+
         protected override ObjectTypeConstructor BuildSerializationConstructor()
         {
             bool ownsDiscriminatorProperty = false;
@@ -118,11 +158,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<Parameter> serializationConstructorParameters = new List<Parameter>();
             List<ObjectPropertyInitializer> serializationInitializers = new List<ObjectPropertyInitializer>();
             ObjectTypeConstructor? baseSerializationCtor = null;
+            List<ValueExpression> baseParameterInitializers = new List<ValueExpression>();
 
             if (Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType })
             {
                 baseSerializationCtor = objectType.SerializationConstructor;
-                serializationConstructorParameters.AddRange(baseSerializationCtor.Signature.Parameters);
+                foreach (var p in baseSerializationCtor.Signature.Parameters)
+                {
+                    if (p.IsRawData && AdditionalPropertiesProperty != null)
+                    {
+                        baseParameterInitializers.Add(Snippets.Null);
+                        // do not add into the list
+                    }
+                    else
+                    {
+                        baseParameterInitializers.Add(p);
+                        serializationConstructorParameters.Add(p);
+                    }
+                }
             }
 
             foreach (var property in Properties)
@@ -149,6 +202,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                 serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, GetPropertyDefaultValue(property)));
             }
 
+            // add the raw data to serialization ctor parameter list
+            if (RawDataField != null)
+            {
+                var deserializationParameter = new Parameter(
+                    RawDataField.Declaration.Name.ToVariableName(),
+                    RawDataField.ParameterDescription,
+                    RawDataField.Declaration.Type,
+                    null,
+                    ValidationType.None,
+                    null
+                )
+                {
+                    IsRawData = true
+                };
+                serializationConstructorParameters.Add(deserializationParameter);
+                serializationInitializers.Add(new ObjectPropertyInitializer(RawDataField, deserializationParameter, null));
+            }
+
             if (InitializationConstructor.Signature.Parameters
                 .Select(p => p.Type)
                 .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
@@ -173,13 +244,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            return new ObjectTypeConstructor(
+            var initializer = new ConstructorInitializer(true, baseParameterInitializers);
+
+            var signature = new ConstructorSignature(
                 Type,
+                $"Initializes a new instance of {Type:C}",
+                null,
                 IsInheritableCommonType ? Protected : Internal,
-                serializationConstructorParameters.ToArray(),
-                serializationInitializers.ToArray(),
-                baseSerializationCtor
-            );
+                serializationConstructorParameters,
+                Initializer: initializer);
+
+            return new ObjectTypeConstructor(
+                signature,
+                serializationInitializers,
+                baseSerializationCtor);
         }
 
         private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
@@ -204,6 +282,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // we do not need to add intialization for raw data field
+                if (property == RawDataField)
+                {
+                    continue;
+                }
                 // Only required properties that are not discriminators go into default ctor
                 // skip the flattened properties, we should never include them in the constructors
                 if (property == Discriminator?.Property || property is FlattenedObjectTypeProperty)
@@ -289,30 +372,26 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(
                 Type,
                 IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
-                defaultCtorParameters.ToArray(),
-                defaultCtorInitializers.ToArray(),
+                defaultCtorParameters,
+                defaultCtorInitializers,
                 baseCtor);
         }
 
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
 
-        protected bool SkipInitializerConstructor => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.SkipInitCtor;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             // Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
             if (!SkipInitializerConstructor)
-            {
                 yield return InitializationConstructor;
-            }
 
             // Skip serialization ctor if they are the same
             if (InitializationConstructor != SerializationConstructor)
-            {
                 yield return SerializationConstructor;
-            }
+
+            if (EmptyConstructor != null)
+                yield return EmptyConstructor;
         }
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
@@ -388,6 +467,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private HashSet<string?> GetParentPropertySerializedNames()
         {
+            // TODO -- this is not really getting the serialized name of the properties as advertised in the method name
+            // this is just getting the name of the schema property.
+            // this is a guard of not having compilation errors because we cannot define the properties with the same name as properties defined in base types, therefore here we should get the set by the declaration name of the property
             return EnumerateHierarchy()
                 .Skip(1)
                 .SelectMany(type => type.Properties)
@@ -629,34 +711,26 @@ namespace AutoRest.CSharp.Output.Models.Types
             return $"{ObjectSchema.CreateDescription()}";
         }
 
-        protected override bool EnsureHasJsonSerialization()
-        {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Json);
-        }
-
-        protected override bool EnsureHasXmlSerialization()
-        {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Xml);
-        }
-
         protected override bool EnsureIncludeSerializer()
         {
-            return _usage.HasFlag(SchemaTypeUsage.Input);
+            // TODO -- this should always return true when use model reader writer is enabled.
+            return Configuration.UseModelReaderWriter || _usage.HasFlag(SchemaTypeUsage.Input);
         }
 
         protected override bool EnsureIncludeDeserializer()
         {
-            return _usage.HasFlag(SchemaTypeUsage.Output);
+            // TODO -- this should always return true when use model reader writer is enabled.
+            return Configuration.UseModelReaderWriter || _usage.HasFlag(SchemaTypeUsage.Output);
         }
 
-        protected override JsonObjectSerialization EnsureJsonSerialization()
+        protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this);
+            return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
         }
 
-        protected override XmlObjectSerialization EnsureXmlSerialization()
+        protected override XmlObjectSerialization? BuildXmlSerialization()
         {
-            return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml) ? _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
         }
 
         private SerializableObjectType? BuildDefaultDerivedType()

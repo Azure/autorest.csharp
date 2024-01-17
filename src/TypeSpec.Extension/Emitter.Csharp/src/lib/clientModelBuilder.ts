@@ -3,7 +3,6 @@
 
 import {
     SdkClient,
-    createSdkContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
@@ -39,10 +38,9 @@ import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputModelType,
-    InputPrimitiveType,
-    InputType
+    InputPrimitiveType
 } from "../type/inputType.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { getExternalDocs } from "./decorators.js";
 import { processServiceAuthentication } from "./serviceAuthentication.js";
@@ -50,21 +48,22 @@ import { resolveServers } from "./typespecServer.js";
 import { InputClient } from "../type/inputClient.js";
 import { ClientKind } from "../type/clientKind.js";
 import { InputOperation } from "../type/inputOperation.js";
-import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import { getUsages, navigateModels } from "./model.js";
 import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
-import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
 import { createContentTypeOrAcceptParameter } from "./utils.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function createModel(
-    context: EmitContext<NetEmitterOptions>
+    sdkContext: SdkContext<NetEmitterOptions>
 ): CodeModel {
-    const services = listServices(context.program);
+    const services = listServices(sdkContext.emitContext.program);
     if (services.length === 0) {
-        services.push({ type: context.program.getGlobalNamespaceType() });
+        services.push({
+            type: sdkContext.emitContext.program.getGlobalNamespaceType()
+        });
     }
 
     // TODO: support multiple service. Current only chose the first service.
@@ -74,19 +73,15 @@ export function createModel(
         throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
-    return createModelForService(context, service);
+    return createModelForService(sdkContext, service);
 }
 
 export function createModelForService(
-    context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext<NetEmitterOptions>,
     service: Service
 ): CodeModel {
-    const emitterOptions = resolveOptions(context);
-    const program = context.program;
-    const sdkContext = createSdkContext(
-        context,
-        "@azure-tools/typespec-csharp"
-    );
+    const emitterOptions = resolveOptions(sdkContext.emitContext);
+    const program = sdkContext.emitContext.program;
     const serviceNamespaceType = service.type;
 
     const apiVersions: Set<string> | undefined = new Set<string>();
@@ -102,8 +97,8 @@ export function createModelForService(
         defaultApiVersion
             ? {
                   Type: {
-                      Name: "String",
-                      Kind: InputTypeKind.String,
+                      Kind: InputTypeKind.Primitive,
+                      Name: InputPrimitiveTypeKind.String,
                       IsNullable: false
                   } as InputPrimitiveType,
                   Value: defaultApiVersion
@@ -153,15 +148,10 @@ export function createModelForService(
     logger.info("routes:" + routes.length);
 
     const clients: InputClient[] = [];
-    const dpgClients = emitterOptions.branded
-        ? listClients(sdkContext)
-        : listClientsByNamespace(
-              context,
-              context.program.getGlobalNamespaceType()
-          );
+    const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
         clients.push(emitClient(client));
-        addChildClients(context, client, clients);
+        addChildClients(sdkContext.emitContext, client, clients);
     }
 
     for (const client of clients) {
@@ -203,58 +193,38 @@ export function createModelForService(
 
     function addChildClients(
         context: EmitContext<NetEmitterOptions>,
-        client: SdkClient | DotnetSdkOperationGroup,
+        client: SdkClient | SdkOperationGroup,
         clients: InputClient[]
     ) {
-        if (emitterOptions.branded) {
-            const dpgOperationGroups = listOperationGroups(
-                sdkContext,
-                client as SdkClient
-            );
-            for (const dpgGroup of dpgOperationGroups) {
-                var dotnetOperationGroup = {
-                    ...dpgGroup,
-                    name: dpgGroup.type.name
-                };
-                var subClient = emitClient(dotnetOperationGroup, client);
-                clients.push(subClient);
-                addChildClients(context, dotnetOperationGroup, clients);
-            }
-        } else {
-            const dpgOperationGroups = listOperationGroupsByClient(
-                context,
-                client
-            );
-            for (const dpgGroup of dpgOperationGroups) {
-                clients.push(emitClient(dpgGroup, client));
-                addChildClients(context, dpgGroup, clients);
-            }
+        const dpgOperationGroups = listOperationGroups(
+            sdkContext,
+            client as SdkClient
+        );
+        for (const dpgGroup of dpgOperationGroups) {
+            var subClient = emitClient(dpgGroup, client);
+            clients.push(subClient);
+            addChildClients(context, dpgGroup, clients);
         }
     }
 
-    function getClientName(
-        client: SdkClient | DotnetSdkOperationGroup
-    ): string {
-        if (emitterOptions.branded) {
-            return client.kind === ClientKind.SdkClient
-                ? client.name
-                : client.type.name;
-        } else {
-            return client.kind === ClientKind.SdkClient
-                ? `${client.name}Client`
-                : client.name === "Models"
-                ? "ModelsOps"
-                : client.name; //quick fix for reserved namespace need something more robust
+    function getClientName(client: SdkClient | SdkOperationGroup): string {
+        if (client.kind === ClientKind.SdkClient) {
+            return client.name;
         }
+
+        var pathParts = client.groupPath.split(".");
+        return pathParts?.length >= 3
+            ? pathParts.slice(pathParts.length - 2).join("")
+            : client.type.name === "Models"
+            ? "ModelsOps"
+            : client.type.name;
     }
 
     function emitClient(
-        client: SdkClient | DotnetSdkOperationGroup,
-        parent?: SdkClient | DotnetSdkOperationGroup
+        client: SdkClient | SdkOperationGroup,
+        parent?: SdkClient | SdkOperationGroup
     ): InputClient {
-        const operations = emitterOptions.branded
-            ? listOperationsInOperationGroup(sdkContext, client)
-            : listOperations(context, client);
+        const operations = listOperationsInOperationGroup(sdkContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
@@ -276,7 +246,7 @@ export function createModelForService(
                 getHttpOperation(program, op)
             );
             const inputOperation: InputOperation = loadOperation(
-                context,
+                sdkContext,
                 httpOperation,
                 url,
                 urlParameters,
@@ -347,124 +317,4 @@ function applyDefaultContentTypeAndAcceptParameter(
             )
         );
     }
-}
-
-function processNamespace(
-    context: EmitContext<NetEmitterOptions>,
-    clients: SdkClient[],
-    root: Namespace,
-    prefix: string,
-    level: number
-) {
-    if (level > 0) {
-        return;
-    }
-
-    const name = level > 1 ? prefix + root.name : root.name;
-
-    const contextType = getLocationContext(context.program, root).type;
-    if (contextType !== "project" && contextType !== "synthetic") {
-        return;
-    }
-
-    if (contextType === "project") {
-        clients.push({
-            kind: "SdkClient",
-            name: name,
-            service: root,
-            type: root,
-            arm: false
-        } as SdkClient);
-    }
-
-    for (const ns of root.namespaces) {
-        processNamespace(context, clients, ns[1], name, level + 1);
-    }
-
-    for (const i of root.interfaces) {
-        processInterface(context, clients, i[1], name, level + 1);
-    }
-}
-
-function processInterface(
-    context: EmitContext<NetEmitterOptions>,
-    clients: SdkClient[],
-    i: Interface,
-    prefix: string,
-    level: number
-) {
-    if (level > 0) {
-        return;
-    }
-
-    const name = level > 1 ? prefix + i.name : i.name;
-    if (i.operations.size > 0) {
-        clients.push({
-            kind: ClientKind.SdkClient,
-            name: name,
-            service: i.namespace,
-            type: i,
-            arm: false
-        } as SdkClient);
-    }
-}
-
-function listClientsByNamespace(
-    context: EmitContext<NetEmitterOptions>,
-    ns: Namespace
-): SdkClient[] {
-    var clients: SdkClient[] = [];
-    //we start with -1 because there is a synthetic namespace created with no name to contain both the project namespaces and the compiler namespaces like TypeSpec
-    processNamespace(context, clients, ns, "", -1);
-    return clients;
-}
-
-function listOperationGroupsByClient(
-    context: EmitContext<NetEmitterOptions>,
-    client: SdkClient | DotnetSdkOperationGroup
-): DotnetSdkOperationGroup[] {
-    var operationGroups: DotnetSdkOperationGroup[] = [];
-    //we start with -1 because there is a synthetic namespace created with no name to contain both the project namespaces and the compiler namespaces like TypeSpec
-    const prefix = client.kind === ClientKind.SdkClient ? "" : client.name;
-    if ("namespaces" in client.type) {
-        for (const ns of client.type.namespaces) {
-            addChild(context, operationGroups, ns[1], prefix);
-        }
-
-        for (const i of client.type.interfaces) {
-            addChild(context, operationGroups, i[1], prefix);
-        }
-    }
-    return operationGroups;
-}
-
-function addChild(
-    context: EmitContext<NetEmitterOptions>,
-    operationGroups: DotnetSdkOperationGroup[],
-    type: Interface | Namespace,
-    prefix: string
-) {
-    const name = `${prefix}${type.name}`;
-    operationGroups.push({
-        kind: ClientKind.SdkOperationGroup,
-        type: type,
-        name: name
-    } as DotnetSdkOperationGroup);
-}
-
-interface DotnetSdkOperationGroup extends SdkOperationGroup {
-    name: string;
-}
-
-function listOperations(
-    context: EmitContext<NetEmitterOptions>,
-    client: SdkClient | DotnetSdkOperationGroup
-): Operation[] {
-    const operations: Operation[] = [];
-
-    for (const operation of client.type.operations) {
-        operations.push(operation[1]);
-    }
-
-    return operations;
 }

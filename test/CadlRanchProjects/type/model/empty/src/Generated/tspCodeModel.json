@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "EmptyInput",
    "Namespace": "Type.Model.Empty",
    "Description": "Empty model used in operation parameters",
@@ -16,6 +17,7 @@
   },
   {
    "$id": "3",
+   "Kind": "Model",
    "Name": "EmptyOutput",
    "Namespace": "Type.Model.Empty",
    "Description": "Empty model used in operation return type",
@@ -25,6 +27,7 @@
   },
   {
    "$id": "4",
+   "Kind": "Model",
    "Name": "EmptyInputOutput",
    "Namespace": "Type.Model.Empty",
    "Description": "Empty model used in both parameter and return type",
@@ -51,8 +54,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "8",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -68,8 +71,8 @@
         "$id": "9",
         "Type": {
          "$id": "10",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -98,8 +101,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "13",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -125,8 +128,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "16",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -183,8 +186,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -261,8 +264,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -288,8 +291,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "30",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

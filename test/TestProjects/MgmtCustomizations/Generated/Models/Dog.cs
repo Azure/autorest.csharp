@@ -27,10 +27,14 @@ namespace MgmtCustomizations.Models
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
         /// <param name="bark"> A dog can bark. </param>
-        internal Dog(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, string bark) : base(kind, name, size, dateOfBirth)
+        /// <param name="jump"> A dog can jump. </param>
+        internal Dog(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, string bark, string jump) : base(kind, name, size, dateOfBirth)
         {
             Bark = bark;
+            Jump = jump;
             Kind = kind;
         }
+        /// <summary> A dog can jump. </summary>
+        public string Jump { get; set; }
     }
 }

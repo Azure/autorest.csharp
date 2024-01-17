@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public override void Write(Utf8JsonWriter writer, InputLiteralType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
+
         public static InputLiteralType CreateInputLiteralType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
@@ -89,7 +90,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 InputPrimitiveType primitiveType => primitiveType.Kind,
                 InputEnumType enumType => enumType.EnumValueType.Kind,
-                _ => throw new JsonException($"Not supported literal type {type.Name}.")
+                _ => throw new JsonException($"Not supported literal type {type.GetType()}.")
             };
             object value = kind switch
             {

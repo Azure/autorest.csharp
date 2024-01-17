@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);
 
         private ModelFactoryTypeProvider? _modelFactoryProvider;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, _sourceInputModel);
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, TypeFactory, _sourceInputModel);
 
         private DpgTestBaseProvider? _dpgTestBase;
         public DpgTestBaseProvider DpgTestBase => _dpgTestBase ??= new DpgTestBaseProvider(Configuration.Namespace, RestClients, DpgTestEnvironment, _sourceInputModel);

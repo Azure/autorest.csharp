@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "Bird",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
@@ -21,8 +22,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -36,8 +37,8 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -47,6 +48,7 @@
   },
   {
    "$id": "7",
+   "Kind": "Model",
    "Name": "Dinosaur",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
@@ -63,8 +65,8 @@
      "IsReadOnly": false,
      "Type": {
       "$id": "9",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -76,8 +78,8 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -87,6 +89,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Model",
    "Name": "SeaGull",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
@@ -100,6 +103,7 @@
   },
   {
    "$id": "13",
+   "Kind": "Model",
    "Name": "Sparrow",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
@@ -113,6 +117,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Model",
    "Name": "Goose",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
@@ -126,6 +131,7 @@
   },
   {
    "$id": "15",
+   "Kind": "Model",
    "Name": "Eagle",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
@@ -143,6 +149,7 @@
      "Description": "",
      "Type": {
       "$id": "17",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -159,11 +166,12 @@
      "Description": "",
      "Type": {
       "$id": "19",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "20",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -189,6 +197,7 @@
   },
   {
    "$id": "22",
+   "Kind": "Model",
    "Name": "TRex",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level legacy model in polymorphic single level inheritance.",
@@ -219,8 +228,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "26",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -236,8 +245,8 @@
         "$id": "27",
         "Type": {
          "$id": "28",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -249,8 +258,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "30",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -327,8 +336,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "36",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -354,8 +363,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -412,8 +421,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "44",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -490,8 +499,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "50",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -517,8 +526,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "53",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -575,8 +584,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "58",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -636,8 +645,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "63",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -697,8 +706,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "68",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

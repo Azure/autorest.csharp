@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
@@ -16,17 +15,14 @@ namespace _Type.Property.AdditionalProperties.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
         /// <param name="name"> The name property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal UnknownExtendsUnknownAdditionalPropertiesDiscriminated(string name) : base(name)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownExtendsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"> The name property. </param>
         /// <param name="kind"> The discriminator. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal UnknownExtendsUnknownAdditionalPropertiesDiscriminated(string name, string kind, IDictionary<string, BinaryData> additionalProperties) : base(name, kind, additionalProperties)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownExtendsUnknownAdditionalPropertiesDiscriminated"/> for deserialization. </summary>
+        internal UnknownExtendsUnknownAdditionalPropertiesDiscriminated()
         {
         }
     }

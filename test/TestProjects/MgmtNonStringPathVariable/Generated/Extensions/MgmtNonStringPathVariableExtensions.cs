@@ -96,6 +96,14 @@ namespace MgmtNonStringPathVariable
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -125,6 +133,14 @@ namespace MgmtNonStringPathVariable
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Fakes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakeResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -173,6 +189,14 @@ namespace MgmtNonStringPathVariable
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -201,6 +225,14 @@ namespace MgmtNonStringPathVariable
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// <item>

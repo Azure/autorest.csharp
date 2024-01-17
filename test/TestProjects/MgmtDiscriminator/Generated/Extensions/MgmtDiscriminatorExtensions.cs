@@ -30,6 +30,102 @@ namespace MgmtDiscriminator
         }
 
         /// <summary>
+        /// Gets a collection of ArtifactResources in the ArmClient.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorArmClient.GetArtifacts(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> An object representing collection of ArtifactResources and their operations over a ArtifactResource. </returns>
+        public static ArtifactCollection GetArtifacts(this ArmClient client, ResourceIdentifier scope)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtDiscriminatorArmClient(client).GetArtifacts(scope);
+        }
+
+        /// <summary>
+        /// Get a blueprint artifact.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceScope}/providers/Microsoft.Blueprint/artifacts/{artifactName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Artifacts_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorArmClient.GetArtifactAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="artifactName"> Name of the blueprint artifact. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="artifactName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<ArtifactResource>> GetArtifactAsync(this ArmClient client, ResourceIdentifier scope, string artifactName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return await GetMockableMgmtDiscriminatorArmClient(client).GetArtifactAsync(scope, artifactName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a blueprint artifact.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceScope}/providers/Microsoft.Blueprint/artifacts/{artifactName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Artifacts_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ArtifactResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorArmClient.GetArtifact(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="artifactName"> Name of the blueprint artifact. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="artifactName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="artifactName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static Response<ArtifactResource> GetArtifact(this ArmClient client, ResourceIdentifier scope, string artifactName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtDiscriminatorArmClient(client).GetArtifact(scope, artifactName, cancellationToken);
+        }
+
+        /// <summary>
         /// Gets an object representing a <see cref="DeliveryRuleResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// <item>
@@ -46,6 +142,25 @@ namespace MgmtDiscriminator
             Argument.AssertNotNull(client, nameof(client));
 
             return GetMockableMgmtDiscriminatorArmClient(client).GetDeliveryRuleResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing an <see cref="ArtifactResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ArtifactResource.CreateResourceIdentifier" /> to create an <see cref="ArtifactResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorArmClient.GetArtifactResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="ArtifactResource"/> object. </returns>
+        public static ArtifactResource GetArtifactResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtDiscriminatorArmClient(client).GetArtifactResource(id);
         }
 
         /// <summary>
@@ -76,6 +191,14 @@ namespace MgmtDiscriminator
         /// <term>Operation Id</term>
         /// <description>DeliveryRules_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -105,6 +228,14 @@ namespace MgmtDiscriminator
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DeliveryRules_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DeliveryRuleResource"/></description>
         /// </item>
         /// </list>
         /// <item>

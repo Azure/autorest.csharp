@@ -4,28 +4,37 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using Azure.Core;
+using Microsoft.Build.Construction;
 using Microsoft.CodeAnalysis;
+using NuGet.Configuration;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Input.Source
 {
     public class SourceInputModel
     {
-        private readonly Compilation _compilation;
         private readonly CompilationInput? _existingCompilation;
         private readonly CodeGenAttributes _codeGenAttributes;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
 
-        public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
+        public Compilation Customization { get; }
+        public Compilation? PreviousContract { get; }
+
+        public SourceInputModel(Compilation customization, CompilationInput? existingCompilation = null)
         {
-            _compilation = compilation;
+            Customization = customization;
+            PreviousContract = LoadBaselineContract().GetAwaiter().GetResult();
             _existingCompilation = existingCompilation;
 
-            _codeGenAttributes = new CodeGenAttributes(compilation);
+            _codeGenAttributes = new CodeGenAttributes(customization);
 
-            IAssemblySymbol assembly = _compilation.Assembly;
+            IAssemblySymbol assembly = Customization.Assembly;
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
@@ -41,8 +50,8 @@ namespace AutoRest.CSharp.Input.Source
 
         public IReadOnlyList<string>? GetServiceVersionOverrides()
         {
-            var osvAttributeType = _compilation.GetTypeByMetadataName(typeof(CodeGenOverrideServiceVersionsAttribute).FullName!)!;
-            var osvAttribute = _compilation.Assembly.GetAttributes()
+            var osvAttributeType = Customization.GetTypeByMetadataName(typeof(CodeGenOverrideServiceVersionsAttribute).FullName!)!;
+            var osvAttribute = Customization.Assembly.GetAttributes()
                 .FirstOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, osvAttributeType));
 
             return osvAttribute?.ConstructorArguments[0].Values.Select(v => v.Value).OfType<string>().ToList();
@@ -67,7 +76,7 @@ namespace AutoRest.CSharp.Input.Source
             if (!_nameMap.TryGetValue(name, out var type) &&
                 !_nameMap.TryGetValue(fullyQualifiedMetadataName, out type))
             {
-                type = includeArmCore ? _compilation.GetTypeByMetadataName(fullyQualifiedMetadataName) : _compilation.Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
+                type = includeArmCore ? Customization.GetTypeByMetadataName(fullyQualifiedMetadataName) : Customization.Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
             }
 
             return type;
@@ -126,6 +135,37 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return name != null;
+        }
+
+        private async Task<Compilation?> LoadBaselineContract()
+        {
+            // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
+            if (!Configuration.AzureArm)
+                return null;
+
+            string fullPath;
+            string projectFilePath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, $"{Configuration.Namespace}.csproj"));
+            if (!File.Exists(projectFilePath))
+                return null;
+
+            var baselineVersion = ProjectRootElement.Open(projectFilePath).Properties.SingleOrDefault(p => p.Name == "ApiCompatVersion")?.Value;
+
+            if (baselineVersion is not null)
+            {
+                var nugetGlobalPackageFolder = SettingsUtility.GetGlobalPackagesFolder(new NullSettings());
+                var nugetFolder = Path.Combine(nugetGlobalPackageFolder, Configuration.Namespace.ToLowerInvariant(), baselineVersion, "lib", "netstandard2.0");
+                fullPath = Path.Combine(nugetFolder, $"{Configuration.Namespace}.dll");
+                if (File.Exists(fullPath))
+                {
+                    return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(Path.Combine(nugetFolder, $"{Configuration.Namespace}.xml"), fullPath);
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Can't find Baseline contract assembly ({Configuration.Namespace}@{baselineVersion}) from Nuget Global Package Folder at {fullPath}. " +
+                        $"Please make sure the baseline nuget package has been installed properly");
+                }
+            }
+            return null;
         }
     }
 }

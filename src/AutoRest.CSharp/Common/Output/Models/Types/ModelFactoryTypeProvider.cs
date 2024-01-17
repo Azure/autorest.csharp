@@ -21,6 +21,8 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Microsoft.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -29,26 +31,51 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= Models.Select(CreateMethod);
+        // TODO: remove this intermediate state once we generate it before output types
+        private IReadOnlyList<Method>? _methods;
 
-        public IEnumerable<SerializableObjectType> Models { get; }
+        // This method should only be called from OutputMethods as intermediate state.
+        private IReadOnlyList<Method> ShouldNotBeUsedForOutput([CallerMemberName] string caller = "")
+        {
+            Debug.Assert(caller == nameof(Methods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
+            return _methods ??= _models.Select(CreateMethod).ToList();
+        }
+
+        // TODO: remove this intermediate state once we generate it before output types
+        private IReadOnlyList<Method>? _outputMethods;
+        public IReadOnlyList<Method> Methods
+        {
+            get
+            {
+                if (SignatureType is null)
+                {
+                    // The overloading feature is not enabled, we jsut return the original methods
+                    return ShouldNotBeUsedForOutput();
+                }
+                // filter out duplicate methods in custom code and combine overload methods
+                return _outputMethods ??= ShouldNotBeUsedForOutput().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).Concat(SignatureType.OverloadMethods).ToList();
+            }
+        }
 
         public FormattableString Description => $"Model factory for models.";
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
-        {
-            Models = objectTypes;
+        private readonly IEnumerable<SerializableObjectType> _models;
+        private readonly TypeFactory _typeFactory;
 
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
+        {
+            _typeFactory = typeFactory;
+            _models = objectTypes;
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
+        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             if (!Configuration.GenerateModelFactory)
                 return null;
@@ -67,10 +94,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
 
-            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
+            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, typeFactory, sourceInputModel);
         }
 
-        public static string GetRPName(string defaultNamespace)
+        private static string GetRPName(string defaultNamespace)
         {
             // for mgmt plane packages, we always have the prefix `Arm` on the name of model factories, except for Azure.ResourceManager
             var prefix = Configuration.AzureArm && !Configuration.MgmtConfiguration.IsArmCore ? "Arm" : string.Empty;
@@ -87,6 +114,21 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
+
+        private SignatureType? _signatureType;
+        public override SignatureType? SignatureType
+        {
+            get
+            {
+                // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
+                // TODO: enable this for DPG, and check Configuration.Generate1ConvenientClient to disable it for HLC
+                if (!Configuration.AzureArm)
+                {
+                    return null;
+                }
+                return _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, Declaration.Namespace, Declaration.Name);
+            }
+        }
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
@@ -118,9 +160,19 @@ namespace AutoRest.CSharp.Output.Models.Types
                 switch (parentPropertyType)
                 {
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
+                        // when a property is flattened, it should only have one property. But the serialization ctor might takes two parameters because it may have the raw data field as an extra parameter
+                        var parameters = serializableObjectType.SerializationConstructor.Signature.Parameters;
+                        var arguments = new List<ValueExpression>();
                         // get the type of the first parameter of its ctor
-                        var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = New.Instance(parentPropertyType, result.GetConversion(from, to));
+                        var to = parameters[0].Type;
+                        arguments.Add(result.GetConversion(from, to));
+                        // check if we need extra parameters for the raw data field
+                        if (parameters.Count > 1)
+                        {
+                            // this parameter should be the raw data field, otherwise this property should not have been flattened in the first place
+                            arguments.Add(new PositionalParameterReference(parameters[1].Name, Null));
+                        }
+                        result = New.Instance(parentPropertyType, arguments.ToArray());
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
@@ -174,6 +226,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     // if the property is not found, in order not to introduce compilation errors, we need to add a `default` into the argument list
                     methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Default));
+                    continue;
+                }
+
+                if (ctorParameter.IsRawData)
+                {
+                    // we do not want to include the raw data as a parameter of the model factory entry method, therefore here we skip the parameter, and use empty dictionary as argument
+                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Null));
                     continue;
                 }
 
@@ -244,7 +303,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // write the initializers and validations
                 new ParameterValidationBlock(methodParameters, true),
-                Return(New.Instance(ctorToCall.Signature, methodArguments))
+                Return(Snippets.New.Instance(ctorToCall.Signature, methodArguments))
             };
 
             return new(signature, methodBody);
@@ -262,7 +321,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties.Where(p => p != (obj as SerializableObjectType)?.RawDataField));
             // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
             if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
             {

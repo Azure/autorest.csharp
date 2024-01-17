@@ -30,6 +30,11 @@ namespace _Type.Property.AdditionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IsFloatAdditionalProperties"/> for deserialization. </summary>
+        internal IsFloatAdditionalProperties()
+        {
+        }
+
         /// <summary> The id property. </summary>
         public float Id { get; set; }
         /// <summary> Additional Properties. </summary>

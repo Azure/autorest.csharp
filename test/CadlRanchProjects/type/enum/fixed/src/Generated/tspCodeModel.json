@@ -5,6 +5,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "DaysOfWeekEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -88,8 +89,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "15",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -105,8 +106,8 @@
         "$id": "16",
         "Type": {
          "$id": "17",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -118,8 +119,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -198,8 +199,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "25",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -225,8 +226,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -302,8 +303,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "34",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -329,8 +330,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "37",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

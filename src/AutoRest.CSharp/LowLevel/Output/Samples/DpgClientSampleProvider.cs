@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
         protected override CSharpAttribute[] GetMethodAttributes() => _attributes;
 
-        private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
+        private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), Literal("Only validating compilation of examples")) };
 
         protected override IEnumerable<MethodBodyStatement> BuildResponseStatements(DpgOperationSample sample, VariableReference resultVar)
         {

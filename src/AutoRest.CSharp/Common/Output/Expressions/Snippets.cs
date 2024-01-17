@@ -59,6 +59,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static StringExpression Literal(string? value) => new(value is null ? Null : new StringLiteralExpression(value, false));
         public static StringExpression LiteralU8(string value) => new(new StringLiteralExpression(value, true));
 
+        public static BoolExpression GreaterThan(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression(">", left, right));
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
         public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));
         public static BoolExpression Is(ValueExpression value, CSharpType type) => new(new BinaryOperatorExpression("is", value, type));
@@ -97,7 +98,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static AssignValueStatement Assign<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
-            => variable != null ? new AssignValueStatement(variable, expression) : Return(expression);
+            => variable != null ? Assign(variable, expression) : Return(expression);
 
         public static MethodBodyStatement InvokeConsoleWriteLine(ValueExpression expression)
             => new InvokeStaticMethodStatement(typeof(Console), nameof(Console.WriteLine), expression);

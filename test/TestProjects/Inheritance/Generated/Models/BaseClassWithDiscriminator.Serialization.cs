@@ -5,11 +5,8 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
 {
@@ -97,132 +94,7 @@ namespace Inheritance.Models
                     case "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties": return ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties.DeserializeClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(element);
                 }
             }
-            string discriminatorProperty = default;
-            Optional<string> baseClassProperty = default;
-            Optional<DataFactoryElement<string>> dfeString = default;
-            Optional<DataFactoryElement<double>> dfeDouble = default;
-            Optional<DataFactoryElement<bool>> dfeBool = default;
-            Optional<DataFactoryElement<int>> dfeInt = default;
-            Optional<DataFactoryElement<BinaryData>> dfeObject = default;
-            Optional<DataFactoryElement<IList<SeparateClass>>> dfeListOfT = default;
-            Optional<DataFactoryElement<IList<string>>> dfeListOfString = default;
-            Optional<DataFactoryElement<IDictionary<string, string>>> dfeKeyValuePairs = default;
-            Optional<DataFactoryElement<DateTimeOffset>> dfeDateTime = default;
-            Optional<DataFactoryElement<TimeSpan>> dfeDuration = default;
-            Optional<DataFactoryElement<Uri>> dfeUri = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("DiscriminatorProperty"u8))
-                {
-                    discriminatorProperty = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("BaseClassProperty"u8))
-                {
-                    baseClassProperty = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("DfeString"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeString = JsonSerializer.Deserialize<DataFactoryElement<string>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeDouble"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeDouble = JsonSerializer.Deserialize<DataFactoryElement<double>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeBool"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeBool = JsonSerializer.Deserialize<DataFactoryElement<bool>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeInt"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeInt = JsonSerializer.Deserialize<DataFactoryElement<int>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeObject"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeObject = JsonSerializer.Deserialize<DataFactoryElement<BinaryData>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeListOfT"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeListOfT = JsonSerializer.Deserialize<DataFactoryElement<IList<SeparateClass>>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeListOfString"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeListOfString = JsonSerializer.Deserialize<DataFactoryElement<IList<string>>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeKeyValuePairs"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeKeyValuePairs = JsonSerializer.Deserialize<DataFactoryElement<IDictionary<string, string>>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeDateTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeDateTime = JsonSerializer.Deserialize<DataFactoryElement<DateTimeOffset>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeDuration"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeDuration = JsonSerializer.Deserialize<DataFactoryElement<TimeSpan>>(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("DfeUri"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    dfeUri = JsonSerializer.Deserialize<DataFactoryElement<Uri>>(property.Value.GetRawText());
-                    continue;
-                }
-            }
-            return new BaseClassWithDiscriminator(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty);
+            return UnknownBaseClassWithDiscriminator.DeserializeUnknownBaseClassWithDiscriminator(element);
         }
     }
 }

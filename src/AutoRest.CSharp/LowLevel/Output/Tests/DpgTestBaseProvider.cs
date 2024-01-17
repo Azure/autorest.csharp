@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                     Parameters: new[] { IsAsyncParameter },
                     Initializer: new ConstructorInitializer(
                         IsBase: true,
-                        Arguments: new FormattableString[] { $"{IsAsyncParameter.Name:I}" })
+                        Arguments: new ValueExpression[] { IsAsyncParameter })
                     ),
                     EmptyStatement);
         }

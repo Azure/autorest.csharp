@@ -2,12 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.ClientModel;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
@@ -252,6 +252,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
 
             return new GeneratedCodeWorkspace(project);
+        }
+
+        public static async Task<Compilation?> CreatePreviousContractFromDll(string xmlDocumentationpath, string dllPath)
+        {
+            var workspace = new AdhocWorkspace();
+            Project project = workspace.AddProject("PreviousContract", LanguageNames.CSharp);
+            project = project
+                .AddMetadataReferences(AssemblyMetadataReferences)
+                .WithCompilationOptions(new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+            project = project.AddMetadataReference(MetadataReference.CreateFromFile(dllPath, documentation: XmlDocumentationProvider.CreateFromFile(xmlDocumentationpath)));
+            return await project.GetCompilationAsync();
         }
 
         private static Project CreateGeneratedCodeProject()

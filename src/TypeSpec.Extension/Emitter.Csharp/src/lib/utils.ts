@@ -15,13 +15,17 @@ import {
     projectedNameClientKey,
     projectedNameJsonKey
 } from "../constants.js";
-import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    SdkContext,
+    getSdkModel
+} from "@azure-tools/typespec-client-generator-core";
 import { InputParameter } from "../type/inputParameter.js";
 import { InputPrimitiveType, InputType } from "../type/inputType.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
 import { InputConstant } from "../type/inputConstant.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -41,19 +45,6 @@ export function getNameForTemplate(model: Model): string {
 
     return model.name;
 }
-
-const anonCounter = (function () {
-    let count = 0; // Private counter variable
-
-    return {
-        increment: function () {
-            return ++count;
-        },
-        getCount: function () {
-            return count;
-        }
-    };
-})();
 
 export function getProjectedNameForCsharp(
     context: SdkContext,
@@ -77,8 +68,8 @@ export function getTypeName(
     if (type.kind === "Model") {
         name = getNameForTemplate(type);
         if (name === "") {
-            anonCounter.increment();
-            return `Anon_${anonCounter.getCount()}`;
+            const sdkModel = getSdkModel(context, type as Model);
+            return sdkModel.generatedName || sdkModel.name;
         }
         return name;
     }
@@ -103,8 +94,8 @@ export function createContentTypeOrAcceptParameter(
     const isContentType: boolean =
         nameInRequest.toLowerCase() === "content-type";
     const inputType: InputType = {
-        Name: "String",
-        Kind: InputTypeKind.String,
+        Kind: InputTypeKind.Primitive,
+        Name: InputPrimitiveTypeKind.String,
         IsNullable: false
     } as InputPrimitiveType;
     return {

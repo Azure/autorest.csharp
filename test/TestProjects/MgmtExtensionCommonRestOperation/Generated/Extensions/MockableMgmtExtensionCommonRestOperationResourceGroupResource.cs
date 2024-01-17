@@ -54,6 +54,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
@@ -76,6 +84,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeOne</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeOneResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -107,6 +123,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="typeTwoName"> The name. </param>
@@ -129,6 +153,14 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Common_GetTypeTwo</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TypeTwoResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

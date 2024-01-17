@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -159,7 +160,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"[{attribute.Type}(");
                         foreach (var argument in attribute.Arguments)
                         {
-                            writer.Append($"{argument:L}, ");
+                            writer.WriteValueExpression(argument);
                         }
                         writer.RemoveTrailingComma();
                         writer.LineRaw(")]");
@@ -255,7 +256,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(isBase ? ": base(" : ": this(");
                     foreach (var argument in arguments)
                     {
-                        writer.WriteValueExpression(new FormattableStringToExpression(argument));
+                        writer.WriteValueExpression(argument);
                         writer.AppendRaw(", ");
                     }
                     writer.RemoveTrailingComma();
@@ -274,6 +275,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
+            if (methodBase.IsRawSummaryText)
+            {
+                return writer.WriteRawXmlDocumentation(methodBase.Description);
+            }
+
             if (methodBase.NonDocumentComment is { } comment)
             {
                 writer.Line($"// {comment}");
@@ -320,6 +326,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.AppendRaw("]");
             }
+
+            writer.AppendRawIf("ref ", clientParameter.IsRef);
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)

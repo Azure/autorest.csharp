@@ -152,6 +152,14 @@ namespace MgmtMultipleParentResource
         /// <term>Operation Id</term>
         /// <description>AnotherParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -182,6 +190,14 @@ namespace MgmtMultipleParentResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AnotherParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AnotherParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -231,6 +247,14 @@ namespace MgmtMultipleParentResource
         /// <term>Operation Id</term>
         /// <description>TheParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TheParentResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -261,6 +285,14 @@ namespace MgmtMultipleParentResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TheParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-03-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TheParentResource"/></description>
         /// </item>
         /// </list>
         /// <item>

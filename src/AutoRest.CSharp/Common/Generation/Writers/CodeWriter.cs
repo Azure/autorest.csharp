@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
@@ -175,6 +176,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     case CodeWriterDeclaration declaration:
                         Append(declaration);
                         break;
+                    case ValueExpression expression:
+                        this.WriteValueExpression(expression);
+                        break;
                     case var _ when isLiteralFormat:
                         Literal(argument);
                         break;
@@ -218,6 +222,18 @@ namespace AutoRest.CSharp.Generation.Writers
             //}
 
             _usingNamespaces.Add(@namespace);
+        }
+
+        public CodeWriter WriteRawXmlDocumentation(FormattableString? content)
+        {
+            if (content is null)
+                return this;
+
+            var lines = content.ToString().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            var xmlLines = string.Join('\n', lines.Select(l => "/// " + l));
+            AppendRaw(xmlLines);
+            Line();
+            return this;
         }
 
         public CodeWriter AppendXmlDocumentation(FormattableString startTag, FormattableString endTag, FormattableString content)

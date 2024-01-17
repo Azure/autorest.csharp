@@ -55,7 +55,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response<object> response = client.GetMixedLiteral();
+            Response<GetResponse8> response = client.GetMixedLiteral();
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response<object> response = await client.GetMixedLiteralAsync();
+            Response<GetResponse8> response = await client.GetMixedLiteralAsync();
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response<object> response = client.GetMixedLiteral();
+            Response<GetResponse8> response = client.GetMixedLiteral();
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response<object> response = await client.GetMixedLiteralAsync();
+            Response<GetResponse8> response = await client.GetMixedLiteralAsync();
         }
 
         [Test]
@@ -123,7 +123,13 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    stringLiteral = "a",
+                    intLiteral = "a",
+                    floatLiteral = "a",
+                    booleanLiteral = "a",
+                },
             });
             Response response = client.Send(content);
 
@@ -138,7 +144,13 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    stringLiteral = "a",
+                    intLiteral = "a",
+                    floatLiteral = "a",
+                    booleanLiteral = "a",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -151,7 +163,8 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -160,7 +173,8 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+            Response response = await client.SendAsync(prop);
         }
 
         [Test]
@@ -171,7 +185,13 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    stringLiteral = "a",
+                    intLiteral = "a",
+                    floatLiteral = "a",
+                    booleanLiteral = "a",
+                },
             });
             Response response = client.Send(content);
 
@@ -186,7 +206,13 @@ namespace _Type.Union.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                prop = "a",
+                prop = new
+                {
+                    stringLiteral = "a",
+                    intLiteral = "a",
+                    floatLiteral = "a",
+                    booleanLiteral = "a",
+                },
             });
             Response response = await client.SendAsync(content);
 
@@ -199,7 +225,8 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response response = client.Send(SendRequestProp.A);
+            MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+            Response response = client.Send(prop);
         }
 
         [Test]
@@ -208,7 +235,8 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient();
 
-            Response response = await client.SendAsync(SendRequestProp.A);
+            MixedLiteralsCases prop = new MixedLiteralsCases(BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"), BinaryData.FromObjectAsJson("a"));
+            Response response = await client.SendAsync(prop);
         }
     }
 }

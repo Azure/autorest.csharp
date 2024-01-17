@@ -26,7 +26,7 @@ namespace xml_service.Models
         {
             containers ??= new List<Container>();
 
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers?.ToList(), nextMarker);
+            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers?.ToList(), nextMarker, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Container"/>. </summary>
@@ -38,7 +38,7 @@ namespace xml_service.Models
         {
             metadata ??= new Dictionary<string, string>();
 
-            return new Container(name, properties, metadata);
+            return new Container(name, properties, metadata, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ContainerProperties"/>. </summary>
@@ -51,7 +51,7 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.ContainerProperties"/> instance for mocking. </returns>
         public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = default, string etag = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, PublicAccessType? publicAccess = null)
         {
-            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess);
+            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListBlobsResponse"/>. </summary>
@@ -66,7 +66,7 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.ListBlobsResponse"/> instance for mocking. </returns>
         public static ListBlobsResponse ListBlobsResponse(string serviceEndpoint = null, string containerName = null, string prefix = null, string marker = null, int maxResults = default, string delimiter = null, Blobs blobs = null, string nextMarker = null)
         {
-            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker);
+            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Blobs"/>. </summary>
@@ -78,21 +78,15 @@ namespace xml_service.Models
             blobPrefix ??= new List<BlobPrefix>();
             blob ??= new List<Blob>();
 
-            return new Blobs(blobPrefix?.ToList(), blob?.ToList());
+            return new Blobs(blobPrefix?.ToList(), blob?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BlobPrefix"/>. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.BlobPrefix"/> instance for mocking. </returns>
         public static BlobPrefix BlobPrefix(string name = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            return new BlobPrefix(name);
+            return new BlobPrefix(name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Blob"/>. </summary>
@@ -106,7 +100,7 @@ namespace xml_service.Models
         {
             metadata ??= new Dictionary<string, string>();
 
-            return new Blob(name, deleted, snapshot, properties, metadata);
+            return new Blob(name, deleted, snapshot, properties, metadata, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BlobProperties"/>. </summary>
@@ -141,7 +135,7 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.BlobProperties"/> instance for mocking. </returns>
         public static BlobProperties BlobProperties(DateTimeOffset lastModified = default, string etag = null, long? contentLength = null, string contentType = null, string contentEncoding = null, string contentLanguage = null, string contentMD5 = null, string contentDisposition = null, string cacheControl = null, int? blobSequenceNumber = null, BlobType? blobType = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, string copyId = null, CopyStatusType? copyStatus = null, string copySource = null, string copyProgress = null, DateTimeOffset? copyCompletionTime = null, string copyStatusDescription = null, bool? serverEncrypted = null, bool? incrementalCopy = null, string destinationSnapshot = null, DateTimeOffset? deletedTime = null, int? remainingRetentionDays = null, AccessTier? accessTier = null, bool? accessTierInferred = null, ArchiveStatus? archiveStatus = null)
         {
-            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus);
+            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.JsonOutput"/>. </summary>
@@ -149,7 +143,7 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.JsonOutput"/> instance for mocking. </returns>
         public static JsonOutput JsonOutput(int? id = null)
         {
-            return new JsonOutput(id);
+            return new JsonOutput(id, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ObjectWithXMsTextProperty"/>. </summary>
@@ -158,7 +152,7 @@ namespace xml_service.Models
         /// <returns> A new <see cref="Models.ObjectWithXMsTextProperty"/> instance for mocking. </returns>
         public static ObjectWithXMsTextProperty ObjectWithXMsTextProperty(string language = null, string content = null)
         {
-            return new ObjectWithXMsTextProperty(language, content);
+            return new ObjectWithXMsTextProperty(language, content, serializedAdditionalRawData: null);
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;

@@ -6,7 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
-    internal abstract class PropertySerialization
+    internal abstract record PropertySerialization
     {
         /// <summary>
         /// Name of the parameter in serialization constructor. Used in deserialization logic only
@@ -33,23 +33,16 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public CSharpType? SerializedType { get; }
 
         public bool IsRequired { get; }
-        public bool ShouldSkipSerialization { get; }
-        public bool ShouldSkipDeserialization { get; }
+        public bool ShouldExcludeInWireSerialization { get; }
 
-        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization) :
-            this(parameterName, value, serializedName, serializedType, isRequired, shouldSkipSerialization, false)
-        {
-        }
-
-        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization, TypedValueExpression? enumerableValue = null)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldExcludeInWireSerialization, TypedValueExpression? enumerableValue = null)
         {
             SerializationConstructorParameterName = parameterName;
             Value = value;
             SerializedName = serializedName;
             SerializedType = serializedType;
             IsRequired = isRequired;
-            ShouldSkipSerialization = shouldSkipSerialization;
-            ShouldSkipDeserialization = shouldSkipDeserialization;
+            ShouldExcludeInWireSerialization = shouldExcludeInWireSerialization;
             EnumerableValue = enumerableValue;
         }
     }

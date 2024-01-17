@@ -54,6 +54,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
@@ -76,6 +84,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -107,6 +123,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
@@ -129,6 +153,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -160,6 +192,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
@@ -182,6 +222,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGrpParentWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGrpParentWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,6 +261,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGroupParentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
@@ -235,6 +291,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MgmtGroupParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MgmtGroupParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

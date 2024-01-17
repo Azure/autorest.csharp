@@ -6,6 +6,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "FineTuningJob_object",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -24,6 +25,7 @@
   },
   {
    "$id": "4",
+   "Kind": "Enum",
    "Name": "CreateEditResponse_object",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -42,6 +44,7 @@
   },
   {
    "$id": "6",
+   "Kind": "Enum",
    "Name": "CreateEmbeddingResponse_object",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -60,6 +63,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Enum",
    "Name": "Embedding_object",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -78,6 +82,7 @@
   },
   {
    "$id": "10",
+   "Kind": "Enum",
    "Name": "OpenAIFile_object",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -96,6 +101,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Enum",
    "Name": "FineTune_object",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -114,6 +120,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Enum",
    "Name": "Model_object",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -134,6 +141,7 @@
  "Models": [
   {
    "$id": "16",
+   "Kind": "Model",
    "Name": "CreateTranscriptionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -146,8 +154,8 @@
      "Description": "The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
      "Type": {
       "$id": "18",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -160,21 +168,23 @@
      "Description": "ID of the model to use. Only `whisper-1` is currently available.",
      "Type": {
       "$id": "20",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "21",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "22",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "23",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "whisper-1",
@@ -193,8 +203,8 @@
      "Description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
      "Type": {
       "$id": "25",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -207,15 +217,17 @@
      "Description": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
      "Type": {
       "$id": "27",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "28",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "29",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "json",
@@ -223,11 +235,12 @@
        },
        {
         "$id": "30",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "31",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text",
@@ -235,11 +248,12 @@
        },
        {
         "$id": "32",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "33",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "srt",
@@ -247,11 +261,12 @@
        },
        {
         "$id": "34",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "35",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "verbose_json",
@@ -259,11 +274,12 @@
        },
        {
         "$id": "36",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "37",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "vtt",
@@ -282,8 +298,8 @@
      "Description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
      "Type": {
       "$id": "39",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -296,8 +312,8 @@
      "Description": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy\nand latency.",
      "Type": {
       "$id": "41",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -307,6 +323,7 @@
   },
   {
    "$id": "42",
+   "Kind": "Model",
    "Name": "CreateTranscriptionResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -319,8 +336,8 @@
      "Description": "",
      "Type": {
       "$id": "44",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -330,6 +347,7 @@
   },
   {
    "$id": "45",
+   "Kind": "Model",
    "Name": "CreateTranslationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -342,8 +360,8 @@
      "Description": "The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
      "Type": {
       "$id": "47",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -356,21 +374,23 @@
      "Description": "ID of the model to use. Only `whisper-1` is currently available.",
      "Type": {
       "$id": "49",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "50",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "51",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "52",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "whisper-1",
@@ -389,8 +409,8 @@
      "Description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
      "Type": {
       "$id": "54",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -403,15 +423,17 @@
      "Description": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
      "Type": {
       "$id": "56",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "57",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "58",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "json",
@@ -419,11 +441,12 @@
        },
        {
         "$id": "59",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "60",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text",
@@ -431,11 +454,12 @@
        },
        {
         "$id": "61",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "62",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "srt",
@@ -443,11 +467,12 @@
        },
        {
         "$id": "63",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "64",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "verbose_json",
@@ -455,11 +480,12 @@
        },
        {
         "$id": "65",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "66",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "vtt",
@@ -478,8 +504,8 @@
      "Description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
      "Type": {
       "$id": "68",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -489,6 +515,7 @@
   },
   {
    "$id": "69",
+   "Kind": "Model",
    "Name": "CreateTranslationResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -501,8 +528,8 @@
      "Description": "",
      "Type": {
       "$id": "71",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -512,6 +539,7 @@
   },
   {
    "$id": "72",
+   "Kind": "Model",
    "Name": "CreateChatCompletionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -524,21 +552,23 @@
      "Description": "ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)\ntable for details on which models work with the Chat API.",
      "Type": {
       "$id": "74",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "75",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "76",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "77",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt4",
@@ -546,11 +576,12 @@
        },
        {
         "$id": "78",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "79",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-4-0314",
@@ -558,11 +589,12 @@
        },
        {
         "$id": "80",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "81",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-4-0613",
@@ -570,11 +602,12 @@
        },
        {
         "$id": "82",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "83",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-4-32k",
@@ -582,11 +615,12 @@
        },
        {
         "$id": "84",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "85",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-4-32k-0314",
@@ -594,11 +628,12 @@
        },
        {
         "$id": "86",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "87",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-4-32k-0613",
@@ -606,11 +641,12 @@
        },
        {
         "$id": "88",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "89",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-3.5-turbo",
@@ -618,11 +654,12 @@
        },
        {
         "$id": "90",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "91",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-3.5-turbo-16k",
@@ -630,11 +667,12 @@
        },
        {
         "$id": "92",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "93",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-3.5-turbo-0301",
@@ -642,11 +680,12 @@
        },
        {
         "$id": "94",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "95",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-3.5-turbo-0613",
@@ -654,11 +693,12 @@
        },
        {
         "$id": "96",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "97",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-3.5-turbo-16k-0613",
@@ -677,9 +717,11 @@
      "Description": "A list of messages comprising the conversation so far.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).",
      "Type": {
       "$id": "99",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "100",
+       "Kind": "Model",
        "Name": "ChatCompletionRequestMessage",
        "Namespace": "OpenAI",
        "IsNullable": false,
@@ -692,15 +734,17 @@
          "Description": "The role of the messages author. One of `system`, `user`, `assistant`, or `function`.",
          "Type": {
           "$id": "102",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "103",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "104",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "system",
@@ -708,11 +752,12 @@
            },
            {
             "$id": "105",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "106",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "user",
@@ -720,11 +765,12 @@
            },
            {
             "$id": "107",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "108",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "assistant",
@@ -732,11 +778,12 @@
            },
            {
             "$id": "109",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "110",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "function",
@@ -755,8 +802,8 @@
          "Description": "The contents of the message. `content` is required for all messages, and may be null for\nassistant messages with function calls.",
          "Type": {
           "$id": "112",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": true
          },
          "IsRequired": true,
@@ -769,8 +816,8 @@
          "Description": "The name of the author of this message. `name` is required if role is `function`, and it\nshould be the name of the function whose response is in the `content`. May contain a-z,\nA-Z, 0-9, and underscores, with a maximum length of 64 characters.",
          "Type": {
           "$id": "114",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -783,10 +830,11 @@
          "Description": "The name and arguments of a function that should be called, as generated by the model.",
          "Type": {
           "$id": "116",
-          "Name": "Anon_1",
+          "Kind": "Model",
+          "Name": "ChatCompletionRequestMessageFunctionCall",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "None",
+          "Usage": "Input",
           "Properties": [
            {
             "$id": "117",
@@ -795,8 +843,8 @@
             "Description": "The name of the function to call.",
             "Type": {
              "$id": "118",
-             "Name": "string",
-             "Kind": "String",
+             "Kind": "Primitive",
+             "Name": "String",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -809,8 +857,8 @@
             "Description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
             "Type": {
              "$id": "120",
-             "Name": "string",
-             "Kind": "String",
+             "Kind": "Primitive",
+             "Name": "String",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -835,9 +883,11 @@
      "Description": "A list of functions the model may generate JSON inputs for.",
      "Type": {
       "$id": "122",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "123",
+       "Kind": "Model",
        "Name": "ChatCompletionFunctions",
        "Namespace": "OpenAI",
        "IsNullable": false,
@@ -850,8 +900,8 @@
          "Description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and\ndashes, with a maximum length of 64.",
          "Type": {
           "$id": "125",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -864,8 +914,8 @@
          "Description": "A description of what the function does, used by the model to choose when and how to call the\nfunction.",
          "Type": {
           "$id": "127",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -878,23 +928,25 @@
          "Description": "The parameters the functions accepts, described as a JSON Schema object. See the\n[guide](/docs/guides/gpt/function-calling) for examples, and the\n[JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation\nabout the format.\\n\\nTo describe a function that accepts no parameters, provide the value\n`{\\\"type\\\": \\\"object\\\", \\\"properties\\\": {}}`.",
          "Type": {
           "$id": "129",
+          "Kind": "Model",
           "Name": "ChatCompletionFunctionParameters",
           "Namespace": "OpenAI",
           "IsNullable": false,
           "Usage": "Input",
           "InheritedDictionaryType": {
            "$id": "130",
+           "Kind": "Dictionary",
            "Name": "Dictionary",
            "KeyType": {
             "$id": "131",
-            "Name": "string",
-            "Kind": "String",
+            "Kind": "Primitive",
+            "Name": "String",
             "IsNullable": false
            },
            "ValueType": {
             "$id": "132",
-            "Name": "Intrinsic",
-            "Kind": "unknown",
+            "Kind": "Intrinsic",
+            "Name": "unknown",
             "IsNullable": false
            },
            "IsNullable": false
@@ -918,15 +970,17 @@
      "Description": "Controls how the model responds to function calls. `none` means the model does not call a\nfunction, and responds to the end-user. `auto` means the model can pick between an end-user or\ncalling a function.  Specifying a particular function via `{\\\"name\":\\ \\\"my_function\\\"}` forces the\nmodel to call that function. `none` is the default when no functions are present. `auto` is the\ndefault if functions are present.",
      "Type": {
       "$id": "134",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "135",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "136",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "none",
@@ -934,11 +988,12 @@
        },
        {
         "$id": "137",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "138",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "auto",
@@ -946,6 +1001,7 @@
        },
        {
         "$id": "139",
+        "Kind": "Model",
         "Name": "ChatCompletionFunctionCallOption",
         "Namespace": "OpenAI",
         "IsNullable": false,
@@ -958,8 +1014,8 @@
           "Description": "The name of the function to call.",
           "Type": {
            "$id": "141",
-           "Name": "string",
-           "Kind": "String",
+           "Kind": "Primitive",
+           "Name": "String",
            "IsNullable": false
           },
           "IsRequired": true,
@@ -980,8 +1036,8 @@
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "Type": {
       "$id": "143",
-      "Name": "Temperature",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -994,8 +1050,8 @@
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "Type": {
       "$id": "145",
-      "Name": "TopP",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1008,8 +1064,8 @@
      "Description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "Type": {
       "$id": "147",
-      "Name": "N",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1022,8 +1078,8 @@
      "Description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "Type": {
       "$id": "149",
-      "Name": "MaxTokens",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1036,21 +1092,23 @@
      "Description": "Up to 4 sequences where the API will stop generating further tokens.",
      "Type": {
       "$id": "151",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "152",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": true
        },
        {
         "$id": "153",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "154",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": true
@@ -1068,8 +1126,8 @@
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
       "$id": "156",
-      "Name": "Penalty",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1082,8 +1140,8 @@
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
       "$id": "158",
-      "Name": "Penalty",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1096,17 +1154,18 @@
      "Description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
      "Type": {
       "$id": "160",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "161",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "162",
-       "Name": "safeint",
-       "Kind": "Int64",
+       "Kind": "Primitive",
+       "Name": "Int64",
        "IsNullable": false
       },
       "IsNullable": true
@@ -1121,8 +1180,8 @@
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "Type": {
       "$id": "164",
-      "Name": "User",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1135,8 +1194,8 @@
      "Description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
      "Type": {
       "$id": "166",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1161,6 +1220,7 @@
   },
   {
    "$id": "167",
+   "Kind": "Model",
    "Name": "CreateChatCompletionResponse",
    "Namespace": "OpenAI",
    "Description": "Represents a chat completion response returned by model, based on the provided input.",
@@ -1174,8 +1234,8 @@
      "Description": "A unique identifier for the chat completion.",
      "Type": {
       "$id": "169",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1188,8 +1248,8 @@
      "Description": "The object type, which is always `chat.completion`.",
      "Type": {
       "$id": "171",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1202,8 +1262,8 @@
      "Description": "The Unix timestamp (in seconds) of when the chat completion was created.",
      "Type": {
       "$id": "173",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1216,8 +1276,8 @@
      "Description": "The model used for the chat completion.",
      "Type": {
       "$id": "175",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1230,13 +1290,15 @@
      "Description": "A list of chat completion choices. Can be more than one if `n` is greater than 1.",
      "Type": {
       "$id": "177",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "178",
-       "Name": "Anon_2",
+       "Kind": "Model",
+       "Name": "CreateChatCompletionResponseChoice",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "179",
@@ -1245,8 +1307,8 @@
          "Description": "The index of the choice in the list of choices.",
          "Type": {
           "$id": "180",
-          "Name": "safeint",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1259,6 +1321,7 @@
          "Description": "",
          "Type": {
           "$id": "182",
+          "Kind": "Model",
           "Name": "ChatCompletionResponseMessage",
           "Namespace": "OpenAI",
           "IsNullable": false,
@@ -1271,15 +1334,17 @@
             "Description": "The role of the author of this message.",
             "Type": {
              "$id": "184",
+             "Kind": "Union",
              "Name": "Union",
              "UnionItemTypes": [
               {
                "$id": "185",
+               "Kind": "Literal",
                "Name": "Literal",
                "LiteralValueType": {
                 "$id": "186",
+                "Kind": "Primitive",
                 "Name": "String",
-                "Kind": "String",
                 "IsNullable": false
                },
                "Value": "system",
@@ -1287,11 +1352,12 @@
               },
               {
                "$id": "187",
+               "Kind": "Literal",
                "Name": "Literal",
                "LiteralValueType": {
                 "$id": "188",
+                "Kind": "Primitive",
                 "Name": "String",
-                "Kind": "String",
                 "IsNullable": false
                },
                "Value": "user",
@@ -1299,11 +1365,12 @@
               },
               {
                "$id": "189",
+               "Kind": "Literal",
                "Name": "Literal",
                "LiteralValueType": {
                 "$id": "190",
+                "Kind": "Primitive",
                 "Name": "String",
-                "Kind": "String",
                 "IsNullable": false
                },
                "Value": "assistant",
@@ -1311,11 +1378,12 @@
               },
               {
                "$id": "191",
+               "Kind": "Literal",
                "Name": "Literal",
                "LiteralValueType": {
                 "$id": "192",
+                "Kind": "Primitive",
                 "Name": "String",
-                "Kind": "String",
                 "IsNullable": false
                },
                "Value": "function",
@@ -1334,8 +1402,8 @@
             "Description": "The contents of the message.",
             "Type": {
              "$id": "194",
-             "Name": "string",
-             "Kind": "String",
+             "Kind": "Primitive",
+             "Name": "String",
              "IsNullable": true
             },
             "IsRequired": true,
@@ -1348,10 +1416,11 @@
             "Description": "The name and arguments of a function that should be called, as generated by the model.",
             "Type": {
              "$id": "196",
-             "Name": "Anon_3",
+             "Kind": "Model",
+             "Name": "ChatCompletionResponseMessageFunctionCall",
              "Namespace": "OpenAI",
              "IsNullable": false,
-             "Usage": "None",
+             "Usage": "Output",
              "Properties": [
               {
                "$id": "197",
@@ -1360,8 +1429,8 @@
                "Description": "The name of the function to call.",
                "Type": {
                 "$id": "198",
-                "Name": "string",
-                "Kind": "String",
+                "Kind": "Primitive",
+                "Name": "String",
                 "IsNullable": false
                },
                "IsRequired": true,
@@ -1374,8 +1443,8 @@
                "Description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
                "Type": {
                 "$id": "200",
-                "Name": "string",
-                "Kind": "String",
+                "Kind": "Primitive",
+                "Name": "String",
                 "IsNullable": false
                },
                "IsRequired": true,
@@ -1398,15 +1467,17 @@
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, `length` if the maximum number of tokens\nspecified in the request was reached, `content_filter` if the content was omitted due to\na flag from our content filters, or `function_call` if the model called a function.",
          "Type": {
           "$id": "202",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "203",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "204",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "stop",
@@ -1414,11 +1485,12 @@
            },
            {
             "$id": "205",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "206",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "length",
@@ -1426,11 +1498,12 @@
            },
            {
             "$id": "207",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "208",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "function_call",
@@ -1438,11 +1511,12 @@
            },
            {
             "$id": "209",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "210",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "content_filter",
@@ -1468,6 +1542,7 @@
      "Description": "",
      "Type": {
       "$id": "212",
+      "Kind": "Model",
       "Name": "CompletionUsage",
       "Namespace": "OpenAI",
       "Description": "Usage statistics for the completion request.",
@@ -1481,8 +1556,8 @@
         "Description": "Number of tokens in the prompt.",
         "Type": {
          "$id": "214",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -1495,8 +1570,8 @@
         "Description": "Number of tokens in the generated completion",
         "Type": {
          "$id": "216",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -1509,8 +1584,8 @@
         "Description": "Total number of tokens used in the request (prompt + completion).",
         "Type": {
          "$id": "218",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -1537,6 +1612,7 @@
   },
   {
    "$id": "219",
+   "Kind": "Model",
    "Name": "CreateFineTuningJobRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -1549,8 +1625,8 @@
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file. Additionally, you must upload your file with\nthe purpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "Type": {
       "$id": "221",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1563,8 +1639,8 @@
      "Description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should\nnot be present in both train and validation files.\n\nYour dataset must be formatted as a JSONL file. You must upload your file with the purpose\n`fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "Type": {
       "$id": "223",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1577,21 +1653,23 @@
      "Description": "The name of the model to fine-tune. You can select one of the\n[supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).",
      "Type": {
       "$id": "225",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "226",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "227",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "228",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "babbage-002",
@@ -1599,11 +1677,12 @@
        },
        {
         "$id": "229",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "230",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "davinci-002",
@@ -1611,11 +1690,12 @@
        },
        {
         "$id": "231",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "232",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "gpt-3.5-turbo",
@@ -1634,10 +1714,11 @@
      "Description": "The hyperparameters used for the fine-tuning job.",
      "Type": {
       "$id": "234",
-      "Name": "Anon_4",
+      "Kind": "Model",
+      "Name": "CreateFineTuningJobRequestHyperparameters",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "None",
+      "Usage": "Input",
       "Properties": [
        {
         "$id": "235",
@@ -1646,15 +1727,17 @@
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "Type": {
          "$id": "236",
+         "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
            "$id": "237",
+           "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
             "$id": "238",
+            "Kind": "Primitive",
             "Name": "String",
-            "Kind": "String",
             "IsNullable": false
            },
            "Value": "auto",
@@ -1662,8 +1745,8 @@
           },
           {
            "$id": "239",
-           "Name": "NEpochs",
-           "Kind": "Int64",
+           "Kind": "Primitive",
+           "Name": "Int64",
            "IsNullable": false
           }
          ],
@@ -1684,8 +1767,8 @@
      "Description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.",
      "Type": {
       "$id": "241",
-      "Name": "SuffixString",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1698,6 +1781,7 @@
   },
   {
    "$id": "242",
+   "Kind": "Model",
    "Name": "FineTuningJob",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -1710,8 +1794,8 @@
      "Description": "The object identifier, which can be referenced in the API endpoints.",
      "Type": {
       "$id": "244",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1724,6 +1808,7 @@
      "Description": "The object type, which is always \"fine_tuning.job\".",
      "Type": {
       "$id": "246",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "2"
@@ -1741,8 +1826,8 @@
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
      "Type": {
       "$id": "248",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1755,8 +1840,8 @@
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be\nnull if the fine-tuning job is still running.",
      "Type": {
       "$id": "250",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -1769,8 +1854,8 @@
      "Description": "The base model that is being fine-tuned.",
      "Type": {
       "$id": "252",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1783,8 +1868,8 @@
      "Description": "The name of the fine-tuned model that is being created. The value will be null if the\nfine-tuning job is still running.",
      "Type": {
       "$id": "254",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -1797,8 +1882,8 @@
      "Description": "The organization that owns the fine-tuning job.",
      "Type": {
       "$id": "256",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1811,15 +1896,17 @@
      "Description": "The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
      "Type": {
       "$id": "258",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "259",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "260",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "created",
@@ -1827,11 +1914,12 @@
        },
        {
         "$id": "261",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "262",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "pending",
@@ -1839,11 +1927,12 @@
        },
        {
         "$id": "263",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "264",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "running",
@@ -1851,11 +1940,12 @@
        },
        {
         "$id": "265",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "266",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "succeeded",
@@ -1863,11 +1953,12 @@
        },
        {
         "$id": "267",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "268",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "failed",
@@ -1875,11 +1966,12 @@
        },
        {
         "$id": "269",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "270",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "cancelled",
@@ -1898,10 +1990,11 @@
      "Description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "Type": {
       "$id": "272",
-      "Name": "Anon_5",
+      "Kind": "Model",
+      "Name": "FineTuningJobHyperparameters",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "None",
+      "Usage": "Output",
       "Properties": [
        {
         "$id": "273",
@@ -1910,15 +2003,17 @@
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.\n\n\"Auto\" decides the optimal number of epochs based on the size of the dataset. If setting the\nnumber manually, we support any number between 1 and 50 epochs.",
         "Type": {
          "$id": "274",
+         "Kind": "Union",
          "Name": "Union",
          "UnionItemTypes": [
           {
            "$id": "275",
+           "Kind": "Literal",
            "Name": "Literal",
            "LiteralValueType": {
             "$id": "276",
+            "Kind": "Primitive",
             "Name": "String",
-            "Kind": "String",
             "IsNullable": false
            },
            "Value": "auto",
@@ -1926,8 +2021,8 @@
           },
           {
            "$id": "277",
-           "Name": "NEpochs",
-           "Kind": "Int64",
+           "Kind": "Primitive",
+           "Name": "Int64",
            "IsNullable": false
           }
          ],
@@ -1948,8 +2043,8 @@
      "Description": "The file ID used for training. You can retrieve the training data with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
       "$id": "279",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1962,8 +2057,8 @@
      "Description": "The file ID used for validation. You can retrieve the validation results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
       "$id": "281",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -1976,11 +2071,12 @@
      "Description": "The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "Type": {
       "$id": "283",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "284",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1995,8 +2091,8 @@
      "Description": "The total number of billable tokens processed by this fine tuning job. The value will be null\nif the fine-tuning job is still running.",
      "Type": {
       "$id": "286",
-      "Name": "safeint",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -2009,10 +2105,11 @@
      "Description": "For fine-tuning jobs that have `failed`, this will contain more information on the cause of the\nfailure.",
      "Type": {
       "$id": "288",
-      "Name": "Anon_6",
+      "Kind": "Model",
+      "Name": "FineTuningJobError",
       "Namespace": "OpenAI",
       "IsNullable": true,
-      "Usage": "None",
+      "Usage": "Output",
       "Properties": [
        {
         "$id": "289",
@@ -2021,8 +2118,8 @@
         "Description": "A human-readable error message.",
         "Type": {
          "$id": "290",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -2035,8 +2132,8 @@
         "Description": "A machine-readable error code.",
         "Type": {
          "$id": "292",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -2049,8 +2146,8 @@
         "Description": "The parameter that was invalid, usually `training_file` or `validation_file`. This field\nwill be null if the failure was not parameter-specific.",
         "Type": {
          "$id": "294",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": true
         },
         "IsRequired": false,
@@ -2071,6 +2168,7 @@
   },
   {
    "$id": "295",
+   "Kind": "Model",
    "Name": "ListPaginatedFineTuningJobsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -2083,8 +2181,8 @@
      "Description": "",
      "Type": {
       "$id": "297",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2097,6 +2195,7 @@
      "Description": "",
      "Type": {
       "$id": "299",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "242"
@@ -2113,8 +2212,8 @@
      "Description": "",
      "Type": {
       "$id": "301",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2124,6 +2223,7 @@
   },
   {
    "$id": "302",
+   "Kind": "Model",
    "Name": "ListFineTuningJobEventsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -2136,8 +2236,8 @@
      "Description": "",
      "Type": {
       "$id": "304",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2150,9 +2250,11 @@
      "Description": "",
      "Type": {
       "$id": "306",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "307",
+       "Kind": "Model",
        "Name": "FineTuningJobEvent",
        "Namespace": "OpenAI",
        "IsNullable": false,
@@ -2165,8 +2267,8 @@
          "Description": "",
          "Type": {
           "$id": "309",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -2179,8 +2281,8 @@
          "Description": "",
          "Type": {
           "$id": "311",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -2193,8 +2295,8 @@
          "Description": "",
          "Type": {
           "$id": "313",
-          "Name": "utcDateTime",
-          "Kind": "DateTimeUnix",
+          "Kind": "Primitive",
+          "Name": "DateTimeUnix",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -2207,15 +2309,17 @@
          "Description": "",
          "Type": {
           "$id": "315",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "316",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "317",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "info",
@@ -2223,11 +2327,12 @@
            },
            {
             "$id": "318",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "319",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "warn",
@@ -2235,11 +2340,12 @@
            },
            {
             "$id": "320",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "321",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "error",
@@ -2258,8 +2364,8 @@
          "Description": "",
          "Type": {
           "$id": "323",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -2279,6 +2385,7 @@
   },
   {
    "$id": "324",
+   "Kind": "Model",
    "Name": "CreateCompletionRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -2291,21 +2398,23 @@
      "Description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to\nsee all of your available models, or see our [Model overview](/docs/models/overview) for\ndescriptions of them.",
      "Type": {
       "$id": "326",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "327",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "328",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "329",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "babbage-002",
@@ -2313,11 +2422,12 @@
        },
        {
         "$id": "330",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "331",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "davinci-002",
@@ -2325,11 +2435,12 @@
        },
        {
         "$id": "332",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "333",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-davinci-003",
@@ -2337,11 +2448,12 @@
        },
        {
         "$id": "334",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "335",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-davinci-002",
@@ -2349,11 +2461,12 @@
        },
        {
         "$id": "336",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "337",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-davinci-001",
@@ -2361,11 +2474,12 @@
        },
        {
         "$id": "338",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "339",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "code-davinci-002",
@@ -2373,11 +2487,12 @@
        },
        {
         "$id": "340",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "341",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-curie-001",
@@ -2385,11 +2500,12 @@
        },
        {
         "$id": "342",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "343",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-babbage-001",
@@ -2397,11 +2513,12 @@
        },
        {
         "$id": "344",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "345",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-ada-001",
@@ -2420,46 +2537,51 @@
      "Description": "The prompt(s) to generate completions for, encoded as a string, array of strings, array of\ntokens, or array of token arrays.\n\nNote that <|endoftext|> is the document separator that the model sees during training, so if a\nprompt is not specified the model will generate as if from the beginning of a new document.",
      "Type": {
       "$id": "347",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "348",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": true
        },
        {
         "$id": "349",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "350",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": true
        },
        {
         "$id": "351",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "352",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsNullable": true
        },
        {
         "$id": "353",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "354",
+         "Kind": "Array",
          "Name": "Array",
          "ElementType": {
           "$id": "355",
-          "Name": "safeint",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsNullable": false
@@ -2479,8 +2601,8 @@
      "Description": "The suffix that comes after a completion of inserted text.",
      "Type": {
       "$id": "357",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2493,8 +2615,8 @@
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "Type": {
       "$id": "359",
-      "Name": "Temperature",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2507,8 +2629,8 @@
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "Type": {
       "$id": "361",
-      "Name": "TopP",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2521,8 +2643,8 @@
      "Description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "Type": {
       "$id": "363",
-      "Name": "N",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2535,8 +2657,8 @@
      "Description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "Type": {
       "$id": "365",
-      "Name": "MaxTokens",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2549,21 +2671,23 @@
      "Description": "Up to 4 sequences where the API will stop generating further tokens.",
      "Type": {
       "$id": "367",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "368",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": true
        },
        {
         "$id": "369",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "370",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": true
@@ -2581,8 +2705,8 @@
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
       "$id": "372",
-      "Name": "Penalty",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2595,8 +2719,8 @@
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "Type": {
       "$id": "374",
-      "Name": "Penalty",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2609,17 +2733,18 @@
      "Description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
      "Type": {
       "$id": "376",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "377",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "378",
-       "Name": "safeint",
-       "Kind": "Int64",
+       "Kind": "Primitive",
+       "Name": "Int64",
        "IsNullable": false
       },
       "IsNullable": true
@@ -2634,8 +2759,8 @@
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "Type": {
       "$id": "380",
-      "Name": "User",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -2648,8 +2773,8 @@
      "Description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
      "Type": {
       "$id": "382",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2662,8 +2787,8 @@
      "Description": "Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.\nFor example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The\nAPI will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`\nelements in the response.\n\nThe maximum value for `logprobs` is 5.",
      "Type": {
       "$id": "384",
-      "Name": "safeint",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2676,8 +2801,8 @@
      "Description": "Echo back the prompt in addition to the completion",
      "Type": {
       "$id": "386",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2690,8 +2815,8 @@
      "Description": "Generates `best_of` completions server-side and returns the \"best\" (the one with the highest\nlog probability per token). Results cannot be streamed.\n\nWhen used with `n`, `best_of` controls the number of candidate completions and `n` specifies\nhow many to return – `best_of` must be greater than `n`.\n\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "Type": {
       "$id": "388",
-      "Name": "safeint",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2701,6 +2826,7 @@
   },
   {
    "$id": "389",
+   "Kind": "Model",
    "Name": "CreateCompletionResponse",
    "Namespace": "OpenAI",
    "Description": "Represents a completion response from the API. Note: both the streamed and non-streamed response\nobjects share the same shape (unlike the chat endpoint).",
@@ -2714,8 +2840,8 @@
      "Description": "A unique identifier for the completion.",
      "Type": {
       "$id": "391",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2728,8 +2854,8 @@
      "Description": "The object type, which is always `text_completion`.",
      "Type": {
       "$id": "393",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2742,8 +2868,8 @@
      "Description": "The Unix timestamp (in seconds) of when the completion was created.",
      "Type": {
       "$id": "395",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2756,8 +2882,8 @@
      "Description": "The model used for the completion.",
      "Type": {
       "$id": "397",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2770,13 +2896,15 @@
      "Description": "The list of completion choices the model generated for the input.",
      "Type": {
       "$id": "399",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "400",
-       "Name": "Anon_7",
+       "Kind": "Model",
+       "Name": "CreateCompletionResponseChoice",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "401",
@@ -2785,8 +2913,8 @@
          "Description": "",
          "Type": {
           "$id": "402",
-          "Name": "safeint",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -2799,8 +2927,8 @@
          "Description": "",
          "Type": {
           "$id": "404",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -2813,10 +2941,11 @@
          "Description": "",
          "Type": {
           "$id": "406",
-          "Name": "Anon_8",
+          "Kind": "Model",
+          "Name": "CreateCompletionResponseChoiceLogprobs",
           "Namespace": "OpenAI",
           "IsNullable": true,
-          "Usage": "None",
+          "Usage": "Output",
           "Properties": [
            {
             "$id": "407",
@@ -2825,11 +2954,12 @@
             "Description": "",
             "Type": {
              "$id": "408",
+             "Kind": "Array",
              "Name": "Array",
              "ElementType": {
               "$id": "409",
-              "Name": "string",
-              "Kind": "String",
+              "Kind": "Primitive",
+              "Name": "String",
               "IsNullable": false
              },
              "IsNullable": false
@@ -2844,11 +2974,12 @@
             "Description": "",
             "Type": {
              "$id": "411",
+             "Kind": "Array",
              "Name": "Array",
              "ElementType": {
               "$id": "412",
-              "Name": "float64",
-              "Kind": "Float64",
+              "Kind": "Primitive",
+              "Name": "Float64",
               "IsNullable": false
              },
              "IsNullable": false
@@ -2863,20 +2994,22 @@
             "Description": "",
             "Type": {
              "$id": "414",
+             "Kind": "Array",
              "Name": "Array",
              "ElementType": {
               "$id": "415",
+              "Kind": "Dictionary",
               "Name": "Dictionary",
               "KeyType": {
                "$id": "416",
-               "Name": "string",
-               "Kind": "String",
+               "Kind": "Primitive",
+               "Name": "String",
                "IsNullable": false
               },
               "ValueType": {
                "$id": "417",
-               "Name": "safeint",
-               "Kind": "Int64",
+               "Kind": "Primitive",
+               "Name": "Int64",
                "IsNullable": false
               },
               "IsNullable": false
@@ -2893,11 +3026,12 @@
             "Description": "",
             "Type": {
              "$id": "419",
+             "Kind": "Array",
              "Name": "Array",
              "ElementType": {
               "$id": "420",
-              "Name": "safeint",
-              "Kind": "Int64",
+              "Kind": "Primitive",
+              "Name": "Int64",
               "IsNullable": false
              },
              "IsNullable": false
@@ -2917,15 +3051,17 @@
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `content_filter` if content was omitted\ndue to a flag from our content filters, `length` if the maximum number of tokens specified\nin the request was reached, or `content_filter` if content was omitted due to a flag from our\ncontent filters.",
          "Type": {
           "$id": "422",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "423",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "424",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "stop",
@@ -2933,11 +3069,12 @@
            },
            {
             "$id": "425",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "426",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "length",
@@ -2945,11 +3082,12 @@
            },
            {
             "$id": "427",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "428",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "content_filter",
@@ -2989,6 +3127,7 @@
   },
   {
    "$id": "430",
+   "Kind": "Model",
    "Name": "CreateEditRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -3001,21 +3140,23 @@
      "Description": "ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`\nmodel with this endpoint.",
      "Type": {
       "$id": "432",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "433",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "434",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "435",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-davinci-edit-001",
@@ -3023,11 +3164,12 @@
        },
        {
         "$id": "436",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "437",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "code-davinci-edit-001",
@@ -3046,8 +3188,8 @@
      "Description": "The input text to use as a starting point for the edit.",
      "Type": {
       "$id": "439",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3060,8 +3202,8 @@
      "Description": "The instruction that tells the model how to edit the prompt.",
      "Type": {
       "$id": "441",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3074,8 +3216,8 @@
      "Description": "How many edits to generate for the input and instruction.",
      "Type": {
       "$id": "443",
-      "Name": "EditN",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3088,8 +3230,8 @@
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "Type": {
       "$id": "445",
-      "Name": "Temperature",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3102,8 +3244,8 @@
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "Type": {
       "$id": "447",
-      "Name": "TopP",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3113,6 +3255,7 @@
   },
   {
    "$id": "448",
+   "Kind": "Model",
    "Name": "CreateEditResponse",
    "Namespace": "OpenAI",
    "Deprecated": "deprecated",
@@ -3126,6 +3269,7 @@
      "Description": "The object type, which is always `edit`.",
      "Type": {
       "$id": "450",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "4"
@@ -3143,8 +3287,8 @@
      "Description": "The Unix timestamp (in seconds) of when the edit was created.",
      "Type": {
       "$id": "452",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3157,13 +3301,15 @@
      "Description": "description: A list of edit choices. Can be more than one if `n` is greater than 1.",
      "Type": {
       "$id": "454",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "455",
-       "Name": "Anon_9",
+       "Kind": "Model",
+       "Name": "CreateEditResponseChoice",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "456",
@@ -3172,8 +3318,8 @@
          "Description": "The edited result.",
          "Type": {
           "$id": "457",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3186,8 +3332,8 @@
          "Description": "The index of the choice in the list of choices.",
          "Type": {
           "$id": "459",
-          "Name": "safeint",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3200,15 +3346,17 @@
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `length` if the maximum number of tokens\nspecified in the request was reached.",
          "Type": {
           "$id": "461",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "462",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "463",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "stop",
@@ -3216,11 +3364,12 @@
            },
            {
             "$id": "464",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "465",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "length",
@@ -3257,6 +3406,7 @@
   },
   {
    "$id": "467",
+   "Kind": "Model",
    "Name": "CreateEmbeddingRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -3269,21 +3419,23 @@
      "Description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.",
      "Type": {
       "$id": "469",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "470",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "471",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "472",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-embedding-ada-002",
@@ -3302,46 +3454,51 @@
      "Description": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a\nsingle request, pass an array of strings or array of token arrays. Each input must not exceed\nthe max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "Type": {
       "$id": "474",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "475",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "476",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "477",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
        },
        {
         "$id": "478",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "479",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsNullable": false
        },
        {
         "$id": "480",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "481",
+         "Kind": "Array",
          "Name": "Array",
          "ElementType": {
           "$id": "482",
-          "Name": "safeint",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsNullable": false
@@ -3361,8 +3518,8 @@
      "Description": "",
      "Type": {
       "$id": "484",
-      "Name": "User",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -3372,6 +3529,7 @@
   },
   {
    "$id": "485",
+   "Kind": "Model",
    "Name": "CreateEmbeddingResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -3384,6 +3542,7 @@
      "Description": "The object type, which is always \"embedding\".",
      "Type": {
       "$id": "487",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "6"
@@ -3401,8 +3560,8 @@
      "Description": "The name of the model used to generate the embedding.",
      "Type": {
       "$id": "489",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3415,9 +3574,11 @@
      "Description": "The list of embeddings generated by the model.",
      "Type": {
       "$id": "491",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "492",
+       "Kind": "Model",
        "Name": "Embedding",
        "Namespace": "OpenAI",
        "Description": "Represents an embedding vector returned by embedding endpoint.",
@@ -3431,8 +3592,8 @@
          "Description": "The index of the embedding in the list of embeddings.",
          "Type": {
           "$id": "494",
-          "Name": "safeint",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3445,6 +3606,7 @@
          "Description": "The object type, which is always \"embedding\".",
          "Type": {
           "$id": "496",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$ref": "8"
@@ -3462,11 +3624,12 @@
          "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\nlisted in the [embedding guide](/docs/guides/embeddings).",
          "Type": {
           "$id": "498",
+          "Kind": "Array",
           "Name": "Array",
           "ElementType": {
            "$id": "499",
-           "Name": "float64",
-           "Kind": "Float64",
+           "Kind": "Primitive",
+           "Name": "Float64",
            "IsNullable": false
           },
           "IsNullable": false
@@ -3488,10 +3651,11 @@
      "Description": "The usage information for the request.",
      "Type": {
       "$id": "501",
-      "Name": "Anon_10",
+      "Kind": "Model",
+      "Name": "CreateEmbeddingResponseUsage",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "None",
+      "Usage": "Output",
       "Properties": [
        {
         "$id": "502",
@@ -3500,8 +3664,8 @@
         "Description": "The number of tokens used by the prompt.",
         "Type": {
          "$id": "503",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -3514,8 +3678,8 @@
         "Description": "The total number of tokens used by the request.",
         "Type": {
          "$id": "505",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -3536,6 +3700,7 @@
   },
   {
    "$id": "506",
+   "Kind": "Model",
    "Name": "ListFilesResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -3548,8 +3713,8 @@
      "Description": "",
      "Type": {
       "$id": "508",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3562,9 +3727,11 @@
      "Description": "",
      "Type": {
       "$id": "510",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "511",
+       "Kind": "Model",
        "Name": "OpenAIFile",
        "Namespace": "OpenAI",
        "Description": "The `File` object represents a document that has been uploaded to OpenAI.",
@@ -3578,8 +3745,8 @@
          "Description": "The file identifier, which can be referenced in the API endpoints.",
          "Type": {
           "$id": "513",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3592,6 +3759,7 @@
          "Description": "The object type, which is always \"file\".",
          "Type": {
           "$id": "515",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$ref": "10"
@@ -3609,8 +3777,8 @@
          "Description": "The size of the file in bytes.",
          "Type": {
           "$id": "517",
-          "Name": "safeint",
-          "Kind": "Int64",
+          "Kind": "Primitive",
+          "Name": "Int64",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3623,8 +3791,8 @@
          "Description": "The Unix timestamp (in seconds) for when the file was created.",
          "Type": {
           "$id": "519",
-          "Name": "utcDateTime",
-          "Kind": "DateTimeUnix",
+          "Kind": "Primitive",
+          "Name": "DateTimeUnix",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3637,8 +3805,8 @@
          "Description": "The name of the file.",
          "Type": {
           "$id": "521",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3651,8 +3819,8 @@
          "Description": "The intended purpose of the file. Currently, only \"fine-tune\" is supported.",
          "Type": {
           "$id": "523",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3665,15 +3833,17 @@
          "Description": "The current status of the file, which can be either `uploaded`, `processed`, `pending`,\n`error`, `deleting` or `deleted`.",
          "Type": {
           "$id": "525",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "526",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "527",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "uploaded",
@@ -3681,11 +3851,12 @@
            },
            {
             "$id": "528",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "529",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "processed",
@@ -3693,11 +3864,12 @@
            },
            {
             "$id": "530",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "531",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "pending",
@@ -3705,11 +3877,12 @@
            },
            {
             "$id": "532",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "533",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "error",
@@ -3717,11 +3890,12 @@
            },
            {
             "$id": "534",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "535",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "deleting",
@@ -3729,11 +3903,12 @@
            },
            {
             "$id": "536",
+            "Kind": "Literal",
             "Name": "Literal",
             "LiteralValueType": {
              "$id": "537",
+             "Kind": "Primitive",
              "Name": "String",
-             "Kind": "String",
              "IsNullable": false
             },
             "Value": "deleted",
@@ -3752,8 +3927,8 @@
          "Description": "Additional details about the status of the file. If the file is in the `error` state, this will\ninclude a message describing the error.",
          "Type": {
           "$id": "539",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": true
          },
          "IsRequired": false,
@@ -3773,6 +3948,7 @@
   },
   {
    "$id": "540",
+   "Kind": "Model",
    "Name": "CreateFileRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -3785,8 +3961,8 @@
      "Description": "Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.\n\nIf the `purpose` is set to \"fine-tune\", the file will be used for fine-tuning.",
      "Type": {
       "$id": "542",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3799,8 +3975,8 @@
      "Description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\n[fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the\nuploaded file.",
      "Type": {
       "$id": "544",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3810,6 +3986,7 @@
   },
   {
    "$id": "545",
+   "Kind": "Model",
    "Name": "DeleteFileResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -3822,8 +3999,8 @@
      "Description": "",
      "Type": {
       "$id": "547",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3836,8 +4013,8 @@
      "Description": "",
      "Type": {
       "$id": "549",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3850,8 +4027,8 @@
      "Description": "",
      "Type": {
       "$id": "551",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3861,6 +4038,7 @@
   },
   {
    "$id": "552",
+   "Kind": "Model",
    "Name": "CreateFineTuneRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -3873,8 +4051,8 @@
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file, where each training example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
      "Type": {
       "$id": "554",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -3887,8 +4065,8 @@
      "Description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the\n[fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\nYour train and validation data should be mutually exclusive.\n\nYour dataset must be formatted as a JSONL file, where each validation example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
      "Type": {
       "$id": "556",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3901,21 +4079,23 @@
      "Description": "The name of the base model to fine-tune. You can select one of \"ada\", \"babbage\", \"curie\",\n\"davinci\", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more\nabout these models, see the [Models](/docs/models) documentation.",
      "Type": {
       "$id": "558",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "559",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": true
        },
        {
         "$id": "560",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "561",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "ada",
@@ -3923,11 +4103,12 @@
        },
        {
         "$id": "562",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "563",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "babbage",
@@ -3935,11 +4116,12 @@
        },
        {
         "$id": "564",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "565",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "curie",
@@ -3947,11 +4129,12 @@
        },
        {
         "$id": "566",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "567",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "davinci",
@@ -3970,8 +4153,8 @@
      "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
      "Type": {
       "$id": "569",
-      "Name": "safeint",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3984,8 +4167,8 @@
      "Description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.\n\nBy default, the batch size will be dynamically configured to be ~0.2% of the number of examples\nin the training set, capped at 256 - in general, we've found that larger batch sizes tend to\nwork better for larger datasets.",
      "Type": {
       "$id": "571",
-      "Name": "safeint",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3998,8 +4181,8 @@
      "Description": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original\nlearning rate used for pretraining multiplied by this value.\n\nBy default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final\n`batch_size` (larger learning rates tend to perform better with larger batch sizes). We\nrecommend experimenting with values in the range 0.02 to 0.2 to see what produces the best\nresults.",
      "Type": {
       "$id": "573",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4012,8 +4195,8 @@
      "Description": "The weight to use for loss on the prompt tokens. This controls how much the model tries to\nlearn to generate the prompt (as compared to the completion which always has a weight of 1.0),\nand can add a stabilizing effect to training when completions are short.\n\nIf prompts are extremely long (relative to completions), it may make sense to reduce this\nweight so as to avoid over-prioritizing learning the prompt.",
      "Type": {
       "$id": "575",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4026,8 +4209,8 @@
      "Description": "If set, we calculate classification-specific metrics such as accuracy and F-1 score using the\nvalidation set at the end of every epoch. These metrics can be viewed in the\n[results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\n\nIn order to compute classification metrics, you must provide a `validation_file`. Additionally,\nyou must specify `classification_n_classes` for multiclass classification or\n`classification_positive_class` for binary classification.",
      "Type": {
       "$id": "577",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4040,8 +4223,8 @@
      "Description": "The number of classes in a classification task.\n\nThis parameter is required for multiclass classification.",
      "Type": {
       "$id": "579",
-      "Name": "safeint",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4054,8 +4237,8 @@
      "Description": "The positive class in binary classification.\n\nThis parameter is needed to generate precision, recall, and F1 metrics when doing binary\nclassification.",
      "Type": {
       "$id": "581",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4068,11 +4251,12 @@
      "Description": "If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score\nis a generalization of F-1 score. This is only used for binary classification.\n\nWith a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger\nbeta score puts more weight on recall and less on precision. A smaller beta score puts more\nweight on precision and less on recall.",
      "Type": {
       "$id": "583",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "584",
-       "Name": "float64",
-       "Kind": "Float64",
+       "Kind": "Primitive",
+       "Name": "Float64",
        "IsNullable": false
       },
       "IsNullable": true
@@ -4087,8 +4271,8 @@
      "Description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.",
      "Type": {
       "$id": "586",
-      "Name": "SuffixString",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4098,6 +4282,7 @@
   },
   {
    "$id": "587",
+   "Kind": "Model",
    "Name": "FineTune",
    "Namespace": "OpenAI",
    "Deprecated": "deprecated",
@@ -4112,8 +4297,8 @@
      "Description": "The object identifier, which can be referenced in the API endpoints.",
      "Type": {
       "$id": "589",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4126,6 +4311,7 @@
      "Description": "The object type, which is always \"fine-tune\".",
      "Type": {
       "$id": "591",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "12"
@@ -4143,8 +4329,8 @@
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
      "Type": {
       "$id": "593",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4157,8 +4343,8 @@
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was last updated.",
      "Type": {
       "$id": "595",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4171,8 +4357,8 @@
      "Description": "The base model that is being fine-tuned.",
      "Type": {
       "$id": "597",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4185,8 +4371,8 @@
      "Description": "The name of the fine-tuned model that is being created.",
      "Type": {
       "$id": "599",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -4199,8 +4385,8 @@
      "Description": "The organization that owns the fine-tuning job.",
      "Type": {
       "$id": "601",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4213,15 +4399,17 @@
      "Description": "The current status of the fine-tuning job, which can be either `created`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
      "Type": {
       "$id": "603",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "604",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "605",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "created",
@@ -4229,11 +4417,12 @@
        },
        {
         "$id": "606",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "607",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "running",
@@ -4241,11 +4430,12 @@
        },
        {
         "$id": "608",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "609",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "succeeded",
@@ -4253,11 +4443,12 @@
        },
        {
         "$id": "610",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "611",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "failed",
@@ -4265,11 +4456,12 @@
        },
        {
         "$id": "612",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "613",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "cancelled",
@@ -4288,10 +4480,11 @@
      "Description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.",
      "Type": {
       "$id": "615",
-      "Name": "Anon_11",
+      "Kind": "Model",
+      "Name": "FineTuneHyperparams",
       "Namespace": "OpenAI",
       "IsNullable": false,
-      "Usage": "None",
+      "Usage": "Output",
       "Properties": [
        {
         "$id": "616",
@@ -4300,8 +4493,8 @@
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "Type": {
          "$id": "617",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -4314,8 +4507,8 @@
         "Description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.",
         "Type": {
          "$id": "619",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -4328,8 +4521,8 @@
         "Description": "The weight to use for loss on the prompt tokens.",
         "Type": {
          "$id": "621",
-         "Name": "float64",
-         "Kind": "Float64",
+         "Kind": "Primitive",
+         "Name": "Float64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -4342,8 +4535,8 @@
         "Description": "The learning rate multiplier to use for training.",
         "Type": {
          "$id": "623",
-         "Name": "float64",
-         "Kind": "Float64",
+         "Kind": "Primitive",
+         "Name": "Float64",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -4356,8 +4549,8 @@
         "Description": "The classification metrics to compute using the validation dataset at the end of every epoch.",
         "Type": {
          "$id": "625",
-         "Name": "boolean",
-         "Kind": "Boolean",
+         "Kind": "Primitive",
+         "Name": "Boolean",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -4370,8 +4563,8 @@
         "Description": "The positive class to use for computing classification metrics.",
         "Type": {
          "$id": "627",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -4384,8 +4577,8 @@
         "Description": "The number of classes to use for computing classification metrics.",
         "Type": {
          "$id": "629",
-         "Name": "safeint",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -4403,6 +4596,7 @@
      "Description": "The list of files used for training.",
      "Type": {
       "$id": "631",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "511"
@@ -4419,6 +4613,7 @@
      "Description": "The list of files used for validation.",
      "Type": {
       "$id": "633",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "511"
@@ -4435,6 +4630,7 @@
      "Description": "The compiled results files for the fine-tuning job.",
      "Type": {
       "$id": "635",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "511"
@@ -4451,9 +4647,11 @@
      "Description": "The list of events that have been observed in the lifecycle of the FineTune job.",
      "Type": {
       "$id": "637",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "638",
+       "Kind": "Model",
        "Name": "FineTuneEvent",
        "Namespace": "OpenAI",
        "IsNullable": false,
@@ -4466,8 +4664,8 @@
          "Description": "",
          "Type": {
           "$id": "640",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4480,8 +4678,8 @@
          "Description": "",
          "Type": {
           "$id": "642",
-          "Name": "utcDateTime",
-          "Kind": "DateTimeUnix",
+          "Kind": "Primitive",
+          "Name": "DateTimeUnix",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4494,8 +4692,8 @@
          "Description": "",
          "Type": {
           "$id": "644",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4508,8 +4706,8 @@
          "Description": "",
          "Type": {
           "$id": "646",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4532,6 +4730,7 @@
   },
   {
    "$id": "647",
+   "Kind": "Model",
    "Name": "ListFineTunesResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -4544,8 +4743,8 @@
      "Description": "",
      "Type": {
       "$id": "649",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4558,6 +4757,7 @@
      "Description": "",
      "Type": {
       "$id": "651",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "587"
@@ -4571,6 +4771,7 @@
   },
   {
    "$id": "652",
+   "Kind": "Model",
    "Name": "ListFineTuneEventsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -4583,8 +4784,8 @@
      "Description": "",
      "Type": {
       "$id": "654",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4597,6 +4798,7 @@
      "Description": "",
      "Type": {
       "$id": "656",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "638"
@@ -4610,6 +4812,7 @@
   },
   {
    "$id": "657",
+   "Kind": "Model",
    "Name": "ListModelsResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -4622,8 +4825,8 @@
      "Description": "",
      "Type": {
       "$id": "659",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4636,9 +4839,11 @@
      "Description": "",
      "Type": {
       "$id": "661",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "662",
+       "Kind": "Model",
        "Name": "Model",
        "Namespace": "OpenAI",
        "Description": "Describes an OpenAI model offering that can be used with the API.",
@@ -4652,8 +4857,8 @@
          "Description": "The model identifier, which can be referenced in the API endpoints.",
          "Type": {
           "$id": "664",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4666,6 +4871,7 @@
          "Description": "The object type, which is always \"model\".",
          "Type": {
           "$id": "666",
+          "Kind": "Literal",
           "Name": "Literal",
           "LiteralValueType": {
            "$ref": "14"
@@ -4683,8 +4889,8 @@
          "Description": "The Unix timestamp (in seconds) when the model was created.",
          "Type": {
           "$id": "668",
-          "Name": "utcDateTime",
-          "Kind": "DateTimeUnix",
+          "Kind": "Primitive",
+          "Name": "DateTimeUnix",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4697,8 +4903,8 @@
          "Description": "The organization that owns the model.",
          "Type": {
           "$id": "670",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4718,6 +4924,7 @@
   },
   {
    "$id": "671",
+   "Kind": "Model",
    "Name": "DeleteModelResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -4730,8 +4937,8 @@
      "Description": "",
      "Type": {
       "$id": "673",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4744,8 +4951,8 @@
      "Description": "",
      "Type": {
       "$id": "675",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4758,8 +4965,8 @@
      "Description": "",
      "Type": {
       "$id": "677",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4769,6 +4976,7 @@
   },
   {
    "$id": "678",
+   "Kind": "Model",
    "Name": "CreateImageRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -4781,8 +4989,8 @@
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "Type": {
       "$id": "680",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4795,8 +5003,8 @@
      "Description": "The number of images to generate. Must be between 1 and 10.",
      "Type": {
       "$id": "682",
-      "Name": "ImagesN",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4809,15 +5017,17 @@
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
      "Type": {
       "$id": "684",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "685",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "686",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "256x256",
@@ -4825,11 +5035,12 @@
        },
        {
         "$id": "687",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "688",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "512x512",
@@ -4837,11 +5048,12 @@
        },
        {
         "$id": "689",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "690",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "1024x1024",
@@ -4860,15 +5072,17 @@
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
      "Type": {
       "$id": "692",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "693",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "694",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "url",
@@ -4876,11 +5090,12 @@
        },
        {
         "$id": "695",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "696",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "b64_json",
@@ -4899,8 +5114,8 @@
      "Description": "",
      "Type": {
       "$id": "698",
-      "Name": "User",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -4910,6 +5125,7 @@
   },
   {
    "$id": "699",
+   "Kind": "Model",
    "Name": "ImagesResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -4922,8 +5138,8 @@
      "Description": "",
      "Type": {
       "$id": "701",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -4936,9 +5152,11 @@
      "Description": "",
      "Type": {
       "$id": "703",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "704",
+       "Kind": "Model",
        "Name": "Image",
        "Namespace": "OpenAI",
        "Description": "Represents the url or the content of an image generated by the OpenAI API.",
@@ -4952,8 +5170,8 @@
          "Description": "The URL of the generated image, if `response_format` is `url` (default).",
          "Type": {
           "$id": "706",
-          "Name": "url",
-          "Kind": "Uri",
+          "Kind": "Primitive",
+          "Name": "Uri",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -4966,8 +5184,8 @@
          "Description": "The base64-encoded JSON of the generated image, if `response_format` is `b64_json`.",
          "Type": {
           "$id": "708",
-          "Name": "bytes",
-          "Kind": "Bytes",
+          "Kind": "Primitive",
+          "Name": "Bytes",
           "IsNullable": false
          },
          "IsRequired": false,
@@ -4987,6 +5205,7 @@
   },
   {
    "$id": "709",
+   "Kind": "Model",
    "Name": "CreateImageEditRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -4999,8 +5218,8 @@
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "Type": {
       "$id": "711",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5013,8 +5232,8 @@
      "Description": "The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not\nprovided, image must have transparency, which will be used as the mask.",
      "Type": {
       "$id": "713",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5027,8 +5246,8 @@
      "Description": "An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where\n`image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions\nas `image`.",
      "Type": {
       "$id": "715",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -5041,8 +5260,8 @@
      "Description": "The number of images to generate. Must be between 1 and 10.",
      "Type": {
       "$id": "717",
-      "Name": "ImagesN",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -5055,15 +5274,17 @@
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
      "Type": {
       "$id": "719",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "720",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "721",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "256x256",
@@ -5071,11 +5292,12 @@
        },
        {
         "$id": "722",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "723",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "512x512",
@@ -5083,11 +5305,12 @@
        },
        {
         "$id": "724",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "725",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "1024x1024",
@@ -5106,15 +5329,17 @@
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
      "Type": {
       "$id": "727",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "728",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "729",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "url",
@@ -5122,11 +5347,12 @@
        },
        {
         "$id": "730",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "731",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "b64_json",
@@ -5145,8 +5371,8 @@
      "Description": "",
      "Type": {
       "$id": "733",
-      "Name": "User",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -5156,6 +5382,7 @@
   },
   {
    "$id": "734",
+   "Kind": "Model",
    "Name": "CreateImageVariationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -5168,8 +5395,8 @@
      "Description": "The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,\nand square.",
      "Type": {
       "$id": "736",
-      "Name": "bytes",
-      "Kind": "Bytes",
+      "Kind": "Primitive",
+      "Name": "Bytes",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5182,8 +5409,8 @@
      "Description": "The number of images to generate. Must be between 1 and 10.",
      "Type": {
       "$id": "738",
-      "Name": "ImagesN",
-      "Kind": "Int64",
+      "Kind": "Primitive",
+      "Name": "Int64",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -5196,15 +5423,17 @@
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
      "Type": {
       "$id": "740",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "741",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "742",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "256x256",
@@ -5212,11 +5441,12 @@
        },
        {
         "$id": "743",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "744",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "512x512",
@@ -5224,11 +5454,12 @@
        },
        {
         "$id": "745",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "746",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "1024x1024",
@@ -5247,15 +5478,17 @@
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
      "Type": {
       "$id": "748",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "749",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "750",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "url",
@@ -5263,11 +5496,12 @@
        },
        {
         "$id": "751",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "752",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "b64_json",
@@ -5286,8 +5520,8 @@
      "Description": "",
      "Type": {
       "$id": "754",
-      "Name": "User",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -5297,6 +5531,7 @@
   },
   {
    "$id": "755",
+   "Kind": "Model",
    "Name": "CreateModerationRequest",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -5309,21 +5544,23 @@
      "Description": "The input text to classify",
      "Type": {
       "$id": "757",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "758",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "759",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "760",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -5341,21 +5578,23 @@
      "Description": "Two content moderations models are available: `text-moderation-stable` and\n`text-moderation-latest`. The default is `text-moderation-latest` which will be automatically\nupgraded over time. This ensures you are always using our most accurate model. If you use\n`text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy\nof `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.",
      "Type": {
       "$id": "762",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "763",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "764",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "765",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-moderation-latest",
@@ -5363,11 +5602,12 @@
        },
        {
         "$id": "766",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "767",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text-moderation-stable",
@@ -5383,6 +5623,7 @@
   },
   {
    "$id": "768",
+   "Kind": "Model",
    "Name": "CreateModerationResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -5395,8 +5636,8 @@
      "Description": "The unique identifier for the moderation request.",
      "Type": {
       "$id": "770",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5409,8 +5650,8 @@
      "Description": "The model used to generate the moderation results.",
      "Type": {
       "$id": "772",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5423,13 +5664,15 @@
      "Description": "A list of moderation objects.",
      "Type": {
       "$id": "774",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "775",
-       "Name": "Anon_12",
+       "Kind": "Model",
+       "Name": "CreateModerationResponseResult",
        "Namespace": "OpenAI",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "776",
@@ -5438,8 +5681,8 @@
          "Description": "Whether the content violates [OpenAI's usage policies](/policies/usage-policies).",
          "Type": {
           "$id": "777",
-          "Name": "boolean",
-          "Kind": "Boolean",
+          "Kind": "Primitive",
+          "Name": "Boolean",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -5452,10 +5695,11 @@
          "Description": "A list of the categories, and whether they are flagged or not.",
          "Type": {
           "$id": "779",
-          "Name": "Anon_13",
+          "Kind": "Model",
+          "Name": "CreateModerationResponseResultCategories",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "None",
+          "Usage": "Output",
           "Properties": [
            {
             "$id": "780",
@@ -5464,8 +5708,8 @@
             "Description": "Content that expresses, incites, or promotes hate based on race, gender, ethnicity,\nreligion, nationality, sexual orientation, disability status, or caste. Hateful content\naimed at non-protected groups (e.g., chess players) is harrassment.",
             "Type": {
              "$id": "781",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5478,8 +5722,8 @@
             "Description": "Hateful content that also includes violence or serious harm towards the targeted group\nbased on race, gender, ethnicity, religion, nationality, sexual orientation, disability\nstatus, or caste.",
             "Type": {
              "$id": "783",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5492,8 +5736,8 @@
             "Description": "Content that expresses, incites, or promotes harassing language towards any target.",
             "Type": {
              "$id": "785",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5506,8 +5750,8 @@
             "Description": "Harassment content that also includes violence or serious harm towards any target.",
             "Type": {
              "$id": "787",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5520,8 +5764,8 @@
             "Description": "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,\nand eating disorders.",
             "Type": {
              "$id": "789",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5534,8 +5778,8 @@
             "Description": "Content where the speaker expresses that they are engaging or intend to engage in acts of\nself-harm, such as suicide, cutting, and eating disorders.",
             "Type": {
              "$id": "791",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5548,8 +5792,8 @@
             "Description": "Content that encourages performing acts of self-harm, such as suicide, cutting, and eating\ndisorders, or that gives instructions or advice on how to commit such acts.",
             "Type": {
              "$id": "793",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5562,8 +5806,8 @@
             "Description": "Content meant to arouse sexual excitement, such as the description of sexual activity, or\nthat promotes sexual services (excluding sex education and wellness).",
             "Type": {
              "$id": "795",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5576,8 +5820,8 @@
             "Description": "Sexual content that includes an individual who is under 18 years old.",
             "Type": {
              "$id": "797",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5590,8 +5834,8 @@
             "Description": "Content that depicts death, violence, or physical injury.",
             "Type": {
              "$id": "799",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5604,8 +5848,8 @@
             "Description": "Content that depicts death, violence, or physical injury in graphic detail.",
             "Type": {
              "$id": "801",
-             "Name": "boolean",
-             "Kind": "Boolean",
+             "Kind": "Primitive",
+             "Name": "Boolean",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5623,10 +5867,11 @@
          "Description": "A list of the categories along with their scores as predicted by model.",
          "Type": {
           "$id": "803",
-          "Name": "Anon_14",
+          "Kind": "Model",
+          "Name": "CreateModerationResponseResultCategoryScores",
           "Namespace": "OpenAI",
           "IsNullable": false,
-          "Usage": "None",
+          "Usage": "Output",
           "Properties": [
            {
             "$id": "804",
@@ -5635,8 +5880,8 @@
             "Description": "The score for the category 'hate'.",
             "Type": {
              "$id": "805",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5649,8 +5894,8 @@
             "Description": "The score for the category 'hate/threatening'.",
             "Type": {
              "$id": "807",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5663,8 +5908,8 @@
             "Description": "The score for the category 'harassment'.",
             "Type": {
              "$id": "809",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5677,8 +5922,8 @@
             "Description": "The score for the category 'harassment/threatening'.",
             "Type": {
              "$id": "811",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5691,8 +5936,8 @@
             "Description": "The score for the category 'self-harm'.",
             "Type": {
              "$id": "813",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5705,8 +5950,8 @@
             "Description": "The score for the category 'self-harm/intent'.",
             "Type": {
              "$id": "815",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5719,8 +5964,8 @@
             "Description": "The score for the category 'self-harm/instructive'.",
             "Type": {
              "$id": "817",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5733,8 +5978,8 @@
             "Description": "The score for the category 'sexual'.",
             "Type": {
              "$id": "819",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5747,8 +5992,8 @@
             "Description": "The score for the category 'sexual/minors'.",
             "Type": {
              "$id": "821",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5761,8 +6006,8 @@
             "Description": "The score for the category 'violence'.",
             "Type": {
              "$id": "823",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5775,8 +6020,8 @@
             "Description": "The score for the category 'violence/graphic'.",
             "Type": {
              "$id": "825",
-             "Name": "float64",
-             "Kind": "Float64",
+             "Kind": "Primitive",
+             "Name": "Float64",
              "IsNullable": false
             },
             "IsRequired": true,
@@ -5807,6 +6052,7 @@
   },
   {
    "$id": "826",
+   "Kind": "Model",
    "Name": "ErrorResponse",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -5819,6 +6065,7 @@
      "Description": "",
      "Type": {
       "$id": "828",
+      "Kind": "Model",
       "Name": "Error",
       "Namespace": "OpenAI",
       "IsNullable": false,
@@ -5831,8 +6078,8 @@
         "Description": "",
         "Type": {
          "$id": "830",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -5845,8 +6092,8 @@
         "Description": "",
         "Type": {
          "$id": "832",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -5859,8 +6106,8 @@
         "Description": "",
         "Type": {
          "$id": "834",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": true
         },
         "IsRequired": true,
@@ -5873,8 +6120,8 @@
         "Description": "",
         "Type": {
          "$id": "836",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": true
         },
         "IsRequired": true,
@@ -5892,6 +6139,7 @@
   },
   {
    "$id": "837",
+   "Kind": "Model",
    "Name": "FineTuningEvent",
    "Namespace": "OpenAI",
    "IsNullable": false,
@@ -5904,8 +6152,8 @@
      "Description": "",
      "Type": {
       "$id": "839",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5918,8 +6166,8 @@
      "Description": "",
      "Type": {
       "$id": "841",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5932,8 +6180,8 @@
      "Description": "",
      "Type": {
       "$id": "843",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5946,8 +6194,8 @@
      "Description": "",
      "Type": {
       "$id": "845",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -5960,17 +6208,18 @@
      "Description": "",
      "Type": {
       "$id": "847",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "848",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "849",
-       "Name": "Intrinsic",
-       "Kind": "unknown",
+       "Kind": "Intrinsic",
+       "Name": "unknown",
        "IsNullable": false
       },
       "IsNullable": true
@@ -5985,15 +6234,17 @@
      "Description": "",
      "Type": {
       "$id": "851",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "852",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "853",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "message",
@@ -6001,11 +6252,12 @@
        },
        {
         "$id": "854",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "855",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "metrics",
@@ -6060,8 +6312,8 @@
        "Description": "OpenAI Endpoint",
        "Type": {
         "$id": "863",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -6077,8 +6329,8 @@
         "$id": "864",
         "Type": {
          "$id": "865",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "https://api.openai.com/v1"
@@ -6090,11 +6342,12 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "867",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "868",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "multipart/form-data",
@@ -6140,8 +6393,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "872",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6217,11 +6470,12 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "879",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "880",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "multipart/form-data",
@@ -6267,8 +6521,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "884",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6371,8 +6625,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "894",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6398,8 +6652,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "897",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6503,8 +6757,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "907",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6530,8 +6784,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "910",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6595,8 +6849,8 @@
        "Description": "Identifier for the last job from the previous pagination request.",
        "Type": {
         "$id": "915",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6616,8 +6870,8 @@
        "Description": "Number of fine-tuning jobs to retrieve.",
        "Type": {
         "$id": "917",
-        "Name": "safeint",
-        "Kind": "Int64",
+        "Kind": "Primitive",
+        "Name": "Int64",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6636,8 +6890,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "919",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6698,8 +6952,8 @@
        "NameInRequest": "fine_tuning_job_id",
        "Type": {
         "$id": "924",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -6718,8 +6972,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "926",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6781,8 +7035,8 @@
        "Description": "The ID of the fine-tuning job to get events for.",
        "Type": {
         "$id": "931",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -6802,8 +7056,8 @@
        "Description": "Identifier for the last event from the previous pagination request.",
        "Type": {
         "$id": "933",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6823,8 +7077,8 @@
        "Description": "Number of events to retrieve.",
        "Type": {
         "$id": "935",
-        "Name": "integer",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        },
        "Location": "Query",
@@ -6843,8 +7097,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "937",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -6906,8 +7160,8 @@
        "Description": "The ID of the fine-tuning job to cancel.",
        "Type": {
         "$id": "942",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -6926,8 +7180,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "944",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7016,8 +7270,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "952",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7043,8 +7297,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "955",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7137,8 +7391,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "963",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7164,8 +7418,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "966",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7258,8 +7512,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "974",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7285,8 +7539,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "977",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7362,8 +7616,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "984",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7424,11 +7678,12 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "989",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "990",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "multipart/form-data",
@@ -7474,8 +7729,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "994",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7540,8 +7795,8 @@
        "Description": "The ID of the file to use for this request.",
        "Type": {
         "$id": "999",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -7560,8 +7815,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1001",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7623,8 +7878,8 @@
        "Description": "The ID of the file to use for this request.",
        "Type": {
         "$id": "1006",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -7643,8 +7898,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1008",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7706,8 +7961,8 @@
        "Description": "The ID of the file to use for this request.",
        "Type": {
         "$id": "1013",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -7726,8 +7981,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1015",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7756,8 +8011,8 @@
        ],
        "BodyType": {
         "$id": "1018",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -7821,8 +8076,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1024",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7848,8 +8103,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "1027",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7914,8 +8169,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1032",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -7978,8 +8233,8 @@
        "Description": "The ID of the fine-tune job",
        "Type": {
         "$id": "1037",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -7998,8 +8253,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1039",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8062,8 +8317,8 @@
        "Description": "The ID of the fine-tune job to get events for.",
        "Type": {
         "$id": "1044",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -8083,8 +8338,8 @@
        "Description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
        "Type": {
         "$id": "1046",
-        "Name": "boolean",
-        "Kind": "Boolean",
+        "Kind": "Primitive",
+        "Name": "Boolean",
         "IsNullable": false
        },
        "Location": "Query",
@@ -8103,8 +8358,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1048",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8167,8 +8422,8 @@
        "Description": "The ID of the fine-tune job to cancel",
        "Type": {
         "$id": "1053",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -8187,8 +8442,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1055",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8261,8 +8516,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1062",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8324,8 +8579,8 @@
        "Description": "The ID of the model to use for this request.",
        "Type": {
         "$id": "1067",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -8344,8 +8599,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1069",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8407,8 +8662,8 @@
        "Description": "The model to delete",
        "Type": {
         "$id": "1074",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -8427,8 +8682,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1076",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8518,8 +8773,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1084",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8545,8 +8800,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "1087",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8610,11 +8865,12 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "1092",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "1093",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "multipart/form-data",
@@ -8660,8 +8916,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1097",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8725,11 +8981,12 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "1102",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "1103",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "multipart/form-data",
@@ -8775,8 +9032,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1107",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8869,8 +9126,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "1115",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -8896,8 +9153,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "1118",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

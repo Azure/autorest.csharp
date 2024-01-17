@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "InnerModel",
    "Namespace": "Type.Dictionary",
    "Description": "Dictionary inner model",
@@ -20,8 +21,8 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -34,11 +35,12 @@
      "Description": "",
      "Type": {
       "$id": "6",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "7",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -80,8 +82,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "13",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -97,8 +99,8 @@
         "$id": "14",
         "Type": {
          "$id": "15",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -110,8 +112,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "17",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -140,17 +142,18 @@
        ],
        "BodyType": {
         "$id": "20",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "21",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "22",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -185,17 +188,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "25",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "26",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "27",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -216,8 +220,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "29",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -243,8 +247,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "32",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -313,8 +317,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "39",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -343,17 +347,18 @@
        ],
        "BodyType": {
         "$id": "42",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "43",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "44",
-         "Name": "int64",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsNullable": false
@@ -388,17 +393,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "47",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "48",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "49",
-         "Name": "int64",
-         "Kind": "Int64",
+         "Kind": "Primitive",
+         "Name": "Int64",
          "IsNullable": false
         },
         "IsNullable": false
@@ -419,8 +425,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "51",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -446,8 +452,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "54",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -516,8 +522,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "61",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -546,17 +552,18 @@
        ],
        "BodyType": {
         "$id": "64",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "65",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "66",
-         "Name": "boolean",
-         "Kind": "Boolean",
+         "Kind": "Primitive",
+         "Name": "Boolean",
          "IsNullable": false
         },
         "IsNullable": false
@@ -591,17 +598,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "69",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "70",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "71",
-         "Name": "boolean",
-         "Kind": "Boolean",
+         "Kind": "Primitive",
+         "Name": "Boolean",
          "IsNullable": false
         },
         "IsNullable": false
@@ -622,8 +630,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "73",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -649,8 +657,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "76",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -719,8 +727,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "83",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -749,17 +757,18 @@
        ],
        "BodyType": {
         "$id": "86",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "87",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "88",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -794,17 +803,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "91",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "92",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "93",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -825,8 +835,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "95",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -852,8 +862,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "98",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -922,8 +932,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "105",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -952,17 +962,18 @@
        ],
        "BodyType": {
         "$id": "108",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "109",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "110",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -997,17 +1008,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "113",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "114",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "115",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1028,8 +1040,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "117",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1055,8 +1067,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "120",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1125,8 +1137,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "127",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1155,17 +1167,18 @@
        ],
        "BodyType": {
         "$id": "130",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "131",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "132",
-         "Name": "utcDateTime",
-         "Kind": "DateTime",
+         "Kind": "Primitive",
+         "Name": "DateTime",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1200,17 +1213,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "135",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "136",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "137",
-         "Name": "utcDateTime",
-         "Kind": "DateTime",
+         "Kind": "Primitive",
+         "Name": "DateTime",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1231,8 +1245,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "139",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1258,8 +1272,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "142",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1328,8 +1342,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "149",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1358,17 +1372,18 @@
        ],
        "BodyType": {
         "$id": "152",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "153",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "154",
-         "Name": "duration",
-         "Kind": "DurationISO8601",
+         "Kind": "Primitive",
+         "Name": "DurationISO8601",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1403,17 +1418,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "157",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "158",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "159",
-         "Name": "duration",
-         "Kind": "DurationISO8601",
+         "Kind": "Primitive",
+         "Name": "DurationISO8601",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1434,8 +1450,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "161",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1461,8 +1477,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "164",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1531,8 +1547,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "171",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1561,17 +1577,18 @@
        ],
        "BodyType": {
         "$id": "174",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "175",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "176",
-         "Name": "Intrinsic",
-         "Kind": "unknown",
+         "Kind": "Intrinsic",
+         "Name": "unknown",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1606,17 +1623,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "179",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "180",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "181",
-         "Name": "Intrinsic",
-         "Kind": "unknown",
+         "Kind": "Intrinsic",
+         "Name": "unknown",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1637,8 +1655,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "183",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1664,8 +1682,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "186",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1734,8 +1752,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "193",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1764,11 +1782,12 @@
        ],
        "BodyType": {
         "$id": "196",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "197",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
@@ -1806,11 +1825,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "200",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "201",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
@@ -1834,8 +1854,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "203",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1861,8 +1881,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "206",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1931,8 +1951,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "213",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1961,11 +1981,12 @@
        ],
        "BodyType": {
         "$id": "216",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "217",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
@@ -2003,11 +2024,12 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "220",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "221",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
@@ -2031,8 +2053,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "223",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2058,8 +2080,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "226",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2128,8 +2150,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "233",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2158,17 +2180,18 @@
        ],
        "BodyType": {
         "$id": "236",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "237",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "238",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": true
         },
         "IsNullable": false
@@ -2203,17 +2226,18 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "241",
+        "Kind": "Dictionary",
         "Name": "Dictionary",
         "KeyType": {
          "$id": "242",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "ValueType": {
          "$id": "243",
-         "Name": "float32",
-         "Kind": "Float32",
+         "Kind": "Primitive",
+         "Name": "Float32",
          "IsNullable": true
         },
         "IsNullable": false
@@ -2234,8 +2258,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "245",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2261,8 +2285,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "248",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

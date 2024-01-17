@@ -3,7 +3,6 @@
 
 import { getLroMetadata } from "@azure-tools/typespec-azure-core";
 import {
-    createSdkContext,
     isApiVersion,
     shouldGenerateConvenient,
     shouldGenerateProtocol,
@@ -12,7 +11,6 @@ import {
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import {
-    EmitContext,
     getDeprecated,
     getDoc,
     getSummary,
@@ -20,7 +18,8 @@ import {
     Model,
     ModelProperty,
     Namespace,
-    Operation
+    Operation,
+    Program
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -42,6 +41,7 @@ import {
     InputModelType,
     InputType,
     isInputLiteralType,
+    isInputModelType,
     isInputUnionType
 } from "../type/inputType.js";
 import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
@@ -69,9 +69,11 @@ import {
     createContentTypeOrAcceptParameter,
     getTypeName
 } from "./utils.js";
+import { Usage } from "../type/usage.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
 
 export function loadOperation(
-    context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext<NetEmitterOptions>,
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
@@ -79,17 +81,13 @@ export function loadOperation(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
-    const program = context.program;
-    const sdkContext = createSdkContext(
-        context,
-        "@azure-tools/typespec-csharp"
-    );
     const {
         path: fullPath,
         operation: op,
         verb,
         parameters: typespecParameters
     } = operation;
+    const program = sdkContext.program;
     logger.info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
@@ -116,19 +114,31 @@ export function loadOperation(
             typespecParameters.body.type
         );
         if (effectiveBodyType.kind === "Model") {
-            if (effectiveBodyType.name !== "") {
-                parameters.push(
-                    loadBodyParameter(sdkContext, effectiveBodyType)
-                );
-            } else {
-                effectiveBodyType.name = `${capitalize(op.name)}Request`;
-                let bodyParameter = loadBodyParameter(
-                    sdkContext,
-                    effectiveBodyType
-                );
+            let bodyParameter = loadBodyParameter(
+                sdkContext,
+                effectiveBodyType
+            );
+            if (effectiveBodyType.name === "") {
                 bodyParameter.Kind = InputOperationParameterKind.Spread;
-                parameters.push(bodyParameter);
             }
+            // TODO: remove this after https://github.com/Azure/typespec-azure/issues/69 is resolved
+            // workaround for alias model
+            if (
+                isInputModelType(bodyParameter.Type) &&
+                bodyParameter.Type.Name === ""
+            ) {
+                // give body type a name
+                bodyParameter.Type.Name = `${capitalize(op.name)}Request`;
+                var bodyModelType = bodyParameter.Type as InputModelType;
+                bodyModelType.Usage = Usage.Input;
+                // update models cache
+                models.delete("");
+                models.set(bodyModelType.Name, bodyModelType);
+
+                // give body parameter a name
+                bodyParameter.Name = `${capitalize(op.name)}Request`;
+            }
+            parameters.push(bodyParameter);
         }
     }
 
@@ -263,7 +273,7 @@ export function loadOperation(
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind =
-            isContentType || inputType.Name === "Literal"
+            isContentType || inputType.Kind === InputTypeKind.Literal
                 ? InputOperationParameterKind.Constant
                 : isApiVer
                 ? defaultValue
@@ -298,7 +308,6 @@ export function loadOperation(
         context: SdkContext,
         body: ModelProperty | Model
     ): InputParameter {
-        const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(
             context,
             getFormattedType(program, body),
@@ -309,7 +318,7 @@ export function loadOperation(
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
         return {
-            Name: getTypeName(sdkContext, body),
+            Name: getTypeName(context, body),
             NameInRequest: body.name,
             Description: getDoc(program, body),
             Type: inputType,

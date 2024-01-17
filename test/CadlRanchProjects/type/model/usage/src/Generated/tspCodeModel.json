@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "InputRecord",
    "Namespace": "Type.Model.Usage",
    "Description": "Record used in operation parameters",
@@ -20,8 +21,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -31,6 +32,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "OutputRecord",
    "Namespace": "Type.Model.Usage",
    "Description": "Record used in operation return type",
@@ -44,8 +46,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -55,6 +57,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "InputOutputRecord",
    "Namespace": "Type.Model.Usage",
    "Description": "Record used both as operation parameter and return type",
@@ -68,8 +71,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -96,8 +99,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "14",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -113,8 +116,8 @@
         "$id": "15",
         "Type": {
          "$id": "16",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -143,8 +146,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "19",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -170,8 +173,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -228,8 +231,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -306,8 +309,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -333,8 +336,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "36",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

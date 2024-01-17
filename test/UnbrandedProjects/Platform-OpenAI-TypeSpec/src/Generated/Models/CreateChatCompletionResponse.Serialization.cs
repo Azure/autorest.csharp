@@ -3,9 +3,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
@@ -22,7 +22,7 @@ namespace OpenAI.Models
             string @object = default;
             DateTimeOffset created = default;
             string model = default;
-            IReadOnlyList<CreateChoice> choices = default;
+            IReadOnlyList<CreateChatCompletionResponseChoice> choices = default;
             OptionalProperty<CompletionUsage> usage = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -48,10 +48,10 @@ namespace OpenAI.Models
                 }
                 if (property.NameEquals("choices"u8))
                 {
-                    List<CreateChoice> array = new List<CreateChoice>();
+                    List<CreateChatCompletionResponseChoice> array = new List<CreateChatCompletionResponseChoice>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CreateChoice.DeserializeCreateChoice(item));
+                        array.Add(CreateChatCompletionResponseChoice.DeserializeCreateChatCompletionResponseChoice(item));
                     }
                     choices = array;
                     continue;

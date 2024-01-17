@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                 Parameters: new[] { IsAsyncParameter },
                 Initializer: new ConstructorInitializer(
                     IsBase: true,
-                    Arguments: new FormattableString[] { $"{IsAsyncParameter.Name:I}" })
+                    Arguments: new ValueExpression[] { IsAsyncParameter })
                 ),
                 EmptyStatement);
         }
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         protected override CSharpAttribute[] GetMethodAttributes() => _attributes;
 
-        private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Please remove the Ignore attribute to let the test method run") };
+        private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), Literal("Please remove the Ignore attribute to let the test method run")) };
 
         protected override MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {

@@ -73,6 +73,14 @@ namespace MgmtPartialResource
         /// <term>Operation Id</term>
         /// <description>ConfigurationProfileAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
@@ -95,6 +103,14 @@ namespace MgmtPartialResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ConfigurationProfileAssignments_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ConfigurationProfileAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

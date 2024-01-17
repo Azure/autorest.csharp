@@ -6,6 +6,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "Thing_requiredLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -24,6 +25,7 @@
   },
   {
    "$id": "4",
+   "Kind": "Enum",
    "Name": "Thing_requiredLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -42,6 +44,7 @@
   },
   {
    "$id": "6",
+   "Kind": "Enum",
    "Name": "Thing_requiredLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -60,6 +63,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Enum",
    "Name": "Thing_optionalLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -78,6 +82,7 @@
   },
   {
    "$id": "10",
+   "Kind": "Enum",
    "Name": "Thing_optionalLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -96,6 +101,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Enum",
    "Name": "Thing_optionalLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -114,6 +120,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Enum",
    "Name": "StringFixedEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -141,6 +148,7 @@
   },
   {
    "$id": "18",
+   "Kind": "Enum",
    "Name": "StringExtensibleEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -168,6 +176,7 @@
   },
   {
    "$id": "22",
+   "Kind": "Enum",
    "Name": "IntExtensibleEnum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -195,6 +204,7 @@
   },
   {
    "$id": "26",
+   "Kind": "Enum",
    "Name": "FloatExtensibleEnum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -222,6 +232,7 @@
   },
   {
    "$id": "30",
+   "Kind": "Enum",
    "Name": "FloatFixedEnum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -249,6 +260,7 @@
   },
   {
    "$id": "34",
+   "Kind": "Enum",
    "Name": "IntFixedEnum",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -276,6 +288,7 @@
   },
   {
    "$id": "38",
+   "Kind": "Enum",
    "Name": "DaysOfWeekExtensibleEnum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -325,6 +338,7 @@
  "Models": [
   {
    "$id": "46",
+   "Kind": "Model",
    "Name": "Thing",
    "Namespace": "UnbrandedTypeSpec",
    "Description": "A model with a few properties of literal types",
@@ -338,8 +352,8 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "48",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -352,29 +366,31 @@
      "Description": "required Union",
      "Type": {
       "$id": "50",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "51",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "52",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "53",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
        },
        {
         "$id": "54",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        }
       ],
@@ -390,6 +406,7 @@
      "Description": "required literal string",
      "Type": {
       "$id": "56",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "2"
@@ -407,6 +424,7 @@
      "Description": "required literal int",
      "Type": {
       "$id": "58",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "4"
@@ -424,6 +442,7 @@
      "Description": "required literal float",
      "Type": {
       "$id": "60",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "6"
@@ -441,11 +460,12 @@
      "Description": "required literal bool",
      "Type": {
       "$id": "62",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$id": "63",
+       "Kind": "Primitive",
        "Name": "Boolean",
-       "Kind": "Boolean",
        "IsNullable": false
       },
       "Value": false,
@@ -461,6 +481,7 @@
      "Description": "optional literal string",
      "Type": {
       "$id": "65",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "8"
@@ -478,6 +499,7 @@
      "Description": "optional literal int",
      "Type": {
       "$id": "67",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "10"
@@ -495,6 +517,7 @@
      "Description": "optional literal float",
      "Type": {
       "$id": "69",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "12"
@@ -512,11 +535,12 @@
      "Description": "optional literal bool",
      "Type": {
       "$id": "71",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$id": "72",
+       "Kind": "Primitive",
        "Name": "Boolean",
-       "Kind": "Boolean",
        "IsNullable": false
       },
       "Value": true,
@@ -532,8 +556,8 @@
      "Description": "description with xml <|endoftext|>",
      "Type": {
       "$id": "74",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -546,11 +570,12 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "76",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "77",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -565,11 +590,12 @@
      "Description": "required nullable collection",
      "Type": {
       "$id": "79",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "80",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -581,6 +607,7 @@
   },
   {
    "$id": "81",
+   "Kind": "Model",
    "Name": "RoundTripModel",
    "Namespace": "UnbrandedTypeSpec",
    "Description": "this is a roundtrip model",
@@ -594,8 +621,8 @@
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "83",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -608,8 +635,8 @@
      "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "85",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -622,6 +649,7 @@
      "Description": "Required collection of enums",
      "Type": {
       "$id": "87",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "14"
@@ -638,11 +666,12 @@
      "Description": "Required dictionary of enums",
      "Type": {
       "$id": "89",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "90",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
@@ -682,6 +711,7 @@
      "Description": "this is a collection of int based extensible enum",
      "Type": {
       "$id": "94",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "22"
@@ -709,6 +739,7 @@
      "Description": "this is a collection of float based extensible enum",
      "Type": {
       "$id": "97",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "26"
@@ -736,6 +767,7 @@
      "Description": "this is a collection of float based fixed enum",
      "Type": {
       "$id": "100",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "30"
@@ -763,6 +795,7 @@
      "Description": "this is a collection of int based fixed enum",
      "Type": {
       "$id": "103",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "34"
@@ -790,8 +823,8 @@
      "Description": "required unknown",
      "Type": {
       "$id": "106",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -804,8 +837,8 @@
      "Description": "optional unknown",
      "Type": {
       "$id": "108",
-      "Name": "Intrinsic",
-      "Kind": "unknown",
+      "Kind": "Intrinsic",
+      "Name": "unknown",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -818,17 +851,18 @@
      "Description": "required record of unknown",
      "Type": {
       "$id": "110",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "111",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "112",
-       "Name": "Intrinsic",
-       "Kind": "unknown",
+       "Kind": "Intrinsic",
+       "Name": "unknown",
        "IsNullable": false
       },
       "IsNullable": false
@@ -843,17 +877,18 @@
      "Description": "optional record of unknown",
      "Type": {
       "$id": "114",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "115",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "116",
-       "Name": "Intrinsic",
-       "Kind": "unknown",
+       "Kind": "Intrinsic",
+       "Name": "unknown",
        "IsNullable": false
       },
       "IsNullable": false
@@ -868,17 +903,18 @@
      "Description": "required readonly record of unknown",
      "Type": {
       "$id": "118",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "119",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "120",
-       "Name": "Intrinsic",
-       "Kind": "unknown",
+       "Kind": "Intrinsic",
+       "Name": "unknown",
        "IsNullable": false
       },
       "IsNullable": false
@@ -893,17 +929,18 @@
      "Description": "optional readonly record of unknown",
      "Type": {
       "$id": "122",
+      "Kind": "Dictionary",
       "Name": "Dictionary",
       "KeyType": {
        "$id": "123",
-       "Name": "string",
-       "Kind": "String",
+       "Kind": "Primitive",
+       "Name": "String",
        "IsNullable": false
       },
       "ValueType": {
        "$id": "124",
-       "Name": "Intrinsic",
-       "Kind": "unknown",
+       "Kind": "Intrinsic",
+       "Name": "unknown",
        "IsNullable": false
       },
       "IsNullable": false
@@ -918,6 +955,7 @@
      "Description": "this is a model with required nullable properties",
      "Type": {
       "$id": "126",
+      "Kind": "Model",
       "Name": "ModelWithRequiredNullableProperties",
       "Namespace": "UnbrandedTypeSpec",
       "Description": "A model with a few required nullable properties",
@@ -931,8 +969,8 @@
         "Description": "required nullable primitive type",
         "Type": {
          "$id": "128",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": true
         },
         "IsRequired": true,
@@ -972,6 +1010,7 @@
   },
   {
    "$id": "131",
+   "Kind": "Model",
    "Name": "Friend",
    "Namespace": "UnbrandedTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
@@ -985,8 +1024,8 @@
      "Description": "name of the NotFriend",
      "Type": {
       "$id": "133",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -996,6 +1035,7 @@
   },
   {
    "$id": "134",
+   "Kind": "Model",
    "Name": "ModelWithFormat",
    "Namespace": "UnbrandedTypeSpec",
    "IsNullable": false,
@@ -1008,8 +1048,8 @@
      "Description": "url format",
      "Type": {
       "$id": "136",
-      "Name": "string",
-      "Kind": "Uri",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1022,8 +1062,8 @@
      "Description": "uuid format",
      "Type": {
       "$id": "138",
-      "Name": "string",
-      "Kind": "Guid",
+      "Kind": "Primitive",
+      "Name": "Guid",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1033,6 +1073,7 @@
   },
   {
    "$id": "139",
+   "Kind": "Model",
    "Name": "ProjectedModel",
    "Namespace": "UnbrandedTypeSpec",
    "Description": "this is a model with a projected name",
@@ -1046,8 +1087,8 @@
      "Description": "name of the ModelWithProjectedName",
      "Type": {
       "$id": "141",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1057,10 +1098,11 @@
   },
   {
    "$id": "142",
-   "Name": "Anon_1",
+   "Kind": "Model",
+   "Name": "ReturnsAnonymousModelResponse",
    "Namespace": "UnbrandedTypeSpec",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": []
   }
  ],
@@ -1082,8 +1124,8 @@
        "NameInRequest": "unbrandedTypeSpecUrl",
        "Type": {
         "$id": "146",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -1102,8 +1144,8 @@
        "NameInRequest": "head-parameter",
        "Type": {
         "$id": "148",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1122,8 +1164,8 @@
        "NameInRequest": "queryParameter",
        "Type": {
         "$id": "150",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1142,8 +1184,8 @@
        "NameInRequest": "optionalQuery",
        "Type": {
         "$id": "152",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -1162,8 +1204,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "154",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1224,8 +1266,8 @@
        "NameInRequest": "p1",
        "Type": {
         "$id": "159",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1244,11 +1286,12 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "161",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "162",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "text/plain",
@@ -1277,8 +1320,8 @@
        "NameInRequest": "p2",
        "Type": {
         "$id": "165",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1314,8 +1357,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "168",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1379,8 +1422,8 @@
        "NameInRequest": "p1",
        "Type": {
         "$id": "173",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1399,8 +1442,8 @@
        "NameInRequest": "p2",
        "Type": {
         "$id": "175",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1436,8 +1479,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "178",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1463,8 +1506,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "181",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1528,8 +1571,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "186",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1607,8 +1650,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "192",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1634,8 +1677,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "195",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1699,11 +1742,12 @@
        "NameInRequest": "p1",
        "Type": {
         "$id": "200",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "201",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "test",
@@ -1732,11 +1776,12 @@
        "NameInRequest": "p2",
        "Type": {
         "$id": "204",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "205",
-         "Name": "Number",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "Value": 123,
@@ -1765,11 +1810,12 @@
        "NameInRequest": "p3",
        "Type": {
         "$id": "208",
+        "Kind": "Literal",
         "Name": "Literal",
         "LiteralValueType": {
          "$id": "209",
+         "Kind": "Primitive",
          "Name": "Boolean",
-         "Kind": "Boolean",
          "IsNullable": false
         },
         "Value": true,
@@ -1798,8 +1844,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "212",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1860,8 +1906,8 @@
        "NameInRequest": "action",
        "Type": {
         "$id": "217",
-        "Name": "string",
-        "Kind": "DateTime",
+        "Kind": "Primitive",
+        "Name": "DateTime",
         "IsNullable": false
        },
        "Location": "Path",
@@ -1880,8 +1926,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "219",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1942,8 +1988,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "224",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2021,8 +2067,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "230",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2048,8 +2094,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "233",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2131,8 +2177,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "239",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2158,8 +2204,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "242",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2241,8 +2287,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "248",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2268,8 +2314,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "251",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2332,8 +2378,8 @@
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
         "$id": "256",
-        "Name": "utcDateTime",
-        "Kind": "DateTime",
+        "Kind": "Primitive",
+        "Name": "DateTime",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2352,8 +2398,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "258",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2408,8 +2454,8 @@
        "NameInRequest": "subscriptionId",
        "Type": {
         "$id": "263",
-        "Name": "string",
-        "Kind": "Guid",
+        "Kind": "Primitive",
+        "Name": "Guid",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2445,8 +2491,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "266",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2472,8 +2518,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "269",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2549,8 +2595,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "275",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2576,8 +2622,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "278",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2641,8 +2687,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "283",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2703,8 +2749,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "288",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2782,8 +2828,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "294",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2809,8 +2855,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "297",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2874,8 +2920,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "302",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2930,8 +2976,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "307",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -2950,8 +2996,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "309",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

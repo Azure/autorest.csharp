@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputType.Name), ref name)
+                    || reader.TryReadString(nameof(InputModelType.Name), ref name)
                     || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable)
                     || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputModelType.Accessibility), ref accessibility)
@@ -97,12 +97,6 @@ namespace AutoRest.CSharp.Common.Input
         private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, InputDictionaryType? inheritedDictionaryType, bool isNullable, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
-            bool isAnonymousModel = false;
-            if (name.StartsWith("Anon_", StringComparison.Ordinal))
-            {
-                name = id ?? throw new JsonException("Model must have id"); // we just use id as the name of the model
-                isAnonymousModel = true;
-            }
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             if (usageString != null)
             {
@@ -110,10 +104,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var derivedModels = new List<InputModelType>();
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyValue, inheritedDictionaryType, IsNullable: isNullable)
-            {
-                IsAnonymousModel = isAnonymousModel
-            };
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyValue, inheritedDictionaryType, IsNullable: isNullable);
 
             if (id is not null)
             {

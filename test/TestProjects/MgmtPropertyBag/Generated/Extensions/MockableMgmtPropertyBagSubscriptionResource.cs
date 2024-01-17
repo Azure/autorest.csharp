@@ -57,6 +57,14 @@ namespace MgmtPropertyBag.Mocking
         /// <term>Operation Id</term>
         /// <description>Foos_ListWithSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
@@ -79,6 +87,14 @@ namespace MgmtPropertyBag.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Foos_ListWithSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -103,6 +119,14 @@ namespace MgmtPropertyBag.Mocking
         /// <term>Operation Id</term>
         /// <description>Bars_ListWithSubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
@@ -126,6 +150,14 @@ namespace MgmtPropertyBag.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_ListWithSubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

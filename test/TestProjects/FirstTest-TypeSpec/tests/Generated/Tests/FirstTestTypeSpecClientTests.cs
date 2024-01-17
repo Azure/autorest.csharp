@@ -440,7 +440,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response<object> response = await client.ReturnsAnonymousModelAsync();
+            Response<ReturnsAnonymousModelResponse> response = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]
@@ -462,7 +462,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response<object> response = await client.ReturnsAnonymousModelAsync();
+            Response<ReturnsAnonymousModelResponse> response = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]

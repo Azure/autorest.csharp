@@ -239,12 +239,6 @@ namespace Hello.Demo2 {
         @path p2: string
     ): RoundTripModel;
 
-    @route("/demoHi")
-    @doc("Return hi in demo2")
-    @get
-    @convenientAPI(true)
-    op helloDemo2(): Thing;
-
     @route("/literal")
     @doc("Create with literal value")
     @post

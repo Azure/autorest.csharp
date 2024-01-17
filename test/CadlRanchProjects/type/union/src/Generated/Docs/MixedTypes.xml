@@ -7,13 +7,13 @@ This sample shows how to call GetMixedTypeAsync.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response<object> response = await client.GetMixedTypeAsync();
+Response<GetResponse9> response = await client.GetMixedTypeAsync();
 ]]></code>
 This sample shows how to call GetMixedTypeAsync with all parameters.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response<object> response = await client.GetMixedTypeAsync();
+Response<GetResponse9> response = await client.GetMixedTypeAsync();
 ]]></code></example>
     </member>
     <member name="GetMixedType(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetMixedType.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response<object> response = client.GetMixedType();
+Response<GetResponse9> response = client.GetMixedType();
 ]]></code>
 This sample shows how to call GetMixedType with all parameters.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response<object> response = client.GetMixedType();
+Response<GetResponse9> response = client.GetMixedType();
 ]]></code></example>
     </member>
     <member name="GetMixedTypeAsync(RequestContext)">
@@ -85,34 +85,50 @@ Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
 Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
 ]]></code></example>
     </member>
-    <member name="SendAsync(SendRequestProp,CancellationToken)">
+    <member name="SendAsync(MixedTypesCases,CancellationToken)">
       <example>
 This sample shows how to call SendAsync.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+{
+    name = "<name>",
+}), null, null, null);
+Response response = await client.SendAsync(prop);
 ]]></code>
 This sample shows how to call SendAsync with all parameters.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response response = await client.SendAsync(SendRequestProp.A);
+MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+{
+    name = "<name>",
+}), null, null, null);
+Response response = await client.SendAsync(prop);
 ]]></code></example>
     </member>
-    <member name="Send(SendRequestProp,CancellationToken)">
+    <member name="Send(MixedTypesCases,CancellationToken)">
       <example>
 This sample shows how to call Send.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response response = client.Send(SendRequestProp.A);
+MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+{
+    name = "<name>",
+}), null, null, null);
+Response response = client.Send(prop);
 ]]></code>
 This sample shows how to call Send with all parameters.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient();
 
-Response response = client.Send(SendRequestProp.A);
+MixedTypesCases prop = new MixedTypesCases(BinaryData.FromObjectAsJson(new
+{
+    name = "<name>",
+}), null, null, null);
+Response response = client.Send(prop);
 ]]></code></example>
     </member>
     <member name="SendAsync(RequestContent,RequestContext)">
@@ -123,7 +139,16 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["model"] = new
+        {
+            name = "<name>",
+        },
+        ["literal"] = null,
+        ["int"] = null,
+        ["boolean"] = null
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -135,7 +160,16 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["model"] = new
+        {
+            name = "<name>",
+        },
+        ["literal"] = null,
+        ["int"] = null,
+        ["boolean"] = null
+    },
 });
 Response response = await client.SendAsync(content);
 
@@ -150,7 +184,16 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["model"] = new
+        {
+            name = "<name>",
+        },
+        ["literal"] = null,
+        ["int"] = null,
+        ["boolean"] = null
+    },
 });
 Response response = client.Send(content);
 
@@ -162,7 +205,16 @@ MixedTypes client = new UnionClient().GetMixedTypesClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    prop = "a",
+    prop = new Dictionary<string, object>
+    {
+        ["model"] = new
+        {
+            name = "<name>",
+        },
+        ["literal"] = null,
+        ["int"] = null,
+        ["boolean"] = null
+    },
 });
 Response response = client.Send(content);
 

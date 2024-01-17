@@ -32,6 +32,7 @@ export type NetEmitterOptions = {
     "head-as-boolean"?: boolean;
     branded?: boolean;
     "generate-test-project"?: boolean;
+    "use-model-reader-writer"?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -105,7 +106,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             type: "boolean",
             nullable: true,
             default: false
-        }
+        },
+        "use-model-reader-writer": { type: "boolean", nullable: true }
     },
     required: []
 };

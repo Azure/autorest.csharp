@@ -177,6 +177,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -207,6 +215,14 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -256,6 +272,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -286,6 +310,14 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -335,6 +367,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -364,6 +404,14 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -395,6 +443,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -423,6 +479,14 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListByLocation</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -453,6 +517,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -481,6 +553,14 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachines_ListAll</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -511,6 +591,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -538,6 +626,14 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Images_List</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ImageResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -567,6 +663,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -595,6 +699,14 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_ListAll</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -622,6 +734,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
@@ -653,6 +769,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportRequestRateByInterval</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -683,6 +803,10 @@ namespace MgmtAcronymMapping
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportThrottledRequests</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -712,6 +836,10 @@ namespace MgmtAcronymMapping
         /// <item>
         /// <term>Operation Id</term>
         /// <description>LogAnalytics_ExportThrottledRequests</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// <item>
