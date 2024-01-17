@@ -26,7 +26,7 @@ namespace MultipleMediaTypes.Samples
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
-            Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
+            Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json; serialization=Avro"));
 
             Console.WriteLine(response.Status);
         }
@@ -39,7 +39,7 @@ namespace MultipleMediaTypes.Samples
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
-            Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
+            Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json; serialization=Avro"));
 
             Console.WriteLine(response.Status);
         }
@@ -51,7 +51,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            Response response = client.OneBinaryBodyTwoContentTypes(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json"));
+            Response response = client.OneBinaryBodyTwoContentTypes(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json; serialization=Avro"));
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            Response response = await client.OneBinaryBodyTwoContentTypesAsync(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json"));
+            Response response = await client.OneBinaryBodyTwoContentTypesAsync(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json; serialization=Avro"));
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace MultipleMediaTypes.Samples
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
-            Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json"));
+            Response response = client.OneBinaryBodyTwoContentTypes(content, new ContentType("application/json; serialization=Avro"));
 
             Console.WriteLine(response.Status);
         }
@@ -85,7 +85,7 @@ namespace MultipleMediaTypes.Samples
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
-            Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
+            Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json; serialization=Avro"));
 
             Console.WriteLine(response.Status);
         }
@@ -97,7 +97,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            Response response = client.OneBinaryBodyTwoContentTypes(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json"));
+            Response response = client.OneBinaryBodyTwoContentTypes(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json; serialization=Avro"));
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace MultipleMediaTypes.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
 
-            Response response = await client.OneBinaryBodyTwoContentTypesAsync(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json"));
+            Response response = await client.OneBinaryBodyTwoContentTypesAsync(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json; serialization=Avro"));
         }
 
         [Test]

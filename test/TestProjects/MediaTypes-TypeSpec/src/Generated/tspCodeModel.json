@@ -77,7 +77,7 @@
            "Kind": "String",
            "IsNullable": false
           },
-          "Value": "application/json",
+          "Value": "application/json; serialization=Avro",
           "IsNullable": false
          },
          {
@@ -169,7 +169,7 @@
      "Uri": "{endpoint}",
      "Path": "/oneBinaryBodyTwoContentTypes",
      "RequestMediaTypes": [
-      "application/json",
+      "application/json; serialization=Avro",
       "application/octet-stream"
      ],
      "BufferResponse": true,
