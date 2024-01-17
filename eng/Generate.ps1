@@ -2,6 +2,7 @@
 param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$debug, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
+Import-Module "$PSScriptRoot\..\test\scripts\LocalTestNugetSource.psm1" -DisableNameChecking -Force;
 
 $timer = [System.Diagnostics.Stopwatch]::new();
 $timer.Start();
@@ -376,6 +377,23 @@ if (!$noBuild) {
     if ($typespecCount -gt 0) {
         Invoke-TypeSpecSetup
     }
+}
+
+[hashtable]$testPackagesToInstall = @{};
+$localTestNugetSourceFolder = Join-Path $repoRoot 'test/NugetPackages'
+foreach($key in $keys){
+    foreach($nugetPackageFilename in (Get-ChildItem -Path $localTestNugetSourceFolder | Select-Object -ExpandProperty Name)){
+        $nameForRegex = [Regex]::Escape($key);
+        if ($nugetPackageFilename -match "^($nameForRegex)\.([\.\d\w\-]+)\.nupkg$") {
+            $name = $matches[1]
+            $version = $matches[2]
+            $testPackagesToInstall[$name] = $version;
+        }
+    }
+}
+
+if($testPackagesToInstall.Count -gt 0){
+    Install-Test-Nuget-Packages $testPackagesToInstall
 }
 
 $keys | % { $swaggerDefinitions[$_] } | ForEach-Object -Parallel {

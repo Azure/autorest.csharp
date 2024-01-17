@@ -32,7 +32,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private readonly InputModelType _inputModel;
         private readonly TypeFactory _typeFactory;
-        private readonly SourceInputModel? _sourceInputModel;
         private readonly IReadOnlyList<InputModelType> _derivedModels;
         private readonly SerializableObjectType? _defaultDerivedType;
 
@@ -94,7 +93,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _typeFactory = typeFactory;
             _inputModel = inputModel;
-            _sourceInputModel = sourceInputModel;
             DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
