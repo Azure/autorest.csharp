@@ -20,6 +20,7 @@ using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Common.Input.Configuration;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -92,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
         public LowLevelClientMethod BuildOperationMethodChain()
         {
             var protocolMethodAttributes = Operation.Deprecated is { } deprecated
-                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : Array.Empty<CSharpAttribute>();
 
             var shouldRequestContextOptional = ShouldRequestContextOptional();
@@ -352,7 +353,7 @@ namespace AutoRest.CSharp.Output.Models
                 name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
             }
             var attributes = Operation.Deprecated is { } deprecated
-                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), Literal(deprecated)) }
                 : null;
 
             var protocolToConvenience = new List<ProtocolToConvenienceParameterConverter>();
