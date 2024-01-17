@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _typeFactory = typeFactory;
             _serializationBuilder = new SerializationBuilder();
-            _usage = inputModel.Usage;
+            _usage = context.InputModelTypeUsageProvider?.GetUsage(inputModel) ?? inputModel.Usage;
 
             DefaultAccessibility = inputModel.Accessibility ?? "public";
 
@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
                     ConstantExpression? defaultValue = null;
-                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value) && Discriminator.Value is {} discriminatorValue)
+                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value) && Discriminator.Value is { } discriminatorValue)
                     {
                         defaultValue = new ConstantExpression(discriminatorValue);
                     }
@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildMethods()
         {
-            if (XmlSerialization is {} xmlSerialization)
+            if (XmlSerialization is { } xmlSerialization)
             {
                 if (IncludeSerializer)
                 {
@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
                 }
 
-                if (IncludeDeserializer && JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization, ExistingType) is {} jsonDeserialize)
+                if (IncludeDeserializer && JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization, ExistingType) is { } jsonDeserialize)
                 {
                     yield return jsonDeserialize;
                 }

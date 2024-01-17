@@ -17,6 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             CodeModel = codeModel;
             SchemaUsageProvider = codeModel is null ? null : new SchemaUsageProvider(codeModel);
+            InputModelTypeUsageProvider = inputNamespace is null ? null : new InputTypeUsageProvider(inputNamespace);
             SourceInputModel = sourceInputModel;
             DefaultNamespace = defaultNamespace;
             InputNamespace = inputNamespace;
@@ -27,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public InputNamespace? InputNamespace { get; } = null;
         public CodeModel? CodeModel { get; }
         public SchemaUsageProvider? SchemaUsageProvider { get; }
+        public InputTypeUsageProvider? InputModelTypeUsageProvider { get; }
         public string DefaultNamespace { get; }
         public SourceInputModel? SourceInputModel { get; }
         public virtual TypeFactory TypeFactory { get; } = null!;
