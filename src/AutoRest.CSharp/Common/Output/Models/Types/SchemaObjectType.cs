@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(context.DefaultNamespace, context.SourceInputModel)
         {
             DefaultName = (newName ?? inputModel.Name).ToCleanName();
-            DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, Configuration.Namespace);
             InputModel = inputModel;
 
             _typeFactory = typeFactory;
@@ -69,7 +68,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal InputModelType InputModel { get; }
 
         protected override string DefaultName { get; }
-        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 

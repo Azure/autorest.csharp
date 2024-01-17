@@ -50,11 +50,18 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private HashSet<string> GetParentPropertyNames()
         {
-            return EnumerateHierarchy()
+            var propertyNames = EnumerateHierarchy()
                 .Skip(1)
                 .SelectMany(type => type.Properties)
                 .Select(p => p.Declaration.Name)
                 .ToHashSet();
+
+            // TODO: workaround to map between resourceType and type
+            if (propertyNames.Contains("ResourceType"))
+            {
+                propertyNames.Add("Type");
+            }
+            return propertyNames;
         }
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
