@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
         public EnumType(InputEnumType enumType, TypeFactory typeFactory, BuildContext context, string? newName = default)
-            : this(enumType, TypeProvider.GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", typeFactory, context.SourceInputModel, newName)
+            : this(enumType, GetDefaultModelNamespace(null, context.DefaultNamespace), enumType.Accessibility ?? "public", typeFactory, context.SourceInputModel, newName)
         {
         }
 
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
-            Description = input.Description;
+            Description = string.IsNullOrWhiteSpace(input.Description) ? $"The {input.Name}." : input.Description;
             IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
