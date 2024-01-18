@@ -25,6 +25,64 @@ namespace ModelsTypeSpec.Tests
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                kind = "A",
+            });
+            Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                optionalInt = 1234,
+                kind = "A",
+                optionalString = "<optionalString>",
+            });
+            Response response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_PutBaseModelWithDiscriminatorDefinedOnBase_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            {
+                OptionalInt = 1234,
+                OptionalString = "<optionalString>",
+            };
+            Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ModelsTypeSpec_GetOutputDiscriminatorModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

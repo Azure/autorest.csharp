@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Unknown version of SingleBase. </summary>
@@ -16,13 +13,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="UnknownSingleBase"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownSingleBase(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
-        {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownSingleBase"/> for deserialization. </summary>
-        internal UnknownSingleBase()
+        internal UnknownSingleBase(string kind, int size) : base(kind, size)
         {
         }
     }

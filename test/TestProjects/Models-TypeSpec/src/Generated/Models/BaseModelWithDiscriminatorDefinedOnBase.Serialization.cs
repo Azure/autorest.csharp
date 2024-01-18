@@ -5,27 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    [PersistableModelProxy(typeof(UnknownBaseModelWithDiscriminatorDefinedOnBase))]
-    public partial class BaseModelWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable, IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>
+    public partial class BaseModelWithDiscriminatorDefinedOnBase : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(BaseModelWithDiscriminatorDefinedOnBase)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(OptionalString))
             {
@@ -34,40 +23,11 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        BaseModelWithDiscriminatorDefinedOnBase IJsonModel<BaseModelWithDiscriminatorDefinedOnBase>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static BaseModelWithDiscriminatorDefinedOnBase DeserializeBaseModelWithDiscriminatorDefinedOnBase(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new FormatException($"The model {nameof(BaseModelWithDiscriminatorDefinedOnBase)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeBaseModelWithDiscriminatorDefinedOnBase(document.RootElement, options);
-        }
-
-        internal static BaseModelWithDiscriminatorDefinedOnBase DeserializeBaseModelWithDiscriminatorDefinedOnBase(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -82,47 +42,16 @@ namespace ModelsTypeSpec.Models
             return UnknownBaseModelWithDiscriminatorDefinedOnBase.DeserializeUnknownBaseModelWithDiscriminatorDefinedOnBase(element);
         }
 
-        BinaryData IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new FormatException($"The model {nameof(BaseModelWithDiscriminatorDefinedOnBase)} does not support '{options.Format}' format.");
-            }
-        }
-
-        BaseModelWithDiscriminatorDefinedOnBase IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeBaseModelWithDiscriminatorDefinedOnBase(document.RootElement, options);
-                    }
-                default:
-                    throw new FormatException($"The model {nameof(BaseModelWithDiscriminatorDefinedOnBase)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<BaseModelWithDiscriminatorDefinedOnBase>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
-
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new BaseModelWithDiscriminatorDefinedOnBase FromResponse(Response response)
+        internal static BaseModelWithDiscriminatorDefinedOnBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeBaseModelWithDiscriminatorDefinedOnBase(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
