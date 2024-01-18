@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 Parameters: Array.Empty<Parameter>(),
                 Attributes: _attributes);
 
-        private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") };
+        private readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), Literal("Only validating compilation of examples")) };
 
         private Method BuildSampleMethod(DpgOperationSample sample, bool isAsync)
         {

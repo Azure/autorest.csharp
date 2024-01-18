@@ -593,6 +593,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
+        protected Type? FindModelFactory() => MyTypes().SingleOrDefault(IsModelFactory);
+
         private IEnumerable<Type> FindAllRestOperations()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();

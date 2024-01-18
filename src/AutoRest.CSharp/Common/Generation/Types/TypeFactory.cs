@@ -431,7 +431,11 @@ namespace AutoRest.CSharp.Generation.Types
             type = null;
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
             {
-                type = CreateType(namedTypeSymbol.TypeArguments[0]).WithNullable(true);
+                if (!TryCreateType(namedTypeSymbol.TypeArguments[0], validator, out type))
+                {
+                    return false;
+                }
+                type = type.WithNullable(true);
                 return true;
             }
 
