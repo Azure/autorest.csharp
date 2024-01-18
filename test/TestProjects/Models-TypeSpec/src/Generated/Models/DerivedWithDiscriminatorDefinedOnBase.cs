@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
@@ -25,16 +26,19 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of <see cref="DerivedWithDiscriminatorDefinedOnBase"/>. </summary>
         /// <param name="kind"> Required kind. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="optionalString"> Optional string. </param>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="optionalInt"> Optional int. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        internal DerivedWithDiscriminatorDefinedOnBase(string kind, string optionalString, string requiredString, int? optionalInt) : base(kind, optionalString)
+        internal DerivedWithDiscriminatorDefinedOnBase(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData, string optionalString, string requiredString, int? optionalInt) : base(kind, serializedAdditionalRawData, optionalString)
         {
-            Argument.AssertNotNull(kind, nameof(kind));
-
             RequiredString = requiredString;
             OptionalInt = optionalInt;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DerivedWithDiscriminatorDefinedOnBase"/> for deserialization. </summary>
+        internal DerivedWithDiscriminatorDefinedOnBase()
+        {
         }
 
         /// <summary> Required string. </summary>

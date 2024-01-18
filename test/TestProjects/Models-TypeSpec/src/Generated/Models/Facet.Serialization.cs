@@ -12,23 +12,23 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace CustomizationsInTsp.Models
+namespace ModelsTypeSpec.Models
 {
-    internal partial class ModelToMakeInternal : IUtf8JsonSerializable, IJsonModel<ModelToMakeInternal>
+    public partial class Facet : IUtf8JsonSerializable, IJsonModel<Facet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToMakeInternal>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Facet>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<ModelToMakeInternal>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<Facet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Facet>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Facet)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredInt"u8);
-            writer.WriteNumberValue(RequiredInt);
+            writer.WritePropertyName("field"u8);
+            writer.WriteStringValue(Field);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -47,19 +47,19 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndObject();
         }
 
-        ModelToMakeInternal IJsonModel<ModelToMakeInternal>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Facet IJsonModel<Facet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Facet>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(Facet)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelToMakeInternal(document.RootElement, options);
+            return DeserializeFacet(document.RootElement, options);
         }
 
-        internal static ModelToMakeInternal DeserializeModelToMakeInternal(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static Facet DeserializeFacet(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -67,14 +67,14 @@ namespace CustomizationsInTsp.Models
             {
                 return null;
             }
-            int requiredInt = default;
+            string field = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredInt"u8))
+                if (property.NameEquals("field"u8))
                 {
-                    requiredInt = property.Value.GetInt32();
+                    field = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -83,46 +83,46 @@ namespace CustomizationsInTsp.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelToMakeInternal(requiredInt, serializedAdditionalRawData);
+            return new Facet(field, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<ModelToMakeInternal>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Facet>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Facet>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Facet)} does not support '{options.Format}' format.");
             }
         }
 
-        ModelToMakeInternal IPersistableModel<ModelToMakeInternal>.Create(BinaryData data, ModelReaderWriterOptions options)
+        Facet IPersistableModel<Facet>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<Facet>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeModelToMakeInternal(document.RootElement, options);
+                        return DeserializeFacet(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(Facet)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<ModelToMakeInternal>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Facet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static ModelToMakeInternal FromResponse(Response response)
+        internal static Facet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToMakeInternal(document.RootElement);
+            return DeserializeFacet(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -14,21 +14,19 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class FirstDerivedOutputModel : IUtf8JsonSerializable, IJsonModel<FirstDerivedOutputModel>
+    public partial class BaseModelWithARequiredProperty : IUtf8JsonSerializable, IJsonModel<BaseModelWithARequiredProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirstDerivedOutputModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithARequiredProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<FirstDerivedOutputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<BaseModelWithARequiredProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstDerivedOutputModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithARequiredProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FirstDerivedOutputModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BaseModelWithARequiredProperty)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("first"u8);
-            writer.WriteBooleanValue(First);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -49,19 +47,19 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        FirstDerivedOutputModel IJsonModel<FirstDerivedOutputModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BaseModelWithARequiredProperty IJsonModel<BaseModelWithARequiredProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstDerivedOutputModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithARequiredProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FirstDerivedOutputModel)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(BaseModelWithARequiredProperty)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFirstDerivedOutputModel(document.RootElement, options);
+            return DeserializeBaseModelWithARequiredProperty(document.RootElement, options);
         }
 
-        internal static FirstDerivedOutputModel DeserializeFirstDerivedOutputModel(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static BaseModelWithARequiredProperty DeserializeBaseModelWithARequiredProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -69,17 +67,11 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            bool first = default;
             string kind = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("first"u8))
-                {
-                    first = property.Value.GetBoolean();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
@@ -91,50 +83,50 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FirstDerivedOutputModel(kind, serializedAdditionalRawData, first);
+            return new BaseModelWithARequiredProperty(kind, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<FirstDerivedOutputModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BaseModelWithARequiredProperty>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstDerivedOutputModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithARequiredProperty>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(FirstDerivedOutputModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BaseModelWithARequiredProperty)} does not support '{options.Format}' format.");
             }
         }
 
-        FirstDerivedOutputModel IPersistableModel<FirstDerivedOutputModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        BaseModelWithARequiredProperty IPersistableModel<BaseModelWithARequiredProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstDerivedOutputModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<BaseModelWithARequiredProperty>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFirstDerivedOutputModel(document.RootElement, options);
+                        return DeserializeBaseModelWithARequiredProperty(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(FirstDerivedOutputModel)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(BaseModelWithARequiredProperty)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<FirstDerivedOutputModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BaseModelWithARequiredProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new FirstDerivedOutputModel FromResponse(Response response)
+        internal static BaseModelWithARequiredProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFirstDerivedOutputModel(document.RootElement);
+            return DeserializeBaseModelWithARequiredProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

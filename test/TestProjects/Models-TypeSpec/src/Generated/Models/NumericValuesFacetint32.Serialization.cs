@@ -14,21 +14,19 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class Int32ValuesFacet : IUtf8JsonSerializable, IJsonModel<Int32ValuesFacet>
+    public partial class NumericValuesFacetint32 : IUtf8JsonSerializable, IJsonModel<NumericValuesFacetint32>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Int32ValuesFacet>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NumericValuesFacetint32>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<Int32ValuesFacet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<NumericValuesFacetint32>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Int32ValuesFacet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<NumericValuesFacetint32>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("values"u8);
             writer.WriteStartArray();
             foreach (var item in Values)
@@ -58,19 +56,19 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Int32ValuesFacet IJsonModel<Int32ValuesFacet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NumericValuesFacetint32 IJsonModel<NumericValuesFacetint32>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Int32ValuesFacet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<NumericValuesFacetint32>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{format}' format.");
+                throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeInt32ValuesFacet(document.RootElement, options);
+            return DeserializeNumericValuesFacetint32(document.RootElement, options);
         }
 
-        internal static Int32ValuesFacet DeserializeInt32ValuesFacet(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static NumericValuesFacetint32 DeserializeNumericValuesFacetint32(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -78,7 +76,6 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            Int32ValuesFacetKind kind = default;
             IReadOnlyList<int> values = default;
             int value = default;
             string field = default;
@@ -86,11 +83,6 @@ namespace ModelsTypeSpec.Models
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = new Int32ValuesFacetKind(property.Value.GetString());
-                    continue;
-                }
                 if (property.NameEquals("values"u8))
                 {
                     List<int> array = new List<int>();
@@ -117,46 +109,46 @@ namespace ModelsTypeSpec.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Int32ValuesFacet(field, serializedAdditionalRawData, values, value, kind);
+            return new NumericValuesFacetint32(field, serializedAdditionalRawData, values, value);
         }
 
-        BinaryData IPersistableModel<Int32ValuesFacet>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NumericValuesFacetint32>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Int32ValuesFacet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<NumericValuesFacetint32>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{options.Format}' format.");
             }
         }
 
-        Int32ValuesFacet IPersistableModel<Int32ValuesFacet>.Create(BinaryData data, ModelReaderWriterOptions options)
+        NumericValuesFacetint32 IPersistableModel<NumericValuesFacetint32>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Int32ValuesFacet>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<NumericValuesFacetint32>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeInt32ValuesFacet(document.RootElement, options);
+                        return DeserializeNumericValuesFacetint32(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Int32ValuesFacet)} does not support '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<Int32ValuesFacet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NumericValuesFacetint32>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new Int32ValuesFacet FromResponse(Response response)
+        internal static new NumericValuesFacetint32 FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInt32ValuesFacet(document.RootElement);
+            return DeserializeNumericValuesFacetint32(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

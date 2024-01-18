@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Unknown version of OutputBaseModelWithDiscriminator. </summary>
@@ -12,7 +15,13 @@ namespace ModelsTypeSpec.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownOutputBaseModelWithDiscriminator"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
-        internal UnknownOutputBaseModelWithDiscriminator(string kind) : base(kind)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownOutputBaseModelWithDiscriminator(string kind, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, serializedAdditionalRawData)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownOutputBaseModelWithDiscriminator"/> for deserialization. </summary>
+        internal UnknownOutputBaseModelWithDiscriminator()
         {
         }
     }
