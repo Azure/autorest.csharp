@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         }
         internal static string GetCoverageFilePath()
         {
-            return Path.Combine(GetCoverageDirectory(), "cadl-ranch-coverage-csharp-nonAzure.json");
+            return Path.Combine(GetCoverageDirectory(), "cadl-ranch-coverage-csharp-standard.json");
         }
 
         protected override void Stop(Process process)

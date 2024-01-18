@@ -124,17 +124,28 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp.json
+          - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp-azure.json
+            artifact: CoverageReport
+          - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp-standard.json
             artifact: CoverageReport
           - ${{if eq(variables['System.TeamProject'], 'internal')}}:
             - task: AzureCLI@2
-              displayName: 'Upload to Cadl Ranch Coverage Report'
+              displayName: 'Upload Cadl Ranch Azure Coverage Report'
               condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
               inputs:
                 azureSubscription: "Cadl Ranch Storage"
                 scriptType: "bash"
                 scriptLocation: "inlineScript"
-                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version")
+                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-azure.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode azure
+                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            - task: AzureCLI@2
+              displayName: 'Upload Cadl Ranch Standard Coverage Report'
+              condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
+              inputs:
+                azureSubscription: "Cadl Ranch Storage"
+                scriptType: "bash"
+                scriptLocation: "inlineScript"
+                inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp-standard.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/TypeSpec.Extension/Emitter.Csharp/package.json').version") --generatorMode standard
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - template: new-emitter-package-files.yml
