@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Common.Input;
@@ -13,7 +12,7 @@ internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTy
     internal IReadOnlyList<InputEnumTypeValue> GetEnum()
     {
         if (!IsAllLiteralStringPlusString())
-            throw new InvalidOperationException($"Cannot convert union '{Name}' to enum because its not all strings");
+            throw new InvalidOperationException($"Cannot convert union '{this}' to enum because its not all strings");
 
         var values = new List<InputEnumTypeValue>();
         foreach (var item in UnionItemTypes)
