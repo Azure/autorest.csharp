@@ -8,6 +8,7 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "LR",
+   "Namespace": "Type.Union",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -21,8 +22,6 @@
      "Value": "right"
     }
    ],
-   "Namespace": "Type.Union",
-   "Description": "",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -31,6 +30,7 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "UD",
+   "Namespace": "Type.Union",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -44,8 +44,6 @@
      "Value": "down"
     }
    ],
-   "Namespace": "Type.Union",
-   "Description": "",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -113,7 +111,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -178,7 +177,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -236,7 +236,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -294,7 +295,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -352,7 +354,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -410,7 +413,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -475,7 +479,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -540,7 +545,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -605,7 +611,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -670,7 +677,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -712,7 +720,8 @@
            "IsNullable": false
           },
           "IsRequired": true,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "IsDiscriminator": false
          }
         ]
        },
@@ -736,7 +745,8 @@
            "IsNullable": false
           },
           "IsRequired": true,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "IsDiscriminator": false
          }
         ]
        }
@@ -744,7 +754,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -782,7 +793,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -827,7 +839,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "111",
@@ -849,12 +862,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -878,7 +893,8 @@
       "$ref": "108"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -935,7 +951,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "123",
@@ -969,12 +986,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -998,7 +1017,8 @@
       "$ref": "117"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1089,7 +1109,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "143",
@@ -1157,7 +1178,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "153",
@@ -1225,7 +1247,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "163",
@@ -1293,12 +1316,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1322,7 +1347,8 @@
       "$ref": "132"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1389,7 +1415,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "184",
@@ -1433,7 +1460,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "190",
@@ -1477,7 +1505,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "196",
@@ -1521,12 +1550,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1550,7 +1581,8 @@
       "$ref": "177"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }

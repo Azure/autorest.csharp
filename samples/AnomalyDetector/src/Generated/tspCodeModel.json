@@ -26,6 +26,8 @@
    "$id": "4",
    "Kind": "Enum",
    "Name": "TimeGranularity",
+   "Namespace": "AnomalyDetector.Univariate",
+   "Description": "the time granularity of the data points.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -74,8 +76,6 @@
      "Value": "none"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "the time granularity of the data points.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
@@ -84,6 +84,8 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ImputeMode",
+   "Namespace": "AnomalyDetector.Univariate",
+   "Description": "The impute mode.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -117,8 +119,6 @@
      "Value": "notFill"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "The impute mode.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -127,6 +127,8 @@
    "$id": "21",
    "Kind": "Enum",
    "Name": "MultivariateBatchDetectionStatus",
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "The batch detection status.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -150,8 +152,6 @@
      "Value": "FAILED"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "The batch detection status.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -160,6 +160,8 @@
    "$id": "26",
    "Kind": "Enum",
    "Name": "DataSchema",
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -175,8 +177,6 @@
      "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -185,6 +185,8 @@
    "$id": "29",
    "Kind": "Enum",
    "Name": "AlignMode",
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "The alignment mode.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -198,8 +200,6 @@
      "Value": "Outer"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "The alignment mode.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -208,6 +208,8 @@
    "$id": "32",
    "Kind": "Enum",
    "Name": "FillNAMethod",
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -236,8 +238,6 @@
      "Value": "Fixed"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -246,6 +246,8 @@
    "$id": "38",
    "Kind": "Enum",
    "Name": "ModelStatus",
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "the model status.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -269,8 +271,6 @@
      "Value": "FAILED"
     }
    ],
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "the model status.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -279,6 +279,7 @@
    "$id": "43",
    "Kind": "Enum",
    "Name": "AnomalyDetectorErrorCodes",
+   "Namespace": "AnomalyDetector.Univariate",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -337,8 +338,6 @@
      "Value": "InvalidImputeFixedValue"
     }
    ],
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -398,11 +397,12 @@
          "Type": {
           "$id": "62",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "63",
@@ -416,14 +416,16 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "65",
@@ -434,7 +436,8 @@
       "$ref": "4"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "66",
@@ -448,7 +451,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "68",
@@ -462,7 +466,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "70",
@@ -476,7 +481,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "72",
@@ -490,7 +496,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "74",
@@ -501,7 +508,8 @@
       "$ref": "14"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "75",
@@ -515,7 +523,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -543,7 +552,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "80",
@@ -563,7 +573,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "83",
@@ -583,7 +594,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "86",
@@ -603,7 +615,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "89",
@@ -623,7 +636,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "92",
@@ -643,7 +657,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "95",
@@ -663,7 +678,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "98",
@@ -683,7 +699,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -708,7 +725,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "104",
@@ -722,7 +740,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "106",
@@ -736,7 +755,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "108",
@@ -750,7 +770,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "110",
@@ -764,7 +785,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "112",
@@ -778,7 +800,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "114",
@@ -792,7 +815,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "116",
@@ -806,7 +830,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "118",
@@ -820,7 +845,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -848,7 +874,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "123",
@@ -859,7 +886,8 @@
       "$ref": "4"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "124",
@@ -873,7 +901,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "126",
@@ -887,7 +916,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "128",
@@ -901,7 +931,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "130",
@@ -915,7 +946,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -940,7 +972,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "135",
@@ -960,7 +993,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "138",
@@ -980,7 +1014,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1005,7 +1040,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "144",
@@ -1030,7 +1066,8 @@
          "$ref": "21"
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "147",
@@ -1062,7 +1099,8 @@
              "IsNullable": false
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "152",
@@ -1076,14 +1114,16 @@
              "IsNullable": false
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            }
           ]
          },
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "154",
@@ -1115,7 +1155,8 @@
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "159",
@@ -1129,7 +1170,8 @@
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "161",
@@ -1143,7 +1185,8 @@
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "163",
@@ -1153,11 +1196,12 @@
             "Type": {
              "$id": "164",
              "Kind": "Primitive",
-             "Name": "DateTime",
+             "Name": "DateTimeRFC3339",
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "165",
@@ -1167,18 +1211,20 @@
             "Type": {
              "$id": "166",
              "Kind": "Primitive",
-             "Name": "DateTime",
+             "Name": "DateTimeRFC3339",
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            }
           ]
          },
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "167",
@@ -1206,7 +1252,8 @@
             "IsNullable": false
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           },
           {
            "$id": "171",
@@ -1220,7 +1267,8 @@
             "IsNullable": false
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           },
           {
            "$id": "173",
@@ -1230,11 +1278,12 @@
            "Type": {
             "$id": "174",
             "Kind": "Primitive",
-            "Name": "DateTime",
+            "Name": "DateTimeRFC3339",
             "IsNullable": false
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           },
           {
            "$id": "175",
@@ -1244,21 +1293,24 @@
            "Type": {
             "$id": "176",
             "Kind": "Primitive",
-            "Name": "DateTime",
+            "Name": "DateTimeRFC3339",
             "IsNullable": false
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           }
          ]
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "177",
@@ -1286,11 +1338,12 @@
          "Type": {
           "$id": "181",
           "Kind": "Primitive",
-          "Name": "DateTime",
+          "Name": "DateTimeRFC3339",
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "182",
@@ -1318,7 +1371,8 @@
              "IsNullable": false
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "186",
@@ -1332,7 +1386,8 @@
              "IsNullable": false
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "188",
@@ -1346,7 +1401,8 @@
              "IsNullable": false
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            },
            {
             "$id": "190",
@@ -1378,7 +1434,8 @@
                  "IsNullable": false
                 },
                 "IsRequired": false,
-                "IsReadOnly": false
+                "IsReadOnly": false,
+                "IsDiscriminator": false
                },
                {
                 "$id": "195",
@@ -1392,7 +1449,8 @@
                  "IsNullable": false
                 },
                 "IsRequired": false,
-                "IsReadOnly": false
+                "IsReadOnly": false,
+                "IsDiscriminator": false
                },
                {
                 "$id": "197",
@@ -1426,24 +1484,28 @@
                     "IsNullable": false
                    },
                    "IsRequired": false,
-                   "IsReadOnly": false
+                   "IsReadOnly": false,
+                   "IsDiscriminator": false
                   }
                  ]
                 },
                 "IsRequired": false,
-                "IsReadOnly": false
+                "IsReadOnly": false,
+                "IsDiscriminator": false
                }
               ]
              },
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            }
           ]
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "202",
@@ -1460,14 +1522,16 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1516,7 +1580,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "207",
@@ -1527,7 +1592,8 @@
       "$ref": "26"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "208",
@@ -1537,11 +1603,12 @@
      "Type": {
       "$id": "209",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "210",
@@ -1551,11 +1618,12 @@
      "Type": {
       "$id": "211",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "212",
@@ -1569,7 +1637,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "214",
@@ -1583,7 +1652,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "216",
@@ -1608,7 +1678,8 @@
          "$ref": "29"
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "219",
@@ -1619,7 +1690,8 @@
          "$ref": "32"
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "220",
@@ -1633,12 +1705,14 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "222",
@@ -1649,7 +1723,8 @@
       "$ref": "38"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "223",
@@ -1666,7 +1741,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "225",
@@ -1714,7 +1790,8 @@
             "IsNullable": false
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           },
           {
            "$id": "232",
@@ -1734,7 +1811,8 @@
             "IsNullable": false
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           },
           {
            "$id": "235",
@@ -1754,7 +1832,8 @@
             "IsNullable": false
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           },
           {
            "$id": "238",
@@ -1774,12 +1853,14 @@
             "IsNullable": false
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "IsDiscriminator": false
           }
          ]
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "241",
@@ -1796,12 +1877,14 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1835,7 +1918,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "246",
@@ -1845,11 +1929,12 @@
      "Type": {
       "$id": "247",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "248",
@@ -1859,11 +1944,12 @@
      "Type": {
       "$id": "249",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "250",
@@ -1874,7 +1960,8 @@
       "$ref": "204"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1902,7 +1989,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "254",
@@ -1916,7 +2004,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "256",
@@ -1930,7 +2019,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "258",
@@ -1944,7 +2034,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1987,7 +2078,8 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "266",
@@ -2007,7 +2099,8 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "269",
@@ -2027,14 +2120,16 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "272",
@@ -2048,7 +2143,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2079,7 +2175,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "277",
@@ -2096,7 +2193,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2118,7 +2216,8 @@
       "$ref": "43"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "281",
@@ -2132,7 +2231,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2157,7 +2257,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "286",
@@ -2171,7 +2272,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }

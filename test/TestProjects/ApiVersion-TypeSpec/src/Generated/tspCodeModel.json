@@ -32,6 +32,7 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "Versions",
+   "Namespace": "ApiVersionInTsp",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -45,8 +46,6 @@
      "Value": "v1.2"
     }
    ],
-   "Namespace": "ApiVersionInTsp",
-   "Description": "",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
@@ -74,7 +73,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }

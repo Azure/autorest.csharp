@@ -1171,6 +1171,7 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 DerivedModel input = new DerivedModel("<name>")
 {
     Age = 1234,
+    Size = 123.45,
 };
 Response response = await client.UseDerivedModelAsync(input);
 ]]></code></example>
@@ -1193,6 +1194,7 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 DerivedModel input = new DerivedModel("<name>")
 {
     Age = 1234,
+    Size = 123.45,
 };
 Response response = client.UseDerivedModel(input);
 ]]></code></example>
@@ -1274,7 +1276,10 @@ This sample shows how to call UseDerivedModelWithUnionAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"))
+{
+    Size = 123.45,
+};
 Response response = await client.UseDerivedModelWithUnionAsync(input);
 ]]></code></example>
     </member>
@@ -1293,7 +1298,10 @@ This sample shows how to call UseDerivedModelWithUnion with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"))
+{
+    Size = 123.45,
+};
 Response response = client.UseDerivedModelWithUnion(input);
 ]]></code></example>
     </member>

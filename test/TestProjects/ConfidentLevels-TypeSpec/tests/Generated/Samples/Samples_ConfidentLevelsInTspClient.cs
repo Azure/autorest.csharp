@@ -1391,6 +1391,7 @@ default
             DerivedModel input = new DerivedModel("<name>")
             {
                 Age = 1234,
+                Size = 123.45,
             };
             Response response = client.UseDerivedModel(input);
         }
@@ -1405,6 +1406,7 @@ default
             DerivedModel input = new DerivedModel("<name>")
             {
                 Age = 1234,
+                Size = 123.45,
             };
             Response response = await client.UseDerivedModelAsync(input);
         }
@@ -1508,7 +1510,10 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"))
+            {
+                Size = 123.45,
+            };
             Response response = client.UseDerivedModelWithUnion(input);
         }
 
@@ -1519,7 +1524,10 @@ default
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"));
+            DerivedModelWithUnion input = new DerivedModelWithUnion("<name>", BinaryData.FromObjectAsJson("<unionProperty>"))
+            {
+                Size = 123.45,
+            };
             Response response = await client.UseDerivedModelWithUnionAsync(input);
         }
     }

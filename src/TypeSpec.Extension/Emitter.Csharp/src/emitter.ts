@@ -40,6 +40,18 @@ export const $lib = createTypeSpecLibrary({
             messages: {
                 default: paramMessage`No Route for service for service ${"service"}`
             }
+        },
+        "No-Model": {
+            severity: "error",
+            messages: {
+                default: paramMessage`Model '${"name"}' is not found`
+            }
+        },
+        "No-Type": {
+            severity: "error",
+            messages: {
+                default: paramMessage`Type '${"kind"}' is not found`
+            }
         }
     },
     emitter: {
@@ -56,6 +68,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     for (const transport of logger.transports) {
         transport.level = options.logLevel ?? LoggerLevel.INFO;
     }
+    context.options["filter-out-core-models"] = false;
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path

@@ -390,7 +390,7 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         else
                         {
-                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
+                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} in method {_client?.Declaration.FullName}.{name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
                         }
                     }
                     else

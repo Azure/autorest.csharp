@@ -49,7 +49,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal BaseModel(string name)
+        public BaseModel(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
@@ -75,6 +75,6 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> The name. </summary>
         public string Name { get; }
         /// <summary> The size. </summary>
-        public double? Size { get; }
+        public double? Size { get; set; }
     }
 }

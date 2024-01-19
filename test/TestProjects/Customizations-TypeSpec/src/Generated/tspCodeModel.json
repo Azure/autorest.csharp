@@ -8,6 +8,8 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ExtensibleEnumWithOperator",
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Extensible enum to customize operator",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -23,8 +25,6 @@
      "Description": "Tuesday."
     }
    ],
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -33,6 +33,8 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "EnumToRename",
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Renamed enum (original name: EnumToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -51,8 +53,6 @@
      "Value": "3"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -61,6 +61,8 @@
    "$id": "9",
    "Kind": "Enum",
    "Name": "EnumWithValueToRename",
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Enum with renamed value (original name: ValueToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -79,8 +81,6 @@
      "Value": "3"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -89,6 +89,8 @@
    "$id": "13",
    "Kind": "Enum",
    "Name": "EnumToBeMadeExtensible",
+   "Namespace": "CustomizationsInTsp",
+   "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -107,8 +109,6 @@
      "Value": "3"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
-   "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -117,6 +117,8 @@
    "$id": "17",
    "Kind": "Enum",
    "Name": "NormalEnum",
+   "Namespace": "CustomizationsInTsp",
+   "Description": "A normal enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -130,8 +132,6 @@
      "Value": "b"
     }
    ],
-   "Namespace": "CustomizationsInTsp",
-   "Description": "A normal enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -156,7 +156,8 @@
       "$ref": "2"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "22",
@@ -184,12 +185,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "26",
@@ -217,7 +220,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "30",
@@ -231,12 +235,14 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "32",
@@ -264,12 +270,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "36",
@@ -297,7 +305,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "40",
@@ -311,7 +320,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "42",
@@ -325,7 +335,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "44",
@@ -339,7 +350,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "46",
@@ -353,7 +365,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "48",
@@ -367,7 +380,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "50",
@@ -381,7 +395,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "52",
@@ -395,7 +410,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "54",
@@ -415,7 +431,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "57",
@@ -441,7 +458,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "61",
@@ -467,7 +485,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "65",
@@ -499,7 +518,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "70",
@@ -519,7 +539,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "73",
@@ -539,7 +560,8 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "76",
@@ -559,7 +581,8 @@
          "IsNullable": true
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "79",
@@ -579,7 +602,8 @@
          "IsNullable": true
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "82",
@@ -599,7 +623,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "IsDiscriminator": false
        },
        {
         "$id": "85",
@@ -619,7 +644,8 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "IsDiscriminator": false
        },
        {
         "$id": "88",
@@ -639,7 +665,8 @@
          "IsNullable": true
         },
         "IsRequired": true,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "IsDiscriminator": false
        },
        {
         "$id": "91",
@@ -659,12 +686,14 @@
          "IsNullable": true
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "94",
@@ -675,7 +704,8 @@
       "$ref": "5"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "95",
@@ -686,7 +716,8 @@
       "$ref": "9"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "96",
@@ -697,7 +728,8 @@
       "$ref": "13"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "97",
@@ -725,12 +757,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "101",
@@ -741,7 +775,8 @@
       "$ref": "17"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "102",
@@ -769,7 +804,8 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "106",
@@ -783,7 +819,8 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "108",
@@ -797,12 +834,14 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
