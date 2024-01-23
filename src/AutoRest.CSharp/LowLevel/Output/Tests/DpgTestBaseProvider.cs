@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                 if (client.IsSubClient)
                     continue;
 
-                var ctor = client.GetEffectiveCtorWithClientOptions();
+                var ctor = client.GetEffectiveCtor(includeClientOptions: true);
 
                 if (ctor == null)
                     continue;
