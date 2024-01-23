@@ -1,4 +1,0 @@
-options:
-  "@azure-tools/typespec-csharp":
-    namespace: Client.Structure.Service.Default
-    generate-sample-project: false
