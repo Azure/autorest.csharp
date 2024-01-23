@@ -15,9 +15,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
         {
             DefaultNamespace = $"{defaultNamespace}.Tests";
             DefaultName = $"{ClientBuilder.GetRPName(defaultNamespace)}TestEnvironment";
+            Inherits = typeof(TestEnvironment);
         }
-
-        public override CSharpType? Inherits => typeof(TestEnvironment);
 
         protected override string DefaultNamespace { get; }
 

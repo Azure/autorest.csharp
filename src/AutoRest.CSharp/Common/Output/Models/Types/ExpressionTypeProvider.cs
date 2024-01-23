@@ -2,37 +2,38 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    // TODO -- eventually we should be able to move this class to a more common place, or just combine everything in this class into TypeProvider
+    // TODO -- eventually we should combine everything in this class into TypeProvider
     internal abstract class ExpressionTypeProvider : TypeProvider
     {
         protected ExpressionTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
         }
 
-        private IEnumerable<string>? _usings;
-        public IEnumerable<string> Usings => _usings ??= BuildUsings();
+        private IReadOnlyList<string>? _usings;
+        public IReadOnlyList<string> Usings => _usings ??= BuildUsings().ToArray();
 
         protected virtual IEnumerable<string> BuildUsings()
         {
             yield break;
         }
 
-        public virtual CSharpType? Inherits => null;
+        public virtual CSharpType? Inherits { get; protected init; }
 
-        private IEnumerable<CSharpType>? _implements;
-        public virtual IEnumerable<CSharpType> Implements => _implements ??= BuildImplements();
+        private IReadOnlyList<CSharpType>? _implements;
+        public virtual IReadOnlyList<CSharpType> Implements => _implements ??= BuildImplements().ToArray();
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= BuildMethods();
+        private IReadOnlyList<Method>? _methods;
+        public IReadOnlyList<Method> Methods => _methods ??= BuildMethods().ToArray();
 
-        private IEnumerable<Method>? _constructors;
-        public IEnumerable<Method> Constructors => _constructors ??= BuildConstructors();
+        private IReadOnlyList<Method>? _constructors;
+        public IReadOnlyList<Method> Constructors => _constructors ??= BuildConstructors().ToArray();
 
         protected virtual IEnumerable<CSharpType> BuildImplements()
         {

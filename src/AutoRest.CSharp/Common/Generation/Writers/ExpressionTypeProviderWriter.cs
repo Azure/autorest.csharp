@@ -60,10 +60,5 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.WriteMethod(method);
             }
         }
-
-        public override string ToString()
-        {
-            return _writer.ToString();
-        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -30,10 +29,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             DefaultNamespace = $"{defaultNamespace}.Tests";
             DefaultName = $"{ClientBuilder.GetRPName(defaultNamespace)}TestBase";
             _clients = clients;
-            BaseType = new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
+            Inherits = new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
         }
-
-        public CSharpType BaseType { get; }
 
         public DpgTestEnvironmentProvider TestEnvironment { get; }
 
@@ -42,8 +39,6 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility => "public";
-
-        public override CSharpType? Inherits => new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
 
         protected override IEnumerable<Method> BuildConstructors()
         {

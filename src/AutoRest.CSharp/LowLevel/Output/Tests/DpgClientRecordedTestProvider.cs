@@ -28,9 +28,8 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
         public DpgClientRecordedTestProvider(string defaultNamespace, LowLevelClient client, DpgTestBaseProvider testBase, SourceInputModel? sourceInputModel) : base($"{defaultNamespace}.Tests", $"{client.Declaration.Name}Tests", client, sourceInputModel)
         {
             _testBaseProvider = testBase;
+            Inherits = _testBaseProvider.Type;
         }
-
-        public override CSharpType? Inherits => _testBaseProvider.Type;
 
         protected override IEnumerable<string> BuildUsings()
         {
