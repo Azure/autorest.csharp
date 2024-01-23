@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private async Task WriteTestFiles()
         {
-            if (!Configuration.GenerateTestProject)
+            if (!Configuration.GenerateTestProject && !Configuration.GenerateSampleProject)
                 return;
 
             if (_isAzureSdk)

@@ -38,15 +38,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 dpgClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", dpgClientWriter.ToString());
 
-                var sampleProvider = library.GetSampleForClient(client);
-                // write samples
-                if (sampleProvider != null)
+                if (Configuration.GenerateSampleProject)
                 {
-                    var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
-                    var clientSampleWriter = new ExpressionTypeProviderWriter(new CodeWriter(), sampleProvider);
-                    clientSampleWriter.Write();
-                    project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
-                    project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
+                    var sampleProvider = library.GetSampleForClient(client);
+                    // write samples
+                    if (sampleProvider != null)
+                    {
+                        var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                        var clientSampleWriter = new ExpressionTypeProviderWriter(new CodeWriter(), sampleProvider);
+                        clientSampleWriter.Write();
+                        project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                        project.AddGeneratedDocFile(dpgClientWriter.XmlDocWriter.Filename, new XmlDocumentFile(clientExampleFilename, dpgClientWriter.XmlDocWriter));
+                    }
                 }
             }
 
