@@ -29,7 +29,6 @@ namespace Client.Structure.Service.Default
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _client;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -67,7 +66,6 @@ namespace Client.Structure.Service.Default
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
             _client = client;
-            _apiVersion = options.Version;
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -84,7 +82,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='OneAsync(RequestContext)']/*" />
         public virtual async Task<Response> OneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.One");
@@ -115,7 +112,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='One(RequestContext)']/*" />
         public virtual Response One(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.One");
@@ -146,7 +142,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='TwoAsync(RequestContext)']/*" />
         public virtual async Task<Response> TwoAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.Two");
@@ -177,7 +172,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ServiceClient.xml" path="doc/members/member[@name='Two(RequestContext)']/*" />
         public virtual Response Two(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ServiceClient.Two");
@@ -194,19 +188,33 @@ namespace Client.Structure.Service.Default
             }
         }
 
+        private Baz _cachedBaz;
+        private Qux _cachedQux;
         private Foo _cachedFoo;
         private Bar _cachedBar;
+
+        /// <summary> Initializes a new instance of Baz. </summary>
+        public virtual Baz GetBazClient()
+        {
+            return Volatile.Read(ref _cachedBaz) ?? Interlocked.CompareExchange(ref _cachedBaz, new Baz(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedBaz;
+        }
+
+        /// <summary> Initializes a new instance of Qux. </summary>
+        public virtual Qux GetQuxClient()
+        {
+            return Volatile.Read(ref _cachedQux) ?? Interlocked.CompareExchange(ref _cachedQux, new Qux(ClientDiagnostics, _pipeline, _endpoint, _client), null) ?? _cachedQux;
+        }
 
         /// <summary> Initializes a new instance of Foo. </summary>
         public virtual Foo GetFooClient()
         {
-            return Volatile.Read(ref _cachedFoo) ?? Interlocked.CompareExchange(ref _cachedFoo, new Foo(ClientDiagnostics, _pipeline, _endpoint, _client, _apiVersion), null) ?? _cachedFoo;
+            return Volatile.Read(ref _cachedFoo) ?? Interlocked.CompareExchange(ref _cachedFoo, new Foo(ClientDiagnostics, _pipeline, _endpoint, _client), null) ?? _cachedFoo;
         }
 
         /// <summary> Initializes a new instance of Bar. </summary>
         public virtual Bar GetBarClient()
         {
-            return Volatile.Read(ref _cachedBar) ?? Interlocked.CompareExchange(ref _cachedBar, new Bar(ClientDiagnostics, _pipeline, _endpoint, _client, _apiVersion), null) ?? _cachedBar;
+            return Volatile.Read(ref _cachedBar) ?? Interlocked.CompareExchange(ref _cachedBar, new Bar(ClientDiagnostics, _pipeline, _endpoint, _client), null) ?? _cachedBar;
         }
 
         internal HttpMessage CreateOneRequest(RequestContext context)
@@ -219,7 +227,6 @@ namespace Client.Structure.Service.Default
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/one", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -235,7 +242,6 @@ namespace Client.Structure.Service.Default
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/two", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

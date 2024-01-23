@@ -20,7 +20,6 @@ namespace Client.Structure.Service.Default
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _client;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,14 +37,12 @@ namespace Client.Structure.Service.Default
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal Foo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client, string apiVersion)
+        internal Foo(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
             _client = client;
-            _apiVersion = apiVersion;
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -62,7 +59,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Foo.xml" path="doc/members/member[@name='ThreeAsync(RequestContext)']/*" />
         public virtual async Task<Response> ThreeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Foo.Three");
@@ -93,7 +89,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Foo.xml" path="doc/members/member[@name='Three(RequestContext)']/*" />
         public virtual Response Three(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Foo.Three");
@@ -124,7 +119,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Foo.xml" path="doc/members/member[@name='FourAsync(RequestContext)']/*" />
         public virtual async Task<Response> FourAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Foo.Four");
@@ -155,7 +149,6 @@ namespace Client.Structure.Service.Default
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Foo.xml" path="doc/members/member[@name='Four(RequestContext)']/*" />
         public virtual Response Four(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Foo.Four");
@@ -182,7 +175,6 @@ namespace Client.Structure.Service.Default
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/three", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -198,7 +190,6 @@ namespace Client.Structure.Service.Default
             uri.AppendRaw("/client/structure/", false);
             uri.AppendRaw(_client, true);
             uri.AppendPath("/four", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

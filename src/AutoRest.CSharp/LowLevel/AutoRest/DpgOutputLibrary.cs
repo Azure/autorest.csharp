@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var result = new Dictionary<LowLevelClient, DpgClientSampleProvider>();
 
             // we currently only write samples for branded libraries
-            if (!Configuration.IsBranded)
+            if (!Configuration.IsBranded || !Configuration.GenerateSampleProject)
                 return result;
 
             foreach (var client in RestClients)
@@ -115,7 +115,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client) => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
+        public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client)
+            => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
