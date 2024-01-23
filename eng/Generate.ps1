@@ -2,6 +2,7 @@
 param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$debug, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
+Import-Module "$PSScriptRoot\..\test\scripts\LocalTestNugetSource.psm1" -DisableNameChecking -Force;
 
 $timer = [System.Diagnostics.Stopwatch]::new();
 $timer.Start();
@@ -72,7 +73,12 @@ function Add-CadlRanch-TypeSpec([string]$testName, [string]$projectPrefix, [stri
     $tspMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
     $clientTsp = Join-Path $cadlRanchFilePath $testName "client.tsp"
     $mainTypeSpecFile = If (Test-Path $clientTsp) { Resolve-Path $clientTsp } Else { Resolve-Path $tspMain }
-    Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
+    if ($projectPrefix -eq "typespec-nonAzure-") {
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true --option @azure-tools/typespec-csharp.branded=false" "-n"
+    }
+    else {
+        Add-TypeSpec "$projectPrefix$testName" $projectDirectory $mainTypeSpecFile "$configString--option @azure-tools/typespec-csharp.new-project=true" "-n"
+    }
 }
 
 function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
@@ -249,7 +255,7 @@ if (!($Exclude -contains "Samples")) {
     }
 }
 
-# TypeSpec projects
+# Azure cadl ranch projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 
 $cadlRanchProjectPaths = $testData.CadlRanchProjects
@@ -257,6 +263,17 @@ $cadlRanchProjectPaths = $testData.CadlRanchProjects
 if (!($Exclude -contains "CadlRanchProjects")) {
     foreach ($testPath in $cadlRanchProjectPaths) {
         Add-CadlRanch-TypeSpec $testPath "typespec-" $cadlRanchProjectDirectory
+    }
+}
+
+# Non azure cadl ranch projects
+$cadlRanchProjectNonAzureDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjectsNonAzure'
+
+$cadlRanchProjectNonAzurePaths = $testData.CadlRanchProjectsNonAzure
+
+if (!($Exclude -contains "CadlRanchProjectsNonAzure")) {
+    foreach ($testPath in $cadlRanchProjectNonAzurePaths) {
+        Add-CadlRanch-TypeSpec $testPath "typespec-nonAzure-" $cadlRanchProjectNonAzureDirectory
     }
 }
 
@@ -360,6 +377,23 @@ if (!$noBuild) {
     if ($typespecCount -gt 0) {
         Invoke-TypeSpecSetup
     }
+}
+
+[hashtable]$testPackagesToInstall = @{};
+$localTestNugetSourceFolder = Join-Path $repoRoot 'test/NugetPackages'
+foreach($key in $keys){
+    foreach($nugetPackageFilename in (Get-ChildItem -Path $localTestNugetSourceFolder | Select-Object -ExpandProperty Name)){
+        $nameForRegex = [Regex]::Escape($key);
+        if ($nugetPackageFilename -match "^($nameForRegex)\.([\.\d\w\-]+)\.nupkg$") {
+            $name = $matches[1]
+            $version = $matches[2]
+            $testPackagesToInstall[$name] = $version;
+        }
+    }
+}
+
+if($testPackagesToInstall.Count -gt 0){
+    Install-Test-Nuget-Packages $testPackagesToInstall
 }
 
 $keys | % { $swaggerDefinitions[$_] } | ForEach-Object -Parallel {

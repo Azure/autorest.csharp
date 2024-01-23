@@ -54,6 +54,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
@@ -76,6 +84,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -107,6 +123,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
@@ -129,6 +153,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -160,6 +192,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
@@ -182,6 +222,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestorWithLocs_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorWithLocResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -213,6 +261,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
@@ -235,6 +291,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithAncestors_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithAncestorResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -266,6 +330,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
@@ -288,6 +360,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -319,6 +399,14 @@ namespace MgmtListMethods.Mocking
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
@@ -341,6 +429,14 @@ namespace MgmtListMethods.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParents_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

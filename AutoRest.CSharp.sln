@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TestServerLowLevel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadlRanchProjects.Tests", "test\CadlRanchProjects.Tests\CadlRanchProjects.Tests.csproj", "{4D29A8F5-E844-448F-9F27-E74BD04CCA1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnbrandedProjects.Tests", "test\UnbrandedProjects.Tests\UnbrandedProjects.Tests.csproj", "{B589D88B-9254-4A69-B8CE-2564DC3D2908}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnbrandedProjects.Tests", "test\UnbrandedProjects.Tests\UnbrandedProjects.Tests.csproj", "{B589D88B-9254-4A69-B8CE-2564DC3D2908}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Tests", "test\AutoRest.CSharp.UnitTests\AutoRest.CSharp.Tests.csproj", "{5F262867-0677-41D3-8629-5E68FA6AA11C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadlRanchProjectsNonAzure.Tests", "test\CadlRanchProjectsNonAzure.Tests\CadlRanchProjectsNonAzure.Tests.csproj", "{32CC2EC8-C107-4C0B-BAA8-973486F6303C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{5F262867-0677-41D3-8629-5E68FA6AA11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F262867-0677-41D3-8629-5E68FA6AA11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F262867-0677-41D3-8629-5E68FA6AA11C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32CC2EC8-C107-4C0B-BAA8-973486F6303C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32CC2EC8-C107-4C0B-BAA8-973486F6303C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32CC2EC8-C107-4C0B-BAA8-973486F6303C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32CC2EC8-C107-4C0B-BAA8-973486F6303C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

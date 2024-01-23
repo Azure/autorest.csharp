@@ -7,6 +7,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "Versions",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -43,8 +44,8 @@
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
         "$id": "7",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -78,8 +79,8 @@
         "$id": "9",
         "Type": {
          "$id": "10",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "v1.0"
@@ -91,8 +92,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "12",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -149,8 +150,8 @@
        "NameInRequest": "keyword",
        "Type": {
         "$id": "17",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -169,8 +170,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "19",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

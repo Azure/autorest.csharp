@@ -7,6 +7,7 @@
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "DefaultDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
@@ -19,8 +20,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "duration",
-      "Kind": "DurationISO8601",
+      "Kind": "Primitive",
+      "Name": "DurationISO8601",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -30,6 +31,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "ISO8601DurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
@@ -42,8 +44,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "duration",
-      "Kind": "DurationISO8601",
+      "Kind": "Primitive",
+      "Name": "DurationISO8601",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -53,6 +55,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "Int32SecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
@@ -65,8 +68,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "duration",
-      "Kind": "DurationSeconds",
+      "Kind": "Primitive",
+      "Name": "DurationSeconds",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -76,6 +79,7 @@
   },
   {
    "$id": "11",
+   "Kind": "Model",
    "Name": "FloatSecondsDurationProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
@@ -88,8 +92,8 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Name": "duration",
-      "Kind": "DurationSecondsFloat",
+      "Kind": "Primitive",
+      "Name": "DurationSecondsFloat",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -99,6 +103,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Model",
    "Name": "FloatSecondsDurationArrayProperty",
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
@@ -111,11 +116,12 @@
      "Description": "",
      "Type": {
       "$id": "16",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "17",
-       "Name": "Float32Duration",
-       "Kind": "DurationSecondsFloat",
+       "Kind": "Primitive",
+       "Name": "DurationSecondsFloat",
        "IsNullable": false
       },
       "IsNullable": false
@@ -154,8 +160,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "23",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -171,8 +177,8 @@
         "$id": "24",
         "Type": {
          "$id": "25",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -184,8 +190,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "27",
-        "Name": "duration",
-        "Kind": "DurationISO8601",
+        "Kind": "Primitive",
+        "Name": "DurationISO8601",
         "IsNullable": false
        },
        "Location": "Query",
@@ -204,8 +210,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "29",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -259,8 +265,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "34",
-        "Name": "duration",
-        "Kind": "DurationISO8601",
+        "Kind": "Primitive",
+        "Name": "DurationISO8601",
         "IsNullable": false
        },
        "Location": "Query",
@@ -279,8 +285,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "36",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -334,8 +340,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "41",
-        "Name": "duration",
-        "Kind": "DurationSeconds",
+        "Kind": "Primitive",
+        "Name": "DurationSeconds",
         "IsNullable": false
        },
        "Location": "Query",
@@ -354,8 +360,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "43",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -409,8 +415,8 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "48",
-        "Name": "duration",
-        "Kind": "DurationSecondsFloat",
+        "Kind": "Primitive",
+        "Name": "DurationSecondsFloat",
         "IsNullable": false
        },
        "Location": "Query",
@@ -429,8 +435,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "50",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -484,11 +490,12 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "55",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "56",
-         "Name": "Int32Duration",
-         "Kind": "DurationSeconds",
+         "Kind": "Primitive",
+         "Name": "DurationSeconds",
          "IsNullable": false
         },
         "IsNullable": false
@@ -510,8 +517,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "58",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -594,8 +601,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "66",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -621,8 +628,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "69",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -702,8 +709,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "75",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -729,8 +736,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "78",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -810,8 +817,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "84",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -837,8 +844,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "87",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -918,8 +925,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "93",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -945,8 +952,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "96",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1026,8 +1033,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "102",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1053,8 +1060,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "105",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1129,8 +1136,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "112",
-        "Name": "duration",
-        "Kind": "DurationISO8601",
+        "Kind": "Primitive",
+        "Name": "DurationISO8601",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1149,8 +1156,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "114",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1204,8 +1211,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "119",
-        "Name": "duration",
-        "Kind": "DurationISO8601",
+        "Kind": "Primitive",
+        "Name": "DurationISO8601",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1224,8 +1231,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "121",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1279,11 +1286,12 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "126",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "127",
-         "Name": "Iso8601Duration",
-         "Kind": "DurationISO8601",
+         "Kind": "Primitive",
+         "Name": "DurationISO8601",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1305,8 +1313,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1360,8 +1368,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "134",
-        "Name": "duration",
-        "Kind": "DurationSeconds",
+        "Kind": "Primitive",
+        "Name": "DurationSeconds",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1380,8 +1388,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "136",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1435,8 +1443,8 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "141",
-        "Name": "duration",
-        "Kind": "DurationSecondsFloat",
+        "Kind": "Primitive",
+        "Name": "DurationSecondsFloat",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1455,8 +1463,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "143",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

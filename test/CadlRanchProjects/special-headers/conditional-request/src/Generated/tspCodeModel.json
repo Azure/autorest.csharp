@@ -24,8 +24,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "5",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -41,8 +41,8 @@
         "$id": "6",
         "Type": {
          "$id": "7",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -55,8 +55,8 @@
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
         "$id": "9",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -75,8 +75,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "11",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -132,8 +132,8 @@
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "16",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -152,8 +152,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
