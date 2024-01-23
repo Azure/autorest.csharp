@@ -15,7 +15,6 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -28,7 +27,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate_CreateFirewallPolicy()
         {
             // Example: Create FirewallPolicy
@@ -140,7 +139,7 @@ DestinationPorts =
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate_CreateFirewallPolicyWithDifferentValues()
         {
             // Example: Create FirewallPolicy with different values
@@ -252,7 +251,7 @@ DestinationPorts =
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Exists()
         {
             // Example: Get FirewallPolicy
@@ -263,7 +262,7 @@ DestinationPorts =
             await collection.ExistsAsync("firewallPolicy");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Get FirewallPolicy
@@ -274,7 +273,7 @@ DestinationPorts =
             await collection.GetAsync("firewallPolicy");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll()
         {
             // Example: List all Firewall Policies for a given resource group
@@ -287,7 +286,7 @@ DestinationPorts =
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetIfExists()
         {
             // Example: Get FirewallPolicy

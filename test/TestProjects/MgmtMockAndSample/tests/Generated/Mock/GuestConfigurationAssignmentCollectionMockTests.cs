@@ -14,7 +14,6 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -27,7 +26,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate()
         {
             // Example: Create or update guest configuration assignment
@@ -45,7 +44,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Exists()
         {
             // Example: Get a guest configuration assignment
@@ -55,7 +54,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync("SecureProtocol");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Get a guest configuration assignment
@@ -65,7 +64,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync("SecureProtocol");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll()
         {
             // Example: List all guest configuration assignments for a virtual machine
@@ -77,7 +76,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetIfExists()
         {
             // Example: Get a guest configuration assignment

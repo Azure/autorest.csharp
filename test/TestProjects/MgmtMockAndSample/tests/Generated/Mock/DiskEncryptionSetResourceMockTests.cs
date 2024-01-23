@@ -16,7 +16,6 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -29,7 +28,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete a disk encryption set.
@@ -39,7 +38,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
         {
             // Example: Get information about a disk encryption set when auto-key rotation failed.
@@ -49,7 +48,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await diskEncryptionSet.GetAsync();
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get_GetInformationAboutADiskEncryptionSet()
         {
             // Example: Get information about a disk encryption set.
@@ -59,7 +58,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await diskEncryptionSet.GetAsync();
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetDiskEncryptionSets()
         {
             // Example: List all disk encryption sets in a subscription.
@@ -71,7 +70,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Update_UpdateADiskEncryptionSetWithRotationToLatestKeyVersionEnabledSetToTrueSucceeded()
         {
             // Example: Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Succeeded
@@ -87,7 +86,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Update_UpdateADiskEncryptionSetWithRotationToLatestKeyVersionEnabledSetToTrueUpdating()
         {
             // Example: Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Updating
@@ -103,7 +102,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Update_UpdateADiskEncryptionSet()
         {
             // Example: Update a disk encryption set.

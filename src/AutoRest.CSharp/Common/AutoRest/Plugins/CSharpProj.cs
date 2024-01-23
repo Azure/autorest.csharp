@@ -106,6 +106,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             writer.PackageReferences.Add(new("Azure.Identity"));
 
             writer.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\MockTestBase.cs"));
+            writer.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\RecordedTestAttribute.cs"));
 
             return writer.Write();
         }

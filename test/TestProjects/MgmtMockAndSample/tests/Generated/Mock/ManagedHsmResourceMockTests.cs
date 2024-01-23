@@ -14,7 +14,6 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -27,7 +26,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete a managed HSM Pool
@@ -37,7 +36,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await managedHsm.DeleteAsync(WaitUntil.Completed);
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Retrieve a managed HSM Pool
@@ -47,7 +46,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await managedHsm.GetAsync();
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetManagedHsms()
         {
             // Example: List managed HSM Pools in a subscription
@@ -59,7 +58,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetMHSMPrivateLinkResourcesByMhsmResource()
         {
             // Example: KeyVaultListPrivateLinkResources
@@ -71,7 +70,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Update()
         {
             // Example: Update an existing managed HSM Pool

@@ -15,7 +15,6 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -28,7 +27,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CheckNameAvailabilityVault()
         {
             // Example: Validate a vault name
@@ -38,7 +37,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await subscriptionResource.CheckNameAvailabilityVaultAsync(new VaultCheckNameAvailabilityContent("sample-vault"));
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete a vault
@@ -48,7 +47,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await vault.DeleteAsync(WaitUntil.Completed);
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Disable()
         {
             // Example: Disable a vault
@@ -58,7 +57,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await vault.DisableAsync();
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Retrieve a vault
@@ -68,7 +67,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await vault.GetAsync();
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetKeys()
         {
             // Example: List keys on an existing vault
@@ -80,7 +79,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetPrivateLinkResources()
         {
             // Example: KeyVaultListPrivateLinkResources
@@ -92,7 +91,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetVaults()
         {
             // Example: List vaults in the specified subscription
@@ -104,7 +103,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task UpdateAccessPolicy()
         {
             // Example: Add an access policy, or update an access policy with new permissions
@@ -131,7 +130,7 @@ CertificatePermission.Get
             })));
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Validate()
         {
             // Example: Validate an existing vault

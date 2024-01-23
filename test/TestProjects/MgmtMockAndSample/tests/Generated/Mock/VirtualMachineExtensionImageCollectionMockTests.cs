@@ -13,7 +13,6 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -26,7 +25,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Exists_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
@@ -37,7 +36,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync("aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Exists_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen
@@ -48,7 +47,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync("aa", "aaa");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
@@ -59,7 +58,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync("aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen
@@ -70,7 +69,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync("aa", "aaa");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_VirtualMachineExtensionImagesListTypesMaximumSetGen()
         {
             // Example: VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen
@@ -83,7 +82,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_VirtualMachineExtensionImagesListTypesMinimumSetGen()
         {
             // Example: VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen
@@ -96,7 +95,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_VirtualMachineExtensionImagesListVersionsMaximumSetGen()
         {
             // Example: VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen
@@ -109,7 +108,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_VirtualMachineExtensionImagesListVersionsMinimumSetGen()
         {
             // Example: VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen
@@ -122,7 +121,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetIfExists_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MaximumSet_Gen
@@ -133,7 +132,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetIfExistsAsync("aaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaa");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetIfExists_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Example: VirtualMachineExtensionImages_Get_MinimumSet_Gen

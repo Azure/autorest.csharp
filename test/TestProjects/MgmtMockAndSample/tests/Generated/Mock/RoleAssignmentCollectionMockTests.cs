@@ -13,7 +13,6 @@ using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -26,7 +25,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate()
         {
             // Example: Create role assignment
@@ -41,7 +40,7 @@ namespace MgmtMockAndSample.Tests.Mock
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Exists()
         {
             // Example: Get role assignment by name
@@ -51,7 +50,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.ExistsAsync("roleAssignmentName");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Get role assignment by name
@@ -61,7 +60,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await collection.GetAsync("roleAssignmentName");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_ListRoleAssignmentsForResource()
         {
             // Example: List role assignments for resource
@@ -73,7 +72,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_ListRoleAssignmentsForResourceGroup()
         {
             // Example: List role assignments for resource group
@@ -85,7 +84,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_ListRoleAssignmentsForSubscription()
         {
             // Example: List role assignments for subscription
@@ -97,7 +96,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll_ListRoleAssignmentsForScope()
         {
             // Example: List role assignments for scope
@@ -109,7 +108,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetIfExists()
         {
             // Example: Get role assignment by name

@@ -18,7 +18,6 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using NUnit.Framework;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
@@ -97,7 +96,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
         protected void WriteTestAttribute()
         {
-            _writer.Line($"[{typeof(TestAttribute)}]");
+            _writer.UseNamespace("Azure.Core.TestFramework");
+            _writer.Line($"[RecordedTest]");
         }
 
         protected void WriteTestOperation(CodeWriterDeclaration declaration, MockTestCase testCase)

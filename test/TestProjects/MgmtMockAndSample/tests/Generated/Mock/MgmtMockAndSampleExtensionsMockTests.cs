@@ -14,7 +14,6 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -27,7 +26,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetDeletedManagedHsms()
         {
             // Example: List deleted managed HSMs in the specified subscription
@@ -39,7 +38,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetDeletedVaults()
         {
             // Example: List deleted vaults in the specified subscription
@@ -51,7 +50,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CalculateTemplateHashDeployment()
         {
             // Example: Calculate template hash
@@ -95,7 +94,7 @@ namespace MgmtMockAndSample.Tests.Mock
             }));
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetTenantActivityLogs()
         {
             // Example: Get Tenant Activity Logs without filter or select

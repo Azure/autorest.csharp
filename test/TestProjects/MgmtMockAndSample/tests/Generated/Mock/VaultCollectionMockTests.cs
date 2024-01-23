@@ -17,7 +17,6 @@ using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -30,7 +29,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate_CreateANewVaultOrUpdateAnExistingVault()
         {
             // Example: Create a new vault or update an existing vault
@@ -69,7 +68,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate_CreateOrUpdateAVaultWithNetworkAcls()
         {
             // Example: Create or update a vault with network acls
@@ -99,7 +98,7 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             }));
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate_VerifySampleGenCanHandleExamplesWithSomeParameterMissing()
         {
             // Example: Verify Sample-gen can handle examples with some parameter missing
@@ -138,7 +137,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Exists()
         {
             // Example: Retrieve a vault
@@ -149,7 +148,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             await collection.ExistsAsync("sample-vault");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Retrieve a vault
@@ -160,7 +159,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             await collection.GetAsync("sample-vault");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll()
         {
             // Example: List vaults in the specified resource group
@@ -173,7 +172,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetIfExists()
         {
             // Example: Retrieve a vault

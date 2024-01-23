@@ -14,7 +14,6 @@ using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -27,7 +26,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete an guest configuration assignment
@@ -37,7 +36,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await guestConfigurationAssignment.DeleteAsync(WaitUntil.Completed);
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Get a guest configuration assignment
@@ -47,7 +46,7 @@ namespace MgmtMockAndSample.Tests.Mock
             await guestConfigurationAssignment.GetAsync();
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Update()
         {
             // Example: Create or update guest configuration assignment

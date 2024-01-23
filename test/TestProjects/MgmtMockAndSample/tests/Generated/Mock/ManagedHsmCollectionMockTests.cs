@@ -17,7 +17,6 @@ using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
-using NUnit.Framework;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -30,7 +29,7 @@ namespace MgmtMockAndSample.Tests.Mock
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task CreateOrUpdate()
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
@@ -83,7 +82,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             });
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Exists()
         {
             // Example: Retrieve a managed HSM Pool
@@ -94,7 +93,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             await collection.ExistsAsync("hsm1");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task Get()
         {
             // Example: Retrieve a managed HSM Pool
@@ -105,7 +104,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             await collection.GetAsync("hsm1");
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetAll()
         {
             // Example: List managed HSM Pools in a resource group
@@ -118,7 +117,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             }
         }
 
-        [Test]
+        [RecordedTest]
         public async Task GetIfExists()
         {
             // Example: Retrieve a managed HSM Pool
