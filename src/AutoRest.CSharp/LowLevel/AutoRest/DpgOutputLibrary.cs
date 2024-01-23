@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var result = new Dictionary<LowLevelClient, DpgClientSampleProvider>();
 
-            // we currently only write samples for branded libraries
+            // we do not write samples if the library is not branded, or samples are turned off
             if (!Configuration.IsBranded || !Configuration.GenerateSampleProject)
                 return result;
 
