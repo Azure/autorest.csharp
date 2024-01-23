@@ -2,12 +2,11 @@
  "$id": "1",
  "Name": "Client.Structure.Service",
  "Description": "Test that we can use @client and @operationGroup decorators to customize client side code structure, such as:\n1. have everything as default.\n2. to rename client or operation group\n3. one client can have more than one operations groups\n4. split one interface into two clients\n5. have two clients with operations come from different interfaces\n6. have two clients with a hierarchy relation.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ClientType",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -58,8 +57,8 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "10",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -96,8 +95,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -116,42 +115,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "15",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "16",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "17",
-        "Type": {
-         "$id": "18",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "15",
        "StatusCodes": [
         204
        ],
@@ -169,7 +137,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "20",
+     "$id": "16",
      "Name": "two",
      "ResourceName": "Service",
      "Parameters": [
@@ -180,13 +148,13 @@
        "$ref": "11"
       },
       {
-       "$id": "21",
+       "$id": "17",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "18",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -199,20 +167,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "19",
         "Type": {
-         "$ref": "22"
+         "$ref": "18"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "20",
        "StatusCodes": [
         204
        ],
@@ -231,18 +196,29 @@
     }
    ],
    "Protocol": {
-    "$id": "25"
+    "$id": "21"
    },
    "Creatable": true
   },
   {
-   "$id": "26",
-   "Name": "Foo",
+   "$id": "22",
+   "Name": "Baz",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "23"
+   },
+   "Creatable": false,
+   "Parent": "ServiceClient"
+  },
+  {
+   "$id": "24",
+   "Name": "BazFoo",
    "Description": "",
    "Operations": [
     {
-     "$id": "27",
-     "Name": "three",
+     "$id": "25",
+     "Name": "seven",
      "ResourceName": "Foo",
      "Parameters": [
       {
@@ -252,13 +228,13 @@
        "$ref": "11"
       },
       {
-       "$id": "28",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -271,20 +247,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "28",
         "Type": {
-         "$ref": "29"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "29",
        "StatusCodes": [
         204
        ],
@@ -296,15 +269,27 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
      "Uri": "{endpoint}/client/structure/{client}",
-     "Path": "/three",
+     "Path": "/seven",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
-    },
+    }
+   ],
+   "Protocol": {
+    "$id": "30"
+   },
+   "Creatable": false,
+   "Parent": "Baz"
+  },
+  {
+   "$id": "31",
+   "Name": "Qux",
+   "Description": "",
+   "Operations": [
     {
      "$id": "32",
-     "Name": "four",
-     "ResourceName": "Foo",
+     "Name": "eight",
+     "ResourceName": "Qux",
      "Parameters": [
       {
        "$ref": "9"
@@ -318,8 +303,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -338,9 +323,6 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
@@ -357,7 +339,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
      "Uri": "{endpoint}/client/structure/{client}",
-     "Path": "/four",
+     "Path": "/eight",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -371,12 +353,12 @@
   },
   {
    "$id": "38",
-   "Name": "Bar",
+   "Name": "QuxBar",
    "Description": "",
    "Operations": [
     {
      "$id": "39",
-     "Name": "five",
+     "Name": "nine",
      "ResourceName": "Bar",
      "Parameters": [
       {
@@ -391,8 +373,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "41",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -411,14 +393,209 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
        "$id": "43",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/nine",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "44"
+   },
+   "Creatable": false,
+   "Parent": "Qux"
+  },
+  {
+   "$id": "45",
+   "Name": "Foo",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "46",
+     "Name": "three",
+     "ResourceName": "Foo",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "47",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "48",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "49",
+        "Type": {
+         "$ref": "48"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "50",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/three",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "51",
+     "Name": "four",
+     "ResourceName": "Foo",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "52",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "53",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "54",
+        "Type": {
+         "$ref": "53"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "55",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/four",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "56"
+   },
+   "Creatable": false,
+   "Parent": "ServiceClient"
+  },
+  {
+   "$id": "57",
+   "Name": "Bar",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "58",
+     "Name": "five",
+     "ResourceName": "Bar",
+     "Parameters": [
+      {
+       "$ref": "9"
+      },
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "59",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "60",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "61",
+        "Type": {
+         "$ref": "60"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "62",
        "StatusCodes": [
         204
        ],
@@ -436,7 +613,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "44",
+     "$id": "63",
      "Name": "six",
      "ResourceName": "Bar",
      "Parameters": [
@@ -447,13 +624,13 @@
        "$ref": "11"
       },
       {
-       "$id": "45",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "65",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -466,20 +643,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "66",
         "Type": {
-         "$ref": "46"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "67",
        "StatusCodes": [
         204
        ],
@@ -498,7 +672,7 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "68"
    },
    "Creatable": false,
    "Parent": "ServiceClient"

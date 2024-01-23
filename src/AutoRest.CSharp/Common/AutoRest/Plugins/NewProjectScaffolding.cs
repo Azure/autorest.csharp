@@ -78,8 +78,6 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
-            //TODO WriteTestBaseClass(autoRest);
-            //TODO WriteTestEnvironment(autoRest);
         }
 
         private async Task WriteProjectFiles()
