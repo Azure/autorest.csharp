@@ -57,7 +57,7 @@ namespace Payload.JsonMergePatch
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = body.ToRequestContent();
+            using RequestContent content = RequestContent.Create(body, options); // body.ToPatchRequestContent();
             Response response = await CreateResourceAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Resource.FromResponse(response), response);
         }

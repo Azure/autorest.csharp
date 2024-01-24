@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
-using Microsoft.Extensions.Options;
 
 namespace Payload.JsonMergePatch.Models
 {
@@ -21,11 +20,25 @@ namespace Payload.JsonMergePatch.Models
 
         void IJsonModel<ResourcePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourcePatch>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" || options.Format == "P" ? ((IPersistableModel<ResourcePatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ResourcePatch)} does not support '{format}' format.");
             }
+
+            if (options.Format == "W")
+            {
+                WriteJson(writer, options);
+            }
+            else if (options.Format == "P")
+            {
+                WritePatch(writer);
+            }
+        }
+
+        internal void WriteJson(Utf8JsonWriter writer, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
 
             writer.WriteStartObject();
             if (Optional.IsDefined(Description))
@@ -70,68 +83,6 @@ namespace Payload.JsonMergePatch.Models
                 writer.WriteEndArray();
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        internal void WriteJson(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Description))
-            {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
-            }
-            if (Optional.IsCollectionDefined(Map))
-            {
-                writer.WritePropertyName("map"u8);
-                writer.WriteStartObject();
-                foreach (var item in Map)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            if (Optional.IsCollectionDefined(Array))
-            {
-                writer.WritePropertyName("array"u8);
-                writer.WriteStartArray();
-                foreach (var item in Array)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(NestedModel))
-            {
-                writer.WritePropertyName("nestedModel"u8);
-                writer.WriteObjectValue(NestedModel);
-            }
-            if (Optional.IsCollectionDefined(IntArray))
-            {
-                writer.WritePropertyName("intArray"u8);
-                writer.WriteStartArray();
-                foreach (var item in IntArray)
-                {
-                    writer.WriteNumberValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (_serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -182,6 +133,7 @@ namespace Payload.JsonMergePatch.Models
 
             if (Optional.IsCollectionDefined(_array))
             {
+                writer.WritePropertyName("array"u8);
                 writer.WriteStartArray();
                 foreach (var item in _array)
                 {
@@ -361,6 +313,13 @@ namespace Payload.JsonMergePatch.Models
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
+            return content;
+        }
+
+        internal virtual RequestContent ToPatchRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            WritePatch(content.JsonWriter);
             return content;
         }
     }

@@ -63,7 +63,7 @@ namespace Payload.JsonMergePatch.Models
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal NestedModel(string name, string description, InnerModel innerModel, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
+            _name = name;
             _description = description;
             _innerModel = innerModel;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -75,7 +75,19 @@ namespace Payload.JsonMergePatch.Models
         }
 
         /// <summary> Gets the name. </summary>
-        public string Name { get; }
+        private string _name;
+        private bool _nameChanged = false;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                Argument.AssertNotNull(value, nameof(Name));
+
+                _nameChanged = true;
+                _name = value;
+            }
+        }
 
         private string _description;
         private bool _descriptionChanged = false;

@@ -21,11 +21,25 @@ namespace Payload.JsonMergePatch.Models
 
         void IJsonModel<InnerModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" || options.Format == "P" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(InnerModel)} does not support '{format}' format.");
             }
+
+            if (options.Format == "W")
+            {
+                WriteJson(writer, options);
+            }
+            else if (options.Format == "P")
+            {
+                WritePatch(writer);
+            }
+        }
+
+        internal void WriteJson(Utf8JsonWriter writer, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
 
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -36,34 +50,6 @@ namespace Payload.JsonMergePatch.Models
                 writer.WriteStringValue(Description);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        internal void WriteJson(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
-            if (Optional.IsDefined(Description))
-            {
-                writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(Description);
-            }
-            if (_serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -188,6 +174,13 @@ namespace Payload.JsonMergePatch.Models
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
+            return content;
+        }
+
+        internal virtual RequestContent ToPatchRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            WritePatch(content.JsonWriter);
             return content;
         }
     }

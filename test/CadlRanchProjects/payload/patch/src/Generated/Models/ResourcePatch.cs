@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -65,9 +66,9 @@ namespace Payload.JsonMergePatch.Models
         {
             _description = description;
             _map = map;
-            Array = array;
-            NestedModel = nestedModel;
-            IntArray = intArray;
+            _array = array;
+            _nestedModel = nestedModel;
+            _intArray = intArray;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -126,6 +127,14 @@ namespace Payload.JsonMergePatch.Models
         private IList<int> _intArray;
         private bool _intArrayChanged = false;
         /// <summary> Gets the int array. </summary>
-        public IList<int> IntArray { get; }
+        public IList<int> IntArray
+        {
+            get => _intArray;
+            set
+            {
+                _intArray = value;
+                _intArrayChanged = true;
+            }
+        }
     }
 }
