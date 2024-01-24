@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var accessModifiers = existingMember is null ? Public : GetAccessModifiers(existingMember);
 
-                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, Serialization.SerializationFormat.Default, true);
+                var additionalPropertiesField = new FieldDeclaration($"Additional Properties", accessModifiers | ReadOnly, type, type, declaration, null, false, true);
                 var additionalPropertiesParameter = new Parameter(name.ToVariableName(), $"Additional Properties", type, null, ValidationType.None, null);
 
                 // we intentionally do not add this field into the field list to avoid cyclic references
@@ -267,7 +267,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 declaration,
                 GetPropertyInitializationValue(originalType, inputModelProperty),
                 inputModelProperty.IsRequired,
-                SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
                 OptionalViaNullability: optionalViaNullability,
                 IsField: false,
                 WriteAsProperty: true,
@@ -301,7 +300,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Declaration: declaration,
                 InitializationValue: GetPropertyInitializationValue(originalType, inputModelProperty),
                 IsRequired: inputModelProperty.IsRequired,
-                SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
                 IsField: existingMember is IFieldSymbol,
                 WriteAsProperty: writeAsProperty,
                 OptionalViaNullability: optionalViaNullability,

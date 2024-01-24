@@ -83,14 +83,12 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, string? name, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            string? encode = null;
             var isNullable = false;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadBoolean(nameof(InputPrimitiveType.IsNullable), ref isNullable)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Name), ref name) // the primitive kind in the json is represented by the property `Name`.
-                    || reader.TryReadString("Encode", ref encode);
+                    || reader.TryReadString(nameof(InputPrimitiveType.Name), ref name); // the primitive kind in the json is represented by the property `Name`.
 
                 if (!isKnownProperty)
                 {

@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ClientFields(IEnumerable<Parameter> parameters, InputAuth? authorization)
         {
-            ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, Configuration.ApiTypes.ClientDiagnosticsType, KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true);
+            ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, Configuration.ApiTypes.ClientDiagnosticsType, KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, Configuration.ApiTypes.HttpPipelineType, "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>();
@@ -57,14 +57,14 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (authorization.ApiKey is not null)
                 {
-                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", Literal(authorization.ApiKey.Name), SerializationFormat.Default);
+                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", Literal(authorization.ApiKey.Name));
                     _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
                     fields.Add(AuthorizationHeaderConstant);
                     fields.Add(_keyAuthField);
                     if (authorization.ApiKey.Prefix is not null)
                     {
-                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", Literal(authorization.ApiKey.Prefix), SerializationFormat.Default);
+                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", Literal(authorization.ApiKey.Prefix));
                         fields.Add(AuthorizationApiKeyPrefixConstant);
                     }
                     credentialFields.Add(_keyAuthField);
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models
                 if (authorization.OAuth2 is not null)
                 {
                     var scopeExpression = New.Array(typeof(string), true, authorization.OAuth2.Scopes.Select(Literal).ToArray());
-                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", scopeExpression, SerializationFormat.Default);
+                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", scopeExpression);
                     _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
 
                     fields.Add(ScopesConstant);
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
             foreach (Parameter parameter in parameters)
             {
                 var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier
-                        ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true)
+                        ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
                         : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
 
                 if (field.WriteAsProperty)
