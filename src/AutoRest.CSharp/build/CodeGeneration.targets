@@ -34,8 +34,8 @@
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
     <_SaveInputs Condition="'$(SaveInputs)' == 'true'">-SaveInputs</_SaveInputs>
     <!-- Here we append the generate-test-project configuration to TypespecAdditionalOptions if it is specified -->
-    <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' == 'true' AND '$(TypespecAdditionalOptions)' != ''">$(TypespecAdditionalOptions)%3Bgenerate-test-project=true</TypespecAdditionalOptions>
-    <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' == 'true' AND '$(TypespecAdditionalOptions)' == ''">generate-test-project=true</TypespecAdditionalOptions>
+    <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' != '' AND '$(TypespecAdditionalOptions)' != ''">$(TypespecAdditionalOptions)%3Bgenerate-test-project=true</TypespecAdditionalOptions>
+    <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' != '' AND '$(TypespecAdditionalOptions)' == ''">generate-test-project=true</TypespecAdditionalOptions>
     <_TypespecAdditionalOptions Condition="'$(TypespecAdditionalOptions)' != ''">-TypespecAdditionalOptions "$(TypespecAdditionalOptions)"</_TypespecAdditionalOptions>
     <_SpecRepoRoot Condition="'$(SpecRepoRoot)' != ''">"$(SpecRepoRoot)"</_SpecRepoRoot>
   </PropertyGroup>
