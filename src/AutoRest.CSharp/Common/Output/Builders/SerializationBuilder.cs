@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             if (type.EqualsIgnoreNullable(typeof(DateTimeOffset)))
             {
-                return SerializationFormat.DateTime_ISO8601;
+                return SerializationFormat.DateTime_RFC3339;
             }
 
             if (type.EqualsIgnoreNullable(typeof(TimeSpan)))

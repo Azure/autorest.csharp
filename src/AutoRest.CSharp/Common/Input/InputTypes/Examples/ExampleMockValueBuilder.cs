@@ -133,7 +133,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputTypePrimitiveKind.Boolean => InputExampleValue.Value(primitiveType, true),
             InputTypePrimitiveKind.Date => InputExampleValue.Value(primitiveType, "2022-05-10"),
             InputTypePrimitiveKind.DateTime => InputExampleValue.Value(primitiveType, "2022-05-10T14:57:31.2311892-04:00"),
-            InputTypePrimitiveKind.DateTimeISO8601 => InputExampleValue.Value(primitiveType, "2022-05-10T18:57:31.2311892Z"),
             InputTypePrimitiveKind.DateTimeRFC1123 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),
             InputTypePrimitiveKind.DateTimeRFC3339 => InputExampleValue.Value(primitiveType, "2022-05-10T18:57:31.2311892Z"),
             InputTypePrimitiveKind.DateTimeRFC7231 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),

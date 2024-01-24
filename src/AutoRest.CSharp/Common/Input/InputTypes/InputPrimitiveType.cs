@@ -15,8 +15,7 @@ internal record InputPrimitiveType(InputTypePrimitiveKind Kind, SerializationFor
     public static InputPrimitiveType BytesBase64Url { get; } = new(InputTypePrimitiveKind.BytesBase64Url, SerializationFormat.Bytes_Base64Url);
     public static InputPrimitiveType ContentType { get; } = new(InputTypePrimitiveKind.ContentType, SerializationFormat.Default);
     public static InputPrimitiveType Date { get; } = new(InputTypePrimitiveKind.Date, SerializationFormat.Date_ISO8601);
-    public static InputPrimitiveType DateTime { get; } = new(InputTypePrimitiveKind.DateTime, SerializationFormat.DateTime_ISO8601);
-    public static InputPrimitiveType DateTimeISO8601 { get; } = new(InputTypePrimitiveKind.DateTimeISO8601, SerializationFormat.DateTime_ISO8601);
+    public static InputPrimitiveType DateTime { get; } = new(InputTypePrimitiveKind.DateTime, SerializationFormat.DateTime_RFC3339);
     public static InputPrimitiveType DateTimeRFC1123 { get; } = new(InputTypePrimitiveKind.DateTimeRFC1123, SerializationFormat.DateTime_RFC1123);
     public static InputPrimitiveType DateTimeUnix { get; } = new(InputTypePrimitiveKind.DateTimeUnix, SerializationFormat.DateTime_Unix);
     public static InputPrimitiveType DurationISO8601 { get; } = new(InputTypePrimitiveKind.DurationISO8601, SerializationFormat.Duration_ISO8601);

@@ -347,7 +347,7 @@ namespace AutoRest.CSharp.Common.Input
             ByteArraySchema => InputPrimitiveType.Bytes,
 
             DateSchema => InputPrimitiveType.Date,
-            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => InputPrimitiveType.DateTimeISO8601,
+            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => InputPrimitiveType.DateTime,
             DateTimeSchema { Format: DateTimeSchemaFormat.DateTimeRfc1123 } => InputPrimitiveType.DateTimeRFC1123,
             DateTimeSchema => InputPrimitiveType.DateTime,
             UnixTimeSchema => InputPrimitiveType.DateTimeUnix,
@@ -365,7 +365,7 @@ namespace AutoRest.CSharp.Common.Input
             ArmIdSchema => InputPrimitiveType.ResourceIdentifier,
             { Type: AllSchemaTypes.ArmId } => InputPrimitiveType.ResourceIdentifier,
 
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTimeISO8601,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTime,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => InputPrimitiveType.DateTimeRFC1123,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => InputPrimitiveType.DateTimeUnix,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,

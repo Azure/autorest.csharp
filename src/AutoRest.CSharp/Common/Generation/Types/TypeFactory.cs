@@ -57,7 +57,6 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypePrimitiveKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
                 InputTypePrimitiveKind.Date => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypePrimitiveKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypePrimitiveKind.DateTimeISO8601 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypePrimitiveKind.DateTimeRFC1123 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypePrimitiveKind.DateTimeRFC3339 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypePrimitiveKind.DateTimeRFC7231 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),

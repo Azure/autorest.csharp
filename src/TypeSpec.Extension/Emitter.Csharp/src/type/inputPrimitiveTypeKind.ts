@@ -10,7 +10,6 @@ export enum InputPrimitiveTypeKind {
     ContentType = "ContentType",
     Date = "Date",
     DateTime = "DateTime",
-    DateTimeISO8601 = "DateTimeISO8601",
     DateTimeRFC1123 = "DateTimeRFC1123",
     DateTimeRFC3339 = "DateTimeRFC3339",
     DateTimeRFC7231 = "DateTimeRFC7231",

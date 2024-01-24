@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                             if (time != null)
                                 return DateTimeOffsetExpression.FromUnixTimeSeconds(Long(time.Value));
                             break;
-                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601 or SerializationFormat.Date_ISO8601:
+                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.Date_ISO8601:
                             if (rawValue.RawValue is string s)
                                 return DateTimeOffsetExpression.Parse(s);
                             break;

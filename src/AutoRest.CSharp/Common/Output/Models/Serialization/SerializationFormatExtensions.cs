@@ -10,7 +10,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             SerializationFormat.DateTime_RFC1123 => "R",
             SerializationFormat.DateTime_RFC3339 => "O",
             SerializationFormat.DateTime_RFC7231 => "R",
-            SerializationFormat.DateTime_ISO8601 => "O",
             SerializationFormat.Date_ISO8601 => "D",
             SerializationFormat.DateTime_Unix => "U",
             SerializationFormat.Bytes_Base64Url => "U",

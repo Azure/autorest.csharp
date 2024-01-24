@@ -12,7 +12,6 @@ internal enum InputTypePrimitiveKind
     ContentType,
     Date,
     DateTime,
-    DateTimeISO8601,
     DateTimeRFC1123,
     DateTimeRFC3339,
     DateTimeRFC7231,
