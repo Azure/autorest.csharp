@@ -55,7 +55,7 @@ namespace MultipleMediaTypes
         }
 
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)']/*" />
@@ -64,13 +64,13 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             Response response = await OneBinaryBodyTwoContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)']/*" />
@@ -79,7 +79,7 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             Response response = OneBinaryBodyTwoContentTypes(content, contentType, context);
             return response;
         }
@@ -100,7 +100,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -140,7 +140,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
