@@ -33,7 +33,9 @@
     <_AutoRestCommand>npx autorest@$(AutoRestVersion) --max-memory-size=8192 --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/net7.0/any/ --clear-output-folder=true --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;</_AutoRestCommand>
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
     <_SaveInputs Condition="'$(SaveInputs)' == 'true'">-SaveInputs</_SaveInputs>
-    <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' != 'true'">$(TypespecAdditionalOptions)%3Bgenerate-test-project=true</TypespecAdditionalOptions>
+    <!-- Here we append the generate-test-project configuration to TypespecAdditionalOptions if it is specified -->
+    <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' == 'true' AND '$(TypespecAdditionalOptions)' != ''">$(TypespecAdditionalOptions)%3Bgenerate-test-project=true</TypespecAdditionalOptions>
+    <TypespecAdditionalOptions Condition="'$(GenerateTestProject)' == 'true' AND '$(TypespecAdditionalOptions)' == ''">generate-test-project=true</TypespecAdditionalOptions>
     <_TypespecAdditionalOptions Condition="'$(TypespecAdditionalOptions)' != ''">-TypespecAdditionalOptions "$(TypespecAdditionalOptions)"</_TypespecAdditionalOptions>
     <_SpecRepoRoot Condition="'$(SpecRepoRoot)' != ''">"$(SpecRepoRoot)"</_SpecRepoRoot>
   </PropertyGroup>
