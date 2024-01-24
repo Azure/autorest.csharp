@@ -34,7 +34,7 @@ internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTy
             if (literal.LiteralValueType is not InputPrimitiveType primitive)
                 return false;
 
-            if (primitive.Kind != InputTypeKind.String)
+            if (primitive.Kind != InputTypePrimitiveKind.String)
                 return false;
         }
 
@@ -48,7 +48,7 @@ internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTy
             InputPrimitiveType? primitive = item is InputLiteralType literal ? literal.LiteralValueType as InputPrimitiveType : item as InputPrimitiveType;
             if (primitive is null)
                 return false;
-            if (primitive.Kind != InputTypeKind.String)
+            if (primitive.Kind != InputTypePrimitiveKind.String)
                 return false;
         }
 

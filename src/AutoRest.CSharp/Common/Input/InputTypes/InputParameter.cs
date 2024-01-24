@@ -59,7 +59,7 @@ internal record InputParameter(
             InputDictionaryType dictionaryType => dictionaryType.ValueType,
             _ => parameterType
         };
-        if (affectType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
+        if (affectType is InputPrimitiveType { Kind: InputTypePrimitiveKind.DateTime })
         {
             if (requestLocation == RequestLocation.Header)
             {

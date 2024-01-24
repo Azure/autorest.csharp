@@ -305,7 +305,7 @@ namespace AutoRest.CSharp.Output.Models
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters[0];
                     if (bodyMediaType == BodyMediaType.Binary ||
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
-                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputTypeKind.Stream })
+                        bodyRequestParameter.Type is InputPrimitiveType { Kind: InputTypePrimitiveKind.Stream })
                     {
                         body = new BinaryRequestBody(bodyParameterValue);
                     }
@@ -385,7 +385,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new StringResponseBody();
             }
 
-            if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            if (bodyType is InputPrimitiveType { Kind: InputTypePrimitiveKind.Stream })
             {
                 return new StreamResponseBody();
             }

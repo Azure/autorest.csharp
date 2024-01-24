@@ -3,11 +3,10 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal enum InputTypeKind
+internal enum InputTypePrimitiveKind
 {
     AzureLocation,
     Boolean,
-    BinaryData,
     Bytes,
     BytesBase64Url,
     ContentType,

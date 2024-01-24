@@ -370,7 +370,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
 
         public bool HasResponseBody => _method.ResponseBodyType != null;
-        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream };
+        public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputTypePrimitiveKind.Stream };
 
         private InputType? _resultType;
         public InputType? ResultType => _resultType ??= GetEffectiveResponseType();

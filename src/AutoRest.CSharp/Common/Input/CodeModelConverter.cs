@@ -412,11 +412,11 @@ namespace AutoRest.CSharp.Common.Input
             var rawValue = constantSchema.Value.Value;
             object normalizedValue = kind switch
             {
-                InputTypeKind.Boolean => bool.Parse(rawValue.ToString()!),
-                InputTypeKind.Int32 => int.Parse(rawValue.ToString()!),
-                InputTypeKind.Int64 => long.Parse(rawValue.ToString()!),
-                InputTypeKind.Float32 => float.Parse(rawValue.ToString()!),
-                InputTypeKind.Float64 => double.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Boolean => bool.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Int32 => int.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Int64 => long.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Float32 => float.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Float64 => double.Parse(rawValue.ToString()!),
                 _ => rawValue
             };
 

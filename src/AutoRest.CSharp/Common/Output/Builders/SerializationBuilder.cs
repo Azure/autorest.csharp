@@ -47,24 +47,7 @@ namespace AutoRest.CSharp.Output.Builders
             InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
             InputListType listType => GetSerializationFormat(listType.ElementType),
             InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
-            InputPrimitiveType primitiveType => primitiveType.Kind switch
-            {
-                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
-                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
-                InputTypeKind.Date => SerializationFormat.Date_ISO8601,
-                InputTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
-                InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
-                InputTypeKind.DateTimeRFC3339 => SerializationFormat.DateTime_RFC3339,
-                InputTypeKind.DateTimeRFC7231 => SerializationFormat.DateTime_RFC7231,
-                InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
-                InputTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
-                InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
-                InputTypeKind.DurationSeconds => SerializationFormat.Duration_Seconds,
-                InputTypeKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
-                InputTypeKind.Time => SerializationFormat.Time_ISO8601,
-                _ => SerializationFormat.Default
-            },
+            InputPrimitiveType primitiveType => primitiveType.Format,
             _ => SerializationFormat.Default
         };
 
@@ -72,6 +55,17 @@ namespace AutoRest.CSharp.Output.Builders
         {
             var serializationFormat = GetSerializationFormat(inputType);
             return serializationFormat != SerializationFormat.Default ? serializationFormat : GetDefaultSerializationFormat(valueType);
+        }
+
+        public static SerializationFormat GetSerializationFormat(ObjectTypeProperty property)
+        {
+            // only input types support serialization format now, schemas do not support serialization format
+            if (property is { InputModelProperty: { } inputModelProperty })
+            {
+                return GetSerializationFormat(inputModelProperty.Type, property.Declaration.Type);
+            }
+
+            return SerializationFormat.Default;
         }
 
         public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type, SerializationFormat? serializationFormat) => bodyMediaType switch

@@ -116,19 +116,19 @@ namespace AutoRest.CSharp.Common.Input
 
             switch (valueType.Kind)
             {
-                case InputTypeKind.String:
+                case InputTypePrimitiveKind.String:
                     foreach (var value in allowedValues)
                     {
                         concreteValues.Add(new InputEnumTypeStringValue(value.Name, (string)value.Value, value.Description));
                     }
                     break;
-                case InputTypeKind.Int32:
+                case InputTypePrimitiveKind.Int32:
                     foreach (var value in allowedValues)
                     {
                         concreteValues.Add(new InputEnumTypeIntegerValue(value.Name, (int)value.Value, value.Description));
                     }
                     break;
-                case InputTypeKind.Float32:
+                case InputTypePrimitiveKind.Float32:
                     foreach (var value in allowedValues)
                     {
                         switch (value.Value)

@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
@@ -11,15 +12,6 @@ namespace AutoRest.CSharp.Common.Input
     internal sealed class TypeSpecInputTypeConverter : JsonConverter<InputType>
     {
         private const string KindPropertyName = "Kind";
-        private const string PrimitiveTypeKind = nameof(InputPrimitiveType.Kind);
-        private const string LiteralValueType = nameof(InputLiteralType.LiteralValueType);
-        private const string ListElementType = nameof(InputListType.ElementType);
-        private const string DictionaryKeyType = nameof(InputDictionaryType.KeyType);
-        private const string DictionaryValueType = nameof(InputDictionaryType.ValueType);
-        private const string EnumValueType = nameof(InputEnumType.EnumValueType);
-        private const string EnumAllowedValues = nameof(InputEnumType.AllowedValues);
-        private const string IsNullableField = nameof(InputType.IsNullable);
-        private const string UnionItemTypes = nameof(InputUnionType.UnionItemTypes);
 
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
@@ -30,6 +22,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public override InputType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            // TODO -- figure out why we need this
             if (reader.TokenType == JsonTokenType.String)
             {
                 return CreatePrimitiveType(reader.GetString(), false);
@@ -90,12 +83,14 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, string? name, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
+            string? encode = null;
             var isNullable = false;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadBoolean(nameof(InputPrimitiveType.IsNullable), ref isNullable)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Name), ref name); // the primitive kind in the json is represented by the property `Name`.
+                    || reader.TryReadString(nameof(InputPrimitiveType.Name), ref name) // the primitive kind in the json is represented by the property `Name`.
+                    || reader.TryReadString("Encode", ref encode);
 
                 if (!isKnownProperty)
                 {
@@ -115,10 +110,29 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType CreatePrimitiveType(string? inputTypeKindString, bool isNullable)
         {
             Argument.AssertNotNull(inputTypeKindString, nameof(inputTypeKindString));
-            return Enum.TryParse<InputTypeKind>(inputTypeKindString, ignoreCase: true, out var kind)
-                ? new InputPrimitiveType(kind, isNullable)
+            return Enum.TryParse<InputTypePrimitiveKind>(inputTypeKindString, ignoreCase: true, out var kind)
+                ? new InputPrimitiveType(kind, GetSerializationFormat(kind), isNullable)
                 : throw new JsonException($"{inputTypeKindString} type is unknown.");
         }
+
+        private static SerializationFormat GetSerializationFormat(InputTypePrimitiveKind kind) => kind switch
+        {
+            InputTypePrimitiveKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
+            InputTypePrimitiveKind.Bytes => SerializationFormat.Bytes_Base64,
+            InputTypePrimitiveKind.Date => SerializationFormat.Date_ISO8601,
+            InputTypePrimitiveKind.DateTime => SerializationFormat.DateTime_ISO8601,
+            InputTypePrimitiveKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
+            InputTypePrimitiveKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+            InputTypePrimitiveKind.DateTimeRFC3339 => SerializationFormat.DateTime_RFC3339,
+            InputTypePrimitiveKind.DateTimeRFC7231 => SerializationFormat.DateTime_RFC7231,
+            InputTypePrimitiveKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
+            InputTypePrimitiveKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
+            InputTypePrimitiveKind.DurationConstant => SerializationFormat.Duration_Constant,
+            InputTypePrimitiveKind.DurationSeconds => SerializationFormat.Duration_Seconds,
+            InputTypePrimitiveKind.DurationSecondsFloat => SerializationFormat.Duration_Seconds_Float,
+            InputTypePrimitiveKind.Time => SerializationFormat.Time_ISO8601,
+            _ => SerializationFormat.Default,
+        };
 
         private static InputIntrinsicType ReadIntrinsicType(ref Utf8JsonReader reader, string? id, string? name, ReferenceResolver resolver)
         {
