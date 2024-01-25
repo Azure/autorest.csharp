@@ -28,7 +28,7 @@ jobs:
       - name: Generate code
         shell: pwsh
         run: |
-          ./eng/Generate.ps1
+          ./eng/Generate.ps1 -skipBuildProject
 
       - name: Commit generated code
         run: |
