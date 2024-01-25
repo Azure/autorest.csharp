@@ -22,7 +22,7 @@ function Invoke($command, $executePath=$repoRoot)
     }
 }
 
-function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug)
+function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $debug, $skipBuildProject)
 {
     $outputPath = $baseOutput
     if(Test-Path "$outputPath/*.sln") {
@@ -51,7 +51,9 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     if($buildDir.EndsWith("src")) {
         $buildDir = $buildDir -replace ".{4}$"
     }
-    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
+    if (!$skipBuildProject) {
+        Invoke "dotnet build $buildDir --verbosity quiet /nologo"
+    }
 }
 
 function AutoRest-Reset()
@@ -59,7 +61,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
+function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments, $sharedSource, $fast, $debug, $skipBuildProject)
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -102,7 +104,9 @@ function Invoke-TypeSpec($baseOutput, $projectName, $mainFile, $arguments="", $s
     if($buildDir.EndsWith("src")) {
         $buildDir = $buildDir -replace ".{4}$"
     }
-    Invoke "dotnet build $buildDir --verbosity quiet /nologo"
+    if (!$skipBuildProject) {
+        Invoke "dotnet build $buildDir --verbosity quiet /nologo"
+    }
 }
 
 function Invoke-TypeSpecSetup()

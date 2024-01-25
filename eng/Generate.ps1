@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$debug, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$skipBuildProject, [switch]$debug, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 Import-Module "$PSScriptRoot\..\test\scripts\LocalTestNugetSource.psm1" -DisableNameChecking -Force;
@@ -399,14 +399,14 @@ if($testPackagesToInstall.Count -gt 0){
 $keys | % { $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug $using:skipBuildProject;
     }
 } -ThrottleLimit $parallel
 
 $keys | % { $tspDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-TypeSpec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-TypeSpec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug $using:skipBuildProject;
     }
 } -ThrottleLimit $parallel
 
