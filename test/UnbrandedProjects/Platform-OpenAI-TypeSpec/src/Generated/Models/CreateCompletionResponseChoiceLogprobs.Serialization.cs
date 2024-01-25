@@ -2,16 +2,100 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CreateCompletionResponseChoiceLogprobs
+    public partial class CreateCompletionResponseChoiceLogprobs : IUtf8JsonWriteable, IJsonModel<CreateCompletionResponseChoiceLogprobs>
     {
-        internal static CreateCompletionResponseChoiceLogprobs DeserializeCreateCompletionResponseChoiceLogprobs(JsonElement element)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateCompletionResponseChoiceLogprobs>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<CreateCompletionResponseChoiceLogprobs>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoiceLogprobs>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CreateCompletionResponseChoiceLogprobs)} does not support '{format}' format.");
+            }
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("tokens"u8);
+            writer.WriteStartArray();
+            foreach (var item in Tokens)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("token_logprobs"u8);
+            writer.WriteStartArray();
+            foreach (var item in TokenLogprobs)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("top_logprobs"u8);
+            writer.WriteStartArray();
+            foreach (var item in TopLogprobs)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteStartObject();
+                foreach (var item0 in item)
+                {
+                    writer.WritePropertyName(item0.Key);
+                    writer.WriteNumberValue(item0.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("text_offset"u8);
+            writer.WriteStartArray();
+            foreach (var item in TextOffset)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        CreateCompletionResponseChoiceLogprobs IJsonModel<CreateCompletionResponseChoiceLogprobs>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoiceLogprobs>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(CreateCompletionResponseChoiceLogprobs)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeCreateCompletionResponseChoiceLogprobs(document.RootElement, options);
+        }
+
+        internal static CreateCompletionResponseChoiceLogprobs DeserializeCreateCompletionResponseChoiceLogprobs(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -20,6 +104,8 @@ namespace OpenAI.Models
             IReadOnlyList<double> tokenLogprobs = default;
             IReadOnlyList<IDictionary<string, long>> topLogprobs = default;
             IReadOnlyList<long> textOffset = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tokens"u8))
@@ -74,9 +160,45 @@ namespace OpenAI.Models
                     textOffset = array;
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CreateCompletionResponseChoiceLogprobs(tokens, tokenLogprobs, topLogprobs, textOffset);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new CreateCompletionResponseChoiceLogprobs(tokens, tokenLogprobs, topLogprobs, textOffset, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<CreateCompletionResponseChoiceLogprobs>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoiceLogprobs>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(CreateCompletionResponseChoiceLogprobs)} does not support '{options.Format}' format.");
+            }
+        }
+
+        CreateCompletionResponseChoiceLogprobs IPersistableModel<CreateCompletionResponseChoiceLogprobs>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoiceLogprobs>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeCreateCompletionResponseChoiceLogprobs(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(CreateCompletionResponseChoiceLogprobs)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<CreateCompletionResponseChoiceLogprobs>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
@@ -84,6 +206,14 @@ namespace OpenAI.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCreateCompletionResponseChoiceLogprobs(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
+        internal virtual RequestBody ToRequestBody()
+        {
+            var content = new Utf8JsonRequestBody();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

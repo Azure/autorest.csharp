@@ -17,7 +17,7 @@ namespace _Type.Union.Models
         /// <returns> A new <see cref="Models.GetResponse"/> instance for mocking. </returns>
         public static GetResponse GetResponse(GetResponseProp prop = default)
         {
-            return new GetResponse(prop);
+            return new GetResponse(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse1"/>. </summary>
@@ -25,7 +25,7 @@ namespace _Type.Union.Models
         /// <returns> A new <see cref="Models.GetResponse1"/> instance for mocking. </returns>
         public static GetResponse1 GetResponse1(GetResponse1Prop prop = default)
         {
-            return new GetResponse1(prop);
+            return new GetResponse1(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse2"/>. </summary>
@@ -33,105 +33,63 @@ namespace _Type.Union.Models
         /// <returns> A new <see cref="Models.GetResponse2"/> instance for mocking. </returns>
         public static GetResponse2 GetResponse2(GetResponse2Prop prop = default)
         {
-            return new GetResponse2(prop);
+            return new GetResponse2(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse3"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         /// <returns> A new <see cref="Models.GetResponse3"/> instance for mocking. </returns>
         public static GetResponse3 GetResponse3(BinaryData prop = null)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
-
-            return new GetResponse3(prop);
+            return new GetResponse3(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse4"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         /// <returns> A new <see cref="Models.GetResponse4"/> instance for mocking. </returns>
         public static GetResponse4 GetResponse4(BinaryData prop = null)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
-
-            return new GetResponse4(prop);
+            return new GetResponse4(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse5"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         /// <returns> A new <see cref="Models.GetResponse5"/> instance for mocking. </returns>
         public static GetResponse5 GetResponse5(BinaryData prop = null)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
-
-            return new GetResponse5(prop);
+            return new GetResponse5(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse6"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         /// <returns> A new <see cref="Models.GetResponse6"/> instance for mocking. </returns>
         public static GetResponse6 GetResponse6(EnumsOnlyCases prop = null)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
-
-            return new GetResponse6(prop);
+            return new GetResponse6(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse7"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         /// <returns> A new <see cref="Models.GetResponse7"/> instance for mocking. </returns>
         public static GetResponse7 GetResponse7(StringAndArrayCases prop = null)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
-
-            return new GetResponse7(prop);
+            return new GetResponse7(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse8"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         /// <returns> A new <see cref="Models.GetResponse8"/> instance for mocking. </returns>
         public static GetResponse8 GetResponse8(MixedLiteralsCases prop = null)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
-
-            return new GetResponse8(prop);
+            return new GetResponse8(prop, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetResponse9"/>. </summary>
         /// <param name="prop"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
         /// <returns> A new <see cref="Models.GetResponse9"/> instance for mocking. </returns>
         public static GetResponse9 GetResponse9(MixedTypesCases prop = null)
         {
-            if (prop == null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
-
-            return new GetResponse9(prop);
+            return new GetResponse9(prop, serializedAdditionalRawData: null);
         }
     }
 }

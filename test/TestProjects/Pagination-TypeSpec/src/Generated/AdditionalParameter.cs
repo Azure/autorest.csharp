@@ -74,7 +74,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, DimensionValueListItem.DeserializeDimensionValueListItem, ClientDiagnostics, _pipeline, "AdditionalParameter.GetMetricDimensionValues", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => DimensionValueListItem.DeserializeDimensionValueListItem(e), ClientDiagnostics, _pipeline, "AdditionalParameter.GetMetricDimensionValues", "value", "nextLink", context);
         }
 
         /// <summary> List the dimension values for the given metric dimension name. </summary>
@@ -100,7 +100,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMetricDimensionValuesRequest(testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMetricDimensionValuesNextPageRequest(nextLink, testRunId, name, metricNamespace, interval?.ToString(), metricName, timespan, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, DimensionValueListItem.DeserializeDimensionValueListItem, ClientDiagnostics, _pipeline, "AdditionalParameter.GetMetricDimensionValues", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => DimensionValueListItem.DeserializeDimensionValueListItem(e), ClientDiagnostics, _pipeline, "AdditionalParameter.GetMetricDimensionValues", "value", "nextLink", context);
         }
 
         /// <summary>

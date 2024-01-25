@@ -60,7 +60,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTextBlocklistsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, TextBlocklist.DeserializeTextBlocklist, ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklists", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => TextBlocklist.DeserializeTextBlocklist(e), ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklists", "value", "nextLink", context);
         }
 
         /// <summary> Get All Text Blocklists. </summary>
@@ -72,7 +72,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTextBlocklistsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, TextBlocklist.DeserializeTextBlocklist, ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklists", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => TextBlocklist.DeserializeTextBlocklist(e), ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklists", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistItemsRequest(blocklistName, maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTextBlocklistItemsNextPageRequest(nextLink, blocklistName, maxCount, skip, maxpagesize, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, TextBlockItem.DeserializeTextBlockItem, ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklistItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => TextBlockItem.DeserializeTextBlockItem(e), ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklistItems", "value", "nextLink", context);
         }
 
         /// <summary> Get All BlockItems By blocklistName. </summary>
@@ -164,7 +164,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTextBlocklistItemsRequest(blocklistName, maxCount, skip, maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetTextBlocklistItemsNextPageRequest(nextLink, blocklistName, maxCount, skip, maxpagesize, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, TextBlockItem.DeserializeTextBlockItem, ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklistItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => TextBlockItem.DeserializeTextBlockItem(e), ClientDiagnostics, _pipeline, "TwoTypesItem.GetTextBlocklistItems", "value", "nextLink", context);
         }
 
         /// <summary>
