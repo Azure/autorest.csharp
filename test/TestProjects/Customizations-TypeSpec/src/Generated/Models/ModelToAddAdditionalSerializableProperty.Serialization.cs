@@ -46,6 +46,13 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("additionalNullableSerializableProperty");
                 }
             }
+            writer.WritePropertyName("requiredIntOnBase"u8);
+            writer.WriteNumberValue(RequiredIntOnBase);
+            if (Optional.IsDefined(OptionalInt))
+            {
+                writer.WritePropertyName("optionalInt"u8);
+                writer.WriteNumberValue(OptionalInt.Value);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -87,13 +94,15 @@ namespace CustomizationsInTsp.Models
             int requiredInt = default;
             Optional<int> additionalSerializableProperty = default;
             Optional<int?> additionalNullableSerializableProperty = default;
+            int requiredIntOnBase = default;
+            Optional<int> optionalInt = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
                 {
-                    DeserializeRequiredIntValue(property, ref requiredInt);
+                    ReadRequiredIntValue(property, ref requiredInt);
                     continue;
                 }
                 if (property.NameEquals("additionalSerializableProperty"u8))
@@ -115,13 +124,27 @@ namespace CustomizationsInTsp.Models
                     additionalNullableSerializableProperty = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("requiredIntOnBase"u8))
+                {
+                    requiredIntOnBase = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("optionalInt"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalInt = property.Value.GetInt32();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty), serializedAdditionalRawData);
+            return new ModelToAddAdditionalSerializableProperty(requiredIntOnBase, Optional.ToNullable(optionalInt), serializedAdditionalRawData, requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
         }
 
         BinaryData IPersistableModel<ModelToAddAdditionalSerializableProperty>.Write(ModelReaderWriterOptions options)
@@ -157,14 +180,14 @@ namespace CustomizationsInTsp.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static ModelToAddAdditionalSerializableProperty FromResponse(Response response)
+        internal static new ModelToAddAdditionalSerializableProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

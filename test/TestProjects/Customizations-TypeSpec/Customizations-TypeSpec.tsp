@@ -25,7 +25,7 @@ enum ExtensibleEnumWithOperator {
 }
 
 @doc("Model to add additional serializable property")
-model ModelToAddAdditionalSerializableProperty {
+model ModelToAddAdditionalSerializableProperty extends ModelToRename {
     @doc("Required int")
     requiredInt: int32;
 }
@@ -39,7 +39,7 @@ model ModelToMakeInternal {
 @doc("Renamed model (original name: ModelToRename)")
 model ModelToRename {
     @doc("Required int")
-    requiredInt: int32;
+    requiredIntOnBase: int32;
 
     @doc("Optional int")
     optionalInt?: int32;
