@@ -166,7 +166,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     options["generateTestProject"] === true
                         ? undefined
                         : options["generateTestProject"],
-                "use-model-reader-writer": options["use-model-reader-writer"],
+                "use-model-reader-writer":
+                    options["use-model-reader-writer"] ?? true,
                 "azure-arm":
                     sdkContext.arm === false ? undefined : sdkContext.arm
             } as Configuration;

@@ -13,6 +13,16 @@ namespace _Type.Model.Inheritance.Recursive.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypeModelInheritanceRecursiveModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.Element"/>. </summary>
+        /// <param name="extension"></param>
+        /// <returns> A new <see cref="Models.Element"/> instance for mocking. </returns>
+        public static Element Element(IEnumerable<Extension> extension = null)
+        {
+            extension ??= new List<Extension>();
+
+            return new Element(extension?.ToList(), serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.Extension"/>. </summary>
         /// <param name="extension"></param>
         /// <param name="level"></param>
@@ -21,7 +31,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
         {
             extension ??= new List<Extension>();
 
-            return new Extension(extension?.ToList(), level);
+            return new Extension(extension?.ToList(), serializedAdditionalRawData: null, level);
         }
     }
 }

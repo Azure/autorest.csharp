@@ -55,7 +55,7 @@ namespace _Specs_.Azure.Core.Basic
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFirstItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetFirstItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, FirstItem.DeserializeFirstItem, ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetFirstItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => FirstItem.DeserializeFirstItem(e), ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetFirstItems", "value", "nextLink", context);
         }
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for FirstItem. </summary>
@@ -66,7 +66,7 @@ namespace _Specs_.Azure.Core.Basic
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFirstItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetFirstItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, FirstItem.DeserializeFirstItem, ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetFirstItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => FirstItem.DeserializeFirstItem(e), ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetFirstItems", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace _Specs_.Azure.Core.Basic
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSecondItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSecondItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, SecondItem.DeserializeSecondItem, ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetSecondItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => SecondItem.DeserializeSecondItem(e), ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetSecondItems", "value", "nextLink", context);
         }
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for SecondItem. </summary>
@@ -140,7 +140,7 @@ namespace _Specs_.Azure.Core.Basic
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSecondItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSecondItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, SecondItem.DeserializeSecondItem, ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetSecondItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => SecondItem.DeserializeSecondItem(e), ClientDiagnostics, _pipeline, "TwoModelsAsPageItem.GetSecondItems", "value", "nextLink", context);
         }
 
         /// <summary>
