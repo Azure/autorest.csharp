@@ -456,6 +456,7 @@ namespace AutoRest.CSharp.Generation.Types
 
             if (type is null)
             {
+                // TODO -- here if it is null, we could just return this type by its namespace and name. Nullable or IsValueType property could be found in its symbol
                 return false;
             }
 

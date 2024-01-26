@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Generation.Types
 {
     internal class CSharpType
     {
+        // TODO -- add a ctor to support we could construct a csharptype instance just using namespace and name or just wrap a symbol here
         private readonly TypeProvider? _implementation;
         private readonly Type? _type;
 
