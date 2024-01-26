@@ -725,7 +725,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
+            return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this, _sourceTypeMapping) : null;
         }
 
         protected override XmlObjectSerialization? BuildXmlSerialization()

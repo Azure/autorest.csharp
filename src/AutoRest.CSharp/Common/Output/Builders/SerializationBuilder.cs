@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -258,7 +259,7 @@ namespace AutoRest.CSharp.Output.Builders
                 );
         }
 
-        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(SerializationPropertyBag propertyBag, SchemaObjectType objectType)
+        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(SerializationPropertyBag propertyBag, SchemaObjectType objectType, ModelTypeMapping? sourceTypeMapping)
         {
             foreach (ObjectTypeProperty property in propertyBag.Properties)
             {
@@ -282,6 +283,7 @@ namespace AutoRest.CSharp.Output.Builders
                         ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
                         : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
                 }
+                var serializationMapping = property.SerializationMapping ?? sourceTypeMapping?.GetForMemberSerialization(property.Declaration.Name);
                 yield return new JsonPropertySerialization(
                     parameter.Name,
                     memberValueExpression,
@@ -290,19 +292,19 @@ namespace AutoRest.CSharp.Output.Builders
                     serialization,
                     isRequired,
                     shouldExcludeInWireSerialization,
-                    customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                    customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
+                    customSerializationMethodName: serializationMapping?.SerializationValueHook,
+                    customDeserializationMethodName: serializationMapping?.DeserializationValueHook,
                     enumerableExpression: enumerableExpression);
             }
 
             foreach ((string name, SerializationPropertyBag innerBag) in propertyBag.Bag)
             {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType, sourceTypeMapping).ToArray();
                 yield return new JsonPropertySerialization(name, serializationProperties);
             }
         }
 
-        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
+        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType, ModelTypeMapping? sourceTypeMapping)
         {
             var propertyBag = new SerializationPropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
@@ -317,7 +319,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             PopulatePropertyBag(propertyBag, 0);
-            var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
+            var properties = GetPropertySerializationsFromBag(propertyBag, objectType, sourceTypeMapping).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
             return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
