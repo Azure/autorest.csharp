@@ -134,7 +134,7 @@ function Add-Directory ([string]$testName, [string]$directory) {
     $readmeConfigurationPath = Join-Path $directory "readme.md"
     $testArguments = $null
     if (Test-Path $readmeConfigurationPath) {
-        $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true"
+        $testArguments = "--require=$readmeConfigurationPath --clear-output-folder=true --generate-test-project=true"
     }
     if ($testName.EndsWith("TypeSpec")) {
         Add-TypeSpec $testName $directory "" "--option @azure-tools/typespec-csharp.new-project=true" "-n"

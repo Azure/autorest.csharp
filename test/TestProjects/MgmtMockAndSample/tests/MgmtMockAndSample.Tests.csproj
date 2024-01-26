@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\..\..\src\assets\TestFramework\*.cs" />
+    <Compile Include="..\..\..\..\src\assets\TestFramework\MockTestBase.cs" />
+    <Compile Include="..\..\..\..\src\assets\TestFramework\RecordedTestAttribute.cs" />
   </ItemGroup>
 
   <ItemGroup>

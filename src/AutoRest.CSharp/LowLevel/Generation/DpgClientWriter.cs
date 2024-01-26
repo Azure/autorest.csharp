@@ -25,10 +25,10 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -603,9 +603,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, bool isAsync)
         {
-            if (!Configuration.IsBranded)
-                return;
-
             var sampleProvider = _library.GetSampleForClient(_client);
             // do not write this part when there is no sample provider
             if (sampleProvider == null)

@@ -96,6 +96,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
         protected void WriteTestAttribute()
         {
+            _writer.UseNamespace("Azure.Core.TestFramework");
             _writer.Line($"[RecordedTest]");
         }
 
