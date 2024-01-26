@@ -10,15 +10,27 @@ namespace AutoRest.CSharp.Input.Source
 {
     public class SourcePropertySerializationMapping
     {
-        public SourcePropertySerializationMapping(ISymbol existingMember, string[]? serializationPath, string? serializationValueHook, string? deserializationHook)
+        private readonly string? _propertyName;
+        private readonly ISymbol? _existingMember;
+
+        public SourcePropertySerializationMapping(string propertyName, IReadOnlyList<string>? serializationPath, string? serializationValueHook, string? deserializationValueHook)
         {
-            ExistingMember = existingMember;
+            _propertyName = propertyName;
+            SerializationPath = serializationPath;
+            SerializationValueHook = serializationValueHook;
+            DeserializationValueHook = deserializationValueHook;
+        }
+
+        public SourcePropertySerializationMapping(ISymbol existingMember, IReadOnlyList<string>? serializationPath, string? serializationValueHook, string? deserializationHook)
+        {
+            _existingMember = existingMember;
             SerializationPath = serializationPath;
             SerializationValueHook = serializationValueHook;
             DeserializationValueHook = deserializationHook;
         }
 
-        public ISymbol ExistingMember { get; }
+        public string PropertyName => _propertyName ?? throw new InvalidOperationException("we should not call this when the attribute is defined on the property instead of the type");
+        public ISymbol ExistingMember => _existingMember ?? throw new InvalidOperationException("we should not call this when the attribute is defined on the type instead of the property");
         public IReadOnlyList<string>? SerializationPath { get; }
         public string? SerializationValueHook { get; }
         public string? DeserializationValueHook { get; }

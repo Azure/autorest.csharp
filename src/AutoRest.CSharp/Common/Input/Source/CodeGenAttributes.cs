@@ -66,8 +66,9 @@ namespace AutoRest.CSharp.Input.Source
             return propertyNames != null;
         }
 
-        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out string? serializationHook, out string? deserializationHook)
+        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out string? propertyName, out string? serializationHook, out string? deserializationHook)
         {
+            propertyName = null;
             serializationHook = null;
             deserializationHook = null;
             if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
@@ -75,10 +76,18 @@ namespace AutoRest.CSharp.Input.Source
                 return false;
             }
 
+            if (attributeData.ConstructorArguments.Length > 0)
+            {
+                // this attribute could only at most have one constructor
+                propertyName = attributeData.ConstructorArguments[0].Value as string;
+            }
             foreach (var namedArgument in attributeData.NamedArguments)
             {
                 switch (namedArgument.Key)
                 {
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.PropertyName):
+                        propertyName = namedArgument.Value.Value as string;
+                        break;
                     case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.SerializationValueHook):
                         serializationHook = namedArgument.Value.Value as string;
                         break;

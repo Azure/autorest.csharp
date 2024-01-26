@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
+using Azure.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
@@ -10,7 +12,8 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly Dictionary<string, ISymbol> _propertyMappings;
         private readonly Dictionary<string, ISymbol> _codeGenMemberMappings;
-        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _serializationMappings;
+        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _propertySerializationMappings;
+        private readonly Dictionary<string, SourcePropertySerializationMapping> _typeSerializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
@@ -19,7 +22,8 @@ namespace AutoRest.CSharp.Input.Source
         {
             _propertyMappings = new();
             _codeGenMemberMappings = new();
-            _serializationMappings = new(SymbolEqualityComparer.Default);
+            _propertySerializationMappings = new(SymbolEqualityComparer.Default);
+            _typeSerializationMappings = new();
 
             foreach (ISymbol member in GetMembers(existingType))
             {
@@ -44,12 +48,12 @@ namespace AutoRest.CSharp.Input.Source
                     {
                         serializationPath = propertyNames;
                     }
-                    // handle CodeGenMemberSerializationHooks attribute
-                    codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out serializationHook, out deserializationHook);
+                    // handle CodeGenMemberSerializationHooks attribute (here this attribute is added to a property therefore propertyName will be ignored
+                    codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out _, out serializationHook, out deserializationHook);
                 }
                 if (serializationPath != null || serializationHook != null || deserializationHook != null)
                 {
-                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHook, deserializationHook));
+                    _propertySerializationMappings.Add(member, new(member, serializationPath, serializationHook, deserializationHook));
                 }
             }
 
@@ -60,6 +64,14 @@ namespace AutoRest.CSharp.Input.Source
                 {
                     Usage = usage;
                     Formats = formats;
+                }
+
+                // handle CodeGenMemberSerializationHooks attribute
+                if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var propertyName, out var serializationHook, out var deserializationHook))
+                {
+                    if (propertyName == null)
+                        throw new InvalidOperationException($"{nameof(CodeGenMemberSerializationHooksAttribute)} defines on type {existingType.MetadataName}, PropertyName is required");
+                    _typeSerializationMappings.Add(propertyName, new(propertyName, null, serializationHook, deserializationHook));
                 }
             }
         }
@@ -74,7 +86,7 @@ namespace AutoRest.CSharp.Input.Source
             if (symbol == null)
                 return null;
 
-            if (_serializationMappings.TryGetValue(symbol, out var serialization))
+            if (_propertySerializationMappings.TryGetValue(symbol, out var serialization))
                 return serialization;
 
             return null;
@@ -82,7 +94,7 @@ namespace AutoRest.CSharp.Input.Source
 
         public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
         {
-            return _serializationMappings.Values;
+            return _propertySerializationMappings.Values;
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
