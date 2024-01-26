@@ -92,6 +92,9 @@ namespace AutoRest.CSharp.Input.Source
             return null;
         }
 
+        public SourcePropertySerializationMapping? GetForMemberSerialization(string name)
+            => _typeSerializationMappings.TryGetValue(name, out var serialization) ? serialization : null;
+
         public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
         {
             return _propertySerializationMappings.Values;

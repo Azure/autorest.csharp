@@ -47,7 +47,7 @@ namespace CustomizationsInTsp.Models
                 }
             }
             writer.WritePropertyName("requiredIntOnBase"u8);
-            writer.WriteNumberValue(RequiredIntOnBase);
+            WriteRequiredIntOnBaseValue(writer);
             if (Optional.IsDefined(OptionalInt))
             {
                 writer.WritePropertyName("optionalInt"u8);
@@ -126,7 +126,7 @@ namespace CustomizationsInTsp.Models
                 }
                 if (property.NameEquals("requiredIntOnBase"u8))
                 {
-                    requiredIntOnBase = property.Value.GetInt32();
+                    ReadRequiredIntOnBaseValue(property, ref requiredIntOnBase);
                     continue;
                 }
                 if (property.NameEquals("optionalInt"u8))
