@@ -7,9 +7,15 @@ using System;
 
 namespace Azure.Core
 {
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct, Inherited = false)]
     internal class CodeGenMemberSerializationHooksAttribute : Attribute
     {
+        /// <summary>
+        /// Gets or sets the property name which these hooks should apply to
+        /// When this attribute applies to a type (class or struct), we must have a non-null PropertyName
+        /// When this attribute applies to a property, the value of PropertyName will be ignored
+        /// </summary>
+        public string? PropertyName { get; set; }
         /// <summary>
         /// Gets or sets the method name to use when serializing the property value (property name excluded)
         /// The signature of the serialization hook method must be or compatible with when invoking:
@@ -25,6 +31,11 @@ namespace Azure.Core
 
         public CodeGenMemberSerializationHooksAttribute()
         {
+        }
+
+        public CodeGenMemberSerializationHooksAttribute(string propertyName)
+        {
+            PropertyName = propertyName;
         }
     }
 }
