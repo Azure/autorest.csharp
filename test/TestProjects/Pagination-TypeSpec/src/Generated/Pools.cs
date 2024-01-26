@@ -66,7 +66,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPoolsRequest(filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPoolsNextPageRequest(nextLink, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, BatchPool.DeserializeBatchPool, ClientDiagnostics, _pipeline, "Pools.GetPools", "value", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BatchPool.DeserializeBatchPool(e), ClientDiagnostics, _pipeline, "Pools.GetPools", "value", "odata.nextLink", context);
         }
 
         /// <summary> Lists all of the Pools in the specified Account. </summary>
@@ -83,7 +83,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPoolsRequest(filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPoolsNextPageRequest(nextLink, filter, select, expand, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, BatchPool.DeserializeBatchPool, ClientDiagnostics, _pipeline, "Pools.GetPools", "value", "odata.nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BatchPool.DeserializeBatchPool(e), ClientDiagnostics, _pipeline, "Pools.GetPools", "value", "odata.nextLink", context);
         }
 
         /// <summary>

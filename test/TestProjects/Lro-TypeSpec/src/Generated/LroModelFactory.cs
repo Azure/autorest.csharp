@@ -15,16 +15,10 @@ namespace lro.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.RadiologyInsightsInferenceResult"/>. </summary>
         /// <param name="id"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <returns> A new <see cref="Models.RadiologyInsightsInferenceResult"/> instance for mocking. </returns>
         public static RadiologyInsightsInferenceResult RadiologyInsightsInferenceResult(string id = null)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            return new RadiologyInsightsInferenceResult(id);
+            return new RadiologyInsightsInferenceResult(id, serializedAdditionalRawData: null);
         }
     }
 }

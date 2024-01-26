@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
@@ -23,6 +24,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             Argument.AssertNotNull(inner, nameof(inner));
 
             Inner = inner;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OuterModel"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        /// <param name="inner"></param>
+        internal OuterModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData, InnerModel inner) : base(name, serializedAdditionalRawData)
+        {
+            Inner = inner;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OuterModel"/> for deserialization. </summary>
+        internal OuterModel()
+        {
         }
 
         /// <summary> Gets the inner. </summary>
