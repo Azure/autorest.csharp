@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
+    // TODO -- move this somewhere else because it is no longer a "plugin"
     internal class CSharpProj
     {
         private readonly bool _needAzureKeyAuth;
@@ -104,7 +105,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             writer.PackageReferences.Add(new("NUnit"));
             writer.PackageReferences.Add(new("Azure.Identity"));
 
-            writer.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\*.cs"));
+            writer.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\MockTestBase.cs"));
+            writer.CompileIncludes.Add(new("..\\..\\..\\..\\src\\assets\\TestFramework\\RecordedTestAttribute.cs"));
 
             return writer.Write();
         }

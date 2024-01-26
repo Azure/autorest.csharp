@@ -85,6 +85,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null,
                 branded: true,
+                generateSampleProject: true,
                 generateTestProject: true);
         }
 
