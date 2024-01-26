@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -57,7 +58,7 @@ namespace Payload.JsonMergePatch
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContent.Create(body, options); // body.ToPatchRequestContent();
+            using RequestContent content = RequestContent.Create(body, new ModelReaderWriterOptions("JMP")); // body.ToPatchRequestContent();
             Response response = await CreateResourceAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Resource.FromResponse(response), response);
         }

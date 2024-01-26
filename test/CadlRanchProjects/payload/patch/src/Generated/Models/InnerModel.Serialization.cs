@@ -21,7 +21,7 @@ namespace Payload.JsonMergePatch.Models
 
         void IJsonModel<InnerModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" || options.Format == "P" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" || options.Format == "JMP" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(InnerModel)} does not support '{format}' format.");
@@ -31,7 +31,7 @@ namespace Payload.JsonMergePatch.Models
             {
                 WriteJson(writer, options);
             }
-            else if (options.Format == "P")
+            else if (options.Format == "JMP")
             {
                 WritePatch(writer);
             }
@@ -72,15 +72,17 @@ namespace Payload.JsonMergePatch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_description != null)
+            if (_descriptionChanged)
             {
                 writer.WritePropertyName("description"u8);
-                writer.WriteStringValue(_description);
-            }
-            else if (_descriptionChanged)
-            {
-                writer.WritePropertyName("description"u8);
-                writer.WriteNullValue();
+                if (_description != null)
+                {
+                    writer.WriteStringValue(_description);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndObject();
         }
@@ -132,7 +134,7 @@ namespace Payload.JsonMergePatch.Models
 
         BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" || options.Format == "JMP" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -174,13 +176,6 @@ namespace Payload.JsonMergePatch.Models
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
-
-        internal virtual RequestContent ToPatchRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            WritePatch(content.JsonWriter);
             return content;
         }
     }

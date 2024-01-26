@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -24,6 +25,16 @@ namespace Azure.Core
         public static bool IsCollectionDefined<TKey, TValue>(IDictionary<TKey, TValue> collection)
         {
             return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingList && changeTrackingList.IsUndefined);
+        }
+
+        public static bool IsCollectionChanged<T>(IEnumerable<T> collection)
+        {
+            return collection is ChangeTrackingList<T> changeTrackingList && changeTrackingList.IsChanged;
+        }
+
+        public static bool IsCollectionChanged<T>(IEnumerable<T> collection, Func<T, bool> isChanged)
+        {
+            return (collection is ChangeTrackingList<T> changeTrackingList && changeTrackingList.IsChanged) || collection.Any(item => isChanged(item));
         }
 
         public static bool IsDefined<T>(T? value) where T: struct

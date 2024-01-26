@@ -12,6 +12,8 @@ namespace Azure.Core
     internal class ChangeTrackingDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue> where TKey: notnull
     {
         private IDictionary<TKey, TValue>? _innerDictionary;
+        private bool _hasChanged = false;
+
 
         public ChangeTrackingDictionary()
         {
@@ -44,6 +46,7 @@ namespace Azure.Core
         }
 
         public bool IsUndefined => _innerDictionary == null;
+        public bool IsChanged => _hasChanged;
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
@@ -65,11 +68,13 @@ namespace Azure.Core
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
+            _hasChanged = true;
             EnsureDictionary().Add(item);
         }
 
         public void Clear()
         {
+            _hasChanged = true;
             EnsureDictionary().Clear();
         }
 
@@ -100,6 +105,7 @@ namespace Azure.Core
                 return false;
             }
 
+            _hasChanged = true;
             return EnsureDictionary().Remove(item);
         }
 
@@ -130,6 +136,7 @@ namespace Azure.Core
 
         public void Add(TKey key, TValue value)
         {
+            _hasChanged = true;
             EnsureDictionary().Add(key, value);
         }
 
@@ -150,6 +157,7 @@ namespace Azure.Core
                 return false;
             }
 
+            _hasChanged = true;
             return EnsureDictionary().Remove(key);
         }
 
@@ -174,7 +182,11 @@ namespace Azure.Core
 
                 return EnsureDictionary()[key];
             }
-            set => EnsureDictionary()[key] = value;
+            set
+            {
+                _hasChanged = true;
+                EnsureDictionary()[key] = value;
+            }
         }
 
         IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;

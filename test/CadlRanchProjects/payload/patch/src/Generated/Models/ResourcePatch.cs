@@ -51,6 +51,7 @@ namespace Payload.JsonMergePatch.Models
         public ResourcePatch()
         {
             _map = new ChangeTrackingDictionary<string, InnerModel>();
+            _intMap = new ChangeTrackingDictionary<string, int?>();
             _array = new ChangeTrackingList<InnerModel>();
             _intArray = new ChangeTrackingList<int>();
         }
@@ -62,13 +63,14 @@ namespace Payload.JsonMergePatch.Models
         /// <param name="nestedModel"></param>
         /// <param name="intArray"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourcePatch(string description, IDictionary<string, InnerModel> map, IList<InnerModel> array, NestedModel nestedModel, IList<int> intArray, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ResourcePatch(string description, IDictionary<string, InnerModel> map, IDictionary<string, int?> intMap, IList<InnerModel> array, NestedModel nestedModel, IList<int> intArray, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             _description = description;
             _map = map;
-            _array = array;
+            _intMap = intMap;
+            _array = new ChangeTrackingList<InnerModel>(new Optional<IList<InnerModel>>(array));
             _nestedModel = nestedModel;
-            _intArray = intArray;
+            _intArray = new ChangeTrackingList<int>(new Optional<IList<int>>(intArray));
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -95,6 +97,18 @@ namespace Payload.JsonMergePatch.Models
             {
                 _mapChanged = true;
                 _map = value;
+            }
+        }
+
+        private IDictionary<string, int?> _intMap;
+        private bool _intMapChanged = false;
+        public IDictionary<string, int?> IntMap
+        {
+            get => _intMap;
+            set
+            {
+                _intMapChanged = true;
+                _intMap = value;
             }
         }
 

@@ -20,7 +20,7 @@ namespace Payload.JsonMergePatch.Models
 
         void IJsonModel<ResourcePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" || options.Format == "P" ? ((IPersistableModel<ResourcePatch>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" || options.Format == "JMP" ? ((IPersistableModel<ResourcePatch>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ResourcePatch)} does not support '{format}' format.");
@@ -131,20 +131,22 @@ namespace Payload.JsonMergePatch.Models
                 writer.WriteNullValue();
             }
 
-            if (Optional.IsCollectionDefined(_array))
+            if (Optional.IsCollectionChanged(_array, item => item._hasChanged) || _arrayChanged)
             {
                 writer.WritePropertyName("array"u8);
-                writer.WriteStartArray();
-                foreach (var item in _array)
+                if (_array != null)
                 {
-                    item.WriteJson(writer);
+                    writer.WriteStartArray();
+                    foreach (var item in _array)
+                    {
+                        item.WriteJson(writer);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            else if (_arrayChanged && _array == null)
-            {
-                writer.WritePropertyName("array"u8);
-                writer.WriteNullValue();
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
 
             if (_nestedModel != null)
@@ -158,20 +160,22 @@ namespace Payload.JsonMergePatch.Models
                 writer.WriteNullValue();
             }
 
-            if (Optional.IsCollectionDefined(_intArray))
+            if (Optional.IsCollectionChanged(_intArray) || _intArrayChanged)
             {
                 writer.WritePropertyName("intArray"u8);
-                writer.WriteStartArray();
-                foreach (var item in _intArray)
+                if (_intArray != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WriteStartArray();
+                    foreach (var item in _intArray)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            else if (_intArrayChanged && _intArray == null)
-            {
-                writer.WritePropertyName("intArray"u8);
-                writer.WriteNullValue();
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
         }
 
@@ -271,7 +275,7 @@ namespace Payload.JsonMergePatch.Models
 
         BinaryData IPersistableModel<ResourcePatch>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourcePatch>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" || options.Format == "JMP" ? ((IPersistableModel<ResourcePatch>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -313,13 +317,6 @@ namespace Payload.JsonMergePatch.Models
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
-            return content;
-        }
-
-        internal virtual RequestContent ToPatchRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            WritePatch(content.JsonWriter);
             return content;
         }
     }
