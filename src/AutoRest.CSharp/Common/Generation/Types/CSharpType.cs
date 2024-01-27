@@ -26,9 +26,9 @@ namespace AutoRest.CSharp.Generation.Types
             _symbolType = symbol;
             IsNullable = isNullable;
             Name = symbol.Name;
-            Namespace = symbol.ContainingNamespace.ToDisplayString(); // TODO -- this is not the correct
+            Namespace = symbol.ContainingNamespace.ToDisplayString();
             IsValueType = symbol.IsValueType;
-            //IsEnum = // TODO -- figure out how to get this
+            IsEnum = symbol.TypeKind == TypeKind.Enum;
             Arguments = symbol.TypeArguments.Select(t => new CSharpType((INamedTypeSymbol)t, false)).ToArray(); // TODO -- figure out more about this
             IsPublic = symbol.DeclaredAccessibility.HasFlag(Accessibility.Public);
         }
