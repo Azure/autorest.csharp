@@ -62,7 +62,7 @@ namespace CustomNamespace
                     continue;
                 }
             }
-            return new CustomizedModel(propertyRenamedAndTypeChanged, field, fruit, daysOfWeek, new Dictionary<string, BinaryData>());
+            return new CustomizedModel(propertyRenamedAndTypeChanged, field, fruit, daysOfWeek);
         }
     }
 }
