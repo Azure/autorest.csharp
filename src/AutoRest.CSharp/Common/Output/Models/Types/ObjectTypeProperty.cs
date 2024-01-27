@@ -421,12 +421,12 @@ Examples:
 
         private static FormattableString CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)
         {
-            FormattableString? updatedDescription = null;
+            FormattableString updatedDescription = FormattableStringHelpers.Empty;
             if (valueType.IsFrameworkType)
             {
                 if (TypeFactory.IsList(valueType))
                 {
-                    if (valueType is { IsTypeProvider: true, Implementation: ObjectType objectType })
+                    if (valueType.Arguments[0] is { IsTypeProvider: true, Implementation: ObjectType objectType })
                     {
                         updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
@@ -445,7 +445,7 @@ Examples:
             {
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }
-            return updatedDescription ?? $"";
+            return updatedDescription;
         }
     }
 }
