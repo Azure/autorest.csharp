@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             if (IsPropertyBag)
                 return false;
 
-            if (Inherits != null && Inherits is not { IsFrameworkType: false, Implementation: SystemObjectType })
+            if (Inherits != null && Inherits is not { IsTypeProvider: true, Implementation: SystemObjectType })
                 return false;
 
             return true;

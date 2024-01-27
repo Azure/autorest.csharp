@@ -129,6 +129,11 @@ key = "<badListOfDictionaryName>",
                     optionalInt = 1234,
                     optionalString = "<optionalString>",
                 },
+                propertyModelToChangeBinaryDataToFullyCustomizedModel = new
+                {
+                    requiredBinaryData = "<requiredBinaryData>",
+                    optionalBinaryData = "<optionalBinaryData>",
+                },
             });
             Response response = await client.RoundTripAsync(content);
         }
@@ -170,6 +175,10 @@ new Dictionary<string, string>
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
                 PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
+                PropertyModelToChangeBinaryDataToFullyCustomizedModel = new ModelToChangeBinaryDataToFullyCustomizedModel(null)
+                {
+                    OptionalBinaryData = (CustomizedValue)null,
+                },
             };
             Response<RootModel> response = await client.RoundTripAsync(input);
         }

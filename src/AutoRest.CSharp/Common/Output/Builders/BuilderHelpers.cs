@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             object? normalizedValue;
 
-            if (!type.IsFrameworkType && type.Implementation is EnumType enumType)
+            if (type is { IsTypeProvider: true, Implementation: EnumType enumType })
             {
                 if (value == null)
                 {
@@ -42,12 +42,12 @@ namespace AutoRest.CSharp.Output.Builders
                 return new Constant((object?)enumTypeValue ?? stringValue, type);
             }
 
-            Type? frameworkType = type.FrameworkType;
-            if (frameworkType == null)
+            if (!type.IsFrameworkType)
             {
                 throw new InvalidOperationException("Only constants of framework type and enums are allowed");
             }
 
+            Type frameworkType = type.FrameworkType;
             if (frameworkType == typeof(byte[]) && value is string base64String)
                 normalizedValue = Convert.FromBase64String(base64String);
             else if (frameworkType == typeof(BinaryData) && value is string base64String2)

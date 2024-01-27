@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!type.IsFrameworkType)
             {
-                if (type.Implementation is EnumType enumType && !enumType.IsExtensible)
+                if (type is { IsTypeProvider: true, Implementation: EnumType { IsExtensible: false } enumType })
                 {
                     return $"{rawExpression}.To{enumType.Declaration.Name}()";
                 }

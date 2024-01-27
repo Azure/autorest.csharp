@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 foreach (var (key, model) in _models)
                 {
                     var type = TypeFactory.CreateType(key);
-                    if (type is { IsFrameworkType: false, Implementation: ModelTypeProvider implementation} && model == implementation)
+                    if (type is { IsTypeProvider: true, Implementation: ModelTypeProvider implementation } && model == implementation)
                     {
                         yield return model;
                     }
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _enums = enums;
             _models = models;
             _isTspInput = isTspInput;
-             _sourceInputModel = sourceInputModel;
+            _sourceInputModel = sourceInputModel;
             RestClients = restClients;
             ClientOptions = clientOptions;
         }

@@ -45,6 +45,10 @@ RootModel input = new RootModel
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
     PropertyToMoveToCustomization = NormalEnum.A,
     PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
+    PropertyModelToChangeBinaryDataToFullyCustomizedModel = new ModelToChangeBinaryDataToFullyCustomizedModel(null)
+    {
+        OptionalBinaryData = (CustomizedValue)null,
+    },
 };
 Response<RootModel> response = await client.RoundTripAsync(input);
 ]]></code></example>
@@ -93,6 +97,10 @@ RootModel input = new RootModel
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
     PropertyToMoveToCustomization = NormalEnum.A,
     PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
+    PropertyModelToChangeBinaryDataToFullyCustomizedModel = new ModelToChangeBinaryDataToFullyCustomizedModel(null)
+    {
+        OptionalBinaryData = (CustomizedValue)null,
+    },
 };
 Response<RootModel> response = client.RoundTrip(input);
 ]]></code></example>
@@ -192,6 +200,11 @@ using RequestContent content = RequestContent.Create(new
         optionalInt = 1234,
         optionalString = "<optionalString>",
     },
+    propertyModelToChangeBinaryDataToFullyCustomizedModel = new
+    {
+        requiredBinaryData = "<requiredBinaryData>",
+        optionalBinaryData = "<optionalBinaryData>",
+    },
 });
 Response response = await client.RoundTripAsync(content);
 
@@ -229,6 +242,8 @@ Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString()
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("requiredBinaryData").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("optionalBinaryData").ToString());
 ]]></code></example>
     </member>
     <member name="RoundTrip(RequestContent,RequestContext)">
@@ -326,6 +341,11 @@ using RequestContent content = RequestContent.Create(new
         optionalInt = 1234,
         optionalString = "<optionalString>",
     },
+    propertyModelToChangeBinaryDataToFullyCustomizedModel = new
+    {
+        requiredBinaryData = "<requiredBinaryData>",
+        optionalBinaryData = "<optionalBinaryData>",
+    },
 });
 Response response = client.RoundTrip(content);
 
@@ -363,6 +383,8 @@ Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString()
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("requiredBinaryData").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("optionalBinaryData").ToString());
 ]]></code></example>
     </member>
     <member name="FooAsync(RenamedModel,CancellationToken)">

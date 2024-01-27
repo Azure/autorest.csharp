@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             ObjectTypeProperty propertyTypeToUse = objectTypeProperty;
 
-            if (objectTypeProperty.ValueType != null && objectTypeProperty.ValueType.IsFrameworkType)
+            if (objectTypeProperty.ValueType.IsFrameworkType)
             {
                 var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context);
                 if (newProperty != null)

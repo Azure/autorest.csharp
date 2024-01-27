@@ -29,10 +29,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 return;
             }
 
-            if (!type.IsFrameworkType &&
-                type.Implementation is EnumType &&
-                value != null &&
-                !(value is EnumTypeValue || value is string))
+            if (type is { IsTypeProvider: true, Implementation: EnumType } &&
+                value is not null && value is not EnumTypeValue or string)
             {
                 throw new InvalidOperationException($"Unexpected value '{value}' for enum type '{type}'");
             }

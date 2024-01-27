@@ -143,7 +143,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
     private static bool GetIsExpandable(IEnumerable<Segment> segments)
         => segments
-            .Where((s, i) => i % 2 == 0 && s.IsReference && !s.Reference.Type.IsFrameworkType && s.Reference.Type.Implementation is EnumType)
+            .Where((s, i) => i % 2 == 0 && s.IsReference && s.Reference.Type is { IsTypeProvider: true, Implementation: EnumType })
             .Any();
 
     private static IReadOnlyList<Segment> CheckByIdPath(IReadOnlyList<Segment> segments)
@@ -359,9 +359,11 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         // otherwise we need to expand them (the resource type is not a constant)
         // first we get all the segment that is not a constant
         var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
-        foreach (var segment in resourceType.Where(segment => segment.IsReference && !segment.Reference.Type.IsFrameworkType))
+        foreach (var segment in resourceType)
         {
-            var type = segment.Reference.Type.Implementation;
+            if (segment is not { IsReference: true, Type: { IsTypeProvider: true, Implementation: { } type } })
+                continue;
+
             switch (type)
             {
                 case EnumType enumType:
@@ -477,7 +479,9 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
                     }
 
                     //for now we only assume expand variables are in the key slot which will be an odd slot
-                    CSharpType? expandableType = segmentIndex % 2 == 0 && !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+                    CSharpType? expandableType = segmentIndex % 2 == 0 && valueType is { IsTypeProvider: true, Implementation: EnumType }
+                        ? valueType
+                        : null;
 
                     // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
                     segments.Add(new Segment(referenceOrConstant, !skipUriEncoding, expandableType: expandableType));

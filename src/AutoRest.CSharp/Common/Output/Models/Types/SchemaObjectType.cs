@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectTypeConstructor? baseSerializationCtor = null;
             List<ValueExpression> baseParameterInitializers = new List<ValueExpression>();
 
-            if (Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType })
+            if (Inherits is { IsTypeProvider: true, Implementation: ObjectType objectType })
             {
                 baseSerializationCtor = objectType.SerializationConstructor;
                 foreach (var p in baseSerializationCtor.Signature.Parameters)
@@ -636,7 +636,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (selectedSchema != null)
             {
                 CSharpType type = _typeFactory.CreateType(selectedSchema, false);
-                Debug.Assert(!type.IsFrameworkType);
+                Debug.Assert(type.IsTypeProvider);
                 return type;
             }
             return null;

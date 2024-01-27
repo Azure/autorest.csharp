@@ -315,11 +315,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.WriteMethodBodyStatement(Return(response));
                 }
-                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { } } serializableObjectType})
+                else if (responseType is { IsTypeProvider: true, Implementation: SerializableObjectType { JsonSerialization: { } } serializableObjectType})
                 {
                     _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
                 }
-                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
+                else if (responseType is { IsTypeProvider: true, Implementation: EnumType enumType})
                 {
                     _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)));
                 }

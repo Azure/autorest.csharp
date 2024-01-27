@@ -352,12 +352,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
             }
-            return $"";
+            return FormattableStringHelpers.Empty;
         }
 
         private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat, IReadOnlyList<FormattableString> unionTypeDescriptions)
         {
-            FormattableString unionTypesAdditionalDescription = $"";
+            FormattableString unionTypesAdditionalDescription = FormattableStringHelpers.Empty;
 
             if (unionTypeDescriptions.Count > 0)
             {
@@ -426,14 +426,14 @@ Examples:
             {
                 if (TypeFactory.IsList(valueType))
                 {
-                    if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
+                    if (valueType is { IsTypeProvider: true, Implementation: ObjectType objectType })
                     {
                         updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
                 }
                 else if (TypeFactory.IsDictionary(valueType))
                 {
-                    var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType }).ToList();
+                    var objectTypes = valueType.Arguments.Where(arg => arg is { IsTypeProvider: true, Implementation: ObjectType });
                     if (objectTypes.Any())
                     {
                         var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator()).ToArray();
@@ -441,7 +441,7 @@ Examples:
                     }
                 }
             }
-            else if (valueType.Implementation is ObjectType objectType)
+            else if (valueType is { IsTypeProvider: true, Implementation: ObjectType objectType })
             {
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }

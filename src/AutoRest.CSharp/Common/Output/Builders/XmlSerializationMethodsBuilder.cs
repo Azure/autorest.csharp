@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var type = valueSerialization.Type;
             value = value.NullableStructValue(type);
 
-            if (!type.IsFrameworkType)
+            if (type.IsTypeProvider)
             {
                 return type.Implementation switch
                 {
@@ -421,20 +421,25 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            switch (type.Implementation)
+            if (type.IsTypeProvider)
             {
-                case SerializableObjectType serializableObjectType:
-                    return SerializableObjectTypeExpression.Deserialize(serializableObjectType, value);
+                switch (type.Implementation)
+                {
+                    case SerializableObjectType serializableObjectType:
+                        return SerializableObjectTypeExpression.Deserialize(serializableObjectType, value);
 
-                case EnumType clientEnum when value is XElementExpression xe:
-                    return EnumExpression.ToEnum(clientEnum, xe.Value);
+                    case EnumType clientEnum when value is XElementExpression xe:
+                        return EnumExpression.ToEnum(clientEnum, xe.Value);
 
-                case EnumType clientEnum when value is XAttributeExpression xa:
-                    return EnumExpression.ToEnum(clientEnum, xa.Value);
+                    case EnumType clientEnum when value is XAttributeExpression xa:
+                        return EnumExpression.ToEnum(clientEnum, xa.Value);
 
-                default:
-                    throw new NotSupportedException();
+                    default:
+                        throw new NotSupportedException();
+                }
             }
+
+            throw new NotSupportedException();
         }
 
         private static void CollectProperties(Dictionary<XmlPropertySerialization, VariableReference> propertyVariables, XmlObjectSerialization element)

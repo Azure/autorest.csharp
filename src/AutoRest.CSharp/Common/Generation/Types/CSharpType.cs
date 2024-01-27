@@ -11,14 +11,27 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Types
 {
     internal class CSharpType
     {
-        // TODO -- add a ctor to support we could construct a csharptype instance just using namespace and name or just wrap a symbol here
         private readonly TypeProvider? _implementation;
         private readonly Type? _type;
+        private readonly INamedTypeSymbol? _symbolType;
+
+        public CSharpType(INamedTypeSymbol symbol, bool isNullable)
+        {
+            _symbolType = symbol;
+            IsNullable = isNullable;
+            Name = symbol.Name;
+            Namespace = symbol.ContainingNamespace.ToDisplayString(); // TODO -- this is not the correct
+            IsValueType = symbol.IsValueType;
+            //IsEnum = // TODO -- figure out how to get this
+            Arguments = symbol.TypeArguments.Select(t => new CSharpType((INamedTypeSymbol)t, false)).ToArray(); // TODO -- figure out more about this
+            IsPublic = symbol.DeclaredAccessibility.HasFlag(Accessibility.Public);
+        }
 
         public CSharpType(Type type) : this(
             type.IsGenericType ? type.GetGenericTypeDefinition() : type,
@@ -91,12 +104,13 @@ namespace AutoRest.CSharp.Generation.Types
         public IReadOnlyList<CSharpType> Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
         public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");
+        public bool IsTypeProvider => _implementation != null;
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
+        public bool IsSymbolType => _symbolType != null;
+        public INamedTypeSymbol SymbolType => _symbolType ?? throw new InvalidOperationException($"Not symbol type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
 
         public Type? SerializeAs { get; init; }
-
-        public bool HasParent => IsFrameworkType ? false : Implementation is ObjectType objectType ? objectType.Inherits is not null : false;
 
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_implementation, other._implementation) &&
@@ -163,8 +177,9 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
-                ? new CSharpType(FrameworkType, isNullable, Arguments)
-                : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, isNullable);
+                ? new CSharpType(FrameworkType, isNullable, Arguments) : IsTypeProvider
+                ? new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, isNullable)
+                : new CSharpType(SymbolType, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 

@@ -62,8 +62,9 @@ namespace CustomizationsInTsp.Models
         /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
         /// <param name="propertyToMoveToCustomization"> Enum type property to move to customization code. </param>
         /// <param name="propertyModelStruct"> ModelStruct. </param>
+        /// <param name="propertyModelToChangeBinaryDataToFullyCustomizedModel"> ModelToChangeBinaryDataToFullyCustomizedModel. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization, ModelStruct? propertyModelStruct, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization, ModelStruct? propertyModelStruct, ModelToChangeBinaryDataToFullyCustomizedModel propertyModelToChangeBinaryDataToFullyCustomizedModel, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PropertyExtensibleEnum = propertyExtensibleEnum;
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
@@ -76,6 +77,7 @@ namespace CustomizationsInTsp.Models
             PropertyModelToAddAdditionalSerializableProperty = propertyModelToAddAdditionalSerializableProperty;
             PropertyToMoveToCustomization = propertyToMoveToCustomization;
             PropertyModelStruct = propertyModelStruct;
+            PropertyModelToChangeBinaryDataToFullyCustomizedModel = propertyModelToChangeBinaryDataToFullyCustomizedModel;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -97,5 +99,7 @@ namespace CustomizationsInTsp.Models
         public ModelToAddAdditionalSerializableProperty PropertyModelToAddAdditionalSerializableProperty { get; set; }
         /// <summary> ModelStruct. </summary>
         public ModelStruct? PropertyModelStruct { get; set; }
+        /// <summary> ModelToChangeBinaryDataToFullyCustomizedModel. </summary>
+        public ModelToChangeBinaryDataToFullyCustomizedModel PropertyModelToChangeBinaryDataToFullyCustomizedModel { get; set; }
     }
 }

@@ -436,35 +436,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return SerializeFrameworkTypeValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.FrameworkType);
             }
 
-            switch (valueSerialization.Type.Implementation)
+            if (valueSerialization.Type.IsTypeProvider)
             {
-                case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                    {
-                        return new[]
-                        {
-                            Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
-                            InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value, serializeOptions)
-                        };
-                    }
-
-                    return InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value);
-
-                case ObjectType:
-                    return utf8JsonWriter.WriteObjectValue(value);
-
-                case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
-                    return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));
-
-                case EnumType { IsNumericValueType: true } enumType:
-                    return utf8JsonWriter.WriteNumberValue(new EnumExpression(enumType, value.NullableStructValue(valueSerialization.Type)).ToSerial());
-
-                case EnumType enumType:
-                    return utf8JsonWriter.WriteStringValue(new EnumExpression(enumType, value.NullableStructValue(valueSerialization.Type)).ToSerial());
-
-                default:
-                    throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
+                return SerializeTypeProviderValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.Implementation);
             }
+
+            throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
 
         private static MethodBodyStatement SerializeFrameworkTypeValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value, Type valueType)
@@ -566,6 +543,39 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             throw new NotSupportedException($"Framework type {valueType} serialization not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
+        }
+
+        private static MethodBodyStatement SerializeTypeProviderValue(Utf8JsonWriterExpression utf8JsonWriter, JsonValueSerialization valueSerialization, ValueExpression value, TypeProvider implementation)
+        {
+            switch (implementation)
+            {
+                case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
+                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
+                    {
+                        return new[]
+                        {
+                            Var("serializeOptions", New.JsonSerializerOptions(), out var serializeOptions),
+                            InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value, serializeOptions)
+                        };
+                    }
+
+                    return InvokeJsonSerializerSerializeMethod(utf8JsonWriter, value);
+
+                case ObjectType:
+                    return utf8JsonWriter.WriteObjectValue(value);
+
+                case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
+                    return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));
+
+                case EnumType { IsNumericValueType: true } enumType:
+                    return utf8JsonWriter.WriteNumberValue(new EnumExpression(enumType, value.NullableStructValue(valueSerialization.Type)).ToSerial());
+
+                case EnumType enumType:
+                    return utf8JsonWriter.WriteStringValue(new EnumExpression(enumType, value.NullableStructValue(valueSerialization.Type)).ToSerial());
+
+                default:
+                    throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
+            }
         }
 
         private static MethodBodyStatement CheckCollectionItemForNull(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value)

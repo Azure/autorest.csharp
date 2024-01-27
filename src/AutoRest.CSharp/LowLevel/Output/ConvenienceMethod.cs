@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private record RequestContentParameterInfo(CodeWriterDeclaration ContentVariable, FormattableString ContentValue);
 
-        private (IReadOnlyList<FormattableString> ParameterValues, RequestContentParameterInfo? ContentInfo,  CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
+        private (IReadOnlyList<FormattableString> ParameterValues, RequestContentParameterInfo? ContentInfo, CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
         {
             CodeWriterDeclaration? spreadVariable = null;
             var parameters = new List<FormattableString>();
@@ -114,27 +114,6 @@ namespace AutoRest.CSharp.Output.Models
         private static void WriteBodyToRequestContent(CodeWriter writer, CodeWriterDeclaration contentVariable, FormattableString requestContentValue)
         {
             writer.Line($"using {Configuration.ApiTypes.RequestContentType} {contentVariable:D} = {requestContentValue};");
-        }
-
-        public bool IsDeprecatedForExamples()
-        {
-            if (Deprecated is not null)
-                return true;
-
-            var bodyParam = Signature.Parameters.FirstOrDefault(p => p.RequestLocation == RequestLocation.Body);
-            if (bodyParam is not null && !bodyParam.Type.IsFrameworkType && bodyParam.Type.Implementation is ModelTypeProvider mtp)
-            {
-                if (mtp.Deprecated is not null)
-                    return true;
-
-                foreach (var property in mtp.Properties)
-                {
-                    if (!property.ValueType.IsFrameworkType && property.ValueType.Implementation.Deprecated is not null)
-                        return true;
-                }
-            }
-
-            return false;
         }
     }
 

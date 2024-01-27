@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var returnType = method.ReturnType;
             if (returnType == null)
                 return false;
-            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+            if (returnType.IsFrameworkType || returnType is { IsTypeProvider: true, Implementation: not SchemaObjectType })
             {
                 if (TypeFactory.IsList(returnType))
                 {
@@ -71,8 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pageingItemName)
         {
             return schemaObject.Properties.FirstOrDefault(p => p.SchemaProperty?.SerializedName == pageingItemName &&
-                p.SchemaProperty?.FlattenedNames.Count == 0 && p.Declaration.Type.IsFrameworkType &&
-                TypeFactory.IsList(p.Declaration.Type));
+                p.SchemaProperty?.FlattenedNames.Count == 0 && TypeFactory.IsList(p.Declaration.Type));
         }
     }
 }

@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static bool IsSinglePropertyObject(ObjectTypeProperty property)
         {
-            if (property.Declaration.Type is not { IsFrameworkType: false, Implementation: ObjectType objType })
+            if (property.Declaration.Type is not { IsTypeProvider: true, Implementation: ObjectType objType })
                 return false;
 
             return objType switch
@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
             var type = objectTypeProperty.ValueType;
-            if (type is { IsFrameworkType: true, FrameworkType: { } frameworkType } && frameworkType.IsGenericType)
+            if (type is { IsFrameworkType: true, FrameworkType: { IsGenericType: true } frameworkType })
             {
                 var arguments = new CSharpType[type.Arguments.Count];
                 bool shouldReplace = false;
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var argType = type.Arguments[i];
                     arguments[i] = argType;
-                    if (argType is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace })
+                    if (argType is { IsTypeProvider: true, Implementation: MgmtObjectType typeToReplace })
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         if (match != null)
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 ObjectTypeProperty property = objectTypeProperty;
-                if (type is { IsFrameworkType: false, Implementation: MgmtObjectType typeToReplace})
+                if (type is { IsTypeProvider: true, Implementation: MgmtObjectType typeToReplace})
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
@@ -245,7 +245,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
                     // by checking if this type is one of its descendants
-                    if (inheritedType is { IsFrameworkType: false, Implementation: SchemaObjectType schemaObjectType } && IsDescendantOf(schemaObjectType))
+                    if (inheritedType is { IsTypeProvider: true, Implementation: SchemaObjectType schemaObjectType } && IsDescendantOf(schemaObjectType))
                     {
                         // if the base type has a discriminator and this type is one of them
                         return inheritedType;

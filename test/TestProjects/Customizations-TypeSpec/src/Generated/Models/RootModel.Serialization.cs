@@ -82,6 +82,11 @@ namespace CustomizationsInTsp.Models
                 writer.WritePropertyName("propertyModelStruct"u8);
                 writer.WriteObjectValue(PropertyModelStruct);
             }
+            if (Optional.IsDefined(PropertyModelToChangeBinaryDataToFullyCustomizedModel))
+            {
+                writer.WritePropertyName("propertyModelToChangeBinaryDataToFullyCustomizedModel"u8);
+                writer.WriteObjectValue(PropertyModelToChangeBinaryDataToFullyCustomizedModel);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -131,6 +136,7 @@ namespace CustomizationsInTsp.Models
             Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
             Optional<NormalEnum> propertyToMoveToCustomization = default;
             Optional<ModelStruct> propertyModelStruct = default;
+            Optional<ModelToChangeBinaryDataToFullyCustomizedModel> propertyModelToChangeBinaryDataToFullyCustomizedModel = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -234,13 +240,22 @@ namespace CustomizationsInTsp.Models
                     propertyModelStruct = ModelStruct.DeserializeModelStruct(property.Value);
                     continue;
                 }
+                if (property.NameEquals("propertyModelToChangeBinaryDataToFullyCustomizedModel"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    propertyModelToChangeBinaryDataToFullyCustomizedModel = ModelToChangeBinaryDataToFullyCustomizedModel.DeserializeModelToChangeBinaryDataToFullyCustomizedModel(property.Value);
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), Optional.ToNullable(propertyModelStruct), serializedAdditionalRawData);
+            return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), Optional.ToNullable(propertyModelStruct), propertyModelToChangeBinaryDataToFullyCustomizedModel.Value, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<RootModel>.Write(ModelReaderWriterOptions options)

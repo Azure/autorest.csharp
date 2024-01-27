@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
             WriteXmlMethodName = writeXmlMethodName ?? "WriteInternal";
 
             // select interface model type here
-            var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
+            var modelType = model.IsUnknownDerivedType && model.Inherits is { IsTypeProvider: true, Implementation: { } baseModel } ? baseModel.Type : model.Type;
             IPersistableModelTInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
             // we only need this interface when the model is a struct
             IPersistableModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;

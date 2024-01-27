@@ -42,9 +42,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (exampleValue.Schema != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Schema, out CSharpType? replaceType) && replaceType != null)
                 type = replaceType;
 
-            return type.IsFrameworkType ?
-                writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
-                writer.AppendTypeProviderValue(type, exampleValue);
+            return type.IsFrameworkType
+                ? writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization)
+                : type.IsTypeProvider
+                ? writer.AppendTypeProviderValue(type, exampleValue)
+                : writer.AppendSourceTypeValue(type, exampleValue);
         }
 
         public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, Parameter parameter, ExampleParameterValue exampleParameterValue)
@@ -381,6 +383,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             typeof(TimeSpan), typeof(TimeSpan?),
             typeof(IPAddress)
         };
+
+        private static CodeWriter AppendSourceTypeValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        {
+            // we temporarily just write null or default value for source type
+            return writer.AppendRaw("default");
+        }
 
         private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
         {

@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 yield return type;
 
-                if (type.Inherits?.IsFrameworkType == false && type.Inherits.Implementation is ObjectType o)
+                if (type.Inherits is { IsTypeProvider: true, Implementation: ObjectType o })
                 {
                     type = o;
                 }
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
 
         protected ObjectType? GetBaseObjectType()
-            => Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType } ? objectType : null;
+            => Inherits is { IsTypeProvider: true, Implementation: ObjectType objectType } ? objectType : null;
 
         protected virtual ObjectTypeDiscriminator? BuildDiscriminator()
         {

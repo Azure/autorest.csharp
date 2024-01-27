@@ -248,17 +248,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
 
             var isArgMatches = false;
-            if (parentPropertyType.IsClass && !childPropertyType.IsFrameworkType && childPropertyType.Implementation as MgmtObjectType != null)
+            if (parentPropertyType.IsClass &&
+                childPropertyType is { IsTypeProvider: true, Implementation: MgmtObjectType mgmtObjectType })
             {
-                var mgmtObjectType = childPropertyType.Implementation as MgmtObjectType;
-                if (mgmtObjectType != null)
-                    isArgMatches = IsEqual(parentPropertyType, mgmtObjectType, parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList(), new Dictionary<Type, CSharpType> { { parentPropertyType, childPropertyType } });
+                isArgMatches = IsEqual(parentPropertyType, mgmtObjectType, parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList(), new Dictionary<Type, CSharpType> { { parentPropertyType, childPropertyType } });
             }
-            else if (!childPropertyType.IsFrameworkType && childPropertyType.Implementation as EnumType != null)
+            else if (childPropertyType is { IsTypeProvider: true, Implementation: EnumType childEnumType })
             {
-                var childEnumType = childPropertyType.Implementation as EnumType;
-                if (childEnumType != null)
-                    isArgMatches = MatchEnum(parentPropertyType, childEnumType);
+                isArgMatches = MatchEnum(parentPropertyType, childEnumType);
             }
             else if (!fromArePropertyTypesMatch)
             {

@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameterConverters)
                 {
                     if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) &&
-                        convenienceParameter is { Name: var fromName, Type: { IsFrameworkType: false, Implementation: ModelTypeProvider }, IsOptionalInSignature: var isOptional })
+                        convenienceParameter is { Name: var fromName, Type: { IsTypeProvider: true, Implementation: ModelTypeProvider }, IsOptionalInSignature: var isOptional })
                     {
                         writer
                             .Append($"{protocolParameter.Type} {protocolParameter.Name:D} = {fromName:I}")
@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"e => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.{nameof(JsonElement.GetRawText)}())";
             }
 
-            if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { } } type)
+            if (pageItemType is { IsTypeProvider: true, Implementation: SerializableObjectType { JsonSerialization: { } } type })
             {
                 // TODO -- we no longer need this once we remove the UseModelReaderWriter flag
                 if (Configuration.UseModelReaderWriter)

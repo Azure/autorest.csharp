@@ -152,6 +152,11 @@ key = "<badListOfDictionaryName>",
                     optionalInt = 1234,
                     optionalString = "<optionalString>",
                 },
+                propertyModelToChangeBinaryDataToFullyCustomizedModel = new
+                {
+                    requiredBinaryData = "<requiredBinaryData>",
+                    optionalBinaryData = "<optionalBinaryData>",
+                },
             });
             Response response = client.RoundTrip(content);
 
@@ -189,6 +194,8 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("requiredBinaryData").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("optionalBinaryData").ToString());
         }
 
         [Test]
@@ -276,6 +283,11 @@ key = "<badListOfDictionaryName>",
                     optionalInt = 1234,
                     optionalString = "<optionalString>",
                 },
+                propertyModelToChangeBinaryDataToFullyCustomizedModel = new
+                {
+                    requiredBinaryData = "<requiredBinaryData>",
+                    optionalBinaryData = "<optionalBinaryData>",
+                },
             });
             Response response = await client.RoundTripAsync(content);
 
@@ -313,6 +325,8 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("requiredBinaryData").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToChangeBinaryDataToFullyCustomizedModel").GetProperty("optionalBinaryData").ToString());
         }
 
         [Test]
@@ -352,6 +366,10 @@ new Dictionary<string, string>
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
                 PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
+                PropertyModelToChangeBinaryDataToFullyCustomizedModel = new ModelToChangeBinaryDataToFullyCustomizedModel(null)
+                {
+                    OptionalBinaryData = (CustomizedValue)null,
+                },
             };
             Response<RootModel> response = client.RoundTrip(input);
         }
@@ -393,6 +411,10 @@ new Dictionary<string, string>
                 PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
                 PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
+                PropertyModelToChangeBinaryDataToFullyCustomizedModel = new ModelToChangeBinaryDataToFullyCustomizedModel(null)
+                {
+                    OptionalBinaryData = (CustomizedValue)null,
+                },
             };
             Response<RootModel> response = await client.RoundTripAsync(input);
         }

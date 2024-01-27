@@ -186,9 +186,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static bool IsExtendableEnum(CSharpType type)
         {
-            return !type.IsFrameworkType && type.IsValueType &&
-                type.Implementation is EnumType enumType &&
-                enumType.IsExtensible;
+            return type is { IsTypeProvider: true, IsValueType: true, Implementation: EnumType { IsExtensible: true } };
         }
 
         public static CSharpType GetElementType(CSharpType type)
@@ -228,7 +226,7 @@ namespace AutoRest.CSharp.Generation.Types
         public static bool IsStringLike(CSharpType type) =>
             type.IsFrameworkType
                 ? type.Equals(typeof(string))
-                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtensible;
+                : type is { IsTypeProvider: true, Implementation: EnumType { IsExtensible: true } enumType } && enumType.ValueType.Equals(typeof(string));
 
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
@@ -456,8 +454,8 @@ namespace AutoRest.CSharp.Generation.Types
 
             if (type is null)
             {
-                // TODO -- here if it is null, we could just return this type by its namespace and name. Nullable or IsValueType property could be found in its symbol
-                return false;
+                // nullable like in `int?` has been taken care of above, therefore here we could just assume this is not nullable
+                type = new CSharpType(namedTypeSymbol, false);
             }
 
             if (!type.IsValueType &&

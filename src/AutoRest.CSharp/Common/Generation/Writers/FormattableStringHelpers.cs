@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     case { IsFrameworkType: true }:
                         return parameter.GetConversionFromFrameworkToRequestContent(contentType);
-                    case { IsFrameworkType: false, Implementation: EnumType enumType }:
+                    case { IsTypeProvider: true, Implementation: EnumType enumType }:
                         if (enumType.IsExtensible)
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
@@ -220,11 +220,11 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch
             {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
-                { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
+                { IsTypeProvider: true, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
+                { IsTypeProvider: true, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
+                { IsTypeProvider: true, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
+                { IsTypeProvider: true, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
+                { IsTypeProvider: true, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
                 _ => null
             };
 
@@ -255,13 +255,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 return expression.ExpressionValue;
             }
 
-            if (constant is { Type: { IsFrameworkType: false }, Value: EnumTypeValue enumTypeValue })
+            if (constant is { Type: { IsTypeProvider: true }, Value: EnumTypeValue enumTypeValue })
             {
                 return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
             }
 
             // we cannot check `constant.Value is string` because it is always string - this is an issue in yaml serialization)
-            if (constant.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
+            if (constant.Type is { IsTypeProvider: true, Implementation: EnumType enumType })
             {
                 if (enumType.IsStringValueType)
                     return $"new {constant.Type}({constant.Value:L})";
@@ -269,29 +269,32 @@ namespace AutoRest.CSharp.Generation.Writers
                     return $"new {constant.Type}(({enumType.ValueType}){constant.Value})";
             }
 
-            Type frameworkType = constant.Type.FrameworkType;
-            if (frameworkType == typeof(DateTimeOffset))
+            if (constant.Type.IsFrameworkType)
             {
-                var d = (DateTimeOffset)constant.Value;
-                d = d.ToUniversalTime();
-                return $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
-            }
+                Type frameworkType = constant.Type.FrameworkType;
+                if (frameworkType == typeof(DateTimeOffset))
+                {
+                    var d = (DateTimeOffset)constant.Value;
+                    d = d.ToUniversalTime();
+                    return $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
+                }
 
-            if (frameworkType == typeof(byte[]))
-            {
-                var bytes = (byte[])constant.Value;
-                var joinedBytes = string.Join(", ", bytes);
-                return $"new byte[] {{{joinedBytes}}}";
-            }
+                if (frameworkType == typeof(byte[]))
+                {
+                    var bytes = (byte[])constant.Value;
+                    var joinedBytes = string.Join(", ", bytes);
+                    return $"new byte[] {{{joinedBytes}}}";
+                }
 
-            if (frameworkType == typeof(ResourceType))
-            {
-                return $"{((ResourceType)constant.Value).ToString():L}";
-            }
+                if (frameworkType == typeof(ResourceType))
+                {
+                    return $"{((ResourceType)constant.Value).ToString():L}";
+                }
 
-            if (frameworkType == typeof(bool) && writeAsString)
-            {
-                return $"\"{constant.Value!.ToString()!.ToLower()}\"";
+                if (frameworkType == typeof(bool) && writeAsString)
+                {
+                    return $"\"{constant.Value!.ToString()!.ToLower()}\"";
+                }
             }
 
             return $"{constant.Value:L}";

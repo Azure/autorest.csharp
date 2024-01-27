@@ -265,11 +265,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private bool DoesUpdateSchemaHaveTags(CSharpType bodyParamType)
         {
-            if (bodyParamType.IsFrameworkType)
-                return false;
-            if (bodyParamType.Implementation is null)
-                return false;
-            if (bodyParamType.Implementation is not SchemaObjectType schemaObject)
+            if (bodyParamType is not { IsTypeProvider: true, Implementation: SchemaObjectType schemaObject })
                 return false;
             return schemaObject.ObjectSchema.HasTags();
         }

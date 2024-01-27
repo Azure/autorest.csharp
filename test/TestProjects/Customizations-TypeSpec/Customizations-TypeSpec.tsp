@@ -24,6 +24,15 @@ enum ExtensibleEnumWithOperator {
     Tuesday,
 }
 
+@doc("Model to change BinaryData to fully customized type")
+model ModelToChangeBinaryDataToFullyCustomizedModel {
+    @doc("Required BinaryData")
+    requiredBinaryData: string | int32;
+
+    @doc("Optional BinaryData")
+    optionalBinaryData?: string | int32;
+}
+
 @doc("Model to add additional serializable property")
 model ModelToAddAdditionalSerializableProperty {
     @doc("Required int")
@@ -193,6 +202,9 @@ model RootModel {
 
     @doc("ModelStruct")
     propertyModelStruct?: ModelStruct;
+
+    @doc("ModelToChangeBinaryDataToFullyCustomizedModel")
+    propertyModelToChangeBinaryDataToFullyCustomizedModel?: ModelToChangeBinaryDataToFullyCustomizedModel;
 }
 
 @route("/inputToRoundTrip")
