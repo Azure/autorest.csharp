@@ -560,7 +560,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             //try for list method
             originalType = PagingMethod?.ItemType ?? originalType;
 
-            if (originalType == null || originalType is not { IsTypeProvider: true, Implementation: ResourceData data })
+            if (originalType is not { IsTypeProvider: true, Implementation: ResourceData data })
                 return originalType;
 
             if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))

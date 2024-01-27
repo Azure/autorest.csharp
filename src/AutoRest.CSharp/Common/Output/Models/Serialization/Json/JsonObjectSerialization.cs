@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             Discriminator = discriminator;
             IncludeConverter = includeConverter;
             // select interface model type here
-            var modelType = model.IsUnknownDerivedType && model.Inherits is { IsTypeProvider: true, Implementation: { } baseModel } ? baseModel.Type : model.Type;
+            var modelType = model is { IsUnknownDerivedType: true, Inherits: { IsTypeProvider: true, Implementation: { } baseModel } } ? baseModel.Type : model.Type;
             IJsonModelInterface = new CSharpType(typeof(IJsonModel<>), modelType);
             IPersistableModelTInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
             // we only need this interface when the model is a struct
