@@ -146,7 +146,7 @@ function Add-Directory ([string]$testName, [string]$directory) {
 
 function Add-TestProjects-Directory($directory) {
     $testName = $directory.Name
-    if ($testName -eq "ConvenienceInitial-TypeSpec") {
+    if ($testName -eq "ConvenienceInitial-TypeSpec" -or $testName -eq "node_modules") {
         return;
     }
 
