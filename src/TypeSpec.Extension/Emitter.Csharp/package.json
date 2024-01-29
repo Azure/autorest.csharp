@@ -47,7 +47,8 @@
         "@typespec/versioning": ">=0.50.0 <1.0.0"
     },
     "devDependencies": {
-        "@azure-tools/typespec-azure-core": "0.37.0",
+        "@azure-tools/typespec-azure-core": "0.37.2",
+        "@azure-tools/typespec-azure-resource-manager": "0.37.1",
         "@azure-tools/typespec-client-generator-core": "0.37.0",
         "@typespec/compiler": "0.51.0",
         "@typespec/eslint-config-typespec": "0.51.0",
