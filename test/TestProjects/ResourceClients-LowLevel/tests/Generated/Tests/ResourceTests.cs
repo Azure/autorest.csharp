@@ -26,7 +26,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+            Resource client = CreateResourceServiceClient(endpoint, "<GroupId>", "<ItemId>", credential).GetResourceGroup().GetResource();
 
             Response response = await client.GetItemAsync(null);
         }
@@ -37,7 +37,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Resource client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+            Resource client = CreateResourceServiceClient(endpoint, "<GroupId>", "<ItemId>", credential).GetResourceGroup().GetResource();
 
             Response response = await client.GetItemAsync(null);
         }

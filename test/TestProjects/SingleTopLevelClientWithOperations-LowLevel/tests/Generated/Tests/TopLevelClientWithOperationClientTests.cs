@@ -26,7 +26,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, null, credential);
 
             Response response = await client.OperationAsync(null);
         }
@@ -37,7 +37,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, null, credential);
 
             Response response = await client.OperationAsync(null);
         }
@@ -48,7 +48,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, null, credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {
@@ -61,7 +61,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, null, credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {

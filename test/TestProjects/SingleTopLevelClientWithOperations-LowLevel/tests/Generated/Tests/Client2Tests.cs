@@ -26,7 +26,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client2 client = CreateTopLevelClientWithOperationClient(endpoint, credential).GetClient2Client();
+            Client2 client = CreateTopLevelClientWithOperationClient(endpoint, null, credential).GetClient2Client();
 
             Response response = await client.OperationAsync(null);
         }
@@ -37,7 +37,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client2 client = CreateTopLevelClientWithOperationClient(endpoint, credential).GetClient2Client();
+            Client2 client = CreateTopLevelClientWithOperationClient(endpoint, null, credential).GetClient2Client();
 
             Response response = await client.OperationAsync(null);
         }

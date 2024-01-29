@@ -18,10 +18,10 @@ namespace ResourceClients_LowLevel.Tests
         {
         }
 
-        protected ResourceServiceClient CreateResourceServiceClient(Uri endpoint, AzureKeyCredential credential)
+        protected ResourceServiceClient CreateResourceServiceClient(Uri endpoint, string groupId, string itemId, AzureKeyCredential credential)
         {
             ResourceServiceClientOptions options = InstrumentClientOptions(new ResourceServiceClientOptions());
-            ResourceServiceClient client = new ResourceServiceClient(endpoint, credential, options);
+            ResourceServiceClient client = new ResourceServiceClient(endpoint, groupId, itemId, credential, options);
             return InstrumentClient(client);
         }
     }

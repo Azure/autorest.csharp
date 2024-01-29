@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
+using Client.Structure.Service;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests

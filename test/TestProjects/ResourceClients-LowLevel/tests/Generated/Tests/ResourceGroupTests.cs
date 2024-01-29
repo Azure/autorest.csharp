@@ -26,7 +26,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceServiceClient(endpoint, "<GroupId>", null, credential).GetResourceGroup();
 
             Response response = await client.GetGroupAsync(null);
         }
@@ -37,7 +37,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceServiceClient(endpoint, "<GroupId>", null, credential).GetResourceGroup();
 
             Response response = await client.GetGroupAsync(null);
         }
@@ -48,7 +48,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceServiceClient(endpoint, "<GroupId>", null, credential).GetResourceGroup();
 
             await foreach (BinaryData item in client.GetItemsAsync(null))
             {
@@ -61,7 +61,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceGroup client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>");
+            ResourceGroup client = CreateResourceServiceClient(endpoint, "<GroupId>", null, credential).GetResourceGroup();
 
             await foreach (BinaryData item in client.GetItemsAsync(null))
             {
