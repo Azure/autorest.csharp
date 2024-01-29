@@ -109,6 +109,7 @@ namespace NamedTypeSymbolExtensionsTests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 branded: true,
+                generateSampleProject: true,
                 generateTestProject: true);
         }
 

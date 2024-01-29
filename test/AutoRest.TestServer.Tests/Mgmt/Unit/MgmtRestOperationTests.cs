@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
@@ -86,6 +85,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null,
                 branded: true,
+                generateSampleProject: true,
                 generateTestProject: true);
         }
 

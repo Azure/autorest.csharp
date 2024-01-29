@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -18,7 +19,9 @@ namespace AutoRest.CSharp.Mgmt.Report
         }
 
         public string FullSerializedName { get; set; }
-        protected virtual List<string>? TransformTypeWhiteList { get { return null; } }
+        protected virtual HashSet<string>? TransformTypeAllowList { get { return null; } }
+
+        private List<string>? _appliedTransformLogs;
 
         [YamlMember(DefaultValuesHandling = DefaultValuesHandling.OmitEmptyCollections | DefaultValuesHandling.OmitNull)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -26,12 +29,17 @@ namespace AutoRest.CSharp.Mgmt.Report
         {
             get
             {
-                var r = _transformSection.GetAppliedTransformLogs(
-                    this.FullSerializedName, this.TransformTypeWhiteList)
-                    .OrderBy(item => item.Log.Index)
-                    .Select(item => $"[{item.Log.Index}][{item.Transfom}] {item.Log.LogMessage}").ToList();
-                // return null when it's an empty list so that it will be ignored in Json
-                return r.Count == 0? null : r;
+                {
+                    if (_appliedTransformLogs is null)
+                    {
+                        _appliedTransformLogs = _transformSection.GetAppliedTransformLogs(
+                        this.FullSerializedName, this.TransformTypeAllowList)
+                        .OrderBy(item => item.Log.Index)
+                        .Select(item => $"[{item.Log.Index}][{item.Transform}] {item.Log.LogMessage}").ToList();
+                    }
+                    // return null when it's an empty list so that it will be ignored in Json
+                    return _appliedTransformLogs.Count == 0 ? null : _appliedTransformLogs;
+                }
             }
         }
     }

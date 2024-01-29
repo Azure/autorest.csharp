@@ -34,7 +34,49 @@ namespace FirstTestTypeSpec.Models
             optionalNullableList ??= new List<int>();
             requiredNullableList ??= new List<int>();
 
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, optionalLiteralString, optionalLiteralInt, optionalLiteralFloat, optionalLiteralBool, requiredBadDescription, optionalNullableList?.ToList(), requiredNullableList?.ToList());
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, optionalLiteralString, optionalLiteralInt, optionalLiteralFloat, optionalLiteralBool, requiredBadDescription, optionalNullableList?.ToList(), requiredNullableList?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.Element"/>. </summary>
+        /// <param name="extension"></param>
+        /// <returns> A new <see cref="Models.Element"/> instance for mocking. </returns>
+        public static Element Element(IEnumerable<Extension> extension = null)
+        {
+            extension ??= new List<Extension>();
+
+            return new Element(extension?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.Extension"/>. </summary>
+        /// <param name="extension"></param>
+        /// <param name="level"></param>
+        /// <returns> A new <see cref="Models.Extension"/> instance for mocking. </returns>
+        public static Extension Extension(IEnumerable<Extension> extension = null, int level = default)
+        {
+            extension ??= new List<Extension>();
+
+            return new Extension(extension?.ToList(), serializedAdditionalRawData: null, level);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ThereLevelElement"/>. </summary>
+        /// <param name="extension"></param>
+        /// <returns> A new <see cref="Models.ThereLevelElement"/> instance for mocking. </returns>
+        public static ThereLevelElement ThereLevelElement(IEnumerable<ThereLevelExtension> extension = null)
+        {
+            extension ??= new List<ThereLevelExtension>();
+
+            return new ThereLevelElement(extension?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ThereLevelExtension"/>. </summary>
+        /// <param name="extension"></param>
+        /// <param name="level"></param>
+        /// <returns> A new <see cref="Models.ThereLevelExtension"/> instance for mocking. </returns>
+        public static ThereLevelExtension ThereLevelExtension(IEnumerable<ThereLevelExtension> extension = null, int level = default)
+        {
+            extension ??= new List<ThereLevelExtension>();
+
+            return new ThereLevelExtension(extension?.ToList(), serializedAdditionalRawData: null, level);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
@@ -73,7 +115,7 @@ namespace FirstTestTypeSpec.Models
             readOnlyRequiredRecordUnknown ??= new Dictionary<string, BinaryData>();
             readOnlyOptionalRecordUnknown ??= new Dictionary<string, BinaryData>();
 
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection?.ToList(), requiredDictionary, requiredModel, intExtensibleEnum, intExtensibleEnumCollection?.ToList(), floatExtensibleEnum, floatExtensibleEnumCollection?.ToList(), floatFixedEnum, floatFixedEnumCollection?.ToList(), intFixedEnum, intFixedEnumCollection?.ToList(), stringFixedEnum, requiredUnknown, optionalUnknown, requiredRecordUnknown, optionalRecordUnknown, readOnlyRequiredRecordUnknown, readOnlyOptionalRecordUnknown, modelWithRequiredNullable);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection?.ToList(), requiredDictionary, requiredModel, intExtensibleEnum, intExtensibleEnumCollection?.ToList(), floatExtensibleEnum, floatExtensibleEnumCollection?.ToList(), floatFixedEnum, floatFixedEnumCollection?.ToList(), intFixedEnum, intFixedEnumCollection?.ToList(), stringFixedEnum, requiredUnknown, optionalUnknown, requiredRecordUnknown, optionalRecordUnknown, readOnlyRequiredRecordUnknown, readOnlyOptionalRecordUnknown, modelWithRequiredNullable, serializedAdditionalRawData: null);
         }
     }
 }

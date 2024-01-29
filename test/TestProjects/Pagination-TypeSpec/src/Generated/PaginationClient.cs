@@ -76,7 +76,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => LedgerEntry.DeserializeLedgerEntry(e), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
         }
 
         /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
@@ -93,7 +93,7 @@ namespace Pagination
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, LedgerEntry.DeserializeLedgerEntry, ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => LedgerEntry.DeserializeLedgerEntry(e), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
         }
 
         /// <summary>

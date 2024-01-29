@@ -7,7 +7,7 @@
 
 using Azure.Core;
 
-namespace Client.Structure.Service.Default
+namespace Client.Structure.Service
 {
     /// <summary> Client options for ServiceClient. </summary>
     public partial class ServiceClientOptions : ClientOptions

@@ -8,5 +8,6 @@
   ],
   "head-as-boolean": true,
   "deserialize-null-collection-as-null-value": true,
-  "use-model-reader-writer": false
+  "generate-test-project": true,
+  "use-model-reader-writer": true
 }

@@ -1,9 +1,10 @@
 {
   "output-folder": ".",
-  "namespace": "Client.Structure.Service.Default",
-  "library-name": "Client.Structure.Service.Default",
+  "namespace": "Client.Structure.Service",
+  "library-name": "Client.Structure.Service",
   "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"
-  ]
+  ],
+  "use-model-reader-writer": true
 }

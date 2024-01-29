@@ -1,11 +1,7 @@
 using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Azure.Core;
-using Client.Structure.Service.Default;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -17,14 +13,14 @@ namespace CadlRanchProjects.Tests
         [TestCase(typeof(Bar), new string[] { "Five", "Six" })]
         public void Client_Structure_default_methods(Type client, string[] methodNames)
         {
-            var methods = client.GetMethods();
-            Assert.IsNotNull(methods);
-            Assert.AreEqual(methodNames.Length, methods.Where(method => method.Name.EndsWith("Async")).ToArray().Length);
-            /* check the existence of the methods. */
-            foreach (var methodName in methodNames)
-            {
-                Assert.IsNotNull(client.GetMethod($"{methodName}Async"));
-            }
+           var methods = client.GetMethods();
+           Assert.IsNotNull(methods);
+           Assert.AreEqual(methodNames.Length, methods.Where(method => method.Name.EndsWith("Async")).ToArray().Length);
+           /* check the existence of the methods. */
+           foreach (var methodName in methodNames)
+           {
+               Assert.IsNotNull(client.GetMethod($"{methodName}Async"));
+           }
         }
 
         [Test]

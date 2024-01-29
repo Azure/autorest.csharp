@@ -9,7 +9,7 @@ using System;
 using System.Threading;
 using Azure.Core.Pipeline;
 
-namespace Client.Structure.Service.Default
+namespace Client.Structure.Service
 {
     // Data plane generated sub-client.
     /// <summary> The Baz sub-client. </summary>

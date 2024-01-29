@@ -9,10 +9,10 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Client.Structure.Service.Default;
+using Client.Structure.Service;
 using NUnit.Framework;
 
-namespace Client.Structure.Service.Default.Samples
+namespace Client.Structure.Service.Samples
 {
     public partial class Samples_BazFoo
     {

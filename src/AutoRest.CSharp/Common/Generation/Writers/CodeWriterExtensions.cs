@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -159,7 +160,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"[{attribute.Type}(");
                         foreach (var argument in attribute.Arguments)
                         {
-                            writer.Append($"{argument:L}, ");
+                            writer.WriteValueExpression(argument);
                         }
                         writer.RemoveTrailingComma();
                         writer.LineRaw(")]");
@@ -274,6 +275,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
+            if (methodBase.IsRawSummaryText)
+            {
+                return writer.WriteRawXmlDocumentation(methodBase.Description);
+            }
+
             if (methodBase.NonDocumentComment is { } comment)
             {
                 writer.Line($"// {comment}");

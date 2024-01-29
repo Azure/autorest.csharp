@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -102,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                                 new TransformItem(TransformTypeName.PrivilegedOperations, op.OperationId, arg),
                                 op.Operation.GetFullSerializedName(),
                                 $"Operation {op.OperationId} is marked as Privileged Operation");
-                            return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), arg);
+                            return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), Literal(arg));
                         })
                         .ToList();
 

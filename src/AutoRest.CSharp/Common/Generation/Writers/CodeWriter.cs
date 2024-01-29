@@ -224,6 +224,18 @@ namespace AutoRest.CSharp.Generation.Writers
             _usingNamespaces.Add(@namespace);
         }
 
+        public CodeWriter WriteRawXmlDocumentation(FormattableString? content)
+        {
+            if (content is null)
+                return this;
+
+            var lines = content.ToString().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            var xmlLines = string.Join('\n', lines.Select(l => "/// " + l));
+            AppendRaw(xmlLines);
+            Line();
+            return this;
+        }
+
         public CodeWriter AppendXmlDocumentation(FormattableString startTag, FormattableString endTag, FormattableString content)
         {
             const string xmlDoc = "/// ";

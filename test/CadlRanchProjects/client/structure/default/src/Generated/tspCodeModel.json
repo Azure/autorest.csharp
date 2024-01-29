@@ -6,6 +6,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ClientType",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -56,8 +57,8 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "10",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -94,8 +95,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -152,8 +153,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -232,8 +233,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -302,8 +303,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "34",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -372,8 +373,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "41",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -442,8 +443,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "48",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -500,8 +501,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "53",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -570,8 +571,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -628,8 +629,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "65",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",

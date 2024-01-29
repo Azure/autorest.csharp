@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Client.Structure.Service.Default
+namespace Client.Structure.Service
 {
     // Data plane generated sub-client.
     /// <summary> The Qux sub-client. </summary>

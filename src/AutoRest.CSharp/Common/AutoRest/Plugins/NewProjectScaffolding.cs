@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private async Task WriteTestFiles()
         {
-            if (!Configuration.GenerateTestProject)
+            if (!Configuration.GenerateTestProject && !Configuration.GenerateSampleProject)
                 return;
 
             if (_isAzureSdk)
@@ -78,8 +78,6 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
-            //TODO WriteTestBaseClass(autoRest);
-            //TODO WriteTestEnvironment(autoRest);
         }
 
         private async Task WriteProjectFiles()
@@ -420,7 +418,7 @@ EndProject
             slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}"", ""src\{0}.csproj"", ""{{28FF4005-4467-4E36-92E7-DEA27DEB1519}}""
 EndProject
 ";
-            if (Configuration.GenerateTestProject)
+            if (Configuration.GenerateTestProject || Configuration.GenerateSampleProject)
             {
                 slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}.Tests"", ""tests\{0}.Tests.csproj"", ""{{1F1CD1D4-9932-4B73-99D8-C252A67D4B46}}""
 EndProject
