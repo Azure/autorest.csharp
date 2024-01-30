@@ -115,6 +115,7 @@ namespace AutoRest.CSharp.Generation.Types
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_typeProvider, other._typeProvider) &&
                _frameworkType == other._frameworkType &&
+               SymbolEqualityComparer.Default.Equals(_symbolType, other._symbolType) &&
                Arguments.SequenceEqual(other.Arguments) &&
                (ignoreNullable || IsNullable == other.IsNullable);
 
@@ -155,17 +156,17 @@ namespace AutoRest.CSharp.Generation.Types
         public override int GetHashCode()
         {
             // we cache the hashcode since `CSharpType` is meant to be immuttable.
-            if (_hashCode != null)
-                return _hashCode.Value;
+            return _hashCode ??= BuildHashCode(this);
 
-            var hashCode = new HashCode();
-            foreach (var arg in Arguments)
+            static int BuildHashCode(CSharpType type)
             {
-                hashCode.Add(arg);
+                var arguments = new HashCode();
+                foreach (var arg in type.Arguments)
+                {
+                    arguments.Add(arg);
+                }
+                return HashCode.Combine(type._typeProvider, type._frameworkType, SymbolEqualityComparer.Default.GetHashCode(type._symbolType), arguments.ToHashCode(), type.IsNullable);
             }
-            _hashCode = HashCode.Combine(_typeProvider, _frameworkType, hashCode.ToHashCode(), IsNullable);
-
-            return _hashCode.Value;
         }
 
         public CSharpType GetGenericTypeDefinition()
