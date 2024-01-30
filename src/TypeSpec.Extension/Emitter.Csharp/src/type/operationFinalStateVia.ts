@@ -32,7 +32,6 @@ export function convertLroFinalStateVia(
         case FinalStateValue.originalUri:
             return OperationFinalStateVia.OriginalUri;
         case FinalStateValue.operationLocation:
-        case FinalStateValue.noResult: // just temporary, this is a reasonable final state via which we should support in Azure.Core.Shared
             return OperationFinalStateVia.OperationLocation;
         default:
             throw `Unsupported LRO final state value: ${finalStateValue}`;
