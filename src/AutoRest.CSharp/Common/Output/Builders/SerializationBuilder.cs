@@ -12,11 +12,14 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
+using ResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -193,6 +196,27 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
+        public static BicepSerialization BuildBicepSerialization(Schema schema, CSharpType type, bool isCollectionElement)
+        {
+            switch (schema)
+            {
+                case ConstantSchema constantSchema:
+                    return BuildBicepSerialization(constantSchema.ValueType, type, isCollectionElement);
+                case ArraySchema arraySchema:
+                    return new BicepArraySerialization(
+                        TypeFactory.GetImplementationType(type),
+                        BuildBicepSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), true),
+                        type.IsNullable);
+                case DictionarySchema dictionarySchema:
+                    return new BicepDictionarySerialization(
+                        TypeFactory.GetImplementationType(type),
+                        BuildBicepSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type), true),
+                        type.IsNullable);
+                default:
+                    return new BicepValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable || (isCollectionElement && !type.IsValueType));
+            }
+        }
+
         public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, SerializableObjectType objectType)
         {
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
@@ -320,6 +344,11 @@ namespace AutoRest.CSharp.Output.Builders
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
             return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
+        }
+
+        public BicepObjectSerialization? BuildBicepObjectSerialization(ObjectType resource)
+        {
+            return new BicepObjectSerialization("SerializeBicep", resource);
         }
 
         private class SerializationPropertyBag

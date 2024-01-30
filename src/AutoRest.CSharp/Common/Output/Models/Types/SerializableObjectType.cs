@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -24,6 +26,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
 
+        private SerializationBuilder _serializationBuilder = new SerializationBuilder();
+
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
 
@@ -37,6 +41,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private bool _xmlSerializationInitialized = false;
         private XmlObjectSerialization? _xmlSerialization;
         public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
+
+        private bool _bicepSerializationInitialized = false;
+        private BicepObjectSerialization? _bicepSerialization;
+        public BicepObjectSerialization? BicepSerialization => EnsureBicepSerialization();
 
         private JsonObjectSerialization? EnsureJsonSerialization()
         {
@@ -58,9 +66,23 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return _xmlSerialization;
         }
 
+        private BicepObjectSerialization? EnsureBicepSerialization()
+        {
+            if (_bicepSerializationInitialized)
+                return _bicepSerialization;
+
+            _bicepSerializationInitialized = true;
+            _bicepSerialization = BuildBicepSerialization();
+            return _bicepSerialization;
+        }
+
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
 
+        protected virtual BicepObjectSerialization? BuildBicepSerialization()
+        {
+            return Configuration.AzureArm ? _serializationBuilder.BuildBicepObjectSerialization(this) : null;
+        }
 
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();

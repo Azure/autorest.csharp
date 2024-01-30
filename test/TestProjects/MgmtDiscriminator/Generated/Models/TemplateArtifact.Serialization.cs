@@ -6,20 +6,50 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class TemplateArtifact : IUtf8JsonSerializable
+    public partial class TemplateArtifact : IUtf8JsonSerializable, IJsonModel<TemplateArtifact>, IPersistableModel<TemplateArtifact>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TemplateArtifact>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<TemplateArtifact>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<TemplateArtifact>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(TemplateArtifact)} does not support '{format}' format.");
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
+            }
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
+            {
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
+            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             writer.WritePropertyName("template"u8);
@@ -57,11 +87,40 @@ namespace MgmtDiscriminator.Models
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static TemplateArtifact DeserializeTemplateArtifact(JsonElement element)
+        TemplateArtifact IJsonModel<TemplateArtifact>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            var format = options.Format == "W" ? ((IPersistableModel<TemplateArtifact>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
+            {
+                throw new FormatException($"The model {nameof(TemplateArtifact)} does not support '{format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeTemplateArtifact(document.RootElement, options);
+        }
+
+        internal static TemplateArtifact DeserializeTemplateArtifact(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -74,6 +133,8 @@ namespace MgmtDiscriminator.Models
             BinaryData template = default;
             Optional<string> resourceGroup = default;
             IDictionary<string, BinaryData> parameters = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -144,8 +205,109 @@ namespace MgmtDiscriminator.Models
                     }
                     continue;
                 }
+                if (options.Format != "W")
+                {
+                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new TemplateArtifact(id, name, type, systemData.Value, kind, template, resourceGroup.Value, parameters);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new TemplateArtifact(id, name, type, systemData.Value, kind, serializedAdditionalRawData, template, resourceGroup.Value, parameters);
         }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            builder.Append("  template:");
+            builder.AppendLine($" '{Template.ToString()}'");
+
+            if (Optional.IsDefined(ResourceGroup))
+            {
+                builder.Append("  resourceGroup:");
+                builder.AppendLine($" '{ResourceGroup.ToString()}'");
+            }
+
+            builder.Append("  parameters:");
+            builder.AppendLine(" {");
+            foreach (var item in Parameters)
+            {
+                builder.Append($"    {item.Key}: ");
+                if (item.Value == null)
+                {
+                    builder.Append("null");
+                    continue;
+                }
+                builder.AppendLine($" '{item.Value.ToString()}'");
+            }
+            builder.AppendLine("  }");
+
+            builder.Append("  kind:");
+            builder.AppendLine($" '{Kind.ToString()}'");
+
+            builder.Append("  id:");
+            builder.AppendLine($" '{Id.ToString()}'");
+
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name.ToString()}'");
+
+            builder.Append("  type:");
+            builder.AppendLine($" '{ResourceType.ToString()}'");
+
+            if (Optional.IsDefined(SystemData))
+            {
+                builder.Append("  systemData:");
+                builder.AppendLine($" '{SystemData.ToString()}'");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine($"{indent}{line}");
+            }
+        }
+
+        BinaryData IPersistableModel<TemplateArtifact>.Write(ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TemplateArtifact>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                case "B":
+                    return SerializeBicep(options);
+                default:
+                    throw new FormatException($"The model {nameof(TemplateArtifact)} does not support '{options.Format}' format.");
+            }
+        }
+
+        TemplateArtifact IPersistableModel<TemplateArtifact>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            var format = options.Format == "W" ? ((IPersistableModel<TemplateArtifact>)this).GetFormatFromOptions(options) : options.Format;
+
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeTemplateArtifact(document.RootElement, options);
+                    }
+                case "B":
+                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
+                default:
+                    throw new FormatException($"The model {nameof(TemplateArtifact)} does not support '{options.Format}' format.");
+            }
+        }
+
+        string IPersistableModel<TemplateArtifact>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

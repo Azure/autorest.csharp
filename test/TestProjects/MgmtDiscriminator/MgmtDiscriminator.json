@@ -401,6 +401,10 @@
                     "type": "string",
                     "readOnly": true
                 },
+                "boolProperty": {
+                    "description": "The resource type of this rule",
+                    "type": "boolean"
+                },
                 "properties": {
                     "description": "The properties",
                     "type": "object",
