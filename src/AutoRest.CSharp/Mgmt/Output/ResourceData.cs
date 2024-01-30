@@ -7,7 +7,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
