@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static bool IsExtendableEnum(CSharpType type)
         {
-            return type is { IsTypeProvider: true, IsValueType: true, Implementation: EnumType { IsExtensible: true } };
+            return type is { IsTypeProvider: true, IsValueType: true, TypeProvider: EnumType { IsExtensible: true } };
         }
 
         public static CSharpType GetElementType(CSharpType type)
@@ -226,7 +226,7 @@ namespace AutoRest.CSharp.Generation.Types
         public static bool IsStringLike(CSharpType type) =>
             type.IsFrameworkType
                 ? type.Equals(typeof(string))
-                : type is { IsTypeProvider: true, Implementation: EnumType { IsExtensible: true } enumType } && enumType.ValueType.Equals(typeof(string));
+                : type is { IsTypeProvider: true, TypeProvider: EnumType { IsExtensible: true } enumType } && enumType.ValueType.Equals(typeof(string));
 
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);

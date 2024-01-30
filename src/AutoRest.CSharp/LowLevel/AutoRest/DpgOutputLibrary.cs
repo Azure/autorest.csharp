@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 foreach (var (key, model) in _models)
                 {
                     var type = TypeFactory.CreateType(key);
-                    if (type is { IsTypeProvider: true, Implementation: ModelTypeProvider implementation } && model == implementation)
+                    if (type is { IsTypeProvider: true, TypeProvider: ModelTypeProvider implementation } && model == implementation)
                     {
                         yield return model;
                     }

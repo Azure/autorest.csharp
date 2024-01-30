@@ -17,8 +17,8 @@ namespace AutoRest.CSharp.Generation.Types
 {
     internal class CSharpType
     {
-        private readonly TypeProvider? _implementation;
-        private readonly Type? _type;
+        private readonly TypeProvider? _typeProvider;
+        private readonly Type? _frameworkType;
         private readonly INamedTypeSymbol? _symbolType;
 
         public CSharpType(INamedTypeSymbol symbol, bool isNullable)
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Types
             Namespace = symbol.ContainingNamespace.ToDisplayString();
             IsValueType = symbol.IsValueType;
             IsEnum = symbol.TypeKind == TypeKind.Enum;
-            Arguments = symbol.TypeArguments.Select(t => new CSharpType((INamedTypeSymbol)t, false)).ToArray(); // TODO -- figure out more about this
+            Arguments = symbol.TypeArguments.Select(t => new CSharpType((INamedTypeSymbol)t, false)).ToArray();
             IsPublic = symbol.DeclaredAccessibility.HasFlag(Accessibility.Public);
         }
 
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Generation.Types
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
             Debug.Assert(type.IsGenericTypeDefinition || arguments.Count == 0, "arguments can be added only to the generic type definition.");
 
-            _type = type;
+            _frameworkType = type;
 
             Namespace = type.Namespace;
             Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
         {
-            _implementation = implementation;
+            _typeProvider = implementation;
             Name = name;
             IsValueType = isValueType;
             IsEnum = isEnum;
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Generation.Types
             Namespace = ns;
             if (arguments != null)
                 Arguments = arguments;
-            SerializeAs = _implementation?.SerializeAs;
+            SerializeAs = _typeProvider?.SerializeAs;
             IsPublic = implementation.Declaration.Accessibility == "public"
                 && Arguments.All(t => t.IsPublic);
         }
@@ -102,10 +102,10 @@ namespace AutoRest.CSharp.Generation.Types
         public IReadOnlyList<CSharpType> UnionItemTypes { get; private init; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }
         public IReadOnlyList<CSharpType> Arguments { get; } = Array.Empty<CSharpType>();
-        public bool IsFrameworkType => _type != null;
-        public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");
-        public bool IsTypeProvider => _implementation != null;
-        public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
+        public bool IsFrameworkType => _frameworkType != null;
+        public Type FrameworkType => _frameworkType ?? throw new InvalidOperationException("Not a framework type");
+        public bool IsTypeProvider => _typeProvider != null;
+        public TypeProvider TypeProvider => _typeProvider ?? throw new InvalidOperationException($"Not type provider type: '{Namespace}.{Name}'");
         public bool IsSymbolType => _symbolType != null;
         public INamedTypeSymbol SymbolType => _symbolType ?? throw new InvalidOperationException($"Not symbol type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
@@ -113,8 +113,8 @@ namespace AutoRest.CSharp.Generation.Types
         public Type? SerializeAs { get; init; }
 
         protected bool Equals(CSharpType other, bool ignoreNullable)
-            => Equals(_implementation, other._implementation) &&
-               _type == other._type &&
+            => Equals(_typeProvider, other._typeProvider) &&
+               _frameworkType == other._frameworkType &&
                Arguments.SequenceEqual(other.Arguments) &&
                (ignoreNullable || IsNullable == other.IsNullable);
 
@@ -163,22 +163,22 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 hashCode.Add(arg);
             }
-            _hashCode = HashCode.Combine(_implementation, _type, hashCode.ToHashCode(), IsNullable);
+            _hashCode = HashCode.Combine(_typeProvider, _frameworkType, hashCode.ToHashCode(), IsNullable);
 
             return _hashCode.Value;
         }
 
         public CSharpType GetGenericTypeDefinition()
-            => _type is null
-                ? throw new NotSupportedException($"{nameof(TypeProvider)} doesn't support generics.")
-                : new(_type, IsNullable);
+            => _frameworkType is null
+                ? throw new NotSupportedException($"{nameof(Output.Models.Types.TypeProvider)} doesn't support generics.")
+                : new(_frameworkType, IsNullable);
 
         public bool IsGenericType => Arguments.Count > 0;
 
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments) : IsTypeProvider
-                ? new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, isNullable)
+                ? new CSharpType(TypeProvider, Namespace, Name, IsValueType, IsEnum, isNullable)
                 : new CSharpType(SymbolType, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool TryGetCSharpFriendlyName([MaybeNullWhen(false)] out string name)
         {
-            name = _type switch
+            name = _frameworkType switch
             {
                 null => null,
                 var t when t.IsGenericParameter => t.Name,

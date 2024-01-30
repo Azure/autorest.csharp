@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Output.Models
                     throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
                 }
 
-                if (responseType is { IsTypeProvider: true, Implementation: ModelTypeProvider modelType })
+                if (responseType is { IsTypeProvider: true, TypeProvider: ModelTypeProvider modelType })
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
                     var propertyType = property.ValueType.WithNullable(false);
@@ -381,7 +381,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (parameterChain.IsSpreadParameter)
                     {
-                        if (convenienceParameter.Type is { IsTypeProvider: true, Implementation: ModelTypeProvider model })
+                        if (convenienceParameter.Type is { IsTypeProvider: true, TypeProvider: ModelTypeProvider model })
                         {
                             var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
 

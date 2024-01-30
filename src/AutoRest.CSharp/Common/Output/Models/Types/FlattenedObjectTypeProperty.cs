@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool HasDefaultPublicCtor(CSharpType type)
         {
-            if (type is not { IsTypeProvider: true, Implementation: ObjectType objType })
+            if (type is not { IsTypeProvider: true, TypeProvider: ObjectType objType })
                 return true;
 
             foreach (var ctor in objType.Constructors)
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             innerProperty = null;
 
-            if (property.Declaration.Type is not { IsTypeProvider: true, Implementation: ObjectType objType })
+            if (property.Declaration.Type is not { IsTypeProvider: true, TypeProvider: ObjectType objType })
                 return false;
 
             var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).Where(property => property is not FlattenedObjectTypeProperty).ToArray();

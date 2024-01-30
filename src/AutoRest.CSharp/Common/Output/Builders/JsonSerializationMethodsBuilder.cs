@@ -438,7 +438,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueSerialization.Type.IsTypeProvider)
             {
-                return SerializeTypeProviderValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.Implementation);
+                return SerializeTypeProviderValue(utf8JsonWriter, valueSerialization, value, valueSerialization.Type.TypeProvider);
             }
 
             throw new NotSupportedException($"Cannot build serialization expression for type {valueSerialization.Type}, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
@@ -630,7 +630,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // We could only do this when there is a discriminator, and the discriminator does not have a value (having a value indicating it is the child instead of base), and there is an unknown default object type to fall back, and I am not that fallback type.
             if (discriminator is { Value: null, DefaultObjectType: { } defaultObjectType } && !serialization.Type.Equals(defaultObjectType.Type))
             {
-                yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, jsonElement, null));
+                yield return Return(GetDeserializeImplementation(discriminator.DefaultObjectType.Type.TypeProvider, jsonElement, null));
             }
             else
             {
@@ -642,7 +642,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (var implementation in discriminator.Implementations)
             {
-                yield return new SwitchCase(Literal(implementation.Key), Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null)), true);
+                yield return new SwitchCase(Literal(implementation.Key), Return(GetDeserializeImplementation(implementation.Type.TypeProvider, element, null)), true);
             }
         }
 
@@ -668,7 +668,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (serialization.Discriminator?.SerializedName == variable.Key.SerializedName &&
                     isThisTheDefaultDerivedType &&
                     serialization.Discriminator.Value is not null &&
-                    (!serialization.Discriminator.Property.ValueType.IsEnum || serialization.Discriminator.Property.ValueType.Implementation is EnumType { IsExtensible: true }))
+                    (!serialization.Discriminator.Property.ValueType.IsEnum || serialization.Discriminator.Property.ValueType.TypeProvider is EnumType { IsExtensible: true }))
                 {
                     var defaultValue = serialization.Discriminator.Value.Value.Value?.ToString();
                     yield return Declare(variable.Value, Literal(defaultValue));
@@ -1039,7 +1039,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
             }
 
-            return GetDeserializeImplementation(serializationType.Implementation, element, serializerOptions);
+            return GetDeserializeImplementation(serializationType.TypeProvider, element, serializerOptions);
         }
 
         public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ValueExpression? serializerOptions)

@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.TokenAuth.Type))
                 return false;
 
-            if (parameter.Type is { IsTypeProvider: true, Implementation: ObjectType })
+            if (parameter.Type is { IsTypeProvider: true, TypeProvider: ObjectType })
                 return false;
 
             return true;

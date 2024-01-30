@@ -249,11 +249,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var isArgMatches = false;
             if (parentPropertyType.IsClass &&
-                childPropertyType is { IsTypeProvider: true, Implementation: MgmtObjectType mgmtObjectType })
+                childPropertyType is { IsTypeProvider: true, TypeProvider: MgmtObjectType mgmtObjectType })
             {
                 isArgMatches = IsEqual(parentPropertyType, mgmtObjectType, parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList(), new Dictionary<Type, CSharpType> { { parentPropertyType, childPropertyType } });
             }
-            else if (childPropertyType is { IsTypeProvider: true, Implementation: EnumType childEnumType })
+            else if (childPropertyType is { IsTypeProvider: true, TypeProvider: EnumType childEnumType })
             {
                 isArgMatches = MatchEnum(parentPropertyType, childEnumType);
             }

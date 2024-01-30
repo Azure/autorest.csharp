@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var operationName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType is { IsTypeProvider: true, Implementation: ResourceData data })
+            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType is { IsTypeProvider: true, TypeProvider: ResourceData data })
             {
                 var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data

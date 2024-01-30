@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var type = header.Type;
             writer.WriteXmlDocumentationSummary($"{header.Description}");
             writer.Append($"public {type} {header.Name} => ");
-            if (type is { IsTypeProvider: true, Implementation: EnumType enumType })
+            if (type is { IsTypeProvider: true, TypeProvider: EnumType enumType })
             {
                 writer.Append($"{ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {typeof(string)} value) ? ");
                 writer.AppendEnumFromString(enumType, $"value");

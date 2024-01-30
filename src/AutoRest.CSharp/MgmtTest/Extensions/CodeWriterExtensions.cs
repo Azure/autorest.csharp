@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         public static CodeWriter AppendExamplePropertyBagParamValue(this CodeWriter writer, Parameter parameter, Dictionary<string, ExampleParameterValue> exampleParameterValue)
         {
             writer.Append($"new {parameter.Type}(");
-            var mgmtObject = parameter.Type.Implementation as ModelTypeProvider;
+            var mgmtObject = parameter.Type.TypeProvider as ModelTypeProvider;
             var requiredProperties = mgmtObject!.Properties.Where(p => p.IsRequired);
             var nonRequiredProperties = mgmtObject!.Properties.Where(p => !p.IsRequired);
             foreach (var property in requiredProperties)
@@ -392,7 +392,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
         {
-            switch (type.Implementation)
+            switch (type.TypeProvider)
             {
                 case ObjectType objectType:
                     return writer.AppendObjectTypeValue(objectType, exampleValue.Properties);
@@ -420,7 +420,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (implementation == null)
                 throw new InvalidOperationException($"Cannot find an implementation corresponding to the discriminator value {actualDiscriminatorValue} for object model type {objectType.Type.Name}");
 
-            return (ObjectType)implementation.Type.Implementation;
+            return (ObjectType)implementation.Type.TypeProvider;
         }
 
         private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue>? valueDict)

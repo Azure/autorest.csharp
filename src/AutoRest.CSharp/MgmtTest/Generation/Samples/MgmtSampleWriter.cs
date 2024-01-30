@@ -131,11 +131,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private void WriteNotNullResultHandling(CodeWriterVariableDeclaration result)
         {
-            if (result.Type is { IsTypeProvider: true, Implementation: Resource resource })
+            if (result.Type is { IsTypeProvider: true, TypeProvider: Resource resource })
             {
                 WriteResourceResultHandling(result, resource);
             }
-            else if (result.Type is { IsTypeProvider: true, Implementation: ResourceData resourceData })
+            else if (result.Type is { IsTypeProvider: true, TypeProvider: ResourceData resourceData })
             {
                 WriteResourceDataResultHandling(result, resourceData);
             }

@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var returnType = method.ReturnType;
             if (returnType == null)
                 return false;
-            if (returnType.IsFrameworkType || returnType is { IsTypeProvider: true, Implementation: not SchemaObjectType })
+            if (returnType.IsFrameworkType || returnType is { IsTypeProvider: true, TypeProvider: not SchemaObjectType })
             {
                 if (TypeFactory.IsList(returnType))
                 {
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             else
             {
                 valuePropertyName = method.Operation.Paging?.ItemName ?? "value";
-                var schemaObject = (SchemaObjectType)returnType.Implementation;
+                var schemaObject = (SchemaObjectType)returnType.TypeProvider;
                 itemType = GetValueProperty(schemaObject, valuePropertyName)?.ValueType.Arguments.FirstOrDefault();
             }
             return itemType != null;

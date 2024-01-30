@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
             {
                 bodyParamName = "patch";
-                if (bodyParamType is { IsTypeProvider: true, Implementation: ObjectType objectType })
+                if (bodyParamType is { IsTypeProvider: true, TypeProvider: ObjectType objectType })
                 {
                     Configuration.MgmtConfiguration.PatchInitializerCustomization.TryGetValue(bodyParamType.Name, out var customizations);
                     customizations ??= new Dictionary<string, string>();

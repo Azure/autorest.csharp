@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Builders
         {
             object? normalizedValue;
 
-            if (type is { IsTypeProvider: true, Implementation: EnumType enumType })
+            if (type is { IsTypeProvider: true, TypeProvider: EnumType enumType })
             {
                 if (value == null)
                 {

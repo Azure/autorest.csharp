@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         private ObjectTypeProperty GetPropertyBySerializedName(CSharpType type, string name)
         {
-            TypeProvider implementation = type.Implementation;
+            TypeProvider implementation = type.TypeProvider;
 
             if (implementation is SchemaObjectType objectType)
             {

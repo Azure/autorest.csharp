@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
-                var resourceBeingReturned = MgmtReturnType is { IsTypeProvider: true, Implementation: Resource resource } ? resource : null;
+                var resourceBeingReturned = MgmtReturnType is { IsTypeProvider: true, TypeProvider: Resource resource } ? resource : null;
                 operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
                 MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
@@ -244,10 +244,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (InterimOperation != null)
                 return null;
 
-            var isRestReturnTypeResourceData = restReturnType is { IsTypeProvider: true, Implementation: ResourceData };
+            var isRestReturnTypeResourceData = restReturnType is { IsTypeProvider: true, TypeProvider: ResourceData };
 
             // second check: if the method is returning a Resource and the rest operation is returning a ResourceData
-            if (isRestReturnTypeResourceData && mgmtReturnType is { IsTypeProvider: true, Implementation: Resource returnResource })
+            if (isRestReturnTypeResourceData && mgmtReturnType is { IsTypeProvider: true, TypeProvider: Resource returnResource })
             {
                 // in this case we should call the constructor of the resource to wrap it into a resource
                 return GetValueConverter(returnResource, clientVariable, valueVariable);
@@ -560,7 +560,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             //try for list method
             originalType = PagingMethod?.ItemType ?? originalType;
 
-            if (originalType is not { IsTypeProvider: true, Implementation: ResourceData data })
+            if (originalType is not { IsTypeProvider: true, TypeProvider: ResourceData data })
                 return originalType;
 
             if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))

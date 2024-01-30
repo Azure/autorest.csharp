@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool IsReplacementTypeManagedServiceIdentity(CSharpType replacementCSharpType)
         {
-            return replacementCSharpType is { IsTypeProvider: true, Implementation: SystemObjectType systemObjectType } && systemObjectType.SystemType == typeof(ManagedServiceIdentity);
+            return replacementCSharpType is { IsTypeProvider: true, TypeProvider: SystemObjectType systemObjectType } && systemObjectType.SystemType == typeof(ManagedServiceIdentity);
         }
     }
 }

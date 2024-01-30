@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                     break;
                                 default:
                                     // other types will go into SystemObjectType
-                                    replacedTypes.Add(schema, csharpType.Implementation);
+                                    replacedTypes.Add(schema, csharpType.TypeProvider);
                                     break;
                             }
                         }

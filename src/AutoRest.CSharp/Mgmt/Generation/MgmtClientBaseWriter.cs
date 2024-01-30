@@ -546,7 +546,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Line($"throw new {Configuration.ApiTypes.RequestFailedExceptionType}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 var realReturnType = operation.MgmtReturnType;
-                if (realReturnType is { IsTypeProvider: true, Implementation: Resource resource } && resource.ResourceData.ShouldSetResourceIdentifier)
+                if (realReturnType is { IsTypeProvider: true, TypeProvider: Resource resource } && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
                     _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
                 }
@@ -662,7 +662,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (operation.OperationSource is not null)
                 {
                     _writer.Append($"new {operation.OperationSource.Type}(")
-                        .AppendIf($"{ArmClientReference}", operation.MgmtReturnType is { IsTypeProvider: true, Implementation: Resource })
+                        .AppendIf($"{ArmClientReference}", operation.MgmtReturnType is { IsTypeProvider: true, TypeProvider: Resource })
                         .Append($"), ");
                 }
 

@@ -367,7 +367,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             writer.Append(GetConstantOrParameter(constantOrReference, ignoreNullability));
 
-            if (enumAsString && constantOrReference.Type is { IsTypeProvider: true, Implementation: EnumType enumType })
+            if (enumAsString && constantOrReference.Type is { IsTypeProvider: true, TypeProvider: EnumType enumType })
             {
                 writer.AppendEnumToString(enumType);
             }

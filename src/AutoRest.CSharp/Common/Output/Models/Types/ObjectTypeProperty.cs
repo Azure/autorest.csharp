@@ -426,22 +426,22 @@ Examples:
             {
                 if (TypeFactory.IsList(valueType))
                 {
-                    if (valueType.Arguments[0] is { IsTypeProvider: true, Implementation: ObjectType objectType })
+                    if (valueType.Arguments[0] is { IsTypeProvider: true, TypeProvider: ObjectType objectType })
                     {
                         updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
                 }
                 else if (TypeFactory.IsDictionary(valueType))
                 {
-                    var objectTypes = valueType.Arguments.Where(arg => arg is { IsTypeProvider: true, Implementation: ObjectType });
+                    var objectTypes = valueType.Arguments.Where(arg => arg is { IsTypeProvider: true, TypeProvider: ObjectType });
                     if (objectTypes.Any())
                     {
-                        var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator()).ToArray();
+                        var subDescription = objectTypes.Select(o => ((ObjectType)o.TypeProvider).CreateExtraDescriptionWithDiscriminator()).ToArray();
                         updatedDescription = subDescription.Join("");
                     }
                 }
             }
-            else if (valueType is { IsTypeProvider: true, Implementation: ObjectType objectType })
+            else if (valueType is { IsTypeProvider: true, TypeProvider: ObjectType objectType })
             {
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }

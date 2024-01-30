@@ -143,7 +143,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
     private static bool GetIsExpandable(IEnumerable<Segment> segments)
         => segments
-            .Where((s, i) => i % 2 == 0 && s.IsReference && s.Reference.Type is { IsTypeProvider: true, Implementation: EnumType })
+            .Where((s, i) => i % 2 == 0 && s.IsReference && s.Reference.Type is { IsTypeProvider: true, TypeProvider: EnumType })
             .Any();
 
     private static IReadOnlyList<Segment> CheckByIdPath(IReadOnlyList<Segment> segments)
@@ -361,7 +361,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
         foreach (var segment in resourceType)
         {
-            if (segment is not { IsReference: true, Type: { IsTypeProvider: true, Implementation: { } type } })
+            if (segment is not { IsReference: true, Type: { IsTypeProvider: true, TypeProvider: { } type } })
                 continue;
 
             switch (type)
@@ -479,7 +479,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
                     }
 
                     //for now we only assume expand variables are in the key slot which will be an odd slot
-                    CSharpType? expandableType = segmentIndex % 2 == 0 && valueType is { IsTypeProvider: true, Implementation: EnumType }
+                    CSharpType? expandableType = segmentIndex % 2 == 0 && valueType is { IsTypeProvider: true, TypeProvider: EnumType }
                         ? valueType
                         : null;
 

@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static bool IsSinglePropertyObject(ObjectTypeProperty property)
         {
-            if (property.Declaration.Type is not { IsTypeProvider: true, Implementation: ObjectType objType })
+            if (property.Declaration.Type is not { IsTypeProvider: true, TypeProvider: ObjectType objType })
                 return false;
 
             return objType switch
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var argType = type.Arguments[i];
                     arguments[i] = argType;
-                    if (argType is { IsTypeProvider: true, Implementation: MgmtObjectType typeToReplace })
+                    if (argType is { IsTypeProvider: true, TypeProvider: MgmtObjectType typeToReplace })
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         if (match != null)
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 ObjectTypeProperty property = objectTypeProperty;
-                if (type is { IsTypeProvider: true, Implementation: MgmtObjectType typeToReplace })
+                if (type is { IsTypeProvider: true, TypeProvider: MgmtObjectType typeToReplace })
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
                     // by checking if this type is one of its descendants
-                    if (inheritedType is { IsTypeProvider: true, Implementation: SchemaObjectType schemaObjectType } && IsDescendantOf(schemaObjectType))
+                    if (inheritedType is { IsTypeProvider: true, TypeProvider: SchemaObjectType schemaObjectType } && IsDescendantOf(schemaObjectType))
                     {
                         // if the base type has a discriminator and this type is one of them
                         return inheritedType;
@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             // try to replace the base type if this is not a type from discriminator
             // try exact match first
-            var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
+            var typeToReplace = inheritedType?.TypeProvider as MgmtObjectType;
             if (typeToReplace != null)
             {
                 var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
@@ -293,7 +293,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                if (Inherits?.Implementation is SystemObjectType)
+                if (Inherits?.TypeProvider is SystemObjectType)
                 {
                     return GetPropertyBySerializedName(property.SerializedName, includeParents);
                 }

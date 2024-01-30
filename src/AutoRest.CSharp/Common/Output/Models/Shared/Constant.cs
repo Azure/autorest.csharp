@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 return;
             }
 
-            if (type is { IsTypeProvider: true, Implementation: EnumType } &&
+            if (type is { IsTypeProvider: true, TypeProvider: EnumType } &&
                 value is not null && value is not EnumTypeValue && value is not string)
             {
                 throw new InvalidOperationException($"Unexpected value '{value}' for enum type '{type}'");

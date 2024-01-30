@@ -437,7 +437,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (isDeclaration && type.IsTypeProvider)
             {
-                AppendRaw(type.Implementation.Declaration.Name);
+                AppendRaw(type.TypeProvider.Declaration.Name);
             }
             else if (writeTypeNameOnly)
             {

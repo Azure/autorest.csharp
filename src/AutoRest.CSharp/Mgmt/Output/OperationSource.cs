@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             ResponseSerialization = SerializationBuilder.BuildSerialization(schema, resource?.ResourceData.Type ?? returnType, false);
         }
 
-        public bool IsReturningResource => ReturnType is { IsTypeProvider: true, Implementation: Output.Resource };
+        public bool IsReturningResource => ReturnType is { IsTypeProvider: true, TypeProvider: Output.Resource };
 
         public CSharpType ReturnType { get; }
         public CSharpType Interface { get; }

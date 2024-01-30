@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return GetFrameworkTypeValueFormattable(frameworkType, element, serializationFormat, serializationType);
             }
 
-            return GetDeserializeImplementationFormattable(serializationType.Implementation, element, serializationOptions);
+            return GetDeserializeImplementationFormattable(serializationType.TypeProvider, element, serializationOptions);
         }
 
         public static FormattableString GetFrameworkTypeValueFormattable(Type frameworkType, FormattableString element, SerializationFormat format, CSharpType? serializationType)

@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectTypeConstructor? baseSerializationCtor = null;
             List<ValueExpression> baseParameterInitializers = new List<ValueExpression>();
 
-            if (Inherits is { IsTypeProvider: true, Implementation: ObjectType objectType })
+            if (Inherits is { IsTypeProvider: true, TypeProvider: ObjectType objectType })
             {
                 baseSerializationCtor = objectType.SerializationConstructor;
                 foreach (var p in baseSerializationCtor.Signature.Parameters)

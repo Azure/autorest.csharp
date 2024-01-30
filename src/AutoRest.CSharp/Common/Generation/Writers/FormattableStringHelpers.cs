@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     case { IsFrameworkType: true }:
                         return parameter.GetConversionFromFrameworkToRequestContent(contentType);
-                    case { IsTypeProvider: true, Implementation: EnumType enumType }:
+                    case { IsTypeProvider: true, TypeProvider: EnumType enumType }:
                         if (enumType.IsExtensible)
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
@@ -220,11 +220,11 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch
             {
-                { IsTypeProvider: true, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
-                { IsTypeProvider: true, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsTypeProvider: true, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
-                { IsTypeProvider: true, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
-                { IsTypeProvider: true, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
+                { IsTypeProvider: true, TypeProvider: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
+                { IsTypeProvider: true, TypeProvider: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
+                { IsTypeProvider: true, TypeProvider: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
+                { IsTypeProvider: true, TypeProvider: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
+                { IsTypeProvider: true, TypeProvider: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
                 _ => null
             };
 
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             // we cannot check `constant.Value is string` because it is always string - this is an issue in yaml serialization)
-            if (constant.Type is { IsTypeProvider: true, Implementation: EnumType enumType })
+            if (constant.Type is { IsTypeProvider: true, TypeProvider: EnumType enumType })
             {
                 if (enumType.IsStringValueType)
                     return $"new {constant.Type}({constant.Value:L})";

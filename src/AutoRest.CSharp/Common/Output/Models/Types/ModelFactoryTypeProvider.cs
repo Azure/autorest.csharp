@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var parentPropertyType = immediateParentProperty.Declaration.Type;
                 switch (parentPropertyType)
                 {
-                    case { IsTypeProvider: true, Implementation: SerializableObjectType serializableObjectType }:
+                    case { IsTypeProvider: true, TypeProvider: SerializableObjectType serializableObjectType }:
                         // when a property is flattened, it should only have one property. But the serialization ctor might takes two parameters because it may have the raw data field as an extra parameter
                         var parameters = serializableObjectType.SerializationConstructor.Signature.Parameters;
                         var arguments = new List<ValueExpression>();
@@ -174,14 +174,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                         }
                         result = New.Instance(parentPropertyType, arguments.ToArray());
                         break;
-                    case { IsTypeProvider: true, Implementation: SystemObjectType systemObjectType }:
+                    case { IsTypeProvider: true, TypeProvider: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
                         // find the method in the list
                         var method = ExistingModelFactoryMethods.First(m => m.Name == systemObjectType.Type.Name);
                         result = new InvokeStaticMethodExpression(method.DeclaringType!, method.Name, new[] { result });
                         break;
                     default:
-                        throw new InvalidOperationException($"The propertyType {parentPropertyType} (implementation type: {parentPropertyType.Implementation.GetType()}) is unhandled here, this should never happen");
+                        throw new InvalidOperationException($"The propertyType {parentPropertyType} (implementation type: {parentPropertyType.TypeProvider.GetType()}) is unhandled here, this should never happen");
                 }
 
                 // change the from type to the current type
@@ -254,11 +254,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // this class is the base in a discriminated set
                     switch (inputType)
                     {
-                        case { IsTypeProvider: true, Implementation: EnumType { IsExtensible: true } extensibleEnum }:
+                        case { IsTypeProvider: true, TypeProvider: EnumType { IsExtensible: true } extensibleEnum }:
                             inputType = extensibleEnum.ValueType;
                             overriddenDefaultValue = new Constant("Unknown", inputType);
                             break;
-                        case { IsTypeProvider: true, Implementation: EnumType { IsExtensible: false } }:
+                        case { IsTypeProvider: true, TypeProvider: EnumType { IsExtensible: false } }:
                             // we skip the parameter if the discriminator is a sealed choice because we can never pass in a "Unknown" value.
                             // but we still need to add it to the method argument list as a `default`
                             methodArguments.Add(Default);

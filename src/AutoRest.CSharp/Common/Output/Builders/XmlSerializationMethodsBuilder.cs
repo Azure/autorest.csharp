@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var type = elementValueSerialization.Value.Type;
             string elementName = elementValueSerialization.Name;
 
-            if (type is { IsFrameworkType: false, Implementation: ObjectType })
+            if (type is { IsFrameworkType: false, TypeProvider: ObjectType })
             {
                 return xmlWriter.WriteObjectValue(element, elementName);
             }
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (type.IsTypeProvider)
             {
-                return type.Implementation switch
+                return type.TypeProvider switch
                 {
                     EnumType clientEnum => xmlWriter.WriteValue(new EnumExpression(clientEnum, value).ToSerial()),
                     _ => throw new NotSupportedException("Object type references are only supported as elements")
@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return Assign(propertyVariables[contentSerialization], DeserializeValue(contentSerialization.ValueSerialization, element));
             }
 
-            var objectType = (ObjectType)objectSerialization.Type.Implementation;
+            var objectType = (ObjectType)objectSerialization.Type.TypeProvider;
             var parameterValues = propertyVariables.ToDictionary(v => v.Key.SerializationConstructorParameterName, v => (ValueExpression)v.Value);
 
             var arguments = new List<ValueExpression>();
@@ -423,7 +423,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (type.IsTypeProvider)
             {
-                switch (type.Implementation)
+                switch (type.TypeProvider)
                 {
                     case SerializableObjectType serializableObjectType:
                         return SerializableObjectTypeExpression.Deserialize(serializableObjectType, value);
