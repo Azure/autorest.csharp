@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
 
-        public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
+        public CSharpType Type => new TypeProviderType(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         protected abstract string DefaultName { get; }

@@ -29,13 +29,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 return;
             }
 
-            if (type is { IsTypeProvider: true, TypeProvider: EnumType } &&
+            if (type is TypeProviderType { TypeProvider: EnumType } &&
                 value is not null && value is not EnumTypeValue && value is not string)
             {
                 throw new InvalidOperationException($"Unexpected value '{value}' for enum type '{type}'");
             }
 
-            if (value != null && type.IsFrameworkType && value.GetType() != type.FrameworkType)
+            if (value != null && type is FrameworkType { Type: { } frameworkType } && value.GetType() != frameworkType)
             {
                 throw new InvalidOperationException($"Constant type mismatch. Value type is '{value.GetType()}'. CSharpType is '{type}'.");
             }

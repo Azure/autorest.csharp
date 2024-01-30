@@ -42,49 +42,49 @@ namespace AutoRest.CSharp.Generation.Types
         {
             InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
             InputUnionType unionType => CSharpType.FromUnion(unionType.UnionItemTypes.Select(CreateType).ToArray(), unionType.IsNullable),
-            InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
-            InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
+            InputListType listType => new FrameworkType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
+            InputDictionaryType dictionaryType => new FrameworkType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
             InputModelType model => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
-                InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
-                InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
-                InputTypeKind.Boolean => new CSharpType(typeof(bool), inputType.IsNullable),
-                InputTypeKind.BytesBase64Url => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData), inputType.IsNullable) : new CSharpType(typeof(byte[]), inputType.IsNullable),
-                InputTypeKind.ContentType => new CSharpType(typeof(ContentType), inputType.IsNullable),
-                InputTypeKind.Date => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.DateTime => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.DateTimeISO8601 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.DateTimeRFC1123 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.DateTimeRFC3339 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.DateTimeRFC7231 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.DateTimeUnix => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.Decimal => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.Decimal128 => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.DurationISO8601 => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
-                InputTypeKind.DurationSeconds => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
-                InputTypeKind.DurationSecondsFloat => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
-                InputTypeKind.DurationConstant => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
-                InputTypeKind.ETag => new CSharpType(typeof(ETag), inputType.IsNullable),
-                InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
-                InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
-                InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
-                InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
-                InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
-                InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
-                InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress), inputType.IsNullable),
-                InputTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod), inputType.IsNullable),
-                InputTypeKind.ResourceIdentifier => new CSharpType(typeof(ResourceIdentifier), inputType.IsNullable),
-                InputTypeKind.ResourceType => new CSharpType(typeof(ResourceType), inputType.IsNullable),
-                InputTypeKind.Stream => new CSharpType(typeof(Stream), inputType.IsNullable),
-                InputTypeKind.String => new CSharpType(typeof(string), inputType.IsNullable),
-                InputTypeKind.Time => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
-                InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
-                _ => new CSharpType(typeof(object), inputType.IsNullable),
+                InputTypeKind.AzureLocation => new FrameworkType(typeof(AzureLocation), inputType.IsNullable),
+                InputTypeKind.BinaryData => new FrameworkType(typeof(BinaryData), inputType.IsNullable),
+                InputTypeKind.Boolean => new FrameworkType(typeof(bool), inputType.IsNullable),
+                InputTypeKind.BytesBase64Url => Configuration.ShouldTreatBase64AsBinaryData ? new FrameworkType(typeof(BinaryData), inputType.IsNullable) : new FrameworkType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new FrameworkType(typeof(BinaryData), inputType.IsNullable) : new FrameworkType(typeof(byte[]), inputType.IsNullable),
+                InputTypeKind.ContentType => new FrameworkType(typeof(ContentType), inputType.IsNullable),
+                InputTypeKind.Date => new FrameworkType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTime => new FrameworkType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeISO8601 => new FrameworkType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeRFC1123 => new FrameworkType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeRFC3339 => new FrameworkType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeRFC7231 => new FrameworkType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.DateTimeUnix => new FrameworkType(typeof(DateTimeOffset), inputType.IsNullable),
+                InputTypeKind.Decimal => new FrameworkType(typeof(decimal), inputType.IsNullable),
+                InputTypeKind.Decimal128 => new FrameworkType(typeof(decimal), inputType.IsNullable),
+                InputTypeKind.DurationISO8601 => new FrameworkType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.DurationSeconds => new FrameworkType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.DurationSecondsFloat => new FrameworkType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.DurationConstant => new FrameworkType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.ETag => new FrameworkType(typeof(ETag), inputType.IsNullable),
+                InputTypeKind.Float32 => new FrameworkType(typeof(float), inputType.IsNullable),
+                InputTypeKind.Float64 => new FrameworkType(typeof(double), inputType.IsNullable),
+                InputTypeKind.Float128 => new FrameworkType(typeof(decimal), inputType.IsNullable),
+                InputTypeKind.Guid => new FrameworkType(typeof(Guid), inputType.IsNullable),
+                InputTypeKind.Int32 => new FrameworkType(typeof(int), inputType.IsNullable),
+                InputTypeKind.Int64 => new FrameworkType(typeof(long), inputType.IsNullable),
+                InputTypeKind.IPAddress => new FrameworkType(typeof(IPAddress), inputType.IsNullable),
+                InputTypeKind.RequestMethod => new FrameworkType(typeof(RequestMethod), inputType.IsNullable),
+                InputTypeKind.ResourceIdentifier => new FrameworkType(typeof(ResourceIdentifier), inputType.IsNullable),
+                InputTypeKind.ResourceType => new FrameworkType(typeof(ResourceType), inputType.IsNullable),
+                InputTypeKind.Stream => new FrameworkType(typeof(Stream), inputType.IsNullable),
+                InputTypeKind.String => new FrameworkType(typeof(string), inputType.IsNullable),
+                InputTypeKind.Time => new FrameworkType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.Uri => new FrameworkType(typeof(Uri), inputType.IsNullable),
+                _ => new FrameworkType(typeof(object), inputType.IsNullable),
             },
             InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
@@ -96,18 +96,18 @@ namespace AutoRest.CSharp.Generation.Types
         // This function provide the capability to support the extensions is coming from outside, like parameter.
         public CSharpType CreateType(Schema schema, string? format, bool isNullable, Property? property = default) => schema switch
         {
-            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
-            BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
-            ByteArraySchema _ => new CSharpType(typeof(byte[]), isNullable),
-            ArraySchema array => new CSharpType(GetListType(schema), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
-            DictionarySchema dictionary => new CSharpType(typeof(IDictionary<,>), isNullable, new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
-            CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
-            NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new CSharpType(
+            ConstantSchema constantSchema => constantSchema.ValueType is not ChoiceSchema && ToXMsFormatType(format) is Type type ? new FrameworkType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
+            BinarySchema _ => new FrameworkType(typeof(Stream), isNullable),
+            ByteArraySchema _ => new FrameworkType(typeof(byte[]), isNullable),
+            ArraySchema array => new FrameworkType(GetListType(schema), isNullable, CreateType(array.ElementType, array.NullableItems ?? false)),
+            DictionarySchema dictionary => new FrameworkType(typeof(IDictionary<,>), isNullable, new FrameworkType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
+            CredentialSchema credentialSchema => new FrameworkType(typeof(string), isNullable),
+            NumberSchema number => new FrameworkType(ToFrameworkNumericType(number), isNullable),
+            AnyObjectSchema _ when format == XMsFormat.DataFactoryElementOfListOfT => new FrameworkType(
                 typeof(DataFactoryElement<>),
                 isNullable: isNullable,
-                new CSharpType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
-            _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
+                new FrameworkType(typeof(IList<>), _library.FindTypeForSchema((ObjectSchema)property!.Extensions!["x-ms-format-element-type"]))),
+            _ when ToFrameworkType(schema, format) is Type type => new FrameworkType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
 
@@ -118,21 +118,21 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static CSharpType GetImplementationType(CSharpType type)
         {
-            if (type.IsFrameworkType)
+            if (type is FrameworkType)
             {
-                if (IsReadOnlyMemory(type))
+                if (IsReadOnlyMemory(type) && type.Arguments[0] is FrameworkType { Type: { } elementType })
                 {
-                    return new CSharpType(type.Arguments[0].FrameworkType.MakeArrayType());
+                    return new FrameworkType(elementType.MakeArrayType());
                 }
 
                 if (IsList(type))
                 {
-                    return new CSharpType(typeof(List<>), type.Arguments);
+                    return new FrameworkType(typeof(List<>), type.Arguments);
                 }
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(typeof(Dictionary<,>), type.Arguments);
+                    return new FrameworkType(typeof(Dictionary<,>), type.Arguments);
                 }
             }
 
@@ -141,21 +141,21 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static CSharpType GetPropertyImplementationType(CSharpType type)
         {
-            if (type.IsFrameworkType)
+            if (type is FrameworkType)
             {
                 if (IsReadOnlyMemory(type))
                 {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments);
+                    return new FrameworkType(typeof(ReadOnlyMemory<>), type.Arguments);
                 }
 
                 if (IsList(type))
                 {
-                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
+                    return new FrameworkType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
                 }
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
+                    return new FrameworkType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
                 }
             }
 
@@ -186,16 +186,16 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static bool IsExtendableEnum(CSharpType type)
         {
-            return type is { IsTypeProvider: true, IsValueType: true, TypeProvider: EnumType { IsExtensible: true } };
+            return type is TypeProviderType { IsValueType: true, TypeProvider: EnumType { IsExtensible: true } };
         }
 
         public static CSharpType GetElementType(CSharpType type)
         {
-            if (type.IsFrameworkType)
+            if (type is FrameworkType { Type: { } frameworkType })
             {
-                if (type.FrameworkType.IsArray)
+                if (frameworkType.IsArray)
                 {
-                    return new CSharpType(type.FrameworkType.GetElementType()!);
+                    return new FrameworkType(frameworkType.GetElementType()!);
                 }
 
                 if (IsReadOnlyMemory(type))
@@ -224,57 +224,57 @@ namespace AutoRest.CSharp.Generation.Types
         /// <param name="type">Type to check.</param>
         /// <returns>Is the type a string or an Enum that is modeled as string.</returns>
         public static bool IsStringLike(CSharpType type) =>
-            type.IsFrameworkType
+            type is FrameworkType
                 ? type.Equals(typeof(string))
-                : type is { IsTypeProvider: true, TypeProvider: EnumType { IsExtensible: true } enumType } && enumType.ValueType.Equals(typeof(string));
+                : type is TypeProviderType { TypeProvider: EnumType { IsExtensible: true } enumType } && enumType.ValueType.Equals(typeof(string));
 
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
 
         internal static bool IsReadOnlyDictionary(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(IReadOnlyDictionary<,>);
+            => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(IReadOnlyDictionary<,>);
 
         internal static bool IsReadWriteDictionary(CSharpType type)
-            => type.IsFrameworkType && (type.FrameworkType == typeof(IDictionary<,>) || type.FrameworkType == typeof(Dictionary<,>));
+            => type is FrameworkType { Type: { } frameworkType } && (frameworkType == typeof(IDictionary<,>) || frameworkType == typeof(Dictionary<,>));
 
         internal static bool IsList(CSharpType type)
             => IsReadOnlyList(type) || IsReadWriteList(type) || IsReadOnlyMemory(type);
 
         internal static bool IsReadOnlyMemory(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(ReadOnlyMemory<>);
+            => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(ReadOnlyMemory<>);
 
         internal static bool IsReadOnlyList(CSharpType type)
-            => type.IsFrameworkType &&
-               (type.FrameworkType == typeof(IEnumerable<>) ||
-               type.FrameworkType == typeof(IReadOnlyList<>));
+            => type is FrameworkType { Type: { } frameworkType } &&
+               (frameworkType == typeof(IEnumerable<>) ||
+               frameworkType == typeof(IReadOnlyList<>));
 
         internal static bool IsReadWriteList(CSharpType type)
-            => type.IsFrameworkType && (type.FrameworkType == typeof(IList<>) || type.FrameworkType == typeof(ICollection<>) || type.FrameworkType == typeof(List<>));
+            => type is FrameworkType { Type: { } frameworkType } && (frameworkType == typeof(IList<>) || frameworkType == typeof(ICollection<>) || frameworkType == typeof(List<>));
 
         internal static bool IsIEnumerableType(CSharpType type)
-            => type.IsFrameworkType &&
-            (type.FrameworkType == typeof(IEnumerable) ||
-            type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+            => type is FrameworkType { Type: { } frameworkType } &&
+            (frameworkType == typeof(IEnumerable) ||
+            frameworkType.IsGenericType && frameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
 
-        internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
+        internal static bool IsIEnumerableOfT(CSharpType type) => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(IEnumerable<>);
 
-        internal static bool IsResponseOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response<>);
+        internal static bool IsResponseOfT(CSharpType type) => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(Response<>);
 
-        internal static bool IsResponse(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Response);
+        internal static bool IsResponse(CSharpType type) => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(Response);
 
-        internal static bool IsOperationOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>);
+        internal static bool IsOperationOfT(CSharpType type) => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(Operation<>);
 
-        internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
+        internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(IAsyncEnumerable<>);
 
-        internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
+        internal static bool IsAsyncPageable(CSharpType type) => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(AsyncPageable<>);
 
         internal static bool IsOperationOfAsyncPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsAsyncPageable(type.Arguments[0]);
+            => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsAsyncPageable(type.Arguments[0]);
 
-        internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
+        internal static bool IsPageable(CSharpType type) => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(Pageable<>);
 
         internal static bool IsOperationOfPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
+            => type is FrameworkType { Type: { } frameworkType } && frameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
 
         internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
 
@@ -345,16 +345,16 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static CSharpType GetInputType(CSharpType type)
         {
-            if (type.IsFrameworkType)
+            if (type is FrameworkType)
             {
                 if (IsReadOnlyMemory(type))
                 {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
+                    return new FrameworkType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
                 }
 
                 if (IsList(type))
                 {
-                    return new CSharpType(
+                    return new FrameworkType(
                         typeof(IEnumerable<>),
                         isNullable: type.IsNullable,
                         type.Arguments);
@@ -366,16 +366,16 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static CSharpType GetOutputType(CSharpType type)
         {
-            if (type.IsFrameworkType)
+            if (type is FrameworkType)
             {
                 if (IsReadOnlyMemory(type))
                 {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
+                    return new FrameworkType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
                 }
 
                 if (IsList(type))
                 {
-                    return new CSharpType(
+                    return new FrameworkType(
                         typeof(IReadOnlyList<>),
                         isNullable: type.IsNullable,
                         type.Arguments);
@@ -383,7 +383,7 @@ namespace AutoRest.CSharp.Generation.Types
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(
+                    return new FrameworkType(
                         typeof(IReadOnlyDictionary<,>),
                         isNullable: type.IsNullable,
                         type.Arguments);
@@ -445,7 +445,7 @@ namespace AutoRest.CSharp.Generation.Types
                 {
                     return false;
                 }
-                type = new CSharpType(existingType, false, arguments);
+                type = new FrameworkType(existingType, false, arguments);
             }
             else
             {
@@ -455,7 +455,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (type is null)
             {
                 // nullable like in `int?` has been taken care of above, therefore here we could just assume this is not nullable
-                type = new CSharpType(namedTypeSymbol, false);
+                type = new SymbolType(namedTypeSymbol, false);
             }
 
             if (!type.IsValueType &&
@@ -479,7 +479,7 @@ namespace AutoRest.CSharp.Generation.Types
             var arrayType = TryGetFrameworkType(arrayTypeSymbol);
             if (arrayType is not null && validator(arrayType))
             {
-                type = new CSharpType(arrayType, arrayType.IsValueType && symbol.NullableAnnotation != NullableAnnotation.NotAnnotated);
+                type = new FrameworkType(arrayType, arrayType.IsValueType && symbol.NullableAnnotation != NullableAnnotation.NotAnnotated);
                 return true;
             }
             return false;
@@ -539,7 +539,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static bool IsCollectionType(CSharpType type)
         {
-            return type.IsFrameworkType && (IsDictionary(type) || IsList(type));
+            return IsDictionary(type) || IsList(type);
         }
 
         /// <summary>
@@ -548,17 +548,17 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         public static bool RequiresToList(CSharpType from, CSharpType to)
         {
-            if (!to.IsFrameworkType || !from.IsFrameworkType || from.FrameworkType != typeof(IEnumerable<>))
+            if (to is not FrameworkType { Type: { } toType } || from is not FrameworkType { Type: { } fromType } || fromType != typeof(IEnumerable<>))
             {
                 return false;
             }
 
-            return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
+            return toType == typeof(IReadOnlyList<>) || toType == typeof(IList<>);
         }
 
         internal static bool IsArray(CSharpType type)
         {
-            return type is { IsFrameworkType: true, FrameworkType.IsArray: true };
+            return type is FrameworkType { Type.IsArray: true };
         }
     }
 }
