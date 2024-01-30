@@ -164,11 +164,17 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
+            if (Optional.IsDefined(TypeName))
+            {
+                builder.Append("  typeName:");
+                builder.AppendLine($" '{TypeName.ToString()}'");
+            }
 
-            builder.Append("  operator:");
-            builder.AppendLine($" '{Operator.ToString()}'");
+            if (Optional.IsDefined(Operator))
+            {
+                builder.Append("  operator:");
+                builder.AppendLine($" '{Operator.ToString()}'");
+            }
 
             if (Optional.IsDefined(NegateCondition))
             {
@@ -188,7 +194,7 @@ namespace MgmtDiscriminator.Models
                         builder.Append("null");
                         continue;
                     }
-                    builder.AppendLine($"    '{item.ToString()}'");
+                    builder.AppendLine($"    '{item}'");
                 }
                 builder.AppendLine("  ]");
             }

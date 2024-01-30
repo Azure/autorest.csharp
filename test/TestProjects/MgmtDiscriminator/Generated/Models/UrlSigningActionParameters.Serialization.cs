@@ -131,8 +131,11 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
+            if (Optional.IsDefined(TypeName))
+            {
+                builder.Append("  typeName:");
+                builder.AppendLine($" '{TypeName.ToString()}'");
+            }
 
             if (Optional.IsDefined(Algorithm))
             {

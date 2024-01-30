@@ -116,16 +116,19 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Bark))
             {
                 builder.Append("  bark:");
-                builder.AppendLine($" '{Bark.ToString()}'");
+                builder.AppendLine($" '{Bark}'");
             }
 
-            builder.Append("  kind:");
-            builder.AppendLine($" '{Kind.ToString()}'");
+            if (Optional.IsDefined(Kind))
+            {
+                builder.Append("  kind:");
+                builder.AppendLine($" '{Kind.ToString()}'");
+            }
 
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
-                builder.AppendLine($" '{Id.ToString()}'");
+                builder.AppendLine($" '{Id}'");
             }
 
             builder.AppendLine("}");

@@ -219,40 +219,58 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  template:");
-            builder.AppendLine($" '{Template.ToString()}'");
+            if (Optional.IsDefined(Template))
+            {
+                builder.Append("  template:");
+                builder.AppendLine($" '{Template.ToString()}'");
+            }
 
             if (Optional.IsDefined(ResourceGroup))
             {
                 builder.Append("  resourceGroup:");
-                builder.AppendLine($" '{ResourceGroup.ToString()}'");
+                builder.AppendLine($" '{ResourceGroup}'");
             }
 
-            builder.Append("  parameters:");
-            builder.AppendLine(" {");
-            foreach (var item in Parameters)
+            if (Optional.IsCollectionDefined(Parameters))
             {
-                builder.Append($"    {item.Key}: ");
-                if (item.Value == null)
+                builder.Append("  parameters:");
+                builder.AppendLine(" {");
+                foreach (var item in Parameters)
                 {
-                    builder.Append("null");
-                    continue;
+                    builder.Append($"    {item.Key}: ");
+                    if (item.Value == null)
+                    {
+                        builder.Append("null");
+                        continue;
+                    }
+                    builder.AppendLine($" '{item.Value.ToString()}'");
                 }
-                builder.AppendLine($" '{item.Value.ToString()}'");
+                builder.AppendLine("  }");
             }
-            builder.AppendLine("  }");
 
-            builder.Append("  kind:");
-            builder.AppendLine($" '{Kind.ToString()}'");
+            if (Optional.IsDefined(Kind))
+            {
+                builder.Append("  kind:");
+                builder.AppendLine($" '{Kind.ToString()}'");
+            }
 
-            builder.Append("  id:");
-            builder.AppendLine($" '{Id.ToString()}'");
+            if (Optional.IsDefined(Id))
+            {
+                builder.Append("  id:");
+                builder.AppendLine($" '{Id.ToString()}'");
+            }
 
-            builder.Append("  name:");
-            builder.AppendLine($" '{Name.ToString()}'");
+            if (Optional.IsDefined(Name))
+            {
+                builder.Append("  name:");
+                builder.AppendLine($" '{Name}'");
+            }
 
-            builder.Append("  type:");
-            builder.AppendLine($" '{ResourceType.ToString()}'");
+            if (Optional.IsDefined(ResourceType))
+            {
+                builder.Append("  type:");
+                builder.AppendLine($" '{ResourceType.ToString()}'");
+            }
 
             if (Optional.IsDefined(SystemData))
             {

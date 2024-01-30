@@ -15,7 +15,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Constant = AutoRest.CSharp.Output.Models.Shared.Constant;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
@@ -140,7 +139,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     // add in customization hooks
                     stringBuilder.Append($"  {property.SerializedName}:"),
                     SerializeExpression(stringBuilder, property.ValueSerialization, property.Value, 2)
-                });
+                },
+                true);
 
             yield return EmptyLine;
         }
@@ -234,6 +234,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                             expression.Property(nameof(Uri.AbsoluteUri))));
                 }
 
+                if (valueSerialization.Type.FrameworkType == typeof(string))
+                {
+                    return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression));
+                }
+
                 if (valueSerialization.Type.FrameworkType == typeof(bool))
                 {
                     return new[]
@@ -247,12 +252,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         stringBuilder.AppendLine(new FormattableStringExpression($"{indent}{{0}}", boolVariable))
                     };
                 }
+
+                return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression.Invoke(nameof(ToString))));
             }
 
-            if (valueSerialization.Type.IsValueType || valueSerialization.Type.IsFrameworkType)
+            if (valueSerialization.Type.IsValueType)
             {
-                return stringBuilder.AppendLine(
-                    new FormattableStringExpression($"{indent}'{{0}}'", expression.Invoke(nameof(ToString))));
+                return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression.Invoke(nameof(ToString))));
             }
 
             var spacesToUse = isArrayElement ? spaces + 2 : spaces;

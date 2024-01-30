@@ -97,7 +97,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OptionalString))
             {
                 builder.Append("  optionalString:");
-                builder.AppendLine($" '{OptionalString.ToString()}'");
+                builder.AppendLine($" '{OptionalString}'");
             }
 
             builder.AppendLine("}");

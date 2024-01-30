@@ -122,14 +122,23 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
+            if (Optional.IsDefined(TypeName))
+            {
+                builder.Append("  typeName:");
+                builder.AppendLine($" '{TypeName.ToString()}'");
+            }
 
-            builder.Append("  sourcePattern:");
-            builder.AppendLine($" '{SourcePattern.ToString()}'");
+            if (Optional.IsDefined(SourcePattern))
+            {
+                builder.Append("  sourcePattern:");
+                builder.AppendLine($" '{SourcePattern}'");
+            }
 
-            builder.Append("  destination:");
-            builder.AppendLine($" '{Destination.ToString()}'");
+            if (Optional.IsDefined(Destination))
+            {
+                builder.Append("  destination:");
+                builder.AppendLine($" '{Destination}'");
+            }
 
             if (Optional.IsDefined(PreserveUnmatchedPath))
             {

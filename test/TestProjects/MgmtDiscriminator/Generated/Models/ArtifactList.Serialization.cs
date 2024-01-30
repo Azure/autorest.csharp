@@ -134,7 +134,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(NextLink))
             {
                 builder.Append("  nextLink:");
-                builder.AppendLine($" '{NextLink.ToString()}'");
+                builder.AppendLine($" '{NextLink}'");
             }
 
             builder.AppendLine("}");

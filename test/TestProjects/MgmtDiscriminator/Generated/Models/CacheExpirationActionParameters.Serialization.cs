@@ -130,14 +130,23 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
+            if (Optional.IsDefined(TypeName))
+            {
+                builder.Append("  typeName:");
+                builder.AppendLine($" '{TypeName.ToString()}'");
+            }
 
-            builder.Append("  cacheBehavior:");
-            builder.AppendLine($" '{CacheBehavior.ToString()}'");
+            if (Optional.IsDefined(CacheBehavior))
+            {
+                builder.Append("  cacheBehavior:");
+                builder.AppendLine($" '{CacheBehavior.ToString()}'");
+            }
 
-            builder.Append("  cacheType:");
-            builder.AppendLine($" '{CacheType.ToString()}'");
+            if (Optional.IsDefined(CacheType))
+            {
+                builder.Append("  cacheType:");
+                builder.AppendLine($" '{CacheType.ToString()}'");
+            }
 
             if (Optional.IsDefined(CacheDuration))
             {

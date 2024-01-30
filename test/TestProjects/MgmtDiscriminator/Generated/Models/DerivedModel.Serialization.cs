@@ -112,23 +112,26 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  requiredCollection:");
-            builder.AppendLine(" [");
-            foreach (var item in RequiredCollection)
+            if (Optional.IsCollectionDefined(RequiredCollection))
             {
-                if (item == null)
+                builder.Append("  requiredCollection:");
+                builder.AppendLine(" [");
+                foreach (var item in RequiredCollection)
                 {
-                    builder.Append("null");
-                    continue;
+                    if (item == null)
+                    {
+                        builder.Append("null");
+                        continue;
+                    }
+                    builder.AppendLine($"    '{item}'");
                 }
-                builder.AppendLine($"    '{item.ToString()}'");
+                builder.AppendLine("  ]");
             }
-            builder.AppendLine("  ]");
 
             if (Optional.IsDefined(OptionalString))
             {
                 builder.Append("  optionalString:");
-                builder.AppendLine($" '{OptionalString.ToString()}'");
+                builder.AppendLine($" '{OptionalString}'");
             }
 
             builder.AppendLine("}");

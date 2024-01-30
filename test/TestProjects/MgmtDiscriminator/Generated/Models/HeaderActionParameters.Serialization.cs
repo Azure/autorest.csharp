@@ -118,19 +118,28 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
+            if (Optional.IsDefined(TypeName))
+            {
+                builder.Append("  typeName:");
+                builder.AppendLine($" '{TypeName.ToString()}'");
+            }
 
-            builder.Append("  headerAction:");
-            builder.AppendLine($" '{HeaderAction.ToString()}'");
+            if (Optional.IsDefined(HeaderAction))
+            {
+                builder.Append("  headerAction:");
+                builder.AppendLine($" '{HeaderAction.ToString()}'");
+            }
 
-            builder.Append("  headerName:");
-            builder.AppendLine($" '{HeaderName.ToString()}'");
+            if (Optional.IsDefined(HeaderName))
+            {
+                builder.Append("  headerName:");
+                builder.AppendLine($" '{HeaderName}'");
+            }
 
             if (Optional.IsDefined(Value))
             {
                 builder.Append("  value:");
-                builder.AppendLine($" '{Value.ToString()}'");
+                builder.AppendLine($" '{Value}'");
             }
 
             builder.AppendLine("}");

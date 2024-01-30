@@ -99,11 +99,17 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  paramIndicator:");
-            builder.AppendLine($" '{ParamIndicator.ToString()}'");
+            if (Optional.IsDefined(ParamIndicator))
+            {
+                builder.Append("  paramIndicator:");
+                builder.AppendLine($" '{ParamIndicator.ToString()}'");
+            }
 
-            builder.Append("  paramName:");
-            builder.AppendLine($" '{ParamName.ToString()}'");
+            if (Optional.IsDefined(ParamName))
+            {
+                builder.Append("  paramName:");
+                builder.AppendLine($" '{ParamName}'");
+            }
 
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());

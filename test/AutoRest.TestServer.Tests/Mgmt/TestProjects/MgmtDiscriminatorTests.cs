@@ -55,7 +55,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Properties = new DeliveryRuleProperties(3, condition, actions,
                     new Dictionary<string, DeliveryRuleAction>()
                         {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
-                    new Dog {Bark = "ruff"}, foo: "Foo", new Dictionary<string, BinaryData>()
+                    new Dog(), foo: "Foo", new Dictionary<string, BinaryData>()
                 {
                     {"foo", new BinaryData("bar") }
                 }),

@@ -110,16 +110,22 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  parameters:");
-            AppendChildObject(builder, Parameters, options, 2);
+            if (Optional.IsDefined(Parameters))
+            {
+                builder.Append("  parameters:");
+                AppendChildObject(builder, Parameters, options, 2);
+            }
 
-            builder.Append("  name:");
-            builder.AppendLine($" '{Name.ToString()}'");
+            if (Optional.IsDefined(Name))
+            {
+                builder.Append("  name:");
+                builder.AppendLine($" '{Name.ToString()}'");
+            }
 
             if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
-                builder.AppendLine($" '{Foo.ToString()}'");
+                builder.AppendLine($" '{Foo}'");
             }
 
             builder.AppendLine("}");

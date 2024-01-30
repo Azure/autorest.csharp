@@ -88,13 +88,16 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  kind:");
-            builder.AppendLine($" '{Kind.ToString()}'");
+            if (Optional.IsDefined(Kind))
+            {
+                builder.Append("  kind:");
+                builder.AppendLine($" '{Kind.ToString()}'");
+            }
 
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
-                builder.AppendLine($" '{Id.ToString()}'");
+                builder.AppendLine($" '{Id}'");
             }
 
             builder.AppendLine("}");

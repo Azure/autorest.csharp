@@ -189,29 +189,47 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  roleDefinitionId:");
-            builder.AppendLine($" '{RoleDefinitionId.ToString()}'");
+            if (Optional.IsDefined(RoleDefinitionId))
+            {
+                builder.Append("  roleDefinitionId:");
+                builder.AppendLine($" '{RoleDefinitionId}'");
+            }
 
-            builder.Append("  principalIds:");
-            builder.AppendLine($" '{PrincipalIds.ToString()}'");
+            if (Optional.IsDefined(PrincipalIds))
+            {
+                builder.Append("  principalIds:");
+                builder.AppendLine($" '{PrincipalIds.ToString()}'");
+            }
 
             if (Optional.IsDefined(ResourceGroup))
             {
                 builder.Append("  resourceGroup:");
-                builder.AppendLine($" '{ResourceGroup.ToString()}'");
+                builder.AppendLine($" '{ResourceGroup}'");
             }
 
-            builder.Append("  kind:");
-            builder.AppendLine($" '{Kind.ToString()}'");
+            if (Optional.IsDefined(Kind))
+            {
+                builder.Append("  kind:");
+                builder.AppendLine($" '{Kind.ToString()}'");
+            }
 
-            builder.Append("  id:");
-            builder.AppendLine($" '{Id.ToString()}'");
+            if (Optional.IsDefined(Id))
+            {
+                builder.Append("  id:");
+                builder.AppendLine($" '{Id.ToString()}'");
+            }
 
-            builder.Append("  name:");
-            builder.AppendLine($" '{Name.ToString()}'");
+            if (Optional.IsDefined(Name))
+            {
+                builder.Append("  name:");
+                builder.AppendLine($" '{Name}'");
+            }
 
-            builder.Append("  type:");
-            builder.AppendLine($" '{ResourceType.ToString()}'");
+            if (Optional.IsDefined(ResourceType))
+            {
+                builder.Append("  type:");
+                builder.AppendLine($" '{ResourceType.ToString()}'");
+            }
 
             if (Optional.IsDefined(SystemData))
             {

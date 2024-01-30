@@ -89,13 +89,16 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  name:");
-            builder.AppendLine($" '{Name.ToString()}'");
+            if (Optional.IsDefined(Name))
+            {
+                builder.Append("  name:");
+                builder.AppendLine($" '{Name.ToString()}'");
+            }
 
             if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
-                builder.AppendLine($" '{Foo.ToString()}'");
+                builder.AppendLine($" '{Foo}'");
             }
 
             builder.AppendLine("}");

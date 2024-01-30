@@ -235,7 +235,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
-                builder.AppendLine($" '{Foo.ToString()}'");
+                builder.AppendLine($" '{Foo}'");
             }
 
             builder.AppendLine("}");

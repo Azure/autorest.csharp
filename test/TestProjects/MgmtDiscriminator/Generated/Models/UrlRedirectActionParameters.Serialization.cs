@@ -158,11 +158,17 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
+            if (Optional.IsDefined(TypeName))
+            {
+                builder.Append("  typeName:");
+                builder.AppendLine($" '{TypeName.ToString()}'");
+            }
 
-            builder.Append("  redirectType:");
-            builder.AppendLine($" '{RedirectType.ToString()}'");
+            if (Optional.IsDefined(RedirectType))
+            {
+                builder.Append("  redirectType:");
+                builder.AppendLine($" '{RedirectType.ToString()}'");
+            }
 
             if (Optional.IsDefined(DestinationProtocol))
             {
@@ -173,25 +179,25 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(CustomPath))
             {
                 builder.Append("  customPath:");
-                builder.AppendLine($" '{CustomPath.ToString()}'");
+                builder.AppendLine($" '{CustomPath}'");
             }
 
             if (Optional.IsDefined(CustomHostname))
             {
                 builder.Append("  customHostname:");
-                builder.AppendLine($" '{CustomHostname.ToString()}'");
+                builder.AppendLine($" '{CustomHostname}'");
             }
 
             if (Optional.IsDefined(CustomQueryString))
             {
                 builder.Append("  customQueryString:");
-                builder.AppendLine($" '{CustomQueryString.ToString()}'");
+                builder.AppendLine($" '{CustomQueryString}'");
             }
 
             if (Optional.IsDefined(CustomFragment))
             {
                 builder.Append("  customFragment:");
-                builder.AppendLine($" '{CustomFragment.ToString()}'");
+                builder.AppendLine($" '{CustomFragment}'");
             }
 
             builder.AppendLine("}");

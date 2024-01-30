@@ -122,16 +122,22 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            builder.Append("  typeName:");
-            builder.AppendLine($" '{TypeName.ToString()}'");
+            if (Optional.IsDefined(TypeName))
+            {
+                builder.Append("  typeName:");
+                builder.AppendLine($" '{TypeName.ToString()}'");
+            }
 
-            builder.Append("  queryStringBehavior:");
-            builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
+            if (Optional.IsDefined(QueryStringBehavior))
+            {
+                builder.Append("  queryStringBehavior:");
+                builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
+            }
 
             if (Optional.IsDefined(QueryParameters))
             {
                 builder.Append("  queryParameters:");
-                builder.AppendLine($" '{QueryParameters.ToString()}'");
+                builder.AppendLine($" '{QueryParameters}'");
             }
 
             builder.AppendLine("}");
