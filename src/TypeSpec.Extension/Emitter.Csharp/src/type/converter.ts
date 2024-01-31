@@ -28,6 +28,7 @@ import {
 import {
     InputDictionaryType,
     InputEnumType,
+    InputIntrinsicType,
     InputListType,
     InputLiteralType,
     InputModelType,
@@ -39,13 +40,14 @@ import { InputModelProperty } from "./inputModelProperty.js";
 import { Visibility } from "@typespec/http";
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
 import {
-    getCSharpInputTypeKindByIntrinsicModelName,
+    getCSharpInputTypeKindByPrimitiveModelName,
     mapTypeSpecTypeToCSharpInputTypeKind
 } from "../lib/model.js";
 import { InputTypeKind } from "./inputTypeKind.js";
 import { getFullNamespaceString } from "../lib/utils.js";
 import { InputPrimitiveTypeKind } from "./inputPrimitiveTypeKind.js";
 import { LiteralTypeContext } from "./literalTypeContext.js";
+import { InputIntrinsicTypeKind } from "./inputIntrinsicTypeKind.js";
 
 export function fromSdkType(
     sdkType: SdkType,
@@ -70,6 +72,7 @@ export function fromSdkType(
     if (sdkType.__raw?.kind === "Scalar") return fromScalarType(sdkType);
 // this happens for discriminator type, normally all other primitive types should be handled in scalar above
 // TODO: can we improve the type in TCGC around discriminator
+    if (sdkType.__raw?.kind === "Intrinsic") return fromIntrinsicType(sdkType);
     if (isSdkBuiltInType(sdkType.kind))
         return fromSdkBuiltInType(sdkType as SdkBuiltInType);
     return {} as InputType;
@@ -209,12 +212,21 @@ export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
 export function fromScalarType(scalarType: SdkType): InputPrimitiveType {
     return {
         Kind: InputTypeKind.Primitive,
-        Name: getCSharpInputTypeKindByIntrinsicModelName(
+        Name: getCSharpInputTypeKindByPrimitiveModelName(
             scalarType.kind,
             scalarType.kind,
             undefined // To-DO: encode not compatible
         ),
         IsNullable: scalarType.nullable
+    };
+}
+
+function fromIntrinsicType(scalarType: SdkType): InputIntrinsicType {
+    const name = (scalarType.__raw! as IntrinsicType).name;
+    return {
+        Kind: InputTypeKind.Intrinsic,
+        Name: getCSharpInputTypeKindByIntrinsic(scalarType.__raw! as IntrinsicType),
+        IsNullable: false
     };
 }
 
@@ -423,3 +435,22 @@ function isSdkBuiltInType(kind: string): boolean {
         "etag"
     ].includes(kind);
 }
+
+function getCSharpInputTypeKindByIntrinsic(type: IntrinsicType): InputIntrinsicTypeKind {
+    switch (type.name)
+    {
+        case "ErrorType":
+            return InputIntrinsicTypeKind.Error;
+        case "void":
+            return InputIntrinsicTypeKind.Void;
+        case "never":
+            return InputIntrinsicTypeKind.Never;
+        case "unknown":
+            return InputIntrinsicTypeKind.Unknown;
+        case "null":
+            return InputIntrinsicTypeKind.Null;
+        default:
+            throw new Error(`Unsupported intrinsic type name '${type.name}'`);
+    }
+}
+

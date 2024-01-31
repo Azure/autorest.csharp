@@ -95,7 +95,7 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
     const kind = typespecType.kind;
     switch (kind) {
         case "Model":
-            return getCSharpInputTypeKindByIntrinsicModelName(
+            return getCSharpInputTypeKindByPrimitiveModelName(
                 typespecType.name,
                 format,
                 encode
@@ -117,11 +117,11 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
             if (format === "uri") return InputPrimitiveTypeKind.Uri;
             return InputPrimitiveTypeKind.String;
         default:
-            return InputPrimitiveTypeKind.UnKnownKind;
+            throw new Error(`Unsupported primitive kind ${kind}`);
     }
 }
 
-export function getCSharpInputTypeKindByIntrinsicModelName(
+export function getCSharpInputTypeKindByPrimitiveModelName(
     name: string,
     format?: string,
     encode?: EncodeData
@@ -331,7 +331,7 @@ export function getInputType(
                 const sdkType = getClientType(context, type);
                 return {
                     Kind: InputTypeKind.Primitive,
-                    Name: getCSharpInputTypeKindByIntrinsicModelName(
+                    Name: getCSharpInputTypeKindByPrimitiveModelName(
                         sdkType.kind,
                         formattedType.format,
                         formattedType.encode
