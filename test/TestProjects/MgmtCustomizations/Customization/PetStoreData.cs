@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace MgmtCustomizations
 {
-    [CodeGenMemberSerializationHooks(nameof(Id), SerializationValueHook = nameof(WriteId), DeserializationValueHook = nameof(ReadId))]
+    [CodeGenSerialization(nameof(Id), SerializationValueHook = nameof(WriteId), DeserializationValueHook = nameof(ReadId))]
     public partial class PetStoreData
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

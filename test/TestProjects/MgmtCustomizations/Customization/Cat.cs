@@ -3,9 +3,6 @@
 
 #nullable disable
 
-using System.ComponentModel;
-using Azure.Core;
-
 namespace MgmtCustomizations.Models
 {
     public partial class Cat : Pet

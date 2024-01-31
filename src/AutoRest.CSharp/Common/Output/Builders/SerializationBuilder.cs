@@ -259,9 +259,9 @@ namespace AutoRest.CSharp.Output.Builders
                 );
         }
 
-        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(SerializationPropertyBag propertyBag, SchemaObjectType objectType, ModelTypeMapping? sourceTypeMapping)
+        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(SerializationPropertyBag propertyBag, SchemaObjectType objectType)
         {
-            foreach (ObjectTypeProperty property in propertyBag.Properties)
+            foreach (var (property, serializationMapping) in propertyBag.Properties)
             {
                 var schemaProperty = property.SchemaProperty!; // we ensured this is never null when constructing the list
                 var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Output.Builders
                     throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
                 }
 
-                var serializedName = schemaProperty.SerializedName;
+                var serializedName = serializationMapping?.SerializationPath?[^1] ?? schemaProperty.SerializedName;
                 var isRequired = schemaProperty.IsRequired;
                 var shouldExcludeInWireSerialization = schemaProperty.IsReadOnly;
                 var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
@@ -283,7 +283,6 @@ namespace AutoRest.CSharp.Output.Builders
                         ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
                         : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
                 }
-                var serializationMapping = property.SerializationMapping ?? sourceTypeMapping?.GetForMemberSerialization(property.Declaration.Name);
                 yield return new JsonPropertySerialization(
                     parameter.Name,
                     memberValueExpression,
@@ -299,12 +298,12 @@ namespace AutoRest.CSharp.Output.Builders
 
             foreach ((string name, SerializationPropertyBag innerBag) in propertyBag.Bag)
             {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType, sourceTypeMapping).ToArray();
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
                 yield return new JsonPropertySerialization(name, serializationProperties);
             }
         }
 
-        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType, ModelTypeMapping? sourceTypeMapping)
+        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
             var propertyBag = new SerializationPropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
@@ -313,29 +312,29 @@ namespace AutoRest.CSharp.Output.Builders
                 {
                     if (objectTypeProperty.SchemaProperty != null)
                     {
-                        propertyBag.Properties.Add(objectTypeProperty);
+                        propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
                     }
                 }
             }
 
             PopulatePropertyBag(propertyBag, 0);
-            var properties = GetPropertySerializationsFromBag(propertyBag, objectType, sourceTypeMapping).ToArray();
+            var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
             return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
         private class SerializationPropertyBag
         {
-            public Dictionary<string, SerializationPropertyBag> Bag { get; } = new Dictionary<string, SerializationPropertyBag>();
-            public List<ObjectTypeProperty> Properties { get; } = new List<ObjectTypeProperty>();
+            public Dictionary<string, SerializationPropertyBag> Bag { get; } = new();
+            public Dictionary<ObjectTypeProperty, SourcePropertySerializationMapping?> Properties { get; } = new();
         }
 
         private static void PopulatePropertyBag(SerializationPropertyBag propertyBag, int depthIndex)
         {
-            foreach (ObjectTypeProperty property in propertyBag.Properties.ToArray())
+            foreach (var (property, serializationMapping) in propertyBag.Properties.ToArray())
             {
                 var schemaProperty = property.SchemaProperty!; // we ensure this is not null when we build the array
-                ICollection<string> flattenedNames = property.SerializationMapping?.SerializationPath as ICollection<string> ?? schemaProperty.FlattenedNames;
+                ICollection<string> flattenedNames = serializationMapping?.SerializationPath as ICollection<string> ?? schemaProperty.FlattenedNames;
                 if (depthIndex >= (flattenedNames?.Count ?? 0) - 1)
                 {
                     continue;
@@ -348,7 +347,7 @@ namespace AutoRest.CSharp.Output.Builders
                     propertyBag.Bag.Add(name, namedBag);
                 }
 
-                namedBag.Properties.Add(property);
+                namedBag.Properties.Add(property, serializationMapping);
                 propertyBag.Properties.Remove(property);
             }
 

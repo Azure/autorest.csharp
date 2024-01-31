@@ -34,7 +34,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private readonly IReadOnlyList<InputModelType> _derivedModels;
         private readonly SerializableObjectType? _defaultDerivedType;
-        private readonly ModelTypeMapping? _sourceTypeMapping;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -101,8 +100,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _derivedModels = inputModel.DerivedModels;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
-            _sourceTypeMapping = _sourceInputModel?.CreateForModel(ExistingType);
-
             IsPropertyBag = inputModel.IsPropertyBag;
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             SkipInitializerConstructor = IsUnknownDerivedType;
@@ -151,7 +148,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceTypeMapping, IsStruct);
+            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, ModelTypeMapping, IsStruct);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -217,7 +214,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
 
                     var declaredName = property.Declaration.Name;
-                    var serializedName = inputModelProperty.SerializedName;
+                    var serializationMapping = GetForMemberSerialization(declaredName);
+                    var serializedName = serializationMapping?.SerializationPath?[^1] ?? inputModelProperty.SerializedName;
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
 
                     var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
@@ -229,7 +227,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                             : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
                     }
 
-                    var serializationMapping = property.SerializationMapping ?? _sourceTypeMapping?.GetForMemberSerialization(declaredName);
                     yield return new JsonPropertySerialization(
                         declaredName.ToVariableName(),
                         memberValueExpression,

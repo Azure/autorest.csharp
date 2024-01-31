@@ -1,9 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using Azure.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
@@ -12,7 +10,6 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly Dictionary<string, ISymbol> _propertyMappings;
         private readonly Dictionary<string, ISymbol> _codeGenMemberMappings;
-        private readonly Dictionary<ISymbol, SourcePropertySerializationMapping> _propertySerializationMappings;
         private readonly Dictionary<string, SourcePropertySerializationMapping> _typeSerializationMappings;
 
         public string[]? Usage { get; }
@@ -22,20 +19,16 @@ namespace AutoRest.CSharp.Input.Source
         {
             _propertyMappings = new();
             _codeGenMemberMappings = new();
-            _propertySerializationMappings = new(SymbolEqualityComparer.Default);
             _typeSerializationMappings = new();
 
             foreach (ISymbol member in GetMembers(existingType))
             {
                 // If member is defined in both base and derived class, use derived one
-                if (member.Kind is SymbolKind.Property or SymbolKind.Field && !_propertyMappings.ContainsKey(member.Name))
+                if (ShouldIncludeMember(member) && !_propertyMappings.ContainsKey(member.Name))
                 {
                     _propertyMappings[member.Name] = member;
                 }
 
-                string[]? serializationPath = null;
-                string? serializationHook = null;
-                string? deserializationHook = null;
                 foreach (var attributeData in member.GetAttributes())
                 {
                     // handle CodeGenMember attribute
@@ -43,17 +36,6 @@ namespace AutoRest.CSharp.Input.Source
                     {
                         _codeGenMemberMappings[schemaMemberName] = member;
                     }
-                    // handle CodeGenMemberSerialization attribute
-                    if (codeGenAttributes.TryGetCodeGenMemberSerializationAttributeValue(attributeData, out var propertyNames))
-                    {
-                        serializationPath = propertyNames;
-                    }
-                    // handle CodeGenMemberSerializationHooks attribute (here this attribute is added to a property therefore propertyName will be ignored
-                    codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out _, out serializationHook, out deserializationHook);
-                }
-                if (serializationPath != null || serializationHook != null || deserializationHook != null)
-                {
-                    _propertySerializationMappings.Add(member, new(member, serializationPath, serializationHook, deserializationHook));
                 }
             }
 
@@ -67,13 +49,17 @@ namespace AutoRest.CSharp.Input.Source
                 }
 
                 // handle CodeGenMemberSerializationHooks attribute
-                if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var propertyName, out var serializationHook, out var deserializationHook))
+                if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
                 {
-                    if (propertyName == null)
-                        throw new InvalidOperationException($"{nameof(CodeGenMemberSerializationHooksAttribute)} defines on type {existingType.MetadataName}, PropertyName is required");
-                    _typeSerializationMappings.Add(propertyName, new(propertyName, null, serializationHook, deserializationHook));
+                    _typeSerializationMappings.Add(propertyName, new(propertyName, serializationNames, serializationHook, deserializationHook));
                 }
             }
+        }
+
+        private static bool ShouldIncludeMember(ISymbol member)
+        {
+            // here we exclude those "CompilerGenerated" members, such as the backing field of a property which is also a field.
+            return !member.IsImplicitlyDeclared && member is IPropertySymbol or IFieldSymbol;
         }
 
         public ISymbol? GetMemberByOriginalName(string name)
@@ -81,23 +67,17 @@ namespace AutoRest.CSharp.Input.Source
                 renamedSymbol :
                 _propertyMappings.TryGetValue(name, out var memberSymbol) ? memberSymbol : null;
 
-        public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)
-        {
-            if (symbol == null)
-                return null;
-
-            if (_propertySerializationMappings.TryGetValue(symbol, out var serialization))
-                return serialization;
-
-            return null;
-        }
-
         public SourcePropertySerializationMapping? GetForMemberSerialization(string name)
             => _typeSerializationMappings.TryGetValue(name, out var serialization) ? serialization : null;
 
-        public IEnumerable<SourcePropertySerializationMapping> GetSerializationMembers()
+        public IEnumerable<ISymbol> GetPropertiesWithSerialization()
         {
-            return _propertySerializationMappings.Values;
+            // only the property with CodeGenSerialization attribute will be emitted into the serialization code.
+            foreach (var (propertyName, symbol) in _propertyMappings)
+            {
+                if (_typeSerializationMappings.ContainsKey(propertyName))
+                    yield return symbol;
+            }
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
