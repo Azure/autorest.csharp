@@ -7,12 +7,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Azure.Core;
 
 namespace Payload.JsonMergePatch.Models
 {
     /// <summary> It is the model used by Resource model. </summary>
-    public partial class InnerModel
+    public partial class InnerModel: INotifyPropertyChanged
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -60,10 +62,11 @@ namespace Payload.JsonMergePatch.Models
         /// <param name="name"></param>
         /// <param name="description"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal InnerModel(string name, string description, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal InnerModel(string name, string description, int? intValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             _description = description;
+            _intValue = intValue;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -85,21 +88,33 @@ namespace Payload.JsonMergePatch.Models
             {
                 _descriptionChanged = true;
                 _description = value;
+                NotifyPropertyChanged();
             }
         }
 
-        private int _intValue;
+        private int? _intValue;
         private bool _intValueChanged = false;
-        public int IntValue
+
+        public int? IntValue
         {
             get => _intValue;
             set
             {
                 _intValueChanged = true;
                 _intValue = value;
+                NotifyPropertyChanged();
             }
         }
 
-        internal bool _hasChanged => _descriptionChanged;
+        internal bool hasChanged => _descriptionChanged || _intValueChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

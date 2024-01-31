@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Azure.Core;
 
 namespace Payload.JsonMergePatch.Models
@@ -100,9 +101,16 @@ namespace Payload.JsonMergePatch.Models
             {
                 _innerModelChanged = true;
                 _innerModel = value;
+                value.PropertyChanged += HandlePropertyChangeEvent;
             }
         }
 
-        internal bool _hasChanges => _descriptionChanged || _innerModelChanged || (_innerModel != null && _innerModel._hasChanged);
+        internal bool _hasChanges => _descriptionChanged || _innerModelChanged || (_innerModel != null && _innerModel.hasChanged);
+
+
+        private void HandlePropertyChangeEvent(object sender, PropertyChangedEventArgs args)
+        {
+            _innerModelChanged = true;
+        }
     }
 }

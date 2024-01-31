@@ -27,14 +27,24 @@ namespace Azure.Core
             return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingList && changeTrackingList.IsUndefined);
         }
 
+        public static bool IsCollectionChanged<TKey, TValue>(IDictionary<TKey, TValue> collection)
+        {
+            return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingList && !changeTrackingList.IsChanged);
+        }
+
+        public static bool IsCollectionChanged<TKey, TValue>(IDictionary<TKey, TValue> collection, Func<TValue, bool> isChanged)
+        {
+            return IsCollectionChanged(collection) || collection.Values.Any(v => isChanged(v));
+        }
+
         public static bool IsCollectionChanged<T>(IEnumerable<T> collection)
         {
-            return collection is ChangeTrackingList<T> changeTrackingList && changeTrackingList.IsChanged;
+            return !(collection is ChangeTrackingList<T> changeTrackingList && !changeTrackingList.IsChanged);
         }
 
         public static bool IsCollectionChanged<T>(IEnumerable<T> collection, Func<T, bool> isChanged)
         {
-            return (collection is ChangeTrackingList<T> changeTrackingList && changeTrackingList.IsChanged) || collection.Any(item => isChanged(item));
+            return IsCollectionChanged(collection) || collection.Any(item => isChanged(item));
         }
 
         public static bool IsDefined<T>(T? value) where T: struct

@@ -49,6 +49,11 @@ namespace Payload.JsonMergePatch.Models
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
+            if (Optional.IsDefined(IntValue))
+            {
+                writer.WritePropertyName("intValue"u8);
+                writer.WriteNumberValue(IntValue.Value);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -84,6 +89,18 @@ namespace Payload.JsonMergePatch.Models
                     writer.WriteNullValue();
                 }
             }
+            if (_intValueChanged)
+            {
+                writer.WritePropertyName("intValue"u8);
+                if (_intValue != null)
+                {
+                    writer.WriteNumberValue(_intValue.Value);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
+            }
             writer.WriteEndObject();
         }
 
@@ -109,6 +126,7 @@ namespace Payload.JsonMergePatch.Models
             }
             string name = default;
             Optional<string> description = default;
+            Optional<int> intValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -123,13 +141,22 @@ namespace Payload.JsonMergePatch.Models
                     description = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("intValue"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    intValue = property.Value.GetInt32();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new InnerModel(name, description.Value, serializedAdditionalRawData);
+            return new InnerModel(name, description.Value, Optional.ToNullable(intValue), serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)

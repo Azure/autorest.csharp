@@ -88,7 +88,7 @@ namespace Payload.JsonMergePatch.Models
                     writer.WriteNullValue();
                 }
             }
-            if (_innerModelChanged || (_innerModel != null && _innerModel._hasChanged))
+            if (_innerModelChanged || (_innerModel != null && _innerModel.hasChanged))
             {
                 writer.WritePropertyName("innerModel"u8);
                 if (_innerModel != null)

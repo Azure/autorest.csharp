@@ -9,11 +9,17 @@ using System.Collections.Generic;
 
 namespace Azure.Core
 {
+    internal enum ChangeType
+    {
+        Add,
+        Change,
+        Remove
+    }
+
     internal class ChangeTrackingDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue> where TKey: notnull
     {
         private IDictionary<TKey, TValue>? _innerDictionary;
-        private bool _hasChanged = false;
-
+        private IDictionary<TKey, ChangeType>? _changeDictionary;
 
         public ChangeTrackingDictionary()
         {
@@ -46,7 +52,13 @@ namespace Azure.Core
         }
 
         public bool IsUndefined => _innerDictionary == null;
-        public bool IsChanged => _hasChanged;
+        public bool IsChanged => _changeDictionary != null && _changeDictionary.Count > 0;
+        public IDictionary<TKey, ChangeType>? ChangeDictionary => _changeDictionary;
+
+        public bool ShouldSetNull(TKey key)
+        {
+            return _changeDictionary != null && _changeDictionary.ContainsKey(key) && _changeDictionary[key] == ChangeType.Remove;
+        }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
@@ -68,13 +80,16 @@ namespace Azure.Core
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            _hasChanged = true;
             EnsureDictionary().Add(item);
+            SetChangeType(item.Key, ChangeType.Add);
         }
 
         public void Clear()
         {
-            _hasChanged = true;
+            foreach (KeyValuePair<TKey, TValue> pair in EnsureDictionary())
+            {
+                SetChangeType(pair.Key, ChangeType.Remove);
+            }
             EnsureDictionary().Clear();
         }
 
@@ -105,8 +120,15 @@ namespace Azure.Core
                 return false;
             }
 
-            _hasChanged = true;
-            return EnsureDictionary().Remove(item);
+            if (EnsureDictionary().Remove(item))
+            {
+                SetChangeType(item.Key, ChangeType.Remove);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public int Count
@@ -136,8 +158,8 @@ namespace Azure.Core
 
         public void Add(TKey key, TValue value)
         {
-            _hasChanged = true;
             EnsureDictionary().Add(key, value);
+            SetChangeType(key, ChangeType.Add);
         }
 
         public bool ContainsKey(TKey key)
@@ -157,8 +179,15 @@ namespace Azure.Core
                 return false;
             }
 
-            _hasChanged = true;
-            return EnsureDictionary().Remove(key);
+            if (EnsureDictionary().Remove(key))
+            {
+                SetChangeType(key, ChangeType.Remove);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool TryGetValue(TKey key, out TValue value)
@@ -184,8 +213,8 @@ namespace Azure.Core
             }
             set
             {
-                _hasChanged = true;
                 EnsureDictionary()[key] = value;
+                SetChangeType(key, ChangeType.Change);
             }
         }
 
@@ -222,6 +251,39 @@ namespace Azure.Core
         private IDictionary<TKey, TValue> EnsureDictionary()
         {
             return _innerDictionary ??= new Dictionary<TKey, TValue>();
+        }
+
+        private IDictionary<TKey, ChangeType> EnsureChangeDictionary()
+        {
+            return _changeDictionary ??= new Dictionary<TKey, ChangeType>();
+        }
+
+        private void SetChangeType(TKey key, ChangeType changeType)
+        {
+            var changeDictionary = EnsureChangeDictionary();
+            if (changeDictionary.TryGetValue(key, out var lastChange))
+            {
+                if ((lastChange == ChangeType.Change && changeType == ChangeType.Change) || (lastChange == ChangeType.Remove && changeType == ChangeType.Add))
+                {
+                    changeDictionary[key] = ChangeType.Change;
+                }
+                else if (lastChange == ChangeType.Add && changeType == ChangeType.Change)
+                {
+                    changeDictionary[key] = ChangeType.Add;
+                }
+                else if (lastChange == ChangeType.Change && changeType == ChangeType.Remove)
+                {
+                    changeDictionary[key] = ChangeType.Remove;
+                }
+                else if (lastChange == ChangeType.Add && changeType == ChangeType.Remove)
+                {
+                    changeDictionary.Remove(key);
+                }
+            }
+            else
+            {
+                changeDictionary[key] = changeType;
+            }
         }
     }
 }

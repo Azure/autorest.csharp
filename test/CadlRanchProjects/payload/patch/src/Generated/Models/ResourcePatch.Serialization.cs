@@ -114,30 +114,82 @@ namespace Payload.JsonMergePatch.Models
                 writer.WriteNullValue();
             }
 
-            if (Optional.IsCollectionDefined(_map))
+            if (Optional.IsCollectionChanged(Map, item => item.hasChanged))
             {
                 writer.WritePropertyName("map"u8);
-                writer.WriteStartObject();
-                foreach (var item in _map)
+                if (Map != null)
                 {
-                    writer.WritePropertyName(item.Key);
-                    item.Value.WriteJson(writer);
+                    writer.WriteStartObject();
+                    if (Map is ChangeTrackingDictionary<string, InnerModel> changeTrackingMap)
+                    {
+                        foreach (var item in changeTrackingMap.ChangeDictionary)
+                        {
+                            writer.WritePropertyName(item.Key);
+                            if (changeTrackingMap.ShouldSetNull(item.Key))
+                            {
+                                writer.WriteNullValue();
+                            }
+                            else
+                            {
+                                Map[item.Key].WritePatch(writer);
+                            }
+                        }
+                        foreach (var item in changeTrackingMap)
+                        {
+                            if (item.Value.hasChanged)
+                            {
+                                item.Value.WritePatch(writer);
+                            }
+                        }
+                    }
+                    writer.WriteEndObject();
                 }
-                writer.WriteEndObject();
-            }
-            else if (_mapChanged && _map == null)
-            {
-                writer.WritePropertyName("map"u8);
-                writer.WriteNullValue();
             }
 
-            if (Optional.IsCollectionChanged(_array, item => item._hasChanged) || _arrayChanged)
+            if (Optional.IsCollectionChanged(IntMap))
+            {
+                writer.WritePropertyName("map"u8);
+                if (IntMap != null)
+                {
+                    writer.WriteStartObject();
+                    if (IntMap is ChangeTrackingDictionary<string, int> changeTackingIntMap)
+                    {
+                        foreach (var item in changeTackingIntMap.ChangeDictionary)
+                        {
+                            writer.WritePropertyName(item.Key);
+                            if (changeTackingIntMap.ShouldSetNull(item.Key))
+                            {
+                                writer.WriteNullValue();
+                            }
+                            else
+                            {
+                                writer.WriteNumberValue(IntMap[item.Key]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in IntMap)
+                        {
+                            writer.WritePropertyName(item.Key);
+                            writer.WriteNumberValue(item.Value);
+                        }
+                    }
+                    writer.WriteEndObject();
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
+            }
+
+            if (Optional.IsCollectionChanged(Array, item => item.hasChanged))
             {
                 writer.WritePropertyName("array"u8);
-                if (_array != null)
+                if (Array != null)
                 {
                     writer.WriteStartArray();
-                    foreach (var item in _array)
+                    foreach (var item in Array)
                     {
                         item.WriteJson(writer);
                     }
@@ -160,13 +212,13 @@ namespace Payload.JsonMergePatch.Models
                 writer.WriteNullValue();
             }
 
-            if (Optional.IsCollectionChanged(_intArray) || _intArrayChanged)
+            if (Optional.IsCollectionChanged(IntArray))
             {
                 writer.WritePropertyName("intArray"u8);
-                if (_intArray != null)
+                if (IntArray != null)
                 {
                     writer.WriteStartArray();
-                    foreach (var item in _intArray)
+                    foreach (var item in IntArray)
                     {
                         writer.WriteNumberValue(item);
                     }
@@ -176,6 +228,11 @@ namespace Payload.JsonMergePatch.Models
                 {
                     writer.WriteNullValue();
                 }
+            }
+
+            if (Optional.IsCollectionChanged(ArrayOfArray, item => Optional.IsCollectionChanged(item)))
+            {
+
             }
         }
 
@@ -201,9 +258,11 @@ namespace Payload.JsonMergePatch.Models
             }
             Optional<string> description = default;
             Optional<IDictionary<string, InnerModel>> map = default;
+            Optional<IDictionary<string, int>> intMap = default;
             Optional<IList<InnerModel>> array = default;
             Optional<NestedModel> nestedModel = default;
             Optional<IList<int>> intArray = default;
+            Optional<IList<IList<int>>> arrayOfArray = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -225,6 +284,20 @@ namespace Payload.JsonMergePatch.Models
                         dictionary.Add(property0.Name, InnerModel.DeserializeInnerModel(property0.Value));
                     }
                     map = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("intMap"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetInt32());
+                    }
+                    intMap = dictionary;
                     continue;
                 }
                 if (property.NameEquals("array"u8))
@@ -264,13 +337,39 @@ namespace Payload.JsonMergePatch.Models
                     intArray = array0;
                     continue;
                 }
+                if (property.NameEquals("arrayOfArray"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<IList<int>> array0 = new List<IList<int>>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array0.Add(null);
+                        }
+                        else
+                        {
+                            List<int> array1 = new List<int>();
+                            foreach (var item0 in item.EnumerateArray())
+                            {
+                                array1.Add(item0.GetInt32());
+                            }
+                            array0.Add(array1);
+                        }
+                    }
+                    arrayOfArray = array0;
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourcePatch(description.Value, Optional.ToDictionary(map), Optional.ToList(array), nestedModel.Value, Optional.ToList(intArray), serializedAdditionalRawData);
+            return new ResourcePatch(description.Value, map, intMap, array, arrayOfArray, nestedModel.Value, intArray, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ResourcePatch>.Write(ModelReaderWriterOptions options)

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using Azure.Core;
@@ -50,10 +51,11 @@ namespace Payload.JsonMergePatch.Models
         /// <summary> Initializes a new instance of <see cref="ResourcePatch"/>. </summary>
         public ResourcePatch()
         {
-            _map = new ChangeTrackingDictionary<string, InnerModel>();
-            _intMap = new ChangeTrackingDictionary<string, int?>();
-            _array = new ChangeTrackingList<InnerModel>();
-            _intArray = new ChangeTrackingList<int>();
+            Map = new ChangeTrackingDictionary<string, InnerModel>();
+            IntMap = new ChangeTrackingDictionary<string, int>();
+            Array = new ChangeTrackingList<InnerModel>();
+            IntArray = new ChangeTrackingList<int>();
+            ArrayOfArray = new ChangeTrackingList<IList<int>>();
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourcePatch"/>. </summary>
@@ -63,14 +65,15 @@ namespace Payload.JsonMergePatch.Models
         /// <param name="nestedModel"></param>
         /// <param name="intArray"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourcePatch(string description, IDictionary<string, InnerModel> map, IDictionary<string, int?> intMap, IList<InnerModel> array, NestedModel nestedModel, IList<int> intArray, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ResourcePatch(string description, Optional<IDictionary<string, InnerModel>> map, Optional<IDictionary<string, int>> intMap, Optional<IList<InnerModel>> array, Optional<IList<IList<int>>> arrayOfArray, NestedModel nestedModel, Optional<IList<int>> intArray, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             _description = description;
-            _map = map;
-            _intMap = intMap;
-            _array = new ChangeTrackingList<InnerModel>(new Optional<IList<InnerModel>>(array));
+            Map = new ChangeTrackingDictionary<string, InnerModel>(map);
+            IntMap = new ChangeTrackingDictionary<string, int>(intMap);
+            Array = new ChangeTrackingList<InnerModel>(array);
             _nestedModel = nestedModel;
-            _intArray = new ChangeTrackingList<int>(new Optional<IList<int>>(intArray));
+            IntArray = new ChangeTrackingList<int>(intArray);
+            ArrayOfArray = new ChangeTrackingList<IList<int>>(arrayOfArray);
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -87,43 +90,12 @@ namespace Payload.JsonMergePatch.Models
             }
         }
 
-        private IDictionary<string, InnerModel> _map;
-        private bool _mapChanged = false;
         /// <summary> Gets the map. </summary>
-        public IDictionary<string, InnerModel> Map
-        {
-            get => _map;
-            set
-            {
-                _mapChanged = true;
-                _map = value;
-            }
-        }
+        public IDictionary<string, InnerModel> Map { get; set; }
+        public IDictionary<string, int> IntMap { get; set; }
 
-        private IDictionary<string, int?> _intMap;
-        private bool _intMapChanged = false;
-        public IDictionary<string, int?> IntMap
-        {
-            get => _intMap;
-            set
-            {
-                _intMapChanged = true;
-                _intMap = value;
-            }
-        }
-
-        private IList<InnerModel> _array;
-        private bool _arrayChanged = false;
         /// <summary> Gets the array. </summary>
-        public IList<InnerModel> Array
-        {
-            get => _array;
-            set
-            {
-                _arrayChanged = true;
-                _array = value;
-            }
-        }
+        public IList<InnerModel> Array { get; set; }
 
         private NestedModel _nestedModel;
         private bool _nestedModelChanged = false;
@@ -138,17 +110,7 @@ namespace Payload.JsonMergePatch.Models
             }
         }
 
-        private IList<int> _intArray;
-        private bool _intArrayChanged = false;
-        /// <summary> Gets the int array. </summary>
-        public IList<int> IntArray
-        {
-            get => _intArray;
-            set
-            {
-                _intArray = value;
-                _intArrayChanged = true;
-            }
-        }
+        public IList<int> IntArray { get; set; }
+        public IList<IList<int>> ArrayOfArray { get; set; }
     }
 }
