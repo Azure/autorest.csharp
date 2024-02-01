@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             // alternate - is one of ancestors resource data or contained on a resource data
             var usage = GetUsage();
 
-            return Configuration.AzureArm && usage.HasFlag(InputModelTypeUsage.Output) ? _serializationBuilder.BuildBicepObjectSerialization(this) : null;
+            return Configuration.AzureArm && Configuration.UseModelReaderWriter && usage.HasFlag(InputModelTypeUsage.Output) ? _serializationBuilder.BuildBicepObjectSerialization(this) : null;
         }
 
         protected abstract bool EnsureIncludeSerializer();
