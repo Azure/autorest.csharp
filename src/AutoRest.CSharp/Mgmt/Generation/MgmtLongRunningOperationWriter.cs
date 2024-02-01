@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken)} rehydrationToken)"))
+                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null)"))
                     {
                         _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, rehydrationToken);");
                     }
@@ -78,11 +78,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
                     }
                     _writer.Line();
-
-                    _writer.WriteXmlDocumentationInheritDoc();
-                    _writer
-                        .LineRaw("public override string Id => _operation.GetOperationId();")
-                        .Line();
 
                     if (_isGeneric)
                     {

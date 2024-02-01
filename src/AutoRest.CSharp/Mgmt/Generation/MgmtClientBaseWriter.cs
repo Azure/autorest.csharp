@@ -640,7 +640,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{typeof(RequestMethod)}.{new CultureInfo("en-US", false).TextInfo.ToTitleCase(operation.Method.Request.HttpMethod.ToString().ToLower())}, ");
                 _writer.Append($"uri.ToUri(), ");
                 _writer.Append($"uri.ToString(), ");
-                _writer.Append($"{typeof(NextLinkOperationImplementation)}.HeaderSource.None, ");
+                _writer.Append($"{typeof(NextLinkOperationImplementation)}.HeaderSource.None.ToString(), ");
                 _writer.Append($"false, null, ");
                 _writer.Line($"{typeof(OperationFinalStateVia)}.OriginalUri);");
             }
