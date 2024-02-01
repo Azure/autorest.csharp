@@ -47,7 +47,7 @@ namespace FirstTestTypeSpec.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ThereLevelElement"/>. </summary>
-        internal ThereLevelElement()
+        public ThereLevelElement()
         {
             Extension = new ChangeTrackingList<ThereLevelExtension>();
         }
@@ -55,13 +55,13 @@ namespace FirstTestTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="ThereLevelElement"/>. </summary>
         /// <param name="extension"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ThereLevelElement(IReadOnlyList<ThereLevelExtension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ThereLevelElement(IList<ThereLevelExtension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Extension = extension;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the extension. </summary>
-        public IReadOnlyList<ThereLevelExtension> Extension { get; }
+        public IList<ThereLevelExtension> Extension { get; }
     }
 }

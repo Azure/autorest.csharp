@@ -35,12 +35,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
             {
-                if (item == null)
-                {
-                    writer.WriteNullValue();
-                    continue;
-                }
-                writer.WriteStringValue(item.Value.ToSerialString());
+                writer.WriteStringValue(item.ToSerialString());
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredDictionary"u8);
@@ -48,12 +43,7 @@ namespace FirstTestTypeSpec.Models
             foreach (var item in RequiredDictionary)
             {
                 writer.WritePropertyName(item.Key);
-                if (item.Value == null)
-                {
-                    writer.WriteNullValue();
-                    continue;
-                }
-                writer.WriteStringValue(item.Value.Value.ToString());
+                writer.WriteStringValue(item.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
@@ -120,15 +110,8 @@ namespace FirstTestTypeSpec.Models
             }
             if (Optional.IsDefined(StringFixedEnum))
             {
-                if (StringFixedEnum != null)
-                {
-                    writer.WritePropertyName("stringFixedEnum"u8);
-                    writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
-                }
-                else
-                {
-                    writer.WriteNull("stringFixedEnum");
-                }
+                writer.WritePropertyName("stringFixedEnum"u8);
+                writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
             }
             writer.WritePropertyName("requiredUnknown"u8);
 #if NET6_0_OR_GREATER
@@ -282,8 +265,8 @@ namespace FirstTestTypeSpec.Models
             }
             string requiredString = default;
             int requiredInt = default;
-            IList<StringFixedEnum?> requiredCollection = default;
-            IDictionary<string, StringExtensibleEnum?> requiredDictionary = default;
+            IList<StringFixedEnum> requiredCollection = default;
+            IDictionary<string, StringExtensibleEnum> requiredDictionary = default;
             Thing requiredModel = default;
             Optional<IntExtensibleEnum> intExtensibleEnum = default;
             Optional<IList<IntExtensibleEnum>> intExtensibleEnumCollection = default;
@@ -293,7 +276,7 @@ namespace FirstTestTypeSpec.Models
             Optional<IList<FloatFixedEnum>> floatFixedEnumCollection = default;
             Optional<IntFixedEnum> intFixedEnum = default;
             Optional<IList<IntFixedEnum>> intFixedEnumCollection = default;
-            Optional<StringFixedEnum?> stringFixedEnum = default;
+            Optional<StringFixedEnum> stringFixedEnum = default;
             BinaryData requiredUnknown = default;
             Optional<BinaryData> optionalUnknown = default;
             IDictionary<string, BinaryData> requiredRecordUnknown = default;
@@ -317,34 +300,20 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredCollection"u8))
                 {
-                    List<StringFixedEnum?> array = new List<StringFixedEnum?>();
+                    List<StringFixedEnum> array = new List<StringFixedEnum>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString().ToStringFixedEnum());
-                        }
+                        array.Add(item.GetString().ToStringFixedEnum());
                     }
                     requiredCollection = array;
                     continue;
                 }
                 if (property.NameEquals("requiredDictionary"u8))
                 {
-                    Dictionary<string, StringExtensibleEnum?> dictionary = new Dictionary<string, StringExtensibleEnum?>();
+                    Dictionary<string, StringExtensibleEnum> dictionary = new Dictionary<string, StringExtensibleEnum>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, new StringExtensibleEnum(property0.Value.GetString()));
-                        }
+                        dictionary.Add(property0.Name, new StringExtensibleEnum(property0.Value.GetString()));
                     }
                     requiredDictionary = dictionary;
                     continue;
@@ -450,7 +419,6 @@ namespace FirstTestTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        stringFixedEnum = null;
                         continue;
                     }
                     stringFixedEnum = property.Value.GetString().ToStringFixedEnum();

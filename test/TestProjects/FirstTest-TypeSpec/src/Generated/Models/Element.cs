@@ -47,7 +47,7 @@ namespace FirstTestTypeSpec.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Element"/>. </summary>
-        internal Element()
+        public Element()
         {
             Extension = new ChangeTrackingList<Extension>();
         }
@@ -55,13 +55,13 @@ namespace FirstTestTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="Element"/>. </summary>
         /// <param name="extension"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Element(IReadOnlyList<Extension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Element(IList<Extension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Extension = extension;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the extension. </summary>
-        public IReadOnlyList<Extension> Extension { get; }
+        public IList<Extension> Extension { get; }
     }
 }

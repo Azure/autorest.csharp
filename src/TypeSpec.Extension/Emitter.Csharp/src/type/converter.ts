@@ -103,12 +103,11 @@ export function fromSdkModelType(
             )?.propertyName, // TO-DO: SdkModelType lacks of DiscriminatorPropertyName
             DiscriminatorValue: modelType.discriminatorValue,
             Usage: fromUsageFlags(modelType.usage),
-            BaseModel: modelType.baseModel
-                ? fromSdkModelType(modelType.baseModel, program, models, enums)
-                : undefined,
         } as InputModelType;
 
         models.set(modelTypeName, inputModelType);
+
+        inputModelType.BaseModel = modelType.baseModel ? fromSdkModelType(modelType.baseModel, program, models, enums) : undefined;
 
         // TODO: can we fix the resolving reference issue in csharp?
         // https://github.com/Azure/autorest.csharp/issues/4136

@@ -576,8 +576,6 @@ export function getInputType(
     }
 
     function getInputModelForModel(m: Model): InputModelType | undefined {
-        // Resolve properties after model is added to the map to resolve possible circular dependencies
-        // addModelProperties(model, m.properties, properties);
         if (context.modelsMap!.has(m)) {
             return fromSdkModelType(
                 context.modelsMap!.get(m) as SdkModelType,

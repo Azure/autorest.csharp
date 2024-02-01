@@ -49,7 +49,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
         /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
-        public ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum? requiredExtensibleEnum, StringFixedEnum? requiredFixedEnum)
+        public ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum requiredExtensibleEnum, StringFixedEnum requiredFixedEnum)
         {
             RequiredNullablePrimitive = requiredNullablePrimitive;
             RequiredExtensibleEnum = requiredExtensibleEnum;
@@ -61,7 +61,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
         /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum? requiredExtensibleEnum, StringFixedEnum? requiredFixedEnum, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum requiredExtensibleEnum, StringFixedEnum requiredFixedEnum, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredNullablePrimitive = requiredNullablePrimitive;
             RequiredExtensibleEnum = requiredExtensibleEnum;
@@ -77,8 +77,8 @@ namespace FirstTestTypeSpec.Models
         /// <summary> required nullable primitive type. </summary>
         public int? RequiredNullablePrimitive { get; set; }
         /// <summary> required nullable extensible enum type. </summary>
-        public StringExtensibleEnum? RequiredExtensibleEnum { get; set; }
+        public StringExtensibleEnum RequiredExtensibleEnum { get; set; }
         /// <summary> required nullable fixed enum type. </summary>
-        public StringFixedEnum? RequiredFixedEnum { get; set; }
+        public StringFixedEnum RequiredFixedEnum { get; set; }
     }
 }

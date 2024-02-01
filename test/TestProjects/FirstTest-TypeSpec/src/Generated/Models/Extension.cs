@@ -24,7 +24,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="extension"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="level"></param>
-        internal Extension(IReadOnlyList<Extension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData, int level) : base(extension, serializedAdditionalRawData)
+        internal Extension(IList<Extension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData, int level) : base(extension, serializedAdditionalRawData)
         {
             Level = level;
         }
