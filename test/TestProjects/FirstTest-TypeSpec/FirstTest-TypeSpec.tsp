@@ -524,3 +524,9 @@ model ModelWithProjectedEnum {
 @put
 @convenientAPI(true)
 op bodyIsModelWithProjectedEnum(@body body: ModelWithProjectedEnum ): void;
+
+@route("/optionalDictionary")
+@doc("test optional dictionary.")
+@put
+@convenientAPI(true)
+op optionalDictionary(@body body?: Record<int32>): void;
