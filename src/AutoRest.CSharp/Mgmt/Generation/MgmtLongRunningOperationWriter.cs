@@ -65,9 +65,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName})"))
+                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken)} rehydrationToken)"))
                     {
-                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString});");
+                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, rehydrationToken);");
                     }
                     _writer.Line();
 
@@ -81,10 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
-                        .LineRaw("#pragma warning disable CA1822")
-                        .LineRaw($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]")
-                        .LineRaw("public override string Id => throw new NotImplementedException();")
-                        .LineRaw("#pragma warning restore CA1822")
+                        .LineRaw("public override string Id => _operation.GetOperationId();")
                         .Line();
 
                     if (_isGeneric)

@@ -627,6 +627,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
+            if (operation.IsFakeLongRunningOperation)
+            {
+                _writer.Append($"var uri = ");
+                _writer.Append($"{GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestUriMethodName(operation.Method.Name)}(");
+                WriteArguments(_writer, parameterMapping);
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
+
+                _writer.Append($"var rehydrationToken = {typeof(NextLinkOperationImplementation)}.GetRehydrationToken(");
+
+                _writer.Append($"{typeof(RequestMethod)}.{new CultureInfo("en-US", false).TextInfo.ToTitleCase(operation.Method.Request.HttpMethod.ToString().ToLower())}, ");
+                _writer.Append($"uri.ToUri(), ");
+                _writer.Append($"uri.ToString(), ");
+                _writer.Append($"{typeof(NextLinkOperationImplementation)}.HeaderSource.None, ");
+                _writer.Append($"false, null, ");
+                _writer.Line($"{typeof(OperationFinalStateVia)}.OriginalUri);");
+            }
+
             WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
         }
 
@@ -656,6 +674,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"{Configuration.ApiTypes.ResponseParameterName}");
                 }
+                _writer.Append($", rehydrationToken");
             }
             else
             {

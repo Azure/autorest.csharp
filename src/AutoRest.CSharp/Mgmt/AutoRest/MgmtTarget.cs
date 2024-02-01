@@ -178,10 +178,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
+                var name = resource.Type.Name;
+
                 var ri = new ResourceItem(resource, MgmtReport.Instance.TransformSection);
                 MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
 
-                AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
+                AddGeneratedFile(project, $"{name}.cs", writer.ToString());
+
+                // we do not need this if model reader writer feature is not enabled
+                if (Configuration.UseModelReaderWriter)
+                {
+                    WriteSerialization(project, resource, serializeWriter, $"Models/{name}.Serialization.cs");
+                }
             }
 
             // write extension class
@@ -289,6 +297,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     return;
             }
 
+            WriteSerialization(project, model, serializeWriter, serializationFileName);
+        }
+
+        private static void WriteSerialization(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter, string serializationFileName)
+        {
             var serializerCodeWriter = new CodeWriter();
             serializeWriter.WriteSerialization(serializerCodeWriter, model);
             AddGeneratedFile(project, serializationFileName, serializerCodeWriter.ToString());
