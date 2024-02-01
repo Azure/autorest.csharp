@@ -71,15 +71,6 @@ namespace ConfidentLevelsInTsp.Models
             return new ModelWithFloatLiteralTypeProperty(name, id, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.BaseModel"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="size"> The size. </param>
-        /// <returns> A new <see cref="Models.BaseModel"/> instance for mocking. </returns>
-        public static BaseModel BaseModel(string name = null, double? size = null)
-        {
-            return new BaseModel(name, size, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
@@ -88,6 +79,15 @@ namespace ConfidentLevelsInTsp.Models
         public static DerivedModel DerivedModel(string name = null, double? size = null, int? age = null)
         {
             return new DerivedModel(name, size, serializedAdditionalRawData: null, age);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.BaseModel"/>. </summary>
+        /// <param name="name"> The name. </param>
+        /// <param name="size"> The size. </param>
+        /// <returns> A new <see cref="Models.BaseModel"/> instance for mocking. </returns>
+        public static BaseModel BaseModel(string name = null, double? size = null)
+        {
+            return new BaseModel(name, size, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithUnion"/>. </summary>

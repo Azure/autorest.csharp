@@ -49,7 +49,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="BaseModelWithARequiredProperty"/>. </summary>
         /// <param name="kind"> Required kind. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        internal BaseModelWithARequiredProperty(string kind)
+        public BaseModelWithARequiredProperty(string kind)
         {
             Argument.AssertNotNull(kind, nameof(kind));
 
@@ -71,6 +71,6 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Required kind. </summary>
-        public string Kind { get; }
+        public string Kind { get; set; }
     }
 }

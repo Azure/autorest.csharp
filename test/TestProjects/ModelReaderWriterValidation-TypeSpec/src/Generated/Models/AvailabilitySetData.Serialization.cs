@@ -109,7 +109,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             string name = default;
             string type = default;
             string location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            Optional<IDictionary<string, string>> tags = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

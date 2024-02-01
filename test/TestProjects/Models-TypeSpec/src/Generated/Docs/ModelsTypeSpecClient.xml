@@ -8,7 +8,10 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+{
+    Kind = "A",
+};
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
 ]]></code>
 This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBaseAsync with all parameters.
@@ -20,6 +23,7 @@ BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefin
 {
     OptionalInt = 1234,
     OptionalString = "<optionalString>",
+    Kind = "A",
 };
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
 ]]></code></example>
@@ -31,7 +35,10 @@ This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+{
+    Kind = "A",
+};
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
 ]]></code>
 This sample shows how to call PutBaseModelWithDiscriminatorDefinedOnBase with all parameters.
@@ -43,6 +50,7 @@ BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefin
 {
     OptionalInt = 1234,
     OptionalString = "<optionalString>",
+    Kind = "A",
 };
 Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
 ]]></code></example>
@@ -1222,7 +1230,10 @@ RoundTripOptionalModel input = new RoundTripOptionalModel
     OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
     {
         default
-    }),
+    })
+    {
+        OptionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
     OptionalFixedStringEnum = FixedStringEnum.One,
     OptionalExtensibleEnum = ExtensibleEnum.One,
     OptionalIntRecord =
@@ -1279,7 +1290,10 @@ RoundTripOptionalModel input = new RoundTripOptionalModel
     OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
     {
         default
-    }),
+    })
+    {
+        OptionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
     OptionalFixedStringEnum = FixedStringEnum.One,
     OptionalExtensibleEnum = ExtensibleEnum.One,
     OptionalIntRecord =

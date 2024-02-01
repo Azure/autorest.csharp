@@ -10,6 +10,8 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "FixedStringEnum",
+   "Namespace": "ModelsTypeSpec",
+   "Description": "Fixed string enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -28,8 +30,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "ModelsTypeSpec",
-   "Description": "Fixed string enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -38,7 +38,10 @@
    "$id": "6",
    "Kind": "Enum",
    "Name": "FixedIntEnum",
-   "EnumValueType": "Float32",
+   "Namespace": "ModelsTypeSpec",
+   "Deprecated": "deprecated for test",
+   "Description": "Fixed int enum",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "7",
@@ -56,9 +59,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "ModelsTypeSpec",
-   "Deprecated": "deprecated for test",
-   "Description": "Fixed int enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -67,6 +67,9 @@
    "$id": "10",
    "Kind": "Enum",
    "Name": "ExtensibleEnum",
+   "Namespace": "ModelsTypeSpec",
+   "Deprecated": "deprecated for test",
+   "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -85,9 +88,6 @@
      "Value": "4"
     }
    ],
-   "Namespace": "ModelsTypeSpec",
-   "Deprecated": "deprecated for test",
-   "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -96,6 +96,9 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "FixedFloatEnum",
+   "Namespace": "ModelsTypeSpec",
+   "Deprecated": "should be replaced by cadl-ranch",
+   "Description": "Fixed float enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -114,9 +117,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "ModelsTypeSpec",
-   "Deprecated": "should be replaced by cadl-ranch",
-   "Description": "Fixed float enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
@@ -125,7 +125,10 @@
    "$id": "18",
    "Kind": "Enum",
    "Name": "ExtensibleIntEnum",
-   "EnumValueType": "Float32",
+   "Namespace": "ModelsTypeSpec",
+   "Deprecated": "should be replaced by cadl-ranch",
+   "Description": "Extensible int enum",
+   "EnumValueType": "String",
    "AllowedValues": [
     {
      "$id": "19",
@@ -143,9 +146,6 @@
      "Value": 4
     }
    ],
-   "Namespace": "ModelsTypeSpec",
-   "Deprecated": "should be replaced by cadl-ranch",
-   "Description": "Extensible int enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -192,31 +192,6 @@
   {
    "$id": "26",
    "Kind": "Model",
-   "Name": "BaseModelWithARequiredProperty",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "A base model with a required property",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "27",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "Required kind",
-     "Type": {
-      "$id": "28",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "29",
-   "Kind": "Model",
    "Name": "BaseModelWithDiscriminatorDefinedOnBase",
    "Namespace": "ModelsTypeSpec",
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
@@ -224,7 +199,30 @@
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "26"
+    "$id": "27",
+    "Kind": "Model",
+    "Name": "BaseModelWithARequiredProperty",
+    "Namespace": "ModelsTypeSpec",
+    "Description": "A base model with a required property",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "Properties": [
+     {
+      "$id": "28",
+      "Name": "kind",
+      "SerializedName": "kind",
+      "Description": "Required kind",
+      "Type": {
+       "$id": "29",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -232,14 +230,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "31",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     },
     {
@@ -254,9 +252,13 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$ref": "27"
   },
   {
    "$id": "34",
@@ -273,14 +275,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "36",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     }
    ]
@@ -306,7 +308,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "40",
@@ -320,7 +323,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "42",
@@ -334,7 +338,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "44",
@@ -348,7 +353,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "46",
@@ -362,7 +368,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "48",
@@ -376,7 +383,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "50",
@@ -390,11 +398,12 @@
       "Namespace": "ModelsTypeSpec",
       "Description": "Base model",
       "IsNullable": false,
-      "Usage": "Input",
+      "Usage": "RoundTrip",
       "Properties": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "52",
@@ -405,7 +414,8 @@
       "$ref": "51"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "53",
@@ -425,7 +435,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "56",
@@ -445,7 +456,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "59",
@@ -515,7 +527,8 @@
                "IsNullable": false
               },
               "IsRequired": true,
-              "IsReadOnly": false
+              "IsReadOnly": false,
+              "IsDiscriminator": false
              }
             ]
            },
@@ -524,14 +537,16 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "69",
@@ -554,7 +569,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "72",
@@ -574,7 +590,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "75",
@@ -594,7 +611,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "78",
@@ -611,7 +629,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "80",
@@ -631,7 +650,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "83",
@@ -651,7 +671,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "86",
@@ -668,7 +689,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "88",
@@ -688,7 +710,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "91",
@@ -708,7 +731,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "94",
@@ -725,7 +749,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "96",
@@ -745,7 +770,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "99",
@@ -765,7 +791,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -776,10 +803,10 @@
    "$ref": "61"
   },
   {
-   "$ref": "66"
+   "$ref": "65"
   },
   {
-   "$ref": "65"
+   "$ref": "66"
   },
   {
    "$id": "102",
@@ -805,7 +832,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "105",
@@ -819,7 +847,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "107",
@@ -833,7 +862,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "109",
@@ -847,7 +877,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "111",
@@ -861,7 +892,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "113",
@@ -875,7 +907,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "115",
@@ -889,7 +922,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "117",
@@ -903,7 +937,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "119",
@@ -917,7 +952,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "121",
@@ -931,7 +967,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "123",
@@ -953,14 +990,14 @@
         "Name": "discriminatorProperty",
         "SerializedName": "discriminatorProperty",
         "Description": "Discriminator",
-        "IsRequired": true,
-        "IsReadOnly": false,
         "Type": {
          "$id": "126",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
         },
+        "IsRequired": true,
+        "IsReadOnly": false,
         "IsDiscriminator": true
        },
        {
@@ -975,7 +1012,8 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "129",
@@ -989,12 +1027,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "131",
@@ -1005,7 +1045,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "132",
@@ -1016,7 +1057,8 @@
       "$ref": "6"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "133",
@@ -1027,7 +1069,8 @@
       "$ref": "10"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "134",
@@ -1044,7 +1087,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "136",
@@ -1070,7 +1114,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "140",
@@ -1096,7 +1141,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "144",
@@ -1119,7 +1165,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "147",
@@ -1133,7 +1180,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "149",
@@ -1147,7 +1195,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "151",
@@ -1167,7 +1216,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "154",
@@ -1187,7 +1237,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "157",
@@ -1201,7 +1252,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "159",
@@ -1215,7 +1267,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "161",
@@ -1235,7 +1288,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "164",
@@ -1255,7 +1309,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "167",
@@ -1275,7 +1330,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "170",
@@ -1295,7 +1351,8 @@
       "IsNullable": true
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "173",
@@ -1315,7 +1372,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "176",
@@ -1335,7 +1393,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1349,7 +1408,7 @@
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output with primitive types",
    "IsNullable": false,
-   "Usage": "RoundTrip",
+   "Usage": "Output",
    "BaseModel": {
     "$ref": "51"
    },
@@ -1366,7 +1425,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "182",
@@ -1380,7 +1440,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "184",
@@ -1394,7 +1455,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "186",
@@ -1408,7 +1470,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "188",
@@ -1422,7 +1485,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "190",
@@ -1436,7 +1500,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "192",
@@ -1450,7 +1515,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "194",
@@ -1460,11 +1526,12 @@
      "Type": {
       "$id": "195",
       "Kind": "Primitive",
-      "Name": "DateTime",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "196",
@@ -1478,7 +1545,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "198",
@@ -1498,7 +1566,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1524,7 +1593,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "204",
@@ -1538,7 +1608,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "206",
@@ -1558,7 +1629,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "209",
@@ -1578,7 +1650,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "212",
@@ -1595,7 +1668,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "214",
@@ -1606,7 +1680,8 @@
       "$ref": "66"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "215",
@@ -1628,7 +1703,7 @@
        "Namespace": "ModelsTypeSpec",
        "Description": "Base model with properties",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "RoundTrip",
        "Properties": [
         {
          "$id": "218",
@@ -1642,7 +1717,8 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
@@ -1662,12 +1738,14 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "222",
@@ -1678,7 +1756,8 @@
       "$ref": "2"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "223",
@@ -1689,7 +1768,8 @@
       "$ref": "10"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "224",
@@ -1715,7 +1795,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "228",
@@ -1741,7 +1822,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "232",
@@ -1764,7 +1846,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "235",
@@ -1778,7 +1861,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "237",
@@ -1792,7 +1876,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "239",
@@ -1812,15 +1897,16 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
   {
-   "$ref": "217"
+   "$ref": "216"
   },
   {
-   "$ref": "216"
+   "$ref": "217"
   },
   {
    "$id": "242",
@@ -1843,7 +1929,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "245",
@@ -1857,7 +1944,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "247",
@@ -1871,7 +1959,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "249",
@@ -1885,7 +1974,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "251",
@@ -1896,7 +1986,8 @@
       "$ref": "66"
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "252",
@@ -1907,7 +1998,8 @@
       "$ref": "66"
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "253",
@@ -1918,7 +2010,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "254",
@@ -1929,7 +2022,8 @@
       "$ref": "10"
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "255",
@@ -1940,7 +2034,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "256",
@@ -1951,7 +2046,8 @@
       "$ref": "10"
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "257",
@@ -1971,7 +2067,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "260",
@@ -1991,7 +2088,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "263",
@@ -2008,7 +2106,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "265",
@@ -2034,7 +2133,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "269",
@@ -2060,7 +2160,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "273",
@@ -2083,7 +2184,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "276",
@@ -2103,7 +2205,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "279",
@@ -2123,7 +2226,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "282",
@@ -2140,7 +2244,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "284",
@@ -2166,7 +2271,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "288",
@@ -2192,7 +2298,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "292",
@@ -2215,7 +2322,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "295",
@@ -2235,7 +2343,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "298",
@@ -2255,7 +2364,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2280,7 +2390,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "304",
@@ -2294,7 +2405,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "306",
@@ -2305,7 +2417,8 @@
       "$ref": "66"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "307",
@@ -2322,7 +2435,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "309",
@@ -2345,7 +2459,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "312",
@@ -2362,7 +2477,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "314",
@@ -2379,7 +2495,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "316",
@@ -2402,7 +2519,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "319",
@@ -2425,7 +2543,8 @@
       "IsNullable": true
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2450,7 +2569,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "325",
@@ -2461,7 +2581,8 @@
       "$ref": "322"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2486,7 +2607,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "329",
@@ -2497,7 +2619,8 @@
       "$ref": "326"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2522,7 +2645,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     },
     {
      "$id": "333",
@@ -2533,37 +2657,13 @@
       "$ref": "330"
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     }
    ]
   },
   {
    "$id": "334",
-   "Kind": "Model",
-   "Name": "NoUseBase",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "Base model",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "335",
-     "Name": "baseModelProp",
-     "SerializedName": "baseModelProp",
-     "Description": "base model property",
-     "Type": {
-      "$id": "336",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "337",
    "Kind": "Model",
    "Name": "RoundTripOnNoUse",
    "Namespace": "ModelsTypeSpec",
@@ -2571,7 +2671,30 @@
    "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "334"
+    "$id": "335",
+    "Kind": "Model",
+    "Name": "NoUseBase",
+    "Namespace": "ModelsTypeSpec",
+    "Description": "Base model",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "Properties": [
+     {
+      "$id": "336",
+      "Name": "baseModelProp",
+      "SerializedName": "baseModelProp",
+      "Description": "base model property",
+      "Type": {
+       "$id": "337",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -2589,9 +2712,13 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$ref": "335"
   },
   {
    "$id": "340",
@@ -2608,14 +2735,14 @@
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
      "Type": {
       "$id": "342",
       "Kind": "Primitive",
       "Name": "String",
       "IsNullable": false
      },
+     "IsRequired": true,
+     "IsReadOnly": false,
      "IsDiscriminator": true
     },
     {
@@ -2630,84 +2757,13 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
   {
    "$id": "345",
-   "Kind": "Model",
-   "Name": "Facet",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "Facet",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "346",
-     "Name": "field",
-     "SerializedName": "field",
-     "Description": "A field to facet by, where the field is attributed as 'facetable'",
-     "Type": {
-      "$id": "347",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "348",
-   "Kind": "Model",
-   "Name": "NumericValuesFacetint32",
-   "Namespace": "ModelsTypeSpec",
-   "IsNullable": false,
-   "Usage": "None",
-   "BaseModel": {
-    "$ref": "345"
-   },
-   "Properties": [
-    {
-     "$id": "349",
-     "Name": "values",
-     "SerializedName": "values",
-     "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
-     "Type": {
-      "$id": "350",
-      "Kind": "Array",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "351",
-       "Kind": "Primitive",
-       "Name": "Int32",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "352",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
-      "$id": "353",
-      "Kind": "Primitive",
-      "Name": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "354",
    "Kind": "Model",
    "Name": "Int32ValuesFacet",
    "Namespace": "ModelsTypeSpec",
@@ -2715,7 +2771,76 @@
    "IsNullable": false,
    "Usage": "Input",
    "BaseModel": {
-    "$ref": "348"
+    "$id": "346",
+    "Kind": "Model",
+    "Name": "NumericValuesFacet",
+    "Namespace": "ModelsTypeSpec",
+    "IsNullable": false,
+    "Usage": "Input",
+    "BaseModel": {
+     "$id": "347",
+     "Kind": "Model",
+     "Name": "Facet",
+     "Namespace": "ModelsTypeSpec",
+     "Description": "Facet",
+     "IsNullable": false,
+     "Usage": "Input",
+     "Properties": [
+      {
+       "$id": "348",
+       "Name": "field",
+       "SerializedName": "field",
+       "Description": "A field to facet by, where the field is attributed as 'facetable'",
+       "Type": {
+        "$id": "349",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false,
+       "IsDiscriminator": false
+      }
+     ]
+    },
+    "Properties": [
+     {
+      "$id": "350",
+      "Name": "values",
+      "SerializedName": "values",
+      "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
+      "Type": {
+       "$id": "351",
+       "Kind": "Array",
+       "Name": "Array",
+       "ElementType": {
+        "$id": "352",
+        "Kind": "Primitive",
+        "Name": "Int32",
+        "IsNullable": false
+       },
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "353",
+      "Name": "value",
+      "SerializedName": "value",
+      "Description": "",
+      "Type": {
+       "$id": "354",
+       "Kind": "Primitive",
+       "Name": "Int32",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -2734,9 +2859,16 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$ref": "346"
+  },
+  {
+   "$ref": "347"
   },
   {
    "$id": "357",
@@ -2748,7 +2880,7 @@
    "DiscriminatorValue": "A",
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "29"
+    "$ref": "26"
    },
    "Properties": [
     {
@@ -2763,7 +2895,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "360",
@@ -2777,7 +2910,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2806,7 +2940,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2835,7 +2970,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2864,7 +3000,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -2893,67 +3030,29 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "374",
-   "Kind": "Model",
-   "Name": "Foo",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "This is a model.",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "375",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "id of Foo",
-     "Type": {
-      "$id": "376",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "377",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of Foo",
-     "Type": {
-      "$id": "378",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "379",
+   "$id": "374",
    "Name": "ModelsTypeSpecClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "380",
+     "$id": "375",
      "Name": "putBaseModelWithDiscriminatorDefinedOnBase",
      "ResourceName": "ModelsTypeSpec",
      "Parameters": [
       {
-       "$id": "381",
+       "$id": "376",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "382",
+        "$id": "377",
         "Kind": "Primitive",
         "Name": "Uri",
         "IsNullable": false
@@ -2969,11 +3068,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "383",
+       "$id": "378",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "29"
+        "$ref": "26"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2986,11 +3085,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "384",
+       "$id": "379",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "385",
+        "$id": "380",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3005,19 +3104,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "386",
+        "$id": "381",
         "Type": {
-         "$ref": "385"
+         "$ref": "380"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "387",
+       "$id": "382",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "388",
+        "$id": "383",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3032,9 +3131,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "389",
+        "$id": "384",
         "Type": {
-         "$ref": "388"
+         "$ref": "383"
         },
         "Value": "application/json"
        }
@@ -3042,12 +3141,12 @@
      ],
      "Responses": [
       {
-       "$id": "390",
+       "$id": "385",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "26"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3069,19 +3168,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "391",
+     "$id": "386",
      "Name": "getOutputDiscriminatorModel",
      "ResourceName": "ModelsTypeSpec",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "392",
+       "$id": "387",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "393",
+        "$id": "388",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3096,9 +3195,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "394",
+        "$id": "389",
         "Type": {
-         "$ref": "393"
+         "$ref": "388"
         },
         "Value": "application/json"
        }
@@ -3106,7 +3205,7 @@
      ],
      "Responses": [
       {
-       "$id": "395",
+       "$id": "390",
        "StatusCodes": [
         200
        ],
@@ -3130,16 +3229,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "396",
+     "$id": "391",
      "Name": "inputToRoundTrip",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "397",
+       "$id": "392",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3156,11 +3255,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "398",
+       "$id": "393",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "399",
+        "$id": "394",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3175,19 +3274,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "400",
+        "$id": "395",
         "Type": {
-         "$ref": "399"
+         "$ref": "394"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "401",
+       "$id": "396",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "402",
+        "$id": "397",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3202,9 +3301,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "403",
+        "$id": "398",
         "Type": {
-         "$ref": "402"
+         "$ref": "397"
         },
         "Value": "application/json"
        }
@@ -3212,7 +3311,7 @@
      ],
      "Responses": [
       {
-       "$id": "404",
+       "$id": "399",
        "StatusCodes": [
         200
        ],
@@ -3239,16 +3338,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "405",
+     "$id": "400",
      "Name": "inputToRoundTripPrimitive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "406",
+       "$id": "401",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3265,11 +3364,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "407",
+       "$id": "402",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "408",
+        "$id": "403",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3284,19 +3383,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "409",
+        "$id": "404",
         "Type": {
-         "$ref": "408"
+         "$ref": "403"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "410",
+       "$id": "405",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "411",
+        "$id": "406",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3311,9 +3410,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "412",
+        "$id": "407",
         "Type": {
-         "$ref": "411"
+         "$ref": "406"
         },
         "Value": "application/json"
        }
@@ -3321,7 +3420,7 @@
      ],
      "Responses": [
       {
-       "$id": "413",
+       "$id": "408",
        "StatusCodes": [
         200
        ],
@@ -3348,16 +3447,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "414",
+     "$id": "409",
      "Name": "inputToRoundTripOptional",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripOptional",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "415",
+       "$id": "410",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3374,11 +3473,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "416",
+       "$id": "411",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "417",
+        "$id": "412",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3393,19 +3492,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "418",
+        "$id": "413",
         "Type": {
-         "$ref": "417"
+         "$ref": "412"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "419",
+       "$id": "414",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "420",
+        "$id": "415",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3420,9 +3519,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "421",
+        "$id": "416",
         "Type": {
-         "$ref": "420"
+         "$ref": "415"
         },
         "Value": "application/json"
        }
@@ -3430,7 +3529,7 @@
      ],
      "Responses": [
       {
-       "$id": "422",
+       "$id": "417",
        "StatusCodes": [
         200
        ],
@@ -3457,17 +3556,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "423",
+     "$id": "418",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsTypeSpec",
      "Deprecated": "deprecated for test",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "424",
+       "$id": "419",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3484,11 +3583,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "425",
+       "$id": "420",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "426",
+        "$id": "421",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3503,19 +3602,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "427",
+        "$id": "422",
         "Type": {
-         "$ref": "426"
+         "$ref": "421"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "428",
+       "$id": "423",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "429",
+        "$id": "424",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3530,9 +3629,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "430",
+        "$id": "425",
         "Type": {
-         "$ref": "429"
+         "$ref": "424"
         },
         "Value": "application/json"
        }
@@ -3540,7 +3639,7 @@
      ],
      "Responses": [
       {
-       "$id": "431",
+       "$id": "426",
        "StatusCodes": [
         200
        ],
@@ -3567,16 +3666,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "432",
+     "$id": "427",
      "Name": "roundTripToOutput",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "433",
+       "$id": "428",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3593,11 +3692,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "434",
+       "$id": "429",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "435",
+        "$id": "430",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3612,19 +3711,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "436",
+        "$id": "431",
         "Type": {
-         "$ref": "435"
+         "$ref": "430"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "437",
+       "$id": "432",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "438",
+        "$id": "433",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3639,9 +3738,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "439",
+        "$id": "434",
         "Type": {
-         "$ref": "438"
+         "$ref": "433"
         },
         "Value": "application/json"
        }
@@ -3649,7 +3748,7 @@
      ],
      "Responses": [
       {
-       "$id": "440",
+       "$id": "435",
        "StatusCodes": [
         200
        ],
@@ -3676,16 +3775,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "441",
+     "$id": "436",
      "Name": "InputRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input recursive model",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "442",
+       "$id": "437",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3702,11 +3801,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "443",
+       "$id": "438",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "444",
+        "$id": "439",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3721,19 +3820,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "445",
+        "$id": "440",
         "Type": {
-         "$ref": "444"
+         "$ref": "439"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "446",
+       "$id": "441",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "447",
+        "$id": "442",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3748,9 +3847,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "448",
+        "$id": "443",
         "Type": {
-         "$ref": "447"
+         "$ref": "442"
         },
         "Value": "application/json"
        }
@@ -3758,7 +3857,7 @@
      ],
      "Responses": [
       {
-       "$id": "449",
+       "$id": "444",
        "StatusCodes": [
         200
        ],
@@ -3779,16 +3878,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "450",
+     "$id": "445",
      "Name": "roundTripRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip recursive model",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "451",
+       "$id": "446",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3805,11 +3904,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "452",
+       "$id": "447",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "453",
+        "$id": "448",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3824,19 +3923,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "454",
+        "$id": "449",
         "Type": {
-         "$ref": "453"
+         "$ref": "448"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "455",
+       "$id": "450",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "456",
+        "$id": "451",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3851,9 +3950,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "457",
+        "$id": "452",
         "Type": {
-         "$ref": "456"
+         "$ref": "451"
         },
         "Value": "application/json"
        }
@@ -3861,7 +3960,7 @@
      ],
      "Responses": [
       {
-       "$id": "458",
+       "$id": "453",
        "StatusCodes": [
         200
        ],
@@ -3888,20 +3987,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "459",
+     "$id": "454",
      "Name": "selfReference",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "460",
+       "$id": "455",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "461",
+        "$id": "456",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3916,9 +4015,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "462",
+        "$id": "457",
         "Type": {
-         "$ref": "461"
+         "$ref": "456"
         },
         "Value": "application/json"
        }
@@ -3926,7 +4025,7 @@
      ],
      "Responses": [
       {
-       "$id": "463",
+       "$id": "458",
        "StatusCodes": [
         200
        ],
@@ -3950,16 +4049,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "464",
+     "$id": "459",
      "Name": "fixedFloatEnum",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "465",
+       "$id": "460",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3976,11 +4075,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "466",
+       "$id": "461",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "467",
+        "$id": "462",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -3995,9 +4094,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "468",
+        "$id": "463",
         "Type": {
-         "$ref": "467"
+         "$ref": "462"
         },
         "Value": "application/json"
        }
@@ -4005,7 +4104,7 @@
      ],
      "Responses": [
       {
-       "$id": "469",
+       "$id": "464",
        "StatusCodes": [
         200
        ],
@@ -4029,16 +4128,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "470",
+     "$id": "465",
      "Name": "extenisbleIntEnum",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "471",
+       "$id": "466",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4055,11 +4154,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "472",
+       "$id": "467",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "473",
+        "$id": "468",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4074,9 +4173,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "474",
+        "$id": "469",
         "Type": {
-         "$ref": "473"
+         "$ref": "468"
         },
         "Value": "application/json"
        }
@@ -4084,7 +4183,7 @@
      ],
      "Responses": [
       {
-       "$id": "475",
+       "$id": "470",
        "StatusCodes": [
         200
        ],
@@ -4108,20 +4207,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "476",
+     "$id": "471",
      "Name": "roundTripToOutputWithNoUseBase",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns RoundTripOnNoUse",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "477",
+       "$id": "472",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "337"
+        "$ref": "334"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4134,11 +4233,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "478",
+       "$id": "473",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "479",
+        "$id": "474",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4153,19 +4252,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "480",
+        "$id": "475",
         "Type": {
-         "$ref": "479"
+         "$ref": "474"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "481",
+       "$id": "476",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "482",
+        "$id": "477",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4180,9 +4279,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "483",
+        "$id": "478",
         "Type": {
-         "$ref": "482"
+         "$ref": "477"
         },
         "Value": "application/json"
        }
@@ -4190,12 +4289,12 @@
      ],
      "Responses": [
       {
-       "$id": "484",
+       "$id": "479",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "337"
+        "$ref": "334"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4217,30 +4316,30 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "485",
+     "$id": "480",
      "Name": "analyzeConversation",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Resource collection action operation template.",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "486",
+       "$id": "481",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "487",
+        "$id": "482",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "488",
+        "$id": "483",
         "Type": {
-         "$id": "489",
+         "$id": "484",
          "Kind": "Primitive",
          "Name": "String",
          "IsNullable": false
@@ -4255,6 +4354,67 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
+      },
+      {
+       "$id": "485",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "486",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "487",
+        "Type": {
+         "$ref": "486"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "488",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "124"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/items:analyzeConversation",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "489",
+     "Name": "getSingleBase",
+     "ResourceName": "ModelsTypeSpec",
+     "Parameters": [
+      {
+       "$ref": "376"
       },
       {
        "$id": "490",
@@ -4291,67 +4451,6 @@
         200
        ],
        "BodyType": {
-        "$ref": "124"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
-     "Path": "/items:analyzeConversation",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "494",
-     "Name": "getSingleBase",
-     "ResourceName": "ModelsTypeSpec",
-     "Parameters": [
-      {
-       "$ref": "381"
-      },
-      {
-       "$id": "495",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "496",
-        "Kind": "Primitive",
-        "Name": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "497",
-        "Type": {
-         "$ref": "496"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "498",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
         "$ref": "340"
        },
        "BodyMediaType": "Json",
@@ -4371,19 +4470,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "499",
+     "$id": "494",
      "Name": "genericType",
      "ResourceName": "ModelsTypeSpec",
      "Parameters": [
       {
-       "$ref": "381"
+       "$ref": "376"
       },
       {
-       "$id": "500",
+       "$id": "495",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "354"
+        "$ref": "345"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4396,11 +4495,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "501",
+       "$id": "496",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "502",
+        "$id": "497",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4415,19 +4514,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "503",
+        "$id": "498",
         "Type": {
-         "$ref": "502"
+         "$ref": "497"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "504",
+       "$id": "499",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "505",
+        "$id": "500",
         "Kind": "Primitive",
         "Name": "String",
         "IsNullable": false
@@ -4442,9 +4541,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "506",
+        "$id": "501",
         "Type": {
-         "$ref": "505"
+         "$ref": "500"
         },
         "Value": "application/json"
        }
@@ -4452,7 +4551,7 @@
      ],
      "Responses": [
       {
-       "$id": "507",
+       "$id": "502",
        "StatusCodes": [
         204
        ],
@@ -4474,7 +4573,7 @@
     }
    ],
    "Protocol": {
-    "$id": "508"
+    "$id": "503"
    },
    "Creatable": true
   }

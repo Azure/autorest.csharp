@@ -31,7 +31,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku"> The sku. </param>
         /// <param name="properties"> The properties property. </param>
-        internal AvailabilitySetData(string id, string name, string resourceType, string location, IReadOnlyDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, ComputeSku sku, AvailabilitySetProperties properties) : base(id, name, resourceType, location, tags, serializedAdditionalRawData)
+        internal AvailabilitySetData(string id, string name, string resourceType, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, ComputeSku sku, AvailabilitySetProperties properties) : base(id, name, resourceType, location, tags, serializedAdditionalRawData)
         {
             Sku = sku;
             Properties = properties;

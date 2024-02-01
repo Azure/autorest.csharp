@@ -654,54 +654,51 @@
   {
    "$id": "79",
    "Kind": "Model",
-   "Name": "BaseModel",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The base model",
-   "IsNullable": false,
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "80",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name",
-     "Type": {
-      "$id": "81",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    },
-    {
-     "$id": "82",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "The size",
-     "Type": {
-      "$id": "83",
-      "Kind": "Primitive",
-      "Name": "Float64",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
-    }
-   ]
-  },
-  {
-   "$id": "84",
-   "Kind": "Model",
    "Name": "DerivedModel",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The derived model",
    "IsNullable": false,
    "Usage": "Input",
    "BaseModel": {
-    "$ref": "79"
+    "$id": "80",
+    "Kind": "Model",
+    "Name": "BaseModel",
+    "Namespace": "ConfidentLevelsInTsp",
+    "Description": "The base model",
+    "IsNullable": false,
+    "Usage": "Input",
+    "Properties": [
+     {
+      "$id": "81",
+      "Name": "name",
+      "SerializedName": "name",
+      "Description": "The name",
+      "Type": {
+       "$id": "82",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "83",
+      "Name": "size",
+      "SerializedName": "size",
+      "Description": "The size",
+      "Type": {
+       "$id": "84",
+       "Kind": "Primitive",
+       "Name": "Float64",
+       "IsNullable": false
+      },
+      "IsRequired": false,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -722,6 +719,9 @@
    ]
   },
   {
+   "$ref": "80"
+  },
+  {
    "$id": "87",
    "Kind": "Model",
    "Name": "DerivedModelWithUnion",
@@ -730,7 +730,7 @@
    "IsNullable": false,
    "Usage": "Input",
    "BaseModel": {
-    "$ref": "79"
+    "$ref": "80"
    },
    "Properties": [
     {
@@ -1928,7 +1928,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "84"
+        "$ref": "79"
        },
        "Location": "Body",
        "IsRequired": true,

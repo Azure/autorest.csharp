@@ -14,23 +14,6 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithARequiredProperty"/>. </summary>
-        /// <param name="kind"> Required kind. </param>
-        /// <returns> A new <see cref="Models.BaseModelWithARequiredProperty"/> instance for mocking. </returns>
-        public static BaseModelWithARequiredProperty BaseModelWithARequiredProperty(string kind = null)
-        {
-            return new BaseModelWithARequiredProperty(kind, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithDiscriminatorDefinedOnBase"/>. </summary>
-        /// <param name="kind"> Required kind. </param>
-        /// <param name="optionalString"> Optional string. </param>
-        /// <returns> A new <see cref="Models.BaseModelWithDiscriminatorDefinedOnBase"/> instance for mocking. </returns>
-        public static BaseModelWithDiscriminatorDefinedOnBase BaseModelWithDiscriminatorDefinedOnBase(string kind = null, string optionalString = null)
-        {
-            return new UnknownBaseModelWithDiscriminatorDefinedOnBase(kind, serializedAdditionalRawData: null, optionalString);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -127,23 +110,23 @@ namespace ModelsTypeSpec.Models
             return new RoundTripModel(serializedAdditionalRawData: null, requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithProperties"/>. </summary>
-        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
-        /// <returns> A new <see cref="Models.BaseModelWithProperties"/> instance for mocking. </returns>
-        public static BaseModelWithProperties BaseModelWithProperties(string optionalPropertyOnBase = null)
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripPrimitiveModel"/>. </summary>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>
+        /// <param name="requiredSafeInt"> Required safeint, illustrating a value type property. </param>
+        /// <param name="requiredFloat"> Required float, illustrating a value type property. </param>
+        /// <param name="requiredDouble"> Required double, illustrating a value type property. </param>
+        /// <param name="requiredBoolean"> Required bolean, illustrating a value type property. </param>
+        /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
+        /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
+        /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
+        /// <returns> A new <see cref="Models.RoundTripPrimitiveModel"/> instance for mocking. </returns>
+        public static RoundTripPrimitiveModel RoundTripPrimitiveModel(string requiredString = null, int requiredInt = default, long requiredInt64 = default, long requiredSafeInt = default, float requiredFloat = default, double requiredDouble = default, bool requiredBoolean = default, DateTimeOffset requiredDateTimeOffset = default, TimeSpan requiredTimeSpan = default, IEnumerable<float?> requiredCollectionWithNullableFloatElement = null)
         {
-            return new BaseModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData: null);
-        }
+            requiredCollectionWithNullableFloatElement ??= new List<float?>();
 
-        /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithProperties"/>. </summary>
-        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
-        /// <param name="requiredList"> Required collection. </param>
-        /// <returns> A new <see cref="Models.DerivedModelWithProperties"/> instance for mocking. </returns>
-        public static DerivedModelWithProperties DerivedModelWithProperties(string optionalPropertyOnBase = null, IEnumerable<CollectionItem> requiredList = null)
-        {
-            requiredList ??= new List<CollectionItem>();
-
-            return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData: null, requiredList?.ToList());
+            return new RoundTripPrimitiveModel(serializedAdditionalRawData: null, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripReadOnlyModel"/>. </summary>
@@ -233,14 +216,6 @@ namespace ModelsTypeSpec.Models
             return new ErrorModel(message, innerError, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.NoUseBase"/>. </summary>
-        /// <param name="baseModelProp"> base model property. </param>
-        /// <returns> A new <see cref="Models.NoUseBase"/> instance for mocking. </returns>
-        public static NoUseBase NoUseBase(string baseModelProp = null)
-        {
-            return new NoUseBase(baseModelProp, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
@@ -248,26 +223,6 @@ namespace ModelsTypeSpec.Models
         public static SingleBase SingleBase(string kind = null, int size = default)
         {
             return new UnknownSingleBase(kind, size, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.Facet"/>. </summary>
-        /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
-        /// <returns> A new <see cref="Models.Facet"/> instance for mocking. </returns>
-        public static Facet Facet(string field = null)
-        {
-            return new Facet(field, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.NumericValuesFacetint32"/>. </summary>
-        /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
-        /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
-        /// <param name="value"></param>
-        /// <returns> A new <see cref="Models.NumericValuesFacetint32"/> instance for mocking. </returns>
-        public static NumericValuesFacetint32 NumericValuesFacetint32(string field = null, IEnumerable<int> values = null, int value = default)
-        {
-            values ??= new List<int>();
-
-            return new NumericValuesFacetint32(field, serializedAdditionalRawData: null, values?.ToList(), value);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Int32ValuesFacet"/>. </summary>
@@ -281,16 +236,6 @@ namespace ModelsTypeSpec.Models
             values ??= new List<int>();
 
             return new Int32ValuesFacet(field, serializedAdditionalRawData: null, values?.ToList(), value, kind);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DerivedWithDiscriminatorDefinedOnBase"/>. </summary>
-        /// <param name="optionalString"> Optional string. </param>
-        /// <param name="requiredString"> Required string. </param>
-        /// <param name="optionalInt"> Optional int. </param>
-        /// <returns> A new <see cref="Models.DerivedWithDiscriminatorDefinedOnBase"/> instance for mocking. </returns>
-        public static DerivedWithDiscriminatorDefinedOnBase DerivedWithDiscriminatorDefinedOnBase(string optionalString = null, string requiredString = null, int? optionalInt = null)
-        {
-            return new DerivedWithDiscriminatorDefinedOnBase("A", serializedAdditionalRawData: null, optionalString, requiredString, optionalInt);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>

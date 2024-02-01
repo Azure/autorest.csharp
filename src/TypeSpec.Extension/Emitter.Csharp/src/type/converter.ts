@@ -121,7 +121,7 @@ export function fromSdkModelType(
             .filter(
                 (p) =>
                     !(p as SdkBodyModelPropertyType).discriminator ||
-                    !modelType.baseModel
+                    !hasDiscriminator(modelType.baseModel)
             )
             .map((p) =>
                 fromSdkModelPropertyType(p, program, models, enums, {
@@ -139,6 +139,17 @@ export function fromSdkModelType(
     }
 
     return inputModelType;
+}
+
+function hasDiscriminator(model? : SdkModelType) : boolean {
+    if (model == null)
+        return false;
+
+    if (model!.properties.some(p => {
+        return (p as SdkBodyModelPropertyType).discriminator;
+    }))
+        return true;
+    return hasDiscriminator(model!.baseModel);
 }
 
 export function fromSdkEnumType(

@@ -65,7 +65,10 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            {
+                Kind = "A",
+            };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
         }
 
@@ -76,7 +79,10 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            {
+                Kind = "A",
+            };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
         }
 
@@ -135,6 +141,7 @@ namespace ModelsTypeSpec.Samples
             {
                 OptionalInt = 1234,
                 OptionalString = "<optionalString>",
+                Kind = "A",
             };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = client.PutBaseModelWithDiscriminatorDefinedOnBase(body);
         }
@@ -150,6 +157,7 @@ namespace ModelsTypeSpec.Samples
             {
                 OptionalInt = 1234,
                 OptionalString = "<optionalString>",
+                Kind = "A",
             };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
         }
@@ -1501,7 +1509,10 @@ default
                 OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
             {
 default
-            }),
+            })
+                {
+                    OptionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
                 OptionalFixedStringEnum = FixedStringEnum.One,
                 OptionalExtensibleEnum = ExtensibleEnum.One,
                 OptionalIntRecord =
@@ -1550,7 +1561,10 @@ default
                 OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
             {
 default
-            }),
+            })
+                {
+                    OptionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
                 OptionalFixedStringEnum = FixedStringEnum.One,
                 OptionalExtensibleEnum = ExtensibleEnum.One,
                 OptionalIntRecord =

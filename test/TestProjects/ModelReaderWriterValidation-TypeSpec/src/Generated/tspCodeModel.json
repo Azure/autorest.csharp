@@ -8,6 +8,8 @@
    "$id": "2",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPatternType",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The type of alias pattern.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -23,8 +25,6 @@
      "Description": "Extract is the only allowed value."
     }
    ],
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The type of alias pattern.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -33,6 +33,8 @@
    "$id": "5",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPathTokenType",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The type of the token that the alias path is referring to.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -84,8 +86,6 @@
      "Description": "The token type is boolean."
     }
    ],
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
@@ -94,6 +94,8 @@
    "$id": "14",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasPathAttributes",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The attributes of the token that the alias path is referring to.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -109,8 +111,6 @@
      "Description": "The token that the alias path is referring to is modifiable by policies with 'modify' effect."
     }
    ],
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
@@ -119,6 +119,8 @@
    "$id": "17",
    "Kind": "Enum",
    "Name": "ResourceTypeAliasType",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The type of the alias.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -140,8 +142,6 @@
      "Description": "Alias value is secret."
     }
    ],
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The type of the alias.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -150,6 +150,8 @@
    "$id": "21",
    "Kind": "Enum",
    "Name": "ProviderAuthorizationConsentState",
+   "Namespace": "ModelReaderWriterValidationTypeSpec",
+   "Description": "The provider authorization consent state.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -177,8 +179,6 @@
      "Description": "The provider authorization consent state is consented."
     }
    ],
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The provider authorization consent state.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Output"
@@ -206,7 +206,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -230,7 +231,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "32",
@@ -250,7 +252,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "35",
@@ -264,7 +267,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "37",
@@ -290,7 +294,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "41",
@@ -304,7 +309,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -345,105 +351,13 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
   {
    "$id": "48",
-   "Kind": "Model",
-   "Name": "TrackedResourceData",
-   "Namespace": "ModelReaderWriterValidationTypeSpec",
-   "Description": "The tracked resource data",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "49",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property.",
-     "Type": {
-      "$id": "50",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "51",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property.",
-     "Type": {
-      "$id": "52",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "53",
-     "Name": "resourceType",
-     "SerializedName": "type",
-     "Description": "The resource type.",
-     "Type": {
-      "$id": "54",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "55",
-     "Name": "location",
-     "SerializedName": "location",
-     "Description": "The location property.",
-     "Type": {
-      "$id": "56",
-      "Kind": "Primitive",
-      "Name": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "57",
-     "Name": "tags",
-     "SerializedName": "tags",
-     "Description": "The tags property.",
-     "Type": {
-      "$id": "58",
-      "Kind": "Dictionary",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "59",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$id": "60",
-       "Kind": "Primitive",
-       "Name": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "61",
    "Kind": "Model",
    "Name": "AvailabilitySetData",
    "Namespace": "ModelReaderWriterValidationTypeSpec",
@@ -451,7 +365,102 @@
    "IsNullable": false,
    "Usage": "RoundTrip",
    "BaseModel": {
-    "$ref": "48"
+    "$id": "49",
+    "Kind": "Model",
+    "Name": "TrackedResourceData",
+    "Namespace": "ModelReaderWriterValidationTypeSpec",
+    "Description": "The tracked resource data",
+    "IsNullable": false,
+    "Usage": "RoundTrip",
+    "Properties": [
+     {
+      "$id": "50",
+      "Name": "id",
+      "SerializedName": "id",
+      "Description": "The id property.",
+      "Type": {
+       "$id": "51",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "52",
+      "Name": "name",
+      "SerializedName": "name",
+      "Description": "The name property.",
+      "Type": {
+       "$id": "53",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "54",
+      "Name": "resourceType",
+      "SerializedName": "type",
+      "Description": "The resource type.",
+      "Type": {
+       "$id": "55",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": true,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "56",
+      "Name": "location",
+      "SerializedName": "location",
+      "Description": "The location property.",
+      "Type": {
+       "$id": "57",
+       "Kind": "Primitive",
+       "Name": "String",
+       "IsNullable": false
+      },
+      "IsRequired": true,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     },
+     {
+      "$id": "58",
+      "Name": "tags",
+      "SerializedName": "tags",
+      "Description": "The tags property.",
+      "Type": {
+       "$id": "59",
+       "Kind": "Dictionary",
+       "Name": "Dictionary",
+       "KeyType": {
+        "$id": "60",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "ValueType": {
+        "$id": "61",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "IsNullable": false
+      },
+      "IsRequired": false,
+      "IsReadOnly": false,
+      "IsDiscriminator": false
+     }
+    ]
    },
    "Properties": [
     {
@@ -479,7 +488,8 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "66",
@@ -493,7 +503,8 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "68",
@@ -507,12 +518,14 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "70",
@@ -558,14 +571,16 @@
              "IsNullable": false
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "IsDiscriminator": false
            }
           ]
          },
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "77",
@@ -579,7 +594,8 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        },
        {
         "$id": "79",
@@ -593,14 +609,19 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
+  },
+  {
+   "$ref": "49"
   },
   {
    "$ref": "63"
@@ -632,7 +653,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "84",
@@ -646,7 +668,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "86",
@@ -660,7 +683,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "88",
@@ -674,7 +698,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "90",
@@ -705,7 +730,8 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "95",
@@ -725,7 +751,8 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "98",
@@ -757,7 +784,8 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "103",
@@ -771,7 +799,8 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "105",
@@ -791,14 +820,16 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             }
            ]
           },
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "108",
@@ -830,7 +861,8 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "113",
@@ -862,7 +894,8 @@
                   "IsNullable": false
                  },
                  "IsRequired": false,
-                 "IsReadOnly": false
+                 "IsReadOnly": false,
+                 "IsDiscriminator": false
                 },
                 {
                  "$id": "118",
@@ -882,7 +915,8 @@
                   "IsNullable": false
                  },
                  "IsRequired": false,
-                 "IsReadOnly": false
+                 "IsReadOnly": false,
+                 "IsDiscriminator": false
                 },
                 {
                  "$id": "121",
@@ -910,7 +944,8 @@
                      "IsNullable": false
                     },
                     "IsRequired": false,
-                    "IsReadOnly": false
+                    "IsReadOnly": false,
+                    "IsDiscriminator": false
                    },
                    {
                     "$id": "125",
@@ -924,7 +959,8 @@
                      "IsNullable": false
                     },
                     "IsRequired": false,
-                    "IsReadOnly": false
+                    "IsReadOnly": false,
+                    "IsDiscriminator": false
                    },
                    {
                     "$id": "127",
@@ -935,12 +971,14 @@
                      "$ref": "2"
                     },
                     "IsRequired": false,
-                    "IsReadOnly": false
+                    "IsReadOnly": false,
+                    "IsDiscriminator": false
                    }
                   ]
                  },
                  "IsRequired": false,
-                 "IsReadOnly": false
+                 "IsReadOnly": false,
+                 "IsDiscriminator": false
                 },
                 {
                  "$id": "128",
@@ -965,7 +1003,8 @@
                      "$ref": "5"
                     },
                     "IsRequired": false,
-                    "IsReadOnly": false
+                    "IsReadOnly": false,
+                    "IsDiscriminator": false
                    },
                    {
                     "$id": "131",
@@ -976,19 +1015,22 @@
                      "$ref": "14"
                     },
                     "IsRequired": false,
-                    "IsReadOnly": false
+                    "IsReadOnly": false,
+                    "IsDiscriminator": false
                    }
                   ]
                  },
                  "IsRequired": false,
-                 "IsReadOnly": false
+                 "IsReadOnly": false,
+                 "IsDiscriminator": false
                 }
                ]
               },
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "132",
@@ -999,7 +1041,8 @@
               "$ref": "17"
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "133",
@@ -1013,7 +1056,8 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "135",
@@ -1024,7 +1068,8 @@
               "$ref": "122"
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "136",
@@ -1035,14 +1080,16 @@
               "$ref": "129"
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             }
            ]
           },
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "137",
@@ -1062,7 +1109,8 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "140",
@@ -1076,7 +1124,8 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "142",
@@ -1108,7 +1157,8 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "147",
@@ -1128,14 +1178,16 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             }
            ]
           },
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "150",
@@ -1166,7 +1218,8 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             },
             {
              "$id": "155",
@@ -1180,14 +1233,16 @@
               "IsNullable": false
              },
              "IsRequired": false,
-             "IsReadOnly": false
+             "IsReadOnly": false,
+             "IsDiscriminator": false
             }
            ]
           },
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "157",
@@ -1201,7 +1256,8 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         },
         {
          "$id": "159",
@@ -1227,14 +1283,16 @@
           "IsNullable": false
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "IsDiscriminator": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "163",
@@ -1245,7 +1303,8 @@
       "$ref": "21"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1304,7 +1363,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "168",
@@ -1318,7 +1378,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "170",
@@ -1344,7 +1405,8 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "IsDiscriminator": false
     },
     {
      "$id": "174",
@@ -1358,7 +1420,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     }
    ]
   },
@@ -1387,7 +1450,8 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "IsDiscriminator": false
     }
    ]
   }
@@ -1752,7 +1816,7 @@
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "61"
+        "$ref": "48"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1826,7 +1890,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "61"
+        "$ref": "48"
        },
        "BodyMediaType": "Json",
        "Headers": [],

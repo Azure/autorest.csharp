@@ -45,7 +45,10 @@ namespace ModelsTypeSpec.Tests
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
-            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>");
+            BaseModelWithDiscriminatorDefinedOnBase body = new DerivedWithDiscriminatorDefinedOnBase("<requiredString>")
+            {
+                Kind = "A",
+            };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
         }
 
@@ -77,6 +80,7 @@ namespace ModelsTypeSpec.Tests
             {
                 OptionalInt = 1234,
                 OptionalString = "<optionalString>",
+                Kind = "A",
             };
             Response<BaseModelWithDiscriminatorDefinedOnBase> response = await client.PutBaseModelWithDiscriminatorDefinedOnBaseAsync(body);
         }
@@ -669,7 +673,10 @@ default
                 OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
             {
 default
-            }),
+            })
+                {
+                    OptionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
                 OptionalFixedStringEnum = FixedStringEnum.One,
                 OptionalExtensibleEnum = ExtensibleEnum.One,
                 OptionalIntRecord =

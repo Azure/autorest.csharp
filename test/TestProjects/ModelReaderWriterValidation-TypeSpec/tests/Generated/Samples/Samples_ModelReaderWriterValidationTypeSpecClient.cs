@@ -617,6 +617,10 @@ Id = new ResourceIdentifier("<id>"),
                     PlatformFaultDomainCount = 1234,
                     PlatformUpdateDomainCount = 1234,
                 },
+                Tags =
+{
+["key"] = "<tags>"
+},
             };
             Response<AvailabilitySetData> response = client.Op4(body);
         }
@@ -645,6 +649,10 @@ Id = new ResourceIdentifier("<id>"),
                     PlatformFaultDomainCount = 1234,
                     PlatformUpdateDomainCount = 1234,
                 },
+                Tags =
+{
+["key"] = "<tags>"
+},
             };
             Response<AvailabilitySetData> response = await client.Op4Async(body);
         }
