@@ -5,14 +5,17 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetUpdateNetworkConfiguration : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetUpdateNetworkConfiguration : IUtf8JsonSerializable, IPersistableModel<VirtualMachineScaleSetUpdateNetworkConfiguration>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -167,6 +170,82 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachineScaleSetUpdateNetworkConfiguration(id.Value, name.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
+        }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Optional.IsDefined(Name))
+            {
+                builder.Append("  name:");
+                builder.AppendLine($" '{Name}'");
+            }
+
+            if (Optional.IsDefined(Primary))
+            {
+                builder.Append("  primary:");
+                var boolValue = Primary == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(EnableAcceleratedNetworking))
+            {
+                builder.Append("  enableAcceleratedNetworking:");
+                var boolValue = EnableAcceleratedNetworking == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(NetworkSecurityGroup))
+            {
+                builder.Append("  networkSecurityGroup:");
+                AppendChildObject(builder, NetworkSecurityGroup, options, 2);
+            }
+
+            if (Optional.IsDefined(DnsSettings))
+            {
+                builder.Append("  dnsSettings:");
+                AppendChildObject(builder, DnsSettings, options, 2);
+            }
+
+            if (Optional.IsCollectionDefined(IPConfigurations))
+            {
+                builder.Append("  ipConfigurations:");
+                builder.AppendLine(" [");
+                foreach (var item in IPConfigurations)
+                {
+                    AppendChildObject(builder, item, options, 4);
+                }
+                builder.AppendLine("  ]");
+            }
+
+            if (Optional.IsDefined(EnableIPForwarding))
+            {
+                builder.Append("  enableIPForwarding:");
+                var boolValue = EnableIPForwarding == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(Id))
+            {
+                builder.Append("  id:");
+                builder.AppendLine($" '{Id}'");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine($"{indent}{line}");
+            }
         }
     }
 }

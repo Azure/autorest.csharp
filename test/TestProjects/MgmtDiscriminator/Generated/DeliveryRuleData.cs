@@ -62,17 +62,21 @@ namespace MgmtDiscriminator
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="boolProperty"> The resource type of this rule. </param>
+        /// <param name="location"> The resource type of this rule. </param>
         /// <param name="properties"> The properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             BoolProperty = boolProperty;
+            Location = location;
             Properties = properties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The resource type of this rule. </summary>
         public bool? BoolProperty { get; set; }
+        /// <summary> The resource type of this rule. </summary>
+        public AzureLocation? Location { get; set; }
         /// <summary> The properties. </summary>
         public DeliveryRuleProperties Properties { get; set; }
     }

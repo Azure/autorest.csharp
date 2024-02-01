@@ -5,63 +5,110 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class RollingUpgradeProgressInfo
+::System.ClientModel.Primitives.IPersistableModel<RollingUpgradeProgressInfo>
+{
+internal static RollingUpgradeProgressInfo DeserializeRollingUpgradeProgressInfo(JsonElement element)
     {
-        internal static RollingUpgradeProgressInfo DeserializeRollingUpgradeProgressInfo(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<int> successfulInstanceCount = default;
+        Optional<int> failedInstanceCount = default;
+        Optional<int> inProgressInstanceCount = default;
+        Optional<int> pendingInstanceCount = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("successfulInstanceCount"u8))
             {
-                return null;
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                successfulInstanceCount = property.Value.GetInt32();
+                continue;
             }
-            Optional<int> successfulInstanceCount = default;
-            Optional<int> failedInstanceCount = default;
-            Optional<int> inProgressInstanceCount = default;
-            Optional<int> pendingInstanceCount = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("failedInstanceCount"u8))
             {
-                if (property.NameEquals("successfulInstanceCount"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    successfulInstanceCount = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("failedInstanceCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    failedInstanceCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("inProgressInstanceCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    inProgressInstanceCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("pendingInstanceCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    pendingInstanceCount = property.Value.GetInt32();
-                    continue;
-                }
+                failedInstanceCount = property.Value.GetInt32();
+                continue;
             }
-            return new RollingUpgradeProgressInfo(Optional.ToNullable(successfulInstanceCount), Optional.ToNullable(failedInstanceCount), Optional.ToNullable(inProgressInstanceCount), Optional.ToNullable(pendingInstanceCount));
+            if (property.NameEquals("inProgressInstanceCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                inProgressInstanceCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("pendingInstanceCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                pendingInstanceCount = property.Value.GetInt32();
+                continue;
+            }
+        }
+        return new RollingUpgradeProgressInfo(Optional.ToNullable(successfulInstanceCount), Optional.ToNullable(failedInstanceCount), Optional.ToNullable(inProgressInstanceCount), Optional.ToNullable(pendingInstanceCount));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(SuccessfulInstanceCount))
+        {
+            builder.Append("  successfulInstanceCount:");
+            builder.AppendLine($" '{SuccessfulInstanceCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(FailedInstanceCount))
+        {
+            builder.Append("  failedInstanceCount:");
+            builder.AppendLine($" '{FailedInstanceCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(InProgressInstanceCount))
+        {
+            builder.Append("  inProgressInstanceCount:");
+            builder.AppendLine($" '{InProgressInstanceCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(PendingInstanceCount))
+        {
+            builder.Append("  pendingInstanceCount:");
+            builder.AppendLine($" '{PendingInstanceCount.ToString()}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

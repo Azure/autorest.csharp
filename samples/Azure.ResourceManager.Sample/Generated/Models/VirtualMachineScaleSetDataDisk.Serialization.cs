@@ -5,12 +5,15 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetDataDisk : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetDataDisk : IUtf8JsonSerializable, IPersistableModel<VirtualMachineScaleSetDataDisk>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -145,6 +148,81 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachineScaleSetDataDisk(name.Value, lun, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite));
+        }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Optional.IsDefined(Name))
+            {
+                builder.Append("  name:");
+                builder.AppendLine($" '{Name}'");
+            }
+
+            if (Optional.IsDefined(Lun))
+            {
+                builder.Append("  lun:");
+                builder.AppendLine($" '{Lun.ToString()}'");
+            }
+
+            if (Optional.IsDefined(Caching))
+            {
+                builder.Append("  caching:");
+                builder.AppendLine($" '{Caching.ToString()}'");
+            }
+
+            if (Optional.IsDefined(WriteAcceleratorEnabled))
+            {
+                builder.Append("  writeAcceleratorEnabled:");
+                var boolValue = WriteAcceleratorEnabled == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(CreateOption))
+            {
+                builder.Append("  createOption:");
+                builder.AppendLine($" '{CreateOption.ToString()}'");
+            }
+
+            if (Optional.IsDefined(DiskSizeGB))
+            {
+                builder.Append("  diskSizeGB:");
+                builder.AppendLine($" '{DiskSizeGB.ToString()}'");
+            }
+
+            if (Optional.IsDefined(ManagedDisk))
+            {
+                builder.Append("  managedDisk:");
+                AppendChildObject(builder, ManagedDisk, options, 2);
+            }
+
+            if (Optional.IsDefined(DiskIopsReadWrite))
+            {
+                builder.Append("  diskIOPSReadWrite:");
+                builder.AppendLine($" '{DiskIopsReadWrite.ToString()}'");
+            }
+
+            if (Optional.IsDefined(DiskMBpsReadWrite))
+            {
+                builder.Append("  diskMBpsReadWrite:");
+                builder.AppendLine($" '{DiskMBpsReadWrite.ToString()}'");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine($"{indent}{line}");
+            }
         }
     }
 }

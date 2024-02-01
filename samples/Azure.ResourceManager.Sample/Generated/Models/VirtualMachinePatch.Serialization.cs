@@ -5,12 +5,15 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachinePatch : IUtf8JsonSerializable
+    public partial class VirtualMachinePatch : IUtf8JsonSerializable, IPersistableModel<VirtualMachinePatch>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -135,6 +138,191 @@ namespace Azure.ResourceManager.Sample.Models
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
+        }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Optional.IsDefined(Plan))
+            {
+                builder.Append("  plan:");
+                AppendChildObject(builder, Plan, options, 2);
+            }
+
+            if (Optional.IsDefined(Identity))
+            {
+                builder.Append("  identity:");
+                AppendChildObject(builder, Identity, options, 2);
+            }
+
+            if (Optional.IsCollectionDefined(Zones))
+            {
+                builder.Append("  zones:");
+                builder.AppendLine(" [");
+                foreach (var item in Zones)
+                {
+                    if (item == null)
+                    {
+                        builder.Append("null");
+                        continue;
+                    }
+                    builder.AppendLine($"    '{item}'");
+                }
+                builder.AppendLine("  ]");
+            }
+
+            if (Optional.IsDefined(HardwareProfile))
+            {
+                builder.Append("  hardwareProfile:");
+                AppendChildObject(builder, HardwareProfile, options, 2);
+            }
+
+            if (Optional.IsDefined(StorageProfile))
+            {
+                builder.Append("  storageProfile:");
+                AppendChildObject(builder, StorageProfile, options, 2);
+            }
+
+            if (Optional.IsDefined(AdditionalCapabilities))
+            {
+                builder.Append("  additionalCapabilities:");
+                AppendChildObject(builder, AdditionalCapabilities, options, 2);
+            }
+
+            if (Optional.IsDefined(OSProfile))
+            {
+                builder.Append("  osProfile:");
+                AppendChildObject(builder, OSProfile, options, 2);
+            }
+
+            if (Optional.IsDefined(NetworkProfile))
+            {
+                builder.Append("  networkProfile:");
+                AppendChildObject(builder, NetworkProfile, options, 2);
+            }
+
+            if (Optional.IsDefined(SecurityProfile))
+            {
+                builder.Append("  securityProfile:");
+                AppendChildObject(builder, SecurityProfile, options, 2);
+            }
+
+            if (Optional.IsDefined(DiagnosticsProfile))
+            {
+                builder.Append("  diagnosticsProfile:");
+                AppendChildObject(builder, DiagnosticsProfile, options, 2);
+            }
+
+            if (Optional.IsDefined(AvailabilitySet))
+            {
+                builder.Append("  availabilitySet:");
+                AppendChildObject(builder, AvailabilitySet, options, 2);
+            }
+
+            if (Optional.IsDefined(VirtualMachineScaleSet))
+            {
+                builder.Append("  virtualMachineScaleSet:");
+                AppendChildObject(builder, VirtualMachineScaleSet, options, 2);
+            }
+
+            if (Optional.IsDefined(ProximityPlacementGroup))
+            {
+                builder.Append("  proximityPlacementGroup:");
+                AppendChildObject(builder, ProximityPlacementGroup, options, 2);
+            }
+
+            if (Optional.IsDefined(Priority))
+            {
+                builder.Append("  priority:");
+                builder.AppendLine($" '{Priority.ToString()}'");
+            }
+
+            if (Optional.IsDefined(EvictionPolicy))
+            {
+                builder.Append("  evictionPolicy:");
+                builder.AppendLine($" '{EvictionPolicy.ToString()}'");
+            }
+
+            if (Optional.IsDefined(BillingProfile))
+            {
+                builder.Append("  billingProfile:");
+                AppendChildObject(builder, BillingProfile, options, 2);
+            }
+
+            if (Optional.IsDefined(Host))
+            {
+                builder.Append("  host:");
+                AppendChildObject(builder, Host, options, 2);
+            }
+
+            if (Optional.IsDefined(HostGroup))
+            {
+                builder.Append("  hostGroup:");
+                AppendChildObject(builder, HostGroup, options, 2);
+            }
+
+            if (Optional.IsDefined(ProvisioningState))
+            {
+                builder.Append("  provisioningState:");
+                builder.AppendLine($" '{ProvisioningState}'");
+            }
+
+            if (Optional.IsDefined(InstanceView))
+            {
+                builder.Append("  instanceView:");
+                AppendChildObject(builder, InstanceView, options, 2);
+            }
+
+            if (Optional.IsDefined(LicenseType))
+            {
+                builder.Append("  licenseType:");
+                builder.AppendLine($" '{LicenseType}'");
+            }
+
+            if (Optional.IsDefined(VmId))
+            {
+                builder.Append("  vmId:");
+                builder.AppendLine($" '{VmId}'");
+            }
+
+            if (Optional.IsDefined(ExtensionsTimeBudget))
+            {
+                builder.Append("  extensionsTimeBudget:");
+                builder.AppendLine($" '{ExtensionsTimeBudget}'");
+            }
+
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                builder.Append("  tags:");
+                builder.AppendLine(" {");
+                foreach (var item in Tags)
+                {
+                    builder.Append($"    {item.Key}: ");
+                    if (item.Value == null)
+                    {
+                        builder.Append("null");
+                        continue;
+                    }
+                    builder.AppendLine($" '{item.Value}'");
+                }
+                builder.AppendLine("  }");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine($"{indent}{line}");
+            }
         }
     }
 }

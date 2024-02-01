@@ -5,35 +5,70 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class SampleUsageName
+::System.ClientModel.Primitives.IPersistableModel<SampleUsageName>
+{
+internal static SampleUsageName DeserializeSampleUsageName(JsonElement element)
     {
-        internal static SampleUsageName DeserializeSampleUsageName(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<string> value = default;
+        Optional<string> localizedValue = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("value"u8))
             {
-                return null;
+                value = property.Value.GetString();
+                continue;
             }
-            Optional<string> value = default;
-            Optional<string> localizedValue = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("localizedValue"u8))
             {
-                if (property.NameEquals("value"u8))
-                {
-                    value = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("localizedValue"u8))
-                {
-                    localizedValue = property.Value.GetString();
-                    continue;
-                }
+                localizedValue = property.Value.GetString();
+                continue;
             }
-            return new SampleUsageName(value.Value, localizedValue.Value);
+        }
+        return new SampleUsageName(value.Value, localizedValue.Value);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Value))
+        {
+            builder.Append("  value:");
+            builder.AppendLine($" '{Value}'");
+        }
+
+        if (Optional.IsDefined(LocalizedValue))
+        {
+            builder.Append("  localizedValue:");
+            builder.AppendLine($" '{LocalizedValue}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

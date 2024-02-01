@@ -6,145 +6,246 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class LastPatchInstallationSummary
+::System.ClientModel.Primitives.IPersistableModel<LastPatchInstallationSummary>
+{
+internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element)
     {
-        internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<PatchOperationStatus> status = default;
+        Optional<string> installationActivityId = default;
+        Optional<bool> maintenanceWindowExceeded = default;
+        Optional<RebootStatus> rebootStatus = default;
+        Optional<int> notSelectedPatchCount = default;
+        Optional<int> excludedPatchCount = default;
+        Optional<int> pendingPatchCount = default;
+        Optional<int> installedPatchCount = default;
+        Optional<int> failedPatchCount = default;
+        Optional<DateTimeOffset> startTime = default;
+        Optional<DateTimeOffset> lastModifiedTime = default;
+        Optional<string> startedBy = default;
+        Optional<ApiError> error = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("status"u8))
             {
-                return null;
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                status = new PatchOperationStatus(property.Value.GetString());
+                continue;
             }
-            Optional<PatchOperationStatus> status = default;
-            Optional<string> installationActivityId = default;
-            Optional<bool> maintenanceWindowExceeded = default;
-            Optional<RebootStatus> rebootStatus = default;
-            Optional<int> notSelectedPatchCount = default;
-            Optional<int> excludedPatchCount = default;
-            Optional<int> pendingPatchCount = default;
-            Optional<int> installedPatchCount = default;
-            Optional<int> failedPatchCount = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<string> startedBy = default;
-            Optional<ApiError> error = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("installationActivityId"u8))
             {
-                if (property.NameEquals("status"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    status = new PatchOperationStatus(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("installationActivityId"u8))
-                {
-                    installationActivityId = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("maintenanceWindowExceeded"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    maintenanceWindowExceeded = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("rebootStatus"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    rebootStatus = new RebootStatus(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("notSelectedPatchCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    notSelectedPatchCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("excludedPatchCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    excludedPatchCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("pendingPatchCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    pendingPatchCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("installedPatchCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    installedPatchCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("failedPatchCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    failedPatchCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("startTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    startTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("lastModifiedTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    lastModifiedTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("startedBy"u8))
-                {
-                    startedBy = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("error"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    error = ApiError.DeserializeApiError(property.Value);
-                    continue;
-                }
+                installationActivityId = property.Value.GetString();
+                continue;
             }
-            return new LastPatchInstallationSummary(Optional.ToNullable(status), installationActivityId.Value, Optional.ToNullable(maintenanceWindowExceeded), Optional.ToNullable(rebootStatus), Optional.ToNullable(notSelectedPatchCount), Optional.ToNullable(excludedPatchCount), Optional.ToNullable(pendingPatchCount), Optional.ToNullable(installedPatchCount), Optional.ToNullable(failedPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), startedBy.Value, error.Value);
+            if (property.NameEquals("maintenanceWindowExceeded"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                maintenanceWindowExceeded = property.Value.GetBoolean();
+                continue;
+            }
+            if (property.NameEquals("rebootStatus"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                rebootStatus = new RebootStatus(property.Value.GetString());
+                continue;
+            }
+            if (property.NameEquals("notSelectedPatchCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                notSelectedPatchCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("excludedPatchCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                excludedPatchCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("pendingPatchCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                pendingPatchCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("installedPatchCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                installedPatchCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("failedPatchCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                failedPatchCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("startTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                startTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("lastModifiedTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                lastModifiedTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("startedBy"u8))
+            {
+                startedBy = property.Value.GetString();
+                continue;
+            }
+            if (property.NameEquals("error"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                error = ApiError.DeserializeApiError(property.Value);
+                continue;
+            }
+        }
+        return new LastPatchInstallationSummary(Optional.ToNullable(status), installationActivityId.Value, Optional.ToNullable(maintenanceWindowExceeded), Optional.ToNullable(rebootStatus), Optional.ToNullable(notSelectedPatchCount), Optional.ToNullable(excludedPatchCount), Optional.ToNullable(pendingPatchCount), Optional.ToNullable(installedPatchCount), Optional.ToNullable(failedPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), startedBy.Value, error.Value);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Status))
+        {
+            builder.Append("  status:");
+            builder.AppendLine($" '{Status.ToString()}'");
+        }
+
+        if (Optional.IsDefined(InstallationActivityId))
+        {
+            builder.Append("  installationActivityId:");
+            builder.AppendLine($" '{InstallationActivityId}'");
+        }
+
+        if (Optional.IsDefined(MaintenanceWindowExceeded))
+        {
+            builder.Append("  maintenanceWindowExceeded:");
+            var boolValue = MaintenanceWindowExceeded == true ? "true" : "false";
+            builder.AppendLine($" {boolValue}");
+        }
+
+        if (Optional.IsDefined(RebootStatus))
+        {
+            builder.Append("  rebootStatus:");
+            builder.AppendLine($" '{RebootStatus.ToString()}'");
+        }
+
+        if (Optional.IsDefined(NotSelectedPatchCount))
+        {
+            builder.Append("  notSelectedPatchCount:");
+            builder.AppendLine($" '{NotSelectedPatchCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(ExcludedPatchCount))
+        {
+            builder.Append("  excludedPatchCount:");
+            builder.AppendLine($" '{ExcludedPatchCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(PendingPatchCount))
+        {
+            builder.Append("  pendingPatchCount:");
+            builder.AppendLine($" '{PendingPatchCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(InstalledPatchCount))
+        {
+            builder.Append("  installedPatchCount:");
+            builder.AppendLine($" '{InstalledPatchCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(FailedPatchCount))
+        {
+            builder.Append("  failedPatchCount:");
+            builder.AppendLine($" '{FailedPatchCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(StartOn))
+        {
+            builder.Append("  startTime:");
+            builder.AppendLine($" '{StartOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(LastModifiedOn))
+        {
+            builder.Append("  lastModifiedTime:");
+            builder.AppendLine($" '{LastModifiedOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(StartedBy))
+        {
+            builder.Append("  startedBy:");
+            builder.AppendLine($" '{StartedBy}'");
+        }
+
+        if (Optional.IsDefined(Error))
+        {
+            builder.Append("  error:");
+            AppendChildObject(builder, Error, options, 2);
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

@@ -5,39 +5,74 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineStatusCodeCount
+::System.ClientModel.Primitives.IPersistableModel<VirtualMachineStatusCodeCount>
+{
+internal static VirtualMachineStatusCodeCount DeserializeVirtualMachineStatusCodeCount(JsonElement element)
     {
-        internal static VirtualMachineStatusCodeCount DeserializeVirtualMachineStatusCodeCount(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<string> code = default;
+        Optional<int> count = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("code"u8))
             {
-                return null;
+                code = property.Value.GetString();
+                continue;
             }
-            Optional<string> code = default;
-            Optional<int> count = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("count"u8))
             {
-                if (property.NameEquals("code"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    code = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("count"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    count = property.Value.GetInt32();
-                    continue;
-                }
+                count = property.Value.GetInt32();
+                continue;
             }
-            return new VirtualMachineStatusCodeCount(code.Value, Optional.ToNullable(count));
+        }
+        return new VirtualMachineStatusCodeCount(code.Value, Optional.ToNullable(count));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Code))
+        {
+            builder.Append("  code:");
+            builder.AppendLine($" '{Code}'");
+        }
+
+        if (Optional.IsDefined(Count))
+        {
+            builder.Append("  count:");
+            builder.AppendLine($" '{Count.ToString()}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

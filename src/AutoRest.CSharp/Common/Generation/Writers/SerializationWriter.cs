@@ -183,7 +183,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteMethod(method);
             }
-            // writer.LineRaw()
         }
 
         /// <summary>

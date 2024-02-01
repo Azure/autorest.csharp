@@ -6,6 +6,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
@@ -15,9 +16,11 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Constant = AutoRest.CSharp.Output.Models.Shared.Constant;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
+using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
@@ -227,19 +230,42 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueSerialization.Type.IsFrameworkType)
             {
-                if (valueSerialization.Type.FrameworkType == typeof(Uri))
+                var frameworkType = valueSerialization.Type.FrameworkType;
+                if (frameworkType == typeof(Nullable<>))
+                {
+                    frameworkType = valueSerialization.Type.Arguments[0].FrameworkType;
+                }
+
+                expression = expression.NullableStructValue(valueSerialization.Type);
+
+                if (frameworkType == typeof(Uri))
                 {
                     return stringBuilder.AppendLine(
                         new FormattableStringExpression($"{indent}'{{0}}'",
                             expression.Property(nameof(Uri.AbsoluteUri))));
                 }
 
-                if (valueSerialization.Type.FrameworkType == typeof(string))
+                if (frameworkType == typeof(string))
                 {
                     return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression));
                 }
 
-                if (valueSerialization.Type.FrameworkType == typeof(bool))
+                if (frameworkType == typeof(TimeSpan))
+                {
+                    return new[]
+                    {
+                        Var(
+                            "formattedTimeSpan",
+                            new StringExpression(new InvokeStaticMethodExpression(typeof(XmlConvert),
+                                nameof(XmlConvert.ToString), new[] { expression })),
+                            out var timeSpanVariable),
+                        stringBuilder.AppendLine(new FormattableStringExpression(
+                            $"{indent}'{{0}}'",
+                            timeSpanVariable))
+                    };
+                }
+
+                if (frameworkType == typeof(bool))
                 {
                     return new[]
                     {

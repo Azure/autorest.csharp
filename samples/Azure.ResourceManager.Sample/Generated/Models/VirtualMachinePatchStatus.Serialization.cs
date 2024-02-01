@@ -5,43 +5,78 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachinePatchStatus
+::System.ClientModel.Primitives.IPersistableModel<VirtualMachinePatchStatus>
+{
+internal static VirtualMachinePatchStatus DeserializeVirtualMachinePatchStatus(JsonElement element)
     {
-        internal static VirtualMachinePatchStatus DeserializeVirtualMachinePatchStatus(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<AvailablePatchSummary> availablePatchSummary = default;
+        Optional<LastPatchInstallationSummary> lastPatchInstallationSummary = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("availablePatchSummary"u8))
             {
-                return null;
-            }
-            Optional<AvailablePatchSummary> availablePatchSummary = default;
-            Optional<LastPatchInstallationSummary> lastPatchInstallationSummary = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("availablePatchSummary"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value);
                     continue;
                 }
-                if (property.NameEquals("lastPatchInstallationSummary"u8))
+                availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value);
+                continue;
+            }
+            if (property.NameEquals("lastPatchInstallationSummary"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value);
                     continue;
                 }
+                lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value);
+                continue;
             }
-            return new VirtualMachinePatchStatus(availablePatchSummary.Value, lastPatchInstallationSummary.Value);
+        }
+        return new VirtualMachinePatchStatus(availablePatchSummary.Value, lastPatchInstallationSummary.Value);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(AvailablePatchSummary))
+        {
+            builder.Append("  availablePatchSummary:");
+            AppendChildObject(builder, AvailablePatchSummary, options, 2);
+        }
+
+        if (Optional.IsDefined(LastPatchInstallationSummary))
+        {
+            builder.Append("  lastPatchInstallationSummary:");
+            AppendChildObject(builder, LastPatchInstallationSummary, options, 2);
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

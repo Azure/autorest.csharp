@@ -17,9 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
                 property.SerializedName,
                 property.ValueType,
                 property.IsRequired,
-                // property.SchemaProperty?.Required ?? property.InputModelProperty?.IsRequired ?? false,
                 property.IsReadOnly)
-                // property.SchemaProperty?.ReadOnly ?? property.InputModelProperty?.IsReadOnly ?? false)
         {
             ValueSerialization = valueSerialization;
         }

@@ -6,105 +6,181 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineAssessPatchesResult
+::System.ClientModel.Primitives.IPersistableModel<VirtualMachineAssessPatchesResult>
+{
+internal static VirtualMachineAssessPatchesResult DeserializeVirtualMachineAssessPatchesResult(JsonElement element)
     {
-        internal static VirtualMachineAssessPatchesResult DeserializeVirtualMachineAssessPatchesResult(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<PatchOperationStatus> status = default;
+        Optional<string> assessmentActivityId = default;
+        Optional<bool> rebootPending = default;
+        Optional<int> criticalAndSecurityPatchCount = default;
+        Optional<int> otherPatchCount = default;
+        Optional<DateTimeOffset> startDateTime = default;
+        Optional<IReadOnlyList<VirtualMachineSoftwarePatchProperties>> patches = default;
+        Optional<ApiError> error = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("status"u8))
             {
-                return null;
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                status = new PatchOperationStatus(property.Value.GetString());
+                continue;
             }
-            Optional<PatchOperationStatus> status = default;
-            Optional<string> assessmentActivityId = default;
-            Optional<bool> rebootPending = default;
-            Optional<int> criticalAndSecurityPatchCount = default;
-            Optional<int> otherPatchCount = default;
-            Optional<DateTimeOffset> startDateTime = default;
-            Optional<IReadOnlyList<VirtualMachineSoftwarePatchProperties>> patches = default;
-            Optional<ApiError> error = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("assessmentActivityId"u8))
             {
-                if (property.NameEquals("status"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    status = new PatchOperationStatus(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("assessmentActivityId"u8))
-                {
-                    assessmentActivityId = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("rebootPending"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    rebootPending = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("criticalAndSecurityPatchCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    criticalAndSecurityPatchCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("otherPatchCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    otherPatchCount = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("startDateTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    startDateTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("patches"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<VirtualMachineSoftwarePatchProperties> array = new List<VirtualMachineSoftwarePatchProperties>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(VirtualMachineSoftwarePatchProperties.DeserializeVirtualMachineSoftwarePatchProperties(item));
-                    }
-                    patches = array;
-                    continue;
-                }
-                if (property.NameEquals("error"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    error = ApiError.DeserializeApiError(property.Value);
-                    continue;
-                }
+                assessmentActivityId = property.Value.GetString();
+                continue;
             }
-            return new VirtualMachineAssessPatchesResult(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startDateTime), Optional.ToList(patches), error.Value);
+            if (property.NameEquals("rebootPending"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                rebootPending = property.Value.GetBoolean();
+                continue;
+            }
+            if (property.NameEquals("criticalAndSecurityPatchCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                criticalAndSecurityPatchCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("otherPatchCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                otherPatchCount = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("startDateTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                startDateTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("patches"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                List<VirtualMachineSoftwarePatchProperties> array = new List<VirtualMachineSoftwarePatchProperties>();
+                foreach (var item in property.Value.EnumerateArray())
+                {
+                    array.Add(VirtualMachineSoftwarePatchProperties.DeserializeVirtualMachineSoftwarePatchProperties(item));
+                }
+                patches = array;
+                continue;
+            }
+            if (property.NameEquals("error"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                error = ApiError.DeserializeApiError(property.Value);
+                continue;
+            }
+        }
+        return new VirtualMachineAssessPatchesResult(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startDateTime), Optional.ToList(patches), error.Value);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Status))
+        {
+            builder.Append("  status:");
+            builder.AppendLine($" '{Status.ToString()}'");
+        }
+
+        if (Optional.IsDefined(AssessmentActivityId))
+        {
+            builder.Append("  assessmentActivityId:");
+            builder.AppendLine($" '{AssessmentActivityId}'");
+        }
+
+        if (Optional.IsDefined(RebootPending))
+        {
+            builder.Append("  rebootPending:");
+            var boolValue = RebootPending == true ? "true" : "false";
+            builder.AppendLine($" {boolValue}");
+        }
+
+        if (Optional.IsDefined(CriticalAndSecurityPatchCount))
+        {
+            builder.Append("  criticalAndSecurityPatchCount:");
+            builder.AppendLine($" '{CriticalAndSecurityPatchCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(OtherPatchCount))
+        {
+            builder.Append("  otherPatchCount:");
+            builder.AppendLine($" '{OtherPatchCount.ToString()}'");
+        }
+
+        if (Optional.IsDefined(StartOn))
+        {
+            builder.Append("  startDateTime:");
+            builder.AppendLine($" '{StartOn.ToString()}'");
+        }
+
+        if (Optional.IsCollectionDefined(Patches))
+        {
+            builder.Append("  patches:");
+            builder.AppendLine(" [");
+            foreach (var item in Patches)
+            {
+                AppendChildObject(builder, item, options, 4);
+            }
+            builder.AppendLine("  ]");
+        }
+
+        if (Optional.IsDefined(Error))
+        {
+            builder.Append("  error:");
+            AppendChildObject(builder, Error, options, 2);
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

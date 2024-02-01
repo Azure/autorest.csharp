@@ -5,29 +5,58 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class LogAnalyticsOutput
+::System.ClientModel.Primitives.IPersistableModel<LogAnalyticsOutput>
+{
+internal static LogAnalyticsOutput DeserializeLogAnalyticsOutput(JsonElement element)
     {
-        internal static LogAnalyticsOutput DeserializeLogAnalyticsOutput(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<string> output = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("output"u8))
             {
-                return null;
+                output = property.Value.GetString();
+                continue;
             }
-            Optional<string> output = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("output"u8))
-                {
-                    output = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new LogAnalyticsOutput(output.Value);
+        }
+        return new LogAnalyticsOutput(output.Value);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Output))
+        {
+            builder.Append("  output:");
+            builder.AppendLine($" '{Output}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

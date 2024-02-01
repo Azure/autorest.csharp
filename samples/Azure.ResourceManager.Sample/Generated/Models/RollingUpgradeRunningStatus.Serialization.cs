@@ -6,63 +6,109 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class RollingUpgradeRunningStatus
+::System.ClientModel.Primitives.IPersistableModel<RollingUpgradeRunningStatus>
+{
+internal static RollingUpgradeRunningStatus DeserializeRollingUpgradeRunningStatus(JsonElement element)
     {
-        internal static RollingUpgradeRunningStatus DeserializeRollingUpgradeRunningStatus(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<RollingUpgradeStatusCode> code = default;
+        Optional<DateTimeOffset> startTime = default;
+        Optional<RollingUpgradeActionType> lastAction = default;
+        Optional<DateTimeOffset> lastActionTime = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("code"u8))
             {
-                return null;
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                code = property.Value.GetString().ToRollingUpgradeStatusCode();
+                continue;
             }
-            Optional<RollingUpgradeStatusCode> code = default;
-            Optional<DateTimeOffset> startTime = default;
-            Optional<RollingUpgradeActionType> lastAction = default;
-            Optional<DateTimeOffset> lastActionTime = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("startTime"u8))
             {
-                if (property.NameEquals("code"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    code = property.Value.GetString().ToRollingUpgradeStatusCode();
                     continue;
                 }
-                if (property.NameEquals("startTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    startTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("lastAction"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    lastAction = property.Value.GetString().ToRollingUpgradeActionType();
-                    continue;
-                }
-                if (property.NameEquals("lastActionTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    lastActionTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
+                startTime = property.Value.GetDateTimeOffset("O");
+                continue;
             }
-            return new RollingUpgradeRunningStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(lastAction), Optional.ToNullable(lastActionTime));
+            if (property.NameEquals("lastAction"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                lastAction = property.Value.GetString().ToRollingUpgradeActionType();
+                continue;
+            }
+            if (property.NameEquals("lastActionTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                lastActionTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+        }
+        return new RollingUpgradeRunningStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(lastAction), Optional.ToNullable(lastActionTime));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Code))
+        {
+            builder.Append("  code:");
+            builder.AppendLine($" '{Code.ToString()}'");
+        }
+
+        if (Optional.IsDefined(StartOn))
+        {
+            builder.Append("  startTime:");
+            builder.AppendLine($" '{StartOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(LastAction))
+        {
+            builder.Append("  lastAction:");
+            builder.AppendLine($" '{LastAction.ToString()}'");
+        }
+
+        if (Optional.IsDefined(LastActionOn))
+        {
+            builder.Append("  lastActionTime:");
+            builder.AppendLine($" '{LastActionOn.ToString()}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

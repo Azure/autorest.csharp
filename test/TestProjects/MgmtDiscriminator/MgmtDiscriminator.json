@@ -405,6 +405,11 @@
                     "description": "The resource type of this rule",
                     "type": "boolean"
                 },
+                "location": {
+                    "description": "The resource type of this rule",
+                    "type": "string",
+                    "x-ms-format": "azure-location"
+                },
                 "properties": {
                     "description": "The properties",
                     "type": "object",

@@ -23,11 +23,12 @@ namespace MgmtDiscriminator.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="boolProperty"> The resource type of this rule. </param>
+        /// <param name="location"> The resource type of this rule. </param>
         /// <param name="properties"> The properties. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
-        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, DeliveryRuleProperties properties = null)
+        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, DeliveryRuleProperties properties = null)
         {
-            return new DeliveryRuleData(id, name, resourceType, systemData, boolProperty, properties, serializedAdditionalRawData: null);
+            return new DeliveryRuleData(id, name, resourceType, systemData, boolProperty, location, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleProperties"/>. </summary>

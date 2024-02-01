@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Azure.Core;
 using MgmtDiscriminator;
 using MgmtDiscriminator.Models;
 using NUnit.Framework;
@@ -59,6 +60,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     {"foo", new BinaryData("bar") }
                 }),
+                BoolProperty = false,
+                Location = AzureLocation.AustraliaCentral
             };
 
             TestContext.Progress.WriteLine(ModelReaderWriter.Write(data, new ModelReaderWriterOptions("B")).ToString());

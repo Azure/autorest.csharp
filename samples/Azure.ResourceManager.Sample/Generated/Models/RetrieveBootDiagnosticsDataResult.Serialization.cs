@@ -6,43 +6,77 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class RetrieveBootDiagnosticsDataResult
+::System.ClientModel.Primitives.IPersistableModel<RetrieveBootDiagnosticsDataResult>
+{
+internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element)
     {
-        internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<Uri> consoleScreenshotBlobUri = default;
+        Optional<Uri> serialConsoleLogBlobUri = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("consoleScreenshotBlobUri"u8))
             {
-                return null;
-            }
-            Optional<Uri> consoleScreenshotBlobUri = default;
-            Optional<Uri> serialConsoleLogBlobUri = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("consoleScreenshotBlobUri"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    consoleScreenshotBlobUri = new Uri(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("serialConsoleLogBlobUri"u8))
+                consoleScreenshotBlobUri = new Uri(property.Value.GetString());
+                continue;
+            }
+            if (property.NameEquals("serialConsoleLogBlobUri"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    serialConsoleLogBlobUri = new Uri(property.Value.GetString());
                     continue;
                 }
+                serialConsoleLogBlobUri = new Uri(property.Value.GetString());
+                continue;
             }
-            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri.Value, serialConsoleLogBlobUri.Value);
+        }
+        return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri.Value, serialConsoleLogBlobUri.Value);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(ConsoleScreenshotBlobUri))
+        {
+            builder.Append("  consoleScreenshotBlobUri:");
+            builder.AppendLine($" '{ConsoleScreenshotBlobUri.AbsoluteUri}'");
+        }
+
+        if (Optional.IsDefined(SerialConsoleLogBlobUri))
+        {
+            builder.Append("  serialConsoleLogBlobUri:");
+            builder.AppendLine($" '{SerialConsoleLogBlobUri.AbsoluteUri}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

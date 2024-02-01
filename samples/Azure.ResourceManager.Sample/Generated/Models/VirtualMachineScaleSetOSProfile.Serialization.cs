@@ -5,13 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetOSProfile : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetOSProfile : IUtf8JsonSerializable, IPersistableModel<VirtualMachineScaleSetOSProfile>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -128,6 +131,73 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachineScaleSetOSProfile(computerNamePrefix.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, Optional.ToList(secrets));
+        }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Optional.IsDefined(ComputerNamePrefix))
+            {
+                builder.Append("  computerNamePrefix:");
+                builder.AppendLine($" '{ComputerNamePrefix}'");
+            }
+
+            if (Optional.IsDefined(AdminUsername))
+            {
+                builder.Append("  adminUsername:");
+                builder.AppendLine($" '{AdminUsername}'");
+            }
+
+            if (Optional.IsDefined(AdminPassword))
+            {
+                builder.Append("  adminPassword:");
+                builder.AppendLine($" '{AdminPassword}'");
+            }
+
+            if (Optional.IsDefined(CustomData))
+            {
+                builder.Append("  customData:");
+                builder.AppendLine($" '{CustomData}'");
+            }
+
+            if (Optional.IsDefined(WindowsConfiguration))
+            {
+                builder.Append("  windowsConfiguration:");
+                AppendChildObject(builder, WindowsConfiguration, options, 2);
+            }
+
+            if (Optional.IsDefined(LinuxConfiguration))
+            {
+                builder.Append("  linuxConfiguration:");
+                AppendChildObject(builder, LinuxConfiguration, options, 2);
+            }
+
+            if (Optional.IsCollectionDefined(Secrets))
+            {
+                builder.Append("  secrets:");
+                builder.AppendLine(" [");
+                foreach (var item in Secrets)
+                {
+                    AppendChildObject(builder, item, options, 4);
+                }
+                builder.AppendLine("  ]");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine($"{indent}{line}");
+            }
         }
     }
 }

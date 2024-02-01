@@ -5,45 +5,85 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVmExtensionsSummary
+::System.ClientModel.Primitives.IPersistableModel<VirtualMachineScaleSetVmExtensionsSummary>
+{
+internal static VirtualMachineScaleSetVmExtensionsSummary DeserializeVirtualMachineScaleSetVmExtensionsSummary(JsonElement element)
     {
-        internal static VirtualMachineScaleSetVmExtensionsSummary DeserializeVirtualMachineScaleSetVmExtensionsSummary(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<string> name = default;
+        Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("name"u8))
             {
-                return null;
+                name = property.Value.GetString();
+                continue;
             }
-            Optional<string> name = default;
-            Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("statusesSummary"u8))
             {
-                if (property.NameEquals("name"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("statusesSummary"u8))
+                List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
+                foreach (var item in property.Value.EnumerateArray())
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
-                    }
-                    statusesSummary = array;
-                    continue;
+                    array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
                 }
+                statusesSummary = array;
+                continue;
             }
-            return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, Optional.ToList(statusesSummary));
+        }
+        return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, Optional.ToList(statusesSummary));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Name))
+        {
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name}'");
+        }
+
+        if (Optional.IsCollectionDefined(StatusesSummary))
+        {
+            builder.Append("  statusesSummary:");
+            builder.AppendLine(" [");
+            foreach (var item in StatusesSummary)
+            {
+                AppendChildObject(builder, item, options, 4);
+            }
+            builder.AppendLine("  ]");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

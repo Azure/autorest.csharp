@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using System.Xml;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -151,7 +152,8 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(CacheDuration))
             {
                 builder.Append("  cacheDuration:");
-                builder.AppendLine($" '{CacheDuration.ToString()}'");
+                var formattedTimeSpan = XmlConvert.ToString(CacheDuration.Value);
+                builder.AppendLine($" '{formattedTimeSpan}'");
             }
 
             builder.AppendLine("}");

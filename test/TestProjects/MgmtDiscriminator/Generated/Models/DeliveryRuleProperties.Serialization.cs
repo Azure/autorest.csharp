@@ -193,7 +193,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Order))
             {
                 builder.Append("  order:");
-                builder.AppendLine($" '{Order.ToString()}'");
+                builder.AppendLine($" '{Order.Value.ToString()}'");
             }
 
             if (Optional.IsDefined(Conditions))

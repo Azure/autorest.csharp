@@ -217,6 +217,23 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
+        public static BicepSerialization BuildBicepSerialization(InputType inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat)
+        {
+            return inputType switch
+            {
+                CodeModelType codeModelType => BuildBicepSerialization(codeModelType.Schema, valueType, isCollectionElement),
+                InputListType listType => new BicepArraySerialization(
+                    TypeFactory.GetImplementationType(valueType),
+                    BuildBicepSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat),
+                    valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                InputDictionaryType dictionaryType => new BicepDictionarySerialization(
+                    TypeFactory.GetImplementationType(valueType),
+                    BuildBicepSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat),
+                    valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
+                _ => new BicepValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
+            };
+        }
+
         public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, SerializableObjectType objectType)
         {
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
@@ -346,7 +363,7 @@ namespace AutoRest.CSharp.Output.Builders
             return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
-        public BicepObjectSerialization? BuildBicepObjectSerialization(ObjectType resource)
+        public BicepObjectSerialization? BuildBicepObjectSerialization(SerializableObjectType resource)
         {
             return new BicepObjectSerialization("SerializeBicep", resource);
         }

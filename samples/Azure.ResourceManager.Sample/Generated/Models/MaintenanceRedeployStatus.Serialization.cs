@@ -6,89 +6,154 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class MaintenanceRedeployStatus
+::System.ClientModel.Primitives.IPersistableModel<MaintenanceRedeployStatus>
+{
+internal static MaintenanceRedeployStatus DeserializeMaintenanceRedeployStatus(JsonElement element)
     {
-        internal static MaintenanceRedeployStatus DeserializeMaintenanceRedeployStatus(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<bool> isCustomerInitiatedMaintenanceAllowed = default;
+        Optional<DateTimeOffset> preMaintenanceWindowStartTime = default;
+        Optional<DateTimeOffset> preMaintenanceWindowEndTime = default;
+        Optional<DateTimeOffset> maintenanceWindowStartTime = default;
+        Optional<DateTimeOffset> maintenanceWindowEndTime = default;
+        Optional<MaintenanceOperationResultCodeType> lastOperationResultCode = default;
+        Optional<string> lastOperationMessage = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("isCustomerInitiatedMaintenanceAllowed"u8))
             {
-                return null;
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                isCustomerInitiatedMaintenanceAllowed = property.Value.GetBoolean();
+                continue;
             }
-            Optional<bool> isCustomerInitiatedMaintenanceAllowed = default;
-            Optional<DateTimeOffset> preMaintenanceWindowStartTime = default;
-            Optional<DateTimeOffset> preMaintenanceWindowEndTime = default;
-            Optional<DateTimeOffset> maintenanceWindowStartTime = default;
-            Optional<DateTimeOffset> maintenanceWindowEndTime = default;
-            Optional<MaintenanceOperationResultCodeType> lastOperationResultCode = default;
-            Optional<string> lastOperationMessage = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("preMaintenanceWindowStartTime"u8))
             {
-                if (property.NameEquals("isCustomerInitiatedMaintenanceAllowed"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    isCustomerInitiatedMaintenanceAllowed = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("preMaintenanceWindowStartTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    preMaintenanceWindowStartTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("preMaintenanceWindowEndTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    preMaintenanceWindowEndTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("maintenanceWindowStartTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    maintenanceWindowStartTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("maintenanceWindowEndTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    maintenanceWindowEndTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("lastOperationResultCode"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    lastOperationResultCode = property.Value.GetString().ToMaintenanceOperationResultCodeType();
-                    continue;
-                }
-                if (property.NameEquals("lastOperationMessage"u8))
-                {
-                    lastOperationMessage = property.Value.GetString();
-                    continue;
-                }
+                preMaintenanceWindowStartTime = property.Value.GetDateTimeOffset("O");
+                continue;
             }
-            return new MaintenanceRedeployStatus(Optional.ToNullable(isCustomerInitiatedMaintenanceAllowed), Optional.ToNullable(preMaintenanceWindowStartTime), Optional.ToNullable(preMaintenanceWindowEndTime), Optional.ToNullable(maintenanceWindowStartTime), Optional.ToNullable(maintenanceWindowEndTime), Optional.ToNullable(lastOperationResultCode), lastOperationMessage.Value);
+            if (property.NameEquals("preMaintenanceWindowEndTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                preMaintenanceWindowEndTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("maintenanceWindowStartTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                maintenanceWindowStartTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("maintenanceWindowEndTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                maintenanceWindowEndTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("lastOperationResultCode"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                lastOperationResultCode = property.Value.GetString().ToMaintenanceOperationResultCodeType();
+                continue;
+            }
+            if (property.NameEquals("lastOperationMessage"u8))
+            {
+                lastOperationMessage = property.Value.GetString();
+                continue;
+            }
+        }
+        return new MaintenanceRedeployStatus(Optional.ToNullable(isCustomerInitiatedMaintenanceAllowed), Optional.ToNullable(preMaintenanceWindowStartTime), Optional.ToNullable(preMaintenanceWindowEndTime), Optional.ToNullable(maintenanceWindowStartTime), Optional.ToNullable(maintenanceWindowEndTime), Optional.ToNullable(lastOperationResultCode), lastOperationMessage.Value);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(IsCustomerInitiatedMaintenanceAllowed))
+        {
+            builder.Append("  isCustomerInitiatedMaintenanceAllowed:");
+            var boolValue = IsCustomerInitiatedMaintenanceAllowed == true ? "true" : "false";
+            builder.AppendLine($" {boolValue}");
+        }
+
+        if (Optional.IsDefined(PreMaintenanceWindowStartOn))
+        {
+            builder.Append("  preMaintenanceWindowStartTime:");
+            builder.AppendLine($" '{PreMaintenanceWindowStartOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(PreMaintenanceWindowEndOn))
+        {
+            builder.Append("  preMaintenanceWindowEndTime:");
+            builder.AppendLine($" '{PreMaintenanceWindowEndOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(MaintenanceWindowStartOn))
+        {
+            builder.Append("  maintenanceWindowStartTime:");
+            builder.AppendLine($" '{MaintenanceWindowStartOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(MaintenanceWindowEndOn))
+        {
+            builder.Append("  maintenanceWindowEndTime:");
+            builder.AppendLine($" '{MaintenanceWindowEndOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(LastOperationResultCode))
+        {
+            builder.Append("  lastOperationResultCode:");
+            builder.AppendLine($" '{LastOperationResultCode.ToString()}'");
+        }
+
+        if (Optional.IsDefined(LastOperationMessage))
+        {
+            builder.Append("  lastOperationMessage:");
+            builder.AppendLine($" '{LastOperationMessage}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

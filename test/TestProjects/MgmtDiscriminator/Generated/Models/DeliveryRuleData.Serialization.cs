@@ -34,6 +34,11 @@ namespace MgmtDiscriminator
                 writer.WritePropertyName("boolProperty"u8);
                 writer.WriteBooleanValue(BoolProperty.Value);
             }
+            if (Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
+            }
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
@@ -98,6 +103,7 @@ namespace MgmtDiscriminator
                 return null;
             }
             Optional<bool> boolProperty = default;
+            Optional<AzureLocation> location = default;
             Optional<DeliveryRuleProperties> properties = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -114,6 +120,15 @@ namespace MgmtDiscriminator
                         continue;
                     }
                     boolProperty = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("location"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -155,7 +170,7 @@ namespace MgmtDiscriminator
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleData(id, name, type, systemData.Value, Optional.ToNullable(boolProperty), properties.Value, serializedAdditionalRawData);
+            return new DeliveryRuleData(id, name, type, systemData.Value, Optional.ToNullable(boolProperty), Optional.ToNullable(location), properties.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -166,8 +181,14 @@ namespace MgmtDiscriminator
             if (Optional.IsDefined(BoolProperty))
             {
                 builder.Append("  boolProperty:");
-                var boolValue = BoolProperty == true ? "true" : "false";
+                var boolValue = BoolProperty.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(Location))
+            {
+                builder.Append("  location:");
+                builder.AppendLine($" '{Location.Value.ToString()}'");
             }
 
             if (Optional.IsDefined(Properties))

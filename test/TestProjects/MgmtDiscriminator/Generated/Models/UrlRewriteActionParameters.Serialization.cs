@@ -143,7 +143,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(PreserveUnmatchedPath))
             {
                 builder.Append("  preserveUnmatchedPath:");
-                var boolValue = PreserveUnmatchedPath == true ? "true" : "false";
+                var boolValue = PreserveUnmatchedPath.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 

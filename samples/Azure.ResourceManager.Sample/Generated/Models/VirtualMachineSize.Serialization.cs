@@ -5,79 +5,138 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineSize
+::System.ClientModel.Primitives.IPersistableModel<VirtualMachineSize>
+{
+internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element)
     {
-        internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<string> name = default;
+        Optional<int> numberOfCores = default;
+        Optional<int> osDiskSizeInMB = default;
+        Optional<int> resourceDiskSizeInMB = default;
+        Optional<int> memoryInMB = default;
+        Optional<int> maxDataDiskCount = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("name"u8))
             {
-                return null;
+                name = property.Value.GetString();
+                continue;
             }
-            Optional<string> name = default;
-            Optional<int> numberOfCores = default;
-            Optional<int> osDiskSizeInMB = default;
-            Optional<int> resourceDiskSizeInMB = default;
-            Optional<int> memoryInMB = default;
-            Optional<int> maxDataDiskCount = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("numberOfCores"u8))
             {
-                if (property.NameEquals("name"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("numberOfCores"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    numberOfCores = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("osDiskSizeInMB"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    osDiskSizeInMB = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("resourceDiskSizeInMB"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    resourceDiskSizeInMB = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("memoryInMB"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    memoryInMB = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("maxDataDiskCount"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    maxDataDiskCount = property.Value.GetInt32();
-                    continue;
-                }
+                numberOfCores = property.Value.GetInt32();
+                continue;
             }
-            return new VirtualMachineSize(name.Value, Optional.ToNullable(numberOfCores), Optional.ToNullable(osDiskSizeInMB), Optional.ToNullable(resourceDiskSizeInMB), Optional.ToNullable(memoryInMB), Optional.ToNullable(maxDataDiskCount));
+            if (property.NameEquals("osDiskSizeInMB"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                osDiskSizeInMB = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("resourceDiskSizeInMB"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                resourceDiskSizeInMB = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("memoryInMB"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                memoryInMB = property.Value.GetInt32();
+                continue;
+            }
+            if (property.NameEquals("maxDataDiskCount"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                maxDataDiskCount = property.Value.GetInt32();
+                continue;
+            }
+        }
+        return new VirtualMachineSize(name.Value, Optional.ToNullable(numberOfCores), Optional.ToNullable(osDiskSizeInMB), Optional.ToNullable(resourceDiskSizeInMB), Optional.ToNullable(memoryInMB), Optional.ToNullable(maxDataDiskCount));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Name))
+        {
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name}'");
+        }
+
+        if (Optional.IsDefined(NumberOfCores))
+        {
+            builder.Append("  numberOfCores:");
+            builder.AppendLine($" '{NumberOfCores.ToString()}'");
+        }
+
+        if (Optional.IsDefined(OSDiskSizeInMB))
+        {
+            builder.Append("  osDiskSizeInMB:");
+            builder.AppendLine($" '{OSDiskSizeInMB.ToString()}'");
+        }
+
+        if (Optional.IsDefined(ResourceDiskSizeInMB))
+        {
+            builder.Append("  resourceDiskSizeInMB:");
+            builder.AppendLine($" '{ResourceDiskSizeInMB.ToString()}'");
+        }
+
+        if (Optional.IsDefined(MemoryInMB))
+        {
+            builder.Append("  memoryInMB:");
+            builder.AppendLine($" '{MemoryInMB.ToString()}'");
+        }
+
+        if (Optional.IsDefined(MaxDataDiskCount))
+        {
+            builder.Append("  maxDataDiskCount:");
+            builder.AppendLine($" '{MaxDataDiskCount.ToString()}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

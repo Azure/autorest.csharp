@@ -179,7 +179,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(NegateCondition))
             {
                 builder.Append("  negateCondition:");
-                var boolValue = NegateCondition == true ? "true" : "false";
+                var boolValue = NegateCondition.Value == true ? "true" : "false";
                 builder.AppendLine($" {boolValue}");
             }
 

@@ -5,46 +5,94 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class SampleUsage
+::System.ClientModel.Primitives.IPersistableModel<SampleUsage>
+{
+internal static SampleUsage DeserializeSampleUsage(JsonElement element)
     {
-        internal static SampleUsage DeserializeSampleUsage(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        UsageUnit unit = default;
+        int currentValue = default;
+        long limit = default;
+        SampleUsageName name = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("unit"u8))
             {
-                return null;
+                unit = new UsageUnit(property.Value.GetString());
+                continue;
             }
-            UsageUnit unit = default;
-            int currentValue = default;
-            long limit = default;
-            SampleUsageName name = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("currentValue"u8))
             {
-                if (property.NameEquals("unit"u8))
-                {
-                    unit = new UsageUnit(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("currentValue"u8))
-                {
-                    currentValue = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("limit"u8))
-                {
-                    limit = property.Value.GetInt64();
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = SampleUsageName.DeserializeSampleUsageName(property.Value);
-                    continue;
-                }
+                currentValue = property.Value.GetInt32();
+                continue;
             }
-            return new SampleUsage(unit, currentValue, limit, name);
+            if (property.NameEquals("limit"u8))
+            {
+                limit = property.Value.GetInt64();
+                continue;
+            }
+            if (property.NameEquals("name"u8))
+            {
+                name = SampleUsageName.DeserializeSampleUsageName(property.Value);
+                continue;
+            }
+        }
+        return new SampleUsage(unit, currentValue, limit, name);
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Unit))
+        {
+            builder.Append("  unit:");
+            builder.AppendLine($" '{Unit.ToString()}'");
+        }
+
+        if (Optional.IsDefined(CurrentValue))
+        {
+            builder.Append("  currentValue:");
+            builder.AppendLine($" '{CurrentValue.ToString()}'");
+        }
+
+        if (Optional.IsDefined(Limit))
+        {
+            builder.Append("  limit:");
+            builder.AppendLine($" '{Limit.ToString()}'");
+        }
+
+        if (Optional.IsDefined(Name))
+        {
+            builder.Append("  name:");
+            AppendChildObject(builder, Name, options, 2);
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

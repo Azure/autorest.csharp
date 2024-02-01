@@ -6,109 +6,201 @@
 #nullable disable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineSoftwarePatchProperties
+::System.ClientModel.Primitives.IPersistableModel<VirtualMachineSoftwarePatchProperties>
+{
+internal static VirtualMachineSoftwarePatchProperties DeserializeVirtualMachineSoftwarePatchProperties(JsonElement element)
     {
-        internal static VirtualMachineSoftwarePatchProperties DeserializeVirtualMachineSoftwarePatchProperties(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<string> patchId = default;
+        Optional<string> name = default;
+        Optional<string> version = default;
+        Optional<string> kbid = default;
+        Optional<IReadOnlyList<string>> classifications = default;
+        Optional<SoftwareUpdateRebootBehavior> rebootBehavior = default;
+        Optional<string> activityId = default;
+        Optional<DateTimeOffset> publishedDate = default;
+        Optional<DateTimeOffset> lastModifiedDateTime = default;
+        Optional<PatchAssessmentState> assessmentState = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("patchId"u8))
             {
-                return null;
+                patchId = property.Value.GetString();
+                continue;
             }
-            Optional<string> patchId = default;
-            Optional<string> name = default;
-            Optional<string> version = default;
-            Optional<string> kbid = default;
-            Optional<IReadOnlyList<string>> classifications = default;
-            Optional<SoftwareUpdateRebootBehavior> rebootBehavior = default;
-            Optional<string> activityId = default;
-            Optional<DateTimeOffset> publishedDate = default;
-            Optional<DateTimeOffset> lastModifiedDateTime = default;
-            Optional<PatchAssessmentState> assessmentState = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("name"u8))
             {
-                if (property.NameEquals("patchId"u8))
-                {
-                    patchId = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("version"u8))
-                {
-                    version = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("kbid"u8))
-                {
-                    kbid = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("classifications"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetString());
-                    }
-                    classifications = array;
-                    continue;
-                }
-                if (property.NameEquals("rebootBehavior"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    rebootBehavior = new SoftwareUpdateRebootBehavior(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("activityId"u8))
-                {
-                    activityId = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("publishedDate"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    publishedDate = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("lastModifiedDateTime"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    lastModifiedDateTime = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("assessmentState"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    assessmentState = new PatchAssessmentState(property.Value.GetString());
-                    continue;
-                }
+                name = property.Value.GetString();
+                continue;
             }
-            return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, Optional.ToList(classifications), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState));
+            if (property.NameEquals("version"u8))
+            {
+                version = property.Value.GetString();
+                continue;
+            }
+            if (property.NameEquals("kbid"u8))
+            {
+                kbid = property.Value.GetString();
+                continue;
+            }
+            if (property.NameEquals("classifications"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                List<string> array = new List<string>();
+                foreach (var item in property.Value.EnumerateArray())
+                {
+                    array.Add(item.GetString());
+                }
+                classifications = array;
+                continue;
+            }
+            if (property.NameEquals("rebootBehavior"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                rebootBehavior = new SoftwareUpdateRebootBehavior(property.Value.GetString());
+                continue;
+            }
+            if (property.NameEquals("activityId"u8))
+            {
+                activityId = property.Value.GetString();
+                continue;
+            }
+            if (property.NameEquals("publishedDate"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                publishedDate = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("lastModifiedDateTime"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                lastModifiedDateTime = property.Value.GetDateTimeOffset("O");
+                continue;
+            }
+            if (property.NameEquals("assessmentState"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                assessmentState = new PatchAssessmentState(property.Value.GetString());
+                continue;
+            }
+        }
+        return new VirtualMachineSoftwarePatchProperties(patchId.Value, name.Value, version.Value, kbid.Value, Optional.ToList(classifications), Optional.ToNullable(rebootBehavior), activityId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(lastModifiedDateTime), Optional.ToNullable(assessmentState));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(PatchId))
+        {
+            builder.Append("  patchId:");
+            builder.AppendLine($" '{PatchId}'");
+        }
+
+        if (Optional.IsDefined(Name))
+        {
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name}'");
+        }
+
+        if (Optional.IsDefined(Version))
+        {
+            builder.Append("  version:");
+            builder.AppendLine($" '{Version}'");
+        }
+
+        if (Optional.IsDefined(Kbid))
+        {
+            builder.Append("  kbid:");
+            builder.AppendLine($" '{Kbid}'");
+        }
+
+        if (Optional.IsCollectionDefined(Classifications))
+        {
+            builder.Append("  classifications:");
+            builder.AppendLine(" [");
+            foreach (var item in Classifications)
+            {
+                if (item == null)
+                {
+                    builder.Append("null");
+                    continue;
+                }
+                builder.AppendLine($"    '{item}'");
+            }
+            builder.AppendLine("  ]");
+        }
+
+        if (Optional.IsDefined(RebootBehavior))
+        {
+            builder.Append("  rebootBehavior:");
+            builder.AppendLine($" '{RebootBehavior.ToString()}'");
+        }
+
+        if (Optional.IsDefined(ActivityId))
+        {
+            builder.Append("  activityId:");
+            builder.AppendLine($" '{ActivityId}'");
+        }
+
+        if (Optional.IsDefined(PublishedOn))
+        {
+            builder.Append("  publishedDate:");
+            builder.AppendLine($" '{PublishedOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(LastModifiedOn))
+        {
+            builder.Append("  lastModifiedDateTime:");
+            builder.AppendLine($" '{LastModifiedOn.ToString()}'");
+        }
+
+        if (Optional.IsDefined(AssessmentState))
+        {
+            builder.Append("  assessmentState:");
+            builder.AppendLine($" '{AssessmentState.ToString()}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

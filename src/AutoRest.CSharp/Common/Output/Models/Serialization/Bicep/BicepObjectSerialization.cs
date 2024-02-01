@@ -1,31 +1,57 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
 {
     internal class BicepObjectSerialization
     {
-        public BicepObjectSerialization(string name, ObjectType model)
+        public BicepObjectSerialization(string name, SerializableObjectType model)
         {
             Type = model.Type;
             var enumeration = model.EnumerateHierarchy().SelectMany(o => o.Properties);
             var properties = new List<BicepPropertySerialization>();
             foreach (var property in enumeration)
             {
+                BicepSerialization bicepSerialization;
+
+                if (property.SchemaProperty != null)
+                {
+                    bicepSerialization = SerializationBuilder.BuildBicepSerialization(
+                        property.SchemaProperty.Schema,
+                        property.Declaration.Type,
+                        false);
+                }
+                else if (property.InputModelProperty != null)
+                {
+                    bicepSerialization = SerializationBuilder.BuildBicepSerialization(property.InputModelProperty!.Type,
+                        property.Declaration.Type, false, property.SerializationFormat);
+                }
+                else if (property.Declaration.Name == "AdditionalProperties")
+                {
+                    bicepSerialization = SerializationBuilder.BuildBicepSerialization(
+                        new DictionarySchema(),
+                        property.Declaration.Type,
+                        false);
+                }
+                else
+                {
+                    throw new InvalidOperationException(
+                        $"Unexpected property with no SchemaProperty or InputModelProperty: {property.Declaration.Name}");
+                }
+
                 properties.Add(
                     new BicepPropertySerialization(
                         property,
-                        // TODO figure out how to properly handle null schema e.g. AdditionalProperties properties
-                        SerializationBuilder.BuildBicepSerialization(property.SchemaProperty?.Schema ?? new DictionarySchema(), property.ValueType, false)));
+                        bicepSerialization));
             }
             Properties = properties;
             Name = name;

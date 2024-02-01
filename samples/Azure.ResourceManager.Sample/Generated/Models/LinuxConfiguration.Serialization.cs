@@ -5,12 +5,15 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class LinuxConfiguration : IUtf8JsonSerializable
+    public partial class LinuxConfiguration : IUtf8JsonSerializable, IPersistableModel<LinuxConfiguration>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -73,6 +76,46 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVmAgent));
+        }
+
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Optional.IsDefined(DisablePasswordAuthentication))
+            {
+                builder.Append("  disablePasswordAuthentication:");
+                var boolValue = DisablePasswordAuthentication == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(Ssh))
+            {
+                builder.Append("  ssh:");
+                AppendChildObject(builder, Ssh, options, 2);
+            }
+
+            if (Optional.IsDefined(ProvisionVmAgent))
+            {
+                builder.Append("  provisionVMAgent:");
+                var boolValue = ProvisionVmAgent == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine($"{indent}{line}");
+            }
         }
     }
 }

@@ -5,60 +5,111 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class DiskInstanceView
+::System.ClientModel.Primitives.IPersistableModel<DiskInstanceView>
+{
+internal static DiskInstanceView DeserializeDiskInstanceView(JsonElement element)
     {
-        internal static DiskInstanceView DeserializeDiskInstanceView(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<string> name = default;
+        Optional<IReadOnlyList<DiskEncryptionSettings>> encryptionSettings = default;
+        Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("name"u8))
             {
-                return null;
+                name = property.Value.GetString();
+                continue;
             }
-            Optional<string> name = default;
-            Optional<IReadOnlyList<DiskEncryptionSettings>> encryptionSettings = default;
-            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("encryptionSettings"u8))
             {
-                if (property.NameEquals("name"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("encryptionSettings"u8))
+                List<DiskEncryptionSettings> array = new List<DiskEncryptionSettings>();
+                foreach (var item in property.Value.EnumerateArray())
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<DiskEncryptionSettings> array = new List<DiskEncryptionSettings>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item));
-                    }
-                    encryptionSettings = array;
-                    continue;
+                    array.Add(DiskEncryptionSettings.DeserializeDiskEncryptionSettings(item));
                 }
-                if (property.NameEquals("statuses"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    List<InstanceViewStatus> array = new List<InstanceViewStatus>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
-                    }
-                    statuses = array;
-                    continue;
-                }
+                encryptionSettings = array;
+                continue;
             }
-            return new DiskInstanceView(name.Value, Optional.ToList(encryptionSettings), Optional.ToList(statuses));
+            if (property.NameEquals("statuses"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                List<InstanceViewStatus> array = new List<InstanceViewStatus>();
+                foreach (var item in property.Value.EnumerateArray())
+                {
+                    array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                }
+                statuses = array;
+                continue;
+            }
+        }
+        return new DiskInstanceView(name.Value, Optional.ToList(encryptionSettings), Optional.ToList(statuses));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Name))
+        {
+            builder.Append("  name:");
+            builder.AppendLine($" '{Name}'");
+        }
+
+        if (Optional.IsCollectionDefined(EncryptionSettings))
+        {
+            builder.Append("  encryptionSettings:");
+            builder.AppendLine(" [");
+            foreach (var item in EncryptionSettings)
+            {
+                AppendChildObject(builder, item, options, 4);
+            }
+            builder.AppendLine("  ]");
+        }
+
+        if (Optional.IsCollectionDefined(Statuses))
+        {
+            builder.Append("  statuses:");
+            builder.AppendLine(" [");
+            foreach (var item in Statuses)
+            {
+                AppendChildObject(builder, item, options, 4);
+            }
+            builder.AppendLine("  ]");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }

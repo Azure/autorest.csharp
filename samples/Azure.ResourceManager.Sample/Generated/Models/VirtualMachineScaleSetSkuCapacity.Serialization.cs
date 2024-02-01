@@ -5,63 +5,110 @@
 
 #nullable disable
 
+using System;
+using System.ClientModel.Primitives;
+using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetSkuCapacity
+::System.ClientModel.Primitives.IPersistableModel<VirtualMachineScaleSetSkuCapacity>
+{
+internal static VirtualMachineScaleSetSkuCapacity DeserializeVirtualMachineScaleSetSkuCapacity(JsonElement element)
     {
-        internal static VirtualMachineScaleSetSkuCapacity DeserializeVirtualMachineScaleSetSkuCapacity(JsonElement element)
+        if (element.ValueKind == JsonValueKind.Null)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            return null;
+        }
+        Optional<long> minimum = default;
+        Optional<long> maximum = default;
+        Optional<long> defaultCapacity = default;
+        Optional<VirtualMachineScaleSetSkuScaleType> scaleType = default;
+        foreach (var property in element.EnumerateObject())
+        {
+            if (property.NameEquals("minimum"u8))
             {
-                return null;
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                minimum = property.Value.GetInt64();
+                continue;
             }
-            Optional<long> minimum = default;
-            Optional<long> maximum = default;
-            Optional<long> defaultCapacity = default;
-            Optional<VirtualMachineScaleSetSkuScaleType> scaleType = default;
-            foreach (var property in element.EnumerateObject())
+            if (property.NameEquals("maximum"u8))
             {
-                if (property.NameEquals("minimum"u8))
+                if (property.Value.ValueKind == JsonValueKind.Null)
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    minimum = property.Value.GetInt64();
                     continue;
                 }
-                if (property.NameEquals("maximum"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    maximum = property.Value.GetInt64();
-                    continue;
-                }
-                if (property.NameEquals("defaultCapacity"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    defaultCapacity = property.Value.GetInt64();
-                    continue;
-                }
-                if (property.NameEquals("scaleType"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    scaleType = property.Value.GetString().ToVirtualMachineScaleSetSkuScaleType();
-                    continue;
-                }
+                maximum = property.Value.GetInt64();
+                continue;
             }
-            return new VirtualMachineScaleSetSkuCapacity(Optional.ToNullable(minimum), Optional.ToNullable(maximum), Optional.ToNullable(defaultCapacity), Optional.ToNullable(scaleType));
+            if (property.NameEquals("defaultCapacity"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                defaultCapacity = property.Value.GetInt64();
+                continue;
+            }
+            if (property.NameEquals("scaleType"u8))
+            {
+                if (property.Value.ValueKind == JsonValueKind.Null)
+                {
+                    continue;
+                }
+                scaleType = property.Value.GetString().ToVirtualMachineScaleSetSkuScaleType();
+                continue;
+            }
+        }
+        return new VirtualMachineScaleSetSkuCapacity(Optional.ToNullable(minimum), Optional.ToNullable(maximum), Optional.ToNullable(defaultCapacity), Optional.ToNullable(scaleType));
+    }
+
+    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine("{");
+
+        if (Optional.IsDefined(Minimum))
+        {
+            builder.Append("  minimum:");
+            builder.AppendLine($" '{Minimum.ToString()}'");
+        }
+
+        if (Optional.IsDefined(Maximum))
+        {
+            builder.Append("  maximum:");
+            builder.AppendLine($" '{Maximum.ToString()}'");
+        }
+
+        if (Optional.IsDefined(DefaultCapacity))
+        {
+            builder.Append("  defaultCapacity:");
+            builder.AppendLine($" '{DefaultCapacity.ToString()}'");
+        }
+
+        if (Optional.IsDefined(ScaleType))
+        {
+            builder.Append("  scaleType:");
+            builder.AppendLine($" '{ScaleType.ToString()}'");
+        }
+
+        builder.AppendLine("}");
+        return BinaryData.FromString(builder.ToString());
+    }
+
+    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+    {
+        string indent = new string(' ', spaces);
+        BinaryData data = ModelReaderWriter.Write(childObject, options);
+        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var line in lines)
+        {
+            stringBuilder.AppendLine($"{indent}{line}");
         }
     }
+}
 }
