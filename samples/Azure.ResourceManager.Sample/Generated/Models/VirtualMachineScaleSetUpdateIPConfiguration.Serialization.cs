@@ -5,17 +5,14 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetUpdateIPConfiguration : IUtf8JsonSerializable, IPersistableModel<VirtualMachineScaleSetUpdateIPConfiguration>
+    public partial class VirtualMachineScaleSetUpdateIPConfiguration : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -230,107 +227,6 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachineScaleSetUpdateIPConfiguration(id.Value, name.Value, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools));
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name}'");
-            }
-
-            if (Optional.IsDefined(Subnet))
-            {
-                builder.Append("  subnet:");
-                AppendChildObject(builder, Subnet, options, 2);
-            }
-
-            if (Optional.IsDefined(Primary))
-            {
-                builder.Append("  primary:");
-                var boolValue = Primary == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(PublicIPAddressConfiguration))
-            {
-                builder.Append("  publicIPAddressConfiguration:");
-                AppendChildObject(builder, PublicIPAddressConfiguration, options, 2);
-            }
-
-            if (Optional.IsDefined(PrivateIPAddressVersion))
-            {
-                builder.Append("  privateIPAddressVersion:");
-                builder.AppendLine($" '{PrivateIPAddressVersion.ToString()}'");
-            }
-
-            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
-            {
-                builder.Append("  applicationGatewayBackendAddressPools:");
-                builder.AppendLine(" [");
-                foreach (var item in ApplicationGatewayBackendAddressPools)
-                {
-                    AppendChildObject(builder, item, options, 4);
-                }
-                builder.AppendLine("  ]");
-            }
-
-            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
-            {
-                builder.Append("  applicationSecurityGroups:");
-                builder.AppendLine(" [");
-                foreach (var item in ApplicationSecurityGroups)
-                {
-                    AppendChildObject(builder, item, options, 4);
-                }
-                builder.AppendLine("  ]");
-            }
-
-            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
-            {
-                builder.Append("  loadBalancerBackendAddressPools:");
-                builder.AppendLine(" [");
-                foreach (var item in LoadBalancerBackendAddressPools)
-                {
-                    AppendChildObject(builder, item, options, 4);
-                }
-                builder.AppendLine("  ]");
-            }
-
-            if (Optional.IsCollectionDefined(LoadBalancerInboundNatPools))
-            {
-                builder.Append("  loadBalancerInboundNatPools:");
-                builder.AppendLine(" [");
-                foreach (var item in LoadBalancerInboundNatPools)
-                {
-                    AppendChildObject(builder, item, options, 4);
-                }
-                builder.AppendLine("  ]");
-            }
-
-            if (Optional.IsDefined(Id))
-            {
-                builder.Append("  id:");
-                builder.AppendLine($" '{Id}'");
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

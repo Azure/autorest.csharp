@@ -5,78 +5,43 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<OrchestrationServiceSummary>
-{
-internal static OrchestrationServiceSummary DeserializeOrchestrationServiceSummary(JsonElement element)
+    public partial class OrchestrationServiceSummary
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static OrchestrationServiceSummary DeserializeOrchestrationServiceSummary(JsonElement element)
         {
-            return null;
-        }
-        Optional<OrchestrationServiceName> serviceName = default;
-        Optional<OrchestrationServiceState> serviceState = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("serviceName"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<OrchestrationServiceName> serviceName = default;
+            Optional<OrchestrationServiceState> serviceState = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("serviceName"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    serviceName = new OrchestrationServiceName(property.Value.GetString());
                     continue;
                 }
-                serviceName = new OrchestrationServiceName(property.Value.GetString());
-                continue;
-            }
-            if (property.NameEquals("serviceState"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("serviceState"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    serviceState = new OrchestrationServiceState(property.Value.GetString());
                     continue;
                 }
-                serviceState = new OrchestrationServiceState(property.Value.GetString());
-                continue;
             }
-        }
-        return new OrchestrationServiceSummary(Optional.ToNullable(serviceName), Optional.ToNullable(serviceState));
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(ServiceName))
-        {
-            builder.Append("  serviceName:");
-            builder.AppendLine($" '{ServiceName.ToString()}'");
-        }
-
-        if (Optional.IsDefined(ServiceState))
-        {
-            builder.Append("  serviceState:");
-            builder.AppendLine($" '{ServiceState.ToString()}'");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new OrchestrationServiceSummary(Optional.ToNullable(serviceName), Optional.ToNullable(serviceState));
         }
     }
-}
 }

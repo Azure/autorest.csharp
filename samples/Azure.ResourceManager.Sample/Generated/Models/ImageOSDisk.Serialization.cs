@@ -6,15 +6,13 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class ImageOSDisk : IUtf8JsonSerializable, IPersistableModel<ImageOSDisk>
+    public partial class ImageOSDisk : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -153,80 +151,6 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new ImageOSDisk(snapshot, managedDisk, blobUri.Value, Optional.ToNullable(caching), Optional.ToNullable(diskSizeGB), Optional.ToNullable(storageAccountType), diskEncryptionSet, osType, osState);
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(OSType))
-            {
-                builder.Append("  osType:");
-                builder.AppendLine($" '{OSType.ToString()}'");
-            }
-
-            if (Optional.IsDefined(OSState))
-            {
-                builder.Append("  osState:");
-                builder.AppendLine($" '{OSState.ToString()}'");
-            }
-
-            if (Optional.IsDefined(Snapshot))
-            {
-                builder.Append("  snapshot:");
-                AppendChildObject(builder, Snapshot, options, 2);
-            }
-
-            if (Optional.IsDefined(ManagedDisk))
-            {
-                builder.Append("  managedDisk:");
-                AppendChildObject(builder, ManagedDisk, options, 2);
-            }
-
-            if (Optional.IsDefined(BlobUri))
-            {
-                builder.Append("  blobUri:");
-                builder.AppendLine($" '{BlobUri.AbsoluteUri}'");
-            }
-
-            if (Optional.IsDefined(Caching))
-            {
-                builder.Append("  caching:");
-                builder.AppendLine($" '{Caching.ToString()}'");
-            }
-
-            if (Optional.IsDefined(DiskSizeGB))
-            {
-                builder.Append("  diskSizeGB:");
-                builder.AppendLine($" '{DiskSizeGB.ToString()}'");
-            }
-
-            if (Optional.IsDefined(StorageAccountType))
-            {
-                builder.Append("  storageAccountType:");
-                builder.AppendLine($" '{StorageAccountType.ToString()}'");
-            }
-
-            if (Optional.IsDefined(DiskEncryptionSet))
-            {
-                builder.Append("  diskEncryptionSet:");
-                AppendChildObject(builder, DiskEncryptionSet, options, 2);
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

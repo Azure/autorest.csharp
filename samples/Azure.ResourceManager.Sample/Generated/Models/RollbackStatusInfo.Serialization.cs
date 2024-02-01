@@ -5,94 +5,53 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<RollbackStatusInfo>
-{
-internal static RollbackStatusInfo DeserializeRollbackStatusInfo(JsonElement element)
+    public partial class RollbackStatusInfo
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static RollbackStatusInfo DeserializeRollbackStatusInfo(JsonElement element)
         {
-            return null;
-        }
-        Optional<int> successfullyRolledbackInstanceCount = default;
-        Optional<int> failedRolledbackInstanceCount = default;
-        Optional<ApiError> rollbackError = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("successfullyRolledbackInstanceCount"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<int> successfullyRolledbackInstanceCount = default;
+            Optional<int> failedRolledbackInstanceCount = default;
+            Optional<ApiError> rollbackError = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("successfullyRolledbackInstanceCount"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    successfullyRolledbackInstanceCount = property.Value.GetInt32();
                     continue;
                 }
-                successfullyRolledbackInstanceCount = property.Value.GetInt32();
-                continue;
-            }
-            if (property.NameEquals("failedRolledbackInstanceCount"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("failedRolledbackInstanceCount"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    failedRolledbackInstanceCount = property.Value.GetInt32();
                     continue;
                 }
-                failedRolledbackInstanceCount = property.Value.GetInt32();
-                continue;
-            }
-            if (property.NameEquals("rollbackError"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("rollbackError"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    rollbackError = ApiError.DeserializeApiError(property.Value);
                     continue;
                 }
-                rollbackError = ApiError.DeserializeApiError(property.Value);
-                continue;
             }
-        }
-        return new RollbackStatusInfo(Optional.ToNullable(successfullyRolledbackInstanceCount), Optional.ToNullable(failedRolledbackInstanceCount), rollbackError.Value);
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
-        {
-            builder.Append("  successfullyRolledbackInstanceCount:");
-            builder.AppendLine($" '{SuccessfullyRolledbackInstanceCount.ToString()}'");
-        }
-
-        if (Optional.IsDefined(FailedRolledbackInstanceCount))
-        {
-            builder.Append("  failedRolledbackInstanceCount:");
-            builder.AppendLine($" '{FailedRolledbackInstanceCount.ToString()}'");
-        }
-
-        if (Optional.IsDefined(RollbackError))
-        {
-            builder.Append("  rollbackError:");
-            AppendChildObject(builder, RollbackError, options, 2);
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new RollbackStatusInfo(Optional.ToNullable(successfullyRolledbackInstanceCount), Optional.ToNullable(failedRolledbackInstanceCount), rollbackError.Value);
         }
     }
-}
 }

@@ -5,70 +5,35 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<InnerError>
-{
-internal static InnerError DeserializeInnerError(JsonElement element)
+    public partial class InnerError
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static InnerError DeserializeInnerError(JsonElement element)
         {
-            return null;
-        }
-        Optional<string> exceptiontype = default;
-        Optional<string> errordetail = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("exceptiontype"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                exceptiontype = property.Value.GetString();
-                continue;
+                return null;
             }
-            if (property.NameEquals("errordetail"u8))
+            Optional<string> exceptiontype = default;
+            Optional<string> errordetail = default;
+            foreach (var property in element.EnumerateObject())
             {
-                errordetail = property.Value.GetString();
-                continue;
+                if (property.NameEquals("exceptiontype"u8))
+                {
+                    exceptiontype = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("errordetail"u8))
+                {
+                    errordetail = property.Value.GetString();
+                    continue;
+                }
             }
-        }
-        return new InnerError(exceptiontype.Value, errordetail.Value);
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(Exceptiontype))
-        {
-            builder.Append("  exceptiontype:");
-            builder.AppendLine($" '{Exceptiontype}'");
-        }
-
-        if (Optional.IsDefined(Errordetail))
-        {
-            builder.Append("  errordetail:");
-            builder.AppendLine($" '{Errordetail}'");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new InnerError(exceptiontype.Value, errordetail.Value);
         }
     }
-}
 }

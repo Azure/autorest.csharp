@@ -5,142 +5,83 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<UpgradeOperationHistoricalStatusInfoProperties>
-{
-internal static UpgradeOperationHistoricalStatusInfoProperties DeserializeUpgradeOperationHistoricalStatusInfoProperties(JsonElement element)
+    public partial class UpgradeOperationHistoricalStatusInfoProperties
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static UpgradeOperationHistoricalStatusInfoProperties DeserializeUpgradeOperationHistoricalStatusInfoProperties(JsonElement element)
         {
-            return null;
-        }
-        Optional<UpgradeOperationHistoryStatus> runningStatus = default;
-        Optional<RollingUpgradeProgressInfo> progress = default;
-        Optional<ApiError> error = default;
-        Optional<UpgradeOperationInvoker> startedBy = default;
-        Optional<ImageReference> targetImageReference = default;
-        Optional<RollbackStatusInfo> rollbackInfo = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("runningStatus"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<UpgradeOperationHistoryStatus> runningStatus = default;
+            Optional<RollingUpgradeProgressInfo> progress = default;
+            Optional<ApiError> error = default;
+            Optional<UpgradeOperationInvoker> startedBy = default;
+            Optional<ImageReference> targetImageReference = default;
+            Optional<RollbackStatusInfo> rollbackInfo = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("runningStatus"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    runningStatus = UpgradeOperationHistoryStatus.DeserializeUpgradeOperationHistoryStatus(property.Value);
                     continue;
                 }
-                runningStatus = UpgradeOperationHistoryStatus.DeserializeUpgradeOperationHistoryStatus(property.Value);
-                continue;
-            }
-            if (property.NameEquals("progress"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("progress"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property.Value);
                     continue;
                 }
-                progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property.Value);
-                continue;
-            }
-            if (property.NameEquals("error"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("error"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    error = ApiError.DeserializeApiError(property.Value);
                     continue;
                 }
-                error = ApiError.DeserializeApiError(property.Value);
-                continue;
-            }
-            if (property.NameEquals("startedBy"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("startedBy"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    startedBy = property.Value.GetString().ToUpgradeOperationInvoker();
                     continue;
                 }
-                startedBy = property.Value.GetString().ToUpgradeOperationInvoker();
-                continue;
-            }
-            if (property.NameEquals("targetImageReference"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("targetImageReference"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    targetImageReference = ImageReference.DeserializeImageReference(property.Value);
                     continue;
                 }
-                targetImageReference = ImageReference.DeserializeImageReference(property.Value);
-                continue;
-            }
-            if (property.NameEquals("rollbackInfo"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("rollbackInfo"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value);
                     continue;
                 }
-                rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value);
-                continue;
             }
-        }
-        return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value);
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(RunningStatus))
-        {
-            builder.Append("  runningStatus:");
-            AppendChildObject(builder, RunningStatus, options, 2);
-        }
-
-        if (Optional.IsDefined(Progress))
-        {
-            builder.Append("  progress:");
-            AppendChildObject(builder, Progress, options, 2);
-        }
-
-        if (Optional.IsDefined(Error))
-        {
-            builder.Append("  error:");
-            AppendChildObject(builder, Error, options, 2);
-        }
-
-        if (Optional.IsDefined(StartedBy))
-        {
-            builder.Append("  startedBy:");
-            builder.AppendLine($" '{StartedBy.ToString()}'");
-        }
-
-        if (Optional.IsDefined(TargetImageReference))
-        {
-            builder.Append("  targetImageReference:");
-            AppendChildObject(builder, TargetImageReference, options, 2);
-        }
-
-        if (Optional.IsDefined(RollbackInfo))
-        {
-            builder.Append("  rollbackInfo:");
-            AppendChildObject(builder, RollbackInfo, options, 2);
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value);
         }
     }
-}
 }

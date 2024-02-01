@@ -5,15 +5,12 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class LogAnalyticsInputBase : IUtf8JsonSerializable, IPersistableModel<LogAnalyticsInputBase>
+    public partial class LogAnalyticsInputBase : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -40,65 +37,6 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteBooleanValue(GroupByResourceName.Value);
             }
             writer.WriteEndObject();
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(BlobContainerSasUri))
-            {
-                builder.Append("  blobContainerSasUri:");
-                builder.AppendLine($" '{BlobContainerSasUri.AbsoluteUri}'");
-            }
-
-            if (Optional.IsDefined(FromTime))
-            {
-                builder.Append("  fromTime:");
-                builder.AppendLine($" '{FromTime.ToString()}'");
-            }
-
-            if (Optional.IsDefined(ToTime))
-            {
-                builder.Append("  toTime:");
-                builder.AppendLine($" '{ToTime.ToString()}'");
-            }
-
-            if (Optional.IsDefined(GroupByThrottlePolicy))
-            {
-                builder.Append("  groupByThrottlePolicy:");
-                var boolValue = GroupByThrottlePolicy == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(GroupByOperationName))
-            {
-                builder.Append("  groupByOperationName:");
-                var boolValue = GroupByOperationName == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(GroupByResourceName))
-            {
-                builder.Append("  groupByResourceName:");
-                var boolValue = GroupByResourceName == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

@@ -5,62 +5,33 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<LogAnalytics>
-{
-internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
+    public partial class LogAnalytics
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
         {
-            return null;
-        }
-        Optional<LogAnalyticsOutput> properties = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("properties"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<LogAnalyticsOutput> properties = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
                     continue;
                 }
-                properties = LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
-                continue;
             }
-        }
-        return new LogAnalytics(properties.Value);
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(Properties))
-        {
-            builder.Append("  properties:");
-            AppendChildObject(builder, Properties, options, 2);
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new LogAnalytics(properties.Value);
         }
     }
-}
 }

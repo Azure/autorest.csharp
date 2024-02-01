@@ -5,85 +5,45 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<VirtualMachineScaleSetVmExtensionsSummary>
-{
-internal static VirtualMachineScaleSetVmExtensionsSummary DeserializeVirtualMachineScaleSetVmExtensionsSummary(JsonElement element)
+    public partial class VirtualMachineScaleSetVmExtensionsSummary
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static VirtualMachineScaleSetVmExtensionsSummary DeserializeVirtualMachineScaleSetVmExtensionsSummary(JsonElement element)
         {
-            return null;
-        }
-        Optional<string> name = default;
-        Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("name"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                name = property.Value.GetString();
-                continue;
+                return null;
             }
-            if (property.NameEquals("statusesSummary"u8))
+            Optional<string> name = default;
+            Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
+            foreach (var property in element.EnumerateObject())
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("name"u8))
                 {
+                    name = property.Value.GetString();
                     continue;
                 }
-                List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.NameEquals("statusesSummary"u8))
                 {
-                    array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
+                    }
+                    statusesSummary = array;
+                    continue;
                 }
-                statusesSummary = array;
-                continue;
             }
-        }
-        return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, Optional.ToList(statusesSummary));
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(Name))
-        {
-            builder.Append("  name:");
-            builder.AppendLine($" '{Name}'");
-        }
-
-        if (Optional.IsCollectionDefined(StatusesSummary))
-        {
-            builder.Append("  statusesSummary:");
-            builder.AppendLine(" [");
-            foreach (var item in StatusesSummary)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, Optional.ToList(statusesSummary));
         }
     }
-}
 }

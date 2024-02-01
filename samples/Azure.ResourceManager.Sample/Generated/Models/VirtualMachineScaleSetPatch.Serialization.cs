@@ -5,15 +5,12 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetPatch : IUtf8JsonSerializable, IPersistableModel<VirtualMachineScaleSetPatch>
+    public partial class VirtualMachineScaleSetPatch : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -93,118 +90,6 @@ namespace Azure.ResourceManager.Sample.Models
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(Sku))
-            {
-                builder.Append("  sku:");
-                AppendChildObject(builder, Sku, options, 2);
-            }
-
-            if (Optional.IsDefined(Plan))
-            {
-                builder.Append("  plan:");
-                AppendChildObject(builder, Plan, options, 2);
-            }
-
-            if (Optional.IsDefined(Identity))
-            {
-                builder.Append("  identity:");
-                AppendChildObject(builder, Identity, options, 2);
-            }
-
-            if (Optional.IsDefined(UpgradePolicy))
-            {
-                builder.Append("  upgradePolicy:");
-                AppendChildObject(builder, UpgradePolicy, options, 2);
-            }
-
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
-            {
-                builder.Append("  automaticRepairsPolicy:");
-                AppendChildObject(builder, AutomaticRepairsPolicy, options, 2);
-            }
-
-            if (Optional.IsDefined(VirtualMachineProfile))
-            {
-                builder.Append("  virtualMachineProfile:");
-                AppendChildObject(builder, VirtualMachineProfile, options, 2);
-            }
-
-            if (Optional.IsDefined(Overprovision))
-            {
-                builder.Append("  overprovision:");
-                var boolValue = Overprovision == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
-            {
-                builder.Append("  doNotRunExtensionsOnOverprovisionedVMs:");
-                var boolValue = DoNotRunExtensionsOnOverprovisionedVms == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(SinglePlacementGroup))
-            {
-                builder.Append("  singlePlacementGroup:");
-                var boolValue = SinglePlacementGroup == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(AdditionalCapabilities))
-            {
-                builder.Append("  additionalCapabilities:");
-                AppendChildObject(builder, AdditionalCapabilities, options, 2);
-            }
-
-            if (Optional.IsDefined(ScaleInPolicy))
-            {
-                builder.Append("  scaleInPolicy:");
-                AppendChildObject(builder, ScaleInPolicy, options, 2);
-            }
-
-            if (Optional.IsDefined(ProximityPlacementGroup))
-            {
-                builder.Append("  proximityPlacementGroup:");
-                AppendChildObject(builder, ProximityPlacementGroup, options, 2);
-            }
-
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                builder.Append("  tags:");
-                builder.AppendLine(" {");
-                foreach (var item in Tags)
-                {
-                    builder.Append($"    {item.Key}: ");
-                    if (item.Value == null)
-                    {
-                        builder.Append("null");
-                        continue;
-                    }
-                    builder.AppendLine($" '{item.Value}'");
-                }
-                builder.AppendLine("  }");
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

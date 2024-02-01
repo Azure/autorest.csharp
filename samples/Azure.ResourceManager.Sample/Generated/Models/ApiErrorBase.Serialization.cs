@@ -5,82 +5,41 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<ApiErrorBase>
-{
-internal static ApiErrorBase DeserializeApiErrorBase(JsonElement element)
+    public partial class ApiErrorBase
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static ApiErrorBase DeserializeApiErrorBase(JsonElement element)
         {
-            return null;
-        }
-        Optional<string> code = default;
-        Optional<string> target = default;
-        Optional<string> message = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("code"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                code = property.Value.GetString();
-                continue;
+                return null;
             }
-            if (property.NameEquals("target"u8))
+            Optional<string> code = default;
+            Optional<string> target = default;
+            Optional<string> message = default;
+            foreach (var property in element.EnumerateObject())
             {
-                target = property.Value.GetString();
-                continue;
+                if (property.NameEquals("code"u8))
+                {
+                    code = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("target"u8))
+                {
+                    target = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("message"u8))
+                {
+                    message = property.Value.GetString();
+                    continue;
+                }
             }
-            if (property.NameEquals("message"u8))
-            {
-                message = property.Value.GetString();
-                continue;
-            }
-        }
-        return new ApiErrorBase(code.Value, target.Value, message.Value);
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(Code))
-        {
-            builder.Append("  code:");
-            builder.AppendLine($" '{Code}'");
-        }
-
-        if (Optional.IsDefined(Target))
-        {
-            builder.Append("  target:");
-            builder.AppendLine($" '{Target}'");
-        }
-
-        if (Optional.IsDefined(Message))
-        {
-            builder.Append("  message:");
-            builder.AppendLine($" '{Message}'");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new ApiErrorBase(code.Value, target.Value, message.Value);
         }
     }
-}
 }

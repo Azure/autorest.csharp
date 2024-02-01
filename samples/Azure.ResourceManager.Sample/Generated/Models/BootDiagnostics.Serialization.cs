@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class BootDiagnostics : IUtf8JsonSerializable, IPersistableModel<BootDiagnostics>
+    public partial class BootDiagnostics : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -61,39 +59,6 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new BootDiagnostics(Optional.ToNullable(enabled), storageUri.Value);
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(Enabled))
-            {
-                builder.Append("  enabled:");
-                var boolValue = Enabled == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(StorageUri))
-            {
-                builder.Append("  storageUri:");
-                builder.AppendLine($" '{StorageUri.AbsoluteUri}'");
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

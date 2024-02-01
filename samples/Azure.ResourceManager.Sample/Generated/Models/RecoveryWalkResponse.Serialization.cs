@@ -5,79 +5,43 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<RecoveryWalkResponse>
-{
-internal static RecoveryWalkResponse DeserializeRecoveryWalkResponse(JsonElement element)
+    public partial class RecoveryWalkResponse
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static RecoveryWalkResponse DeserializeRecoveryWalkResponse(JsonElement element)
         {
-            return null;
-        }
-        Optional<bool> walkPerformed = default;
-        Optional<int> nextPlatformUpdateDomain = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("walkPerformed"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<bool> walkPerformed = default;
+            Optional<int> nextPlatformUpdateDomain = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("walkPerformed"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    walkPerformed = property.Value.GetBoolean();
                     continue;
                 }
-                walkPerformed = property.Value.GetBoolean();
-                continue;
-            }
-            if (property.NameEquals("nextPlatformUpdateDomain"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("nextPlatformUpdateDomain"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    nextPlatformUpdateDomain = property.Value.GetInt32();
                     continue;
                 }
-                nextPlatformUpdateDomain = property.Value.GetInt32();
-                continue;
             }
-        }
-        return new RecoveryWalkResponse(Optional.ToNullable(walkPerformed), Optional.ToNullable(nextPlatformUpdateDomain));
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(WalkPerformed))
-        {
-            builder.Append("  walkPerformed:");
-            var boolValue = WalkPerformed == true ? "true" : "false";
-            builder.AppendLine($" {boolValue}");
-        }
-
-        if (Optional.IsDefined(NextPlatformUpdateDomain))
-        {
-            builder.Append("  nextPlatformUpdateDomain:");
-            builder.AppendLine($" '{NextPlatformUpdateDomain.ToString()}'");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new RecoveryWalkResponse(Optional.ToNullable(walkPerformed), Optional.ToNullable(nextPlatformUpdateDomain));
         }
     }
-}
 }

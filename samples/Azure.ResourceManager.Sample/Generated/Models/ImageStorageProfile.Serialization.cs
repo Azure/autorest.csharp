@@ -5,16 +5,13 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class ImageStorageProfile : IUtf8JsonSerializable, IPersistableModel<ImageStorageProfile>
+    public partial class ImageStorageProfile : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -87,50 +84,6 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new ImageStorageProfile(osDisk.Value, Optional.ToList(dataDisks), Optional.ToNullable(zoneResilient));
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(OSDisk))
-            {
-                builder.Append("  osDisk:");
-                AppendChildObject(builder, OSDisk, options, 2);
-            }
-
-            if (Optional.IsCollectionDefined(DataDisks))
-            {
-                builder.Append("  dataDisks:");
-                builder.AppendLine(" [");
-                foreach (var item in DataDisks)
-                {
-                    AppendChildObject(builder, item, options, 4);
-                }
-                builder.AppendLine("  ]");
-            }
-
-            if (Optional.IsDefined(ZoneResilient))
-            {
-                builder.Append("  zoneResilient:");
-                var boolValue = ZoneResilient == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

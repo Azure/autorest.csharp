@@ -5,125 +5,67 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<ApiError>
-{
-internal static ApiError DeserializeApiError(JsonElement element)
+    public partial class ApiError
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static ApiError DeserializeApiError(JsonElement element)
         {
-            return null;
-        }
-        Optional<IReadOnlyList<ApiErrorBase>> details = default;
-        Optional<InnerError> innererror = default;
-        Optional<string> code = default;
-        Optional<string> target = default;
-        Optional<string> message = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("details"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<IReadOnlyList<ApiErrorBase>> details = default;
+            Optional<InnerError> innererror = default;
+            Optional<string> code = default;
+            Optional<string> target = default;
+            Optional<string> message = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("details"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<ApiErrorBase> array = new List<ApiErrorBase>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(ApiErrorBase.DeserializeApiErrorBase(item));
+                    }
+                    details = array;
                     continue;
                 }
-                List<ApiErrorBase> array = new List<ApiErrorBase>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.NameEquals("innererror"u8))
                 {
-                    array.Add(ApiErrorBase.DeserializeApiErrorBase(item));
-                }
-                details = array;
-                continue;
-            }
-            if (property.NameEquals("innererror"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    innererror = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
-                innererror = InnerError.DeserializeInnerError(property.Value);
-                continue;
+                if (property.NameEquals("code"u8))
+                {
+                    code = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("target"u8))
+                {
+                    target = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("message"u8))
+                {
+                    message = property.Value.GetString();
+                    continue;
+                }
             }
-            if (property.NameEquals("code"u8))
-            {
-                code = property.Value.GetString();
-                continue;
-            }
-            if (property.NameEquals("target"u8))
-            {
-                target = property.Value.GetString();
-                continue;
-            }
-            if (property.NameEquals("message"u8))
-            {
-                message = property.Value.GetString();
-                continue;
-            }
-        }
-        return new ApiError(Optional.ToList(details), innererror.Value, code.Value, target.Value, message.Value);
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsCollectionDefined(Details))
-        {
-            builder.Append("  details:");
-            builder.AppendLine(" [");
-            foreach (var item in Details)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        if (Optional.IsDefined(Innererror))
-        {
-            builder.Append("  innererror:");
-            AppendChildObject(builder, Innererror, options, 2);
-        }
-
-        if (Optional.IsDefined(Code))
-        {
-            builder.Append("  code:");
-            builder.AppendLine($" '{Code}'");
-        }
-
-        if (Optional.IsDefined(Target))
-        {
-            builder.Append("  target:");
-            builder.AppendLine($" '{Target}'");
-        }
-
-        if (Optional.IsDefined(Message))
-        {
-            builder.Append("  message:");
-            builder.AppendLine($" '{Message}'");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new ApiError(Optional.ToList(details), innererror.Value, code.Value, target.Value, message.Value);
         }
     }
-}
 }

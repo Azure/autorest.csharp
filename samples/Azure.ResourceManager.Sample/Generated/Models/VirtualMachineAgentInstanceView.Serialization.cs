@@ -5,111 +5,60 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<VirtualMachineAgentInstanceView>
-{
-internal static VirtualMachineAgentInstanceView DeserializeVirtualMachineAgentInstanceView(JsonElement element)
+    public partial class VirtualMachineAgentInstanceView
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static VirtualMachineAgentInstanceView DeserializeVirtualMachineAgentInstanceView(JsonElement element)
         {
-            return null;
-        }
-        Optional<string> vmAgentVersion = default;
-        Optional<IReadOnlyList<VirtualMachineExtensionHandlerInstanceView>> extensionHandlers = default;
-        Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("vmAgentVersion"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                vmAgentVersion = property.Value.GetString();
-                continue;
+                return null;
             }
-            if (property.NameEquals("extensionHandlers"u8))
+            Optional<string> vmAgentVersion = default;
+            Optional<IReadOnlyList<VirtualMachineExtensionHandlerInstanceView>> extensionHandlers = default;
+            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            foreach (var property in element.EnumerateObject())
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("vmAgentVersion"u8))
                 {
+                    vmAgentVersion = property.Value.GetString();
                     continue;
                 }
-                List<VirtualMachineExtensionHandlerInstanceView> array = new List<VirtualMachineExtensionHandlerInstanceView>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.NameEquals("extensionHandlers"u8))
                 {
-                    array.Add(VirtualMachineExtensionHandlerInstanceView.DeserializeVirtualMachineExtensionHandlerInstanceView(item));
-                }
-                extensionHandlers = array;
-                continue;
-            }
-            if (property.NameEquals("statuses"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<VirtualMachineExtensionHandlerInstanceView> array = new List<VirtualMachineExtensionHandlerInstanceView>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(VirtualMachineExtensionHandlerInstanceView.DeserializeVirtualMachineExtensionHandlerInstanceView(item));
+                    }
+                    extensionHandlers = array;
                     continue;
                 }
-                List<InstanceViewStatus> array = new List<InstanceViewStatus>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.NameEquals("statuses"u8))
                 {
-                    array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<InstanceViewStatus> array = new List<InstanceViewStatus>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                    }
+                    statuses = array;
+                    continue;
                 }
-                statuses = array;
-                continue;
             }
-        }
-        return new VirtualMachineAgentInstanceView(vmAgentVersion.Value, Optional.ToList(extensionHandlers), Optional.ToList(statuses));
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(VmAgentVersion))
-        {
-            builder.Append("  vmAgentVersion:");
-            builder.AppendLine($" '{VmAgentVersion}'");
-        }
-
-        if (Optional.IsCollectionDefined(ExtensionHandlers))
-        {
-            builder.Append("  extensionHandlers:");
-            builder.AppendLine(" [");
-            foreach (var item in ExtensionHandlers)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        if (Optional.IsCollectionDefined(Statuses))
-        {
-            builder.Append("  statuses:");
-            builder.AppendLine(" [");
-            foreach (var item in Statuses)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new VirtualMachineAgentInstanceView(vmAgentVersion.Value, Optional.ToList(extensionHandlers), Optional.ToList(statuses));
         }
     }
-}
 }

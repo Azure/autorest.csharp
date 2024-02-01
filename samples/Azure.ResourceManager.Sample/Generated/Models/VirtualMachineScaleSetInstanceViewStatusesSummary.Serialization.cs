@@ -5,73 +5,39 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<VirtualMachineScaleSetInstanceViewStatusesSummary>
-{
-internal static VirtualMachineScaleSetInstanceViewStatusesSummary DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(JsonElement element)
+    internal partial class VirtualMachineScaleSetInstanceViewStatusesSummary
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static VirtualMachineScaleSetInstanceViewStatusesSummary DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(JsonElement element)
         {
-            return null;
-        }
-        Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("statusesSummary"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("statusesSummary"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
+                    }
+                    statusesSummary = array;
                     continue;
                 }
-                List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();
-                foreach (var item in property.Value.EnumerateArray())
-                {
-                    array.Add(VirtualMachineStatusCodeCount.DeserializeVirtualMachineStatusCodeCount(item));
-                }
-                statusesSummary = array;
-                continue;
             }
-        }
-        return new VirtualMachineScaleSetInstanceViewStatusesSummary(Optional.ToList(statusesSummary));
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsCollectionDefined(StatusesSummary))
-        {
-            builder.Append("  statusesSummary:");
-            builder.AppendLine(" [");
-            foreach (var item in StatusesSummary)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new VirtualMachineScaleSetInstanceViewStatusesSummary(Optional.ToList(statusesSummary));
         }
     }
-}
 }

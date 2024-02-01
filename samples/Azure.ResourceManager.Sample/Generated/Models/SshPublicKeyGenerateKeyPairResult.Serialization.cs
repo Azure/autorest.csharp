@@ -5,82 +5,40 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
-using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<SshPublicKeyGenerateKeyPairResult>
-{
-internal static SshPublicKeyGenerateKeyPairResult DeserializeSshPublicKeyGenerateKeyPairResult(JsonElement element)
+    public partial class SshPublicKeyGenerateKeyPairResult
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static SshPublicKeyGenerateKeyPairResult DeserializeSshPublicKeyGenerateKeyPairResult(JsonElement element)
         {
-            return null;
-        }
-        string privateKey = default;
-        string publicKey = default;
-        string id = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("privateKey"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                privateKey = property.Value.GetString();
-                continue;
+                return null;
             }
-            if (property.NameEquals("publicKey"u8))
+            string privateKey = default;
+            string publicKey = default;
+            string id = default;
+            foreach (var property in element.EnumerateObject())
             {
-                publicKey = property.Value.GetString();
-                continue;
+                if (property.NameEquals("privateKey"u8))
+                {
+                    privateKey = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("publicKey"u8))
+                {
+                    publicKey = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"u8))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
             }
-            if (property.NameEquals("id"u8))
-            {
-                id = property.Value.GetString();
-                continue;
-            }
-        }
-        return new SshPublicKeyGenerateKeyPairResult(privateKey, publicKey, id);
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(PrivateKey))
-        {
-            builder.Append("  privateKey:");
-            builder.AppendLine($" '{PrivateKey}'");
-        }
-
-        if (Optional.IsDefined(PublicKey))
-        {
-            builder.Append("  publicKey:");
-            builder.AppendLine($" '{PublicKey}'");
-        }
-
-        if (Optional.IsDefined(Id))
-        {
-            builder.Append("  id:");
-            builder.AppendLine($" '{Id}'");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new SshPublicKeyGenerateKeyPairResult(privateKey, publicKey, id);
         }
     }
-}
 }

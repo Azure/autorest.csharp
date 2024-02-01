@@ -5,15 +5,12 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class OSDisk : IUtf8JsonSerializable, IPersistableModel<OSDisk>
+    public partial class OSDisk : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -185,93 +182,6 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new OSDisk(Optional.ToNullable(osType), encryptionSettings.Value, name.Value, vhd.Value, image.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), diffDiskSettings.Value, createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value);
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(OSType))
-            {
-                builder.Append("  osType:");
-                builder.AppendLine($" '{OSType.ToString()}'");
-            }
-
-            if (Optional.IsDefined(EncryptionSettings))
-            {
-                builder.Append("  encryptionSettings:");
-                AppendChildObject(builder, EncryptionSettings, options, 2);
-            }
-
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name}'");
-            }
-
-            if (Optional.IsDefined(Vhd))
-            {
-                builder.Append("  vhd:");
-                AppendChildObject(builder, Vhd, options, 2);
-            }
-
-            if (Optional.IsDefined(Image))
-            {
-                builder.Append("  image:");
-                AppendChildObject(builder, Image, options, 2);
-            }
-
-            if (Optional.IsDefined(Caching))
-            {
-                builder.Append("  caching:");
-                builder.AppendLine($" '{Caching.ToString()}'");
-            }
-
-            if (Optional.IsDefined(WriteAcceleratorEnabled))
-            {
-                builder.Append("  writeAcceleratorEnabled:");
-                var boolValue = WriteAcceleratorEnabled == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(DiffDiskSettings))
-            {
-                builder.Append("  diffDiskSettings:");
-                AppendChildObject(builder, DiffDiskSettings, options, 2);
-            }
-
-            if (Optional.IsDefined(CreateOption))
-            {
-                builder.Append("  createOption:");
-                builder.AppendLine($" '{CreateOption.ToString()}'");
-            }
-
-            if (Optional.IsDefined(DiskSizeGB))
-            {
-                builder.Append("  diskSizeGB:");
-                builder.AppendLine($" '{DiskSizeGB.ToString()}'");
-            }
-
-            if (Optional.IsDefined(ManagedDisk))
-            {
-                builder.Append("  managedDisk:");
-                AppendChildObject(builder, ManagedDisk, options, 2);
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

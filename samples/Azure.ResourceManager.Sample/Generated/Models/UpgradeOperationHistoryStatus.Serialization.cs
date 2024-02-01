@@ -6,93 +6,53 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<UpgradeOperationHistoryStatus>
-{
-internal static UpgradeOperationHistoryStatus DeserializeUpgradeOperationHistoryStatus(JsonElement element)
+    public partial class UpgradeOperationHistoryStatus
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static UpgradeOperationHistoryStatus DeserializeUpgradeOperationHistoryStatus(JsonElement element)
         {
-            return null;
-        }
-        Optional<UpgradeState> code = default;
-        Optional<DateTimeOffset> startTime = default;
-        Optional<DateTimeOffset> endTime = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("code"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<UpgradeState> code = default;
+            Optional<DateTimeOffset> startTime = default;
+            Optional<DateTimeOffset> endTime = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("code"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    code = property.Value.GetString().ToUpgradeState();
                     continue;
                 }
-                code = property.Value.GetString().ToUpgradeState();
-                continue;
-            }
-            if (property.NameEquals("startTime"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("startTime"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    startTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                startTime = property.Value.GetDateTimeOffset("O");
-                continue;
-            }
-            if (property.NameEquals("endTime"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("endTime"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    endTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                endTime = property.Value.GetDateTimeOffset("O");
-                continue;
             }
-        }
-        return new UpgradeOperationHistoryStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(endTime));
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(Code))
-        {
-            builder.Append("  code:");
-            builder.AppendLine($" '{Code.ToString()}'");
-        }
-
-        if (Optional.IsDefined(StartOn))
-        {
-            builder.Append("  startTime:");
-            builder.AppendLine($" '{StartOn.ToString()}'");
-        }
-
-        if (Optional.IsDefined(EndOn))
-        {
-            builder.Append("  endTime:");
-            builder.AppendLine($" '{EndOn.ToString()}'");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new UpgradeOperationHistoryStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(endTime));
         }
     }
-}
 }

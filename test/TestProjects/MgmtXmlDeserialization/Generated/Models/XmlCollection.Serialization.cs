@@ -9,6 +9,7 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -183,6 +184,49 @@ namespace MgmtXmlDeserialization.Models
             return new XmlCollection(Optional.ToList(value), Optional.ToNullable(count), nextLink.Value, serializedAdditionalRawData);
         }
 
+        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+
+            if (Optional.IsCollectionDefined(Value))
+            {
+                builder.Append("  value:");
+                builder.AppendLine(" [");
+                foreach (var item in Value)
+                {
+                    AppendChildObject(builder, item, options, 4);
+                }
+                builder.AppendLine("  ]");
+            }
+
+            if (Optional.IsDefined(Count))
+            {
+                builder.Append("  count:");
+                builder.AppendLine($" '{Count.Value.ToString()}'");
+            }
+
+            if (Optional.IsDefined(NextLink))
+            {
+                builder.Append("  nextLink:");
+                builder.AppendLine($" '{NextLink}'");
+            }
+
+            builder.AppendLine("}");
+            return BinaryData.FromString(builder.ToString());
+        }
+
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        {
+            string indent = new string(' ', spaces);
+            BinaryData data = ModelReaderWriter.Write(childObject, options);
+            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine($"{indent}{line}");
+            }
+        }
+
         BinaryData IPersistableModel<XmlCollection>.Write(ModelReaderWriterOptions options)
         {
             var format = options.Format == "W" ? ((IPersistableModel<XmlCollection>)this).GetFormatFromOptions(options) : options.Format;
@@ -191,6 +235,8 @@ namespace MgmtXmlDeserialization.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
+                case "B":
+                    return SerializeBicep(options);
                 case "X":
                     {
                         using MemoryStream stream = new MemoryStream();
@@ -217,6 +263,8 @@ namespace MgmtXmlDeserialization.Models
                     }
                 case "X":
                     return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
+                case "B":
+                    throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
                     throw new FormatException($"The model {nameof(XmlCollection)} does not support '{options.Format}' format.");
             }

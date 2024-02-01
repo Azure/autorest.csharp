@@ -5,16 +5,13 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class WindowsConfiguration : IUtf8JsonSerializable, IPersistableModel<WindowsConfiguration>
+    public partial class WindowsConfiguration : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -128,69 +125,6 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, Optional.ToList(additionalUnattendContent), patchSettings.Value, winRM.Value);
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(ProvisionVmAgent))
-            {
-                builder.Append("  provisionVMAgent:");
-                var boolValue = ProvisionVmAgent == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(EnableAutomaticUpdates))
-            {
-                builder.Append("  enableAutomaticUpdates:");
-                var boolValue = EnableAutomaticUpdates == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(TimeZone))
-            {
-                builder.Append("  timeZone:");
-                builder.AppendLine($" '{TimeZone}'");
-            }
-
-            if (Optional.IsCollectionDefined(AdditionalUnattendContent))
-            {
-                builder.Append("  additionalUnattendContent:");
-                builder.AppendLine(" [");
-                foreach (var item in AdditionalUnattendContent)
-                {
-                    AppendChildObject(builder, item, options, 4);
-                }
-                builder.AppendLine("  ]");
-            }
-
-            if (Optional.IsDefined(PatchSettings))
-            {
-                builder.Append("  patchSettings:");
-                AppendChildObject(builder, PatchSettings, options, 2);
-            }
-
-            if (Optional.IsDefined(WinRM))
-            {
-                builder.Append("  winRM:");
-                AppendChildObject(builder, WinRM, options, 2);
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

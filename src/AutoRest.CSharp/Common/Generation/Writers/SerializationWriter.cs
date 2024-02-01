@@ -70,13 +70,19 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (Configuration.UseModelReaderWriter && json.IJsonModelObjectInterface is { } jsonModelObjectInterface)
                         writer.Append($"{jsonModelObjectInterface}, ");
                 }
+
+                bool persistableModelTInterfaceAdded = false;
                 if (xml != null && model.IncludeSerializer)
                 {
-                    writer.Append($"{xml.IXmlInterface}, ")
-                        .AppendIf($"{xml.IPersistableModelTInterface}, ", Configuration.UseModelReaderWriter);
+                    writer.Append($"{xml.IXmlInterface}, ");
+                    if (Configuration.UseModelReaderWriter)
+                    {
+                        writer.Append($"{xml.IPersistableModelTInterface}, ");
+                        persistableModelTInterfaceAdded = true;
+                    }
                 }
 
-                if (bicep != null)
+                if (bicep != null && !persistableModelTInterfaceAdded)
                 {
                     writer.Append($"{bicep.IPersistableModelTInterface}");
                 }

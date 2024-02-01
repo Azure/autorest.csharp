@@ -5,10 +5,7 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,7 +14,7 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetData : IUtf8JsonSerializable, IPersistableModel<VirtualMachineScaleSetData>
+    public partial class VirtualMachineScaleSetData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -374,195 +371,6 @@ namespace Azure.ResourceManager.Sample
                 }
             }
             return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(Sku))
-            {
-                builder.Append("  sku:");
-                AppendChildObject(builder, Sku, options, 2);
-            }
-
-            if (Optional.IsDefined(Plan))
-            {
-                builder.Append("  plan:");
-                AppendChildObject(builder, Plan, options, 2);
-            }
-
-            if (Optional.IsDefined(Identity))
-            {
-                builder.Append("  identity:");
-                AppendChildObject(builder, Identity, options, 2);
-            }
-
-            if (Optional.IsCollectionDefined(Zones))
-            {
-                builder.Append("  zones:");
-                builder.AppendLine(" [");
-                foreach (var item in Zones)
-                {
-                    if (item == null)
-                    {
-                        builder.Append("null");
-                        continue;
-                    }
-                    builder.AppendLine($"    '{item}'");
-                }
-                builder.AppendLine("  ]");
-            }
-
-            if (Optional.IsDefined(UpgradePolicy))
-            {
-                builder.Append("  upgradePolicy:");
-                AppendChildObject(builder, UpgradePolicy, options, 2);
-            }
-
-            if (Optional.IsDefined(AutomaticRepairsPolicy))
-            {
-                builder.Append("  automaticRepairsPolicy:");
-                AppendChildObject(builder, AutomaticRepairsPolicy, options, 2);
-            }
-
-            if (Optional.IsDefined(VirtualMachineProfile))
-            {
-                builder.Append("  virtualMachineProfile:");
-                AppendChildObject(builder, VirtualMachineProfile, options, 2);
-            }
-
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                builder.Append("  provisioningState:");
-                builder.AppendLine($" '{ProvisioningState}'");
-            }
-
-            if (Optional.IsDefined(Overprovision))
-            {
-                builder.Append("  overprovision:");
-                var boolValue = Overprovision == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
-            {
-                builder.Append("  doNotRunExtensionsOnOverprovisionedVMs:");
-                var boolValue = DoNotRunExtensionsOnOverprovisionedVms == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(UniqueId))
-            {
-                builder.Append("  uniqueId:");
-                builder.AppendLine($" '{UniqueId}'");
-            }
-
-            if (Optional.IsDefined(SinglePlacementGroup))
-            {
-                builder.Append("  singlePlacementGroup:");
-                var boolValue = SinglePlacementGroup == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(ZoneBalance))
-            {
-                builder.Append("  zoneBalance:");
-                var boolValue = ZoneBalance == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(PlatformFaultDomainCount))
-            {
-                builder.Append("  platformFaultDomainCount:");
-                builder.AppendLine($" '{PlatformFaultDomainCount.ToString()}'");
-            }
-
-            if (Optional.IsDefined(ProximityPlacementGroup))
-            {
-                builder.Append("  proximityPlacementGroup:");
-                AppendChildObject(builder, ProximityPlacementGroup, options, 2);
-            }
-
-            if (Optional.IsDefined(HostGroup))
-            {
-                builder.Append("  hostGroup:");
-                AppendChildObject(builder, HostGroup, options, 2);
-            }
-
-            if (Optional.IsDefined(AdditionalCapabilities))
-            {
-                builder.Append("  additionalCapabilities:");
-                AppendChildObject(builder, AdditionalCapabilities, options, 2);
-            }
-
-            if (Optional.IsDefined(ScaleInPolicy))
-            {
-                builder.Append("  scaleInPolicy:");
-                AppendChildObject(builder, ScaleInPolicy, options, 2);
-            }
-
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                builder.Append("  tags:");
-                builder.AppendLine(" {");
-                foreach (var item in Tags)
-                {
-                    builder.Append($"    {item.Key}: ");
-                    if (item.Value == null)
-                    {
-                        builder.Append("null");
-                        continue;
-                    }
-                    builder.AppendLine($" '{item.Value}'");
-                }
-                builder.AppendLine("  }");
-            }
-
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.ToString()}'");
-            }
-
-            if (Optional.IsDefined(Id))
-            {
-                builder.Append("  id:");
-                builder.AppendLine($" '{Id.ToString()}'");
-            }
-
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name}'");
-            }
-
-            if (Optional.IsDefined(ResourceType))
-            {
-                builder.Append("  type:");
-                builder.AppendLine($" '{ResourceType.ToString()}'");
-            }
-
-            if (Optional.IsDefined(SystemData))
-            {
-                builder.Append("  systemData:");
-                builder.AppendLine($" '{SystemData.ToString()}'");
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

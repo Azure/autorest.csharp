@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class InstanceViewStatus : IUtf8JsonSerializable, IPersistableModel<InstanceViewStatus>
+    public partial class InstanceViewStatus : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -94,56 +92,6 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new InstanceViewStatus(code.Value, Optional.ToNullable(level), displayStatus.Value, message.Value, Optional.ToNullable(time));
-        }
-
-        private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-
-            if (Optional.IsDefined(Code))
-            {
-                builder.Append("  code:");
-                builder.AppendLine($" '{Code}'");
-            }
-
-            if (Optional.IsDefined(Level))
-            {
-                builder.Append("  level:");
-                builder.AppendLine($" '{Level.ToString()}'");
-            }
-
-            if (Optional.IsDefined(DisplayStatus))
-            {
-                builder.Append("  displayStatus:");
-                builder.AppendLine($" '{DisplayStatus}'");
-            }
-
-            if (Optional.IsDefined(Message))
-            {
-                builder.Append("  message:");
-                builder.AppendLine($" '{Message}'");
-            }
-
-            if (Optional.IsDefined(Time))
-            {
-                builder.Append("  time:");
-                builder.AppendLine($" '{Time.ToString()}'");
-            }
-
-            builder.AppendLine("}");
-            return BinaryData.FromString(builder.ToString());
-        }
-
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-        {
-            string indent = new string(' ', spaces);
-            BinaryData data = ModelReaderWriter.Write(childObject, options);
-            string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
-            {
-                stringBuilder.AppendLine($"{indent}{line}");
-            }
         }
     }
 }

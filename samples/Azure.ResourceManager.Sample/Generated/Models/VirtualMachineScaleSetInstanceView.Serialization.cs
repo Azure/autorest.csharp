@@ -5,141 +5,79 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-::System.ClientModel.Primitives.IPersistableModel<VirtualMachineScaleSetInstanceView>
-{
-internal static VirtualMachineScaleSetInstanceView DeserializeVirtualMachineScaleSetInstanceView(JsonElement element)
+    public partial class VirtualMachineScaleSetInstanceView
     {
-        if (element.ValueKind == JsonValueKind.Null)
+        internal static VirtualMachineScaleSetInstanceView DeserializeVirtualMachineScaleSetInstanceView(JsonElement element)
         {
-            return null;
-        }
-        Optional<VirtualMachineScaleSetInstanceViewStatusesSummary> virtualMachine = default;
-        Optional<IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary>> extensions = default;
-        Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
-        Optional<IReadOnlyList<OrchestrationServiceSummary>> orchestrationServices = default;
-        foreach (var property in element.EnumerateObject())
-        {
-            if (property.NameEquals("virtualMachine"u8))
+            if (element.ValueKind == JsonValueKind.Null)
             {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                return null;
+            }
+            Optional<VirtualMachineScaleSetInstanceViewStatusesSummary> virtualMachine = default;
+            Optional<IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary>> extensions = default;
+            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            Optional<IReadOnlyList<OrchestrationServiceSummary>> orchestrationServices = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("virtualMachine"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value);
                     continue;
                 }
-                virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value);
-                continue;
-            }
-            if (property.NameEquals("extensions"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
+                if (property.NameEquals("extensions"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<VirtualMachineScaleSetVmExtensionsSummary> array = new List<VirtualMachineScaleSetVmExtensionsSummary>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(VirtualMachineScaleSetVmExtensionsSummary.DeserializeVirtualMachineScaleSetVmExtensionsSummary(item));
+                    }
+                    extensions = array;
                     continue;
                 }
-                List<VirtualMachineScaleSetVmExtensionsSummary> array = new List<VirtualMachineScaleSetVmExtensionsSummary>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.NameEquals("statuses"u8))
                 {
-                    array.Add(VirtualMachineScaleSetVmExtensionsSummary.DeserializeVirtualMachineScaleSetVmExtensionsSummary(item));
-                }
-                extensions = array;
-                continue;
-            }
-            if (property.NameEquals("statuses"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<InstanceViewStatus> array = new List<InstanceViewStatus>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
+                    }
+                    statuses = array;
                     continue;
                 }
-                List<InstanceViewStatus> array = new List<InstanceViewStatus>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.NameEquals("orchestrationServices"u8))
                 {
-                    array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
-                }
-                statuses = array;
-                continue;
-            }
-            if (property.NameEquals("orchestrationServices"u8))
-            {
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<OrchestrationServiceSummary> array = new List<OrchestrationServiceSummary>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(OrchestrationServiceSummary.DeserializeOrchestrationServiceSummary(item));
+                    }
+                    orchestrationServices = array;
                     continue;
                 }
-                List<OrchestrationServiceSummary> array = new List<OrchestrationServiceSummary>();
-                foreach (var item in property.Value.EnumerateArray())
-                {
-                    array.Add(OrchestrationServiceSummary.DeserializeOrchestrationServiceSummary(item));
-                }
-                orchestrationServices = array;
-                continue;
             }
-        }
-        return new VirtualMachineScaleSetInstanceView(virtualMachine.Value, Optional.ToList(extensions), Optional.ToList(statuses), Optional.ToList(orchestrationServices));
-    }
-
-    private BinaryData SerializeBicep(ModelReaderWriterOptions options)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendLine("{");
-
-        if (Optional.IsDefined(VirtualMachine))
-        {
-            builder.Append("  virtualMachine:");
-            AppendChildObject(builder, VirtualMachine, options, 2);
-        }
-
-        if (Optional.IsCollectionDefined(Extensions))
-        {
-            builder.Append("  extensions:");
-            builder.AppendLine(" [");
-            foreach (var item in Extensions)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        if (Optional.IsCollectionDefined(Statuses))
-        {
-            builder.Append("  statuses:");
-            builder.AppendLine(" [");
-            foreach (var item in Statuses)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        if (Optional.IsCollectionDefined(OrchestrationServices))
-        {
-            builder.Append("  orchestrationServices:");
-            builder.AppendLine(" [");
-            foreach (var item in OrchestrationServices)
-            {
-                AppendChildObject(builder, item, options, 4);
-            }
-            builder.AppendLine("  ]");
-        }
-
-        builder.AppendLine("}");
-        return BinaryData.FromString(builder.ToString());
-    }
-
-    private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
-    {
-        string indent = new string(' ', spaces);
-        BinaryData data = ModelReaderWriter.Write(childObject, options);
-        string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            stringBuilder.AppendLine($"{indent}{line}");
+            return new VirtualMachineScaleSetInstanceView(virtualMachine.Value, Optional.ToList(extensions), Optional.ToList(statuses), Optional.ToList(orchestrationServices));
         }
     }
-}
 }
