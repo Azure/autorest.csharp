@@ -28,10 +28,16 @@ namespace FirstTestTypeSpec.Models
 
         /// <summary> Initializes a new instance of <see cref="ChildModel"/>. </summary>
         /// <param name="level"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parent"></param>
-        internal ChildModel(int level, IList<BaseModel> parent) : base(level)
+        internal ChildModel(int level, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<BaseModel> parent) : base(level, serializedAdditionalRawData)
         {
             Parent = parent;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ChildModel"/> for deserialization. </summary>
+        internal ChildModel()
+        {
         }
 
         /// <summary> Gets the parent. </summary>

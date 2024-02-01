@@ -21,6 +21,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Samples.Models
 {
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal class DpgOperationSample
     {
         public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
@@ -478,5 +479,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
             return "request content";
         }
+
+        private string GetDebuggerDisplay()
+            => $"Sample (Client: {_client.Type}, Method: {_operationMethodSignature.GetCRef()})";
     }
 }
