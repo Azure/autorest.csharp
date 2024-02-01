@@ -3,7 +3,6 @@
 
 using System;
 using System.ClientModel.Primitives;
-using System.Text;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -28,8 +27,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
             public static readonly Parameter OptionalOptions = new Parameter("options", null, nullableModelReaderWriterOptionsType, Constant.Default(nullableModelReaderWriterOptionsType), ValidationType.None, null);
             public static readonly Parameter JsonElement = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
             public static readonly Parameter Data = new Parameter("data", null, typeof(BinaryData), null, ValidationType.None, null);
-            public static readonly Parameter StringBuilder = new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None, null);
-            public static readonly Parameter IPersistableModel = new Parameter("persistableModel", null, typeof(IPersistableModel<object>), null, ValidationType.None, null);
         }
     }
 }

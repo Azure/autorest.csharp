@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class SchemaObjectType : SerializableObjectType
     {
-        protected SerializationBuilder _serializationBuilder;
+        private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
 
