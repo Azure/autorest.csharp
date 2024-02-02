@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtMultipleParentResource.Models
 {
@@ -15,6 +16,26 @@ namespace MgmtMultipleParentResource.Models
         /// <summary> Initializes a new instance of <see cref="ChildBodyUpdate"/>. </summary>
         public ChildBodyUpdate()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ChildBodyUpdate"/>. </summary>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
+        /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
+        /// <param name="runAsPassword"> Specifies the user account password on the VM when executing the run command. </param>
+        /// <param name="timeoutInSeconds"> The timeout in seconds to execute the run command. </param>
+        /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
+        /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
+        /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
+        internal ChildBodyUpdate(IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState) : base(tags)
+        {
+            AsyncExecution = asyncExecution;
+            RunAsUser = runAsUser;
+            RunAsPassword = runAsPassword;
+            TimeoutInSeconds = timeoutInSeconds;
+            OutputBlobUri = outputBlobUri;
+            ErrorBlobUri = errorBlobUri;
+            ProvisioningState = provisioningState;
         }
 
         /// <summary> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </summary>

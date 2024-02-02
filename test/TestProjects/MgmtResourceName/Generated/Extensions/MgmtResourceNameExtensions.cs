@@ -175,6 +175,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -203,6 +211,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Machines_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="MachineResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -250,6 +266,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -278,6 +302,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Disks_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Disk"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -325,6 +357,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -353,6 +393,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -400,6 +448,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -428,6 +484,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>networkResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NetworkResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -475,6 +539,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -503,6 +575,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>displayResources_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DisplayResource"/></description>
         /// </item>
         /// </list>
         /// <item>
@@ -551,6 +631,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
+        /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
@@ -581,6 +669,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
         /// </item>
         /// </list>
         /// <item>

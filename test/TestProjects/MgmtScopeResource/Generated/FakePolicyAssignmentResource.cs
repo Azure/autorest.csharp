@@ -37,6 +37,9 @@ namespace MgmtScopeResource
         private readonly FakePolicyAssignmentsRestOperations _fakePolicyAssignmentRestClient;
         private readonly FakePolicyAssignmentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Authorization/policyAssignments";
+
         /// <summary> Initializes a new instance of the <see cref="FakePolicyAssignmentResource"/> class for mocking. </summary>
         protected FakePolicyAssignmentResource()
         {
@@ -63,9 +66,6 @@ namespace MgmtScopeResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Authorization/policyAssignments";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -99,6 +99,14 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +139,14 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -162,6 +178,14 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Delete</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -197,6 +221,14 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Delete</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -230,6 +262,14 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Create</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -268,6 +308,14 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>FakePolicyAssignments_Create</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FakePolicyAssignmentResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

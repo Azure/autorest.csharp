@@ -39,6 +39,9 @@ namespace MgmtResourceName
         private readonly MemoryResourcesRestOperations _memoryMemoryResourcesRestClient;
         private readonly MemoryData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/memoryResources";
+
         /// <summary> Initializes a new instance of the <see cref="Memory"/> class for mocking. </summary>
         protected Memory()
         {
@@ -65,9 +68,6 @@ namespace MgmtResourceName
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/memoryResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -100,6 +100,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +139,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +177,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,6 +222,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>MemoryResources_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="Memory"/></description>
         /// </item>
         /// </list>
         /// </summary>

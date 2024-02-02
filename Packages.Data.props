@@ -3,8 +3,15 @@
   <!-- Dependency versions to mimic azure-sdk-for-net build system. -->
 
   <!-- Test only dependencies. -->
-  <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true'">
+  <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true' Or '$(IsUnitTestProject)' == 'true'">
     <PackageReference Update="Moq" Version="[4.18.2]" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true'">
+    <!-- Include the basic related files for the test framework to ensure our generated test code could build here-->
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestMode.cs" LinkBase="Shared/TestFramework" />
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestBase.cs" LinkBase="Shared/TestFramework" />
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/TestEnvironment.cs" LinkBase="Shared/TestFramework" />
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
@@ -26,7 +33,7 @@
   <!-- All csproj dependencies. -->
   <ItemGroup>
     <PackageReference Update="NUnit" Version="3.13.2" />
-    <PackageReference Update="System.Net.ClientModel" Version="1.0.0-beta.1" />
+    <PackageReference Update="System.ClientModel" Version="1.0.0-beta.3" />
     <PackageReference Update="Azure.Core" Version="1.36.0" />
     <PackageReference Update="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Update="Azure.ResourceManager" Version="1.9.0" />
@@ -39,5 +46,7 @@
     <PackageReference Update="System.Text.Json" Version="4.7.2" />
     <PackageReference Update="YamlDotNet" Version="11.2.1" />
     <PackageReference Update="System.Memory" Version="4.5.4" />
+    <PackageReference Update="NuGet.Configuration" Version="6.8.0" />
+    <PackageReference Update="Microsoft.Build" Version="16.11.0" />
   </ItemGroup>
 </Project>

@@ -44,6 +44,7 @@ RootModel input = new RootModel
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
     PropertyToMoveToCustomization = NormalEnum.A,
+    PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
 };
 Response<RootModel> response = await client.RoundTripAsync(input);
 ]]></code></example>
@@ -91,6 +92,7 @@ RootModel input = new RootModel
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
     PropertyToMoveToCustomization = NormalEnum.A,
+    PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
 };
 Response<RootModel> response = client.RoundTrip(input);
 ]]></code></example>
@@ -184,6 +186,12 @@ using RequestContent content = RequestContent.Create(new
         requiredInt = 1234,
     },
     propertyToMoveToCustomization = "a",
+    propertyModelStruct = new
+    {
+        requiredInt = 1234,
+        optionalInt = 1234,
+        optionalString = "<optionalString>",
+    },
 });
 Response response = await client.RoundTripAsync(content);
 
@@ -218,6 +226,9 @@ Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString()
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
+Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
 ]]></code></example>
     </member>
     <member name="RoundTrip(RequestContent,RequestContext)">
@@ -309,6 +320,12 @@ using RequestContent content = RequestContent.Create(new
         requiredInt = 1234,
     },
     propertyToMoveToCustomization = "a",
+    propertyModelStruct = new
+    {
+        requiredInt = 1234,
+        optionalInt = 1234,
+        optionalString = "<optionalString>",
+    },
 });
 Response response = client.RoundTrip(content);
 
@@ -343,6 +360,213 @@ Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString()
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
+Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalString").ToString());
+]]></code></example>
+    </member>
+    <member name="FooAsync(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call FooAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234);
+Response<RenamedModel> response = await client.FooAsync(input);
+]]></code>
+This sample shows how to call FooAsync with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = await client.FooAsync(input);
+]]></code></example>
+    </member>
+    <member name="Foo(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call Foo.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234);
+Response<RenamedModel> response = client.Foo(input);
+]]></code>
+This sample shows how to call Foo with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = client.Foo(input);
+]]></code></example>
+    </member>
+    <member name="FooAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call FooAsync and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = await client.FooAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call FooAsync with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = await client.FooAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
+    <member name="Foo(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Foo and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = client.Foo(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call Foo with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = client.Foo(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
+    <member name="BarAsync(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call BarAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234);
+Response<RenamedModel> response = await client.BarAsync(renamedModel);
+]]></code>
+This sample shows how to call BarAsync with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = await client.BarAsync(renamedModel);
+]]></code></example>
+    </member>
+    <member name="Bar(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call Bar.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234);
+Response<RenamedModel> response = client.Bar(renamedModel);
+]]></code>
+This sample shows how to call Bar with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = client.Bar(renamedModel);
+]]></code></example>
+    </member>
+    <member name="BarAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call BarAsync and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = await client.BarAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call BarAsync with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = await client.BarAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
+    <member name="Bar(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Bar and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = client.Bar(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call Bar with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = client.Bar(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
     </member>
   </members>

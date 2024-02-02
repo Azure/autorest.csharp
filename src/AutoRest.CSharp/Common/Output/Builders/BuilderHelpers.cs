@@ -9,6 +9,7 @@ using System.Security;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -245,7 +246,7 @@ namespace AutoRest.CSharp.Output.Builders
                 return newType;
             }
 
-            if (newType.Arguments.Length != defaultType.Arguments.Length)
+            if (newType.Arguments.Count != defaultType.Arguments.Count)
             {
                 return newType.WithNullable(defaultType.IsNullable);
             }
@@ -253,8 +254,8 @@ namespace AutoRest.CSharp.Output.Builders
             if ((TypeFactory.IsList(newType) && TypeFactory.IsList(defaultType)) ||
                 (TypeFactory.IsDictionary(newType) && TypeFactory.IsDictionary(defaultType)))
             {
-                var arguments = new CSharpType[newType.Arguments.Length];
-                for (var i = 0; i < newType.Arguments.Length; i++)
+                var arguments = new CSharpType[newType.Arguments.Count];
+                for (var i = 0; i < newType.Arguments.Count; i++)
                 {
                     arguments[i] = PromoteNullabilityInformation(newType.Arguments[i], defaultType.Arguments[i]);
                 }
@@ -283,6 +284,46 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             return name;
+        }
+
+        public static MethodSignatureModifiers MapModifiers(ISymbol symbol)
+        {
+            var modifiers = MethodSignatureModifiers.None;
+            switch (symbol.DeclaredAccessibility)
+            {
+                case Accessibility.Public:
+                    modifiers |= MethodSignatureModifiers.Public;
+                    break;
+                case Accessibility.Internal:
+                    modifiers |= MethodSignatureModifiers.Internal;
+                    break;
+                case Accessibility.Private:
+                    modifiers |= MethodSignatureModifiers.Private;
+                    break;
+                case Accessibility.Protected:
+                    modifiers |= MethodSignatureModifiers.Protected;
+                    break;
+                case Accessibility.ProtectedAndInternal:
+                    modifiers |= MethodSignatureModifiers.Protected | MethodSignatureModifiers.Internal;
+                    break;
+            }
+            if (symbol.IsStatic)
+            {
+                modifiers |= MethodSignatureModifiers.Static;
+            }
+            if (symbol is IMethodSymbol methodSymbol && methodSymbol.IsAsync)
+            {
+                modifiers |= MethodSignatureModifiers.Async;
+            }
+            if (symbol.IsVirtual)
+            {
+                modifiers |= MethodSignatureModifiers.Virtual;
+            }
+            if (symbol.IsOverride)
+            {
+                modifiers |= MethodSignatureModifiers.Override;
+            }
+            return modifiers;
         }
     }
 }

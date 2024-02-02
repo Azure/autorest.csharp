@@ -41,6 +41,9 @@ namespace MgmtParamOrdering
         private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageRestClient;
         private readonly VirtualMachineExtensionImageData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/artifacttypes/types/versions";
+
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageResource"/> class for mocking. </summary>
         protected VirtualMachineExtensionImageResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtParamOrdering
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/artifacttypes/types/versions";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -103,6 +103,14 @@ namespace MgmtParamOrdering
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -134,6 +142,14 @@ namespace MgmtParamOrdering
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

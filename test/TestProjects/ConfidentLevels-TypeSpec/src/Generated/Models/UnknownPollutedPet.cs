@@ -6,7 +6,7 @@
 #nullable disable
 
 using System;
-using Azure.Core;
+using System.Collections.Generic;
 
 namespace ConfidentLevelsInTsp.Models
 {
@@ -14,17 +14,15 @@ namespace ConfidentLevelsInTsp.Models
     internal partial class UnknownPollutedPet : PollutedPet
     {
         /// <summary> Initializes a new instance of <see cref="UnknownPollutedPet"/>. </summary>
-        /// <param name="name"> The name of the pet. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal UnknownPollutedPet(string name) : base(name)
-        {
-            Argument.AssertNotNull(name, nameof(name));
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownPollutedPet"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
-        internal UnknownPollutedPet(string kind, string name) : base(kind, name)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownPollutedPet(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownPollutedPet"/> for deserialization. </summary>
+        internal UnknownPollutedPet()
         {
         }
     }

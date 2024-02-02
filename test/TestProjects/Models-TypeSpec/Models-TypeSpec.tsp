@@ -10,10 +10,10 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using TypeSpec.Versioning;
 
+@versioned(Versions)
 @service(
     {
-        title: "Models in CADL",
-        version: "0.1.0"
+        title: "Models in CADL"
     }
 )
 @server(
@@ -23,9 +23,37 @@ using TypeSpec.Versioning;
         endpoint: string,
     }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @doc("CADL project to test various types of models.")
 namespace ModelsTypeSpec;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "0.1.0"
+}
+
+@doc("A base model with a required property")
+model BaseModelWithARequiredProperty {
+    @doc("Required kind")
+    kind: string;
+}
+
+@doc("A base model in the discriminated set inheriting from a base with the predefined discriminator property")
+@discriminator("kind")
+model BaseModelWithDiscriminatorDefinedOnBase extends BaseModelWithARequiredProperty {
+    @doc("Optional string.")
+    optionalString?: string;
+}
+
+@doc("A derived class in the discriminated set inheriting from a base with the predefined discriminator property")
+model DerivedWithDiscriminatorDefinedOnBase extends BaseModelWithDiscriminatorDefinedOnBase {
+    kind: "A";
+
+    @doc("Required string.")
+    requiredString: string;
+
+    @doc("Optional int")
+    optionalInt?: int32;
+}
 
 @doc("Base model")
 model BaseModel {
@@ -552,6 +580,11 @@ model SecondDerivedOutputModel extends OutputBaseModelWithDiscriminator {
   kind: "second";
   second: boolean;
 }
+
+@route("/roundTripToDiscriminatorDefinedOnBase")
+@put
+@convenientAPI(true)
+op putBaseModelWithDiscriminatorDefinedOnBase(@body body: BaseModelWithDiscriminatorDefinedOnBase): BaseModelWithDiscriminatorDefinedOnBase;
 
 @route("/pet")
 @get

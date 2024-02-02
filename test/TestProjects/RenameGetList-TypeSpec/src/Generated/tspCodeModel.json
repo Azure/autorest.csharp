@@ -7,6 +7,7 @@
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ProjectKind",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -34,32 +35,51 @@
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
+  },
+  {
+   "$id": "6",
+   "Kind": "Enum",
+   "Name": "Versions",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "7",
+     "Name": "2022-05-15-preview",
+     "Value": "2022-05-15-preview"
+    }
+   ],
+   "Namespace": "RenameGetList",
+   "Description": "",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "6",
+   "$id": "8",
+   "Kind": "Model",
    "Name": "Project",
    "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
-     "$id": "7",
+     "$id": "9",
      "Name": "projectName",
      "SerializedName": "projectName",
      "Description": "",
      "Type": {
-      "$id": "8",
-      "Name": "string",
-      "Kind": "String",
+      "$id": "10",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "9",
+     "$id": "11",
      "Name": "projectKind",
      "SerializedName": "projectKind",
      "Description": "The project kind.",
@@ -70,137 +90,148 @@
      "IsReadOnly": false
     },
     {
-     "$id": "10",
+     "$id": "12",
      "Name": "storageInputContainerName",
      "SerializedName": "storageInputContainerName",
      "Description": "The storage container name.",
      "Type": {
-      "$id": "11",
-      "Name": "string",
-      "Kind": "String",
+      "$id": "13",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "12",
+     "$id": "14",
      "Name": "settings",
      "SerializedName": "settings",
      "Description": "The project settings.",
      "Type": {
-      "$id": "13",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "14",
-       "Name": "string",
-       "Kind": "String",
+      "$id": "15",
+      "Kind": "Model",
+      "Name": "ProjectSettings",
+      "Namespace": "RenameGetList",
+      "Description": "Represents the settings used to define the project behavior.",
+      "IsNullable": false,
+      "Usage": "None",
+      "InheritedDictionaryType": {
+       "$id": "16",
+       "Kind": "Dictionary",
+       "Name": "Dictionary",
+       "KeyType": {
+        "$id": "17",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "ValueType": {
+        "$id": "18",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
        "IsNullable": false
       },
-      "ValueType": {
-       "$id": "15",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "IsNullable": false
+      "Properties": []
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "16",
+     "$id": "19",
      "Name": "multilingual",
      "SerializedName": "multilingual",
      "Description": "Whether the project would be used for multiple languages or not.",
      "Type": {
-      "$id": "17",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "$id": "20",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "18",
+     "$id": "21",
      "Name": "description",
      "SerializedName": "description",
      "Description": "The project description.",
      "Type": {
-      "$id": "19",
-      "Name": "string",
-      "Kind": "String",
+      "$id": "22",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "20",
+     "$id": "23",
      "Name": "language",
      "SerializedName": "language",
      "Description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "Type": {
-      "$id": "21",
-      "Name": "string",
-      "Kind": "String",
+      "$id": "24",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "22",
+     "$id": "25",
      "Name": "createdDateTime",
      "SerializedName": "createdDateTime",
      "Description": "Represents the project creation datetime.",
      "Type": {
-      "$id": "23",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "$id": "26",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "24",
+     "$id": "27",
      "Name": "lastModifiedDateTime",
      "SerializedName": "lastModifiedDateTime",
      "Description": "Represents the project last modification datetime.",
      "Type": {
-      "$id": "25",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "$id": "28",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "26",
+     "$id": "29",
      "Name": "lastTrainedDateTime",
      "SerializedName": "lastTrainedDateTime",
      "Description": "Represents the project last training datetime.",
      "Type": {
-      "$id": "27",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "$id": "30",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "28",
+     "$id": "31",
      "Name": "lastDeployedDateTime",
      "SerializedName": "lastDeployedDateTime",
      "Description": "Represents the project last deployment datetime.",
      "Type": {
-      "$id": "29",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "$id": "32",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -209,7 +240,11 @@
    ]
   },
   {
-   "$id": "30",
+   "$ref": "15"
+  },
+  {
+   "$id": "33",
+   "Kind": "Model",
    "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
@@ -217,15 +252,16 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "31",
+     "$id": "34",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Project items on this page",
      "Type": {
-      "$id": "32",
+      "$id": "35",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "6"
+       "$ref": "8"
       },
       "IsNullable": false
      },
@@ -233,14 +269,14 @@
      "IsReadOnly": false
     },
     {
-     "$id": "33",
+     "$id": "36",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "34",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "$id": "37",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -249,21 +285,22 @@
    ]
   },
   {
-   "$id": "35",
+   "$id": "38",
+   "Kind": "Model",
    "Name": "Deployment",
    "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
-     "$id": "36",
+     "$id": "39",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "37",
-      "Name": "string",
-      "Kind": "String",
+      "$id": "40",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -272,7 +309,8 @@
    ]
   },
   {
-   "$id": "38",
+   "$id": "41",
+   "Kind": "Model",
    "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
@@ -280,15 +318,16 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "39",
+     "$id": "42",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Deployment items on this page",
      "Type": {
-      "$id": "40",
+      "$id": "43",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
-       "$ref": "35"
+       "$ref": "38"
       },
       "IsNullable": false
      },
@@ -296,14 +335,14 @@
      "IsReadOnly": false
     },
     {
-     "$id": "41",
+     "$id": "44",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "42",
-      "Name": "ResourceLocation",
-      "Kind": "Uri",
+      "$id": "45",
+      "Kind": "Primitive",
+      "Name": "Uri",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -312,7 +351,8 @@
    ]
   },
   {
-   "$id": "43",
+   "$id": "46",
+   "Kind": "Model",
    "Name": "ListQueryParams",
    "Namespace": "RenameGetList",
    "IsNullable": false,
@@ -322,24 +362,34 @@
  ],
  "Clients": [
   {
-   "$id": "44",
+   "$id": "47",
    "Name": "RenameGetListClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "48"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "49",
+   "Name": "Projects",
    "Description": "",
    "Operations": [
     {
-     "$id": "45",
+     "$id": "50",
      "Name": "get",
      "ResourceName": "Project",
      "Description": "Gets the details of a project.",
      "Parameters": [
       {
-       "$id": "46",
+       "$id": "51",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Type": {
-        "$id": "47",
+        "$id": "52",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -353,44 +403,44 @@
        "Kind": "Client"
       },
       {
-       "$id": "48",
+       "$id": "53",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "",
+       "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "49",
+        "$id": "54",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "55",
         "Type": {
-         "$id": "51",
+         "$id": "56",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
-       }
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "52",
+       "$id": "57",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "53",
-        "Name": "string",
-        "Kind": "String",
+        "$id": "58",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -404,75 +454,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "55",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "56",
-        "Type": {
-         "$ref": "55"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "57",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "6"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{Endpoint}/language",
-     "Path": "/authoring/analyze-text/projects/{projectName}",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
-    },
-    {
-     "$id": "58",
-     "Name": "list",
-     "ResourceName": "Project",
-     "Description": "Lists the existing projects.",
-     "Parameters": [
-      {
-       "$ref": "46"
-      },
-      {
-       "$ref": "48"
-      },
-      {
        "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -500,86 +488,65 @@
         200
        ],
        "BodyType": {
-        "$ref": "30"
+        "$ref": "8"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/language",
-     "Path": "/authoring/analyze-text/projects",
+     "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
-     "Paging": {
-      "$id": "63",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
-     },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "64",
-     "Name": "get",
-     "ResourceName": "Deployment",
-     "Description": "Gets the details of a deployment.",
+     "$id": "63",
+     "Name": "list",
+     "ResourceName": "Project",
+     "Description": "Lists the existing projects.",
      "Parameters": [
       {
-       "$ref": "46"
+       "$ref": "51"
       },
       {
-       "$ref": "48"
-      },
-      {
-       "$id": "65",
-       "Name": "projectName",
-       "NameInRequest": "projectName",
+       "$id": "64",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "66",
-        "Name": "string",
-        "Kind": "String",
+        "$id": "65",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
-       "Location": "Path",
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "55"
+       },
        "IsRequired": true,
-       "IsApiVersion": false,
+       "IsApiVersion": true,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Client"
       },
       {
-       "$id": "67",
-       "Name": "deploymentName",
-       "NameInRequest": "deploymentName",
-       "Type": {
-        "$id": "68",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "69",
+       "$id": "66",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "70",
+        "$id": "67",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -592,9 +559,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "71",
+        "$id": "68",
         "Type": {
-         "$ref": "70"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
@@ -602,16 +569,162 @@
      ],
      "Responses": [
       {
-       "$id": "72",
+       "$id": "69",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "35"
+        "$ref": "33"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{Endpoint}/language",
+     "Path": "/authoring/analyze-text/projects",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "70",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "71"
+   },
+   "Creatable": false,
+   "Parent": "RenameGetListClient"
+  },
+  {
+   "$id": "72",
+   "Name": "Deployments",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "73",
+     "Name": "get",
+     "ResourceName": "Deployment",
+     "Description": "Gets the details of a deployment.",
+     "Parameters": [
+      {
+       "$ref": "51"
+      },
+      {
+       "$id": "74",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "75",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "55"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "76",
+       "Name": "projectName",
+       "NameInRequest": "projectName",
+       "Type": {
+        "$id": "77",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "78",
+       "Name": "deploymentName",
+       "NameInRequest": "deploymentName",
+       "Type": {
+        "$id": "79",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "80",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "81",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "82",
+        "Type": {
+         "$ref": "81"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "83",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "38"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -623,25 +736,46 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "73",
+     "$id": "84",
      "Name": "list",
      "ResourceName": "Deployment",
      "Description": "Lists the existing deployments.",
      "Parameters": [
       {
-       "$ref": "46"
+       "$ref": "51"
       },
       {
-       "$ref": "48"
+       "$id": "85",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "86",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "55"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "74",
+       "$id": "87",
        "Name": "projectName",
        "NameInRequest": "projectName",
        "Type": {
-        "$id": "75",
-        "Name": "string",
-        "Kind": "String",
+        "$id": "88",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Path",
@@ -655,13 +789,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "76",
+       "$id": "89",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "90",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -674,9 +808,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "91",
         "Type": {
-         "$ref": "77"
+         "$ref": "90"
         },
         "Value": "application/json"
        }
@@ -684,16 +818,19 @@
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "38"
+        "$ref": "41"
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -702,7 +839,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments",
      "BufferResponse": true,
      "Paging": {
-      "$id": "80",
+      "$id": "93",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -711,9 +848,10 @@
     }
    ],
    "Protocol": {
-    "$id": "81"
+    "$id": "94"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "RenameGetListClient"
   }
  ]
 }

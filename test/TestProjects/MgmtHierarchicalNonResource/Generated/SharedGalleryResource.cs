@@ -45,6 +45,9 @@ namespace MgmtHierarchicalNonResource
         private readonly SharedGalleryImageVersionsRestOperations _sharedGalleryImageVersionsRestClient;
         private readonly SharedGalleryData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/sharedGalleries";
+
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryResource"/> class for mocking. </summary>
         protected SharedGalleryResource()
         {
@@ -75,9 +78,6 @@ namespace MgmtHierarchicalNonResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/sharedGalleries";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -110,6 +110,14 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -144,6 +152,14 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleries_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SharedGalleryResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -177,6 +193,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -200,6 +220,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
@@ -222,6 +246,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -258,6 +286,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
@@ -293,6 +325,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
@@ -321,6 +357,10 @@ namespace MgmtHierarchicalNonResource
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_List</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
@@ -348,6 +388,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -385,6 +429,10 @@ namespace MgmtHierarchicalNonResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SharedGalleryImageVersions_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
         /// </item>
         /// </list>
         /// </summary>

@@ -6,7 +6,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 {
-    internal class XmlObjectAttributeSerialization : XmlPropertySerialization
+    internal record XmlObjectAttributeSerialization : XmlPropertySerialization
     {
         public XmlObjectAttributeSerialization(string serializedName, ObjectTypeProperty property, XmlValueSerialization valueSerialization)
             : base(serializedName, property)

@@ -55,6 +55,14 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
@@ -77,6 +85,14 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -108,6 +124,14 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
@@ -131,6 +155,14 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>DedicatedHostGroups_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="DedicatedHostGroupResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -163,6 +195,14 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
@@ -185,6 +225,14 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Workspaces_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="WorkspaceResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,6 +264,14 @@ namespace MgmtParamOrdering.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
@@ -239,6 +295,14 @@ namespace MgmtParamOrdering.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineScaleSets_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineScaleSetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

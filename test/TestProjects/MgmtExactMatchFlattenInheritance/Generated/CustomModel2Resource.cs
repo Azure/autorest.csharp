@@ -39,6 +39,9 @@ namespace MgmtExactMatchFlattenInheritance
         private readonly CustomModel2SRestOperations _customModel2RestClient;
         private readonly CustomModel2Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel2s";
+
         /// <summary> Initializes a new instance of the <see cref="CustomModel2Resource"/> class for mocking. </summary>
         protected CustomModel2Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtExactMatchFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel2s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -101,6 +101,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -133,6 +141,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -164,6 +180,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -199,6 +223,14 @@ namespace MgmtExactMatchFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>CustomModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="CustomModel2Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

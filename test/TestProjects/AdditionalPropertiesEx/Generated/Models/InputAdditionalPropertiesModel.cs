@@ -21,6 +21,20 @@ namespace AdditionalPropertiesEx.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
+        /// <summary> Initializes a new instance of <see cref="InputAdditionalPropertiesModel"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        internal InputAdditionalPropertiesModel(int id, IDictionary<string, object> additionalProperties)
+        {
+            Id = id;
+            AdditionalProperties = additionalProperties;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InputAdditionalPropertiesModel"/> for deserialization. </summary>
+        internal InputAdditionalPropertiesModel()
+        {
+        }
+
         /// <summary> Gets the id. </summary>
         public int Id { get; }
         /// <summary> Additional Properties. </summary>

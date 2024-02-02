@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -15,9 +17,10 @@ using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
+    [DebuggerDisplay("Name: {Declaration.Name}, Type: {Declaration.Type}")]
     internal class ObjectTypeProperty
     {
-        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType)
+        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty? inputModelProperty)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
@@ -31,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   serializationFormat: field.SerializationFormat,
                   serializationMapping: field.SerializationMapping)
         {
-            InitializationValue = field.DefaultValue;
+            InitializationValue = field.InitializationValue;
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, SourcePropertySerializationMapping? serializationMapping = null)
@@ -76,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public SerializationFormat SerializationFormat { get; }
 
-        public FormattableString? InitializationValue { get; }
+        public ValueExpression? InitializationValue { get; }
 
         private bool IsFlattenedProperty { get; }
 
@@ -443,11 +446,6 @@ Examples:
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }
             return updatedDescription ?? $"";
-        }
-
-        public override string ToString()
-        {
-            return $"ObjectTypeProperty {{Name: {Declaration.Name}, Type: {Declaration.Type}}}";
         }
     }
 }

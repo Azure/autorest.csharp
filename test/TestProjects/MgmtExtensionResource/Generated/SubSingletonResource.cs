@@ -37,6 +37,9 @@ namespace MgmtExtensionResource
         private readonly SubSingletonsRestOperations _subSingletonRestClient;
         private readonly SubSingletonData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Singleton/subSingletons";
+
         /// <summary> Initializes a new instance of the <see cref="SubSingletonResource"/> class for mocking. </summary>
         protected SubSingletonResource()
         {
@@ -63,9 +66,6 @@ namespace MgmtExtensionResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Singleton/subSingletons";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -99,6 +99,14 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>SubSingletons_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -130,6 +138,14 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubSingletons_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -163,6 +179,14 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>SubSingletons_Execute</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -192,6 +216,14 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SubSingletons_Execute</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SubSingletonResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -2,13 +2,12 @@
  "$id": "1",
  "Name": "Encode.Datetime",
  "Description": "Test for encode decorator on datetime.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "DefaultDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -21,8 +20,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "utcDateTime",
-      "Kind": "DateTime",
+      "Kind": "Primitive",
+      "Name": "DateTime",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -32,6 +31,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "Rfc3339DatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -44,8 +44,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeRFC3339",
+      "Kind": "Primitive",
+      "Name": "DateTimeRFC3339",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -55,6 +55,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "Rfc7231DatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -67,8 +68,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeRFC7231",
+      "Kind": "Primitive",
+      "Name": "DateTimeRFC7231",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -78,6 +79,7 @@
   },
   {
    "$id": "11",
+   "Kind": "Model",
    "Name": "UnixTimestampDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -90,8 +92,8 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Name": "utcDateTime",
-      "Kind": "DateTimeUnix",
+      "Kind": "Primitive",
+      "Name": "DateTimeUnix",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -101,6 +103,7 @@
   },
   {
    "$id": "14",
+   "Kind": "Model",
    "Name": "UnixTimestampArrayDatetimeProperty",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -113,11 +116,12 @@
      "Description": "",
      "Type": {
       "$id": "16",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "17",
-       "Name": "unixTimestampDatetime",
-       "Kind": "DateTimeUnix",
+       "Kind": "Primitive",
+       "Name": "DateTimeUnix",
        "IsNullable": false
       },
       "IsNullable": false
@@ -129,6 +133,7 @@
   },
   {
    "$id": "18",
+   "Kind": "Model",
    "Name": "DefaultDatetimeHeader",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -137,6 +142,7 @@
   },
   {
    "$id": "19",
+   "Kind": "Model",
    "Name": "Rfc3339DatetimeHeader",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -145,6 +151,7 @@
   },
   {
    "$id": "20",
+   "Kind": "Model",
    "Name": "Rfc7231DatetimeHeader",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -153,6 +160,7 @@
   },
   {
    "$id": "21",
+   "Kind": "Model",
    "Name": "UnixTimestampDatetimeHeader",
    "Namespace": "Encode.Datetime",
    "IsNullable": false,
@@ -188,8 +196,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -205,8 +213,8 @@
         "$id": "28",
         "Type": {
          "$id": "29",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -218,8 +226,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "31",
-        "Name": "utcDateTime",
-        "Kind": "DateTime",
+        "Kind": "Primitive",
+        "Name": "DateTime",
         "IsNullable": false
        },
        "Location": "Query",
@@ -238,8 +246,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -258,42 +266,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "35",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "36",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "37",
-        "Type": {
-         "$id": "38",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "35",
        "StatusCodes": [
         204
        ],
@@ -311,7 +288,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "36",
      "Name": "rfc3339",
      "ResourceName": "Query",
      "Parameters": [
@@ -319,13 +296,13 @@
        "$ref": "26"
       },
       {
-       "$id": "41",
+       "$id": "37",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "42",
-        "Name": "utcDateTime",
-        "Kind": "DateTimeRFC3339",
+        "$id": "38",
+        "Kind": "Primitive",
+        "Name": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Query",
@@ -339,13 +316,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "43",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "40",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -358,20 +335,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "41",
         "Type": {
-         "$ref": "44"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -389,7 +363,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "43",
      "Name": "rfc7231",
      "ResourceName": "Query",
      "Parameters": [
@@ -397,13 +371,13 @@
        "$ref": "26"
       },
       {
-       "$id": "48",
+       "$id": "44",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "49",
-        "Name": "utcDateTime",
-        "Kind": "DateTimeRFC7231",
+        "$id": "45",
+        "Kind": "Primitive",
+        "Name": "DateTimeRFC7231",
         "IsNullable": false
        },
        "Location": "Query",
@@ -417,13 +391,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "51",
+        "$id": "47",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -436,20 +410,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "52",
+        "$id": "48",
         "Type": {
-         "$ref": "51"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "49",
        "StatusCodes": [
         204
        ],
@@ -467,7 +438,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "54",
+     "$id": "50",
      "Name": "unixTimestamp",
      "ResourceName": "Query",
      "Parameters": [
@@ -475,13 +446,13 @@
        "$ref": "26"
       },
       {
-       "$id": "55",
+       "$id": "51",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "56",
-        "Name": "utcDateTime",
-        "Kind": "DateTimeUnix",
+        "$id": "52",
+        "Kind": "Primitive",
+        "Name": "DateTimeUnix",
         "IsNullable": false
        },
        "Location": "Query",
@@ -495,13 +466,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "57",
+       "$id": "53",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "54",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -514,20 +485,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "55",
         "Type": {
-         "$ref": "58"
+         "$ref": "54"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "56",
        "StatusCodes": [
         204
        ],
@@ -545,7 +513,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "61",
+     "$id": "57",
      "Name": "unixTimestampArray",
      "ResourceName": "Query",
      "Parameters": [
@@ -553,16 +521,17 @@
        "$ref": "26"
       },
       {
-       "$id": "62",
+       "$id": "58",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "63",
+        "$id": "59",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "64",
-         "Name": "unixTimestampDatetime",
-         "Kind": "DateTimeUnix",
+         "$id": "60",
+         "Kind": "Primitive",
+         "Name": "DateTimeUnix",
          "IsNullable": false
         },
         "IsNullable": false
@@ -579,13 +548,13 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "65",
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "62",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -598,20 +567,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "63",
         "Type": {
-         "$ref": "66"
+         "$ref": "62"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "64",
        "StatusCodes": [
         204
        ],
@@ -630,18 +596,18 @@
     }
    ],
    "Protocol": {
-    "$id": "69"
+    "$id": "65"
    },
    "Creatable": false,
    "Parent": "DatetimeClient"
   },
   {
-   "$id": "70",
+   "$id": "66",
    "Name": "Property",
    "Description": "",
    "Operations": [
     {
-     "$id": "71",
+     "$id": "67",
      "Name": "default",
      "ResourceName": "Property",
      "Parameters": [
@@ -649,7 +615,7 @@
        "$ref": "26"
       },
       {
-       "$id": "72",
+       "$id": "68",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -666,40 +632,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "74",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "75",
-        "Type": {
-         "$ref": "74"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "76",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "70",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -712,20 +651,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "71",
         "Type": {
-         "$ref": "77"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "35"
+       "$id": "72",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "73",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "74",
+        "Type": {
+         "$ref": "73"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "75",
        "StatusCodes": [
         200
        ],
@@ -734,7 +697,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -749,7 +715,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "80",
+     "$id": "76",
      "Name": "rfc3339",
      "ResourceName": "Property",
      "Parameters": [
@@ -757,7 +723,7 @@
        "$ref": "26"
       },
       {
-       "$id": "81",
+       "$id": "77",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -774,40 +740,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "82",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "83",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "84",
-        "Type": {
-         "$ref": "83"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "85",
+       "$id": "78",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "86",
+        "$id": "79",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -820,20 +759,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "87",
+        "$id": "80",
         "Type": {
-         "$ref": "86"
+         "$ref": "79"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "35"
+       "$id": "81",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "82",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "83",
+        "Type": {
+         "$ref": "82"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "88",
+       "$id": "84",
        "StatusCodes": [
         200
        ],
@@ -842,7 +805,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -857,7 +823,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "89",
+     "$id": "85",
      "Name": "rfc7231",
      "ResourceName": "Property",
      "Parameters": [
@@ -865,7 +831,7 @@
        "$ref": "26"
       },
       {
-       "$id": "90",
+       "$id": "86",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -882,40 +848,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "91",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "92",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "93",
-        "Type": {
-         "$ref": "92"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "94",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "95",
+        "$id": "88",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -928,20 +867,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "96",
+        "$id": "89",
         "Type": {
-         "$ref": "95"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "35"
+       "$id": "90",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "91",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "92",
+        "Type": {
+         "$ref": "91"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "97",
+       "$id": "93",
        "StatusCodes": [
         200
        ],
@@ -950,7 +913,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -965,7 +931,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "98",
+     "$id": "94",
      "Name": "unixTimestamp",
      "ResourceName": "Property",
      "Parameters": [
@@ -973,7 +939,7 @@
        "$ref": "26"
       },
       {
-       "$id": "99",
+       "$id": "95",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -990,40 +956,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "100",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "101",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "102",
-        "Type": {
-         "$ref": "101"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "103",
+       "$id": "96",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "104",
+        "$id": "97",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1036,20 +975,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "105",
+        "$id": "98",
         "Type": {
-         "$ref": "104"
+         "$ref": "97"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "35"
+       "$id": "99",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "100",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "101",
+        "Type": {
+         "$ref": "100"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "106",
+       "$id": "102",
        "StatusCodes": [
         200
        ],
@@ -1058,7 +1021,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1073,7 +1039,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "107",
+     "$id": "103",
      "Name": "unixTimestampArray",
      "ResourceName": "Property",
      "Parameters": [
@@ -1081,7 +1047,7 @@
        "$ref": "26"
       },
       {
-       "$id": "108",
+       "$id": "104",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1098,40 +1064,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "109",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "110",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "111",
-        "Type": {
-         "$ref": "110"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "112",
+       "$id": "105",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
+        "$id": "106",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1144,20 +1083,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "114",
+        "$id": "107",
         "Type": {
-         "$ref": "113"
+         "$ref": "106"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "35"
+       "$id": "108",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "109",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "110",
+        "Type": {
+         "$ref": "109"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "111",
        "StatusCodes": [
         200
        ],
@@ -1166,7 +1129,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1182,18 +1148,18 @@
     }
    ],
    "Protocol": {
-    "$id": "116"
+    "$id": "112"
    },
    "Creatable": false,
    "Parent": "DatetimeClient"
   },
   {
-   "$id": "117",
+   "$id": "113",
    "Name": "Header",
    "Description": "",
    "Operations": [
     {
-     "$id": "118",
+     "$id": "114",
      "Name": "default",
      "ResourceName": "Header",
      "Parameters": [
@@ -1201,13 +1167,13 @@
        "$ref": "26"
       },
       {
-       "$id": "119",
+       "$id": "115",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "120",
-        "Name": "utcDateTime",
-        "Kind": "DateTime",
+        "$id": "116",
+        "Kind": "Primitive",
+        "Name": "DateTime",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1221,13 +1187,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "121",
+       "$id": "117",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "122",
+        "$id": "118",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1240,20 +1206,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "123",
+        "$id": "119",
         "Type": {
-         "$ref": "122"
+         "$ref": "118"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "124",
+       "$id": "120",
        "StatusCodes": [
         204
        ],
@@ -1271,7 +1234,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "125",
+     "$id": "121",
      "Name": "rfc3339",
      "ResourceName": "Header",
      "Parameters": [
@@ -1279,13 +1242,13 @@
        "$ref": "26"
       },
       {
-       "$id": "126",
+       "$id": "122",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "127",
-        "Name": "utcDateTime",
-        "Kind": "DateTimeRFC3339",
+        "$id": "123",
+        "Kind": "Primitive",
+        "Name": "DateTimeRFC3339",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1299,13 +1262,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "128",
+       "$id": "124",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "129",
+        "$id": "125",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1318,20 +1281,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "130",
+        "$id": "126",
         "Type": {
-         "$ref": "129"
+         "$ref": "125"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "131",
+       "$id": "127",
        "StatusCodes": [
         204
        ],
@@ -1349,7 +1309,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "132",
+     "$id": "128",
      "Name": "rfc7231",
      "ResourceName": "Header",
      "Parameters": [
@@ -1357,13 +1317,13 @@
        "$ref": "26"
       },
       {
-       "$id": "133",
+       "$id": "129",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "134",
-        "Name": "utcDateTime",
-        "Kind": "DateTimeRFC7231",
+        "$id": "130",
+        "Kind": "Primitive",
+        "Name": "DateTimeRFC7231",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1377,13 +1337,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "135",
+       "$id": "131",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "136",
+        "$id": "132",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1396,20 +1356,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "133",
         "Type": {
-         "$ref": "136"
+         "$ref": "132"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "138",
+       "$id": "134",
        "StatusCodes": [
         204
        ],
@@ -1427,7 +1384,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "139",
+     "$id": "135",
      "Name": "unixTimestamp",
      "ResourceName": "Header",
      "Parameters": [
@@ -1435,13 +1392,13 @@
        "$ref": "26"
       },
       {
-       "$id": "140",
+       "$id": "136",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "141",
-        "Name": "utcDateTime",
-        "Kind": "DateTimeUnix",
+        "$id": "137",
+        "Kind": "Primitive",
+        "Name": "DateTimeUnix",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1455,13 +1412,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "142",
+       "$id": "138",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "143",
+        "$id": "139",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1474,20 +1431,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "144",
+        "$id": "140",
         "Type": {
-         "$ref": "143"
+         "$ref": "139"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "145",
+       "$id": "141",
        "StatusCodes": [
         204
        ],
@@ -1505,7 +1459,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "146",
+     "$id": "142",
      "Name": "unixTimestampArray",
      "ResourceName": "Header",
      "Parameters": [
@@ -1513,16 +1467,17 @@
        "$ref": "26"
       },
       {
-       "$id": "147",
+       "$id": "143",
        "Name": "value",
        "NameInRequest": "value",
        "Type": {
-        "$id": "148",
+        "$id": "144",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
-         "$id": "149",
-         "Name": "unixTimestampDatetime",
-         "Kind": "DateTimeUnix",
+         "$id": "145",
+         "Kind": "Primitive",
+         "Name": "DateTimeUnix",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1539,13 +1494,13 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "150",
+       "$id": "146",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "151",
+        "$id": "147",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1558,20 +1513,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "152",
+        "$id": "148",
         "Type": {
-         "$ref": "151"
+         "$ref": "147"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "153",
+       "$id": "149",
        "StatusCodes": [
         204
        ],
@@ -1590,18 +1542,18 @@
     }
    ],
    "Protocol": {
-    "$id": "154"
+    "$id": "150"
    },
    "Creatable": false,
    "Parent": "DatetimeClient"
   },
   {
-   "$id": "155",
+   "$id": "151",
    "Name": "ResponseHeader",
    "Description": "",
    "Operations": [
     {
-     "$id": "156",
+     "$id": "152",
      "Name": "default",
      "ResourceName": "ResponseHeader",
      "Parameters": [
@@ -1609,13 +1561,13 @@
        "$ref": "26"
       },
       {
-       "$id": "157",
+       "$id": "153",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "158",
+        "$id": "154",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1628,34 +1580,31 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "159",
+        "$id": "155",
         "Type": {
-         "$ref": "158"
+         "$ref": "154"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "160",
+       "$id": "156",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "161",
+         "$id": "157",
          "Name": "value",
          "NameInResponse": "value",
          "Description": "",
          "Type": {
-          "$id": "162",
-          "Name": "utcDateTime",
-          "Kind": "DateTime",
+          "$id": "158",
+          "Kind": "Primitive",
+          "Name": "DateTime",
           "IsNullable": false
          }
         }
@@ -1672,7 +1621,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "163",
+     "$id": "159",
      "Name": "rfc3339",
      "ResourceName": "ResponseHeader",
      "Parameters": [
@@ -1680,13 +1629,13 @@
        "$ref": "26"
       },
       {
-       "$id": "164",
+       "$id": "160",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "165",
+        "$id": "161",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1699,34 +1648,31 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "166",
+        "$id": "162",
         "Type": {
-         "$ref": "165"
+         "$ref": "161"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "167",
+       "$id": "163",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "168",
+         "$id": "164",
          "Name": "value",
          "NameInResponse": "value",
          "Description": "",
          "Type": {
-          "$id": "169",
-          "Name": "utcDateTime",
-          "Kind": "DateTime",
+          "$id": "165",
+          "Kind": "Primitive",
+          "Name": "DateTime",
           "IsNullable": false
          }
         }
@@ -1743,7 +1689,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "170",
+     "$id": "166",
      "Name": "rfc7231",
      "ResourceName": "ResponseHeader",
      "Parameters": [
@@ -1751,13 +1697,13 @@
        "$ref": "26"
       },
       {
-       "$id": "171",
+       "$id": "167",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "172",
+        "$id": "168",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1770,34 +1716,31 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "173",
+        "$id": "169",
         "Type": {
-         "$ref": "172"
+         "$ref": "168"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "174",
+       "$id": "170",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "175",
+         "$id": "171",
          "Name": "value",
          "NameInResponse": "value",
          "Description": "",
          "Type": {
-          "$id": "176",
-          "Name": "utcDateTime",
-          "Kind": "DateTime",
+          "$id": "172",
+          "Kind": "Primitive",
+          "Name": "DateTime",
           "IsNullable": false
          }
         }
@@ -1814,7 +1757,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "177",
+     "$id": "173",
      "Name": "unixTimestamp",
      "ResourceName": "ResponseHeader",
      "Parameters": [
@@ -1822,13 +1765,13 @@
        "$ref": "26"
       },
       {
-       "$id": "178",
+       "$id": "174",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "179",
+        "$id": "175",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1841,34 +1784,31 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "180",
+        "$id": "176",
         "Type": {
-         "$ref": "179"
+         "$ref": "175"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "35"
       }
      ],
      "Responses": [
       {
-       "$id": "181",
+       "$id": "177",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "182",
+         "$id": "178",
          "Name": "value",
          "NameInResponse": "value",
          "Description": "",
          "Type": {
-          "$id": "183",
-          "Name": "utcDateTime",
-          "Kind": "DateTime",
+          "$id": "179",
+          "Kind": "Primitive",
+          "Name": "DateTime",
           "IsNullable": false
          }
         }
@@ -1886,7 +1826,7 @@
     }
    ],
    "Protocol": {
-    "$id": "184"
+    "$id": "180"
    },
    "Creatable": false,
    "Parent": "DatetimeClient"

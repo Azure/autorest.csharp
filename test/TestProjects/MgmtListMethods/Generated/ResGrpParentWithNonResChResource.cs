@@ -42,6 +42,9 @@ namespace MgmtListMethods
         private readonly ResGrpParentWithNonResChesRestOperations _resGrpParentWithNonResChRestClient;
         private readonly ResGrpParentWithNonResChData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/resGrpParentWithNonResChes";
+
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithNonResChResource"/> class for mocking. </summary>
         protected ResGrpParentWithNonResChResource()
         {
@@ -68,9 +71,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/resGrpParentWithNonResChes";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -104,6 +104,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -136,6 +144,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -167,6 +183,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_CreateOrUpdate</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,6 +230,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_CreateOrUpdate</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -244,6 +276,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_ListNonResourceChild</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -265,6 +305,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_ListNonResourceChild</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -285,6 +333,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -335,6 +391,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -384,6 +448,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -431,6 +503,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -480,6 +560,14 @@ namespace MgmtListMethods
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -526,6 +614,14 @@ namespace MgmtListMethods
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResGrpParentWithNonResChes_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResGrpParentWithNonResChResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -5,7 +5,7 @@ using Azure.Core;
 
 namespace ModelWithConverterUsage.Models
 {
-    [CodeGenModel(Usage = new[] { "converter"})]
+    [CodeGenModel(Usage = new[] { "converter" })]
     public partial struct ModelStruct
     {
     }

@@ -3,21 +3,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -26,11 +29,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
-        private InputModelType _inputModel;
-        private TypeFactory _typeFactory;
-        private SourceInputModel? _sourceInputModel;
-        private InputModelType[]? _derivedTypes;
-        private SerializableObjectType? _defaultDerivedType;
+        private ObjectTypeProperty? _additionalPropertiesProperty;
+        private readonly InputModelType _inputModel;
+        private readonly TypeFactory _typeFactory;
+        private readonly IReadOnlyList<InputModelType> _derivedModels;
+        private readonly SerializableObjectType? _defaultDerivedType;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -38,26 +41,68 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
-        public IObjectTypeFields<InputModelProperty> Fields => _fields ??= EnsureFields();
+        public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
         private ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         private ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
-        public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
+        public override ObjectTypeProperty? AdditionalPropertiesProperty => _additionalPropertiesProperty ??= EnsureAdditionalPropertiesProperty();
 
-        public bool IsPropertyBag => _inputModel.IsPropertyBag;
+        private ObjectTypeProperty? EnsureAdditionalPropertiesProperty()
+            => Fields.AdditionalProperties is { } additionalPropertiesField
+                ? new ObjectTypeProperty(additionalPropertiesField, null)
+                : null;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, SerializableObjectType? defaultDerivedType = null)
+        private ObjectTypeProperty? _rawDataField;
+        public override ObjectTypeProperty? RawDataField
+        {
+            get
+            {
+                if (_rawDataField != null)
+                    return _rawDataField;
+
+                if (AdditionalPropertiesProperty != null || !ShouldHaveRawData)
+                    return null;
+
+                // when this model has derived types, the accessibility should change from private to `protected internal`
+                string accessibility = HasDerivedTypes() ? "private protected" : "private";
+
+                _rawDataField = new ObjectTypeProperty(
+                    BuilderHelpers.CreateMemberDeclaration(PrivateAdditionalPropertiesPropertyName,
+                        _privateAdditionalPropertiesPropertyType, accessibility, null, _typeFactory),
+                    PrivateAdditionalPropertiesPropertyDescription,
+                    true,
+                    null);
+
+                return _rawDataField;
+            }
+        }
+
+        private bool HasDerivedTypes()
+        {
+            if (_derivedModels is not null && _derivedModels.Any())
+                return true;
+
+            if (_inputModel.DiscriminatorPropertyName is not null)
+                return true;
+
+            return false;
+        }
+
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
-            _typeFactory = typeFactory!;
+            _typeFactory = typeFactory;
             _inputModel = inputModel;
-            _sourceInputModel = sourceInputModel;
             DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
             _deprecated = inputModel.Deprecated;
-            _derivedTypes = derivedTypes;
+            _derivedModels = inputModel.DerivedModels;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+
+            IsPropertyBag = inputModel.IsPropertyBag;
+            IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
+            SkipInitializerConstructor = IsUnknownDerivedType;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -76,6 +121,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             //TODO if no one inherits from this we can omit the virtual
             var signatures = MethodSignatureModifiers.Internal;
+            // structs cannot have virtual members
+            if (IsStruct)
+            {
+                return signatures;
+            }
+
             var parent = GetBaseObjectType();
             if (parent is null)
             {
@@ -92,18 +143,18 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override FormattableString CreateDescription()
         {
-            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : $"The {_inputModel.Name}.";
+            return string.IsNullOrEmpty(_inputModel.Description) ? $"The {_inputModel.Name}." : FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(_inputModel.Description));
         }
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType), IsStruct);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
         {
             //get base public ctor params
-            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
+            GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var baseInitializers, true);
 
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
@@ -111,8 +162,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (_inputModel.DiscriminatorPropertyName is not null)
                 accessibility = MethodSignatureModifiers.Protected;
-
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
 
             return new ConstructorSignature(
                 Type,
@@ -125,10 +174,26 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
-            //get base public ctor params
-            GetConstructorParameters(Fields.SerializationParameters, out var fullParameterList, out var parametersToPassToBase, false, CreateSerializationConstructorParameter);
+            // if there is additional properties property, we need to append it to the parameter list
+            var parameters = Fields.SerializationParameters;
+            if (RawDataField != null)
+            {
+                var deserializationParameter = new Parameter(
+                    RawDataField.Declaration.Name.ToVariableName(),
+                    RawDataField.ParameterDescription,
+                    RawDataField.Declaration.Type,
+                    null,
+                    ValidationType.None,
+                    null
+                )
+                {
+                    IsRawData = true
+                };
+                parameters = parameters.Append(deserializationParameter).ToList();
+            }
 
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
+            //get base public ctor params
+            GetConstructorParameters(parameters, out var fullParameterList, out var baseInitializers, false);
 
             return new ConstructorSignature(
                 Type,
@@ -168,17 +233,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                         property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                         valueSerialization,
                         property.IsRequired,
-                        ShouldSkipSerialization(property, inputModelProperty),
-                        false,
+                        ShouldExcludeInWireSerialization(property, inputModelProperty),
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                         customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
                         enumerableExpression: enumerableExpression);
-                    ;
                 }
             }
         }
 
-        private static bool ShouldSkipSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
+        private static bool ShouldExcludeInWireSerialization(ObjectTypeProperty property, InputModelProperty inputProperty)
         {
             if (inputProperty.IsDiscriminator)
             {
@@ -193,28 +256,75 @@ namespace AutoRest.CSharp.Output.Models.Types
             return inputProperty.IsReadOnly;
         }
 
-        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
+        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out IReadOnlyList<Parameter> fullParameterList, out IReadOnlyList<ValueExpression> baseInitializers, bool isInitializer)
         {
-            fullParameterList = new List<Parameter>();
+            var parameterList = new List<Parameter>();
             var parent = GetBaseObjectType();
-            parametersToPassToBase = Array.Empty<Parameter>();
+            baseInitializers = Array.Empty<ValueExpression>();
             if (parent is not null)
             {
+                var discriminatorParameterName = Discriminator?.Property.Declaration.Name.ToVariableName();
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
-                parametersToPassToBase = ctor.Signature.Parameters;
-                fullParameterList.AddRange(parametersToPassToBase);
+                var baseParameters = new List<Parameter>();
+                var baseParameterInitializers = new List<ValueExpression>();
+                foreach (var p in ctor.Signature.Parameters)
+                {
+                    // we check if we should have the discriminator to our ctor only when we are building the initialization ctor
+                    if (isInitializer && IsDiscriminatorInheritedOnBase && p.Name == discriminatorParameterName)
+                    {
+                        // if this is base
+                        if (Discriminator is { Value: null })
+                        {
+                            baseParameterInitializers.Add(p); // pass it through
+                            baseParameters.Add(p);
+                        }
+                        // if this is derived or unknown
+                        else if (Discriminator is { Value: { } value })
+                        {
+                            baseParameterInitializers.Add(new ConstantExpression(value));
+                            // do not add it into the list
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"We have a inherited discriminator, but the discriminator is null, this will never happen");
+                        }
+                    }
+                    else if (p.IsRawData && AdditionalPropertiesProperty != null)
+                    {
+                        baseParameterInitializers.Add(Snippets.Null);
+                        // do not add it into the list
+                    }
+                    else
+                    {
+                        baseParameterInitializers.Add(p);
+                        baseParameters.Add(p);
+                    }
+                }
+                parameterList.AddRange(baseParameters);
+                baseInitializers = baseParameterInitializers;
             }
-            fullParameterList.AddRange(parameters.Select(creator));
+            parameterList.AddRange(parameters);
+            fullParameterList = parameterList.DistinctBy(p => p.Name).ToArray(); // we filter out the parameters with the same name since we might have the same property both in myself and my base.
         }
 
-        private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
-            => ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
+        private bool? _isDiscriminatorInheritedOnBase;
+        internal bool IsDiscriminatorInheritedOnBase => _isDiscriminatorInheritedOnBase ??= EnsureIsDiscriminatorInheritedOnBase();
 
-        private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => p with { Type = TypeFactory.GetInputType(p.Type) };
+        private bool EnsureIsDiscriminatorInheritedOnBase()
+        {
+            if (Discriminator is null)
+                return false;
 
-        private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
-            => p with { Validation = ValidationType.None };
+            if (Discriminator is { Value: { } })
+            {
+                var parent = GetBaseObjectType() as ModelTypeProvider;
+                return parent?.IsDiscriminatorInheritedOnBase ?? false;
+            }
+
+            var property = Discriminator.Property;
+            // if the property corresponding to the discriminator could not be found on this type, it means we are inheriting the discriminator
+            return !Properties.Contains(property);
+        }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
         {
@@ -238,11 +348,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(SerializationConstructorSignature.Parameters, false), baseCtor);
         }
 
-        private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool includeDiscriminator)
+        private IReadOnlyList<ObjectPropertyInitializer> GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool isInitializer)
         {
-            List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
+            List<ObjectPropertyInitializer> defaultCtorInitializers = new();
 
-            if (includeDiscriminator && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
+            // only initialization ctor initializes the discriminator
+            // and we should not initialize the discriminator again when the discriminator is inherited (it should show up in the ctor)
+            if (isInitializer && !IsDiscriminatorInheritedOnBase && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !IsUnknownDerivedType)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -253,6 +365,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // we do not need to add initialization for raw data field
+                if (isInitializer && property == RawDataField)
+                {
+                    continue;
+                }
+
                 ReferenceOrConstant? initializationValue = null;
                 Constant? defaultInitializationValue = null;
 
@@ -307,69 +425,134 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            return defaultCtorInitializers.ToArray();
+            return defaultCtorInitializers;
         }
 
         protected override CSharpType? CreateInheritedType()
         {
             if (_inputModel.BaseModel is not null)
-                return _typeFactory.CreateType(_inputModel.BaseModel!);
+                return _typeFactory.CreateType(_inputModel.BaseModel);
 
             return null;
+        }
+
+        private HashSet<string> GetParentPropertyNames()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
         }
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            var existingPropertyNames = GetParentPropertyNames();
             foreach (var field in Fields)
-                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this);
+            {
+                var property = new ObjectTypeProperty(field, Fields.GetInputByField(field));
+                if (existingPropertyNames.Contains(property.Declaration.Name))
+                    continue;
+                yield return property;
+            }
+
+            if (AdditionalPropertiesProperty is { } additionalPropertiesProperty)
+                yield return additionalPropertiesProperty;
+
+            if (RawDataField is { } rawData)
+                yield return rawData;
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            yield return InitializationConstructor;
+            if (!SkipInitializerConstructor)
+                yield return InitializationConstructor;
+
             if (SerializationConstructor != InitializationConstructor)
                 yield return SerializationConstructor;
+
+            if (EmptyConstructor != null)
+                yield return EmptyConstructor;
         }
 
-        protected override bool EnsureHasJsonSerialization()
+        protected override JsonObjectSerialization? BuildJsonSerialization()
         {
             if (IsPropertyBag)
-                return false;
-            return true;
-        }
-
-        protected override bool EnsureHasXmlSerialization()
-        {
-            return false;
-        }
-
-        protected override bool EnsureIncludeSerializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
-        }
-
-        protected override bool EnsureIncludeDeserializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
-        }
-
-        protected override JsonObjectSerialization EnsureJsonSerialization()
-        {
+                return null;
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), null, Discriminator, false);
+            var additionalProperties = CreateAdditionalPropertiesSerialization();
+            return new(this, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, false);
         }
 
-        protected override XmlObjectSerialization? EnsureXmlSerialization()
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
+        {
+            bool shouldExcludeInWireSerialization = false;
+            ObjectTypeProperty? additionalPropertiesProperty = null;
+            InputType? additionalPropertiesValueType = null;
+            foreach (var model in EnumerateHierarchy())
+            {
+                additionalPropertiesProperty = model.AdditionalPropertiesProperty ?? (model as SerializableObjectType)?.RawDataField;
+                if (additionalPropertiesProperty != null)
+                {
+                    // if this is a real "AdditionalProperties", we should NOT exclude it in wire
+                    shouldExcludeInWireSerialization = additionalPropertiesProperty != model.AdditionalPropertiesProperty;
+                    if (model is ModelTypeProvider { AdditionalPropertiesProperty: { } additionalProperties, _inputModel.InheritedDictionaryType: { } inheritedDictionaryType })
+                    {
+                        additionalPropertiesValueType = inheritedDictionaryType.ValueType;
+                    }
+                    break;
+                }
+            }
+
+            if (additionalPropertiesProperty == null)
+            {
+                return null;
+            }
+
+            var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
+            Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
+            JsonSerialization valueSerialization;
+            if (additionalPropertiesValueType is not null)
+            {
+                // build the serialization when there is an input type corresponding to it
+                valueSerialization = SerializationBuilder.BuildJsonSerialization(additionalPropertiesValueType, dictionaryValueType, false, SerializationFormat.Default);
+            }
+            else
+            {
+                // build a simple one from its type when there is not an input type corresponding to it (indicating it is a raw data field)
+                valueSerialization = new JsonValueSerialization(dictionaryValueType, SerializationFormat.Default, true);
+            }
+
+            return new JsonAdditionalPropertiesSerialization(
+                additionalPropertiesProperty,
+                valueSerialization,
+                new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments),
+                shouldExcludeInWireSerialization);
+        }
+
+        protected override XmlObjectSerialization? BuildXmlSerialization()
         {
             return null;
         }
 
+        protected override bool EnsureIncludeSerializer()
+        {
+            // TODO -- this should always return true when use model reader writer is enabled.
+            return Configuration.UseModelReaderWriter || _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
+        }
+
+        protected override bool EnsureIncludeDeserializer()
+        {
+            // TODO -- this should always return true when use model reader writer is enabled.
+            return Configuration.UseModelReaderWriter || _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
+        }
+
         protected override IEnumerable<Method> BuildMethods()
         {
-            if (EnsureIncludeDeserializer())
+            if (IncludeDeserializer)
                 yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
-            if (EnsureIncludeSerializer())
+            if (IncludeSerializer)
                 yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers());
         }
 
@@ -421,8 +604,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
-                property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
+                implementations = _derivedModels.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
+                // find the discriminator corresponding property in this type or its base type or more
+                property = GetPropertyForDiscriminator(discriminatorPropertyName);
             }
 
             if (_inputModel.DiscriminatorValue != null)
@@ -439,6 +623,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
+        private ObjectTypeProperty GetPropertyForDiscriminator(string inputPropertyName)
+        {
+            foreach (var obj in EnumerateHierarchy())
+            {
+                var property = obj.Properties.FirstOrDefault(p => p.InputModelProperty?.Name == inputPropertyName);
+                if (property is not null)
+                    return property;
+            }
+
+            throw new InvalidOperationException($"Expecting discriminator property {inputPropertyName} on model {Declaration.Name}, but found none");
+        }
+
         internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
         {
             var result = new ModelTypeProvider(
@@ -446,14 +642,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 DefaultNamespace,
                 _sourceInputModel,
                 _typeFactory,
-                _derivedTypes,
                 _defaultDerivedType);
             return result;
-        }
-
-        internal InputModelProperty? GetProperty(InputModelType key)
-        {
-            return _inputModel.GetProperty(key);
         }
     }
 }

@@ -20,7 +20,6 @@ namespace Projection.ProjectedName
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -45,7 +44,6 @@ namespace Projection.ProjectedName
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -181,11 +179,18 @@ namespace Projection.ProjectedName
         }
 
         private Property _cachedProperty;
+        private Model _cachedModel;
 
         /// <summary> Initializes a new instance of Property. </summary>
         public virtual Property GetPropertyClient()
         {
-            return Volatile.Read(ref _cachedProperty) ?? Interlocked.CompareExchange(ref _cachedProperty, new Property(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedProperty;
+            return Volatile.Read(ref _cachedProperty) ?? Interlocked.CompareExchange(ref _cachedProperty, new Property(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedProperty;
+        }
+
+        /// <summary> Initializes a new instance of Model. </summary>
+        public virtual Model GetModelClient()
+        {
+            return Volatile.Read(ref _cachedModel) ?? Interlocked.CompareExchange(ref _cachedModel, new Model(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedModel;
         }
 
         internal HttpMessage CreateClientNameRequest(RequestContext context)
@@ -196,7 +201,6 @@ namespace Projection.ProjectedName
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/projection/projected-name/operation", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -211,7 +215,6 @@ namespace Projection.ProjectedName
             uri.Reset(_endpoint);
             uri.AppendPath("/projection/projected-name/parameter", false);
             uri.AppendQuery("default-name", clientName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

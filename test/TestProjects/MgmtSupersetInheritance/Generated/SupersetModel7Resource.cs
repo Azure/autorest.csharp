@@ -39,6 +39,9 @@ namespace MgmtSupersetInheritance
         private readonly SupersetModel7SRestOperations _supersetModel7RestClient;
         private readonly SupersetModel7Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel7s";
+
         /// <summary> Initializes a new instance of the <see cref="SupersetModel7Resource"/> class for mocking. </summary>
         protected SupersetModel7Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtSupersetInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel7s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -100,6 +100,14 @@ namespace MgmtSupersetInheritance
         /// <term>Operation Id</term>
         /// <description>SupersetModel7s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +139,14 @@ namespace MgmtSupersetInheritance
         /// <term>Operation Id</term>
         /// <description>SupersetModel7s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +177,14 @@ namespace MgmtSupersetInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel7s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,6 +222,14 @@ namespace MgmtSupersetInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>SupersetModel7s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="SupersetModel7Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

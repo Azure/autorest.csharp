@@ -37,6 +37,9 @@ namespace MgmtResourceName
         private readonly ProviderRestOperations _providerOperationRestClient;
         private readonly ProviderOperationData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Authorization/providerOperations";
+
         /// <summary> Initializes a new instance of the <see cref="ProviderOperationResource"/> class for mocking. </summary>
         protected ProviderOperationResource()
         {
@@ -63,9 +66,6 @@ namespace MgmtResourceName
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Authorization/providerOperations";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -99,6 +99,14 @@ namespace MgmtResourceName
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> Specifies whether to expand the values. </param>
@@ -131,6 +139,14 @@ namespace MgmtResourceName
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ProviderOperationResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

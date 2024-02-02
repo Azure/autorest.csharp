@@ -66,6 +66,14 @@ namespace MgmtParent.Mocking
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -91,6 +99,14 @@ namespace MgmtParent.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VirtualMachineExtensionImages_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VirtualMachineExtensionImageResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -118,6 +134,14 @@ namespace MgmtParent.Mocking
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
@@ -140,6 +164,14 @@ namespace MgmtParent.Mocking
         /// <item>
         /// <term>Operation Id</term>
         /// <description>AvailabilitySets_ListBySubscription</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AvailabilitySetResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

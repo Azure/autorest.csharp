@@ -39,6 +39,9 @@ namespace MgmtExactMatchInheritance
         private readonly ExactMatchModel1SRestOperations _exactMatchModel1RestClient;
         private readonly ExactMatchModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/exactMatchModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Resource"/> class for mocking. </summary>
         protected ExactMatchModel1Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtExactMatchInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/exactMatchModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -100,6 +100,14 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +139,14 @@ namespace MgmtExactMatchInheritance
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +177,14 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,6 +222,14 @@ namespace MgmtExactMatchInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ExactMatchModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ExactMatchModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

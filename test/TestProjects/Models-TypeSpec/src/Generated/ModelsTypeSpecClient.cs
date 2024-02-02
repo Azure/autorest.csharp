@@ -56,6 +56,112 @@ namespace ModelsTypeSpec
             _apiVersion = options.Version;
         }
 
+        /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)']/*" />
+        public virtual async Task<Response<BaseModelWithDiscriminatorDefinedOnBase>> PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutBaseModelWithDiscriminatorDefinedOnBaseAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(BaseModelWithDiscriminatorDefinedOnBase.FromResponse(response), response);
+        }
+
+        /// <param name="body"> The <see cref="BaseModelWithDiscriminatorDefinedOnBase"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)']/*" />
+        public virtual Response<BaseModelWithDiscriminatorDefinedOnBase> PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PutBaseModelWithDiscriminatorDefinedOnBase(content, context);
+            return Response.FromValue(BaseModelWithDiscriminatorDefinedOnBase.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutBaseModelWithDiscriminatorDefinedOnBaseAsync(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBaseAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> PutBaseModelWithDiscriminatorDefinedOnBaseAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.PutBaseModelWithDiscriminatorDefinedOnBase");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutBaseModelWithDiscriminatorDefinedOnBaseRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutBaseModelWithDiscriminatorDefinedOnBase(BaseModelWithDiscriminatorDefinedOnBase,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='PutBaseModelWithDiscriminatorDefinedOnBase(RequestContent,RequestContext)']/*" />
+        public virtual Response PutBaseModelWithDiscriminatorDefinedOnBase(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ModelsTypeSpecClient.PutBaseModelWithDiscriminatorDefinedOnBase");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutBaseModelWithDiscriminatorDefinedOnBaseRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsTypeSpecClient.xml" path="doc/members/member[@name='GetOutputDiscriminatorModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputBaseModelWithDiscriminator>> GetOutputDiscriminatorModelAsync(CancellationToken cancellationToken = default)
@@ -1570,6 +1676,21 @@ namespace ModelsTypeSpec
             }
         }
 
+        internal HttpMessage CreatePutBaseModelWithDiscriminatorDefinedOnBaseRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/roundTripToDiscriminatorDefinedOnBase", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
         internal HttpMessage CreateGetOutputDiscriminatorModelRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1578,7 +1699,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/pet", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1592,7 +1712,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTrip", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1608,7 +1727,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripPrimitive", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1624,7 +1742,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripOptional", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1640,7 +1757,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripReadOnly", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1656,7 +1772,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/roundTripToOutput", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1672,7 +1787,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/inputRecursive", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1688,7 +1802,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/roundTripRecursive", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1704,7 +1817,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/selfReference", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1719,7 +1831,6 @@ namespace ModelsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/fixedFloatEnum", false);
             uri.AppendQuery("input", input, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1734,7 +1845,6 @@ namespace ModelsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/extenisbleIntEnum", false);
             uri.AppendQuery("input", input, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1748,7 +1858,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -1778,7 +1887,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/single", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1792,7 +1900,6 @@ namespace ModelsTypeSpec
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/genericType", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

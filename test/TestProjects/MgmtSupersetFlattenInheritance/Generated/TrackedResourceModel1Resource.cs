@@ -40,6 +40,9 @@ namespace MgmtSupersetFlattenInheritance
         private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1RestClient;
         private readonly TrackedResourceModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/trackedResourceModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Resource"/> class for mocking. </summary>
         protected TrackedResourceModel1Resource()
         {
@@ -66,9 +69,6 @@ namespace MgmtSupersetFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/trackedResourceModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -101,6 +101,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -132,6 +140,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -162,6 +178,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -200,6 +224,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Put</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -237,6 +269,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -287,6 +327,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -336,6 +384,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -383,6 +439,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -432,6 +496,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -478,6 +550,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>TrackedResourceModel1s_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="TrackedResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

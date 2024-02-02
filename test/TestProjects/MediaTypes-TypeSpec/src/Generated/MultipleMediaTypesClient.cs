@@ -21,7 +21,6 @@ namespace MultipleMediaTypes
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -53,11 +52,10 @@ namespace MultipleMediaTypes
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)']/*" />
@@ -66,13 +64,13 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             Response response = await OneBinaryBodyTwoContentTypesAsync(content, contentType, context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="body"> The <see cref="BinaryData"/> to use. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)']/*" />
@@ -81,7 +79,7 @@ namespace MultipleMediaTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(body);
+            using RequestContent content = body;
             Response response = OneBinaryBodyTwoContentTypes(content, contentType, context);
             return response;
         }
@@ -102,7 +100,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -142,7 +140,7 @@ namespace MultipleMediaTypes
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json" | "application/octet-stream". </param>
+        /// <param name="contentType"> The <see cref="ContentType"/> to use. Allowed values: "application/json; serialization=Avro" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -392,7 +390,6 @@ namespace MultipleMediaTypes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/oneBinaryBodyTwoContentTypes", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("content-type", contentType.ToString());
@@ -408,7 +405,6 @@ namespace MultipleMediaTypes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/oneStringBodyThreeContentTypes", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("content-type", contentType.ToString());
@@ -424,7 +420,6 @@ namespace MultipleMediaTypes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/oneModelBodyOneContentType", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("content-type", "application/json");

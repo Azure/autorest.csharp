@@ -15,6 +15,38 @@ namespace ModelShapes.Models
     /// <summary> The InputModel. </summary>
     public partial class InputModel
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
@@ -53,6 +85,66 @@ namespace ModelShapes.Models
             VectorRequired = vectorRequired;
             VectorReadOnlyRequiredNullable = vectorReadOnlyRequiredNullable;
             VectorRequiredNullable = vectorRequiredNullable;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredStringList"></param>
+        /// <param name="requiredIntList"></param>
+        /// <param name="nonRequiredString"></param>
+        /// <param name="nonRequiredInt"></param>
+        /// <param name="nonRequiredStringList"></param>
+        /// <param name="nonRequiredIntList"></param>
+        /// <param name="requiredNullableString"></param>
+        /// <param name="requiredNullableInt"></param>
+        /// <param name="requiredNullableStringList"></param>
+        /// <param name="requiredNullableIntList"></param>
+        /// <param name="nonRequiredNullableString"></param>
+        /// <param name="nonRequiredNullableInt"></param>
+        /// <param name="nonRequiredNullableStringList"></param>
+        /// <param name="nonRequiredNullableIntList"></param>
+        /// <param name="vector"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnly"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyRequiredNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorRequiredNullable"> The vector representation of a search query. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, ReadOnlyMemory<float> vector, ReadOnlyMemory<float> vectorReadOnly, ReadOnlyMemory<float> vectorReadOnlyRequired, ReadOnlyMemory<float> vectorRequired, ReadOnlyMemory<float>? vectorNullable, ReadOnlyMemory<float>? vectorReadOnlyNullable, ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable, ReadOnlyMemory<float>? vectorRequiredNullable, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        {
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
+            RequiredStringList = requiredStringList;
+            RequiredIntList = requiredIntList;
+            NonRequiredString = nonRequiredString;
+            NonRequiredInt = nonRequiredInt;
+            NonRequiredStringList = nonRequiredStringList;
+            NonRequiredIntList = nonRequiredIntList;
+            RequiredNullableString = requiredNullableString;
+            RequiredNullableInt = requiredNullableInt;
+            RequiredNullableStringList = requiredNullableStringList;
+            RequiredNullableIntList = requiredNullableIntList;
+            NonRequiredNullableString = nonRequiredNullableString;
+            NonRequiredNullableInt = nonRequiredNullableInt;
+            NonRequiredNullableStringList = nonRequiredNullableStringList;
+            NonRequiredNullableIntList = nonRequiredNullableIntList;
+            Vector = vector;
+            VectorReadOnly = vectorReadOnly;
+            VectorReadOnlyRequired = vectorReadOnlyRequired;
+            VectorRequired = vectorRequired;
+            VectorNullable = vectorNullable;
+            VectorReadOnlyNullable = vectorReadOnlyNullable;
+            VectorReadOnlyRequiredNullable = vectorReadOnlyRequiredNullable;
+            VectorRequiredNullable = vectorRequiredNullable;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="InputModel"/> for deserialization. </summary>
+        internal InputModel()
+        {
         }
 
         /// <summary> Gets the required string. </summary>

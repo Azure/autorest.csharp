@@ -26,7 +26,7 @@ model Body {
 
 @route("/oneBinaryBodyTwoContentTypes")
 @convenientAPI(true)
-op oneBinaryBodyTwoContentTypes(@body body: bytes, @header contentType: "application/json" | "application/octet-stream"): void;
+op oneBinaryBodyTwoContentTypes(@body body: bytes, @header contentType: "application/json; serialization=Avro" | "application/octet-stream"): void;
 
 @route("/oneStringBodyThreeContentTypes")
 @convenientAPI(true)

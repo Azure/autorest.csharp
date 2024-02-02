@@ -39,6 +39,9 @@ namespace MgmtNoTypeReplacement
         private readonly NoTypeReplacementModel2SRestOperations _noTypeReplacementModel2RestClient;
         private readonly NoTypeReplacementModel2Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/noTypeReplacementModel2s";
+
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel2Resource"/> class for mocking. </summary>
         protected NoTypeReplacementModel2Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtNoTypeReplacement
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/noTypeReplacementModel2s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -100,6 +100,14 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +139,14 @@ namespace MgmtNoTypeReplacement
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +177,14 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,6 +222,14 @@ namespace MgmtNoTypeReplacement
         /// <item>
         /// <term>Operation Id</term>
         /// <description>NoTypeReplacementModel2s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="NoTypeReplacementModel2Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

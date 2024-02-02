@@ -21,7 +21,6 @@ namespace _Type.Union
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,31 +37,29 @@ namespace _Type.Union
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal EnumsOnly(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal EnumsOnly(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetEnumsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse6>> GetEnumsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetEnumsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse6.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnly(CancellationToken)']/*" />
-        public virtual Response<object> GetEnumsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse6> GetEnumsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetEnumsOnly(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse6.FromResponse(response), response);
         }
 
         /// <summary>
@@ -137,23 +134,29 @@ namespace _Type.Union
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='SendAsync(SendRequestProp,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='SendAsync(EnumsOnlyCases,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(EnumsOnlyCases prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = await SendAsync(sendRequest.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest6 sendRequest6 = new SendRequest6(prop);
+            Response response = await SendAsync(sendRequest6.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='Send(SendRequestProp,CancellationToken)']/*" />
-        public virtual Response Send(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='Send(EnumsOnlyCases,CancellationToken)']/*" />
+        public virtual Response Send(EnumsOnlyCases prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = Send(sendRequest.ToRequestContent(), context);
+            SendRequest6 sendRequest6 = new SendRequest6(prop);
+            Response response = Send(sendRequest6.ToRequestContent(), context);
             return response;
         }
 
@@ -167,7 +170,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(EnumsOnlyCases,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -206,7 +209,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(EnumsOnlyCases,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -243,7 +246,6 @@ namespace _Type.Union
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/union/enums-only", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -257,7 +259,6 @@ namespace _Type.Union
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/union/enums-only", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
@@ -28,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
             "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-            null, new List<InputModelType>(), null, null, false);
+            null, new List<InputModelType>(), null, null, null, false);
 
         [OneTimeSetUp]
         public void Initialize()
@@ -43,6 +42,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 publicClients: true,
                 modelNamespace: false,
                 headAsBoolean: false,
+                skipCSProj: false,
                 skipCSProjPackageReference: false,
                 generation1ConvenienceClient: false,
                 singleTopLevelClient: false,
@@ -52,9 +52,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 publicDiscriminatorProperty: false,
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
+                useModelReaderWriter: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
-                useOverloadsBetweenProtocolAndConvenience: true,
                 keepNonOverloadableProtocolSignature: false,
                 projectFolder: ".",
                 existingProjectFolder: null,
@@ -67,6 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 branded: true,
+                generateSampleProject: true,
                 generateTestProject: true);
         }
 

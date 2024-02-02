@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Server.Path.Single",
  "Description": "Illustrates server with a single path parameter @server",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [
@@ -25,8 +23,8 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "5",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -45,8 +43,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -65,42 +63,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "9",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "10",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "11",
-        "Type": {
-         "$id": "12",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "9",
        "StatusCodes": [
         200
        ],
@@ -119,7 +86,7 @@
     }
    ],
    "Protocol": {
-    "$id": "14"
+    "$id": "10"
    },
    "Creatable": true
   }

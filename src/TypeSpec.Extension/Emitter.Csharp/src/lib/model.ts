@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { isFixed } from "@azure-tools/typespec-azure-core";
+import { getLroMetadata, isFixed } from "@azure-tools/typespec-azure-core";
 import {
     EncodeData,
     Enum,
@@ -24,7 +24,6 @@ import {
     getEncode,
     getFormat,
     getKnownValues,
-    getProjectedNames,
     getVisibility,
     isArrayModelType,
     isRecordModelType,
@@ -41,11 +40,6 @@ import {
     isStatusCode
 } from "@typespec/http";
 import { getResourceOperation } from "@typespec/rest";
-import {
-    projectedNameCSharpKey,
-    projectedNameClientKey,
-    projectedNameJsonKey
-} from "../constants.js";
 import { FormattedType } from "../type/formattedType.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
 import { InputModelProperty } from "../type/inputModelProperty.js";
@@ -56,16 +50,17 @@ import {
     InputListType,
     InputLiteralType,
     InputModelType,
-    InputNullType,
     InputPrimitiveType,
     InputType,
     InputUnionType,
-    InputUnknownType,
+    isInputDictionaryType,
     isInputEnumType,
+    isInputIntrinsicType,
+    isInputListType,
     isInputLiteralType,
     isInputModelType
 } from "../type/inputType.js";
-import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputPrimitiveTypeKind } from "../type/inputPrimitiveTypeKind.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
@@ -77,6 +72,8 @@ import {
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getSerializeName, getTypeName } from "./utils.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { InputIntrinsicTypeKind } from "../type/inputIntrinsicTypeKind.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -85,7 +82,7 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
     typespecType: Type,
     format?: string,
     encode?: EncodeData
-): InputTypeKind {
+): InputPrimitiveTypeKind {
     const kind = typespecType.kind;
     switch (kind) {
         case "Model":
@@ -95,23 +92,23 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
                 encode
             );
         case "ModelProperty":
-            return InputTypeKind.Object;
+            return InputPrimitiveTypeKind.Object;
         case "Enum":
-            return InputTypeKind.Enum;
+            return InputPrimitiveTypeKind.Enum;
         case "Number":
             let numberValue = typespecType.value;
             if (numberValue % 1 === 0) {
-                return InputTypeKind.Int32;
+                return InputPrimitiveTypeKind.Int32;
             }
-            return InputTypeKind.Float64;
+            return InputPrimitiveTypeKind.Float64;
         case "Boolean":
-            return InputTypeKind.Boolean;
+            return InputPrimitiveTypeKind.Boolean;
         case "String":
-            if (format === "date") return InputTypeKind.DateTime;
-            if (format === "uri") return InputTypeKind.Uri;
-            return InputTypeKind.String;
+            if (format === "date") return InputPrimitiveTypeKind.DateTime;
+            if (format === "uri") return InputPrimitiveTypeKind.Uri;
+            return InputPrimitiveTypeKind.String;
         default:
-            return InputTypeKind.UnKnownKind;
+            return InputPrimitiveTypeKind.UnKnownKind;
     }
 }
 
@@ -119,99 +116,103 @@ function getCSharpInputTypeKindByIntrinsicModelName(
     name: string,
     format?: string,
     encode?: EncodeData
-): InputTypeKind {
+): InputPrimitiveTypeKind {
     switch (name) {
         case "bytes":
             switch (encode?.encoding) {
                 case undefined:
                 case "base64":
-                    return InputTypeKind.Bytes;
+                    return InputPrimitiveTypeKind.Bytes;
                 case "base64url":
-                    return InputTypeKind.BytesBase64Url;
+                    return InputPrimitiveTypeKind.BytesBase64Url;
                 default:
                     logger.warn(
                         `invalid encode ${encode?.encoding} for bytes.`
                     );
-                    return InputTypeKind.Bytes;
+                    return InputPrimitiveTypeKind.Bytes;
             }
         case "int8":
-            return InputTypeKind.SByte;
+            return InputPrimitiveTypeKind.SByte;
         case "unit8":
-            return InputTypeKind.Byte;
+            return InputPrimitiveTypeKind.Byte;
         case "int32":
-            return InputTypeKind.Int32;
+            return InputPrimitiveTypeKind.Int32;
         case "int64":
-            return InputTypeKind.Int64;
+            return InputPrimitiveTypeKind.Int64;
         case "float32":
-            return InputTypeKind.Float32;
+            return InputPrimitiveTypeKind.Float32;
         case "float64":
-            return InputTypeKind.Float64;
+            return InputPrimitiveTypeKind.Float64;
+        case "decimal":
+            return InputPrimitiveTypeKind.Decimal;
+        case "decimal128":
+            return InputPrimitiveTypeKind.Decimal128;
         case "uri":
         case "url":
-            return InputTypeKind.Uri;
+            return InputPrimitiveTypeKind.Uri;
         case "uuid":
-            return InputTypeKind.Guid;
+            return InputPrimitiveTypeKind.Guid;
         case "etag":
-            return InputTypeKind.String;
+            return InputPrimitiveTypeKind.String;
         case "string":
             switch (format?.toLowerCase()) {
                 case "date":
-                    return InputTypeKind.DateTime;
+                    return InputPrimitiveTypeKind.DateTime;
                 case "uri":
                 case "url":
-                    return InputTypeKind.Uri;
+                    return InputPrimitiveTypeKind.Uri;
                 case "uuid":
-                    return InputTypeKind.Guid;
+                    return InputPrimitiveTypeKind.Guid;
                 default:
                     if (format) {
                         logger.warn(`invalid format ${format}`);
                     }
-                    return InputTypeKind.String;
+                    return InputPrimitiveTypeKind.String;
             }
         case "boolean":
-            return InputTypeKind.Boolean;
+            return InputPrimitiveTypeKind.Boolean;
         case "date":
-            return InputTypeKind.Date;
+            return InputPrimitiveTypeKind.Date;
         case "datetime":
             switch (encode?.encoding) {
                 case undefined:
-                    return InputTypeKind.DateTime;
+                    return InputPrimitiveTypeKind.DateTime;
                 case "rfc3339":
-                    return InputTypeKind.DateTimeRFC3339;
+                    return InputPrimitiveTypeKind.DateTimeRFC3339;
                 case "rfc7231":
-                    return InputTypeKind.DateTimeRFC7231;
+                    return InputPrimitiveTypeKind.DateTimeRFC7231;
                 case "unixTimestamp":
-                    return InputTypeKind.DateTimeUnix;
+                    return InputPrimitiveTypeKind.DateTimeUnix;
                 default:
                     logger.warn(
                         `invalid encode ${encode?.encoding} for date time.`
                     );
-                    return InputTypeKind.DateTime;
+                    return InputPrimitiveTypeKind.DateTime;
             }
         case "time":
-            return InputTypeKind.Time;
+            return InputPrimitiveTypeKind.Time;
         case "duration":
             switch (encode?.encoding) {
                 case undefined:
                 case "ISO8601":
-                    return InputTypeKind.DurationISO8601;
+                    return InputPrimitiveTypeKind.DurationISO8601;
                 case "seconds":
                     if (
                         encode.type?.name === "float" ||
                         encode.type?.name === "float32"
                     ) {
-                        return InputTypeKind.DurationSecondsFloat;
+                        return InputPrimitiveTypeKind.DurationSecondsFloat;
                     } else {
-                        return InputTypeKind.DurationSeconds;
+                        return InputPrimitiveTypeKind.DurationSeconds;
                     }
                 default:
                     logger.warn(
                         `invalid encode ${encode?.encoding} for duration.`
                     );
-                    return InputTypeKind.DurationISO8601;
+                    return InputPrimitiveTypeKind.DurationISO8601;
             }
         default:
-            return InputTypeKind.Object;
+            return InputPrimitiveTypeKind.Object;
     }
 }
 
@@ -269,7 +270,7 @@ export function getDefaultValue(type: Type): any {
     }
 }
 
-export function isNeverType(type: Type): type is NeverType {
+function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
 }
 
@@ -320,8 +321,8 @@ export function getInputType(
             default:
                 const sdkType = getClientType(context, type);
                 return {
-                    Name: getTypeName(context, type),
-                    Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                    Kind: InputTypeKind.Primitive,
+                    Name: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
                         formattedType.format,
                         formattedType.encode
@@ -333,22 +334,27 @@ export function getInputType(
         return getInputTypeForUnion(type);
     } else if (type.kind === "Tuple") {
         return {
-            Name: "Intrinsic",
-            Kind: "unknown",
+            Kind: InputTypeKind.Intrinsic,
+            Name: InputIntrinsicTypeKind.Unknown,
             IsNullable: false
-        } as InputUnknownType;
+        } as InputIntrinsicType;
     } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
 
-    function getInputModelType(m: Model): InputType {
+    function getInputModelType(
+        m: Model
+    ): InputListType | InputDictionaryType | InputModelType {
         /* Array and Map Type. */
-        if (!isNeverType(m)) {
-            if (isArrayModelType(program, m)) {
-                return getInputTypeForArray(m.indexer.value);
-            } else if (isRecordModelType(program, m)) {
-                return getInputTypeForMap(m.indexer.key, m.indexer.value);
-            }
+        if (isArrayModelType(program, m)) {
+            return getInputTypeForArray(m.indexer.value);
+        } else if (
+            isRecordModelType(program, m) &&
+            m.sourceModel === undefined
+        ) {
+            // only when the model does not have a source model, it is really a record type
+            // when we have `model Foo is Record<string>` this should be a model with additional properties therefore it should not be parsed into a dictionary type
+            return getInputTypeForMap(m.indexer.key, m.indexer.value);
         }
         return getInputModelForModel(m);
     }
@@ -388,17 +394,18 @@ export function getInputType(
     ): InputLiteralType {
         // For literal types, we just want to emit them directly as well.
         const type = formattedType.type;
-        const builtInKind: InputTypeKind = mapTypeSpecTypeToCSharpInputTypeKind(
-            context,
-            type,
-            formattedType.format,
-            formattedType.encode
-        );
-        const rawValueType = {
-            Name: type.kind,
-            Kind: builtInKind,
+        const builtInKind: InputPrimitiveTypeKind =
+            mapTypeSpecTypeToCSharpInputTypeKind(
+                context,
+                type,
+                formattedType.format,
+                formattedType.encode
+            );
+        const rawValueType: InputPrimitiveType = {
+            Kind: InputTypeKind.Primitive,
+            Name: builtInKind,
             IsNullable: false
-        } as InputPrimitiveType;
+        };
         const literalValue = getDefaultValue(type);
         const newValueType = getLiteralValueType();
 
@@ -407,30 +414,37 @@ export function getInputType(
         }
 
         return {
-            Name: "Literal",
+            Kind: InputTypeKind.Literal,
+            Name: InputTypeKind.Literal,
             LiteralValueType: newValueType,
             Value: literalValue,
             IsNullable: false
-        } as InputLiteralType;
+        };
 
         function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
-            if (literalContext === undefined || rawValueType.Kind === "Boolean")
+            if (
+                literalContext === undefined ||
+                rawValueType.Name === InputPrimitiveTypeKind.Boolean
+            )
                 return rawValueType;
 
             // otherwise we need to wrap this into an extensible enum
             // we use the model name followed by the property name as the enum name to ensure it is unique
             const enumName = `${literalContext.ModelName}_${literalContext.PropertyName}`;
             const enumValueType =
-                rawValueType.Kind === "String" ? "String" : "Float32";
+                rawValueType.Name === InputPrimitiveTypeKind.String
+                    ? InputPrimitiveTypeKind.String
+                    : InputPrimitiveTypeKind.Float32;
             const allowValues: InputEnumTypeValue[] = [
                 {
                     Name: literalValue.toString(),
                     Value: literalValue,
                     Description: literalValue.toString()
-                } as InputEnumTypeValue
+                }
             ];
-            const enumType = {
+            const enumType: InputEnumType = {
+                Kind: InputTypeKind.Enum,
                 Name: enumName,
                 EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
@@ -439,8 +453,9 @@ export function getInputType(
                 Deprecated: undefined,
                 Description: `The ${enumName}`, // TODO -- what should we put here?
                 IsExtensible: true,
-                IsNullable: false
-            } as InputEnumType;
+                IsNullable: false,
+                Usage: "None" // will be updated later
+            };
             return enumType;
         }
     }
@@ -472,15 +487,16 @@ export function getInputType(
                         "The enum member value type is not consistent."
                     );
                 }
-                const member = {
+                const member: InputEnumTypeValue = {
                     Name: getTypeName(context, option),
                     Value: option.value ?? option?.name,
                     Description: getDoc(program, option)
-                } as InputEnumTypeValue;
+                };
                 allowValues.push(member);
             }
 
             enumType = {
+                Kind: InputTypeKind.Enum,
                 Name: name,
                 EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
@@ -489,8 +505,9 @@ export function getInputType(
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 IsExtensible: !isFixed(program, e),
-                IsNullable: false
-            } as InputEnumType;
+                IsNullable: false,
+                Usage: "None"
+            };
             setUsage(context, e, enumType);
             if (addToCollection) enums.set(name, enumType);
         }
@@ -506,7 +523,8 @@ export function getInputType(
 
     function getInputTypeForArray(elementType: Type): InputListType {
         return {
-            Name: "Array",
+            Kind: InputTypeKind.Array,
+            Name: InputTypeKind.Array,
             ElementType: getInputType(
                 context,
                 getFormattedType(program, elementType),
@@ -514,12 +532,13 @@ export function getInputType(
                 enums
             ),
             IsNullable: false
-        } as InputListType;
+        };
     }
 
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
-            Name: "Dictionary",
+            Kind: InputTypeKind.Dictionary,
+            Name: InputTypeKind.Dictionary,
             KeyType: getInputType(
                 context,
                 getFormattedType(program, key),
@@ -533,19 +552,22 @@ export function getInputType(
                 enums
             ),
             IsNullable: false
-        } as InputDictionaryType;
+        };
     }
 
     function getInputModelForModel(m: Model): InputModelType {
-        m = getEffectiveSchemaType(context, m) as Model;
         const name = getTypeName(context, m);
         let model = models.get(name);
         if (!model) {
-            const baseModel = getInputModelBaseType(m.baseModel);
+            const { baseModel, inheritedDictionaryType } =
+                getInputModelBaseType(m);
+            model = models.get(name);
+            if (model) return model;
             const properties: InputModelProperty[] = [];
 
             const discriminator = getDiscriminator(program, m);
             model = {
+                Kind: InputTypeKind.Model,
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
                 Accessibility: isInternal(context, m)
@@ -556,10 +578,11 @@ export function getInputType(
                 IsNullable: false,
                 DiscriminatorPropertyName: discriminator?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
-                BaseModel: baseModel,
                 Usage: Usage.None,
+                InheritedDictionaryType: inheritedDictionaryType, // InheritedDictionaryType represent the type of additional properties property
+                BaseModel: baseModel, // BaseModel should be the last but one assigned to model
                 Properties: properties // Properties should be the last assigned to model
-            } as InputModelType;
+            };
             setUsage(context, m, model);
 
             // open generic type model which has un-instanced template parameter will not be generated. e.g.
@@ -621,11 +644,11 @@ export function getInputType(
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const name = getTypeName(context, value);
                 const serializedName = getSerializeName(context, value);
-                const literalTypeContext = {
+                const literalTypeContext: LiteralTypeContext = {
                     ModelName: model.Name,
                     PropertyName: name,
                     Namespace: model.Namespace
-                } as LiteralTypeContext;
+                };
                 const inputType = getInputType(
                     context,
                     getFormattedType(program, value),
@@ -658,43 +681,78 @@ export function getInputType(
         });
 
         if (model.DiscriminatorPropertyName && !discriminatorPropertyDefined) {
+            // if the discriminator property has already been defined on one of the base models of myself,
+            // we still need to add a property here because the `IsDiscriminator` property would be different from the one inherited from the base model
+            // TODO -- need to confirm how TCGC handles this case
             logger.info(
                 `No specified type for discriminator property '${model.DiscriminatorPropertyName}'. Assume it is a string.`
             );
-            const discriminatorProperty = {
+            const discriminatorProperty: InputModelProperty = {
                 Name: model.DiscriminatorPropertyName,
                 SerializedName: model.DiscriminatorPropertyName,
                 Description: "Discriminator",
                 IsRequired: true,
                 IsReadOnly: false,
-                IsNullable: false,
                 Type: {
-                    Name: "string",
-                    Kind: InputTypeKind.String,
+                    Kind: InputTypeKind.Primitive,
+                    Name: InputPrimitiveTypeKind.String,
                     IsNullable: false
                 } as InputPrimitiveType,
                 IsDiscriminator: true
-            } as InputModelProperty;
+            };
             // put default discriminator property as the first property to keep previous behavior
             outputProperties.unshift(discriminatorProperty);
         }
     }
-    function getInputModelBaseType(m?: Model): InputModelType | undefined {
-        if (!m) {
-            return undefined;
+
+    // in the real cases of tsp, because now we use `extends` or `is` to represent additional properties,
+    // and tsp only supports one base model, we can only have one of baseModel and sourceModel defined
+    // but it is valid case that a model has a base model as well as additional properties
+    // which is the reason we did not define the return type as `InputModelType | InputDictionaryType | undefined`
+    // to keep the possibility that we could have both `baseModel` and `inheritedDictionaryType` defined in the future
+    // tsp might support this in the future.
+    function getInputModelBaseType(m: Model): {
+        baseModel?: InputModelType;
+        inheritedDictionaryType?: InputDictionaryType;
+    } {
+        const baseModel = m.baseModel;
+        const sourceModel = m.sourceModel;
+
+        // we cannot have both `extends` and `is`, therefore only one of baseModel and sourceModel can be defined
+        if (sourceModel && isRecordModelType(program, sourceModel)) {
+            return {
+                inheritedDictionaryType: getInputTypeForMap(
+                    sourceModel.indexer.key,
+                    sourceModel.indexer.value
+                )
+            };
         }
 
-        // Arrays and dictionaries can't be a base type
-        if (m.indexer) {
-            return undefined;
+        if (baseModel) {
+            const baseModelType = getInputModelType(baseModel);
+
+            if (isInputListType(baseModelType)) {
+                // tsp never allows array to be the base model of a model
+                // meaning that it should be invalid tsp if you write:
+                // model Foo extends Bar[] {}
+                // or
+                // model Foo extends Array<Bar> {}
+                // therefore it is safe that here we just return empty result here because this will be unreachable
+                return {};
+            }
+
+            if (isInputDictionaryType(baseModelType)) {
+                return {
+                    inheritedDictionaryType: baseModelType
+                };
+            }
+
+            return {
+                baseModel: baseModelType
+            };
         }
 
-        // TypeSpec "primitive" types can't be base types for models
-        if (program.checker.isStdType(m)) {
-            return undefined;
-        }
-
-        return getInputModelForModel(m);
+        return {};
     }
 
     function getFullNamespaceString(namespace: Namespace | undefined): string {
@@ -711,27 +769,29 @@ export function getInputType(
         return namespaceString;
     }
 
-    function getInputModelForIntrinsicType(type: IntrinsicType): InputType {
+    function getInputModelForIntrinsicType(
+        type: IntrinsicType
+    ): InputIntrinsicType {
         switch (type.name) {
             case "unknown":
                 return {
-                    Name: "Intrinsic",
-                    Kind: "unknown",
+                    Kind: InputTypeKind.Intrinsic,
+                    Name: InputIntrinsicTypeKind.Unknown,
                     IsNullable: false
-                } as InputUnknownType;
+                } as InputIntrinsicType;
             case "null":
                 return {
-                    Name: "Intrinsic",
-                    Kind: "null",
+                    Kind: InputTypeKind.Intrinsic,
+                    Name: InputIntrinsicTypeKind.Null,
                     IsNullable: false
-                } as InputNullType;
+                } as InputIntrinsicType;
             default:
                 throw new Error(`Unsupported type ${type.name}`);
         }
     }
 
-    function getInputTypeForUnion(union: Union): InputType {
-        let ItemTypes: InputType[] = [];
+    function getInputTypeForUnion(union: Union): InputUnionType | InputType {
+        let itemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
 
         let hasNullType = false;
@@ -743,29 +803,30 @@ export function getInputType(
                 enums
             );
             if (
-                inputType.Name === "Intrinsic" &&
-                (inputType as InputIntrinsicType).Kind === "null"
+                isInputIntrinsicType(inputType) &&
+                inputType.Name === InputIntrinsicTypeKind.Null
             ) {
                 hasNullType = true;
                 continue;
             }
-            ItemTypes.push(inputType);
+            itemTypes.push(inputType);
         }
 
         if (hasNullType) {
-            ItemTypes = ItemTypes.map((i) => {
+            itemTypes = itemTypes.map((i) => {
                 i.IsNullable = true;
                 return i;
             });
         }
 
-        return ItemTypes.length > 1
-            ? ({
-                  Name: "Union",
-                  UnionItemTypes: ItemTypes,
+        return itemTypes.length > 1
+            ? {
+                  Kind: InputTypeKind.Union,
+                  Name: InputTypeKind.Union,
+                  UnionItemTypes: itemTypes,
                   IsNullable: false
-              } as InputUnionType)
-            : ItemTypes[0];
+              }
+            : itemTypes[0];
     }
 }
 
@@ -806,9 +867,11 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         let effectiveType = type;
+        if (type.kind === "Enum") {
+            typeName = getTypeName(context, type);
+        }
         if (type.kind === "Model") {
-            effectiveType = getEffectiveSchemaType(context, type) as Model;
-            typeName = getTypeName(context, effectiveType);
+            typeName = getTypeName(context, effectiveType as Model);
         }
         const affectTypes: Set<string> = new Set<string>();
         if (typeName !== "") {
@@ -897,6 +960,26 @@ export function getUsages(
                     appendUsage(name, UsageFlags.Output);
                 }
             }
+            /* calculate the usage of the LRO result type. */
+            const metadata = getLroMetadata(program, op.operation);
+            if (metadata !== undefined) {
+                let bodyType: Model;
+                if (
+                    op.verb !== "delete" &&
+                    metadata.finalResult !== undefined &&
+                    metadata.finalResult !== "void"
+                ) {
+                    bodyType = metadata.finalEnvelopeResult as Model;
+                    if (bodyType) {
+                        getAllEffectedModels(
+                            bodyType,
+                            new Set<string>()
+                        ).forEach((element) => {
+                            affectedReturnTypes.add(element);
+                        });
+                    }
+                }
+            }
         }
     }
 
@@ -964,6 +1047,16 @@ export function getUsages(
                     result.push(...getAllEffectedModels(prop.type, visited));
                 }
             }
+            /*propagate usage to the property type of the base model. */
+            if (model.baseModel) {
+                for (const [_, prop] of model.baseModel.properties) {
+                    if (prop.type.kind === "Model") {
+                        result.push(
+                            ...getAllEffectedModels(prop.type, visited)
+                        );
+                    }
+                }
+            }
         }
 
         return result;
@@ -972,20 +1065,20 @@ export function getUsages(
 
 export function getFormattedType(program: Program, type: Type): FormattedType {
     let targetType = type;
-    let format = getFormat(program, type);
+    const format = getFormat(program, type);
     if (type.kind === "ModelProperty") {
         targetType = type.type;
     }
-    let encodeData = undefined;
-    if (type.kind === "Scalar" || type.kind === "ModelProperty") {
-        encodeData = getEncode(program, type);
-    }
+    const encodeData =
+        type.kind === "Scalar" || type.kind === "ModelProperty"
+            ? getEncode(program, type)
+            : undefined;
 
     return {
         type: targetType,
         format: format,
         encode: encodeData
-    } as FormattedType;
+    };
 }
 
 // This is a temporary solution. After we uptake getAllModels we should delete this.

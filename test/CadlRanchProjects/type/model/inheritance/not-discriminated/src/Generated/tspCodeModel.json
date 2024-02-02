@@ -2,13 +2,12 @@
  "$id": "1",
  "Name": "Type.Model.Inheritance.NotDiscriminated",
  "Description": "Illustrates not-discriminated inheritance model.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "Pet",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
@@ -22,8 +21,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -33,14 +32,15 @@
   },
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "Cat",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The second level model in the normal multiple levels inheritance.",
    "IsNullable": false,
+   "Usage": "None",
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "None",
    "Properties": [
     {
      "$id": "6",
@@ -49,8 +49,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -60,14 +60,15 @@
   },
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "Siamese",
    "Namespace": "Type.Model.Inheritance.NotDiscriminated",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "5"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "9",
@@ -76,8 +77,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "boolean",
-      "Kind": "Boolean",
+      "Kind": "Primitive",
+      "Name": "Boolean",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -104,8 +105,8 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "14",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -121,8 +122,8 @@
         "$id": "15",
         "Type": {
          "$id": "16",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -151,8 +152,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "19",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -178,8 +179,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -198,42 +199,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "24",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "25",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "26",
-        "Type": {
-         "$id": "27",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -254,7 +224,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "29",
+     "$id": "25",
      "Name": "getValid",
      "ResourceName": "NotDiscriminated",
      "Parameters": [
@@ -262,13 +232,13 @@
        "$ref": "13"
       },
       {
-       "$id": "30",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "31",
+        "$id": "27",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -281,20 +251,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "28",
         "Type": {
-         "$ref": "31"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -303,7 +270,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -315,7 +285,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "34",
+     "$id": "30",
      "Name": "putValid",
      "ResourceName": "NotDiscriminated",
      "Parameters": [
@@ -323,7 +293,7 @@
        "$ref": "13"
       },
       {
-       "$id": "35",
+       "$id": "31",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -340,40 +310,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "36",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "37",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "38",
-        "Type": {
-         "$ref": "37"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "39",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "33",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -386,20 +329,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "34",
         "Type": {
-         "$ref": "40"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "24"
+       "$id": "35",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "36",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "37",
+        "Type": {
+         "$ref": "36"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "38",
        "StatusCodes": [
         200
        ],
@@ -408,7 +375,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -424,7 +394,7 @@
     }
    ],
    "Protocol": {
-    "$id": "43"
+    "$id": "39"
    },
    "Creatable": true
   }

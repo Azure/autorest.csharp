@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace model_flattening.Models
 {
     /// <summary> The product URL. </summary>
@@ -13,6 +16,15 @@ namespace model_flattening.Models
         /// <summary> Initializes a new instance of <see cref="ProductUrl"/>. </summary>
         internal ProductUrl()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ProductUrl"/>. </summary>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        /// <param name="odataValue"> URL value. </param>
+        internal ProductUrl(string genericValue, IDictionary<string, BinaryData> serializedAdditionalRawData, string odataValue) : base(genericValue, serializedAdditionalRawData)
+        {
+            OdataValue = odataValue;
         }
 
         /// <summary> URL value. </summary>

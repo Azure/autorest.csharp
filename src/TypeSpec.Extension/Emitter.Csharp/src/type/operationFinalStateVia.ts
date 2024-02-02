@@ -8,7 +8,8 @@ export enum OperationFinalStateVia {
     OriginalUri,
     OperationLocation,
     CustomLink,
-    CustomOperationReference
+    CustomOperationReference,
+    NoResult
 }
 
 export function convertLroFinalStateVia(

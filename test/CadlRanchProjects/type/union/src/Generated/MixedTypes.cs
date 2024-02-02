@@ -21,7 +21,6 @@ namespace _Type.Union
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,31 +37,29 @@ namespace _Type.Union
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
-        internal MixedTypes(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal MixedTypes(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='GetMixedTypeAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetMixedTypeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetResponse9>> GetMixedTypeAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMixedTypeAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse9.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='GetMixedType(CancellationToken)']/*" />
-        public virtual Response<object> GetMixedType(CancellationToken cancellationToken = default)
+        public virtual Response<GetResponse9> GetMixedType(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMixedType(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetResponse9.FromResponse(response), response);
         }
 
         /// <summary>
@@ -137,23 +134,29 @@ namespace _Type.Union
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='SendAsync(SendRequestProp,CancellationToken)']/*" />
-        public virtual async Task<Response> SendAsync(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='SendAsync(MixedTypesCases,CancellationToken)']/*" />
+        public virtual async Task<Response> SendAsync(MixedTypesCases prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = await SendAsync(sendRequest.ToRequestContent(), context).ConfigureAwait(false);
+            SendRequest9 sendRequest9 = new SendRequest9(prop);
+            Response response = await SendAsync(sendRequest9.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="prop"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='Send(SendRequestProp,CancellationToken)']/*" />
-        public virtual Response Send(SendRequestProp prop, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='Send(MixedTypesCases,CancellationToken)']/*" />
+        public virtual Response Send(MixedTypesCases prop, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(prop, nameof(prop));
+
             RequestContext context = FromCancellationToken(cancellationToken);
-            SendRequest sendRequest = new SendRequest(prop);
-            Response response = Send(sendRequest.ToRequestContent(), context);
+            SendRequest9 sendRequest9 = new SendRequest9(prop);
+            Response response = Send(sendRequest9.ToRequestContent(), context);
             return response;
         }
 
@@ -167,7 +170,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SendAsync(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SendAsync(MixedTypesCases,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -206,7 +209,7 @@ namespace _Type.Union
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Send(SendRequestProp,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Send(MixedTypesCases,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -243,7 +246,6 @@ namespace _Type.Union
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/union/mixed-types", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -257,7 +259,6 @@ namespace _Type.Union
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/union/mixed-types", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

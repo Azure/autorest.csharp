@@ -9,6 +9,8 @@
         "type/model/inheritance/single-discriminator",
         "type/model/inheritance/not-discriminated",
         "type/model/inheritance/enum-discriminator",
+        "type/model/inheritance/recursive",
+        "type/property/additional-properties",
         "type/property/nullable",
         "type/property/optionality",
         "type/property/value-types",
@@ -29,9 +31,12 @@
         "encode/duration",
         "projection/projected-name",
         "payload/content-negotiation",
+        "payload/media-type",
         "payload/pageable",
         "server/path/multiple",
         "server/path/single",
+        "server/versions/not-versioned",
+        "server/versions/versioned",
         "special-headers/client-request-id",
         "special-headers/conditional-request",
         "special-headers/repeatability",
@@ -39,10 +44,12 @@
         "parameters/collection-format",
         "parameters/spread",
         "parameters/body-optionality",
-        "client/structure/default",
         "client/structure/multi-client",
         "client/structure/renamed-operation",
         "client/structure/two-operation-group"
+    ],
+    "CadlRanchProjectsNonAzure":[
+        "authentication/http/custom"
     ],
     "TestServerProjects": [
         "additionalProperties",

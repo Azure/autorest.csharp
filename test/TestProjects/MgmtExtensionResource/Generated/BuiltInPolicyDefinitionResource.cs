@@ -37,6 +37,9 @@ namespace MgmtExtensionResource
         private readonly PolicyDefinitionsRestOperations _builtInPolicyDefinitionPolicyDefinitionsRestClient;
         private readonly PolicyDefinitionData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Authorization/policyDefinitions";
+
         /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinitionResource"/> class for mocking. </summary>
         protected BuiltInPolicyDefinitionResource()
         {
@@ -63,9 +66,6 @@ namespace MgmtExtensionResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Authorization/policyDefinitions";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -99,6 +99,14 @@ namespace MgmtExtensionResource
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetBuiltIn</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BuiltInPolicyDefinitionResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -130,6 +138,14 @@ namespace MgmtExtensionResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>PolicyDefinitions_GetBuiltIn</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-09-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BuiltInPolicyDefinitionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

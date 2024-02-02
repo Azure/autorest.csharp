@@ -12,6 +12,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using static AutoRest.CSharp.Output.Models.FieldModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -56,14 +57,14 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (authorization.ApiKey is not null)
                 {
-                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{authorization.ApiKey.Name:L}", SerializationFormat.Default);
+                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", Literal(authorization.ApiKey.Name), SerializationFormat.Default);
                     _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
                     fields.Add(AuthorizationHeaderConstant);
                     fields.Add(_keyAuthField);
                     if (authorization.ApiKey.Prefix is not null)
                     {
-                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", $"{authorization.ApiKey.Prefix:L}", SerializationFormat.Default);
+                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", Literal(authorization.ApiKey.Prefix), SerializationFormat.Default);
                         fields.Add(AuthorizationApiKeyPrefixConstant);
                     }
                     credentialFields.Add(_keyAuthField);
@@ -72,7 +73,8 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (authorization.OAuth2 is not null)
                 {
-                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {authorization.OAuth2.Scopes.GetLiteralsFormattable()} }}", SerializationFormat.Default);
+                    var scopeExpression = New.Array(typeof(string), true, authorization.OAuth2.Scopes.Select(Literal).ToArray());
+                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", scopeExpression, SerializationFormat.Default);
                     _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
 
                     fields.Add(ScopesConstant);

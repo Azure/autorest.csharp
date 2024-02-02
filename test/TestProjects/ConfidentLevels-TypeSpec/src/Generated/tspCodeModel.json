@@ -2,12 +2,11 @@
  "$id": "1",
  "Name": "ConfidentLevelsInTsp",
  "Description": "CADL project to test various types of models.",
- "ApiVersions": [
-  "0.1.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "ModelWithIntegerLiteralTypeProperty_id",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -26,6 +25,7 @@
   },
   {
    "$id": "4",
+   "Kind": "Enum",
    "Name": "ModelWithFloatLiteralTypeProperty_id",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -46,6 +46,7 @@
  "Models": [
   {
    "$id": "6",
+   "Kind": "Model",
    "Name": "ModelWithUnionProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model with union types",
@@ -59,18 +60,19 @@
      "Description": "This is a union property",
      "Type": {
       "$id": "8",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "9",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "10",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        }
       ],
@@ -83,6 +85,7 @@
   },
   {
    "$id": "11",
+   "Kind": "Model",
    "Name": "UsualModel",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model without union types",
@@ -96,8 +99,8 @@
      "Description": "The name",
      "Type": {
       "$id": "13",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -110,8 +113,8 @@
      "Description": "The age",
      "Type": {
       "$id": "15",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -124,8 +127,8 @@
      "Description": "The size",
      "Type": {
       "$id": "17",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -135,6 +138,7 @@
   },
   {
    "$id": "18",
+   "Kind": "Model",
    "Name": "AnotherModelWithUnionProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is another model with union types",
@@ -148,21 +152,23 @@
      "Description": "This is a union property",
      "Type": {
       "$id": "20",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "21",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "22",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "23",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
@@ -177,6 +183,7 @@
   },
   {
    "$id": "24",
+   "Kind": "Model",
    "Name": "NonConfidentModelWithSelfReference",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "Non-confident model that contains self reference",
@@ -190,8 +197,8 @@
      "Description": "The name",
      "Type": {
       "$id": "26",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -204,6 +211,7 @@
      "Description": "The self reference",
      "Type": {
       "$id": "28",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$ref": "24"
@@ -220,21 +228,23 @@
      "Description": "The non-confident part",
      "Type": {
       "$id": "30",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "31",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "32",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "33",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -249,6 +259,7 @@
   },
   {
    "$id": "34",
+   "Kind": "Model",
    "Name": "NonConfidentModelWithIndirectSelfReference",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The model that contains self reference",
@@ -262,8 +273,8 @@
      "Description": "The name",
      "Type": {
       "$id": "36",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -276,9 +287,11 @@
      "Description": "The self reference",
      "Type": {
       "$id": "38",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "39",
+       "Kind": "Model",
        "Name": "IndirectSelfReferenceModel",
        "Namespace": "ConfidentLevelsInTsp",
        "Description": "Indirect self reference model",
@@ -292,8 +305,8 @@
          "Description": "Something not important",
          "Type": {
           "$id": "41",
-          "Name": "string",
-          "Kind": "String",
+          "Kind": "Primitive",
+          "Name": "String",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -317,21 +330,23 @@
          "Description": "The non-confident part",
          "Type": {
           "$id": "44",
+          "Kind": "Union",
           "Name": "Union",
           "UnionItemTypes": [
            {
             "$id": "45",
-            "Name": "string",
-            "Kind": "String",
+            "Kind": "Primitive",
+            "Name": "String",
             "IsNullable": false
            },
            {
             "$id": "46",
+            "Kind": "Array",
             "Name": "Array",
             "ElementType": {
              "$id": "47",
-             "Name": "int32",
-             "Kind": "Int32",
+             "Kind": "Primitive",
+             "Name": "Int32",
              "IsNullable": false
             },
             "IsNullable": false
@@ -356,6 +371,7 @@
   },
   {
    "$id": "48",
+   "Kind": "Model",
    "Name": "ModelWithIntegerLiteralTypeProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model with a property of literal type of numbers",
@@ -369,8 +385,8 @@
      "Description": "The name",
      "Type": {
       "$id": "50",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -383,6 +399,7 @@
      "Description": "The id",
      "Type": {
       "$id": "52",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "2"
@@ -397,6 +414,7 @@
   },
   {
    "$id": "53",
+   "Kind": "Model",
    "Name": "ModelWithFloatLiteralTypeProperty",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a model with a property of literal type of numbers",
@@ -410,8 +428,8 @@
      "Description": "The name",
      "Type": {
       "$id": "55",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -424,6 +442,7 @@
      "Description": "The id",
      "Type": {
       "$id": "57",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "4"
@@ -438,6 +457,7 @@
   },
   {
    "$id": "58",
+   "Kind": "Model",
    "Name": "Pet",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The base Pet model",
@@ -452,11 +472,10 @@
      "Description": "Discriminator",
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsNullable": false,
      "Type": {
       "$id": "60",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -468,8 +487,8 @@
      "Description": "The name of the pet",
      "Type": {
       "$id": "62",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -479,6 +498,7 @@
   },
   {
    "$id": "63",
+   "Kind": "Model",
    "Name": "PollutedPet",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The base Pet model polluted by union in derived type",
@@ -493,11 +513,10 @@
      "Description": "Discriminator",
      "IsRequired": true,
      "IsReadOnly": false,
-     "IsNullable": false,
      "Type": {
       "$id": "65",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -509,8 +528,8 @@
      "Description": "The name of the pet",
      "Type": {
       "$id": "67",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -520,15 +539,16 @@
   },
   {
    "$id": "68",
+   "Kind": "Model",
    "Name": "PollutedDog",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The dog with a union type",
    "IsNullable": false,
    "DiscriminatorValue": "dog",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "63"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "69",
@@ -537,8 +557,8 @@
      "Description": "Woof",
      "Type": {
       "$id": "70",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -551,21 +571,23 @@
      "Description": "Color, could be specified by a string or by an array of int as RGB",
      "Type": {
       "$id": "72",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "73",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "74",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "75",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -580,15 +602,16 @@
   },
   {
    "$id": "76",
+   "Kind": "Model",
    "Name": "UnpollutedCat",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The cat without a union type",
    "IsNullable": false,
    "DiscriminatorValue": "cat",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "63"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "77",
@@ -597,8 +620,8 @@
      "Description": "Meow",
      "Type": {
       "$id": "78",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -608,6 +631,7 @@
   },
   {
    "$id": "79",
+   "Kind": "Model",
    "Name": "BaseModel",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The base model",
@@ -621,8 +645,8 @@
      "Description": "The name",
      "Type": {
       "$id": "81",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -635,8 +659,8 @@
      "Description": "The size",
      "Type": {
       "$id": "83",
-      "Name": "float64",
-      "Kind": "Float64",
+      "Kind": "Primitive",
+      "Name": "Float64",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -646,14 +670,15 @@
   },
   {
    "$id": "84",
+   "Kind": "Model",
    "Name": "DerivedModel",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The derived model",
    "IsNullable": false,
+   "Usage": "Input",
    "BaseModel": {
     "$ref": "79"
    },
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "85",
@@ -662,8 +687,8 @@
      "Description": "The age",
      "Type": {
       "$id": "86",
-      "Name": "int32",
-      "Kind": "Int32",
+      "Kind": "Primitive",
+      "Name": "Int32",
       "IsNullable": false
      },
      "IsRequired": false,
@@ -673,14 +698,15 @@
   },
   {
    "$id": "87",
+   "Kind": "Model",
    "Name": "DerivedModelWithUnion",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "This is a derived model with unions",
    "IsNullable": false,
+   "Usage": "Input",
    "BaseModel": {
     "$ref": "79"
    },
-   "Usage": "Input",
    "Properties": [
     {
      "$id": "88",
@@ -689,21 +715,23 @@
      "Description": "The union property",
      "Type": {
       "$id": "89",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "90",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "91",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "92",
-         "Name": "int32",
-         "Kind": "Int32",
+         "Kind": "Primitive",
+         "Name": "Int32",
          "IsNullable": false
         },
         "IsNullable": false
@@ -718,15 +746,16 @@
   },
   {
    "$id": "93",
+   "Kind": "Model",
    "Name": "Cat",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The cat",
    "IsNullable": false,
    "DiscriminatorValue": "cat",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "58"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "94",
@@ -735,8 +764,8 @@
      "Description": "Meow",
      "Type": {
       "$id": "95",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -746,15 +775,16 @@
   },
   {
    "$id": "96",
+   "Kind": "Model",
    "Name": "Dog",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The dog",
    "IsNullable": false,
    "DiscriminatorValue": "dog",
+   "Usage": "RoundTrip",
    "BaseModel": {
     "$ref": "58"
    },
-   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "97",
@@ -763,8 +793,8 @@
      "Description": "Woof",
      "Type": {
       "$id": "98",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -791,8 +821,8 @@
        "NameInRequest": "host",
        "Type": {
         "$id": "102",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -828,8 +858,8 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "105",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -855,8 +885,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "108",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -875,42 +905,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "110",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "111",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "112",
-        "Type": {
-         "$id": "113",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "0.1.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "114",
+       "$id": "110",
        "StatusCodes": [
         204
        ],
@@ -931,7 +930,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "115",
+     "$id": "111",
      "Name": "unionInResponseProperty",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses a model with union types as response body",
@@ -940,7 +939,7 @@
        "$ref": "101"
       },
       {
-       "$id": "116",
+       "$id": "112",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -957,40 +956,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "117",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "118",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "119",
-        "Type": {
-         "$ref": "118"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "120",
+       "$id": "113",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "121",
+        "$id": "114",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1003,20 +975,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "122",
+        "$id": "115",
         "Type": {
-         "$ref": "121"
+         "$ref": "114"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "110"
+       "$id": "116",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "117",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "118",
+        "Type": {
+         "$ref": "117"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "123",
+       "$id": "119",
        "StatusCodes": [
         200
        ],
@@ -1025,7 +1021,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1040,7 +1039,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "124",
+     "$id": "120",
      "Name": "unionWithSelfReference",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses a model with union types and self reference in request body",
@@ -1049,7 +1048,7 @@
        "$ref": "101"
       },
       {
-       "$id": "125",
+       "$id": "121",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1066,13 +1065,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "126",
+       "$id": "122",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "127",
+        "$id": "123",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1085,21 +1084,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "128",
+        "$id": "124",
         "Type": {
-         "$ref": "127"
+         "$ref": "123"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "129",
+       "$id": "125",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "130",
+        "$id": "126",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1112,20 +1111,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "131",
+        "$id": "127",
         "Type": {
-         "$ref": "130"
+         "$ref": "126"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "110"
       }
      ],
      "Responses": [
       {
-       "$id": "132",
+       "$id": "128",
        "StatusCodes": [
         204
        ],
@@ -1146,7 +1142,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "133",
+     "$id": "129",
      "Name": "unionWithInderict",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses a model with union types and indirect self reference in request body",
@@ -1155,7 +1151,7 @@
        "$ref": "101"
       },
       {
-       "$id": "134",
+       "$id": "130",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1172,13 +1168,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "135",
+       "$id": "131",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "136",
+        "$id": "132",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1191,21 +1187,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "137",
+        "$id": "133",
         "Type": {
-         "$ref": "136"
+         "$ref": "132"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "138",
+       "$id": "134",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "139",
+        "$id": "135",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1218,20 +1214,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "140",
+        "$id": "136",
         "Type": {
-         "$ref": "139"
+         "$ref": "135"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "110"
       }
      ],
      "Responses": [
       {
-       "$id": "141",
+       "$id": "137",
        "StatusCodes": [
         204
        ],
@@ -1252,7 +1245,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "142",
+     "$id": "138",
      "Name": "literalOfInteger",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses a model with a property of literal type of numbers in request body",
@@ -1261,7 +1254,7 @@
        "$ref": "101"
       },
       {
-       "$id": "143",
+       "$id": "139",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1278,13 +1271,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "144",
+       "$id": "140",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "145",
+        "$id": "141",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1297,21 +1290,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "146",
+        "$id": "142",
         "Type": {
-         "$ref": "145"
+         "$ref": "141"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "147",
+       "$id": "143",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "148",
+        "$id": "144",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1324,20 +1317,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "149",
+        "$id": "145",
         "Type": {
-         "$ref": "148"
+         "$ref": "144"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "110"
       }
      ],
      "Responses": [
       {
-       "$id": "150",
+       "$id": "146",
        "StatusCodes": [
         204
        ],
@@ -1358,7 +1348,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "151",
+     "$id": "147",
      "Name": "literalOfFloat",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses a model with a property of literal type of numbers in request body",
@@ -1367,7 +1357,7 @@
        "$ref": "101"
       },
       {
-       "$id": "152",
+       "$id": "148",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1384,13 +1374,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "153",
+       "$id": "149",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "154",
+        "$id": "150",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1403,21 +1393,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "155",
+        "$id": "151",
         "Type": {
-         "$ref": "154"
+         "$ref": "150"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "156",
+       "$id": "152",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "157",
+        "$id": "153",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1430,20 +1420,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "158",
+        "$id": "154",
         "Type": {
-         "$ref": "157"
+         "$ref": "153"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "110"
       }
      ],
      "Responses": [
       {
-       "$id": "159",
+       "$id": "155",
        "StatusCodes": [
         204
        ],
@@ -1464,7 +1451,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "160",
+     "$id": "156",
      "Name": "confidentOperationWithDiscriminator",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses a model with discriminator in request body, this operation should be confident",
@@ -1473,7 +1460,7 @@
        "$ref": "101"
       },
       {
-       "$id": "161",
+       "$id": "157",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1490,40 +1477,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "162",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "163",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "164",
-        "Type": {
-         "$ref": "163"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "165",
+       "$id": "158",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "166",
+        "$id": "159",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1536,20 +1496,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "167",
+        "$id": "160",
         "Type": {
-         "$ref": "166"
+         "$ref": "159"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "110"
+       "$id": "161",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "162",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "163",
+        "Type": {
+         "$ref": "162"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "168",
+       "$id": "164",
        "StatusCodes": [
         200
        ],
@@ -1558,7 +1542,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1573,7 +1560,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "169",
+     "$id": "165",
      "Name": "pollutedBaseMethod",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses the base type with a discriminator, but this operation is low confident because one of the derived type from the discriminated types has union types on it",
@@ -1582,7 +1569,7 @@
        "$ref": "101"
       },
       {
-       "$id": "170",
+       "$id": "166",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1599,40 +1586,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "171",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "172",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "173",
-        "Type": {
-         "$ref": "172"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "174",
+       "$id": "167",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "175",
+        "$id": "168",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1645,20 +1605,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "176",
+        "$id": "169",
         "Type": {
-         "$ref": "175"
+         "$ref": "168"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "110"
+       "$id": "170",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "171",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "172",
+        "Type": {
+         "$ref": "171"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "177",
+       "$id": "173",
        "StatusCodes": [
         200
        ],
@@ -1667,7 +1651,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1682,7 +1669,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "178",
+     "$id": "174",
      "Name": "pollutedDerivedMethod",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses the model with a union type directly therefore this operation is not confident",
@@ -1691,7 +1678,7 @@
        "$ref": "101"
       },
       {
-       "$id": "179",
+       "$id": "175",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1708,40 +1695,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "180",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "181",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "182",
-        "Type": {
-         "$ref": "181"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "183",
+       "$id": "176",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "184",
+        "$id": "177",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1754,20 +1714,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "185",
+        "$id": "178",
         "Type": {
-         "$ref": "184"
+         "$ref": "177"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "110"
+       "$id": "179",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "180",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "181",
+        "Type": {
+         "$ref": "180"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "186",
+       "$id": "182",
        "StatusCodes": [
         200
        ],
@@ -1776,7 +1760,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1791,7 +1778,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "187",
+     "$id": "183",
      "Name": "unpollutedDerivedMethod",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that is not using the model with a union type directly but since the base type is not confident and we would like it to be low confident, therefore this must be made internal as well",
@@ -1800,7 +1787,7 @@
        "$ref": "101"
       },
       {
-       "$id": "188",
+       "$id": "184",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1817,40 +1804,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "189",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "190",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "191",
-        "Type": {
-         "$ref": "190"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "192",
+       "$id": "185",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "193",
+        "$id": "186",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1863,20 +1823,44 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "194",
+        "$id": "187",
         "Type": {
-         "$ref": "193"
+         "$ref": "186"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "110"
+       "$id": "188",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "189",
+        "Kind": "Primitive",
+        "Name": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "190",
+        "Type": {
+         "$ref": "189"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "195",
+       "$id": "191",
        "StatusCodes": [
         200
        ],
@@ -1885,7 +1869,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "POST",
@@ -1900,7 +1887,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "196",
+     "$id": "192",
      "Name": "useDerivedModel",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation with nothing special",
@@ -1909,7 +1896,7 @@
        "$ref": "101"
       },
       {
-       "$id": "197",
+       "$id": "193",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1926,13 +1913,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "198",
+       "$id": "194",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "199",
+        "$id": "195",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1945,21 +1932,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "200",
+        "$id": "196",
         "Type": {
-         "$ref": "199"
+         "$ref": "195"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "201",
+       "$id": "197",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "202",
+        "$id": "198",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -1972,20 +1959,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "203",
+        "$id": "199",
         "Type": {
-         "$ref": "202"
+         "$ref": "198"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "110"
       }
      ],
      "Responses": [
       {
-       "$id": "204",
+       "$id": "200",
        "StatusCodes": [
         204
        ],
@@ -2006,7 +1990,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "205",
+     "$id": "201",
      "Name": "useDerivedModelWithUnion",
      "ResourceName": "ConfidentLevelsInTsp",
      "Description": "This is an operation that uses a derived model with unions",
@@ -2015,7 +1999,7 @@
        "$ref": "101"
       },
       {
-       "$id": "206",
+       "$id": "202",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2032,13 +2016,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "207",
+       "$id": "203",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "208",
+        "$id": "204",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2051,21 +2035,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "209",
+        "$id": "205",
         "Type": {
-         "$ref": "208"
+         "$ref": "204"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "210",
+       "$id": "206",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "211",
+        "$id": "207",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -2078,20 +2062,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "212",
+        "$id": "208",
         "Type": {
-         "$ref": "211"
+         "$ref": "207"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "110"
       }
      ],
      "Responses": [
       {
-       "$id": "213",
+       "$id": "209",
        "StatusCodes": [
         204
        ],
@@ -2113,7 +2094,7 @@
     }
    ],
    "Protocol": {
-    "$id": "214"
+    "$id": "210"
    },
    "Creatable": true
   }

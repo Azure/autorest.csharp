@@ -2,13 +2,12 @@
  "$id": "1",
  "Name": "_Specs_.Azure.ClientGenerator.Core.Usage",
  "Description": "Test for internal decorator.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {
    "$id": "2",
+   "Kind": "Model",
    "Name": "InputModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "Description": "Usage override to roundtrip.",
@@ -22,8 +21,8 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -33,6 +32,7 @@
   },
   {
    "$id": "5",
+   "Kind": "Model",
    "Name": "OutputModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation",
    "Description": "Usage override to roundtrip.",
@@ -46,8 +46,8 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -57,6 +57,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Model",
    "Name": "OrphanModel",
    "Namespace": "_Specs_.Azure.ClientGenerator.Core.Usage",
    "Accessibility": "public",
@@ -71,8 +72,8 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -86,22 +87,32 @@
    "$id": "11",
    "Name": "UsageClient",
    "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "12"
+   },
+   "Creatable": true
+  },
+  {
+   "$id": "13",
+   "Name": "ModelInOperation",
+   "Description": "",
    "Operations": [
     {
-     "$id": "12",
+     "$id": "14",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$id": "13",
+       "$id": "15",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "14",
+        "$id": "16",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -114,18 +125,18 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "15",
+        "$id": "17",
         "Type": {
-         "$id": "16",
+         "$id": "18",
+         "Kind": "Primitive",
          "Name": "String",
-         "Kind": "String",
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "17",
+       "$id": "19",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -142,13 +153,13 @@
        "Kind": "Method"
       },
       {
-       "$id": "18",
+       "$id": "20",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "19",
+        "$id": "21",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -161,21 +172,21 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "22",
         "Type": {
-         "$ref": "19"
+         "$ref": "21"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "21",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "24",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -188,48 +199,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "25",
         "Type": {
-         "$ref": "22"
+         "$ref": "24"
         },
         "Value": "application/json"
-       }
-      },
-      {
-       "$id": "24",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "25",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "26",
-        "Type": {
-         "$id": "27",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -250,22 +230,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "29",
+     "$id": "27",
      "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "15"
       },
       {
-       "$id": "30",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "31",
+        "$id": "29",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -278,20 +258,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "30",
         "Type": {
-         "$ref": "31"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
@@ -300,7 +277,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -313,9 +293,10 @@
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "32"
    },
-   "Creatable": true
+   "Creatable": false,
+   "Parent": "UsageClient"
   }
  ]
 }

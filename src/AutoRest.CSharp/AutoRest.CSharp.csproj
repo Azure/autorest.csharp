@@ -4,7 +4,7 @@
     <PackageId>Microsoft.Azure.AutoRest.CSharp</PackageId>
     <OutputType>Exe</OutputType>
     <Version>3.0.0</Version>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
@@ -28,7 +28,9 @@
     <PackageReference Include="nunit" />
     <!-- Any stable version of System.Memory should work here. -->
     <PackageReference Include="System.Memory" />
-    <PackageReference Include="System.Net.ClientModel" />
+    <PackageReference Include="NuGet.Configuration" />
+    <PackageReference Include="Microsoft.Build" />
+    <PackageReference Include="System.ClientModel" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

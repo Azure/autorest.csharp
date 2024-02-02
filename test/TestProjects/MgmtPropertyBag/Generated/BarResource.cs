@@ -40,6 +40,9 @@ namespace MgmtPropertyBag
         private readonly BarsRestOperations _barRestClient;
         private readonly BarData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/bars";
+
         /// <summary> Initializes a new instance of the <see cref="BarResource"/> class for mocking. </summary>
         protected BarResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtPropertyBag
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/bars";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -101,6 +101,14 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -139,6 +147,14 @@ namespace MgmtPropertyBag
         /// <term>Operation Id</term>
         /// <description>Bars_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
@@ -175,6 +191,14 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Create</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -216,6 +240,14 @@ namespace MgmtPropertyBag
         /// <item>
         /// <term>Operation Id</term>
         /// <description>Bars_Create</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2020-06-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="BarResource"/></description>
         /// </item>
         /// </list>
         /// </summary>

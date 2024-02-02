@@ -2,12 +2,11 @@
  "$id": "1",
  "Name": "NoTestTypeSpec",
  "Description": "This is a sample typespec project.",
- "ApiVersions": [
-  "0.1.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
+   "Kind": "Enum",
    "Name": "Thing_requiredLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -26,6 +25,7 @@
   },
   {
    "$id": "4",
+   "Kind": "Enum",
    "Name": "Thing_requiredLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -44,6 +44,7 @@
   },
   {
    "$id": "6",
+   "Kind": "Enum",
    "Name": "Thing_requiredLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -62,6 +63,7 @@
   },
   {
    "$id": "8",
+   "Kind": "Enum",
    "Name": "Thing_optionalLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -80,6 +82,7 @@
   },
   {
    "$id": "10",
+   "Kind": "Enum",
    "Name": "Thing_optionalLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -98,6 +101,7 @@
   },
   {
    "$id": "12",
+   "Kind": "Enum",
    "Name": "Thing_optionalLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
@@ -118,6 +122,7 @@
  "Models": [
   {
    "$id": "14",
+   "Kind": "Model",
    "Name": "Thing",
    "Namespace": "NoTestTypeSpec",
    "Description": "A model with a few properties of literal types",
@@ -131,8 +136,8 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "16",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -145,29 +150,31 @@
      "Description": "required Union",
      "Type": {
       "$id": "18",
+      "Kind": "Union",
       "Name": "Union",
       "UnionItemTypes": [
        {
         "$id": "19",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        {
         "$id": "20",
+        "Kind": "Array",
         "Name": "Array",
         "ElementType": {
          "$id": "21",
-         "Name": "string",
-         "Kind": "String",
+         "Kind": "Primitive",
+         "Name": "String",
          "IsNullable": false
         },
         "IsNullable": false
        },
        {
         "$id": "22",
-        "Name": "int32",
-        "Kind": "Int32",
+        "Kind": "Primitive",
+        "Name": "Int32",
         "IsNullable": false
        }
       ],
@@ -183,6 +190,7 @@
      "Description": "required literal string",
      "Type": {
       "$id": "24",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "2"
@@ -200,6 +208,7 @@
      "Description": "required literal int",
      "Type": {
       "$id": "26",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "4"
@@ -217,6 +226,7 @@
      "Description": "required literal float",
      "Type": {
       "$id": "28",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "6"
@@ -234,11 +244,12 @@
      "Description": "required literal bool",
      "Type": {
       "$id": "30",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$id": "31",
+       "Kind": "Primitive",
        "Name": "Boolean",
-       "Kind": "Boolean",
        "IsNullable": false
       },
       "Value": false,
@@ -254,6 +265,7 @@
      "Description": "optional literal string",
      "Type": {
       "$id": "33",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "8"
@@ -271,6 +283,7 @@
      "Description": "optional literal int",
      "Type": {
       "$id": "35",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "10"
@@ -288,6 +301,7 @@
      "Description": "optional literal float",
      "Type": {
       "$id": "37",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$ref": "12"
@@ -305,11 +319,12 @@
      "Description": "optional literal bool",
      "Type": {
       "$id": "39",
+      "Kind": "Literal",
       "Name": "Literal",
       "LiteralValueType": {
        "$id": "40",
+       "Kind": "Primitive",
        "Name": "Boolean",
-       "Kind": "Boolean",
        "IsNullable": false
       },
       "Value": true,
@@ -325,8 +340,8 @@
      "Description": "description with xml <|endoftext|>",
      "Type": {
       "$id": "42",
-      "Name": "string",
-      "Kind": "String",
+      "Kind": "Primitive",
+      "Name": "String",
       "IsNullable": false
      },
      "IsRequired": true,
@@ -339,11 +354,12 @@
      "Description": "optional nullable collection",
      "Type": {
       "$id": "44",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "45",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -358,11 +374,12 @@
      "Description": "required nullable collection",
      "Type": {
       "$id": "47",
+      "Kind": "Array",
       "Name": "Array",
       "ElementType": {
        "$id": "48",
-       "Name": "int32",
-       "Kind": "Int32",
+       "Kind": "Primitive",
+       "Name": "Int32",
        "IsNullable": false
       },
       "IsNullable": true
@@ -391,8 +408,8 @@
        "NameInRequest": "noTestTypeSpecUrl",
        "Type": {
         "$id": "52",
+        "Kind": "Primitive",
         "Name": "Uri",
-        "Kind": "Uri",
         "IsNullable": false
        },
        "Location": "Uri",
@@ -411,8 +428,8 @@
        "NameInRequest": "head-parameter",
        "Type": {
         "$id": "54",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -431,8 +448,8 @@
        "NameInRequest": "queryParameter",
        "Type": {
         "$id": "56",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -451,8 +468,8 @@
        "NameInRequest": "optionalQuery",
        "Type": {
         "$id": "58",
-        "Name": "string",
-        "Kind": "String",
+        "Kind": "Primitive",
+        "Name": "String",
         "IsNullable": false
        },
        "Location": "Query",
@@ -471,8 +488,8 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
+        "Kind": "Primitive",
         "Name": "String",
-        "Kind": "String",
         "IsNullable": false
        },
        "Location": "Header",
@@ -491,42 +508,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "62",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "63",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "64",
-        "Type": {
-         "$id": "65",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "0.1.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "62",
        "StatusCodes": [
         200
        ],
@@ -535,7 +521,10 @@
        },
        "BodyMediaType": "Json",
        "Headers": [],
-       "IsErrorResponse": false
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
       }
      ],
      "HttpMethod": "GET",
@@ -548,15 +537,15 @@
     }
    ],
    "Protocol": {
-    "$id": "67"
+    "$id": "63"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "68",
+  "$id": "64",
   "ApiKey": {
-   "$id": "69",
+   "$id": "65",
    "Name": "my-api-key"
   }
  }

@@ -65,7 +65,7 @@ export async function typeSpecCompile(
     using TypeSpec.Rest; 
     using TypeSpec.Http;
     using TypeSpec.Versioning;
-    ${needAzureCore ? "using Azure.Core;" : ""}
+    ${needAzureCore ? "using Azure.Core;\nusing Azure.Core.Traits;" : ""}
     ${needTCGC ? "using Azure.ClientGenerator.Core;" : ""}
     
     ${needNamespaces ? namespace : ""}
@@ -130,6 +130,6 @@ export function navigateModels(
 /* We always need to pass in the emitter name now that it is required so making a helper to do this. */
 export function createNetSdkContext(
     program: EmitContext<NetEmitterOptions>
-): SdkContext {
+): SdkContext<NetEmitterOptions> {
     return createSdkContext(program, "@azure-tools/typespec-azure");
 }

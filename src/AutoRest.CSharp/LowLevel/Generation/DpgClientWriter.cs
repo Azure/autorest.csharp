@@ -25,10 +25,10 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
-using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -225,8 +225,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(_client.ClientOptions.Type));
                 _writer.Line($"{_client.Fields.ClientDiagnosticsProperty.Name:I} = new {_client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
-                FormattableString perCallPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
-                FormattableString perRetryPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
+                FormattableString perCallPolicies = $"{typeof(Array)}.{nameof(Array.Empty)}<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
+                FormattableString perRetryPolicies = $"{typeof(Array)}.{nameof(Array.Empty)}<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.WriteMethodBodyStatement(Return(response));
                 }
-                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
+                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { } } serializableObjectType})
                 {
                     _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
                 }
@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryDate(responseType.FrameworkType, response)));
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryData(responseType.FrameworkType, response, convenienceMethod.ResponseMediaTypes?.FirstOrDefault())));
                 }
             }
             _writer.Line();
@@ -603,9 +603,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, bool isAsync)
         {
-            if (!Configuration.IsBranded)
-                return;
-
             var sampleProvider = _library.GetSampleForClient(_client);
             // do not write this part when there is no sample provider
             if (sampleProvider == null)

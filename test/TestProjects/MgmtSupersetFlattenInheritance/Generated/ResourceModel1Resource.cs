@@ -39,6 +39,9 @@ namespace MgmtSupersetFlattenInheritance
         private readonly ResourceModel1SRestOperations _resourceModel1RestClient;
         private readonly ResourceModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/resourceModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Resource"/> class for mocking. </summary>
         protected ResourceModel1Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtSupersetFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/resourceModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -100,6 +100,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>ResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,6 +139,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <term>Operation Id</term>
         /// <description>ResourceModel1s_Get</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceModel1Resource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -161,6 +177,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>
@@ -198,6 +222,14 @@ namespace MgmtSupersetFlattenInheritance
         /// <item>
         /// <term>Operation Id</term>
         /// <description>ResourceModel1s_Put</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2021-06-10</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="ResourceModel1Resource"/></description>
         /// </item>
         /// </list>
         /// </summary>

@@ -15,6 +15,13 @@ namespace MgmtSafeFlatten.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="LayerOneProperties"/>. </summary>
+        /// <param name="uniqueId"> The id of layer one. </param>
+        internal LayerOneProperties(string uniqueId)
+        {
+            UniqueId = uniqueId;
+        }
+
         /// <summary> The id of layer one. </summary>
         public string UniqueId { get; }
     }

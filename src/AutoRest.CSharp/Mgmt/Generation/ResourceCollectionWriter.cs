@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
+            // we put this method inside this method just because we are trying to preserve their existing sequence
             var allPossibleTypes = This.ResourceTypes.SelectMany(p => p.Value).Distinct();
 
             FormattableString validResourceType = allPossibleTypes.Count() == 1

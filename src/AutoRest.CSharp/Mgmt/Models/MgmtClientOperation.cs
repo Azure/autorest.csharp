@@ -5,17 +5,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -85,18 +86,44 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MgmtRestOperation this[int index] => _operations[index];
 
         private MethodSignature? _methodSignature;
-        public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
-            Name,
-            null,
-            Description,
-            Accessibility == Public
-                ? _extensionParameter != null
-                    ? Public | Static | Extension
-                    : Public | Virtual
-                : Accessibility,
-            IsPagingOperation
-                ? new CSharpType(typeof(Pageable<>), ReturnType)
-                : ReturnType, null, MethodParameters.ToArray());
+        public MethodSignature MethodSignature
+        {
+            get
+            {
+                if (_methodSignature != null)
+                    return _methodSignature;
+                else
+                {
+                    var attributes = _operations
+                        .Where(op => Configuration.MgmtConfiguration.PrivilegedOperations.ContainsKey(op.OperationId))
+                        .Select(op =>
+                        {
+                            var arg = Configuration.MgmtConfiguration.PrivilegedOperations[op.OperationId];
+                            MgmtReport.Instance.TransformSection.AddTransformLog(
+                                new TransformItem(TransformTypeName.PrivilegedOperations, op.OperationId, arg),
+                                op.Operation.GetFullSerializedName(),
+                                $"Operation {op.OperationId} is marked as Privileged Operation");
+                            return new CSharpAttribute(typeof(Azure.Core.CallerShouldAuditAttribute), Literal(arg));
+                        })
+                        .ToList();
+
+                    _methodSignature = new MethodSignature(
+                        Name,
+                        null,
+                        Description,
+                        Accessibility == Public
+                            ? _extensionParameter != null
+                                ? Public | Static | Extension
+                                : Public | Virtual
+                            : Accessibility,
+                        IsPagingOperation
+                            ? new CSharpType(typeof(Pageable<>), ReturnType)
+                            : ReturnType, null, MethodParameters.ToArray(),
+                        attributes);
+                    return _methodSignature;
+                }
+            }
+        }
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().Name;
@@ -108,14 +135,34 @@ namespace AutoRest.CSharp.Mgmt.Models
         private FormattableString BuildDescription()
         {
             var pathInformation = _operations.Select(operation =>
-                (FormattableString)$@"<item>
+            {
+                FormattableString resourceItem = $"";
+                if (operation.Resource != null)
+                {
+                    resourceItem = $@"
+<item>
+<term>Resource</term>
+<description>{operation.Resource.Type:C}</description>
+</item>";
+                }
+                FormattableString defaultApiVersion = $"";
+                if (operation.Operation.ApiVersions.Any())
+                {
+                    defaultApiVersion = $@"
+<item>
+<term>Default Api Version</term>
+<description>{string.Join(", ", operation.Operation.ApiVersions.Select(v => v.Version))}</description>
+</item>";
+                }
+                    return (FormattableString)$@"<item>
 <term>Request Path</term>
 <description>{operation.Operation.GetHttpPath()}</description>
 </item>
 <item>
 <term>Operation Id</term>
 <description>{operation.OperationId}</description>
-</item>").ToArray().Join(Environment.NewLine);
+</item>{defaultApiVersion}{resourceItem}";
+            }).ToArray().Join(Environment.NewLine);
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";

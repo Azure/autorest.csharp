@@ -36,6 +36,9 @@ namespace MgmtScopeResource
         private readonly VMInsightsRestOperations _vmInsightsOnboardingStatusVMInsightsRestClient;
         private readonly VMInsightsOnboardingStatusData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Insights/vmInsightsOnboardingStatuses";
+
         /// <summary> Initializes a new instance of the <see cref="VMInsightsOnboardingStatusResource"/> class for mocking. </summary>
         protected VMInsightsOnboardingStatusResource()
         {
@@ -62,9 +65,6 @@ namespace MgmtScopeResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Insights/vmInsightsOnboardingStatuses";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -98,6 +98,14 @@ namespace MgmtScopeResource
         /// <term>Operation Id</term>
         /// <description>VMInsights_GetOnboardingStatus</description>
         /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2018-11-27-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VMInsightsOnboardingStatusResource"/></description>
+        /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -129,6 +137,14 @@ namespace MgmtScopeResource
         /// <item>
         /// <term>Operation Id</term>
         /// <description>VMInsights_GetOnboardingStatus</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2018-11-27-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="VMInsightsOnboardingStatusResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
