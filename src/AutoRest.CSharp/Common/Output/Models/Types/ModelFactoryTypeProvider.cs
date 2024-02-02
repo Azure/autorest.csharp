@@ -328,7 +328,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            if (!properties.Any(p => p is { IsReadOnly: true, ValueType: { IsReadOnlyDictionary: false, IsReadOnlyList: false } }))
+            if (!properties.Any(p => p.IsReadOnly && !p.ValueType.IsReadWriteDictionary && !p.ValueType.IsReadWriteList))
             {
                 return false;
             }
