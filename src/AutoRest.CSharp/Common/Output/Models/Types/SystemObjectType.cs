@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                             Type = AllSchemaTypes.Array
                         };
                     }
-                    if (TypeFactory.IsDictionary(property.PropertyType))
+                    if (declarationType.IsDictionary)
                     {
                         schemaProperty.Schema = new DictionarySchema()
                         {

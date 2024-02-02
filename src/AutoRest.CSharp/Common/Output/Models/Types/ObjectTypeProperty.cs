@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 elementType = TypeFactory.GetElementType(input);
                 typeDescription = $"{itemName}";
             }
-            else if (TypeFactory.IsDictionary(input))
+            else if (input.IsDictionary)
             {
                 typeDescription = $"{itemName}{{TKey, TValue}}";
             }
@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     typeSpecificDesc = "the element of this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
-                if (TypeFactory.IsDictionary(type) &&
+                if (type.IsDictionary &&
                     type.Arguments[1].IsFrameworkType &&
                     type.Arguments[1].FrameworkType == typeof(BinaryData))
                 {
@@ -431,7 +431,7 @@ Examples:
                         updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
                     }
                 }
-                else if (TypeFactory.IsDictionary(valueType))
+                else if (valueType.IsDictionary)
                 {
                     var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType }).ToList();
                     if (objectTypes.Any())

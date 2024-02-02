@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (TypeFactory.IsList(type))
                 return writer.AppendListValue(type, exampleValue, includeCollectionInitialization);
 
-            if (TypeFactory.IsDictionary(type))
+            if (type.IsDictionary)
                 return writer.AppendDictionaryValue(type, exampleValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
@@ -534,7 +534,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
-            => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
+            => property.Declaration.Accessibility == "public" && (property.Declaration.Type.IsReadWriteDictionary || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
 
         private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, object value)
         {

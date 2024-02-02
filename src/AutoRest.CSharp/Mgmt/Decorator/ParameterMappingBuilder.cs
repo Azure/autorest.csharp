@@ -200,16 +200,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static FormattableString GetValueExpression(CSharpType type, FormattableString rawExpression)
         {
-            if (TypeFactory.IsStringLike(type))
+            // if the type is string
+            if (type.EqualsIgnoreNullable(typeof(string)))
+                return rawExpression;
+
+            // or if the type is extensible enum and its underlying type is also string
+            if (type is { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true, ValueType: { } enumValueType } } && enumValueType.EqualsIgnoreNullable(typeof(string)))
                 return rawExpression;
 
             if (!type.IsFrameworkType)
             {
-                if (type.Implementation is EnumType enumType && !enumType.IsExtensible)
+                if (type.Implementation is EnumType { IsExtensible: false } enumType)
                 {
                     return $"{rawExpression}.To{enumType.Declaration.Name}()";
                 }
-                throw new System.InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
+                throw new InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
             }
             // TODO: The deserialize type value logic is existing in multiple writers, similar but slightly different,
             //       should be abstracted into one place in future refactoring.

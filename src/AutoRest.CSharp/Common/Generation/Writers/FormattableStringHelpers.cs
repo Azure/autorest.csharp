@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static FormattableString GetConversionFromFrameworkToRequestContent(this Parameter parameter, string? contentType)
         {
-            if (TypeFactory.IsReadWriteDictionary(parameter.Type))
+            if (parameter.Type.IsReadWriteDictionary)
             {
                 return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
             }

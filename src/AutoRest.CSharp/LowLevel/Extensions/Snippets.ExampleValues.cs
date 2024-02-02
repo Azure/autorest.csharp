@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             if (TypeFactory.IsList(type))
                 return GetExpressionForList(type, exampleValue, serializationFormat, includeCollectionInitialization);
             // handle dictionary
-            if (TypeFactory.IsDictionary(type))
+            if (type.IsDictionary)
                 return GetExpressionForDictionary(type, exampleValue, serializationFormat, includeCollectionInitialization);
 
             Type? frameworkType = type.SerializeAs != null ? type.SerializeAs : type.IsFrameworkType ? type.FrameworkType : null;
@@ -459,7 +459,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
-            => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
+            => property.Declaration.Accessibility == "public" && (property.Declaration.Type.IsReadWriteDictionary || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
 
         private static ValueExpression GetExpressionForEnumType(EnumType enumType, object value)
         {

@@ -252,7 +252,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             if ((TypeFactory.IsList(newType) && TypeFactory.IsList(defaultType)) ||
-                (TypeFactory.IsDictionary(newType) && TypeFactory.IsDictionary(defaultType)))
+                (newType.IsDictionary && defaultType.IsDictionary))
             {
                 var arguments = new CSharpType[newType.Arguments.Count];
                 for (var i = 0; i < newType.Arguments.Count; i++)

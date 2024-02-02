@@ -56,6 +56,15 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = type.IsValueType;
             IsEnum = type.IsEnum;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
+
+            #region Assign the attributes of this type
+            IsReadOnlyDictionary = type == typeof(IReadOnlyDictionary<,>);
+            IsReadWriteDictionary = type == typeof(IDictionary<,>);
+            IsDictionary = IsReadOnlyDictionary || IsReadWriteDictionary;
+
+            #endregion
+
+
         }
 
         public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
@@ -95,7 +104,11 @@ namespace AutoRest.CSharp.Generation.Types
 
         public Type? SerializeAs { get; init; }
 
-        public bool HasParent => IsFrameworkType ? false : Implementation is ObjectType objectType ? objectType.Inherits is not null : false;
+        #region Attributes of the type
+        public bool IsDictionary { get; }
+        public bool IsReadOnlyDictionary { get; }
+        public bool IsReadWriteDictionary { get; }
+        #endregion
 
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_implementation, other._implementation) &&

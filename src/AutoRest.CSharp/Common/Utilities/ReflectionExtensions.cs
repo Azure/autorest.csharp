@@ -10,9 +10,10 @@ namespace AutoRest.CSharp.Common.Utilities
     {
         internal static bool IsReadOnly(this PropertyInfo property, bool allowInternal = false)
         {
+            CSharpType propertyType = property.PropertyType;
             if (TypeFactory.IsCollectionType(property.PropertyType))
             {
-                return TypeFactory.IsReadOnlyDictionary(property.PropertyType) || TypeFactory.IsReadOnlyList(property.PropertyType);
+                return propertyType.IsReadOnlyDictionary || TypeFactory.IsReadOnlyList(property.PropertyType);
             }
 
             var setMethod = property.GetSetMethod(nonPublic: allowInternal);

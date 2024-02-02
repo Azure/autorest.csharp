@@ -1071,7 +1071,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return InvokeOptional.ToList(variable);
             }
 
-            if (TypeFactory.IsDictionary(targetType))
+            if (targetType.IsDictionary)
             {
                 return InvokeOptional.ToDictionary(variable);
             }

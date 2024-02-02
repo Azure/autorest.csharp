@@ -129,11 +129,11 @@ namespace AutoRest.CSharp.Generation.Types
                 {
                     return new CSharpType(typeof(List<>), type.Arguments);
                 }
+            }
 
-                if (IsDictionary(type))
-                {
-                    return new CSharpType(typeof(Dictionary<,>), type.Arguments);
-                }
+            if (type.IsDictionary)
+            {
+                return new CSharpType(typeof(Dictionary<,>), type.Arguments);
             }
 
             return type;
@@ -153,10 +153,10 @@ namespace AutoRest.CSharp.Generation.Types
                     return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
                 }
 
-                if (IsDictionary(type))
-                {
-                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
-                }
+            }
+            if (type.IsDictionary)
+            {
+                return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
             }
 
             return type;
@@ -184,6 +184,7 @@ namespace AutoRest.CSharp.Generation.Types
             return type.IsValueType || defaultValue.Value.Value == null;
         }
 
+        // TODO -- this should be removed.
         public static bool IsExtendableEnum(CSharpType type)
         {
             return !type.IsFrameworkType && type.IsValueType &&
@@ -191,6 +192,7 @@ namespace AutoRest.CSharp.Generation.Types
                 enumType.IsExtensible;
         }
 
+        // TODO -- this should also move to CSharpType class
         public static CSharpType GetElementType(CSharpType type)
         {
             if (type.IsFrameworkType)
@@ -209,35 +211,14 @@ namespace AutoRest.CSharp.Generation.Types
                 {
                     return type.Arguments[0];
                 }
-
-                if (IsDictionary(type))
-                {
-                    return type.Arguments[1];
-                }
+            }
+            if (type.IsDictionary)
+            {
+                return type.Arguments[1];
             }
 
             throw new NotSupportedException(type.Name);
         }
-
-
-        /// <summary>
-        /// Is the type a string or an Enum that is modeled as string.
-        /// </summary>
-        /// <param name="type">Type to check.</param>
-        /// <returns>Is the type a string or an Enum that is modeled as string.</returns>
-        public static bool IsStringLike(CSharpType type) =>
-            type.IsFrameworkType
-                ? type.Equals(typeof(string))
-                : type.Implementation is EnumType enumType && enumType.ValueType.Equals(typeof(string)) && enumType.IsExtensible;
-
-        internal static bool IsDictionary(CSharpType type)
-            => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
-
-        internal static bool IsReadOnlyDictionary(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(IReadOnlyDictionary<,>);
-
-        internal static bool IsReadWriteDictionary(CSharpType type)
-            => type.IsFrameworkType && (type.FrameworkType == typeof(IDictionary<,>) || type.FrameworkType == typeof(Dictionary<,>));
 
         internal static bool IsList(CSharpType type)
             => IsReadOnlyList(type) || IsReadWriteList(type) || IsReadOnlyMemory(type);
@@ -382,14 +363,13 @@ namespace AutoRest.CSharp.Generation.Types
                         isNullable: type.IsNullable,
                         type.Arguments);
                 }
-
-                if (IsDictionary(type))
-                {
-                    return new CSharpType(
-                        typeof(IReadOnlyDictionary<,>),
-                        isNullable: type.IsNullable,
-                        type.Arguments);
-                }
+            }
+            if (type.IsDictionary)
+            {
+                return new CSharpType(
+                    typeof(IReadOnlyDictionary<,>),
+                    isNullable: type.IsNullable,
+                    type.Arguments);
             }
 
             return type;
@@ -540,7 +520,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static bool IsCollectionType(CSharpType type)
         {
-            return type.IsFrameworkType && (IsDictionary(type) || IsList(type));
+            return type.IsDictionary || IsList(type);
         }
 
         /// <summary>
