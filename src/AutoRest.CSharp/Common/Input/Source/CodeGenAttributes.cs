@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Input.Source
             return name != null;
         }
 
-        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string propertyName, out IReadOnlyList<string>? serializationNames, out string? serializationHook, out string? deserializationHook)
+        public bool TryGetCodeGenSerializationAttributeValue(AttributeData attributeData, [MaybeNullWhen(false)] out string propertyName, out IReadOnlyList<string>? serializationNames, out string? serializationHook, out string? deserializationHook)
         {
             propertyName = null;
             serializationNames = null;
@@ -61,12 +61,19 @@ namespace AutoRest.CSharp.Input.Source
                 return false;
             }
 
+            var ctorArgs = attributeData.ConstructorArguments;
             // this attribute could only at most have one constructor
-            propertyName = attributeData.ConstructorArguments[0].Value as string;
+            propertyName = ctorArgs[0].Value as string;
 
-            if (attributeData.ConstructorArguments.Length > 1)
+            if (ctorArgs.Length > 1)
             {
-                serializationNames = ToStringArray(attributeData.ConstructorArguments[1].Values);
+                var namesArg = ctorArgs[1];
+                serializationNames = namesArg.Kind switch
+                {
+                    TypedConstantKind.Array => ToStringArray(namesArg.Values),
+                    _ when namesArg.IsNull => null,
+                    _ => new string[] { namesArg.Value?.ToString()! }
+                };
             }
 
             foreach (var namedArgument in attributeData.NamedArguments)

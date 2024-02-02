@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Input.Source
                 }
 
                 // handle CodeGenMemberSerializationHooks attribute
-                if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
+                if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
                 {
                     _typeSerializationMappings.Add(propertyName, new(propertyName, serializationNames, serializationHook, deserializationHook));
                 }

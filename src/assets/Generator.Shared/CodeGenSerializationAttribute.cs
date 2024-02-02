@@ -16,7 +16,7 @@ namespace Azure.Core
         /// When this attribute applies to a property, the value of PropertyName will be ignored
         /// </summary>
         public string? PropertyName { get; set; }
-        public string[] SerializationPath { get; }
+        public string[]? SerializationPath { get; }
         /// <summary>
         /// Gets or sets the method name to use when serializing the property value (property name excluded)
         /// The signature of the serialization hook method must be or compatible with when invoking:
@@ -30,7 +30,19 @@ namespace Azure.Core
         /// </summary>
         public string? DeserializationValueHook { get; set; }
 
-        public CodeGenSerializationAttribute(string propertyName, params string[] serializationPath)
+        public CodeGenSerializationAttribute(string propertyName)
+        {
+            PropertyName = propertyName;
+            SerializationPath = null;
+        }
+
+        public CodeGenSerializationAttribute(string propertyName, string serializationName)
+        {
+            PropertyName = propertyName;
+            SerializationPath = new[] { serializationName };
+        }
+
+        public CodeGenSerializationAttribute(string propertyName, string[] serializationPath)
         {
             PropertyName = propertyName;
             SerializationPath = serializationPath;
