@@ -168,8 +168,6 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsOperationOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>);
 
-        internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
-
         internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
 
         internal static bool IsOperationOfAsyncPageable(CSharpType type)

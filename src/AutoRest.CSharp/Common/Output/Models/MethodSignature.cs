@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            if (ReturnType != null && TypeFactory.IsIAsyncEnumerableOfT(ReturnType))
+            if (ReturnType is { IsIAsyncEnumerableOfT: true })
             {
                 return this with
                 {

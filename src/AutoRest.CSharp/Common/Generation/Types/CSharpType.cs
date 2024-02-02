@@ -64,6 +64,7 @@ namespace AutoRest.CSharp.Generation.Types
             #region Assign the attributes of this type
             IsIEnumerable = type == typeof(IEnumerable);
             IsIEnumerableOfT = type == typeof(IEnumerable<>);
+            IsIAsyncEnumerableOfT = type == typeof(IAsyncEnumerable<>);
             IsReadOnlyDictionary = type == typeof(IReadOnlyDictionary<,>);
             IsReadWriteDictionary = type == typeof(IDictionary<,>);
             IsDictionary = IsReadOnlyDictionary || IsReadWriteDictionary;
@@ -121,6 +122,7 @@ namespace AutoRest.CSharp.Generation.Types
         public bool IsCollection { get; }
         public bool IsIEnumerable { get; }
         public bool IsIEnumerableOfT { get; }
+        public bool IsIAsyncEnumerableOfT { get; }
 
         public bool IsDictionary { get; }
         public bool IsReadOnlyDictionary { get; }
