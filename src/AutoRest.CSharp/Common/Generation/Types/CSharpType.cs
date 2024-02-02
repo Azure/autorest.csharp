@@ -100,24 +100,17 @@ namespace AutoRest.CSharp.Generation.Types
             }
         }
 
-        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
-            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
-        {
-        }
-
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
+        public CSharpType(TypeProvider implementation, bool isNullable = false)
         {
             _implementation = implementation;
-            Name = name;
-            IsValueType = isValueType;
-            IsEnum = isEnum;
+            Namespace = implementation.Declaration.Namespace;
+            Name = implementation.Declaration.Name;
+            IsValueType = implementation.IsValueType;
+            IsEnum = implementation.IsEnum;
             IsNullable = isNullable;
-            Namespace = ns;
-            if (arguments != null)
-                Arguments = arguments;
+            Arguments = Array.Empty<CSharpType>(); // currently we do not have generic TypeProviders
             SerializeAs = _implementation?.SerializeAs;
-            IsPublic = implementation.Declaration.Accessibility == "public"
-                && Arguments.All(t => t.IsPublic);
+            IsPublic = implementation.Declaration.Accessibility == "public" && Arguments.All(t => t.IsPublic);
         }
 
         public string Namespace { get; }
@@ -231,7 +224,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments)
-                : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, isNullable);
+                : new CSharpType(Implementation, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 
@@ -269,17 +262,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, IEnumerable<ObjectTypeProperty>? backingProperties = null)
         {
-            var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
             var systemObjectType = SystemObjectType.Create(type, defaultNamespace, sourceInputModel, backingProperties);
-            // TODO -- why we do not just return systemObjectType.Type here? because of the generic types?
-            return new CSharpType(
-                systemObjectType,
-                type.Namespace ?? defaultNamespace,
-                systemObjectType.Declaration.Name,
-                type.IsValueType,
-                type.IsEnum,
-                false,
-                genericTypes.ToArray());
+            return systemObjectType.Type;
         }
 
         /// <summary>
