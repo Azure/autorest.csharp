@@ -117,50 +117,22 @@ namespace AutoRest.CSharp.Generation.Types
         }
 
         public static CSharpType GetImplementationType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
+            => type switch
             {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(type.Arguments[0].FrameworkType.MakeArrayType());
-                }
-
-                if (IsList(type))
-                {
-                    return new CSharpType(typeof(List<>), type.Arguments);
-                }
-            }
-
-            if (type.IsDictionary)
-            {
-                return new CSharpType(typeof(Dictionary<,>), type.Arguments);
-            }
-
-            return type;
-        }
+                { IsReadOnlyMemory: true } => new CSharpType(type.Arguments[0].FrameworkType.MakeArrayType()),
+                { IsList: true } => new CSharpType(typeof(List<>), type.Arguments),
+                { IsDictionary: true } => new CSharpType(typeof(Dictionary<,>), type.Arguments),
+                _ => type
+            };
 
         public static CSharpType GetPropertyImplementationType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
+            => type switch
             {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments);
-                }
-
-                if (IsList(type))
-                {
-                    return new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments);
-                }
-
-            }
-            if (type.IsDictionary)
-            {
-                return new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments);
-            }
-
-            return type;
-        }
+                { IsReadOnlyMemory: true } => new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments),
+                { IsList: true } => new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments),
+                { IsDictionary: true } => new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments),
+                _ => type
+            };
 
         public static bool CanBeInitializedInline(CSharpType type, Constant? defaultValue)
         {
@@ -194,45 +166,13 @@ namespace AutoRest.CSharp.Generation.Types
 
         // TODO -- this should also move to CSharpType class
         public static CSharpType GetElementType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
+            => type switch
             {
-                if (type.FrameworkType.IsArray)
-                {
-                    return new CSharpType(type.FrameworkType.GetElementType()!);
-                }
-
-                if (IsReadOnlyMemory(type))
-                {
-                    return type.Arguments[0];
-                }
-
-                if (IsList(type))
-                {
-                    return type.Arguments[0];
-                }
-            }
-            if (type.IsDictionary)
-            {
-                return type.Arguments[1];
-            }
-
-            throw new NotSupportedException(type.Name);
-        }
-
-        internal static bool IsList(CSharpType type)
-            => IsReadOnlyList(type) || IsReadWriteList(type) || IsReadOnlyMemory(type);
-
-        internal static bool IsReadOnlyMemory(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(ReadOnlyMemory<>);
-
-        internal static bool IsReadOnlyList(CSharpType type)
-            => type.IsFrameworkType &&
-               (type.FrameworkType == typeof(IEnumerable<>) ||
-               type.FrameworkType == typeof(IReadOnlyList<>));
-
-        internal static bool IsReadWriteList(CSharpType type)
-            => type.IsFrameworkType && (type.FrameworkType == typeof(IList<>) || type.FrameworkType == typeof(ICollection<>) || type.FrameworkType == typeof(List<>));
+                { IsFrameworkType: true, FrameworkType: { IsArray: true } arrayType } => new CSharpType(arrayType.GetElementType()!),
+                { IsReadOnlyMemory: true } or { IsList: true } => type.Arguments[0],
+                { IsDictionary: true } => type.Arguments[1],
+                _ => throw new NotSupportedException(type.Name)
+            };
 
         internal static bool IsIEnumerableType(CSharpType type)
             => type.IsFrameworkType &&
@@ -327,53 +267,21 @@ namespace AutoRest.CSharp.Generation.Types
         };
 
         public static CSharpType GetInputType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
+            => type switch
             {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
-                }
-
-                if (IsList(type))
-                {
-                    return new CSharpType(
-                        typeof(IEnumerable<>),
-                        isNullable: type.IsNullable,
-                        type.Arguments);
-                }
-            }
-
-            return type;
-        }
+                { IsReadOnlyMemory: true } => new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments),
+                { IsList: true } => new CSharpType(typeof(IEnumerable<>), isNullable: type.IsNullable, type.Arguments),
+                _ => type
+            };
 
         public static CSharpType GetOutputType(CSharpType type)
-        {
-            if (type.IsFrameworkType)
+            => type switch
             {
-                if (IsReadOnlyMemory(type))
-                {
-                    return new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments);
-                }
-
-                if (IsList(type))
-                {
-                    return new CSharpType(
-                        typeof(IReadOnlyList<>),
-                        isNullable: type.IsNullable,
-                        type.Arguments);
-                }
-            }
-            if (type.IsDictionary)
-            {
-                return new CSharpType(
-                    typeof(IReadOnlyDictionary<,>),
-                    isNullable: type.IsNullable,
-                    type.Arguments);
-            }
-
-            return type;
-        }
+                { IsReadOnlyMemory: true } => new CSharpType(typeof(ReadOnlyMemory<>), type.IsNullable, type.Arguments),
+                { IsList: true } => new CSharpType(typeof(IReadOnlyList<>), type.IsNullable, type.Arguments),
+                { IsDictionary: true } => new CSharpType(typeof(IReadOnlyDictionary<,>), type.IsNullable, type.Arguments),
+                _ => type
+            };
 
         public CSharpType CreateType(ITypeSymbol symbol)
         {
@@ -518,11 +426,6 @@ namespace AutoRest.CSharp.Generation.Types
             builder.Append(symbol.MetadataName);
         }
 
-        public static bool IsCollectionType(CSharpType type)
-        {
-            return type.IsDictionary || IsList(type);
-        }
-
         /// <summary>
         /// Method checks if object of "<c>from</c>" type can be converted to "<c>to</c>" type by calling `ToList` extension method.
         /// It returns true if "<c>from</c>" is <see cref="IEnumerable{T}"/> and "<c>to</c>" is <see cref="IReadOnlyList{T}"/> or <see cref="IList{T}"/>.
@@ -535,11 +438,6 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
-        }
-
-        internal static bool IsArray(CSharpType type)
-        {
-            return type is { IsFrameworkType: true, FrameworkType.IsArray: true };
         }
     }
 }

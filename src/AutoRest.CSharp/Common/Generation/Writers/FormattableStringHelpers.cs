@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return null;
             }
 
-            if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
+            if (parameterType.IsCollectionType && (defaultValue == null || defaultValue.Value.Type.IsCollectionType))
             {
                 defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
             }
@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
             }
 
-            if (TypeFactory.IsList(parameter.Type))
+            if (parameter.Type.IsList)
             {
                 return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
             }

@@ -321,7 +321,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = TypeFactory.IsCollectionType(property.SerializedType) && !TypeFactory.IsReadOnlyMemory(property.SerializedType) && property.IsRequired
+                    var checkPropertyIsInitialized = property is { IsRequired: true, SerializedType: { IsCollectionType: true, IsReadOnlyMemory: false } }
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -741,7 +741,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, out var value)
                 };
 
-                AssignValueStatement assignStatement = TypeFactory.IsReadOnlyMemory(jsonPropertySerialization.SerializedType!)
+                AssignValueStatement assignStatement = jsonPropertySerialization.SerializedType!.IsReadOnlyMemory
                     ? Assign(propertyVariables[jsonPropertySerialization], New.Instance(jsonPropertySerialization.SerializedType!, value))
                     : Assign(propertyVariables[jsonPropertySerialization], value);
                 statements.Add(assignStatement);
@@ -780,7 +780,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
-                if (!TypeFactory.IsCollectionType(serializedType) || Configuration.DeserializeNullCollectionAsNullValue)
+                if (!serializedType.IsCollectionType || Configuration.DeserializeNullCollectionAsNullValue)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
@@ -789,7 +789,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     };
                 }
 
-                if (jsonPropertySerialization.IsRequired && !TypeFactory.IsReadOnlyMemory(serializedType))
+                if (jsonPropertySerialization.IsRequired && !serializedType.IsReadOnlyMemory)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {
@@ -805,7 +805,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             // even if ReadOnlyMemory is required we leave the list empty if the payload doesn't have it
-            if ((!jsonPropertySerialization.IsRequired || (serializedType is not null && TypeFactory.IsReadOnlyMemory(serializedType))) &&
+            if ((!jsonPropertySerialization.IsRequired || (serializedType is not null && serializedType.IsReadOnlyMemory)) &&
                 serializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
                 serializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
             {
@@ -908,7 +908,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             switch (serialization)
             {
-                case JsonArraySerialization jsonReadOnlyMemory when TypeFactory.IsArray(jsonReadOnlyMemory.ImplementationType):
+                case JsonArraySerialization jsonReadOnlyMemory when jsonReadOnlyMemory.ImplementationType.IsArray:
                     var readOnlyMemory = new VariableReference(jsonReadOnlyMemory.ImplementationType, "array");
                     value = readOnlyMemory;
                     VariableReference index = new VariableReference(typeof(int), "index");
@@ -1066,7 +1066,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var targetType = jsonPropertySerialization.Value.Type;
-            if (TypeFactory.IsList(targetType) && !TypeFactory.IsReadOnlyMemory(targetType))
+            if (targetType.IsList && !targetType.IsReadOnlyMemory)
             {
                 return InvokeOptional.ToList(variable);
             }

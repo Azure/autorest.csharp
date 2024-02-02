@@ -457,7 +457,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return default;
 
             var type = value.Type;
-            if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
+            if (checkUndefinedCollection && type.IsCollectionType)
             {
                 writer.Append($"if (");
 

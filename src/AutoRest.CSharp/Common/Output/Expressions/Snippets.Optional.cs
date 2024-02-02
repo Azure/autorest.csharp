@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                     return statement;
                 }
 
-                return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                return serialization.Value.Type is { IsCollectionType: true, IsReadOnlyMemory: false }
                     ? new IfStatement(IsCollectionDefined(serialization.Value)) { statement }
                     : new IfStatement(IsDefined(serialization.Value)) { statement };
             }

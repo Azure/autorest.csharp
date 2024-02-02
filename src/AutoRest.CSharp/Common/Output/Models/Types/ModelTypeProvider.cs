@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
                     TypedMemberExpression? enumerableExpression = null;
-                    if (TypeFactory.IsReadOnlyMemory(property.Declaration.Type))
+                    if (property.Declaration.Type.IsReadOnlyMemory)
                     {
                         enumerableExpression = property.Declaration.Type.IsNullable
                             ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
@@ -340,7 +340,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return InitializationConstructor;
 
             // verifies the serialization ctor has the same parameter list as the public one, we return the initialization ctor
-            if (!SerializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
+            if (!SerializationConstructorSignature.Parameters.Any(p => p.Type.IsList) && InitializationConstructorSignature.Parameters.SequenceEqual(SerializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
                 return InitializationConstructor;
 
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
@@ -406,9 +406,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else
                 {
-                    if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
+                    if (initializationValue == null && propertyType.IsCollectionType)
                     {
-                        if (TypeFactory.IsReadOnlyMemory(propertyType))
+                        if (propertyType.IsReadOnlyMemory)
                         {
                             initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
                         }

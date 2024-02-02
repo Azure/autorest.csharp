@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 typeDescription = $"<see cref=\"{input}\"/>";
             }
 
-            if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
+            if (input.IsList || input.IsArray)
             {
                 elementType = TypeFactory.GetElementType(input);
                 typeDescription = $"{itemName}";
@@ -337,7 +337,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     typeSpecificDesc = "this property";
                     return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
                 }
-                if (TypeFactory.IsList(type) &&
+                if (type.IsList &&
                     type.Arguments[0].IsFrameworkType &&
                     type.Arguments[0].FrameworkType == typeof(BinaryData))
                 {
@@ -424,7 +424,7 @@ Examples:
             FormattableString? updatedDescription = null;
             if (valueType.IsFrameworkType)
             {
-                if (TypeFactory.IsList(valueType))
+                if (valueType.IsList)
                 {
                     if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
                     {

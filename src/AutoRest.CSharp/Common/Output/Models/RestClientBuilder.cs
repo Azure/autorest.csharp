@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Output.Models
                         {
                             requestBody = new BinaryRequestBody(reference);
                         }
-                        else if (TypeFactory.IsList(type))
+                        else if (type.IsList)
                         {
                             requestBody = new BinaryCollectionRequestBody(reference);
                         }

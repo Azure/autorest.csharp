@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -542,7 +541,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Find properties that would have to be initialized using a foreach loop
             var collectionInitializers = initializersSet
                 .Except(selectedCtorInitializers)
-                .Where(i => i.IsReadOnly && TypeFactory.IsCollectionType(i.Type))
+                .Where(i => i is { IsReadOnly: true, Type.IsCollectionType: true })
                 .ToArray();
 
             // Find properties that would have to be initialized via property initializers

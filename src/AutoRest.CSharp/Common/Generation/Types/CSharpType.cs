@@ -20,13 +20,13 @@ namespace AutoRest.CSharp.Generation.Types
         private readonly Type? _type;
 
         public CSharpType(Type type) : this(
-            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            type,
             type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
         {
         }
 
         public CSharpType(Type type, bool isNullable) : this(
-            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            type,
             isNullable,
             type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
         {
@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType(Type type, bool isNullable, IReadOnlyList<CSharpType> arguments)
         {
+            type = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
             Debug.Assert(type.IsGenericTypeDefinition || arguments.Count == 0, "arguments can be added only to the generic type definition.");
 
@@ -61,10 +62,13 @@ namespace AutoRest.CSharp.Generation.Types
             IsReadOnlyDictionary = type == typeof(IReadOnlyDictionary<,>);
             IsReadWriteDictionary = type == typeof(IDictionary<,>);
             IsDictionary = IsReadOnlyDictionary || IsReadWriteDictionary;
-
+            IsReadOnlyMemory = type == typeof(ReadOnlyMemory<>);
+            IsReadWriteList = type == typeof(IList<>) || type == typeof(ICollection<>) || type == typeof(List<>);
+            IsReadOnlyList = type == typeof(IEnumerable<>) || type == typeof(IReadOnlyList<>);
+            IsList = IsReadOnlyList || IsReadWriteList || IsReadOnlyMemory;
+            IsCollectionType = IsDictionary || IsList;
+            IsArray = type.IsArray;
             #endregion
-
-
         }
 
         public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
@@ -105,9 +109,17 @@ namespace AutoRest.CSharp.Generation.Types
         public Type? SerializeAs { get; init; }
 
         #region Attributes of the type
+        public bool IsArray { get; }
+        public bool IsCollectionType { get; }
+
         public bool IsDictionary { get; }
         public bool IsReadOnlyDictionary { get; }
         public bool IsReadWriteDictionary { get; }
+
+        public bool IsList { get; }
+        public bool IsReadOnlyMemory { get; }
+        public bool IsReadOnlyList { get; }
+        public bool IsReadWriteList { get; }
         #endregion
 
         protected bool Equals(CSharpType other, bool ignoreNullable)

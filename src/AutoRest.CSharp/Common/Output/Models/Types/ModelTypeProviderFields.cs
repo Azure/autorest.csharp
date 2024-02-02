@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We represent property being optional by making it nullable (when it is a value type)
                 // Except in the case of collection where there is a special handling
                 var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
-                                             !TypeFactory.IsCollectionType(propertyType);
+                                             !propertyType.IsCollectionType;
 
                 var existingMember = sourceTypeMapping?.GetMemberByOriginalName(originalFieldName);
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (TypeFactory.IsCollectionType(type))
+            if (type.IsCollectionType)
             {
                 // nullable collection should be settable
                 // one exception is in the property bag, we never let them to be settable.

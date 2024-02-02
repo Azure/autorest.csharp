@@ -278,15 +278,14 @@ namespace AutoRest.CSharp.Output.Models
                 if (responseType is { IsFrameworkType: false, Implementation: ModelTypeProvider modelType })
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
-                    var propertyType = property.ValueType.WithNullable(false);
-                    if (!TypeFactory.IsList(propertyType))
+                    if (!property.ValueType.IsList)
                     {
                         throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
                     }
 
                     responseType = TypeFactory.GetElementType(property.ValueType);
                 }
-                else if (TypeFactory.IsList(responseType))
+                else if (responseType.IsList)
                 {
                     responseType = TypeFactory.GetElementType(responseType);
                 }

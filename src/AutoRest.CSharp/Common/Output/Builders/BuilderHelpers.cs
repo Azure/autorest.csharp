@@ -251,7 +251,7 @@ namespace AutoRest.CSharp.Output.Builders
                 return newType.WithNullable(defaultType.IsNullable);
             }
 
-            if ((TypeFactory.IsList(newType) && TypeFactory.IsList(defaultType)) ||
+            if ((newType.IsList && defaultType.IsList) ||
                 (newType.IsDictionary && defaultType.IsDictionary))
             {
                 var arguments = new CSharpType[newType.Arguments.Count];
