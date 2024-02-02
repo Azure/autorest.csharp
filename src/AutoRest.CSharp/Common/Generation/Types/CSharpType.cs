@@ -48,13 +48,13 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType(Type type, bool isNullable, IReadOnlyList<CSharpType> arguments)
         {
+            // here we ensure the framework type is always the open generic type, aka List<>, not List<int> or List<string> with concrete generic arguments
             type = type.IsGenericType ? type.GetGenericTypeDefinition() : type;
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
-            Debug.Assert(type.IsGenericTypeDefinition || arguments.Count == 0, "arguments can be added only to the generic type definition.");
-
+            ValidateArguments(type, arguments);
             _type = type;
 
-            Namespace = type.Namespace;
+            Namespace = type.Namespace!;
             Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
             IsNullable = isNullable;
             Arguments = arguments;
@@ -88,6 +88,16 @@ namespace AutoRest.CSharp.Generation.Types
             IsOperationOfAsyncPageable = IsOperationOfT && arguments.Count == 1 && arguments[0].IsAsyncPageable;
             IsOperationOfPageable = IsOperationOfT && arguments.Count == 1 && arguments[0].IsPageable;
             #endregion
+        }
+
+        [Conditional("DEBUG")]
+        private static void ValidateArguments(Type type, IReadOnlyList<CSharpType> arguments)
+        {
+            if (type.IsGenericTypeDefinition)
+            {
+                Debug.Assert(arguments.Count > 0, "arguments can be added only to the generic type definition.");
+                Debug.Assert(arguments.Count == type.GetGenericArguments().Length, $"the count of arguments given ({string.Join(", ", arguments.Select(a => a.ToString()))}) does not match the arguments in the definition {type}");
+            }
         }
 
         public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
