@@ -3,6 +3,7 @@
 
 using System;
 using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -59,6 +60,8 @@ namespace AutoRest.CSharp.Generation.Types
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
 
             #region Assign the attributes of this type
+            IsIEnumerable = type == typeof(IEnumerable);
+            IsIEnumerableOfT = type == typeof(IEnumerable<>);
             IsReadOnlyDictionary = type == typeof(IReadOnlyDictionary<,>);
             IsReadWriteDictionary = type == typeof(IDictionary<,>);
             IsDictionary = IsReadOnlyDictionary || IsReadWriteDictionary;
@@ -111,6 +114,8 @@ namespace AutoRest.CSharp.Generation.Types
         #region Attributes of the type
         public bool IsArray { get; }
         public bool IsCollectionType { get; }
+        public bool IsIEnumerable { get; }
+        public bool IsIEnumerableOfT { get; }
 
         public bool IsDictionary { get; }
         public bool IsReadOnlyDictionary { get; }

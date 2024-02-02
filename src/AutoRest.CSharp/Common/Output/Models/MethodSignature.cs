@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            if (ReturnType != null && TypeFactory.IsIEnumerableOfT(ReturnType))
+            if (ReturnType is { IsIEnumerableOfT: true })
             {
                 return this with
                 {
