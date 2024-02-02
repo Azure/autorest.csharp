@@ -12,10 +12,11 @@ namespace Azure.Core
     {
         /// <summary>
         /// Gets or sets the property name which these hooks should apply to
-        /// When this attribute applies to a type (class or struct), we must have a non-null PropertyName
-        /// When this attribute applies to a property, the value of PropertyName will be ignored
         /// </summary>
         public string? PropertyName { get; set; }
+        /// <summary>
+        /// Gets or sets the serialization path of the property in the JSON
+        /// </summary>
         public string[]? SerializationPath { get; }
         /// <summary>
         /// Gets or sets the method name to use when serializing the property value (property name excluded)

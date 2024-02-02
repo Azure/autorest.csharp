@@ -628,9 +628,11 @@ namespace Azure.Service.Models
 
 ### Customize serialization/deserialization methods
 
+Changing how a property serializes or deserializes is done by `CodeGenSerialization` attribute. This attribute can be applied to a class or struct with a property name to change the serialization/deserialization method of the property.
+
 #### Change the serialized name of a property
 
-If you want to change the property name that serializes into the JSON or deserializes from the JSON, you could define your own property name using the `CodeGenMemberSerialization` attribute.
+If you want to change the property name that serializes into the JSON or deserializes from the JSON, you could define your own partial class with the `CodeGenMemberSerialization` attribute.
 
 <details>
 
@@ -657,10 +659,9 @@ namespace Azure.Service.Models
 // Cat.cs
 namespace Azure.Service.Models
 {
+    [CodeGenSerialization(nameof(Name), "catName")] // add the property name, and the new serialized name
     public partial class Cat
     {
-        [CodeGenMemberSerialization("catName")] // the new serialized name
-        public string Name { get; set; }
     }
 }
 ```
@@ -668,19 +669,8 @@ namespace Azure.Service.Models
 **Generated code after:**
 
 ``` diff
-// Generated/Models/Cat.cs
-namespace Azure.Service.Models
-{
-    public partial class Cat
-    {
-        /* omit the ctors for brevity */
--       public string Name { get; set; }
-        public string Color { get; set; }
-    }
-}
-```
+// Generated/Models/Cat.cs - no change
 
-``` diff
 // Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
@@ -727,9 +717,9 @@ namespace Azure.Service.Models
 
 #### Change the hierarchy of a property in the serialized JSON
 
-If you want to change the layer of the property in the json, you can add all the elements in the json path of your property to the attribute, then the generator will generate the property into the JSON in the correct hierarchy.
+If you want to change the layer of the property in the json, you can add all the elements in the json path of your property to the attribute using an array, the generator will generate the property into the JSON in the correct hierarchy.
 
-**NOTE: Introducing extra layers in serialized JSON only works for mgmt plane and HLC models, does not work for DPG models.**
+**NOTE: Introducing extra layers in serialized JSON only works for MPG and HLC models, does not work for DPG models.**
 
 For instance, we want to move `Name` property in the model `Cat` to make it serialized under property `properties` and rename to `catName`.
 
@@ -795,10 +785,9 @@ namespace Azure.Service.Models
 // Cat.cs
 namespace Azure.Service.Models
 {
+    [CodeGenSerialization(nameof(Name), new string[] { "properties", "catName" })]
     public partial class Cat
     {
-        [CodeGenMemberSerialization("properties", "catName")]
-        public string Name { get; set; }
     }
 }
 ```
@@ -806,19 +795,8 @@ namespace Azure.Service.Models
 **Generated code after:**
 
 ``` diff
-// Generated/Models/Cat.cs
-namespace Azure.Service.Models
-{
-    public partial class Cat
-    {
-        /* omit the ctors for brevity */
--       public string Name { get; set; }
-        public string Color { get; set; }
-    }
-}
-```
+// Generated/Models/Cat.cs - no change
 
-``` diff
 // Generated/Models/Model.Serialization.cs
 namespace Azure.Service.Models
 {
@@ -874,20 +852,15 @@ namespace Azure.Service.Models
 
 </details>
 
-#### Change the implementation of serialization/deserialization method of one particular property
+#### Change the implementation of serialization/deserialization method of a property
 
-If you want to change the implementation of serialization/deserialization method of one particular property, you could define your own hook methods and assign them to the property by using the `CodeGenMemberSerializationHooks` attribute.
+If you want to change the implementation of serialization/deserialization method of a property, you could define your own hook methods and assign them to the `CodeGenSerialization` attribute.
 
 This `CodeGenMemberSerializationHooks` comes with two different usages, you could either add the attribute to the containing type of the property you would like to change, or add the attribute to a specified property.
 
-Please note:
-1. When used on a class or struct, the `PropertyName` value is required. When used on a property, the `PropertyName` value will be ignored by the generator.
-2. If there are `CodeGenMemberSerializationHooks` attribute on a property, and a `CodeGenMemberSerializationHooks` attribute on the containing type with the same property name, the attribute on the property will override the attribute on the containing type.
-3. The `CodeGenMemberSerializationHooks` attribute cannot be inherited by its derived types when used on a class or struct.
+The custom serialization method for this property is assigned by the `SerializationValueHook` property of the `CodeGenSerialization` attribute, and the custom deserialization method for this property is assigned by the `DeserializationValueHook` property of the `CodeGenSerialization` attribute.
 
-<details>
-
-When adding the `CodeGenMemberSerializationHooks` attribute to a property, it takes two parameters: `SerializationValueHook` and `DeserializationValueHook`, When adding the `CodeGenMemberSerializationHooks` attribute to a type, it takes three parameters: `PropertyName`, `SerializationValueHook` and `DeserializationValueHook`, and `PropertyName` is required. The `SerializationValueHook` and `DeserializationValueHook` are hook method names, and they should have the signature as below:
+The `SerializationValueHook` and `DeserializationValueHook` here are hook method names, and these methods should have the signature as below:
 
 ``` C#
 // serialization hook and serialization value hook
@@ -914,6 +887,10 @@ internal static void DeserializeSizeProperty(JsonProperty property, ref Optional
 Please use the `nameof` expression to avoid typo in the attribute. Also you could leave both the serialization value hook unassigned if you do not want to change the serialization logic, similar you could leave deserialization hook unassigned if you do not want to change the deserialization logic.
 
 The `[MethodImpl(MethodImplOptions.AggressiveInlining)]` attribute is recommended for your hook methods to get optimized performance.
+
+Please note that the generator will not check the signature of the hook methods you assigned to the attribute, therefore if the signature is not compatible, the generated library might not compile.
+
+<details>
 
 For instance, we have a model class `Cat` with property `Name` and `Color`, and we would like to change the way how `Name` property is serialized and deserialized.
 
@@ -975,13 +952,11 @@ namespace Azure.Service.Models
 
 **Add customized model:**
 
-Add the `CodeGenMemberSerializationHooks` attribute to the containing type:
-
 ``` C#
 // Cat.cs
 namespace Azure.Service.Models
 {
-    [CodeGenMemberSerializationHooks(nameof(Name), SerializationValueHook = nameof(SerializeNameValue), DeserializationValue = nameof(DeserializeNameValue))]
+    [CodeGenSerialization(nameof(Name), SerializationValueHook = nameof(SerializeNameValue), DeserializationValue = nameof(DeserializeNameValue))]
     public partial class Cat
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1004,102 +979,8 @@ namespace Azure.Service.Models
 **Generated code after:**
 
 ``` diff
-// Generated/Models/Cat.cs
-// no change in this file
-```
+// Generated/Models/Cat.cs - no change
 
-``` diff
-// Generated/Models/Cat.Serialization.cs
-namespace Azure.Service.Models
-{
-    public partial class Cat : IUtf8JsonSerializable
-    {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
--           writer.WriteStringValue(Name);
-+           SerializeNameValue(writer);
-            if (Optional.IsDefined(Color))
-            {
-                writer.WritePropertyName("color"u8);
-                writer.WriteStringValue(Color);
-            }
-            writer.WriteEndObject();
-        }
-
-        internal static Cat DeserializeCat(JsonElement element)
-        {
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string name = default;
-            Optional<string> color = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("name"u8))
-                {
--                   meow = property.Value.GetString();
-+                   DeserializeNameValue(property, ref name);
-                    continue;
-                }
-                if (property.NameEquals("color"u8))
-                {
-                    color = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new Cat(name, color, size);
-        }
-    }
-}
-```
-
-Alternatively, you could add the attribute on the property you would like to change, this requires you to write the property in your customization file:
-
-``` C#
-// Cat.cs
-namespace Azure.Service.Models
-{
-    public partial class Cat
-    {
-        [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeNameValue), DeserializationValue = nameof(DeserializeNameValue))]
-        public string Name { get; set; }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void SerializeNameValue(Utf8JsonWriter writer)
-        {
-            // this is the logic we would like to have for the value serialization
-            writer.WriteStringValue(Name.ToUpper());
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void DeserializeNameValue(JsonProperty property, ref string name) // the type here is string since name is required
-        {
-            // this is the logic we would like to have for the value deserialization
-            name = property.Value.GetString().ToLower();
-        }
-    }
-}
-```
-
-**Generated code after:**
-
-``` diff
-// Generated/Models/Cat.cs
-namespace Azure.Service.Models
-{
-    public partial class Cat
-    {
-        /* omit the ctors for brevity */
--       public string Name { get; set; }
-        public string Color { get; set; }
-    }
-}
-```
-
-``` diff
 // Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
@@ -1151,7 +1032,7 @@ namespace Azure.Service.Models
 
 #### Add a new property to the model with serialization/deserialization
 
-If you want to add a new property to the model and also add the property into the serialization/deserialization methods, you could also use the `CodeGenMemberSerialization` attribute and the `CodeGenMemberSerializationHooks` attribute.
+If you want to add a new property to the model and also add the property into the serialization/deserialization methods, you could also use the `CodeGenSerialization` attribute to change its default serialized name, and serialization/deserialization methods.
 
 <details>
 
@@ -1214,9 +1095,9 @@ namespace Azure.Service.Models
 **Add customized model:**
 
 ``` C#
+[CodeGenSerialization(nameof(Size), "size")]
 public partial class Cat
 {
-    [CodeGenMemberSerialization("size")]
     public int? Size { get; set; }
 }
 ```
@@ -1242,9 +1123,7 @@ namespace Azure.Service.Models
         public string Color { get; set; }
     }
 }
-```
 
-``` diff
 // Generated/Models/Cat.Serialization.cs
 namespace Azure.Service.Models
 {
@@ -1301,7 +1180,7 @@ namespace Azure.Service.Models
 }
 ```
 
-You could also add the `CodeGenMemberSerializationHooks` attribute to the property to have your own serialization/deserialization logic of the new property. You might have to do this if the type of your new property is an object type or any type that our generator does not natively support.
+You could also add the `CodeGenSerialization` attribute to the property to have your own serialization/deserialization logic of the new property. You might have to do this if the type of your new property is an object type or any type that our generator does not natively support.
 
 **NOTE: Adding property to serialization/deserialization methods currently only works for DPG.**
 

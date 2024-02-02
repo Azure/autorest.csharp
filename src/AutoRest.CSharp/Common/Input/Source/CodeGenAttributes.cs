@@ -76,15 +76,18 @@ namespace AutoRest.CSharp.Input.Source
                 };
             }
 
-            foreach (var namedArgument in attributeData.NamedArguments)
+            foreach (var (key, namedArgument) in attributeData.NamedArguments)
             {
-                switch (namedArgument.Key)
+                switch (key)
                 {
+                    case nameof(Azure.Core.CodeGenSerializationAttribute.SerializationPath):
+                        serializationNames = ToStringArray(namedArgument.Values);
+                        break;
                     case nameof(Azure.Core.CodeGenSerializationAttribute.SerializationValueHook):
-                        serializationHook = namedArgument.Value.Value as string;
+                        serializationHook = namedArgument.Value as string;
                         break;
                     case nameof(Azure.Core.CodeGenSerializationAttribute.DeserializationValueHook):
-                        deserializationHook = namedArgument.Value.Value as string;
+                        deserializationHook = namedArgument.Value as string;
                         break;
                 }
             }
