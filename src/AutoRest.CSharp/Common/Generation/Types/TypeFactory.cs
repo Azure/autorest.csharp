@@ -148,20 +148,12 @@ namespace AutoRest.CSharp.Generation.Types
                 return true;
             }
 
-            if (IsExtendableEnum(type) && defaultValue.Value.Value != null)
+            if (type is { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } && defaultValue.Value.Value != null)
             {
                 return defaultValue.Value.IsNewInstanceSentinel;
             }
 
             return type.IsValueType || defaultValue.Value.Value == null;
-        }
-
-        // TODO -- this should be removed.
-        public static bool IsExtendableEnum(CSharpType type)
-        {
-            return !type.IsFrameworkType && type.IsValueType &&
-                type.Implementation is EnumType enumType &&
-                enumType.IsExtensible;
         }
 
         // TODO -- this should also move to CSharpType class
