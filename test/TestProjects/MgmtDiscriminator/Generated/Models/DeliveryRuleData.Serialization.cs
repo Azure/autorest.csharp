@@ -10,6 +10,7 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using System.Xml;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtDiscriminator.Models;
@@ -38,6 +39,26 @@ namespace MgmtDiscriminator
             {
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location.Value);
+            }
+            if (Optional.IsDefined(DateTimeProperty))
+            {
+                writer.WritePropertyName("dateTimeProperty"u8);
+                writer.WriteStringValue(DateTimeProperty.Value, "O");
+            }
+            if (Optional.IsDefined(Duration))
+            {
+                writer.WritePropertyName("duration"u8);
+                writer.WriteStringValue(Duration.Value, "P");
+            }
+            if (Optional.IsDefined(Number))
+            {
+                writer.WritePropertyName("number"u8);
+                writer.WriteNumberValue(Number.Value);
+            }
+            if (Optional.IsDefined(Uri))
+            {
+                writer.WritePropertyName("uri"u8);
+                writer.WriteStringValue(Uri.AbsoluteUri);
             }
             if (Optional.IsDefined(Properties))
             {
@@ -104,6 +125,10 @@ namespace MgmtDiscriminator
             }
             Optional<bool> boolProperty = default;
             Optional<AzureLocation> location = default;
+            Optional<DateTimeOffset> dateTimeProperty = default;
+            Optional<TimeSpan> duration = default;
+            Optional<int> number = default;
+            Optional<Uri> uri = default;
             Optional<DeliveryRuleProperties> properties = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -129,6 +154,42 @@ namespace MgmtDiscriminator
                         continue;
                     }
                     location = new AzureLocation(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("dateTimeProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    dateTimeProperty = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("duration"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    duration = property.Value.GetTimeSpan("P");
+                    continue;
+                }
+                if (property.NameEquals("number"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    number = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("uri"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    uri = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))
@@ -170,7 +231,7 @@ namespace MgmtDiscriminator
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleData(id, name, type, systemData.Value, Optional.ToNullable(boolProperty), Optional.ToNullable(location), properties.Value, serializedAdditionalRawData);
+            return new DeliveryRuleData(id, name, type, systemData.Value, Optional.ToNullable(boolProperty), Optional.ToNullable(location), Optional.ToNullable(dateTimeProperty), Optional.ToNullable(duration), Optional.ToNullable(number), uri.Value, properties.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -191,10 +252,36 @@ namespace MgmtDiscriminator
                 builder.AppendLine($" '{Location.Value.ToString()}'");
             }
 
+            if (Optional.IsDefined(DateTimeProperty))
+            {
+                builder.Append("  dateTimeProperty:");
+                var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
+                builder.AppendLine($" '{formattedDateTimeString}'");
+            }
+
+            if (Optional.IsDefined(Duration))
+            {
+                builder.Append("  duration:");
+                var formattedTimeSpan = XmlConvert.ToString(Duration.Value);
+                builder.AppendLine($" '{formattedTimeSpan}'");
+            }
+
+            if (Optional.IsDefined(Number))
+            {
+                builder.Append("  number:");
+                builder.AppendLine($" {Number.Value}");
+            }
+
+            if (Optional.IsDefined(Uri))
+            {
+                builder.Append("  uri:");
+                builder.AppendLine($" '{Uri.AbsoluteUri}'");
+            }
+
             if (Optional.IsDefined(Properties))
             {
                 builder.Append("  properties:");
-                AppendChildObject(builder, Properties, options, 2);
+                AppendChildObject(builder, Properties, options, 2, false);
             }
 
             if (Optional.IsDefined(Id))
@@ -225,14 +312,23 @@ namespace MgmtDiscriminator
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
+            string firstLineIndent = new string(' ', spaces - 1);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            for (int i = 0; i < lines.Length; i++)
             {
-                stringBuilder.AppendLine($"{indent}{line}");
+                string line = lines[i];
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($"{firstLineIndent}{line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
             }
         }
 

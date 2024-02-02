@@ -61,22 +61,38 @@ namespace MgmtDiscriminator
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="boolProperty"> The resource type of this rule. </param>
-        /// <param name="location"> The resource type of this rule. </param>
+        /// <param name="boolProperty"> A bool property to verify bicep generation. </param>
+        /// <param name="location"> A location property to verify bicep generation. </param>
+        /// <param name="dateTimeProperty"> A datetime property to verify bicep generation. </param>
+        /// <param name="duration"> A duration property to verify bicep generation. </param>
+        /// <param name="number"> A number property to verify bicep generation. </param>
+        /// <param name="uri"> A number property to verify bicep generation. </param>
         /// <param name="properties"> The properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? boolProperty, AzureLocation? location, DateTimeOffset? dateTimeProperty, TimeSpan? duration, int? number, Uri uri, DeliveryRuleProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             BoolProperty = boolProperty;
             Location = location;
+            DateTimeProperty = dateTimeProperty;
+            Duration = duration;
+            Number = number;
+            Uri = uri;
             Properties = properties;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The resource type of this rule. </summary>
+        /// <summary> A bool property to verify bicep generation. </summary>
         public bool? BoolProperty { get; set; }
-        /// <summary> The resource type of this rule. </summary>
+        /// <summary> A location property to verify bicep generation. </summary>
         public AzureLocation? Location { get; set; }
+        /// <summary> A datetime property to verify bicep generation. </summary>
+        public DateTimeOffset? DateTimeProperty { get; set; }
+        /// <summary> A duration property to verify bicep generation. </summary>
+        public TimeSpan? Duration { get; set; }
+        /// <summary> A number property to verify bicep generation. </summary>
+        public int? Number { get; set; }
+        /// <summary> A number property to verify bicep generation. </summary>
+        public Uri Uri { get; set; }
         /// <summary> The properties. </summary>
         public DeliveryRuleProperties Properties { get; set; }
     }

@@ -38,6 +38,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static readonly Parameter StringBuilderParameter =
             new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None, null);
 
+        private static readonly Parameter IndentFirstLine =
+            new Parameter("indentFirstLine", null, typeof(bool), null, ValidationType.None, null);
+
         public static IEnumerable<Method> BuildBicepSerializationMethods(
             SerializableObjectType model,
             BicepObjectSerialization bicepObject)
@@ -65,7 +68,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     {
                         new Parameter("stringBuilder", null, typeof(StringBuilder), null, ValidationType.None,
                             null),
-                        ChildObject, KnownParameters.Serializations.Options, Spaces
+                        ChildObject, KnownParameters.Serializations.Options, Spaces, IndentFirstLine
                     }),
                 WriteAppendChildObject(bicepObject).ToArray());
         }
@@ -98,6 +101,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             VariableReference indent = new VariableReference(typeof(string), "indent");
             yield return Declare(indent, New.Instance(typeof(string), Literal(' '), Spaces));
 
+            VariableReference firstLineIndent = new VariableReference(typeof(string), "firstLineIndent");
+            yield return Declare(firstLineIndent, New.Instance(typeof(string), Literal(' '), new BinaryOperatorExpression("-", Spaces, new ConstantExpression(new Constant(1, typeof(int))))));
+
             VariableReference data = new VariableReference(typeof(BinaryData), "data");
             yield return Declare(
                 data,
@@ -124,12 +130,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     null,
                     false)
             );
-            var stringBuilder = new ParameterReference(StringBuilderParameter);
-            yield return new ForeachStatement("line", new EnumerableExpression(typeof(string), lines), out var line)
+            var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
+            yield return new ForStatement(typeof(string), "i", "line", new ListExpression(typeof(string), lines), out var i, out var line)
             {
-                stringBuilder.Invoke(
-                    nameof(StringBuilder.AppendLine),
-                    new FormattableStringExpression("{0}{1}", indent, line)).ToStatement()
+                new IfElseStatement(And(Equal(i, new ConstantExpression(new Constant(0, typeof(int)))), Not(new BoolExpression(IndentFirstLine))),
+                    stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", firstLineIndent, line)),
+                stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
             };
         }
 
@@ -137,12 +143,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             yield return InvokeOptional.WrapInIsDefined(
                 property,
+                InvokeOptional.WrapInIsNotEmpty(
+                    property,
                 new[]
-                {
-                    // add in customization hooks
-                    stringBuilder.Append($"  {property.SerializedName}:"),
-                    SerializeExpression(stringBuilder, property.ValueSerialization, property.Value, 2)
-                },
+                    {
+                        // add in customization hooks
+                        stringBuilder.Append($"  {property.SerializedName}:"),
+                        SerializeExpression(stringBuilder, property.ValueSerialization, property.Value, 2)
+                    }),
                 true);
 
             yield return EmptyLine;
@@ -230,56 +238,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueSerialization.Type.IsFrameworkType)
             {
-                var frameworkType = valueSerialization.Type.FrameworkType;
-                if (frameworkType == typeof(Nullable<>))
-                {
-                    frameworkType = valueSerialization.Type.Arguments[0].FrameworkType;
-                }
-
-                expression = expression.NullableStructValue(valueSerialization.Type);
-
-                if (frameworkType == typeof(Uri))
-                {
-                    return stringBuilder.AppendLine(
-                        new FormattableStringExpression($"{indent}'{{0}}'",
-                            expression.Property(nameof(Uri.AbsoluteUri))));
-                }
-
-                if (frameworkType == typeof(string))
-                {
-                    return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression));
-                }
-
-                if (frameworkType == typeof(TimeSpan))
-                {
-                    return new[]
-                    {
-                        Var(
-                            "formattedTimeSpan",
-                            new StringExpression(new InvokeStaticMethodExpression(typeof(XmlConvert),
-                                nameof(XmlConvert.ToString), new[] { expression })),
-                            out var timeSpanVariable),
-                        stringBuilder.AppendLine(new FormattableStringExpression(
-                            $"{indent}'{{0}}'",
-                            timeSpanVariable))
-                    };
-                }
-
-                if (frameworkType == typeof(bool))
-                {
-                    return new[]
-                    {
-                        Var(
-                            "boolValue",
-                            new StringExpression(new TernaryConditionalOperator(
-                                Equal(expression, BoolExpression.True),
-                                Literal("true"), Literal("false"))),
-                            out var boolVariable),
-                        stringBuilder.AppendLine(new FormattableStringExpression($"{indent}{{0}}", boolVariable))
-                    };
-                }
-
-                return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression.Invoke(nameof(ToString))));
+                return SerializeFrameworkTypeValue(stringBuilder, valueSerialization, expression, indent);
             }
 
             if (valueSerialization.Type.IsValueType)
@@ -296,9 +255,88 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     new[]
                     {
                         stringBuilder, expression, KnownParameters.Serializations.Options,
-                        new ConstantExpression(new Constant(spacesToUse, typeof(int)))
+                        new ConstantExpression(new Constant(spacesToUse, typeof(int))),
+                        isArrayElement ? BoolExpression.True : BoolExpression.False
                     })
             };
+        }
+
+        private static MethodBodyStatement SerializeFrameworkTypeValue(
+            StringBuilderExpression stringBuilder,
+            BicepValueSerialization valueSerialization,
+            ValueExpression expression,
+            string indent)
+        {
+            var frameworkType = valueSerialization.Type.FrameworkType;
+            if (frameworkType == typeof(Nullable<>))
+            {
+                frameworkType = valueSerialization.Type.Arguments[0].FrameworkType;
+            }
+
+            expression = expression.NullableStructValue(valueSerialization.Type);
+
+            if (frameworkType == typeof(Uri))
+            {
+                return stringBuilder.AppendLine(
+                    new FormattableStringExpression($"{indent}'{{0}}'",
+                        expression.Property(nameof(Uri.AbsoluteUri))));
+            }
+
+            if (frameworkType == typeof(string))
+            {
+                return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression));
+            }
+
+            if (frameworkType == typeof(int))
+            {
+                return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}{{0}}", expression));
+            }
+
+            if (frameworkType == typeof(TimeSpan))
+            {
+                return new[]
+                {
+                    Var(
+                        "formattedTimeSpan",
+                        new StringExpression(new InvokeStaticMethodExpression(typeof(XmlConvert),
+                            nameof(XmlConvert.ToString), new[] { expression })),
+                        out var timeSpanVariable),
+                    stringBuilder.AppendLine(new FormattableStringExpression(
+                        $"{indent}'{{0}}'",
+                        timeSpanVariable))
+                };
+            }
+
+            if (frameworkType == typeof(DateTimeOffset) || frameworkType == typeof(DateTime))
+            {
+                return new[]
+                {
+                    Var(
+                        "formattedDateTimeString",
+                        new StringExpression(new InvokeStaticMethodExpression(typeof(TypeFormatters),
+                            nameof(TypeFormatters.ToString), new[] { expression, Literal("o") })),
+                        out var dateTimeStringVariable),
+                    stringBuilder.AppendLine(new FormattableStringExpression(
+                        $"{indent}'{{0}}'",
+                        dateTimeStringVariable))
+                };
+            }
+
+            if (frameworkType == typeof(bool))
+            {
+                return new[]
+                {
+                    Var(
+                        "boolValue",
+                        new StringExpression(new TernaryConditionalOperator(
+                            Equal(expression, BoolExpression.True),
+                            Literal("true"), Literal("false"))),
+                        out var boolVariable),
+                    stringBuilder.AppendLine(new FormattableStringExpression($"{indent}{{0}}", boolVariable))
+                };
+            }
+
+            return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression.Invoke(nameof(ToString))));
         }
 
         private static MethodBodyStatement CheckCollectionItemForNull(

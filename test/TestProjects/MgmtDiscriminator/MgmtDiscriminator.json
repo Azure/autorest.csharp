@@ -402,13 +402,33 @@
                     "readOnly": true
                 },
                 "boolProperty": {
-                    "description": "The resource type of this rule",
+                    "description": "A bool property to verify bicep generation.",
                     "type": "boolean"
                 },
                 "location": {
-                    "description": "The resource type of this rule",
+                    "description": "A location property to verify bicep generation.",
                     "type": "string",
                     "x-ms-format": "azure-location"
+                },
+                "dateTimeProperty": {
+                    "description": "A datetime property to verify bicep generation.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "duration": {
+                    "description": "A duration property to verify bicep generation.",
+                    "type": "string",
+                    "format": "duration"
+                },
+                "number": {
+                    "description": "A number property to verify bicep generation.",
+                    "type": "number",
+                    "format": "int32"
+                },
+                "uri": {
+                    "description": "A number property to verify bicep generation.",
+                    "type": "string",
+                    "format": "url"
                 },
                 "properties": {
                     "description": "The properties",

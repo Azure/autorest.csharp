@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -193,43 +194,49 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Order))
             {
                 builder.Append("  order:");
-                builder.AppendLine($" '{Order.Value.ToString()}'");
+                builder.AppendLine($" {Order.Value}");
             }
 
             if (Optional.IsDefined(Conditions))
             {
                 builder.Append("  conditions:");
-                AppendChildObject(builder, Conditions, options, 2);
+                AppendChildObject(builder, Conditions, options, 2, false);
             }
 
             if (Optional.IsCollectionDefined(Actions))
             {
-                builder.Append("  actions:");
-                builder.AppendLine(" [");
-                foreach (var item in Actions)
+                if (Actions.Any())
                 {
-                    AppendChildObject(builder, item, options, 4);
+                    builder.Append("  actions:");
+                    builder.AppendLine(" [");
+                    foreach (var item in Actions)
+                    {
+                        AppendChildObject(builder, item, options, 4, true);
+                    }
+                    builder.AppendLine("  ]");
                 }
-                builder.AppendLine("  ]");
             }
 
             if (Optional.IsCollectionDefined(ExtraMappingInfo))
             {
-                builder.Append("  extraMappingInfo:");
-                builder.AppendLine(" {");
-                foreach (var item in ExtraMappingInfo)
+                if (ExtraMappingInfo.Any())
                 {
-                    builder.Append($"    {item.Key}: ");
+                    builder.Append("  extraMappingInfo:");
+                    builder.AppendLine(" {");
+                    foreach (var item in ExtraMappingInfo)
+                    {
+                        builder.Append($"    {item.Key}: ");
 
-                    AppendChildObject(builder, item.Value, options, 4);
+                        AppendChildObject(builder, item.Value, options, 4, false);
+                    }
+                    builder.AppendLine("  }");
                 }
-                builder.AppendLine("  }");
             }
 
             if (Optional.IsDefined(Pet))
             {
                 builder.Append("  pet:");
-                AppendChildObject(builder, Pet, options, 2);
+                AppendChildObject(builder, Pet, options, 2, false);
             }
 
             if (Optional.IsDefined(Foo))
@@ -242,14 +249,23 @@ namespace MgmtDiscriminator.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
+            string firstLineIndent = new string(' ', spaces - 1);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            for (int i = 0; i < lines.Length; i++)
             {
-                stringBuilder.AppendLine($"{indent}{line}");
+                string line = lines[i];
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($"{firstLineIndent}{line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
             }
         }
 

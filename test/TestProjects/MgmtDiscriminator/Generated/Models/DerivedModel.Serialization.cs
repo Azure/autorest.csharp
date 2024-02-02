@@ -8,6 +8,7 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
@@ -114,18 +115,21 @@ namespace MgmtDiscriminator.Models
 
             if (Optional.IsCollectionDefined(RequiredCollection))
             {
-                builder.Append("  requiredCollection:");
-                builder.AppendLine(" [");
-                foreach (var item in RequiredCollection)
+                if (RequiredCollection.Any())
                 {
-                    if (item == null)
+                    builder.Append("  requiredCollection:");
+                    builder.AppendLine(" [");
+                    foreach (var item in RequiredCollection)
                     {
-                        builder.Append("null");
-                        continue;
+                        if (item == null)
+                        {
+                            builder.Append("null");
+                            continue;
+                        }
+                        builder.AppendLine($"    '{item}'");
                     }
-                    builder.AppendLine($"    '{item}'");
+                    builder.AppendLine("  ]");
                 }
-                builder.AppendLine("  ]");
             }
 
             if (Optional.IsDefined(OptionalString))
@@ -138,14 +142,23 @@ namespace MgmtDiscriminator.Models
             return BinaryData.FromString(builder.ToString());
         }
 
-        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces)
+        private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
+            string firstLineIndent = new string(' ', spaces - 1);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            for (int i = 0; i < lines.Length; i++)
             {
-                stringBuilder.AppendLine($"{indent}{line}");
+                string line = lines[i];
+                if (i == 0 && !indentFirstLine)
+                {
+                    stringBuilder.AppendLine($"{firstLineIndent}{line}");
+                }
+                else
+                {
+                    stringBuilder.AppendLine($"{indent}{line}");
+                }
             }
         }
 

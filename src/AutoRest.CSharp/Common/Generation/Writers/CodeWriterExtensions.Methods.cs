@@ -123,7 +123,18 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteMethodBodyStatement(writer, foreachStatement.Body.AsStatement());
                         writer.LineRaw("}");
                     }
-
+                    break;
+                case ForStatement forStatement:
+                    using (writer.AmbientScope())
+                    {
+                        writer.AppendRaw("for (");
+                        writer.Append($"int {forStatement.Indexer:D} = 0; {forStatement.Indexer} < {forStatement.Enumerable}.Length; {forStatement.Indexer}++)");
+                        writer.LineRaw("{");
+                        writer.Append($"{forStatement.ItemType} {forStatement.Item:D} = {forStatement.Enumerable}[{forStatement.Indexer}];");
+                        writer.LineRaw("");
+                        WriteMethodBodyStatement(writer, forStatement.Body.AsStatement());
+                        writer.LineRaw("}");
+                    }
                     break;
                 case UsingScopeStatement usingStatement:
                     using (writer.AmbientScope())

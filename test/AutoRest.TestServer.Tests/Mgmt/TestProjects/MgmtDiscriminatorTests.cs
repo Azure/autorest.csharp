@@ -61,7 +61,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     {"foo", new BinaryData("bar") }
                 }),
                 BoolProperty = false,
-                Location = AzureLocation.AustraliaCentral
+                Location = AzureLocation.AustraliaCentral,
+                DateTimeProperty = DateTime.Now,
+                Duration = TimeSpan.FromDays(1),
+                Number = 4
             };
 
             TestContext.Progress.WriteLine(ModelReaderWriter.Write(data, new ModelReaderWriterOptions("B")).ToString());
