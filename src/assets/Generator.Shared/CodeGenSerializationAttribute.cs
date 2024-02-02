@@ -34,7 +34,6 @@ namespace Azure.Core
         public CodeGenSerializationAttribute(string propertyName)
         {
             PropertyName = propertyName;
-            SerializationPath = null;
         }
 
         public CodeGenSerializationAttribute(string propertyName, string serializationName)
