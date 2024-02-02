@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace MgmtCustomizations.Models
 {
-    [CodeGenSerialization(nameof(Bark), "properties", "dog", "bark", SerializationValueHook = nameof(SerializeBarkProperty))] // use this attribute to only customize the serialization of the property
+    [CodeGenSerialization(nameof(Bark), new string[] { "properties", "dog", "bark" }, SerializationValueHook = nameof(SerializeBarkProperty))] // use this attribute to only customize the serialization of the property
     public partial class Dog : Pet
     {
         /// <summary> A dog can bark. </summary>
