@@ -12,6 +12,8 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
+using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -71,6 +73,9 @@ namespace AutoRest.CSharp.Generation.Types
             IsList = IsReadOnlyList || IsReadWriteList || IsReadOnlyMemory;
             IsCollection = IsDictionary || IsList;
             IsArray = type.IsArray;
+
+            IsResponse = type == typeof(Response);
+            IsResponseOfT = type == typeof(Response<>);
             #endregion
         }
 
@@ -125,6 +130,9 @@ namespace AutoRest.CSharp.Generation.Types
         public bool IsReadOnlyMemory { get; }
         public bool IsReadOnlyList { get; }
         public bool IsReadWriteList { get; }
+
+        public bool IsResponse { get; }
+        public bool IsResponseOfT { get; }
         #endregion
 
         protected bool Equals(CSharpType other, bool ignoreNullable)
