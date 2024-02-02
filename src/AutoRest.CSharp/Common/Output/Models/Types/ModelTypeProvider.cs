@@ -215,7 +215,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                     var declaredName = property.Declaration.Name;
                     var serializedName = inputModelProperty.SerializedName;
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, property.Declaration.Type));
 
                     var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
                     TypedMemberExpression? enumerableExpression = null;

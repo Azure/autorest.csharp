@@ -2,11 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -94,11 +91,11 @@ namespace AutoRest.CSharp.Common.Input
             };
             object value = kind switch
             {
-                InputTypeKind.String => reader.GetString() ?? throw new JsonException(),
-                InputTypeKind.Int32 => reader.GetInt32(),
-                InputTypeKind.Float32 => reader.GetSingle(),
-                InputTypeKind.Float64 => reader.GetDouble(),
-                InputTypeKind.Boolean => reader.GetBoolean(),
+                InputTypePrimitiveKind.String => reader.GetString() ?? throw new JsonException(),
+                InputTypePrimitiveKind.Int32 => reader.GetInt32(),
+                InputTypePrimitiveKind.Float32 => reader.GetSingle(),
+                InputTypePrimitiveKind.Float64 => reader.GetDouble(),
+                InputTypePrimitiveKind.Boolean => reader.GetBoolean(),
                 _ => throw new JsonException($"Not supported literal type {kind}.")
             };
             reader.Read();

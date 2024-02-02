@@ -888,7 +888,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }
@@ -900,7 +900,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }
@@ -912,7 +912,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = client.ParamDatetime("<scenario>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }
@@ -924,7 +924,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }

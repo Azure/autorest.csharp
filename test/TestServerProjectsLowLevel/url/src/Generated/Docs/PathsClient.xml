@@ -974,7 +974,7 @@ This sample shows how to call DateTimeNullAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -983,7 +983,7 @@ This sample shows how to call DateTimeNullAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -995,7 +995,7 @@ This sample shows how to call DateTimeNull.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -1004,7 +1004,7 @@ This sample shows how to call DateTimeNull with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
 Console.WriteLine(response.Status);
 ]]></code></example>

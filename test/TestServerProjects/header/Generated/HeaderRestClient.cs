@@ -1100,7 +1100,7 @@ namespace header
             uri.AppendPath("/header/param/prim/datetime", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
-            request.Headers.Add("value", value, "O");
+            request.Headers.Add("value", value, "R");
             request.Headers.Add("Accept", "application/json");
             return message;
         }

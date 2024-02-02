@@ -9,7 +9,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         DateTime_RFC1123,
         DateTime_RFC3339,
         DateTime_RFC7231,
-        DateTime_ISO8601,
         DateTime_Unix,
         Date_ISO8601,
         Duration_ISO8601,

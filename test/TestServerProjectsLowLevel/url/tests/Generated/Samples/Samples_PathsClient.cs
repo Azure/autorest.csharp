@@ -1127,7 +1127,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }
@@ -1139,7 +1139,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }
@@ -1151,7 +1151,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = client.DateTimeNull(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }
@@ -1163,7 +1163,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+            Response response = await client.DateTimeNullAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
 
             Console.WriteLine(response.Status);
         }

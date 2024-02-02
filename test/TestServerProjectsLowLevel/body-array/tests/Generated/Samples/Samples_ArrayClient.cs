@@ -2240,7 +2240,7 @@ true
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T18:57:31.2311892Z"
+"2022-05-10T14:57:31.2311892-04:00"
             });
             Response response = client.PutDateTimeValid(content);
 
@@ -2256,7 +2256,7 @@ true
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T18:57:31.2311892Z"
+"2022-05-10T14:57:31.2311892-04:00"
             });
             Response response = await client.PutDateTimeValidAsync(content);
 
@@ -2272,7 +2272,7 @@ true
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T18:57:31.2311892Z"
+"2022-05-10T14:57:31.2311892-04:00"
             });
             Response response = client.PutDateTimeValid(content);
 
@@ -2288,7 +2288,7 @@ true
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-"2022-05-10T18:57:31.2311892Z"
+"2022-05-10T14:57:31.2311892-04:00"
             });
             Response response = await client.PutDateTimeValidAsync(content);
 

@@ -910,8 +910,8 @@ namespace body_complex_LowLevel.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                field = "2022-05-10T18:57:31.2311892Z",
-                now = "2022-05-10T18:57:31.2311892Z",
+                field = "2022-05-10T14:57:31.2311892-04:00",
+                now = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.PutDateTime(content);
 
@@ -927,8 +927,8 @@ namespace body_complex_LowLevel.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                field = "2022-05-10T18:57:31.2311892Z",
-                now = "2022-05-10T18:57:31.2311892Z",
+                field = "2022-05-10T14:57:31.2311892-04:00",
+                now = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutDateTimeAsync(content);
 

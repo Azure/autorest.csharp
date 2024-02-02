@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
@@ -133,7 +134,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                             if (time != null)
                                 return DateTimeOffsetExpression.FromUnixTimeSeconds(Long(time.Value));
                             break;
-                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601 or SerializationFormat.Date_ISO8601:
+                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.Date_ISO8601:
                             if (rawValue.RawValue is string s)
                                 return DateTimeOffsetExpression.Parse(s);
                             break;
@@ -383,7 +384,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out var exampleValue))
                 {
                     properties.Remove(property);
-                    argument = GetExpression(propertyType, exampleValue, property.SerializationFormat, includeCollectionInitialization: true);
+                    argument = GetExpression(propertyType, exampleValue, SerializationBuilder.GetSerializationFormat(property), includeCollectionInitialization: true);
                 }
                 else
                 {
@@ -400,7 +401,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 foreach (var (property, exampleValue) in propertiesToWrite)
                 {
                     // we need to pass in the current type of this property to make sure its initialization is correct
-                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, property.SerializationFormat, includeCollectionInitialization: false);
+                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, SerializationBuilder.GetSerializationFormat(property), includeCollectionInitialization: false);
                     initializerDict.Add(property.Declaration.Name, propertyExpression);
                 }
                 objectPropertyInitializer = new(initializerDict, false);

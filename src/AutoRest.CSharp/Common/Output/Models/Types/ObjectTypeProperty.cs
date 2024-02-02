@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.ResourceManager.Models;
 
@@ -31,7 +32,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
-                  serializationFormat: field.SerializationFormat,
                   serializationMapping: field.SerializationMapping)
         {
             InitializationValue = field.InitializationValue;
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerializationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -52,7 +52,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsRequired = isRequired;
             InputModelProperty = inputModelProperty;
             _baseParameterDescription = parameterDescription;
-            SerializationFormat = serializationFormat;
             SerializationMapping = serializationMapping;
             FormattedDescription = CreatePropertyDescription(parameterDescription, isReadOnly);
             Description = FormattedDescription.ToString();
@@ -76,8 +75,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 inputModelProperty: InputModelProperty,
                 isFlattenedProperty: true);
         }
-
-        public SerializationFormat SerializationFormat { get; }
 
         public ValueExpression? InitializationValue { get; }
 
@@ -302,7 +299,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 description = $"{parameterDescription}";
             }
 
-            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type, SerializationFormat);
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type, SerializationBuilder.GetSerializationFormat(this));
             description = $"{description}{binaryDataExtraDescription}";
 
             return description;

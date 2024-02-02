@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public bool IsRawData { get; init; }
 
         public static IEqualityComparer<Parameter> TypeAndNameEqualityComparer = new ParameterTypeAndNameEqualityComparer();
-        public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
+        public IReadOnlyList<CSharpAttribute> Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
         public Parameter ToRequired()

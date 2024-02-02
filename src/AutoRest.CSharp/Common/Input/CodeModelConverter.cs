@@ -347,7 +347,7 @@ namespace AutoRest.CSharp.Common.Input
             ByteArraySchema => InputPrimitiveType.Bytes,
 
             DateSchema => InputPrimitiveType.Date,
-            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => InputPrimitiveType.DateTimeISO8601,
+            DateTimeSchema { Format: DateTimeSchemaFormat.DateTime } => InputPrimitiveType.DateTime,
             DateTimeSchema { Format: DateTimeSchemaFormat.DateTimeRfc1123 } => InputPrimitiveType.DateTimeRFC1123,
             DateTimeSchema => InputPrimitiveType.DateTime,
             UnixTimeSchema => InputPrimitiveType.DateTimeUnix,
@@ -365,7 +365,7 @@ namespace AutoRest.CSharp.Common.Input
             ArmIdSchema => InputPrimitiveType.ResourceIdentifier,
             { Type: AllSchemaTypes.ArmId } => InputPrimitiveType.ResourceIdentifier,
 
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTimeISO8601,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => InputPrimitiveType.DateTime,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => InputPrimitiveType.DateTimeRFC1123,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => InputPrimitiveType.DateTimeUnix,
             { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
@@ -412,11 +412,11 @@ namespace AutoRest.CSharp.Common.Input
             var rawValue = constantSchema.Value.Value;
             object normalizedValue = kind switch
             {
-                InputTypeKind.Boolean => bool.Parse(rawValue.ToString()!),
-                InputTypeKind.Int32 => int.Parse(rawValue.ToString()!),
-                InputTypeKind.Int64 => long.Parse(rawValue.ToString()!),
-                InputTypeKind.Float32 => float.Parse(rawValue.ToString()!),
-                InputTypeKind.Float64 => double.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Boolean => bool.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Int32 => int.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Int64 => long.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Float32 => float.Parse(rawValue.ToString()!),
+                InputTypePrimitiveKind.Float64 => double.Parse(rawValue.ToString()!),
                 _ => rawValue
             };
 

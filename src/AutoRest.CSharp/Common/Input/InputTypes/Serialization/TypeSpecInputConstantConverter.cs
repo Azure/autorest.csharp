@@ -68,20 +68,20 @@ namespace AutoRest.CSharp.Common.Input
                 case InputPrimitiveType primitype:
                     switch (primitype.Kind)
                     {
-                        case InputTypeKind.String:
+                        case InputTypePrimitiveKind.String:
                             value = reader.GetString() ?? throw new JsonException();
                             break;
-                        case InputTypeKind.Uri:
+                        case InputTypePrimitiveKind.Uri:
                             var stringvalue = reader.GetString() ?? throw new JsonException();
                             value = new Uri(stringvalue);
                             break;
-                        case InputTypeKind.Int32:
+                        case InputTypePrimitiveKind.Int32:
                             value = reader.GetInt32();
                             break;
-                        case InputTypeKind.Int64:
+                        case InputTypePrimitiveKind.Int64:
                             value = reader.GetInt64();
                             break;
-                        case InputTypeKind.Boolean:
+                        case InputTypePrimitiveKind.Boolean:
                             value = reader.GetBoolean();
                             break;
                         default:
@@ -93,13 +93,13 @@ namespace AutoRest.CSharp.Common.Input
                 case InputEnumType enumType:
                     switch (enumType.EnumValueType.Kind)
                     {
-                        case InputTypeKind.String:
+                        case InputTypePrimitiveKind.String:
                             value = reader.GetString() ?? throw new JsonException();
                             break;
-                        case InputTypeKind.Int32:
+                        case InputTypePrimitiveKind.Int32:
                             value = reader.GetInt32();
                             break;
-                        case InputTypeKind.Float32:
+                        case InputTypePrimitiveKind.Float32:
                             value = reader.GetDouble();
                             break;
                         default:

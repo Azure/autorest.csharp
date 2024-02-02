@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Builders
             UnixTimeSchema => SerializationFormat.DateTime_Unix,
             DateTimeSchema dateTimeSchema => dateTimeSchema.Format switch
             {
-                DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_RFC3339,
                 DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
                 _ => SerializationFormat.Default
             },
@@ -91,13 +91,13 @@ namespace AutoRest.CSharp.Output.Builders
             },
 
             _ when schema.Type == AllSchemaTypes.Duration => SerializationFormat.Duration_ISO8601,
-            _ when schema.Type == AllSchemaTypes.DateTime => SerializationFormat.DateTime_ISO8601,
-            _ when schema.Type == AllSchemaTypes.Date => SerializationFormat.DateTime_ISO8601,
-            _ when schema.Type == AllSchemaTypes.Time => SerializationFormat.DateTime_ISO8601,
+            _ when schema.Type == AllSchemaTypes.DateTime => SerializationFormat.DateTime_RFC3339,
+            _ when schema.Type == AllSchemaTypes.Date => SerializationFormat.DateTime_RFC3339,
+            _ when schema.Type == AllSchemaTypes.Time => SerializationFormat.DateTime_RFC3339,
 
             _ => schema.Extensions?.Format switch
             {
-                XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                XMsFormat.DateTime => SerializationFormat.DateTime_RFC3339,
                 XMsFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
                 XMsFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
                 XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
