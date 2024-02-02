@@ -215,7 +215,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
         private static ValueExpression GetExpressionForList(CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             var exampleListValue = exampleValue as InputExampleListValue;
-            var elementType = TypeFactory.GetElementType(listType);
+            var elementType = listType.GetElementType();
             var elementExpressions = new List<ValueExpression>();
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             foreach (var itemValue in exampleListValue?.Values ?? Enumerable.Empty<InputExampleValue>())

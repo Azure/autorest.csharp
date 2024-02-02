@@ -385,8 +385,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultInitializationValue = defaultParameterValue;
                     }
 
-                    var inputType = parameter?.Type ?? TypeFactory.GetInputType(propertyType);
-                    if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
+                    var inputType = parameter?.Type ?? propertyType.GetInputType();
+                    if (defaultParameterValue != null && !property.ValueType.CanBeInitializedInline(defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);
                         defaultParameterValue = Constant.Default(inputType);
@@ -414,7 +414,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         }
                         else
                         {
-                            initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                            initializationValue = Constant.NewInstanceOf(propertyType.GetPropertyImplementationType());
                         }
                     }
                 }

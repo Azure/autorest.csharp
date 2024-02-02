@@ -115,56 +115,6 @@ namespace AutoRest.CSharp.Generation.Types
             return schema.Extensions is not null && schema.Extensions.IsEmbeddingsVector ? typeof(ReadOnlyMemory<>) : typeof(IList<>);
         }
 
-        public static CSharpType GetImplementationType(CSharpType type)
-            => type switch
-            {
-                { IsReadOnlyMemory: true } => new CSharpType(type.Arguments[0].FrameworkType.MakeArrayType()),
-                { IsList: true } => new CSharpType(typeof(List<>), type.Arguments),
-                { IsDictionary: true } => new CSharpType(typeof(Dictionary<,>), type.Arguments),
-                _ => type
-            };
-
-        public static CSharpType GetPropertyImplementationType(CSharpType type)
-            => type switch
-            {
-                { IsReadOnlyMemory: true } => new CSharpType(typeof(ReadOnlyMemory<>), type.Arguments),
-                { IsList: true } => new CSharpType(Configuration.ApiTypes.ChangeTrackingListType, type.Arguments),
-                { IsDictionary: true } => new CSharpType(Configuration.ApiTypes.ChangeTrackingDictionaryType, type.Arguments),
-                _ => type
-            };
-
-        public static bool CanBeInitializedInline(CSharpType type, Constant? defaultValue)
-        {
-            Debug.Assert(defaultValue.HasValue);
-
-            if (!type.Equals(defaultValue.Value.Type) && !CanBeInitializedInline(defaultValue.Value.Type, defaultValue))
-            {
-                return false;
-            }
-
-            if (type.Equals(typeof(string)))
-            {
-                return true;
-            }
-
-            if (type is { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } && defaultValue.Value.Value != null)
-            {
-                return defaultValue.Value.IsNewInstanceSentinel;
-            }
-
-            return type.IsValueType || defaultValue.Value.Value == null;
-        }
-
-        // TODO -- this should also move to CSharpType class
-        public static CSharpType GetElementType(CSharpType type)
-            => type switch
-            {
-                { IsFrameworkType: true, FrameworkType: { IsArray: true } arrayType } => new CSharpType(arrayType.GetElementType()!),
-                { IsReadOnlyMemory: true } or { IsList: true } => type.Arguments[0],
-                { IsDictionary: true } => type.Arguments[1],
-                _ => throw new NotSupportedException(type.Name)
-            };
-
         internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
 
         internal static Type? ToFrameworkType(Schema schema, string? format) => schema.Type switch
@@ -231,23 +181,6 @@ namespace AutoRest.CSharp.Generation.Types
                 _ => typeof(int)
             }
         };
-
-        public static CSharpType GetInputType(CSharpType type)
-            => type switch
-            {
-                { IsReadOnlyMemory: true } => new CSharpType(typeof(ReadOnlyMemory<>), isNullable: type.IsNullable, type.Arguments),
-                { IsList: true } => new CSharpType(typeof(IEnumerable<>), isNullable: type.IsNullable, type.Arguments),
-                _ => type
-            };
-
-        public static CSharpType GetOutputType(CSharpType type)
-            => type switch
-            {
-                { IsReadOnlyMemory: true } => new CSharpType(typeof(ReadOnlyMemory<>), type.IsNullable, type.Arguments),
-                { IsList: true } => new CSharpType(typeof(IReadOnlyList<>), type.IsNullable, type.Arguments),
-                { IsDictionary: true } => new CSharpType(typeof(IReadOnlyDictionary<,>), type.IsNullable, type.Arguments),
-                _ => type
-            };
 
         public CSharpType CreateType(ITypeSymbol symbol)
         {
@@ -390,20 +323,6 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             builder.Append(symbol.MetadataName);
-        }
-
-        /// <summary>
-        /// Method checks if object of "<c>from</c>" type can be converted to "<c>to</c>" type by calling `ToList` extension method.
-        /// It returns true if "<c>from</c>" is <see cref="IEnumerable{T}"/> and "<c>to</c>" is <see cref="IReadOnlyList{T}"/> or <see cref="IList{T}"/>.
-        /// </summary>
-        public static bool RequiresToList(CSharpType from, CSharpType to)
-        {
-            if (!to.IsFrameworkType || !from.IsFrameworkType || from.FrameworkType != typeof(IEnumerable<>))
-            {
-                return false;
-            }
-
-            return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
         }
     }
 }

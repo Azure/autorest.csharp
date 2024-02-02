@@ -233,7 +233,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (input.IsList || input.IsArray)
             {
-                elementType = TypeFactory.GetElementType(input);
+                elementType = input.GetElementType();
                 typeDescription = $"{itemName}";
             }
             else if (input.IsDictionary)

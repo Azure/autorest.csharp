@@ -599,7 +599,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
         {
-            if (TypeFactory.RequiresToList(from, to))
+            if (from.RequiresToList(to))
             {
                 writer.UseNamespace(typeof(Enumerable).Namespace!);
                 return writer.AppendRaw(from.IsNullable ? "?.ToList()" : ".ToList()");
@@ -610,7 +610,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         internal static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
         {
-            if (TypeFactory.RequiresToList(from, to))
+            if (from.RequiresToList(to))
             {
                 writer.UseNamespace(typeof(Enumerable).Namespace!);
                 return from.IsNullable ? "?.ToList()" : ".ToList()";

@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
 
-                inputType = TypeFactory.GetInputType(inputType);
+                inputType = inputType.GetInputType();
                 if (!inputType.IsValueType)
                 {
                     inputType = inputType.WithNullable(true);

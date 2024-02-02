@@ -390,7 +390,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new StreamResponseBody();
             }
 
-            CSharpType responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
+            CSharpType responseType = typeFactory.CreateType(bodyType).GetOutputType();
             ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType, null);
 
             return new ObjectResponseBody(responseType, serialization);

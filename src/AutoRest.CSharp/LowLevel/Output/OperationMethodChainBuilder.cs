@@ -283,11 +283,11 @@ namespace AutoRest.CSharp.Output.Models
                         throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
                     }
 
-                    responseType = TypeFactory.GetElementType(property.ValueType);
+                    responseType = property.ValueType.GetElementType();
                 }
                 else if (responseType.IsList)
                 {
-                    responseType = TypeFactory.GetElementType(responseType);
+                    responseType = responseType.GetElementType();
                 }
 
                 if (Operation.LongRunning != null)
@@ -328,7 +328,7 @@ namespace AutoRest.CSharp.Output.Models
             var inputType = GetReturnedResponseInputType();
             if (inputType != null)
             {
-                return TypeFactory.GetOutputType(_typeFactory.CreateType(inputType));
+                return _typeFactory.CreateType(inputType).GetOutputType();
             }
             return null;
         }
@@ -433,7 +433,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
                     continue;
-                var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
+                var inputType = parameter.Type.GetInputType().WithNullable(!inputProperty.IsRequired);
                 Constant? defaultValue = null;
                 if (!inputProperty.IsRequired)
                     defaultValue = Constant.Default(inputType);

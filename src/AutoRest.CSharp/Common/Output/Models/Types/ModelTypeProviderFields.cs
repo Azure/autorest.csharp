@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // for structs, all properties must be set in the public ctor
                 if (isStruct || inputModelProperty is { IsRequired: true, IsDiscriminator: false, IsReadOnly: false, Type: not InputLiteralType })
                 {
-                    publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
+                    publicParameters.Add(parameter with { Type = parameter.Type.GetInputType() });
                 }
             }
 
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var type = typeFactory.CreateType(additionalPropertiesType);
                 if (!inputModel.Usage.HasFlag(InputModelTypeUsage.Input))
                 {
-                    type = TypeFactory.GetOutputType(type);
+                    type = type.GetOutputType();
                 }
 
                 var name = existingMember is null ? "AdditionalProperties" : existingMember.Name;
@@ -328,10 +328,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var propertyType = typeFactory.CreateType(property.Type);
 
-            if (!usage.HasFlag(InputModelTypeUsage.Input) ||
-                property.IsReadOnly)
+            if (!usage.HasFlag(InputModelTypeUsage.Input) || property.IsReadOnly)
             {
-                propertyType = TypeFactory.GetOutputType(propertyType);
+                propertyType = propertyType.GetOutputType();
             }
 
             return propertyType;

@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             var initializer = (FormattableString?)null;
 
-            if (defaultValue != null && operationParameter.Kind != InputOperationParameterKind.Constant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+            if (defaultValue != null && operationParameter.Kind != InputOperationParameterKind.Constant && !type.CanBeInitializedInline(defaultValue))
             {
                 initializer = type.GetParameterInitializer(defaultValue.Value);
                 type = type.WithNullable(true);
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
                 : ValidationType.None;
 
-            var inputType = TypeFactory.GetInputType(type);
+            var inputType = type.GetInputType();
             return new Parameter(
                 name,
                 CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 : ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
-            if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+            if (defaultValue != null && !type.CanBeInitializedInline(defaultValue))
             {
                 initializer = type.GetParameterInitializer(defaultValue.Value);
                 type = type.WithNullable(true);
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 ? GetValidation(type, requestLocation, skipUrlEncoding)
                 : ValidationType.None;
 
-            var inputType = TypeFactory.GetInputType(type);
+            var inputType = type.GetInputType();
             return new Parameter(
                 name,
                 CreateDescription(requestParameter, inputType, keepClientDefaultValue ? null : clientDefaultValue),
