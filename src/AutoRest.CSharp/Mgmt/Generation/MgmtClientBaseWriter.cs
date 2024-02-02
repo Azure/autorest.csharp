@@ -641,8 +641,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"uri.ToUri(), ");
                 _writer.Append($"uri.ToString(), ");
                 _writer.Append($"{typeof(NextLinkOperationImplementation)}.HeaderSource.None.ToString(), ");
-                _writer.Append($"false, null, ");
-                _writer.Line($"{typeof(OperationFinalStateVia)}.OriginalUri);");
+                _writer.Append($"null, ");
+                _writer.Line($"{typeof(OperationFinalStateVia)}.OriginalUri.ToString());");
             }
 
             WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
