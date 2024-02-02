@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return null;
             }
 
-            if (parameterType.IsCollectionType && (defaultValue == null || defaultValue.Value.Type.IsCollectionType))
+            if (parameterType.IsCollection && (defaultValue == null || defaultValue.Value.Type.IsCollection))
             {
                 defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
             }

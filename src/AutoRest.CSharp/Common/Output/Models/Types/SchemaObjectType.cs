@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     initializationValue = GetPropertyDefaultValue(property);
 
-                    if (initializationValue == null && propertyType.IsCollectionType)
+                    if (initializationValue == null && propertyType.IsCollection)
                     {
                         if (propertyType.IsReadOnlyMemory)
                         {
@@ -515,7 +515,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // Except in the case of collection where there is a special handling
             bool optionalViaNullability = !property.IsRequired &&
                                           !property.IsNullable &&
-                                          !propertyType.IsCollectionType;
+                                          !propertyType.IsCollection;
 
             if (optionalViaNullability)
             {
@@ -537,7 +537,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 valueType = valueType.WithNullable(false);
             }
 
-            bool isCollection = type is { IsCollectionType: true, IsReadOnlyMemory: false };
+            bool isCollection = type is { IsCollection: true, IsReadOnlyMemory: false };
 
             bool propertyShouldOmitSetter = IsStruct ||
                               !_usage.HasFlag(SchemaTypeUsage.Input) ||

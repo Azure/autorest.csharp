@@ -541,7 +541,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Find properties that would have to be initialized using a foreach loop
             var collectionInitializers = initializersSet
                 .Except(selectedCtorInitializers)
-                .Where(i => i is { IsReadOnly: true, Type.IsCollectionType: true })
+                .Where(i => i is { IsReadOnly: true, Type.IsCollection: true })
                 .ToArray();
 
             // Find properties that would have to be initialized via property initializers

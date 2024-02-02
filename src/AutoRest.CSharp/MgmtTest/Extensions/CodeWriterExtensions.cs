@@ -440,7 +440,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (!valueDict.TryGetValue(property.SchemaProperty!.SerializedName, out exampleValue))
                 {
                     // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
-                    if (property.Declaration.Type.IsCollectionType)
+                    if (property.Declaration.Type.IsCollection)
                     {
                         exampleValue = new ExampleValue()
                         {

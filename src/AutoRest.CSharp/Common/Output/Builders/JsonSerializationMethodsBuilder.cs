@@ -321,7 +321,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else if (property.SerializedType is { IsNullable: true })
                 {
-                    var checkPropertyIsInitialized = property is { IsRequired: true, SerializedType: { IsCollectionType: true, IsReadOnlyMemory: false } }
+                    var checkPropertyIsInitialized = property is { IsRequired: true, SerializedType: { IsCollection: true, IsReadOnlyMemory: false } }
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
@@ -780,7 +780,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
                 // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
-                if (!serializedType.IsCollectionType || Configuration.DeserializeNullCollectionAsNullValue)
+                if (!serializedType.IsCollection || Configuration.DeserializeNullCollectionAsNullValue)
                 {
                     return new IfStatement(checkEmptyProperty)
                     {

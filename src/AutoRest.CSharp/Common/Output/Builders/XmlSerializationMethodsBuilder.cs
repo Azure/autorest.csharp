@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (serialization.SerializedType is { IsNullable: true } serializedType)
             {
-                if (serializedType.IsCollectionType && serialization.IsRequired)
+                if (serializedType.IsCollection && serialization.IsRequired)
                 {
                     return new IfElseStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value)), statement, null);
                 }

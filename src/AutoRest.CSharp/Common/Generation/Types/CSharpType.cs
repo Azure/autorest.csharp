@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Types
             IsReadWriteList = type == typeof(IList<>) || type == typeof(ICollection<>) || type == typeof(List<>);
             IsReadOnlyList = type == typeof(IEnumerable<>) || type == typeof(IReadOnlyList<>);
             IsList = IsReadOnlyList || IsReadWriteList || IsReadOnlyMemory;
-            IsCollectionType = IsDictionary || IsList;
+            IsCollection = IsDictionary || IsList;
             IsArray = type.IsArray;
             #endregion
         }
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         #region Attributes of the type
         public bool IsArray { get; }
-        public bool IsCollectionType { get; }
+        public bool IsCollection { get; }
         public bool IsIEnumerable { get; }
         public bool IsIEnumerableOfT { get; }
 

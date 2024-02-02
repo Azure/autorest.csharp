@@ -406,7 +406,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else
                 {
-                    if (initializationValue == null && propertyType.IsCollectionType)
+                    if (initializationValue == null && propertyType.IsCollection)
                     {
                         if (propertyType.IsReadOnlyMemory)
                         {
