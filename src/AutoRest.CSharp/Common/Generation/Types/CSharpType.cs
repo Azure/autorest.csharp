@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -75,8 +76,17 @@ namespace AutoRest.CSharp.Generation.Types
             IsCollection = IsDictionary || IsList;
             IsArray = type.IsArray;
 
+            IsTask = type == typeof(Task);
+            IsTaskOfT = type == typeof(Task<>);
+            // TODO -- these are azure-specific. We might need to generalize these using ApiTypes
             IsResponse = type == typeof(Response);
             IsResponseOfT = type == typeof(Response<>);
+            IsPageable = type == typeof(Pageable<>);
+            IsAsyncPageable = type == typeof(AsyncPageable<>);
+            IsOperation = type == typeof(Operation);
+            IsOperationOfT = type == typeof(Operation<>);
+            IsOperationOfAsyncPageable = IsOperationOfT && arguments.Count == 1 && arguments[0].IsAsyncPageable;
+            IsOperationOfPageable = IsOperationOfT && arguments.Count == 1 && arguments[0].IsPageable;
             #endregion
         }
 
@@ -133,8 +143,16 @@ namespace AutoRest.CSharp.Generation.Types
         public bool IsReadOnlyList { get; }
         public bool IsReadWriteList { get; }
 
+        public bool IsTask { get; }
+        public bool IsTaskOfT { get; }
         public bool IsResponse { get; }
         public bool IsResponseOfT { get; }
+        public bool IsPageable { get; }
+        public bool IsAsyncPageable { get; }
+        public bool IsOperation { get; }
+        public bool IsOperationOfT { get; }
+        public bool IsOperationOfAsyncPageable { get; }
+        public bool IsOperationOfPageable { get; }
         #endregion
 
         protected bool Equals(CSharpType other, bool ignoreNullable)

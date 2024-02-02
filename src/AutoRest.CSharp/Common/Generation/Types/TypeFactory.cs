@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -165,18 +164,6 @@ namespace AutoRest.CSharp.Generation.Types
                 { IsDictionary: true } => type.Arguments[1],
                 _ => throw new NotSupportedException(type.Name)
             };
-
-        internal static bool IsOperationOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>);
-
-        internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
-
-        internal static bool IsOperationOfAsyncPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsAsyncPageable(type.Arguments[0]);
-
-        internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
-
-        internal static bool IsOperationOfPageable(CSharpType type)
-            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Count == 1 && IsPageable(type.Arguments[0]);
 
         internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions?.Format);
 
