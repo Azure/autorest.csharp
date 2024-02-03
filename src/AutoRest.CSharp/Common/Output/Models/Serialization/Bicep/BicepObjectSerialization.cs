@@ -8,7 +8,12 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Models;
+using NUnit.Framework;
+using ResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
 {
@@ -17,43 +22,28 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
         public BicepObjectSerialization(string name, SerializableObjectType model)
         {
             Type = model.Type;
-            var enumeration = model.EnumerateHierarchy().SelectMany(o => o.Properties);
-            var properties = new List<BicepPropertySerialization>();
-            foreach (var property in enumeration)
+
+            if (model.EnumerateHierarchy().Any(m => m is ResourceData))
             {
-                BicepSerialization bicepSerialization;
-
-                if (property.SchemaProperty != null)
+                // For ResourceData models, properties directly on the model are nested under "Properties". All inherited properties
+                // are inlined.
+                foreach (var property in model.Properties)
                 {
-                    bicepSerialization = SerializationBuilder.BuildBicepSerialization(
-                        property.SchemaProperty.Schema,
-                        property.Declaration.Type,
-                        false);
-                }
-                else if (property.InputModelProperty != null)
-                {
-                    bicepSerialization = SerializationBuilder.BuildBicepSerialization(property.InputModelProperty!.Type,
-                        property.Declaration.Type, false, property.SerializationFormat);
-                }
-                else if (property.Declaration.Name == "AdditionalProperties")
-                {
-                    bicepSerialization = SerializationBuilder.BuildBicepSerialization(
-                        new DictionarySchema(),
-                        property.Declaration.Type,
-                        false);
-                }
-                else
-                {
-                    throw new InvalidOperationException(
-                        $"Unexpected property with no SchemaProperty or InputModelProperty: {property.Declaration.Name}");
+                    NestedProperties.Add(new BicepPropertySerialization(property, CreateBicepSerialization(property)));
                 }
 
-                properties.Add(
-                    new BicepPropertySerialization(
-                        property,
-                        bicepSerialization));
+                foreach (var property in model.EnumerateHierarchy().Skip(1).SelectMany(o => o.Properties))
+                {
+                    Properties.Add(new BicepPropertySerialization(property, CreateBicepSerialization(property)));
+                }
             }
-            Properties = properties;
+            else
+            {
+                foreach (var property in model.EnumerateHierarchy().SelectMany(o => o.Properties))
+                {
+                    Properties.Add(new BicepPropertySerialization(property, CreateBicepSerialization(property)));
+                }
+            }
             Name = name;
 
             // select interface model type here
@@ -63,17 +53,47 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
             IPersistableModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
         }
 
-        public IReadOnlyList<BicepPropertySerialization> Properties { get; }
+        private static BicepSerialization CreateBicepSerialization(ObjectTypeProperty property)
+        {
+            BicepSerialization bicepSerialization;
+
+            if (property.SchemaProperty != null)
+            {
+                bicepSerialization = SerializationBuilder.BuildBicepSerialization(
+                    property.SchemaProperty.Schema,
+                    property.Declaration.Type,
+                    false);
+            }
+            else if (property.InputModelProperty != null)
+            {
+                bicepSerialization = SerializationBuilder.BuildBicepSerialization(property.InputModelProperty!.Type,
+                    property.Declaration.Type, false, property.SerializationFormat);
+            }
+            else if (property.Declaration.Name == "AdditionalProperties")
+            {
+                bicepSerialization = SerializationBuilder.BuildBicepSerialization(
+                    new DictionarySchema(),
+                    property.Declaration.Type,
+                    false);
+            }
+            else
+            {
+                throw new InvalidOperationException(
+                    $"Unexpected property with no SchemaProperty or InputModelProperty: {property.Declaration.Name}");
+            }
+
+            return bicepSerialization;
+        }
+
+        public IList<BicepPropertySerialization> NestedProperties { get; } = new List<BicepPropertySerialization>();
+
+        public IList<BicepPropertySerialization> Properties { get; } = new List<BicepPropertySerialization>();
 
         public string Name { get; }
         public CSharpType Type { get; }
 
-        /// The interface IPersistableModel{T}
-        /// </summary>
         public CSharpType IPersistableModelTInterface { get; }
-        /// <summary>
-        /// The interface IPersistableModel{object}
-        /// </summary>
+
         public CSharpType? IPersistableModelObjectInterface { get; }
     }
 }

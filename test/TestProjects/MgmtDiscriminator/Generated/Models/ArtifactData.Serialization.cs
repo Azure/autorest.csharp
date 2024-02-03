@@ -104,12 +104,6 @@ namespace MgmtDiscriminator
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToString()}'");
-            }
-
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
@@ -134,6 +128,14 @@ namespace MgmtDiscriminator
                 builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
+            builder.AppendLine("  properties: {");
+            if (Optional.IsDefined(Kind))
+            {
+                builder.Append("    kind:");
+                builder.AppendLine($" '{Kind.ToString()}'");
+            }
+
+            builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
@@ -141,7 +143,6 @@ namespace MgmtDiscriminator
         private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
-            string firstLineIndent = new string(' ', spaces - 1);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < lines.Length; i++)
@@ -149,7 +150,7 @@ namespace MgmtDiscriminator
                 string line = lines[i];
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($"{firstLineIndent}{line}");
+                    stringBuilder.AppendLine($" {line}");
                 }
                 else
                 {

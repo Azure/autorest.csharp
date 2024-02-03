@@ -107,7 +107,6 @@ namespace MgmtDiscriminator.Models
         private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
-            string firstLineIndent = new string(' ', spaces - 1);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < lines.Length; i++)
@@ -115,7 +114,7 @@ namespace MgmtDiscriminator.Models
                 string line = lines[i];
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($"{firstLineIndent}{line}");
+                    stringBuilder.AppendLine($" {line}");
                 }
                 else
                 {

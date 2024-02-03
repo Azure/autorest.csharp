@@ -239,51 +239,6 @@ namespace MgmtDiscriminator
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(BoolProperty))
-            {
-                builder.Append("  boolProperty:");
-                var boolValue = BoolProperty.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("  location:");
-                builder.AppendLine($" '{Location.Value.ToString()}'");
-            }
-
-            if (Optional.IsDefined(DateTimeProperty))
-            {
-                builder.Append("  dateTimeProperty:");
-                var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
-            }
-
-            if (Optional.IsDefined(Duration))
-            {
-                builder.Append("  duration:");
-                var formattedTimeSpan = XmlConvert.ToString(Duration.Value);
-                builder.AppendLine($" '{formattedTimeSpan}'");
-            }
-
-            if (Optional.IsDefined(Number))
-            {
-                builder.Append("  number:");
-                builder.AppendLine($" {Number.Value}");
-            }
-
-            if (Optional.IsDefined(Uri))
-            {
-                builder.Append("  uri:");
-                builder.AppendLine($" '{Uri.AbsoluteUri}'");
-            }
-
-            if (Optional.IsDefined(Properties))
-            {
-                builder.Append("  properties:");
-                AppendChildObject(builder, Properties, options, 2, false);
-            }
-
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
@@ -308,6 +263,53 @@ namespace MgmtDiscriminator
                 builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
+            builder.AppendLine("  properties: {");
+            if (Optional.IsDefined(BoolProperty))
+            {
+                builder.Append("    boolProperty:");
+                var boolValue = BoolProperty.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(Location))
+            {
+                builder.Append("    location:");
+                builder.AppendLine($" '{Location.Value.ToString()}'");
+            }
+
+            if (Optional.IsDefined(DateTimeProperty))
+            {
+                builder.Append("    dateTimeProperty:");
+                var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
+                builder.AppendLine($" '{formattedDateTimeString}'");
+            }
+
+            if (Optional.IsDefined(Duration))
+            {
+                builder.Append("    duration:");
+                var formattedTimeSpan = XmlConvert.ToString(Duration.Value);
+                builder.AppendLine($" '{formattedTimeSpan}'");
+            }
+
+            if (Optional.IsDefined(Number))
+            {
+                builder.Append("    number:");
+                builder.AppendLine($" {Number.Value}");
+            }
+
+            if (Optional.IsDefined(Uri))
+            {
+                builder.Append("    uri:");
+                builder.AppendLine($" '{Uri.AbsoluteUri}'");
+            }
+
+            if (Optional.IsDefined(Properties))
+            {
+                builder.Append("    properties:");
+                AppendChildObject(builder, Properties, options, 4, false);
+            }
+
+            builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
@@ -315,7 +317,6 @@ namespace MgmtDiscriminator
         private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
-            string firstLineIndent = new string(' ', spaces - 1);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < lines.Length; i++)
@@ -323,7 +324,7 @@ namespace MgmtDiscriminator
                 string line = lines[i];
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($"{firstLineIndent}{line}");
+                    stringBuilder.AppendLine($" {line}");
                 }
                 else
                 {

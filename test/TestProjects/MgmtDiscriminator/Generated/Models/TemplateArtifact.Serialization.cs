@@ -220,38 +220,6 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Template))
-            {
-                builder.Append("  template:");
-                builder.AppendLine($" '{Template.ToString()}'");
-            }
-
-            if (Optional.IsDefined(ResourceGroup))
-            {
-                builder.Append("  resourceGroup:");
-                builder.AppendLine($" '{ResourceGroup}'");
-            }
-
-            if (Optional.IsCollectionDefined(Parameters))
-            {
-                if (Parameters.Any())
-                {
-                    builder.Append("  parameters:");
-                    builder.AppendLine(" {");
-                    foreach (var item in Parameters)
-                    {
-                        builder.Append($"    {item.Key}: ");
-                        if (item.Value == null)
-                        {
-                            builder.Append("null");
-                            continue;
-                        }
-                        builder.AppendLine($" '{item.Value.ToString()}'");
-                    }
-                    builder.AppendLine("  }");
-                }
-            }
-
             if (Optional.IsDefined(Kind))
             {
                 builder.Append("  kind:");
@@ -282,6 +250,40 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
+            builder.AppendLine("  properties: {");
+            if (Optional.IsDefined(Template))
+            {
+                builder.Append("    template:");
+                builder.AppendLine($" '{Template.ToString()}'");
+            }
+
+            if (Optional.IsDefined(ResourceGroup))
+            {
+                builder.Append("    resourceGroup:");
+                builder.AppendLine($" '{ResourceGroup}'");
+            }
+
+            if (Optional.IsCollectionDefined(Parameters))
+            {
+                if (Parameters.Any())
+                {
+                    builder.Append("    parameters:");
+                    builder.AppendLine(" {");
+                    foreach (var item in Parameters)
+                    {
+                        builder.Append($"        {item.Key}: ");
+                        if (item.Value == null)
+                        {
+                            builder.Append("null");
+                            continue;
+                        }
+                        builder.AppendLine($" '{item.Value.ToString()}'");
+                    }
+                    builder.AppendLine("    }");
+                }
+            }
+
+            builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }
@@ -289,7 +291,6 @@ namespace MgmtDiscriminator.Models
         private void AppendChildObject(StringBuilder stringBuilder, object childObject, ModelReaderWriterOptions options, int spaces, bool indentFirstLine)
         {
             string indent = new string(' ', spaces);
-            string firstLineIndent = new string(' ', spaces - 1);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < lines.Length; i++)
@@ -297,7 +298,7 @@ namespace MgmtDiscriminator.Models
                 string line = lines[i];
                 if (i == 0 && !indentFirstLine)
                 {
-                    stringBuilder.AppendLine($"{firstLineIndent}{line}");
+                    stringBuilder.AppendLine($" {line}");
                 }
                 else
                 {
