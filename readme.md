@@ -856,8 +856,6 @@ namespace Azure.Service.Models
 
 If you want to change the implementation of serialization/deserialization method of a property, you could define your own hook methods and assign them to the `CodeGenSerialization` attribute.
 
-This `CodeGenMemberSerializationHooks` comes with two different usages, you could either add the attribute to the containing type of the property you would like to change, or add the attribute to a specified property.
-
 The custom serialization method for this property is assigned by the `SerializationValueHook` property of the `CodeGenSerialization` attribute, and the custom deserialization method for this property is assigned by the `DeserializationValueHook` property of the `CodeGenSerialization` attribute.
 
 The `SerializationValueHook` and `DeserializationValueHook` here are hook method names, and these methods should have the signature as below:

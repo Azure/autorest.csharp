@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Input.Source
                     Formats = formats;
                 }
 
-                // handle CodeGenMemberSerializationHooks attribute
+                // handle CodeGenSerialization attribute
                 if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
                 {
                     _typeSerializationMappings.Add(propertyName, new(propertyName, serializationNames, serializationHook, deserializationHook));
