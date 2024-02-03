@@ -113,8 +113,8 @@ namespace AutoRest.CSharp.Generation.Types
             IsPublic = implementation.Declaration.Accessibility == "public" && Arguments.All(t => t.IsPublic);
         }
 
-        public string Namespace { get; }
-        public string Name { get; }
+        public virtual string Namespace { get; }
+        public virtual string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
         public bool IsLiteral => Literal is not null;
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool IsGenericType => Arguments.Count > 0;
 
-        public CSharpType WithNullable(bool isNullable) =>
+        public virtual CSharpType WithNullable(bool isNullable) => // make it virtual to ensure this is mockable
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments)
                 : new CSharpType(Implementation, isNullable);
