@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
@@ -60,13 +59,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodBodyStatement[]
                 {
                     // writer.WriteStringValue(ModelReaderWriter.Write(Data, options));
-                    new InvokeInstanceMethodStatement(writer, "WriteStringValue", new ValueExpression[] { new InvokeStaticMethodExpression(modelReaderWriter, "Write", new ValueExpression[] { new MemberExpression(This, "Data"), options }, new List<CSharpType> { resourceDataType }) }, false)
-                });
+                    writer.WriteStringValue(new InvokeStaticMethodExpression(modelReaderWriter, "Write", new ValueExpression[] { new MemberExpression(This, "Data"), options }, new List<CSharpType> { resourceDataType }))
+                }); ;
 
             // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-            var reader = new Parameter("reader", null, typeof(Utf8JsonReader), null, CSharp.Output.Models.Shared.ValidationType.None, null);
+            var reader = (ValueExpression)KnownParameters.Serializations.Utf8JsonReader(isRef: false);
             yield return new Method(
-                new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
+                new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, resourceDataType, null, new[] { KnownParameters.Serializations.Utf8JsonReader(), KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
                 new MethodBodyStatement[]
                 {
                     // return ModelReaderWriter.Read<ResourceData>(new BinaryData(reader.ValueSequence));
@@ -135,10 +134,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
 
                 // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-                var reader = (ValueExpression)KnownParameters.Serializations.Utf8JsonReader;
+                var reader = KnownParameters.Serializations.Utf8JsonReader();
                 yield return new
                 (
-                    new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
+                    new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader(), KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
                     new MethodBodyStatement[]
                     {
                     Serializations.ValidateJsonFormat(options, json.IPersistableModelTInterface),
@@ -162,7 +161,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     // object IJsonModel<object>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
                     yield return new
                     (
-                        new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelObjectInterface),
+                        new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { KnownParameters.Serializations.Utf8JsonReader(), KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelObjectInterface),
                         This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Create), reader, options)
                     );
                 }
