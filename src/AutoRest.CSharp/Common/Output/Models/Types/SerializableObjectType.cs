@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -35,33 +36,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private bool? _includeDeserializer;
         public bool IncludeDeserializer => _includeDeserializer ??= EnsureIncludeDeserializer();
 
-        private bool _jsonSerializationInitialized = false;
-        private JsonObjectSerialization? _jsonSerialization;
-        public JsonObjectSerialization? JsonSerialization => EnsureJsonSerialization();
+        private ModelSerialization? _modelSerialization;
+        public ModelSerialization Serialization => _modelSerialization ??= BuildSerialization();
 
-        private bool _xmlSerializationInitialized = false;
-        private XmlObjectSerialization? _xmlSerialization;
-        public XmlObjectSerialization? XmlSerialization => EnsureXmlSerialization();
-
-        private JsonObjectSerialization? EnsureJsonSerialization()
-        {
-            if (_jsonSerializationInitialized)
-                return _jsonSerialization;
-
-            _jsonSerializationInitialized = true;
-            _jsonSerialization = BuildJsonSerialization();
-            return _jsonSerialization;
-        }
-
-        private XmlObjectSerialization? EnsureXmlSerialization()
-        {
-            if (_xmlSerializationInitialized)
-                return _xmlSerialization;
-
-            _xmlSerializationInitialized = true;
-            _xmlSerialization = BuildXmlSerialization();
-            return _xmlSerialization;
-        }
+        protected abstract ModelSerialization BuildSerialization();
 
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();

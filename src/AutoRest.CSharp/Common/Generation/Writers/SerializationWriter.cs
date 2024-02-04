@@ -38,16 +38,17 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteObjectSerialization(CodeWriter writer, SerializableObjectType model)
         {
             var declaration = model.Declaration;
-            var json = model.JsonSerialization;
-            var xml = model.XmlSerialization;
+            var serialization = model.Serialization;
+            var json = serialization.Json;
+            var xml = serialization.Xml;
 
-            if (json == null && xml == null)
+            if (serialization.Json == null && serialization.Xml == null)
             {
                 return;
             }
             using (writer.Namespace(declaration.Namespace))
             {
-                if (json is { IncludeConverter: true })
+                if (serialization.Json is { IncludeConverter: true })
                 {
                     writer.Append($"[{typeof(JsonConverter)}(typeof({declaration.Name}Converter))]");
                 }
@@ -60,18 +61,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Append($"{declaration.Accessibility} partial {(model.IsStruct ? "struct" : "class")} {declaration.Name}")
                     .AppendRawIf(" : ", model.IncludeSerializer);
-
-                if (json != null && model.IncludeSerializer)
+                foreach (var i in serialization.Interfaces)
                 {
-                    writer.Append($"{json.IJsonInterface}, ")
-                        .AppendIf($"{json.IJsonModelInterface}, ", Configuration.UseModelReaderWriter);
-                    if (Configuration.UseModelReaderWriter && json.IJsonModelObjectInterface is { } jsonModelObjectInterface)
-                        writer.Append($"{jsonModelObjectInterface}, ");
-                }
-                if (xml != null && model.IncludeSerializer)
-                {
-                    writer.Append($"{xml.IXmlInterface}, ")
-                        .AppendIf($"{xml.IPersistableModelTInterface}, ", Configuration.UseModelReaderWriter);
+                    writer.Append($"{i}, ");
                 }
 
                 writer.RemoveTrailingComma();
