@@ -73,6 +73,9 @@
     <PackageReference Include="Azure.ClientSdk.Analyzers" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" />
     <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" />
+    <PackageReference Include="System.ClientModel" Version="1.0.0-beta.3" >
+      <NoWarn>NU1605</NoWarn>
+    </PackageReference>
   </ItemGroup>
 
   <Target Name="_ValidateSourceFileNames"
