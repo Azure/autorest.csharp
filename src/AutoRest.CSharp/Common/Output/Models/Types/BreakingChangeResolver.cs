@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -18,18 +17,12 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 namespace AutoRest.CSharp.Output.Models.Types
 {
     /// <summary>
-    /// This type holds three portions of codes:
-    ///     - current
-    ///     - custom
-    ///     - baseline contract
-    ///     current union custom compare with baseline contract outputs the changeset, we can apply different rules with it.
+    /// The <see cref="BreakingChangeResolver"/> class consumes the generated methods and resolves the methods in customization and baseline contract to produce a full list of the methods we should generate.
     /// </summary>
     internal class BreakingChangeResolver
     {
         private readonly SignatureType _customizationType;
         private readonly SignatureType _baselineContractType;
-        private IEnumerable<MethodSignature>? _generatedMethods;
-        private MethodChangeset? _methodChangeset;
 
         /// <summary>
         /// Tracks the changeset of methods between the currently generated methods, and the methods read from the baseline contract
@@ -51,25 +44,31 @@ namespace AutoRest.CSharp.Output.Models.Types
             _baselineContractType = new SignatureType(typeFactory, contractTypeMapping);
         }
 
-        public void Build(IEnumerable<MethodSignature> generatedMethods)
+        public IEnumerable<Method> Resolve(IEnumerable<Method> generatedMethods)
         {
-            if (_generatedMethods is not null)
+            var generatedMethodSignatures = generatedMethods.Select(m => (MethodSignature)m.Signature);
+            var methodChangeset = CompareMethods(generatedMethodSignatures.Union(_customizationType.Methods, MethodSignature.ParameterAndReturnTypeEqualityComparer), _baselineContractType.Methods);
+
+            var methodToSkip = generatedMethodSignatures.Intersect(_customizationType.Methods, MethodSignature.ParameterAndReturnTypeEqualityComparer).ToHashSet(MethodSignature.ParameterAndReturnTypeEqualityComparer);
+            foreach (var method in generatedMethods)
             {
-                throw new InvalidOperationException($"{nameof(BreakingChangeResolver)} could only be built once.");
+                if (methodToSkip.Contains((MethodSignature)method.Signature))
+                    continue;
+
+                yield return method;
             }
-            _generatedMethods = generatedMethods;
-            _methodChangeset = CompareMethods(generatedMethods.Union(_customizationType.Methods, MethodSignature.ParameterAndReturnTypeEqualityComparer), _baselineContractType.Methods);
+
+            foreach (var method in BuildOverloadMethods(methodChangeset))
+            {
+                yield return method;
+            }
         }
 
-        private IReadOnlyList<Method>? _overloadMethods;
-        public IReadOnlyList<Method> OverloadMethods => _overloadMethods ??= EnsureOverloadMethods();
-
-        private IReadOnlyList<Method> EnsureOverloadMethods()
+        private IEnumerable<Method> BuildOverloadMethods(MethodChangeset methodChangeset)
         {
-            var overloadMethods = new List<Method>();
-            if (_methodChangeset?.Updated is not { } updated)
+            if (methodChangeset.Updated is not { } updated)
             {
-                return Array.Empty<Method>();
+                yield break;
             }
 
             foreach (var (current, previous) in updated)
@@ -78,10 +77,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     var overloadMethodSignature = new OverloadMethodSignature(currentMethodToCall, previous.WithParametersRequired(), missingParameters, previous.Description);
                     var previousMethodSignature = overloadMethodSignature.PreviousMethodSignature with { Attributes = new CSharpAttribute[] { new CSharpAttribute(typeof(EditorBrowsableAttribute), FrameworkEnumValue(EditorBrowsableState.Never)) } };
-                    overloadMethods.Add(new Method(previousMethodSignature, BuildOverloadMethodBody(overloadMethodSignature)));
+
+                    yield return new Method(previousMethodSignature, BuildOverloadMethodBody(overloadMethodSignature));
                 }
             }
-            return overloadMethods;
         }
 
         private MethodBodyStatement BuildOverloadMethodBody(OverloadMethodSignature overloadMethodSignature)
@@ -101,17 +100,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parameters.Add(new PositionalParameterReference(parameter));
             }
             return parameters;
-        }
-
-        private IReadOnlySet<MethodSignature>? _methodsToSkip;
-        public IReadOnlySet<MethodSignature> MethodsToSkip => _methodsToSkip ??= EnsureMethodsToSkip();
-        private IReadOnlySet<MethodSignature> EnsureMethodsToSkip()
-        {
-            if (_generatedMethods == null)
-            {
-                throw new InvalidOperationException($"{nameof(BreakingChangeResolver)} has not been built yet.");
-            }
-            return _generatedMethods.Intersect(_customizationType.Methods, MethodSignature.ParameterAndReturnTypeEqualityComparer).ToHashSet(MethodSignature.ParameterAndReturnTypeEqualityComparer);
         }
 
         private bool TryGetPreviousMethodWithLessOptionalParameters(IReadOnlyList<MethodSignature> currentMethods, MethodSignature previousMethod, [NotNullWhen(true)] out MethodSignature? currentMethodToCall, [NotNullWhen(true)] out IReadOnlyList<Parameter>? missingParameters)
@@ -165,12 +153,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return true;
         }
 
-        private static MethodChangeset? CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature>? previousMethods)
+        private static MethodChangeset CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature> previousMethods)
         {
-            if (previousMethods is null)
-            {
-                return null;
-            }
             var missing = new List<MethodSignature>();
             var updated = new List<UpdatedMethod>();
             var set = currentMethods.ToHashSet(MethodSignature.ParameterAndReturnTypeEqualityComparer);

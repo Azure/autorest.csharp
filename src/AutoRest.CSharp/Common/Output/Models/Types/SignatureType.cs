@@ -13,11 +13,7 @@ using Microsoft.CodeAnalysis;
 namespace AutoRest.CSharp.Output.Models.Types
 {
     /// <summary>
-    /// This type holds three portions of codes:
-    ///     - current
-    ///     - custom
-    ///     - baseline contract
-    ///     current union custom compare with baseline contract outputs the changeset, we can apply different rules with it.
+    /// The <see cref="SignatureType"/> resolves the symbol to produce the MethodSignatures on the symbol
     /// </summary>
     internal class SignatureType
     {

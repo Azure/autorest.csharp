@@ -71,8 +71,8 @@ namespace AutoRest.CSharp.Input.Source
 
         private static bool IsMethodSymbol(ISymbol member)
         {
-            // here we exclude those "CompilerGenerated" members
-            return !member.IsImplicitlyDeclared && member is IMethodSymbol;
+            // here we exclude those "CompilerGenerated" members and ctor symbols
+            return !member.IsImplicitlyDeclared && member is IMethodSymbol method && method.MethodKind != MethodKind.Constructor;
         }
 
         public ISymbol? GetMemberByOriginalName(string name)

@@ -42,10 +42,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // The overloading feature is not enabled, we jsut return the original methods
                 return generatedMethods;
             }
-            // build the resolver
-            BreakingChangeResolver.Build(generatedMethods.Select(x => (MethodSignature)x.Signature));
-            // filter out duplicate methods in custom code and combine overload methods
-            return generatedMethods.Where(m => !BreakingChangeResolver.MethodsToSkip.Contains(m.Signature)).Concat(BreakingChangeResolver.OverloadMethods);
+
+            return BreakingChangeResolver.Resolve(generatedMethods);
         }
 
         public FormattableString Description => $"Model factory for models.";
