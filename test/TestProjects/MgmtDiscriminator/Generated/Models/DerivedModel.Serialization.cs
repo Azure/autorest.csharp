@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DerivedModel : IUtf8JsonSerializable, IJsonModel<DerivedModel>, IPersistableModel<DerivedModel>
+    public partial class DerivedModel : IUtf8JsonSerializable, IJsonModel<DerivedModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

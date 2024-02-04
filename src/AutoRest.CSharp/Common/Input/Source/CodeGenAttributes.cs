@@ -66,10 +66,11 @@ namespace AutoRest.CSharp.Input.Source
             return propertyNames != null;
         }
 
-        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out string? serializationHook, out string? deserializationHook)
+        public bool TryGetCodeGenMemberSerializationHooksAttributeValue(AttributeData attributeData, out string? serializationHook, out string? deserializationHook, out string? bicepSerializationHook)
         {
             serializationHook = null;
             deserializationHook = null;
+            bicepSerializationHook = null;
             if (!CheckAttribute(attributeData, CodeGenMemberSerializationHooksAttribute))
             {
                 return false;
@@ -85,10 +86,13 @@ namespace AutoRest.CSharp.Input.Source
                     case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.DeserializationValueHook):
                         deserializationHook = namedArgument.Value.Value as string;
                         break;
+                    case nameof(Azure.Core.CodeGenMemberSerializationHooksAttribute.BicepSerializationValueHook):
+                        bicepSerializationHook = namedArgument.Value.Value as string;
+                        break;
                 }
             }
 
-            return serializationHook != null || deserializationHook != null;
+            return serializationHook != null || deserializationHook != null || bicepSerializationHook != null;
         }
 
         public bool TryGetCodeGenModelAttributeValue(AttributeData attributeData, out string[]? usage, out string[]? formats)

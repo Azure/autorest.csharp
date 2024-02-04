@@ -16,7 +16,7 @@ using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class DeliveryRuleListResult : IUtf8JsonSerializable, IJsonModel<DeliveryRuleListResult>, IPersistableModel<DeliveryRuleListResult>
+    internal partial class DeliveryRuleListResult : IUtf8JsonSerializable, IJsonModel<DeliveryRuleListResult>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

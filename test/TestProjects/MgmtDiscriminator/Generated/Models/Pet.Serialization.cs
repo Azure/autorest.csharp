@@ -14,7 +14,7 @@ using Azure.Core;
 namespace MgmtDiscriminator.Models
 {
     [PersistableModelProxy(typeof(UnknownPet))]
-    public partial class Pet : IUtf8JsonSerializable, IJsonModel<Pet>, IPersistableModel<Pet>
+    public partial class Pet : IUtf8JsonSerializable, IJsonModel<Pet>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Pet>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

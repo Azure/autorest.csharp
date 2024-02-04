@@ -15,7 +15,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class RoleAssignmentArtifact : IUtf8JsonSerializable, IJsonModel<RoleAssignmentArtifact>, IPersistableModel<RoleAssignmentArtifact>
+    public partial class RoleAssignmentArtifact : IUtf8JsonSerializable, IJsonModel<RoleAssignmentArtifact>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoleAssignmentArtifact>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
@@ -219,7 +219,8 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
-            builder.AppendLine("  properties: {");
+            builder.Append("  properties:");
+            builder.AppendLine(" {");
             if (Optional.IsDefined(RoleDefinitionId))
             {
                 builder.Append("    roleDefinitionId:");

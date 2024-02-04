@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class HeaderActionParameters : IUtf8JsonSerializable, IJsonModel<HeaderActionParameters>, IPersistableModel<HeaderActionParameters>
+    public partial class HeaderActionParameters : IUtf8JsonSerializable, IJsonModel<HeaderActionParameters>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<HeaderActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.Input.Source
                 string[]? serializationPath = null;
                 string? serializationHook = null;
                 string? deserializationHook = null;
+                string? bicepSerializationHook = null;
                 foreach (var attributeData in member.GetAttributes())
                 {
                     // handle CodeGenMember attribute
@@ -45,11 +46,11 @@ namespace AutoRest.CSharp.Input.Source
                         serializationPath = propertyNames;
                     }
                     // handle CodeGenMemberSerializationHooks attribute
-                    codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out serializationHook, out deserializationHook);
+                    codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out serializationHook, out deserializationHook, out bicepSerializationHook);
                 }
                 if (serializationPath != null || serializationHook != null || deserializationHook != null)
                 {
-                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHook, deserializationHook));
+                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHook, deserializationHook, bicepSerializationHook));
                 }
             }
 

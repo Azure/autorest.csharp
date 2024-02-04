@@ -16,7 +16,7 @@ using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class UnknownArtifact : IUtf8JsonSerializable, IJsonModel<ArtifactData>, IPersistableModel<ArtifactData>
+    internal partial class UnknownArtifact : IUtf8JsonSerializable, IJsonModel<ArtifactData>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ArtifactData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

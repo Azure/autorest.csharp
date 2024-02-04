@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleRouteConfigurationOverrideAction : IUtf8JsonSerializable, IJsonModel<DeliveryRuleRouteConfigurationOverrideAction>, IPersistableModel<DeliveryRuleRouteConfigurationOverrideAction>
+    public partial class DeliveryRuleRouteConfigurationOverrideAction : IUtf8JsonSerializable, IJsonModel<DeliveryRuleRouteConfigurationOverrideAction>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleRouteConfigurationOverrideAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

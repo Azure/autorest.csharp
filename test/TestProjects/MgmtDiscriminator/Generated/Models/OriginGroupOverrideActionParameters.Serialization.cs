@@ -15,7 +15,7 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class OriginGroupOverrideActionParameters : IUtf8JsonSerializable, IJsonModel<OriginGroupOverrideActionParameters>, IPersistableModel<OriginGroupOverrideActionParameters>
+    public partial class OriginGroupOverrideActionParameters : IUtf8JsonSerializable, IJsonModel<OriginGroupOverrideActionParameters>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OriginGroupOverrideActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

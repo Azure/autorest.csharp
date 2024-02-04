@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class UrlRedirectActionParameters : IUtf8JsonSerializable, IJsonModel<UrlRedirectActionParameters>, IPersistableModel<UrlRedirectActionParameters>
+    public partial class UrlRedirectActionParameters : IUtf8JsonSerializable, IJsonModel<UrlRedirectActionParameters>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRedirectActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

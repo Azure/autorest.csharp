@@ -15,7 +15,7 @@ using MgmtDiscriminator.Models;
 namespace MgmtDiscriminator
 {
     [PersistableModelProxy(typeof(UnknownArtifact))]
-    public partial class ArtifactData : IUtf8JsonSerializable, IJsonModel<ArtifactData>, IPersistableModel<ArtifactData>
+    public partial class ArtifactData : IUtf8JsonSerializable, IJsonModel<ArtifactData>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ArtifactData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
@@ -104,6 +104,12 @@ namespace MgmtDiscriminator
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
+            if (Optional.IsDefined(Kind))
+            {
+                builder.Append("  kind:");
+                builder.AppendLine($" '{Kind.ToString()}'");
+            }
+
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
@@ -128,14 +134,6 @@ namespace MgmtDiscriminator
                 builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
-            builder.AppendLine("  properties: {");
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("    kind:");
-                builder.AppendLine($" '{Kind.ToString()}'");
-            }
-
-            builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }

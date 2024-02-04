@@ -14,7 +14,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization.Bicep;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -41,9 +41,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static readonly Parameter IndentFirstLine =
             new Parameter("indentFirstLine", null, typeof(bool), null, ValidationType.None, null);
 
-        public static IEnumerable<Method> BuildBicepSerializationMethods(
-            SerializableObjectType model,
-            BicepObjectSerialization bicepObject)
+        private static readonly ValueExpression FormatExpression = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options).Format;
+
+        public static IEnumerable<Method> BuildBicepSerializationMethods(JsonObjectSerialization objectSerialization)
         {
             yield return new Method(
                 new MethodSignature(
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     typeof(BinaryData),
                     null,
                     new Parameter[] { KnownParameters.Serializations.Options }),
-                WriteSerializeBicep(bicepObject).ToArray());
+                WriteSerializeBicep(objectSerialization).ToArray());
 
             yield return new Method(
                 new MethodSignature(
@@ -73,8 +73,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 WriteAppendChildObject().ToArray());
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(
-            BicepObjectSerialization objectSerialization)
+        private static IEnumerable<MethodBodyStatement> WriteSerializeBicep(JsonObjectSerialization objectSerialization)
         {
             VariableReference stringBuilder = new VariableReference(typeof(StringBuilder), "builder");
             yield return Declare(stringBuilder, New.Instance(typeof(StringBuilder)));
@@ -83,36 +82,43 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             yield return stringBuilderExpression.AppendLine("{");
             yield return EmptyLine;
-            var spaces = 2;
-            foreach (BicepPropertySerialization property in objectSerialization.Properties)
-            {
-                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilderExpression, property, spaces))
-                {
-                    yield return statement;
-                }
-            }
 
-            if (objectSerialization.NestedProperties.Count > 0)
+            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2))
             {
-                yield return stringBuilderExpression.AppendLine("  properties: {");
-                spaces += 2;
-            }
-
-            foreach (BicepPropertySerialization property in objectSerialization.NestedProperties)
-            {
-                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilderExpression, property, spaces))
-                {
-                    yield return statement;
-                }
-            }
-
-            if (objectSerialization.NestedProperties.Count > 0)
-            {
-                yield return stringBuilderExpression.AppendLine("  }");
+                yield return methodBodyStatement;
             }
 
             yield return stringBuilderExpression.AppendLine("}");
             yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilderParameter.ToString))));
+        }
+
+        private static IEnumerable<MethodBodyStatement> WriteProperties(IEnumerable<JsonPropertySerialization> properties, StringBuilderExpression stringBuilder, int spaces)
+        {
+            var indent = new string(' ', spaces);
+            foreach (JsonPropertySerialization property in properties)
+            {
+                if (property.ValueSerialization == null)
+                {
+                    // Flattened property
+                    yield return Serializations.WrapInCheckNotWire(
+                        property,
+                        FormatExpression,
+                        new[]
+                        {
+                            stringBuilder.Append($"{indent}{property.SerializedName}:"),
+                            stringBuilder.AppendLine($" {{"),
+                            WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2).ToArray(),
+                            stringBuilder.AppendLine($"{indent}}}")
+                        });
+                }
+                else
+                {
+                    foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces))
+                    {
+                        yield return statement;
+                    }
+                }
+            }
         }
 
         private static IEnumerable<MethodBodyStatement> WriteAppendChildObject()
@@ -155,7 +161,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        private static IEnumerable<MethodBodyStatement> SerializeProperty(StringBuilderExpression stringBuilder, BicepPropertySerialization property, int spaces)
+        private static IEnumerable<MethodBodyStatement> SerializeProperty(StringBuilderExpression stringBuilder, JsonPropertySerialization property, int spaces)
         {
             var indent = new string(' ', spaces);
             yield return InvokeOptional.WrapInIsDefined(
@@ -164,9 +170,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     property,
                 new[]
                     {
-                        // add in customization hooks
                         stringBuilder.Append($"{indent}{property.SerializedName}:"),
-                        SerializeExpression(stringBuilder, property.ValueSerialization, property.Value, spaces)
+                        property.CustomBicepSerializationMethodName is {} serializationMethodName
+                            ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
+                            : SerializeExpression(stringBuilder, property.ValueSerialization!, property.Value, spaces)
                     }),
                 true);
 
@@ -175,24 +182,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeExpression(
             StringBuilderExpression stringBuilder,
-            BicepSerialization propertyValueSerialization,
+            JsonSerialization propertyValueSerialization,
             ValueExpression expression,
             int spaces,
             bool isArrayElement = false)
         {
             return propertyValueSerialization switch
             {
-                BicepArraySerialization array => SerializeArray(
+                JsonArraySerialization array => SerializeArray(
                     stringBuilder,
                     array,
                     new EnumerableExpression(TypeFactory.GetElementType(array.ImplementationType), expression),
                     spaces),
-                BicepDictionarySerialization dictionary => SerializeDictionary(
+                JsonDictionarySerialization dictionary => SerializeDictionary(
                     stringBuilder,
                     dictionary,
                     new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression),
                     spaces),
-                BicepValueSerialization value => SerializeValue(
+                JsonValueSerialization value => SerializeValue(
                     stringBuilder,
                     value,
                     expression,
@@ -204,7 +211,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeArray(
             StringBuilderExpression stringBuilder,
-            BicepArraySerialization arraySerialization,
+            JsonArraySerialization arraySerialization,
             EnumerableExpression array,
             int spaces)
         {
@@ -223,7 +230,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeDictionary(
             StringBuilderExpression stringBuilder,
-            BicepDictionarySerialization dictionarySerialization,
+            JsonDictionarySerialization dictionarySerialization,
             DictionaryExpression dictionary,
             int spaces)
         {
@@ -246,7 +253,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeValue(
             StringBuilderExpression stringBuilder,
-            BicepValueSerialization valueSerialization,
+            JsonValueSerialization valueSerialization,
             ValueExpression expression,
             int spaces,
             bool isArrayElement = false)
@@ -280,7 +287,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement SerializeFrameworkTypeValue(
             StringBuilderExpression stringBuilder,
-            BicepValueSerialization valueSerialization,
+            JsonValueSerialization valueSerialization,
             ValueExpression expression,
             string indent)
         {
@@ -315,8 +322,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     Var(
                         "formattedTimeSpan",
-                        new StringExpression(new InvokeStaticMethodExpression(typeof(XmlConvert),
-                            nameof(XmlConvert.ToString), new[] { expression })),
+                        new StringExpression(new InvokeStaticMethodExpression(typeof(TypeFormatters),
+                            nameof(TypeFormatters.ToString), new[] { expression, Literal("P") })),
                         out var timeSpanVariable),
                     stringBuilder.AppendLine(new FormattableStringExpression(
                         $"{indent}'{{0}}'",
@@ -358,18 +365,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement CheckCollectionItemForNull(
             StringBuilderExpression stringBuilder,
-            BicepSerialization valueSerialization,
+            JsonSerialization valueSerialization,
             ValueExpression value)
             => CollectionItemRequiresNullCheckInSerialization(valueSerialization)
                 ? new IfStatement(Equal(value, Null)) { stringBuilder.Append("null"), Continue }
                 : EmptyStatement;
 
-        private static bool CollectionItemRequiresNullCheckInSerialization(BicepSerialization serialization) =>
+        private static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
             // nullable value type, like int?
-            serialization is { IsNullable: true } and BicepValueSerialization { Type.IsValueType: true } ||
+            serialization is { IsNullable: true } and JsonValueSerialization { Type.IsValueType: true } ||
             // list or dictionary
-            serialization is BicepArraySerialization or BicepDictionarySerialization ||
+            serialization is JsonArraySerialization or JsonDictionarySerialization ||
             // framework reference type, e.g. byte[]
-            serialization is BicepValueSerialization { Type: { IsValueType: false, IsFrameworkType: true } };
+            serialization is JsonValueSerialization { Type: { IsValueType: false, IsFrameworkType: true } };
     }
 }

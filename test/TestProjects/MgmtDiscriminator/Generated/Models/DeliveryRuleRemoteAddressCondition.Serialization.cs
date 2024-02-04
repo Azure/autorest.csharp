@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class DeliveryRuleRemoteAddressCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleRemoteAddressCondition>, IPersistableModel<DeliveryRuleRemoteAddressCondition>
+    public partial class DeliveryRuleRemoteAddressCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleRemoteAddressCondition>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleRemoteAddressCondition>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

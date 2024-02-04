@@ -10,14 +10,13 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
-using System.Xml;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator
 {
-    public partial class DeliveryRuleData : IUtf8JsonSerializable, IJsonModel<DeliveryRuleData>, IPersistableModel<DeliveryRuleData>
+    public partial class DeliveryRuleData : IUtf8JsonSerializable, IJsonModel<DeliveryRuleData>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
@@ -239,6 +238,51 @@ namespace MgmtDiscriminator
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
+            if (Optional.IsDefined(BoolProperty))
+            {
+                builder.Append("  boolProperty:");
+                var boolValue = BoolProperty.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
+            }
+
+            if (Optional.IsDefined(Location))
+            {
+                builder.Append("  location:");
+                builder.AppendLine($" '{Location.Value.ToString()}'");
+            }
+
+            if (Optional.IsDefined(DateTimeProperty))
+            {
+                builder.Append("  dateTimeProperty:");
+                var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
+                builder.AppendLine($" '{formattedDateTimeString}'");
+            }
+
+            if (Optional.IsDefined(Duration))
+            {
+                builder.Append("  duration:");
+                var formattedTimeSpan = TypeFormatters.ToString(Duration.Value, "P");
+                builder.AppendLine($" '{formattedTimeSpan}'");
+            }
+
+            if (Optional.IsDefined(Number))
+            {
+                builder.Append("  number:");
+                builder.AppendLine($" {Number.Value}");
+            }
+
+            if (Optional.IsDefined(Uri))
+            {
+                builder.Append("  uri:");
+                builder.AppendLine($" '{Uri.AbsoluteUri}'");
+            }
+
+            if (Optional.IsDefined(Properties))
+            {
+                builder.Append("  properties:");
+                AppendChildObject(builder, Properties, options, 2, false);
+            }
+
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
@@ -263,53 +307,6 @@ namespace MgmtDiscriminator
                 builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
-            builder.AppendLine("  properties: {");
-            if (Optional.IsDefined(BoolProperty))
-            {
-                builder.Append("    boolProperty:");
-                var boolValue = BoolProperty.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsDefined(Location))
-            {
-                builder.Append("    location:");
-                builder.AppendLine($" '{Location.Value.ToString()}'");
-            }
-
-            if (Optional.IsDefined(DateTimeProperty))
-            {
-                builder.Append("    dateTimeProperty:");
-                var formattedDateTimeString = TypeFormatters.ToString(DateTimeProperty.Value, "o");
-                builder.AppendLine($" '{formattedDateTimeString}'");
-            }
-
-            if (Optional.IsDefined(Duration))
-            {
-                builder.Append("    duration:");
-                var formattedTimeSpan = XmlConvert.ToString(Duration.Value);
-                builder.AppendLine($" '{formattedTimeSpan}'");
-            }
-
-            if (Optional.IsDefined(Number))
-            {
-                builder.Append("    number:");
-                builder.AppendLine($" {Number.Value}");
-            }
-
-            if (Optional.IsDefined(Uri))
-            {
-                builder.Append("    uri:");
-                builder.AppendLine($" '{Uri.AbsoluteUri}'");
-            }
-
-            if (Optional.IsDefined(Properties))
-            {
-                builder.Append("    properties:");
-                AppendChildObject(builder, Properties, options, 4, false);
-            }
-
-            builder.AppendLine("  }");
             builder.AppendLine("}");
             return BinaryData.FromString(builder.ToString());
         }

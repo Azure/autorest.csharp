@@ -16,7 +16,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class TemplateArtifact : IUtf8JsonSerializable, IJsonModel<TemplateArtifact>, IPersistableModel<TemplateArtifact>
+    public partial class TemplateArtifact : IUtf8JsonSerializable, IJsonModel<TemplateArtifact>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TemplateArtifact>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
@@ -250,7 +250,8 @@ namespace MgmtDiscriminator.Models
                 builder.AppendLine($" '{SystemData.ToString()}'");
             }
 
-            builder.AppendLine("  properties: {");
+            builder.Append("  properties:");
+            builder.AppendLine(" {");
             if (Optional.IsDefined(Template))
             {
                 builder.Append("    template:");

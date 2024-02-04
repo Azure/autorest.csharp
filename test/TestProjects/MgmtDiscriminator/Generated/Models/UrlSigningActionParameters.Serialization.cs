@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class UrlSigningActionParameters : IUtf8JsonSerializable, IJsonModel<UrlSigningActionParameters>, IPersistableModel<UrlSigningActionParameters>
+    public partial class UrlSigningActionParameters : IUtf8JsonSerializable, IJsonModel<UrlSigningActionParameters>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlSigningActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

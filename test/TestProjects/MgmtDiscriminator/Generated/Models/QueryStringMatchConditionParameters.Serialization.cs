@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class QueryStringMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<QueryStringMatchConditionParameters>, IPersistableModel<QueryStringMatchConditionParameters>
+    public partial class QueryStringMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<QueryStringMatchConditionParameters>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QueryStringMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

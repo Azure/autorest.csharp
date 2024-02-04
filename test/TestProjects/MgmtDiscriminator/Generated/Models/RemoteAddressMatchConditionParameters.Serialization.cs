@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class RemoteAddressMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<RemoteAddressMatchConditionParameters>, IPersistableModel<RemoteAddressMatchConditionParameters>
+    public partial class RemoteAddressMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<RemoteAddressMatchConditionParameters>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RemoteAddressMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

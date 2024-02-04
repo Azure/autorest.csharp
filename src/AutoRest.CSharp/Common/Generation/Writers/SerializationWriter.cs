@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -41,9 +40,9 @@ namespace AutoRest.CSharp.Generation.Writers
             var declaration = model.Declaration;
             var json = model.JsonSerialization;
             var xml = model.XmlSerialization;
-            var bicep = model.BicepSerialization;
+            var writeBicep = false;
 
-            if (json == null && xml == null && bicep == null)
+            if (json == null && xml == null)
             {
                 return;
             }
@@ -71,20 +70,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"{jsonModelObjectInterface}, ");
                 }
 
-                bool persistableModelTInterfaceAdded = false;
                 if (xml != null && model.IncludeSerializer)
                 {
                     writer.Append($"{xml.IXmlInterface}, ");
                     if (Configuration.UseModelReaderWriter)
                     {
                         writer.Append($"{xml.IPersistableModelTInterface}, ");
-                        persistableModelTInterfaceAdded = true;
                     }
-                }
-
-                if (bicep != null && !persistableModelTInterfaceAdded)
-                {
-                    writer.Append($"{bicep.IPersistableModelTInterface}");
                 }
 
                 writer.RemoveTrailingComma();
@@ -100,14 +92,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (json != null)
                     {
                         WriteJsonSerialization(writer, model, json);
+                        if (Configuration.AzureArm && Configuration.UseModelReaderWriter && model.GetUsage().HasFlag(InputModelTypeUsage.Output))
+                        {
+                            writeBicep = true;
+                            WriteBicepSerialization(writer, json);
+                        }
                     }
 
-                    if (bicep != null)
-                    {
-                        WriteBicepSerialization(writer, model, bicep);
-                    }
-
-                    WriteIModelImplementations(writer, model, json, xml, bicep);
+                    WriteIModelImplementations(writer, model, json, xml, writeBicep);
 
                     foreach (var method in model.Methods)
                     {
@@ -181,11 +173,10 @@ namespace AutoRest.CSharp.Generation.Writers
         /// This method writes the implementation of IXmlSerializable and the static deserialization method
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="model"></param>
-        /// <param name="bicepObject"></param>
-        private static void WriteBicepSerialization(CodeWriter writer, SerializableObjectType model, BicepObjectSerialization bicepObject)
+        /// <param name="jsonObject"></param>
+        private static void WriteBicepSerialization(CodeWriter writer, JsonObjectSerialization jsonObject)
         {
-            foreach (var method in BicepSerializationMethodsBuilder.BuildBicepSerializationMethods(model, bicepObject))
+            foreach (var method in BicepSerializationMethodsBuilder.BuildBicepSerializationMethods(jsonObject))
             {
                 writer.WriteMethod(method);
             }
@@ -228,9 +219,9 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <param name="json"></param>
         /// <param name="xml"></param>
         /// <param name="bicep"></param>
-        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
+        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, bool writeBicep)
         {
-            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml, bicep))
+            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml, writeBicep))
             {
                 writer.WriteMethod(method);
             }

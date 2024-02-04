@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 : null;
 
         private ObjectTypeProperty? _rawDataField;
-        protected override InputModelTypeUsage GetUsage() => _inputModel.Usage;
+        protected internal override InputModelTypeUsage GetUsage() => _inputModel.Usage;
 
         public override ObjectTypeProperty? RawDataField
         {
@@ -238,6 +238,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         ShouldExcludeInWireSerialization(property, inputModelProperty),
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                         customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
+                        customBicepSerializationMethodName: property.SerializationMapping?.BicepSerializationValueHook,
                         enumerableExpression: enumerableExpression);
                 }
             }

@@ -14,7 +14,7 @@ using Azure.Core;
 namespace MgmtDiscriminator.Models
 {
     [PersistableModelProxy(typeof(UnknownDeliveryRuleCondition))]
-    public partial class DeliveryRuleCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleCondition>, IPersistableModel<DeliveryRuleCondition>
+    public partial class DeliveryRuleCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleCondition>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCondition>)this).Write(writer, new ModelReaderWriterOptions("W"));
 

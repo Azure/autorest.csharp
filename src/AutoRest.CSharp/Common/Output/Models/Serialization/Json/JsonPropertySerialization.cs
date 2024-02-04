@@ -18,12 +18,14 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             bool shouldExcludeInWireSerialization,
             string? customSerializationMethodName = null,
             string? customDeserializationMethodName = null,
+            string? customBicepSerializationMethodName = null,
             TypedValueExpression? enumerableExpression = null)
             : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression)
         {
             ValueSerialization = valueSerialization;
             CustomSerializationMethodName = customSerializationMethodName;
             CustomDeserializationMethodName = customDeserializationMethodName;
+            CustomBicepSerializationMethodName = customBicepSerializationMethodName;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
@@ -41,5 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public string? CustomSerializationMethodName { get; }
 
         public string? CustomDeserializationMethodName { get; }
+
+        public string? CustomBicepSerializationMethodName { get; set; }
     }
 }

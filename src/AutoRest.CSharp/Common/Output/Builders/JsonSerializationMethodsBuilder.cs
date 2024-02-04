@@ -28,7 +28,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -121,13 +120,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
+        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, bool writeBicep)
         {
             // we do not need this if model reader writer feature is not enabled
             if (!Configuration.UseModelReaderWriter)
                 yield break;
 
-            var iModelTInterface = json?.IPersistableModelTInterface ?? xml?.IPersistableModelTInterface ?? bicep?.IPersistableModelTInterface;
+            var iModelTInterface = json?.IPersistableModelTInterface ?? xml?.IPersistableModelTInterface;
             var iModelObjectInterface = json?.IPersistableModelObjectInterface ?? xml?.IPersistableModelObjectInterface;
             // if we have json serialization, we must have this interface.
             // if we have xml serialization, we must have this interface.
@@ -140,7 +139,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelWriteMethodBody(json, xml, bicep, options, iModelTInterface).ToArray()
+                BuildModelWriteMethodBody(json, xml, writeBicep, options, iModelTInterface).ToArray()
             );
 
             // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
@@ -148,7 +147,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelCreateMethodBody(model, json != null, xml != null, bicep != null, data, options, iModelTInterface).ToArray()
+                BuildModelCreateMethodBody(model, json != null, xml != null, writeBicep, data, options, iModelTInterface).ToArray()
             );
 
             // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
@@ -188,7 +187,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             // TODO should this be moved into SerializationBuilder or a more generic MethodBuilder now that it supports xml (and bicep)
             static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json,
-                XmlObjectSerialization? xml, BicepObjectSerialization? bicep,
+                XmlObjectSerialization? xml, bool writeBicep,
                 ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
@@ -207,7 +206,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     switchStatement.Add(jsonCase);
                 }
 
-                if (bicep != null)
+                if (writeBicep)
                 {
 
                     var bicepCase = new SwitchCase(

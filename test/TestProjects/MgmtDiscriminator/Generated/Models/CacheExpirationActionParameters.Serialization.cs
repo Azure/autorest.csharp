@@ -10,12 +10,11 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
-using System.Xml;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class CacheExpirationActionParameters : IUtf8JsonSerializable, IJsonModel<CacheExpirationActionParameters>, IPersistableModel<CacheExpirationActionParameters>
+    public partial class CacheExpirationActionParameters : IUtf8JsonSerializable, IJsonModel<CacheExpirationActionParameters>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CacheExpirationActionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
@@ -152,7 +151,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(CacheDuration))
             {
                 builder.Append("  cacheDuration:");
-                var formattedTimeSpan = XmlConvert.ToString(CacheDuration.Value);
+                var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");
                 builder.AppendLine($" '{formattedTimeSpan}'");
             }
 
