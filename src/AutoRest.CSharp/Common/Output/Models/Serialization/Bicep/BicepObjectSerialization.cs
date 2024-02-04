@@ -16,6 +16,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
                 new BicepPropertySerialization(p, p.SerializationMapping?.BicepSerializationValueHook));
         }
 
-        public IEnumerable<BicepPropertySerialization> Properties { get; set; }
+        public IEnumerable<BicepPropertySerialization> Properties { get; }
     }
 }
