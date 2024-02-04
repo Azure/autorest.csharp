@@ -155,12 +155,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static InputType GetInputTypeFromExistingMemberType(CSharpType type)
         {
-            if (TypeFactory.IsList(type))
+            if (type.IsList)
             {
                 return new InputListType("Array", GetInputTypeFromExistingMemberType(type.Arguments[0]), false);
             }
 
-            if (TypeFactory.IsDictionary(type))
+            if (type.IsDictionary)
             {
                 return new InputDictionaryType("Dictionary", InputPrimitiveType.String, GetInputTypeFromExistingMemberType(type.Arguments[1]), false);
             }
