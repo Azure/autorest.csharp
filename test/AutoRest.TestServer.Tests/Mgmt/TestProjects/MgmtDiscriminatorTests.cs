@@ -41,6 +41,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ToBicep()
         {
+            var now = DateTime.UtcNow;
             var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
                 new QueryStringMatchConditionParameters(
                     QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
@@ -62,12 +63,61 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 }),
                 BoolProperty = false,
                 Location = AzureLocation.AustraliaCentral,
-                DateTimeProperty = DateTime.Now,
+                LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
+                DateTimeProperty = now,
                 Duration = TimeSpan.FromDays(1),
                 Number = 4,
             };
 
-            TestContext.Progress.WriteLine(ModelReaderWriter.Write(data, new ModelReaderWriterOptions("B")).ToString());
+            var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("B")).ToString();
+            TestContext.Progress.WriteLine(bicep);
+            var expected = $$"""
+                           {
+                             boolProperty: false
+                             location: 'australiacentral'
+                             locationWithCustomSerialization: 'brazilsouth'
+                             dateTimeProperty: '{{TypeFormatters.ToString(now, "o")}}'
+                             duration: 'P1D'
+                             number: 4
+                             properties: {
+                               order: 3
+                               conditions: {
+                                 parameters: {
+                                   typeName: 'DeliveryRuleQueryStringConditionParameters'
+                                   operator: 'Any'
+                                   matchValues: [
+                                     'val1'
+                                     'val2'
+                                   ]
+                                 }
+                                 name: 'QueryString'
+                                 foo: 'query'
+                               }
+                               actions: [
+                                 {
+                                   name: 'CacheExpiration'
+                                   foo: 'foo1'
+                                 }
+                                 {
+                                   name: 'UrlSigning'
+                                   foo: 'foo2'
+                                 }
+                               ]
+                               extraMappingInfo: {
+                                 dictionaryKey:  {
+                                   name: 'CacheExpiration'
+                                   foo: 'foo1'
+                                 }
+                               }
+                               pet: {
+                                 kind: 'Dog'
+                               }
+                               foo: 'Foo'
+                             }
+                           }
+                           
+                           """;
+            Assert.AreEqual(expected, bicep);
         }
     }
 }

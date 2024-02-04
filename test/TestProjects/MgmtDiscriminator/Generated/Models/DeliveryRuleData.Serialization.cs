@@ -39,6 +39,11 @@ namespace MgmtDiscriminator
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location.Value);
             }
+            if (Optional.IsDefined(LocationWithCustomSerialization))
+            {
+                writer.WritePropertyName("locationWithCustomSerialization"u8);
+                writer.WriteStringValue(LocationWithCustomSerialization.Value);
+            }
             if (Optional.IsDefined(DateTimeProperty))
             {
                 writer.WritePropertyName("dateTimeProperty"u8);
@@ -124,6 +129,7 @@ namespace MgmtDiscriminator
             }
             Optional<bool> boolProperty = default;
             Optional<AzureLocation> location = default;
+            Optional<AzureLocation> locationWithCustomSerialization = default;
             Optional<DateTimeOffset> dateTimeProperty = default;
             Optional<TimeSpan> duration = default;
             Optional<int> number = default;
@@ -153,6 +159,15 @@ namespace MgmtDiscriminator
                         continue;
                     }
                     location = new AzureLocation(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("locationWithCustomSerialization"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    locationWithCustomSerialization = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("dateTimeProperty"u8))
@@ -230,7 +245,7 @@ namespace MgmtDiscriminator
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new DeliveryRuleData(id, name, type, systemData.Value, Optional.ToNullable(boolProperty), Optional.ToNullable(location), Optional.ToNullable(dateTimeProperty), Optional.ToNullable(duration), Optional.ToNullable(number), uri.Value, properties.Value, serializedAdditionalRawData);
+            return new DeliveryRuleData(id, name, type, systemData.Value, Optional.ToNullable(boolProperty), Optional.ToNullable(location), Optional.ToNullable(locationWithCustomSerialization), Optional.ToNullable(dateTimeProperty), Optional.ToNullable(duration), Optional.ToNullable(number), uri.Value, properties.Value, serializedAdditionalRawData);
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -249,6 +264,12 @@ namespace MgmtDiscriminator
             {
                 builder.Append("  location:");
                 builder.AppendLine($" '{Location.Value.ToString()}'");
+            }
+
+            if (Optional.IsDefined(LocationWithCustomSerialization))
+            {
+                builder.Append("  locationWithCustomSerialization:");
+                SerializeLocation(builder);
             }
 
             if (Optional.IsDefined(DateTimeProperty))

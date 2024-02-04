@@ -410,6 +410,11 @@
                     "type": "string",
                     "x-ms-format": "azure-location"
                 },
+                "locationWithCustomSerialization": {
+                    "description": "A location property to verify bicep generation.",
+                    "type": "string",
+                    "x-ms-format": "azure-location"
+                },
                 "dateTimeProperty": {
                     "description": "A datetime property to verify bicep generation.",
                     "type": "string",
