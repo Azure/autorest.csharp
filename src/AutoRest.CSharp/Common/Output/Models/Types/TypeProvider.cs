@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal abstract class TypeProvider
     {
         private readonly Lazy<INamedTypeSymbol?> _existingType;
+        private readonly Lazy<SourceTypeMapping?> _sourceTypeMapping;
 
         protected string? _deprecated;
 
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _sourceInputModel = sourceInputModel;
             DefaultNamespace = defaultNamespace;
             _existingType = new Lazy<INamedTypeSymbol?>(() => sourceInputModel?.FindForType(DefaultNamespace, DefaultName));
+            _sourceTypeMapping = new Lazy<SourceTypeMapping?>(() => _sourceInputModel?.CreateForType(ExistingType));
         }
 
         protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
@@ -41,6 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
+        protected SourceTypeMapping? SourceTypeMapping => _sourceTypeMapping.Value;
         protected virtual SignatureType? SignatureType => null;
 
         internal virtual Type? SerializeAs => null;

@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(InputModelType inputModel, CSharpType modelType, TypeFactory typeFactory, ModelTypeMapping? modelTypeMapping, bool isStruct)
+        public ModelTypeProviderFields(InputModelType inputModel, CSharpType modelType, TypeFactory typeFactory, SourceTypeMapping? sourceTypeMapping, bool isStruct)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
                                              !TypeFactory.IsCollectionType(propertyType);
 
-                var existingMember = modelTypeMapping?.GetMemberByOriginalName(originalFieldName);
+                var existingMember = sourceTypeMapping?.GetMemberByOriginalName(originalFieldName);
 
                 var field = existingMember is not null
                     ? CreateFieldFromExisting(existingMember, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                var existingMember = modelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
+                var existingMember = sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 var type = typeFactory.CreateType(additionalPropertiesType);
                 if (!inputModel.Usage.HasFlag(InputModelTypeUsage.Input))
@@ -122,9 +122,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // adding the leftover members from the source type
-            if (modelTypeMapping is not null)
+            if (sourceTypeMapping is not null)
             {
-                foreach (var existingMember in modelTypeMapping.GetPropertiesWithSerialization())
+                foreach (var existingMember in sourceTypeMapping.GetPropertiesWithSerialization())
                 {
                     if (visitedMembers.Contains(existingMember))
                     {

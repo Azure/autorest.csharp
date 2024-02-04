@@ -6,8 +6,9 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
 {
-    public class ModelTypeMapping
+    public class SourceTypeMapping
     {
+        private readonly List<IMethodSymbol> _methodSymbols;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
         private readonly Dictionary<string, ISymbol> _codeGenMemberMappings;
         private readonly Dictionary<string, SourcePropertySerializationMapping> _typeSerializationMappings;
@@ -15,8 +16,9 @@ namespace AutoRest.CSharp.Input.Source
         public string[]? Usage { get; }
         public string[]? Formats { get; }
 
-        public ModelTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol existingType)
+        public SourceTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol existingType)
         {
+            _methodSymbols = new();
             _propertyMappings = new();
             _codeGenMemberMappings = new();
             _typeSerializationMappings = new();
@@ -24,9 +26,14 @@ namespace AutoRest.CSharp.Input.Source
             foreach (ISymbol member in GetMembers(existingType))
             {
                 // If member is defined in both base and derived class, use derived one
-                if (ShouldIncludeMember(member) && !_propertyMappings.ContainsKey(member.Name))
+                if (IsPropertyOrFieldSymbol(member) && !_propertyMappings.ContainsKey(member.Name))
                 {
                     _propertyMappings[member.Name] = member;
+                }
+
+                if (IsMethodSymbol(member))
+                {
+                    _methodSymbols.Add((IMethodSymbol)member);
                 }
 
                 foreach (var attributeData in member.GetAttributes())
@@ -56,10 +63,16 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        private static bool ShouldIncludeMember(ISymbol member)
+        private static bool IsPropertyOrFieldSymbol(ISymbol member)
         {
             // here we exclude those "CompilerGenerated" members, such as the backing field of a property which is also a field.
             return !member.IsImplicitlyDeclared && member is IPropertySymbol or IFieldSymbol;
+        }
+
+        private static bool IsMethodSymbol(ISymbol member)
+        {
+            // here we exclude those "CompilerGenerated" members
+            return !member.IsImplicitlyDeclared && member is IMethodSymbol;
         }
 
         public ISymbol? GetMemberByOriginalName(string name)
@@ -79,6 +92,8 @@ namespace AutoRest.CSharp.Input.Source
                     yield return symbol;
             }
         }
+
+        public IEnumerable<IMethodSymbol> GetMethods() => _methodSymbols;
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)
         {

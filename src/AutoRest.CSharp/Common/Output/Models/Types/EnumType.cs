@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class EnumType : TypeProvider
     {
         private readonly IEnumerable<InputEnumTypeValue> _allowedValues;
-        private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
         public EnumType(ChoiceSchema schema, BuildContext context)
@@ -51,8 +50,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                         $"{ExistingType.ToDisplayString()} cannot be mapped to enum," +
                         $" expected enum or struct got {ExistingType.TypeKind}")
                 };
-
-                _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
             IsExtensible = isExtensible;
@@ -88,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var value in _allowedValues)
             {
                 var name = BuilderHelpers.DisambiguateName(Type, value.Name.ToCleanName());
-                var existingMember = _typeMapping?.GetMemberByOriginalName(name);
+                var existingMember = SourceTypeMapping?.GetMemberByOriginalName(name);
                 values.Add(new EnumTypeValue(
                     BuilderHelpers.CreateMemberDeclaration(name, Type, "public", existingMember, _typeFactory),
                     CreateDescription(value),

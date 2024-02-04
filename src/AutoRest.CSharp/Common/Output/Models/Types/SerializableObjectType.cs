@@ -15,19 +15,14 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 {
     internal abstract class SerializableObjectType : ObjectType
     {
-        protected readonly Lazy<ModelTypeMapping?> _modelTypeMapping;
         protected SerializableObjectType(BuildContext context) : base(context)
         {
-            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
         }
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
-
-        private protected ModelTypeMapping? ModelTypeMapping => _modelTypeMapping.Value;
 
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
@@ -100,7 +95,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                 if (obj is not SerializableObjectType so)
                     continue;
 
-                var serialization = so.ModelTypeMapping?.GetForMemberSerialization(propertyDeclaredName);
+                var serialization = so.SourceTypeMapping?.GetForMemberSerialization(propertyDeclaredName);
                 if (serialization is not null)
                     return serialization;
             }
