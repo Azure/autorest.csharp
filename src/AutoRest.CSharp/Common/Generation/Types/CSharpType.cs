@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Generation.Types
             ValidateArguments(type, arguments);
             _type = type;
 
-            Namespace = type.Namespace!;
+            Namespace = type.Namespace;
             Name = type.IsGenericType ? type.Name.Substring(0, type.Name.IndexOf('`')) : type.Name;
             IsNullable = isNullable;
             Arguments = arguments;
