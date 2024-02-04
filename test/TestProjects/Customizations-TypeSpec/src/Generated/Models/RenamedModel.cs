@@ -43,22 +43,22 @@ namespace CustomizationsInTsp.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RenamedModel"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
-        public RenamedModel(int requiredInt)
+        /// <param name="requiredIntOnBase"> Required int. </param>
+        public RenamedModel(int requiredIntOnBase)
         {
-            RequiredInt = requiredInt;
+            RequiredIntOnBase = requiredIntOnBase;
         }
 
         /// <summary> Initializes a new instance of <see cref="RenamedModel"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="requiredIntOnBase"> Required int. </param>
         /// <param name="optionalInt"> Optional int. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal RenamedModel(int requiredInt, int? optionalInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal RenamedModel(int requiredIntOnBase, int? optionalInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            RequiredInt = requiredInt;
+            RequiredIntOnBase = requiredIntOnBase;
             OptionalInt = optionalInt;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
@@ -69,6 +69,6 @@ namespace CustomizationsInTsp.Models
         }
 
         /// <summary> Required int. </summary>
-        public int RequiredInt { get; set; }
+        public int RequiredIntOnBase { get; set; }
     }
 }
