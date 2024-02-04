@@ -82,6 +82,11 @@ namespace AutoRest.CSharp.Input.Source
             return type;
         }
 
+        public INamedTypeSymbol? FindForTypeInContract(string ns, string name)
+        {
+            return PreviousContract?.GetTypeByMetadataName($"{ns}.{name}");
+        }
+
         internal bool TryGetClientSourceInput(INamedTypeSymbol type, [NotNullWhen(true)] out ClientSourceInput? clientSourceInput)
         {
             foreach (var attribute in type.GetAttributes())
