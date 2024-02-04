@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
 
-        private readonly ModelTypeMapping? _sourceTypeMapping;
         private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
 
         private ObjectTypeProperty? _additionalPropertiesProperty;
@@ -54,12 +53,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
 
-            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
-
             // Update usage from code attribute
-            if (_sourceTypeMapping?.Usage != null)
+            if (ModelTypeMapping?.Usage != null)
             {
-                foreach (var usage in _sourceTypeMapping.Usage)
+                foreach (var usage in ModelTypeMapping.Usage)
                 {
                     _usage |= Enum.Parse<SchemaTypeUsage>(usage, true);
                 }
@@ -71,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _usage |= Enum.Parse<SchemaTypeUsage>(objectSchema.Extensions?.Usage!, true);
             }
 
-            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
+            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, ModelTypeMapping);
             IsUnknownDerivedType = objectSchema.IsUnknownDiscriminatorModel;
             // we skip the init ctor when there is an extension telling us to, or when this is an unknown derived type in a discriminated set
             SkipInitializerConstructor = ObjectSchema is { Extensions.SkipInitCtor: true } || IsUnknownDerivedType;
@@ -102,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                var existingMember = _sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
+                var existingMember = ModelTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, _typeFactory),
@@ -503,9 +500,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ObjectTypeProperty CreateProperty(Property property)
         {
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-            var existingMember = _sourceTypeMapping?.GetMemberByOriginalName(name);
-
-            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(existingMember);
+            var existingMember = ModelTypeMapping?.GetMemberByOriginalName(name);
 
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
@@ -574,8 +569,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 propertyShouldOmitSetter,
                 property,
                 valueType,
-                optionalViaNullability,
-                serializationMapping);
+                optionalViaNullability);
             return objectTypeProperty;
         }
 
