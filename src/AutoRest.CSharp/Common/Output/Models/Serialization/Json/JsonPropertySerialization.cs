@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
@@ -16,16 +17,13 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             JsonSerialization valueSerialization,
             bool isRequired,
             bool shouldExcludeInWireSerialization,
-            string? customSerializationMethodName = null,
-            string? customDeserializationMethodName = null,
-            string? customBicepSerializationMethodName = null,
+            SourcePropertySerializationMapping? serializationMapping = null,
             TypedValueExpression? enumerableExpression = null)
-            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression)
+            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, enumerableExpression, serializationMapping)
         {
             ValueSerialization = valueSerialization;
-            CustomSerializationMethodName = customSerializationMethodName;
-            CustomDeserializationMethodName = customDeserializationMethodName;
-            CustomBicepSerializationMethodName = customBicepSerializationMethodName;
+            CustomSerializationMethodName = serializationMapping?.SerializationValueHook;
+            CustomDeserializationMethodName = serializationMapping?.DeserializationValueHook;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
