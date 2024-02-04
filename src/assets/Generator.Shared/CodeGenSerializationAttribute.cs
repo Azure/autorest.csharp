@@ -7,9 +7,17 @@ using System;
 
 namespace Azure.Core
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    internal class CodeGenMemberSerializationHooksAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = true, Inherited = true)]
+    internal class CodeGenSerializationAttribute : Attribute
     {
+        /// <summary>
+        /// Gets or sets the property name which these hooks should apply to
+        /// </summary>
+        public string? PropertyName { get; set; }
+        /// <summary>
+        /// Gets or sets the serialization path of the property in the JSON
+        /// </summary>
+        public string[]? SerializationPath { get; }
         /// <summary>
         /// Gets or sets the method name to use when serializing the property value (property name excluded)
         /// The signature of the serialization hook method must be or compatible with when invoking:
@@ -22,16 +30,28 @@ namespace Azure.Core
         /// private static void DeserializationHook(JsonProperty property, ref Optional&lt;TypeOfTheProperty&gt; propertyValue); // if the property is optional
         /// </summary>
         public string? DeserializationValueHook { get; set; }
-
         /// <summary>
         /// Gets or sets the method name to use when serializing the property value (property name excluded)
         /// The signature of the serialization hook method must be or compatible with when invoking:
-        /// private void SerializeHook(Utf8JsonWriter writer);
+        /// private void SerializeHook(StringBuilder builder);
         /// </summary>
         public string? BicepSerializationValueHook { get; set; }
 
-        public CodeGenMemberSerializationHooksAttribute()
+        public CodeGenSerializationAttribute(string propertyName)
         {
+            PropertyName = propertyName;
+        }
+
+        public CodeGenSerializationAttribute(string propertyName, string serializationName)
+        {
+            PropertyName = propertyName;
+            SerializationPath = new[] { serializationName };
+        }
+
+        public CodeGenSerializationAttribute(string propertyName, string[] serializationPath)
+        {
+            PropertyName = propertyName;
+            SerializationPath = serializationPath;
         }
     }
 }

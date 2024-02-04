@@ -16,17 +16,22 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 {
     internal abstract class SerializableObjectType : ObjectType
     {
+        protected readonly Lazy<ModelTypeMapping?> _modelTypeMapping;
         protected SerializableObjectType(BuildContext context) : base(context)
         {
+            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
             _context = context;
         }
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
+            _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         private readonly BuildContext? _context;
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
+
+        private protected ModelTypeMapping? ModelTypeMapping => _modelTypeMapping.Value;
 
         private SerializationBuilder _serializationBuilder = new SerializationBuilder();
 
@@ -67,6 +72,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
 
+
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();
 
@@ -95,5 +101,20 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected const string PrivateAdditionalPropertiesPropertyDescription = "Keeps track of any properties unknown to the library.";
         protected const string PrivateAdditionalPropertiesPropertyName = "_serializedAdditionalRawData";
         protected static readonly CSharpType _privateAdditionalPropertiesPropertyType = typeof(IDictionary<string, BinaryData>);
+
+        protected internal SourcePropertySerializationMapping? GetForMemberSerialization(string propertyDeclaredName)
+        {
+            foreach (var obj in EnumerateHierarchy())
+            {
+                if (obj is not SerializableObjectType so)
+                    continue;
+
+                var serialization = so.ModelTypeMapping?.GetForMemberSerialization(propertyDeclaredName);
+                if (serialization is not null)
+                    return serialization;
+            }
+
+            return null;
+        }
     }
 }

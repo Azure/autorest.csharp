@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType), IsStruct);
+            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, ModelTypeMapping, IsStruct);
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -216,7 +216,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
 
                     var declaredName = property.Declaration.Name;
-                    var serializedName = inputModelProperty.SerializedName;
+                    var serializationMapping = GetForMemberSerialization(declaredName);
+                    var serializedName = serializationMapping?.SerializationPath?[^1] ?? inputModelProperty.SerializedName;
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
 
                     var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
@@ -236,9 +237,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         ShouldExcludeInWireSerialization(property, inputModelProperty),
-                        customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
-                        customBicepSerializationMethodName: property.SerializationMapping?.BicepSerializationValueHook,
+                        customSerializationMethodName: serializationMapping?.SerializationValueHook,
+                        customDeserializationMethodName: serializationMapping?.DeserializationValueHook,
+                        customBicepSerializationMethodName: serializationMapping?.BicepSerializationValueHook,
                         enumerableExpression: enumerableExpression);
                 }
             }

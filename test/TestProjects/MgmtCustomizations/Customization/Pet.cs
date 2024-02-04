@@ -4,21 +4,20 @@
 #nullable disable
 
 using System;
-using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtCustomizations.Models
 {
+    [CodeGenSerialization(nameof(Size), SerializationValueHook = nameof(SerializeSizeProperty), DeserializationValueHook = nameof(DeserializeSizeProperty))]
+    [CodeGenSerialization(nameof(DateOfBirth), SerializationValueHook = nameof(SerializeDateOfBirthProperty))]
     public abstract partial class Pet
     {
         /// <summary> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </summary>
-        [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeSizeProperty), DeserializationValueHook = nameof(DeserializeSizeProperty))]
         public int Size { get; set; }
 
         /// <summary> Pet date of birth. </summary>
-        [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeDateOfBirthProperty))]
         public DateTimeOffset? DateOfBirth { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
