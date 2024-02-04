@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -207,54 +208,59 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 return Array.Empty<MethodSignature>();
             }
-            return PopulateMethods(type);
+            return PopulateMethods(type).ToArray();
         }
 
-        private IReadOnlyList<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
+        private IEnumerable<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
         {
             if (typeSymbol is null)
             {
                 // TODO: handle missing type
-                return Array.Empty<MethodSignature>();
+                yield break;
             }
-            var result = new List<MethodSignature>();
             var methods = typeSymbol.GetMembers().OfType<IMethodSymbol>();
             foreach (var method in methods)
             {
-                var description = method.GetDocumentationCommentXml();
-                if (!_typeFactory.TryCreateType(method.ReturnType, out var returnType))
-                {
-                    // TODO: handle missing method return type from MgmtOutputLibrary
-                    continue;
-                }
-
-                // TODO: handle missing parameter type from MgmtOutputLibrary
-                var parameters = new List<Parameter>();
-                bool isParameterTypeMissing = false;
-                foreach (var parameter in method.Parameters)
-                {
-                    var methodParameter = FromParameterSymbol(parameter);
-
-                    // If any parameter can't be created, it means the type was removed from current version
-                    if (methodParameter is null)
-                    {
-                        isParameterTypeMissing = true;
-                        break;
-                    }
-                    else
-                    {
-                        parameters.Add(methodParameter);
-                    }
-                }
-
-                // Since we don't have the ability to create the missing types, if any parameter type is missing we can't continue to generate overload methods
-                if (isParameterTypeMissing)
-                {
-                    continue;
-                }
-                result.Add(new MethodSignature(method.Name, null, $"{description}", BuilderHelpers.MapModifiers(method), returnType, null, parameters, IsRawSummaryText: true));
+                var methodSignature = PopulateMethodSymbol(method);
+                if (methodSignature is not null)
+                    yield return methodSignature;
             }
-            return result;
+        }
+
+        private MethodSignature? PopulateMethodSymbol(IMethodSymbol method)
+        {
+            var description = method.GetDocumentationCommentXml();
+            if (!_typeFactory.TryCreateType(method.ReturnType, out var returnType))
+            {
+                // TODO: handle missing method return type from MgmtOutputLibrary
+                return null;
+            }
+
+            // TODO: handle missing parameter type from MgmtOutputLibrary
+            var parameters = new List<Parameter>();
+            bool isParameterTypeMissing = false;
+            foreach (var parameter in method.Parameters)
+            {
+                var methodParameter = FromParameterSymbol(parameter);
+
+                // If any parameter can't be created, it means the type was removed from current version
+                if (methodParameter is null)
+                {
+                    isParameterTypeMissing = true;
+                    break;
+                }
+                else
+                {
+                    parameters.Add(methodParameter);
+                }
+            }
+
+            // Since we don't have the ability to create the missing types, if any parameter type is missing we can't continue to generate overload methods
+            if (isParameterTypeMissing)
+            {
+                return null;
+            }
+            return new MethodSignature(method.Name, null, $"{description}", BuilderHelpers.MapModifiers(method), returnType, null, parameters, IsRawSummaryText: true);
         }
 
         private Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
