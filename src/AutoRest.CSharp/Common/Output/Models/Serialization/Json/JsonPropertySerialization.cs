@@ -41,7 +41,5 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public string? CustomSerializationMethodName { get; }
 
         public string? CustomDeserializationMethodName { get; }
-
-        public string? CustomBicepSerializationMethodName { get; set; }
     }
 }
