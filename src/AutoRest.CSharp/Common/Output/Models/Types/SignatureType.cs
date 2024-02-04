@@ -41,12 +41,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public SignatureType(TypeFactory typeFactory, IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string @namespace, string name)
         {
-            // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
-            if (!Configuration.AzureArm)
-            {
-                throw new InvalidOperationException("This type should only be used for Mgmt");
-            }
-
             _typeFactory = typeFactory;
             Methods = methods;
             _namespace = @namespace;

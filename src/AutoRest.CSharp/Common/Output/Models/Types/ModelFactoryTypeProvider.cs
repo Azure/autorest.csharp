@@ -116,19 +116,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
         private SignatureType? _signatureType;
-        public override SignatureType? SignatureType
-        {
-            get
-            {
-                // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
-                // TODO: enable this for DPG, and check Configuration.Generate1ConvenientClient to disable it for HLC
-                if (!Configuration.AzureArm)
-                {
-                    return null;
-                }
-                return _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, Declaration.Namespace, Declaration.Name);
-            }
-        }
+        protected override SignatureType? SignatureType => _signatureType ??= new SignatureType(_typeFactory, ShouldNotBeUsedForOutput().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, Declaration.Namespace, Declaration.Name);
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
