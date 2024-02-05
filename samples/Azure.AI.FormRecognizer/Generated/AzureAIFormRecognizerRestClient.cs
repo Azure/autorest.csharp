@@ -37,6 +37,15 @@ namespace Azure.AI.FormRecognizer
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
         }
 
+        internal RequestUriBuilder CreateTrainCustomModelAsyncRequestUri(TrainContent trainRequest)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models", false);
+            return uri;
+        }
+
         internal HttpMessage CreateTrainCustomModelAsyncRequest(TrainContent trainRequest)
         {
             var message = _pipeline.CreateMessage();
@@ -101,6 +110,20 @@ namespace Azure.AI.FormRecognizer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetCustomModelRequestUri(Guid modelId, bool? includeKeys)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            if (includeKeys != null)
+            {
+                uri.AppendQuery("includeKeys", includeKeys.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetCustomModelRequest(Guid modelId, bool? includeKeys)
@@ -168,6 +191,16 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateDeleteCustomModelRequestUri(Guid modelId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteCustomModelRequest(Guid modelId)
         {
             var message = _pipeline.CreateMessage();
@@ -215,6 +248,21 @@ namespace Azure.AI.FormRecognizer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateAnalyzeWithCustomModelRequestUri(Guid modelId, Models.ContentType contentType, bool? includeTextDetails, Stream fileStream)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            uri.AppendPath("/analyze", false);
+            if (includeTextDetails != null)
+            {
+                uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, Models.ContentType contentType, bool? includeTextDetails, Stream fileStream)
@@ -284,6 +332,21 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateAnalyzeWithCustomModelRequestUri(Guid modelId, bool? includeTextDetails, SourcePath fileStream)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            uri.AppendPath("/analyze", false);
+            if (includeTextDetails != null)
+            {
+                uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, bool? includeTextDetails, SourcePath fileStream)
         {
             var message = _pipeline.CreateMessage();
@@ -351,6 +414,18 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateGetAnalyzeFormResultRequestUri(Guid modelId, Guid resultId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            uri.AppendPath("/analyzeResults/", false);
+            uri.AppendPath(resultId, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetAnalyzeFormResultRequest(Guid modelId, Guid resultId)
         {
             var message = _pipeline.CreateMessage();
@@ -412,6 +487,17 @@ namespace Azure.AI.FormRecognizer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCopyCustomModelRequestUri(Guid modelId, CopyContent copyRequest)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            uri.AppendPath("/copy", false);
+            return uri;
         }
 
         internal HttpMessage CreateCopyCustomModelRequest(Guid modelId, CopyContent copyRequest)
@@ -484,6 +570,18 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateGetCustomModelCopyResultRequestUri(Guid modelId, Guid resultId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/", false);
+            uri.AppendPath(modelId, true);
+            uri.AppendPath("/copyResults/", false);
+            uri.AppendPath(resultId, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetCustomModelCopyResultRequest(Guid modelId, Guid resultId)
         {
             var message = _pipeline.CreateMessage();
@@ -547,6 +645,15 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateGenerateModelCopyAuthorizationRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models/copyAuthorization", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGenerateModelCopyAuthorizationRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -603,6 +710,19 @@ namespace Azure.AI.FormRecognizer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateAnalyzeReceiptAsyncRequestUri(Models.ContentType contentType, bool? includeTextDetails, Stream fileStream)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/prebuilt/receipt/analyze", false);
+            if (includeTextDetails != null)
+            {
+                uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateAnalyzeReceiptAsyncRequest(Models.ContentType contentType, bool? includeTextDetails, Stream fileStream)
@@ -668,6 +788,19 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateAnalyzeReceiptAsyncRequestUri(bool? includeTextDetails, SourcePath fileStream)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/prebuilt/receipt/analyze", false);
+            if (includeTextDetails != null)
+            {
+                uri.AppendQuery("includeTextDetails", includeTextDetails.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateAnalyzeReceiptAsyncRequest(bool? includeTextDetails, SourcePath fileStream)
         {
             var message = _pipeline.CreateMessage();
@@ -731,6 +864,16 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateGetAnalyzeReceiptResultRequestUri(Guid resultId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/prebuilt/receipt/analyzeResults/", false);
+            uri.AppendPath(resultId, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetAnalyzeReceiptResultRequest(Guid resultId)
         {
             var message = _pipeline.CreateMessage();
@@ -790,6 +933,15 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateAnalyzeLayoutAsyncRequestUri(Models.ContentType contentType, Stream fileStream)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/layout/analyze", false);
+            return uri;
+        }
+
         internal HttpMessage CreateAnalyzeLayoutAsyncRequest(Models.ContentType contentType, Stream fileStream)
         {
             var message = _pipeline.CreateMessage();
@@ -847,6 +999,15 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateAnalyzeLayoutAsyncRequestUri(SourcePath fileStream)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/layout/analyze", false);
+            return uri;
+        }
+
         internal HttpMessage CreateAnalyzeLayoutAsyncRequest(SourcePath fileStream)
         {
             var message = _pipeline.CreateMessage();
@@ -902,6 +1063,16 @@ namespace Azure.AI.FormRecognizer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetAnalyzeLayoutResultRequestUri(Guid resultId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/layout/analyzeResults/", false);
+            uri.AppendPath(resultId, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetAnalyzeLayoutResultRequest(Guid resultId)
@@ -963,6 +1134,16 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateListCustomModelsRequestUri(Enum1 op)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models", false);
+            uri.AppendQuery("op", op.ToString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreateListCustomModelsRequest(Enum1 op)
         {
             var message = _pipeline.CreateMessage();
@@ -1022,6 +1203,16 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        internal RequestUriBuilder CreateGetCustomModelsRequestUri(Enum2 op)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendPath("/custom/models", false);
+            uri.AppendQuery("op", op.ToString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetCustomModelsRequest(Enum2 op)
         {
             var message = _pipeline.CreateMessage();
@@ -1079,6 +1270,15 @@ namespace Azure.AI.FormRecognizer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListCustomModelsNextPageRequestUri(string nextLink, Enum1 op)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListCustomModelsNextPageRequest(string nextLink, Enum1 op)

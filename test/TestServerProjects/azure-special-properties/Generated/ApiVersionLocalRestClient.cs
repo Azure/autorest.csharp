@@ -34,6 +34,15 @@ namespace azure_special_properties
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetMethodLocalValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/local/2.0", false);
+            uri.AppendQuery("api-version", "2.0", true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMethodLocalValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -76,6 +85,18 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMethodLocalNullRequestUri(string apiVersion)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/local/null", false);
+            if (apiVersion != null)
+            {
+                uri.AppendQuery("api-version", apiVersion, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetMethodLocalNullRequest(string apiVersion)
@@ -127,6 +148,15 @@ namespace azure_special_properties
             }
         }
 
+        internal RequestUriBuilder CreateGetPathLocalValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azurespecials/apiVersion/path/string/none/query/local/2.0", false);
+            uri.AppendQuery("api-version", "2.0", true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetPathLocalValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -169,6 +199,15 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetSwaggerLocalValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azurespecials/apiVersion/swagger/string/none/query/local/2.0", false);
+            uri.AppendQuery("api-version", "2.0", true);
+            return uri;
         }
 
         internal HttpMessage CreateGetSwaggerLocalValidRequest()

@@ -43,6 +43,20 @@ namespace Azure.Network.Management.Interface
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string resourceGroupName, string networkInterfaceName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = _pipeline.CreateMessage();
@@ -118,6 +132,24 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string resourceGroupName, string networkInterfaceName, string expand)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string resourceGroupName, string networkInterfaceName, string expand)
@@ -209,6 +241,20 @@ namespace Azure.Network.Management.Interface
             }
         }
 
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string networkInterfaceName, NetworkInterface parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -296,6 +342,20 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateUpdateTagsRequestUri(string resourceGroupName, string networkInterfaceName, TagsObject parameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateUpdateTagsRequest(string resourceGroupName, string networkInterfaceName, TagsObject parameters)
@@ -395,6 +455,17 @@ namespace Azure.Network.Management.Interface
             }
         }
 
+        internal RequestUriBuilder CreateListAllRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListAllRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -449,6 +520,19 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListRequestUri(string resourceGroupName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateListRequest(string resourceGroupName)
@@ -521,6 +605,21 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetEffectiveRouteTableRequestUri(string resourceGroupName, string networkInterfaceName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendPath("/effectiveRouteTable", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetEffectiveRouteTableRequest(string resourceGroupName, string networkInterfaceName)
@@ -599,6 +698,21 @@ namespace Azure.Network.Management.Interface
             }
         }
 
+        internal RequestUriBuilder CreateListEffectiveNetworkSecurityGroupsRequestUri(string resourceGroupName, string networkInterfaceName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendPath("/effectiveNetworkSecurityGroups", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListEffectiveNetworkSecurityGroupsRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = _pipeline.CreateMessage();
@@ -675,6 +789,14 @@ namespace Azure.Network.Management.Interface
             }
         }
 
+        internal RequestUriBuilder CreateListAllNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateListAllNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -740,6 +862,14 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string resourceGroupName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName)

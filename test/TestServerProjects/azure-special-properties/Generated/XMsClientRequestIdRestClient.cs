@@ -34,6 +34,14 @@ namespace azure_special_properties
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azurespecials/overwrite/x-ms-client-request-id/method/", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -74,6 +82,14 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamGetRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azurespecials/overwrite/x-ms-client-request-id/via-param/method/", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamGetRequest()

@@ -26,12 +26,12 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal SampleArmOperation(Response response)
+        internal SampleArmOperation(Response response, RehydrationToken? rehydrationToken = null) : base(response, rehydrationToken)
         {
-            _operation = OperationInternal.Succeeded(response);
+            _operation = OperationInternal.Succeeded(response, rehydrationToken);
         }
 
-        internal SampleArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
+        internal SampleArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null) : base(clientDiagnostics, pipeline, request, response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "SampleArmOperation", fallbackStrategy: new SequentialDelayStrategy());

@@ -36,6 +36,14 @@ namespace additionalProperties
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateCreateAPTrueRequestUri(PetAPTrue createParameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/additionalProperties/true", false);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateAPTrueRequest(PetAPTrue createParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -105,6 +113,14 @@ namespace additionalProperties
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateCatAPTrueRequestUri(CatAPTrue createParameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/additionalProperties/true-subclass", false);
+            return uri;
         }
 
         internal HttpMessage CreateCreateCatAPTrueRequest(CatAPTrue createParameters)
@@ -178,6 +194,14 @@ namespace additionalProperties
             }
         }
 
+        internal RequestUriBuilder CreateCreateAPObjectRequestUri(PetAPObject createParameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/additionalProperties/type/object", false);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateAPObjectRequest(PetAPObject createParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -247,6 +271,14 @@ namespace additionalProperties
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateAPStringRequestUri(PetAPString createParameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/additionalProperties/type/string", false);
+            return uri;
         }
 
         internal HttpMessage CreateCreateAPStringRequest(PetAPString createParameters)
@@ -320,6 +352,14 @@ namespace additionalProperties
             }
         }
 
+        internal RequestUriBuilder CreateCreateAPInPropertiesRequestUri(PetAPInProperties createParameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/additionalProperties/in/properties", false);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateAPInPropertiesRequest(PetAPInProperties createParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -389,6 +429,14 @@ namespace additionalProperties
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateAPInPropertiesWithAPStringRequestUri(PetAPInPropertiesWithAPString createParameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/additionalProperties/in/properties/with/additionalProperties/string", false);
+            return uri;
         }
 
         internal HttpMessage CreateCreateAPInPropertiesWithAPStringRequest(PetAPInPropertiesWithAPString createParameters)

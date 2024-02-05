@@ -43,6 +43,23 @@ namespace AppConfiguration
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateGetKeysRequestUri(string name, string after, string acceptDatetime)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/keys", false);
+            if (name != null)
+            {
+                uri.AppendQuery("name", name, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateGetKeysRequest(string name, string after, string acceptDatetime)
         {
             var message = _pipeline.CreateMessage();
@@ -121,6 +138,23 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateCheckKeysRequestUri(string name, string after, string acceptDatetime)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/keys", false);
+            if (name != null)
+            {
+                uri.AppendQuery("name", name, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateCheckKeysRequest(string name, string after, string acceptDatetime)
         {
             var message = _pipeline.CreateMessage();
@@ -186,6 +220,31 @@ namespace AppConfiguration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetKeyValuesRequestUri(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/kv", false);
+            if (key != null)
+            {
+                uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
@@ -278,6 +337,31 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateCheckKeyValuesRequestUri(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/kv", false);
+            if (key != null)
+            {
+                uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateCheckKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
@@ -355,6 +439,24 @@ namespace AppConfiguration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetKeyValueRequestUri(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select)
@@ -462,6 +564,20 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreatePutKeyValueRequestUri(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
         {
             var message = _pipeline.CreateMessage();
@@ -564,6 +680,20 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateDeleteKeyValueRequestUri(string key, string label, string ifMatch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteKeyValueRequest(string key, string label, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -653,6 +783,24 @@ namespace AppConfiguration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCheckKeyValueRequestUri(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/kv/", false);
+            uri.AppendPath(key, true);
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateCheckKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select)
@@ -749,6 +897,27 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateGetLabelsRequestUri(string name, string after, string acceptDatetime, IEnumerable<Get5ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/labels", false);
+            if (name != null)
+            {
+                uri.AppendQuery("name", name, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateGetLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<Get5ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
@@ -833,6 +1002,27 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateCheckLabelsRequestUri(string name, string after, string acceptDatetime, IEnumerable<Head5ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/labels", false);
+            if (name != null)
+            {
+                uri.AppendQuery("name", name, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateCheckLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<Head5ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
@@ -904,6 +1094,20 @@ namespace AppConfiguration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutLockRequestUri(string key, string label, string ifMatch, string ifNoneMatch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/locks/", false);
+            uri.AppendPath(key, true);
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreatePutLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
@@ -999,6 +1203,20 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateDeleteLockRequestUri(string key, string label, string ifMatch, string ifNoneMatch)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/locks/", false);
+            uri.AppendPath(key, true);
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -1092,6 +1310,31 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateGetRevisionsRequestUri(string key, string label, string after, string acceptDatetime, IEnumerable<Enum6> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/revisions", false);
+            if (key != null)
+            {
+                uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateGetRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum6> select)
         {
             var message = _pipeline.CreateMessage();
@@ -1182,6 +1425,31 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateCheckRevisionsRequestUri(string key, string label, string after, string acceptDatetime, IEnumerable<Enum7> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/revisions", false);
+            if (key != null)
+            {
+                uri.AppendQuery("key", key, true);
+            }
+            if (label != null)
+            {
+                uri.AppendQuery("label", label, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (after != null)
+            {
+                uri.AppendQuery("After", after, true);
+            }
+            if (select != null && Optional.IsCollectionDefined(select))
+            {
+                uri.AppendQueryDelimited("$Select", select, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum7> select)
         {
             var message = _pipeline.CreateMessage();
@@ -1259,6 +1527,14 @@ namespace AppConfiguration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetKeysNextPageRequestUri(string nextLink, string name, string after, string acceptDatetime)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetKeysNextPageRequest(string nextLink, string name, string after, string acceptDatetime)
@@ -1342,6 +1618,14 @@ namespace AppConfiguration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetKeyValuesNextPageRequestUri(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetKeyValuesNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
@@ -1431,6 +1715,14 @@ namespace AppConfiguration
             }
         }
 
+        internal RequestUriBuilder CreateGetLabelsNextPageRequestUri(string nextLink, string name, string after, string acceptDatetime, IEnumerable<Get5ItemsItem> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetLabelsNextPageRequest(string nextLink, string name, string after, string acceptDatetime, IEnumerable<Get5ItemsItem> select)
         {
             var message = _pipeline.CreateMessage();
@@ -1514,6 +1806,14 @@ namespace AppConfiguration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRevisionsNextPageRequestUri(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum6> select)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetRevisionsNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum6> select)

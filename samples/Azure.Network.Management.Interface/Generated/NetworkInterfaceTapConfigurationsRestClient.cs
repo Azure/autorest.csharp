@@ -43,6 +43,22 @@ namespace Azure.Network.Management.Interface
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendPath("/tapConfigurations/", false);
+            uri.AppendPath(tapConfigurationName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
         {
             var message = _pipeline.CreateMessage();
@@ -130,6 +146,22 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendPath("/tapConfigurations/", false);
+            uri.AppendPath(tapConfigurationName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName)
@@ -225,6 +257,22 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendPath("/tapConfigurations/", false);
+            uri.AppendPath(tapConfigurationName, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters)
@@ -328,6 +376,21 @@ namespace Azure.Network.Management.Interface
             }
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string resourceGroupName, string networkInterfaceName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/networkInterfaces/", false);
+            uri.AppendPath(networkInterfaceName, true);
+            uri.AppendPath("/tapConfigurations", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string resourceGroupName, string networkInterfaceName)
         {
             var message = _pipeline.CreateMessage();
@@ -410,6 +473,14 @@ namespace Azure.Network.Management.Interface
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateListNextPageRequestUri(string nextLink, string resourceGroupName, string networkInterfaceName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string networkInterfaceName)

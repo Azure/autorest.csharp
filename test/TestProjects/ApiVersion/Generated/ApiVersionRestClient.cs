@@ -38,6 +38,17 @@ namespace ApiVersion
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateOperationRequestUri(Models.ApiVersion notApiVersionEnum)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/op", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendQuery("not-api-version-constant", "2.0", true);
+            uri.AppendQuery("not-api-version-enum", notApiVersionEnum.ToString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationRequest(Models.ApiVersion notApiVersionEnum)
         {
             var message = _pipeline.CreateMessage();

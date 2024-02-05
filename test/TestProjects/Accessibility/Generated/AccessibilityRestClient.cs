@@ -34,6 +34,14 @@ namespace Accessibility
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateOperationRequestUri(string body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/Operation/", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationRequest(string body)
         {
             var message = _pipeline.CreateMessage();
@@ -81,6 +89,14 @@ namespace Accessibility
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateOperationInternalRequestUri(string body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationInternal/", false);
+            return uri;
         }
 
         internal HttpMessage CreateOperationInternalRequest(string body)
