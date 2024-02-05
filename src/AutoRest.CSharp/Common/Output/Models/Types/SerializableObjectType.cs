@@ -21,14 +21,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected SerializableObjectType(BuildContext context) : base(context)
         {
             _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
-            _context = context;
         }
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             _modelTypeMapping = new Lazy<ModelTypeMapping?>(() => _sourceInputModel?.CreateForModel(ExistingType));
         }
-
-        private readonly BuildContext? _context;
 
         public INamedTypeSymbol? GetExistingType() => ExistingType;
 
