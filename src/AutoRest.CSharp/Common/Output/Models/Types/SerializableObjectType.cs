@@ -36,10 +36,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private bool? _includeDeserializer;
         public bool IncludeDeserializer => _includeDeserializer ??= EnsureIncludeDeserializer();
 
-        private ModelSerialization? _modelSerialization;
-        public ModelSerialization Serialization => _modelSerialization ??= BuildSerialization();
+        private ObjectTypeSerialization? _modelSerialization;
+        public ObjectTypeSerialization Serialization => _modelSerialization ??= BuildSerialization();
 
-        protected abstract ModelSerialization BuildSerialization();
+        protected abstract ObjectTypeSerialization BuildSerialization();
 
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();

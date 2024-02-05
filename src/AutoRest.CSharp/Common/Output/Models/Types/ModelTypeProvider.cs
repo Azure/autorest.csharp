@@ -476,9 +476,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return EmptyConstructor;
         }
 
-        protected override ModelSerialization BuildSerialization()
+        protected override ObjectTypeSerialization BuildSerialization()
         {
-            return new ModelSerialization(BuildJsonSerialization(), BuildXmlSerialization(), IncludeSerializer);
+            return new ObjectTypeSerialization(BuildJsonSerialization(), BuildXmlSerialization(), IncludeSerializer);
         }
 
         protected override JsonObjectSerialization? BuildJsonSerialization()

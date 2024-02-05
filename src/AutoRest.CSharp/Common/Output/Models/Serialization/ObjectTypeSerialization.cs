@@ -10,10 +10,10 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
-    internal record ModelSerialization
+    internal record ObjectTypeSerialization
     {
         private readonly bool _includeSerializer;
-        public ModelSerialization(JsonObjectSerialization? json, XmlObjectSerialization? xml, bool includeSerializer)
+        public ObjectTypeSerialization(JsonObjectSerialization? json, XmlObjectSerialization? xml, bool includeSerializer)
         {
             Json = json;
             Xml = xml;

@@ -718,9 +718,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return Configuration.UseModelReaderWriter || _usage.HasFlag(SchemaTypeUsage.Output);
         }
 
-        protected override ModelSerialization BuildSerialization()
+        protected override ObjectTypeSerialization BuildSerialization()
         {
-            return new ModelSerialization(BuildJsonSerialization(), BuildXmlSerialization(), IncludeSerializer);
+            return new ObjectTypeSerialization(BuildJsonSerialization(), BuildXmlSerialization(), IncludeSerializer);
         }
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
