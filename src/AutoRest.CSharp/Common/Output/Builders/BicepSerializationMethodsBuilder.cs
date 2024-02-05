@@ -151,11 +151,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     false)
             );
             var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
-            yield return new ForStatement(typeof(string), "i", "line", new ListExpression(typeof(string), lines), out var i, out var line)
+            var line = new VariableReference(typeof(string), "line");
+            yield return new ForStatement("i", new ListExpression(typeof(string), lines), out var indexer)
             {
-                new IfElseStatement(And(Equal(i, new ConstantExpression(new Constant(0, typeof(int)))), Not(new BoolExpression(IndentFirstLine))),
-                    stringBuilder.AppendLine(new FormattableStringExpression(" {0}", new ValueExpression[] {line})),
-                stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
+                Declare(line, new IndexerExpression(lines, indexer)),
+                new IfElseStatement(
+                    And(Equal(indexer, new ConstantExpression(new Constant(0, typeof(int)))),
+                        Not(new BoolExpression(IndentFirstLine))),
+                    stringBuilder.AppendLine(new FormattableStringExpression(" {0}", line)),
+                    stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}", indent, line)))
             };
         }
 

@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 using SwitchExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.SwitchExpression;
@@ -128,9 +130,21 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.AmbientScope())
                     {
                         writer.AppendRaw("for (");
-                        writer.Append($"int {forStatement.Indexer:D} = 0; {forStatement.Indexer} < {forStatement.Enumerable}.Length; {forStatement.Indexer}++)");
+                        writer.WriteValueExpression(
+                            new AssignmentExpression(
+                                forStatement.IndexerVariable,
+                                new ConstantExpression(new Constant(0, typeof(int)))));
+                        writer.AppendRaw("; ");
+                        writer.WriteValueExpression(
+                            new BoolExpression(
+                                new BinaryOperatorExpression(
+                                    "<",
+                                    forStatement.IndexerVariable,
+                                    forStatement.Enumerable.Property("Length"))));
+                        writer.AppendRaw("; ");
+                        writer.WriteValueExpression(new UnaryOperatorExpression("++", forStatement.IndexerVariable, true));
+                        writer.LineRaw(")");
                         writer.LineRaw("{");
-                        writer.Append($"{forStatement.ItemType} {forStatement.Item:D} = {forStatement.Enumerable}[{forStatement.Indexer}];");
                         writer.LineRaw("");
                         WriteMethodBodyStatement(writer, forStatement.Body.AsStatement());
                         writer.LineRaw("}");
@@ -661,6 +675,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 case DeclarationExpression(var variable, var isOut):
                     writer.AppendRawIf("out ", isOut);
                     writer.Append($"{variable.Type} {variable.Declaration:D}");
+                    break;
+                case AssignmentExpression(var variable, var value):
+                    writer.Append($"{variable.Type} {variable.Declaration:D} = {value}");
                     break;
             }
 

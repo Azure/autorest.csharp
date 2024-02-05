@@ -118,6 +118,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                            
                            """;
             Assert.AreEqual(expected, bicep);
+
+            var props = new DeliveryRuleProperties(3, condition, actions,
+                new Dictionary<string, DeliveryRuleAction>()
+                {
+                    {
+                        "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null)
+                    }
+                },
+                new Dog(), foo: "Foo", new Dictionary<string, BinaryData>() { { "foo", new BinaryData("bar") } });
+
+            bicep = ModelReaderWriter.Write(props, new ModelReaderWriterOptions("B")).ToString();
+            TestContext.Progress.WriteLine(bicep);
         }
     }
 }
