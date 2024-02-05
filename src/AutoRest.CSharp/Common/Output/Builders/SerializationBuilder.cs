@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Output.Builders
             return serializationFormat != SerializationFormat.Default ? serializationFormat : GetDefaultSerializationFormat(valueType);
         }
 
-        public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type, SerializationFormat? serializationFormat) => bodyMediaType switch
+        public static ValueSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type, SerializationFormat? serializationFormat) => bodyMediaType switch
         {
             BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
             BodyMediaType.Json => BuildJsonSerialization(inputType, type, false, serializationFormat ?? GetSerializationFormat(inputType, type)),
@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Builders
             };
         }
 
-        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
+        public ValueSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
         {
             KnownMediaType.Json => BuildSerialization(schema, type, false),
             KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),

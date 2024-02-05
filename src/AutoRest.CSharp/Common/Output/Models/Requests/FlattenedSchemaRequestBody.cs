@@ -10,9 +10,9 @@ namespace AutoRest.CSharp.Output.Models.Requests
     {
         public ObjectType ObjectType { get; }
         public ObjectPropertyInitializer[] Initializers { get; }
-        public ObjectSerialization Serialization { get; }
+        public ValueSerialization Serialization { get; }
 
-        public FlattenedSchemaRequestBody(ObjectType objectType, ObjectPropertyInitializer[] initializers, ObjectSerialization serialization)
+        public FlattenedSchemaRequestBody(ObjectType objectType, ObjectPropertyInitializer[] initializers, ValueSerialization serialization)
         {
             ObjectType = objectType;
             Initializers = initializers;

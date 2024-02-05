@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -13,13 +12,11 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 {
     internal record ModelSerialization
     {
-        private readonly bool _isStruct;
         private readonly bool _includeSerializer;
-        public ModelSerialization(JsonObjectSerialization? json, XmlObjectSerialization? xml, bool isStruct, bool includeSerializer)
+        public ModelSerialization(JsonObjectSerialization? json, XmlObjectSerialization? xml, bool includeSerializer)
         {
             Json = json;
             Xml = xml;
-            _isStruct = isStruct;
             _includeSerializer = includeSerializer;
         }
 
@@ -35,22 +32,37 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             if (!_includeSerializer)
                 return Array.Empty<CSharpType>();
 
+            bool hasIJsonT = false;
+            bool hasIJsonObject = false;
             var interfaces = new List<CSharpType>();
             if (Json is not null)
             {
                 interfaces.Add(Json.IJsonInterface);
                 if (Configuration.UseModelReaderWriter)
-                    interfaces.Add(Json.IJsonModelInterface);
+                {
+                    interfaces.Add(Json.IJsonModelTInterface);
+                    hasIJsonT = true;
+                    if (Json.IJsonModelObjectInterface is not null)
+                    {
+                        interfaces.Add(Json.IJsonModelObjectInterface);
+                        hasIJsonObject = true;
+                    }
+                }
             }
             if (Xml is not null)
             {
                 interfaces.Add(Xml.IXmlInterface);
                 if (Configuration.UseModelReaderWriter)
-                    interfaces.Add(Xml.IPersistableModelTInterface);
-            }
-            if (_isStruct && Configuration.UseModelReaderWriter)
-            {
-                interfaces.Add(typeof(IPersistableModel<object>));
+                {
+                    if (!hasIJsonT)
+                    {
+                        interfaces.Add(Xml.IPersistableModelTInterface);
+                    }
+                    if (Xml.IPersistableModelObjectInterface is not null && !hasIJsonObject)
+                    {
+                        interfaces.Add(Xml.IPersistableModelObjectInterface);
+                    }
+                }
             }
             return interfaces;
         }

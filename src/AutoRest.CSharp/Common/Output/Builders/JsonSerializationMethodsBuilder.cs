@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
     {
         public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
         {
-            var jsonModelInterface = json.IJsonModelInterface;
+            var jsonModelInterface = json.IJsonModelTInterface;
             var typeOfT = jsonModelInterface.Arguments[0];
 
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
