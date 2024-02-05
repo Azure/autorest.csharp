@@ -4,5 +4,11 @@
     <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ClientModel" Version="1.0.0-beta.3" >
+      <NoWarn>NU1605</NoWarn>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="..\..\Directory.Build.props" />
 </Project>
