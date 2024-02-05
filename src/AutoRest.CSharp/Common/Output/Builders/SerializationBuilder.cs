@@ -295,7 +295,10 @@ namespace AutoRest.CSharp.Output.Builders
                     serialization,
                     isRequired,
                     shouldExcludeInWireSerialization,
-                    serializationMapping: serializationMapping,
+                    serializationHooks: new CustomSerializationHooks(
+                        serializationMapping?.JsonSerializationValueHook,
+                        serializationMapping?.JsonDeserializationValueHook,
+                        serializationMapping?.BicepSerializationValueHook),
                     enumerableExpression: enumerableExpression);
             }
 

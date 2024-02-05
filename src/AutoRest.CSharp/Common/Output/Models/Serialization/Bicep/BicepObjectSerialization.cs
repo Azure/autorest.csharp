@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
         public BicepObjectSerialization(SerializableObjectType objectType, JsonObjectSerialization jsonObjectSerialization)
         {
             Properties = jsonObjectSerialization.Properties.Select(p =>
-                new BicepPropertySerialization(p, p.SerializationMapping?.BicepSerializationValueHook));
+                new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
         }
 
         public IEnumerable<BicepPropertySerialization> Properties { get; }

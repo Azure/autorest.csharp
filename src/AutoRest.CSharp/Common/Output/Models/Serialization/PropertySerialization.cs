@@ -36,9 +36,9 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public bool IsRequired { get; }
         public bool ShouldExcludeInWireSerialization { get; }
 
-        public SourcePropertySerializationMapping? SerializationMapping { get; }
+        public CustomSerializationHooks? SerializationHooks { get; }
 
-        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldExcludeInWireSerialization, TypedValueExpression? enumerableValue = null, SourcePropertySerializationMapping? serializationMapping = null)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldExcludeInWireSerialization, TypedValueExpression? enumerableValue = null, CustomSerializationHooks? serializationHooks = null)
         {
             SerializationConstructorParameterName = parameterName;
             Value = value;
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
             IsRequired = isRequired;
             ShouldExcludeInWireSerialization = shouldExcludeInWireSerialization;
             EnumerableValue = enumerableValue;
-            SerializationMapping = serializationMapping;
+            SerializationHooks = serializationHooks;
         }
     }
 }

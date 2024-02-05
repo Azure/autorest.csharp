@@ -237,7 +237,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         ShouldExcludeInWireSerialization(property, inputModelProperty),
-                        serializationMapping: serializationMapping,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook),
                         enumerableExpression: enumerableExpression);
                 }
             }

@@ -7,19 +7,19 @@ namespace AutoRest.CSharp.Input.Source
 {
     public class SourcePropertySerializationMapping
     {
-        public SourcePropertySerializationMapping(string propertyName, IReadOnlyList<string>? serializationPath, string? serializationValueHook, string? deserializationValueHook, string? bicepSerializationValueHook)
+        public SourcePropertySerializationMapping(string propertyName, IReadOnlyList<string>? serializationPath, string? jsonSerializationValueHook, string? jsonDeserializationValueHook, string? bicepSerializationValueHook)
         {
             PropertyName = propertyName;
             SerializationPath = serializationPath;
-            SerializationValueHook = serializationValueHook;
-            DeserializationValueHook = deserializationValueHook;
+            JsonSerializationValueHook = jsonSerializationValueHook;
+            JsonDeserializationValueHook = jsonDeserializationValueHook;
             BicepSerializationValueHook = bicepSerializationValueHook;
         }
 
         public string PropertyName { get; }
         public IReadOnlyList<string>? SerializationPath { get; }
-        public string? SerializationValueHook { get; }
-        public string? DeserializationValueHook { get; }
+        public string? JsonSerializationValueHook { get; }
+        public string? JsonDeserializationValueHook { get; }
 
         public string? BicepSerializationValueHook { get; }
     }
