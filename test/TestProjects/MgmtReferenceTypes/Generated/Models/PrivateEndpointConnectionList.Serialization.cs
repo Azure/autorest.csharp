@@ -55,7 +55,6 @@ namespace Azure.ResourceManager.Fake.Models
             {
                 writer.WriteObjectValue(model);
             }
-
             public override PrivateEndpointConnectionList Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);
