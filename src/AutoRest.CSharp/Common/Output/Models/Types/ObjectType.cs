@@ -82,7 +82,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract FormattableString CreateDescription();
-        public virtual JsonConverterProvider? JsonConverter { get; }
 
         protected virtual IEnumerable<Method> BuildMethods()
         {
