@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsage>, IXmlSerializable, IPersistableModel<ModelWithCustomUsage>
+    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsage>, IXmlSerializable
     {
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
