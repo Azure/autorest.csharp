@@ -17,7 +17,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtXmlDeserialization
 {
-    public partial class XmlInstanceData : IUtf8JsonSerializable, IJsonModel<XmlInstanceData>, IXmlSerializable, IPersistableModel<XmlInstanceData>
+    public partial class XmlInstanceData : IUtf8JsonSerializable, IJsonModel<XmlInstanceData>, IXmlSerializable
     {
         private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {

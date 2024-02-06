@@ -1,70 +1,43 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
     internal record ObjectTypeSerialization
     {
-        private readonly bool _includeSerializer;
-        public ObjectTypeSerialization(JsonObjectSerialization? json, XmlObjectSerialization? xml, bool includeSerializer)
+        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml)
         {
             Json = json;
             Xml = xml;
-            _includeSerializer = includeSerializer;
+
+            WireFormat = Xml != null ? Serializations.XmlFormat : Serializations.JsonFormat;
+
+            // select interface model type here
+            var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
+            Interfaces = new SerializationInterfaces(model.IncludeSerializer, model.IsStruct, modelType, json is not null, xml is not null);
+
+            if (Configuration.UseModelReaderWriter && model.Declaration.IsAbstract && model.Discriminator is { } discriminator)
+            {
+                PersistableModelProxyType = discriminator.DefaultObjectType.Type;
+            }
         }
 
-        public JsonObjectSerialization? Json { get; init; }
+        public JsonObjectSerialization? Json { get; }
 
-        public XmlObjectSerialization? Xml { get; init; }
+        public XmlObjectSerialization? Xml { get; }
 
-        private IReadOnlyList<CSharpType>? _interfaces;
-        public IReadOnlyList<CSharpType> Interfaces => _interfaces ??= BuildInterfaces();
+        public ValueExpression WireFormat { get; }
 
-        private IReadOnlyList<CSharpType> BuildInterfaces()
-        {
-            if (!_includeSerializer)
-                return Array.Empty<CSharpType>();
+        public SerializationInterfaces Interfaces { get; }
 
-            bool hasIJsonT = false;
-            bool hasIJsonObject = false;
-            var interfaces = new List<CSharpType>();
-            if (Json is not null)
-            {
-                interfaces.Add(Json.IJsonInterface);
-                if (Configuration.UseModelReaderWriter)
-                {
-                    interfaces.Add(Json.IJsonModelTInterface);
-                    hasIJsonT = true;
-                    if (Json.IJsonModelObjectInterface is not null)
-                    {
-                        interfaces.Add(Json.IJsonModelObjectInterface);
-                        hasIJsonObject = true;
-                    }
-                }
-            }
-            if (Xml is not null)
-            {
-                interfaces.Add(Xml.IXmlInterface);
-                if (Configuration.UseModelReaderWriter)
-                {
-                    if (!hasIJsonT)
-                    {
-                        interfaces.Add(Xml.IPersistableModelTInterface);
-                    }
-                    if (Xml.IPersistableModelObjectInterface is not null && !hasIJsonObject)
-                    {
-                        interfaces.Add(Xml.IPersistableModelObjectInterface);
-                    }
-                }
-            }
-            return interfaces;
-        }
+        public CSharpType? PersistableModelProxyType { get; }
     }
 }

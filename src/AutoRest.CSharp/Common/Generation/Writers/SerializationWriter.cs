@@ -6,12 +6,9 @@ using System.ClientModel.Primitives;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
-using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 
@@ -39,8 +36,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var declaration = model.Declaration;
             var serialization = model.Serialization;
-            var json = serialization.Json;
-            var xml = serialization.Xml;
 
             if (serialization.Json == null && serialization.Xml == null)
             {
@@ -52,11 +47,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Append($"[{typeof(JsonConverter)}(typeof({declaration.Name}Converter))]");
                 }
-                // write the serialization proxy attribute if the model is abstract
-                if (Configuration.UseModelReaderWriter && declaration.IsAbstract && model.Discriminator is { } discriminator)
+                // write the serialization proxy attribute if the model has one
+                if (serialization.PersistableModelProxyType is { } proxyType)
                 {
-                    var unknown = discriminator.DefaultObjectType;
-                    writer.Append($"[{typeof(PersistableModelProxyAttribute)}(typeof({unknown.Type}))]");
+                    writer.Append($"[{typeof(PersistableModelProxyAttribute)}(typeof({proxyType}))]");
                 }
 
                 writer.Append($"{declaration.Accessibility} partial {(model.IsStruct ? "struct" : "class")} {declaration.Name}")
@@ -71,17 +65,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
-                    if (xml != null)
+                    foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(model, serialization))
                     {
-                        WriteXmlSerialization(writer, model, xml);
+                        writer.WriteMethod(method);
                     }
-
-                    if (json != null)
-                    {
-                        WriteJsonSerialization(writer, model, json);
-                    }
-
-                    WriteIModelImplementations(writer, model, json, xml);
 
                     foreach (var method in model.Methods)
                     {
@@ -90,7 +77,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteMethod(method);
                     }
 
-                    if (json is { IncludeConverter: true })
+                    if (serialization.Json is { IncludeConverter: true } json)
                     {
                         WriteCustomJsonConverter(writer, declaration, json.Type, model.IncludeSerializer, model.IncludeDeserializer);
                     }
@@ -128,70 +115,6 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"throw new {typeof(NotImplementedException)}();");
                     }
                 }
-            }
-        }
-
-        /// <summary>
-        /// This method writes the implementation of IXmlSerializable and the static deserialization method
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="model"></param>
-        /// <param name="xml"></param>
-        private static void WriteXmlSerialization(CodeWriter writer, SerializableObjectType model, XmlObjectSerialization xml)
-        {
-            if (model.IncludeSerializer)
-            {
-                foreach (var method in XmlSerializationMethodsBuilder.BuildXmlSerializationMethods(xml))
-                {
-                    writer.WriteMethod(method);
-                }
-            }
-
-            if (model.IncludeDeserializer)
-                writer.WriteMethod(XmlSerializationMethodsBuilder.BuildDeserialize(model.Declaration, xml));
-        }
-
-        /// <summary>
-        /// This method writes the implementation of IUtf8JsonSerializable, IJsonModel{T} and the static deserialization method
-        /// If the model is defined as a struct, including the implementation of IJsonModel{object}
-        /// NOTE: the inherited methods from IModel{T} and IModel{object} is excluded
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="model"></param>
-        /// <param name="json"></param>
-        private static void WriteJsonSerialization(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization json)
-        {
-            // the methods that implement the interface IJsonModel<T> (and IJsonModel<object> if eligible) (do not include the methods inherited from IModel<T> or IModel<object>)
-            if (model.IncludeSerializer)
-            {
-                foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(model, json))
-                {
-                    writer.WriteMethod(method);
-                }
-            }
-
-            // the deserialize static method
-            if (model.IncludeDeserializer)
-            {
-                if (JsonSerializationMethodsBuilder.BuildDeserialize(model.Declaration, json, model.GetExistingType()) is { } deserialize)
-                {
-                    writer.WriteMethod(deserialize);
-                }
-            }
-        }
-
-        /// <summary>
-        /// This method writes the implementation of IModel{T}
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="model"></param>
-        /// <param name="json"></param>
-        /// <param name="xml"></param>
-        private static void WriteIModelImplementations(CodeWriter writer, SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml)
-        {
-            foreach (var method in JsonSerializationMethodsBuilder.BuildIModelMethods(model, json, xml))
-            {
-                writer.WriteMethod(method);
             }
         }
 
