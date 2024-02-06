@@ -144,6 +144,7 @@ namespace AutoRest.CSharp.Input.Source
 
         private async Task<Compilation?> LoadBaselineContract()
         {
+            // TODO -- enable this for DPG, and check Configuration.Generate1ConvenientClient to disable it for HLC
             // This can only be used for Mgmt now, because there are custom/hand-written code in HLC can't be loaded into CsharpType such as generic methods
             if (!Configuration.AzureArm)
                 return null;
