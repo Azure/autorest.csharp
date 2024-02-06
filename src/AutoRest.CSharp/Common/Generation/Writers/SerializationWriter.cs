@@ -65,15 +65,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
-                    foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(model, serialization))
-                    {
-                        writer.WriteMethod(method);
-                    }
-
                     foreach (var method in model.Methods)
                     {
-                        writer.WriteXmlDocumentationSummary(method.Signature.Description);
-                        writer.WriteXmlDocumentationParameters(method.Signature.Parameters);
+                        writer.WriteMethodDocumentation(method.Signature);
                         writer.WriteMethod(method);
                     }
 

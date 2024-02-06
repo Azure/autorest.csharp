@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -556,6 +557,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildMethods()
         {
+            foreach (var method in SerializationMethodsBuilder.BuildSerializationMethods(this))
+            {
+                yield return method;
+            }
+
             if (IncludeDeserializer)
                 yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
             if (IncludeSerializer)

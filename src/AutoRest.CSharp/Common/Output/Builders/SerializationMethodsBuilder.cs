@@ -20,8 +20,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class SerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildSerializationMethods(SerializableObjectType model, ObjectTypeSerialization serialization)
+        public static IEnumerable<Method> BuildSerializationMethods(SerializableObjectType model)
         {
+            var serialization = model.Serialization;
             // xml has to be the first to minimize the amount of changes
             if (serialization.Xml is { } xml)
             {
@@ -59,14 +60,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            foreach (var method in BuildIModelMethods(model, serialization))
+            foreach (var method in BuildIModelMethods(model))
             {
                 yield return method;
             }
         }
 
-        private static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, ObjectTypeSerialization serialization)
+        private static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model)
         {
+            var serialization = model.Serialization;
             var interfaces = serialization.Interfaces;
 
             var iModelTInterface = interfaces.IPersistableModelTInterface;
