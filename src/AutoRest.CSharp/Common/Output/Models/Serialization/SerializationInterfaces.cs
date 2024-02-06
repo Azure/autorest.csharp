@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
     {
         public SerializationInterfaces(bool includeSerializer, bool isStruct, CSharpType modelType, bool hasJson, bool hasXml)
         {
+            // TODO -- includeSerializer could be removed after the use-model-reader-writer configuration is removed because it is always true
             if (includeSerializer)
             {
                 if (hasJson)
