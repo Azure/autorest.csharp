@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 foreach (var method in converter.Methods)
                 {
-                    writer.WriteMethod(method);
+                    writer.WriteMethod(method, writeEmptyLine: false);
                 }
             }
         }
