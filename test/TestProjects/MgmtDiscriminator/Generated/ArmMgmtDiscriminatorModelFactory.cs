@@ -118,10 +118,11 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="bark"> A dog can bark. </param>
+        /// <param name="dogKind"> The kind of the dog. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string id = null, string bark = null)
+        public static Dog Dog(string id = null, string bark = null, DogKind? dogKind = null)
         {
-            return new Dog(PetKind.Dog, id, serializedAdditionalRawData: null, bark);
+            return new Dog(PetKind.Dog, id, serializedAdditionalRawData: null, bark, dogKind);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRemoteAddressCondition"/>. </summary>

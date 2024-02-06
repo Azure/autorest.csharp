@@ -537,6 +537,15 @@
                 "bark": {
                     "description": "A dog can bark",
                     "type": "string"
+                },
+                "dogKind": {
+                    "description": "The kind of the dog",
+                    "type": "string",
+                    "enum": ["german Shepherd", "golden Retriever"],
+                    "x-ms-enum": {
+                        "name": "DogKind",
+                        "modelAsString": false
+                    }
                 }
             }
         },

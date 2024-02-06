@@ -173,31 +173,63 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(DestinationProtocol))
             {
                 builder.Append("  destinationProtocol:");
-                builder.AppendLine($" '{DestinationProtocol.ToString()}'");
+                builder.AppendLine($" '{DestinationProtocol.Value.ToString()}'");
             }
 
             if (Optional.IsDefined(CustomPath))
             {
                 builder.Append("  customPath:");
-                builder.AppendLine($" '{CustomPath}'");
+                if (CustomPath.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{CustomPath}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{CustomPath}'");
+                }
             }
 
             if (Optional.IsDefined(CustomHostname))
             {
                 builder.Append("  customHostname:");
-                builder.AppendLine($" '{CustomHostname}'");
+                if (CustomHostname.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{CustomHostname}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{CustomHostname}'");
+                }
             }
 
             if (Optional.IsDefined(CustomQueryString))
             {
                 builder.Append("  customQueryString:");
-                builder.AppendLine($" '{CustomQueryString}'");
+                if (CustomQueryString.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{CustomQueryString}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{CustomQueryString}'");
+                }
             }
 
             if (Optional.IsDefined(CustomFragment))
             {
                 builder.Append("  customFragment:");
-                builder.AppendLine($" '{CustomFragment}'");
+                if (CustomFragment.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{CustomFragment}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{CustomFragment}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -209,9 +241,25 @@ namespace MgmtDiscriminator.Models
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

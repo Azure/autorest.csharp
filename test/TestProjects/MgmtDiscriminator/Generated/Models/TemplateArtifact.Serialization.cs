@@ -220,6 +220,20 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
+            if (Optional.IsDefined(Name))
+            {
+                builder.Append("  name:");
+                if (Name.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Name}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Name}'");
+                }
+            }
+
             if (Optional.IsDefined(Kind))
             {
                 builder.Append("  kind:");
@@ -230,18 +244,6 @@ namespace MgmtDiscriminator.Models
             {
                 builder.Append("  id:");
                 builder.AppendLine($" '{Id.ToString()}'");
-            }
-
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name}'");
-            }
-
-            if (Optional.IsDefined(ResourceType))
-            {
-                builder.Append("  type:");
-                builder.AppendLine($" '{ResourceType.ToString()}'");
             }
 
             if (Optional.IsDefined(SystemData))
@@ -261,7 +263,15 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(ResourceGroup))
             {
                 builder.Append("    resourceGroup:");
-                builder.AppendLine($" '{ResourceGroup}'");
+                if (ResourceGroup.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{ResourceGroup}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{ResourceGroup}'");
+                }
             }
 
             if (Optional.IsCollectionDefined(Parameters))
@@ -272,7 +282,7 @@ namespace MgmtDiscriminator.Models
                     builder.AppendLine(" {");
                     foreach (var item in Parameters)
                     {
-                        builder.Append($"        {item.Key}: ");
+                        builder.Append($"        {item.Key}:");
                         if (item.Value == null)
                         {
                             builder.Append("null");
@@ -294,9 +304,25 @@ namespace MgmtDiscriminator.Models
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

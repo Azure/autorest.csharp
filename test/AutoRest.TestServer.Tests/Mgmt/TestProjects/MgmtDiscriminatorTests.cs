@@ -45,7 +45,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
                 new QueryStringMatchConditionParameters(
                     QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
-                    QueryStringOperator.Any) { MatchValues = { "val1", "val2" } });
+                    QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" } });
             var actions =
                 new[]
                 {
@@ -57,9 +57,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Properties = new DeliveryRuleProperties(3, condition, actions,
                     new Dictionary<string, DeliveryRuleAction>()
                         {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
-                    new Dog(), foo: "Foo", new Dictionary<string, BinaryData>()
+                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
                 {
-                    {"foo", new BinaryData("bar") }
+                    {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
                 }),
                 BoolProperty = false,
                 Location = AzureLocation.AustraliaCentral,
@@ -70,11 +70,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             };
 
             var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("B")).ToString();
-            TestContext.Progress.WriteLine(bicep);
             var expected = $$"""
                            {
-                             boolProperty: false
                              location: 'australiacentral'
+                             boolProperty: false
                              locationWithCustomSerialization: 'brazilsouth'
                              dateTimeProperty: '{{TypeFormatters.ToString(now, "o")}}'
                              duration: 'P1D'
@@ -86,7 +85,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                    typeName: 'DeliveryRuleQueryStringConditionParameters'
                                    operator: 'Any'
                                    matchValues: [
-                                     'val1'
+                                     '''
+                           firstline
+                           secondline'''
                                      'val2'
                                    ]
                                  }
@@ -110,26 +111,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                  }
                                }
                                pet: {
+                                 dogKind: 'German Shepherd'
                                  kind: 'Dog'
                                }
-                               foo: 'Foo'
+                               foo: '''
+                           Foo
+                           bar'''
                              }
                            }
                            
                            """;
-            Assert.AreEqual(expected, bicep);
-
-            var props = new DeliveryRuleProperties(3, condition, actions,
-                new Dictionary<string, DeliveryRuleAction>()
-                {
-                    {
-                        "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null)
-                    }
-                },
-                new Dog(), foo: "Foo", new Dictionary<string, BinaryData>() { { "foo", new BinaryData("bar") } });
-
-            bicep = ModelReaderWriter.Write(props, new ModelReaderWriterOptions("B")).ToString();
             TestContext.Progress.WriteLine(bicep);
+            Assert.AreEqual(expected, bicep);
         }
     }
 }

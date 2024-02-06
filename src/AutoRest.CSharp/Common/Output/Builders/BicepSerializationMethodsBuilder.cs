@@ -6,17 +6,15 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Constant = AutoRest.CSharp.Output.Models.Shared.Constant;
@@ -84,7 +82,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return stringBuilderExpression.AppendLine("{");
             yield return EmptyLine;
 
-            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2))
+            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization.IsResourceData))
             {
                 yield return methodBodyStatement;
             }
@@ -93,28 +91,81 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilderParameter.ToString))));
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteProperties(IEnumerable<BicepPropertySerialization> properties, StringBuilderExpression stringBuilder, int spaces)
+        private static IEnumerable<MethodBodyStatement> WriteProperties(IEnumerable<BicepPropertySerialization> properties, StringBuilderExpression stringBuilder, int spaces, bool isResourceData)
         {
             var indent = new string(' ', spaces);
-            foreach (BicepPropertySerialization property in properties)
+            var propertyList = properties.ToList();
+            BicepPropertySerialization? name = null;
+            BicepPropertySerialization? location = null;
+            BicepPropertySerialization? tags = null;
+            BicepPropertySerialization? type = null;
+
+            if (isResourceData)
             {
-                if (property.ValueSerialization == null)
+                name = propertyList.FirstOrDefault(p => p.SerializedName == "name");
+                location = propertyList.FirstOrDefault(p => p.SerializedName == "location");
+                tags = propertyList.FirstOrDefault(p => p.SerializedName == "tags");
+                type = propertyList.FirstOrDefault(p => p.SerializedName == "type");
+            }
+
+            // The top level ResourceData properties should be written first in the payload. Type should not be included
+            // as it will be put in the outer envelope.
+            if (name != null)
+            {
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, name, indent))
                 {
-                    // Flattened property
-                    yield return new[]
-                    {
-                        stringBuilder.Append($"{indent}{property.SerializedName}:"),
-                        stringBuilder.AppendLine($" {{"),
-                        WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2).ToArray(),
-                        stringBuilder.AppendLine($"{indent}}}")
-                    };
+                    yield return methodBodyStatement;
+                };
+            }
+
+            if (location != null)
+            {
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, location, indent))
+                {
+                    yield return methodBodyStatement;
+                };
+            }
+
+            if (tags != null)
+            {
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, tags, indent))
+                {
+                    yield return methodBodyStatement;
+                };
+            }
+
+            foreach (BicepPropertySerialization property in propertyList)
+            {
+                if (property == name || property == location || property == tags || property == type)
+                {
+                    continue;
                 }
-                else
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, property, indent))
                 {
-                    foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces))
-                    {
-                        yield return statement;
-                    }
+                    yield return methodBodyStatement;
+                }
+            }
+        }
+
+        private static IEnumerable<MethodBodyStatement> WriteProperty(StringBuilderExpression stringBuilder, int spaces,
+            BicepPropertySerialization property, string indent)
+        {
+            if (property.ValueSerialization == null)
+            {
+                // Flattened property
+                yield return new[]
+                {
+                    stringBuilder.Append($"{indent}{property.SerializedName}:"),
+                    stringBuilder.AppendLine(" {"),
+                    WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2, false).ToArray(),
+                    stringBuilder.AppendLine($"{indent}}}")
+                };
+            }
+            else
+            {
+                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces))
+                {
+                    yield return statement;
                 }
             }
         }
@@ -125,6 +176,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Declare(indent, New.Instance(typeof(string), Literal(' '), Spaces));
 
             VariableReference data = new VariableReference(typeof(BinaryData), "data");
+
             yield return Declare(
                 data,
                 new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write),
@@ -152,9 +204,28 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
             var stringBuilder = new StringBuilderExpression(new ParameterReference(StringBuilderParameter));
             var line = new VariableReference(typeof(string), "line");
+            var inMultilineString = new VariableReference(typeof(bool), "inMultilineString");
+            yield return Declare(inMultilineString, BoolExpression.False);
             yield return new ForStatement("i", new ListExpression(typeof(string), lines), out var indexer)
             {
                 Declare(line, new IndexerExpression(lines, indexer)),
+                // if this is a multiline string, we do not apply the indentation, except for the first line containing only the ''' which is handled
+                // in the subsequent if statement
+                new IfStatement(new BoolExpression(inMultilineString))
+                    {
+                        new IfStatement(new BoolExpression(line.Invoke(nameof(string.Contains), Literal("'''"))))
+                        {
+                            Assign(new BoolExpression(inMultilineString), BoolExpression.False)
+                        },
+                        stringBuilder.AppendLine(line),
+                        Continue
+                    },
+                new IfStatement(new BoolExpression(line.Invoke(nameof(string.Contains), Literal("'''"))))
+                {
+                    Assign(new BoolExpression(inMultilineString), BoolExpression.True),
+                    stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}",indent, line)),
+                    Continue
+                },
                 new IfElseStatement(
                     And(Equal(indexer, new ConstantExpression(new Constant(0, typeof(int)))),
                         Not(new BoolExpression(IndentFirstLine))),
@@ -245,7 +316,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     stringBuilder.Append(
                         new FormattableStringExpression(
-                            $"{indent}{indent}{{0}}: ", keyValuePair.Key)),
+                            $"{indent}{indent}{{0}}:", keyValuePair.Key)),
                     CheckCollectionItemForNull(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value),
                     SerializeExpression(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value, spaces + 2)
                 },
@@ -270,7 +341,26 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueSerialization.Type.IsValueType)
             {
-                return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression.Invoke(nameof(ToString))));
+                switch (valueSerialization.Type.Implementation)
+                {
+                    case EnumType { IsNumericValueType: true } enumType:
+                        return stringBuilder.AppendLine(
+                            new EnumExpression(
+                                enumType,
+                                expression.NullableStructValue(valueSerialization.Type))
+                                .Invoke(nameof(ToString)));
+                    case EnumType enumType:
+                        return stringBuilder.AppendLine(
+                            new FormattableStringExpression(
+                                $"{indent}'{{0}}'",
+                                new EnumExpression(
+                                        enumType,
+                                        expression.NullableStructValue(valueSerialization.Type))
+                                .ToSerial()));
+                    default:
+                        return stringBuilder.AppendLine(new FormattableStringExpression("{0}{1}",
+                            expression.Invoke(nameof(ToString))));
+                }
             }
 
             return new[]
@@ -310,7 +400,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (frameworkType == typeof(string))
             {
-                return stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression));
+                return new IfElseStatement(
+                    new BoolExpression(
+                        expression.Invoke(nameof(string.Contains),
+                            new TypeReference(typeof(Environment)).Property(nameof(Environment.NewLine)))),
+                    new[]
+                    {
+                        stringBuilder.AppendLine($"{indent}'''"),
+                        stringBuilder.AppendLine(new FormattableStringExpression("{0}'''", expression))
+                    },
+                    stringBuilder.AppendLine(new FormattableStringExpression($"{indent}'{{0}}'", expression)));
             }
 
             if (frameworkType == typeof(int))

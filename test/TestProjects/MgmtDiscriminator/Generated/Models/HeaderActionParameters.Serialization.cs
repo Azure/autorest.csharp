@@ -133,13 +133,29 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(HeaderName))
             {
                 builder.Append("  headerName:");
-                builder.AppendLine($" '{HeaderName}'");
+                if (HeaderName.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{HeaderName}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{HeaderName}'");
+                }
             }
 
             if (Optional.IsDefined(Value))
             {
                 builder.Append("  value:");
-                builder.AppendLine($" '{Value}'");
+                if (Value.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Value}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Value}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -151,9 +167,25 @@ namespace MgmtDiscriminator.Models
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

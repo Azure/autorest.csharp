@@ -131,13 +131,29 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(SourcePattern))
             {
                 builder.Append("  sourcePattern:");
-                builder.AppendLine($" '{SourcePattern}'");
+                if (SourcePattern.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{SourcePattern}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{SourcePattern}'");
+                }
             }
 
             if (Optional.IsDefined(Destination))
             {
                 builder.Append("  destination:");
-                builder.AppendLine($" '{Destination}'");
+                if (Destination.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Destination}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Destination}'");
+                }
             }
 
             if (Optional.IsDefined(PreserveUnmatchedPath))
@@ -156,9 +172,25 @@ namespace MgmtDiscriminator.Models
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

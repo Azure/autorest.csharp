@@ -108,7 +108,15 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(ParamName))
             {
                 builder.Append("  paramName:");
-                builder.AppendLine($" '{ParamName}'");
+                if (ParamName.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{ParamName}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{ParamName}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -120,9 +128,25 @@ namespace MgmtDiscriminator.Models
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

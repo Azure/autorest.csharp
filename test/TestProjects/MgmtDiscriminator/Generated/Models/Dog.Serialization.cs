@@ -32,6 +32,11 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("bark"u8);
                 writer.WriteStringValue(Bark);
             }
+            if (Optional.IsDefined(DogKind))
+            {
+                writer.WritePropertyName("dogKind"u8);
+                writer.WriteStringValue(DogKind.Value.ToSerialString());
+            }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
             if (options.Format != "W" && Optional.IsDefined(Id))
@@ -78,6 +83,7 @@ namespace MgmtDiscriminator.Models
                 return null;
             }
             Optional<string> bark = default;
+            Optional<DogKind> dogKind = default;
             PetKind kind = default;
             Optional<string> id = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -87,6 +93,15 @@ namespace MgmtDiscriminator.Models
                 if (property.NameEquals("bark"u8))
                 {
                     bark = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("dogKind"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    dogKind = property.Value.GetString().ToDogKind();
                     continue;
                 }
                 if (property.NameEquals("kind"u8))
@@ -105,7 +120,7 @@ namespace MgmtDiscriminator.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Dog(kind, id.Value, serializedAdditionalRawData, bark.Value);
+            return new Dog(kind, id.Value, serializedAdditionalRawData, bark.Value, Optional.ToNullable(dogKind));
         }
 
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
@@ -116,19 +131,41 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Bark))
             {
                 builder.Append("  bark:");
-                builder.AppendLine($" '{Bark}'");
+                if (Bark.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Bark}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Bark}'");
+                }
+            }
+
+            if (Optional.IsDefined(DogKind))
+            {
+                builder.Append("  dogKind:");
+                builder.AppendLine($" '{DogKind.Value.ToSerialString()}'");
             }
 
             if (Optional.IsDefined(Kind))
             {
                 builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToString()}'");
+                builder.AppendLine($" '{Kind.ToSerialString()}'");
             }
 
             if (Optional.IsDefined(Id))
             {
                 builder.Append("  id:");
-                builder.AppendLine($" '{Id}'");
+                if (Id.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Id}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Id}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -140,9 +177,25 @@ namespace MgmtDiscriminator.Models
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

@@ -253,17 +253,31 @@ namespace MgmtDiscriminator
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(BoolProperty))
+            if (Optional.IsDefined(Name))
             {
-                builder.Append("  boolProperty:");
-                var boolValue = BoolProperty.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
+                builder.Append("  name:");
+                if (Name.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Name}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Name}'");
+                }
             }
 
             if (Optional.IsDefined(Location))
             {
                 builder.Append("  location:");
                 builder.AppendLine($" '{Location.Value.ToString()}'");
+            }
+
+            if (Optional.IsDefined(BoolProperty))
+            {
+                builder.Append("  boolProperty:");
+                var boolValue = BoolProperty.Value == true ? "true" : "false";
+                builder.AppendLine($" {boolValue}");
             }
 
             if (Optional.IsDefined(LocationWithCustomSerialization))
@@ -310,18 +324,6 @@ namespace MgmtDiscriminator
                 builder.AppendLine($" '{Id.ToString()}'");
             }
 
-            if (Optional.IsDefined(Name))
-            {
-                builder.Append("  name:");
-                builder.AppendLine($" '{Name}'");
-            }
-
-            if (Optional.IsDefined(ResourceType))
-            {
-                builder.Append("  type:");
-                builder.AppendLine($" '{ResourceType.ToString()}'");
-            }
-
             if (Optional.IsDefined(SystemData))
             {
                 builder.Append("  systemData:");
@@ -337,9 +339,25 @@ namespace MgmtDiscriminator
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

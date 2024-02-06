@@ -110,22 +110,30 @@ namespace MgmtDiscriminator.Models
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Parameters))
-            {
-                builder.Append("  parameters:");
-                AppendChildObject(builder, Parameters, options, 2, false);
-            }
-
             if (Optional.IsDefined(Name))
             {
                 builder.Append("  name:");
                 builder.AppendLine($" '{Name.ToString()}'");
             }
 
+            if (Optional.IsDefined(Parameters))
+            {
+                builder.Append("  parameters:");
+                AppendChildObject(builder, Parameters, options, 2, false);
+            }
+
             if (Optional.IsDefined(Foo))
             {
                 builder.Append("  foo:");
-                builder.AppendLine($" '{Foo}'");
+                if (Foo.Contains(Environment.NewLine))
+                {
+                    builder.AppendLine(" '''");
+                    builder.AppendLine($"{Foo}'''");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Foo}'");
+                }
             }
 
             builder.AppendLine("}");
@@ -137,9 +145,25 @@ namespace MgmtDiscriminator.Models
             string indent = new string(' ', spaces);
             BinaryData data = ModelReaderWriter.Write(childObject, options);
             string[] lines = data.ToString().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            bool inMultilineString = false;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
+                if (inMultilineString)
+                {
+                    if (line.Contains("'''"))
+                    {
+                        inMultilineString = false;
+                    }
+                    stringBuilder.AppendLine(line);
+                    continue;
+                }
+                if (line.Contains("'''"))
+                {
+                    inMultilineString = true;
+                    stringBuilder.AppendLine($"{indent}{line}");
+                    continue;
+                }
                 if (i == 0 && !indentFirstLine)
                 {
                     stringBuilder.AppendLine($" {line}");

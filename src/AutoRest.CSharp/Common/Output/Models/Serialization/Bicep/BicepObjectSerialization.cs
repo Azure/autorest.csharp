@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
@@ -14,8 +15,11 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Bicep
         {
             Properties = jsonObjectSerialization.Properties.Select(p =>
                 new BicepPropertySerialization(p, p.SerializationHooks?.BicepSerializationMethodName));
+            IsResourceData = objectType is MgmtObjectType;
         }
 
         public IEnumerable<BicepPropertySerialization> Properties { get; }
+
+        public bool IsResourceData { get; }
     }
 }

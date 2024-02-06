@@ -14,6 +14,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 
         public MethodBodyStatement AppendLine(StringExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.AppendLine), value);
 
+        public MethodBodyStatement Append(ValueExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.Append), value);
+
+        public MethodBodyStatement AppendLine(ValueExpression value) => new InvokeInstanceMethodStatement(Untyped, nameof(StringBuilder.AppendLine), value);
+
         public MethodBodyStatement Append(string value) => Append(Snippets.Literal(value));
 
         public MethodBodyStatement AppendLine(string value) => AppendLine(Snippets.Literal(value));
