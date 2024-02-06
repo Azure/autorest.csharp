@@ -4,7 +4,10 @@
 #nullable enable
 
 using System;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
@@ -53,21 +56,23 @@ namespace Azure.Core
     {
         private readonly IOperation<T> _operation;
         private readonly AsyncLockWithValue<OperationState<T>> _stateLock;
-        private Response _rawResponse;
+        private Response? _rawResponse;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationInternal"/> class in a final successful state.
         /// </summary>
         /// <param name="rawResponse">The final value of <see cref="OperationInternalBase.RawResponse"/>.</param>
         /// <param name="value">The final result of the long-running operation.</param>
-        public static OperationInternal<T> Succeeded(Response rawResponse, T value) => new(OperationState<T>.Success(rawResponse, value));
+        /// <param name="rehydrationToken">rehydration token</param>
+        public static OperationInternal<T> Succeeded(Response rawResponse, T value, RehydrationToken? rehydrationToken = null) => new(OperationState<T>.Success(rawResponse, value), rehydrationToken);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationInternal"/> class in a final failed state.
         /// </summary>
         /// <param name="rawResponse">The final value of <see cref="OperationInternalBase.RawResponse"/>.</param>
         /// <param name="operationFailedException">The exception that will be thrown by <c>UpdateStatusAsync</c>.</param>
-        public static OperationInternal<T> Failed(Response rawResponse, RequestFailedException operationFailedException) => new(OperationState<T>.Failure(rawResponse, operationFailedException));
+        /// <param name="rehydrationToken">rehydration token</param>
+        public static OperationInternal<T> Failed(Response rawResponse, RequestFailedException operationFailedException, RehydrationToken? rehydrationToken = null) => new(OperationState<T>.Failure(rawResponse, operationFailedException), rehydrationToken);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationInternal{T}"/> class.
@@ -93,21 +98,23 @@ namespace Azure.Core
         /// <param name="scopeAttributes">The attributes to use during diagnostic scope creation.</param>
         /// <param name="fallbackStrategy">The delay strategy when Retry-After header is not present.  When it is present, the longer of the two delays will be used.
         ///     Default is <see cref="FixedDelayWithNoJitterStrategy"/>.</param>
+        /// <param name="rehydrationToken">The rehydration token.</param>
         public OperationInternal(IOperation<T> operation,
             ClientDiagnostics clientDiagnostics,
-            Response rawResponse,
+            Response? rawResponse,
             string? operationTypeName = null,
             IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null,
-            DelayStrategy? fallbackStrategy = null)
-            : base(clientDiagnostics, operationTypeName ?? operation.GetType().Name, scopeAttributes, fallbackStrategy)
+            DelayStrategy? fallbackStrategy = null,
+            RehydrationToken? rehydrationToken = null)
+            : base(clientDiagnostics, operationTypeName ?? operation.GetType().Name, scopeAttributes, fallbackStrategy, rehydrationToken)
         {
             _operation = operation;
             _rawResponse = rawResponse;
             _stateLock = new AsyncLockWithValue<OperationState<T>>();
         }
 
-        private OperationInternal(OperationState<T> finalState)
-            : base(finalState.RawResponse)
+        private OperationInternal(OperationState<T> finalState, RehydrationToken? rehydrationToken)
+            : base(finalState.RawResponse, rehydrationToken)
         {
             // FinalOperation represents operation that is in final state and can't be updated.
             // It implements IOperation<T> and throws exception when UpdateStateAsync is called.
@@ -116,7 +123,7 @@ namespace Azure.Core
             _stateLock = new AsyncLockWithValue<OperationState<T>>(finalState);
         }
 
-        public override Response RawResponse => _stateLock.TryGetValue(out var state) ? state.RawResponse : _rawResponse;
+        public override Response RawResponse => (_stateLock.TryGetValue(out var state) ? state.RawResponse : _rawResponse) ?? throw new InvalidOperationException("The operation does not have a response yet. Please call UpdateStatus or WaitForCompletion first.");
 
         public override bool HasCompleted => _stateLock.HasValue;
 
@@ -265,7 +272,7 @@ namespace Azure.Core
                 }
 
                 asyncLock.SetValue(state);
-                return GetResponseFromState(state);
+                return GetResponseFromState(state, GetRequestMethod(_rehydrationToken));
             }
             catch (Exception e)
             {
@@ -274,14 +281,87 @@ namespace Azure.Core
             }
         }
 
-        private static Response GetResponseFromState(OperationState<T> state)
+        private RequestMethod? GetRequestMethod(RehydrationToken? rehydrationToken)
+        {
+            if (rehydrationToken is null)
+            {
+                return null;
+            }
+            var lroDetails = ((IPersistableModel<RehydrationToken>)rehydrationToken!).Write(new ModelReaderWriterOptions("J")).ToObjectFromJson<Dictionary<string, string>>();
+            return new RequestMethod(lroDetails["requestMethod"]);
+        }
+
+        private static Response GetResponseFromState(OperationState<T> state, RequestMethod? requestmethod = null)
         {
             if (state.HasSucceeded)
             {
                 return state.RawResponse;
             }
 
+            // if this is a fake delete lro with 404, just return empty response with 200
+            if (RequestMethod.Delete == requestmethod && state.RawResponse.Status == 404)
+            {
+                return new EmptyResponse(HttpStatusCode.OK);
+            }
+
             throw state.OperationFailedException!;
+        }
+
+        private class EmptyResponse : Response
+        {
+            public EmptyResponse(HttpStatusCode status)
+            {
+                Status = (int)status;
+                ReasonPhrase = status.ToString();
+            }
+
+            public override int Status { get; }
+
+            public override string ReasonPhrase { get; }
+
+            public override Stream? ContentStream { get => null; set => throw new System.NotImplementedException(); }
+            public override string ClientRequestId { get => string.Empty; set => throw new System.NotImplementedException(); }
+
+            public override void Dispose()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            /// <inheritdoc />
+#if HAS_INTERNALS_VISIBLE_CORE
+            internal
+#endif
+            protected override bool ContainsHeader(string name)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            /// <inheritdoc />
+#if HAS_INTERNALS_VISIBLE_CORE
+            internal
+#endif
+            protected override IEnumerable<HttpHeader> EnumerateHeaders()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            /// <inheritdoc />
+#if HAS_INTERNALS_VISIBLE_CORE
+            internal
+#endif
+            protected override bool TryGetHeader(string name, out string value)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            /// <inheritdoc />
+#if HAS_INTERNALS_VISIBLE_CORE
+            internal
+#endif
+            protected override bool TryGetHeaderValues(string name, out IEnumerable<string> values)
+            {
+                throw new System.NotImplementedException();
+            }
         }
 
         private class FinalOperation : IOperation<T>

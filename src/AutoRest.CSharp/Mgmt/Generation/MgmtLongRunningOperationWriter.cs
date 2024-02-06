@@ -57,6 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope())
                 {
                     _writer.Line($"private readonly {_operationInternalType} _operation;");
+                    _writer.Line($"private readonly {typeof(RehydrationToken?)} _rehydrationToken;");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_name} for mocking.");
@@ -65,17 +66,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null) : base({Configuration.ApiTypes.ResponseParameterName}, rehydrationToken)"))
+                    using (_writer.Scope($"internal {_name}({_responseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(RehydrationToken?)} rehydrationToken = null)"))
                     {
                         _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString}, rehydrationToken);");
+                        _writer.Line($"_rehydrationToken = rehydrationToken;");
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null) : base({_sourceString}clientDiagnostics, pipeline, request, {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue)"))
+                    using (_writer.Scope($"internal {_name}({_operationSourceString}{Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
                         _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
                         _writer.Line($"_operation = new {_operationInternalType}({nextLinkOperation}, clientDiagnostics, {Configuration.ApiTypes.ResponseParameterName}, {_name:L}, fallbackStrategy: new {typeof(SequentialDelayStrategy)}());");
+                        _writer.Line($"_rehydrationToken = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.GetRehydrationToken)}(request.Method, request.Uri.ToUri(), {Configuration.ApiTypes.ResponseParameterName}, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
                     }
                     _writer.Line();
 

@@ -13,7 +13,7 @@ if(Test-Path $clonedPath)
 }
 
 Write-Host "git clone --no-checkout --filter=tree:0 https://github.com/Azure/azure-sdk-for-net.git $clonedPath"
-git clone --no-checkout --filter=tree:0 https://github.com/Azure/azure-sdk-for-net.git $clonedPath
+git clone --no-checkout --filter=tree:0 https://github.com/Azure/azure-sdk-for-net.git/ -b lro-rehydration-resourcemanager $clonedPath
 Push-Location $clonedPath
 Write-Host "git sparse-checkout init"
 git sparse-checkout init
