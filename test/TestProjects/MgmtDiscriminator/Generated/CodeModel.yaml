@@ -1290,13 +1290,13 @@ schemas: !Schemas
     - !SealedChoiceSchema &ref_80
       choices:
         - !ChoiceValue 
-          value: German Shepherd
+          value: german Shepherd
           language:
             default:
               name: GermanShepherd
               description: ''
         - !ChoiceValue 
-          value: Golden Retriever
+          value: golden Retriever
           language:
             default:
               name: GoldenRetriever

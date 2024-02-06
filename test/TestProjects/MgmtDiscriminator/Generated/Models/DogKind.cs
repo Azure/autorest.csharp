@@ -10,9 +10,9 @@ namespace MgmtDiscriminator.Models
     /// <summary> The kind of the dog. </summary>
     public enum DogKind
     {
-        /// <summary> German Shepherd. </summary>
+        /// <summary> german Shepherd. </summary>
         GermanShepherd,
-        /// <summary> Golden Retriever. </summary>
+        /// <summary> golden Retriever. </summary>
         GoldenRetriever
     }
 }

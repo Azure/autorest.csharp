@@ -13,15 +13,15 @@ namespace MgmtDiscriminator.Models
     {
         public static string ToSerialString(this DogKind value) => value switch
         {
-            DogKind.GermanShepherd => "German Shepherd",
-            DogKind.GoldenRetriever => "Golden Retriever",
+            DogKind.GermanShepherd => "german Shepherd",
+            DogKind.GoldenRetriever => "golden Retriever",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DogKind value.")
         };
 
         public static DogKind ToDogKind(this string value)
         {
-            if (StringComparer.OrdinalIgnoreCase.Equals(value, "German Shepherd")) return DogKind.GermanShepherd;
-            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Golden Retriever")) return DogKind.GoldenRetriever;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "german Shepherd")) return DogKind.GermanShepherd;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "golden Retriever")) return DogKind.GoldenRetriever;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DogKind value.");
         }
     }
