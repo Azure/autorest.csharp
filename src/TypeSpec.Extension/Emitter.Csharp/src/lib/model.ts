@@ -132,13 +132,21 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     return InputPrimitiveTypeKind.Bytes;
             }
         case "int8":
+        case "int16":
             return InputPrimitiveTypeKind.SByte;
         case "unit8":
+        case "uint16":
             return InputPrimitiveTypeKind.Byte;
         case "int32":
+        case "uint32":
+        case "numeric":
+        case "integer":
+        case "safeint":
             return InputPrimitiveTypeKind.Int32;
         case "int64":
+        case "uint64":
             return InputPrimitiveTypeKind.Int64;
+        case "float":
         case "float32":
             return InputPrimitiveTypeKind.Float32;
         case "float64":
@@ -151,8 +159,13 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "url":
             return InputPrimitiveTypeKind.Uri;
         case "uuid":
+        case "guid":
             return InputPrimitiveTypeKind.Guid;
         case "etag":
+        case "password":
+        case "armId":
+        case "ipAddress":
+        case "azureLocation":
             return InputPrimitiveTypeKind.String;
         case "string":
             switch (format?.toLowerCase()) {
@@ -171,7 +184,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             }
         case "boolean":
             return InputPrimitiveTypeKind.Boolean;
-        case "date":
+        case "plainDate":
             return InputPrimitiveTypeKind.Date;
         case "datetime":
             switch (encode?.encoding) {
@@ -189,7 +202,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     );
                     return InputPrimitiveTypeKind.DateTime;
             }
-        case "time":
+        case "plainTime":
             return InputPrimitiveTypeKind.Time;
         case "duration":
             switch (encode?.encoding) {
