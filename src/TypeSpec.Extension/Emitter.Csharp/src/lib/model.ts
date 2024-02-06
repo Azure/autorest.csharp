@@ -133,7 +133,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             }
         case "int8":
             return InputPrimitiveTypeKind.SByte;
-        case "unit8":
+        case "uint8":
             return InputPrimitiveTypeKind.Byte;
         case "int16":
         case "uint16":
