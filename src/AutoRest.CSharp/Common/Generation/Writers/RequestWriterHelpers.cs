@@ -263,7 +263,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 JsonSerialization jsonSerialization => new[]
                 {
                     Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var utf8JsonContent, out var writer),
-                    JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, valueExpression),
+                    JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, valueExpression, null),
                     Assign(requestExpression.Property(nameof(Request.Content)), utf8JsonContent)
                 },
 
