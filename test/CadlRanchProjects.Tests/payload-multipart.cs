@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Payload.MultiPart;
 using Payload.MultiPart.Models;
 using Azure.Core;
+using System.ClientModel.Primitives;
 
 namespace CadlRanchProjects.Tests
 {
@@ -35,7 +36,7 @@ namespace CadlRanchProjects.Tests
         public Task Payload_MultiPart_FormData_basic_protocol_with_Model() => Test(async (host) =>
         {
             MultiPartRequest data = new MultiPartRequest("123", BinaryData.FromBytes(File.ReadAllBytes(SampleJpgPath)));
-            using RequestContent content = MultipartFormDataExtensions.Create<MultiPartRequest>(data);
+            using RequestContent content = RequestContent.Create(data, new ModelReaderWriterOptions("MPFD"));
             var response1 = await new MultiPartClient(host, null).GetFormDataClient().BasicAsync(content);
             Assert.AreEqual(204, response1.Status);
         });

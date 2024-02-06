@@ -3,6 +3,7 @@
 
 using System;
 using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         //public MethodBodyStatement Create(ValueExpression content) => new InvokeStaticMethodStatement(typeof(MultipartFormDataContent), nameof(MultipartFormDataContent.Create), new[] { content });
         public static MultipartFormDataExpression Create(ValueExpression content) => new(InvokeStatic(nameof(MultipartFormData.Create), new[] { content }));
         //public static MultipartFormDataContentExpression FromObject(ValueExpression value) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromObject), new[] { value }));
-        public static MultipartFormDataExpression ParseToFormData() => new(InvokeStatic(nameof(MultipartFormData.ParseToFormData)));
+        public static MultipartFormDataExpression ParseToFormData() => new(InvokeStatic(nameof(MultipartFormDataExtensions.ParseToFormData)));
     }
 }

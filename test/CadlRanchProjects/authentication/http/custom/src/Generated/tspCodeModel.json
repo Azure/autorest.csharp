@@ -11,6 +11,7 @@
    "Namespace": "Authentication.Http.Custom",
    "IsNullable": false,
    "Usage": "Output",
+   "MediaTypes": [],
    "Properties": [
     {
      "$id": "3",

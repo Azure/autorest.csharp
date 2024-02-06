@@ -49,8 +49,10 @@
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
     <Compile Remove="..\..\src\assets\Azure.Core.Shared\RequestContent.cs" />
+    <Compile Remove="..\..\src\assets\Generator.Shared\MultipartFormDataHelper.cs" />
     <Compile Remove="Common\Output\Expressions\KnownValueExpressions\Azure\AzureMultipartFormDataContentExpression.cs" />
     <None Remove="..\..\src\assets\Azure.Core.Shared\RequestContent.cs" />
+    <None Remove="..\..\src\assets\Generator.Shared\MultipartFormDataHelper.cs" />
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
     <None Include="index.d.ts" CopyToOutputDirectory="PreserveNewest" />

@@ -12,5 +12,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public static readonly ModelReaderWriterOptionsExpression Wire = new(New.Instance(typeof(ModelReaderWriterOptions), Literal("W")));
 
         public ValueExpression Format => new MemberExpression(this, nameof(ModelReaderWriterOptions.Format));
+        public static readonly ModelReaderWriterOptionsExpression MultipartFormData = new(New.Instance(typeof(ModelReaderWriterOptions), Literal("MPFD")));
     }
 }

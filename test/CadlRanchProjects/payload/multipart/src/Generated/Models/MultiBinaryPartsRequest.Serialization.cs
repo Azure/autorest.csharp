@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -119,7 +118,7 @@ namespace Payload.MultiPart.Models
                         {
                             content.Add(Picture.WithMediaType("application/octet-stream"), "picture", "picture.wav", null);
                         }
-                        BinaryData binaryData = content.ToContent();
+                        BinaryData binaryData = ModelReaderWriter.Write(content, new ModelReaderWriterOptions("MPFD"));
                         return binaryData;
                     }
                 default:

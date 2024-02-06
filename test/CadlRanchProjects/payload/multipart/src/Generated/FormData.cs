@@ -695,6 +695,7 @@ namespace Payload.MultiPart
 
         internal HttpMessage CreateBasicRequest(RequestContent content, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(content.ContentType, nameof(content.ContentType));
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -710,6 +711,7 @@ namespace Payload.MultiPart
 
         internal HttpMessage CreateComplexRequest(RequestContent content, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(content.ContentType, nameof(content.ContentType));
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -725,6 +727,7 @@ namespace Payload.MultiPart
 
         internal HttpMessage CreateJsonPartRequest(RequestContent content, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(content.ContentType, nameof(content.ContentType));
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -740,6 +743,7 @@ namespace Payload.MultiPart
 
         internal HttpMessage CreateBinaryArrayPartsRequest(RequestContent content, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(content.ContentType, nameof(content.ContentType));
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -755,6 +759,7 @@ namespace Payload.MultiPart
 
         internal HttpMessage CreateJsonArrayPartsRequest(RequestContent content, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(content.ContentType, nameof(content.ContentType));
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -770,6 +775,7 @@ namespace Payload.MultiPart
 
         internal HttpMessage CreateMultiBinaryPartsRequest(RequestContent content, RequestContext context)
         {
+            Argument.AssertNotNullOrEmpty(content.ContentType, nameof(content.ContentType));
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
