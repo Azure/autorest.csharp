@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Output.Models.Serialization
 {
-    internal abstract class ValueSerialization
+    internal abstract class ObjectSerialization
     {
     }
 }

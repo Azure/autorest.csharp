@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             CSharpType responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
-            ValueSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType, null);
+            ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType, null);
 
             return new ObjectResponseBody(responseType, serialization);
         }

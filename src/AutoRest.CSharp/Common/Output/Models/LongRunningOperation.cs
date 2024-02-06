@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType? ResultType { get; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
-        public ValueSerialization? ResultSerialization { get; }
+        public ObjectSerialization? ResultSerialization { get; }
         public RestClientMethod? NextPageMethod { get; }
         public PagingResponseInfo? PagingResponse { get; }
         public string Description { get; }

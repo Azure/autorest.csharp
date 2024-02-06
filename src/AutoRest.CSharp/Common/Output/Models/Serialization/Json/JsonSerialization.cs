@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
-    internal abstract class JsonSerialization : ValueSerialization
+    internal abstract class JsonSerialization : ObjectSerialization
     {
         protected JsonSerialization(bool isNullable, JsonSerializationOptions options = JsonSerializationOptions.None)
         {

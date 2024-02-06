@@ -6,7 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 {
-    internal abstract class XmlElementSerialization: ValueSerialization
+    internal abstract class XmlElementSerialization: ObjectSerialization
     {
         public abstract string Name { get; }
     }

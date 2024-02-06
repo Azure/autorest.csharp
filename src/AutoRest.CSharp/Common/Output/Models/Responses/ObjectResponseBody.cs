@@ -9,13 +9,13 @@ namespace AutoRest.CSharp.Output.Models.Responses
 {
     internal class ObjectResponseBody: ResponseBody
     {
-        public ObjectResponseBody(CSharpType type, ValueSerialization serialization)
+        public ObjectResponseBody(CSharpType type, ObjectSerialization serialization)
         {
             Serialization = serialization;
             Type = type;
         }
 
-        public ValueSerialization Serialization { get; }
+        public ObjectSerialization Serialization { get; }
         public override CSharpType Type { get; }
     }
 }
