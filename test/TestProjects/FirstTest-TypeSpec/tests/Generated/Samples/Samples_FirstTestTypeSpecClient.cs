@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -2287,6 +2288,110 @@ new BaseModel(1234)
 
             ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
             Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = client.OptionalDictionary(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = null;
+            Response response = await client.OptionalDictionaryAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.OptionalDictionary();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.OptionalDictionaryAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = 1234,
+            });
+            Response response = client.OptionalDictionary(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = 1234,
+            });
+            Response response = await client.OptionalDictionaryAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FirstTestTypeSpec_OptionalDictionary_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.OptionalDictionary(body: new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            });
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FirstTestTypeSpec_OptionalDictionary_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.OptionalDictionaryAsync(body: new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            });
         }
     }
 }
