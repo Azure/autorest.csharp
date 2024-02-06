@@ -376,7 +376,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        private JsonConverterProvider? _jsonConverter;
+        public override JsonConverterProvider? JsonConverter
+            => _jsonConverter ??= _usage.HasFlag(SchemaTypeUsage.Converter) ? new JsonConverterProvider(this, _sourceInputModel) : null;
 
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

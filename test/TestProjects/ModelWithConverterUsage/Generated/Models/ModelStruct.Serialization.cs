@@ -133,6 +133,7 @@ namespace ModelWithConverterUsage.Models
             {
                 writer.WriteObjectValue(model);
             }
+
             public override ModelStruct Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);

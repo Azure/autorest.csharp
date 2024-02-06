@@ -39,7 +39,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         public bool IsAccessibilityOverridden { get; }
-        public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
         public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
@@ -489,7 +488,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             var additionalProperties = CreateAdditionalPropertiesSerialization();
-            return new(this, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, false);
+            return new(this, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, null);
         }
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()

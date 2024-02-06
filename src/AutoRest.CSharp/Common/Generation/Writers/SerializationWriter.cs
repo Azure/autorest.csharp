@@ -4,13 +4,9 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -43,9 +39,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             using (writer.Namespace(declaration.Namespace))
             {
-                if (serialization.Json is { IncludeConverter: true })
+                var converter = serialization.Json?.JsonConverter;
+                if (converter is not null)
                 {
-                    writer.Append($"[{typeof(JsonConverter)}(typeof({declaration.Name}Converter))]");
+                    // this is an inner class therefore we directly write its name here instead of writing its type
+                    writer.Append($"[{typeof(JsonConverter)}(typeof({converter.Declaration.Name}))]");
                 }
                 // write the serialization proxy attribute if the model has one
                 if (serialization.PersistableModelProxyType is { } proxyType)
@@ -71,43 +69,22 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteMethod(method);
                     }
 
-                    if (serialization.Json is { IncludeConverter: true } json)
+                    if (converter is not null)
                     {
-                        WriteCustomJsonConverter(writer, declaration, json.Type, model.IncludeSerializer, model.IncludeDeserializer);
+                        WriteCustomJsonConverter(writer, converter);
                     }
                 }
             }
         }
 
-        private static void WriteCustomJsonConverter(CodeWriter writer, TypeDeclarationOptions declaration, CSharpType type, bool includeSerializer, bool includeDeserializer)
+        private static void WriteCustomJsonConverter(CodeWriter writer, JsonConverterProvider converter)
         {
-            writer.Append($"internal partial class {declaration.Name}Converter : {typeof(JsonConverter)}<{type}>");
+            writer.Append($"{converter.Declaration.Accessibility} partial class {converter.Declaration.Name} : {converter.Inherits!}");
             using (writer.Scope())
             {
-                using (writer.Scope($"public override void Write({typeof(Utf8JsonWriter)} writer, {type} model, {typeof(JsonSerializerOptions)} options)"))
+                foreach (var method in converter.Methods)
                 {
-                    if (includeSerializer)
-                    {
-                        writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
-                    }
-                    else
-                    {
-                        writer.Append($"throw new {typeof(NotImplementedException)}();");
-                    }
-                }
-
-                using (writer.Scope($"public override {type} Read(ref {typeof(Utf8JsonReader)} reader, {typeof(Type)} typeToConvert, {typeof(JsonSerializerOptions)} options)"))
-                {
-                    if (includeDeserializer)
-                    {
-                        var document = new CodeWriterDeclaration("document");
-                        writer.Line($"using var {document:D} = {typeof(JsonDocument)}.ParseValue(ref reader);");
-                        writer.Line($"return Deserialize{declaration.Name}({document}.RootElement);");
-                    }
-                    else
-                    {
-                        writer.Append($"throw new {typeof(NotImplementedException)}();");
-                    }
+                    writer.WriteMethod(method);
                 }
             }
         }
