@@ -134,22 +134,14 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (TypeFactory.IsReadWriteDictionary(parameter.Type))
             {
-                var conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
-                if (parameter.IsOptionalInSignature)
-                {
-                    conversionString = $"{parameter.Name} != null ? {conversionString} : null";
-                }
-                return $"{conversionString}";
+                FormattableString conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                return parameter.IsOptionalInSignature ? $"{parameter.Name} != null ? {conversionString} : null" : conversionString;
             }
 
             if (TypeFactory.IsList(parameter.Type))
             {
-                var conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
-                if (parameter.IsOptionalInSignature)
-                {
-                    conversionString = $"{parameter.Name} != null ? {conversionString} : null";
-                }
-                return $"{conversionString}";
+                FormattableString conversionString = $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                return parameter.IsOptionalInSignature ? $"{parameter.Name} != null ? {conversionString} : null" : conversionString;
             }
 
             BodyMediaType? mediaType = contentType == null ? null : ToMediaType(contentType);
