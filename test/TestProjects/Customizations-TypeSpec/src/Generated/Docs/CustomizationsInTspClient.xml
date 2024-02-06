@@ -42,7 +42,10 @@ RootModel input = new RootModel
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
-    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234, 1234)
+    {
+        OptionalInt = 1234,
+    },
     PropertyToMoveToCustomization = NormalEnum.A,
     PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
 };
@@ -90,7 +93,10 @@ RootModel input = new RootModel
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
-    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+    PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234, 1234)
+    {
+        OptionalInt = 1234,
+    },
     PropertyToMoveToCustomization = NormalEnum.A,
     PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
 };
@@ -122,7 +128,7 @@ using RequestContent content = RequestContent.Create(new
     },
     propertyModelToRename = new
     {
-        requiredInt = 1234,
+        requiredIntOnBase = 1234,
         optionalInt = 1234,
     },
     propertyModelToChangeNamespace = new
@@ -184,6 +190,8 @@ using RequestContent content = RequestContent.Create(new
     propertyModelToAddAdditionalSerializableProperty = new
     {
         requiredInt = 1234,
+        requiredIntOnBase = 1234,
+        optionalInt = 1234,
     },
     propertyToMoveToCustomization = "a",
     propertyModelStruct = new
@@ -198,7 +206,7 @@ Response response = await client.RoundTripAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
@@ -225,6 +233,8 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredIntOnBase").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
@@ -256,7 +266,7 @@ using RequestContent content = RequestContent.Create(new
     },
     propertyModelToRename = new
     {
-        requiredInt = 1234,
+        requiredIntOnBase = 1234,
         optionalInt = 1234,
     },
     propertyModelToChangeNamespace = new
@@ -318,6 +328,8 @@ using RequestContent content = RequestContent.Create(new
     propertyModelToAddAdditionalSerializableProperty = new
     {
         requiredInt = 1234,
+        requiredIntOnBase = 1234,
+        optionalInt = 1234,
     },
     propertyToMoveToCustomization = "a",
     propertyModelStruct = new
@@ -332,7 +344,7 @@ Response response = client.RoundTrip(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
@@ -359,6 +371,8 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredIntOnBase").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
@@ -413,12 +427,12 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
 });
 Response response = await client.FooAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call FooAsync with all request content and parse the result.
 <code><![CDATA[
@@ -426,13 +440,13 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
     optionalInt = 1234,
 });
 Response response = await client.FooAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
     </member>
@@ -444,12 +458,12 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
 });
 Response response = client.Foo(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call Foo with all request content and parse the result.
 <code><![CDATA[
@@ -457,13 +471,13 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
     optionalInt = 1234,
 });
 Response response = client.Foo(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
     </member>
@@ -515,12 +529,12 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
 });
 Response response = await client.BarAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call BarAsync with all request content and parse the result.
 <code><![CDATA[
@@ -528,13 +542,13 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
     optionalInt = 1234,
 });
 Response response = await client.BarAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
     </member>
@@ -546,12 +560,12 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
 });
 Response response = client.Bar(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 ]]></code>
 This sample shows how to call Bar with all request content and parse the result.
 <code><![CDATA[
@@ -559,13 +573,13 @@ CustomizationsInTspClient client = new CustomizationsInTspClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    requiredInt = 1234,
+    requiredIntOnBase = 1234,
     optionalInt = 1234,
 });
 Response response = client.Bar(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
     </member>

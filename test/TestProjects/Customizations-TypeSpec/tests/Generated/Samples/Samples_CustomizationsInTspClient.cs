@@ -82,7 +82,7 @@ namespace CustomizationsInTsp.Samples
                 },
                 propertyModelToRename = new
                 {
-                    requiredInt = 1234,
+                    requiredIntOnBase = 1234,
                     optionalInt = 1234,
                 },
                 propertyModelToChangeNamespace = new
@@ -144,6 +144,8 @@ key = "<badListOfDictionaryName>",
                 propertyModelToAddAdditionalSerializableProperty = new
                 {
                     requiredInt = 1234,
+                    requiredIntOnBase = 1234,
+                    optionalInt = 1234,
                 },
                 propertyToMoveToCustomization = "a",
                 propertyModelStruct = new
@@ -158,7 +160,7 @@ key = "<badListOfDictionaryName>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
@@ -185,6 +187,8 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredIntOnBase").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
@@ -206,7 +210,7 @@ key = "<badListOfDictionaryName>",
                 },
                 propertyModelToRename = new
                 {
-                    requiredInt = 1234,
+                    requiredIntOnBase = 1234,
                     optionalInt = 1234,
                 },
                 propertyModelToChangeNamespace = new
@@ -268,6 +272,8 @@ key = "<badListOfDictionaryName>",
                 propertyModelToAddAdditionalSerializableProperty = new
                 {
                     requiredInt = 1234,
+                    requiredIntOnBase = 1234,
+                    optionalInt = 1234,
                 },
                 propertyToMoveToCustomization = "a",
                 propertyModelStruct = new
@@ -282,7 +288,7 @@ key = "<badListOfDictionaryName>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
@@ -309,6 +315,8 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredIntOnBase").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("optionalInt").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelStruct").GetProperty("optionalInt").ToString());
@@ -349,7 +357,10 @@ new Dictionary<string, string>
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
-                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234, 1234)
+                {
+                    OptionalInt = 1234,
+                },
                 PropertyToMoveToCustomization = NormalEnum.A,
                 PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
             };
@@ -390,7 +401,10 @@ new Dictionary<string, string>
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
-                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234, 1234)
+                {
+                    OptionalInt = 1234,
+                },
                 PropertyToMoveToCustomization = NormalEnum.A,
                 PropertyModelStruct = new ModelStruct(1234, 1234, "<optionalString>"),
             };
@@ -405,12 +419,12 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
             });
             Response response = client.Foo(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
         [Test]
@@ -421,12 +435,12 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
             });
             Response response = await client.FooAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
         [Test]
@@ -457,13 +471,13 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
                 optionalInt = 1234,
             });
             Response response = client.Foo(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }
 
@@ -475,13 +489,13 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
                 optionalInt = 1234,
             });
             Response response = await client.FooAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }
 
@@ -519,12 +533,12 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
             });
             Response response = client.Bar(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
         [Test]
@@ -535,12 +549,12 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
             });
             Response response = await client.BarAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
         }
 
         [Test]
@@ -571,13 +585,13 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
                 optionalInt = 1234,
             });
             Response response = client.Bar(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }
 
@@ -589,13 +603,13 @@ new Dictionary<string, string>
 
             using RequestContent content = RequestContent.Create(new
             {
-                requiredInt = 1234,
+                requiredIntOnBase = 1234,
                 optionalInt = 1234,
             });
             Response response = await client.BarAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredIntOnBase").ToString());
             Console.WriteLine(result.GetProperty("optionalInt").ToString());
         }
 
