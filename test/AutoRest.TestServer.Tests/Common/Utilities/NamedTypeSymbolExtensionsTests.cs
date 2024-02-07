@@ -95,6 +95,7 @@ namespace NamedTypeSymbolExtensionsTests
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                enableBicepSerialization: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 keepNonOverloadableProtocolSignature: false,

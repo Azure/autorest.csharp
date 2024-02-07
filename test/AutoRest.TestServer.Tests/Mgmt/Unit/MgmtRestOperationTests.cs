@@ -74,6 +74,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 keepNonOverloadableProtocolSignature: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                enableBicepSerialization: true,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
