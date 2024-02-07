@@ -29,7 +29,15 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(AbstractModelProperty))
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
-                writer.WriteObjectValue(AbstractModelProperty);
+                BinaryData data = ModelReaderWriter.Write(AbstractModelProperty, options);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(data);
+#else
+                using (JsonDocument document = JsonDocument.Parse(data))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
