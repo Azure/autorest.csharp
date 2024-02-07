@@ -121,7 +121,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                            }
                            
                            """;
-            TestContext.Progress.WriteLine(bicep);
             Assert.AreEqual(expected, bicep);
         }
     }
