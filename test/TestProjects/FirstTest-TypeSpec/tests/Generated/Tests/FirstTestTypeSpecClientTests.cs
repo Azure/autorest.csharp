@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -1053,6 +1054,58 @@ new BaseModel(1234)
 
             ModelWithProjectedEnum body = new ModelWithProjectedEnum(CsProjectedEnumInModel.CsOne);
             Response response = await client.BodyIsModelWithProjectedEnumAsync(body);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = null;
+            Response response = await client.OptionalDictionaryAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.OptionalDictionaryAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                key = 1234,
+            });
+            Response response = await client.OptionalDictionaryAsync(content);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task FirstTestTypeSpec_OptionalDictionary_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = null;
+            FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
+
+            Response response = await client.OptionalDictionaryAsync(body: new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            });
         }
     }
 }
