@@ -39,7 +39,14 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelInfo))
             {
                 writer.WritePropertyName("modelInfo"u8);
-                ((IJsonModel<ModelInfo>)ModelInfo).Write(writer, options);
+                if (ModelInfo != null)
+                {
+                    ((IJsonModel<ModelInfo>)ModelInfo).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

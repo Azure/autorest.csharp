@@ -33,7 +33,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    ((IJsonModel<VariableState>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<VariableState>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -43,7 +50,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Results)
                 {
-                    ((IJsonModel<AnomalyState>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<AnomalyState>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

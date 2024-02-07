@@ -40,7 +40,14 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(CorrelationChanges))
             {
                 writer.WritePropertyName("correlationChanges"u8);
-                ((IJsonModel<CorrelationChanges>)CorrelationChanges).Write(writer, options);
+                if (CorrelationChanges != null)
+                {
+                    ((IJsonModel<CorrelationChanges>)CorrelationChanges).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

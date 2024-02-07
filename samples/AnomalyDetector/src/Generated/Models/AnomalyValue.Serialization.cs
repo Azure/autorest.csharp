@@ -39,7 +39,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Interpretation)
                 {
-                    ((IJsonModel<AnomalyInterpretation>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<AnomalyInterpretation>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

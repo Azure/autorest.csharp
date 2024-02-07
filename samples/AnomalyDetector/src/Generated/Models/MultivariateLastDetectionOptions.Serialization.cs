@@ -31,7 +31,14 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Variables)
             {
-                ((IJsonModel<VariableValues>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<VariableValues>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("topContributorCount"u8);
