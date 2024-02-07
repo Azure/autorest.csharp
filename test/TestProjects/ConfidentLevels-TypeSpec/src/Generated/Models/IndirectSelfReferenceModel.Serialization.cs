@@ -32,7 +32,14 @@ namespace ConfidentLevelsInTsp.Models
             if (Optional.IsDefined(Reference))
             {
                 writer.WritePropertyName("reference"u8);
-                ((IJsonModel<NonConfidentModelWithSelfReference>)Reference).Write(writer, options);
+                if (Reference != null)
+                {
+                    ((IJsonModel<NonConfidentModelWithSelfReference>)Reference).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WritePropertyName("unionProperty"u8);
 #if NET6_0_OR_GREATER

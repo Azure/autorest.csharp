@@ -33,7 +33,14 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStartArray();
             foreach (var item in SelfReference)
             {
-                ((IJsonModel<NonConfidentModelWithSelfReference>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<NonConfidentModelWithSelfReference>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("unionProperty"u8);

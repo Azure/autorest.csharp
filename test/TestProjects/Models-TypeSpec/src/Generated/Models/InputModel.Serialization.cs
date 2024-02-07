@@ -74,9 +74,23 @@ namespace ModelsTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<BaseModel>)RequiredModel).Write(writer, options);
+            if (RequiredModel != null)
+            {
+                ((IJsonModel<BaseModel>)RequiredModel).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredModel2"u8);
-            ((IJsonModel<BaseModel>)RequiredModel2).Write(writer, options);
+            if (RequiredModel2 != null)
+            {
+                ((IJsonModel<BaseModel>)RequiredModel2).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)
@@ -95,7 +109,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredModelList)
             {
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -103,7 +124,14 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                if (item.Value != null)
+                {
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
@@ -136,7 +164,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableModelList)
                 {
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -178,7 +213,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredModelList)
                 {
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -210,7 +252,14 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableModelList)
                     {
-                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                        if (item != null)
+                        {
+                            ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                        }
+                        else
+                        {
+                            writer.WriteNullValue();
+                        }
                     }
                     writer.WriteEndArray();
                 }

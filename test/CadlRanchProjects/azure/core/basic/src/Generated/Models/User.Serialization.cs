@@ -40,7 +40,14 @@ namespace _Specs_.Azure.Core.Basic.Models
                 writer.WriteStartArray();
                 foreach (var item in Orders)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<UserOrder>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

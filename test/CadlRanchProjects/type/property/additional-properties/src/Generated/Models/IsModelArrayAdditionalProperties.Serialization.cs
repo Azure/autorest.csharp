@@ -33,7 +33,14 @@ namespace _Type.Property.AdditionalProperties.Models
                 writer.WriteStartArray();
                 foreach (var item0 in item.Value)
                 {
-                    writer.WriteObjectValue(item0);
+                    if (item0 != null)
+                    {
+                        ((IJsonModel<ModelForRecord>)item0).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -28,7 +28,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("inner"u8);
-            writer.WriteObjectValue(Inner);
+            if (Inner != null)
+            {
+                ((IJsonModel<InnerModel>)Inner).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (options.Format != "W" && _serializedAdditionalRawData != null)

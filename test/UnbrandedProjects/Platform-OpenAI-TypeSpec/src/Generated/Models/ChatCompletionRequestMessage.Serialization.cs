@@ -42,7 +42,14 @@ namespace OpenAI.Models
             if (OptionalProperty.IsDefined(FunctionCall))
             {
                 writer.WritePropertyName("function_call"u8);
-                writer.WriteObjectValue(FunctionCall);
+                if (FunctionCall != null)
+                {
+                    ((IJsonModel<ChatCompletionRequestMessageFunctionCall>)FunctionCall).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

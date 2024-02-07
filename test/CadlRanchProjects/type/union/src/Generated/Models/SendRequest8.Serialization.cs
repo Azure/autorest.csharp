@@ -28,7 +28,14 @@ namespace _Type.Union.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
-            writer.WriteObjectValue(Prop);
+            if (Prop != null)
+            {
+                ((IJsonModel<MixedLiteralsCases>)Prop).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

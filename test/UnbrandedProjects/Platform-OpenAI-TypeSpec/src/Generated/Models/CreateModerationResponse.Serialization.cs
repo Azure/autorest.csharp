@@ -31,7 +31,14 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<CreateModerationResponseResult>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

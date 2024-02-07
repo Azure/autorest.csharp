@@ -48,7 +48,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in LocationMappings)
                 {
-                    ((IJsonModel<ProviderExtendedLocation>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ProviderExtendedLocation>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -58,7 +65,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Aliases)
                 {
-                    ((IJsonModel<ResourceTypeAlias>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ResourceTypeAlias>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -83,7 +97,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ZoneMappings)
                 {
-                    ((IJsonModel<ZoneMapping>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ZoneMapping>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -93,7 +114,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ApiProfiles)
                 {
-                    ((IJsonModel<ApiProfile>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ApiProfile>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

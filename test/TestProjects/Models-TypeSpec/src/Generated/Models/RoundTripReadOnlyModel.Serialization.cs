@@ -50,12 +50,26 @@ namespace ModelsTypeSpec.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
-                ((IJsonModel<DerivedModel>)RequiredReadonlyModel).Write(writer, options);
+                if (RequiredReadonlyModel != null)
+                {
+                    ((IJsonModel<DerivedModel>)RequiredReadonlyModel).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
-                ((IJsonModel<DerivedModel>)OptionalReadonlyModel).Write(writer, options);
+                if (OptionalReadonlyModel != null)
+                {
+                    ((IJsonModel<DerivedModel>)OptionalReadonlyModel).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W")
             {
@@ -103,7 +117,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredReadOnlyModelList)
                 {
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -136,7 +157,14 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in RequiredReadOnlyModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                    if (item.Value != null)
+                    {
+                        ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndObject();
             }
@@ -166,7 +194,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalReadOnlyModelList)
                 {
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -193,7 +228,14 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                    if (item.Value != null)
+                    {
+                        ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndObject();
             }

@@ -31,7 +31,14 @@ namespace FirstTestTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Parent)
             {
-                ((IJsonModel<BaseModel>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<BaseModel>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("level"u8);

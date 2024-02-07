@@ -53,7 +53,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ResourceTypes)
                 {
-                    ((IJsonModel<ProviderResourceType>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ProviderResourceType>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

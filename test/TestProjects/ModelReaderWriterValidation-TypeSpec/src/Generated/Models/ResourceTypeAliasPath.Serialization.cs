@@ -45,12 +45,26 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(Pattern))
             {
                 writer.WritePropertyName("pattern"u8);
-                ((IJsonModel<ResourceTypeAliasPattern>)Pattern).Write(writer, options);
+                if (Pattern != null)
+                {
+                    ((IJsonModel<ResourceTypeAliasPattern>)Pattern).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                ((IJsonModel<ResourceTypeAliasPathMetadata>)Metadata).Write(writer, options);
+                if (Metadata != null)
+                {
+                    ((IJsonModel<ResourceTypeAliasPathMetadata>)Metadata).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

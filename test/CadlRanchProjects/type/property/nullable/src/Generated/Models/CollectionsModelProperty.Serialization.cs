@@ -35,7 +35,14 @@ namespace _Type.Property.Nullable.Models
                 writer.WriteStartArray();
                 foreach (var item in NullableProperty)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<InnerModel>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

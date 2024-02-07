@@ -94,7 +94,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<BaseModelWithDiscriminator>)RequiredModel).Write(writer, options);
+            if (RequiredModel != null)
+            {
+                ((IJsonModel<BaseModelWithDiscriminator>)RequiredModel).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -105,7 +112,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredIntRecord"u8);
@@ -129,7 +143,14 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                if (item.Value != null)
+                {
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);

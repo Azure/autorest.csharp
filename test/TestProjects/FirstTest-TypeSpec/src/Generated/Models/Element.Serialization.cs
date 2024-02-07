@@ -33,7 +33,14 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Extension)
                 {
-                    ((IJsonModel<Extension>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<Extension>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

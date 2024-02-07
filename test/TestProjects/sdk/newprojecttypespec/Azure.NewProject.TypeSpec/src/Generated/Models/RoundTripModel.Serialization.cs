@@ -47,15 +47,14 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            BinaryData data = ModelReaderWriter.Write(RequiredModel, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-            using (JsonDocument document = JsonDocument.Parse(data))
+            if (RequiredModel != null)
             {
-                JsonSerializer.Serialize(writer, document.RootElement);
+                ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
             }
-#endif
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);

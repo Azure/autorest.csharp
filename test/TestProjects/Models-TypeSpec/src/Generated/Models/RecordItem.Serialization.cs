@@ -31,7 +31,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                if (item != null)
+                {
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

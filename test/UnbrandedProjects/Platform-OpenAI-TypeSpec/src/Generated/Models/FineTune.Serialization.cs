@@ -47,26 +47,54 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparams"u8);
-            writer.WriteObjectValue(Hyperparams);
+            if (Hyperparams != null)
+            {
+                ((IJsonModel<FineTuneHyperparams>)Hyperparams).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("training_files"u8);
             writer.WriteStartArray();
             foreach (var item in TrainingFiles)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("validation_files"u8);
             writer.WriteStartArray();
             foreach (var item in ValidationFiles)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("result_files"u8);
             writer.WriteStartArray();
             foreach (var item in ResultFiles)
             {
-                writer.WriteObjectValue(item);
+                if (item != null)
+                {
+                    ((IJsonModel<OpenAIFile>)item).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             writer.WriteEndArray();
             if (OptionalProperty.IsCollectionDefined(Events))
@@ -75,7 +103,14 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Events)
                 {
-                    writer.WriteObjectValue(item);
+                    if (item != null)
+                    {
+                        ((IJsonModel<FineTuneEvent>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -35,7 +35,14 @@ namespace ConfidentLevelsInTsp.Models
                 writer.WriteStartArray();
                 foreach (var item in Reference)
                 {
-                    ((IJsonModel<IndirectSelfReferenceModel>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<IndirectSelfReferenceModel>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
