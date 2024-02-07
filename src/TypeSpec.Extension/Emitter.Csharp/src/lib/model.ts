@@ -139,8 +139,8 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "uint32":
         case "numeric":
         case "integer":
-        case "safeint":
             return InputPrimitiveTypeKind.Int32;
+        case "safeint":
         case "int64":
         case "uint64":
             return InputPrimitiveTypeKind.Int64;
@@ -1117,3 +1117,4 @@ export function navigateModels(
         { skipSubNamespaces }
     );
 }
+
