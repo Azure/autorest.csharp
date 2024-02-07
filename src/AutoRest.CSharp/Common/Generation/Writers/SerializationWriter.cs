@@ -73,11 +73,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (xml != null && model.IncludeSerializer)
                 {
-                    writer.Append($"{xml.IXmlInterface}, ");
-                    if (Configuration.UseModelReaderWriter)
-                    {
-                        writer.Append($"{xml.IPersistableModelTInterface}, ");
-                    }
+                    writer.Append($"{xml.IXmlInterface}, ")
+                        .AppendIf($"{xml.IPersistableModelTInterface}, ", Configuration.UseModelReaderWriter);
                 }
 
                 writer.RemoveTrailingComma();
