@@ -37,6 +37,14 @@ namespace model_flattening
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreatePutArrayRequestUri(IEnumerable<Resource> resourceArray)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/array", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutArrayRequest(IEnumerable<Resource> resourceArray)
         {
             var message = _pipeline.CreateMessage();
@@ -92,6 +100,14 @@ namespace model_flattening
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetArrayRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/array", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetArrayRequest()
@@ -157,6 +173,14 @@ namespace model_flattening
             }
         }
 
+        internal RequestUriBuilder CreatePutWrappedArrayRequestUri(IEnumerable<WrappedProduct> resourceArray)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/wrappedarray", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutWrappedArrayRequest(IEnumerable<WrappedProduct> resourceArray)
         {
             var message = _pipeline.CreateMessage();
@@ -212,6 +236,14 @@ namespace model_flattening
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetWrappedArrayRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/wrappedarray", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetWrappedArrayRequest()
@@ -277,6 +309,14 @@ namespace model_flattening
             }
         }
 
+        internal RequestUriBuilder CreatePutDictionaryRequestUri(IDictionary<string, FlattenedProduct> resourceDictionary)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/dictionary", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutDictionaryRequest(IDictionary<string, FlattenedProduct> resourceDictionary)
         {
             var message = _pipeline.CreateMessage();
@@ -333,6 +373,14 @@ namespace model_flattening
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetDictionaryRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/dictionary", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetDictionaryRequest()
@@ -398,6 +446,14 @@ namespace model_flattening
             }
         }
 
+        internal RequestUriBuilder CreatePutResourceCollectionRequestUri(ResourceCollection resourceComplexObject)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/resourcecollection", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutResourceCollectionRequest(ResourceCollection resourceComplexObject)
         {
             var message = _pipeline.CreateMessage();
@@ -448,6 +504,14 @@ namespace model_flattening
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetResourceCollectionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/resourcecollection", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetResourceCollectionRequest()
@@ -501,6 +565,14 @@ namespace model_flattening
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutSimpleProductRequestUri(SimpleProduct simpleBodyProduct)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/customFlattening", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutSimpleProductRequest(SimpleProduct simpleBodyProduct)
@@ -563,6 +635,14 @@ namespace model_flattening
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostFlattenedSimpleProductRequestUri(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/customFlattening", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostFlattenedSimpleProductRequest(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue)
@@ -652,6 +732,16 @@ namespace model_flattening
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutSimpleProductWithGroupingRequestUri(FlattenParameterGroup flattenParameterGroup)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/model-flatten/customFlattening/parametergrouping/", false);
+            uri.AppendPath(flattenParameterGroup.Name, true);
+            uri.AppendPath("/", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutSimpleProductWithGroupingRequest(FlattenParameterGroup flattenParameterGroup)

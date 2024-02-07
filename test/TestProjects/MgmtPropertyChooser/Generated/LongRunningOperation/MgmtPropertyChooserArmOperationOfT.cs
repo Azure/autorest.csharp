@@ -20,21 +20,24 @@ namespace MgmtPropertyChooser
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternal<T> _operation;
+        private readonly RehydrationToken? _rehydrationToken;
 
         /// <summary> Initializes a new instance of MgmtPropertyChooserArmOperation for mocking. </summary>
         protected MgmtPropertyChooserArmOperation()
         {
         }
 
-        internal MgmtPropertyChooserArmOperation(Response<T> response)
+        internal MgmtPropertyChooserArmOperation(Response<T> response, RehydrationToken? rehydrationToken = null)
         {
-            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value);
+            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value, rehydrationToken);
+            _rehydrationToken = rehydrationToken;
         }
 
         internal MgmtPropertyChooserArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             _operation = new OperationInternal<T>(nextLinkOperation, clientDiagnostics, response, "MgmtPropertyChooserArmOperation", fallbackStrategy: new SequentialDelayStrategy());
+            _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
         }
 
         /// <inheritdoc />

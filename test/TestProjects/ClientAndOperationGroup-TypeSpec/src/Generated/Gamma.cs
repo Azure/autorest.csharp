@@ -162,6 +162,14 @@ namespace ClientAndOperationGroup
             }
         }
 
+        internal RequestUriBuilder CreateFourRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/Gamma", false);
+            return uri;
+        }
+
         internal HttpMessage CreateFourRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -173,6 +181,14 @@ namespace ClientAndOperationGroup
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateFiveRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/Gamma", false);
+            return uri;
         }
 
         internal HttpMessage CreateFiveRequest(RequestContext context)

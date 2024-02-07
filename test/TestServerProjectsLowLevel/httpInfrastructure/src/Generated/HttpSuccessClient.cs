@@ -1225,6 +1225,14 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateHead200RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead200Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1236,6 +1244,14 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGet200RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
         }
 
         internal HttpMessage CreateGet200Request(RequestContext context)
@@ -1251,6 +1267,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateOptions200RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOptions200Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1262,6 +1286,14 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePut200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut200Request(RequestContent content, RequestContext context)
@@ -1279,6 +1311,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePatch200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePatch200Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1292,6 +1332,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePost200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost200Request(RequestContent content, RequestContext context)
@@ -1309,6 +1357,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDelete200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete200Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1322,6 +1378,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePut201RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/201", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut201Request(RequestContent content, RequestContext context)
@@ -1339,6 +1403,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePost201RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/201", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePost201Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier201);
@@ -1352,6 +1424,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePut202RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut202Request(RequestContent content, RequestContext context)
@@ -1369,6 +1449,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePatch202RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePatch202Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -1382,6 +1470,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePost202RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost202Request(RequestContent content, RequestContext context)
@@ -1399,6 +1495,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDelete202RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/202", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete202Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -1414,6 +1518,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateHead204RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead204Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -1425,6 +1537,14 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePut204RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut204Request(RequestContent content, RequestContext context)
@@ -1442,6 +1562,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePatch204RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePatch204Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -1455,6 +1583,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePost204RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost204Request(RequestContent content, RequestContext context)
@@ -1472,6 +1608,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDelete204RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete204Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -1485,6 +1629,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateHead404RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/404", false);
+            return uri;
         }
 
         internal HttpMessage CreateHead404Request(RequestContext context)

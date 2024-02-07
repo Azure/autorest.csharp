@@ -609,6 +609,14 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateHead408RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/408", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead408Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -620,6 +628,14 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePut500RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/500", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut500Request(RequestContent content, RequestContext context)
@@ -637,6 +653,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePatch500RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/500", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePatch500Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -652,6 +676,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGet502RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/502", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGet502Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -665,6 +697,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateOptions502RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/502", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOptions502Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -676,6 +716,14 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePost503RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/503", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost503Request(RequestContent content, RequestContext context)
@@ -693,6 +741,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDelete503RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/503", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete503Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -708,6 +764,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePut504RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/504", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePut504Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -721,6 +785,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePatch504RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/504", false);
+            return uri;
         }
 
         internal HttpMessage CreatePatch504Request(RequestContent content, RequestContext context)

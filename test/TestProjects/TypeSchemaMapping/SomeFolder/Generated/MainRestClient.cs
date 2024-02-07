@@ -37,6 +37,14 @@ namespace TypeSchemaMapping
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateOperationRequestUri(CustomizedModel body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/Operation/", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationRequest(CustomizedModel body)
         {
             var message = _pipeline.CreateMessage();
@@ -85,6 +93,14 @@ namespace TypeSchemaMapping
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateOperationStructRequestUri(RenamedModelStruct? body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationStruct/", false);
+            return uri;
         }
 
         internal HttpMessage CreateOperationStructRequest(RenamedModelStruct? body)
@@ -147,6 +163,14 @@ namespace TypeSchemaMapping
             }
         }
 
+        internal RequestUriBuilder CreateOperationSecondModelRequestUri(SecondModel body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationSecondModel", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationSecondModelRequest(SecondModel body)
         {
             var message = _pipeline.CreateMessage();
@@ -205,6 +229,14 @@ namespace TypeSchemaMapping
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateOperationThirdModelRequestUri(RenamedThirdModel body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationThirdModel", false);
+            return uri;
         }
 
         internal HttpMessage CreateOperationThirdModelRequest(RenamedThirdModel body)
@@ -267,6 +299,14 @@ namespace TypeSchemaMapping
             }
         }
 
+        internal RequestUriBuilder CreateOperationModelWithArrayOfEnumRequestUri(ModelWithArrayOfEnum body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationModelWithArrayOfEnum", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationModelWithArrayOfEnumRequest(ModelWithArrayOfEnum body)
         {
             var message = _pipeline.CreateMessage();
@@ -327,6 +367,14 @@ namespace TypeSchemaMapping
             }
         }
 
+        internal RequestUriBuilder CreateOperationWithInternalModelRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationWithInternalModel", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationWithInternalModelRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -376,6 +424,14 @@ namespace TypeSchemaMapping
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateOperationWithAbstractModelRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationWithAbstractModel", false);
+            return uri;
         }
 
         internal HttpMessage CreateOperationWithAbstractModelRequest()
@@ -429,6 +485,14 @@ namespace TypeSchemaMapping
             }
         }
 
+        internal RequestUriBuilder CreateOperationWithListOfInternalModelRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationWithListOfInternalModel", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationWithListOfInternalModelRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -478,6 +542,14 @@ namespace TypeSchemaMapping
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateOperationWithPublicModelWithInternalPropertyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/OperationWithPublicModelWithInternalProperty", false);
+            return uri;
         }
 
         internal HttpMessage CreateOperationWithPublicModelWithInternalPropertyRequest()

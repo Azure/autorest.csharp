@@ -185,6 +185,14 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateIfMatchPutRequestUri(RequestContent content, ETag? ifMatch, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/NonCollapse/ifMatch", false);
+            return uri;
+        }
+
         internal HttpMessage CreateIfMatchPutRequest(RequestContent content, ETag? ifMatch, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -201,6 +209,14 @@ namespace CollapseRequestCondition_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateIfNoneMatchPutRequestUri(RequestContent content, ETag? ifNoneMatch, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/NonCollapse/ifNoneMatch", false);
+            return uri;
         }
 
         internal HttpMessage CreateIfNoneMatchPutRequest(RequestContent content, ETag? ifNoneMatch, RequestContext context)

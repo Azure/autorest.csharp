@@ -2196,6 +2196,15 @@ namespace url_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetBooleanTrueRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/true", false);
+            uri.AppendQuery("boolQuery", true, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBooleanTrueRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2210,6 +2219,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetBooleanFalseRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/false", false);
+            uri.AppendQuery("boolQuery", false, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBooleanFalseRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2222,6 +2240,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetBooleanNullRequestUri(bool? boolQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/null", false);
+            if (boolQuery != null)
+            {
+                uri.AppendQuery("boolQuery", boolQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetBooleanNullRequest(bool? boolQuery, RequestContext context)
@@ -2241,6 +2271,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetIntOneMillionRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/1000000", false);
+            uri.AppendQuery("intQuery", 1000000, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetIntOneMillionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2255,6 +2294,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetIntNegativeOneMillionRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/-1000000", false);
+            uri.AppendQuery("intQuery", -1000000, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetIntNegativeOneMillionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2267,6 +2315,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetIntNullRequestUri(int? intQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/null", false);
+            if (intQuery != null)
+            {
+                uri.AppendQuery("intQuery", intQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetIntNullRequest(int? intQuery, RequestContext context)
@@ -2286,6 +2346,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetTenBillionRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/10000000000", false);
+            uri.AppendQuery("longQuery", 10000000000L, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetTenBillionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2300,6 +2369,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetNegativeTenBillionRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/-10000000000", false);
+            uri.AppendQuery("longQuery", -10000000000L, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNegativeTenBillionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2312,6 +2390,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetLongNullRequestUri(long? longQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/null", false);
+            if (longQuery != null)
+            {
+                uri.AppendQuery("longQuery", longQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetLongNullRequest(long? longQuery, RequestContext context)
@@ -2331,6 +2421,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateFloatScientificPositiveRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/1.034E+20", false);
+            uri.AppendQuery("floatQuery", 1.034E+20F, true);
+            return uri;
+        }
+
         internal HttpMessage CreateFloatScientificPositiveRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2345,6 +2444,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateFloatScientificNegativeRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/-1.034E-20", false);
+            uri.AppendQuery("floatQuery", -1.034E-20F, true);
+            return uri;
+        }
+
         internal HttpMessage CreateFloatScientificNegativeRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2357,6 +2465,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateFloatNullRequestUri(float? floatQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/null", false);
+            if (floatQuery != null)
+            {
+                uri.AppendQuery("floatQuery", floatQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateFloatNullRequest(float? floatQuery, RequestContext context)
@@ -2376,6 +2496,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDoubleDecimalPositiveRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/9999999.999", false);
+            uri.AppendQuery("doubleQuery", 9999999.999, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDoubleDecimalPositiveRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2390,6 +2519,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDoubleDecimalNegativeRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/-9999999.999", false);
+            uri.AppendQuery("doubleQuery", -9999999.999, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDoubleDecimalNegativeRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2402,6 +2540,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateDoubleNullRequestUri(double? doubleQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/null", false);
+            if (doubleQuery != null)
+            {
+                uri.AppendQuery("doubleQuery", doubleQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateDoubleNullRequest(double? doubleQuery, RequestContext context)
@@ -2421,6 +2571,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateStringUnicodeRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/unicode/", false);
+            uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩", true);
+            return uri;
+        }
+
         internal HttpMessage CreateStringUnicodeRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2433,6 +2592,15 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateStringUrlEncodedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend", false);
+            uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end", true);
+            return uri;
         }
 
         internal HttpMessage CreateStringUrlEncodedRequest(RequestContext context)
@@ -2449,6 +2617,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateStringEmptyRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/empty", false);
+            uri.AppendQuery("stringQuery", "", true);
+            return uri;
+        }
+
         internal HttpMessage CreateStringEmptyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2461,6 +2638,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateStringNullRequestUri(string stringQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/null", false);
+            if (stringQuery != null)
+            {
+                uri.AppendQuery("stringQuery", stringQuery, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateStringNullRequest(string stringQuery, RequestContext context)
@@ -2480,6 +2669,18 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateEnumValidRequestUri(string enumQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/enum/green%20color", false);
+            if (enumQuery != null)
+            {
+                uri.AppendQuery("enumQuery", enumQuery, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateEnumValidRequest(string enumQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2495,6 +2696,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateEnumNullRequestUri(string enumQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/enum/null", false);
+            if (enumQuery != null)
+            {
+                uri.AppendQuery("enumQuery", enumQuery, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateEnumNullRequest(string enumQuery, RequestContext context)
@@ -2514,6 +2727,18 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateByteMultiByteRequestUri(BinaryData byteQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/multibyte", false);
+            if (byteQuery != null)
+            {
+                uri.AppendQuery("byteQuery", byteQuery.ToArray(), "D", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateByteMultiByteRequest(BinaryData byteQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2531,6 +2756,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateByteEmptyRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/empty", false);
+            uri.AppendQuery("byteQuery", new byte[] { }, "D", true);
+            return uri;
+        }
+
         internal HttpMessage CreateByteEmptyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2543,6 +2777,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateByteNullRequestUri(BinaryData byteQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/null", false);
+            if (byteQuery != null)
+            {
+                uri.AppendQuery("byteQuery", byteQuery.ToArray(), "D", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateByteNullRequest(BinaryData byteQuery, RequestContext context)
@@ -2562,6 +2808,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDateValidRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/date/2012-01-01", false);
+            uri.AppendQuery("dateQuery", new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            return uri;
+        }
+
         internal HttpMessage CreateDateValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2574,6 +2829,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateDateNullRequestUri(DateTimeOffset? dateQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/date/null", false);
+            if (dateQuery != null)
+            {
+                uri.AppendQuery("dateQuery", dateQuery.Value, "D", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery, RequestContext context)
@@ -2593,6 +2860,15 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDateTimeValidRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
+            uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
+            return uri;
+        }
+
         internal HttpMessage CreateDateTimeValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2605,6 +2881,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateDateTimeNullRequestUri(DateTimeOffset? dateTimeQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/datetime/null", false);
+            if (dateTimeQuery != null)
+            {
+                uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "O", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery, RequestContext context)
@@ -2624,6 +2912,18 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateArrayStringCsvValidRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2639,6 +2939,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateArrayStringCsvNullRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/null", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery, RequestContext context)
@@ -2658,6 +2970,18 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateArrayStringCsvEmptyRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/empty", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2673,6 +2997,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateArrayStringNoCollectionFormatEmptyRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/none/string/empty", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery, RequestContext context)
@@ -2692,6 +3028,18 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateArrayStringSsvValidRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/ssv/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2709,6 +3057,18 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateArrayStringTsvValidRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/tsv/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2724,6 +3084,18 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateArrayStringPipesValidRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/pipes/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery, RequestContext context)

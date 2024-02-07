@@ -44,6 +44,16 @@ namespace PublicClientCtor
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateOperationRequestUri(TestModel value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRaw("/publicclientctor/1.0.0", false);
+            uri.AppendPath("/op", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationRequest(TestModel value)
         {
             var message = _pipeline.CreateMessage();

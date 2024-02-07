@@ -39,6 +39,17 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateResetRequestUri(string indexerName, RequestOptions requestOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers('", false);
+            uri.AppendPath(indexerName, true);
+            uri.AppendPath("')/search.reset", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateResetRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -101,6 +112,17 @@ namespace CognitiveSearch
             }
         }
 
+        internal RequestUriBuilder CreateRunRequestUri(string indexerName, RequestOptions requestOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers('", false);
+            uri.AppendPath(indexerName, true);
+            uri.AppendPath("')/search.run", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateRunRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -161,6 +183,17 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string indexerName, Enum0 prefer, Indexer indexer, RequestOptions requestOptions, AccessCondition accessCondition)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers('", false);
+            uri.AppendPath(indexerName, true);
+            uri.AppendPath("')", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string indexerName, Enum0 prefer, Indexer indexer, RequestOptions requestOptions, AccessCondition accessCondition)
@@ -264,6 +297,17 @@ namespace CognitiveSearch
             }
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string indexerName, RequestOptions requestOptions, AccessCondition accessCondition)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers('", false);
+            uri.AppendPath(indexerName, true);
+            uri.AppendPath("')", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteRequest(string indexerName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -338,6 +382,17 @@ namespace CognitiveSearch
             }
         }
 
+        internal RequestUriBuilder CreateGetRequestUri(string indexerName, RequestOptions requestOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers('", false);
+            uri.AppendPath(indexerName, true);
+            uri.AppendPath("')", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetRequest(string indexerName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -410,6 +465,19 @@ namespace CognitiveSearch
             }
         }
 
+        internal RequestUriBuilder CreateListRequestUri(string select, RequestOptions requestOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers", false);
+            if (select != null)
+            {
+                uri.AppendQuery("$select", select, true);
+            }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -470,6 +538,15 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateRequestUri(Indexer indexer, RequestOptions requestOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(Indexer indexer, RequestOptions requestOptions)
@@ -544,6 +621,17 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetStatusRequestUri(string indexerName, RequestOptions requestOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/indexers('", false);
+            uri.AppendPath(indexerName, true);
+            uri.AppendPath("')/search.status", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetStatusRequest(string indexerName, RequestOptions requestOptions)

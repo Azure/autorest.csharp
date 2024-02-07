@@ -45,6 +45,18 @@ namespace constants
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreatePutNoModelAsStringNoRequiredTwoValueNoDefaultRequestUri(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreatePutNoModelAsStringNoRequiredTwoValueNoDefaultRequest(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input)
         {
             var message = _pipeline.CreateMessage();
@@ -91,6 +103,18 @@ namespace constants
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutNoModelAsStringNoRequiredTwoValueDefaultRequestUri(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringNoRequiredTwoValueDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreatePutNoModelAsStringNoRequiredTwoValueDefaultRequest(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input)
@@ -141,6 +165,18 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequestUri(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueNoDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input)
         {
             var message = _pipeline.CreateMessage();
@@ -187,6 +223,18 @@ namespace constants
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutNoModelAsStringNoRequiredOneValueDefaultRequestUri(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input)
@@ -237,6 +285,15 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutNoModelAsStringRequiredTwoValueNoDefaultRequestUri(NoModelAsStringRequiredTwoValueNoDefaultOpEnum input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueNoDefault", false);
+            uri.AppendQuery("input", input.ToSerialString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNoModelAsStringRequiredTwoValueNoDefaultRequest(NoModelAsStringRequiredTwoValueNoDefaultOpEnum input)
         {
             var message = _pipeline.CreateMessage();
@@ -280,6 +337,15 @@ namespace constants
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutNoModelAsStringRequiredTwoValueDefaultRequestUri(NoModelAsStringRequiredTwoValueDefaultOpEnum input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueDefault", false);
+            uri.AppendQuery("input", input.ToSerialString(), true);
+            return uri;
         }
 
         internal HttpMessage CreatePutNoModelAsStringRequiredTwoValueDefaultRequest(NoModelAsStringRequiredTwoValueDefaultOpEnum input)
@@ -327,6 +393,15 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutNoModelAsStringRequiredOneValueNoDefaultRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueNoDefault", false);
+            uri.AppendQuery("input", "value1", true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNoModelAsStringRequiredOneValueNoDefaultRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -370,6 +445,15 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutNoModelAsStringRequiredOneValueDefaultRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueDefault", false);
+            uri.AppendQuery("input", "value1", true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNoModelAsStringRequiredOneValueDefaultRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -411,6 +495,18 @@ namespace constants
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutModelAsStringNoRequiredTwoValueNoDefaultRequestUri(ModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueNoDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreatePutModelAsStringNoRequiredTwoValueNoDefaultRequest(ModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input)
@@ -461,6 +557,18 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutModelAsStringNoRequiredTwoValueDefaultRequestUri(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreatePutModelAsStringNoRequiredTwoValueDefaultRequest(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input)
         {
             var message = _pipeline.CreateMessage();
@@ -507,6 +615,18 @@ namespace constants
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutModelAsStringNoRequiredOneValueNoDefaultRequestUri(ModelAsStringNoRequiredOneValueNoDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueNoDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreatePutModelAsStringNoRequiredOneValueNoDefaultRequest(ModelAsStringNoRequiredOneValueNoDefaultOpEnum? input)
@@ -557,6 +677,18 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutModelAsStringNoRequiredOneValueDefaultRequestUri(ModelAsStringNoRequiredOneValueDefaultOpEnum? input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueDefault", false);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreatePutModelAsStringNoRequiredOneValueDefaultRequest(ModelAsStringNoRequiredOneValueDefaultOpEnum? input)
         {
             var message = _pipeline.CreateMessage();
@@ -605,6 +737,15 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutModelAsStringRequiredTwoValueNoDefaultRequestUri(ModelAsStringRequiredTwoValueNoDefaultOpEnum input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringRequiredTwoValueNoDefault", false);
+            uri.AppendQuery("input", input.ToString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutModelAsStringRequiredTwoValueNoDefaultRequest(ModelAsStringRequiredTwoValueNoDefaultOpEnum input)
         {
             var message = _pipeline.CreateMessage();
@@ -648,6 +789,15 @@ namespace constants
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutModelAsStringRequiredTwoValueDefaultRequestUri(ModelAsStringRequiredTwoValueDefaultOpEnum input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringRequiredTwoValueDefault", false);
+            uri.AppendQuery("input", input.ToString(), true);
+            return uri;
         }
 
         internal HttpMessage CreatePutModelAsStringRequiredTwoValueDefaultRequest(ModelAsStringRequiredTwoValueDefaultOpEnum input)
@@ -695,6 +845,15 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutModelAsStringRequiredOneValueNoDefaultRequestUri(ModelAsStringRequiredOneValueNoDefaultOpEnum input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringRequiredOneValueNoDefault", false);
+            uri.AppendQuery("input", input.ToString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutModelAsStringRequiredOneValueNoDefaultRequest(ModelAsStringRequiredOneValueNoDefaultOpEnum input)
         {
             var message = _pipeline.CreateMessage();
@@ -740,6 +899,15 @@ namespace constants
             }
         }
 
+        internal RequestUriBuilder CreatePutModelAsStringRequiredOneValueDefaultRequestUri(ModelAsStringRequiredOneValueDefaultOpEnum input)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/putModelAsStringRequiredOneValueDefault", false);
+            uri.AppendQuery("input", input.ToString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutModelAsStringRequiredOneValueDefaultRequest(ModelAsStringRequiredOneValueDefaultOpEnum input)
         {
             var message = _pipeline.CreateMessage();
@@ -783,6 +951,16 @@ namespace constants
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutClientConstantsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/constants/clientConstants/", false);
+            uri.AppendPath(_pathConstant, true);
+            uri.AppendQuery("query-constant", _queryConstant, true);
+            return uri;
         }
 
         internal HttpMessage CreatePutClientConstantsRequest()

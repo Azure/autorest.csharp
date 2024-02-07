@@ -679,6 +679,24 @@ namespace Parameters_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateNoRequestBodyResponseBodyRequestUri(int id, int skip, int? top, string status, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test1", false);
+            uri.AppendQuery("id", id, true);
+            uri.AppendQuery("skip", skip, true);
+            if (top != null)
+            {
+                uri.AppendQuery("$top", top.Value, true);
+            }
+            if (status != null)
+            {
+                uri.AppendQuery("status", status, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int skip, int? top, string status, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -702,6 +720,14 @@ namespace Parameters_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateRequestBodyResponseBodyRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test1", false);
+            return uri;
+        }
+
         internal HttpMessage CreateRequestBodyResponseBodyRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -715,6 +741,15 @@ namespace Parameters_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateDeleteNoRequestBodyResponseBodyRequestUri(string resourceName, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test1", false);
+            uri.AppendQuery("resourceName", resourceName, true);
+            return uri;
         }
 
         internal HttpMessage CreateDeleteNoRequestBodyResponseBodyRequest(string resourceName, RequestContext context)
@@ -731,6 +766,14 @@ namespace Parameters_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateNoRequestBodyNoResponseBodyRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test2", false);
+            return uri;
+        }
+
         internal HttpMessage CreateNoRequestBodyNoResponseBodyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -741,6 +784,14 @@ namespace Parameters_LowLevel
             uri.AppendPath("/test2", false);
             request.Uri = uri;
             return message;
+        }
+
+        internal RequestUriBuilder CreateRequestBodyNoResponseBodyRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test2", false);
+            return uri;
         }
 
         internal HttpMessage CreateRequestBodyNoResponseBodyRequest(RequestContent content, RequestContext context)
@@ -755,6 +806,18 @@ namespace Parameters_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateOptionalPathParametersRequestUri(int id, string name, int skip, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test3/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            return uri;
         }
 
         internal HttpMessage CreateOptionalPathParametersRequest(int id, string name, int skip, RequestContext context)
@@ -773,6 +836,18 @@ namespace Parameters_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateOptionalPathParametersWithMixedSequenceRequestUri(int id, string name, int skip, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test4/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            return uri;
+        }
+
         internal HttpMessage CreateOptionalPathParametersWithMixedSequenceRequest(int id, string name, int skip, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -787,6 +862,23 @@ namespace Parameters_LowLevel
             uri.AppendQuery("skip", skip, true);
             request.Uri = uri;
             return message;
+        }
+
+        internal RequestUriBuilder CreateOptionalPathBodyParametersWithMixedSequenceRequestUri(int id, string name, int skip, int max, RequestContent content, int? top, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test5/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            uri.AppendQuery("skip", skip, true);
+            uri.AppendQuery("max", max, true);
+            if (top != null)
+            {
+                uri.AppendQuery("top", top.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateOptionalPathBodyParametersWithMixedSequenceRequest(int id, string name, int skip, int max, RequestContent content, int? top, RequestContext context)
@@ -810,6 +902,17 @@ namespace Parameters_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateRepeatableActionRequestUri(int id, string name, RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/test6/", false);
+            uri.AppendPath(id, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(name, true);
+            return uri;
         }
 
         internal HttpMessage CreateRepeatableActionRequest(int id, string name, RequestContent content, RequestContext context)

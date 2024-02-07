@@ -43,6 +43,20 @@ namespace validation
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateValidationOfMethodParametersRequestUri(string resourceGroupName, int id)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/fakepath/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(id, true);
+            uri.AppendQuery("apiVersion", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateValidationOfMethodParametersRequest(string resourceGroupName, int id)
         {
             var message = _pipeline.CreateMessage();
@@ -116,6 +130,20 @@ namespace validation
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateValidationOfBodyRequestUri(string resourceGroupName, int id, Product body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/fakepath/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(id, true);
+            uri.AppendQuery("apiVersion", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateValidationOfBodyRequest(string resourceGroupName, int id, Product body)
@@ -202,6 +230,16 @@ namespace validation
             }
         }
 
+        internal RequestUriBuilder CreateGetWithConstantInPathRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/validation/constantsInPath/", false);
+            uri.AppendPath("constant", true);
+            uri.AppendPath("/value", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetWithConstantInPathRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -242,6 +280,16 @@ namespace validation
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostWithConstantInBodyRequestUri(Product body)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/validation/constantsInPath/", false);
+            uri.AppendPath("constant", true);
+            uri.AppendPath("/value", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostWithConstantInBodyRequest(Product body)

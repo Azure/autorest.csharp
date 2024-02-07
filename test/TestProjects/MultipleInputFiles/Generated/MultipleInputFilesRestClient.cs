@@ -35,6 +35,16 @@ namespace MultipleInputFiles
             _source = source;
         }
 
+        internal RequestUriBuilder CreateOperation1RequestUri(TestModel value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("https://", false);
+            uri.AppendRaw(_source.ToString(), true);
+            uri.AppendRaw(".fakeendpoint.azure.com", false);
+            uri.AppendPath("/operation1", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperation1Request(TestModel value)
         {
             var message = _pipeline.CreateMessage();
@@ -93,6 +103,16 @@ namespace MultipleInputFiles
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateOperation2RequestUri(TestModel value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("https://", false);
+            uri.AppendRaw(_source.ToString(), true);
+            uri.AppendRaw(".fakeendpoint.azure.com", false);
+            uri.AppendPath("/operation2", false);
+            return uri;
         }
 
         internal HttpMessage CreateOperation2Request(TestModel value)

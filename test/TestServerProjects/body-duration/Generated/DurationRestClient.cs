@@ -35,6 +35,14 @@ namespace body_duration
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/duration/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -102,6 +110,14 @@ namespace body_duration
             }
         }
 
+        internal RequestUriBuilder CreatePutPositiveDurationRequestUri(TimeSpan durationBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/duration/positiveduration", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutPositiveDurationRequest(TimeSpan durationBody)
         {
             var message = _pipeline.CreateMessage();
@@ -149,6 +165,14 @@ namespace body_duration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetPositiveDurationRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/duration/positiveduration", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetPositiveDurationRequest()
@@ -202,6 +226,14 @@ namespace body_duration
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/duration/invalid", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetInvalidRequest()

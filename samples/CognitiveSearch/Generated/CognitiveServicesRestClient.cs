@@ -39,6 +39,15 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateGetServiceStatisticsRequestUri(RequestOptions requestOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendPath("/servicestats", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetServiceStatisticsRequest(RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();

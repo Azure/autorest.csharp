@@ -318,6 +318,15 @@ namespace dpg_customization_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetModelRequestUri(string mode, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/customization/model/", false);
+            uri.AppendPath(mode, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetModelRequest(string mode, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -330,6 +339,15 @@ namespace dpg_customization_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePostModelRequestUri(string mode, RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/customization/model/", false);
+            uri.AppendPath(mode, false);
+            return uri;
         }
 
         internal HttpMessage CreatePostModelRequest(string mode, RequestContent content, RequestContext context)
@@ -348,6 +366,15 @@ namespace dpg_customization_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetPagesRequestUri(string mode, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/customization/paging/", false);
+            uri.AppendPath(mode, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetPagesRequest(string mode, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -362,6 +389,15 @@ namespace dpg_customization_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateLroRequestUri(string mode, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/customization/lro/", false);
+            uri.AppendPath(mode, false);
+            return uri;
+        }
+
         internal HttpMessage CreateLroRequest(string mode, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -374,6 +410,14 @@ namespace dpg_customization_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetPagesNextPageRequestUri(string nextLink, string mode, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetPagesNextPageRequest(string nextLink, string mode, RequestContext context)

@@ -36,6 +36,14 @@ namespace body_complex
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -87,6 +95,14 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutValidRequestUri(Fish complexBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutValidRequest(Fish complexBody)
@@ -218,6 +234,14 @@ namespace body_complex
             }
         }
 
+        internal RequestUriBuilder CreateGetDotSyntaxRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/dotsyntax", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDotSyntaxRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -269,6 +293,14 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetComposedWithDiscriminatorRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/composedWithDiscriminator", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetComposedWithDiscriminatorRequest()
@@ -324,6 +356,14 @@ namespace body_complex
             }
         }
 
+        internal RequestUriBuilder CreateGetComposedWithoutDiscriminatorRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/composedWithoutDiscriminator", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -377,6 +417,14 @@ namespace body_complex
             }
         }
 
+        internal RequestUriBuilder CreateGetComplicatedRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/complicated", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComplicatedRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -428,6 +476,14 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutComplicatedRequestUri(Salmon complexBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/complicated", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutComplicatedRequest(Salmon complexBody)
@@ -489,6 +545,14 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutMissingDiscriminatorRequestUri(Salmon complexBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/missingdiscriminator", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutMissingDiscriminatorRequest(Salmon complexBody)
@@ -560,6 +624,14 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutValidMissingRequiredRequestUri(Fish complexBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/missingrequired/invalid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutValidMissingRequiredRequest(Fish complexBody)

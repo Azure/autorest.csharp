@@ -35,6 +35,14 @@ namespace body_datetime_rfc1123
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -102,6 +110,14 @@ namespace body_datetime_rfc1123
             }
         }
 
+        internal RequestUriBuilder CreateGetInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/invalid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -153,6 +169,14 @@ namespace body_datetime_rfc1123
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetOverflowRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/overflow", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetOverflowRequest()
@@ -208,6 +232,14 @@ namespace body_datetime_rfc1123
             }
         }
 
+        internal RequestUriBuilder CreateGetUnderflowRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/underflow", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetUnderflowRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -261,6 +293,14 @@ namespace body_datetime_rfc1123
             }
         }
 
+        internal RequestUriBuilder CreatePutUtcMaxDateTimeRequestUri(DateTimeOffset datetimeBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/max", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -308,6 +348,14 @@ namespace body_datetime_rfc1123
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetUtcLowercaseMaxDateTimeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/max/lowercase", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetUtcLowercaseMaxDateTimeRequest()
@@ -363,6 +411,14 @@ namespace body_datetime_rfc1123
             }
         }
 
+        internal RequestUriBuilder CreateGetUtcUppercaseMaxDateTimeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/max/uppercase", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetUtcUppercaseMaxDateTimeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -416,6 +472,14 @@ namespace body_datetime_rfc1123
             }
         }
 
+        internal RequestUriBuilder CreatePutUtcMinDateTimeRequestUri(DateTimeOffset datetimeBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/min", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -463,6 +527,14 @@ namespace body_datetime_rfc1123
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetUtcMinDateTimeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/datetimerfc1123/min", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetUtcMinDateTimeRequest()

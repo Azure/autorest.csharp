@@ -122,6 +122,17 @@ namespace ServiceVersionOverride_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateOperationRequestUri(string notApiVersionEnum, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/op", false);
+            uri.AppendQuery("not-api-version-constant", "2.0", true);
+            uri.AppendQuery("not-api-version-enum", notApiVersionEnum, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationRequest(string notApiVersionEnum, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

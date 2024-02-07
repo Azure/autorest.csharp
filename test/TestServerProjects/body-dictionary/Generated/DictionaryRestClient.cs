@@ -37,6 +37,14 @@ namespace body_dictionary
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -100,6 +108,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/empty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -161,6 +177,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutEmptyRequestUri(IDictionary<string, string> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/empty", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutEmptyRequest(IDictionary<string, string> arrayBody)
@@ -230,6 +254,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetNullValueRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/nullvalue", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullValueRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -291,6 +323,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetNullKeyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/nullkey", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetNullKeyRequest()
@@ -356,6 +396,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetEmptyStringKeyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/keyemptystring", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyStringKeyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -417,6 +465,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/invalid", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetInvalidRequest()
@@ -482,6 +538,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetBooleanTfftRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/boolean/tfft", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -543,6 +607,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutBooleanTfftRequestUri(IDictionary<string, bool> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/boolean/tfft", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutBooleanTfftRequest(IDictionary<string, bool> arrayBody)
@@ -612,6 +684,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetBooleanInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/boolean/true.null.false", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -673,6 +753,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetBooleanInvalidStringRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/boolean/true.boolean.false", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetBooleanInvalidStringRequest()
@@ -738,6 +826,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetIntegerValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetIntegerValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -799,6 +895,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutIntegerValidRequestUri(IDictionary<string, int> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutIntegerValidRequest(IDictionary<string, int> arrayBody)
@@ -868,6 +972,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetIntInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/integer/1.null.zero", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -929,6 +1041,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetIntInvalidStringRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/integer/1.integer.0", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetIntInvalidStringRequest()
@@ -994,6 +1114,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetLongValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetLongValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1055,6 +1183,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutLongValidRequestUri(IDictionary<string, long> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutLongValidRequest(IDictionary<string, long> arrayBody)
@@ -1124,6 +1260,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetLongInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/long/1.null.zero", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1185,6 +1329,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetLongInvalidStringRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/long/1.integer.0", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetLongInvalidStringRequest()
@@ -1250,6 +1402,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetFloatValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetFloatValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1311,6 +1471,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutFloatValidRequestUri(IDictionary<string, float> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutFloatValidRequest(IDictionary<string, float> arrayBody)
@@ -1380,6 +1548,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetFloatInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/float/0.0-null-1.2e20", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1441,6 +1617,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetFloatInvalidStringRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/float/1.number.0", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetFloatInvalidStringRequest()
@@ -1506,6 +1690,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDoubleValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDoubleValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1567,6 +1759,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutDoubleValidRequestUri(IDictionary<string, double> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutDoubleValidRequest(IDictionary<string, double> arrayBody)
@@ -1636,6 +1836,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDoubleInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/double/0.0-null-1.2e20", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1697,6 +1905,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetDoubleInvalidStringRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/double/1.number.0", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetDoubleInvalidStringRequest()
@@ -1762,6 +1978,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetStringValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetStringValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1823,6 +2047,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutStringValidRequestUri(IDictionary<string, string> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutStringValidRequest(IDictionary<string, string> arrayBody)
@@ -1892,6 +2124,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetStringWithNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/string/foo.null.foo2", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetStringWithNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1953,6 +2193,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetStringWithInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/string/foo.123.foo2", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetStringWithInvalidRequest()
@@ -2018,6 +2266,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDateValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDateValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2079,6 +2335,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutDateValidRequestUri(IDictionary<string, DateTimeOffset> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutDateValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
@@ -2148,6 +2412,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDateInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date/invalidnull", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2209,6 +2481,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetDateInvalidCharsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date/invalidchars", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetDateInvalidCharsRequest()
@@ -2274,6 +2554,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDateTimeValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date-time/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2335,6 +2623,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutDateTimeValidRequestUri(IDictionary<string, DateTimeOffset> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date-time/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
@@ -2404,6 +2700,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDateTimeInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date-time/invalidnull", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2465,6 +2769,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetDateTimeInvalidCharsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date-time/invalidchars", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetDateTimeInvalidCharsRequest()
@@ -2530,6 +2842,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDateTimeRfc1123ValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2591,6 +2911,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutDateTimeRfc1123ValidRequestUri(IDictionary<string, DateTimeOffset> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeRfc1123ValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
@@ -2660,6 +2988,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDurationValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/duration/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDurationValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2721,6 +3057,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutDurationValidRequestUri(IDictionary<string, TimeSpan> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/duration/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutDurationValidRequest(IDictionary<string, TimeSpan> arrayBody)
@@ -2790,6 +3134,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetByteValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/byte/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetByteValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2851,6 +3203,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutByteValidRequestUri(IDictionary<string, byte[]> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/byte/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutByteValidRequest(IDictionary<string, byte[]> arrayBody)
@@ -2920,6 +3280,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetByteInvalidNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/byte/invalidnull", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2983,6 +3351,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetBase64UrlRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/prim/base64url/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBase64UrlRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3044,6 +3420,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetComplexNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/complex/null", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetComplexNullRequest()
@@ -3123,6 +3507,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetComplexEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/complex/empty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComplexEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3184,6 +3576,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetComplexItemNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/complex/itemnull", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetComplexItemNullRequest()
@@ -3249,6 +3649,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetComplexItemEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/complex/itemempty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComplexItemEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3312,6 +3720,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetComplexValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/complex/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComplexValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3373,6 +3789,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutComplexValidRequestUri(IDictionary<string, Widget> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/complex/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutComplexValidRequest(IDictionary<string, Widget> arrayBody)
@@ -3440,6 +3864,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetArrayNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/array/null", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetArrayNullRequest()
@@ -3543,6 +3975,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetArrayEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/array/empty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetArrayEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3628,6 +4068,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetArrayItemNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/array/itemnull", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetArrayItemNullRequest()
@@ -3717,6 +4165,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetArrayItemEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/array/itemempty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetArrayItemEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3802,6 +4258,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetArrayValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/array/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetArrayValidRequest()
@@ -3891,6 +4355,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreatePutArrayValidRequestUri(IDictionary<string, IList<string>> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/array/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutArrayValidRequest(IDictionary<string, IList<string>> arrayBody)
         {
             var message = _pipeline.CreateMessage();
@@ -3966,6 +4438,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetDictionaryNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/dictionary/null", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetDictionaryNullRequest()
@@ -4055,6 +4535,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDictionaryEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/dictionary/empty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDictionaryEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -4140,6 +4628,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetDictionaryItemNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/dictionary/itemnull", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetDictionaryItemNullRequest()
@@ -4229,6 +4725,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDictionaryItemEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/dictionary/itemempty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDictionaryItemEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -4316,6 +4820,14 @@ namespace body_dictionary
             }
         }
 
+        internal RequestUriBuilder CreateGetDictionaryValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/dictionary/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -4401,6 +4913,14 @@ namespace body_dictionary
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutDictionaryValidRequestUri(IDictionary<string, IDictionary<string, string>> arrayBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/dictionary/dictionary/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutDictionaryValidRequest(IDictionary<string, IDictionary<string, string>> arrayBody)

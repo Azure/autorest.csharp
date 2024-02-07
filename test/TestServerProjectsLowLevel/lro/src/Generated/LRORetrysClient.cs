@@ -499,6 +499,14 @@ namespace lro_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreatePut201CreatingSucceeded200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/put/201/creating/succeeded/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
@@ -512,6 +520,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetrySucceededRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/putasync/retry/succeeded", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetrySucceededRequest(RequestContent content, RequestContext context)
@@ -529,6 +545,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDeleteProvisioning202Accepted200SucceededRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/delete/provisioning/202/accepted/200/succeeded", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200202);
@@ -540,6 +564,14 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateDelete202Retry200RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/delete/202/retry/200", false);
+            return uri;
         }
 
         internal HttpMessage CreateDelete202Retry200Request(RequestContext context)
@@ -555,6 +587,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetrySucceededRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/deleteasync/retry/succeeded", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteAsyncRelativeRetrySucceededRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -566,6 +606,14 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePost202Retry200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/post/202/retry/200", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost202Retry200Request(RequestContent content, RequestContext context)
@@ -581,6 +629,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePostAsyncRelativeRetrySucceededRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/postasync/retry/succeeded", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetrySucceededRequest(RequestContent content, RequestContext context)

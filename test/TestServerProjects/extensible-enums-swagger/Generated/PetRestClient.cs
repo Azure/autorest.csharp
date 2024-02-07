@@ -36,6 +36,15 @@ namespace extensible_enums_swagger
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetByPetIdRequestUri(string petId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/extensibleenums/pet/", false);
+            uri.AppendPath(petId, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetByPetIdRequest(string petId)
         {
             var message = _pipeline.CreateMessage();
@@ -102,6 +111,14 @@ namespace extensible_enums_swagger
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateAddPetRequestUri(Pet petParam)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/extensibleenums/pet/addPet", false);
+            return uri;
         }
 
         internal HttpMessage CreateAddPetRequest(Pet petParam)

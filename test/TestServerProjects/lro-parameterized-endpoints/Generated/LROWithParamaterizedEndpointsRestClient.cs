@@ -34,6 +34,16 @@ namespace lro_parameterized_endpoints
             _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
+        internal RequestUriBuilder CreatePollWithParameterizedEndpointsRequestUri(string accountName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(_host, false);
+            uri.AppendPath("/lroParameterizedEndpoints", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePollWithParameterizedEndpointsRequest(string accountName)
         {
             var message = _pipeline.CreateMessage();
@@ -95,6 +105,17 @@ namespace lro_parameterized_endpoints
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePollWithConstantParameterizedEndpointsRequestUri(string accountName)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(_host, false);
+            uri.AppendPath("/lroConstantParameterizedEndpoints/", false);
+            uri.AppendPath("iAmConstant", false);
+            return uri;
         }
 
         internal HttpMessage CreatePollWithConstantParameterizedEndpointsRequest(string accountName)

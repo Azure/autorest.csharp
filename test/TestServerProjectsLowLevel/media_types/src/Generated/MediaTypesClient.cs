@@ -527,6 +527,14 @@ namespace media_types_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateAnalyzeBodyRequestUri(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/analyze", false);
+            return uri;
+        }
+
         internal HttpMessage CreateAnalyzeBodyRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -542,6 +550,14 @@ namespace media_types_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateAnalyzeBodyNoAcceptHeaderRequestUri(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/analyzeNoAccept", false);
+            return uri;
+        }
+
         internal HttpMessage CreateAnalyzeBodyNoAcceptHeaderRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -554,6 +570,14 @@ namespace media_types_LowLevel
             request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateContentTypeWithEncodingRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/contentTypeWithEncoding", false);
+            return uri;
         }
 
         internal HttpMessage CreateContentTypeWithEncodingRequest(RequestContent content, RequestContext context)
@@ -571,6 +595,14 @@ namespace media_types_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateBinaryBodyWithTwoContentTypesRequestUri(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/binaryBodyTwoContentTypes", false);
+            return uri;
+        }
+
         internal HttpMessage CreateBinaryBodyWithTwoContentTypesRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -584,6 +616,14 @@ namespace media_types_LowLevel
             request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateBinaryBodyWithThreeContentTypesRequestUri(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
+            return uri;
         }
 
         internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(RequestContent content, ContentType contentType, RequestContext context)
@@ -601,6 +641,14 @@ namespace media_types_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateBodyThreeTypesRequestUri(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
+            return uri;
+        }
+
         internal HttpMessage CreateBodyThreeTypesRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -614,6 +662,14 @@ namespace media_types_LowLevel
             request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutTextAndJsonBodyRequestUri(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/textAndJson", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutTextAndJsonBodyRequest(RequestContent content, ContentType contentType, RequestContext context)

@@ -38,6 +38,23 @@ namespace custom_baseUrl_more_options
             _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
         }
 
+        internal RequestUriBuilder CreateGetEmptyRequestUri(string vault, string secret, string keyName, string keyVersion)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(vault, false);
+            uri.AppendRaw(secret, false);
+            uri.AppendRaw(_dnsSuffix, false);
+            uri.AppendPath("/customuri/", false);
+            uri.AppendPath(_subscriptionId, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(keyName, true);
+            if (keyVersion != null)
+            {
+                uri.AppendQuery("keyVersion", keyVersion, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)
         {
             var message = _pipeline.CreateMessage();

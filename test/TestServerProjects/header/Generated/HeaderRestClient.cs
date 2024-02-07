@@ -35,6 +35,14 @@ namespace header
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateParamExistingKeyRequestUri(string userAgent)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/existingkey", false);
+            return uri;
+        }
+
         internal HttpMessage CreateParamExistingKeyRequest(string userAgent)
         {
             var message = _pipeline.CreateMessage();
@@ -93,6 +101,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseExistingKeyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/existingkey", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseExistingKeyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -136,6 +152,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamProtectedKeyRequestUri(string contentType)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/protectedkey", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamProtectedKeyRequest(string contentType)
@@ -195,6 +219,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseProtectedKeyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/protectedkey", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseProtectedKeyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -238,6 +270,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamIntegerRequestUri(string scenario, int value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/integer", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamIntegerRequest(string scenario, int value)
@@ -301,6 +341,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseIntegerRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/integer", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseIntegerRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -359,6 +407,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamLongRequestUri(string scenario, long value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/long", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamLongRequest(string scenario, long value)
@@ -422,6 +478,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseLongRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/long", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseLongRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -480,6 +544,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamFloatRequestUri(string scenario, float value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/float", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamFloatRequest(string scenario, float value)
@@ -543,6 +615,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseFloatRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/float", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseFloatRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -601,6 +681,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamDoubleRequestUri(string scenario, double value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/double", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDoubleRequest(string scenario, double value)
@@ -664,6 +752,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseDoubleRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/double", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDoubleRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -722,6 +818,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamBoolRequestUri(string scenario, bool value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/bool", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamBoolRequest(string scenario, bool value)
@@ -785,6 +889,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseBoolRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/bool", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseBoolRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -843,6 +955,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamStringRequestUri(string scenario, string value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/string", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamStringRequest(string scenario, string value)
@@ -909,6 +1029,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseStringRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/string", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseStringRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -967,6 +1095,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamDateRequestUri(string scenario, DateTimeOffset value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/date", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
@@ -1030,6 +1166,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseDateRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/date", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDateRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -1088,6 +1232,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamDatetimeRequestUri(string scenario, DateTimeOffset value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/datetime", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
@@ -1151,6 +1303,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseDatetimeRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/datetime", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDatetimeRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -1209,6 +1369,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamDatetimeRfc1123RequestUri(string scenario, DateTimeOffset? value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/datetimerfc1123", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value)
@@ -1275,6 +1443,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseDatetimeRfc1123RequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/datetimerfc1123", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -1333,6 +1509,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamDurationRequestUri(string scenario, TimeSpan value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/duration", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
@@ -1396,6 +1580,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseDurationRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/duration", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDurationRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -1454,6 +1646,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamByteRequestUri(string scenario, byte[] value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/byte", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamByteRequest(string scenario, byte[] value)
@@ -1525,6 +1725,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseByteRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/byte", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseByteRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -1583,6 +1791,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateParamEnumRequestUri(string scenario, GreyscaleColors? value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/enum", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamEnumRequest(string scenario, GreyscaleColors? value)
@@ -1649,6 +1865,14 @@ namespace header
             }
         }
 
+        internal RequestUriBuilder CreateResponseEnumRequestUri(string scenario)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/enum", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseEnumRequest(string scenario)
         {
             var message = _pipeline.CreateMessage();
@@ -1707,6 +1931,14 @@ namespace header
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCustomRequestIdRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
+            return uri;
         }
 
         internal HttpMessage CreateCustomRequestIdRequest()

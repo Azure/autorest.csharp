@@ -36,6 +36,14 @@ namespace body_string
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetNotExpandableRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/notExpandable", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNotExpandableRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -89,6 +97,14 @@ namespace body_string
             }
         }
 
+        internal RequestUriBuilder CreatePutNotExpandableRequestUri(Colors stringBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/notExpandable", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNotExpandableRequest(Colors stringBody)
         {
             var message = _pipeline.CreateMessage();
@@ -136,6 +152,14 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetReferencedRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/Referenced", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetReferencedRequest()
@@ -191,6 +215,14 @@ namespace body_string
             }
         }
 
+        internal RequestUriBuilder CreatePutReferencedRequestUri(Colors enumStringBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/Referenced", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutReferencedRequest(Colors enumStringBody)
         {
             var message = _pipeline.CreateMessage();
@@ -238,6 +270,14 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetReferencedConstantRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/ReferencedConstant", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetReferencedConstantRequest()
@@ -291,6 +331,14 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutReferencedConstantRequestUri(RefColorConstant enumStringBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/ReferencedConstant", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutReferencedConstantRequest(RefColorConstant enumStringBody)

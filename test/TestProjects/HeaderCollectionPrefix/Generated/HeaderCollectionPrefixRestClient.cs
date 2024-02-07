@@ -35,6 +35,14 @@ namespace HeaderCollectionPrefix
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateOperationRequestUri(IDictionary<string, string> metadata)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/Operation/", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationRequest(IDictionary<string, string> metadata)
         {
             var message = _pipeline.CreateMessage();

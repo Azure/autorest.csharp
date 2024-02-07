@@ -35,6 +35,15 @@ namespace body_formdata_urlencoded
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateUpdatePetWithFormRequestUri(int petId, PetType petType, PetFood petFood, int petAge, string name, string status)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/formsdataurlencoded/pet/add/", false);
+            uri.AppendPath(petId, true);
+            return uri;
+        }
+
         internal HttpMessage CreateUpdatePetWithFormRequest(int petId, PetType petType, PetFood petFood, int petAge, string name, string status)
         {
             var message = _pipeline.CreateMessage();
@@ -104,6 +113,14 @@ namespace body_formdata_urlencoded
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePartialConstantBodyRequestUri(string service, string accessToken)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/formsdataurlencoded/partialConstantBody", false);
+            return uri;
         }
 
         internal HttpMessage CreatePartialConstantBodyRequest(string service, string accessToken)

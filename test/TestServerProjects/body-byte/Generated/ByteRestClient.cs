@@ -35,6 +35,14 @@ namespace body_byte
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/byte/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -86,6 +94,14 @@ namespace body_byte
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/byte/empty", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetEmptyRequest()
@@ -141,6 +157,14 @@ namespace body_byte
             }
         }
 
+        internal RequestUriBuilder CreateGetNonAsciiRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/byte/nonAscii", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNonAsciiRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -192,6 +216,14 @@ namespace body_byte
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutNonAsciiRequestUri(byte[] byteBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/byte/nonAscii", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutNonAsciiRequest(byte[] byteBody)
@@ -253,6 +285,14 @@ namespace body_byte
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/byte/invalid", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetInvalidRequest()

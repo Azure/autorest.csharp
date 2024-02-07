@@ -39,6 +39,14 @@ namespace body_complex
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateGetValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/basic/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -90,6 +98,15 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutValidRequestUri(Basic complexBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/basic/valid", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreatePutValidRequest(Basic complexBody)
@@ -154,6 +171,14 @@ namespace body_complex
             }
         }
 
+        internal RequestUriBuilder CreateGetInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/basic/invalid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -205,6 +230,14 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/basic/empty", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetEmptyRequest()
@@ -260,6 +293,14 @@ namespace body_complex
             }
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/basic/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -311,6 +352,14 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetNotProvidedRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/basic/notprovided", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetNotProvidedRequest()

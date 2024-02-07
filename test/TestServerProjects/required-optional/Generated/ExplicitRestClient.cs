@@ -37,6 +37,14 @@ namespace required_optional
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreatePutOptionalBinaryBodyRequestUri(Stream bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/explicit/optional/binary-body", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutOptionalBinaryBodyRequest(Stream bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -85,6 +93,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutRequiredBinaryBodyRequestUri(Stream bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/explicit/required/binary-body", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutRequiredBinaryBodyRequest(Stream bodyParameter)
@@ -146,6 +162,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostRequiredIntegerParameterRequestUri(int bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/integer/parameter", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostRequiredIntegerParameterRequest(int bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -193,6 +217,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostOptionalIntegerParameterRequestUri(int? bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/integer/parameter", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostOptionalIntegerParameterRequest(int? bodyParameter)
@@ -245,6 +277,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredIntegerPropertyRequestUri(IntWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/integer/property", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredIntegerPropertyRequest(IntWrapper bodyParameter)
@@ -308,6 +348,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalIntegerPropertyRequestUri(IntOptionalWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/integer/property", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalIntegerPropertyRequest(IntOptionalWrapper bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -360,6 +408,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostRequiredIntegerHeaderRequestUri(int headerParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/integer/header", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostRequiredIntegerHeaderRequest(int headerParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -404,6 +460,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostOptionalIntegerHeaderRequestUri(int? headerParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/integer/header", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostOptionalIntegerHeaderRequest(int? headerParameter)
@@ -453,6 +517,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredStringParameterRequestUri(string bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/string/parameter", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredStringParameterRequest(string bodyParameter)
@@ -516,6 +588,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalStringParameterRequestUri(string bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/string/parameter", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalStringParameterRequest(string bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -566,6 +646,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredStringPropertyRequestUri(StringWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/string/property", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredStringPropertyRequest(StringWrapper bodyParameter)
@@ -629,6 +717,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalStringPropertyRequestUri(StringOptionalWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/string/property", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalStringPropertyRequest(StringOptionalWrapper bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -679,6 +775,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredStringHeaderRequestUri(string headerParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/string/header", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredStringHeaderRequest(string headerParameter)
@@ -739,6 +843,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalStringHeaderRequestUri(string bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/string/header", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalStringHeaderRequest(string bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -786,6 +898,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredClassParameterRequestUri(Product bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/class/parameter", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredClassParameterRequest(Product bodyParameter)
@@ -849,6 +969,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalClassParameterRequestUri(Product bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/class/parameter", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalClassParameterRequest(Product bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -899,6 +1027,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredClassPropertyRequestUri(ClassWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/class/property", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredClassPropertyRequest(ClassWrapper bodyParameter)
@@ -962,6 +1098,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalClassPropertyRequestUri(ClassOptionalWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/class/property", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalClassPropertyRequest(ClassOptionalWrapper bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -1012,6 +1156,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredArrayParameterRequestUri(IEnumerable<string> bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/array/parameter", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredArrayParameterRequest(IEnumerable<string> bodyParameter)
@@ -1080,6 +1232,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalArrayParameterRequestUri(IEnumerable<string> bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/array/parameter", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalArrayParameterRequest(IEnumerable<string> bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -1135,6 +1295,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredArrayPropertyRequestUri(ArrayWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/array/property", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredArrayPropertyRequest(ArrayWrapper bodyParameter)
@@ -1198,6 +1366,14 @@ namespace required_optional
             }
         }
 
+        internal RequestUriBuilder CreatePostOptionalArrayPropertyRequestUri(ArrayOptionalWrapper bodyParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/array/property", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostOptionalArrayPropertyRequest(ArrayOptionalWrapper bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -1248,6 +1424,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostRequiredArrayHeaderRequestUri(IEnumerable<string> headerParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/requied/array/header", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostRequiredArrayHeaderRequest(IEnumerable<string> headerParameter)
@@ -1306,6 +1490,14 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostOptionalArrayHeaderRequestUri(IEnumerable<string> headerParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/reqopt/optional/array/header", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostOptionalArrayHeaderRequest(IEnumerable<string> headerParameter)

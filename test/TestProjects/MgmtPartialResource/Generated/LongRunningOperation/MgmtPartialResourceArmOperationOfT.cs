@@ -20,21 +20,24 @@ namespace MgmtPartialResource
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternal<T> _operation;
+        private readonly RehydrationToken? _rehydrationToken;
 
         /// <summary> Initializes a new instance of MgmtPartialResourceArmOperation for mocking. </summary>
         protected MgmtPartialResourceArmOperation()
         {
         }
 
-        internal MgmtPartialResourceArmOperation(Response<T> response)
+        internal MgmtPartialResourceArmOperation(Response<T> response, RehydrationToken? rehydrationToken = null)
         {
-            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value);
+            _operation = OperationInternal<T>.Succeeded(response.GetRawResponse(), response.Value, rehydrationToken);
+            _rehydrationToken = rehydrationToken;
         }
 
         internal MgmtPartialResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             _operation = new OperationInternal<T>(nextLinkOperation, clientDiagnostics, response, "MgmtPartialResourceArmOperation", fallbackStrategy: new SequentialDelayStrategy());
+            _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
         }
 
         /// <inheritdoc />

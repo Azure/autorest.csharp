@@ -213,6 +213,14 @@ namespace ResourceClients_LowLevel
             return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, groupId);
         }
 
+        internal RequestUriBuilder CreateGetParametersRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetParametersRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -224,6 +232,14 @@ namespace ResourceClients_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetGroupsRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/groups", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetGroupsRequest(RequestContext context)
@@ -239,6 +255,14 @@ namespace ResourceClients_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetAllItemsRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/items", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetAllItemsRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -252,6 +276,14 @@ namespace ResourceClients_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetGroupsNextPageRequestUri(string nextLink, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetGroupsNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -263,6 +295,14 @@ namespace ResourceClients_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetAllItemsNextPageRequestUri(string nextLink, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetAllItemsNextPageRequest(string nextLink, RequestContext context)

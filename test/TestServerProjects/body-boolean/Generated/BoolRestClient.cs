@@ -35,6 +35,14 @@ namespace body_boolean
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetTrueRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/bool/true", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetTrueRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -88,6 +96,14 @@ namespace body_boolean
             }
         }
 
+        internal RequestUriBuilder CreatePutTrueRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/bool/true", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutTrueRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -133,6 +149,14 @@ namespace body_boolean
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetFalseRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/bool/false", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetFalseRequest()
@@ -188,6 +212,14 @@ namespace body_boolean
             }
         }
 
+        internal RequestUriBuilder CreatePutFalseRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/bool/false", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutFalseRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -233,6 +265,14 @@ namespace body_boolean
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/bool/null", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetNullRequest()
@@ -300,6 +340,14 @@ namespace body_boolean
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/bool/invalid", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetInvalidRequest()

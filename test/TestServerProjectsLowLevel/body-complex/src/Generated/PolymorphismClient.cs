@@ -629,6 +629,14 @@ namespace body_complex_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetValidRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -640,6 +648,14 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutValidRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
@@ -657,6 +673,14 @@ namespace body_complex_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetDotSyntaxRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/dotsyntax", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetDotSyntaxRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -668,6 +692,14 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetComposedWithDiscriminatorRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/composedWithDiscriminator", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetComposedWithDiscriminatorRequest(RequestContext context)
@@ -683,6 +715,14 @@ namespace body_complex_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetComposedWithoutDiscriminatorRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/composedWithoutDiscriminator", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComposedWithoutDiscriminatorRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -696,6 +736,14 @@ namespace body_complex_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetComplicatedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/complicated", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComplicatedRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -707,6 +755,14 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutComplicatedRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/complicated", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutComplicatedRequest(RequestContent content, RequestContext context)
@@ -724,6 +780,14 @@ namespace body_complex_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePutMissingDiscriminatorRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/missingdiscriminator", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutMissingDiscriminatorRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -737,6 +801,14 @@ namespace body_complex_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutValidMissingRequiredRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/polymorphism/missingrequired/invalid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutValidMissingRequiredRequest(RequestContent content, RequestContext context)

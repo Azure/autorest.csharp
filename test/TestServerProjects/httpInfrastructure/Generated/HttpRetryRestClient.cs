@@ -35,6 +35,14 @@ namespace httpInfrastructure
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateHead408RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/408", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead408Request()
         {
             var message = _pipeline.CreateMessage();
@@ -76,6 +84,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePut500RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/500", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut500Request(bool? booleanValue)
@@ -130,6 +146,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreatePatch500RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/500", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePatch500Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -182,6 +206,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateGet502RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/502", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGet502Request()
         {
             var message = _pipeline.CreateMessage();
@@ -223,6 +255,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateOptions502RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/502", false);
+            return uri;
         }
 
         internal HttpMessage CreateOptions502Request()
@@ -278,6 +318,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreatePost503RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/503", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePost503Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -328,6 +376,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDelete503RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/503", false);
+            return uri;
         }
 
         internal HttpMessage CreateDelete503Request(bool? booleanValue)
@@ -382,6 +438,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreatePut504RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/504", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePut504Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -432,6 +496,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePatch504RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/retry/504", false);
+            return uri;
         }
 
         internal HttpMessage CreatePatch504Request(bool? booleanValue)

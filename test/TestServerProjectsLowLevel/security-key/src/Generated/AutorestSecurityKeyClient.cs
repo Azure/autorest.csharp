@@ -117,6 +117,14 @@ namespace security_key_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateHeadRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/securitykey", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHeadRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

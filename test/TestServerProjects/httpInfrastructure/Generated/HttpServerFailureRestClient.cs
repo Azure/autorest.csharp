@@ -34,6 +34,14 @@ namespace httpInfrastructure
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateHead501RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/501", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead501Request()
         {
             var message = _pipeline.CreateMessage();
@@ -73,6 +81,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateGet501RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/501", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGet501Request()
         {
             var message = _pipeline.CreateMessage();
@@ -110,6 +126,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePost505RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/505", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost505Request(bool? booleanValue)
@@ -158,6 +182,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDelete505RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/505", false);
+            return uri;
         }
 
         internal HttpMessage CreateDelete505Request(bool? booleanValue)

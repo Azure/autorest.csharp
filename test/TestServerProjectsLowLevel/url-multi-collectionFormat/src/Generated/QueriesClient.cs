@@ -244,6 +244,21 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateArrayStringMultiNullRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/multi/string/null", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -264,6 +279,21 @@ namespace url_multi_collectionFormat_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateArrayStringMultiEmptyRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/multi/string/empty", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -282,6 +312,21 @@ namespace url_multi_collectionFormat_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateArrayStringMultiValidRequestUri(IEnumerable<string> arrayQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/multi/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                foreach (var param in arrayQuery)
+                {
+                    uri.AppendQuery("arrayQuery", param, true);
+                }
+            }
+            return uri;
         }
 
         internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery, RequestContext context)

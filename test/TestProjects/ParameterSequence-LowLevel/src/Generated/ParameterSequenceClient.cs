@@ -209,6 +209,16 @@ namespace ParameterSequence_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetItemRequestUri(string itemName, string origin, string version, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(itemName, true);
+            uri.AppendQuery("origin", origin, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetItemRequest(string itemName, string origin, string version, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -226,6 +236,16 @@ namespace ParameterSequence_LowLevel
                 request.Headers.Add("version", version);
             }
             return message;
+        }
+
+        internal RequestUriBuilder CreateSelectItemRequestUri(string itemName, string origin, string version, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/select/", false);
+            uri.AppendPath(itemName, true);
+            uri.AppendQuery("origin", origin, true);
+            return uri;
         }
 
         internal HttpMessage CreateSelectItemRequest(string itemName, string origin, string version, RequestContext context)

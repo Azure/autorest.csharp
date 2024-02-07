@@ -20,21 +20,24 @@ namespace MgmtPropertyChooser
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternal _operation;
+        private readonly RehydrationToken? _rehydrationToken;
 
         /// <summary> Initializes a new instance of MgmtPropertyChooserArmOperation for mocking. </summary>
         protected MgmtPropertyChooserArmOperation()
         {
         }
 
-        internal MgmtPropertyChooserArmOperation(Response response)
+        internal MgmtPropertyChooserArmOperation(Response response, RehydrationToken? rehydrationToken = null)
         {
-            _operation = OperationInternal.Succeeded(response);
+            _operation = OperationInternal.Succeeded(response, rehydrationToken);
+            _rehydrationToken = rehydrationToken;
         }
 
         internal MgmtPropertyChooserArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "MgmtPropertyChooserArmOperation", fallbackStrategy: new SequentialDelayStrategy());
+            _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
         }
 
         /// <inheritdoc />

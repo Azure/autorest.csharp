@@ -433,6 +433,14 @@ namespace body_complex_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetValidRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/dictionary/typed/valid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -444,6 +452,14 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutValidRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/dictionary/typed/valid", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
@@ -461,6 +477,14 @@ namespace body_complex_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetEmptyRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/dictionary/typed/empty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -472,6 +496,14 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutEmptyRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/dictionary/typed/empty", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutEmptyRequest(RequestContent content, RequestContext context)
@@ -489,6 +521,14 @@ namespace body_complex_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/dictionary/typed/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -500,6 +540,14 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetNotProvidedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/complex/dictionary/typed/notprovided", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetNotProvidedRequest(RequestContext context)

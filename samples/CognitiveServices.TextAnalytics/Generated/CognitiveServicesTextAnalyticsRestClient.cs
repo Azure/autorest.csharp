@@ -36,6 +36,23 @@ namespace CognitiveServices.TextAnalytics
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
         }
 
+        internal RequestUriBuilder CreateEntitiesRecognitionGeneralRequestUri(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
+            uri.AppendPath("/entities/recognition/general", false);
+            if (modelVersion != null)
+            {
+                uri.AppendQuery("model-version", modelVersion, true);
+            }
+            if (showStats != null)
+            {
+                uri.AppendQuery("showStats", showStats.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateEntitiesRecognitionGeneralRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
             var message = _pipeline.CreateMessage();
@@ -120,6 +137,23 @@ namespace CognitiveServices.TextAnalytics
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateEntitiesLinkingRequestUri(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
+            uri.AppendPath("/entities/linking", false);
+            if (modelVersion != null)
+            {
+                uri.AppendQuery("model-version", modelVersion, true);
+            }
+            if (showStats != null)
+            {
+                uri.AppendQuery("showStats", showStats.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateEntitiesLinkingRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
@@ -208,6 +242,23 @@ namespace CognitiveServices.TextAnalytics
             }
         }
 
+        internal RequestUriBuilder CreateKeyPhrasesRequestUri(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
+            uri.AppendPath("/keyPhrases", false);
+            if (modelVersion != null)
+            {
+                uri.AppendQuery("model-version", modelVersion, true);
+            }
+            if (showStats != null)
+            {
+                uri.AppendQuery("showStats", showStats.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateKeyPhrasesRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
             var message = _pipeline.CreateMessage();
@@ -294,6 +345,23 @@ namespace CognitiveServices.TextAnalytics
             }
         }
 
+        internal RequestUriBuilder CreateLanguagesRequestUri(LanguageBatchInput input, string modelVersion, bool? showStats)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
+            uri.AppendPath("/languages", false);
+            if (modelVersion != null)
+            {
+                uri.AppendQuery("model-version", modelVersion, true);
+            }
+            if (showStats != null)
+            {
+                uri.AppendQuery("showStats", showStats.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateLanguagesRequest(LanguageBatchInput input, string modelVersion, bool? showStats)
         {
             var message = _pipeline.CreateMessage();
@@ -378,6 +446,23 @@ namespace CognitiveServices.TextAnalytics
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateSentimentRequestUri(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
+            uri.AppendPath("/sentiment", false);
+            if (modelVersion != null)
+            {
+                uri.AppendQuery("model-version", modelVersion, true);
+            }
+            if (showStats != null)
+            {
+                uri.AppendQuery("showStats", showStats.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateSentimentRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)

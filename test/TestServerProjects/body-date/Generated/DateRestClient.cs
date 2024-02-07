@@ -35,6 +35,14 @@ namespace body_date
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -102,6 +110,14 @@ namespace body_date
             }
         }
 
+        internal RequestUriBuilder CreateGetInvalidDateRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/invaliddate", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetInvalidDateRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -153,6 +169,14 @@ namespace body_date
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetOverflowDateRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/overflowdate", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetOverflowDateRequest()
@@ -208,6 +232,14 @@ namespace body_date
             }
         }
 
+        internal RequestUriBuilder CreateGetUnderflowDateRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/underflowdate", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetUnderflowDateRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -261,6 +293,14 @@ namespace body_date
             }
         }
 
+        internal RequestUriBuilder CreatePutMaxDateRequestUri(DateTimeOffset dateBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/max", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutMaxDateRequest(DateTimeOffset dateBody)
         {
             var message = _pipeline.CreateMessage();
@@ -308,6 +348,14 @@ namespace body_date
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMaxDateRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/max", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMaxDateRequest()
@@ -363,6 +411,14 @@ namespace body_date
             }
         }
 
+        internal RequestUriBuilder CreatePutMinDateRequestUri(DateTimeOffset dateBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/min", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutMinDateRequest(DateTimeOffset dateBody)
         {
             var message = _pipeline.CreateMessage();
@@ -410,6 +466,14 @@ namespace body_date
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMinDateRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/date/min", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMinDateRequest()

@@ -719,6 +719,15 @@ namespace Azure.NewProject.TypeSpec
             return Volatile.Read(ref _cachedProtocolAndConvenient) ?? Interlocked.CompareExchange(ref _cachedProtocolAndConvenient, new ProtocolAndConvenient(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedProtocolAndConvenient;
         }
 
+        internal RequestUriBuilder CreateTopActionRequestUri(DateTimeOffset action, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/top/", false);
+            uri.AppendPath(action, "O", true);
+            return uri;
+        }
+
         internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -733,6 +742,14 @@ namespace Azure.NewProject.TypeSpec
             return message;
         }
 
+        internal RequestUriBuilder CreateTopAction2RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/top2", false);
+            return uri;
+        }
+
         internal HttpMessage CreateTopAction2Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -744,6 +761,14 @@ namespace Azure.NewProject.TypeSpec
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePatchActionRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/patch", false);
+            return uri;
         }
 
         internal HttpMessage CreatePatchActionRequest(RequestContent content, RequestContext context)
@@ -761,6 +786,14 @@ namespace Azure.NewProject.TypeSpec
             return message;
         }
 
+        internal RequestUriBuilder CreateAnonymousBodyRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/anonymousBody", false);
+            return uri;
+        }
+
         internal HttpMessage CreateAnonymousBodyRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -774,6 +807,14 @@ namespace Azure.NewProject.TypeSpec
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateFriendlyModelRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/friendlyName", false);
+            return uri;
         }
 
         internal HttpMessage CreateFriendlyModelRequest(RequestContent content, RequestContext context)
@@ -791,6 +832,14 @@ namespace Azure.NewProject.TypeSpec
             return message;
         }
 
+        internal RequestUriBuilder CreateAddTimeHeaderRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            return uri;
+        }
+
         internal HttpMessage CreateAddTimeHeaderRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -803,6 +852,15 @@ namespace Azure.NewProject.TypeSpec
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
             return message;
+        }
+
+        internal RequestUriBuilder CreateStringFormatRequestUri(Guid subscriptionId, RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/stringFormat/", false);
+            uri.AppendPath(subscriptionId, true);
+            return uri;
         }
 
         internal HttpMessage CreateStringFormatRequest(Guid subscriptionId, RequestContent content, RequestContext context)

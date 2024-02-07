@@ -20,21 +20,24 @@ namespace MgmtMockAndSample
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternal _operation;
+        private readonly RehydrationToken? _rehydrationToken;
 
         /// <summary> Initializes a new instance of MgmtMockAndSampleArmOperation for mocking. </summary>
         protected MgmtMockAndSampleArmOperation()
         {
         }
 
-        internal MgmtMockAndSampleArmOperation(Response response)
+        internal MgmtMockAndSampleArmOperation(Response response, RehydrationToken? rehydrationToken = null)
         {
-            _operation = OperationInternal.Succeeded(response);
+            _operation = OperationInternal.Succeeded(response, rehydrationToken);
+            _rehydrationToken = rehydrationToken;
         }
 
         internal MgmtMockAndSampleArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "MgmtMockAndSampleArmOperation", fallbackStrategy: new SequentialDelayStrategy());
+            _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
         }
 
         /// <inheritdoc />

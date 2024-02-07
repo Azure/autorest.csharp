@@ -313,6 +313,14 @@ namespace lro_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreatePutAsyncRetrySucceededRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/customheader/putasync/retry/succeeded", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutAsyncRetrySucceededRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -326,6 +334,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePut201CreatingSucceeded200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/customheader/put/201/creating/succeeded/200", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content, RequestContext context)
@@ -343,6 +359,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePost202Retry200RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/customheader/post/202/retry/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePost202Retry200Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -356,6 +380,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePostAsyncRetrySucceededRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/customheader/postasync/retry/succeeded", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRetrySucceededRequest(RequestContent content, RequestContext context)

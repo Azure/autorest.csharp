@@ -301,6 +301,14 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateHead501RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/501", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead501Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -312,6 +320,14 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGet501RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/501", false);
+            return uri;
         }
 
         internal HttpMessage CreateGet501Request(RequestContext context)
@@ -327,6 +343,14 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePost505RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/505", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePost505Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -340,6 +364,14 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateDelete505RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/failure/server/505", false);
+            return uri;
         }
 
         internal HttpMessage CreateDelete505Request(RequestContent content, RequestContext context)

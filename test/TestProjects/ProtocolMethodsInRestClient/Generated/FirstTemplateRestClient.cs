@@ -36,6 +36,14 @@ namespace ProtocolMethodsInRestClient
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateCreateRequestUri(Resource resource)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/firstTemplate/resources", false);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateRequest(Resource resource)
         {
             var message = _pipeline.CreateMessage();
@@ -96,6 +104,14 @@ namespace ProtocolMethodsInRestClient
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/firstTemplate/resources", false);
+            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(RequestContent content, RequestContext context)
@@ -173,6 +189,15 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string resourceId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/firstTemplate/resources/", false);
+            uri.AppendPath(resourceId, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteRequest(string resourceId)
         {
             var message = _pipeline.CreateMessage();
@@ -228,6 +253,15 @@ namespace ProtocolMethodsInRestClient
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string resourceId)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/firstTemplate/resources/", false);
+            uri.AppendPath(resourceId, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string resourceId)
@@ -296,6 +330,15 @@ namespace ProtocolMethodsInRestClient
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRequestUri(string resourceId, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/firstTemplate/resources/", false);
+            uri.AppendPath(resourceId, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string resourceId, RequestContext context)

@@ -35,6 +35,14 @@ namespace lro
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreatePut201CreatingSucceeded200RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/put/201/creating/succeeded/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePut201CreatingSucceeded200Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -87,6 +95,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetrySucceededRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/putasync/retry/succeeded", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetrySucceededRequest(Product product)
@@ -143,6 +159,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDeleteProvisioning202Accepted200SucceededRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/delete/provisioning/202/accepted/200/succeeded", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -190,6 +214,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDelete202Retry200RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/delete/202/retry/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete202Retry200Request()
         {
             var message = _pipeline.CreateMessage();
@@ -235,6 +267,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetrySucceededRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/deleteasync/retry/succeeded", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteAsyncRelativeRetrySucceededRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -278,6 +318,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePost202Retry200RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/post/202/retry/200", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost202Retry200Request(Product product)
@@ -332,6 +380,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostAsyncRelativeRetrySucceededRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/retryerror/postasync/retry/succeeded", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetrySucceededRequest(Product product)

@@ -39,6 +39,14 @@ namespace paging
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
+        internal RequestUriBuilder CreateGetNoItemNamePagesRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/noitemname", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNoItemNamePagesRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -90,6 +98,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetEmptyNextLinkNamePagesRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/emptynextlink", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetEmptyNextLinkNamePagesRequest()
@@ -145,6 +161,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetNullNextLinkNamePagesRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/nullnextlink", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullNextLinkNamePagesRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -198,6 +222,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetSinglePagesRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/single", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetSinglePagesRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -249,6 +281,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetSinglePagesWithBodyParamsRequestUri(BodyParam parameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/single/getWithBodyParams", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetSinglePagesWithBodyParamsRequest(BodyParam parameters)
@@ -322,6 +362,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateFirstResponseEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/firstResponseEmpty/1", false);
+            return uri;
+        }
+
         internal HttpMessage CreateFirstResponseEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -373,6 +421,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesRequestUri(PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesRequest(PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
@@ -439,6 +495,16 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetWithQueryParamsRequestUri(int requiredQueryParameter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/getWithQueryParams", false);
+            uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
+            uri.AppendQuery("queryConstant", true, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetWithQueryParamsRequest(int requiredQueryParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -494,6 +560,18 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDuplicateParamsRequestUri(string filter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/duplicateParams/1", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateDuplicateParamsRequest(string filter)
@@ -555,6 +633,18 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreatePageWithMaxPageSizeRequestUri(MaxPageSizeType? maxpagesize)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/maxPageSize", false);
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("$maxpagesize", maxpagesize.Value.ToString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreatePageWithMaxPageSizeRequest(MaxPageSizeType? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
@@ -614,6 +704,15 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateNextOperationWithQueryParamsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
+            uri.AppendQuery("queryConstant", true, true);
+            return uri;
+        }
+
         internal HttpMessage CreateNextOperationWithQueryParamsRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -666,6 +765,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetOdataMultiplePagesRequestUri(PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/odata", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesRequest(PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
@@ -730,6 +837,15 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesWithOffsetRequestUri(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/withpath/", false);
+            uri.AppendPath(pagingGetMultiplePagesWithOffsetOptions.Offset, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions)
@@ -809,6 +925,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetMultiplePagesRetryFirstRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/retryfirst", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMultiplePagesRetryFirstRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -860,6 +984,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesRetrySecondRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/retrysecond", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondRequest()
@@ -915,6 +1047,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetSinglePagesFailureRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/single/failure", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetSinglePagesFailureRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -966,6 +1106,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesFailureRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/failure", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureRequest()
@@ -1021,6 +1169,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetMultiplePagesFailureUriRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/failureuri", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMultiplePagesFailureUriRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1072,6 +1228,16 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesFragmentNextLinkRequestUri(string apiVersion, string tenant)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragment/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendQuery("api_version", apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string apiVersion, string tenant)
@@ -1153,6 +1319,16 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetMultiplePagesFragmentWithGroupingNextLinkRequestUri(CustomParameterGroup customParameterGroup)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
+            uri.AppendPath(customParameterGroup.Tenant, true);
+            uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(CustomParameterGroup customParameterGroup)
         {
             var message = _pipeline.CreateMessage();
@@ -1222,6 +1398,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetMultiplePagesLRORequestUri(PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/lro", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMultiplePagesLRORequest(PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -1274,6 +1458,15 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateAppendApiVersionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/apiVersion/append/1", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateAppendApiVersionRequest()
@@ -1330,6 +1523,15 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateReplaceApiVersionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/apiVersion/replace/1", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateReplaceApiVersionRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1382,6 +1584,18 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateNextFragmentRequestUri(string apiVersion, string tenant, string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragment/", false);
+            uri.AppendPath(tenant, true);
+            uri.AppendPath("/", false);
+            uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api_version", apiVersion, true);
+            return uri;
         }
 
         internal HttpMessage CreateNextFragmentRequest(string apiVersion, string tenant, string nextLink)
@@ -1475,6 +1689,18 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateNextFragmentWithGroupingRequestUri(string nextLink, CustomParameterGroup customParameterGroup)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
+            uri.AppendPath(customParameterGroup.Tenant, true);
+            uri.AppendPath("/", false);
+            uri.AppendRawNextLink(nextLink, false);
+            uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
+            return uri;
+        }
+
         internal HttpMessage CreateNextFragmentWithGroupingRequest(string nextLink, CustomParameterGroup customParameterGroup)
         {
             var message = _pipeline.CreateMessage();
@@ -1556,6 +1782,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetPagingModelWithItemNameWithXMSClientNameRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paging/itemNameWithXMSClientName", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1607,6 +1841,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetNoItemNamePagesNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink)
@@ -1676,6 +1918,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetEmptyNextLinkNamePagesNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyNextLinkNamePagesNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -1743,6 +1993,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetSinglePagesNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -1808,6 +2066,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetSinglePagesWithBodyParamsNextPageRequestUri(string nextLink, BodyParam parameters)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetSinglePagesWithBodyParamsNextPageRequest(string nextLink, BodyParam parameters)
@@ -1887,6 +2153,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateFirstResponseEmptyNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateFirstResponseEmptyNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -1952,6 +2226,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesNextPageRequestUri(string nextLink, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions)
@@ -2032,6 +2314,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateDuplicateParamsNextPageRequestUri(string nextLink, string filter)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateDuplicateParamsNextPageRequest(string nextLink, string filter)
         {
             var message = _pipeline.CreateMessage();
@@ -2101,6 +2391,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreatePageWithMaxPageSizeNextPageRequestUri(string nextLink, MaxPageSizeType? maxpagesize)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreatePageWithMaxPageSizeNextPageRequest(string nextLink, MaxPageSizeType? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
@@ -2168,6 +2466,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetOdataMultiplePagesNextPageRequestUri(string nextLink, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions)
@@ -2246,6 +2552,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesWithOffsetNextPageRequestUri(string nextLink, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions)
@@ -2334,6 +2648,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetMultiplePagesRetryFirstNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -2399,6 +2721,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesRetrySecondNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink)
@@ -2468,6 +2798,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetSinglePagesFailureNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -2533,6 +2871,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesFailureNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink)
@@ -2602,6 +2948,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateGetMultiplePagesFailureUriNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -2667,6 +3021,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetMultiplePagesLRONextPageRequestUri(string nextLink, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions)
@@ -2737,6 +3099,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateAppendApiVersionNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateAppendApiVersionNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -2804,6 +3174,14 @@ namespace paging
             }
         }
 
+        internal RequestUriBuilder CreateReplaceApiVersionNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
+        }
+
         internal HttpMessage CreateReplaceApiVersionNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
@@ -2869,6 +3247,14 @@ namespace paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequestUri(string nextLink)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            return uri;
         }
 
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink)

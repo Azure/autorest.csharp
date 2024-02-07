@@ -35,6 +35,14 @@ namespace body_integer
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -102,6 +110,14 @@ namespace body_integer
             }
         }
 
+        internal RequestUriBuilder CreateGetInvalidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/invalid", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -153,6 +169,14 @@ namespace body_integer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetOverflowInt32RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/overflowint32", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetOverflowInt32Request()
@@ -208,6 +232,14 @@ namespace body_integer
             }
         }
 
+        internal RequestUriBuilder CreateGetUnderflowInt32RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/underflowint32", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetUnderflowInt32Request()
         {
             var message = _pipeline.CreateMessage();
@@ -259,6 +291,14 @@ namespace body_integer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetOverflowInt64RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/overflowint64", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetOverflowInt64Request()
@@ -314,6 +354,14 @@ namespace body_integer
             }
         }
 
+        internal RequestUriBuilder CreateGetUnderflowInt64RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/underflowint64", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetUnderflowInt64Request()
         {
             var message = _pipeline.CreateMessage();
@@ -367,6 +415,14 @@ namespace body_integer
             }
         }
 
+        internal RequestUriBuilder CreatePutMax32RequestUri(int intBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/max/32", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutMax32Request(int intBody)
         {
             var message = _pipeline.CreateMessage();
@@ -414,6 +470,14 @@ namespace body_integer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutMax64RequestUri(long intBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/max/64", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutMax64Request(long intBody)
@@ -465,6 +529,14 @@ namespace body_integer
             }
         }
 
+        internal RequestUriBuilder CreatePutMin32RequestUri(int intBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/min/32", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutMin32Request(int intBody)
         {
             var message = _pipeline.CreateMessage();
@@ -514,6 +586,14 @@ namespace body_integer
             }
         }
 
+        internal RequestUriBuilder CreatePutMin64RequestUri(long intBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/min/64", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutMin64Request(long intBody)
         {
             var message = _pipeline.CreateMessage();
@@ -561,6 +641,14 @@ namespace body_integer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetUnixTimeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/unixtime", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetUnixTimeRequest()
@@ -616,6 +704,14 @@ namespace body_integer
             }
         }
 
+        internal RequestUriBuilder CreatePutUnixTimeDateRequestUri(DateTimeOffset intBody)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/unixtime", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutUnixTimeDateRequest(DateTimeOffset intBody)
         {
             var message = _pipeline.CreateMessage();
@@ -663,6 +759,14 @@ namespace body_integer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetInvalidUnixTimeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/invalidunixtime", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetInvalidUnixTimeRequest()
@@ -716,6 +820,14 @@ namespace body_integer
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetNullUnixTimeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/int/nullunixtime", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetNullUnixTimeRequest()

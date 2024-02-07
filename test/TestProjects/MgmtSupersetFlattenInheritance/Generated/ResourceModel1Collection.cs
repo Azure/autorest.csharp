@@ -90,7 +90,9 @@ namespace MgmtSupersetFlattenInheritance
             try
             {
                 var response = await _resourceModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response), response.GetRawResponse()));
+                var uri = _resourceModel1RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtSupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -138,7 +140,9 @@ namespace MgmtSupersetFlattenInheritance
             try
             {
                 var response = _resourceModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, data, cancellationToken);
-                var operation = new MgmtSupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response), response.GetRawResponse()));
+                var uri = _resourceModel1RestClient.CreatePutRequestUri(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, data);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtSupersetFlattenInheritanceArmOperation<ResourceModel1Resource>(Response.FromValue(new ResourceModel1Resource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

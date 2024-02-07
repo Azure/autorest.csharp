@@ -35,6 +35,14 @@ namespace lro
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreatePutNonRetry400RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/put/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNonRetry400Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -87,6 +95,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutNonRetry201Creating400RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/put/201/creating/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutNonRetry201Creating400Request(Product product)
@@ -143,6 +159,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreatePutNonRetry201Creating400InvalidJsonRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/put/201/creating/400/invalidjson", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -195,6 +219,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetry400RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/putasync/retry/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetry400Request(Product product)
@@ -251,6 +283,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDeleteNonRetry400RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/delete/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteNonRetry400Request()
         {
             var message = _pipeline.CreateMessage();
@@ -294,6 +334,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDelete202NonRetry400RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/delete/202/retry/400", false);
+            return uri;
         }
 
         internal HttpMessage CreateDelete202NonRetry400Request()
@@ -341,6 +389,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetry400RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/deleteasync/retry/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteAsyncRelativeRetry400Request()
         {
             var message = _pipeline.CreateMessage();
@@ -384,6 +440,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostNonRetry400RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/post/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostNonRetry400Request(Product product)
@@ -440,6 +504,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreatePost202NonRetry400RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/post/202/retry/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePost202NonRetry400Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -492,6 +564,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostAsyncRelativeRetry400RequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/postasync/retry/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetry400Request(Product product)
@@ -548,6 +628,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreatePutError201NoProvisioningStatePayloadRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/put/201/noprovisioningstatepayload", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -600,6 +688,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryNoStatusRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/nostatus", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(Product product)
@@ -656,6 +752,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryNoStatusPayloadRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/nostatuspayload", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -710,6 +814,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDelete204SucceededRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/delete/204/nolocation", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete204SucceededRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -751,6 +863,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetryNoStatusRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/deleteasync/retry/nostatus", false);
+            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest()
@@ -796,6 +916,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePost202NoLocationRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/post/202/nolocation", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost202NoLocationRequest(Product product)
@@ -852,6 +980,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreatePostAsyncRelativeRetryNoPayloadRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/postasync/retry/nopayload", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -904,6 +1040,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePut200InvalidJsonRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/put/200/invalidjson", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut200InvalidJsonRequest(Product product)
@@ -960,6 +1104,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryInvalidHeaderRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/invalidheader", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -1012,6 +1164,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryInvalidJsonPollingRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/invalidjsonpolling", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(Product product)
@@ -1068,6 +1228,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDelete202RetryInvalidHeaderRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/delete/202/retry/invalidheader", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete202RetryInvalidHeaderRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1111,6 +1279,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetryInvalidHeaderRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/deleteasync/retry/invalidheader", false);
+            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest()
@@ -1158,6 +1334,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/deleteasync/retry/invalidjsonpolling", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1201,6 +1385,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePost202RetryInvalidHeaderRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/post/202/retry/invalidheader", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost202RetryInvalidHeaderRequest(Product product)
@@ -1257,6 +1449,14 @@ namespace lro
             }
         }
 
+        internal RequestUriBuilder CreatePostAsyncRelativeRetryInvalidHeaderRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/postasync/retry/invalidheader", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -1309,6 +1509,14 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePostAsyncRelativeRetryInvalidJsonPollingRequestUri(Product product)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/postasync/retry/invalidjsonpolling", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(Product product)

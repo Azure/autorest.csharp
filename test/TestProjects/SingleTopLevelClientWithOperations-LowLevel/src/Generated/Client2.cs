@@ -106,6 +106,14 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateOperationRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/client2", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOperationRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

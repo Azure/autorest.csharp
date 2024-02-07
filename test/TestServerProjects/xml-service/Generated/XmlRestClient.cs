@@ -38,6 +38,14 @@ namespace xml_service
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetComplexTypeRefNoMetaRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/complex-type-ref-no-meta", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComplexTypeRefNoMetaRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -95,6 +103,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutComplexTypeRefNoMetaRequestUri(RootWithRefAndNoMeta model)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/complex-type-ref-no-meta", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutComplexTypeRefNoMetaRequest(RootWithRefAndNoMeta model)
@@ -157,6 +173,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetComplexTypeRefWithMetaRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/complex-type-ref-with-meta", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetComplexTypeRefWithMetaRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -214,6 +238,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutComplexTypeRefWithMetaRequestUri(RootWithRefAndMeta model)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/complex-type-ref-with-meta", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutComplexTypeRefWithMetaRequest(RootWithRefAndMeta model)
@@ -276,6 +308,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetSimpleRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/simple", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetSimpleRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -333,6 +373,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutSimpleRequestUri(Slideshow slideshow)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/simple", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutSimpleRequest(Slideshow slideshow)
@@ -396,6 +444,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetWrappedListsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/wrapped-lists", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetWrappedListsRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -453,6 +509,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutWrappedListsRequestUri(AppleBarrel wrappedLists)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/wrapped-lists", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutWrappedListsRequest(AppleBarrel wrappedLists)
@@ -516,6 +580,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetHeadersRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/headers", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetHeadersRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -558,6 +630,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetEmptyListRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-list", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetEmptyListRequest()
@@ -617,6 +697,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutEmptyListRequestUri(Slideshow slideshow)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-list", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutEmptyListRequest(Slideshow slideshow)
@@ -679,6 +767,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetEmptyWrappedListsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-wrapped-lists", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyWrappedListsRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -736,6 +832,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutEmptyWrappedListsRequestUri(AppleBarrel appleBarrel)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-wrapped-lists", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutEmptyWrappedListsRequest(AppleBarrel appleBarrel)
@@ -796,6 +900,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRootListRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/root-list", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetRootListRequest()
@@ -867,6 +979,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreatePutRootListRequestUri(IEnumerable<Banana> bananas)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/root-list", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutRootListRequest(IEnumerable<Banana> bananas)
         {
             var message = _pipeline.CreateMessage();
@@ -930,6 +1050,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetRootListSingleItemRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/root-list-single-item", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetRootListSingleItemRequest()
@@ -1001,6 +1129,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreatePutRootListSingleItemRequestUri(IEnumerable<Banana> bananas)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/root-list-single-item", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutRootListSingleItemRequest(IEnumerable<Banana> bananas)
         {
             var message = _pipeline.CreateMessage();
@@ -1064,6 +1200,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetEmptyRootListRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-root-list", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetEmptyRootListRequest()
@@ -1135,6 +1279,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreatePutEmptyRootListRequestUri(IEnumerable<Banana> bananas)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-root-list", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutEmptyRootListRequest(IEnumerable<Banana> bananas)
         {
             var message = _pipeline.CreateMessage();
@@ -1200,6 +1352,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetEmptyChildElementRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-child-element", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyChildElementRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1257,6 +1417,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutEmptyChildElementRequestUri(Banana banana)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/empty-child-element", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutEmptyChildElementRequest(Banana banana)
@@ -1319,6 +1487,15 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateListContainersRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/", false);
+            uri.AppendQuery("comp", "list", true);
+            return uri;
+        }
+
         internal HttpMessage CreateListContainersRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1377,6 +1554,16 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetServicePropertiesRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/", false);
+            uri.AppendQuery("comp", "properties", true);
+            uri.AppendQuery("restype", "service", true);
+            return uri;
         }
 
         internal HttpMessage CreateGetServicePropertiesRequest()
@@ -1440,6 +1627,16 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreatePutServicePropertiesRequestUri(StorageServiceProperties properties)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/", false);
+            uri.AppendQuery("comp", "properties", true);
+            uri.AppendQuery("restype", "service", true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutServicePropertiesRequest(StorageServiceProperties properties)
         {
             var message = _pipeline.CreateMessage();
@@ -1500,6 +1697,16 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetAclsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/mycontainer", false);
+            uri.AppendQuery("comp", "acl", true);
+            uri.AppendQuery("restype", "container", true);
+            return uri;
         }
 
         internal HttpMessage CreateGetAclsRequest()
@@ -1573,6 +1780,16 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreatePutAclsRequestUri(IEnumerable<SignedIdentifier> properties)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/mycontainer", false);
+            uri.AppendQuery("comp", "acl", true);
+            uri.AppendQuery("restype", "container", true);
+            return uri;
+        }
+
         internal HttpMessage CreatePutAclsRequest(IEnumerable<SignedIdentifier> properties)
         {
             var message = _pipeline.CreateMessage();
@@ -1640,6 +1857,16 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateListBlobsRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/mycontainer", false);
+            uri.AppendQuery("comp", "list", true);
+            uri.AppendQuery("restype", "container", true);
+            return uri;
+        }
+
         internal HttpMessage CreateListBlobsRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1699,6 +1926,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateJsonInputRequestUri(JsonInput properties)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/jsoninput", false);
+            return uri;
         }
 
         internal HttpMessage CreateJsonInputRequest(JsonInput properties)
@@ -1761,6 +1996,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateJsonOutputRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/jsonoutput", false);
+            return uri;
+        }
+
         internal HttpMessage CreateJsonOutputRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1812,6 +2055,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetXMsTextRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/x-ms-text", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetXMsTextRequest()
@@ -1873,6 +2124,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetBytesRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/bytes", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBytesRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1930,6 +2189,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutBinaryRequestUri(ModelWithByteProperty slideshow)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/bytes", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutBinaryRequest(ModelWithByteProperty slideshow)
@@ -1993,6 +2260,14 @@ namespace xml_service
             }
         }
 
+        internal RequestUriBuilder CreateGetUriRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/url", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetUriRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2050,6 +2325,14 @@ namespace xml_service
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePutUriRequestUri(ModelWithUrlProperty model)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/xml/url", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutUriRequest(ModelWithUrlProperty model)

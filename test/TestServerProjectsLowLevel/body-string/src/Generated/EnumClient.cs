@@ -441,6 +441,14 @@ namespace body_string_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetNotExpandableRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/notExpandable", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNotExpandableRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -452,6 +460,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutNotExpandableRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/notExpandable", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutNotExpandableRequest(RequestContent content, RequestContext context)
@@ -469,6 +485,14 @@ namespace body_string_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetReferencedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/Referenced", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetReferencedRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -480,6 +504,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutReferencedRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/Referenced", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutReferencedRequest(RequestContent content, RequestContext context)
@@ -497,6 +529,14 @@ namespace body_string_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetReferencedConstantRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/ReferencedConstant", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetReferencedConstantRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -508,6 +548,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutReferencedConstantRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/enum/ReferencedConstant", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutReferencedConstantRequest(RequestContent content, RequestContext context)

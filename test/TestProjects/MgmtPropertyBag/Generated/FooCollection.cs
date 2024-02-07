@@ -95,7 +95,9 @@ namespace MgmtPropertyBag
             try
             {
                 var response = await _fooRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, filter, top, orderby, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
+                var uri = _fooRestClient.CreateCreateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, filter, top, orderby);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -147,7 +149,9 @@ namespace MgmtPropertyBag
             try
             {
                 var response = _fooRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, filter, top, orderby, cancellationToken);
-                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
+                var uri = _fooRestClient.CreateCreateRequestUri(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, filter, top, orderby);
+                var rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(RequestMethod.Put, uri.ToUri(), uri.ToString(), NextLinkOperationImplementation.HeaderSource.None.ToString(), null, OperationFinalStateVia.OriginalUri.ToString());
+                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()), rehydrationToken);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

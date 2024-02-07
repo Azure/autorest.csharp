@@ -2031,6 +2031,14 @@ namespace header_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateParamExistingKeyRequestUri(string userAgent, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/existingkey", false);
+            return uri;
+        }
+
         internal HttpMessage CreateParamExistingKeyRequest(string userAgent, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2043,6 +2051,14 @@ namespace header_LowLevel
             request.Headers.Add("User-Agent", userAgent);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateResponseExistingKeyRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/existingkey", false);
+            return uri;
         }
 
         internal HttpMessage CreateResponseExistingKeyRequest(RequestContext context)
@@ -2058,6 +2074,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateParamProtectedKeyRequestUri(string contentType, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/protectedkey", false);
+            return uri;
+        }
+
         internal HttpMessage CreateParamProtectedKeyRequest(string contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2071,6 +2095,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseProtectedKeyRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/protectedkey", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseProtectedKeyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2082,6 +2114,14 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamIntegerRequestUri(string scenario, int value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/integer", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamIntegerRequest(string scenario, int value, RequestContext context)
@@ -2099,6 +2139,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseIntegerRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/integer", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseIntegerRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2111,6 +2159,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamLongRequestUri(string scenario, long value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/long", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamLongRequest(string scenario, long value, RequestContext context)
@@ -2128,6 +2184,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseLongRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/long", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseLongRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2140,6 +2204,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamFloatRequestUri(string scenario, float value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/float", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamFloatRequest(string scenario, float value, RequestContext context)
@@ -2157,6 +2229,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseFloatRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/float", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseFloatRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2169,6 +2249,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamDoubleRequestUri(string scenario, double value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/double", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDoubleRequest(string scenario, double value, RequestContext context)
@@ -2186,6 +2274,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseDoubleRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/double", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDoubleRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2198,6 +2294,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamBoolRequestUri(string scenario, bool value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/bool", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamBoolRequest(string scenario, bool value, RequestContext context)
@@ -2215,6 +2319,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseBoolRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/bool", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseBoolRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2227,6 +2339,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamStringRequestUri(string scenario, string value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/string", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamStringRequest(string scenario, string value, RequestContext context)
@@ -2247,6 +2367,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseStringRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/string", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseStringRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2259,6 +2387,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamDateRequestUri(string scenario, DateTimeOffset value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/date", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value, RequestContext context)
@@ -2276,6 +2412,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseDateRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/date", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDateRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2288,6 +2432,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamDatetimeRequestUri(string scenario, DateTimeOffset value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/datetime", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value, RequestContext context)
@@ -2305,6 +2457,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseDatetimeRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/datetime", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDatetimeRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2317,6 +2477,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamDatetimeRfc1123RequestUri(string scenario, DateTimeOffset? value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/datetimerfc1123", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value, RequestContext context)
@@ -2337,6 +2505,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseDatetimeRfc1123RequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/datetimerfc1123", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2349,6 +2525,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamDurationRequestUri(string scenario, TimeSpan value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/duration", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value, RequestContext context)
@@ -2366,6 +2550,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseDurationRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/duration", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseDurationRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2378,6 +2570,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamByteRequestUri(string scenario, BinaryData value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/byte", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamByteRequest(string scenario, BinaryData value, RequestContext context)
@@ -2395,6 +2595,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseByteRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/byte", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseByteRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2407,6 +2615,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateParamEnumRequestUri(string scenario, string value, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/param/prim/enum", false);
+            return uri;
         }
 
         internal HttpMessage CreateParamEnumRequest(string scenario, string value, RequestContext context)
@@ -2427,6 +2643,14 @@ namespace header_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateResponseEnumRequestUri(string scenario, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/response/prim/enum", false);
+            return uri;
+        }
+
         internal HttpMessage CreateResponseEnumRequest(string scenario, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2439,6 +2663,14 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateCustomRequestIdRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
+            return uri;
         }
 
         internal HttpMessage CreateCustomRequestIdRequest(RequestContext context)

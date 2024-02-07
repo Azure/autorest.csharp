@@ -36,6 +36,14 @@ namespace httpInfrastructure
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateHead300RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/300", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead300Request()
         {
             var message = _pipeline.CreateMessage();
@@ -83,6 +91,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGet300RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/300", false);
+            return uri;
         }
 
         internal HttpMessage CreateGet300Request()
@@ -156,6 +172,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateHead301RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/301", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead301Request()
         {
             var message = _pipeline.CreateMessage();
@@ -205,6 +229,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateGet301RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/301", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGet301Request()
         {
             var message = _pipeline.CreateMessage();
@@ -252,6 +284,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePut301RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/301", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut301Request(bool? booleanValue)
@@ -310,6 +350,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateHead302RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/302", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead302Request()
         {
             var message = _pipeline.CreateMessage();
@@ -359,6 +407,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateGet302RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/302", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGet302Request()
         {
             var message = _pipeline.CreateMessage();
@@ -406,6 +462,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePatch302RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/302", false);
+            return uri;
         }
 
         internal HttpMessage CreatePatch302Request(bool? booleanValue)
@@ -462,6 +526,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePost303RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/303", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost303Request(bool? booleanValue)
@@ -522,6 +594,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateHead307RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead307Request()
         {
             var message = _pipeline.CreateMessage();
@@ -569,6 +649,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGet307RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            return uri;
         }
 
         internal HttpMessage CreateGet307Request()
@@ -620,6 +708,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreateOptions307RequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            return uri;
+        }
+
         internal HttpMessage CreateOptions307Request()
         {
             var message = _pipeline.CreateMessage();
@@ -667,6 +763,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreatePut307RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut307Request(bool? booleanValue)
@@ -727,6 +831,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreatePatch307RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePatch307Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -785,6 +897,14 @@ namespace httpInfrastructure
             }
         }
 
+        internal RequestUriBuilder CreatePost307RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePost307Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -841,6 +961,14 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDelete307RequestUri(bool? booleanValue)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/redirect/307", false);
+            return uri;
         }
 
         internal HttpMessage CreateDelete307Request(bool? booleanValue)

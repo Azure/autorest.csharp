@@ -871,6 +871,14 @@ namespace body_string_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetNullRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/null", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNullRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -882,6 +890,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutNullRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/null", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutNullRequest(RequestContent content, RequestContext context)
@@ -899,6 +915,14 @@ namespace body_string_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetEmptyRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/empty", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetEmptyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -910,6 +934,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutEmptyRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/empty", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutEmptyRequest(RequestContent content, RequestContext context)
@@ -927,6 +959,14 @@ namespace body_string_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetMbcsRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/mbcs", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetMbcsRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -938,6 +978,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutMbcsRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/mbcs", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutMbcsRequest(RequestContent content, RequestContext context)
@@ -955,6 +1003,14 @@ namespace body_string_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetWhitespaceRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/whitespace", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetWhitespaceRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -966,6 +1022,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutWhitespaceRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/whitespace", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutWhitespaceRequest(RequestContent content, RequestContext context)
@@ -983,6 +1047,14 @@ namespace body_string_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetNotProvidedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/notProvided", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNotProvidedRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -994,6 +1066,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetBase64EncodedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/base64Encoding", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetBase64EncodedRequest(RequestContext context)
@@ -1009,6 +1089,14 @@ namespace body_string_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetBase64UrlEncodedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/base64UrlEncoding", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBase64UrlEncodedRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1020,6 +1108,14 @@ namespace body_string_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutBase64UrlEncodedRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/base64UrlEncoding", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content, RequestContext context)
@@ -1035,6 +1131,14 @@ namespace body_string_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetNullBase64UrlEncodedRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/string/nullBase64UrlEncoding", false);
+            return uri;
         }
 
         internal HttpMessage CreateGetNullBase64UrlEncodedRequest(RequestContext context)

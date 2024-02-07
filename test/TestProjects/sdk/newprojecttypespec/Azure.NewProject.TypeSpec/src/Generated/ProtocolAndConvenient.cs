@@ -242,6 +242,14 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
+        internal RequestUriBuilder CreateInternalProtocolRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/internalProtocol", false);
+            return uri;
+        }
+
         internal HttpMessage CreateInternalProtocolRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -255,6 +263,14 @@ namespace Azure.NewProject.TypeSpec
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateStillConvenientRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/stillConvenient", false);
+            return uri;
         }
 
         internal HttpMessage CreateStillConvenientRequest(RequestContext context)

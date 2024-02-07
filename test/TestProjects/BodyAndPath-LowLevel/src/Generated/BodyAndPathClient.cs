@@ -496,6 +496,15 @@ namespace BodyAndPath_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateCreateRequestUri(string itemName, RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(itemName, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateRequest(string itemName, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -509,6 +518,22 @@ namespace BodyAndPath_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreateCreateStreamRequestUri(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(itemNameStream, true);
+            if (excluded != null && Optional.IsCollectionDefined(excluded))
+            {
+                foreach (var param in excluded)
+                {
+                    uri.AppendQuery("excluded", param, true);
+                }
+            }
+            return uri;
         }
 
         internal HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded, RequestContext context)
@@ -533,6 +558,17 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateCreateEnumRequestUri(string enumName1, string enumName2, RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(enumName1, true);
+            uri.AppendPath("/", false);
+            uri.AppendPath(enumName2, true);
+            return uri;
+        }
+
         internal HttpMessage CreateCreateEnumRequest(string enumName1, string enumName2, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -550,6 +586,14 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetBodyAndPathsRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/list", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBodyAndPathsRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -563,6 +607,14 @@ namespace BodyAndPath_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetItemsRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/listItems", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetItemsRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -574,6 +626,24 @@ namespace BodyAndPath_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateUpdateRequestUri(string item3, string item2, string item1, string item4, RequestContent content, string item5, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/", false);
+            uri.AppendPath(item3, true);
+            uri.AppendPath("/item4/", false);
+            uri.AppendPath(item2, true);
+            uri.AppendPath("/item1", false);
+            uri.AppendQuery("item1", item1, true);
+            uri.AppendQuery("item4", item4, true);
+            if (item5 != null)
+            {
+                uri.AppendQuery("item5", item5, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateUpdateRequest(string item3, string item2, string item1, string item4, RequestContent content, string item5, RequestContext context)

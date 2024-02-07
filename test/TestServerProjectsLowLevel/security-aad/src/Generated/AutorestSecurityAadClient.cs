@@ -117,6 +117,14 @@ namespace security_aad_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateHeadRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/securityaad", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHeadRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

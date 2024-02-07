@@ -36,6 +36,15 @@ namespace url
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetBooleanTrueRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/bool/true/", false);
+            uri.AppendPath(true, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBooleanTrueRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -78,6 +87,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetBooleanFalseRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/bool/false/", false);
+            uri.AppendPath(false, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetBooleanFalseRequest()
@@ -124,6 +142,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateGetIntOneMillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/1000000/", false);
+            uri.AppendPath(1000000, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetIntOneMillionRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -166,6 +193,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetIntNegativeOneMillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/-1000000/", false);
+            uri.AppendPath(-1000000, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetIntNegativeOneMillionRequest()
@@ -212,6 +248,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateGetTenBillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/long/10000000000/", false);
+            uri.AppendPath(10000000000L, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetTenBillionRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -254,6 +299,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetNegativeTenBillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/long/-10000000000/", false);
+            uri.AppendPath(-10000000000L, true);
+            return uri;
         }
 
         internal HttpMessage CreateGetNegativeTenBillionRequest()
@@ -300,6 +354,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateFloatScientificPositiveRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/float/1.034E+20/", false);
+            uri.AppendPath(1.034E+20F, true);
+            return uri;
+        }
+
         internal HttpMessage CreateFloatScientificPositiveRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -342,6 +405,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateFloatScientificNegativeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/float/-1.034E-20/", false);
+            uri.AppendPath(-1.034E-20F, true);
+            return uri;
         }
 
         internal HttpMessage CreateFloatScientificNegativeRequest()
@@ -388,6 +460,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateDoubleDecimalPositiveRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/double/9999999.999/", false);
+            uri.AppendPath(9999999.999, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDoubleDecimalPositiveRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -430,6 +511,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDoubleDecimalNegativeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/double/-9999999.999/", false);
+            uri.AppendPath(-9999999.999, true);
+            return uri;
         }
 
         internal HttpMessage CreateDoubleDecimalNegativeRequest()
@@ -476,6 +566,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateStringUnicodeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/unicode/", false);
+            uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
+            return uri;
+        }
+
         internal HttpMessage CreateStringUnicodeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -520,6 +619,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateStringUrlEncodedRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
+            uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
+            return uri;
+        }
+
         internal HttpMessage CreateStringUrlEncodedRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -562,6 +670,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateStringUrlNonEncodedRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
+            uri.AppendPath("begin!*'();:@&=+$,end", false);
+            return uri;
         }
 
         internal HttpMessage CreateStringUrlNonEncodedRequest()
@@ -610,6 +727,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateStringEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/empty/", false);
+            uri.AppendPath("", true);
+            return uri;
+        }
+
         internal HttpMessage CreateStringEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -652,6 +778,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateStringNullRequestUri(string stringPath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/null/", false);
+            uri.AppendPath(stringPath, true);
+            return uri;
         }
 
         internal HttpMessage CreateStringNullRequest(string stringPath)
@@ -712,6 +847,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateEnumValidRequestUri(UriColor enumPath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/enum/green%20color/", false);
+            uri.AppendPath(enumPath.ToSerialString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreateEnumValidRequest(UriColor enumPath)
         {
             var message = _pipeline.CreateMessage();
@@ -758,6 +902,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateEnumNullRequestUri(UriColor enumPath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/null/", false);
+            uri.AppendPath(enumPath.ToSerialString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreateEnumNullRequest(UriColor enumPath)
         {
             var message = _pipeline.CreateMessage();
@@ -802,6 +955,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateByteMultiByteRequestUri(byte[] bytePath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/multibyte/", false);
+            uri.AppendPath(bytePath, "D", true);
+            return uri;
         }
 
         internal HttpMessage CreateByteMultiByteRequest(byte[] bytePath)
@@ -862,6 +1024,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateByteEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/empty/", false);
+            uri.AppendPath(new byte[] { }, "D", true);
+            return uri;
+        }
+
         internal HttpMessage CreateByteEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -904,6 +1075,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateByteNullRequestUri(byte[] bytePath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/byte/null/", false);
+            uri.AppendPath(bytePath, "D", true);
+            return uri;
         }
 
         internal HttpMessage CreateByteNullRequest(byte[] bytePath)
@@ -964,6 +1144,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateDateValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/date/2012-01-01/", false);
+            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            return uri;
+        }
+
         internal HttpMessage CreateDateValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1006,6 +1195,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDateNullRequestUri(DateTimeOffset datePath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/date/null/", false);
+            uri.AppendPath(datePath, "D", true);
+            return uri;
         }
 
         internal HttpMessage CreateDateNullRequest(DateTimeOffset datePath)
@@ -1054,6 +1252,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateDateTimeValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
+            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
+            return uri;
+        }
+
         internal HttpMessage CreateDateTimeValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1096,6 +1303,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDateTimeNullRequestUri(DateTimeOffset dateTimePath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/datetime/null/", false);
+            uri.AppendPath(dateTimePath, "O", true);
+            return uri;
         }
 
         internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
@@ -1142,6 +1358,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateBase64UrlRequestUri(byte[] base64UrlPath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/string/bG9yZW0/", false);
+            uri.AppendPath(base64UrlPath, "U", true);
+            return uri;
         }
 
         internal HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath)
@@ -1202,6 +1427,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateArrayCsvInPathRequestUri(IEnumerable<string> arrayPath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
+            uri.AppendPath(arrayPath, true);
+            return uri;
+        }
+
         internal HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
         {
             var message = _pipeline.CreateMessage();
@@ -1258,6 +1492,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateUnixTimeUrlRequestUri(DateTimeOffset unixTimeUrlPath)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/paths/int/1460505600/", false);
+            uri.AppendPath(unixTimeUrlPath, "U", true);
+            return uri;
         }
 
         internal HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)

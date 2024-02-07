@@ -124,6 +124,19 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
+        internal RequestUriBuilder CreateSayHiRequestUri(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/hello", false);
+            uri.AppendQuery("queryParameter", queryParameter, true);
+            if (optionalQuery != null)
+            {
+                uri.AppendQuery("optionalQuery", optionalQuery, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

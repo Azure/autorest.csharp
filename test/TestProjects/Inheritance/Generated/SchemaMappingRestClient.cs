@@ -36,6 +36,14 @@ namespace Inheritance
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateMixedRequestUri(BaseClass value)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/op", false);
+            return uri;
+        }
+
         internal HttpMessage CreateMixedRequest(BaseClass value)
         {
             var message = _pipeline.CreateMessage();

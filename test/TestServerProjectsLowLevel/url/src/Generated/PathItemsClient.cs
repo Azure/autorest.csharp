@@ -378,6 +378,32 @@ namespace url_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateGetAllWithValuesRequestUri(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(_globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/globalStringQuery/pathItemStringQuery/localStringQuery", false);
+            if (pathItemStringQuery != null)
+            {
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+            }
+            if (_globalStringQuery != null)
+            {
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
+            }
+            if (localStringQuery != null)
+            {
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -407,6 +433,32 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetGlobalQueryNullRequestUri(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(_globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/null/pathItemStringQuery/localStringQuery", false);
+            if (pathItemStringQuery != null)
+            {
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+            }
+            if (_globalStringQuery != null)
+            {
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
+            }
+            if (localStringQuery != null)
+            {
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)
@@ -440,6 +492,32 @@ namespace url_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateGetGlobalAndLocalQueryNullRequestUri(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(_globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/null/pathItemStringQuery/null", false);
+            if (pathItemStringQuery != null)
+            {
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+            }
+            if (_globalStringQuery != null)
+            {
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
+            }
+            if (localStringQuery != null)
+            {
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -469,6 +547,32 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateGetLocalPathItemQueryNullRequestUri(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
+            uri.AppendPath(_globalStringPath, true);
+            uri.AppendPath("/pathItemStringPath/", false);
+            uri.AppendPath(pathItemStringPath, true);
+            uri.AppendPath("/localStringPath/", false);
+            uri.AppendPath(localStringPath, true);
+            uri.AppendPath("/globalStringQuery/null/null", false);
+            if (pathItemStringQuery != null)
+            {
+                uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
+            }
+            if (_globalStringQuery != null)
+            {
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
+            }
+            if (localStringQuery != null)
+            {
+                uri.AppendQuery("localStringQuery", localStringQuery, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery, RequestContext context)

@@ -110,6 +110,14 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
+        internal RequestUriBuilder CreateGetUnknownValueRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/unknown-value", false);
+            return uri;
+        }
+
         internal HttpMessage CreateGetUnknownValueRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

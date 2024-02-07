@@ -39,6 +39,20 @@ namespace Azure.Storage.Tables
             _version = version;
         }
 
+        internal RequestUriBuilder CreateSetPropertiesRequestUri(Enum4 restype, Enum5 comp, StorageServiceProperties storageServiceProperties, int? timeout)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendQuery("restype", restype.ToString(), true);
+            uri.AppendQuery("comp", comp.ToString(), true);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateSetPropertiesRequest(Enum4 restype, Enum5 comp, StorageServiceProperties storageServiceProperties, int? timeout)
         {
             var message = _pipeline.CreateMessage();
@@ -115,6 +129,20 @@ namespace Azure.Storage.Tables
             }
         }
 
+        internal RequestUriBuilder CreateGetPropertiesRequestUri(Enum4 restype, Enum5 comp, int? timeout)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendQuery("restype", restype.ToString(), true);
+            uri.AppendQuery("comp", comp.ToString(), true);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateGetPropertiesRequest(Enum4 restype, Enum5 comp, int? timeout)
         {
             var message = _pipeline.CreateMessage();
@@ -187,6 +215,20 @@ namespace Azure.Storage.Tables
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetStatisticsRequestUri(Enum4 restype, Enum6 comp, int? timeout)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendQuery("restype", restype.ToString(), true);
+            uri.AppendQuery("comp", comp.ToString(), true);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetStatisticsRequest(Enum4 restype, Enum6 comp, int? timeout)

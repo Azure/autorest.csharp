@@ -237,6 +237,14 @@ namespace head_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreateHead200RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/200", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead200Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200404);
@@ -249,6 +257,14 @@ namespace head_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateHead204RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/204", false);
+            return uri;
+        }
+
         internal HttpMessage CreateHead204Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204404);
@@ -259,6 +275,14 @@ namespace head_LowLevel
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             return message;
+        }
+
+        internal RequestUriBuilder CreateHead404RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/http/success/404", false);
+            return uri;
         }
 
         internal HttpMessage CreateHead404Request(RequestContext context)

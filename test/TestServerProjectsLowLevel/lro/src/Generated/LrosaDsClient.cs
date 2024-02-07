@@ -1705,6 +1705,14 @@ namespace lro_LowLevel
             }
         }
 
+        internal RequestUriBuilder CreatePutNonRetry400RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/put/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNonRetry400Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
@@ -1718,6 +1726,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutNonRetry201Creating400RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/put/201/creating/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutNonRetry201Creating400Request(RequestContent content, RequestContext context)
@@ -1735,6 +1751,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePutNonRetry201Creating400InvalidJsonRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/put/201/creating/400/invalidjson", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
@@ -1748,6 +1772,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetry400RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/putasync/retry/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetry400Request(RequestContent content, RequestContext context)
@@ -1765,6 +1797,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDeleteNonRetry400RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/delete/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteNonRetry400Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -1776,6 +1816,14 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateDelete202NonRetry400RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/delete/202/retry/400", false);
+            return uri;
         }
 
         internal HttpMessage CreateDelete202NonRetry400Request(RequestContext context)
@@ -1791,6 +1839,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetry400RequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/deleteasync/retry/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteAsyncRelativeRetry400Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -1802,6 +1858,14 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePostNonRetry400RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/post/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostNonRetry400Request(RequestContent content, RequestContext context)
@@ -1819,6 +1883,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePost202NonRetry400RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/post/202/retry/400", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePost202NonRetry400Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -1832,6 +1904,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePostAsyncRelativeRetry400RequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/nonretryerror/postasync/retry/400", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetry400Request(RequestContent content, RequestContext context)
@@ -1849,6 +1929,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePutError201NoProvisioningStatePayloadRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/put/201/noprovisioningstatepayload", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
@@ -1862,6 +1950,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryNoStatusRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/nostatus", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(RequestContent content, RequestContext context)
@@ -1879,6 +1975,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryNoStatusPayloadRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/nostatuspayload", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1894,6 +1998,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDelete204SucceededRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/delete/204/nolocation", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete204SucceededRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -1907,6 +2019,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetryNoStatusRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/deleteasync/retry/nostatus", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -1918,6 +2038,14 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePost202NoLocationRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/post/202/nolocation", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost202NoLocationRequest(RequestContent content, RequestContext context)
@@ -1935,6 +2063,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePostAsyncRelativeRetryNoPayloadRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/postasync/retry/nopayload", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -1948,6 +2084,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePut200InvalidJsonRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/put/200/invalidjson", false);
+            return uri;
         }
 
         internal HttpMessage CreatePut200InvalidJsonRequest(RequestContent content, RequestContext context)
@@ -1965,6 +2109,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryInvalidHeaderRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/invalidheader", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1978,6 +2130,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePutAsyncRelativeRetryInvalidJsonPollingRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/putasync/retry/invalidjsonpolling", false);
+            return uri;
         }
 
         internal HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content, RequestContext context)
@@ -1995,6 +2155,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDelete202RetryInvalidHeaderRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/delete/202/retry/invalidheader", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDelete202RetryInvalidHeaderRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -2006,6 +2174,14 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetryInvalidHeaderRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/deleteasync/retry/invalidheader", false);
+            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(RequestContext context)
@@ -2021,6 +2197,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/deleteasync/retry/invalidjsonpolling", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -2032,6 +2216,14 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreatePost202RetryInvalidHeaderRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/post/202/retry/invalidheader", false);
+            return uri;
         }
 
         internal HttpMessage CreatePost202RetryInvalidHeaderRequest(RequestContent content, RequestContext context)
@@ -2049,6 +2241,14 @@ namespace lro_LowLevel
             return message;
         }
 
+        internal RequestUriBuilder CreatePostAsyncRelativeRetryInvalidHeaderRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/postasync/retry/invalidheader", false);
+            return uri;
+        }
+
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -2062,6 +2262,14 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        internal RequestUriBuilder CreatePostAsyncRelativeRetryInvalidJsonPollingRequestUri(RequestContent content, RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/lro/error/postasync/retry/invalidjsonpolling", false);
+            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content, RequestContext context)

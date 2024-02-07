@@ -133,6 +133,15 @@ namespace SubClients_LowLevel
             return Volatile.Read(ref _cachedParameter0) ?? Interlocked.CompareExchange(ref _cachedParameter0, new Parameter(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedParameter0;
         }
 
+        internal RequestUriBuilder CreateGetCachedParameterRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/root/", false);
+            uri.AppendPath(_cachedParameter, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetCachedParameterRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

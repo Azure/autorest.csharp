@@ -188,6 +188,14 @@ namespace ClientAndOperationGroup
             return Volatile.Read(ref _cachedGamma) ?? Interlocked.CompareExchange(ref _cachedGamma, new Gamma(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedGamma;
         }
 
+        internal RequestUriBuilder CreateZeroRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/top", false);
+            return uri;
+        }
+
         internal HttpMessage CreateZeroRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -199,6 +207,14 @@ namespace ClientAndOperationGroup
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
+        }
+
+        internal RequestUriBuilder CreateOneRequestUri(RequestContext context)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/Alpha", false);
+            return uri;
         }
 
         internal HttpMessage CreateOneRequest(RequestContext context)

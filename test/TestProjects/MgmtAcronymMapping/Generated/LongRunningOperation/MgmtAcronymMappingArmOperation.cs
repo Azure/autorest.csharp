@@ -20,21 +20,24 @@ namespace MgmtAcronymMapping
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternal _operation;
+        private readonly RehydrationToken? _rehydrationToken;
 
         /// <summary> Initializes a new instance of MgmtAcronymMappingArmOperation for mocking. </summary>
         protected MgmtAcronymMappingArmOperation()
         {
         }
 
-        internal MgmtAcronymMappingArmOperation(Response response)
+        internal MgmtAcronymMappingArmOperation(Response response, RehydrationToken? rehydrationToken = null)
         {
-            _operation = OperationInternal.Succeeded(response);
+            _operation = OperationInternal.Succeeded(response, rehydrationToken);
+            _rehydrationToken = rehydrationToken;
         }
 
         internal MgmtAcronymMappingArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
             _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "MgmtAcronymMappingArmOperation", fallbackStrategy: new SequentialDelayStrategy());
+            _rehydrationToken = NextLinkOperationImplementation.GetRehydrationToken(request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);
         }
 
         /// <inheritdoc />

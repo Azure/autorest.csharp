@@ -36,6 +36,15 @@ namespace url
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
+        internal RequestUriBuilder CreateGetBooleanTrueRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/true", false);
+            uri.AppendQuery("boolQuery", true, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBooleanTrueRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -80,6 +89,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateGetBooleanFalseRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/false", false);
+            uri.AppendQuery("boolQuery", false, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetBooleanFalseRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -122,6 +140,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetBooleanNullRequestUri(bool? boolQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/bool/null", false);
+            if (boolQuery != null)
+            {
+                uri.AppendQuery("boolQuery", boolQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
@@ -173,6 +203,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateGetIntOneMillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/1000000", false);
+            uri.AppendQuery("intQuery", 1000000, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetIntOneMillionRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -217,6 +256,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateGetIntNegativeOneMillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/-1000000", false);
+            uri.AppendQuery("intQuery", -1000000, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -259,6 +307,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetIntNullRequestUri(int? intQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/int/null", false);
+            if (intQuery != null)
+            {
+                uri.AppendQuery("intQuery", intQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetIntNullRequest(int? intQuery)
@@ -310,6 +370,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateGetTenBillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/10000000000", false);
+            uri.AppendQuery("longQuery", 10000000000L, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetTenBillionRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -354,6 +423,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateGetNegativeTenBillionRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/-10000000000", false);
+            uri.AppendQuery("longQuery", -10000000000L, true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetNegativeTenBillionRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -396,6 +474,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateGetLongNullRequestUri(long? longQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/long/null", false);
+            if (longQuery != null)
+            {
+                uri.AppendQuery("longQuery", longQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateGetLongNullRequest(long? longQuery)
@@ -447,6 +537,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateFloatScientificPositiveRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/1.034E+20", false);
+            uri.AppendQuery("floatQuery", 1.034E+20F, true);
+            return uri;
+        }
+
         internal HttpMessage CreateFloatScientificPositiveRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -491,6 +590,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateFloatScientificNegativeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/-1.034E-20", false);
+            uri.AppendQuery("floatQuery", -1.034E-20F, true);
+            return uri;
+        }
+
         internal HttpMessage CreateFloatScientificNegativeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -533,6 +641,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateFloatNullRequestUri(float? floatQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/float/null", false);
+            if (floatQuery != null)
+            {
+                uri.AppendQuery("floatQuery", floatQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateFloatNullRequest(float? floatQuery)
@@ -584,6 +704,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateDoubleDecimalPositiveRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/9999999.999", false);
+            uri.AppendQuery("doubleQuery", 9999999.999, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDoubleDecimalPositiveRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -628,6 +757,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateDoubleDecimalNegativeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/-9999999.999", false);
+            uri.AppendQuery("doubleQuery", -9999999.999, true);
+            return uri;
+        }
+
         internal HttpMessage CreateDoubleDecimalNegativeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -670,6 +808,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDoubleNullRequestUri(double? doubleQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/double/null", false);
+            if (doubleQuery != null)
+            {
+                uri.AppendQuery("doubleQuery", doubleQuery.Value, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateDoubleNullRequest(double? doubleQuery)
@@ -721,6 +871,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateStringUnicodeRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/unicode/", false);
+            uri.AppendQuery("stringQuery", "啊齄丂狛狜隣郎隣兀﨩", true);
+            return uri;
+        }
+
         internal HttpMessage CreateStringUnicodeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -763,6 +922,15 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateStringUrlEncodedRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend", false);
+            uri.AppendQuery("stringQuery", "begin!*'();:@ &=+$,/?#[]end", true);
+            return uri;
         }
 
         internal HttpMessage CreateStringUrlEncodedRequest()
@@ -809,6 +977,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateStringEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/empty", false);
+            uri.AppendQuery("stringQuery", "", true);
+            return uri;
+        }
+
         internal HttpMessage CreateStringEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -851,6 +1028,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateStringNullRequestUri(string stringQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/string/null", false);
+            if (stringQuery != null)
+            {
+                uri.AppendQuery("stringQuery", stringQuery, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateStringNullRequest(string stringQuery)
@@ -902,6 +1091,18 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateEnumValidRequestUri(UriColor? enumQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/enum/green%20color", false);
+            if (enumQuery != null)
+            {
+                uri.AppendQuery("enumQuery", enumQuery.Value.ToSerialString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateEnumValidRequest(UriColor? enumQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -949,6 +1150,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateEnumNullRequestUri(UriColor? enumQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/enum/null", false);
+            if (enumQuery != null)
+            {
+                uri.AppendQuery("enumQuery", enumQuery.Value.ToSerialString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateEnumNullRequest(UriColor? enumQuery)
@@ -1000,6 +1213,18 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateByteMultiByteRequestUri(byte[] byteQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/multibyte", false);
+            if (byteQuery != null)
+            {
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -1049,6 +1274,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateByteEmptyRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/empty", false);
+            uri.AppendQuery("byteQuery", new byte[] { }, "D", true);
+            return uri;
+        }
+
         internal HttpMessage CreateByteEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1091,6 +1325,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateByteNullRequestUri(byte[] byteQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/byte/null", false);
+            if (byteQuery != null)
+            {
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateByteNullRequest(byte[] byteQuery)
@@ -1142,6 +1388,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateDateValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/date/2012-01-01", false);
+            uri.AppendQuery("dateQuery", new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
+            return uri;
+        }
+
         internal HttpMessage CreateDateValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1184,6 +1439,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDateNullRequestUri(DateTimeOffset? dateQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/date/null", false);
+            if (dateQuery != null)
+            {
+                uri.AppendQuery("dateQuery", dateQuery.Value, "D", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
@@ -1235,6 +1502,15 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateDateTimeValidRequestUri()
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
+            uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
+            return uri;
+        }
+
         internal HttpMessage CreateDateTimeValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1277,6 +1553,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateDateTimeNullRequestUri(DateTimeOffset? dateTimeQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/datetime/null", false);
+            if (dateTimeQuery != null)
+            {
+                uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "O", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
@@ -1328,6 +1616,18 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateArrayStringCsvValidRequestUri(IEnumerable<string> arrayQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -1375,6 +1675,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateArrayStringCsvNullRequestUri(IEnumerable<string> arrayQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/null", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
@@ -1426,6 +1738,18 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateArrayStringCsvEmptyRequestUri(IEnumerable<string> arrayQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/csv/string/empty", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -1473,6 +1797,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateArrayStringNoCollectionFormatEmptyRequestUri(IEnumerable<string> arrayQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/none/string/empty", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery)
@@ -1524,6 +1860,18 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateArrayStringSsvValidRequestUri(IEnumerable<string> arrayQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/ssv/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, " ", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -1573,6 +1921,18 @@ namespace url
             }
         }
 
+        internal RequestUriBuilder CreateArrayStringTsvValidRequestUri(IEnumerable<string> arrayQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/tsv/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "\t", true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -1620,6 +1980,18 @@ namespace url
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateArrayStringPipesValidRequestUri(IEnumerable<string> arrayQuery)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/queries/array/pipes/string/valid", false);
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, "|", true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)

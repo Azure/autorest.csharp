@@ -41,6 +41,30 @@ namespace Azure.Storage.Tables
             _version = version;
         }
 
+        internal RequestUriBuilder CreateQueryRequestUri(Enum1 dataServiceVersion, QueryOptions queryOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/Tables", false);
+            if (queryOptions?.Format != null)
+            {
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
+            }
+            if (queryOptions?.Top != null)
+            {
+                uri.AppendQuery("$top", queryOptions.Top.Value, true);
+            }
+            if (queryOptions?.Select != null)
+            {
+                uri.AppendQuery("$select", queryOptions.Select, true);
+            }
+            if (queryOptions?.Filter != null)
+            {
+                uri.AppendQuery("$filter", queryOptions.Filter, true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateQueryRequest(Enum1 dataServiceVersion, QueryOptions queryOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -116,6 +140,18 @@ namespace Azure.Storage.Tables
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateCreateRequestUri(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/Tables", false);
+            if (queryOptions?.Format != null)
+            {
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions)
@@ -205,6 +241,16 @@ namespace Azure.Storage.Tables
             }
         }
 
+        internal RequestUriBuilder CreateDeleteRequestUri(string table)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/Tables('", false);
+            uri.AppendPath(table, true);
+            uri.AppendPath("')", false);
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteRequest(string table)
         {
             var message = _pipeline.CreateMessage();
@@ -265,6 +311,36 @@ namespace Azure.Storage.Tables
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateQueryEntitiesRequestUri(Enum1 dataServiceVersion, string table, int? timeout, QueryOptions queryOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(table, true);
+            uri.AppendPath("()", false);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            if (queryOptions?.Format != null)
+            {
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
+            }
+            if (queryOptions?.Top != null)
+            {
+                uri.AppendQuery("$top", queryOptions.Top.Value, true);
+            }
+            if (queryOptions?.Select != null)
+            {
+                uri.AppendQuery("$select", queryOptions.Select, true);
+            }
+            if (queryOptions?.Filter != null)
+            {
+                uri.AppendQuery("$filter", queryOptions.Filter, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateQueryEntitiesRequest(Enum1 dataServiceVersion, string table, int? timeout, QueryOptions queryOptions)
@@ -364,6 +440,36 @@ namespace Azure.Storage.Tables
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateQueryEntitiesWithPartitionAndRowKeyRequestUri(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout, QueryOptions queryOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(table, true);
+            uri.AppendPath("(PartitionKey='", false);
+            uri.AppendPath(partitionKey, true);
+            uri.AppendPath("',RowKey='", false);
+            uri.AppendPath(rowKey, true);
+            uri.AppendPath("')", false);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            if (queryOptions?.Format != null)
+            {
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
+            }
+            if (queryOptions?.Select != null)
+            {
+                uri.AppendQuery("$select", queryOptions.Select, true);
+            }
+            if (queryOptions?.Filter != null)
+            {
+                uri.AppendQuery("$filter", queryOptions.Filter, true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateQueryEntitiesWithPartitionAndRowKeyRequest(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout, QueryOptions queryOptions)
@@ -483,6 +589,28 @@ namespace Azure.Storage.Tables
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateUpdateEntityRequestUri(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(table, true);
+            uri.AppendPath("(PartitionKey='", false);
+            uri.AppendPath(partitionKey, true);
+            uri.AppendPath("',RowKey='", false);
+            uri.AppendPath(rowKey, true);
+            uri.AppendPath("')", false);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            if (queryOptions?.Format != null)
+            {
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateUpdateEntityRequest(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
@@ -606,6 +734,28 @@ namespace Azure.Storage.Tables
             }
         }
 
+        internal RequestUriBuilder CreateDeleteEntityRequestUri(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout, QueryOptions queryOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(table, true);
+            uri.AppendPath("(PartitionKey='", false);
+            uri.AppendPath(partitionKey, true);
+            uri.AppendPath("',RowKey='", false);
+            uri.AppendPath(rowKey, true);
+            uri.AppendPath("')", false);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            if (queryOptions?.Format != null)
+            {
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
+            }
+            return uri;
+        }
+
         internal HttpMessage CreateDeleteEntityRequest(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout, QueryOptions queryOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -705,6 +855,23 @@ namespace Azure.Storage.Tables
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateInsertEntityRequestUri(Enum1 dataServiceVersion, string table, int? timeout, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(table, true);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            if (queryOptions?.Format != null)
+            {
+                uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
+            }
+            return uri;
         }
 
         internal HttpMessage CreateInsertEntityRequest(Enum1 dataServiceVersion, string table, int? timeout, IDictionary<string, object> tableEntityProperties, QueryOptions queryOptions)
@@ -837,6 +1004,20 @@ namespace Azure.Storage.Tables
             }
         }
 
+        internal RequestUriBuilder CreateGetAccessPolicyRequestUri(string table, Enum3 comp, int? timeout)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(table, true);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            uri.AppendQuery("comp", comp.ToString(), true);
+            return uri;
+        }
+
         internal HttpMessage CreateGetAccessPolicyRequest(string table, Enum3 comp, int? timeout)
         {
             var message = _pipeline.CreateMessage();
@@ -931,6 +1112,20 @@ namespace Azure.Storage.Tables
                 default:
                     throw new RequestFailedException(message.Response);
             }
+        }
+
+        internal RequestUriBuilder CreateSetAccessPolicyRequestUri(string table, Enum3 comp, int? timeout, IEnumerable<SignedIdentifier> tableAcl)
+        {
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(_url, false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(table, true);
+            if (timeout != null)
+            {
+                uri.AppendQuery("timeout", timeout.Value, true);
+            }
+            uri.AppendQuery("comp", comp.ToString(), true);
+            return uri;
         }
 
         internal HttpMessage CreateSetAccessPolicyRequest(string table, Enum3 comp, int? timeout, IEnumerable<SignedIdentifier> tableAcl)
