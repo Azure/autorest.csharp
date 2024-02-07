@@ -566,6 +566,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
             WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
             WriteIfNotDefault(writer, Options.UseModelReaderWriter, UseModelReaderWriter);
+            WriteIfNotDefault(writer, Options.EnableBicepSerialization, EnableBicepSerialization);
             writer.WriteNonEmptyArray(Options.ProtocolMethodList, ProtocolMethodList);
             writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, SuppressAbstractBaseClasses);
             writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, ModelsToTreatEmptyStringAsNull.ToList());
