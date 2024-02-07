@@ -305,7 +305,7 @@ namespace MgmtDiscriminator.Models
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
-                case "B":
+                case "bicep":
                     return SerializeBicep(options);
                 default:
                     throw new FormatException($"The model {nameof(RoleAssignmentArtifact)} does not support '{options.Format}' format.");
@@ -323,7 +323,7 @@ namespace MgmtDiscriminator.Models
                         using JsonDocument document = JsonDocument.Parse(data);
                         return DeserializeRoleAssignmentArtifact(document.RootElement, options);
                     }
-                case "B":
+                case "bicep":
                     throw new InvalidOperationException("Bicep deserialization is not supported for this type.");
                 default:
                     throw new FormatException($"The model {nameof(RoleAssignmentArtifact)} does not support '{options.Format}' format.");

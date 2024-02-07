@@ -69,7 +69,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Number = 4,
             };
 
-            var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("B")).ToString();
+            var bicep = ModelReaderWriter.Write(data, new ModelReaderWriterOptions("bicep")).ToString();
             var expected = $$"""
                            {
                              location: 'australiacentral'
