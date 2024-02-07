@@ -81,6 +81,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                              properties: {
                                order: 3
                                conditions: {
+                                 name: 'QueryString'
                                  parameters: {
                                    typeName: 'DeliveryRuleQueryStringConditionParameters'
                                    operator: 'Any'
@@ -91,7 +92,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                      'val2'
                                    ]
                                  }
-                                 name: 'QueryString'
                                  foo: 'query'
                                }
                                actions: [
@@ -105,13 +105,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                  }
                                ]
                                extraMappingInfo: {
-                                 dictionaryKey:  {
+                                 dictionaryKey: {
                                    name: 'CacheExpiration'
                                    foo: 'foo1'
                                  }
                                }
                                pet: {
-                                 dogKind: 'German Shepherd'
+                                 dogKind: 'german Shepherd'
                                  kind: 'Dog'
                                }
                                foo: '''
