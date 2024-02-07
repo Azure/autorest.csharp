@@ -49,9 +49,9 @@ namespace AutoRest.CSharp.Input.Source
                 }
 
                 // handle CodeGenSerialization attribute
-                if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
+                if (codeGenAttributes.TryGetCodeGenSerializationAttributeValue(attributeData, out var propertyName, out var serializationNames, out var serializationHook, out var deserializationHook, out var bicepSerializationHook) && !_typeSerializationMappings.ContainsKey(propertyName))
                 {
-                    _typeSerializationMappings.Add(propertyName, new(propertyName, serializationNames, serializationHook, deserializationHook));
+                    _typeSerializationMappings.Add(propertyName, new(propertyName, serializationNames, serializationHook, deserializationHook, bicepSerializationHook));
                 }
             }
         }

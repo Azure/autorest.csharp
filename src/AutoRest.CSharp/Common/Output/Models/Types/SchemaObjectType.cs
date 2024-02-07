@@ -113,6 +113,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private ObjectTypeProperty? _rawDataField;
+        protected internal override InputModelTypeUsage GetUsage() => (InputModelTypeUsage) _usage;
+
         public override ObjectTypeProperty? RawDataField
         {
             get

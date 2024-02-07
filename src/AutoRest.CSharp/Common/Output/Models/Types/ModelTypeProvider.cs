@@ -53,6 +53,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 : null;
 
         private ObjectTypeProperty? _rawDataField;
+        protected internal override InputModelTypeUsage GetUsage() => _inputModel.Usage;
+
         public override ObjectTypeProperty? RawDataField
         {
             get
@@ -235,8 +237,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         ShouldExcludeInWireSerialization(property, inputModelProperty),
-                        customSerializationMethodName: serializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: serializationMapping?.DeserializationValueHook,
+                        serializationHooks: new CustomSerializationHooks(
+                            serializationMapping?.JsonSerializationValueHook,
+                            serializationMapping?.JsonDeserializationValueHook,
+                            serializationMapping?.BicepSerializationValueHook),
                         enumerableExpression: enumerableExpression);
                 }
             }

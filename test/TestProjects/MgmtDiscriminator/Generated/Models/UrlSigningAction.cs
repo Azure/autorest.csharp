@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -27,11 +28,17 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="UrlSigningAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        internal UrlSigningAction(DeliveryRuleActionType name, string foo, UrlSigningActionParameters parameters) : base(name, foo)
+        internal UrlSigningAction(DeliveryRuleActionType name, string foo, IDictionary<string, BinaryData> serializedAdditionalRawData, UrlSigningActionParameters parameters) : base(name, foo, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Name = name;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UrlSigningAction"/> for deserialization. </summary>
+        internal UrlSigningAction()
+        {
         }
 
         /// <summary> Defines the parameters for the action. </summary>

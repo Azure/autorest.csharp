@@ -22,11 +22,18 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
+        /// <param name="boolProperty"> A bool property to verify bicep generation. </param>
+        /// <param name="location"> A location property to verify bicep generation. </param>
+        /// <param name="locationWithCustomSerialization"> A location property to verify bicep generation. </param>
+        /// <param name="dateTimeProperty"> A datetime property to verify bicep generation. </param>
+        /// <param name="duration"> A duration property to verify bicep generation. </param>
+        /// <param name="number"> A number property to verify bicep generation. </param>
+        /// <param name="uri"> A number property to verify bicep generation. </param>
         /// <param name="properties"> The properties. </param>
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
-        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DeliveryRuleProperties properties = null)
+        public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? boolProperty = null, AzureLocation? location = null, AzureLocation? locationWithCustomSerialization = null, DateTimeOffset? dateTimeProperty = null, TimeSpan? duration = null, int? number = null, Uri uri = null, DeliveryRuleProperties properties = null)
         {
-            return new DeliveryRuleData(id, name, resourceType, systemData, properties);
+            return new DeliveryRuleData(id, name, resourceType, systemData, boolProperty, location, locationWithCustomSerialization, dateTimeProperty, duration, number, uri, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleProperties"/>. </summary>
@@ -58,7 +65,7 @@ namespace MgmtDiscriminator.Models
             actions ??= new List<DeliveryRuleAction>();
             extraMappingInfo ??= new Dictionary<string, DeliveryRuleAction>();
 
-            return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo, pet, foo);
+            return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo, pet, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCondition"/>. </summary>
@@ -67,7 +74,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
         public static DeliveryRuleCondition DeliveryRuleCondition(string name = "Unknown", string foo = null)
         {
-            return new UnknownDeliveryRuleCondition(name, foo);
+            return new UnknownDeliveryRuleCondition(name, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleAction"/>. </summary>
@@ -76,7 +83,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
         public static DeliveryRuleAction DeliveryRuleAction(string name = "Unknown", string foo = null)
         {
-            return new DeliveryRuleAction(name, foo);
+            return new DeliveryRuleAction(name, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
@@ -84,7 +91,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string id = null)
         {
-            return new UnknownPet(default, id);
+            return new UnknownPet(default, id, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtDiscriminator.ArtifactData"/>. </summary>
@@ -96,7 +103,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="MgmtDiscriminator.ArtifactData"/> instance for mocking. </returns>
         public static ArtifactData ArtifactData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string kind = "Unknown")
         {
-            return new UnknownArtifact(id, name, resourceType, systemData, kind);
+            return new UnknownArtifact(id, name, resourceType, systemData, kind, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
@@ -105,16 +112,17 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
         public static Cat Cat(string id = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, id, meow);
+            return new Cat(PetKind.Cat, id, serializedAdditionalRawData: null, meow);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="bark"> A dog can bark. </param>
+        /// <param name="dogKind"> The kind of the dog. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string id = null, string bark = null)
+        public static Dog Dog(string id = null, string bark = null, DogKind? dogKind = null)
         {
-            return new Dog(PetKind.Dog, id, bark);
+            return new Dog(PetKind.Dog, id, serializedAdditionalRawData: null, bark, dogKind);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRemoteAddressCondition"/>. </summary>
@@ -123,7 +131,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleRemoteAddressCondition"/> instance for mocking. </returns>
         public static DeliveryRuleRemoteAddressCondition DeliveryRuleRemoteAddressCondition(string foo = null, RemoteAddressMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, parameters);
+            return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRequestMethodCondition"/>. </summary>
@@ -132,7 +140,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleRequestMethodCondition"/> instance for mocking. </returns>
         public static DeliveryRuleRequestMethodCondition DeliveryRuleRequestMethodCondition(string foo = null, RequestMethodMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, parameters);
+            return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleQueryStringCondition"/>. </summary>
@@ -141,7 +149,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleQueryStringCondition"/> instance for mocking. </returns>
         public static DeliveryRuleQueryStringCondition DeliveryRuleQueryStringCondition(string foo = null, QueryStringMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, parameters);
+            return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UrlRedirectAction"/>. </summary>
@@ -150,7 +158,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.UrlRedirectAction"/> instance for mocking. </returns>
         public static UrlRedirectAction UrlRedirectAction(string foo = null, UrlRedirectActionParameters parameters = null)
         {
-            return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, parameters);
+            return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UrlSigningAction"/>. </summary>
@@ -159,7 +167,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.UrlSigningAction"/> instance for mocking. </returns>
         public static UrlSigningAction UrlSigningAction(string foo = null, UrlSigningActionParameters parameters = null)
         {
-            return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, parameters);
+            return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OriginGroupOverrideAction"/>. </summary>
@@ -168,7 +176,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.OriginGroupOverrideAction"/> instance for mocking. </returns>
         public static OriginGroupOverrideAction OriginGroupOverrideAction(string foo = null, OriginGroupOverrideActionParameters parameters = null)
         {
-            return new OriginGroupOverrideAction(DeliveryRuleActionType.OriginGroupOverride, foo, parameters);
+            return new OriginGroupOverrideAction(DeliveryRuleActionType.OriginGroupOverride, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UrlRewriteAction"/>. </summary>
@@ -177,7 +185,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.UrlRewriteAction"/> instance for mocking. </returns>
         public static UrlRewriteAction UrlRewriteAction(string foo = null, UrlRewriteActionParameters parameters = null)
         {
-            return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, parameters);
+            return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRequestHeaderAction"/>. </summary>
@@ -186,7 +194,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleRequestHeaderAction"/> instance for mocking. </returns>
         public static DeliveryRuleRequestHeaderAction DeliveryRuleRequestHeaderAction(string foo = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, parameters);
+            return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleResponseHeaderAction"/>. </summary>
@@ -195,7 +203,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleResponseHeaderAction"/> instance for mocking. </returns>
         public static DeliveryRuleResponseHeaderAction DeliveryRuleResponseHeaderAction(string foo = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleResponseHeaderAction(DeliveryRuleActionType.ModifyResponseHeader, foo, parameters);
+            return new DeliveryRuleResponseHeaderAction(DeliveryRuleActionType.ModifyResponseHeader, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCacheExpirationAction"/>. </summary>
@@ -204,7 +212,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleCacheExpirationAction"/> instance for mocking. </returns>
         public static DeliveryRuleCacheExpirationAction DeliveryRuleCacheExpirationAction(string foo = null, CacheExpirationActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, parameters);
+            return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/>. </summary>
@@ -213,7 +221,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/> instance for mocking. </returns>
         public static DeliveryRuleCacheKeyQueryStringAction DeliveryRuleCacheKeyQueryStringAction(string foo = null, CacheKeyQueryStringActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, parameters);
+            return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>. </summary>
@@ -222,7 +230,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/> instance for mocking. </returns>
         public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(string foo = null, RouteConfigurationOverrideActionParameters parameters = null)
         {
-            return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, parameters);
+            return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, serializedAdditionalRawData: null, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TemplateArtifact"/>. </summary>
@@ -238,7 +246,7 @@ namespace MgmtDiscriminator.Models
         {
             parameters ??= new Dictionary<string, BinaryData>();
 
-            return new TemplateArtifact(id, name, resourceType, systemData, ArtifactKind.Template, template, resourceGroup, parameters);
+            return new TemplateArtifact(id, name, resourceType, systemData, ArtifactKind.Template, serializedAdditionalRawData: null, template, resourceGroup, parameters);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoleAssignmentArtifact"/>. </summary>
@@ -252,7 +260,7 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="Models.RoleAssignmentArtifact"/> instance for mocking. </returns>
         public static RoleAssignmentArtifact RoleAssignmentArtifact(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string roleDefinitionId = null, BinaryData principalIds = null, string resourceGroup = null)
         {
-            return new RoleAssignmentArtifact(id, name, resourceType, systemData, ArtifactKind.RoleAssignment, roleDefinitionId, principalIds, resourceGroup);
+            return new RoleAssignmentArtifact(id, name, resourceType, systemData, ArtifactKind.RoleAssignment, serializedAdditionalRawData: null, roleDefinitionId, principalIds, resourceGroup);
         }
     }
 }
