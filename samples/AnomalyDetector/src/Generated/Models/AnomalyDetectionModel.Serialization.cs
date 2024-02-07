@@ -39,15 +39,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelInfo))
             {
                 writer.WritePropertyName("modelInfo"u8);
-                BinaryData data = ModelReaderWriter.Write(ModelInfo, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<ModelInfo>)ModelInfo).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

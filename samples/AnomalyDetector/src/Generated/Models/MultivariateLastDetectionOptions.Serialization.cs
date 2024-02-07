@@ -31,15 +31,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Variables)
             {
-                BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<VariableValues>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("topContributorCount"u8);

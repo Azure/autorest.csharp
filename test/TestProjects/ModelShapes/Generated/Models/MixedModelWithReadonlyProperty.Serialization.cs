@@ -29,15 +29,7 @@ namespace ModelShapes.Models
             if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
                 writer.WritePropertyName("ReadonlyProperty"u8);
-                BinaryData data = ModelReaderWriter.Write(ReadonlyProperty, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<ReadonlyModel>)ReadonlyProperty).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
@@ -45,15 +37,7 @@ namespace ModelShapes.Models
                 writer.WriteStartArray();
                 foreach (var item in ReadonlyListProperty)
                 {
-                    BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(data))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                    ((IJsonModel<ReadonlyModel>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

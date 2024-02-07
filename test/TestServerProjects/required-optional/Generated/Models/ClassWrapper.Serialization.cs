@@ -27,15 +27,7 @@ namespace required_optional.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            BinaryData data = ModelReaderWriter.Write(Value, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-            using (JsonDocument document = JsonDocument.Parse(data))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            ((IJsonModel<Product>)Value).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

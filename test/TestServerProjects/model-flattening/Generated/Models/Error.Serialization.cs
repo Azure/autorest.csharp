@@ -39,15 +39,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(ParentError))
             {
                 writer.WritePropertyName("parentError"u8);
-                BinaryData data = ModelReaderWriter.Write(ParentError, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<Error>)ParentError).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

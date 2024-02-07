@@ -57,15 +57,7 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            BinaryData data = ModelReaderWriter.Write(RequiredModel, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-            using (JsonDocument document = JsonDocument.Parse(data))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -249,15 +241,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            BinaryData data0 = ModelReaderWriter.Write(ModelWithRequiredNullable, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data0);
-#else
-            using (JsonDocument document = JsonDocument.Parse(data0))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            ((IJsonModel<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

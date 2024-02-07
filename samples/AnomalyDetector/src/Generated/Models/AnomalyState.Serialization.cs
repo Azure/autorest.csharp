@@ -32,15 +32,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                BinaryData data = ModelReaderWriter.Write(Value, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<AnomalyValue>)Value).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Errors))
             {
@@ -48,15 +40,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(data))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

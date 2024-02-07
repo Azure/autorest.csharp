@@ -51,15 +51,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(AlignPolicy))
             {
                 writer.WritePropertyName("alignPolicy"u8);
-                BinaryData data = ModelReaderWriter.Write(AlignPolicy, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<AlignPolicy>)AlignPolicy).Write(writer, options);
             }
             if (Optional.IsDefined(Status))
             {
@@ -72,30 +64,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(data))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DiagnosticsInfo))
             {
                 writer.WritePropertyName("diagnosticsInfo"u8);
-                BinaryData data = ModelReaderWriter.Write(DiagnosticsInfo, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<DiagnosticsInfo>)DiagnosticsInfo).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

@@ -38,15 +38,7 @@ namespace ModelWithConverterUsage.Models
             if (Optional.IsDefined(ObjProperty))
             {
                 writer.WritePropertyName("Obj_Property"u8);
-                BinaryData data = ModelReaderWriter.Write(ObjProperty, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<Product>)ObjProperty).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

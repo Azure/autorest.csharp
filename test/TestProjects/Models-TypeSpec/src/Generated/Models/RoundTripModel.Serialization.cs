@@ -94,7 +94,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            ((IJsonModel<BaseModelWithDiscriminator>)RequiredModel).Write(writer, options);
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -105,7 +105,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredIntRecord"u8);
@@ -129,7 +129,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);

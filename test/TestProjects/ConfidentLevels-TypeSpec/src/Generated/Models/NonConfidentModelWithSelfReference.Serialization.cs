@@ -33,15 +33,7 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStartArray();
             foreach (var item in SelfReference)
             {
-                BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<NonConfidentModelWithSelfReference>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("unionProperty"u8);

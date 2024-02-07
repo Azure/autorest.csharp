@@ -48,7 +48,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in LocationMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<ProviderExtendedLocation>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -58,7 +58,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Aliases)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<ResourceTypeAlias>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -83,7 +83,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ZoneMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<ZoneMapping>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -93,7 +93,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ApiProfiles)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<ApiProfile>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

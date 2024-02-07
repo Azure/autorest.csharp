@@ -53,7 +53,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in ResourceTypes)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<ProviderResourceType>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

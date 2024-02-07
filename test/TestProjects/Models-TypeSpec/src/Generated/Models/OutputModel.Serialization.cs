@@ -32,12 +32,12 @@ namespace ModelsTypeSpec.Models
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            ((IJsonModel<DerivedModel>)RequiredModel).Write(writer, options);
             writer.WritePropertyName("requiredList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -45,7 +45,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
             }
             writer.WriteEndObject();
             if (Optional.IsCollectionDefined(OptionalList))
@@ -54,7 +54,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalList)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in OptionalNullableList)
                     {
-                        writer.WriteObjectValue(item);
+                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -82,7 +82,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
@@ -95,7 +95,7 @@ namespace ModelsTypeSpec.Models
                     foreach (var item in OptionalNullableRecord)
                     {
                         writer.WritePropertyName(item.Key);
-                        writer.WriteObjectValue(item.Value);
+                        ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                     }
                     writer.WriteEndObject();
                 }

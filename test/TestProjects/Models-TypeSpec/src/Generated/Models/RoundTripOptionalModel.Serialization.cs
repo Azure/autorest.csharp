@@ -63,19 +63,19 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel"u8);
-                writer.WriteObjectValue(OptionalModel);
+                ((IJsonModel<DerivedModel>)OptionalModel).Write(writer, options);
             }
             if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
-                writer.WriteObjectValue(OptionalModelWithPropertiesOnBase);
+                ((IJsonModel<DerivedModelWithProperties>)OptionalModelWithPropertiesOnBase).Write(writer, options);
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
@@ -116,7 +116,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }

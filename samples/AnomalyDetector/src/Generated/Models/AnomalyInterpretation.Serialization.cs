@@ -40,15 +40,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(CorrelationChanges))
             {
                 writer.WritePropertyName("correlationChanges"u8);
-                BinaryData data = ModelReaderWriter.Write(CorrelationChanges, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<CorrelationChanges>)CorrelationChanges).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

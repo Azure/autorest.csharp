@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                writer.WriteObjectValue(item);
+                ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("baseModelProp"u8);

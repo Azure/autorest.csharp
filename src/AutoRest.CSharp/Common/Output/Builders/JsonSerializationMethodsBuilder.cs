@@ -450,19 +450,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                     return JsonSerializerExpression.Serialize(utf8JsonWriter, value);
 
+                case SerializableObjectType { JsonSerialization: { } json } when options is not null:
+                    return value.CastTo(json.IJsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), new ValueExpression[] { utf8JsonWriter, options }).ToStatement();
+
                 case SerializableObjectType:
-                    if (options is not null)
-                    {
-                        return new[]
-                        {
-                            Declare("data", ModelReaderWriterExpression.Write(value, options), out var data),
-                            utf8JsonWriter.WriteBinaryData(data)
-                        };
-                    }
-                    else
-                    {
-                        return utf8JsonWriter.WriteObjectValue(value);
-                    }
+                    return utf8JsonWriter.WriteObjectValue(value);
 
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(value.NullableStructValue(valueSerialization.Type), enumType.ValueType));

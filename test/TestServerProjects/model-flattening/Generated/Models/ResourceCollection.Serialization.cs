@@ -29,15 +29,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource"u8);
-                BinaryData data = ModelReaderWriter.Write(Productresource, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<FlattenedProduct>)Productresource).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
@@ -45,15 +37,7 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(data))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                    ((IJsonModel<FlattenedProduct>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -64,15 +48,7 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    BinaryData data = ModelReaderWriter.Write(item.Value, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(data))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                    ((IJsonModel<FlattenedProduct>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }

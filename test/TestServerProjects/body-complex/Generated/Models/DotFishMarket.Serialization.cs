@@ -29,15 +29,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                BinaryData data = ModelReaderWriter.Write(SampleSalmon, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<DotSalmon>)SampleSalmon).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -45,30 +37,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(data))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                    ((IJsonModel<DotSalmon>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                BinaryData data = ModelReaderWriter.Write(SampleFish, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<DotFish>)SampleFish).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -76,15 +52,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    BinaryData data = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(data))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                    ((IJsonModel<DotFish>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

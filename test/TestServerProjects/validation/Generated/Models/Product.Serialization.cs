@@ -47,25 +47,9 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            BinaryData data = ModelReaderWriter.Write(Child, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-            using (JsonDocument document = JsonDocument.Parse(data))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            ((IJsonModel<ChildProduct>)Child).Write(writer, options);
             writer.WritePropertyName("constChild"u8);
-            BinaryData data0 = ModelReaderWriter.Write(ConstChild, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data0);
-#else
-            using (JsonDocument document = JsonDocument.Parse(data0))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            ((IJsonModel<ConstantProduct>)ConstChild).Write(writer, options);
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);

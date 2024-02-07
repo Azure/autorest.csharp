@@ -50,12 +50,12 @@ namespace ModelsTypeSpec.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
-                writer.WriteObjectValue(RequiredReadonlyModel);
+                ((IJsonModel<DerivedModel>)RequiredReadonlyModel).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
             {
                 writer.WritePropertyName("optionalReadonlyModel"u8);
-                writer.WriteObjectValue(OptionalReadonlyModel);
+                ((IJsonModel<DerivedModel>)OptionalReadonlyModel).Write(writer, options);
             }
             if (options.Format != "W")
             {
@@ -103,7 +103,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredReadOnlyModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -136,7 +136,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in RequiredReadOnlyModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
@@ -166,7 +166,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalReadOnlyModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -193,7 +193,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }

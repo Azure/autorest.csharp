@@ -33,28 +33,12 @@ namespace AnomalyDetector.Models
                 writer.WriteStringValue(ResultId);
             }
             writer.WritePropertyName("summary"u8);
-            BinaryData data = ModelReaderWriter.Write(Summary, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data);
-#else
-            using (JsonDocument document = JsonDocument.Parse(data))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            ((IJsonModel<MultivariateBatchDetectionResultSummary>)Summary).Write(writer, options);
             writer.WritePropertyName("results"u8);
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                BinaryData data0 = ModelReaderWriter.Write(item, options);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(data0);
-#else
-                using (JsonDocument document = JsonDocument.Parse(data0))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+                ((IJsonModel<AnomalyState>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
