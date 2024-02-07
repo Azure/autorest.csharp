@@ -1117,4 +1117,3 @@ export function navigateModels(
         { skipSubNamespaces }
     );
 }
-
