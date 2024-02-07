@@ -32,8 +32,6 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
-using static AutoRest.CSharp.Common.Input.Configuration;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
 
