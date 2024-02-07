@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="HelloAsync(RequestContext)">
+      <example>
+This sample shows how to call HelloAsync.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+Response response = await client.HelloAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call HelloAsync with all request content.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+Response response = await client.HelloAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Hello(RequestContext)">
+      <example>
+This sample shows how to call Hello.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+Response response = client.Hello();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Hello with all request content.
+<code><![CDATA[
+JsonMergePatchClient client = new JsonMergePatchClient();
+
+Response response = client.Hello();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
