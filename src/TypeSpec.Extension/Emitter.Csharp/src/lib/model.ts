@@ -131,10 +131,8 @@ function getCSharpInputTypeKindByIntrinsicModelName(
                     );
                     return InputPrimitiveTypeKind.Bytes;
             }
-        case "int8":
-            return InputPrimitiveTypeKind.SByte;
-        case "uint8":
-            return InputPrimitiveTypeKind.Byte;
+        case "int8": // int8 is currently handled as int32 in csharp
+        case "uint8": // int8 is currently handled as int32 in csharp
         case "int16":
         case "uint16":
         case "int32":
