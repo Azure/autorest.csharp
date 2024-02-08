@@ -30,6 +30,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private protected ModelTypeMapping? ModelTypeMapping => _modelTypeMapping.Value;
 
+        private SerializationBuilder _serializationBuilder = new SerializationBuilder();
+
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
 
@@ -41,13 +43,36 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         protected abstract ObjectTypeSerialization BuildSerialization();
 
+        private BicepObjectSerialization? EnsureBicepSerialization()
+        {
+            if (_bicepSerializationInitialized)
+                return _bicepSerialization;
+
+            _bicepSerializationInitialized = true;
+            _bicepSerialization = BuildBicepSerialization();
+            return _bicepSerialization;
+        }
+
+        protected BicepObjectSerialization? BuildBicepSerialization()
+        {
+            // if this.Usages does not contain Output bit, then return null
+            // alternate - is one of ancestors resource data or contained on a resource data
+            var usage = GetUsage();
+
+            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization &&
+                   usage.HasFlag(InputModelTypeUsage.Output) && JsonSerialization != null
+                ? _serializationBuilder.BuildBicepObjectSerialization(this, JsonSerialization) : null;
+        }
+
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
+
 
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();
 
         public virtual JsonConverterProvider? JsonConverter { get; }
+        protected internal abstract InputModelTypeUsage GetUsage();
 
         // TODO -- despite this is actually a field if present, we have to make it a property to work properly with other functionalities in the generator, such as the `CodeWriter.WriteInitialization` method
         public virtual ObjectTypeProperty? RawDataField => null;

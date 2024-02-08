@@ -79,6 +79,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ValueExpression? InitializationValue { get; }
 
+        public string SerializedName => SchemaProperty?.SerializedName ?? InputModelProperty?.SerializedName ?? Declaration.Name;
+
         private bool IsFlattenedProperty { get; }
 
         private FlattenedObjectTypeProperty? _flattenedProperty;

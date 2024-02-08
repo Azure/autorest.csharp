@@ -90,6 +90,10 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter)
             => new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter);
 
+        // Expected signature: MethodName(StringBuilder builder);
+        public static MethodBodyStatement InvokeCustomBicepSerializationMethod(string methodName, StringBuilderExpression stringBuilder)
+            => new InvokeInstanceMethodStatement(null, methodName, stringBuilder);
+
         // Expected signature: MethodName(JsonProperty property, ref Optional<T> optional)
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
             => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
