@@ -5,6 +5,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -13,10 +14,11 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 {
     internal record ObjectTypeSerialization
     {
-        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml)
+        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
         {
             Json = json;
             Xml = xml;
+            Bicep = bicep;
 
             WireFormat = Xml != null ? Serializations.XmlFormat : Serializations.JsonFormat;
 
@@ -33,6 +35,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public JsonObjectSerialization? Json { get; }
 
         public XmlObjectSerialization? Xml { get; }
+
+        public BicepObjectSerialization? Bicep { get; }
 
         public ValueExpression WireFormat { get; }
 

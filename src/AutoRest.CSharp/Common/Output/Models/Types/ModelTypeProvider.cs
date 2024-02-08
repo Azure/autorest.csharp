@@ -17,6 +17,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -480,11 +481,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return EmptyConstructor;
         }
 
-        protected override ObjectTypeSerialization BuildSerialization()
-        {
-            return new ObjectTypeSerialization(this, BuildJsonSerialization(), BuildXmlSerialization());
-        }
-
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
             if (IsPropertyBag)
@@ -494,6 +490,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var additionalProperties = CreateAdditionalPropertiesSerialization();
             return new(this, SerializationConstructor.Signature.Parameters, CreatePropertySerializations().ToArray(), additionalProperties, Discriminator, null);
         }
+
+        protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json) => null;
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertiesSerialization()
         {

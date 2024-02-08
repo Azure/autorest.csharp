@@ -7,6 +7,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -30,8 +31,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private protected ModelTypeMapping? ModelTypeMapping => _modelTypeMapping.Value;
 
-        private SerializationBuilder _serializationBuilder = new SerializationBuilder();
-
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();
 
@@ -41,32 +40,17 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private ObjectTypeSerialization? _modelSerialization;
         public ObjectTypeSerialization Serialization => _modelSerialization ??= BuildSerialization();
 
-        protected abstract ObjectTypeSerialization BuildSerialization();
-
-        private BicepObjectSerialization? EnsureBicepSerialization()
+        private ObjectTypeSerialization BuildSerialization()
         {
-            if (_bicepSerializationInitialized)
-                return _bicepSerialization;
-
-            _bicepSerializationInitialized = true;
-            _bicepSerialization = BuildBicepSerialization();
-            return _bicepSerialization;
-        }
-
-        protected BicepObjectSerialization? BuildBicepSerialization()
-        {
-            // if this.Usages does not contain Output bit, then return null
-            // alternate - is one of ancestors resource data or contained on a resource data
-            var usage = GetUsage();
-
-            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization &&
-                   usage.HasFlag(InputModelTypeUsage.Output) && JsonSerialization != null
-                ? _serializationBuilder.BuildBicepObjectSerialization(this, JsonSerialization) : null;
+            var json = BuildJsonSerialization();
+            var xml = BuildXmlSerialization();
+            var bicep = BuildBicepSerialization(json);
+            return new ObjectTypeSerialization(this, json, xml, bicep);
         }
 
         protected abstract JsonObjectSerialization? BuildJsonSerialization();
         protected abstract XmlObjectSerialization? BuildXmlSerialization();
-
+        protected abstract BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json);
 
         protected abstract bool EnsureIncludeSerializer();
         protected abstract bool EnsureIncludeDeserializer();

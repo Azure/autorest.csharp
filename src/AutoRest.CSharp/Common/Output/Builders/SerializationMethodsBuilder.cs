@@ -60,6 +60,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
+            if (serialization.Bicep is { } bicep)
+            {
+                foreach (var method in BicepSerializationMethodsBuilder.BuildBicepSerializationMethods(bicep))
+                {
+                    yield return method;
+                }
+            }
+
             foreach (var method in BuildIModelMethods(model))
             {
                 yield return method;
@@ -139,14 +147,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var switchStatement = new SwitchStatement(format);
 
-            if (serialization.Json is not null)
+            if (serialization.Json is { } json)
             {
-                switchStatement.Add(JsonSerializationMethodsBuilder.BuildJsonWriteSwitchCase(serialization.Json, options));
+                switchStatement.Add(JsonSerializationMethodsBuilder.BuildJsonWriteSwitchCase(json, options));
             }
 
-            if (serialization.Xml is not null)
+            if (serialization.Xml is { } xml)
             {
-                switchStatement.Add(XmlSerializationMethodsBuilder.BuildXmlWriteSwitchCase(serialization.Xml, options));
+                switchStatement.Add(XmlSerializationMethodsBuilder.BuildXmlWriteSwitchCase(xml, options));
+            }
+
+            if (serialization.Bicep is { } bicep)
+            {
+                switchStatement.Add(BicepSerializationMethodsBuilder.BuildBicepWriteSwitchCase(bicep, options));
             }
 
             // default case
@@ -179,6 +192,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (serialization.Xml is not null)
             {
                 switchStatement.Add(XmlSerializationMethodsBuilder.BuildXmlCreateSwitchCase(model, data, options));
+            }
+
+            if (serialization.Bicep is not null)
+            {
+                switchStatement.Add(BicepSerializationMethodsBuilder.BuildBicepReadSwitchCase(model, data, options));
             }
 
             // default case

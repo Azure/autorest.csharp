@@ -18,6 +18,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -723,14 +724,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             return Configuration.UseModelReaderWriter || _usage.HasFlag(SchemaTypeUsage.Output);
         }
 
-        protected override ObjectTypeSerialization BuildSerialization()
-        {
-            return new ObjectTypeSerialization(this, BuildJsonSerialization(), BuildXmlSerialization());
-        }
-
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
             return _supportedSerializationFormats.Contains(KnownMediaType.Json) ? _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
+        }
+
+        protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)
+        {
+            if (json == null)
+                return null;
+            // if this.Usages does not contain Output bit, then return null
+            // alternate - is one of ancestors resource data or contained on a resource data
+            var usage = GetUsage();
+
+            return Configuration.AzureArm && Configuration.UseModelReaderWriter && Configuration.EnableBicepSerialization &&
+                   usage.HasFlag(InputModelTypeUsage.Output)
+                ? _serializationBuilder.BuildBicepObjectSerialization(this, json) : null;
         }
 
         protected override XmlObjectSerialization? BuildXmlSerialization()
