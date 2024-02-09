@@ -117,7 +117,6 @@ function getCSharpInputTypeKindByIntrinsicModelName(
     format?: string,
     encode?: EncodeData
 ): InputPrimitiveTypeKind {
-    logger.info(`intrinsicModelName ${name}`);
     switch (name) {
         case "bytes":
             switch (encode?.encoding) {
@@ -134,7 +133,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             }
         case "int8":
             return InputPrimitiveTypeKind.SByte;
-        case "unit8":
+        case "uint8":
             return InputPrimitiveTypeKind.Byte;
         case "int32":
             return InputPrimitiveTypeKind.Int32;

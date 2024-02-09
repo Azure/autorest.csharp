@@ -1161,7 +1161,7 @@
       "ElementType": {
        "$id": "153",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "Byte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1181,7 +1181,7 @@
       "ElementType": {
        "$id": "156",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "Byte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1229,7 +1229,7 @@
       "ElementType": {
        "$id": "163",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "SByte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1249,7 +1249,7 @@
       "ElementType": {
        "$id": "166",
        "Kind": "Primitive",
-       "Name": "Int32",
+       "Name": "SByte",
        "IsNullable": false
       },
       "IsNullable": false
@@ -1404,7 +1404,7 @@
      "Type": {
       "$id": "187",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "Object",
       "IsNullable": false
      },
      "IsRequired": true,

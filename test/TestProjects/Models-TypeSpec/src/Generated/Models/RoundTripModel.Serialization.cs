@@ -314,12 +314,12 @@ namespace ModelsTypeSpec.Models
             IDictionary<string, RecordItem> requiredModelRecord = default;
             BinaryData requiredBytes = default;
             Optional<BinaryData> optionalBytes = default;
-            IList<int> requiredUint8Array = default;
-            Optional<IList<int>> optionalUint8Array = default;
+            IList<byte> requiredUint8Array = default;
+            Optional<IList<byte>> optionalUint8Array = default;
             BinaryData requiredUnknown = default;
             Optional<BinaryData> optionalUnknown = default;
-            IList<int> requiredInt8Array = default;
-            Optional<IList<int>> optionalInt8Array = default;
+            IList<sbyte> requiredInt8Array = default;
+            Optional<IList<sbyte>> optionalInt8Array = default;
             IList<int> requiredNullableIntList = default;
             IList<string> requiredNullableStringList = default;
             Optional<IList<int>> nonRequiredNullableIntList = default;
@@ -482,10 +482,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredUint8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     requiredUint8Array = array;
                     continue;
@@ -496,10 +496,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<byte> array = new List<byte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetByte());
                     }
                     optionalUint8Array = array;
                     continue;
@@ -520,10 +520,10 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredInt8Array"u8))
                 {
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     requiredInt8Array = array;
                     continue;
@@ -534,10 +534,10 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    List<int> array = new List<int>();
+                    List<sbyte> array = new List<sbyte>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(item.GetInt32());
+                        array.Add(item.GetSByte());
                     }
                     optionalInt8Array = array;
                     continue;

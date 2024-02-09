@@ -26,10 +26,11 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredCollectionWithNullableFloatElement"/> is null. </exception>
-        public RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float?> requiredCollectionWithNullableFloatElement)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredSafeInt"/> or <paramref name="requiredCollectionWithNullableFloatElement"/> is null. </exception>
+        public RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, object requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float?> requiredCollectionWithNullableFloatElement)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredSafeInt, nameof(requiredSafeInt));
             Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
 
             RequiredString = requiredString;
@@ -56,7 +57,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
-        internal RoundTripPrimitiveModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement) : base(serializedAdditionalRawData)
+        internal RoundTripPrimitiveModel(IDictionary<string, BinaryData> serializedAdditionalRawData, string requiredString, int requiredInt, long requiredInt64, object requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement) : base(serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -82,7 +83,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Required int64, illustrating a value type property. </summary>
         public long RequiredInt64 { get; set; }
         /// <summary> Required safeint, illustrating a value type property. </summary>
-        public long RequiredSafeInt { get; set; }
+        public object RequiredSafeInt { get; set; }
         /// <summary> Required float, illustrating a value type property. </summary>
         public float RequiredFloat { get; set; }
         /// <summary> Required double, illustrating a value type property. </summary>
