@@ -75,7 +75,7 @@ namespace FirstTestTypeSpec.Models
                 return null;
             }
             IList<BaseModel> parent = default;
-            int level = default;
+            sbyte level = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -92,7 +92,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("level"u8))
                 {
-                    level = property.Value.GetInt32();
+                    level = property.Value.GetSByte();
                     continue;
                 }
                 if (options.Format != "W")

@@ -19,7 +19,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="level"></param>
         /// <param name="parent"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="parent"/> is null. </exception>
-        public ChildModel(int level, IEnumerable<BaseModel> parent) : base(level)
+        public ChildModel(sbyte level, IEnumerable<BaseModel> parent) : base(level)
         {
             Argument.AssertNotNull(parent, nameof(parent));
 
@@ -30,7 +30,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="level"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="parent"></param>
-        internal ChildModel(int level, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<BaseModel> parent) : base(level, serializedAdditionalRawData)
+        internal ChildModel(sbyte level, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<BaseModel> parent) : base(level, serializedAdditionalRawData)
         {
             Parent = parent;
         }

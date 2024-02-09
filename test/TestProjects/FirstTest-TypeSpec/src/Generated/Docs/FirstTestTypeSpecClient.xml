@@ -1438,7 +1438,7 @@ This sample shows how to call RecursiveExtensionAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extension input = new Extension(123);
 Response response = await client.RecursiveExtensionAsync(input);
 ]]></code>
 This sample shows how to call RecursiveExtensionAsync with all parameters.
@@ -1446,7 +1446,7 @@ This sample shows how to call RecursiveExtensionAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extension input = new Extension(123);
 Response response = await client.RecursiveExtensionAsync(input);
 ]]></code></example>
     </member>
@@ -1457,7 +1457,7 @@ This sample shows how to call RecursiveExtension.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extension input = new Extension(123);
 Response response = client.RecursiveExtension(input);
 ]]></code>
 This sample shows how to call RecursiveExtension with all parameters.
@@ -1465,7 +1465,7 @@ This sample shows how to call RecursiveExtension with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Extension input = new Extension(1234);
+Extension input = new Extension(123);
 Response response = client.RecursiveExtension(input);
 ]]></code></example>
     </member>
@@ -1478,7 +1478,7 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    level = 1234,
+    level = 123,
 });
 Response response = await client.RecursiveExtensionAsync(content);
 
@@ -1491,7 +1491,7 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    level = 1234,
+    level = 123,
     extension = new object[]
     {
         null
@@ -1511,7 +1511,7 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    level = 1234,
+    level = 123,
 });
 Response response = client.RecursiveExtension(content);
 
@@ -1524,7 +1524,7 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
 {
-    level = 1234,
+    level = 123,
     extension = new object[]
     {
         null
@@ -1552,7 +1552,7 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Extendible input = new Extendible
 {
-    Extension = { new ThereLevelExtension(1234) },
+    Extension = { new ThereLevelExtension(123) },
 };
 Response response = await client.ThreeLevelRecursiveAsync(input);
 ]]></code></example>
@@ -1574,7 +1574,7 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Extendible input = new Extendible
 {
-    Extension = { new ThereLevelExtension(1234) },
+    Extension = { new ThereLevelExtension(123) },
 };
 Response response = client.ThreeLevelRecursive(input);
 ]]></code></example>
@@ -1602,7 +1602,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            level = 1234,
+            level = 123,
             extension = new object[]
             {
                 null
@@ -1638,7 +1638,7 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            level = 1234,
+            level = 123,
             extension = new object[]
             {
                 null
@@ -1658,9 +1658,9 @@ This sample shows how to call RecursiveModelsAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ChildModel input = new ChildModel(1234, new BaseModel[]
+ChildModel input = new ChildModel(123, new BaseModel[]
 {
-    new BaseModel(1234)
+    new BaseModel(123)
 });
 Response response = await client.RecursiveModelsAsync(input);
 ]]></code>
@@ -1669,9 +1669,9 @@ This sample shows how to call RecursiveModelsAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ChildModel input = new ChildModel(1234, new BaseModel[]
+ChildModel input = new ChildModel(123, new BaseModel[]
 {
-    new BaseModel(1234)
+    new BaseModel(123)
 });
 Response response = await client.RecursiveModelsAsync(input);
 ]]></code></example>
@@ -1683,9 +1683,9 @@ This sample shows how to call RecursiveModels.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ChildModel input = new ChildModel(1234, new BaseModel[]
+ChildModel input = new ChildModel(123, new BaseModel[]
 {
-    new BaseModel(1234)
+    new BaseModel(123)
 });
 Response response = client.RecursiveModels(input);
 ]]></code>
@@ -1694,9 +1694,9 @@ This sample shows how to call RecursiveModels with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ChildModel input = new ChildModel(1234, new BaseModel[]
+ChildModel input = new ChildModel(123, new BaseModel[]
 {
-    new BaseModel(1234)
+    new BaseModel(123)
 });
 Response response = client.RecursiveModels(input);
 ]]></code></example>
@@ -1714,10 +1714,10 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            level = 1234,
+            level = 123,
         }
     },
-    level = 1234,
+    level = 123,
 });
 Response response = await client.RecursiveModelsAsync(content);
 
@@ -1734,10 +1734,10 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            level = 1234,
+            level = 123,
         }
     },
-    level = 1234,
+    level = 123,
 });
 Response response = await client.RecursiveModelsAsync(content);
 
@@ -1757,10 +1757,10 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            level = 1234,
+            level = 123,
         }
     },
-    level = 1234,
+    level = 123,
 });
 Response response = client.RecursiveModels(content);
 
@@ -1777,10 +1777,10 @@ using RequestContent content = RequestContent.Create(new
     {
         new
         {
-            level = 1234,
+            level = 123,
         }
     },
-    level = 1234,
+    level = 123,
 });
 Response response = client.RecursiveModels(content);
 
