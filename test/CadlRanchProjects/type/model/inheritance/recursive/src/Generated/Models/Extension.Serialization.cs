@@ -77,7 +77,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             {
                 return null;
             }
-            int level = default;
+            sbyte level = default;
             Optional<IReadOnlyList<Extension>> extension = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
@@ -85,7 +85,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
             {
                 if (property.NameEquals("level"u8))
                 {
-                    level = property.Value.GetInt32();
+                    level = property.Value.GetSByte();
                     continue;
                 }
                 if (property.NameEquals("extension"u8))

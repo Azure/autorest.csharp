@@ -27,7 +27,7 @@ namespace _Type.Model.Inheritance.Recursive.Models
         /// <param name="extension"></param>
         /// <param name="level"></param>
         /// <returns> A new <see cref="Models.Extension"/> instance for mocking. </returns>
-        public static Extension Extension(IEnumerable<Extension> extension = null, int level = default)
+        public static Extension Extension(IEnumerable<Extension> extension = null, sbyte level = default)
         {
             extension ??= new List<Extension>();
 
