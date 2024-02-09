@@ -117,6 +117,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
     format?: string,
     encode?: EncodeData
 ): InputPrimitiveTypeKind {
+    logger.info(`intrinsicModelName ${name}`);
     switch (name) {
         case "bytes":
             switch (encode?.encoding) {
@@ -173,6 +174,10 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputPrimitiveTypeKind.Boolean;
         case "date":
             return InputPrimitiveTypeKind.Date;
+        case "plainDate":
+            return InputPrimitiveTypeKind.Date;
+        case "plainTime":
+            return InputPrimitiveTypeKind.Time;
         case "datetime":
             switch (encode?.encoding) {
                 case undefined:
