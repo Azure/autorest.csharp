@@ -74,6 +74,8 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Float64 => new CSharpType(typeof(double), inputType.IsNullable),
                 InputTypeKind.Float128 => new CSharpType(typeof(decimal), inputType.IsNullable),
                 InputTypeKind.Guid => new CSharpType(typeof(Guid), inputType.IsNullable),
+                InputTypeKind.SByte => new CSharpType(typeof(sbyte), inputType.IsNullable),
+                InputTypeKind.Byte => new CSharpType(typeof(byte), inputType.IsNullable),
                 InputTypeKind.Int32 => new CSharpType(typeof(int), inputType.IsNullable),
                 InputTypeKind.Int64 => new CSharpType(typeof(long), inputType.IsNullable),
                 InputTypeKind.IPAddress => new CSharpType(typeof(IPAddress), inputType.IsNullable),

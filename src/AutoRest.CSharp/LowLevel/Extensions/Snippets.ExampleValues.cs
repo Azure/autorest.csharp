@@ -154,6 +154,8 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             }
 
             if (frameworkType == typeof(char) ||
+                frameworkType == typeof(SByte) ||
+                frameworkType == typeof(byte) ||
                 frameworkType == typeof(short) ||
                 frameworkType == typeof(int) ||
                 frameworkType == typeof(long) ||
