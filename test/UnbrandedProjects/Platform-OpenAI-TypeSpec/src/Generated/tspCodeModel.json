@@ -1065,7 +1065,7 @@
      "Type": {
       "$id": "147",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1079,7 +1079,7 @@
      "Type": {
       "$id": "149",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -1165,7 +1165,7 @@
       "ValueType": {
        "$id": "162",
        "Kind": "Primitive",
-       "Name": "Int64",
+       "Name": "SafeInt",
        "IsNullable": false
       },
       "IsNullable": true
@@ -1308,7 +1308,7 @@
          "Type": {
           "$id": "180",
           "Kind": "Primitive",
-          "Name": "Int64",
+          "Name": "SafeInt",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1557,7 +1557,7 @@
         "Type": {
          "$id": "214",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -1571,7 +1571,7 @@
         "Type": {
          "$id": "216",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -1585,7 +1585,7 @@
         "Type": {
          "$id": "218",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -1746,7 +1746,7 @@
           {
            "$id": "239",
            "Kind": "Primitive",
-           "Name": "Int64",
+           "Name": "SafeInt",
            "IsNullable": false
           }
          ],
@@ -2022,7 +2022,7 @@
           {
            "$id": "277",
            "Kind": "Primitive",
-           "Name": "Int64",
+           "Name": "SafeInt",
            "IsNullable": false
           }
          ],
@@ -2092,7 +2092,7 @@
      "Type": {
       "$id": "286",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": true,
@@ -2565,7 +2565,7 @@
         "ElementType": {
          "$id": "352",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsNullable": true
@@ -2581,7 +2581,7 @@
          "ElementType": {
           "$id": "355",
           "Kind": "Primitive",
-          "Name": "Int64",
+          "Name": "SafeInt",
           "IsNullable": false
          },
          "IsNullable": false
@@ -2644,7 +2644,7 @@
      "Type": {
       "$id": "363",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2658,7 +2658,7 @@
      "Type": {
       "$id": "365",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2744,7 +2744,7 @@
       "ValueType": {
        "$id": "378",
        "Kind": "Primitive",
-       "Name": "Int64",
+       "Name": "SafeInt",
        "IsNullable": false
       },
       "IsNullable": true
@@ -2788,7 +2788,7 @@
      "Type": {
       "$id": "384",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2816,7 +2816,7 @@
      "Type": {
       "$id": "388",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -2914,7 +2914,7 @@
          "Type": {
           "$id": "402",
           "Kind": "Primitive",
-          "Name": "Int64",
+          "Name": "SafeInt",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3009,7 +3009,7 @@
               "ValueType": {
                "$id": "417",
                "Kind": "Primitive",
-               "Name": "Int64",
+               "Name": "SafeInt",
                "IsNullable": false
               },
               "IsNullable": false
@@ -3031,7 +3031,7 @@
              "ElementType": {
               "$id": "420",
               "Kind": "Primitive",
-              "Name": "Int64",
+              "Name": "SafeInt",
               "IsNullable": false
              },
              "IsNullable": false
@@ -3217,7 +3217,7 @@
      "Type": {
       "$id": "443",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -3333,7 +3333,7 @@
          "Type": {
           "$id": "459",
           "Kind": "Primitive",
-          "Name": "Int64",
+          "Name": "SafeInt",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3482,7 +3482,7 @@
         "ElementType": {
          "$id": "479",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsNullable": false
@@ -3498,7 +3498,7 @@
          "ElementType": {
           "$id": "482",
           "Kind": "Primitive",
-          "Name": "Int64",
+          "Name": "SafeInt",
           "IsNullable": false
          },
          "IsNullable": false
@@ -3593,7 +3593,7 @@
          "Type": {
           "$id": "494",
           "Kind": "Primitive",
-          "Name": "Int64",
+          "Name": "SafeInt",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -3665,7 +3665,7 @@
         "Type": {
          "$id": "503",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -3679,7 +3679,7 @@
         "Type": {
          "$id": "505",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -3778,7 +3778,7 @@
          "Type": {
           "$id": "517",
           "Kind": "Primitive",
-          "Name": "Int64",
+          "Name": "SafeInt",
           "IsNullable": false
          },
          "IsRequired": true,
@@ -4154,7 +4154,7 @@
      "Type": {
       "$id": "569",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4168,7 +4168,7 @@
      "Type": {
       "$id": "571",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4224,7 +4224,7 @@
      "Type": {
       "$id": "579",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -4494,7 +4494,7 @@
         "Type": {
          "$id": "617",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -4508,7 +4508,7 @@
         "Type": {
          "$id": "619",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": true,
@@ -4578,7 +4578,7 @@
         "Type": {
          "$id": "629",
          "Kind": "Primitive",
-         "Name": "Int64",
+         "Name": "SafeInt",
          "IsNullable": false
         },
         "IsRequired": false,
@@ -5004,7 +5004,7 @@
      "Type": {
       "$id": "682",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -5261,7 +5261,7 @@
      "Type": {
       "$id": "717",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -5410,7 +5410,7 @@
      "Type": {
       "$id": "738",
       "Kind": "Primitive",
-      "Name": "Int64",
+      "Name": "SafeInt",
       "IsNullable": true
      },
      "IsRequired": false,
@@ -6871,7 +6871,7 @@
        "Type": {
         "$id": "917",
         "Kind": "Primitive",
-        "Name": "Int64",
+        "Name": "SafeInt",
         "IsNullable": false
        },
        "Location": "Query",
@@ -7078,7 +7078,7 @@
        "Type": {
         "$id": "935",
         "Kind": "Primitive",
-        "Name": "Int32",
+        "Name": "Int64",
         "IsNullable": false
        },
        "Location": "Query",

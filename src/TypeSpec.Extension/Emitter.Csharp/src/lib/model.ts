@@ -139,6 +139,10 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputPrimitiveTypeKind.Int32;
         case "int64":
             return InputPrimitiveTypeKind.Int64;
+        case "integer":
+            return InputPrimitiveTypeKind.Int64;
+        case "safeint":
+            return InputPrimitiveTypeKind.SafeInt;
         case "float32":
             return InputPrimitiveTypeKind.Float32;
         case "float64":

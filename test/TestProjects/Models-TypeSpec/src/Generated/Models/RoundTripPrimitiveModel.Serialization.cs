@@ -34,7 +34,7 @@ namespace ModelsTypeSpec.Models
             writer.WritePropertyName("requiredInt64"u8);
             writer.WriteNumberValue(RequiredInt64);
             writer.WritePropertyName("requiredSafeInt"u8);
-            writer.WriteObjectValue(RequiredSafeInt);
+            writer.WriteNumberValue(RequiredSafeInt);
             writer.WritePropertyName("requiredFloat"u8);
             writer.WriteNumberValue(RequiredFloat);
             writer.WritePropertyName("required_Double"u8);
@@ -98,7 +98,7 @@ namespace ModelsTypeSpec.Models
             string requiredString = default;
             int requiredInt = default;
             long requiredInt64 = default;
-            object requiredSafeInt = default;
+            long requiredSafeInt = default;
             float requiredFloat = default;
             double requiredDouble = default;
             bool requiredBoolean = default;
@@ -126,7 +126,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredSafeInt"u8))
                 {
-                    requiredSafeInt = property.Value.GetObject();
+                    requiredSafeInt = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("requiredFloat"u8))

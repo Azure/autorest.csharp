@@ -1404,7 +1404,7 @@
      "Type": {
       "$id": "187",
       "Kind": "Primitive",
-      "Name": "Object",
+      "Name": "SafeInt",
       "IsNullable": false
      },
      "IsRequired": true,

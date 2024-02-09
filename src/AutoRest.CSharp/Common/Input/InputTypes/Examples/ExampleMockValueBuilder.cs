@@ -146,6 +146,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputTypeKind.Byte => InputExampleValue.Value(primitiveType, 123),
             InputTypeKind.Int32 => InputExampleValue.Value(primitiveType, 1234),
             InputTypeKind.Int64 => InputExampleValue.Value(primitiveType, 1234L),
+            InputTypeKind.SafeInt => InputExampleValue.Value(primitiveType, 1234L),
             InputTypeKind.String => string.IsNullOrWhiteSpace(hint) ? InputExampleValue.Value(primitiveType, "<String>") : InputExampleValue.Value(primitiveType, $"<{hint}>"),
             InputTypeKind.DurationISO8601 => InputExampleValue.Value(primitiveType, "PT1H23M45S"),
             InputTypeKind.DurationConstant => InputExampleValue.Value(primitiveType, "01:23:45"),
