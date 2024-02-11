@@ -30,13 +30,6 @@ namespace AutoRest.CSharp.Common.Output.Models
                     ? new IfStatement(IsCollectionDefined(serialization.Value)) { statement }
                     : new IfStatement(IsDefined(serialization.Value)) { statement };
             }
-
-            public static MethodBodyStatement WrapInIsNotEmpty(PropertySerialization serialization, MethodBodyStatement statement)
-            {
-                return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
-                    ? new IfStatement(new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value))) { statement }
-                    : statement;
-            }
         }
     }
 }
