@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtDiscriminator.Models
@@ -28,10 +29,16 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToString());
-            writer.WritePropertyName("originGroup"u8);
-            JsonSerializer.Serialize(writer, OriginGroup);
+            if (Optional.IsDefined(TypeName))
+            {
+                writer.WritePropertyName("typeName"u8);
+                writer.WriteStringValue(TypeName.ToString());
+            }
+            if (Optional.IsDefined(OriginGroup))
+            {
+                writer.WritePropertyName("originGroup"u8);
+                JsonSerializer.Serialize(writer, OriginGroup);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -98,18 +105,40 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
                 builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{TypeName.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(OriginGroup))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(OriginGroup), out propertyOverride);
+            if (Optional.IsDefined(OriginGroup) || hasPropertyOverride)
             {
                 builder.Append("  originGroup:");
-                AppendChildObject(builder, OriginGroup, options, 2, false);
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    AppendChildObject(builder, OriginGroup, options, 2, false);
+                }
             }
 
             builder.AppendLine("}");

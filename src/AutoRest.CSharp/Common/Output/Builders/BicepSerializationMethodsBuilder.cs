@@ -3,6 +3,7 @@
 
 using System;
 using System.ClientModel.Primitives;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,13 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
+using Azure.ResourceManager;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Constant = AutoRest.CSharp.Output.Models.Shared.Constant;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
@@ -77,12 +80,35 @@ namespace AutoRest.CSharp.Common.Output.Builders
             VariableReference stringBuilder = new VariableReference(typeof(StringBuilder), "builder");
             yield return Declare(stringBuilder, New.Instance(typeof(StringBuilder)));
 
+            VariableReference bicepOptions = new VariableReference(typeof(BicepModelReaderWriterOptions), "bicepOptions");
+            yield return Declare(bicepOptions, new AsExpression(KnownParameters.Serializations.Options, typeof(BicepModelReaderWriterOptions)));
+
+            VariableReference hasObjectOverride = new VariableReference(typeof(bool), "hasObjectOverride");
+            VariableReference propertyOverrides = new VariableReference(typeof(IDictionary<string, string>), "propertyOverrides");
+            yield return Declare(propertyOverrides, Null);
+            yield return Declare(
+                hasObjectOverride,
+                And(
+                    new BoolExpression(NotEqual(bicepOptions, Null)),
+                    new BoolExpression(bicepOptions.Property(nameof(BicepModelReaderWriterOptions.ParameterOverrides))
+                        .Invoke("TryGetValue", This, new KeywordExpression("out", propertyOverrides)))));
+
+            var hasPropertyOverride = new VariableReference(typeof(bool), "hasPropertyOverride");
+            yield return Declare(hasPropertyOverride, BoolExpression.False);
+            var propertyOverride = new VariableReference(typeof(string), "propertyOverride");
+            yield return Declare(propertyOverride, Null);
+
+            var propertyOverrideVariables = new PropertyOverrideVariables(propertyOverrides, hasObjectOverride,
+                hasPropertyOverride, propertyOverride);
+
+            yield return EmptyLine;
+
             var stringBuilderExpression = new StringBuilderExpression(stringBuilder);
 
             yield return stringBuilderExpression.AppendLine("{");
             yield return EmptyLine;
 
-            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization.IsResourceData))
+            foreach (MethodBodyStatement methodBodyStatement in WriteProperties(objectSerialization.Properties, stringBuilderExpression, 2, objectSerialization.IsResourceData, propertyOverrideVariables))
             {
                 yield return methodBodyStatement;
             }
@@ -91,7 +117,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(BinaryDataExpression.FromString(stringBuilder.Invoke(nameof(StringBuilderParameter.ToString))));
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteProperties(IEnumerable<BicepPropertySerialization> properties, StringBuilderExpression stringBuilder, int spaces, bool isResourceData)
+        private static IEnumerable<MethodBodyStatement> WriteProperties(
+            IEnumerable<BicepPropertySerialization> properties,
+            StringBuilderExpression stringBuilder,
+            int spaces,
+            bool isResourceData,
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             var indent = new string(' ', spaces);
             var propertyList = properties.ToList();
@@ -112,7 +143,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // as it will be put in the outer envelope.
             if (name != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, name, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, name, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -120,7 +151,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (location != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, location, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, location, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -128,7 +159,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (tags != null)
             {
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, tags, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, tags, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 };
@@ -140,15 +171,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     continue;
                 }
-                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, property, indent))
+                foreach (MethodBodyStatement methodBodyStatement in WriteProperty(stringBuilder, spaces, property, indent, propertyOverrideVariables))
                 {
                     yield return methodBodyStatement;
                 }
             }
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteProperty(StringBuilderExpression stringBuilder, int spaces,
-            BicepPropertySerialization property, string indent)
+        private static IEnumerable<MethodBodyStatement> WriteProperty(
+            StringBuilderExpression stringBuilder,
+            int spaces,
+            BicepPropertySerialization property,
+            string indent,
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             if (property.ValueSerialization == null)
             {
@@ -157,13 +192,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     stringBuilder.Append($"{indent}{property.SerializedName}:"),
                     stringBuilder.AppendLine(" {"),
-                    WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2, false).ToArray(),
+                    WriteProperties(property.PropertySerializations!, stringBuilder, spaces + 2, false, propertyOverrideVariables).ToArray(),
                     stringBuilder.AppendLine($"{indent}}}")
                 };
             }
             else
             {
-                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces))
+                foreach (MethodBodyStatement statement in SerializeProperty(stringBuilder, property, spaces, propertyOverrideVariables))
                 {
                     yield return statement;
                 }
@@ -234,21 +269,38 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
 
-        private static IEnumerable<MethodBodyStatement> SerializeProperty(StringBuilderExpression stringBuilder, BicepPropertySerialization property, int spaces)
+        private static IEnumerable<MethodBodyStatement> SerializeProperty(
+            StringBuilderExpression stringBuilder,
+            BicepPropertySerialization property,
+            int spaces,
+            PropertyOverrideVariables propertyOverrideVariables)
         {
             var indent = new string(' ', spaces);
-            yield return InvokeOptional.WrapInIsDefined(
+            yield return Assign(
+                propertyOverrideVariables.HasPropertyOverride,
+                new BoolExpression(
+                    And(
+                        new BoolExpression(propertyOverrideVariables.HasObjectOverride),
+                        new BoolExpression(propertyOverrideVariables.PropertyOverrides.Invoke("TryGetValue", Nameof(property.Value),
+                            new KeywordExpression("out", propertyOverrideVariables.PropertyOverride))))));
+
+            // we write the properties if there is a value or an override for that property
+            yield return WrapInIsDefinedOrPropertyOverride(
                 property,
-                InvokeOptional.WrapInIsNotEmpty(
+                propertyOverrideVariables.HasPropertyOverride,
+                WrapInIsNotEmptyOrPropertyOverride(
                     property,
+                    propertyOverrideVariables.HasPropertyOverride,
                 new[]
                     {
                         stringBuilder.Append($"{indent}{property.SerializedName}:"),
-                        property.CustomSerializationMethodName is {} serializationMethodName
-                            ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
-                            : SerializeExpression(stringBuilder, property.ValueSerialization!, property.Value, spaces)
-                    }),
-                true);
+                        new IfElseStatement(
+                            new BoolExpression(propertyOverrideVariables.HasPropertyOverride),
+                            stringBuilder.AppendLine(new FormattableStringExpression($" {{0}}",propertyOverrideVariables.PropertyOverride)),
+                            property.CustomSerializationMethodName is {} serializationMethodName
+                                ? InvokeCustomBicepSerializationMethod(serializationMethodName, stringBuilder)
+                                : SerializeExpression(stringBuilder, property.ValueSerialization!, property.Value, spaces))
+                    }));
 
             yield return EmptyLine;
         }
@@ -479,5 +531,28 @@ namespace AutoRest.CSharp.Common.Output.Builders
             serialization is BicepArraySerialization or BicepDictionarySerialization ||
             // framework reference type, e.g. byte[]
             serialization is BicepValueSerialization { Type: { IsValueType: false, IsFrameworkType: true } };
+
+        public static MethodBodyStatement WrapInIsDefinedOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
+        {
+            return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                ? new IfStatement(Or(InvokeOptional.IsCollectionDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement }
+                : new IfStatement(Or(InvokeOptional.IsDefined(serialization.Value), new BoolExpression(propertyOverride))) { statement };
+        }
+
+        public static MethodBodyStatement WrapInIsNotEmptyOrPropertyOverride(BicepPropertySerialization serialization, ValueExpression propertyOverride, MethodBodyStatement statement)
+        {
+            return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
+                ? new IfStatement(Or(
+                    new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value)),
+                    new BoolExpression(propertyOverride)))
+                {
+                    statement
+                }
+                : statement;
+        }
+
+        private record struct PropertyOverrideVariables(ValueExpression PropertyOverrides, ValueExpression HasObjectOverride, ValueExpression HasPropertyOverride, ValueExpression PropertyOverride)
+        {
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -37,8 +38,11 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("dogKind"u8);
                 writer.WriteStringValue(DogKind.Value.ToSerialString());
             }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToSerialString());
+            if (Optional.IsDefined(Kind))
+            {
+                writer.WritePropertyName("kind"u8);
+                writer.WriteStringValue(Kind.ToSerialString());
+            }
             if (options.Format != "W" && Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
@@ -126,45 +130,83 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(Bark))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Bark), out propertyOverride);
+            if (Optional.IsDefined(Bark) || hasPropertyOverride)
             {
                 builder.Append("  bark:");
-                if (Bark.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Bark}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Bark}'");
+                    if (Bark.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{Bark}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{Bark}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(DogKind))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DogKind), out propertyOverride);
+            if (Optional.IsDefined(DogKind) || hasPropertyOverride)
             {
                 builder.Append("  dogKind:");
-                builder.AppendLine($" '{DogKind.Value.ToSerialString()}'");
-            }
-
-            if (Optional.IsDefined(Kind))
-            {
-                builder.Append("  kind:");
-                builder.AppendLine($" '{Kind.ToSerialString()}'");
-            }
-
-            if (Optional.IsDefined(Id))
-            {
-                builder.Append("  id:");
-                if (Id.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Id}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Id}'");
+                    builder.AppendLine($" '{DogKind.Value.ToSerialString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Kind), out propertyOverride);
+            if (Optional.IsDefined(Kind) || hasPropertyOverride)
+            {
+                builder.Append("  kind:");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Kind.ToSerialString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Id), out propertyOverride);
+            if (Optional.IsDefined(Id) || hasPropertyOverride)
+            {
+                builder.Append("  id:");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    if (Id.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{Id}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{Id}'");
+                    }
                 }
             }
 

@@ -5,6 +5,9 @@
     <OutputType>Exe</OutputType>
     <Version>3.0.0</Version>
     <TargetFramework>net7.0</TargetFramework>
+<!--    Will not be merged - temporary until autorest.csharp is updated to consume latest Azure.Core -->
+    <NoWarn>NU1605</NoWarn>
+<!--    End Temp-->
     <Nullable>enable</Nullable>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
@@ -54,6 +57,10 @@
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
     <None Include="index.d.ts" CopyToOutputDirectory="PreserveNewest" />
     <None Include="index.mjs" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\azure-sdk-for-net\sdk\resourcemanager\Azure.ResourceManager\src\Azure.ResourceManager.csproj" />
   </ItemGroup>
 
   <Target Name="PreparePropsFile" BeforeTargets="GenerateNuspec;_GetPackageFiles" DependsOnTargets="GenerateSourceLinkFile" Condition="'$(TargetFrameworks)' == '' or '$(IsCrossTargetingBuild)' == 'true'" Outputs="$(_SourcePackagePropsFilePath)">

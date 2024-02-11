@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Azure.Core;
+using Azure.ResourceManager;
 using MgmtDiscriminator;
 using MgmtDiscriminator.Models;
 using NUnit.Framework;
@@ -98,6 +99,118 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                  {
                                    name: 'CacheExpiration'
                                    foo: 'foo1'
+                                 }
+                                 {
+                                   name: 'UrlSigning'
+                                   foo: 'foo2'
+                                 }
+                               ]
+                               extraMappingInfo: {
+                                 dictionaryKey: {
+                                   name: 'CacheExpiration'
+                                   foo: 'foo1'
+                                 }
+                               }
+                               pet: {
+                                 dogKind: 'german Shepherd'
+                                 kind: 'Dog'
+                               }
+                               foo: '''
+                           Foo
+                           bar'''
+                             }
+                           }
+                           
+                           """;
+            Assert.AreEqual(expected, bicep);
+        }
+
+        [Test]
+        public void ToBicepWithParameters()
+        {
+            var now = DateTime.UtcNow;
+            var queryParams = new QueryStringMatchConditionParameters(
+                QueryStringMatchConditionParametersTypeName.DeliveryRuleQueryStringConditionParameters,
+                QueryStringOperator.Any) { MatchValues = { $"firstline{Environment.NewLine}secondline", "val2" }};
+            var condition = new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, "query", null,
+                queryParams);
+            var firstAction = new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null);
+            var actions =
+                new[]
+                {
+                    firstAction,
+                    new DeliveryRuleAction(DeliveryRuleActionType.UrlSigning, "foo2", null)
+                };
+            var data = new DeliveryRuleData
+            {
+                Properties = new DeliveryRuleProperties(3, condition, actions,
+                    new Dictionary<string, DeliveryRuleAction>()
+                        {{ "dictionaryKey", new DeliveryRuleAction(DeliveryRuleActionType.CacheExpiration, "foo1", null) }},
+                    new Dog { DogKind = DogKind.GermanShepherd }, foo: $"Foo{Environment.NewLine}bar", new Dictionary<string, BinaryData>()
+                {
+                    {$"foo{Environment.NewLine}bar", new BinaryData("bar") }
+                }),
+                BoolProperty = false,
+                Location = AzureLocation.AustraliaCentral,
+                LocationWithCustomSerialization = AzureLocation.AustraliaCentral,
+                DateTimeProperty = now,
+                Duration = TimeSpan.FromDays(1),
+                Number = 4,
+            };
+            var options = new BicepModelReaderWriterOptions
+            {
+                ParameterOverrides =
+                    {
+                        {
+                            data, new Dictionary<string, string>
+                            {
+                                { nameof(DeliveryRuleData.BoolProperty), "boolParameter" },
+                                { nameof(DeliveryRuleData.Location), "locationParameter" },
+                            }
+                        },
+                        {
+                            queryParams, new Dictionary<string, string>
+                            {
+                                { nameof(QueryStringMatchConditionParametersTypeName), "queryParametersTypeNameParameter" },
+                            }
+                        },
+                        {
+                            firstAction, new Dictionary<string, string>
+                            {
+                                { nameof(DeliveryRuleAction.Foo), "fooParameter" },
+                            }
+                        }
+                    }
+            };
+            var bicep = ModelReaderWriter.Write(data, options).ToString();
+            var expected = $$"""
+                           {
+                             location: locationParameter
+                             boolProperty: boolParameter
+                             locationWithCustomSerialization: 'brazilsouth'
+                             dateTimeProperty: '{{TypeFormatters.ToString(now, "o")}}'
+                             duration: 'P1D'
+                             number: 4
+                             properties: {
+                               order: 3
+                               conditions: {
+                                 name: 'QueryString'
+                                 parameters: {
+                                   typeName: 'DeliveryRuleQueryStringConditionParameters'
+                                   operator: 'Any'
+                                   matchValues: [
+                                     '''
+                           firstline
+                           secondline'''
+                                     'val2'
+                                   ]
+                                 }
+                                 foo: 'query'
+                               }
+                               actions: [
+                                 {
+                                   name: 'CacheExpiration'
+                                   foo: fooParameter
                                  }
                                  {
                                    name: 'UrlSigning'

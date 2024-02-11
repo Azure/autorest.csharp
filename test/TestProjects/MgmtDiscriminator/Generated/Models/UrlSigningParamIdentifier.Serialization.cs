@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -27,10 +28,16 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("paramIndicator"u8);
-            writer.WriteStringValue(ParamIndicator.ToString());
-            writer.WritePropertyName("paramName"u8);
-            writer.WriteStringValue(ParamName);
+            if (Optional.IsDefined(ParamIndicator))
+            {
+                writer.WritePropertyName("paramIndicator"u8);
+                writer.WriteStringValue(ParamIndicator.ToString());
+            }
+            if (Optional.IsDefined(ParamName))
+            {
+                writer.WritePropertyName("paramName"u8);
+                writer.WriteStringValue(ParamName);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -97,25 +104,47 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(ParamIndicator))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamIndicator), out propertyOverride);
+            if (Optional.IsDefined(ParamIndicator) || hasPropertyOverride)
             {
                 builder.Append("  paramIndicator:");
-                builder.AppendLine($" '{ParamIndicator.ToString()}'");
-            }
-
-            if (Optional.IsDefined(ParamName))
-            {
-                builder.Append("  paramName:");
-                if (ParamName.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{ParamName}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{ParamName}'");
+                    builder.AppendLine($" '{ParamIndicator.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(ParamName), out propertyOverride);
+            if (Optional.IsDefined(ParamName) || hasPropertyOverride)
+            {
+                builder.Append("  paramName:");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    if (ParamName.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{ParamName}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{ParamName}'");
+                    }
                 }
             }
 

@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
-    <NoWarn>SA1649;SA1633;CS0618</NoWarn>
+    <NoWarn>SA1649;SA1633;CS0618;NU1605</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +26,8 @@
     <PackageReference Include="Moq" Version="4.20.69" />
 
     <ProjectReference Include="../../src/AutoRest.CSharp/AutoRest.CSharp.csproj" />
+
+    <ProjectReference Include="..\..\..\azure-sdk-for-net\sdk\resourcemanager\Azure.ResourceManager\src\Azure.ResourceManager.csproj" />
   </ItemGroup>
 
   <ItemGroup>
