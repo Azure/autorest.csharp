@@ -58,7 +58,7 @@
     <None Include="index.d.ts" CopyToOutputDirectory="PreserveNewest" />
     <None Include="index.mjs" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-  
+
   <Target Name="PreparePropsFile" BeforeTargets="GenerateNuspec;_GetPackageFiles" DependsOnTargets="GenerateSourceLinkFile" Condition="'$(TargetFrameworks)' == '' or '$(IsCrossTargetingBuild)' == 'true'" Outputs="$(_SourcePackagePropsFilePath)">
 
     <PropertyGroup>
