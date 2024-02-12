@@ -29,16 +29,13 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(RequiredCollection))
+            writer.WritePropertyName("requiredCollection"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollection)
             {
-                writer.WritePropertyName("requiredCollection"u8);
-                writer.WriteStartArray();
-                foreach (var item in RequiredCollection)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WriteStringValue(item);
             }
+            writer.WriteEndArray();
             if (Optional.IsDefined(OptionalString))
             {
                 writer.WritePropertyName("optionalString"u8);

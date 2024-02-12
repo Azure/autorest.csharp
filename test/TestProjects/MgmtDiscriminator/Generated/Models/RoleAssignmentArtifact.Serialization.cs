@@ -29,22 +29,19 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Kind))
-            {
-                writer.WritePropertyName("kind"u8);
-                writer.WriteStringValue(Kind.ToString());
-            }
-            if (options.Format != "W" && Optional.IsDefined(Id))
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToString());
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W" && Optional.IsDefined(Name))
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(ResourceType))
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
@@ -56,23 +53,17 @@ namespace MgmtDiscriminator.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(RoleDefinitionId))
-            {
-                writer.WritePropertyName("roleDefinitionId"u8);
-                writer.WriteStringValue(RoleDefinitionId);
-            }
-            if (Optional.IsDefined(PrincipalIds))
-            {
-                writer.WritePropertyName("principalIds"u8);
+            writer.WritePropertyName("roleDefinitionId"u8);
+            writer.WriteStringValue(RoleDefinitionId);
+            writer.WritePropertyName("principalIds"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(PrincipalIds);
 #else
-                using (JsonDocument document = JsonDocument.Parse(PrincipalIds))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+            using (JsonDocument document = JsonDocument.Parse(PrincipalIds))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
             }
+#endif
             if (Optional.IsDefined(ResourceGroup))
             {
                 writer.WritePropertyName("resourceGroup"u8);

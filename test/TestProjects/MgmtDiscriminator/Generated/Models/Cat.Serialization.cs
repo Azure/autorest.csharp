@@ -33,11 +33,8 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("meow"u8);
                 writer.WriteStringValue(Meow);
             }
-            if (Optional.IsDefined(Kind))
-            {
-                writer.WritePropertyName("kind"u8);
-                writer.WriteStringValue(Kind.ToSerialString());
-            }
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToSerialString());
             if (options.Format != "W" && Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);

@@ -29,11 +29,8 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TypeName))
-            {
-                writer.WritePropertyName("typeName"u8);
-                writer.WriteStringValue(TypeName.ToString());
-            }
+            writer.WritePropertyName("typeName"u8);
+            writer.WriteStringValue(TypeName.ToString());
             if (Optional.IsDefined(Algorithm))
             {
                 writer.WritePropertyName("algorithm"u8);

@@ -28,16 +28,10 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TypeName))
-            {
-                writer.WritePropertyName("typeName"u8);
-                writer.WriteStringValue(TypeName.ToString());
-            }
-            if (Optional.IsDefined(RedirectType))
-            {
-                writer.WritePropertyName("redirectType"u8);
-                writer.WriteStringValue(RedirectType.ToString());
-            }
+            writer.WritePropertyName("typeName"u8);
+            writer.WriteStringValue(TypeName.ToString());
+            writer.WritePropertyName("redirectType"u8);
+            writer.WriteStringValue(RedirectType.ToString());
             if (Optional.IsDefined(DestinationProtocol))
             {
                 writer.WritePropertyName("destinationProtocol"u8);

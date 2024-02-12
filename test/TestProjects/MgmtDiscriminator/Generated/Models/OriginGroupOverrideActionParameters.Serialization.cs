@@ -29,16 +29,10 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TypeName))
-            {
-                writer.WritePropertyName("typeName"u8);
-                writer.WriteStringValue(TypeName.ToString());
-            }
-            if (Optional.IsDefined(OriginGroup))
-            {
-                writer.WritePropertyName("originGroup"u8);
-                JsonSerializer.Serialize(writer, OriginGroup);
-            }
+            writer.WritePropertyName("typeName"u8);
+            writer.WriteStringValue(TypeName.ToString());
+            writer.WritePropertyName("originGroup"u8);
+            JsonSerializer.Serialize(writer, OriginGroup);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

@@ -28,21 +28,12 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TypeName))
-            {
-                writer.WritePropertyName("typeName"u8);
-                writer.WriteStringValue(TypeName.ToString());
-            }
-            if (Optional.IsDefined(CacheBehavior))
-            {
-                writer.WritePropertyName("cacheBehavior"u8);
-                writer.WriteStringValue(CacheBehavior.ToString());
-            }
-            if (Optional.IsDefined(CacheType))
-            {
-                writer.WritePropertyName("cacheType"u8);
-                writer.WriteStringValue(CacheType.ToString());
-            }
+            writer.WritePropertyName("typeName"u8);
+            writer.WriteStringValue(TypeName.ToString());
+            writer.WritePropertyName("cacheBehavior"u8);
+            writer.WriteStringValue(CacheBehavior.ToString());
+            writer.WritePropertyName("cacheType"u8);
+            writer.WriteStringValue(CacheType.ToString());
             if (Optional.IsDefined(CacheDuration))
             {
                 if (CacheDuration != null)

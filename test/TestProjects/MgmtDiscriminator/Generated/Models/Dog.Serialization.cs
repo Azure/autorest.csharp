@@ -38,11 +38,8 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("dogKind"u8);
                 writer.WriteStringValue(DogKind.Value.ToSerialString());
             }
-            if (Optional.IsDefined(Kind))
-            {
-                writer.WritePropertyName("kind"u8);
-                writer.WriteStringValue(Kind.ToSerialString());
-            }
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToSerialString());
             if (options.Format != "W" && Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);

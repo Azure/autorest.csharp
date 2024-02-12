@@ -28,21 +28,12 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(TypeName))
-            {
-                writer.WritePropertyName("typeName"u8);
-                writer.WriteStringValue(TypeName.ToString());
-            }
-            if (Optional.IsDefined(SourcePattern))
-            {
-                writer.WritePropertyName("sourcePattern"u8);
-                writer.WriteStringValue(SourcePattern);
-            }
-            if (Optional.IsDefined(Destination))
-            {
-                writer.WritePropertyName("destination"u8);
-                writer.WriteStringValue(Destination);
-            }
+            writer.WritePropertyName("typeName"u8);
+            writer.WriteStringValue(TypeName.ToString());
+            writer.WritePropertyName("sourcePattern"u8);
+            writer.WriteStringValue(SourcePattern);
+            writer.WritePropertyName("destination"u8);
+            writer.WriteStringValue(Destination);
             if (Optional.IsDefined(PreserveUnmatchedPath))
             {
                 writer.WritePropertyName("preserveUnmatchedPath"u8);

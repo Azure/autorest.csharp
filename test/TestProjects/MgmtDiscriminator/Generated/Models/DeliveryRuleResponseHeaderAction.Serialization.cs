@@ -28,16 +28,10 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(Parameters))
-            {
-                writer.WritePropertyName("parameters"u8);
-                writer.WriteObjectValue(Parameters);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name.ToString());
-            }
+            writer.WritePropertyName("parameters"u8);
+            writer.WriteObjectValue(Parameters);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name.ToString());
             if (options.Format != "W" && Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);

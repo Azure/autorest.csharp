@@ -28,16 +28,10 @@ namespace MgmtDiscriminator.Models
             }
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ParamIndicator))
-            {
-                writer.WritePropertyName("paramIndicator"u8);
-                writer.WriteStringValue(ParamIndicator.ToString());
-            }
-            if (Optional.IsDefined(ParamName))
-            {
-                writer.WritePropertyName("paramName"u8);
-                writer.WriteStringValue(ParamName);
-            }
+            writer.WritePropertyName("paramIndicator"u8);
+            writer.WriteStringValue(ParamIndicator.ToString());
+            writer.WritePropertyName("paramName"u8);
+            writer.WriteStringValue(ParamName);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
