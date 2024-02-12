@@ -50,7 +50,7 @@
     <PackageReference Update="Microsoft.Build" Version="16.11.0" />
   </ItemGroup>
   
-  <!-- Override Client Model version for tests projects. Can be reverted once autorest.csharp is updated to consume 1.1.0.-->
+  <!-- Override Client Model version for tests projects. Can be reverted once autorest.csharp is updated to consume 1.1.0. https://github.com/Azure/autorest.csharp/issues/4216-->
   <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
     <PackageReference Update="System.ClientModel" Version="1.0.0" />
   </ItemGroup>
