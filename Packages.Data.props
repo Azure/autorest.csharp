@@ -49,4 +49,9 @@
     <PackageReference Update="NuGet.Configuration" Version="6.8.0" />
     <PackageReference Update="Microsoft.Build" Version="16.11.0" />
   </ItemGroup>
+  
+  <!-- Override Client Model version for tests projects. Can be reverted once autorest.csharp is updated to consume 1.1.0.-->
+  <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
+    <PackageReference Update="System.ClientModel" Version="1.0.0" />
+  </ItemGroup>
 </Project>
