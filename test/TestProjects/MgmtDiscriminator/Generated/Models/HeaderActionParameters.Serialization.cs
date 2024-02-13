@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -116,45 +117,83 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
                 builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{TypeName.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(HeaderAction))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HeaderAction), out propertyOverride);
+            if (Optional.IsDefined(HeaderAction) || hasPropertyOverride)
             {
                 builder.Append("  headerAction:");
-                builder.AppendLine($" '{HeaderAction.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{HeaderAction.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(HeaderName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(HeaderName), out propertyOverride);
+            if (Optional.IsDefined(HeaderName) || hasPropertyOverride)
             {
                 builder.Append("  headerName:");
-                if (HeaderName.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{HeaderName}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{HeaderName}'");
+                    if (HeaderName.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{HeaderName}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{HeaderName}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(Value))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Value), out propertyOverride);
+            if (Optional.IsDefined(Value) || hasPropertyOverride)
             {
                 builder.Append("  value:");
-                if (Value.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{Value}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{Value}'");
+                    if (Value.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{Value}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{Value}'");
+                    }
                 }
             }
 

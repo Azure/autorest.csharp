@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -156,79 +157,141 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
                 builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{TypeName.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(RedirectType))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(RedirectType), out propertyOverride);
+            if (Optional.IsDefined(RedirectType) || hasPropertyOverride)
             {
                 builder.Append("  redirectType:");
-                builder.AppendLine($" '{RedirectType.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{RedirectType.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(DestinationProtocol))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(DestinationProtocol), out propertyOverride);
+            if (Optional.IsDefined(DestinationProtocol) || hasPropertyOverride)
             {
                 builder.Append("  destinationProtocol:");
-                builder.AppendLine($" '{DestinationProtocol.Value.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{DestinationProtocol.Value.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(CustomPath))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomPath), out propertyOverride);
+            if (Optional.IsDefined(CustomPath) || hasPropertyOverride)
             {
                 builder.Append("  customPath:");
-                if (CustomPath.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomPath}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomPath}'");
+                    if (CustomPath.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{CustomPath}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{CustomPath}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(CustomHostname))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomHostname), out propertyOverride);
+            if (Optional.IsDefined(CustomHostname) || hasPropertyOverride)
             {
                 builder.Append("  customHostname:");
-                if (CustomHostname.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomHostname}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomHostname}'");
+                    if (CustomHostname.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{CustomHostname}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{CustomHostname}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(CustomQueryString))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomQueryString), out propertyOverride);
+            if (Optional.IsDefined(CustomQueryString) || hasPropertyOverride)
             {
                 builder.Append("  customQueryString:");
-                if (CustomQueryString.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomQueryString}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomQueryString}'");
+                    if (CustomQueryString.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{CustomQueryString}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{CustomQueryString}'");
+                    }
                 }
             }
 
-            if (Optional.IsDefined(CustomFragment))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CustomFragment), out propertyOverride);
+            if (Optional.IsDefined(CustomFragment) || hasPropertyOverride)
             {
                 builder.Append("  customFragment:");
-                if (CustomFragment.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{CustomFragment}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{CustomFragment}'");
+                    if (CustomFragment.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{CustomFragment}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{CustomFragment}'");
+                    }
                 }
             }
 

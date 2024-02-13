@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -128,31 +129,69 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
                 builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{TypeName.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(CacheBehavior))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheBehavior), out propertyOverride);
+            if (Optional.IsDefined(CacheBehavior) || hasPropertyOverride)
             {
                 builder.Append("  cacheBehavior:");
-                builder.AppendLine($" '{CacheBehavior.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{CacheBehavior.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(CacheType))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheType), out propertyOverride);
+            if (Optional.IsDefined(CacheType) || hasPropertyOverride)
             {
                 builder.Append("  cacheType:");
-                builder.AppendLine($" '{CacheType.ToString()}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{CacheType.ToString()}'");
+                }
             }
 
-            if (Optional.IsDefined(CacheDuration))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(CacheDuration), out propertyOverride);
+            if (Optional.IsDefined(CacheDuration) || hasPropertyOverride)
             {
                 builder.Append("  cacheDuration:");
-                var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");
-                builder.AppendLine($" '{formattedTimeSpan}'");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    var formattedTimeSpan = TypeFormatters.ToString(CacheDuration.Value, "P");
+                    builder.AppendLine($" '{formattedTimeSpan}'");
+                }
             }
 
             builder.AppendLine("}");

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -163,65 +164,111 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
                 builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
-
-            if (Optional.IsDefined(Operator))
-            {
-                builder.Append("  operator:");
-                builder.AppendLine($" '{Operator.ToString()}'");
-            }
-
-            if (Optional.IsDefined(NegateCondition))
-            {
-                builder.Append("  negateCondition:");
-                var boolValue = NegateCondition.Value == true ? "true" : "false";
-                builder.AppendLine($" {boolValue}");
-            }
-
-            if (Optional.IsCollectionDefined(MatchValues))
-            {
-                if (MatchValues.Any())
+                if (hasPropertyOverride)
                 {
-                    builder.Append("  matchValues:");
-                    builder.AppendLine(" [");
-                    foreach (var item in MatchValues)
-                    {
-                        if (item == null)
-                        {
-                            builder.Append("null");
-                            continue;
-                        }
-                        if (item.Contains(Environment.NewLine))
-                        {
-                            builder.AppendLine("    '''");
-                            builder.AppendLine($"{item}'''");
-                        }
-                        else
-                        {
-                            builder.AppendLine($"    '{item}'");
-                        }
-                    }
-                    builder.AppendLine("  ]");
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{TypeName.ToString()}'");
                 }
             }
 
-            if (Optional.IsCollectionDefined(Transforms))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Operator), out propertyOverride);
+            if (Optional.IsDefined(Operator) || hasPropertyOverride)
             {
-                if (Transforms.Any())
+                builder.Append("  operator:");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{Operator.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(NegateCondition), out propertyOverride);
+            if (Optional.IsDefined(NegateCondition) || hasPropertyOverride)
+            {
+                builder.Append("  negateCondition:");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    var boolValue = NegateCondition.Value == true ? "true" : "false";
+                    builder.AppendLine($" {boolValue}");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(MatchValues), out propertyOverride);
+            if (Optional.IsCollectionDefined(MatchValues) || hasPropertyOverride)
+            {
+                if (MatchValues.Any() || hasPropertyOverride)
+                {
+                    builder.Append("  matchValues:");
+                    if (hasPropertyOverride)
+                    {
+                        builder.AppendLine($" {propertyOverride}");
+                    }
+                    else
+                    {
+                        builder.AppendLine(" [");
+                        foreach (var item in MatchValues)
+                        {
+                            if (item == null)
+                            {
+                                builder.Append("null");
+                                continue;
+                            }
+                            if (item.Contains(Environment.NewLine))
+                            {
+                                builder.AppendLine("    '''");
+                                builder.AppendLine($"{item}'''");
+                            }
+                            else
+                            {
+                                builder.AppendLine($"    '{item}'");
+                            }
+                        }
+                        builder.AppendLine("  ]");
+                    }
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(Transforms), out propertyOverride);
+            if (Optional.IsCollectionDefined(Transforms) || hasPropertyOverride)
+            {
+                if (Transforms.Any() || hasPropertyOverride)
                 {
                     builder.Append("  transforms:");
-                    builder.AppendLine(" [");
-                    foreach (var item in Transforms)
+                    if (hasPropertyOverride)
                     {
-                        builder.AppendLine($"    '{item.ToString()}'");
+                        builder.AppendLine($" {propertyOverride}");
                     }
-                    builder.AppendLine("  ]");
+                    else
+                    {
+                        builder.AppendLine(" [");
+                        foreach (var item in Transforms)
+                        {
+                            builder.AppendLine($"    '{item.ToString()}'");
+                        }
+                        builder.AppendLine("  ]");
+                    }
                 }
             }
 

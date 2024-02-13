@@ -24,9 +24,9 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToListName, new[] { collection });
             public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(Configuration.ApiTypes.OptionalType, Configuration.ApiTypes.OptionalToNullableName, new[] { optional });
 
-            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement, bool forceCheck = false)
+            public static MethodBodyStatement WrapInIsDefined(PropertySerialization serialization, MethodBodyStatement statement)
             {
-                if (!forceCheck && serialization.IsRequired)
+                if (serialization.IsRequired)
                 {
                     return statement;
                 }
@@ -34,13 +34,6 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
                     ? new IfStatement(IsCollectionDefined(serialization.Value)) { statement }
                     : new IfStatement(IsDefined(serialization.Value)) { statement };
-            }
-
-            public static MethodBodyStatement WrapInIsNotEmpty(PropertySerialization serialization, MethodBodyStatement statement)
-            {
-                return TypeFactory.IsCollectionType(serialization.Value.Type) && !TypeFactory.IsReadOnlyMemory(serialization.Value.Type)
-                    ? new IfStatement(new BoolExpression(InvokeStaticMethodExpression.Extension(typeof(Enumerable), nameof(Enumerable.Any), serialization.Value))) { statement }
-                    : statement;
             }
         }
     }

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace MgmtDiscriminator.Models
 {
@@ -120,31 +121,61 @@ namespace MgmtDiscriminator.Models
         private BinaryData SerializeBicep(ModelReaderWriterOptions options)
         {
             StringBuilder builder = new StringBuilder();
+            BicepModelReaderWriterOptions bicepOptions = options as BicepModelReaderWriterOptions;
+            IDictionary<string, string> propertyOverrides = null;
+            bool hasObjectOverride = bicepOptions != null && bicepOptions.ParameterOverrides.TryGetValue(this, out propertyOverrides);
+            bool hasPropertyOverride = false;
+            string propertyOverride = null;
+
             builder.AppendLine("{");
 
-            if (Optional.IsDefined(TypeName))
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(TypeName), out propertyOverride);
+            if (Optional.IsDefined(TypeName) || hasPropertyOverride)
             {
                 builder.Append("  typeName:");
-                builder.AppendLine($" '{TypeName.ToString()}'");
-            }
-
-            if (Optional.IsDefined(QueryStringBehavior))
-            {
-                builder.Append("  queryStringBehavior:");
-                builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
-            }
-
-            if (Optional.IsDefined(QueryParameters))
-            {
-                builder.Append("  queryParameters:");
-                if (QueryParameters.Contains(Environment.NewLine))
+                if (hasPropertyOverride)
                 {
-                    builder.AppendLine(" '''");
-                    builder.AppendLine($"{QueryParameters}'''");
+                    builder.AppendLine($" {propertyOverride}");
                 }
                 else
                 {
-                    builder.AppendLine($" '{QueryParameters}'");
+                    builder.AppendLine($" '{TypeName.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryStringBehavior), out propertyOverride);
+            if (Optional.IsDefined(QueryStringBehavior) || hasPropertyOverride)
+            {
+                builder.Append("  queryStringBehavior:");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    builder.AppendLine($" '{QueryStringBehavior.ToString()}'");
+                }
+            }
+
+            hasPropertyOverride = hasObjectOverride && propertyOverrides.TryGetValue(nameof(QueryParameters), out propertyOverride);
+            if (Optional.IsDefined(QueryParameters) || hasPropertyOverride)
+            {
+                builder.Append("  queryParameters:");
+                if (hasPropertyOverride)
+                {
+                    builder.AppendLine($" {propertyOverride}");
+                }
+                else
+                {
+                    if (QueryParameters.Contains(Environment.NewLine))
+                    {
+                        builder.AppendLine(" '''");
+                        builder.AppendLine($"{QueryParameters}'''");
+                    }
+                    else
+                    {
+                        builder.AppendLine($" '{QueryParameters}'");
+                    }
                 }
             }
 
