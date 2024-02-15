@@ -106,7 +106,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                  }
                                ]
                                extraMappingInfo: {
-                                 dictionaryKey: {
+                                 'dictionaryKey': {
                                    name: 'CacheExpiration'
                                    foo: 'foo1'
                                  }
@@ -218,7 +218,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                                  }
                                ]
                                extraMappingInfo: {
-                                 dictionaryKey: {
+                                 'dictionaryKey': {
                                    name: 'CacheExpiration'
                                    foo: 'foo1'
                                  }
