@@ -368,7 +368,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     stringBuilder.Append(
                         new FormattableStringExpression(
-                            $"{indent}{indent}{{0}}:", keyValuePair.Key)),
+                            $"{indent}{indent}'{{0}}':", keyValuePair.Key)),
                     CheckCollectionItemForNull(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value),
                     SerializeExpression(stringBuilder, dictionarySerialization.ValueSerialization, keyValuePair.Value, spaces + 2)
                 },
