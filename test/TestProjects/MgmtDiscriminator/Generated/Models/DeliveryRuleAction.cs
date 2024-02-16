@@ -68,6 +68,7 @@ namespace MgmtDiscriminator.Models
         /// <summary> The name of the action for the delivery rule. </summary>
         internal DeliveryRuleActionType Name { get; set; }
         /// <summary> for test. </summary>
+        [WirePath("foo")]
         public string Foo { get; }
     }
 }

@@ -84,20 +84,28 @@ namespace MgmtDiscriminator
         }
 
         /// <summary> A bool property to verify bicep generation. </summary>
+        [WirePath("boolProperty")]
         public bool? BoolProperty { get; set; }
         /// <summary> A location property to verify bicep generation. </summary>
+        [WirePath("location")]
         public AzureLocation? Location { get; set; }
         /// <summary> A location property to verify bicep generation. </summary>
+        [WirePath("locationWithCustomSerialization")]
         public AzureLocation? LocationWithCustomSerialization { get; set; }
         /// <summary> A datetime property to verify bicep generation. </summary>
+        [WirePath("dateTimeProperty")]
         public DateTimeOffset? DateTimeProperty { get; set; }
         /// <summary> A duration property to verify bicep generation. </summary>
+        [WirePath("duration")]
         public TimeSpan? Duration { get; set; }
         /// <summary> A number property to verify bicep generation. </summary>
+        [WirePath("number")]
         public int? Number { get; set; }
         /// <summary> A number property to verify bicep generation. </summary>
+        [WirePath("uri")]
         public Uri Uri { get; set; }
         /// <summary> The properties. </summary>
+        [WirePath("properties")]
         public DeliveryRuleProperties Properties { get; set; }
     }
 }

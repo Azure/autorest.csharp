@@ -17,6 +17,38 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateOSDisk
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSDisk"/>. </summary>
         public VirtualMachineScaleSetUpdateOSDisk()
         {
@@ -48,7 +80,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The managed disk parameters.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.managedDisk
         /// </param>
-        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Caching = caching;
             WriteAcceleratorEnabled = writeAcceleratorEnabled;
@@ -56,22 +89,26 @@ namespace Azure.ResourceManager.Sample.Models
             Image = image;
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>
         /// The caching type.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.caching
         /// </summary>
+        [WirePath("caching")]
         public CachingType? Caching { get; set; }
         /// <summary>
         /// Specifies whether writeAccelerator should be enabled or disabled on the disk.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.writeAcceleratorEnabled
         /// </summary>
+        [WirePath("writeAcceleratorEnabled")]
         public bool? WriteAcceleratorEnabled { get; set; }
         /// <summary>
         /// Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. &lt;br&gt;&lt;br&gt; This value cannot be larger than 1023 GB
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.diskSizeGB
         /// </summary>
+        [WirePath("diskSizeGB")]
         public int? DiskSizeGB { get; set; }
         /// <summary>
         /// The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
@@ -82,6 +119,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the virtual hard disk's uri.
         /// Serialized Name: VirtualHardDisk.uri
         /// </summary>
+        [WirePath("image.uri")]
         public Uri ImageUri
         {
             get => Image is null ? default : Image.Uri;
@@ -97,11 +135,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The list of virtual hard disk container uris.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.vhdContainers
         /// </summary>
+        [WirePath("vhdContainers")]
         public IList<string> VhdContainers { get; }
         /// <summary>
         /// The managed disk parameters.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.managedDisk
         /// </summary>
+        [WirePath("managedDisk")]
         public VirtualMachineScaleSetManagedDiskParameters ManagedDisk { get; set; }
     }
 }

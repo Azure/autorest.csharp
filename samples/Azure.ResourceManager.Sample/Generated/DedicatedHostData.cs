@@ -21,6 +21,38 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class DedicatedHostData : TrackedResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/>. </summary>
         /// <param name="location"> The location. </param>
         /// <param name="sku">
@@ -79,7 +111,8 @@ namespace Azure.ResourceManager.Sample
         /// The dedicated host instance view.
         /// Serialized Name: DedicatedHost.properties.instanceView
         /// </param>
-        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             PlatformFaultDomain = platformFaultDomain;
@@ -90,52 +123,67 @@ namespace Azure.ResourceManager.Sample
             ProvisioningOn = provisioningOn;
             ProvisioningState = provisioningState;
             InstanceView = instanceView;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/> for deserialization. </summary>
+        internal DedicatedHostData()
+        {
         }
 
         /// <summary>
         /// SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
         /// Serialized Name: DedicatedHost.sku
         /// </summary>
+        [WirePath("sku")]
         public SampleSku Sku { get; set; }
         /// <summary>
         /// Fault domain of the dedicated host within a dedicated host group.
         /// Serialized Name: DedicatedHost.properties.platformFaultDomain
         /// </summary>
+        [WirePath("properties.platformFaultDomain")]
         public int? PlatformFaultDomain { get; set; }
         /// <summary>
         /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
         /// Serialized Name: DedicatedHost.properties.autoReplaceOnFailure
         /// </summary>
+        [WirePath("properties.autoReplaceOnFailure")]
         public bool? AutoReplaceOnFailure { get; set; }
         /// <summary>
         /// A unique id generated and assigned to the dedicated host by the platform. &lt;br&gt;&lt;br&gt; Does not change throughout the lifetime of the host.
         /// Serialized Name: DedicatedHost.properties.hostId
         /// </summary>
+        [WirePath("properties.hostId")]
         public string HostId { get; }
         /// <summary>
         /// A list of references to all virtual machines in the Dedicated Host.
         /// Serialized Name: DedicatedHost.properties.virtualMachines
         /// </summary>
+        [WirePath("properties.virtualMachines")]
         public IReadOnlyList<Resources.Models.SubResource> VirtualMachines { get; }
         /// <summary>
         /// Specifies the software license type that will be applied to the VMs deployed on the dedicated host. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **Windows_Server_Hybrid** &lt;br&gt;&lt;br&gt; **Windows_Server_Perpetual** &lt;br&gt;&lt;br&gt; Default: **None**
         /// Serialized Name: DedicatedHost.properties.licenseType
         /// </summary>
+        [WirePath("properties.licenseType")]
         public DedicatedHostLicenseType? LicenseType { get; set; }
         /// <summary>
         /// The date when the host was first provisioned.
         /// Serialized Name: DedicatedHost.properties.provisioningTime
         /// </summary>
+        [WirePath("properties.provisioningTime")]
         public DateTimeOffset? ProvisioningOn { get; }
         /// <summary>
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: DedicatedHost.properties.provisioningState
         /// </summary>
+        [WirePath("properties.provisioningState")]
         public string ProvisioningState { get; }
         /// <summary>
         /// The dedicated host instance view.
         /// Serialized Name: DedicatedHost.properties.instanceView
         /// </summary>
+        [WirePath("properties.instanceView")]
         public DedicatedHostInstanceView InstanceView { get; }
     }
 }

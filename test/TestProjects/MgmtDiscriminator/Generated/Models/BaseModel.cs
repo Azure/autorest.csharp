@@ -60,6 +60,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the optional string. </summary>
+        [WirePath("optionalString")]
         public string OptionalString { get; set; }
     }
 }

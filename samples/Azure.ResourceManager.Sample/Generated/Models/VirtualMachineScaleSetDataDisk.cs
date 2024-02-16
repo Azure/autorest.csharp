@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,6 +16,38 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetDataDisk
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetDataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
@@ -65,7 +100,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.diskMBpsReadWrite
         /// </param>
-        internal VirtualMachineScaleSetDataDisk(string name, int lun, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, VirtualMachineScaleSetManagedDiskParameters managedDisk, long? diskIopsReadWrite, long? diskMBpsReadWrite)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetDataDisk(string name, int lun, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, VirtualMachineScaleSetManagedDiskParameters managedDisk, long? diskIopsReadWrite, long? diskMBpsReadWrite, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Lun = lun;
@@ -76,52 +112,67 @@ namespace Azure.ResourceManager.Sample.Models
             ManagedDisk = managedDisk;
             DiskIopsReadWrite = diskIopsReadWrite;
             DiskMBpsReadWrite = diskMBpsReadWrite;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetDataDisk"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetDataDisk()
+        {
         }
 
         /// <summary>
         /// The disk name.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.name
         /// </summary>
+        [WirePath("name")]
         public string Name { get; set; }
         /// <summary>
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.lun
         /// </summary>
+        [WirePath("lun")]
         public int Lun { get; set; }
         /// <summary>
         /// Specifies the caching requirements. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **ReadOnly** &lt;br&gt;&lt;br&gt; **ReadWrite** &lt;br&gt;&lt;br&gt; Default: **None for Standard storage. ReadOnly for Premium storage**
         /// Serialized Name: VirtualMachineScaleSetDataDisk.caching
         /// </summary>
+        [WirePath("caching")]
         public CachingType? Caching { get; set; }
         /// <summary>
         /// Specifies whether writeAccelerator should be enabled or disabled on the disk.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.writeAcceleratorEnabled
         /// </summary>
+        [WirePath("writeAcceleratorEnabled")]
         public bool? WriteAcceleratorEnabled { get; set; }
         /// <summary>
         /// The create option.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.createOption
         /// </summary>
+        [WirePath("createOption")]
         public DiskCreateOptionType CreateOption { get; set; }
         /// <summary>
         /// Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. &lt;br&gt;&lt;br&gt; This value cannot be larger than 1023 GB
         /// Serialized Name: VirtualMachineScaleSetDataDisk.diskSizeGB
         /// </summary>
+        [WirePath("diskSizeGB")]
         public int? DiskSizeGB { get; set; }
         /// <summary>
         /// The managed disk parameters.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.managedDisk
         /// </summary>
+        [WirePath("managedDisk")]
         public VirtualMachineScaleSetManagedDiskParameters ManagedDisk { get; set; }
         /// <summary>
         /// Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.diskIOPSReadWrite
         /// </summary>
+        [WirePath("diskIOPSReadWrite")]
         public long? DiskIopsReadWrite { get; set; }
         /// <summary>
         /// Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.diskMBpsReadWrite
         /// </summary>
+        [WirePath("diskMBpsReadWrite")]
         public long? DiskMBpsReadWrite { get; set; }
     }
 }

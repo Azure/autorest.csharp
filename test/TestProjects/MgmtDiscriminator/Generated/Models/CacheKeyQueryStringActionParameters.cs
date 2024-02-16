@@ -73,10 +73,13 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets or sets the type name. </summary>
+        [WirePath("typeName")]
         public CacheKeyQueryStringActionParametersTypeName TypeName { get; set; }
         /// <summary> Caching behavior for the requests. </summary>
+        [WirePath("queryStringBehavior")]
         public QueryStringBehavior QueryStringBehavior { get; set; }
         /// <summary> query parameters to include or exclude (comma separated). </summary>
+        [WirePath("queryParameters")]
         public string QueryParameters { get; set; }
     }
 }
