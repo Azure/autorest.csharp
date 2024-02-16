@@ -83,10 +83,10 @@ namespace MgmtDiscriminator.Models
         /// </list>
         /// </para>
         /// </summary>
-        [WirePath("template")]
+        [WirePath("properties.template")]
         public BinaryData Template { get; set; }
         /// <summary> If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed. </summary>
-        [WirePath("resourceGroup")]
+        [WirePath("properties.resourceGroup")]
         public string ResourceGroup { get; set; }
         /// <summary>
         /// Resource Manager template blueprint artifact parameter values.
@@ -118,7 +118,7 @@ namespace MgmtDiscriminator.Models
         /// </list>
         /// </para>
         /// </summary>
-        [WirePath("parameters")]
+        [WirePath("properties.parameters")]
         public IDictionary<string, BinaryData> Parameters { get; }
     }
 }
