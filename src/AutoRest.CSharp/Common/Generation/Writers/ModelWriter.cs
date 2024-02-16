@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -87,10 +87,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (property == rawDataField)
                     continue;
 
-                WriteProperty(writer, property);
+                WriteProperty(writer, property, schema);
 
                 if (property.FlattenedProperty != null)
-                    WriteProperty(writer, property.FlattenedProperty);
+                    WriteProperty(writer, property.FlattenedProperty, schema);
             }
         }
 
@@ -119,9 +119,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const));
         }
 
-        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
+        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, ObjectType objectType)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            if (Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
+            {
+                string? wrapper = property.SchemaProperty?.FlattenedNames?.FirstOrDefault();
+                wrapper = wrapper is null ? string.Empty : $"{wrapper}.";
+                writer.Line($"[WirePath(\"{wrapper}{property.SerializedName}\")]");
+            }
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
 
             // write getter
@@ -147,9 +153,15 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteProperty(CodeWriter writer, FlattenedObjectTypeProperty property)
+        private void WriteProperty(CodeWriter writer, FlattenedObjectTypeProperty property, ObjectType objectType)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            if (Configuration.EnableBicepSerialization && objectType.Declaration.Accessibility == "public" && property.Declaration.Accessibility == "public")
+            {
+                string? wrapper = property.UnderlyingProperty.SchemaProperty?.FlattenedNames?.FirstOrDefault();
+                wrapper = wrapper is null ? string.Empty : $"{wrapper}.";
+                writer.Line($"[WirePath(\"{wrapper}{property.SerializedName}\")]");
+            }
             using (writer.Scope($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}"))
             {
                 // write getter

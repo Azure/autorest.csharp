@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -13,7 +14,8 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class FlattenedObjectTypeProperty : ObjectTypeProperty
     {
         // The flattened object type property does not participate in the serialization or deserialization process, therefore we pass in null for SchemaProperty.
-        internal FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
+        internal FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false)
+            : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
         {
             UnderlyingProperty = underlyingProperty;
             IncludeGetterNullCheck = includeGetterNullCheck;
@@ -37,6 +39,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsOverriddenValueType { get; }
 
         public string ChildPropertyName { get; }
+
+        public override string SerializedName => GetSerializedName();
+
+        private string GetSerializedName()
+        {
+            StringBuilder result = new();
+            foreach (var property in BuildHierarchyStack())
+            {
+                if (result.Length > 0)
+                {
+                    result.Insert(0, '.');
+                }
+                result.Insert(0, property.SerializedName);
+            }
+            return result.ToString();
+        }
 
         internal static (bool IsReadOnly, bool? IncludeGetterNullCheck, bool IncludeSetterNullCheck) GetFlags(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
         {

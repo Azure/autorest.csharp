@@ -63,6 +63,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> The values. </summary>
+        [WirePath("value")]
         public IReadOnlyList<DeliveryRuleData> Value { get; }
     }
 }

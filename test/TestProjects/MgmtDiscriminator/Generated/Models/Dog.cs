@@ -33,8 +33,10 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> A dog can bark. </summary>
+        [WirePath("bark")]
         public string Bark { get; set; }
         /// <summary> The kind of the dog. </summary>
+        [WirePath("dogKind")]
         public DogKind? DogKind { get; set; }
     }
 }

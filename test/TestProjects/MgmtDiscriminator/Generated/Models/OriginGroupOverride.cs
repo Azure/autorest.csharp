@@ -66,6 +66,7 @@ namespace MgmtDiscriminator.Models
         /// <summary> defines the OriginGroup that would override the DefaultOriginGroup on route. </summary>
         internal WritableSubResource OriginGroup { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("originGroup.id")]
         public ResourceIdentifier OriginGroupId
         {
             get => OriginGroup is null ? default : OriginGroup.Id;
@@ -78,6 +79,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Protocol this rule will use when forwarding traffic to backends. </summary>
+        [WirePath("forwardingProtocol")]
         public ForwardingProtocol? ForwardingProtocol { get; set; }
     }
 }

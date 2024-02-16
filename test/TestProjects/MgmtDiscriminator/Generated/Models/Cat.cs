@@ -31,6 +31,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> A cat can meow. </summary>
+        [WirePath("meow")]
         public string Meow { get; set; }
     }
 }
