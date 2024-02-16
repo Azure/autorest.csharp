@@ -42,6 +42,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Defines the parameters for the action. </summary>
+        [WirePath("parameters")]
         public UrlSigningActionParameters Parameters { get; set; }
     }
 }

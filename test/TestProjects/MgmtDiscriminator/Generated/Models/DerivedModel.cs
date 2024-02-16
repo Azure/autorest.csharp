@@ -40,6 +40,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Gets the required collection. </summary>
+        [WirePath("requiredCollection")]
         public IList<string> RequiredCollection { get; }
     }
 }

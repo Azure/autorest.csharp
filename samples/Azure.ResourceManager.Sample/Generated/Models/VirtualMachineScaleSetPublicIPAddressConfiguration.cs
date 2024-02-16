@@ -18,6 +18,38 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetPublicIPAddressConfiguration
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
@@ -57,7 +89,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPAddressVersion
         /// </param>
-        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             IdleTimeoutInMinutes = idleTimeoutInMinutes;
@@ -65,17 +98,25 @@ namespace Azure.ResourceManager.Sample.Models
             IPTags = ipTags;
             PublicIPPrefix = publicIPPrefix;
             PublicIPAddressVersion = publicIPAddressVersion;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetPublicIPAddressConfiguration()
+        {
         }
 
         /// <summary>
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name
         /// </summary>
+        [WirePath("name")]
         public string Name { get; set; }
         /// <summary>
         /// The idle timeout of the public IP address.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.idleTimeoutInMinutes
         /// </summary>
+        [WirePath("properties.idleTimeoutInMinutes")]
         public int? IdleTimeoutInMinutes { get; set; }
         /// <summary>
         /// The dns settings to be applied on the publicIP addresses .
@@ -86,6 +127,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
         /// </summary>
+        [WirePath("properties.dnsSettings.domainNameLabel")]
         public string DnsDomainNameLabel
         {
             get => DnsSettings is null ? default : DnsSettings.DomainNameLabel;
@@ -96,6 +138,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The list of IP tags associated with the public IP address.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.ipTags
         /// </summary>
+        [WirePath("properties.ipTags")]
         public IList<VirtualMachineScaleSetIPTag> IPTags { get; }
         /// <summary>
         /// The PublicIPPrefix from which to allocate publicIP addresses.
@@ -103,6 +146,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         internal WritableSubResource PublicIPPrefix { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.publicIPPrefix.id")]
         public ResourceIdentifier PublicIPPrefixId
         {
             get => PublicIPPrefix is null ? default : PublicIPPrefix.Id;
@@ -118,6 +162,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPAddressVersion
         /// </summary>
+        [WirePath("properties.publicIPAddressVersion")]
         public IPVersion? PublicIPAddressVersion { get; set; }
     }
 }

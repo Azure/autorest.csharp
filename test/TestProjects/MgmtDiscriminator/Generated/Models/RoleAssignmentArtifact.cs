@@ -54,6 +54,7 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Azure resource ID of the RoleDefinition. </summary>
+        [WirePath("roleDefinitionId")]
         public string RoleDefinitionId { get; set; }
         /// <summary>
         /// Array of user or group identities in Azure Active Directory. The roleDefinition will apply to each identity.
@@ -85,8 +86,10 @@ namespace MgmtDiscriminator.Models
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("principalIds")]
         public BinaryData PrincipalIds { get; set; }
         /// <summary> RoleAssignment will be scope to this resourceGroup. If empty, it scopes to the subscription. </summary>
+        [WirePath("resourceGroup")]
         public string ResourceGroup { get; set; }
     }
 }

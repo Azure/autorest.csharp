@@ -30,6 +30,7 @@ namespace Azure.ResourceManager.Sample
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The name of the extension.
         /// Serialized Name: VirtualMachineScaleSetExtension.name
@@ -78,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// Collection of extension names after which this extension needs to be provisioned.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.provisionAfterExtensions
         /// </param>
-        internal VirtualMachineScaleSetExtensionData(string id, string name, ResourceType? resourceType, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
+        internal VirtualMachineScaleSetExtensionData(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, ResourceType? resourceType, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             ResourceType = resourceType;
@@ -98,41 +99,49 @@ namespace Azure.ResourceManager.Sample
         /// The name of the extension.
         /// Serialized Name: VirtualMachineScaleSetExtension.name
         /// </summary>
+        [WirePath("name")]
         public string Name { get; set; }
         /// <summary>
         /// Resource type
         /// Serialized Name: VirtualMachineScaleSetExtension.type
         /// </summary>
+        [WirePath("type")]
         public ResourceType? ResourceType { get; }
         /// <summary>
         /// If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.forceUpdateTag
         /// </summary>
+        [WirePath("properties.forceUpdateTag")]
         public string ForceUpdateTag { get; set; }
         /// <summary>
         /// The name of the extension handler publisher.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.publisher
         /// </summary>
+        [WirePath("properties.publisher")]
         public string Publisher { get; set; }
         /// <summary>
         /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.type
         /// </summary>
+        [WirePath("properties.type")]
         public string ExtensionType { get; set; }
         /// <summary>
         /// Specifies the version of the script handler.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.typeHandlerVersion
         /// </summary>
+        [WirePath("properties.typeHandlerVersion")]
         public string TypeHandlerVersion { get; set; }
         /// <summary>
         /// Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.autoUpgradeMinorVersion
         /// </summary>
+        [WirePath("properties.autoUpgradeMinorVersion")]
         public bool? AutoUpgradeMinorVersion { get; set; }
         /// <summary>
         /// Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.enableAutomaticUpgrade
         /// </summary>
+        [WirePath("properties.enableAutomaticUpgrade")]
         public bool? EnableAutomaticUpgrade { get; set; }
         /// <summary>
         /// Json formatted public settings for the extension.
@@ -165,6 +174,7 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("properties.settings")]
         public BinaryData Settings { get; set; }
         /// <summary>
         /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
@@ -197,16 +207,19 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </para>
         /// </summary>
+        [WirePath("properties.protectedSettings")]
         public BinaryData ProtectedSettings { get; set; }
         /// <summary>
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.provisioningState
         /// </summary>
+        [WirePath("properties.provisioningState")]
         public string ProvisioningState { get; }
         /// <summary>
         /// Collection of extension names after which this extension needs to be provisioned.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.provisionAfterExtensions
         /// </summary>
+        [WirePath("properties.provisionAfterExtensions")]
         public IList<string> ProvisionAfterExtensions { get; }
     }
 }
