@@ -26,7 +26,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, null, null, credential);
 
             Response response = await client.GetParametersAsync(null);
         }
@@ -37,7 +37,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, null, null, credential);
 
             Response response = await client.GetParametersAsync(null);
         }
@@ -48,7 +48,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, null, null, credential);
 
             await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
@@ -61,7 +61,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, null, null, credential);
 
             await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
@@ -74,7 +74,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, null, null, credential);
 
             await foreach (BinaryData item in client.GetAllItemsAsync(null))
             {
@@ -87,7 +87,7 @@ namespace ResourceClients_LowLevel.Tests
         {
             Uri endpoint = null;
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, null, null, credential);
 
             await foreach (BinaryData item in client.GetAllItemsAsync(null))
             {

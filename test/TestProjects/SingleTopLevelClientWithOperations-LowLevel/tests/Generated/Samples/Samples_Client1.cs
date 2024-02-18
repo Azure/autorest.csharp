@@ -22,7 +22,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_Operation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
+            Client1 client = new TopLevelClientWithOperationClient(null, credential).GetClient1Client();
 
             Response response = client.Operation(null);
 
@@ -35,7 +35,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_Operation_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
+            Client1 client = new TopLevelClientWithOperationClient(null, credential).GetClient1Client();
 
             Response response = await client.OperationAsync(null);
 
@@ -48,7 +48,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_Operation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
+            Client1 client = new TopLevelClientWithOperationClient(null, credential).GetClient1Client();
 
             Response response = client.Operation(null);
 
@@ -61,7 +61,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_Operation_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client1 client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
+            Client1 client = new TopLevelClientWithOperationClient(null, credential).GetClient1Client();
 
             Response response = await client.OperationAsync(null);
 

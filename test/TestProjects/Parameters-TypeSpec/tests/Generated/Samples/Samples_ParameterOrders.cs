@@ -22,7 +22,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_ShortVersion()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response response = client.Operation(1234, null, null);
 
@@ -34,7 +34,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_ShortVersion_Async()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response response = await client.OperationAsync(1234, null, null);
 
@@ -46,7 +46,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_ShortVersion_Convenience()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response<Result> response = client.Operation(1234);
         }
@@ -55,7 +55,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_ShortVersion_Convenience_Async()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response<Result> response = await client.OperationAsync(1234);
         }
@@ -64,7 +64,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_AllParameters()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response response = client.Operation(1234, 1234, null);
 
@@ -76,7 +76,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_AllParameters_Async()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response response = await client.OperationAsync(1234, 1234, null);
 
@@ -88,7 +88,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_AllParameters_Convenience()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response<Result> response = client.Operation(1234, end: 1234);
         }
@@ -97,7 +97,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_AllParameters_Convenience_Async()
         {
-            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
+            ParameterOrders client = new ParametersCadlClient().GetParameterOrdersClient();
 
             Response<Result> response = await client.OperationAsync(1234, end: 1234);
         }

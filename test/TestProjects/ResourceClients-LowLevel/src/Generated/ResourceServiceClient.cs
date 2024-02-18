@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Autorest.CSharp.Core;
 using Azure;
@@ -23,6 +24,12 @@ namespace ResourceClients_LowLevel
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
+        /// <summary> Group identifier. </summary>
+        public string GroupId { get; }
+
+        /// <summary> Item identifier. </summary>
+        public string ItemId { get; }
+
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
@@ -35,26 +42,36 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
+        /// <param name="groupId"> Group identifier. </param>
+        /// <param name="itemId"> Item identifier. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ResourceServiceClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new ResourceServiceClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="itemId"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="itemId"/> is an empty string, and was expected to be non-empty. </exception>
+        public ResourceServiceClient(string groupId, string itemId, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), groupId, itemId, credential, new ResourceServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="groupId"> Group identifier. </param>
+        /// <param name="itemId"> Item identifier. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public ResourceServiceClient(Uri endpoint, AzureKeyCredential credential, ResourceServiceClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="groupId"/>, <paramref name="itemId"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="itemId"/> is an empty string, and was expected to be non-empty. </exception>
+        public ResourceServiceClient(Uri endpoint, string groupId, string itemId, AzureKeyCredential credential, ResourceServiceClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(itemId, nameof(itemId));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ResourceServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            GroupId = groupId;
+            ItemId = itemId;
             _endpoint = endpoint;
         }
 
@@ -202,15 +219,12 @@ namespace ResourceClients_LowLevel
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
         }
 
-        /// <summary> Initializes a new instance of ResourceGroup. </summary>
-        /// <param name="groupId"> Group identifier. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ResourceGroup GetResourceGroup(string groupId)
-        {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+        private ResourceGroup _cachedResourceGroup;
 
-            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, groupId);
+        /// <summary> Initializes a new instance of ResourceGroup. </summary>
+        public virtual ResourceGroup GetResourceGroup()
+        {
+            return Volatile.Read(ref _cachedResourceGroup) ?? Interlocked.CompareExchange(ref _cachedResourceGroup, new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, GroupId, ItemId), null) ?? _cachedResourceGroup;
         }
 
         internal HttpMessage CreateGetParametersRequest(RequestContext context)

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -17,6 +18,7 @@ namespace MixApiVersion
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -48,26 +50,22 @@ namespace MixApiVersion
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
-        /// <summary> Initializes a new instance of Pets. </summary>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Pets GetPetsClient(string apiVersion = "2022-11-30-preview")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Pets _cachedPets;
+        private ListPetToysResponse _cachedListPetToysResponse;
 
-            return new Pets(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Pets. </summary>
+        public virtual Pets GetPetsClient()
+        {
+            return Volatile.Read(ref _cachedPets) ?? Interlocked.CompareExchange(ref _cachedPets, new Pets(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedPets;
         }
 
         /// <summary> Initializes a new instance of ListPetToysResponse. </summary>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ListPetToysResponse GetListPetToysResponseClient(string apiVersion = "2022-11-30-preview")
+        public virtual ListPetToysResponse GetListPetToysResponseClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ListPetToysResponse(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedListPetToysResponse) ?? Interlocked.CompareExchange(ref _cachedListPetToysResponse, new ListPetToysResponse(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedListPetToysResponse;
         }
     }
 }

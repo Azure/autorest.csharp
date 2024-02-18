@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -17,6 +18,7 @@ namespace RenameGetList
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -48,26 +50,22 @@ namespace RenameGetList
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
+            _apiVersion = options.Version;
         }
 
-        /// <summary> Initializes a new instance of Projects. </summary>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Projects GetProjectsClient(string apiVersion = "2022-05-15-preview")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Projects _cachedProjects;
+        private Deployments _cachedDeployments;
 
-            return new Projects(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Projects. </summary>
+        public virtual Projects GetProjectsClient()
+        {
+            return Volatile.Read(ref _cachedProjects) ?? Interlocked.CompareExchange(ref _cachedProjects, new Projects(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedProjects;
         }
 
         /// <summary> Initializes a new instance of Deployments. </summary>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Deployments GetDeploymentsClient(string apiVersion = "2022-05-15-preview")
+        public virtual Deployments GetDeploymentsClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Deployments(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDeployments) ?? Interlocked.CompareExchange(ref _cachedDeployments, new Deployments(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedDeployments;
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Autorest.CSharp.Core;
 using Azure;
@@ -26,6 +27,9 @@ namespace ResourceClients_LowLevel
         /// <summary> Group identifier. </summary>
         public string GroupId { get; }
 
+        /// <summary> Item identifier. </summary>
+        public string ItemId { get; }
+
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
@@ -43,13 +47,15 @@ namespace ResourceClients_LowLevel
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="groupId"> Group identifier. </param>
-        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string groupId)
+        /// <param name="itemId"> Item identifier. </param>
+        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string groupId, string itemId)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
             GroupId = groupId;
+            ItemId = itemId;
         }
 
         /// <summary>
@@ -154,15 +160,12 @@ namespace ResourceClients_LowLevel
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
-        /// <param name="itemId"> Item identifier. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="itemId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="itemId"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Resource GetResource(string itemId)
-        {
-            Argument.AssertNotNullOrEmpty(itemId, nameof(itemId));
+        private Resource _cachedResource;
 
-            return new Resource(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, GroupId, itemId);
+        /// <summary> Initializes a new instance of Resource. </summary>
+        public virtual Resource GetResource()
+        {
+            return Volatile.Read(ref _cachedResource) ?? Interlocked.CompareExchange(ref _cachedResource, new Resource(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, GroupId, ItemId), null) ?? _cachedResource;
         }
 
         internal HttpMessage CreateGetGroupRequest(RequestContext context)

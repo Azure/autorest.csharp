@@ -24,6 +24,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
+        /// <summary> The <see cref="string"/> to use. </summary>
+        public string ClientParameter { get; }
+
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
@@ -36,26 +39,30 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
+        /// <param name="clientParameter"> The <see cref="string"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public TopLevelClientWithOperationClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new TopLevelClientWithOperationClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="clientParameter"/> or <paramref name="credential"/> is null. </exception>
+        public TopLevelClientWithOperationClient(string clientParameter, AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), clientParameter, credential, new TopLevelClientWithOperationClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
         /// <param name="endpoint"> server parameter. </param>
+        /// <param name="clientParameter"> The <see cref="string"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public TopLevelClientWithOperationClient(Uri endpoint, AzureKeyCredential credential, TopLevelClientWithOperationClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="clientParameter"/> or <paramref name="credential"/> is null. </exception>
+        public TopLevelClientWithOperationClient(Uri endpoint, string clientParameter, AzureKeyCredential credential, TopLevelClientWithOperationClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(clientParameter, nameof(clientParameter));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new TopLevelClientWithOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientParameter = clientParameter;
             _endpoint = endpoint;
         }
 
@@ -171,6 +178,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
         private Client1 _cachedClient1;
         private Client2 _cachedClient2;
+        private Client4 _cachedClient4;
 
         /// <summary> Initializes a new instance of Client1. </summary>
         public virtual Client1 GetClient1Client()
@@ -185,13 +193,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
-        /// <param name="clientParameter"> The <see cref="string"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientParameter"/> is null. </exception>
-        public virtual Client4 GetClient4(string clientParameter)
+        public virtual Client4 GetClient4()
         {
-            Argument.AssertNotNull(clientParameter, nameof(clientParameter));
-
-            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, clientParameter);
+            return Volatile.Read(ref _cachedClient4) ?? Interlocked.CompareExchange(ref _cachedClient4, new Client4(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, ClientParameter), null) ?? _cachedClient4;
         }
 
         internal HttpMessage CreateOperationRequest(RequestContext context)

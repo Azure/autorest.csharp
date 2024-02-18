@@ -6,7 +6,7 @@
 This sample shows how to call GetProjectAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Response response = await client.GetProjectAsync("<projectName>");
 
@@ -23,7 +23,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProjectAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Response response = await client.GetProjectAsync("<projectName>");
 
@@ -46,7 +46,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProject and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Response response = client.GetProject("<projectName>");
 
@@ -63,7 +63,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProject with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Response response = client.GetProject("<projectName>");
 
@@ -86,7 +86,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 await foreach (BinaryData item in client.GetProjectsAsync())
 {
@@ -104,7 +104,7 @@ await foreach (BinaryData item in client.GetProjectsAsync())
 This sample shows how to call GetProjectsAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 await foreach (BinaryData item in client.GetProjectsAsync())
 {
@@ -128,7 +128,7 @@ await foreach (BinaryData item in client.GetProjectsAsync())
 This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 foreach (BinaryData item in client.GetProjects())
 {
@@ -146,7 +146,7 @@ foreach (BinaryData item in client.GetProjects())
 This sample shows how to call GetProjects with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 foreach (BinaryData item in client.GetProjects())
 {
@@ -170,7 +170,7 @@ foreach (BinaryData item in client.GetProjects())
 This sample shows how to call CreateOrUpdateAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -194,7 +194,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call CreateOrUpdateAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -227,7 +227,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call CreateOrUpdate and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -251,7 +251,7 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call CreateOrUpdate with all parameters and request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -284,14 +284,14 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 This sample shows how to call DeleteAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
 ]]></code>
 This sample shows how to call DeleteAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
 ]]></code></example>
@@ -301,14 +301,14 @@ Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectNam
 This sample shows how to call Delete.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = client.Delete(WaitUntil.Completed, "<projectName>");
 ]]></code>
 This sample shows how to call Delete with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = client.Delete(WaitUntil.Completed, "<projectName>");
 ]]></code></example>
@@ -318,14 +318,14 @@ Operation operation = client.Delete(WaitUntil.Completed, "<projectName>");
 This sample shows how to call ExportAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
 ]]></code>
 This sample shows how to call ExportAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
 ]]></code></example>
@@ -335,14 +335,14 @@ Operation operation = await client.ExportAsync(WaitUntil.Completed, "<projectNam
 This sample shows how to call Export.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
 ]]></code>
 This sample shows how to call Export with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
 ]]></code></example>
@@ -352,14 +352,14 @@ Operation operation = client.Export(WaitUntil.Completed, "<projectName>", "<proj
 This sample shows how to call ImportxAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
 ]]></code>
 This sample shows how to call ImportxAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
 ]]></code></example>
@@ -369,14 +369,14 @@ Operation operation = await client.ImportxAsync(WaitUntil.Completed, "<projectNa
 This sample shows how to call Importx.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = client.Importx(WaitUntil.Completed, "<projectName>");
 ]]></code>
 This sample shows how to call Importx with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 Operation operation = client.Importx(WaitUntil.Completed, "<projectName>");
 ]]></code></example>
@@ -386,7 +386,7 @@ Operation operation = client.Importx(WaitUntil.Completed, "<projectName>");
 This sample shows how to call TrainAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -397,7 +397,7 @@ Operation operation = await client.TrainAsync(WaitUntil.Completed, "<projectName
 This sample shows how to call TrainAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -411,7 +411,7 @@ Operation operation = await client.TrainAsync(WaitUntil.Completed, "<projectName
 This sample shows how to call Train.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -422,7 +422,7 @@ Operation operation = client.Train(WaitUntil.Completed, "<projectName>", content
 This sample shows how to call Train with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient();
 
 using RequestContent content = RequestContent.Create(new
 {

@@ -22,7 +22,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_Patch_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
+            Client4 client = new TopLevelClientWithOperationClient("<ClientParameter>", credential).GetClient4();
 
             Response response = client.Patch("<filter>", null);
 
@@ -35,7 +35,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_Patch_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
+            Client4 client = new TopLevelClientWithOperationClient("<ClientParameter>", credential).GetClient4();
 
             Response response = await client.PatchAsync("<filter>", null);
 
@@ -48,7 +48,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_Patch_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
+            Client4 client = new TopLevelClientWithOperationClient("<ClientParameter>", credential).GetClient4();
 
             Response response = client.Patch("<filter>", null);
 
@@ -61,7 +61,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_Patch_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
+            Client4 client = new TopLevelClientWithOperationClient("<ClientParameter>", credential).GetClient4();
 
             Response response = await client.PatchAsync("<filter>", null);
 

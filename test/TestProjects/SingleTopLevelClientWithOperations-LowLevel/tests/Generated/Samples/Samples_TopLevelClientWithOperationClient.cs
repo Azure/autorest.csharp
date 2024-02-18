@@ -22,7 +22,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_Operation_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             Response response = client.Operation(null);
 
@@ -35,7 +35,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_Operation_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             Response response = await client.OperationAsync(null);
 
@@ -48,7 +48,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_Operation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             Response response = client.Operation(null);
 
@@ -61,7 +61,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_Operation_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             Response response = await client.OperationAsync(null);
 
@@ -74,7 +74,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_GetAll_ShortVersion()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             foreach (BinaryData item in client.GetAll("<filter>", null))
             {
@@ -88,7 +88,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_GetAll_ShortVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {
@@ -102,7 +102,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public void Example_GetAll_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             foreach (BinaryData item in client.GetAll("<filter>", null))
             {
@@ -116,7 +116,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         public async Task Example_GetAll_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
+            TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(null, credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {

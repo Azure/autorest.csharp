@@ -17,10 +17,11 @@ namespace Microsoft.Extensions.Azure
         /// <summary> Registers a <see cref="TwoOperationGroupClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        public static IAzureClientBuilder<TwoOperationGroupClient, TwoOperationGroupClientOptions> AddTwoOperationGroupClient<TBuilder>(this TBuilder builder, Uri endpoint)
+        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
+        public static IAzureClientBuilder<TwoOperationGroupClient, TwoOperationGroupClientOptions> AddTwoOperationGroupClient<TBuilder>(this TBuilder builder, Uri endpoint, string client)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<TwoOperationGroupClient, TwoOperationGroupClientOptions>((options) => new TwoOperationGroupClient(endpoint, options));
+            return builder.RegisterClientFactory<TwoOperationGroupClient, TwoOperationGroupClientOptions>((options) => new TwoOperationGroupClient(endpoint, client, options));
         }
 
         /// <summary> Registers a <see cref="TwoOperationGroupClient"/> instance. </summary>

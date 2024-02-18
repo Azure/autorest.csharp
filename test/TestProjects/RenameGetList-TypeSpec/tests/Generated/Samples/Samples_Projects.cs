@@ -22,7 +22,7 @@ namespace RenameGetList.Samples
         public void Example_Project_GetProject_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             Response response = client.GetProject("<projectName>", null);
 
@@ -42,7 +42,7 @@ namespace RenameGetList.Samples
         public async Task Example_Project_GetProject_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             Response response = await client.GetProjectAsync("<projectName>", null);
 
@@ -62,7 +62,7 @@ namespace RenameGetList.Samples
         public void Example_Project_GetProject_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             Response response = client.GetProject("<projectName>", null);
 
@@ -85,7 +85,7 @@ namespace RenameGetList.Samples
         public async Task Example_Project_GetProject_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             Response response = await client.GetProjectAsync("<projectName>", null);
 
@@ -108,7 +108,7 @@ namespace RenameGetList.Samples
         public void Example_Project_GetProjects_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             foreach (BinaryData item in client.GetProjects(null))
             {
@@ -129,7 +129,7 @@ namespace RenameGetList.Samples
         public async Task Example_Project_GetProjects_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             await foreach (BinaryData item in client.GetProjectsAsync(null))
             {
@@ -150,7 +150,7 @@ namespace RenameGetList.Samples
         public void Example_Project_GetProjects_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             foreach (BinaryData item in client.GetProjects(null))
             {
@@ -174,7 +174,7 @@ namespace RenameGetList.Samples
         public async Task Example_Project_GetProjects_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Projects client = new RenameGetListClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
+            Projects client = new RenameGetListClient(endpoint).GetProjectsClient();
 
             await foreach (BinaryData item in client.GetProjectsAsync(null))
             {

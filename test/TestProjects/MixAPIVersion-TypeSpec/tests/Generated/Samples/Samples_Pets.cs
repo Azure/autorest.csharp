@@ -23,7 +23,7 @@ namespace MixApiVersion.Samples
         public void Example_Pet_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             Response response = client.Delete("<name>");
 
@@ -35,7 +35,7 @@ namespace MixApiVersion.Samples
         public async Task Example_Pet_Delete_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             Response response = await client.DeleteAsync("<name>");
 
@@ -47,7 +47,7 @@ namespace MixApiVersion.Samples
         public void Example_Pet_Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             Response response = client.Delete("<name>");
 
@@ -59,7 +59,7 @@ namespace MixApiVersion.Samples
         public async Task Example_Pet_Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-11-30-preview");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             Response response = await client.DeleteAsync("<name>");
 
@@ -129,7 +129,7 @@ namespace MixApiVersion.Samples
         public void Example_Pets_Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-07-09");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -147,7 +147,7 @@ namespace MixApiVersion.Samples
         public async Task Example_Pets_Create_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-07-09");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -165,7 +165,7 @@ namespace MixApiVersion.Samples
         public void Example_Pets_Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-07-09");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -185,7 +185,7 @@ namespace MixApiVersion.Samples
         public async Task Example_Pets_Create_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Pets client = new MixApiVersionClient(endpoint).GetPetsClient(apiVersion: "2022-07-09");
+            Pets client = new MixApiVersionClient(endpoint).GetPetsClient();
 
             using RequestContent content = RequestContent.Create(new
             {

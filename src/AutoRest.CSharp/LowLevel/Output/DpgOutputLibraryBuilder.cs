@@ -493,12 +493,14 @@ namespace AutoRest.CSharp.Output.Models
 
             private IReadOnlyList<InputParameter> EnsureClientParameters()
             {
-                if (_initClientParameters.Count == 0)
+                var childrenParameters = Children.SelectMany(c => c.ClientParameters).Distinct();
+                var clientParameters = _initClientParameters.Concat(childrenParameters);
+                if (clientParameters.Count() == 0)
                 {
-                    var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                    var endpointParameter = Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
                     return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
                 }
-                return _initClientParameters;
+                return clientParameters.ToList();
             }
 
             public ISet<InputParameter> ResourceParameters { get; }
