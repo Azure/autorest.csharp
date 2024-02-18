@@ -13,6 +13,7 @@ namespace Azure.Core
     internal class ChangeTrackingList<T>: IList<T>, IReadOnlyList<T>
     {
         private IList<T>? _innerList;
+        private bool _hasChanged = false;
 
         public ChangeTrackingList()
         {
@@ -47,10 +48,12 @@ namespace Azure.Core
         }
 
         public bool IsUndefined => _innerList == null;
+        public bool IsChanged => _hasChanged;
 
         public void Reset()
         {
             _innerList = null;
+            _hasChanged = true;
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -75,11 +78,13 @@ namespace Azure.Core
         public void Add(T item)
         {
             EnsureList().Add(item);
+            _hasChanged = true;
         }
 
         public void Clear()
         {
             EnsureList().Clear();
+            _hasChanged = true;
         }
 
         public bool Contains(T item)
@@ -109,6 +114,7 @@ namespace Azure.Core
                 return false;
             }
 
+            _hasChanged = true;
             return EnsureList().Remove(item);
         }
 
@@ -149,6 +155,7 @@ namespace Azure.Core
 
         public void Insert(int index, T item)
         {
+            _hasChanged = true;
             EnsureList().Insert(index, item);
         }
 
@@ -159,6 +166,7 @@ namespace Azure.Core
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
 
+            _hasChanged = true;
             EnsureList().RemoveAt(index);
         }
 
@@ -180,6 +188,7 @@ namespace Azure.Core
                     throw new ArgumentOutOfRangeException(nameof(index));
                 }
 
+                _hasChanged = true;
                 EnsureList()[index] = value;
             }
         }
