@@ -31,19 +31,31 @@ namespace Azure.ResourceManager.Sample.Models
             Skus = skus;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SubscriptionResourceGetVirtualMachineImagesOptions"/> for deserialization. </summary>
+        internal SubscriptionResourceGetVirtualMachineImagesOptions()
+        {
+        }
+
         /// <summary> The name of a supported Azure region. </summary>
+        [WirePath("location")]
         public AzureLocation Location { get; }
         /// <summary> A valid image publisher. </summary>
+        [WirePath("publisherName")]
         public string PublisherName { get; }
         /// <summary> A valid image publisher offer. </summary>
+        [WirePath("offer")]
         public string Offer { get; }
         /// <summary> A valid image SKU. </summary>
+        [WirePath("skus")]
         public string Skus { get; }
         /// <summary> The expand expression to apply on the operation. </summary>
+        [WirePath("expand")]
         public string Expand { get; set; }
         /// <summary> The top. </summary>
+        [WirePath("top")]
         public int? Top { get; set; }
         /// <summary> The orderby. </summary>
+        [WirePath("orderby")]
         public string Orderby { get; set; }
     }
 }
