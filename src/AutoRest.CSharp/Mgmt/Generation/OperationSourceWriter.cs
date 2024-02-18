@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
-                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
+                ValueExpression deserializeExpression = SerializableObjectTypeExpression.Deserialize(resourceData, document.RootElement);
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", new[]{deserializeExpression}, null, false);

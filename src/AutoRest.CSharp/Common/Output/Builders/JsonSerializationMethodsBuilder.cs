@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
@@ -38,22 +36,22 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
-using YamlDotNet.Serialization.NodeTypeResolvers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using ConstantExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.ConstantExpression;
 using MemberExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.MemberExpression;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
 using SwitchCase = AutoRest.CSharp.Common.Output.Expressions.Statements.SwitchCase;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json)
         {
             var jsonModelInterface = json.IJsonModelInterface;
             var typeOfT = jsonModelInterface.Arguments[0];
+
+            var model = typeOfT.Implementation as SerializableObjectType;
+            Debug.Assert(model is not null);
 
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
 
@@ -121,7 +119,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<Method> BuildIModelMethods(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
+        public static IEnumerable<Method> BuildIModelMethods(JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep)
         {
             // we do not need this if model reader writer feature is not enabled
             if (!Configuration.UseModelReaderWriter)
@@ -132,9 +130,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             // if we have json serialization, we must have this interface.
             // if we have xml serialization, we must have this interface.
             // therefore this type should never be null - because we cannot get here when json and xml both are null
-            Debug.Assert(iModelTInterface != null, model.Type.Name);
+            Debug.Assert(iModelTInterface != null, "iModelTInterface should not be null");
 
             var typeOfT = iModelTInterface.Arguments[0];
+            var model = typeOfT.Implementation as SerializableObjectType;
+            Debug.Assert(model is not null);
+
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
             yield return new
@@ -1079,7 +1080,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return GetDeserializeImplementation(serializationType.Implementation, element, serializerOptions);
         }
 
-        public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ValueExpression? serializerOptions)
+        private static ValueExpression GetDeserializeImplementation(TypeProvider implementation, JsonElementExpression element, ValueExpression? serializerOptions)
         {
             switch (implementation)
             {
