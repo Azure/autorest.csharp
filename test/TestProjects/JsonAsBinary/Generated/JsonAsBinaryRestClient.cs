@@ -35,14 +35,6 @@ namespace JsonAsBinary
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateOperationRequestUri(Stream body)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/Operation/", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOperationRequest(Stream body)
         {
             var message = _pipeline.CreateMessage();

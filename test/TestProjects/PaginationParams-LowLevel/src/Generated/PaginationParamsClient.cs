@@ -251,27 +251,6 @@ namespace PaginationParams_LowLevel
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get4s", "value", "nextLink", context);
         }
 
-        internal RequestUriBuilder CreateGetPaginationParamsRequestUri(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/authoring/analyze-text/projects", false);
-            if (maxCount != null)
-            {
-                uri.AppendQuery("top", maxCount.Value, true);
-            }
-            if (skip != null)
-            {
-                uri.AppendQuery("skip", skip.Value, true);
-            }
-            if (maxpagesize != null)
-            {
-                uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPaginationParamsRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -296,27 +275,6 @@ namespace PaginationParams_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet2sRequestUri(int? limit, int? offset, long? maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/authoring/analyze-language/projects", false);
-            if (limit != null)
-            {
-                uri.AppendQuery("limit", limit.Value, true);
-            }
-            if (offset != null)
-            {
-                uri.AppendQuery("offset", offset.Value, true);
-            }
-            if (maxpagesize != null)
-            {
-                uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGet2sRequest(int? limit, int? offset, long? maxpagesize, RequestContext context)
@@ -345,27 +303,6 @@ namespace PaginationParams_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGet3sRequestUri(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/authoring/analyze-lyrics/projects", false);
-            if (maxCount != null)
-            {
-                uri.AppendQuery("Top", maxCount.Value, true);
-            }
-            if (skip != null)
-            {
-                uri.AppendQuery("skip", skip.Value, true);
-            }
-            if (maxpagesize != null)
-            {
-                uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGet3sRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -390,27 +327,6 @@ namespace PaginationParams_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet4sRequestUri(int? top, int? skip, float? maxcount, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/authoring/analyze-song/projects", false);
-            if (top != null)
-            {
-                uri.AppendQuery("top", top.Value, true);
-            }
-            if (skip != null)
-            {
-                uri.AppendQuery("skip", skip.Value, true);
-            }
-            if (maxcount != null)
-            {
-                uri.AppendQuery("maxcount", maxcount.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGet4sRequest(int? top, int? skip, float? maxcount, RequestContext context)
@@ -439,14 +355,6 @@ namespace PaginationParams_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetPaginationParamsNextPageRequestUri(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPaginationParamsNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -458,14 +366,6 @@ namespace PaginationParams_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet2sNextPageRequestUri(string nextLink, int? limit, int? offset, long? maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGet2sNextPageRequest(string nextLink, int? limit, int? offset, long? maxpagesize, RequestContext context)
@@ -481,14 +381,6 @@ namespace PaginationParams_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGet3sNextPageRequestUri(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet3sNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -500,14 +392,6 @@ namespace PaginationParams_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet4sNextPageRequestUri(string nextLink, int? top, int? skip, float? maxcount, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGet4sNextPageRequest(string nextLink, int? top, int? skip, float? maxcount, RequestContext context)

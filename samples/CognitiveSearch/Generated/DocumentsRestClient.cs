@@ -44,18 +44,6 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreateCountRequestUri(RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs/$count", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCountRequest(RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -113,92 +101,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateSearchGetRequestUri(string searchText, SearchOptions searchOptions, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs", false);
-            if (searchText != null)
-            {
-                uri.AppendQuery("search", searchText, true);
-            }
-            if (searchOptions?.IncludeTotalResultCount != null)
-            {
-                uri.AppendQuery("$count", searchOptions.IncludeTotalResultCount.Value, true);
-            }
-            if (searchOptions?.Facets != null && Optional.IsCollectionDefined(searchOptions?.Facets))
-            {
-                foreach (var param in searchOptions.Facets)
-                {
-                    uri.AppendQuery("facet", param, true);
-                }
-            }
-            if (searchOptions?.Filter != null)
-            {
-                uri.AppendQuery("$filter", searchOptions.Filter, true);
-            }
-            if (searchOptions?.HighlightFields != null && Optional.IsCollectionDefined(searchOptions?.HighlightFields))
-            {
-                uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
-            }
-            if (searchOptions?.HighlightPostTag != null)
-            {
-                uri.AppendQuery("highlightPostTag", searchOptions.HighlightPostTag, true);
-            }
-            if (searchOptions?.HighlightPreTag != null)
-            {
-                uri.AppendQuery("highlightPreTag", searchOptions.HighlightPreTag, true);
-            }
-            if (searchOptions?.MinimumCoverage != null)
-            {
-                uri.AppendQuery("minimumCoverage", searchOptions.MinimumCoverage.Value, true);
-            }
-            if (searchOptions?.OrderBy != null && Optional.IsCollectionDefined(searchOptions?.OrderBy))
-            {
-                uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
-            }
-            if (searchOptions?.QueryType != null)
-            {
-                uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
-            }
-            if (searchOptions?.ScoringParameters != null && Optional.IsCollectionDefined(searchOptions?.ScoringParameters))
-            {
-                foreach (var param in searchOptions.ScoringParameters)
-                {
-                    uri.AppendQuery("scoringParameter", param, true);
-                }
-            }
-            if (searchOptions?.ScoringProfile != null)
-            {
-                uri.AppendQuery("scoringProfile", searchOptions.ScoringProfile, true);
-            }
-            if (searchOptions?.SearchFields != null && Optional.IsCollectionDefined(searchOptions?.SearchFields))
-            {
-                uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
-            }
-            if (searchOptions?.SearchMode != null)
-            {
-                uri.AppendQuery("searchMode", searchOptions.SearchMode.Value.ToSerialString(), true);
-            }
-            if (searchOptions?.Select != null && Optional.IsCollectionDefined(searchOptions?.Select))
-            {
-                uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
-            }
-            if (searchOptions?.Skip != null)
-            {
-                uri.AppendQuery("$skip", searchOptions.Skip.Value, true);
-            }
-            if (searchOptions?.Top != null)
-            {
-                uri.AppendQuery("$top", searchOptions.Top.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateSearchGetRequest(string searchText, SearchOptions searchOptions, RequestOptions requestOptions)
@@ -338,18 +240,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateSearchPostRequestUri(SearchRequest searchRequest, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs/search.post.search", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateSearchPostRequest(SearchRequest searchRequest, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -425,24 +315,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetRequestUri(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs('", false);
-            uri.AppendPath(key, true);
-            uri.AppendPath("')", false);
-            if (selectedFields != null && Optional.IsCollectionDefined(selectedFields))
-            {
-                uri.AppendQueryDelimited("$select", selectedFields, ",", true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string key, IEnumerable<string> selectedFields, RequestOptions requestOptions)
@@ -524,56 +396,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateSuggestGetRequestUri(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs/search.suggest", false);
-            uri.AppendQuery("search", searchText, true);
-            uri.AppendQuery("suggesterName", suggesterName, true);
-            if (suggestOptions?.Filter != null)
-            {
-                uri.AppendQuery("$filter", suggestOptions.Filter, true);
-            }
-            if (suggestOptions?.UseFuzzyMatching != null)
-            {
-                uri.AppendQuery("fuzzy", suggestOptions.UseFuzzyMatching.Value, true);
-            }
-            if (suggestOptions?.HighlightPostTag != null)
-            {
-                uri.AppendQuery("highlightPostTag", suggestOptions.HighlightPostTag, true);
-            }
-            if (suggestOptions?.HighlightPreTag != null)
-            {
-                uri.AppendQuery("highlightPreTag", suggestOptions.HighlightPreTag, true);
-            }
-            if (suggestOptions?.MinimumCoverage != null)
-            {
-                uri.AppendQuery("minimumCoverage", suggestOptions.MinimumCoverage.Value, true);
-            }
-            if (suggestOptions?.OrderBy != null && Optional.IsCollectionDefined(suggestOptions?.OrderBy))
-            {
-                uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
-            }
-            if (suggestOptions?.SearchFields != null && Optional.IsCollectionDefined(suggestOptions?.SearchFields))
-            {
-                uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
-            }
-            if (suggestOptions?.Select != null && Optional.IsCollectionDefined(suggestOptions?.Select))
-            {
-                uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
-            }
-            if (suggestOptions?.Top != null)
-            {
-                uri.AppendQuery("$top", suggestOptions.Top.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateSuggestGetRequest(string searchText, string suggesterName, SuggestOptions suggestOptions, RequestOptions requestOptions)
@@ -699,18 +521,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateSuggestPostRequestUri(SuggestRequest suggestRequest, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs/search.post.suggest", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateSuggestPostRequest(SuggestRequest suggestRequest, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -786,18 +596,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateIndexRequestUri(IndexBatch batch, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs/search.index", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateIndexRequest(IndexBatch batch, RequestOptions requestOptions)
@@ -877,52 +675,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateAutocompleteGetRequestUri(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs/search.autocomplete", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            uri.AppendQuery("search", searchText, true);
-            uri.AppendQuery("suggesterName", suggesterName, true);
-            if (autocompleteOptions?.AutocompleteMode != null)
-            {
-                uri.AppendQuery("autocompleteMode", autocompleteOptions.AutocompleteMode.Value.ToSerialString(), true);
-            }
-            if (autocompleteOptions?.Filter != null)
-            {
-                uri.AppendQuery("$filter", autocompleteOptions.Filter, true);
-            }
-            if (autocompleteOptions?.UseFuzzyMatching != null)
-            {
-                uri.AppendQuery("fuzzy", autocompleteOptions.UseFuzzyMatching.Value, true);
-            }
-            if (autocompleteOptions?.HighlightPostTag != null)
-            {
-                uri.AppendQuery("highlightPostTag", autocompleteOptions.HighlightPostTag, true);
-            }
-            if (autocompleteOptions?.HighlightPreTag != null)
-            {
-                uri.AppendQuery("highlightPreTag", autocompleteOptions.HighlightPreTag, true);
-            }
-            if (autocompleteOptions?.MinimumCoverage != null)
-            {
-                uri.AppendQuery("minimumCoverage", autocompleteOptions.MinimumCoverage.Value, true);
-            }
-            if (autocompleteOptions?.SearchFields != null && Optional.IsCollectionDefined(autocompleteOptions?.SearchFields))
-            {
-                uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
-            }
-            if (autocompleteOptions?.Top != null)
-            {
-                uri.AppendQuery("$top", autocompleteOptions.Top.Value, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateAutocompleteGetRequest(string searchText, string suggesterName, RequestOptions requestOptions, AutocompleteOptions autocompleteOptions)
@@ -1042,18 +794,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateAutocompletePostRequestUri(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(_indexName, true);
-            uri.AppendRaw("')", false);
-            uri.AppendPath("/docs/search.post.autocomplete", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateAutocompletePostRequest(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions)

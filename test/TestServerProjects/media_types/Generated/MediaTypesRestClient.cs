@@ -37,14 +37,6 @@ namespace media_types
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateAnalyzeBodyRequestUri(Models.ContentType contentType, Stream input)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/analyze", false);
-            return uri;
-        }
-
         internal HttpMessage CreateAnalyzeBodyRequest(Models.ContentType contentType, Stream input)
         {
             var message = _pipeline.CreateMessage();
@@ -105,14 +97,6 @@ namespace media_types
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateAnalyzeBodyRequestUri(SourcePath input)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/analyze", false);
-            return uri;
         }
 
         internal HttpMessage CreateAnalyzeBodyRequest(SourcePath input)
@@ -177,14 +161,6 @@ namespace media_types
             }
         }
 
-        internal RequestUriBuilder CreateAnalyzeBodyNoAcceptHeaderRequestUri(Models.ContentType contentType, Stream input)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/analyzeNoAccept", false);
-            return uri;
-        }
-
         internal HttpMessage CreateAnalyzeBodyNoAcceptHeaderRequest(Models.ContentType contentType, Stream input)
         {
             var message = _pipeline.CreateMessage();
@@ -236,14 +212,6 @@ namespace media_types
             }
         }
 
-        internal RequestUriBuilder CreateAnalyzeBodyNoAcceptHeaderRequestUri(SourcePath input)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/analyzeNoAccept", false);
-            return uri;
-        }
-
         internal HttpMessage CreateAnalyzeBodyNoAcceptHeaderRequest(SourcePath input)
         {
             var message = _pipeline.CreateMessage();
@@ -293,14 +261,6 @@ namespace media_types
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateContentTypeWithEncodingRequestUri(string input)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/contentTypeWithEncoding", false);
-            return uri;
         }
 
         internal HttpMessage CreateContentTypeWithEncodingRequest(string input)
@@ -361,14 +321,6 @@ namespace media_types
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateBinaryBodyWithTwoContentTypesRequestUri(ContentType1 contentType, Stream message)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/binaryBodyTwoContentTypes", false);
-            return uri;
         }
 
         internal HttpMessage CreateBinaryBodyWithTwoContentTypesRequest(ContentType1 contentType, Stream message)
@@ -440,14 +392,6 @@ namespace media_types
             }
         }
 
-        internal RequestUriBuilder CreateBinaryBodyWithThreeContentTypesRequestUri(ContentType2 contentType, Stream message)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
-            return uri;
-        }
-
         internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(ContentType2 contentType, Stream message)
         {
             var message0 = _pipeline.CreateMessage();
@@ -517,14 +461,6 @@ namespace media_types
             }
         }
 
-        internal RequestUriBuilder CreateBodyThreeTypesRequestUri(Stream message)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
-            return uri;
-        }
-
         internal HttpMessage CreateBodyThreeTypesRequest(Stream message)
         {
             var message0 = _pipeline.CreateMessage();
@@ -590,14 +526,6 @@ namespace media_types
                 default:
                     throw new RequestFailedException(message0.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateBodyThreeTypesRequestUri(string message)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
-            return uri;
         }
 
         internal HttpMessage CreateBodyThreeTypesRequest(string message)
@@ -667,14 +595,6 @@ namespace media_types
             }
         }
 
-        internal RequestUriBuilder CreateBodyThreeTypesRequestUri(object message)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
-            return uri;
-        }
-
         internal HttpMessage CreateBodyThreeTypesRequest(object message)
         {
             var message0 = _pipeline.CreateMessage();
@@ -742,14 +662,6 @@ namespace media_types
                 default:
                     throw new RequestFailedException(message0.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutTextAndJsonBodyRequestUri(ContentType3 contentType, string message)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/textAndJson", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutTextAndJsonBodyRequest(ContentType3 contentType, string message)

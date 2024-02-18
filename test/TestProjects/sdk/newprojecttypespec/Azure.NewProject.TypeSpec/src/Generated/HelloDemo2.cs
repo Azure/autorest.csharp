@@ -456,15 +456,6 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        internal RequestUriBuilder CreateHelloAgainRequestUri(string p2, string p1, RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/againHi/", false);
-            uri.AppendPath(p2, true);
-            return uri;
-        }
-
         internal HttpMessage CreateHelloAgainRequest(string p2, string p1, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -480,15 +471,6 @@ namespace Azure.NewProject.TypeSpec
             request.Headers.Add("content-type", "text/plain");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreateNoContentTypeRequestUri(string p2, string p1, RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/noContentType/", false);
-            uri.AppendPath(p2, true);
-            return uri;
         }
 
         internal HttpMessage CreateNoContentTypeRequest(string p2, string p1, RequestContent content, RequestContext context)
@@ -508,14 +490,6 @@ namespace Azure.NewProject.TypeSpec
             return message;
         }
 
-        internal RequestUriBuilder CreateCreateLiteralRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/literal", false);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateLiteralRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -529,16 +503,6 @@ namespace Azure.NewProject.TypeSpec
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreateHelloLiteralRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/helloLiteral/", false);
-            uri.AppendPath(123, true);
-            uri.AppendQuery("p3", true, true);
-            return uri;
         }
 
         internal HttpMessage CreateHelloLiteralRequest(RequestContext context)

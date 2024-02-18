@@ -37,14 +37,6 @@ namespace body_array
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/null", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -106,14 +98,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetInvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/invalid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetInvalidRequest()
@@ -179,14 +163,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/empty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -248,14 +224,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutEmptyRequestUri(IEnumerable<string> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutEmptyRequest(IEnumerable<string> arrayBody)
@@ -324,14 +292,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetBooleanTfftRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/boolean/tfft", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -393,14 +353,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutBooleanTfftRequestUri(IEnumerable<bool> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/boolean/tfft", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutBooleanTfftRequest(IEnumerable<bool> arrayBody)
@@ -469,14 +421,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetBooleanInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/boolean/true.null.false", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -538,14 +482,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBooleanInvalidStringRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBooleanInvalidStringRequest()
@@ -611,14 +547,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetIntegerValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetIntegerValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -680,14 +608,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutIntegerValidRequestUri(IEnumerable<int> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutIntegerValidRequest(IEnumerable<int> arrayBody)
@@ -756,14 +676,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetIntInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/integer/1.null.zero", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -825,14 +737,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetIntInvalidStringRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/integer/1.integer.0", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetIntInvalidStringRequest()
@@ -898,14 +802,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetLongValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/long/1.-1.3.300", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetLongValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -967,14 +863,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutLongValidRequestUri(IEnumerable<long> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/long/1.-1.3.300", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutLongValidRequest(IEnumerable<long> arrayBody)
@@ -1043,14 +931,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetLongInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/long/1.null.zero", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1112,14 +992,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetLongInvalidStringRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/long/1.integer.0", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetLongInvalidStringRequest()
@@ -1185,14 +1057,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetFloatValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFloatValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1254,14 +1118,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutFloatValidRequestUri(IEnumerable<float> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutFloatValidRequest(IEnumerable<float> arrayBody)
@@ -1330,14 +1186,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetFloatInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1399,14 +1247,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetFloatInvalidStringRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/float/1.number.0", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetFloatInvalidStringRequest()
@@ -1472,14 +1312,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDoubleValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDoubleValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1541,14 +1373,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDoubleValidRequestUri(IEnumerable<double> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDoubleValidRequest(IEnumerable<double> arrayBody)
@@ -1617,14 +1441,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDoubleInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1686,14 +1502,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDoubleInvalidStringRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/double/1.number.0", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDoubleInvalidStringRequest()
@@ -1759,14 +1567,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetStringValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetStringValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1828,14 +1628,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutStringValidRequestUri(IEnumerable<string> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutStringValidRequest(IEnumerable<string> arrayBody)
@@ -1904,14 +1696,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetEnumValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEnumValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1973,14 +1757,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutEnumValidRequestUri(IEnumerable<FooEnum> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutEnumValidRequest(IEnumerable<FooEnum> arrayBody)
@@ -2049,14 +1825,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetStringEnumValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetStringEnumValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2118,14 +1886,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutStringEnumValidRequestUri(IEnumerable<Enum1> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutStringEnumValidRequest(IEnumerable<Enum1> arrayBody)
@@ -2194,14 +1954,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetStringWithNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/string/foo.null.foo2", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetStringWithNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2263,14 +2015,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetStringWithInvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/string/foo.123.foo2", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetStringWithInvalidRequest()
@@ -2336,14 +2080,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetUuidValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/uuid/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetUuidValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2405,14 +2141,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutUuidValidRequestUri(IEnumerable<Guid> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/uuid/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutUuidValidRequest(IEnumerable<Guid> arrayBody)
@@ -2481,14 +2209,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetUuidInvalidCharsRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/uuid/invalidchars", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetUuidInvalidCharsRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2552,14 +2272,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDateValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2621,14 +2333,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDateValidRequestUri(IEnumerable<DateTimeOffset> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateValidRequest(IEnumerable<DateTimeOffset> arrayBody)
@@ -2697,14 +2401,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDateInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date/invalidnull", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2766,14 +2462,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDateInvalidCharsRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date/invalidchars", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDateInvalidCharsRequest()
@@ -2839,14 +2527,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDateTimeValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date-time/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2908,14 +2588,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDateTimeValidRequestUri(IEnumerable<DateTimeOffset> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date-time/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeValidRequest(IEnumerable<DateTimeOffset> arrayBody)
@@ -2984,14 +2656,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDateTimeInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date-time/invalidnull", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3053,14 +2717,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDateTimeInvalidCharsRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date-time/invalidchars", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDateTimeInvalidCharsRequest()
@@ -3126,14 +2782,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDateTimeRfc1123ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3195,14 +2843,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDateTimeRfc1123ValidRequestUri(IEnumerable<DateTimeOffset> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeRfc1123ValidRequest(IEnumerable<DateTimeOffset> arrayBody)
@@ -3271,14 +2911,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDurationValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/duration/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDurationValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3340,14 +2972,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDurationValidRequestUri(IEnumerable<TimeSpan> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/duration/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDurationValidRequest(IEnumerable<TimeSpan> arrayBody)
@@ -3416,14 +3040,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetByteValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/byte/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetByteValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3485,14 +3101,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutByteValidRequestUri(IEnumerable<byte[]> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/byte/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutByteValidRequest(IEnumerable<byte[]> arrayBody)
@@ -3561,14 +3169,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetByteInvalidNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/byte/invalidnull", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3630,14 +3230,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBase64UrlRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/prim/base64url/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBase64UrlRequest()
@@ -3703,14 +3295,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetComplexNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/complex/null", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetComplexNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3772,14 +3356,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetComplexEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/complex/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetComplexEmptyRequest()
@@ -3845,14 +3421,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetComplexItemNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/complex/itemnull", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetComplexItemNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -3914,14 +3482,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetComplexItemEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/complex/itemempty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetComplexItemEmptyRequest()
@@ -3987,14 +3547,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetComplexValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/complex/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetComplexValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -4056,14 +3608,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutComplexValidRequestUri(IEnumerable<Product> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/complex/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutComplexValidRequest(IEnumerable<Product> arrayBody)
@@ -4130,14 +3674,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetArrayNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/array/null", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetArrayNullRequest()
@@ -4227,14 +3763,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetArrayEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/array/empty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetArrayEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -4320,14 +3848,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetArrayItemNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/array/itemnull", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetArrayItemNullRequest()
@@ -4417,14 +3937,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetArrayItemEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/array/itemempty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetArrayItemEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -4510,14 +4022,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetArrayValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/array/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetArrayValidRequest()
@@ -4607,14 +4111,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreatePutArrayValidRequestUri(IEnumerable<IList<string>> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/array/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutArrayValidRequest(IEnumerable<IList<string>> arrayBody)
         {
             var message = _pipeline.CreateMessage();
@@ -4689,14 +4185,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDictionaryNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/dictionary/null", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDictionaryNullRequest()
@@ -4786,14 +4274,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDictionaryEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/dictionary/empty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDictionaryEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -4879,14 +4359,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDictionaryItemNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/dictionary/itemnull", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDictionaryItemNullRequest()
@@ -4976,14 +4448,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDictionaryItemEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/dictionary/itemempty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDictionaryItemEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -5071,14 +4535,6 @@ namespace body_array
             }
         }
 
-        internal RequestUriBuilder CreateGetDictionaryValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/dictionary/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -5164,14 +4620,6 @@ namespace body_array
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDictionaryValidRequestUri(IEnumerable<IDictionary<string, string>> arrayBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/array/dictionary/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDictionaryValidRequest(IEnumerable<IDictionary<string, string>> arrayBody)

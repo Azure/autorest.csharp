@@ -36,16 +36,6 @@ namespace custom_baseUrl_paging
             _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
-        internal RequestUriBuilder CreateGetPagesPartialUrlRequestUri(string accountName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/paging/customurl/partialnextlink", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName)
         {
             var message = _pipeline.CreateMessage();
@@ -115,16 +105,6 @@ namespace custom_baseUrl_paging
             }
         }
 
-        internal RequestUriBuilder CreateGetPagesPartialUrlOperationRequestUri(string accountName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/paging/customurl/partialnextlinkop", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName)
         {
             var message = _pipeline.CreateMessage();
@@ -192,17 +172,6 @@ namespace custom_baseUrl_paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetPagesPartialUrlOperationNextRequestUri(string accountName, string nextLink)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/paging/customurl/", false);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlOperationNextRequest(string accountName, string nextLink)
@@ -283,16 +252,6 @@ namespace custom_baseUrl_paging
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetPagesPartialUrlNextPageRequestUri(string nextLink, string accountName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink, string accountName)

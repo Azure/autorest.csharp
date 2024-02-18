@@ -515,7 +515,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields)
         {
-            RequestWriterHelpers.WriteRequestAndUriCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
+            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, restMethod.ResponseClassifierType.Name, false);
         }
 
         public static void WriteResponseClassifierMethod(CodeWriter writer, IEnumerable<ResponseClassifierType> responseClassifierTypes)

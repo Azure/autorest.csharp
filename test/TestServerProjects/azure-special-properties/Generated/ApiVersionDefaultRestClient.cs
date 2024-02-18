@@ -37,15 +37,6 @@ namespace azure_special_properties
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreateGetMethodGlobalValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMethodGlobalValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -88,15 +79,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetMethodGlobalNotProvidedValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetMethodGlobalNotProvidedValidRequest()
@@ -143,15 +125,6 @@ namespace azure_special_properties
             }
         }
 
-        internal RequestUriBuilder CreateGetPathGlobalValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPathGlobalValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -194,15 +167,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetSwaggerGlobalValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetSwaggerGlobalValidRequest()

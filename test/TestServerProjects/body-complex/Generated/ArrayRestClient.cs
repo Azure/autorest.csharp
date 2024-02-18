@@ -36,14 +36,6 @@ namespace body_complex
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/array/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -95,14 +87,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutValidRequestUri(ArrayWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/array/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutValidRequest(ArrayWrapper complexBody)
@@ -166,14 +150,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/array/empty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -225,14 +201,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutEmptyRequestUri(ArrayWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/array/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutEmptyRequest(ArrayWrapper complexBody)
@@ -294,14 +262,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetNotProvidedRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/array/notprovided", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNotProvidedRequest()

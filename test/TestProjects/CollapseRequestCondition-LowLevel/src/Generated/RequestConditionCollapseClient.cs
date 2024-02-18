@@ -655,14 +655,6 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateCollapsePutRequestUri(RequestContent content, RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/", false);
-            return uri;
-        }
-
         internal HttpMessage CreateCollapsePutRequest(RequestContent content, RequestConditions requestConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -681,14 +673,6 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateCollapseGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/", false);
-            return uri;
-        }
-
         internal HttpMessage CreateCollapseGetRequest(RequestConditions requestConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -703,14 +687,6 @@ namespace CollapseRequestCondition_LowLevel
                 request.Headers.Add(requestConditions, "R");
             }
             return message;
-        }
-
-        internal RequestUriBuilder CreateMissIfNoneMatchGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/missIfNoneMatch", false);
-            return uri;
         }
 
         internal HttpMessage CreateMissIfNoneMatchGetRequest(RequestConditions requestConditions, RequestContext context)
@@ -729,14 +705,6 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateMissIfMatchGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/missIfMatch", false);
-            return uri;
-        }
-
         internal HttpMessage CreateMissIfMatchGetRequest(RequestConditions requestConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -751,14 +719,6 @@ namespace CollapseRequestCondition_LowLevel
                 request.Headers.Add(requestConditions, "R");
             }
             return message;
-        }
-
-        internal RequestUriBuilder CreateMissIfModifiedSinceGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/missIfModifiedSince", false);
-            return uri;
         }
 
         internal HttpMessage CreateMissIfModifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
@@ -777,14 +737,6 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateMissIfUnmodifiedSinceGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/missIfUnmodifiedSince", false);
-            return uri;
-        }
-
         internal HttpMessage CreateMissIfUnmodifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -799,14 +751,6 @@ namespace CollapseRequestCondition_LowLevel
                 request.Headers.Add(requestConditions, "R");
             }
             return message;
-        }
-
-        internal RequestUriBuilder CreateMissIfMatchIfNoneMatchGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/missIfMatchIfNoneMatch", false);
-            return uri;
         }
 
         internal HttpMessage CreateMissIfMatchIfNoneMatchGetRequest(RequestConditions requestConditions, RequestContext context)
@@ -825,14 +769,6 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateIfModifiedSinceGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/ifModifiedSince", false);
-            return uri;
-        }
-
         internal HttpMessage CreateIfModifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -847,14 +783,6 @@ namespace CollapseRequestCondition_LowLevel
                 request.Headers.Add(requestConditions, "R");
             }
             return message;
-        }
-
-        internal RequestUriBuilder CreateIfUnmodifiedSinceGetRequestUri(RequestConditions requestConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/RequestConditionCollapse/ifUnmodifiedSince", false);
-            return uri;
         }
 
         internal HttpMessage CreateIfUnmodifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)

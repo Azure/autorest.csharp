@@ -35,14 +35,6 @@ namespace lro
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreatePut200SucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut200SucceededRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -97,14 +89,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePatch200SucceededIgnoreHeadersRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/patch/200/succeeded/ignoreheaders", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch200SucceededIgnoreHeadersRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -157,14 +141,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePatch201RetryWithAsyncHeaderRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/patch/201/retry/onlyAsyncHeader", false);
-            return uri;
         }
 
         internal HttpMessage CreatePatch201RetryWithAsyncHeaderRequest(Product product)
@@ -223,14 +199,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePatch202RetryWithAsyncAndLocationHeaderRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/patch/202/retry/asyncAndLocationHeader", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch202RetryWithAsyncAndLocationHeaderRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -287,14 +255,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePut201SucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/201/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut201SucceededRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -347,14 +307,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePost202ListRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/list", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost202ListRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -400,14 +352,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut200SucceededNoStateRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/succeeded/nostate", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut200SucceededNoStateRequest(Product product)
@@ -462,14 +406,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePut202Retry200RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/202/retry/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut202Retry200Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -520,14 +456,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut201CreatingSucceeded200RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/201/creating/succeeded/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut201CreatingSucceeded200Request(Product product)
@@ -584,14 +512,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePut200UpdatingSucceeded204RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/updating/succeeded/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut200UpdatingSucceeded204Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -642,14 +562,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut201CreatingFailed200RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/201/created/failed/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut201CreatingFailed200Request(Product product)
@@ -706,14 +618,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePut200Acceptedcanceled200RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/accepted/canceled/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut200Acceptedcanceled200Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -764,14 +668,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutNoHeaderInRetryRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/noheader/202/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutNoHeaderInRetryRequest(Product product)
@@ -828,14 +724,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePutAsyncRetrySucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/retry/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncRetrySucceededRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -888,14 +776,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutAsyncNoRetrySucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/noretry/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutAsyncNoRetrySucceededRequest(Product product)
@@ -952,14 +832,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePutAsyncRetryFailedRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/retry/failed", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncRetryFailedRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -1012,14 +884,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutAsyncNoRetrycanceledRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/noretry/canceled", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutAsyncNoRetrycanceledRequest(Product product)
@@ -1076,14 +940,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePutAsyncNoHeaderInRetryRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/noheader/201/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncNoHeaderInRetryRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -1138,14 +994,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePutNonResourceRequestUri(Sku sku)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putnonresource/202/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutNonResourceRequest(Sku sku)
         {
             var message = _pipeline.CreateMessage();
@@ -1196,14 +1044,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutAsyncNonResourceRequestUri(Sku sku)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putnonresourceasync/202/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutAsyncNonResourceRequest(Sku sku)
@@ -1258,14 +1098,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePutSubResourceRequestUri(SubProduct product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putsubresource/202/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutSubResourceRequest(SubProduct product)
         {
             var message = _pipeline.CreateMessage();
@@ -1316,14 +1148,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutAsyncSubResourceRequestUri(SubProduct product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putsubresourceasync/202/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutAsyncSubResourceRequest(SubProduct product)
@@ -1378,14 +1202,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreateDeleteProvisioning202Accepted200SucceededRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/provisioning/202/accepted/200/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1431,14 +1247,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateDeleteProvisioning202DeletingFailed200RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/provisioning/202/deleting/200/failed", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteProvisioning202DeletingFailed200Request()
@@ -1488,14 +1296,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreateDeleteProvisioning202Deletingcanceled200RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/provisioning/202/deleting/200/canceled", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteProvisioning202Deletingcanceled200Request()
         {
             var message = _pipeline.CreateMessage();
@@ -1543,14 +1343,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreateDelete204SucceededRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/204/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete204SucceededRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1592,14 +1384,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateDelete202Retry200RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/202/retry/200", false);
-            return uri;
         }
 
         internal HttpMessage CreateDelete202Retry200Request()
@@ -1649,14 +1433,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreateDelete202NoRetry204RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/202/noretry/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete202NoRetry204Request()
         {
             var message = _pipeline.CreateMessage();
@@ -1702,14 +1478,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateDeleteNoHeaderInRetryRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/noheader", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteNoHeaderInRetryRequest()
@@ -1759,14 +1527,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreateDeleteAsyncNoHeaderInRetryRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/noheader/202/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteAsyncNoHeaderInRetryRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1814,14 +1574,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreateDeleteAsyncRetrySucceededRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/retry/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteAsyncRetrySucceededRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1865,14 +1617,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateDeleteAsyncNoRetrySucceededRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/noretry/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncNoRetrySucceededRequest()
@@ -1920,14 +1664,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreateDeleteAsyncRetryFailedRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/retry/failed", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteAsyncRetryFailedRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1971,14 +1707,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateDeleteAsyncRetrycanceledRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/retry/canceled", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncRetrycanceledRequest()
@@ -2026,14 +1754,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePost200WithPayloadRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/post/payload/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost200WithPayloadRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2077,14 +1797,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePost202Retry200RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/post/202/retry/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost202Retry200Request(Product product)
@@ -2141,14 +1853,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePost202NoRetry204RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/post/202/noretry/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost202NoRetry204Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -2203,14 +1907,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePostDoubleHeadersFinalLocationGetRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/LROPostDoubleHeadersFinalLocationGet", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostDoubleHeadersFinalLocationGetRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2252,14 +1948,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostDoubleHeadersFinalAzureHeaderGetRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/LROPostDoubleHeadersFinalAzureHeaderGet", false);
-            return uri;
         }
 
         internal HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetRequest()
@@ -2305,14 +1993,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/LROPostDoubleHeadersFinalAzureHeaderGetDefault", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2354,14 +2034,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostAsyncRetrySucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/retry/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRetrySucceededRequest(Product product)
@@ -2420,14 +2092,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePostAsyncNoRetrySucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/noretry/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostAsyncNoRetrySucceededRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -2484,14 +2148,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePostAsyncRetryFailedRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/retry/failed", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostAsyncRetryFailedRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -2544,14 +2200,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostAsyncRetrycanceledRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/retry/canceled", false);
-            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRetrycanceledRequest(Product product)

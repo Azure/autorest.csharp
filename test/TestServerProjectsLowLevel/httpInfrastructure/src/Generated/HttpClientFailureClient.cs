@@ -1643,14 +1643,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateHead400RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead400Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1662,14 +1654,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet400RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet400Request(RequestContext context)
@@ -1685,14 +1669,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateOptions400RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions400Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1704,14 +1680,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut400RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut400Request(RequestContent content, RequestContext context)
@@ -1729,14 +1697,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePatch400RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch400Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1750,14 +1710,6 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePost400RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost400Request(RequestContent content, RequestContext context)
@@ -1775,14 +1727,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDelete400RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete400Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1798,14 +1742,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateHead401RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/401", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead401Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1817,14 +1753,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet402RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/402", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet402Request(RequestContext context)
@@ -1840,14 +1768,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateOptions403RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/403", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions403Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1861,14 +1781,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGet403RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/403", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet403Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1880,14 +1792,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut404RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/404", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut404Request(RequestContent content, RequestContext context)
@@ -1905,14 +1809,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePatch405RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/405", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch405Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1926,14 +1822,6 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePost406RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/406", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost406Request(RequestContent content, RequestContext context)
@@ -1951,14 +1839,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDelete407RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/407", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete407Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -1972,14 +1852,6 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut409RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/409", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut409Request(RequestContent content, RequestContext context)
@@ -1997,14 +1869,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateHead410RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/410", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead410Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -2016,14 +1880,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet411RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/411", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet411Request(RequestContext context)
@@ -2039,14 +1895,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateOptions412RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/412", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions412Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -2060,14 +1908,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGet412RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/412", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet412Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -2079,14 +1919,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut413RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/413", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut413Request(RequestContent content, RequestContext context)
@@ -2104,14 +1936,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePatch414RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/414", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch414Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -2125,14 +1949,6 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePost415RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/415", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost415Request(RequestContent content, RequestContext context)
@@ -2150,14 +1966,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGet416RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/416", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet416Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier);
@@ -2169,14 +1977,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDelete417RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/417", false);
-            return uri;
         }
 
         internal HttpMessage CreateDelete417Request(RequestContent content, RequestContext context)
@@ -2192,14 +1992,6 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreateHead429RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/429", false);
-            return uri;
         }
 
         internal HttpMessage CreateHead429Request(RequestContext context)

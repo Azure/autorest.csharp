@@ -339,21 +339,6 @@ namespace AuthoringTypeSpec
             }
         }
 
-        internal RequestUriBuilder CreateGetDeploymentStatusRequestUri(string projectName, string deploymentName, string jobId, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendPath("/authoring/analyze-text/projects/", false);
-            uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments/", false);
-            uri.AppendPath(deploymentName, true);
-            uri.AppendPath("/jobs/", false);
-            uri.AppendPath(jobId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDeploymentStatusRequest(string projectName, string deploymentName, string jobId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -372,21 +357,6 @@ namespace AuthoringTypeSpec
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetSwapDeploymentsStatusRequestUri(string projectName, string deploymentName, string jobId, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendPath("/authoring/analyze-text/projects/", false);
-            uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments/", false);
-            uri.AppendPath(deploymentName, true);
-            uri.AppendPath("/swap/jobs/", false);
-            uri.AppendPath(jobId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetSwapDeploymentsStatusRequest(string projectName, string deploymentName, string jobId, RequestContext context)

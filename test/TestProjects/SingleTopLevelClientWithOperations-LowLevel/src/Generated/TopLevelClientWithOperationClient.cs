@@ -194,14 +194,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             return new Client4(ClientDiagnostics, _pipeline, _keyCredential, _endpoint, clientParameter);
         }
 
-        internal RequestUriBuilder CreateOperationRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/client3", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOperationRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -213,15 +205,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetAllRequestUri(string filter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/client4", false);
-            uri.AppendQuery("filter", filter, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetAllRequest(string filter, RequestContext context)
@@ -236,14 +219,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetAllNextPageRequestUri(string nextLink, string filter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string filter, RequestContext context)

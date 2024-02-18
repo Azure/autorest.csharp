@@ -427,14 +427,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetValidRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/basic/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -446,15 +438,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutValidRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/basic/valid", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
@@ -473,14 +456,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetInvalidRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/basic/invalid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetInvalidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -492,14 +467,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetEmptyRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/basic/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetEmptyRequest(RequestContext context)
@@ -515,14 +482,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetNullRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/basic/null", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNullRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -534,14 +493,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetNotProvidedRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/basic/notprovided", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNotProvidedRequest(RequestContext context)

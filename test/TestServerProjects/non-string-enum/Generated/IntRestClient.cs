@@ -36,14 +36,6 @@ namespace non_string_enum
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreatePutRequestUri(IntEnum? input)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/nonStringEnums/int/put", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutRequest(IntEnum? input)
         {
             var message = _pipeline.CreateMessage();
@@ -104,14 +96,6 @@ namespace non_string_enum
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/nonStringEnums/int/get", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetRequest()

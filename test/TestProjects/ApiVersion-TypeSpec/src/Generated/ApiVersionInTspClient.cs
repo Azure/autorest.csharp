@@ -170,17 +170,6 @@ namespace ApiVersionInTsp
             }
         }
 
-        internal RequestUriBuilder CreateGetBatchDetectionResultRequestUri(Guid resultId, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/anomalydetector/", false);
-            uri.AppendRaw(_apiVersion, true);
-            uri.AppendPath("/multivariate/detect-batch/", false);
-            uri.AppendPath(resultId, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBatchDetectionResultRequest(Guid resultId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

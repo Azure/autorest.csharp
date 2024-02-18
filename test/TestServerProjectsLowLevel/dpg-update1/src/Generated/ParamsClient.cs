@@ -523,18 +523,6 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateHeadNoParamsRequestUri(string newParameter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/parameters", false);
-            if (newParameter != null)
-            {
-                uri.AppendQuery("new_parameter", newParameter, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreateHeadNoParamsRequest(string newParameter, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -550,19 +538,6 @@ namespace dpg_update1_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetRequiredRequestUri(string parameter, string newParameter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/parameters", false);
-            uri.AppendQuery("parameter", parameter, true);
-            if (newParameter != null)
-            {
-                uri.AppendQuery("new_parameter", newParameter, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateGetRequiredRequest(string parameter, string newParameter, RequestContext context)
@@ -581,23 +556,6 @@ namespace dpg_update1_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutRequiredOptionalRequestUri(string requiredParam, string optionalParam, string newParameter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/parameters", false);
-            uri.AppendQuery("requiredParam", requiredParam, true);
-            if (optionalParam != null)
-            {
-                uri.AppendQuery("optionalParam", optionalParam, true);
-            }
-            if (newParameter != null)
-            {
-                uri.AppendQuery("new_parameter", newParameter, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreatePutRequiredOptionalRequest(string requiredParam, string optionalParam, string newParameter, RequestContext context)
@@ -622,14 +580,6 @@ namespace dpg_update1_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePostParametersRequestUri(RequestContent content, ContentType contentType, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/parameters", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostParametersRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -645,14 +595,6 @@ namespace dpg_update1_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDeleteParametersRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/parameters", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteParametersRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -663,22 +605,6 @@ namespace dpg_update1_LowLevel
             uri.AppendPath("/serviceDriven/parameters", false);
             request.Uri = uri;
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetOptionalRequestUri(string optionalParam, string newParameter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/moreParameters", false);
-            if (optionalParam != null)
-            {
-                uri.AppendQuery("optionalParam", optionalParam, true);
-            }
-            if (newParameter != null)
-            {
-                uri.AppendQuery("new_parameter", newParameter, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateGetOptionalRequest(string optionalParam, string newParameter, RequestContext context)
@@ -700,14 +626,6 @@ namespace dpg_update1_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetNewOperationRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/newPath", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNewOperationRequest(RequestContext context)

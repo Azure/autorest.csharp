@@ -34,16 +34,6 @@ namespace custom_baseUrl
             _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
-        internal RequestUriBuilder CreateGetEmptyRequestUri(string accountName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/customuri", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyRequest(string accountName)
         {
             var message = _pipeline.CreateMessage();

@@ -45,15 +45,6 @@ namespace required_optional
             _optionalGlobalQuery = optionalGlobalQuery;
         }
 
-        internal RequestUriBuilder CreateGetRequiredPathRequestUri(string pathParameter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/implicit/required/path/", false);
-            uri.AppendPath(pathParameter, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequiredPathRequest(string pathParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -112,18 +103,6 @@ namespace required_optional
             }
         }
 
-        internal RequestUriBuilder CreatePutOptionalQueryRequestUri(string queryParameter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/implicit/optional/query", false);
-            if (queryParameter != null)
-            {
-                uri.AppendQuery("queryParameter", queryParameter, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreatePutOptionalQueryRequest(string queryParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -173,14 +152,6 @@ namespace required_optional
             }
         }
 
-        internal RequestUriBuilder CreatePutOptionalHeaderRequestUri(string queryParameter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/implicit/optional/header", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutOptionalHeaderRequest(string queryParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -228,14 +199,6 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutOptionalBodyRequestUri(string bodyParameter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/implicit/optional/body", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutOptionalBodyRequest(string bodyParameter)
@@ -290,14 +253,6 @@ namespace required_optional
             }
         }
 
-        internal RequestUriBuilder CreatePutOptionalBinaryBodyRequestUri(Stream bodyParameter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/implicit/optional/binary-body", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutOptionalBinaryBodyRequest(Stream bodyParameter)
         {
             var message = _pipeline.CreateMessage();
@@ -348,15 +303,6 @@ namespace required_optional
             }
         }
 
-        internal RequestUriBuilder CreateGetRequiredGlobalPathRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/global/required/path/", false);
-            uri.AppendPath(_requiredGlobalPath, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequiredGlobalPathRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -401,15 +347,6 @@ namespace required_optional
             }
         }
 
-        internal RequestUriBuilder CreateGetRequiredGlobalQueryRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/global/required/query", false);
-            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequiredGlobalQueryRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -452,18 +389,6 @@ namespace required_optional
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetOptionalGlobalQueryRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/reqopt/global/optional/query", false);
-            if (_optionalGlobalQuery != null)
-            {
-                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateGetOptionalGlobalQueryRequest()

@@ -34,14 +34,6 @@ namespace HeadAsBooleanTrue
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateHead200RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead200Request()
         {
             var message = _pipeline.CreateMessage();
@@ -100,14 +92,6 @@ namespace HeadAsBooleanTrue
             }
         }
 
-        internal RequestUriBuilder CreateHead204RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead204Request()
         {
             var message = _pipeline.CreateMessage();
@@ -164,14 +148,6 @@ namespace HeadAsBooleanTrue
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateHead404RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/404", false);
-            return uri;
         }
 
         internal HttpMessage CreateHead404Request()

@@ -212,16 +212,6 @@ namespace custom_baseUrl_paging_LowLevel
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
         }
 
-        internal RequestUriBuilder CreateGetPagesPartialUrlRequestUri(string accountName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/paging/customurl/partialnextlink", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -235,16 +225,6 @@ namespace custom_baseUrl_paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetPagesPartialUrlOperationRequestUri(string accountName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/paging/customurl/partialnextlinkop", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlOperationRequest(string accountName, RequestContext context)
@@ -262,17 +242,6 @@ namespace custom_baseUrl_paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetPagesPartialUrlOperationNextRequestUri(string accountName, string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/paging/customurl/", false);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPagesPartialUrlOperationNextRequest(string accountName, string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -287,16 +256,6 @@ namespace custom_baseUrl_paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetPagesPartialUrlNextPageRequestUri(string nextLink, string accountName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink, string accountName, RequestContext context)

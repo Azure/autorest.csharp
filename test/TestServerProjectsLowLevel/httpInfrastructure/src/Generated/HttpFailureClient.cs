@@ -237,14 +237,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetEmptyErrorRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/emptybody/error", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyErrorRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -258,14 +250,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetNoModelErrorRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/nomodel/error", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNoModelErrorRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -277,14 +261,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetNoModelEmptyRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/nomodel/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNoModelEmptyRequest(RequestContext context)

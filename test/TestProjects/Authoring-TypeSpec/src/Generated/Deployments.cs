@@ -404,19 +404,6 @@ namespace AuthoringTypeSpec
             }
         }
 
-        internal RequestUriBuilder CreateGetDeploymentRequestUri(string projectName, string deploymentName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendPath("/authoring/analyze-text/projects/", false);
-            uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments/", false);
-            uri.AppendPath(deploymentName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDeploymentRequest(string projectName, string deploymentName, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -433,19 +420,6 @@ namespace AuthoringTypeSpec
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDeployProjectRequestUri(string projectName, string deploymentName, RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendPath("/authoring/analyze-text/projects/", false);
-            uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments/", false);
-            uri.AppendPath(deploymentName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateDeployProjectRequest(string projectName, string deploymentName, RequestContent content, RequestContext context)
@@ -468,19 +442,6 @@ namespace AuthoringTypeSpec
             return message;
         }
 
-        internal RequestUriBuilder CreateDeleteDeploymentRequestUri(string projectName, string deploymentName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendPath("/authoring/analyze-text/projects/", false);
-            uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments/", false);
-            uri.AppendPath(deploymentName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteDeploymentRequest(string projectName, string deploymentName, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -497,18 +458,6 @@ namespace AuthoringTypeSpec
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetDeploymentsRequestUri(string projectName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendPath("/authoring/analyze-text/projects/", false);
-            uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetDeploymentsRequest(string projectName, RequestContext context)
@@ -528,18 +477,6 @@ namespace AuthoringTypeSpec
             return message;
         }
 
-        internal RequestUriBuilder CreateSwapDeploymentsRequestUri(string projectName, RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendPath("/authoring/analyze-text/projects/", false);
-            uri.AppendPath(projectName, true);
-            uri.AppendPath("/deployments:swap", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateSwapDeploymentsRequest(string projectName, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -557,15 +494,6 @@ namespace AuthoringTypeSpec
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetDeploymentsNextPageRequestUri(string nextLink, string projectName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/language", false);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDeploymentsNextPageRequest(string nextLink, string projectName, RequestContext context)

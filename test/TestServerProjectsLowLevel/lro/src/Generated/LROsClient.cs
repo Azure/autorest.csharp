@@ -2839,14 +2839,6 @@ namespace lro_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreatePut200SucceededRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut200SucceededRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200204);
@@ -2860,14 +2852,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePatch200SucceededIgnoreHeadersRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/patch/200/succeeded/ignoreheaders", false);
-            return uri;
         }
 
         internal HttpMessage CreatePatch200SucceededIgnoreHeadersRequest(RequestContent content, RequestContext context)
@@ -2885,14 +2869,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePatch201RetryWithAsyncHeaderRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/patch/201/retry/onlyAsyncHeader", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch201RetryWithAsyncHeaderRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
@@ -2906,14 +2882,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePatch202RetryWithAsyncAndLocationHeaderRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/patch/202/retry/asyncAndLocationHeader", false);
-            return uri;
         }
 
         internal HttpMessage CreatePatch202RetryWithAsyncAndLocationHeaderRequest(RequestContent content, RequestContext context)
@@ -2931,14 +2899,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePut201SucceededRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/201/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut201SucceededRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier201);
@@ -2954,14 +2914,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePost202ListRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/list", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost202ListRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200202);
@@ -2973,14 +2925,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut200SucceededNoStateRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/succeeded/nostate", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut200SucceededNoStateRequest(RequestContent content, RequestContext context)
@@ -2998,14 +2942,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePut202Retry200RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/202/retry/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut202Retry200Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3019,14 +2955,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut201CreatingSucceeded200RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/201/creating/succeeded/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content, RequestContext context)
@@ -3044,14 +2972,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePut200UpdatingSucceeded204RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/updating/succeeded/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut200UpdatingSucceeded204Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -3065,14 +2985,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut201CreatingFailed200RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/201/created/failed/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut201CreatingFailed200Request(RequestContent content, RequestContext context)
@@ -3090,14 +3002,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePut200Acceptedcanceled200RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/200/accepted/canceled/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePut200Acceptedcanceled200Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -3111,14 +3015,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutNoHeaderInRetryRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/put/noheader/202/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutNoHeaderInRetryRequest(RequestContent content, RequestContext context)
@@ -3136,14 +3032,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePutAsyncRetrySucceededRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/retry/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncRetrySucceededRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -3157,14 +3045,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutAsyncNoRetrySucceededRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/noretry/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutAsyncNoRetrySucceededRequest(RequestContent content, RequestContext context)
@@ -3182,14 +3062,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePutAsyncRetryFailedRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/retry/failed", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncRetryFailedRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -3203,14 +3075,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutAsyncNoRetrycanceledRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/noretry/canceled", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutAsyncNoRetrycanceledRequest(RequestContent content, RequestContext context)
@@ -3228,14 +3092,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePutAsyncNoHeaderInRetryRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putasync/noheader/201/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncNoHeaderInRetryRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier201);
@@ -3249,14 +3105,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutNonResourceRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putnonresource/202/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutNonResourceRequest(RequestContent content, RequestContext context)
@@ -3274,14 +3122,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePutAsyncNonResourceRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putnonresourceasync/202/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncNonResourceRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3295,14 +3135,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutSubResourceRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putsubresource/202/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutSubResourceRequest(RequestContent content, RequestContext context)
@@ -3320,14 +3152,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePutAsyncSubResourceRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/putsubresourceasync/202/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncSubResourceRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3343,14 +3167,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDeleteProvisioning202Accepted200SucceededRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/provisioning/202/accepted/200/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200202);
@@ -3362,14 +3178,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDeleteProvisioning202DeletingFailed200RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/provisioning/202/deleting/200/failed", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteProvisioning202DeletingFailed200Request(RequestContext context)
@@ -3385,14 +3193,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDeleteProvisioning202Deletingcanceled200RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/provisioning/202/deleting/200/canceled", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteProvisioning202Deletingcanceled200Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200202);
@@ -3404,14 +3204,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDelete204SucceededRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/204/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreateDelete204SucceededRequest(RequestContext context)
@@ -3427,14 +3219,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDelete202Retry200RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/202/retry/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete202Retry200Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200202);
@@ -3446,14 +3230,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDelete202NoRetry204RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/202/noretry/204", false);
-            return uri;
         }
 
         internal HttpMessage CreateDelete202NoRetry204Request(RequestContext context)
@@ -3469,14 +3245,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDeleteNoHeaderInRetryRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/delete/noheader", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteNoHeaderInRetryRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202204);
@@ -3488,14 +3256,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDeleteAsyncNoHeaderInRetryRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/noheader/202/204", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncNoHeaderInRetryRequest(RequestContext context)
@@ -3511,14 +3271,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDeleteAsyncRetrySucceededRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/retry/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteAsyncRetrySucceededRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3530,14 +3282,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDeleteAsyncNoRetrySucceededRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/noretry/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncNoRetrySucceededRequest(RequestContext context)
@@ -3553,14 +3297,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDeleteAsyncRetryFailedRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/retry/failed", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteAsyncRetryFailedRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3572,14 +3308,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDeleteAsyncRetrycanceledRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/deleteasync/retry/canceled", false);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteAsyncRetrycanceledRequest(RequestContext context)
@@ -3595,14 +3323,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePost200WithPayloadRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/post/payload/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost200WithPayloadRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200202);
@@ -3614,14 +3334,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePost202Retry200RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/post/202/retry/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost202Retry200Request(RequestContent content, RequestContext context)
@@ -3639,14 +3351,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePost202NoRetry204RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/post/202/noretry/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost202NoRetry204Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3662,14 +3366,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePostDoubleHeadersFinalLocationGetRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/LROPostDoubleHeadersFinalLocationGet", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostDoubleHeadersFinalLocationGetRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3681,14 +3377,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePostDoubleHeadersFinalAzureHeaderGetRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/LROPostDoubleHeadersFinalAzureHeaderGet", false);
-            return uri;
         }
 
         internal HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetRequest(RequestContext context)
@@ -3704,14 +3392,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/LROPostDoubleHeadersFinalAzureHeaderGetDefault", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3723,14 +3403,6 @@ namespace lro_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePostAsyncRetrySucceededRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/retry/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRetrySucceededRequest(RequestContent content, RequestContext context)
@@ -3748,14 +3420,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePostAsyncNoRetrySucceededRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/noretry/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostAsyncNoRetrySucceededRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200202);
@@ -3771,14 +3435,6 @@ namespace lro_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePostAsyncRetryFailedRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/retry/failed", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePostAsyncRetryFailedRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
@@ -3792,14 +3448,6 @@ namespace lro_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreatePostAsyncRetrycanceledRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/postasync/retry/canceled", false);
-            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRetrycanceledRequest(RequestContent content, RequestContext context)

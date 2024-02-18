@@ -35,14 +35,6 @@ namespace body_number
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/null", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -110,14 +102,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreateGetInvalidFloatRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/invalidfloat", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetInvalidFloatRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -169,14 +153,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetInvalidDoubleRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/invaliddouble", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetInvalidDoubleRequest()
@@ -232,14 +208,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreateGetInvalidDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/invaliddecimal", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetInvalidDecimalRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -293,14 +261,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutBigFloatRequestUri(float numberBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/float/3.402823e+20", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutBigFloatRequest(float numberBody)
         {
             var message = _pipeline.CreateMessage();
@@ -348,14 +308,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBigFloatRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/float/3.402823e+20", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBigFloatRequest()
@@ -411,14 +363,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutBigDoubleRequestUri(double numberBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/double/2.5976931e+101", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutBigDoubleRequest(double numberBody)
         {
             var message = _pipeline.CreateMessage();
@@ -466,14 +410,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBigDoubleRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/double/2.5976931e+101", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBigDoubleRequest()
@@ -529,14 +465,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutBigDoublePositiveDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/double/99999999.99", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutBigDoublePositiveDecimalRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -582,14 +510,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBigDoublePositiveDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/double/99999999.99", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBigDoublePositiveDecimalRequest()
@@ -645,14 +565,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutBigDoubleNegativeDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/double/-99999999.99", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutBigDoubleNegativeDecimalRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -698,14 +610,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBigDoubleNegativeDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/double/-99999999.99", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBigDoubleNegativeDecimalRequest()
@@ -761,14 +665,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutBigDecimalRequestUri(decimal numberBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutBigDecimalRequest(decimal numberBody)
         {
             var message = _pipeline.CreateMessage();
@@ -816,14 +712,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBigDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBigDecimalRequest()
@@ -879,14 +767,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutBigDecimalPositiveDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/decimal/99999999.99", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutBigDecimalPositiveDecimalRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -932,14 +812,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBigDecimalPositiveDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/decimal/99999999.99", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBigDecimalPositiveDecimalRequest()
@@ -995,14 +867,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutBigDecimalNegativeDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/decimal/-99999999.99", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutBigDecimalNegativeDecimalRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1048,14 +912,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetBigDecimalNegativeDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/big/decimal/-99999999.99", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetBigDecimalNegativeDecimalRequest()
@@ -1111,14 +967,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutSmallFloatRequestUri(float numberBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/small/float/3.402823e-20", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutSmallFloatRequest(float numberBody)
         {
             var message = _pipeline.CreateMessage();
@@ -1166,14 +1014,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetSmallFloatRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/small/float/3.402823e-20", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetSmallFloatRequest()
@@ -1229,14 +1069,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutSmallDoubleRequestUri(double numberBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/small/double/2.5976931e-101", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutSmallDoubleRequest(double numberBody)
         {
             var message = _pipeline.CreateMessage();
@@ -1284,14 +1116,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetSmallDoubleRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/small/double/2.5976931e-101", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetSmallDoubleRequest()
@@ -1347,14 +1171,6 @@ namespace body_number
             }
         }
 
-        internal RequestUriBuilder CreatePutSmallDecimalRequestUri(decimal numberBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutSmallDecimalRequest(decimal numberBody)
         {
             var message = _pipeline.CreateMessage();
@@ -1402,14 +1218,6 @@ namespace body_number
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetSmallDecimalRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetSmallDecimalRequest()

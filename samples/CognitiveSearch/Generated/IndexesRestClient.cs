@@ -39,15 +39,6 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreateCreateRequestUri(Models.Index index, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/indexes", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateRequest(Models.Index index, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -122,19 +113,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateListRequestUri(string select, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/indexes", false);
-            if (select != null)
-            {
-                uri.AppendQuery("$select", select, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -195,21 +173,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/indexes('", false);
-            uri.AppendPath(indexName, true);
-            uri.AppendPath("')", false);
-            if (allowIndexDowntime != null)
-            {
-                uri.AppendQuery("allowIndexDowntime", allowIndexDowntime.Value, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime, RequestOptions requestOptions, AccessCondition accessCondition)
@@ -319,17 +282,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string indexName, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/indexes('", false);
-            uri.AppendPath(indexName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string indexName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -404,17 +356,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string indexName, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/indexes('", false);
-            uri.AppendPath(indexName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest(string indexName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -487,17 +428,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateGetStatisticsRequestUri(string indexName, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/indexes('", false);
-            uri.AppendPath(indexName, true);
-            uri.AppendPath("')/search.stats", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetStatisticsRequest(string indexName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -568,17 +498,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateAnalyzeRequestUri(string indexName, AnalyzeRequest request, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/indexes('", false);
-            uri.AppendPath(indexName, true);
-            uri.AppendPath("')/search.analyze", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateAnalyzeRequest(string indexName, AnalyzeRequest request, RequestOptions requestOptions)

@@ -36,14 +36,6 @@ namespace body_complex
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetIntRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/integer", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetIntRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -95,14 +87,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutIntRequestUri(IntWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/integer", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutIntRequest(IntWrapper complexBody)
@@ -166,14 +150,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetLongRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/long", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetLongRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -225,14 +201,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutLongRequestUri(LongWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/long", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutLongRequest(LongWrapper complexBody)
@@ -296,14 +264,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetFloatRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/float", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFloatRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -355,14 +315,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutFloatRequestUri(FloatWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/float", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutFloatRequest(FloatWrapper complexBody)
@@ -426,14 +378,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetDoubleRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/double", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDoubleRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -485,14 +429,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDoubleRequestUri(DoubleWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/double", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDoubleRequest(DoubleWrapper complexBody)
@@ -556,14 +492,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetBoolRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/bool", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBoolRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -615,14 +543,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutBoolRequestUri(BooleanWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/bool", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutBoolRequest(BooleanWrapper complexBody)
@@ -686,14 +606,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetStringRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/string", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetStringRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -745,14 +657,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutStringRequestUri(StringWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/string", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutStringRequest(StringWrapper complexBody)
@@ -816,14 +720,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetDateRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/date", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -875,14 +771,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDateRequestUri(DateWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/date", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateRequest(DateWrapper complexBody)
@@ -946,14 +834,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetime", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateTimeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1005,14 +885,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDateTimeRequestUri(DatetimeWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetime", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeRequest(DatetimeWrapper complexBody)
@@ -1076,14 +948,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetDateTimeRfc1123RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetimerfc1123", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateTimeRfc1123Request()
         {
             var message = _pipeline.CreateMessage();
@@ -1135,14 +999,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDateTimeRfc1123RequestUri(Datetimerfc1123Wrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetimerfc1123", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeRfc1123Request(Datetimerfc1123Wrapper complexBody)
@@ -1206,14 +1062,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetDurationRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/duration", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDurationRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1265,14 +1113,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutDurationRequestUri(DurationWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/duration", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDurationRequest(DurationWrapper complexBody)
@@ -1336,14 +1176,6 @@ namespace body_complex
             }
         }
 
-        internal RequestUriBuilder CreateGetByteRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/byte", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetByteRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1395,14 +1227,6 @@ namespace body_complex
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutByteRequestUri(ByteWrapper complexBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/byte", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutByteRequest(ByteWrapper complexBody)

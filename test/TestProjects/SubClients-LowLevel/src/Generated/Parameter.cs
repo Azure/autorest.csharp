@@ -116,15 +116,6 @@ namespace SubClients_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetSubParameterRequestUri(string subParameter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameter/", false);
-            uri.AppendPath(subParameter, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetSubParameterRequest(string subParameter, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

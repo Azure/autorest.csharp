@@ -35,14 +35,6 @@ namespace body_datetime
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/null", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -110,14 +102,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreateGetInvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/invalid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetInvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -169,14 +153,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetOverflowRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/overflow", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetOverflowRequest()
@@ -232,14 +208,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreateGetUnderflowRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/underflow", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetUnderflowRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -293,14 +261,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreatePutUtcMaxDateTimeRequestUri(DateTimeOffset datetimeBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/utc", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -348,14 +308,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutUtcMaxDateTime7DigitsRequestUri(DateTimeOffset datetimeBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/utc7ms", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutUtcMaxDateTime7DigitsRequest(DateTimeOffset datetimeBody)
@@ -407,14 +359,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetUtcLowercaseMaxDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/utc/lowercase", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetUtcLowercaseMaxDateTimeRequest()
@@ -470,14 +414,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreateGetUtcUppercaseMaxDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/utc/uppercase", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetUtcUppercaseMaxDateTimeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -529,14 +465,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetUtcUppercaseMaxDateTime7DigitsRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/utc7ms/uppercase", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetUtcUppercaseMaxDateTime7DigitsRequest()
@@ -594,14 +522,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreatePutLocalPositiveOffsetMaxDateTimeRequestUri(DateTimeOffset datetimeBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/localpositiveoffset", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutLocalPositiveOffsetMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -649,14 +569,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/localpositiveoffset/lowercase", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequest()
@@ -712,14 +624,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/localpositiveoffset/uppercase", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -773,14 +677,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreatePutLocalNegativeOffsetMaxDateTimeRequestUri(DateTimeOffset datetimeBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/localnegativeoffset", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutLocalNegativeOffsetMaxDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -828,14 +724,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/localnegativeoffset/uppercase", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest()
@@ -891,14 +779,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/max/localnegativeoffset/lowercase", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -952,14 +832,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreatePutUtcMinDateTimeRequestUri(DateTimeOffset datetimeBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/min/utc", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -1007,14 +879,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetUtcMinDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/min/utc", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetUtcMinDateTimeRequest()
@@ -1070,14 +934,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreatePutLocalPositiveOffsetMinDateTimeRequestUri(DateTimeOffset datetimeBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/min/localpositiveoffset", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutLocalPositiveOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -1125,14 +981,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetLocalPositiveOffsetMinDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/min/localpositiveoffset", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetLocalPositiveOffsetMinDateTimeRequest()
@@ -1188,14 +1036,6 @@ namespace body_datetime
             }
         }
 
-        internal RequestUriBuilder CreatePutLocalNegativeOffsetMinDateTimeRequestUri(DateTimeOffset datetimeBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/min/localnegativeoffset", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutLocalNegativeOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
         {
             var message = _pipeline.CreateMessage();
@@ -1243,14 +1083,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetLocalNegativeOffsetMinDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/min/localnegativeoffset", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetLocalNegativeOffsetMinDateTimeRequest()
@@ -1304,14 +1136,6 @@ namespace body_datetime
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetLocalNoOffsetMinDateTimeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/datetime/min/localnooffset", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetLocalNoOffsetMinDateTimeRequest()

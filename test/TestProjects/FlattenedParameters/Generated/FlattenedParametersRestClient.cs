@@ -37,14 +37,6 @@ namespace FlattenedParameters
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateOperationRequestUri(IEnumerable<string> items)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/Operation/", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOperationRequest(IEnumerable<string> items)
         {
             var message = _pipeline.CreateMessage();
@@ -93,14 +85,6 @@ namespace FlattenedParameters
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateOperationNotNullRequestUri(IEnumerable<string> items)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/OperationNotNull/", false);
-            return uri;
         }
 
         internal HttpMessage CreateOperationNotNullRequest(IEnumerable<string> items)
@@ -158,14 +142,6 @@ namespace FlattenedParameters
             }
         }
 
-        internal RequestUriBuilder CreateOperationNotRequiredRequestUri(string required, string nonRequired)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/OperationNotRequired/", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOperationNotRequiredRequest(string required, string nonRequired)
         {
             var message = _pipeline.CreateMessage();
@@ -217,14 +193,6 @@ namespace FlattenedParameters
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateOperationRequiredRequestUri(string required, string nonRequired)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/OperationRequired/", false);
-            return uri;
         }
 
         internal HttpMessage CreateOperationRequiredRequest(string required, string nonRequired)

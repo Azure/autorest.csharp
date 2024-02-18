@@ -36,16 +36,6 @@ namespace xms_error_responses
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetPetByIdRequestUri(string petId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/errorStatusCodes/Pets/", false);
-            uri.AppendPath(petId, true);
-            uri.AppendPath("/GetPet", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPetByIdRequest(string petId)
         {
             var message = _pipeline.CreateMessage();
@@ -119,15 +109,6 @@ namespace xms_error_responses
             }
         }
 
-        internal RequestUriBuilder CreateDoSomethingRequestUri(string whatAction)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/errorStatusCodes/Pets/doSomething/", false);
-            uri.AppendPath(whatAction, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDoSomethingRequest(string whatAction)
         {
             var message = _pipeline.CreateMessage();
@@ -194,18 +175,6 @@ namespace xms_error_responses
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateHasModelsParamRequestUri(string models)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/errorStatusCodes/Pets/hasModelsParam", false);
-            if (models != null)
-            {
-                uri.AppendQuery("models", models, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateHasModelsParamRequest(string models)

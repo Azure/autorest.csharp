@@ -35,14 +35,6 @@ namespace body_file
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetFileRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/files/stream/nonempty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFileRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -93,14 +85,6 @@ namespace body_file
             }
         }
 
-        internal RequestUriBuilder CreateGetFileLargeRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/files/stream/verylarge", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFileLargeRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -149,14 +133,6 @@ namespace body_file
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetEmptyFileRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/files/stream/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetEmptyFileRequest()

@@ -1063,14 +1063,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateHead300RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/300", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead300Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200300);
@@ -1082,14 +1074,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet300RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/300", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet300Request(RequestContext context)
@@ -1105,14 +1089,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateHead301RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/301", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead301Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200301);
@@ -1126,14 +1102,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGet301RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/301", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet301Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200301);
@@ -1145,14 +1113,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut301RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/301", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut301Request(RequestContent content, RequestContext context)
@@ -1170,14 +1130,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateHead302RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/302", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead302Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200302);
@@ -1191,14 +1143,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGet302RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/302", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet302Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200302);
@@ -1210,14 +1154,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePatch302RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/302", false);
-            return uri;
         }
 
         internal HttpMessage CreatePatch302Request(RequestContent content, RequestContext context)
@@ -1235,14 +1171,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePost303RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/303", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost303Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200303);
@@ -1258,14 +1186,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateHead307RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/307", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead307Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
@@ -1277,14 +1197,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGet307RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/307", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet307Request(RequestContext context)
@@ -1300,14 +1212,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateOptions307RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/307", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions307Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
@@ -1319,14 +1223,6 @@ namespace httpInfrastructure_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePut307RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/307", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut307Request(RequestContent content, RequestContext context)
@@ -1344,14 +1240,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePatch307RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/307", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch307Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
@@ -1367,14 +1255,6 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePost307RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/307", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost307Request(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
@@ -1388,14 +1268,6 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreateDelete307RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/redirect/307", false);
-            return uri;
         }
 
         internal HttpMessage CreateDelete307Request(RequestContent content, RequestContext context)

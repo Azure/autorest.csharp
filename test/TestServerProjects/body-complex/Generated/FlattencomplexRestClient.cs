@@ -36,14 +36,6 @@ namespace body_complex
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/flatten/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetValidRequest()
         {
             var message = _pipeline.CreateMessage();

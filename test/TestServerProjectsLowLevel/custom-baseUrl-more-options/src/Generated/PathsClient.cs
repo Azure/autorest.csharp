@@ -145,23 +145,6 @@ namespace custom_baseUrl_more_options_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetEmptyRequestUri(string vault, string secret, string keyName, string keyVersion, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(vault, false);
-            uri.AppendRaw(secret, false);
-            uri.AppendRaw(_dnsSuffix, false);
-            uri.AppendPath("/customuri/", false);
-            uri.AppendPath(_subscriptionId, true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(keyName, true);
-            if (keyVersion != null)
-            {
-                uri.AppendQuery("keyVersion", keyVersion, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

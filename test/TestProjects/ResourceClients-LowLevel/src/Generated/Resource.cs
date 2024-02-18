@@ -116,17 +116,6 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetItemRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/items/", false);
-            uri.AppendPath(GroupId, true);
-            uri.AppendPath("/", false);
-            uri.AppendPath(ItemId, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetItemRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

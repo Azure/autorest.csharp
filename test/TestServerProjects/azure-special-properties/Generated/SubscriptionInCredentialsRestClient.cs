@@ -41,15 +41,6 @@ namespace azure_special_properties
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreatePostMethodGlobalValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/", false);
-            uri.AppendPath(_subscriptionId, true);
-            return uri;
-        }
-
         internal HttpMessage CreatePostMethodGlobalValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -94,15 +85,6 @@ namespace azure_special_properties
             }
         }
 
-        internal RequestUriBuilder CreatePostMethodGlobalNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/global/null/", false);
-            uri.AppendPath(_subscriptionId, true);
-            return uri;
-        }
-
         internal HttpMessage CreatePostMethodGlobalNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -145,16 +127,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostMethodGlobalNotProvidedValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/", false);
-            uri.AppendPath(_subscriptionId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreatePostMethodGlobalNotProvidedValidRequest()
@@ -202,15 +174,6 @@ namespace azure_special_properties
             }
         }
 
-        internal RequestUriBuilder CreatePostPathGlobalValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/", false);
-            uri.AppendPath(_subscriptionId, true);
-            return uri;
-        }
-
         internal HttpMessage CreatePostPathGlobalValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -253,15 +216,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostSwaggerGlobalValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/", false);
-            uri.AppendPath(_subscriptionId, true);
-            return uri;
         }
 
         internal HttpMessage CreatePostSwaggerGlobalValidRequest()

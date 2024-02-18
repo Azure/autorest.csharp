@@ -119,16 +119,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreatePatchRequestUri(string filter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/client4", false);
-            uri.AppendQuery("filter", filter, true);
-            uri.AppendQuery("clientParameter", ClientParameter, true);
-            return uri;
-        }
-
         internal HttpMessage CreatePatchRequest(string filter, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

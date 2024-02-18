@@ -1746,15 +1746,6 @@ namespace url_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetBooleanTrueRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/bool/true/", false);
-            uri.AppendPath(true, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBooleanTrueRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1767,15 +1758,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetBooleanFalseRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/bool/false/", false);
-            uri.AppendPath(false, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetBooleanFalseRequest(RequestContext context)
@@ -1792,15 +1774,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetIntOneMillionRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/int/1000000/", false);
-            uri.AppendPath(1000000, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetIntOneMillionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1813,15 +1786,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetIntNegativeOneMillionRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/int/-1000000/", false);
-            uri.AppendPath(-1000000, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetIntNegativeOneMillionRequest(RequestContext context)
@@ -1838,15 +1802,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetTenBillionRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/long/10000000000/", false);
-            uri.AppendPath(10000000000L, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetTenBillionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1859,15 +1814,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetNegativeTenBillionRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/long/-10000000000/", false);
-            uri.AppendPath(-10000000000L, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetNegativeTenBillionRequest(RequestContext context)
@@ -1884,15 +1830,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateFloatScientificPositiveRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/float/1.034E+20/", false);
-            uri.AppendPath(1.034E+20F, true);
-            return uri;
-        }
-
         internal HttpMessage CreateFloatScientificPositiveRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1905,15 +1842,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateFloatScientificNegativeRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/float/-1.034E-20/", false);
-            uri.AppendPath(-1.034E-20F, true);
-            return uri;
         }
 
         internal HttpMessage CreateFloatScientificNegativeRequest(RequestContext context)
@@ -1930,15 +1858,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDoubleDecimalPositiveRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/double/9999999.999/", false);
-            uri.AppendPath(9999999.999, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDoubleDecimalPositiveRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1951,15 +1870,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDoubleDecimalNegativeRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/double/-9999999.999/", false);
-            uri.AppendPath(-9999999.999, true);
-            return uri;
         }
 
         internal HttpMessage CreateDoubleDecimalNegativeRequest(RequestContext context)
@@ -1976,15 +1886,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateStringUnicodeRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/string/unicode/", false);
-            uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
-            return uri;
-        }
-
         internal HttpMessage CreateStringUnicodeRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1997,15 +1898,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateStringUrlEncodedRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
-            uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
-            return uri;
         }
 
         internal HttpMessage CreateStringUrlEncodedRequest(RequestContext context)
@@ -2022,15 +1914,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateStringUrlNonEncodedRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
-            uri.AppendPath("begin!*'();:@&=+$,end", false);
-            return uri;
-        }
-
         internal HttpMessage CreateStringUrlNonEncodedRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2043,15 +1926,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateStringEmptyRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/string/empty/", false);
-            uri.AppendPath("", true);
-            return uri;
         }
 
         internal HttpMessage CreateStringEmptyRequest(RequestContext context)
@@ -2068,15 +1942,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateStringNullRequestUri(string stringPath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/string/null/", false);
-            uri.AppendPath(stringPath, true);
-            return uri;
-        }
-
         internal HttpMessage CreateStringNullRequest(string stringPath, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier400);
@@ -2089,15 +1954,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateEnumValidRequestUri(string enumPath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/enum/green%20color/", false);
-            uri.AppendPath(enumPath, true);
-            return uri;
         }
 
         internal HttpMessage CreateEnumValidRequest(string enumPath, RequestContext context)
@@ -2114,15 +1970,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateEnumNullRequestUri(string enumPath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/string/null/", false);
-            uri.AppendPath(enumPath, true);
-            return uri;
-        }
-
         internal HttpMessage CreateEnumNullRequest(string enumPath, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier400);
@@ -2135,15 +1982,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateByteMultiByteRequestUri(BinaryData bytePath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/byte/multibyte/", false);
-            uri.AppendPath(bytePath.ToArray(), "D", true);
-            return uri;
         }
 
         internal HttpMessage CreateByteMultiByteRequest(BinaryData bytePath, RequestContext context)
@@ -2160,15 +1998,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateByteEmptyRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/byte/empty/", false);
-            uri.AppendPath(new byte[] { }, "D", true);
-            return uri;
-        }
-
         internal HttpMessage CreateByteEmptyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2181,15 +2010,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateByteNullRequestUri(BinaryData bytePath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/byte/null/", false);
-            uri.AppendPath(bytePath.ToArray(), "D", true);
-            return uri;
         }
 
         internal HttpMessage CreateByteNullRequest(BinaryData bytePath, RequestContext context)
@@ -2206,15 +2026,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDateValidRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/date/2012-01-01/", false);
-            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
-            return uri;
-        }
-
         internal HttpMessage CreateDateValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2227,15 +2038,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDateNullRequestUri(DateTimeOffset datePath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/date/null/", false);
-            uri.AppendPath(datePath, "D", true);
-            return uri;
         }
 
         internal HttpMessage CreateDateNullRequest(DateTimeOffset datePath, RequestContext context)
@@ -2252,15 +2054,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDateTimeValidRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
-            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
-            return uri;
-        }
-
         internal HttpMessage CreateDateTimeValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2273,15 +2066,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDateTimeNullRequestUri(DateTimeOffset dateTimePath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/datetime/null/", false);
-            uri.AppendPath(dateTimePath, "O", true);
-            return uri;
         }
 
         internal HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath, RequestContext context)
@@ -2298,15 +2082,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateBase64UrlRequestUri(BinaryData base64UrlPath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/string/bG9yZW0/", false);
-            uri.AppendPath(base64UrlPath.ToArray(), "U", true);
-            return uri;
-        }
-
         internal HttpMessage CreateBase64UrlRequest(BinaryData base64UrlPath, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2321,15 +2096,6 @@ namespace url_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateArrayCsvInPathRequestUri(IEnumerable<string> arrayPath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
-            uri.AppendPath(arrayPath, true);
-            return uri;
-        }
-
         internal HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2342,15 +2108,6 @@ namespace url_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateUnixTimeUrlRequestUri(DateTimeOffset unixTimeUrlPath, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paths/int/1460505600/", false);
-            uri.AppendPath(unixTimeUrlPath, "U", true);
-            return uri;
         }
 
         internal HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath, RequestContext context)

@@ -167,14 +167,6 @@ namespace Accessibility_LowLevel_NoAuth
             }
         }
 
-        internal RequestUriBuilder CreateOperationRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/Operation/", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOperationRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -187,14 +179,6 @@ namespace Accessibility_LowLevel_NoAuth
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreateOperationInternalRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/OperationInternal/", false);
-            return uri;
         }
 
         internal HttpMessage CreateOperationInternalRequest(RequestContent content, RequestContext context)

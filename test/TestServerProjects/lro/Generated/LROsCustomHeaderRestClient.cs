@@ -35,14 +35,6 @@ namespace lro
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreatePutAsyncRetrySucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/customheader/putasync/retry/succeeded", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutAsyncRetrySucceededRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -95,14 +87,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut201CreatingSucceeded200RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/customheader/put/201/creating/succeeded/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut201CreatingSucceeded200Request(Product product)
@@ -159,14 +143,6 @@ namespace lro
             }
         }
 
-        internal RequestUriBuilder CreatePost202Retry200RequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/customheader/post/202/retry/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost202Retry200Request(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -219,14 +195,6 @@ namespace lro
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostAsyncRetrySucceededRequestUri(Product product)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/lro/customheader/postasync/retry/succeeded", false);
-            return uri;
         }
 
         internal HttpMessage CreatePostAsyncRetrySucceededRequest(Product product)

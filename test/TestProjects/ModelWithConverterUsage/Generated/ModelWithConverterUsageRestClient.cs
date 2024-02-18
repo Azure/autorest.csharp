@@ -36,14 +36,6 @@ namespace ModelWithConverterUsage
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
         }
 
-        internal RequestUriBuilder CreateOperationModelRequestUri(ModelClass value)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOperationModelRequest(ModelClass value)
         {
             var message = _pipeline.CreateMessage();
@@ -111,14 +103,6 @@ namespace ModelWithConverterUsage
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateOperationStructRequestUri(ModelStruct? body)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/OperationStruct/", false);
-            return uri;
         }
 
         internal HttpMessage CreateOperationStructRequest(ModelStruct? body)

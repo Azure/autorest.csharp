@@ -34,14 +34,6 @@ namespace httpInfrastructure
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateHead400RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead400Request()
         {
             var message = _pipeline.CreateMessage();
@@ -79,14 +71,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet400RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet400Request()
@@ -128,14 +112,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateOptions400RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions400Request()
         {
             var message = _pipeline.CreateMessage();
@@ -173,14 +149,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut400RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut400Request(bool? booleanValue)
@@ -231,14 +199,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreatePatch400RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch400Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -285,14 +245,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePost400RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost400Request(bool? booleanValue)
@@ -343,14 +295,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateDelete400RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/400", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete400Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -399,14 +343,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateHead401RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/401", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead401Request()
         {
             var message = _pipeline.CreateMessage();
@@ -444,14 +380,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet402RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/402", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet402Request()
@@ -493,14 +421,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateOptions403RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/403", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions403Request()
         {
             var message = _pipeline.CreateMessage();
@@ -540,14 +460,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet403RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/403", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet403Request()
         {
             var message = _pipeline.CreateMessage();
@@ -585,14 +497,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut404RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/404", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut404Request(bool? booleanValue)
@@ -643,14 +547,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreatePatch405RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/405", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch405Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -697,14 +593,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePost406RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/406", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost406Request(bool? booleanValue)
@@ -755,14 +643,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateDelete407RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/407", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete407Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -809,14 +689,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut409RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/409", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut409Request(bool? booleanValue)
@@ -867,14 +739,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateHead410RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/410", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead410Request()
         {
             var message = _pipeline.CreateMessage();
@@ -912,14 +776,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet411RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/411", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet411Request()
@@ -961,14 +817,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateOptions412RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/412", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions412Request()
         {
             var message = _pipeline.CreateMessage();
@@ -1008,14 +856,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet412RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/412", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet412Request()
         {
             var message = _pipeline.CreateMessage();
@@ -1053,14 +893,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut413RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/413", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut413Request(bool? booleanValue)
@@ -1111,14 +943,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreatePatch414RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/414", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch414Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -1165,14 +989,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePost415RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/415", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost415Request(bool? booleanValue)
@@ -1223,14 +1039,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet416RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/416", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet416Request()
         {
             var message = _pipeline.CreateMessage();
@@ -1268,14 +1076,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateDelete417RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/417", false);
-            return uri;
         }
 
         internal HttpMessage CreateDelete417Request(bool? booleanValue)
@@ -1324,14 +1124,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateHead429RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/client/429", false);
-            return uri;
         }
 
         internal HttpMessage CreateHead429Request()

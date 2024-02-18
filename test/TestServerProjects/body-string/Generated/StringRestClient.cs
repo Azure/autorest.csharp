@@ -35,14 +35,6 @@ namespace body_string
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetNullRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/null", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNullRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -110,14 +102,6 @@ namespace body_string
             }
         }
 
-        internal RequestUriBuilder CreatePutNullRequestUri(string stringBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/null", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutNullRequest(string stringBody)
         {
             var message = _pipeline.CreateMessage();
@@ -168,14 +152,6 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetEmptyRequest()
@@ -231,14 +207,6 @@ namespace body_string
             }
         }
 
-        internal RequestUriBuilder CreatePutEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/empty", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutEmptyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -284,14 +252,6 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetMbcsRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/mbcs", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMbcsRequest()
@@ -347,14 +307,6 @@ namespace body_string
             }
         }
 
-        internal RequestUriBuilder CreatePutMbcsRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/mbcs", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutMbcsRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -400,14 +352,6 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetWhitespaceRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/whitespace", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetWhitespaceRequest()
@@ -463,14 +407,6 @@ namespace body_string
             }
         }
 
-        internal RequestUriBuilder CreatePutWhitespaceRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/whitespace", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePutWhitespaceRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -516,14 +452,6 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetNotProvidedRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/notProvided", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNotProvidedRequest()
@@ -579,14 +507,6 @@ namespace body_string
             }
         }
 
-        internal RequestUriBuilder CreateGetBase64EncodedRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/base64Encoding", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBase64EncodedRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -640,14 +560,6 @@ namespace body_string
             }
         }
 
-        internal RequestUriBuilder CreateGetBase64UrlEncodedRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/base64UrlEncoding", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBase64UrlEncodedRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -699,14 +611,6 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutBase64UrlEncodedRequestUri(byte[] stringBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/base64UrlEncoding", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutBase64UrlEncodedRequest(byte[] stringBody)
@@ -768,14 +672,6 @@ namespace body_string
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetNullBase64UrlEncodedRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/string/nullBase64UrlEncoding", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNullBase64UrlEncodedRequest()

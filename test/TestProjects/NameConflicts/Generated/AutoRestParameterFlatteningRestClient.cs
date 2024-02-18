@@ -37,20 +37,6 @@ namespace NameConflicts
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateOperationRequestUri(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class)
-        {
-            var uri0 = new RawRequestUriBuilder();
-            uri0.Reset(_endpoint);
-            uri0.AppendPath("/originalOperation", false);
-            uri0.AppendQuery("request", request, true);
-            uri0.AppendQuery("message", message, true);
-            uri0.AppendQuery("scope", scope, true);
-            uri0.AppendQuery("uri", uri, true);
-            uri0.AppendQuery("pipeline", pipeline, true);
-            uri0.AppendQuery("clientDiagnostics", clientDiagnostics, true);
-            return uri0;
-        }
-
         internal Azure.Core.HttpMessage CreateOperationRequest(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class)
         {
             var message0 = _pipeline.CreateMessage();
@@ -186,14 +172,6 @@ namespace NameConflicts
             }
         }
 
-        internal RequestUriBuilder CreateAnalyzeBodyRequestUri(Stream stringBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/conflictingLROOverloads", false);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateAnalyzeBodyRequest(Stream stringBody)
         {
             var message = _pipeline.CreateMessage();
@@ -241,14 +219,6 @@ namespace NameConflicts
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateAnalyzeBodyRequestUri(string stringBody)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/conflictingLROOverloads", false);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateAnalyzeBodyRequest(string stringBody)
@@ -300,14 +270,6 @@ namespace NameConflicts
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateHttpMessageRequestUri(Models.HttpMessage httpMessage)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/HttpMessage", false);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateHttpMessageRequest(Models.HttpMessage httpMessage)
@@ -370,14 +332,6 @@ namespace NameConflicts
             }
         }
 
-        internal RequestUriBuilder CreateRequestRequestUri(Models.Request request)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/Request", false);
-            return uri;
-        }
-
         internal Azure.Core.HttpMessage CreateRequestRequest(Models.Request request)
         {
             var message = _pipeline.CreateMessage();
@@ -436,14 +390,6 @@ namespace NameConflicts
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateResponseRequestUri(Models.Response response)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/Response", false);
-            return uri;
         }
 
         internal Azure.Core.HttpMessage CreateResponseRequest(Models.Response response)

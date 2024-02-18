@@ -35,14 +35,6 @@ namespace azure_special_properties
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateCustomNamedRequestIdRequestUri(string fooClientRequestId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/customNamedRequestId", false);
-            return uri;
-        }
-
         internal HttpMessage CreateCustomNamedRequestIdRequest(string fooClientRequestId)
         {
             var message = _pipeline.CreateMessage();
@@ -103,14 +95,6 @@ namespace azure_special_properties
             }
         }
 
-        internal RequestUriBuilder CreateCustomNamedRequestIdParamGroupingRequestUri(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/customNamedRequestIdParamGrouping", false);
-            return uri;
-        }
-
         internal HttpMessage CreateCustomNamedRequestIdParamGroupingRequest(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -169,14 +153,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCustomNamedRequestIdHeadRequestUri(string fooClientRequestId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/customNamedRequestIdHead", false);
-            return uri;
         }
 
         internal HttpMessage CreateCustomNamedRequestIdHeadRequest(string fooClientRequestId)

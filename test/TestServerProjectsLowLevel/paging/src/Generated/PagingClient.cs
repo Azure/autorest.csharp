@@ -1266,14 +1266,6 @@ namespace paging_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetNoItemNamePagesRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/noitemname", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNoItemNamePagesRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1285,14 +1277,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetEmptyNextLinkNamePagesRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/emptynextlink", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetEmptyNextLinkNamePagesRequest(RequestContext context)
@@ -1308,14 +1292,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetNullNextLinkNamePagesRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/nullnextlink", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNullNextLinkNamePagesRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1329,14 +1305,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetSinglePagesRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/single", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetSinglePagesRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1348,14 +1316,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetSinglePagesWithBodyParamsRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/single/getWithBodyParams", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetSinglePagesWithBodyParamsRequest(RequestContent content, RequestContext context)
@@ -1373,14 +1333,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateFirstResponseEmptyRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/firstResponseEmpty/1", false);
-            return uri;
-        }
-
         internal HttpMessage CreateFirstResponseEmptyRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1392,14 +1344,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesRequestUri(int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesRequest(int? maxresults, int? timeout, RequestContext context)
@@ -1424,16 +1368,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetWithQueryParamsRequestUri(int requiredQueryParameter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/getWithQueryParams", false);
-            uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
-            uri.AppendQuery("queryConstant", true, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetWithQueryParamsRequest(int requiredQueryParameter, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1447,18 +1381,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateDuplicateParamsRequestUri(string filter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/duplicateParams/1", false);
-            if (filter != null)
-            {
-                uri.AppendQuery("$filter", filter, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateDuplicateParamsRequest(string filter, RequestContext context)
@@ -1478,18 +1400,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePageWithMaxPageSizeRequestUri(string maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/maxPageSize", false);
-            if (maxpagesize != null)
-            {
-                uri.AppendQuery("$maxpagesize", maxpagesize, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreatePageWithMaxPageSizeRequest(string maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1507,15 +1417,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateNextOperationWithQueryParamsRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
-            uri.AppendQuery("queryConstant", true, true);
-            return uri;
-        }
-
         internal HttpMessage CreateNextOperationWithQueryParamsRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1528,14 +1429,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetOdataMultiplePagesRequestUri(int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/odata", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesRequest(int? maxresults, int? timeout, RequestContext context)
@@ -1558,15 +1451,6 @@ namespace paging_LowLevel
                 request.Headers.Add("timeout", timeout.Value);
             }
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesWithOffsetRequestUri(int offset, int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/withpath/", false);
-            uri.AppendPath(offset, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, int? maxresults, int? timeout, RequestContext context)
@@ -1592,14 +1476,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetMultiplePagesRetryFirstRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/retryfirst", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMultiplePagesRetryFirstRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1611,14 +1487,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesRetrySecondRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/retrysecond", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondRequest(RequestContext context)
@@ -1634,14 +1502,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetSinglePagesFailureRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/single/failure", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetSinglePagesFailureRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1653,14 +1513,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesFailureRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/failure", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureRequest(RequestContext context)
@@ -1676,14 +1528,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetMultiplePagesFailureUriRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/failureuri", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMultiplePagesFailureUriRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1695,16 +1539,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesFragmentNextLinkRequestUri(string tenant, string apiVersion, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/fragment/", false);
-            uri.AppendPath(tenant, true);
-            uri.AppendQuery("api_version", apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesFragmentNextLinkRequest(string tenant, string apiVersion, RequestContext context)
@@ -1722,16 +1556,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetMultiplePagesFragmentWithGroupingNextLinkRequestUri(string tenant, string apiVersion, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
-            uri.AppendPath(tenant, true);
-            uri.AppendQuery("api_version", apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(string tenant, string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1745,14 +1569,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesLRORequestUri(int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/lro", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesLRORequest(int? maxresults, int? timeout, RequestContext context)
@@ -1777,15 +1593,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateAppendApiVersionRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/apiVersion/append/1", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateAppendApiVersionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1800,15 +1607,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateReplaceApiVersionRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/apiVersion/replace/1", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateReplaceApiVersionRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1821,18 +1619,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateNextFragmentRequestUri(string tenant, string nextLink, string apiVersion, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/fragment/", false);
-            uri.AppendPath(tenant, true);
-            uri.AppendPath("/", false);
-            uri.AppendRawNextLink(nextLink, false);
-            uri.AppendQuery("api_version", apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateNextFragmentRequest(string tenant, string nextLink, string apiVersion, RequestContext context)
@@ -1852,18 +1638,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateNextFragmentWithGroupingRequestUri(string tenant, string nextLink, string apiVersion, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
-            uri.AppendPath(tenant, true);
-            uri.AppendPath("/", false);
-            uri.AppendRawNextLink(nextLink, false);
-            uri.AppendQuery("api_version", apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateNextFragmentWithGroupingRequest(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1881,14 +1655,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetPagingModelWithItemNameWithXMSClientNameRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/paging/itemNameWithXMSClientName", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1900,14 +1666,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetNoItemNamePagesNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNoItemNamePagesNextPageRequest(string nextLink, RequestContext context)
@@ -1923,14 +1681,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetEmptyNextLinkNamePagesNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyNextLinkNamePagesNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1942,14 +1692,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetSinglePagesNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetSinglePagesNextPageRequest(string nextLink, RequestContext context)
@@ -1965,14 +1707,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetSinglePagesWithBodyParamsNextPageRequestUri(string nextLink, RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetSinglePagesWithBodyParamsNextPageRequest(string nextLink, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1986,14 +1720,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateFirstResponseEmptyNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateFirstResponseEmptyNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2005,14 +1731,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesNextPageRequestUri(string nextLink, int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
@@ -2037,14 +1755,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateDuplicateParamsNextPageRequestUri(string nextLink, string filter, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateDuplicateParamsNextPageRequest(string nextLink, string filter, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2058,14 +1768,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreatePageWithMaxPageSizeNextPageRequestUri(string nextLink, string maxpagesize, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreatePageWithMaxPageSizeNextPageRequest(string nextLink, string maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2077,14 +1779,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetOdataMultiplePagesNextPageRequestUri(string nextLink, int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
@@ -2109,14 +1803,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetMultiplePagesWithOffsetNextPageRequestUri(string nextLink, int offset, int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2139,14 +1825,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetMultiplePagesRetryFirstNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMultiplePagesRetryFirstNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2158,14 +1836,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesRetrySecondNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesRetrySecondNextPageRequest(string nextLink, RequestContext context)
@@ -2181,14 +1851,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetSinglePagesFailureNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetSinglePagesFailureNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2200,14 +1862,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesFailureNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesFailureNextPageRequest(string nextLink, RequestContext context)
@@ -2223,14 +1877,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetMultiplePagesFailureUriNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMultiplePagesFailureUriNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2242,14 +1888,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateAppendApiVersionNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateAppendApiVersionNextPageRequest(string nextLink, RequestContext context)
@@ -2265,14 +1903,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateReplaceApiVersionNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateReplaceApiVersionNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2286,14 +1916,6 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequestUri(string nextLink, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -2305,14 +1927,6 @@ namespace paging_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetMultiplePagesLRONextPageRequestUri(string nextLink, int? maxresults, int? timeout, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)

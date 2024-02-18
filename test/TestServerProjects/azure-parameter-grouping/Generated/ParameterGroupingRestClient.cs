@@ -35,19 +35,6 @@ namespace azure_parameter_grouping
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreatePostRequiredRequestUri(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameterGrouping/postRequired/", false);
-            uri.AppendPath(parameterGroupingPostRequiredParameters.Path, true);
-            if (parameterGroupingPostRequiredParameters?.Query != null)
-            {
-                uri.AppendQuery("query", parameterGroupingPostRequiredParameters.Query.Value, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreatePostRequiredRequest(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -118,18 +105,6 @@ namespace azure_parameter_grouping
             }
         }
 
-        internal RequestUriBuilder CreatePostOptionalRequestUri(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameterGrouping/postOptional", false);
-            if (parameterGroupingPostOptionalParameters?.Query != null)
-            {
-                uri.AppendQuery("query", parameterGroupingPostOptionalParameters.Query.Value, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreatePostOptionalRequest(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -183,22 +158,6 @@ namespace azure_parameter_grouping
             }
         }
 
-        internal RequestUriBuilder CreatePostReservedWordsRequestUri(ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameterGrouping/postReservedWords", false);
-            if (parameterGroupingPostReservedWordsParameters?.From != null)
-            {
-                uri.AppendQuery("from", parameterGroupingPostReservedWordsParameters.From, true);
-            }
-            if (parameterGroupingPostReservedWordsParameters?.Accept != null)
-            {
-                uri.AppendQuery("accept", parameterGroupingPostReservedWordsParameters.Accept, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreatePostReservedWordsRequest(ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -250,22 +209,6 @@ namespace azure_parameter_grouping
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostMultiParamGroupsRequestUri(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameterGrouping/postMultipleParameterGroups", false);
-            if (firstParameterGroup?.QueryOne != null)
-            {
-                uri.AppendQuery("query-one", firstParameterGroup.QueryOne.Value, true);
-            }
-            if (parameterGroupingPostMultiParamGroupsSecondParamGroup?.QueryTwo != null)
-            {
-                uri.AppendQuery("query-two", parameterGroupingPostMultiParamGroupsSecondParamGroup.QueryTwo.Value, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreatePostMultiParamGroupsRequest(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup)
@@ -331,18 +274,6 @@ namespace azure_parameter_grouping
             }
         }
 
-        internal RequestUriBuilder CreatePostSharedParameterGroupObjectRequestUri(FirstParameterGroup firstParameterGroup)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameterGrouping/sharedParameterGroupObject", false);
-            if (firstParameterGroup?.QueryOne != null)
-            {
-                uri.AppendQuery("query-one", firstParameterGroup.QueryOne.Value, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreatePostSharedParameterGroupObjectRequest(FirstParameterGroup firstParameterGroup)
         {
             var message = _pipeline.CreateMessage();
@@ -394,14 +325,6 @@ namespace azure_parameter_grouping
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGroupWithConstantRequestUri(Grouper grouper)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameterGrouping/groupWithConstant", false);
-            return uri;
         }
 
         internal HttpMessage CreateGroupWithConstantRequest(Grouper grouper)

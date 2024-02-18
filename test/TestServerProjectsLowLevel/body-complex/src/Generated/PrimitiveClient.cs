@@ -1465,14 +1465,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetIntRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/integer", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetIntRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1484,14 +1476,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutIntRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/integer", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutIntRequest(RequestContent content, RequestContext context)
@@ -1509,14 +1493,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetLongRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/long", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetLongRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1528,14 +1504,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutLongRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/long", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutLongRequest(RequestContent content, RequestContext context)
@@ -1553,14 +1521,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetFloatRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/float", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFloatRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1572,14 +1532,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutFloatRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/float", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutFloatRequest(RequestContent content, RequestContext context)
@@ -1597,14 +1549,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetDoubleRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/double", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDoubleRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1616,14 +1560,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutDoubleRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/double", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDoubleRequest(RequestContent content, RequestContext context)
@@ -1641,14 +1577,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetBoolRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/bool", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetBoolRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1660,14 +1588,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutBoolRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/bool", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutBoolRequest(RequestContent content, RequestContext context)
@@ -1685,14 +1605,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetStringRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/string", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetStringRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1704,14 +1616,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutStringRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/string", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutStringRequest(RequestContent content, RequestContext context)
@@ -1729,14 +1633,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetDateRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/date", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1748,14 +1644,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutDateRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/date", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateRequest(RequestContent content, RequestContext context)
@@ -1773,14 +1661,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetDateTimeRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetime", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateTimeRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1792,14 +1672,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutDateTimeRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetime", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeRequest(RequestContent content, RequestContext context)
@@ -1817,14 +1689,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetDateTimeRfc1123RequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetimerfc1123", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDateTimeRfc1123Request(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1836,14 +1700,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutDateTimeRfc1123RequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/datetimerfc1123", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDateTimeRfc1123Request(RequestContent content, RequestContext context)
@@ -1861,14 +1717,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetDurationRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/duration", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDurationRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1880,14 +1728,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutDurationRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/duration", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutDurationRequest(RequestContent content, RequestContext context)
@@ -1905,14 +1745,6 @@ namespace body_complex_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetByteRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/byte", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetByteRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1924,14 +1756,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutByteRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/primitive/byte", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutByteRequest(RequestContent content, RequestContext context)

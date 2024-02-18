@@ -247,14 +247,6 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateCollapseGetWithHeadRequestUri(string otherHeader, MatchConditions matchConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/MatchConditionCollapse/withHead", false);
-            return uri;
-        }
-
         internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -275,14 +267,6 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateCollapsePutRequestUri(RequestContent content, MatchConditions matchConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/MatchConditionCollapse/", false);
-            return uri;
-        }
-
         internal HttpMessage CreateCollapsePutRequest(RequestContent content, MatchConditions matchConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -299,14 +283,6 @@ namespace CollapseRequestCondition_LowLevel
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
-        }
-
-        internal RequestUriBuilder CreateCollapseGetRequestUri(MatchConditions matchConditions, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/MatchConditionCollapse/", false);
-            return uri;
         }
 
         internal HttpMessage CreateCollapseGetRequest(MatchConditions matchConditions, RequestContext context)

@@ -36,24 +36,6 @@ namespace HlcConstants
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateMixedRequestUri(RoundTripModel value, StringConstant? optionalStringQuery, bool? optionalBooleanQuery)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op", false);
-            uri.AppendQuery("required-string-query", "default", true);
-            uri.AppendQuery("required-boolean-query", true, true);
-            if (optionalStringQuery != null)
-            {
-                uri.AppendQuery("optional-string-query", optionalStringQuery.Value.ToString(), true);
-            }
-            if (optionalBooleanQuery != null)
-            {
-                uri.AppendQuery("optional-boolean-query", optionalBooleanQuery.Value, true);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreateMixedRequest(RoundTripModel value, StringConstant? optionalStringQuery, bool? optionalBooleanQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -135,24 +117,6 @@ namespace HlcConstants
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostSomethingRequestUri(RoundTripModel value, IntConstant? optionalIntQuery, FloatConstant? optionalFloatQuery)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op2", false);
-            uri.AppendQuery("required-int-query", 0, true);
-            uri.AppendQuery("required-float-query", 3.14F, true);
-            if (optionalIntQuery != null)
-            {
-                uri.AppendQuery("optional-int-query", optionalIntQuery.Value.ToSerialInt32(), true);
-            }
-            if (optionalFloatQuery != null)
-            {
-                uri.AppendQuery("optional-float-query", optionalFloatQuery.Value.ToSerialSingle(), true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreatePostSomethingRequest(RoundTripModel value, IntConstant? optionalIntQuery, FloatConstant? optionalFloatQuery)

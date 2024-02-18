@@ -36,19 +36,6 @@ namespace ProtocolMethodsInRestClient
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateCreateRequestUri(Grouped grouped, Resource resource)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/template/resources", false);
-            if (grouped?.First != null)
-            {
-                uri.AppendQuery("first", grouped.First, true);
-            }
-            uri.AppendQuery("second", grouped.Second, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateRequest(Grouped grouped, Resource resource)
         {
             var message = _pipeline.CreateMessage();
@@ -130,19 +117,6 @@ namespace ProtocolMethodsInRestClient
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateRequestUri(int second, RequestContent content, string first, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/template/resources", false);
-            uri.AppendQuery("second", second, true);
-            if (first != null)
-            {
-                uri.AppendQuery("first", first, true);
-            }
-            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(int second, RequestContent content, string first, RequestContext context)
@@ -231,15 +205,6 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string resourceId, string ifMatch)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/template/resources/", false);
-            uri.AppendPath(resourceId, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string resourceId, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -301,15 +266,6 @@ namespace ProtocolMethodsInRestClient
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateDeleteRequestUri(string resourceId, ETag? ifMatch, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/template/resources/", false);
-            uri.AppendPath(resourceId, true);
-            return uri;
         }
 
         internal HttpMessage CreateDeleteRequest(string resourceId, ETag? ifMatch, RequestContext context)
@@ -397,15 +353,6 @@ namespace ProtocolMethodsInRestClient
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        internal RequestUriBuilder CreateGetRequestUri(string resourceId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/template/resources/", false);
-            uri.AppendPath(resourceId, true);
-            return uri;
         }
 
         internal HttpMessage CreateGetRequest(string resourceId)

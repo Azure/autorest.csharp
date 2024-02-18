@@ -34,15 +34,6 @@ namespace azure_special_properties
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreatePostMethodLocalValidRequestUri(string subscriptionId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/", false);
-            uri.AppendPath(subscriptionId, true);
-            return uri;
-        }
-
         internal HttpMessage CreatePostMethodLocalValidRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -99,15 +90,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostMethodLocalNullRequestUri(string subscriptionId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/local/null/", false);
-            uri.AppendPath(subscriptionId, true);
-            return uri;
         }
 
         internal HttpMessage CreatePostMethodLocalNullRequest(string subscriptionId)
@@ -168,15 +150,6 @@ namespace azure_special_properties
             }
         }
 
-        internal RequestUriBuilder CreatePostPathLocalValidRequestUri(string subscriptionId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/", false);
-            uri.AppendPath(subscriptionId, true);
-            return uri;
-        }
-
         internal HttpMessage CreatePostPathLocalValidRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -233,15 +206,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePostSwaggerLocalValidRequestUri(string subscriptionId)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/", false);
-            uri.AppendPath(subscriptionId, true);
-            return uri;
         }
 
         internal HttpMessage CreatePostSwaggerLocalValidRequest(string subscriptionId)

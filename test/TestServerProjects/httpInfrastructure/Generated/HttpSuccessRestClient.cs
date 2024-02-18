@@ -35,14 +35,6 @@ namespace httpInfrastructure
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateHead200RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead200Request()
         {
             var message = _pipeline.CreateMessage();
@@ -84,14 +76,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200Request()
@@ -147,14 +131,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateOptions200RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOptions200Request()
         {
             var message = _pipeline.CreateMessage();
@@ -206,14 +182,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut200RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut200Request(bool? booleanValue)
@@ -268,14 +236,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreatePatch200RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch200Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -326,14 +286,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePost200RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost200Request(bool? booleanValue)
@@ -388,14 +340,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateDelete200RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/200", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete200Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -446,14 +390,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut201RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/201", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut201Request(bool? booleanValue)
@@ -508,14 +444,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreatePost201RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/201", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePost201Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -566,14 +494,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut202RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/202", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut202Request(bool? booleanValue)
@@ -628,14 +548,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreatePatch202RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/202", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch202Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -686,14 +598,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePost202RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/202", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost202Request(bool? booleanValue)
@@ -748,14 +652,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateDelete202RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/202", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete202Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -808,14 +704,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateHead204RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreateHead204Request()
         {
             var message = _pipeline.CreateMessage();
@@ -857,14 +745,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePut204RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/204", false);
-            return uri;
         }
 
         internal HttpMessage CreatePut204Request(bool? booleanValue)
@@ -919,14 +799,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreatePatch204RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreatePatch204Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -977,14 +849,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePost204RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/204", false);
-            return uri;
         }
 
         internal HttpMessage CreatePost204Request(bool? booleanValue)
@@ -1039,14 +903,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateDelete204RequestUri(bool? booleanValue)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/204", false);
-            return uri;
-        }
-
         internal HttpMessage CreateDelete204Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
@@ -1097,14 +953,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateHead404RequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/success/404", false);
-            return uri;
         }
 
         internal HttpMessage CreateHead404Request()

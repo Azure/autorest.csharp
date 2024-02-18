@@ -36,14 +36,6 @@ namespace multiple_inheritance
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetHorseRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/horse", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetHorseRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -95,14 +87,6 @@ namespace multiple_inheritance
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutHorseRequestUri(Horse horse)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/horse", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutHorseRequest(Horse horse)
@@ -176,14 +160,6 @@ namespace multiple_inheritance
             }
         }
 
-        internal RequestUriBuilder CreateGetPetRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/pet", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetPetRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -235,14 +211,6 @@ namespace multiple_inheritance
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutPetRequestUri(Pet pet)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/pet", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutPetRequest(Pet pet)
@@ -316,14 +284,6 @@ namespace multiple_inheritance
             }
         }
 
-        internal RequestUriBuilder CreateGetFelineRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/feline", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFelineRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -375,14 +335,6 @@ namespace multiple_inheritance
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutFelineRequestUri(Feline feline)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/feline", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutFelineRequest(Feline feline)
@@ -456,14 +408,6 @@ namespace multiple_inheritance
             }
         }
 
-        internal RequestUriBuilder CreateGetCatRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/cat", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetCatRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -515,14 +459,6 @@ namespace multiple_inheritance
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutCatRequestUri(Cat cat)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/cat", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutCatRequest(Cat cat)
@@ -596,14 +532,6 @@ namespace multiple_inheritance
             }
         }
 
-        internal RequestUriBuilder CreateGetKittenRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/kitten", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetKittenRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -655,14 +583,6 @@ namespace multiple_inheritance
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutKittenRequestUri(Kitten kitten)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipleInheritance/kitten", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutKittenRequest(Kitten kitten)

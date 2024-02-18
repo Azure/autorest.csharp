@@ -36,14 +36,6 @@ namespace AdditionalPropertiesEx
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateWriteOnlyRequestUri(InputAdditionalPropertiesModel createParameters)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/ap_operation", false);
-            return uri;
-        }
-
         internal HttpMessage CreateWriteOnlyRequest(InputAdditionalPropertiesModel createParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -105,14 +97,6 @@ namespace AdditionalPropertiesEx
             }
         }
 
-        internal RequestUriBuilder CreateReadOnlyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/ap_operation", false);
-            return uri;
-        }
-
         internal HttpMessage CreateReadOnlyRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -166,14 +150,6 @@ namespace AdditionalPropertiesEx
             }
         }
 
-        internal RequestUriBuilder CreateWriteOnlyStructRequestUri(InputAdditionalPropertiesModelStruct createParameters)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/ap_struct_operation", false);
-            return uri;
-        }
-
         internal HttpMessage CreateWriteOnlyStructRequest(InputAdditionalPropertiesModelStruct createParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -221,14 +197,6 @@ namespace AdditionalPropertiesEx
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateReadOnlyStructRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/ap_struct_operation", false);
-            return uri;
         }
 
         internal HttpMessage CreateReadOnlyStructRequest()

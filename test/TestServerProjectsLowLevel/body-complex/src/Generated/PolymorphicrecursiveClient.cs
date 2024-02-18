@@ -185,14 +185,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetValidRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/polymorphicrecursive/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -204,14 +196,6 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreatePutValidRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/complex/polymorphicrecursive/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)

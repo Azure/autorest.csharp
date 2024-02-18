@@ -35,21 +35,6 @@ namespace url_multi_collectionFormat
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateArrayStringMultiNullRequestUri(IEnumerable<string> arrayQuery)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/queries/array/multi/string/null", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
-            {
-                foreach (var param in arrayQuery)
-                {
-                    uri.AppendQuery("arrayQuery", param, true);
-                }
-            }
-            return uri;
-        }
-
         internal HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -102,21 +87,6 @@ namespace url_multi_collectionFormat
             }
         }
 
-        internal RequestUriBuilder CreateArrayStringMultiEmptyRequestUri(IEnumerable<string> arrayQuery)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/queries/array/multi/string/empty", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
-            {
-                foreach (var param in arrayQuery)
-                {
-                    uri.AppendQuery("arrayQuery", param, true);
-                }
-            }
-            return uri;
-        }
-
         internal HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();
@@ -167,21 +137,6 @@ namespace url_multi_collectionFormat
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateArrayStringMultiValidRequestUri(IEnumerable<string> arrayQuery)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/queries/array/multi/string/valid", false);
-            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
-            {
-                foreach (var param in arrayQuery)
-                {
-                    uri.AppendQuery("arrayQuery", param, true);
-                }
-            }
-            return uri;
         }
 
         internal HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)

@@ -36,16 +36,6 @@ namespace ExtensionClientName
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateRenamedOperationRequestUri(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/originalOperation/", false);
-            uri.AppendPath(renamedPathParameter, true);
-            uri.AppendQuery("originalQueryParameter", renamedQueryParameter, true);
-            return uri;
-        }
-
         internal HttpMessage CreateRenamedOperationRequest(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter)
         {
             var message = _pipeline.CreateMessage();

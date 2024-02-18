@@ -39,17 +39,6 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/synonymmaps('", false);
-            uri.AppendPath(synonymMapName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateOrUpdateRequest(string synonymMapName, Enum0 prefer, SynonymMap synonymMap, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -151,17 +140,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/synonymmaps('", false);
-            uri.AppendPath(synonymMapName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string synonymMapName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -236,17 +214,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string synonymMapName, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/synonymmaps('", false);
-            uri.AppendPath(synonymMapName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest(string synonymMapName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -319,19 +286,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateListRequestUri(string select, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/synonymmaps", false);
-            if (select != null)
-            {
-                uri.AppendQuery("$select", select, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -392,15 +346,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateRequestUri(SynonymMap synonymMap, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/synonymmaps", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(SynonymMap synonymMap, RequestOptions requestOptions)

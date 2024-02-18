@@ -43,18 +43,6 @@ namespace subscriptionId_apiVersion
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreateGetSampleResourceGroupRequestUri(string resourceGroupName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(_subscriptionId, true);
-            uri.AppendPath("/resourcegroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetSampleResourceGroupRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();

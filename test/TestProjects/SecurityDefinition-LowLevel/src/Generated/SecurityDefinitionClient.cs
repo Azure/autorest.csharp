@@ -156,16 +156,6 @@ namespace SecurityDefinition_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateOperationRequestUri(RequestContent content, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRaw("/securitydefinition/1.0.0", false);
-            uri.AppendPath("/op", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateOperationRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

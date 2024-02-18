@@ -39,17 +39,6 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string dataSourceName, Enum0 prefer, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/datasources('", false);
-            uri.AppendPath(dataSourceName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateOrUpdateRequest(string dataSourceName, Enum0 prefer, DataSource dataSource, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -151,17 +140,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/datasources('", false);
-            uri.AppendPath(dataSourceName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string dataSourceName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -236,17 +214,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string dataSourceName, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/datasources('", false);
-            uri.AppendPath(dataSourceName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest(string dataSourceName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -319,19 +286,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateListRequestUri(string select, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/datasources", false);
-            if (select != null)
-            {
-                uri.AppendQuery("$select", select, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -392,15 +346,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateRequestUri(DataSource dataSource, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/datasources", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(DataSource dataSource, RequestOptions requestOptions)

@@ -36,14 +36,6 @@ namespace body_formdata
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateUploadFileRequestUri(Stream fileContent, string fileName)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/formdata/stream/uploadfile", false);
-            return uri;
-        }
-
         internal HttpMessage CreateUploadFileRequest(Stream fileContent, string fileName)
         {
             var message = _pipeline.CreateMessage();
@@ -122,14 +114,6 @@ namespace body_formdata
             }
         }
 
-        internal RequestUriBuilder CreateUploadFileViaBodyRequestUri(Stream fileContent)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/formdata/stream/uploadfile", false);
-            return uri;
-        }
-
         internal HttpMessage CreateUploadFileViaBodyRequest(Stream fileContent)
         {
             var message = _pipeline.CreateMessage();
@@ -193,14 +177,6 @@ namespace body_formdata
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateUploadFilesRequestUri(IEnumerable<Stream> fileContent)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/formdata/stream/uploadfiles", false);
-            return uri;
         }
 
         internal HttpMessage CreateUploadFilesRequest(IEnumerable<Stream> fileContent)

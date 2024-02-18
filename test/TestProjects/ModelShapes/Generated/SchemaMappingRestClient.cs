@@ -36,14 +36,6 @@ namespace ModelShapes
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateInputRequestUri(InputModel value)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op", false);
-            return uri;
-        }
-
         internal HttpMessage CreateInputRequest(InputModel value)
         {
             var message = _pipeline.CreateMessage();
@@ -101,14 +93,6 @@ namespace ModelShapes
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateMixedRequestUri(MixedModel value)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op", false);
-            return uri;
         }
 
         internal HttpMessage CreateMixedRequest(MixedModel value)
@@ -180,14 +164,6 @@ namespace ModelShapes
             }
         }
 
-        internal RequestUriBuilder CreateOutputRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op", false);
-            return uri;
-        }
-
         internal HttpMessage CreateOutputRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -237,14 +213,6 @@ namespace ModelShapes
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateMixedreadonlyRequestUri(MixedModelWithReadonlyProperty value)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op2", false);
-            return uri;
         }
 
         internal HttpMessage CreateMixedreadonlyRequest(MixedModelWithReadonlyProperty value)
@@ -314,14 +282,6 @@ namespace ModelShapes
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateFlattenedParameterOperationRequestUri(string code, string status)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/op3", false);
-            return uri;
         }
 
         internal HttpMessage CreateFlattenedParameterOperationRequest(string code, string status)

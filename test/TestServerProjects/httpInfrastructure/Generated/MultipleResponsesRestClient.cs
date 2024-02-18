@@ -36,14 +36,6 @@ namespace httpInfrastructure
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGet200Model204NoModelDefaultError200ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/200/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200Model204NoModelDefaultError200ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -99,14 +91,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200Model204NoModelDefaultError204ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/204/none", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200Model204NoModelDefaultError204ValidRequest()
@@ -166,14 +150,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200Model204NoModelDefaultError201InvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/201/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200Model204NoModelDefaultError201InvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -229,14 +205,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200Model204NoModelDefaultError202NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/202/none", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200Model204NoModelDefaultError202NoneRequest()
@@ -296,14 +264,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200Model204NoModelDefaultError400ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/400/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200Model204NoModelDefaultError400ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -359,14 +319,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200Model201ModelDefaultError200ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/200/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200Model201ModelDefaultError200ValidRequest()
@@ -436,14 +388,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200Model201ModelDefaultError201ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/201/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200Model201ModelDefaultError201ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -511,14 +455,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200Model201ModelDefaultError400ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/400/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200Model201ModelDefaultError400ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -584,14 +520,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest()
@@ -675,14 +603,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -762,14 +682,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest()
@@ -853,14 +765,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -942,14 +846,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet202None204NoneDefaultError202NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/202/none", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet202None204NoneDefaultError202NoneRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -993,14 +889,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet202None204NoneDefaultError204NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/204/none", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultError204NoneRequest()
@@ -1048,14 +936,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet202None204NoneDefaultError400ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/400/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet202None204NoneDefaultError400ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1099,14 +979,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet202None204NoneDefaultNone202InvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/202/invalid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultNone202InvalidRequest()
@@ -1153,14 +1025,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet202None204NoneDefaultNone204NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/204/none", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet202None204NoneDefaultNone204NoneRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1203,14 +1067,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet202None204NoneDefaultNone400NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/400/none", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet202None204NoneDefaultNone400NoneRequest()
@@ -1257,14 +1113,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet202None204NoneDefaultNone400InvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/202/none/204/none/default/none/response/400/invalid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet202None204NoneDefaultNone400InvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1307,14 +1155,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDefaultModelA200ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/A/response/200/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDefaultModelA200ValidRequest()
@@ -1370,14 +1210,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGetDefaultModelA200NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/A/response/200/none", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDefaultModelA200NoneRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1431,14 +1263,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGetDefaultModelA400ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/A/response/400/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDefaultModelA400ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1480,14 +1304,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDefaultModelA400NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/A/response/400/none", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDefaultModelA400NoneRequest()
@@ -1533,14 +1349,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGetDefaultNone200InvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/none/response/200/invalid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDefaultNone200InvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1581,14 +1389,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetDefaultNone200NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/none/response/200/none", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetDefaultNone200NoneRequest()
@@ -1633,14 +1433,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGetDefaultNone400InvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/none/response/400/invalid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDefaultNone400InvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1683,14 +1475,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGetDefaultNone400NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/default/none/response/400/none", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetDefaultNone400NoneRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1731,14 +1515,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200ModelA200NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/response/200/none", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200ModelA200NoneRequest()
@@ -1794,14 +1570,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200ModelA200ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/response/200/valid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200ModelA200ValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1853,14 +1621,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200ModelA200InvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/response/200/invalid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200ModelA200InvalidRequest()
@@ -1916,14 +1676,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200ModelA400NoneRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/response/400/none", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200ModelA400NoneRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -1975,14 +1727,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200ModelA400ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/response/400/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200ModelA400ValidRequest()
@@ -2038,14 +1782,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGet200ModelA400InvalidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/response/400/invalid", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGet200ModelA400InvalidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -2097,14 +1833,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGet200ModelA202ValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/payloads/200/A/response/202/valid", false);
-            return uri;
         }
 
         internal HttpMessage CreateGet200ModelA202ValidRequest()

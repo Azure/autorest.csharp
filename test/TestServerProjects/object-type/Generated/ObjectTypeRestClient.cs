@@ -35,14 +35,6 @@ namespace object_type
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/objectType/get", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -94,14 +86,6 @@ namespace object_type
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreatePutRequestUri(object putObject)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/objectType/put", false);
-            return uri;
         }
 
         internal HttpMessage CreatePutRequest(object putObject)

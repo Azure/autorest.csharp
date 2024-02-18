@@ -28,6 +28,11 @@ namespace AutoRest.CSharp.Generation.Writers
         public static void WriteRequestAndUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
             WriteUriCreation(writer, clientMethod, methodAccessibility, fields, clientParameters);
+            WriteRequestCreation(writer, clientMethod, methodAccessibility, fields, responseClassifierType, writeSDKUserAgent, clientParameters);
+        }
+
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 

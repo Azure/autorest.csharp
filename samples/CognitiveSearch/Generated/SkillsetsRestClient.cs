@@ -39,17 +39,6 @@ namespace CognitiveSearch
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
-        internal RequestUriBuilder CreateCreateOrUpdateRequestUri(string skillsetName, Enum0 prefer, Skillset skillset, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/skillsets('", false);
-            uri.AppendPath(skillsetName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateCreateOrUpdateRequest(string skillsetName, Enum0 prefer, Skillset skillset, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -151,17 +140,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateDeleteRequestUri(string skillsetName, RequestOptions requestOptions, AccessCondition accessCondition)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/skillsets('", false);
-            uri.AppendPath(skillsetName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateDeleteRequest(string skillsetName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
@@ -236,17 +214,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateGetRequestUri(string skillsetName, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/skillsets('", false);
-            uri.AppendPath(skillsetName, true);
-            uri.AppendPath("')", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateGetRequest(string skillsetName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -319,19 +286,6 @@ namespace CognitiveSearch
             }
         }
 
-        internal RequestUriBuilder CreateListRequestUri(string select, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/skillsets", false);
-            if (select != null)
-            {
-                uri.AppendQuery("$select", select, true);
-            }
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
         internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
@@ -392,15 +346,6 @@ namespace CognitiveSearch
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateCreateRequestUri(Skillset skillset, RequestOptions requestOptions)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
-            uri.AppendPath("/skillsets", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
         }
 
         internal HttpMessage CreateCreateRequest(Skillset skillset, RequestOptions requestOptions)

@@ -126,16 +126,6 @@ namespace custom_baseUrl_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetEmptyRequestUri(string accountName, RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw("http://", false);
-            uri.AppendRaw(accountName, false);
-            uri.AppendRaw(_host, false);
-            uri.AppendPath("/customuri", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyRequest(string accountName, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);

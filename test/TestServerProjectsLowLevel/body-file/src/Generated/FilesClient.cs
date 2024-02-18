@@ -237,14 +237,6 @@ namespace body_file_LowLevel
             }
         }
 
-        internal RequestUriBuilder CreateGetFileRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/files/stream/nonempty", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFileRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -259,14 +251,6 @@ namespace body_file_LowLevel
             return message;
         }
 
-        internal RequestUriBuilder CreateGetFileLargeRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/files/stream/verylarge", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetFileLargeRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -279,14 +263,6 @@ namespace body_file_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
             return message;
-        }
-
-        internal RequestUriBuilder CreateGetEmptyFileRequestUri(RequestContext context)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/files/stream/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetEmptyFileRequest(RequestContext context)

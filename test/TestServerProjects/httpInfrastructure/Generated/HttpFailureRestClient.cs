@@ -35,14 +35,6 @@ namespace httpInfrastructure
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetEmptyErrorRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/emptybody/error", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetEmptyErrorRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -96,14 +88,6 @@ namespace httpInfrastructure
             }
         }
 
-        internal RequestUriBuilder CreateGetNoModelErrorRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/nomodel/error", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetNoModelErrorRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -155,14 +139,6 @@ namespace httpInfrastructure
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetNoModelEmptyRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/http/failure/nomodel/empty", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetNoModelEmptyRequest()

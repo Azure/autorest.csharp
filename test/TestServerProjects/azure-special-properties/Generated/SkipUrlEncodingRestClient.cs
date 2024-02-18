@@ -34,15 +34,6 @@ namespace azure_special_properties
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal RequestUriBuilder CreateGetMethodPathValidRequestUri(string unencodedPathParam)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/skipUrlEncoding/method/path/valid/", false);
-            uri.AppendPath(unencodedPathParam, false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetMethodPathValidRequest(string unencodedPathParam)
         {
             var message = _pipeline.CreateMessage();
@@ -99,15 +90,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetPathValidRequestUri(string unencodedPathParam)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/skipUrlEncoding/path/path/valid/", false);
-            uri.AppendPath(unencodedPathParam, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetPathValidRequest(string unencodedPathParam)
@@ -168,15 +150,6 @@ namespace azure_special_properties
             }
         }
 
-        internal RequestUriBuilder CreateGetSwaggerPathValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/skipUrlEncoding/swagger/path/valid/", false);
-            uri.AppendPath("path1/path2/path3", false);
-            return uri;
-        }
-
         internal HttpMessage CreateGetSwaggerPathValidRequest()
         {
             var message = _pipeline.CreateMessage();
@@ -219,15 +192,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetMethodQueryValidRequestUri(string q1)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/skipUrlEncoding/method/query/valid", false);
-            uri.AppendQuery("q1", q1, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetMethodQueryValidRequest(string q1)
@@ -288,18 +252,6 @@ namespace azure_special_properties
             }
         }
 
-        internal RequestUriBuilder CreateGetMethodQueryNullRequestUri(string q1)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/skipUrlEncoding/method/query/null", false);
-            if (q1 != null)
-            {
-                uri.AppendQuery("q1", q1, false);
-            }
-            return uri;
-        }
-
         internal HttpMessage CreateGetMethodQueryNullRequest(string q1)
         {
             var message = _pipeline.CreateMessage();
@@ -347,15 +299,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetPathQueryValidRequestUri(string q1)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/skipUrlEncoding/path/query/valid", false);
-            uri.AppendQuery("q1", q1, false);
-            return uri;
         }
 
         internal HttpMessage CreateGetPathQueryValidRequest(string q1)
@@ -414,15 +357,6 @@ namespace azure_special_properties
                 default:
                     throw new RequestFailedException(message.Response);
             }
-        }
-
-        internal RequestUriBuilder CreateGetSwaggerQueryValidRequestUri()
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azurespecials/skipUrlEncoding/swagger/query/valid", false);
-            uri.AppendQuery("q1", "value1&q2=value2&q3=value3", false);
-            return uri;
         }
 
         internal HttpMessage CreateGetSwaggerQueryValidRequest()
