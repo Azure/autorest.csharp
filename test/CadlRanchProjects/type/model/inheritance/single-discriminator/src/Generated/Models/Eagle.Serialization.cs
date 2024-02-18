@@ -33,14 +33,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
-                    if (item != null)
-                    {
-                        ((IJsonModel<Bird>)item).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<Bird>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -51,28 +44,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 foreach (var item in Hate)
                 {
                     writer.WritePropertyName(item.Key);
-                    if (item.Value != null)
-                    {
-                        ((IJsonModel<Bird>)item.Value).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<Bird>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Partner))
             {
                 writer.WritePropertyName("partner"u8);
-                if (Partner != null)
-                {
-                    ((IJsonModel<Bird>)Partner).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<Bird>)Partner).Write(writer, options);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);

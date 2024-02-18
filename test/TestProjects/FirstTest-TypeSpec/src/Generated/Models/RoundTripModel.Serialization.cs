@@ -57,14 +57,7 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            if (RequiredModel != null)
-            {
-                ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -248,14 +241,7 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            if (ModelWithRequiredNullable != null)
-            {
-                ((IJsonModel<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

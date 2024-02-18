@@ -28,14 +28,7 @@ namespace FirstTestTypeSpec.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("self"u8);
-            if (Self != null)
-            {
-                ((IJsonModel<ContainSelf>)Self).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<ContainSelf>)Self).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

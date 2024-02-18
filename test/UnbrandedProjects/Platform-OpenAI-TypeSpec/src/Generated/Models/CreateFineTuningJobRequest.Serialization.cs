@@ -42,14 +42,7 @@ namespace OpenAI.Models
             if (OptionalProperty.IsDefined(Hyperparameters))
             {
                 writer.WritePropertyName("hyperparameters"u8);
-                if (Hyperparameters != null)
-                {
-                    ((IJsonModel<CreateFineTuningJobRequestHyperparameters>)Hyperparameters).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<CreateFineTuningJobRequestHyperparameters>)Hyperparameters).Write(writer, options);
             }
             if (OptionalProperty.IsDefined(Suffix))
             {

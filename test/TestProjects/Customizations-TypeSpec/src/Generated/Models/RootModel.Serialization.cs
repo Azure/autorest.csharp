@@ -35,50 +35,22 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
-                if (PropertyModelToMakeInternal != null)
-                {
-                    ((IJsonModel<ModelToMakeInternal>)PropertyModelToMakeInternal).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ModelToMakeInternal>)PropertyModelToMakeInternal).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
-                if (PropertyModelToRename != null)
-                {
-                    ((IJsonModel<RenamedModel>)PropertyModelToRename).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<RenamedModel>)PropertyModelToRename).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
-                if (PropertyModelToChangeNamespace != null)
-                {
-                    ((IJsonModel<ModelToChangeNamespace>)PropertyModelToChangeNamespace).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ModelToChangeNamespace>)PropertyModelToChangeNamespace).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
-                if (PropertyModelWithCustomizedProperties != null)
-                {
-                    ((IJsonModel<ModelWithCustomizedProperties>)PropertyModelWithCustomizedProperties).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ModelWithCustomizedProperties>)PropertyModelWithCustomizedProperties).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
@@ -98,14 +70,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
-                if (PropertyModelToAddAdditionalSerializableProperty != null)
-                {
-                    ((IJsonModel<ModelToAddAdditionalSerializableProperty>)PropertyModelToAddAdditionalSerializableProperty).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ModelToAddAdditionalSerializableProperty>)PropertyModelToAddAdditionalSerializableProperty).Write(writer, options);
             }
             if (Optional.IsDefined(PropertyToMoveToCustomization))
             {
@@ -115,14 +80,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelStruct))
             {
                 writer.WritePropertyName("propertyModelStruct"u8);
-                if (PropertyModelStruct != null)
-                {
-                    ((IJsonModel<ModelStruct>)PropertyModelStruct).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ModelStruct>)PropertyModelStruct).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

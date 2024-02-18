@@ -50,14 +50,7 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<JobWarning>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<JobWarning>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);

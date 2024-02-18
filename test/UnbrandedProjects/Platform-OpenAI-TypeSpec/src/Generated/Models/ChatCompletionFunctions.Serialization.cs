@@ -31,14 +31,7 @@ namespace OpenAI.Models
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("parameters"u8);
-            if (Parameters != null)
-            {
-                ((IJsonModel<ChatCompletionFunctionParameters>)Parameters).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<ChatCompletionFunctionParameters>)Parameters).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

@@ -47,14 +47,7 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            if (RequiredModel != null)
-            {
-                ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<Thing>)RequiredModel).Write(writer, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);

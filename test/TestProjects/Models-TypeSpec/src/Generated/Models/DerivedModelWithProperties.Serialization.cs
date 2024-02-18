@@ -31,14 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(OptionalPropertyOnBase))

@@ -36,7 +36,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Conditions))
             {
                 writer.WritePropertyName("conditions"u8);
-                writer.WriteObjectValue(Conditions);
+                ((IJsonModel<DeliveryRuleCondition>)Conditions).Write(writer, options);
             }
             if (Optional.IsCollectionDefined(Actions))
             {
@@ -44,7 +44,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Actions)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IJsonModel<DeliveryRuleAction>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -55,14 +55,14 @@ namespace MgmtDiscriminator.Models
                 foreach (var item in ExtraMappingInfo)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IJsonModel<DeliveryRuleAction>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                writer.WriteObjectValue(Pet);
+                ((IJsonModel<Pet>)Pet).Write(writer, options);
             }
             if (options.Format != "W" && Optional.IsDefined(Foo))
             {

@@ -30,14 +30,7 @@ namespace _Type.Property.AdditionalProperties.Models
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
-                if (item.Value != null)
-                {
-                    ((IJsonModel<ModelForRecord>)item.Value).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ModelForRecord>)item.Value).Write(writer, options);
             }
             writer.WriteEndObject();
         }

@@ -31,25 +31,11 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<Embedding>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<Embedding>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("usage"u8);
-            if (Usage != null)
-            {
-                ((IJsonModel<CreateEmbeddingResponseUsage>)Usage).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<CreateEmbeddingResponseUsage>)Usage).Write(writer, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

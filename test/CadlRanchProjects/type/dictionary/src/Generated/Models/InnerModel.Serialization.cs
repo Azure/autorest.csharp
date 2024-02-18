@@ -36,14 +36,7 @@ namespace _Type._Dictionary.Models
                 foreach (var item in Children)
                 {
                     writer.WritePropertyName(item.Key);
-                    if (item.Value != null)
-                    {
-                        ((IJsonModel<InnerModel>)item.Value).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<InnerModel>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }

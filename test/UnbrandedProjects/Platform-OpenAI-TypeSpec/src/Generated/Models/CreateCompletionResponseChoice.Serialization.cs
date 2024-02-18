@@ -30,14 +30,7 @@ namespace OpenAI.Models
             if (Logprobs != null)
             {
                 writer.WritePropertyName("logprobs"u8);
-                if (Logprobs != null)
-                {
-                    ((IJsonModel<CreateCompletionResponseChoiceLogprobs>)Logprobs).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<CreateCompletionResponseChoiceLogprobs>)Logprobs).Write(writer, options);
             }
             else
             {

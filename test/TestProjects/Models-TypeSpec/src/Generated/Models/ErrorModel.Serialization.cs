@@ -35,14 +35,7 @@ namespace ModelsTypeSpec.Models
             if (options.Format != "W" && Optional.IsDefined(InnerError))
             {
                 writer.WritePropertyName("innerError"u8);
-                if (InnerError != null)
-                {
-                    ((IJsonModel<ErrorModel>)InnerError).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ErrorModel>)InnerError).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

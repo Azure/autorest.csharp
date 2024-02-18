@@ -29,14 +29,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<FineTuningJob>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<FineTuningJob>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("has_more"u8);

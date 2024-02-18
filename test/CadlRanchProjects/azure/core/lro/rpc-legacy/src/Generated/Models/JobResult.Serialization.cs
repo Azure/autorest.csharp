@@ -48,14 +48,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    if (item != null)
-                    {
-                        ((IJsonModel<ErrorResponse>)item).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<ErrorResponse>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

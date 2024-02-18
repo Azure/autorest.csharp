@@ -54,14 +54,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToString());
             writer.WritePropertyName("hyperparameters"u8);
-            if (Hyperparameters != null)
-            {
-                ((IJsonModel<FineTuningJobHyperparameters>)Hyperparameters).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<FineTuningJobHyperparameters>)Hyperparameters).Write(writer, options);
             writer.WritePropertyName("training_file"u8);
             writer.WriteStringValue(TrainingFile);
             if (ValidationFile != null)
@@ -92,14 +85,7 @@ namespace OpenAI.Models
             if (Error != null)
             {
                 writer.WritePropertyName("error"u8);
-                if (Error != null)
-                {
-                    ((IJsonModel<FineTuningJobError>)Error).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<FineTuningJobError>)Error).Write(writer, options);
             }
             else
             {

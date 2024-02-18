@@ -31,14 +31,7 @@ namespace _Type.Property.ValueTypes.Models
             writer.WriteStartArray();
             foreach (var item in Property)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<InnerModel>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<InnerModel>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

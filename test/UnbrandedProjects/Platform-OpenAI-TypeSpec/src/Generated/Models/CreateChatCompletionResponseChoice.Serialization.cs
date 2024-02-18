@@ -26,14 +26,7 @@ namespace OpenAI.Models
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
             writer.WritePropertyName("message"u8);
-            if (Message != null)
-            {
-                ((IJsonModel<ChatCompletionResponseMessage>)Message).Write(writer, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
+            ((IJsonModel<ChatCompletionResponseMessage>)Message).Write(writer, options);
             writer.WritePropertyName("finish_reason"u8);
             writer.WriteStringValue(FinishReason.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)

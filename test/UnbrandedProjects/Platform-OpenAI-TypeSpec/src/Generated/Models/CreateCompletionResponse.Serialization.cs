@@ -35,27 +35,13 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Choices)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<CreateCompletionResponseChoice>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<CreateCompletionResponseChoice>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (OptionalProperty.IsDefined(Usage))
             {
                 writer.WritePropertyName("usage"u8);
-                if (Usage != null)
-                {
-                    ((IJsonModel<CompletionUsage>)Usage).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<CompletionUsage>)Usage).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

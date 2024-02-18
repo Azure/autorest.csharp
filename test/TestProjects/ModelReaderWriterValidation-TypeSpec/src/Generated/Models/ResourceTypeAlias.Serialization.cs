@@ -38,14 +38,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in Paths)
                 {
-                    if (item != null)
-                    {
-                        ((IJsonModel<ResourceTypeAliasPath>)item).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<ResourceTypeAliasPath>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -62,26 +55,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(DefaultPattern))
             {
                 writer.WritePropertyName("defaultPattern"u8);
-                if (DefaultPattern != null)
-                {
-                    ((IJsonModel<ResourceTypeAliasPattern>)DefaultPattern).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ResourceTypeAliasPattern>)DefaultPattern).Write(writer, options);
             }
             if (Optional.IsDefined(DefaultMetadata))
             {
                 writer.WritePropertyName("defaultMetadata"u8);
-                if (DefaultMetadata != null)
-                {
-                    ((IJsonModel<ResourceTypeAliasPathMetadata>)DefaultMetadata).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ResourceTypeAliasPathMetadata>)DefaultMetadata).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

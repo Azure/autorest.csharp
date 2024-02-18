@@ -30,26 +30,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                if (Sku != null)
-                {
-                    ((IJsonModel<ComputeSku>)Sku).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ComputeSku>)Sku).Write(writer, options);
             }
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                if (Properties != null)
-                {
-                    ((IJsonModel<AvailabilitySetProperties>)Properties).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<AvailabilitySetProperties>)Properties).Write(writer, options);
             }
             if (options.Format != "W")
             {

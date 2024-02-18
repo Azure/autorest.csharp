@@ -498,10 +498,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return JsonSerializerExpression.Serialize(utf8JsonWriter, value);
 
                 case SerializableObjectType { JsonSerialization: { } json } when options is not null:
-                    return new IfElseStatement(
-                        NotEqual(value, Null),
-                        value.CastTo(json.IJsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), new ValueExpression[] { utf8JsonWriter, options }).ToStatement(),
-                        utf8JsonWriter.WriteNullValue());
+                    return value.CastTo(json.IJsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), new ValueExpression[] { utf8JsonWriter, options }).ToStatement();
 
                 case SerializableObjectType:
                     return utf8JsonWriter.WriteObjectValue(value);

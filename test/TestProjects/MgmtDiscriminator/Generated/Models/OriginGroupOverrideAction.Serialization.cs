@@ -28,7 +28,7 @@ namespace MgmtDiscriminator.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
-            writer.WriteObjectValue(Parameters);
+            ((IJsonModel<OriginGroupOverrideActionParameters>)Parameters).Write(writer, options);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             if (options.Format != "W" && Optional.IsDefined(Foo))

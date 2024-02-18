@@ -29,14 +29,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Data)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<FineTuneEvent>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<FineTuneEvent>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)

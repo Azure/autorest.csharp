@@ -29,14 +29,7 @@ namespace OpenAI.Models
             writer.WriteStartArray();
             foreach (var item in Messages)
             {
-                if (item != null)
-                {
-                    ((IJsonModel<ChatCompletionRequestMessage>)item).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<ChatCompletionRequestMessage>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (OptionalProperty.IsCollectionDefined(Functions))
@@ -45,14 +38,7 @@ namespace OpenAI.Models
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
-                    if (item != null)
-                    {
-                        ((IJsonModel<ChatCompletionFunctions>)item).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<ChatCompletionFunctions>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }

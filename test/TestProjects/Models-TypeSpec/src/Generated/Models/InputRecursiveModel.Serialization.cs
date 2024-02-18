@@ -32,14 +32,7 @@ namespace ModelsTypeSpec.Models
             if (Optional.IsDefined(Inner))
             {
                 writer.WritePropertyName("inner"u8);
-                if (Inner != null)
-                {
-                    ((IJsonModel<InputRecursiveModel>)Inner).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<InputRecursiveModel>)Inner).Write(writer, options);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {

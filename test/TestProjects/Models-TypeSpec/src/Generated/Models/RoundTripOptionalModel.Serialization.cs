@@ -63,40 +63,19 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelList)
                 {
-                    if (item != null)
-                    {
-                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel"u8);
-                if (OptionalModel != null)
-                {
-                    ((IJsonModel<DerivedModel>)OptionalModel).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<DerivedModel>)OptionalModel).Write(writer, options);
             }
             if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
-                if (OptionalModelWithPropertiesOnBase != null)
-                {
-                    ((IJsonModel<DerivedModelWithProperties>)OptionalModelWithPropertiesOnBase).Write(writer, options);
-                }
-                else
-                {
-                    writer.WriteNullValue();
-                }
+                ((IJsonModel<DerivedModelWithProperties>)OptionalModelWithPropertiesOnBase).Write(writer, options);
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
@@ -137,14 +116,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    if (item.Value != null)
-                    {
-                        ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
-                    }
-                    else
-                    {
-                        writer.WriteNullValue();
-                    }
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
