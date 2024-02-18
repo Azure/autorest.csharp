@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (WriteValueNullCheck(writer, body.Value))
                         {
                             WriteHeaders(writer, clientMethod, request, content: true, fields);
-                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true, convertBinaryDataToArray: false), body.Value.Type);
+                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true, convertBinaryDataToArray: false));
                         }
 
                         break;
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
                                 initializers);
 
-                        WriteSerializeContent(writer, request, flattenedSchemaRequestBody.Serialization, $"{modelVariable:I}", flattenedSchemaRequestBody.ObjectType.Type);
+                        WriteSerializeContent(writer, request, flattenedSchemaRequestBody.Serialization, $"{modelVariable:I}");
                         break;
                     case UrlEncodedBody urlEncodedRequestBody:
                         var urlContent = new CodeWriterDeclaration("content");
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
         public static string CreateRequestUriMethodName(string name) => $"Create{name}RequestUri";
 
-        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value, CSharpType type)
+        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
             writer.WriteMethodBodyStatement(GetRequestContentForSerialization(request, bodySerialization, value));
         }
