@@ -47,6 +47,9 @@ namespace MgmtDiscriminator
 #pragma warning restore CA1822
 
         /// <inheritdoc />
+        public override RehydrationToken? GetRehydrationToken() => _rehydrationToken;
+
+        /// <inheritdoc />
         public override T Value => _operation.Value;
 
         /// <inheritdoc />

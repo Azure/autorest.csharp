@@ -90,6 +90,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .LineRaw("#pragma warning restore CA1822")
                         .Line();
 
+                    _writer.WriteXmlDocumentationInheritDoc();
+                    _writer
+                        .LineRaw("public override RehydrationToken? GetRehydrationToken() => _rehydrationToken;")
+                        .Line();
+
                     if (_isGeneric)
                     {
                         _writer.WriteXmlDocumentationInheritDoc();

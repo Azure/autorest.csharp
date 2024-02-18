@@ -47,6 +47,9 @@ namespace MgmtMockAndSample
 #pragma warning restore CA1822
 
         /// <inheritdoc />
+        public override RehydrationToken? GetRehydrationToken() => _rehydrationToken;
+
+        /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
 
         /// <inheritdoc />
