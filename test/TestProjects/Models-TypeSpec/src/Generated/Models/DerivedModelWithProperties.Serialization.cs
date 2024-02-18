@@ -31,7 +31,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+            ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(OptionalPropertyOnBase))
@@ -88,7 +93,14 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        }
                     }
                     requiredList = array;
                     continue;

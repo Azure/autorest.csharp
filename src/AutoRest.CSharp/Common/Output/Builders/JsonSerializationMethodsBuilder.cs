@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
@@ -38,13 +36,10 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
-using YamlDotNet.Serialization.NodeTypeResolvers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using ConstantExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.ConstantExpression;
 using MemberExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.MemberExpression;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
 using SwitchCase = AutoRest.CSharp.Common.Output.Expressions.Statements.SwitchCase;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
@@ -1227,8 +1222,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             => type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
 
         public static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
-            serialization is { IsNullable: true } and JsonValueSerialization { Type: { IsValueType: true } } || // nullable value type, like int?
+            serialization is { IsNullable: true } and JsonValueSerialization { Type.IsValueType: true } || // nullable value type, like int?
             serialization is JsonArraySerialization or JsonDictionarySerialization || // list or dictionary
+            serialization is JsonValueSerialization { Type.IsValueType: false } || // reference types
             serialization is JsonValueSerialization jsonValueSerialization &&
             jsonValueSerialization is { Type: { IsValueType: false, IsFrameworkType: true } } && // framework reference type, e.g. byte[]
             jsonValueSerialization.Type.FrameworkType != typeof(string) && // excluding string, because JsonElement.GetString() can handle null

@@ -37,7 +37,12 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+            ((IJsonModel<CollectionItem>)item).Write(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -45,7 +50,12 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                if (item.Value == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+            ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
             }
             writer.WriteEndObject();
             if (Optional.IsCollectionDefined(OptionalList))
@@ -54,7 +64,12 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalList)
                 {
-                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                ((IJsonModel<CollectionItem>)item).Write(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -66,7 +81,12 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in OptionalNullableList)
                     {
-                        ((IJsonModel<CollectionItem>)item).Write(writer, options);
+                        if (item == null)
+                        {
+                            writer.WriteNullValue();
+                            continue;
+                        }
+                    ((IJsonModel<CollectionItem>)item).Write(writer, options);
                     }
                     writer.WriteEndArray();
                 }
@@ -82,7 +102,12 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                 }
                 writer.WriteEndObject();
             }
@@ -95,7 +120,12 @@ namespace ModelsTypeSpec.Models
                     foreach (var item in OptionalNullableRecord)
                     {
                         writer.WritePropertyName(item.Key);
-                        ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
+                        if (item.Value == null)
+                        {
+                            writer.WriteNullValue();
+                            continue;
+                        }
+                    ((IJsonModel<RecordItem>)item.Value).Write(writer, options);
                     }
                     writer.WriteEndObject();
                 }
@@ -175,7 +205,14 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        }
                     }
                     requiredList = array;
                     continue;
@@ -185,7 +222,14 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        }
                     }
                     requiredModelRecord = dictionary;
                     continue;
@@ -199,7 +243,14 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        }
                     }
                     optionalList = array;
                     continue;
@@ -213,7 +264,14 @@ namespace ModelsTypeSpec.Models
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(CollectionItem.DeserializeCollectionItem(item));
+                        }
                     }
                     optionalNullableList = array;
                     continue;
@@ -227,7 +285,14 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        }
                     }
                     optionalRecord = dictionary;
                     continue;
@@ -241,7 +306,14 @@ namespace ModelsTypeSpec.Models
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, RecordItem.DeserializeRecordItem(property0.Value));
+                        }
                     }
                     optionalNullableRecord = dictionary;
                     continue;
