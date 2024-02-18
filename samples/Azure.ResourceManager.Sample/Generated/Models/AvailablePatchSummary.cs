@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -15,6 +16,38 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AvailablePatchSummary
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         internal AvailablePatchSummary()
         {
@@ -53,7 +86,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: AvailablePatchSummary.error
         /// </param>
-        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -63,47 +97,56 @@ namespace Azure.ResourceManager.Sample.Models
             StartOn = startOn;
             LastModifiedOn = lastModifiedOn;
             Error = error;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: AvailablePatchSummary.status
         /// </summary>
+        [WirePath("status")]
         public PatchOperationStatus? Status { get; }
         /// <summary>
         /// The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs.
         /// Serialized Name: AvailablePatchSummary.assessmentActivityId
         /// </summary>
+        [WirePath("assessmentActivityId")]
         public string AssessmentActivityId { get; }
         /// <summary>
         /// The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.
         /// Serialized Name: AvailablePatchSummary.rebootPending
         /// </summary>
+        [WirePath("rebootPending")]
         public bool? RebootPending { get; }
         /// <summary>
         /// The number of critical or security patches that have been detected as available and not yet installed.
         /// Serialized Name: AvailablePatchSummary.criticalAndSecurityPatchCount
         /// </summary>
+        [WirePath("criticalAndSecurityPatchCount")]
         public int? CriticalAndSecurityPatchCount { get; }
         /// <summary>
         /// The number of all available patches excluding critical and security.
         /// Serialized Name: AvailablePatchSummary.otherPatchCount
         /// </summary>
+        [WirePath("otherPatchCount")]
         public int? OtherPatchCount { get; }
         /// <summary>
         /// The UTC timestamp when the operation began.
         /// Serialized Name: AvailablePatchSummary.startTime
         /// </summary>
+        [WirePath("startTime")]
         public DateTimeOffset? StartOn { get; }
         /// <summary>
         /// The UTC timestamp when the operation began.
         /// Serialized Name: AvailablePatchSummary.lastModifiedTime
         /// </summary>
+        [WirePath("lastModifiedTime")]
         public DateTimeOffset? LastModifiedOn { get; }
         /// <summary>
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: AvailablePatchSummary.error
         /// </summary>
+        [WirePath("error")]
         public ApiError Error { get; }
     }
 }

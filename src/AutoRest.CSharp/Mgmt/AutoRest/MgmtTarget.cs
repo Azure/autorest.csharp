@@ -192,6 +192,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
 
+            var wirePathWriter = new WirePathWriter();
+            wirePathWriter.Write();
+            AddGeneratedFile(project, $"Internal/WirePathAttribute.cs", wirePathWriter.ToString());
+
             // write extension class
             WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.MockableExtensions);
 

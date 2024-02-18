@@ -2043,5 +2043,97 @@ Response response = client.BodyIsModelWithProjectedEnum(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)">
+      <example>
+This sample shows how to call OptionalDictionaryAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.OptionalDictionaryAsync();
+]]></code>
+This sample shows how to call OptionalDictionaryAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.OptionalDictionaryAsync(body: new Dictionary<string, int>
+{
+    ["key"] = 1234
+});
+]]></code></example>
+    </member>
+    <member name="OptionalDictionary(IDictionary{string,int},CancellationToken)">
+      <example>
+This sample shows how to call OptionalDictionary.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.OptionalDictionary();
+]]></code>
+This sample shows how to call OptionalDictionary with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.OptionalDictionary(body: new Dictionary<string, int>
+{
+    ["key"] = 1234
+});
+]]></code></example>
+    </member>
+    <member name="OptionalDictionaryAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call OptionalDictionaryAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = null;
+Response response = await client.OptionalDictionaryAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OptionalDictionaryAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 1234,
+});
+Response response = await client.OptionalDictionaryAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="OptionalDictionary(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call OptionalDictionary.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = null;
+Response response = client.OptionalDictionary(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OptionalDictionary with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+using RequestContent content = RequestContent.Create(new
+{
+    key = 1234,
+});
+Response response = client.OptionalDictionary(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
   </members>
 </doc>

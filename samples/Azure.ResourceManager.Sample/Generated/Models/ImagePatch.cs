@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -27,6 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sourceVirtualMachine">
         /// The source virtual machine from which Image is created.
         /// Serialized Name: ImageUpdate.properties.sourceVirtualMachine
@@ -43,7 +45,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Gets the HyperVGenerationType of the VirtualMachine created from the image
         /// Serialized Name: ImageUpdate.properties.hyperVGeneration
         /// </param>
-        internal ImagePatch(IDictionary<string, string> tags, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration) : base(tags)
+        internal ImagePatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration) : base(tags, serializedAdditionalRawData)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;
@@ -57,6 +59,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </summary>
         internal WritableSubResource SourceVirtualMachine { get; set; }
         /// <summary> Gets or sets Id. </summary>
+        [WirePath("properties.sourceVirtualMachine.id")]
         public ResourceIdentifier SourceVirtualMachineId
         {
             get => SourceVirtualMachine is null ? default : SourceVirtualMachine.Id;
@@ -72,16 +75,19 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the storage settings for the virtual machine disks.
         /// Serialized Name: ImageUpdate.properties.storageProfile
         /// </summary>
+        [WirePath("properties.storageProfile")]
         public ImageStorageProfile StorageProfile { get; set; }
         /// <summary>
         /// The provisioning state.
         /// Serialized Name: ImageUpdate.properties.provisioningState
         /// </summary>
+        [WirePath("properties.provisioningState")]
         public string ProvisioningState { get; }
         /// <summary>
         /// Gets the HyperVGenerationType of the VirtualMachine created from the image
         /// Serialized Name: ImageUpdate.properties.hyperVGeneration
         /// </summary>
+        [WirePath("properties.hyperVGeneration")]
         public HyperVGeneration? HyperVGeneration { get; set; }
     }
 }
