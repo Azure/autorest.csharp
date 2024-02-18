@@ -61,7 +61,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownBaseModel(document.RootElement, options);
+            return DeserializeBaseModel(document.RootElement, options);
         }
 
         internal static UnknownBaseModel DeserializeUnknownBaseModel(JsonElement element, ModelReaderWriterOptions options = null)
@@ -119,7 +119,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeUnknownBaseModel(document.RootElement, options);
+                        return DeserializeBaseModel(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(BaseModel)} does not support '{options.Format}' format.");
