@@ -64,12 +64,15 @@ namespace _Type.Property.AdditionalProperties.Models
             Dictionary<string, IList<ModelForRecord>> additionalPropertiesDictionary = new Dictionary<string, IList<ModelForRecord>>();
             foreach (var property in element.EnumerateObject())
             {
-                List<ModelForRecord> array = new List<ModelForRecord>();
-                foreach (var item in property.Value.EnumerateArray())
+                if (property.Value.ValueKind == JsonValueKind.Array)
                 {
-                    array.Add(ModelForRecord.DeserializeModelForRecord(item));
+                    List<ModelForRecord> array = new List<ModelForRecord>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(ModelForRecord.DeserializeModelForRecord(item));
+                    }
+                    additionalPropertiesDictionary.Add(property.Name, array);
                 }
-                additionalPropertiesDictionary.Add(property.Name, array);
             }
             additionalProperties = additionalPropertiesDictionary;
             return new IsModelArrayAdditionalProperties(additionalProperties);

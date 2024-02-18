@@ -34,11 +34,14 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public StringExpression GetString() => new(Untyped.Invoke(nameof(JsonElement.GetString)));
         public ValueExpression GetTimeSpan(string? format) => Extensible.JsonElement.GetTimeSpan(this, format);
 
-        public BoolExpression ValueKindEqualsNull()
-            => new(new BinaryOperatorExpression("==", Property(nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null)));
+        public BoolExpression ValueKindEqualsNull() => ValueKindEquals(JsonValueKind.Null);
 
-        public BoolExpression ValueKindEqualsString()
-            => new(new BinaryOperatorExpression("==", Property(nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.String)));
+        public BoolExpression ValueKindEqualsString() => ValueKindEquals(JsonValueKind.String);
+
+        public BoolExpression ValueKindEquals(JsonValueKind kind)
+            => new(new BinaryOperatorExpression("==", ValueKind, FrameworkEnumValue(kind)));
+
+        public ValueExpression ValueKind => Property(nameof(JsonElement.ValueKind));
 
         public MethodBodyStatement WriteTo(ValueExpression writer) => new InvokeInstanceMethodStatement(Untyped, nameof(JsonElement.WriteTo), new[] { writer }, false);
 
