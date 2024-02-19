@@ -8,14 +8,18 @@
 using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
+using System.Threading;
 using Azure;
 using Azure.Core;
 
 namespace Payload.MultiPart.Models
 {
-    public partial class MultiPartRequest : IUtf8JsonSerializable, IJsonModel<MultiPartRequest>
+    public partial class MultiPartRequest : IUtf8JsonSerializable, IJsonModel<MultiPartRequest>, IPersistableStreamModel<MultiPartRequest>
     {
+        private string _boundary = null;
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultiPartRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MultiPartRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
@@ -129,7 +133,7 @@ namespace Payload.MultiPart.Models
                     }
                 case "MPFD":
                     {
-                        using MultipartFormData content = MultipartFormData.Create(data);
+                        using MultipartFormData content = ModelReaderWriter.Read<MultipartFormData>(data, options);
                         string id = default;
                         BinaryData profileImage = default;
                         IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -156,7 +160,54 @@ namespace Payload.MultiPart.Models
                     throw new FormatException($"The model {nameof(MultiPartRequest)} does not support '{options.Format}' format.");
             }
         }
+        void IPersistableStreamModel<MultiPartRequest>.Write(Stream stream, ModelReaderWriterOptions options)
+        {
+            if (options == null || options.Format != "MPFD")
+            {
+                throw new InvalidOperationException("The specified format is not supported.");
+            }
+            //string boundary = Guid.NewGuid().ToString();
+            string boundary = GetBoundry();
+            using MultipartFormData content = new MultipartFormData(boundary);
+            content.Add(BinaryData.FromString(Id), "id");
+            content.Add(ProfileImage.WithMediaType("application/octet-stream"), "profileImage", "profileImage.wav", null);
+            (content as IPersistableStreamModel<MultipartFormData>).Write(stream, options);
+        }
 
+        Task IPersistableStreamModel<MultiPartRequest>.WriteAsync(Stream stream, ModelReaderWriterOptions options, CancellationToken cancellation)
+        {
+            if (options == null || options.Format != "MPFD")
+            {
+                throw new InvalidOperationException("The specified format is not supported.");
+            }
+            //string boundary = Guid.NewGuid().ToString();
+            string boundary = GetBoundry();
+            using MultipartFormData content = new MultipartFormData(boundary);
+            content.Add(BinaryData.FromString(Id), "id");
+            content.Add(ProfileImage.WithMediaType("application/octet-stream"), "profileImage", "profileImage.wav", null);
+            return (content as IPersistableStreamModel<MultipartFormData>).WriteAsync(stream, options, cancellation);
+        }
+
+        MultiPartRequest IPersistableStreamModel<MultiPartRequest>.Create(Stream stream, ModelReaderWriterOptions options)
+        {
+            //Not implemented.
+            return null;
+        }
+
+        private string GetBoundry()
+        {
+            return _boundary ??= Guid.NewGuid().ToString();
+        }
+
+        string IPersistableStreamModel<MultiPartRequest>.GetMediaType(ModelReaderWriterOptions options)
+        {
+            //return contentType;
+            if (options.Format == "MPFD")
+            {
+                return "multipart/form-data; boundary=" + GetBoundry();
+            }
+            return "application/json";
+        }
         string IPersistableModel<MultiPartRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>

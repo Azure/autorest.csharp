@@ -154,7 +154,7 @@ namespace Payload.MultiPart.Models
                     }
                 case "MPFD":
                     {
-                        using MultipartFormData content = MultipartFormData.Create(data);
+                        using MultipartFormData content = ModelReaderWriter.Read<MultipartFormData>(data, options);
                         string id = default;
                         IList<BinaryData> pictures = default;
                         IDictionary<string, BinaryData> serializedAdditionalRawData = default;

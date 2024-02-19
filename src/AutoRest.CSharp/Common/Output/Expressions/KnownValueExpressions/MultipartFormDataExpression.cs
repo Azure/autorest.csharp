@@ -25,7 +25,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.Add), new[] { toBinaryDataExpress, Literal(name)}, false);
         public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name, ValueExpression headers) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.Add), new[] {toBinaryDataExpress, Literal(name), headers}, false);
         public MethodBodyStatement Add(ValueExpression toBinaryDataExpress, string name, string fileName, ValueExpression headers) => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.Add), new[] { toBinaryDataExpress, Literal(name), Literal(fileName), headers }, false);
-        public MethodBodyStatement ToContent() => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.ToContent));
+        //public MethodBodyStatement ToContent() => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormData.ToContent));
+        public MethodBodyStatement ToContent() => new InvokeInstanceMethodStatement(Untyped, nameof(ModelReaderWriter.Write));
         //public MethodBodyStatement Create(ValueExpression content) => new InvokeStaticMethodStatement(typeof(MultipartFormDataContent), nameof(MultipartFormDataContent.Create), new[] { content });
         public static MultipartFormDataExpression Create(ValueExpression content) => new(InvokeStatic(nameof(MultipartFormData.Create), new[] { content }));
         //public static MultipartFormDataContentExpression FromObject(ValueExpression value) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromObject), new[] { value }));

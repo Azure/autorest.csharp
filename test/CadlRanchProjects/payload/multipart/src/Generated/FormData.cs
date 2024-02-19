@@ -55,7 +55,7 @@ namespace Payload.MultiPart
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            using RequestContent content = RequestContent.Create(body as IPersistableStreamModel<MultiPartRequest>, ModelReaderWriterOptions.MultipartFormData);
             Response response = await BasicAsync(content, context).ConfigureAwait(false);
             return response;
         }
@@ -70,7 +70,7 @@ namespace Payload.MultiPart
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContent.Create(body, ModelReaderWriterOptions.MultipartFormData);
+            using RequestContent content = RequestContent.Create(body as IPersistableStreamModel<MultiPartRequest>, ModelReaderWriterOptions.MultipartFormData);
             Response response = Basic(content, context);
             return response;
         }
