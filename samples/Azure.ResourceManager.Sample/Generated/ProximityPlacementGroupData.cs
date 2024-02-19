@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,6 +21,38 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class ProximityPlacementGroupData : TrackedResourceData
     {
+        /// <summary>
+        /// Keeps track of any properties unknown to the library.
+        /// <para>
+        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
+        /// </para>
+        /// <para>
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// </para>
+        /// <para>
+        /// Examples:
+        /// <list type="bullet">
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson("foo")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("\"foo\"")</term>
+        /// <description>Creates a payload of "foo".</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// <item>
+        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
+        /// <description>Creates a payload of { "key": "value" }.</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
+
         /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/>. </summary>
         /// <param name="location"> The location. </param>
         public ProximityPlacementGroupData(AzureLocation location) : base(location)
@@ -60,7 +93,8 @@ namespace Azure.ResourceManager.Sample
         /// Describes colocation status of the Proximity Placement Group.
         /// Serialized Name: ProximityPlacementGroup.properties.colocationStatus
         /// </param>
-        internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ExtendedLocation extendedLocation, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ExtendedLocation extendedLocation, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ExtendedLocation = extendedLocation;
             ProximityPlacementGroupType = proximityPlacementGroupType;
@@ -68,37 +102,49 @@ namespace Azure.ResourceManager.Sample
             VirtualMachineScaleSets = virtualMachineScaleSets;
             AvailabilitySets = availabilitySets;
             ColocationStatus = colocationStatus;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/> for deserialization. </summary>
+        internal ProximityPlacementGroupData()
+        {
         }
 
         /// <summary>
         /// The extended location of the custom IP prefix.
         /// Serialized Name: ProximityPlacementGroup.extendedLocation
         /// </summary>
+        [WirePath("extendedLocation")]
         public ExtendedLocation ExtendedLocation { get; set; }
         /// <summary>
         /// Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use.
         /// Serialized Name: ProximityPlacementGroup.properties.proximityPlacementGroupType
         /// </summary>
+        [WirePath("properties.proximityPlacementGroupType")]
         public ProximityPlacementGroupType? ProximityPlacementGroupType { get; set; }
         /// <summary>
         /// A list of references to all virtual machines in the proximity placement group.
         /// Serialized Name: ProximityPlacementGroup.properties.virtualMachines
         /// </summary>
+        [WirePath("properties.virtualMachines")]
         public IReadOnlyList<SubResourceWithColocationStatus> VirtualMachines { get; }
         /// <summary>
         /// A list of references to all virtual machine scale sets in the proximity placement group.
         /// Serialized Name: ProximityPlacementGroup.properties.virtualMachineScaleSets
         /// </summary>
+        [WirePath("properties.virtualMachineScaleSets")]
         public IReadOnlyList<SubResourceWithColocationStatus> VirtualMachineScaleSets { get; }
         /// <summary>
         /// A list of references to all availability sets in the proximity placement group.
         /// Serialized Name: ProximityPlacementGroup.properties.availabilitySets
         /// </summary>
+        [WirePath("properties.availabilitySets")]
         public IReadOnlyList<SubResourceWithColocationStatus> AvailabilitySets { get; }
         /// <summary>
         /// Describes colocation status of the Proximity Placement Group.
         /// Serialized Name: ProximityPlacementGroup.properties.colocationStatus
         /// </summary>
+        [WirePath("properties.colocationStatus")]
         public InstanceViewStatus ColocationStatus { get; set; }
     }
 }

@@ -68,6 +68,7 @@ namespace MgmtDiscriminator.Models
         /// <summary> The name of the condition for the delivery rule. </summary>
         internal MatchVariable Name { get; set; }
         /// <summary> For test. </summary>
+        [WirePath("foo")]
         public string Foo { get; }
     }
 }

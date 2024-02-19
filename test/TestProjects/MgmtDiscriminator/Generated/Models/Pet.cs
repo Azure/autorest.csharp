@@ -68,6 +68,7 @@ namespace MgmtDiscriminator.Models
         /// <summary> The kind of the pet. </summary>
         internal PetKind Kind { get; set; }
         /// <summary> The Id of the pet. </summary>
+        [WirePath("id")]
         public string Id { get; }
     }
 }
