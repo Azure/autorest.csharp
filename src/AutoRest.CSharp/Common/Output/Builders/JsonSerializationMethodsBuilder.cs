@@ -534,7 +534,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 valueType == typeof(long) ||
                 valueType == typeof(int) ||
                 valueType == typeof(short) ||
-                valueType == typeof(SByte) ||
+                valueType == typeof(sbyte) ||
                 valueType == typeof(byte))
             {
                 return utf8JsonWriter.WriteNumberValue(value);
@@ -1183,7 +1183,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (frameworkType == typeof(char))
                 return element.GetChar();
 
-            if (frameworkType == typeof(SByte))
+            if (frameworkType == typeof(sbyte))
                 return element.GetSByte();
             if (frameworkType == typeof(byte))
                 return element.GetByte();
