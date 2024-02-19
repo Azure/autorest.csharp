@@ -74,9 +74,23 @@ namespace ModelsTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<BaseModel>)RequiredModel).Write(writer, options);
+            if (RequiredModel != null)
+            {
+                ((IJsonModel<BaseModel>)RequiredModel).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredModel2"u8);
-            ((IJsonModel<BaseModel>)RequiredModel2).Write(writer, options);
+            if (RequiredModel2 != null)
+            {
+                ((IJsonModel<BaseModel>)RequiredModel2).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)

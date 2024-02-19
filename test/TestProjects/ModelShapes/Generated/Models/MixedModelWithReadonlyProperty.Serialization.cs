@@ -37,7 +37,14 @@ namespace ModelShapes.Models
                 writer.WriteStartArray();
                 foreach (var item in ReadonlyListProperty)
                 {
-                    ((IJsonModel<ReadonlyModel>)item).Write(writer, options);
+                    if (item != null)
+                    {
+                        ((IJsonModel<ReadonlyModel>)item).Write(writer, options);
+                    }
+                    else
+                    {
+                        writer.WriteNullValue();
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -103,7 +110,14 @@ namespace ModelShapes.Models
                     List<ReadonlyModel> array = new List<ReadonlyModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ReadonlyModel.DeserializeReadonlyModel(item));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(ReadonlyModel.DeserializeReadonlyModel(item));
+                        }
                     }
                     readonlyListProperty = array;
                     continue;

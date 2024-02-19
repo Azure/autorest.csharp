@@ -395,8 +395,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 utf8JsonWriter.WritePropertyName(serialization.SerializedName),
                 serialization.CustomSerializationMethodName is {} serializationMethodName
                     ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter)
-                    : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.EnumerableValue ?? serialization.Value, options)
+                    : WritePropertyValueSerialization(utf8JsonWriter, serialization.IsRequired, serialization.ValueSerialization!,  serialization.EnumerableValue ?? serialization.Value, options)
             };
+        }
+
+        private static MethodBodyStatement WritePropertyValueSerialization(Utf8JsonWriterExpression utf8JsonWriter, bool isRequired, JsonSerialization serialization, ValueExpression value, ModelReaderWriterOptionsExpression? options)
+        {
+            var serializeStatement = SerializeExpression(utf8JsonWriter, serialization, value, options);
+            if (isRequired && ValueRequiresNullCheckInSerialization(serialization))
+            {
+                return new IfElseStatement(NotEqual(value, Null),
+                    serializeStatement,
+                    utf8JsonWriter.WriteNullValue());
+            }
+            else
+            {
+                return serializeStatement;
+            }
         }
 
         // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
@@ -1246,13 +1261,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static bool IsCustomJsonConverterAdded(Type type)
             => type.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
 
-        private static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
-            serialization is { IsNullable: true } and JsonValueSerialization { Type.IsValueType: true } || // nullable value type, like int?
-            serialization is JsonArraySerialization or JsonDictionarySerialization || // list or dictionary
+        private static bool ValueRequiresNullCheckInSerialization(JsonSerialization serialization) =>
             serialization is JsonValueSerialization { Type: { IsValueType: false, IsFrameworkType: false } } || // type provider reference types (our generated models)
             serialization is JsonValueSerialization jsonValueSerialization &&
             jsonValueSerialization is { Type: { IsValueType: false, IsFrameworkType: true } } && // framework reference type, e.g. byte[]
-            jsonValueSerialization.Type.FrameworkType != typeof(string) && // excluding string, because JsonElement.GetString() can handle null
-            jsonValueSerialization.Type.FrameworkType != typeof(byte[]); // excluding byte[], because JsonElement.GetBytesFromBase64() can handle null
+            jsonValueSerialization.Type.FrameworkType != typeof(string) && // excluding string, because Utf8JsonWriter.WriteStringValue can handle null
+            jsonValueSerialization.Type.FrameworkType != typeof(byte[]); // excluding byte[], because the extension method Utf8JsonWriter.WriteBase64StringValue() can handle null
+
+        private static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
+            serialization is { IsNullable: true } and JsonValueSerialization { Type.IsValueType: true } || // nullable value type, like int?
+            serialization is JsonArraySerialization or JsonDictionarySerialization || // list or dictionary
+            ValueRequiresNullCheckInSerialization(serialization);
     }
 }

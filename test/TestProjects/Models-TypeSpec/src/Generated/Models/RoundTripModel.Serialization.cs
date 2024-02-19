@@ -94,7 +94,14 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<BaseModelWithDiscriminator>)RequiredModel).Write(writer, options);
+            if (RequiredModel != null)
+            {
+                ((IJsonModel<BaseModelWithDiscriminator>)RequiredModel).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -147,7 +154,14 @@ namespace ModelsTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
-            writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
+            if (RequiredBytes != null)
+            {
+                writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(OptionalBytes))
             {
                 writer.WritePropertyName("optionalBytes"u8);
@@ -171,14 +185,21 @@ namespace ModelsTypeSpec.Models
                 writer.WriteEndArray();
             }
             writer.WritePropertyName("requiredUnknown"u8);
+            if (RequiredUnknown != null)
+            {
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(RequiredUnknown);
 #else
-            using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
+                using (JsonDocument document = JsonDocument.Parse(RequiredUnknown))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             if (Optional.IsDefined(OptionalUnknown))
             {
                 writer.WritePropertyName("optionalUnknown"u8);

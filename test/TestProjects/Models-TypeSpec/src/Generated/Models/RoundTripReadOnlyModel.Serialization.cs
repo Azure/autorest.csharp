@@ -50,7 +50,14 @@ namespace ModelsTypeSpec.Models
             if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
-                ((IJsonModel<DerivedModel>)RequiredReadonlyModel).Write(writer, options);
+                if (RequiredReadonlyModel != null)
+                {
+                    ((IJsonModel<DerivedModel>)RequiredReadonlyModel).Write(writer, options);
+                }
+                else
+                {
+                    writer.WriteNullValue();
+                }
             }
             if (options.Format != "W" && Optional.IsDefined(OptionalReadonlyModel))
             {

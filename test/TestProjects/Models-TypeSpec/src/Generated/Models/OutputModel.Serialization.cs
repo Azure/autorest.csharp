@@ -32,7 +32,14 @@ namespace ModelsTypeSpec.Models
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("requiredModel"u8);
-            ((IJsonModel<DerivedModel>)RequiredModel).Write(writer, options);
+            if (RequiredModel != null)
+            {
+                ((IJsonModel<DerivedModel>)RequiredModel).Write(writer, options);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
             writer.WritePropertyName("requiredList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredList)
