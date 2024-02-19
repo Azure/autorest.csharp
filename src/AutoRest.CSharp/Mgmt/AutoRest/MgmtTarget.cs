@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 // we do not need this if model reader writer feature is not enabled
                 if (Configuration.UseModelReaderWriter)
                 {
-                    WriteSerialization(project, resource, serializeWriter, $"Models/{name}.Serialization.cs");
+                    WriteSerialization(project, resource, serializeWriter, $"{name}.Serialization.cs");
                 }
             }
 
